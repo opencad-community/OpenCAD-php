@@ -76,6 +76,8 @@ app.use(function (req, res, next) {
 app.use('/', routes);
 app.use('/users', users);
 
+var port = properties.get()
+
 app.set('port', (process.env.PORT || 3000));
 
 app.listen(app.get('port'), function(){
