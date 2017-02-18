@@ -13,7 +13,7 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/loginapp');
 var db = mongoose.connection;
 var PropertiesReader = require('properties-reader');
-var properties = PropertiesReader('./config.properties');
+var properties = PropertiesReader('./properties.ini');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -76,9 +76,9 @@ app.use(function (req, res, next) {
 app.use('/', routes);
 app.use('/users', users);
 
-var port = properties.get()
+var port = properties.get('main.application.port');
 
-app.set('port', (process.env.PORT || 3000));
+app.set('port', (process.env.PORT || port));
 
 app.listen(app.get('port'), function(){
     console.log('Sever started on port '+app.get('port'));
