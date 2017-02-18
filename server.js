@@ -1,3 +1,4 @@
+var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
 var express = require('express');
@@ -11,6 +12,8 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/loginapp');
 var db = mongoose.connection;
+var PropertiesReader = require('properties-reader');
+var properties = PropertiesReader('./config.properties');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
