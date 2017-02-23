@@ -6,6 +6,9 @@
 ?>
 
 <html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <!-- CSS -->
     <!-- Bootstrap Core CSS -->
