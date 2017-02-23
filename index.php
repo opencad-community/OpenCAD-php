@@ -82,7 +82,8 @@
                                     </div>
                                     <!-- ./ form-group -->
                                     <div class="form-group">
-                                        <select id="division" multiple="multiple">
+                                        <label>Division (Can choose more than one)</label>
+                                        <select class="form-control" id="division" multiple="multiple">
                                             <option value="communications">Communications (Dispatch)</option>
                                             <option value="ems">EMS</option>
                                             <option value="fire">Fire</option>
@@ -118,5 +119,13 @@
         <!-- ./ container-fluid -->
     </div>
     <!-- ./ page-wrapper -->
+
+    <!-- Plugin Intializations -->
+    <!-- Initialize the plugin: -->
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#division').multiselect();
+    });
+    </script>
 </body>
 </html>
