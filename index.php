@@ -3,6 +3,29 @@
     $iniContents = parse_ini_file("./properties/config.ini", true); //Gather from config.ini file
     $community = $iniContents['strings']['community'];
 
+    $testing = true; //If set to true, will default some data for you
+
+    session_start();
+    $registerError = "";
+    $registerSuccess = "";
+    $loginMessage = "";
+
+    if(isset($_SESSION['register_error']))
+    {
+        $registerError = '<div class="alert alert-danger" ><span>'.$_SESSION['register_error'].'</span></div>';
+        unset($_SESSION['register_error']);
+    }
+    if(isset($_SESSION['register_success']))
+    {
+        $registerError = '<div class="alert alert-success" ><span>'.$_SESSION['register_success'].'</span></div>';
+        unset($_SESSION['register_success']);
+    }
+    if(isset($_SESSION['loginMessageDanger']))
+    {
+        $loginMessage = '<div class="alert alert-danger" ><span>'.$_SESSION['loginMessageDanger'].'</span></div>';
+        unset($_SESSION['loginMessageDanger']);
+    }
+    
 ?>
 
 <html>
@@ -39,17 +62,17 @@
                         </div>
                         <!-- ./ panel-heading -->
                         <div class="panel-body">
+                        <?php echo $loginMessage;?>
                             <form role="form" action="./actions/login.php" method="post">
                                 <fieldset>
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Email" name="email" type="text">
+                                        <input class="form-control" placeholder="Email" name="email" type="text" value="<?php if($testing){echo "test@test.test";}?>" required>
                                     </div>
                                     <!-- ./ form-group -->
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                        <input class="form-control" placeholder="Password" name="password" type="password" value="<?php if($testing){echo "password";}?>" required >
                                     </div>
                                     <!-- ./ form-group -->
-                                    <input type="hidden" name="form_token" value="<?php echo $form_token; ?>" />
 								    <input name="login_btn" type="submit" class="btn btn-lg btn-primary btn-block" value="Login" />
                                 </fieldset>
                             </form>
@@ -70,38 +93,39 @@
                         </div>
                         <!-- ./ panel-heading -->
                         <div class="panel-body">
-                            <form role="form" action="./actions/login.php" method="post">
+                        <?php echo $registerError, $registerSuccess;?>
+                            <form role="form" action="./actions/register.php" method="post">
                                 <fieldset>
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Name" name="name" type="text">
+                                        <input class="form-control" placeholder="Name" name="name" type="text" value="<?php if($testing){echo "Test";}?>" required>
                                     </div>
                                     <!-- ./ form-group -->
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Email" name="email" type="text">
+                                        <input class="form-control" placeholder="Email" name="email" type="email" value="<?php if($testing){echo "test@test.test";}?>" required>
                                     </div>
                                     <!-- ./ form-group -->
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Identifier (Code Number, Unit ID)" name="Indentifier" type="text">
+                                        <input class="form-control" placeholder="Identifier (Code Number, Unit ID)" name="identifier" type="text" value="<?php if($testing){echo "1A-1";}?>" required>
                                     </div>
                                     <!-- ./ form-group -->
                                     <div class="form-group">
                                         <label>Division (Can choose more than one)</label>
-                                        <select class="form-control" id="division" multiple="multiple">
+                                        <select class="form-control" id="division" name="division[]" multiple="multiple" size="6" required>
                                             <option value="communications">Communications (Dispatch)</option>
                                             <option value="ems">EMS</option>
                                             <option value="fire">Fire</option>
-                                            <option value="highway">Highway Patrol</option>
+                                            <option value="highway" <?php if($testing){echo "selected=\"selected\"";}?>>Highway Patrol</option>
                                             <option value="police">Police</option>
                                             <option value="sheriff">Sheriff</option>
                                         </select>
                                     </div>
                                     <!-- ./ form-group -->
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                        <input class="form-control" placeholder="Password" name="password" type="password" value="<?php if($testing){echo "password";}?>" required>
                                     </div>
                                     <!-- ./ form-group -->
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Confirm Password" name="password2" type="password" value="">
+                                        <input class="form-control" placeholder="Confirm Password" name="password1" type="password" value="<?php if($testing){echo "password";}?>" required>
                                     </div>
                                     <!-- ./ form-group -->
 
