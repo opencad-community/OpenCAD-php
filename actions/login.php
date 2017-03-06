@@ -45,6 +45,7 @@
             session_start();
             $_SESSION['loginMessageDanger'] = 'Invalid credentials';
             header("Location:../index.php");
+            exit();
         }
 
         /* Check to see if they're approved to use the system
@@ -57,12 +58,14 @@
             session_start();
             $_SESSION['loginMessageDanger'] = 'Your account hasn\'t been approved yet. Please wait for an administrator to approve your access request.';
             header("Location:../index.php");
+            exit();
         }
         else if ($approved == "2")
         {
             session_start();
             $_SESSION['loginMessageDanger'] = 'Your account has been suspended by an administrator.';
             header("Location:../index.php");
+            exit();
         }
         
         /* TODO: Handle password resets */
