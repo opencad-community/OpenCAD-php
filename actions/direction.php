@@ -15,7 +15,7 @@ if (empty($_SESSION['logged_in']))
 */
 
 $iniContents = parse_ini_file("../properties/config.ini", true); //Gather from config.ini file
-$connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"]."/rp-cad/".$iniContents['main']['connection_file_location'];
+$connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"]."/openCad/".$iniContents['main']['connection_file_location'];
 
 require($connectionsFileLocation);
 

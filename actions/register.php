@@ -1,10 +1,10 @@
 <?php
     $iniContents = parse_ini_file("../properties/config.ini", true); //Gather from config.ini file
-    $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"]."/rp-cad/".$iniContents['main']['connection_file_location'];
+    $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"]."/openCad/".$iniContents['main']['connection_file_location'];
 
     require($connectionsFileLocation);
 
-    $name = $_POST['name'];
+    $name = $_POST['uname'];
     $email = $_POST['email'];
     $identifier = $_POST['identifier'];
     $divisions = array();
@@ -13,12 +13,13 @@
         array_push($divisions, $selectedOption);
     }
     
-    if($_POST['password'] != $_POST['password1'])
-    {
+    if($_POST['password'] !== $_POST['password1'])
+    {        
         session_start();
         $_SESSION['register_error'] = "Passwords do not match";
         sleep(1);
         header("Location:../index.php");
+        
     }
     
     //Hash the password
@@ -48,9 +49,10 @@
 
     $query = "INSERT INTO users (name, email, password, identifier) VALUES (?, ?, ?, ?)";
 	
+    
 	try {
 		$stmt = mysqli_prepare($link, $query);
-		mysqli_stmt_bind_param($stmt, "isss", $name, $email, $password, $identifier);
+		mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $password, $identifier);
 		$result = mysqli_stmt_execute($stmt);
 		
 		if ($result == FALSE) {
@@ -66,6 +68,7 @@
 
     /*Add user to departments they requested, temporary table */
     /*This is really inefficient. There should be a better way*/
+ 
     foreach($divisions as $division)
     {
         if($division == "communications")

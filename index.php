@@ -52,6 +52,7 @@
 
     <!-- JS -->
     <script type="text/javascript" src="./js/bootstrap-multiselect.js"></script> <!-- Script for MultiSelect Plugin -->
+    <script type="text/javascript" src="./js/bootstrap.js"></script><!-- Bootstrap Core JS -->
 
     <title><?php echo $community;?> CAD System</title>
     <link rel="icon" href="./images/favicon.ico" />
@@ -109,7 +110,7 @@
                             <form role="form" action="./actions/register.php" method="post">
                                 <fieldset>
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Name" name="name" type="text" value="<?php if($testing){echo "Test";}?>" required>
+                                        <input class="form-control" placeholder="Name" name="uname" type="text" value="<?php if($testing){echo "Test";}?>" required>
                                     </div>
                                     <!-- ./ form-group -->
                                     <div class="form-group">
@@ -141,7 +142,6 @@
                                     </div>
                                     <!-- ./ form-group -->
 
-                                    <input type="hidden" name="form_token" value="<?php echo $form_token; ?>" />
 								    <input name="login_btn" type="submit" class="btn btn-lg btn-primary btn-block" value="Request Access" />
                                 </fieldset>
                             </form>
