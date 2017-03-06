@@ -1,5 +1,7 @@
 <?php
     session_start();
+
+    // TODO: Verify user has permission to be on this page
 	
     if (empty($_SESSION['logged_in']))
     {
@@ -15,6 +17,7 @@
     $community = $iniContents['strings']['community'];
 
     include_once("../actions/adminStats.php");
+    include("../actions/adminActions.php");
 ?>
 
 <!DOCTYPE html>
@@ -73,9 +76,7 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="index.html">Dashboard</a></li>
-                      <li><a href="index2.html">Dashboard2</a></li>
-                      <li><a href="index3.html">Dashboard3</a></li>
+                      <li><a href="javascript:void(0)">Dashboard</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -95,7 +96,7 @@
               <a data-toggle="tooltip" data-placement="top" title="Lock">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="../actions/logout.php">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>

@@ -39,6 +39,8 @@ $sheriffButton = "";
 $policeButton = "";
 
 $num_rows = $result->num_rows;
+// This loop will auto redirect the user if they only have one option 
+// TODO: Add the rest of the headers
 if($num_rows < 2)
 {
     while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
