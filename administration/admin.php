@@ -289,9 +289,8 @@
         paging: false,
         searching: false
 			});
-      
+
 		});
-	
 		</script>
 
     <!-- Custom Theme Scripts -->
