@@ -26,6 +26,15 @@
     if (isset($_POST['rejectUser'])){ 
 	    rejectUser();
     }
+    if (isset($_POST['suspendUser'])){ 
+	    echo "Suspend";
+    }
+    if (isset($_POST['reactivateUser'])){ 
+	    echo "Reactivate";
+    }
+    if (isset($_POST['deleteUser'])){ 
+	    echo "Delete";
+    }
 
     /* FUNCTIONS */
     /* Gets the user count. Returns value */
@@ -111,6 +120,7 @@
         }
     }
 
+    /* Get from temp table */
     function getUserGroups($uid)
     {
         $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -130,6 +140,25 @@
         }
     }
 
+    /* Get from perm table */
+    function getUserGroupsApproved($uid)
+    {
+        $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	
+        if (!$link) { 
+            die('Could not connect: ' .mysql_error());
+        }
+        
+        $sql = "SELECT departments.department_name FROM user_departments INNER JOIN departments on user_departments.department_id=departments.department_id WHERE user_departments.user_id = \"$uid\"";
+
+		
+	    $result1 = mysqli_query($link, $sql);
+        
+        while($row1 = mysqli_fetch_array($result1, MYSQLI_BOTH))
+        {
+              echo $row1[0]."<br/>";
+        }
+    }
 
     function approveUser()
     {
@@ -285,6 +314,75 @@
         mysqli_close($link);
 
         return $row[0];
+    }
+
+    /* NOTE: This function will only build table for users with status 1 & 2. Unapproved users will not be included in this list */
+    function getUsers()
+    {
+        $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	
+        if (!$link) { 
+            die('Could not connect: ' .mysql_error());
+        }
+        
+        $query = "SELECT id, name, email, identifier, approved FROM users WHERE approved = '1' OR approved = '2'";
+
+        $result=mysqli_query($link, $query);
+
+       
+        echo '
+            <table id="allUsers" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Identifier</th>
+                <th>Groups</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>           
+        ';
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            echo '
+            <tr>
+                <td>'.$row[1].'</td>
+                <td>'.$row[2].'</td>
+                <td>'.$row[3].'</td>
+                <td>';
+                
+                getUserGroupsApproved($row[0]);
+                
+                echo ' </td>
+                <td>
+                    <form action="../actions/adminActions.php" method="post">
+                    <input name="editUser" type="submit" class="btn btn-xs btn-link" value="Edit" />
+                    <input name="DeleteUser" type="submit" class="btn btn-xs btn-link" value="Delete" />
+                    ';
+                if ($row[4] == '2')
+                {
+                    echo '<input name="reactivateUser" type="submit" class="btn btn-xs btn-link" value="Reactivate" />';
+                }
+                else
+                {
+                   echo '<input name="suspendUser" type="submit" class="btn btn-xs btn-link" value="Suspend" />'; 
+                }
+                echo '
+                    
+                    <input name="uid" type="hidden" value='.$row[0].' />
+                    </form>                    
+                </td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+        
     }
 
     

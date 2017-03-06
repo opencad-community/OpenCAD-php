@@ -289,7 +289,7 @@
         paging: false,
         searching: false
 			});
-			
+      
 		});
 	
 		</script>

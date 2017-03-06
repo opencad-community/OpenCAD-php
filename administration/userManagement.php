@@ -239,7 +239,7 @@
                   <!-- ./ x_title -->
                   <div class="x_content">
                       <?php echo $accessMessage;?>
-                      
+                      <?php getUsers();?>
                   </div>
                   <!-- ./ x_content -->
                 </div>
@@ -289,16 +289,12 @@
     <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
     
     <script>
-		$(document).ready(function() {
-		
-			$('#pendingUsers').DataTable({
-        paging: false,
-        searching: false
-			});
-			
-		});
-	
-		</script>
+    $(document).ready(function() {
+        $('#allUsers').DataTable({
+            
+        });
+    });
+    </script>
 
     <!-- Custom Theme Scripts -->
     <script src="../js/custom.js"></script>
