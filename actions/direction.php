@@ -48,10 +48,12 @@ if($num_rows < 2)
         if ($row[0] == "0")
         {
             header("Location:../administration/admin.php");
+            $_SESSION['admin'] = 'YES';
         }
         else if ($row[0] == "1")
         {
             header("Location:../dispatch/dispatch.php");
+            
         }
     }
 }
@@ -62,6 +64,7 @@ while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
     if ($row[0] == 0)
     {
         $adminButton = "<a href=\"../administration/admin.php\" class=\"btn btn-primary btn-lg\">Administration</a>";
+        $_SESSION['admin'] = 'YES';
     }
     if ($row[0] == 1)
     {

@@ -13,6 +13,19 @@
       $name = $_SESSION['name'];
     }
 
+    
+    if(isset($_SESSION['admin']))
+    {
+      if ($_SESSION['admin'] == 'YES')
+      {
+          //Do nothing
+      }
+    }
+    else
+    {
+      die("You do not have permission to be here. This has been recorded");
+    }
+
     $iniContents = parse_ini_file("../properties/config.ini", true); //Gather from config.ini file
     $community = $iniContents['strings']['community'];
 

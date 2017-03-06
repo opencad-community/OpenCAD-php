@@ -159,7 +159,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>All Users</h2>
+                    <h2>At A Glance</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -174,6 +174,41 @@
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                           <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
                           <div class="count"><?php echo getUserCount();?></div>
+                        </div>
+                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
+                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                          <span class="count_top"><i class="fa fa-user"></i> Admins</span>
+                          <div class="count"><?php echo getGroupCount("0");?></div>
+                        </div>
+                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
+                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                          <span class="count_top"><i class="fa fa-user"></i> Communications</span>
+                          <div class="count"><?php echo getGroupCount("1");?></div>
+                        </div>
+                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
+                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                          <span class="count_top"><i class="fa fa-user"></i> EMS</span>
+                          <div class="count"><?php echo getGroupCount("2");?></div>
+                        </div>
+                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
+                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                          <span class="count_top"><i class="fa fa-user"></i> Fire</span>
+                          <div class="count"><?php echo getGroupCount("3");?></div>
+                        </div>
+                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
+                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                          <span class="count_top"><i class="fa fa-user"></i> Highway Patrol</span>
+                          <div class="count"><?php echo getGroupCount("4");?></div>
+                        </div>
+                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
+                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                          <span class="count_top"><i class="fa fa-user"></i> Police</span>
+                          <div class="count"><?php echo getGroupCount("5");?></div>
+                        </div>
+                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
+                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                          <span class="count_top"><i class="fa fa-user"></i> Sheriff</span>
+                          <div class="count"><?php echo getGroupCount("6");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                       </div>
@@ -192,7 +227,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Access Requests</h2>
+                    <h2>Account Management</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -204,7 +239,7 @@
                   <!-- ./ x_title -->
                   <div class="x_content">
                       <?php echo $accessMessage;?>
-                      <?php getPendingUsers();?>
+                      
                   </div>
                   <!-- ./ x_content -->
                 </div>

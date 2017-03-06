@@ -269,5 +269,23 @@
         
     }
 
+    function getGroupCount($gid)
+    {
+        $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	
+        if (!$link) { 
+            die('Could not connect: ' .mysql_error());
+        }
+        
+        $query = "SELECT COUNT(*) from user_departments WHERE department_id = \"$gid\"";
+
+        $result=mysqli_query($link, $query);
+        $row = mysqli_fetch_array($result, MYSQLI_BOTH);
+
+        mysqli_close($link);
+
+        return $row[0];
+    }
+
     
 ?>

@@ -45,6 +45,7 @@
         $_SESSION['register_error'] = "Email already exists";
         sleep(1);
         header("Location:../index.php");
+        exit();
 	}
 
     $query = "INSERT INTO users (name, email, password, identifier) VALUES (?, ?, ?, ?)";
