@@ -1,4 +1,4 @@
-# rp-cad
+# openCad
 Open source Computer Aided Dispatch System for GTAV RolePlay Communities. This system is built off PHP
 
 # Install Notes
