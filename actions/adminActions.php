@@ -35,6 +35,9 @@
     if (isset($_POST['deleteUser'])){ 
 	    echo "Delete";
     }
+    if (isset($_POST['getUserDetails'])){
+        getUserDetails();
+    }
 
     /* FUNCTIONS */
     /* Gets the user count. Returns value */
@@ -358,7 +361,7 @@
                 echo ' </td>
                 <td>
                     <form action="../actions/adminActions.php" method="post">
-                    <input name="editUser" type="submit" class="btn btn-xs btn-link" value="Edit" />
+                    <button name="editUser" type="button" data-toggle="modal" id="'.$row[0].'" data-target="#editUserModal" class="btn btn-xs btn-link">Edit</button>
                     <input name="deleteUser" type="submit" class="btn btn-xs btn-link" value="Delete" />
                     ';
                 if ($row[4] == '2')
@@ -455,6 +458,74 @@
         
         sleep(1);
         header("Location:../administration/userManagement.php");
+    }
+
+    function getUserDetails()
+    {
+        $userId = $_POST['userId'];
+
+        $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+        if (!$link) {
+            die('Could not connect: ' .mysql_error());
+        }
+        
+        $sql = "SELECT id, name, email, identifier FROM users WHERE ID = $userId";
+
+        $result=mysqli_query($link, $sql);
+        
+        $encode = array();
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            $encode["userId"] = $row[0];
+            $encode["name"] = $row[1];
+            $encode["email"] = $row[2];
+            $encode["identifier"] = $row[3];
+            
+        }
+        
+        echo json_encode($encode);
+        mysqli_close($link);
+
+    }
+
+    function getStreetNames()
+    {
+        $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	
+        if (!$link) { 
+            die('Could not connect: ' .mysql_error());
+        }
+        
+        $query = "SELECT name, county FROM streets";
+
+        $result=mysqli_query($link, $query);
+
+        echo '
+            <table id="streets" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Name</th>
+                <th>County</th>
+                </tr>
+            </thead>
+            <tbody>           
+        ';
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            echo '
+            <tr>
+                <td>'.$row[0].'</td>
+                <td>'.$row[1].'</td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
     }
     
 ?>

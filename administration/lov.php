@@ -1,4 +1,12 @@
 <?php
+/**
+ * lov.php
+ *
+ * Admin page for handling all list of values
+ *
+ * @author     Shane G
+ */
+
     session_start();
 
     // TODO: Verify user has permission to be on this page
@@ -30,13 +38,6 @@
     $community = $iniContents['strings']['community'];
 
     include("../actions/adminActions.php");
-
-    $accessMessage = "";
-    if(isset($_SESSION['accessMessage']))
-    {
-        $accessMessage = $_SESSION['accessMessage'];
-        unset($_SESSION['accessMessage']);
-    }
 ?>
 
 <!DOCTYPE html>
@@ -101,9 +102,9 @@
                 <ul class="nav side-menu">
                   <li class="active"><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: block;">
-                      <li class="current-page"><a href="javascript:void(0)">Dashboard</a></li>
+                      <li><a href="admin.php">Dashboard</a></li>
                       <li><a href="userManagement.php">User Management</a></li>
-                      <li><a href="lov.php">List of Values Management</a></li>
+                      <li class="current-page"><a href="javascript:void(0)">List of Values Management</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -163,7 +164,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>CAD Administration</h3>
+                <h3>CAD List of Values</h3>
               </div>
           
               <?php /* HIUE SEARCH FUNCTION FOR NOW
@@ -184,12 +185,11 @@
             </div>
 
             <div class="clearfix"></div>
-
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Statistics at a glance</h2>
+                    <h2>Street Names</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -200,41 +200,7 @@
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
-                      <div class="row tile_count">
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
-                          <div class="count"><?php echo getUserCount();?></div>
-                        </div>
-                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
-                      </div>
-                      <!-- ./ row tile_count -->
-                  </div>
-                  <!-- ./ x_content -->
-                </div>
-                <!-- ./ x_panel -->
-              </div>
-              <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
-            </div>
-            <!-- ./ row -->
-
-            <div class="clearfix"></div>
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Access Requests</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <!-- ./ x_title -->
-                  <div class="x_content">
-                      <?php echo $accessMessage;?>
-                      <?php getPendingUsers();?>
+                     <?php getStreetNames();?> 
                   </div>
                   <!-- ./ x_content -->
                 </div>
@@ -286,9 +252,8 @@
     <script>
 		$(document).ready(function() {
 		
-			$('#pendingUsers').DataTable({
-        paging: false,
-        searching: false
+			$('#streets').DataTable({
+                
 			});
 
 		});

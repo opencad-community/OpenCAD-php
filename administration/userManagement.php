@@ -90,6 +90,7 @@
                     <ul class="nav child_menu" style="display: block;">
                       <li><a href="admin.php">Dashboard</a></li>
                       <li class="current-page"><a href="javascript:void(0)">User Management</a></li>
+                      <li><a href="lov.php">List of Values Management</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -266,6 +267,70 @@
       </div>
     </div>
 
+    <!-- modals -->
+    <!-- Edit User Modal -->
+    <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Edit User</h4>
+          </div>
+          <!-- ./ modal-header -->
+          <div class="modal-body">
+            <form role="form" method="post" action="../actions/adminActions.php" class="form-horizontal" >
+              <div class="form-group row">
+                <label class="col-md-3 control-label">Name</label>
+                <div class="col-md-9">
+                  <input name="userName" class="form-control" id="userName" />
+                  <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-md-3 control-label">Email</label>
+                <div class="col-md-9">
+                  <input type="email" name="userEmail" class="form-control" id="userEmail" />
+                  <span class="fa fa-envelope form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-md-3 control-label">Identifier</label>
+                <div class="col-md-9">
+                  <input type="text" name="userIdentifier" class="form-control" id="userIdentifier" />
+                  <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-md-3 control-label">User Groups</label>
+                <div class="col-md-9">
+                  <input type="text" name="userIdentifier" class="form-control" id="userIdentifier" />
+                  <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <input type="submit" name="editUserAccount" class="btn btn-primary" value="Edit User"/>
+          </div>
+          <!-- ./ modal-footer -->
+          </form>
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
+
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
@@ -294,6 +359,32 @@
             
         });
     });
+    </script>
+
+    <script>
+      $('#editUserModal').on('show.bs.modal', function(e) {
+        var $modal = $(this), userId = e.relatedTarget.id;
+
+        $.ajax({
+            cache: false,
+            type: 'POST',
+            url: '../actions/adminActions.php',
+            data: {'getUserDetails': 'yes',
+                   'userId' : userId},
+            success: function(result) 
+            {
+              data = JSON.parse(result);
+                    
+              $('input[name="userName"]').val(data['name']);
+              $('input[name="userEmail"]').val(data['email']);
+              $('input[name="userIdentifier"]').val(data['identifier']);
+              //$('input[name="homeNum"]').val(data['home']); document.getElementById("homeNum").disabled = false;
+
+            },
+
+            error:function(exception){alert('Exeption:'+exception);}
+          });
+      });
     </script>
 
     <!-- Custom Theme Scripts -->
