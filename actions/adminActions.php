@@ -27,10 +27,10 @@
 	    rejectUser();
     }
     if (isset($_POST['suspendUser'])){ 
-	    echo "Suspend";
+	    suspendUser();
     }
     if (isset($_POST['reactivateUser'])){ 
-	    echo "Reactivate";
+	    reactivateUser();
     }
     if (isset($_POST['deleteUser'])){ 
 	    echo "Delete";
@@ -232,7 +232,7 @@
         session_start();
         $_SESSION['accessMessage'] = '<div class="alert alert-success"><span>Successfully approved user access</span></div>';
         
-        sleep(1);//seconds to wait..
+        sleep(1);
         header("Location:../administration/admin.php");
         
 
@@ -293,7 +293,7 @@
         session_start();
         $_SESSION['accessMessage'] = '<div class="alert alert-danger"><span>Successfully rejected user access</span></div>';
         
-        sleep(1);//seconds to wait..
+        sleep(1);
         header("Location:../administration/admin.php");
         
     }
@@ -359,11 +359,11 @@
                 <td>
                     <form action="../actions/adminActions.php" method="post">
                     <input name="editUser" type="submit" class="btn btn-xs btn-link" value="Edit" />
-                    <input name="DeleteUser" type="submit" class="btn btn-xs btn-link" value="Delete" />
+                    <input name="deleteUser" type="submit" class="btn btn-xs btn-link" value="Delete" />
                     ';
                 if ($row[4] == '2')
                 {
-                    echo '<input name="reactivateUser" type="submit" class="btn btn-xs btn-link" value="Reactivate" />';
+                   echo '<input name="reactivateUser" type="submit" class="btn btn-xs btn-link" value="Reactivate" />';
                 }
                 else
                 {
@@ -385,5 +385,76 @@
         
     }
 
+    //Function to suspend a user account
+    // TODO: Add reason, duration
+    function suspendUser()
+    {
+       $uid = $_POST['uid'];
+
+       $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	
+        if (!$link) {
+            die('Could not connect: ' .mysql_error());
+        }
+
+       $query = "UPDATE users SET approved = '2' WHERE id = ?";
+	
+        try {
+            $stmt = mysqli_prepare($link, $query);
+            mysqli_stmt_bind_param($stmt, "i", $uid);
+            $result = mysqli_stmt_execute($stmt);
+            
+            if ($result == FALSE) {
+                die(mysqli_error($link));
+            }
+        }
+        catch (Exception $e)
+        {
+            die("Failed to run query: " . $e->getMessage());
+        }
+
+        mysqli_close($link);
+
+        session_start();
+        $_SESSION['accessMessage'] = '<div class="alert alert-success"><span>Successfully suspended user account</span></div>';
+        
+        sleep(1);
+        header("Location:../administration/userManagement.php");
+    }
+
+    function reactivateUser()
+    {
+       $uid = $_POST['uid'];
+
+       $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	
+        if (!$link) {
+            die('Could not connect: ' .mysql_error());
+        }
+
+       $query = "UPDATE users SET approved = '1' WHERE id = ?";
+	
+        try {
+            $stmt = mysqli_prepare($link, $query);
+            mysqli_stmt_bind_param($stmt, "i", $uid);
+            $result = mysqli_stmt_execute($stmt);
+            
+            if ($result == FALSE) {
+                die(mysqli_error($link));
+            }
+        }
+        catch (Exception $e)
+        {
+            die("Failed to run query: " . $e->getMessage());
+        }
+
+        mysqli_close($link);
+
+        session_start();
+        $_SESSION['accessMessage'] = '<div class="alert alert-success"><span>Successfully reactivated user account</span></div>';
+        
+        sleep(1);
+        header("Location:../administration/userManagement.php");
+    }
     
 ?>
