@@ -13,30 +13,11 @@
       $name = $_SESSION['name'];
     }
 
-    
-    if(isset($_SESSION['admin']))
-    {
-      if ($_SESSION['admin'] == 'YES')
-      {
-          //Do nothing
-      }
-    }
-    else
-    {
-      die("You do not have permission to be here. This has been recorded");
-    }
-
     $iniContents = parse_ini_file("../properties/config.ini", true); //Gather from config.ini file
     $community = $iniContents['strings']['community'];
 
-    include("../actions/adminActions.php");
+    include("../actions/api.php");
 
-    $accessMessage = "";
-    if(isset($_SESSION['accessMessage']))
-    {
-        $accessMessage = $_SESSION['accessMessage'];
-        unset($_SESSION['accessMessage']);
-    }
 ?>
 
 <!DOCTYPE html>
@@ -201,25 +182,20 @@
             </div>
             <!-- ./ row -->
 
-            <?php /*
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Access Requests</h2>
+                    <h2>Active Calls</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
                     </ul>
                     <div class="clearfix"></div>
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
-                      <?php echo $accessMessage;?>
-                      <?php getPendingUsers();?>
+                      <?php //getActiveCalls();?>
                   </div>
                   <!-- ./ x_content -->
                 </div>
@@ -228,7 +204,67 @@
               <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
             </div>
             <!-- ./ row -->
-            */?>    
+
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-4 col-sm-4 col-xs-4">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Dispatchers</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                      <?php getDispatchers();?>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <!-- ./ x_panel -->
+              </div>
+              <!-- ./ col-md-2 col-sm-2 col-xs-2 -->
+
+              <div class="col-md-4 col-sm-4 col-xs-4">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Available Units</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                      <?php getAvailableUnits();?>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <!-- ./ x_panel -->
+              </div>
+              <!-- ./ col-md-5 col-sm-5 col-xs-5 -->
+
+                <div class="col-md-4 col-sm-4 col-xs-4">
+                    <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Unavailable Units</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- ./ x_title -->
+                    <div class="x_content">
+                        <?php getUnAvailableUnits();?>
+                    </div>
+                    <!-- ./ x_content -->
+                    </div>
+                    <!-- ./ x_panel -->
+                </div>
+                <!-- ./ col-md-5 col-sm-5 col-xs-5 -->
+            </div>
+            <!-- ./ row -->        
 
           </div>
           <!-- "" -->
@@ -261,7 +297,7 @@
             <form>
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">Create a new call</label>
-                <div class="col-md-10">
+                <div class="col-lg-10">
                   <input type="text" class="form-control" readonly="readonly" placeholder="action, callsign, calltype, 'location', 'notes'" />
                   <input type="text" class="form-control" readonly="readonly" placeholder="new, 5V-29, 10-11, 'Alta Street at Hawick Avenue', '4 door blue sedan occ 2x'" />
                 </div>
@@ -269,8 +305,8 @@
               </div>
               <!-- ./ form-group -->
               <div class="form-group row">
-                <label class="col-md-2 control-label">Change Unit Status</label>
-                <div class="col-md-10">
+                <label class="col-lg-2 control-label">Change Unit Status</label>
+                <div class="col-lg-10">
                   <input type="text" class="form-control" readonly="readonly" placeholder="action, callsign, status" />
                   <input type="text" class="form-control" readonly="readonly" placeholder="status, 5V-29, 10-6" />
                 </div>
@@ -278,8 +314,8 @@
               </div>
               <!-- ./ form-group -->
               <div class="form-group row">
-                <label class="col-md-2 control-label">Assign Unit to Call</label>
-                <div class="col-md-10">
+                <label class="col-lg-2 control-label">Assign Unit to Call</label>
+                <div class="col-lg-10">
                   <input type="text" class="form-control" readonly="readonly" placeholder="action, callId, callsign" />
                   <input type="text" class="form-control" readonly="readonly" placeholder="assign, 1234, 5V-29" />
                 </div>
