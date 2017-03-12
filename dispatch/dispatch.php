@@ -196,8 +196,12 @@
                   <!-- ./ x_title -->
                   <div class="x_content">
                       <?php //getActiveCalls();?>
+                      <div class="alert alert-info"><span>No active calls</span></div>
                   </div>
                   <!-- ./ x_content -->
+                  <div class="x_footer">
+                    <button class="btn btn-primary">New Call</button>
+                  </div>
                 </div>
                 <!-- ./ x_panel -->
               </div>
@@ -237,6 +241,7 @@
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
+                    <div class="alert alert-danger"><span>No active units</span></div>
                       <?php getAvailableUnits();?>
                   </div>
                   <!-- ./ x_content -->
@@ -256,6 +261,7 @@
                     </div>
                     <!-- ./ x_title -->
                     <div class="x_content">
+                      <div class="alert alert-info"><span>No unavailable units</span></div>
                         <?php getUnAvailableUnits();?>
                     </div>
                     <!-- ./ x_content -->
@@ -268,7 +274,7 @@
 
           <div class="clearfix"></div>
             <div class="row">
-              <div class="col-md-6 col-sm-6 col-xs-6">
+              <div class="col-md-4 col-sm-4 col-xs-4">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>NCIC Name Lookup</h2>
@@ -280,20 +286,24 @@
                   <!-- ./ x_title -->
                   <div class="x_content">
                     <div class="input-group">
-                      <input type="text" name="ncic_name" class="form-control" id="ncic_name"/>
+                      <input type="text" name="ncic_name" class="form-control" id="ncic_name" placeholder="John Doe" value="John Doe"/>
                         <span class="input-group-btn">
-                          <button type="button" class="btn btn-primary">Send</button>
+                          <button type="button" class="btn btn-primary" name="ncic_name_btn" id="ncic_name_btn">Send</button>
                         </span>
                     </div>
                     <!-- ./ input-group -->
+                    <div name="ncic_name_return">
+                      <textarea class="form-control" style="resize:none;" id="ncic_name_return" name="ncic_name_return" readonly="readonly"></textarea> 
+                    </div>
+                    <!-- ./ ncic_name_return -->
                   </div>
                   <!-- ./ x_content -->
                 </div>
                 <!-- ./ x_panel -->
               </div>
-              <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
+              <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
 
-              <div class="col-md-6 col-sm-6 col-xs-6">
+              <div class="col-md-4 col-sm-4 col-xs-4">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>NCIC Plate Lookup</h2>
@@ -305,7 +315,7 @@
                   <!-- ./ x_title -->
                   <div class="x_content">
                       <div class="input-group">
-                      <input type="text" name="ncic_plate" class="form-control" id="ncic_plate"/>
+                      <input type="text" name="ncic_plate" class="form-control" id="ncic_plate" placeholder="License Plate, (ABC123)"/>
                         <span class="input-group-btn">
                           <button type="button" class="btn btn-primary">Send</button>
                         </span>
@@ -316,7 +326,35 @@
                 </div>
                 <!-- ./ x_panel -->
               </div>
-              <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
+              <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
+
+              <div class="col-md-4 col-sm-4 col-xs-4">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>NCIC Firearm Lookup</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                    <div class="input-group">
+                      <input type="text" name="ncic_firearm" class="form-control" id="ncic_firearm" placeholder="Serial Number"/>
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-primary">Send</button>
+                        </span>
+                    </div>
+                    <!-- ./ input-group -->
+                    <div name="firearm_return">
+                    
+                    </div>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <!-- ./ x_panel -->
+              </div>
+              <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
             </div>
             <!-- ./ row -->
 
@@ -401,6 +439,8 @@
     </div>
     <!-- ./ modal fade bs-example-modal-lg -->
 
+
+
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
@@ -436,6 +476,44 @@
 
     });
 	</script>
+
+    <script>
+    $('#ncic_name_btn').on('click', function(e) {
+
+      var name = document.getElementById('ncic_name').value;
+
+      $.ajax({
+          cache: false,
+          type: 'POST',
+          url: '../actions/ncic.php',
+          data: {'ncicName': 'yes',
+                  'ncic_name' : name},
+
+          success: function(result) 
+          {
+            data = JSON.parse(result);
+
+            var textarea = document.getElementById("ncic_name_return");
+
+            if (data['noResult'] == "true")
+            {
+              textarea.value = "NAME NOT FOUND";
+            }
+            else
+            {
+              textarea.value = "Name: "+data['name']+"\nDOB: "+data['dob']+"\nAddress: "+data['address']+"\n\nFlags:";
+              $('#ncic_name_return').height( $("#ncic_name_return")[0].scrollHeight);
+            }
+
+            
+
+          },
+
+          error:function(exception){alert('Exeption:'+exception);}
+        });
+    });
+    </script>
+
     <script>
     function toggleFullScreen() {
         if ((document.fullScreenElement && document.fullScreenElement !== null) ||    

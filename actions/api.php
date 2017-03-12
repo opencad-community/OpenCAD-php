@@ -6,12 +6,12 @@ function getDispatchers()
 }
 function getAvailableUnits()
 {
-    echo "Active Units";
+    
 }
 
 function getUnAvailableUnits()
 {
-    echo "Unavailable Units";
+    
 }
 
 ?>
