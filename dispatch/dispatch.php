@@ -491,6 +491,7 @@
 
           success: function(result) 
           {
+            console.log(result);
             data = JSON.parse(result);
 
             var textarea = document.getElementById("ncic_name_return");
