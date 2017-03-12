@@ -502,12 +502,20 @@
             }
             else
             {
+              if (data['noWarrants'] == "true")
+              {
+                var warrantText = "NO WARRANTS";
+              }
+              else
+              {
+                var warrantText = data['warrant_name'];
+              }
               textarea.value = "Name: "+data['first_name']+" "+data['last_name']+"\nDOB: "+data['dob']+"\nSex: "+data['sex']+"\nAddress: "+data['address']+"\nRace: "+data['race']+"\nDL Status: "+data['dl_status']+
-              "\nHair Color: "+data['hair_color']+"\nBuild: "+data['build']+"\n\nFlags:";
-              $('#ncic_name_return').height( $("#ncic_name_return")[0].scrollHeight);
+              "\nHair Color: "+data['hair_color']+"\nBuild: "+data['build']+"\n\nWarrants: \n    "+warrantText;
+
             }
 
-            
+            $('#ncic_name_return').height( $("#ncic_name_return")[0].scrollHeight);
 
           },
 

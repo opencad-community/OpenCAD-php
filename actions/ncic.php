@@ -42,8 +42,10 @@ function name()
         }
         else
         {
+            
             while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
             {
+                $userId = $row[0];
                 $encode["userId"] = $row[0];
                 $encode["first_name"] = $row[1];
                 $encode["last_name"] = $row[2];
@@ -55,10 +57,39 @@ function name()
                 $encode["hair_color"] = $row[8];
                 $encode["build"] = $row[9];         
             }
+            mysqli_close($link);
+
+            /* Check for Warrants */
+            $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+            if (!$link) {
+                die('Could not connect: ' .mysql_error());
+            }
+            
+            $sql = "SELECT id, name_id, warrant_name FROM ncic_warrants WHERE name_id = \"$userId\"";
+
+            $result=mysqli_query($link, $sql);
+            
+            $num_rows = $result->num_rows;
+            if($num_rows == 0)
+            {
+                $encode["noWarrants"] = "true";
+            }
+            else
+            {
+                while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+                {
+                    $userId = $row[0];
+                    $encode["warrantId"] = $row[0];
+                    $encode["warrant_name"] = $row[2];         
+                }
+                mysqli_close($link);
+            }
+
         }
 
         echo json_encode($encode);
-        mysqli_close($link);
+        
 
     } else {
         $encode = array();
