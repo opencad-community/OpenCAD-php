@@ -27,7 +27,7 @@ function name()
         die('Could not connect: ' .mysql_error());
     }
     
-    $sql = "SELECT id, first_name, last_name, dob, address FROM ncic_names WHERE first_name = \"$first_name\" and last_name = \"$last_name\"";
+    $sql = "SELECT id, first_name, last_name, dob, address, sex, race, dl_status, hair_color, build FROM ncic_names WHERE first_name = \"$first_name\" and last_name = \"$last_name\"";
 
     $result=mysqli_query($link, $sql);
 
@@ -47,6 +47,11 @@ function name()
             $encode["last_name"] = $row[2];
             $encode["dob"] = $row[3];
             $encode["address"] = $row[4];
+            $encode["sex"] = $row[5];
+            $encode["race"] = $row[6];
+            $encode["dl_status"] = $row[7];
+            $encode["hair_color"] = $row[8];
+            $encode["build"] = $row[9];
             
         }
     }

@@ -501,7 +501,8 @@
             }
             else
             {
-              textarea.value = "Name: "+data['first_name']+" "+data['last_name']+"\nDOB: "+data['dob']+"\nAddress: "+data['address']+"\n\nFlags:";
+              textarea.value = "Name: "+data['first_name']+" "+data['last_name']+"\nDOB: "+data['dob']+"\nSex: "+data['sex']+"\nAddress: "+data['address']+"\nRace: "+data['race']+"\nDL Status: "+data['dl_status']+
+              "\nHair Color: "+data['hair_color']+"\nBuild: "+data['build']+"\n\nFlags:";
               $('#ncic_name_return').height( $("#ncic_name_return")[0].scrollHeight);
             }
 
