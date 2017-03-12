@@ -504,7 +504,7 @@
             {
               if (data['noWarrants'] == "true")
               {
-                var warrantText = "    NO WARRANTS";
+                var warrantText = "    NO WARRANTS\n";
               }
               else
               {
@@ -529,7 +529,7 @@
               }
 
               textarea.value = "Name: "+data['first_name']+" "+data['last_name']+"\nDOB: "+data['dob']+"\nAge: "+data['age']+"\nSex: "+data['sex']+"\nAddress: "+data['address']+"\nRace: "+data['race']+"\nDL Status: "+data['dl_status']+
-              "\nHair Color: "+data['hair_color']+"\nBuild: "+data['build']+"\n\nWarrants: \n"+warrantText+"\n\nCitations:\n"+citationText;
+              "\nHair Color: "+data['hair_color']+"\nBuild: "+data['build']+"\n\nWarrants: \n"+warrantText+"\nCitations:\n"+citationText;
 
             }
 
