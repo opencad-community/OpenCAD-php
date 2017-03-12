@@ -504,18 +504,17 @@
             {
               if (data['noWarrants'] == "true")
               {
-                var warrantText = "NO WARRANTS";
+                var warrantText = "    NO WARRANTS";
               }
               else
               {
                 var warrantText = "";
                 for (i=0; i<data.warrant_name.length; i++)
                 {
-                  console.log(data.warrant_name[i]);
                   warrantText += "    "+data.warrant_name[i] + "\n";  
                 }
               }
-              textarea.value = "Name: "+data['first_name']+" "+data['last_name']+"\nDOB: "+data['dob']+"\nSex: "+data['sex']+"\nAddress: "+data['address']+"\nRace: "+data['race']+"\nDL Status: "+data['dl_status']+
+              textarea.value = "Name: "+data['first_name']+" "+data['last_name']+"\nDOB: "+data['dob']+"\nAge: "+data['age']+"\nSex: "+data['sex']+"\nAddress: "+data['address']+"\nRace: "+data['race']+"\nDL Status: "+data['dl_status']+
               "\nHair Color: "+data['hair_color']+"\nBuild: "+data['build']+"\n\nWarrants: \n"+warrantText;
 
             }
