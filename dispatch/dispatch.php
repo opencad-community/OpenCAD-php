@@ -29,7 +29,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?php echo $community;?> Admin</title>
+    <title><?php echo $community;?> Dispatcher</title>
     <link rel="icon" href="../images/favicon.ico" />
 
     <!-- Bootstrap -->
@@ -514,8 +514,22 @@
                   warrantText += "    "+data.warrant_name[i] + "\n";  
                 }
               }
+
+              if (data['noWarrants'] == "true")
+              {
+                var citationText = "    NO CITATIONS";
+              }
+              else
+              {
+                var citationText = "";
+                for (i=0; i<data.citation_name.length; i++)
+                {
+                  citationText += "    "+data.citation_name[i]+"\n";  
+                }
+              }
+
               textarea.value = "Name: "+data['first_name']+" "+data['last_name']+"\nDOB: "+data['dob']+"\nAge: "+data['age']+"\nSex: "+data['sex']+"\nAddress: "+data['address']+"\nRace: "+data['race']+"\nDL Status: "+data['dl_status']+
-              "\nHair Color: "+data['hair_color']+"\nBuild: "+data['build']+"\n\nWarrants: \n"+warrantText;
+              "\nHair Color: "+data['hair_color']+"\nBuild: "+data['build']+"\n\nWarrants: \n"+warrantText+"\n\nCitations:\n"+citationText;
 
             }
 

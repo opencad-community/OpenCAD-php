@@ -89,6 +89,35 @@ function name()
                 mysqli_close($link);
             }
 
+            /* Check for Citations */
+            $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+            if (!$link) {
+                die('Could not connect: ' .mysql_error());
+            }
+            
+            $sql = "SELECT id, name_id, citation_name FROM ncic_citations WHERE name_id = \"$userId\"";
+
+            $result=mysqli_query($link, $sql);
+            
+            $num_rows = $result->num_rows;
+            if($num_rows == 0)
+            {
+                $encode["noCitations"] = "true";
+            }
+            else
+            {
+                $citationIndex = 0;
+                while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+                {
+                    $encode["citationId"][$citationIndex] = $row[0];
+                    $encode["citation_name"][$citationIndex] = $row[2];    
+
+                    $citationIndex++;      
+                }
+                mysqli_close($link);
+            }
+
         }
 
         echo json_encode($encode);
