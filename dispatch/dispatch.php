@@ -501,7 +501,7 @@
             }
             else
             {
-              textarea.value = "Name: "+data['name']+"\nDOB: "+data['dob']+"\nAddress: "+data['address']+"\n\nFlags:";
+              textarea.value = "Name: "+data['first_name']+" "+data['last_name']+"\nDOB: "+data['dob']+"\nAddress: "+data['address']+"\n\nFlags:";
               $('#ncic_name_return').height( $("#ncic_name_return")[0].scrollHeight);
             }
 

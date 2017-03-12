@@ -16,6 +16,10 @@ if (isset($_POST['ncic_name'])){
 function name()
 {
     $name = $_POST['ncic_name'];
+    $name_arr = explode(" ", $name);
+
+    $first_name = $name_arr[0];
+    $last_name = $name_arr[1];
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -23,7 +27,7 @@ function name()
         die('Could not connect: ' .mysql_error());
     }
     
-    $sql = "SELECT id, name, dob, address FROM ncic_names WHERE name = \"$name\"";
+    $sql = "SELECT id, first_name, last_name, dob, address FROM ncic_names WHERE first_name = \"$first_name\" and last_name = \"$last_name\"";
 
     $result=mysqli_query($link, $sql);
 
@@ -39,9 +43,10 @@ function name()
         while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
         {
             $encode["userId"] = $row[0];
-            $encode["name"] = $row[1];
-            $encode["dob"] = $row[2];
-            $encode["address"] = $row[3];
+            $encode["first_name"] = $row[1];
+            $encode["last_name"] = $row[2];
+            $encode["dob"] = $row[3];
+            $encode["address"] = $row[4];
             
         }
     }
