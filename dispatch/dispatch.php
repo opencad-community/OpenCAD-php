@@ -321,6 +321,10 @@
                         </span>
                     </div>
                     <!-- ./ input-group -->
+                    <div name="ncic_plate_return">
+                      <textarea class="form-control" style="resize:none;" id="ncic_plate_return" name="ncic_plate_return" readonly="readonly"></textarea> 
+                    </div>
+                    <!-- ./ ncic_plate_return -->
                   </div>
                   <!-- ./ x_content -->
                 </div>
@@ -509,6 +513,7 @@
               else
               {
                 var warrantText = "";
+                warrantText += "    Count: "+data.warrant_name.length+"\n";
                 for (i=0; i<data.warrant_name.length; i++)
                 {
                   warrantText += "    "+data.warrant_name[i] + "\n";  
@@ -522,6 +527,7 @@
               else
               {
                 var citationText = "";
+                citationText += "    Count: "+data.citation_name.length+"\n";
                 for (i=0; i<data.citation_name.length; i++)
                 {
                   citationText += "    "+data.citation_name[i]+"\n";  

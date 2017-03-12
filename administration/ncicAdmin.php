@@ -39,6 +39,13 @@
 
     include("../actions/adminActions.php");
     include("../actions/ncicAdminActions.php");
+
+    $citationMessage = "";
+    if(isset($_SESSION['citationMessage']))
+    {
+        $citationMessage = $_SESSION['citationMessage'];
+        unset($_SESSION['citationMessage']);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -226,6 +233,36 @@
             </div>
             <!-- ./ row -->
 
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>NCIC Citations DB</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php echo $citationMessage;?>
+                     <?php ncic_citations();?> 
+                  </div>
+                  <!-- ./ x_content -->
+                  <div class="x_footer">
+                    <button class="btn btn-primary" name="create_citation_btn" type="submit" data-toggle="modal" data-target="#createCitationModal">Create Citation</button>
+                  </div>
+                </div>
+                <!-- ./ x_panel -->
+              </div>
+              <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
+            </div>
+            <!-- ./ row -->
+
 
           </div>
           <!-- "" -->
@@ -242,6 +279,54 @@
         <!-- /footer content -->
       </div>
     </div>
+
+    <!-- modals -->
+    <!-- Create Citation Modal -->
+    <div class="modal fade" id="createCitationModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Citation Creator</h4>
+          </div>
+          <!-- ./ modal-header -->
+          <div class="modal-body">
+            <form role="form" action="../actions/ncicAdminActions.php" method="post">
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Civilian Name</label>
+                <div class="col-lg-10">
+                  <select class="form-control selectpicker" name="civilian_names" id="civilian_names" data-live-search="true" required>
+                    <option> </option>
+                    <?php getCivilianNames();?>
+                  </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Citation Name</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" name="citation_name" />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+            
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+                <input name="create_citation" type="submit" class="btn btn-primary" value="Create" /> 
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
 
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
@@ -264,6 +349,12 @@
     <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
     <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+
+    <!-- Bootstrap Select -->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
     
     <script>
 		$(document).ready(function() {
