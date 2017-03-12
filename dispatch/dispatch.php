@@ -243,7 +243,7 @@
                 </div>
                 <!-- ./ x_panel -->
               </div>
-              <!-- ./ col-md-5 col-sm-5 col-xs-5 -->
+              <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
 
                 <div class="col-md-4 col-sm-4 col-xs-4">
                     <div class="x_panel">
@@ -262,9 +262,64 @@
                     </div>
                     <!-- ./ x_panel -->
                 </div>
-                <!-- ./ col-md-5 col-sm-5 col-xs-5 -->
+                <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
             </div>
             <!-- ./ row -->        
+
+          <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>NCIC Name Lookup</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                    <div class="input-group">
+                      <input type="text" name="ncic_name" class="form-control" id="ncic_name"/>
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-primary">Send</button>
+                        </span>
+                    </div>
+                    <!-- ./ input-group -->
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <!-- ./ x_panel -->
+              </div>
+              <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
+
+              <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>NCIC Plate Lookup</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                      <div class="input-group">
+                      <input type="text" name="ncic_plate" class="form-control" id="ncic_plate"/>
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-primary">Send</button>
+                        </span>
+                    </div>
+                    <!-- ./ input-group -->
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <!-- ./ x_panel -->
+              </div>
+              <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
+            </div>
+            <!-- ./ row -->
+
 
           </div>
           <!-- "" -->
@@ -318,6 +373,16 @@
                 <div class="col-lg-10">
                   <input type="text" class="form-control" readonly="readonly" placeholder="action, callId, callsign" />
                   <input type="text" class="form-control" readonly="readonly" placeholder="assign, 1234, 5V-29" />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">NCIC Lookup</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" readonly="readonly" placeholder="action, name/plate" />
+                  <input type="text" class="form-control" readonly="readonly" placeholder="ncic, 'John Doe'" />
+                  <input type="text" class="form-control" readonly="readonly" placeholder="ncic, 'ABC123'" />
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
