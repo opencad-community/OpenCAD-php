@@ -538,6 +538,14 @@
     }
     </script>
 
+    <script>
+    $("#ncic_name").keyup(function(event){
+        if(event.keyCode == 13){
+            $("#ncic_name_btn").click();
+        }
+    });
+    </script>
+
     <!-- Custom Theme Scripts -->
     <script src="../js/custom.js"></script>
   </body>
