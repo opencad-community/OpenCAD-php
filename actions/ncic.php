@@ -77,11 +77,13 @@ function name()
             }
             else
             {
+                $warrantIndex = 0;
                 while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
                 {
-                    $userId = $row[0];
-                    $encode["warrantId"] = $row[0];
-                    $encode["warrant_name"] = $row[2];         
+                    $encode["warrantId"][$warrantIndex] = $row[0];
+                    $encode["warrant_name"][$warrantIndex] = $row[2];   
+
+                    $warrantIndex++;      
                 }
                 mysqli_close($link);
             }
