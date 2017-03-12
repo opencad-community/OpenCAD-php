@@ -1,4 +1,12 @@
 <?php
+/**
+ * ncicAdmin.php
+ *
+ * Admin page for managing NCIC entries
+ *
+ * @author     Shane G
+ */
+
     session_start();
 
     // TODO: Verify user has permission to be on this page
@@ -30,13 +38,7 @@
     $community = $iniContents['strings']['community'];
 
     include("../actions/adminActions.php");
-
-    $accessMessage = "";
-    if(isset($_SESSION['accessMessage']))
-    {
-        $accessMessage = $_SESSION['accessMessage'];
-        unset($_SESSION['accessMessage']);
-    }
+    include("../actions/ncicAdminActions.php");
 ?>
 
 <!DOCTYPE html>
@@ -99,16 +101,16 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li class="active"><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu" style="display: block;">
-                      <li class="current-page"><a href="javascript:void(0)">Dashboard</a></li>
+                  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="admin.php">Dashboard</a></li>
                       <li><a href="userManagement.php">User Management</a></li>
                       <li><a href="lov.php">List of Values Management</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-database"></i> NCIC Editor <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="ncicAdmin.php">NCIC Editor</a></li>
+                  <li class="active"><a><i class="fa fa-database"></i> NCIC Editor <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu"  style="display: block;">
+                      <li class="current-page"><a href="javascript:void(0)">NCIC Editor</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -168,33 +170,16 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>CAD Administration</h3>
+                <h3>CAD NCIC Admin</h3>
               </div>
-          
-              <?php /* HIUE SEARCH FUNCTION FOR NOW
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                  </div>
-                  <!-- ./ input-group -->
-                </div>
-                <!-- ./ col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search -->
-              </div>
-              <!-- ./ title_right -->
-              */?>
             </div>
 
             <div class="clearfix"></div>
-
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Statistics at a glance</h2>
+                    <h2>NCIC Names DB</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -205,14 +190,7 @@
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
-                      <div class="row tile_count">
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
-                          <div class="count"><?php echo getUserCount();?></div>
-                        </div>
-                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
-                      </div>
-                      <!-- ./ row tile_count -->
+                     <?php ncicGetNames();?> 
                   </div>
                   <!-- ./ x_content -->
                 </div>
@@ -227,7 +205,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Access Requests</h2>
+                    <h2>NCIC Warrants DB</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -238,8 +216,7 @@
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
-                      <?php echo $accessMessage;?>
-                      <?php getPendingUsers();?>
+                     <?php ncic_warrants();?> 
                   </div>
                   <!-- ./ x_content -->
                 </div>
@@ -291,9 +268,12 @@
     <script>
 		$(document).ready(function() {
 		
-			$('#pendingUsers').DataTable({
-        paging: false,
-        searching: false
+			$('#ncic_names').DataTable({
+                
+			});
+
+            $('#ncic_warrants').DataTable({
+                
 			});
 
 		});
