@@ -367,6 +367,10 @@
                 
 			});
 
+            $('#ncic_citations').DataTable({
+                
+			});
+
 		});
 		</script>
 
