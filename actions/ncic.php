@@ -176,8 +176,9 @@ function plate()
             $encode["veh_color"] = $row[5];
             $encode["veh_ro"] = $row[6];
             $encode["veh_insurance"] = $row[7];
-            $encode["veh_reg_state"] = $row[8];
-            $encode["notes"] = $row[9];            
+            $encode["flags"] = $row[8];
+            $encode["veh_reg_state"] = $row[9];
+            $encode["notes"] = $row[10];            
                     
         }
         mysqli_close($link);

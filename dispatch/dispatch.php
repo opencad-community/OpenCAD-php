@@ -217,7 +217,7 @@
               <div class="col-md-4 col-sm-4 col-xs-4">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Dispatchers</h2>
+                    <h2>Active Dispatchers</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
                     </ul>
@@ -318,7 +318,7 @@
                   <!-- ./ x_title -->
                   <div class="x_content">
                       <div class="input-group">
-                      <input type="text" name="ncic_plate" class="form-control" id="ncic_plate" placeholder="License Plate, (ABC123)"/>
+                      <input type="text" name="ncic_plate" class="form-control" id="ncic_plate" value="abc123" placeholder="License Plate, (ABC123)"/>
                         <span class="input-group-btn">
                           <button type="button" class="btn btn-primary" id="ncic_plate_btn">Send</button>
                         </span>
@@ -547,11 +547,6 @@
     
     <script>
     $(document).ready(function() {
-        $('#pendingUsers').DataTable({
-            paging: false,
-            searching: false
-        });
-
         $(function() {
             $('#menu_toggle').click();
         });
@@ -639,7 +634,7 @@
                 }
               }
 
-              var dl_status_text = ""
+              var dl_status_text = "";
               if (data['dl_status'] == "Valid")
               {
                  dl_status_text = "<span style=\"color: green;\">Valid</span>";
@@ -685,7 +680,7 @@
             }
             else
             {
-              var insurance_status = ""
+              var insurance_status = "";
               if (data['veh_insurance'] == "VALID")
               {
                  insurance_status = "<span style=\"color: green;\">Valid</span>";
@@ -695,7 +690,7 @@
                 insurance_status = "<span style=\"color: red;\">"+data['veh_insurance']+"</span>";
               }
 
-              var notes = ""
+              var notes = "";
               if (data['notes'] == "")
               {
                  notes = "NO VEHICLE NOTES";
@@ -705,8 +700,19 @@
                 notes = "<span style=\"font-weight: bold;\">"+data['notes']+"</span>";
               }
 
+              var flags = "";
+              if (data['flags'] == "NONE")
+              {
+                 flags = "<span style=\"color: green;\">None</span>";
+              }
+              else
+              {
+                flags = "<span style=\"color: red;\">"+data['flags']+"</span>";
+              }
+
+
               $('#ncic_plate_return').append("Plate: "+data['plate']+"<br/>Color: "+data['veh_color']+"<br/>Make: "+data['veh_make']+"<br/>Model: "+data['veh_model']+"<br/>Owner: "+data['veh_ro']
-              +"<br/>Insurance: "+insurance_status+"<br/><br/>Notes: "+notes);
+              +"<br/>Insurance: "+insurance_status+"<br/>Flags: "+flags+"<br/><br/>Notes: "+notes);
 
               $("#ncic_plate_return").attr("tabindex",-1).focus();
             }
