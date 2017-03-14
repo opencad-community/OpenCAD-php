@@ -36,6 +36,8 @@
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- Datatables -->
@@ -43,12 +45,13 @@
     <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet"
+    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+    
 
     <!-- Custom Theme Style -->
     <link href="../css/custom.css" rel="stylesheet">
   </head>
-
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
@@ -200,7 +203,7 @@
                   </div>
                   <!-- ./ x_content -->
                   <div class="x_footer">
-                    <button class="btn btn-primary">New Call</button>
+                    <button class="btn btn-primary" name="new_call_btn" data-toggle="modal" data-target="#newCall">New Call</button>
                   </div>
                 </div>
                 <!-- ./ x_panel -->
@@ -292,8 +295,8 @@
                         </span>
                     </div>
                     <!-- ./ input-group -->
-                    <div name="ncic_name_return">
-                      <textarea class="form-control" style="resize:none;" id="ncic_name_return" name="ncic_name_return" readonly="readonly"></textarea> 
+                    <div name="ncic_name_return" id="ncic_name_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
+                      <!--<textarea class="form-control" style="resize:none;" id="ncic_name_return" name="ncic_name_return" readonly="readonly"></textarea> -->
                     </div>
                     <!-- ./ ncic_name_return -->
                   </div>
@@ -317,12 +320,12 @@
                       <div class="input-group">
                       <input type="text" name="ncic_plate" class="form-control" id="ncic_plate" placeholder="License Plate, (ABC123)"/>
                         <span class="input-group-btn">
-                          <button type="button" class="btn btn-primary">Send</button>
+                          <button type="button" class="btn btn-primary" id="ncic_plate_btn">Send</button>
                         </span>
                     </div>
                     <!-- ./ input-group -->
-                    <div name="ncic_plate_return">
-                      <textarea class="form-control" style="resize:none;" id="ncic_plate_return" name="ncic_plate_return" readonly="readonly"></textarea> 
+                    <div name="ncic_plate_return" id="ncic_plate_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
+                    
                     </div>
                     <!-- ./ ncic_plate_return -->
                   </div>
@@ -346,12 +349,12 @@
                     <div class="input-group">
                       <input type="text" name="ncic_firearm" class="form-control" id="ncic_firearm" placeholder="Serial Number"/>
                         <span class="input-group-btn">
-                          <button type="button" class="btn btn-primary">Send</button>
+                          <button type="button" class="btn btn-primary" disabled>Send</button>
                         </span>
                     </div>
                     <!-- ./ input-group -->
                     <div name="firearm_return">
-                    
+                      
                     </div>
                   </div>
                   <!-- ./ x_content -->
@@ -380,7 +383,7 @@
     </div>
 
     <!-- modals -->
-    <!-- Edit User Modal -->
+    <!-- Quick Guide Modal -->
     <div class="modal fade" id="quickGuide" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -443,6 +446,72 @@
     </div>
     <!-- ./ modal fade bs-example-modal-lg -->
 
+    <!-- New Call Modal -->
+    <div class="modal fade" id="newCall" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">New Call</h4>
+          </div>
+          <!-- ./ modal-header -->
+          <div class="modal-body">
+            <form method="post" action="../actions/dispatchActions.php" class="newCallForm">
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Incident Type</label>
+                <div class="col-lg-10">
+                  <select class="form-control selectpicker" data-live-search="true" name="call_type">
+                    <option>Test</option>
+                    <option>10-11</option>
+                  </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Address</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control txt-auto" id="street1" name="street1" placeholder="Street 1" required/>
+                  <input type="text" class="form-control txt-auto2" placeholder="Street 2/Cross/Postal" />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Assign Unit to Call</label>
+                <div class="col-lg-10">
+                  <input type="checkbox" name="unassigned" class="flat">&nbsp;Unassigned
+                  <input name="unit1" type="text" class="form-control" placeholder="Unit 1" />
+                  <input type="text" class="form-control" placeholder="Unit 2" />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Narrative</label>
+                <div class="col-lg-10">
+                  <textarea name="narrative" class="form-control" rows="5"></textarea>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+            
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+            <input type="submit" name="create_call" class="btn btn-primary" value="Send"/>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+          <!-- ./ modal-footer -->
+          </form>
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
+
 
 
     <!-- jQuery -->
@@ -451,6 +520,8 @@
     <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
     <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- iCheck -->
+    <script src="../vendors/iCheck/icheck.min.js"></script>
     <!-- NProgress -->
     <script src="../vendors/nprogress/nprogress.js"></script>
     <!-- Datatables -->
@@ -466,6 +537,13 @@
     <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
     <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <!-- Bootstrap Select -->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
+    -<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    
     
     <script>
     $(document).ready(function() {
@@ -477,14 +555,41 @@
         $(function() {
             $('#menu_toggle').click();
         });
-
     });
-	</script>
+	  </script>
 
+
+  
+    <!-- TODO: FIX -->
+    <script>
+    $( ".txt-auto" ).autocomplete({
+      source: "../actions/dispatchActions.php",
+      minLength: 2
+    });
+    $( ".txt-auto" ).autocomplete( "option", "appendTo", ".newCallForm" );
+
+    $( ".txt-auto2" ).autocomplete({
+      source: "../actions/dispatchActions.php",
+      minLength: 2
+    });
+    $( ".txt-auto2" ).autocomplete( "option", "appendTo", ".newCallForm" );
+
+
+    $(".modal input:checkbox").on('change', function () {
+        var self = $(this);
+        if (self.is(":checked")) {
+            
+        } else {
+            
+        }
+    });
+    </script>
+  
     <script>
     $('#ncic_name_btn').on('click', function(e) {
 
       var name = document.getElementById('ncic_name').value;
+      $('#ncic_name_return').empty();
 
       $.ajax({
           cache: false,
@@ -502,45 +607,109 @@
 
             if (data['noResult'] == "true")
             {
-              textarea.value = "NAME NOT FOUND";
+              $('#ncic_name_return').append("<p style=\"color:red;\">NAME NOT FOUND");
             }
             else
             {
               if (data['noWarrants'] == "true")
               {
-                var warrantText = "    NO WARRANTS\n";
+                var warrantText = "&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: green\">NO WARRANTS</span><br/>";
               }
               else
               {
                 var warrantText = "";
-                warrantText += "    Count: "+data.warrant_name.length+"\n";
+                warrantText += "    Count: "+data.warrant_name.length+"<br/>";
                 for (i=0; i<data.warrant_name.length; i++)
                 {
-                  warrantText += "    "+data.warrant_name[i] + "\n";  
+                  warrantText += "<span style=\"color:red\">&nbsp;&nbsp;&nbsp;&nbsp;"+data.warrant_name[i] + "</span><br/>";  
                 }
               }
 
               if (data['noWarrants'] == "true")
               {
-                var citationText = "    NO CITATIONS";
+                var citationText = "&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: green\">NO CITATIONS</span>";
               }
               else
               {
                 var citationText = "";
-                citationText += "    Count: "+data.citation_name.length+"\n";
+                citationText += "    Count: "+data.citation_name.length+"<br/>";
                 for (i=0; i<data.citation_name.length; i++)
                 {
-                  citationText += "    "+data.citation_name[i]+"\n";  
+                  citationText += "&nbsp;&nbsp;&nbsp;&nbsp;"+data.citation_name[i]+"<br/>";  
                 }
               }
 
-              textarea.value = "Name: "+data['first_name']+" "+data['last_name']+"\nDOB: "+data['dob']+"\nAge: "+data['age']+"\nSex: "+data['sex']+"\nAddress: "+data['address']+"\nRace: "+data['race']+"\nDL Status: "+data['dl_status']+
-              "\nHair Color: "+data['hair_color']+"\nBuild: "+data['build']+"\n\nWarrants: \n"+warrantText+"\nCitations:\n"+citationText;
+              var dl_status_text = ""
+              if (data['dl_status'] == "Valid")
+              {
+                 dl_status_text = "<span style=\"color: green;\">Valid</span>";
+              }
+              else
+              {
+                dl_status_text = "<span style=\"color: red;\">"+data['dl_status']+"</span>";
+              }
 
+              $('#ncic_name_return').append("Name: "+data['first_name']+" "+data['last_name']+"<br/>DOB: "+data['dob']+"<br/>Age: "+data['age']+"<br/>Sex: "+data['sex']+"<br/>Address: "+data['address']+"<br/>Race: "+data['race']+"<br/>DL Status: "+dl_status_text+
+              "<br/>Hair Color: "+data['hair_color']+"<br/>Build: "+data['build']+"<br/><br/>Warrants: <br/>"+warrantText+"<br/>Citations:<br/>"+citationText);
+
+              $("#ncic_name_return").attr("tabindex",-1).focus();
             }
+          },
 
-            $('#ncic_name_return').height( $("#ncic_name_return")[0].scrollHeight);
+          error:function(exception){alert('Exeption:'+exception);}
+        });
+    });
+    </script>
 
+    <script>
+    $('#ncic_plate_btn').on('click', function(e) {
+
+      var plate = document.getElementById('ncic_plate').value;
+      $('#ncic_plate_return').empty();
+
+      $.ajax({
+          cache: false,
+          type: 'POST',
+          url: '../actions/ncic.php',
+          data: {'ncicPlate': 'yes',
+                  'ncic_plate' : plate},
+
+          success: function(result) 
+          {
+            console.log(result);
+            data = JSON.parse(result);
+
+            if (data['noResult'] == "true")
+            {
+              $('#ncic_plate_return').append("<p style=\"color:red;\">PLATE NOT FOUND");
+            }
+            else
+            {
+              var insurance_status = ""
+              if (data['veh_insurance'] == "VALID")
+              {
+                 insurance_status = "<span style=\"color: green;\">Valid</span>";
+              }
+              else
+              {
+                insurance_status = "<span style=\"color: red;\">"+data['veh_insurance']+"</span>";
+              }
+
+              var notes = ""
+              if (data['notes'] == "")
+              {
+                 notes = "NO VEHICLE NOTES";
+              }
+              else
+              {
+                notes = "<span style=\"font-weight: bold;\">"+data['notes']+"</span>";
+              }
+
+              $('#ncic_plate_return').append("Plate: "+data['plate']+"<br/>Color: "+data['veh_color']+"<br/>Make: "+data['veh_make']+"<br/>Model: "+data['veh_model']+"<br/>Owner: "+data['veh_ro']
+              +"<br/>Insurance: "+insurance_status+"<br/><br/>Notes: "+notes);
+
+              $("#ncic_plate_return").attr("tabindex",-1).focus();
+            }
           },
 
           error:function(exception){alert('Exeption:'+exception);}
@@ -575,6 +744,14 @@
     $("#ncic_name").keyup(function(event){
         if(event.keyCode == 13){
             $("#ncic_name_btn").click();
+        }
+    });
+    </script>
+
+    <script>
+    $("#ncic_plate").keyup(function(event){
+        if(event.keyCode == 13){
+            $("#ncic_plate_btn").click();
         }
     });
     </script>

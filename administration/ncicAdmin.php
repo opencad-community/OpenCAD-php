@@ -363,11 +363,11 @@
                 
 			});
 
-            $('#ncic_warrants').DataTable({
+      $('#ncic_warrants').DataTable({
                 
 			});
 
-            $('#ncic_citations').DataTable({
+      $('#ncic_citations').DataTable({
                 
 			});
 

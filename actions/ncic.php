@@ -12,6 +12,9 @@ require($connectionsFileLocation);
 if (isset($_POST['ncic_name'])){
     name();
 }
+if (isset($_POST['ncic_plate'])){
+    plate();
+}
 
 function name()
 {
@@ -132,7 +135,55 @@ function name()
 
 function plate()
 {
+    $plate = $_POST['ncic_plate'];
+    
+    //Remove all spaces from plate
+    $plate = str_replace(' ', '', $plate);
+    //Set plate to all uppercase
+    $plate = strtoupper($plate);
+    //Convert all O to 0
+    $plate = str_replace('O', '0', $plate);
+    //Remove al hyphens
+    $plate = str_replace('-', '', $plate);
+    //Remove all special characters
+    $plate = preg_replace('/[^A-Za-z0-9\-]/', '', $plate);
 
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+    
+    $sql = "SELECT * from ncic_plates WHERE veh_plate = \"$plate\"";
+
+    $result=mysqli_query($link, $sql);
+
+    $encode = array();
+    
+    $num_rows = $result->num_rows;
+    if($num_rows == 0)
+    {
+        $encode["noResult"] = "true";
+    }
+    else
+    {
+        
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            $encode["plate"] = $row[2];
+            $encode["veh_make"] = $row[3];
+            $encode["veh_model"] = $row[4];
+            $encode["veh_color"] = $row[5];
+            $encode["veh_ro"] = $row[6];
+            $encode["veh_insurance"] = $row[7];
+            $encode["veh_reg_state"] = $row[8];
+            $encode["notes"] = $row[9];            
+                    
+        }
+        mysqli_close($link);
+    }
+
+    echo json_encode($encode);
 }
 
 function firearm()
