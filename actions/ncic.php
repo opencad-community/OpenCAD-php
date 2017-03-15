@@ -154,7 +154,7 @@ function plate()
         die('Could not connect: ' .mysql_error());
     }
     
-    $sql = "SELECT * from ncic_plates WHERE veh_plate = \"$plate\"";
+    $sql = "SELECT ncic_plates.*, ncic_names.first_name, ncic_names.last_name FROM ncic_plates INNER JOIN ncic_names ON ncic_names.id=ncic_plates.name_id WHERE veh_plate = \"$plate\"";
 
     $result=mysqli_query($link, $sql);
 
@@ -167,18 +167,21 @@ function plate()
     }
     else
     {
+        $result=mysqli_query($link, $sql);
         
         while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
         {
+            $owner = $row[11]." ".$row[12];
+
             $encode["plate"] = $row[2];
             $encode["veh_make"] = $row[3];
             $encode["veh_model"] = $row[4];
             $encode["veh_color"] = $row[5];
-            $encode["veh_ro"] = $row[6];
-            $encode["veh_insurance"] = $row[7];
-            $encode["flags"] = $row[8];
-            $encode["veh_reg_state"] = $row[9];
-            $encode["notes"] = $row[10];            
+            $encode["veh_ro"] = $owner;
+            $encode["veh_insurance"] = $row[6];
+            $encode["flags"] = $row[7];
+            $encode["veh_reg_state"] = $row[8];
+            $encode["notes"] = $row[9];            
                     
         }
         mysqli_close($link);

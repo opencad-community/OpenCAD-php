@@ -113,6 +113,7 @@
                       <li><a href="admin.php">Dashboard</a></li>
                       <li><a href="userManagement.php">User Management</a></li>
                       <li><a href="lov.php">List of Values Management</a></li>
+                      <li><a href="../actions/direction.php">CAD Direction Page</a></li>
                     </ul>
                   </li>
                   <li class="active"><a><i class="fa fa-database"></i> NCIC Editor <span class="fa fa-chevron-down"></span></a>
@@ -198,6 +199,32 @@
                   <!-- ./ x_title -->
                   <div class="x_content">
                      <?php ncicGetNames();?> 
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <!-- ./ x_panel -->
+              </div>
+              <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
+            </div>
+            <!-- ./ row -->
+
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>NCIC Vehicle DB</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php ncicGetPlates();?> 
                   </div>
                   <!-- ./ x_content -->
                 </div>
@@ -360,6 +387,10 @@
 		$(document).ready(function() {
 		
 			$('#ncic_names').DataTable({
+                
+			});
+
+      $('#ncic_plates').DataTable({
                 
 			});
 

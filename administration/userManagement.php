@@ -91,6 +91,12 @@
                       <li><a href="admin.php">Dashboard</a></li>
                       <li class="current-page"><a href="javascript:void(0)">User Management</a></li>
                       <li><a href="lov.php">List of Values Management</a></li>
+                      <li><a href="../actions/direction.php">CAD Direction Page</a></li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-database"></i> NCIC Editor <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="ncicAdmin.php">NCIC Editor</a></li>
                     </ul>
                   </li>
                 </ul>

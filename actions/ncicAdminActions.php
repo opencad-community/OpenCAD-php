@@ -94,6 +94,80 @@ function ncicGetNames()
     }
 }
 
+function ncicGetPlates()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) { 
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT ncic_plates.*, ncic_names.first_name, ncic_names.last_name FROM ncic_plates INNER JOIN ncic_names ON ncic_names.id=ncic_plates.name_id";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>There are currently no vehicles in the NCIC Database</span></div>";
+    }
+    else
+    {
+        echo '
+            <table id="ncic_plates" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Owner</th>
+                <th>Plate</th>
+                <th>Reg. State</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Color</th>
+                <th>Ins. Status</th>
+                <th>Flags</th>
+                <th>Notes</th>
+                <th>Admin Notes</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>           
+        ';
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            $owner = $row[11]." ".$row[12];
+
+            echo '
+            <tr>
+                <td>'.$owner.'</td>
+                <td>'.$row[2].'</td>
+                <td>'.$row[8].'</td>
+                <td>'.$row[3].'</td>
+                <td>'.$row[4].'</td>
+                <td>'.$row[5].'</td>
+                <td>'.$row[6].'</td>
+                <td>'.$row[7].'</td>
+                <td>'.$row[9].'</td>
+                <td>'.$row[10].'</td>
+                <td>
+                    <form action="../actions/ncicAdminActions.php" method="post">
+                    <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
+                    <input name="deleteName" type="submit" class="btn btn-xs btn-link" value="Delete" disabled/>
+                    <input name="vehid" type="hidden" value='.$row[0].' />
+                    </form>                    
+                </td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
+
 function ncic_warrants()
 {
    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);

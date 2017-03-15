@@ -17,6 +17,10 @@ if (empty($_SESSION['logged_in']))
 $iniContents = parse_ini_file("../properties/config.ini", true); //Gather from config.ini file
 $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"]."/openCad/".$iniContents['main']['connection_file_location'];
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require($connectionsFileLocation);
 
 $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -26,7 +30,7 @@ if (!$link) {
 }
 
 $id = $_SESSION['id'];
-$sql = "SELECT * from user_departments WHERE user_id = $id";
+$sql = "SELECT * from user_departments WHERE user_id = \"$id\"";
 
 $result=mysqli_query($link, $sql);
 
@@ -60,33 +64,32 @@ if($num_rows < 2)
 
 while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
 {
-    
-    if ($row[0] == 0)
-    {
+    if ($row[1] == 0)
+    { 
         $adminButton = "<a href=\"../administration/admin.php\" class=\"btn btn-primary btn-lg\">Administration</a>";
         $_SESSION['admin'] = 'YES';
     }
-    if ($row[0] == 1)
+    if ($row[1] == 1)
     {
         $dispatchButton = "<a href=\"../dispatch/dispatch.php\" class=\"btn btn-primary btn-lg\">Dispatch</a>";
     }
-    if ($row[0] == "2")
+    if ($row[1] == "2")
     {
         $emsButton = "<a href=\"../responder/responder.php\" class=\"btn btn-primary btn-lg\">EMS</a>";
     }
-    if ($row[0] == "3")
+    if ($row[1] == "3")
     {
         $fireButton = "<a href=\"../responder/responder.php\" class=\"btn btn-primary btn-lg\">Fire Department</a>";
     }
-    if ($row[0] == "4")
+    if ($row[1] == "4")
     {
         $highwayButton = "<a href=\"../responder/responder.php\" class=\"btn btn-primary btn-lg\">Highway Patrol</a>";
     }
-    if ($row[0] == "5")
+    if ($row[1] == "5")
     {
         $policeButton = "<a href=\"../responder/responder.php\" class=\"btn btn-primary btn-lg\">Police Department</a>";
     }
-    if ($row[0] == "6")
+    if ($row[1] == "6")
     {
         $sheriffButton = "<a href=\"../responder/responder.php\" class=\"btn btn-primary btn-lg\">Sheriff's Office</a>";
     }

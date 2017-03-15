@@ -657,7 +657,7 @@
                 }
               }
 
-              if (data['noWarrants'] == "true")
+              if (data['noCitations'] == "true")
               {
                 var citationText = "&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: green\">NO CITATIONS</span>";
               }
@@ -667,7 +667,7 @@
                 citationText += "    Count: "+data.citation_name.length+"<br/>";
                 for (i=0; i<data.citation_name.length; i++)
                 {
-                  citationText += "&nbsp;&nbsp;&nbsp;&nbsp;"+data.citation_name[i]+"<br/>";  
+                  citationText += "&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #F78F2B\">"+data.citation_name[i]+"</span><br/>";  
                 }
               }
 
@@ -681,8 +681,12 @@
                 dl_status_text = "<span style=\"color: red;\">"+data['dl_status']+"</span>";
               }
 
-              $('#ncic_name_return').append("Name: "+data['first_name']+" "+data['last_name']+"<br/>DOB: "+data['dob']+"<br/>Age: "+data['age']+"<br/>Sex: "+data['sex']+"<br/>Address: "+data['address']+"<br/>Race: "+data['race']+"<br/>DL Status: "+dl_status_text+
-              "<br/>Hair Color: "+data['hair_color']+"<br/>Build: "+data['build']+"<br/><br/>Warrants: <br/>"+warrantText+"<br/>Citations:<br/>"+citationText);
+              $('#ncic_name_return').append("Name: "+data['first_name']+" "+data['last_name']+"<br/>DOB: "+data['dob']+"<br/>Age: "+data['age']+"<br/>Sex: "+data['sex']
+              +"<br/>Race: "+data['race']+"<br/>Hair Color: "+data['hair_color']
+              +"<br/>Build: "+data['build']
+              +"<br/>Address: "+data['address']
+              +"<br/>DL Status: "+dl_status_text
+              +"<br/><br/>Warrants: <br/>"+warrantText+"<br/>Citations:<br/>"+citationText);
 
               $("#ncic_name_return").attr("tabindex",-1).focus();
             }
