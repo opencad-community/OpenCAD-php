@@ -46,7 +46,7 @@
     <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-    <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+    <link href="https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
     
 
     <!-- Custom Theme Style -->
@@ -198,8 +198,7 @@
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
-                      <?php //getActiveCalls();?>
-                      <div class="alert alert-info"><span>No active calls</span></div>
+                      <?php getActiveCalls();?>
                   </div>
                   <!-- ./ x_content -->
                   <div class="x_footer">
@@ -212,6 +211,7 @@
             </div>
             <!-- ./ row -->
 
+            <?php /*Removing for now
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-4 col-sm-4 col-xs-4">
@@ -232,8 +232,11 @@
                 <!-- ./ x_panel -->
               </div>
               <!-- ./ col-md-2 col-sm-2 col-xs-2 -->
+              */?>
 
-              <div class="col-md-4 col-sm-4 col-xs-4">
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Available Units</h2>
@@ -244,16 +247,15 @@
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
-                    <div class="alert alert-danger"><span>No active units</span></div>
                       <?php getAvailableUnits();?>
                   </div>
                   <!-- ./ x_content -->
                 </div>
                 <!-- ./ x_panel -->
               </div>
-              <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
+              <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
 
-                <div class="col-md-4 col-sm-4 col-xs-4">
+                <div class="col-md-6 col-sm-6 col-xs-6">
                     <div class="x_panel">
                     <div class="x_title">
                         <h2>Unavailable Units</h2>
@@ -264,14 +266,13 @@
                     </div>
                     <!-- ./ x_title -->
                     <div class="x_content">
-                      <div class="alert alert-info"><span>No unavailable units</span></div>
                         <?php getUnAvailableUnits();?>
                     </div>
                     <!-- ./ x_content -->
                     </div>
                     <!-- ./ x_panel -->
                 </div>
-                <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
+                <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
             </div>
             <!-- ./ row -->        
 
@@ -550,6 +551,42 @@
         $(function() {
             $('#menu_toggle').click();
         });
+
+        $(function() {
+        $('.clear_call_form').submit(function(e) {
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+            var $tr = $(this).closest('tr');
+            var r = confirm("Are you sure you want to clear this call? This will mark all assigned units on call active.");
+
+            if (r == true)
+            {
+              $.ajax({
+                type: "POST",
+                url: "../actions/dispatchActions.php",
+                data: {
+                    clearCall: 'yes',
+                    callId: $("#"+this.id).serialize()
+                },
+                success: function(response) 
+                {
+                  console.log(response);
+                  $tr.find('td').fadeOut(1000,function(){ 
+                      $tr.remove();                    
+                  }); 
+                },
+                error : function(XMLHttpRequest, textStatus, errorThrown)
+                {
+                  console.log("Error");
+                }
+                
+              }); 
+            }
+            else
+            {
+              return; // Do nothing
+            }  
+        });
+      });
     });
 	  </script>
 
