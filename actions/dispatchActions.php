@@ -37,7 +37,7 @@ if (isset($_GET['term'])) {
 
 function addCall()
 {
-    echo "OK";
+    echo var_dump($_POST);
 }
 
 function clearCall()
