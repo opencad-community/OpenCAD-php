@@ -173,6 +173,24 @@ function getUnAvailableUnits()
 	mysqli_close($link);
 }
 
+function getCodesNcic()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	
+    if (!$link) { 
+        die('Could not connect: ' .mysql_error());
+    }
+    
+    $query = "SELECT code_id, code_name FROM codes ORDER BY `code_id` ASC";
+
+    $result=mysqli_query($link, $query);
+
+    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    {
+        echo '<option value="'.$row[0].'">'.$row[0].'/'.$row[1].'</option>';
+    }
+}
+
 function getActiveCalls()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);

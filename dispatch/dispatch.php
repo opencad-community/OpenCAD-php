@@ -47,6 +47,10 @@
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
     <link href="https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+    <!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
     
 
     <!-- Custom Theme Style -->
@@ -198,7 +202,10 @@
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
-                      <?php getActiveCalls();?>
+                      <div id="noCallsAlertHolder">
+                        <?php getActiveCalls();?>
+                        <span id="noCallsAlertSpan"></span>
+                      </div>
                   </div>
                   <!-- ./ x_content -->
                   <div class="x_footer">
@@ -463,8 +470,7 @@
                 <label class="col-lg-2 control-label">Incident Type</label>
                 <div class="col-lg-10">
                   <select class="form-control selectpicker" data-live-search="true" name="call_type">
-                    <option>Test</option>
-                    <option>10-11</option>
+                    <?php getCodesNcic();?>
                   </select>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -543,7 +549,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
-    -<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    
+    <!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
+    
     
     
     <script>
@@ -572,7 +584,32 @@
                   console.log(response);
                   $tr.find('td').fadeOut(1000,function(){ 
                       $tr.remove();                    
+                  });
+
+                  new PNotify({
+                    title: 'Success',
+                    text: 'Successfully cleared call',
+                    type: 'success',
+                    styling: 'bootstrap3'
                   }); 
+
+                  //Detect if table is now empty
+                  var rowCount = $('#activeCalls tr').length;
+
+                  if (rowCount == "2") // For some reason, this is reporting 2 when the table is empty
+                  {
+                    $('#activeCalls').fadeOut(1000,function(){ 
+                      $('#activeCalls').remove();                    
+                    });
+
+                    $('#noCallsAlertHolder').addClass("alert alert alert-info");
+
+                    $('#noCallsAlertSpan').text("No active calls");
+                  }
+                  else
+                  {
+                    //Do nothing, table can remain
+                  }
                 },
                 error : function(XMLHttpRequest, textStatus, errorThrown)
                 {

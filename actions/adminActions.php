@@ -527,5 +527,44 @@
             </table>
         ';
     }
+
+    function getCodes()
+    {
+        $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	
+        if (!$link) { 
+            die('Could not connect: ' .mysql_error());
+        }
+        
+        $query = "SELECT code_id, code_name FROM codes";
+
+        $result=mysqli_query($link, $query);
+
+        echo '
+            <table id="codes" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Code ID</th>
+                <th>Code Name</th>
+                </tr>
+            </thead>
+            <tbody>           
+        ';
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            echo '
+            <tr>
+                <td>'.$row[0].'</td>
+                <td>'.$row[1].'</td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
     
 ?>
