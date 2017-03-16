@@ -191,6 +191,24 @@ function getCodesNcic()
     }
 }
 
+function getActiveUnits()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	
+    if (!$link) { 
+        die('Could not connect: ' .mysql_error());
+    }
+    
+    $query = "SELECT callsign FROM active_users WHERE status = '1'";
+
+    $result=mysqli_query($link, $query);
+
+    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    {
+        echo '<option value="'.$row[0].'">'.$row[0].'</option>';
+    }
+}
+
 function getActiveCalls()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -232,8 +250,9 @@ function getActiveCalls()
             <tr id="'.$counter.'">
                 <td>'.$row[0].'</td>
                 <td>'.$row[2].'</td>
-                <td>'.$row[1].'</td>
-                <td>'.$row[3].'</td>
+                <td>'.$row[1].'</td>';
+
+                echo '<td>'.$row[3].'/'.$row[4].'/'.$row[5].'</td>
                 <td>
                     <form name="clear_call_form" class="clear_call_form" id="cidForm'.$counter.'">
                         <input id="cidBtn'.$counter.'" type="submit" name="clear_call" class="btn-link" style="color: red;" value="Clear"/>

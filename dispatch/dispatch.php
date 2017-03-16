@@ -297,7 +297,7 @@
                   <!-- ./ x_title -->
                   <div class="x_content">
                     <div class="input-group">
-                      <input type="text" name="ncic_name" class="form-control" id="ncic_name" placeholder="John Doe" value="John Doe"/>
+                      <input type="text" name="ncic_name" class="form-control" id="ncic_name" placeholder="John Doe"/>
                         <span class="input-group-btn">
                           <button type="button" class="btn btn-primary" name="ncic_name_btn" id="ncic_name_btn">Send</button>
                         </span>
@@ -326,7 +326,7 @@
                   <!-- ./ x_title -->
                   <div class="x_content">
                       <div class="input-group">
-                      <input type="text" name="ncic_plate" class="form-control" id="ncic_plate" value="abc123" placeholder="License Plate, (ABC123)"/>
+                      <input type="text" name="ncic_plate" class="form-control" id="ncic_plate" placeholder="License Plate, (ABC123)"/>
                         <span class="input-group-btn">
                           <button type="button" class="btn btn-primary" id="ncic_plate_btn">Send</button>
                         </span>
@@ -459,41 +459,50 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            <button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
             </button>
             <h4 class="modal-title" id="myModalLabel">New Call</h4>
           </div>
           <!-- ./ modal-header -->
           <div class="modal-body">
-            <form method="post" action="../actions/dispatchActions.php" class="newCallForm">
+            <form class="newCallForm" id="newCallForm">
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">Incident Type</label>
                 <div class="col-lg-10">
-                  <select class="form-control selectpicker" data-live-search="true" name="call_type">
+                  <select class="form-control selectpicker" data-live-search="true" name="call_type" title="Incident Type">
                     <?php getCodesNcic();?>
                   </select>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
+              <br/>
               <!-- ./ form-group -->
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Address</label>
                 <div class="col-lg-10">
                   <input type="text" class="form-control txt-auto" id="street1" name="street1" placeholder="Street 1" required/>
-                  <input type="text" class="form-control txt-auto2" placeholder="Street 2/Cross/Postal" />
+                  <input type="text" class="form-control txt-auto2" name="street2" id="street2" placeholder="Street 2/Cross/Postal" />
+                  <input type="text" class="form-control" name="additionalLocation" placeholder="Any Additional Location Information" />
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
               <!-- ./ form-group -->
+              <br/>
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Assign Unit to Call</label>
                 <div class="col-lg-10">
-                  <input type="checkbox" name="unassigned" class="flat">&nbsp;Unassigned
-                  <input name="unit1" type="text" class="form-control" placeholder="Unit 1" />
-                  <input type="text" class="form-control" placeholder="Unit 2" />
+                  <select class="form-control selectpicker" data-live-search="true" name="unit_1" title="Select a Unit or Leave Blank (Will mark call as Pending)">
+                    <option></option>
+                    <?php getActiveUnits();?>
+                  </select>
+                  <select class="form-control selectpicker" data-live-search="true" name="unit_2" title="Select a Unit or Leave Blank">
+                    <option></option>
+                    <?php getActiveUnits();?>
+                  </select>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
+              <br/>
               <!-- ./ form-group -->
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Narrative</label>
@@ -585,7 +594,7 @@
                   $tr.find('td').fadeOut(1000,function(){ 
                       $tr.remove();                    
                   });
-
+                  
                   new PNotify({
                     title: 'Success',
                     text: 'Successfully cleared call',
@@ -624,8 +633,56 @@
             }  
         });
       });
+
+      $(function() {
+        $('.newCallForm').submit(function(e) {
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+
+            $.ajax({
+              type: "POST",
+              url: "../actions/dispatchActions.php",
+              data: {
+                  newCall: 'yes',
+                  details: $("#"+this.id).serialize()
+              },
+              success: function(response) 
+              {
+                console.log(response);
+
+                if (response == "SUCCESS")
+                {
+
+                  $('#closeNewCall').trigger('click');
+
+                  new PNotify({
+                    title: 'Success',
+                    text: 'Successfully created call',
+                    type: 'success',
+                    styling: 'bootstrap3'
+                  }); 
+                }
+                
+              },
+              error : function(XMLHttpRequest, textStatus, errorThrown)
+              {
+                console.log("Error");
+              }
+              
+            }); 
+        });
+      });
+
+      
     });
 	  </script>
+
+    <script>
+    if($("#newCall #unassigned").is(':checked'))
+    {
+      alert("H");
+    }
+
+    </script>
 
 
   
@@ -643,15 +700,6 @@
     });
     $( ".txt-auto2" ).autocomplete( "option", "appendTo", ".newCallForm" );
 
-
-    $(".modal input:checkbox").on('change', function () {
-        var self = $(this);
-        if (self.is(":checked")) {
-            
-        } else {
-            
-        }
-    });
     </script>
   
     <script>
