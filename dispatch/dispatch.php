@@ -472,7 +472,7 @@
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">Incident Type</label>
                 <div class="col-lg-10">
-                  <select class="form-control selectpicker" data-live-search="true" name="call_type" title="Incident Type">
+                  <select class="form-control selectpicker" data-live-search="true" name="call_type" title="Incident Type" required>
                     <?php getCodesNcic();?>
                   </select>
                 </div>
@@ -520,7 +520,8 @@
           <!-- ./ modal-body -->
           <div class="modal-footer">
             <input type="submit" name="create_call" class="btn btn-primary" value="Send"/>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="reset" class="btn btn-default" value="Reset">Reset</button>
+            <button id="newCallReset" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
           <!-- ./ modal-footer -->
           </form>
@@ -577,67 +578,7 @@
         });
 
         getCalls();
-
-        $(function() {
-        $('.clear_call_form').submit(function(e) {
-            e.preventDefault(); // avoid to execute the actual submit of the form.
-            var $tr = $(this).closest('tr');
-            var r = confirm("Are you sure you want to clear this call? This will mark all assigned units on call active.");
-
-            if (r == true)
-            {
-              $.ajax({
-                type: "POST",
-                url: "../actions/dispatchActions.php",
-                data: {
-                    clearCall: 'yes',
-                    callId: $("#"+this.id).serialize()
-                },
-                success: function(response) 
-                {
-                  console.log(response);
-                  $tr.find('td').fadeOut(1000,function(){ 
-                      $tr.remove();                    
-                  });
-                  
-                  new PNotify({
-                    title: 'Success',
-                    text: 'Successfully cleared call',
-                    type: 'success',
-                    styling: 'bootstrap3'
-                  }); 
-
-                  //Detect if table is now empty
-                  var rowCount = $('#activeCalls tr').length;
-
-                  if (rowCount == "2") // For some reason, this is reporting 2 when the table is empty
-                  {
-                    $('#activeCalls').fadeOut(1000,function(){ 
-                      $('#activeCalls').remove();                    
-                    });
-
-                    $('#noCallsAlertHolder').addClass("alert alert alert-info");
-
-                    $('#noCallsAlertSpan').text("No active calls");
-                  }
-                  else
-                  {
-                    //Do nothing, table can remain
-                  }
-                },
-                error : function(XMLHttpRequest, textStatus, errorThrown)
-                {
-                  console.log("Error");
-                }
-                
-              }); 
-            }
-            else
-            {
-              return; // Do nothing
-            }  
-        });
-      });     
+     
     });
 	  </script>
 
@@ -729,6 +670,10 @@
                     type: 'success',
                     styling: 'bootstrap3'
                   }); 
+
+                  //Reset the form
+                  $('.newCallForm').find('input:text, textarea').val('');
+                  $('.newCallForm').find('select').val('').selectpicker('refresh');
 
                   getCalls();
                 }
