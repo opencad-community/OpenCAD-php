@@ -22,6 +22,9 @@ require($connectionsFileLocation);
 if (isset($_GET['a'])){
     getActiveCalls();
 }
+if (isset($_GET['getCalls'])){
+    getActiveCalls();
+}
 
 function getDispatchers()
 {
@@ -254,8 +257,8 @@ function getActiveCalls()
 
                 echo '<td>'.$row[3].'/'.$row[4].'/'.$row[5].'</td>
                 <td>
-                    <form name="clear_call_form" class="clear_call_form" id="cidForm'.$counter.'">
-                        <input id="cidBtn'.$counter.'" type="submit" name="clear_call" class="btn-link" style="color: red;" value="Clear"/>
+                <button id="'.$row[0].'" class="btn-link" style="color: red;" value="'.$row[0].'" onclick="test('.$row[0].')">Clear</button>
+                    <form name="clear_call_form" class="clear_call_form" id="cidForm'.$counter.'">                        
                         <input id="cid'.$counter.'" name="cid" type="hidden" value="'.$row[0].'"/>
                     </form>
                     <form name="call_details_form" class="call_details_form">

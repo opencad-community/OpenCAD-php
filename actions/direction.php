@@ -41,6 +41,7 @@ $fireButton = "";
 $emsButton = "";
 $sheriffButton = "";
 $policeButton = "";
+$civilianButton = "";
 
 $num_rows = $result->num_rows;
 // This loop will auto redirect the user if they only have one option 
@@ -93,6 +94,10 @@ while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
     {
         $sheriffButton = "<a href=\"../responder/responder.php\" class=\"btn btn-primary btn-lg\">Sheriff's Office</a>";
     }
+    if ($row[1] == "7")
+    { 
+        $civilianButton = "<a href=\"../civilian/civilian.php\" class=\"btn btn-primary btn-lg\">Civilian</a>";
+    }
 }
 mysqli_close($link);
 
@@ -134,6 +139,8 @@ mysqli_close($link);
                     <?php echo $policeButton;?>
                     &nbsp;
                     <?php echo $sheriffButton;?>
+                    &nbsp;
+                    <?php echo $civilianButton;?>
                 </div>
                 <!-- ./ col-lg-12 -->
             </div>

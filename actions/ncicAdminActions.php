@@ -23,6 +23,12 @@ require_once($connectionsFileLocation);
 if (isset($_POST['create_citation'])){ 
     create_citation();
 }
+if (isset($_POST['delete_citation'])){ 
+    delete_citation();
+}
+if (isset($_POST['delete_warrant'])){ 
+    delete_warrant();
+}
 
 function ncicGetNames()
 {
@@ -229,8 +235,8 @@ function ncic_warrants()
                             //Do Nothing
                         }
                     echo '
-                    <input name="deleteWarrant" type="submit" class="btn btn-xs btn-link" value="Delete" disabled />
-                    <input name="uid" type="hidden" value='.$row[0].' />
+                    <input name="delete_warrant" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete" />
+                    <input name="wid" type="hidden" value='.$row[2].' />
                     </form>                    
                 </td>
             </tr>
@@ -290,9 +296,9 @@ function ncic_citations()
                 <td>'.$row[5].'</td>
                 <td>
                     <form action="../actions/ncicAdminActions.php" method="post">
-                    <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
-                    <input name="deleteWarrant" type="submit" class="btn btn-xs btn-link" value="Delete" disabled/>
-                    <input name="uid" type="hidden" value='.$row[0].' />
+                    <input name="edit_citation" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
+                    <input name="delete_citation" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
+                    <input name="cid" type="hidden" value='.$row[2].' />
                     </form>                    
                 </td>
             </tr>
@@ -315,6 +321,29 @@ function getCivilianNames()
 	}
 	
 	$sql = "SELECT ncic_names.id, ncic_names.first_name, ncic_names.last_name FROM ncic_names";
+
+	$result=mysqli_query($link, $sql);
+	
+	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+	{
+		echo "<option value=\"$row[0]\">$row[1] $row[2]</option>";
+	}
+	mysqli_close($link);
+}
+
+function getAgencies()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+	
+	$sql = 'SELECT * FROM departments 
+            WHERE department_name <>"Administrators"
+            AND department_name <>"EMS"
+            AND department_name <>"Fire"
+            AND department_name <>"Communications (Dispatch)"';
 
 	$result=mysqli_query($link, $sql);
 	
@@ -358,7 +387,105 @@ function create_citation()
 
     $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully created citation</span></div>';
 
-    header("Location:../administration/ncicAdmin.php");
+    header("Location:../administration/ncicAdmin.php#citation_panel");
+}
+
+function create_warrant()
+{
+    $userId = $_POST['civilian_names'];
+    $warrant_name = $_POST['warrant_name'];
+    $issuing_agency = $_POST['issuing_agency'];
+
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $sql = "INSERT INTO ncic_warrants (name_id, expiration_date, warrant_name, issuing_agency) SELECT (?, DATE_ADD(NOW(), INTERVAL 30 day), ?, ?)";
+	
+    
+	try {
+		$stmt = mysqli_prepare($link, $sql);
+		mysqli_stmt_bind_param($stmt, "iss", $userId, $warrant_name, $issuing_agency);
+		$result = mysqli_stmt_execute($stmt);
+		
+		if ($result == FALSE) {
+			die(mysqli_error($link));
+		}
+	}
+	catch (Exception $e)
+	{
+		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+	}
+	mysqli_close($link);
+
+    $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully created warrant</span></div>';
+
+    header("Location:../administration/ncicAdmin.php#warrant_panel");
+}
+
+function delete_citation()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $cid = $_POST['cid'];
+    
+    $query = "DELETE FROM ncic_citations WHERE id = ?";
+    
+    try {
+        $stmt = mysqli_prepare($link, $query);
+        mysqli_stmt_bind_param($stmt, "i", $cid);
+        $result = mysqli_stmt_execute($stmt);
+        
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage());
+    }
+
+    session_start();
+    $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully removed citation</span></div>';
+    header("Location: ../administration/ncicAdmin.php#citation_panel");
+}
+
+function delete_warrant()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $wid = $_POST['wid'];
+    echo $wid;
+    
+    $query = "DELETE FROM ncic_warrants WHERE id = ?";
+    
+    try {
+        $stmt = mysqli_prepare($link, $query);
+        mysqli_stmt_bind_param($stmt, "i", $wid);
+        $result = mysqli_stmt_execute($stmt);
+        
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage());
+    }
+
+    session_start();
+    $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully removed warrant</span></div>';
+    header("Location: ../administration/ncicAdmin.php#warrant_panel");
 }
 
 

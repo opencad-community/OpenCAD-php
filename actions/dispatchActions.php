@@ -46,9 +46,11 @@ function addCall()
 
 function clearCall()
 {
-    $callIdString = $_POST['callId']; // Prints like "cid=#" NOT just #
+    /*$callIdString = $_POST['callId']; // Prints like "cid=#" NOT just #
     $callIdArr = explode("=", $callIdString);
-    $callId = $callIdArr[1];
+    $callId = $callIdArr[1];*/
+
+    $callId = $_POST['callId']; 
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 	

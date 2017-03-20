@@ -61,7 +61,7 @@
 
     function getPendingUsers()
     {
-       $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+        $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 	
         if (!$link) { 
             die('Could not connect: ' .mysql_error());

@@ -1,12 +1,4 @@
 <?php
-/**
- * ncicAdmin.php
- *
- * Admin page for managing NCIC entries
- *
- * @author     Shane G
- */
-
     session_start();
 
     // TODO: Verify user has permission to be on this page
@@ -21,38 +13,11 @@
       $name = $_SESSION['name'];
     }
 
-    
-    if(isset($_SESSION['admin']))
-    {
-      if ($_SESSION['admin'] == 'YES')
-      {
-          //Do nothing
-      }
-    }
-    else
-    {
-      die("You do not have permission to be here. This has been recorded");
-    }
-
     $iniContents = parse_ini_file("../properties/config.ini", true); //Gather from config.ini file
     $community = $iniContents['strings']['community'];
 
-    include("../actions/adminActions.php");
-    include("../actions/ncicAdminActions.php");
+    include("../actions/civActions.php");
 
-    $citationMessage = "";
-    if(isset($_SESSION['citationMessage']))
-    {
-        $citationMessage = $_SESSION['citationMessage'];
-        unset($_SESSION['citationMessage']);
-    }
-
-    $warrantMessage = "";
-    if(isset($_SESSION['warrantMessage']))
-    {
-        $warrantMessage = $_SESSION['warrantMessage'];
-        unset($_SESSION['warrantMessage']);
-    }
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +29,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?php echo $community;?> Admin</title>
+    <title><?php echo $community;?> Civilian</title>
     <link rel="icon" href="../images/favicon.ico" />
 
     <!-- Bootstrap -->
@@ -79,10 +44,6 @@
     <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-    <!-- PNotify -->
-    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
-    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
-    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <link href="../css/custom.css" rel="stylesheet">
@@ -94,7 +55,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo $community;?> Admin</span></a>
+              <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo $community;?> Civilian</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -119,17 +80,9 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="admin.php">Dashboard</a></li>
-                      <li><a href="userManagement.php">User Management</a></li>
-                      <li><a href="lov.php">List of Values Management</a></li>
-                      <li><a href="../actions/direction.php">CAD Direction Page</a></li>
-                    </ul>
-                  </li>
-                  <li class="active"><a><i class="fa fa-database"></i> NCIC Editor <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu"  style="display: block;">
-                      <li class="current-page"><a href="javascript:void(0)">NCIC Editor</a></li>
+                  <li class="active"><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu" style="display: block;">
+                      <li class="current-page"><a href="javascript:void(0)">Civilian Dashboard</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -140,13 +93,13 @@
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
+              <a data-toggle="tooltip" data-placement="top">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+              <a data-toggle="tooltip" data-placement="top">
                 <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
+              <a data-toggle="tooltip" data-placement="top">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
               </a>
               <a data-toggle="tooltip" data-placement="top" title="Logout" href="../actions/logout.php">
@@ -176,8 +129,6 @@
                     <li><a href="../actions/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
-
-                
               </ul>
             </nav>
           </div>
@@ -189,16 +140,17 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>CAD NCIC Admin</h3>
+                <h3>CAD Civilian</h3>
               </div>
             </div>
 
             <div class="clearfix"></div>
+
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>NCIC Names DB</h2>
+                    <h2>My Identities</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -209,7 +161,7 @@
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
-                     <?php ncicGetNames();?> 
+                    <?php getIdentities();?>
                   </div>
                   <!-- ./ x_content -->
                 </div>
@@ -219,12 +171,11 @@
             </div>
             <!-- ./ row -->
 
-            <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>NCIC Vehicle DB</h2>
+                    <h2>Request an Identity</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -235,7 +186,7 @@
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
-                     <?php ncicGetPlates();?> 
+
                   </div>
                   <!-- ./ x_content -->
                 </div>
@@ -244,68 +195,6 @@
               <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
             </div>
             <!-- ./ row -->
-
-            <div class="clearfix"></div>
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel" id="warrant_panel">
-                  <div class="x_title">
-                    <h2>NCIC Warrants DB</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <!-- ./ x_title -->
-                  <div class="x_content">
-                     <?php echo $warrantMessage;?>
-                     <?php ncic_warrants();?> 
-                  </div>
-                  <!-- ./ x_content -->
-                  <div class="x_footer">
-                    <button class="btn btn-primary" name="create_warrant_btn" type="submit" data-toggle="modal" data-target="#createWarrantModal">Create Warrant</button>
-                  </div>
-                  <!-- ./ x_footer -->
-                </div>
-                <!-- ./ x_panel -->
-              </div>
-              <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
-            </div>
-            <!-- ./ row -->
-
-            <div class="clearfix"></div>
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel" id="citation_panel">
-                  <div class="x_title">
-                    <h2>NCIC Citations DB</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <!-- ./ x_title -->
-                  <div class="x_content">
-                     <?php echo $citationMessage;?>
-                     <?php ncic_citations();?> 
-                  </div>
-                  <!-- ./ x_content -->
-                  <div class="x_footer">
-                    <button class="btn btn-primary" name="create_citation_btn" type="submit" data-toggle="modal" data-target="#createCitationModal">Create Citation</button>
-                  </div>
-                </div>
-                <!-- ./ x_panel -->
-              </div>
-              <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
-            </div>
-            <!-- ./ row -->
-
 
           </div>
           <!-- "" -->
@@ -324,102 +213,130 @@
     </div>
 
     <!-- modals -->
-    <!-- Create Citation Modal -->
-    <div class="modal fade" id="createCitationModal" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
+    <!-- Civilian Details Modal -->
+    <div class="modal fade" id="civilianDetailsModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-md">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
             </button>
-            <h4 class="modal-title" id="myModalLabel">Citation Creator</h4>
+            <h4 class="modal-title" id="myModalLabel">Civilian Details</h4>
           </div>
           <!-- ./ modal-header -->
           <div class="modal-body">
-            <form role="form" action="../actions/ncicAdminActions.php" method="post">
-                <div class="form-group row">
-                <label class="col-lg-2 control-label">Civilian Name</label>
-                <div class="col-lg-10">
-                  <select class="form-control selectpicker" name="civilian_names" id="civilian_names" data-live-search="true" required>
-                    <option> </option>
-                    <?php getCivilianNames();?>
-                  </select>
+            <h4>Character Details</h4>
+              <div class="form-group row">
+                <label class="col-md-3 control-label">Name</label>
+                <div class="col-md-9">
+                  <input name="civName" class="form-control" id="civName" disabled/>
+                  <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
               <!-- ./ form-group -->
               <div class="form-group row">
-                <label class="col-lg-2 control-label">Citation Name</label>
-                <div class="col-lg-10">
-                  <input type="text" class="form-control" name="citation_name" />
+                <label class="col-md-3 control-label">DOB</label>
+                <div class="col-md-9">
+                  <input type="text" name="civDob" class="form-control" id="civDob" disabled/>
+                  <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
               <!-- ./ form-group -->
-            
+              <div class="form-group row">
+                <label class="col-md-3 control-label">Address</label>
+                <div class="col-md-9">
+                  <input type="text" name="civAddress" class="form-control" id="civAddress" disabled/>
+                  <span class="fa fa-location-arrow form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-md-3 control-label">Sex</label>
+                <div class="col-md-9">
+                  <input type="text" name="civSex" class="form-control" id="civSex" disabled/>
+                  <span class="fa fa-transgender form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-md-3 control-label">Race</label>
+                <div class="col-md-9">
+                  <input type="text" name="civRace" class="form-control" id="civRace" disabled/>
+                  <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-md-3 control-label">Hair Color</label>
+                <div class="col-md-9">
+                  <input type="text" name="civHair" class="form-control" id="civHair" disabled/>
+                  <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-md-3 control-label">Build</label>
+                <div class="col-md-9">
+                  <input type="text" name="civBuild" class="form-control" id="civBuild" disabled/>
+                  <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-md-3 control-label">Biography</label>
+                <div class="col-md-9">
+                  <textarea name="civBio" class="form-control" id="civBio" rows='4' disabled>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In libero odio, commodo volutpat tellus elementum, feugiat iaculis nisl. Vivamus convallis augue nec semper suscipit. Donec eu odio interdum erat iaculis venenatis. Curabitur velit tortor, imperdiet ac est ac, tincidunt mattis elit. In hac habitasse platea dictumst. Aliquam tincidunt odio quis convallis ullamcorper. </textarea>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <h4>Vehicle Details</h4>
+              <div class="form-group row">
+                <label class="col-md-3 control-label">License Plate</label>
+                <div class="col-md-9">
+                  <input type="text" name="civPlate" class="form-control" id="civPlate" disabled/>
+                  <span class="fa fa-car form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-md-3 control-label">Vehicle Make</label>
+                <div class="col-md-9">
+                  <input type="text" name="civMake" class="form-control" id="civMake" disabled/>
+                  <span class="fa fa-car form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-md-3 control-label">Vehicle Model</label>
+                <div class="col-md-9">
+                  <input type="text" name="civModel" class="form-control" id="civModel" disabled/>
+                  <span class="fa fa-car form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-md-3 control-label">Vehicle Color</label>
+                <div class="col-md-9">
+                  <input type="text" name="civColor" class="form-control" id="civColor" disabled/>
+                  <span class="fa fa-car form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
           </div>
           <!-- ./ modal-body -->
           <div class="modal-footer">
-                <input name="create_citation" type="submit" class="btn btn-primary" value="Create" /> 
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </form>
-          </div>
-          <!-- ./ modal-footer -->
-        </div>
-        <!-- ./ modal-content -->
-      </div>
-      <!-- ./ modal-dialog modal-lg -->
-    </div>
-    <!-- ./ modal fade bs-example-modal-lg -->
-
-    <!-- Create Warrant Modal -->
-    <div class="modal fade" id="createWarrantModal" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-            </button>
-            <h4 class="modal-title" id="myModalLabel">Warrant Creator</h4>
-          </div>
-          <!-- ./ modal-header -->
-          <div class="modal-body">
-            <form role="form" action="../actions/ncicAdminActions.php" method="post">
-                <div class="form-group row">
-                <label class="col-lg-2 control-label">Civilian Name</label>
-                <div class="col-lg-10">
-                  <select class="form-control selectpicker" name="civilian_names" id="civilian_names" data-live-search="true" required>
-                    <option> </option>
-                    <?php getCivilianNames();?>
-                  </select>
-                </div>
-                <!-- ./ col-sm-9 -->
-              </div>
-              <!-- ./ form-group -->
-              <div class="form-group row">
-                <label class="col-lg-2 control-label">Warrant Name</label>
-                <div class="col-lg-10">
-                  <input type="text" class="form-control" name="warrant_name" />
-                </div>
-                <!-- ./ col-sm-9 -->
-              </div>
-              <!-- ./ form-group -->
-              <div class="form-group row">
-                <label class="col-lg-2 control-label">Issuing Agency</label>
-                <div class="col-lg-10">
-                  <select class="form-control selectpicker" name="issuing_agency" id="issuing_agency" data-live-search="true" required>
-                    <option> </option>
-                    <?php getAgencies();?>
-                  </select>
-                </div>
-                <!-- ./ col-sm-9 -->
-              </div>
-              <!-- ./ form-group -->
-            
-          </div>
-          <!-- ./ modal-body -->
-          <div class="modal-footer">
-                <input name="create_citation" type="submit" class="btn btn-primary" value="Create" /> 
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </form>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
           <!-- ./ modal-footer -->
         </div>
@@ -450,39 +367,45 @@
     <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
     <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-    <!-- PNotify -->
-    <script src="../vendors/pnotify/dist/pnotify.js"></script>
-    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
-    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
-    <!-- Bootstrap Select -->
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
-    
-    <script>
-		$(document).ready(function() {
-		
-			$('#ncic_names').DataTable({
-                
-			});
-
-      $('#ncic_plates').DataTable({
-                
-			});
-
-      $('#ncic_warrants').DataTable({
-                
-			});
-
-      $('#ncic_citations').DataTable({
-                
-			});
-
-		});
-		</script>
 
     <!-- Custom Theme Scripts -->
     <script src="../js/custom.js"></script>
+
+    <script>
+    $('#civilianDetailsModal').on('show.bs.modal', function(e) {
+    var $modal = $(this), civId = e.relatedTarget.id;
+
+
+    $.ajax({
+        cache: false,
+        type: 'GET',
+        url: '../actions/civActions.php',
+        data: {'getCivilianDetails': 'yes',
+                'name_id' : civId},
+        success: function(result) 
+        {
+            console.log(result);
+            data = JSON.parse(result);
+                
+            $('input[name="civName"]').val(data['name']);
+            $('input[name="civDob"]').val(data['dob']);
+            $('input[name="civAddress"]').val(data['address']);
+            $('input[name="civSex"]').val(data['sex']);
+            $('input[name="civRace"]').val(data['race']);
+            $('input[name="civHair"]').val(data['hair_color']);
+            $('input[name="civBuild"]').val(data['build']);
+            $('input[name="civPlate"]').val(data['veh_plate']);
+            $('input[name="civMake"]').val(data['veh_make']);
+            $('input[name="civModel"]').val(data['veh_model']);
+            $('input[name="civColor"]').val(data['veh_color']);
+            
+
+        },
+
+        error:function(exception){alert('Exeption:'+exception);}
+        });
+    });
+    </script>
+
   </body>
 </html>

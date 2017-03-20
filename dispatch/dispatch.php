@@ -203,8 +203,11 @@
                   <!-- ./ x_title -->
                   <div class="x_content">
                       <div id="noCallsAlertHolder">
-                        <?php getActiveCalls();?>
+                        <?php //getActiveCalls();?>
                         <span id="noCallsAlertSpan"></span>
+                      </div>
+                      <div id="live_calls">
+
                       </div>
                   </div>
                   <!-- ./ x_content -->
@@ -573,6 +576,8 @@
             $('#menu_toggle').click();
         });
 
+        getCalls();
+
         $(function() {
         $('.clear_call_form').submit(function(e) {
             e.preventDefault(); // avoid to execute the actual submit of the form.
@@ -632,7 +637,73 @@
               return; // Do nothing
             }  
         });
-      });
+      });     
+    });
+	  </script>
+
+    <script>
+    function getCalls() {
+        $.ajax({
+              type: "GET",
+              url: "../actions/api.php",
+              data: {
+                  getCalls: 'yes'
+              },
+              success: function(response) 
+              {
+                $('#live_calls').html(response);
+                setTimeout(getCalls, 5000);
+                
+              },
+              error : function(XMLHttpRequest, textStatus, errorThrown)
+              {
+                console.log("Error");
+              }
+              
+            }); 
+      }
+
+    function test(btn_id) {
+        var $tr = $(this).closest('tr');
+        var r = confirm("Are you sure you want to clear this call? This will mark all assigned units on call active.");
+
+        if (r == true)
+            {
+              $.ajax({
+                type: "POST",
+                url: "../actions/dispatchActions.php",
+                data: {
+                    clearCall: 'yes',
+                    callId: btn_id
+                },
+                success: function(response) 
+                {
+                  console.log(response);
+                  $tr.find('td').fadeOut(1000,function(){ 
+                      $tr.remove();                    
+                  });
+                  
+                  new PNotify({
+                    title: 'Success',
+                    text: 'Successfully cleared call',
+                    type: 'success',
+                    styling: 'bootstrap3'
+                  }); 
+
+                  getCalls();
+                },
+                error : function(XMLHttpRequest, textStatus, errorThrown)
+                {
+                  console.log("Error");
+                }
+                
+              }); 
+            }
+            else
+            {
+              return; // Do nothing
+            }
+      }
 
       $(function() {
         $('.newCallForm').submit(function(e) {
@@ -647,8 +718,6 @@
               },
               success: function(response) 
               {
-                console.log(response);
-
                 if (response == "SUCCESS")
                 {
 
@@ -660,6 +729,8 @@
                     type: 'success',
                     styling: 'bootstrap3'
                   }); 
+
+                  getCalls();
                 }
                 
               },
@@ -670,18 +741,7 @@
               
             }); 
         });
-      });
-
-      
-    });
-	  </script>
-
-    <script>
-    if($("#newCall #unassigned").is(':checked'))
-    {
-      alert("H");
-    }
-
+      }); 
     </script>
 
 
