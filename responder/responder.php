@@ -94,7 +94,10 @@
                   </li>
                   <li class="active"><a><i class="fa fa-external-link"></i> Links <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: block;">
-                      <li class="current-page"><a href="http://i.imgur.com/muwUucD.jpg" target="_blank">Highway Patrol Zones</a></li>
+                      <li><a href="https://goo.gl/forms/rEJOoJvIlCM5svSo1" target="_blank">Police PAL</a></li>
+                      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdDd1zZGTqUUuGQYuHzmz3TAIWb49y3BDFr8GwRbisLnwiRGg/viewform" target="_blank">Highway PAL</a></li>
+                      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSd26EN4XdgKhbZBEJ16B8cx5LqTNxguh4O3wNggRqqzKOmXzg/viewform" target="_blank">Sheriff PAL</a></li>
+                      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScXgKDn0deB7zgnmBvDRJ7KllHLiQdmahvgQbphxZuNhU6h2g/viewform" target="_blank">Fire PAL</a></li>
                     </ul>
                   </li>
                 </ul>
