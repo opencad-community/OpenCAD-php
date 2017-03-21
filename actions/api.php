@@ -261,16 +261,10 @@ function getActiveCalls()
 
                 echo '<td>'.$row[3].'/'.$row[4].'/'.$row[5].'</td>
                 <td>
-                <button id="'.$row[0].'" class="btn-link" style="color: red;" value="'.$row[0].'" onclick="test('.$row[0].')">Clear</button>
-                    <form name="clear_call_form" class="clear_call_form" id="cidForm'.$counter.'">                        
-                        <input id="cid'.$counter.'" name="cid" type="hidden" value="'.$row[0].'"/>
-                    </form>
+                    <button id="'.$row[0].'" class="btn-link" style="color: red;" value="'.$row[0].'" onclick="test('.$row[0].')">Clear</button>
                     <button id="'.$row[0].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
                     <input name="uid" name="uid" type="hidden" value="'.$row[0].'"/>
-                    <form name="assign_unit_form" class="assign_unit_form">
-                        <input type="submit" name="assign_unit" class="btn-link" value="Assign"/>
-                        <input name="uid" name="uid" type="hidden" value="'.$row[0].'"/>
-                    </form>    
+                    <input type="submit" name="assign_unit" class="btn-link" value="Assign"/>
                 </td>
             </tr>
             ';
