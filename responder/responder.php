@@ -62,7 +62,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo $community;?> Response</span></a>
+              <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span>Responder</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -180,70 +180,6 @@
             </div>
             <!-- ./ row -->
 
-            <?php /*Removing for now
-            <div class="clearfix"></div>
-            <div class="row">
-              <div class="col-md-4 col-sm-4 col-xs-4">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Active Dispatchers</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <!-- ./ x_title -->
-                  <div class="x_content">
-                      <?php getDispatchers();?>
-                  </div>
-                  <!-- ./ x_content -->
-                </div>
-                <!-- ./ x_panel -->
-              </div>
-              <!-- ./ col-md-2 col-sm-2 col-xs-2 -->
-              */?>
-
-            <div class="clearfix"></div>
-            <div class="row">
-              <div class="col-md-6 col-sm-6 col-xs-6">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Available Units</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <!-- ./ x_title -->
-                  <div class="x_content">
-                      Coming Soon!<?php //getAvailableUnits();?>
-                  </div>
-                  <!-- ./ x_content -->
-                </div>
-                <!-- ./ x_panel -->
-              </div>
-              <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
-
-                <div class="col-md-6 col-sm-6 col-xs-6">
-                    <div class="x_panel">
-                    <div class="x_title">
-                        <h2>Unavailable Units</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-                        </ul>
-                        <div class="clearfix"></div>
-                    </div>
-                    <!-- ./ x_title -->
-                    <div class="x_content">
-                        Coming soon!<?php //getUnAvailableUnits();?>
-                    </div>
-                    <!-- ./ x_content -->
-                    </div>
-                    <!-- ./ x_panel -->
-                </div>
-                <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
-            </div>
-            <!-- ./ row --> 
           </div>
           <!-- "" -->
         </div>
@@ -344,6 +280,20 @@
     </div>
     <!-- ./ modal fade bs-example-modal-lg -->
 
+    <div class="modal hide fade" id="myModal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>Modal header</h3>
+    </div>
+    <div class="modal-body">
+        <p>One fine body…</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn">Close</a>
+        <a href="#" class="btn btn-primary">Save changes</a>
+    </div>
+    </div>
+
     
 
 
@@ -416,7 +366,6 @@
             }); 
       }
     </script>
-
 
     <script>
     function toggleFullScreen() {
