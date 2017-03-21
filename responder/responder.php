@@ -288,7 +288,7 @@
     </div>
     <!-- ./ modal fade bs-example-modal-lg -->
 
-    <div class="modal hide fade" id="myModal">
+    <div class="modal hide fade show" id="myModal">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
         <h3>Modal header</h3>
@@ -346,7 +346,7 @@
         $(function() {
             $('#menu_toggle').click();
         });
-     
+
         getCalls();
     });
 	</script>
