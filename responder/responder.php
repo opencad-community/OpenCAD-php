@@ -92,6 +92,11 @@
                       <li class="current-page"><a href="javascript:void(0)">Dashboard</a></li>
                     </ul>
                   </li>
+                  <li class="active"><a><i class="fa fa-external-link"></i> Links <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu" style="display: block;">
+                      <li class="current-page"><a href="http://i.imgur.com/muwUucD.jpg" target="_blank">Highway Patrol Zones</a></li>
+                    </ul>
+                  </li>
                 </ul>
               </div>
               <!-- ./ menu_section -->
