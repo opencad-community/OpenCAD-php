@@ -7,7 +7,7 @@ require($connectionsFileLocation);
 
 if (isset($_POST['clearCall']))
 {
-    clearCall();
+    storeCall();
 }
 if (isset($_POST['newCall']))
 {
@@ -39,12 +39,37 @@ if (isset($_GET['term'])) {
 
 }
 
+function storeCall()
+{
+    $callId = $_POST['callId']; 
+
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+    
+    $query = "INSERT INTO call_history SELECT calls.* FROM calls WHERE call_id = ?";
+        
+    try {
+        $stmt = mysqli_prepare($link, $query);
+        mysqli_stmt_bind_param($stmt, "i", $callId);
+        $result = mysqli_stmt_execute($stmt);
+        
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage());
+    }
+    
+    clearCall();
+}
+
 function clearCall()
 {
-    /*$callIdString = $_POST['callId']; // Prints like "cid=#" NOT just #
-    $callIdArr = explode("=", $callIdString);
-    $callId = $callIdArr[1];*/
-
     $callId = $_POST['callId']; 
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);

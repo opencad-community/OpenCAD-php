@@ -104,6 +104,7 @@
                       <li class="current-page"><a href="javascript:void(0)">Dashboard</a></li>
                       <li><a href="userManagement.php">User Management</a></li>
                       <li><a href="lov.php">List of Values Management</a></li>
+                      <li><a href="callhistory.php">Call History</a></li>
                       <li><a href="../actions/direction.php">CAD Direction Page</a></li>
                     </ul>
                   </li>

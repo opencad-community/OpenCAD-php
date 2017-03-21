@@ -93,11 +93,16 @@
                     </ul>
                   </li>
                   <li class="active"><a><i class="fa fa-external-link"></i> Links <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu" style="display: block;">
+                    <ul class="nav child_menu">
                       <li><a href="https://goo.gl/forms/rEJOoJvIlCM5svSo1" target="_blank">Police PAL</a></li>
                       <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdDd1zZGTqUUuGQYuHzmz3TAIWb49y3BDFr8GwRbisLnwiRGg/viewform" target="_blank">Highway PAL</a></li>
                       <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSd26EN4XdgKhbZBEJ16B8cx5LqTNxguh4O3wNggRqqzKOmXzg/viewform" target="_blank">Sheriff PAL</a></li>
                       <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScXgKDn0deB7zgnmBvDRJ7KllHLiQdmahvgQbphxZuNhU6h2g/viewform" target="_blank">Fire PAL</a></li>
+                    </ul>
+                  </li>
+                  <li class="active"><a><i class="fa fa-hashtag"></i> Callsign <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a id="changeCallsign" class="btn-link" name="changeCallsign" data-toggle="modal" data-target="#callsign">Change Callsign</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -205,6 +210,40 @@
     </div>
 
     <!-- modals -->
+    <!-- Callsign Modal -->
+    <div class="modal fade" id="callsign" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Enter Your Callsign for This Patrol</h4>
+          </div>
+          <!-- ./ modal-header -->
+          <div class="modal-body">
+            <form>
+            <div class="form-group">
+              <label class="col-md-2 control-label">Callsign</label>
+              <div class="col-md-10">
+                <input type="text" id="callign" name="callsign" class="form-control" />
+              </div>
+              <!-- ./ col-sm-9 -->
+            </div>
+            <!-- ./ form-group -->
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+            <input type="submit" name="setCallsign" class="btn btn-primary" value="Set Callsign"/>
+          </div>
+          <!-- ./ modal-footer -->
+          </form>
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-md -->
+    </div>
+    <!-- ./ modal fade -->
+
     <!-- Call Details Modal -->
     <div class="modal fade" id="callDetails" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg">
@@ -288,24 +327,6 @@
     </div>
     <!-- ./ modal fade bs-example-modal-lg -->
 
-    <div class="modal hide fade show" id="myModal">
-    <div class="modal-header">
-        <a class="close" data-dismiss="modal">×</a>
-        <h3>Modal header</h3>
-    </div>
-    <div class="modal-body">
-        <p>One fine body…</p>
-    </div>
-    <div class="modal-footer">
-        <a href="#" class="btn">Close</a>
-        <a href="#" class="btn btn-primary">Save changes</a>
-    </div>
-    </div>
-
-    
-
-
-
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
@@ -347,7 +368,10 @@
             $('#menu_toggle').click();
         });
 
+        $('#callsign').modal('show');
+
         getCalls();
+
     });
 	</script>
 
@@ -399,7 +423,7 @@
     </script>
 
     <script>
-    $('#callDetails').on('show.bs.modal', function(e) {
+    $('#callDetails').on('shown.bs.modal', function(e) {
       var $modal = $(this), callId = e.relatedTarget.id;
 
       $.ajax({
@@ -429,7 +453,17 @@
     });
     </script>
 
+    <script>
+    $('#callsign').on('shown.bs.modal', function(e) {
+        $('#callsign').find('input[name="callsign"]').val('<?php echo $_SESSION['identifier'];?>');
+    });
+    </script>
+
+    
+    
+
     <!-- Custom Theme Scripts -->
     <script src="../js/custom.js"></script>
+
   </body>
 </html>

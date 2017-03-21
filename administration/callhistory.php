@@ -1,12 +1,4 @@
 <?php
-/**
- * lov.php
- *
- * Admin page for handling all list of values
- *
- * @author     Shane G
- */
-
     session_start();
 
     // TODO: Verify user has permission to be on this page
@@ -20,24 +12,25 @@
     {
       $name = $_SESSION['name'];
     }
-
     
     if(isset($_SESSION['admin']))
     {
       if ($_SESSION['admin'] == 'YES')
       {
-          //Do nothing
+        //Do Nothing
       }
-    }
-    else
-    {
-      die("You do not have permission to be here. This has been recorded");
+      else
+      {
+        die("You do not have permission to be here. This has been recorded");
+      }
     }
 
     $iniContents = parse_ini_file("../properties/config.ini", true); //Gather from config.ini file
     $community = $iniContents['strings']['community'];
-
     include("../actions/adminActions.php");
+    
+    
+    
 ?>
 
 <!DOCTYPE html>
@@ -63,8 +56,12 @@
     <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet"
-
+    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    
     <!-- Custom Theme Style -->
     <link href="../css/custom.css" rel="stylesheet">
   </head>
@@ -103,9 +100,9 @@
                   <li class="active"><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: block;">
                       <li><a href="admin.php">Dashboard</a></li>
-                      <li><a href="userManagement.php">User Management</a></li>
-                      <li class="current-page"><a href="javascript:void(0)">List of Values Management</a></li>
-                      <li><a href="callhistory.php">Call History</a></li>
+                      <li><a href= "userManagement.php"> User Management</a></li>
+                      <li><a href="lov.php">List of Values Management</a></li>
+                      <li class="current-page"><a href="javascript:void(0)">Call History</a></li>
                       <li><a href="../actions/direction.php">CAD Direction Page</a></li>
                     </ul>
                   </li>
@@ -171,7 +168,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>CAD List of Values</h3>
+                <h3>Call History</h3>
               </div>
             </div>
 
@@ -180,7 +177,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Street Names</h2>
+                    <h2>Call History</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -191,7 +188,7 @@
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
-                     <?php getStreetNames();?> 
+                     <?php getCallHistory();?> 
                   </div>
                   <!-- ./ x_content -->
                 </div>
@@ -200,35 +197,7 @@
               <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
             </div>
             <!-- ./ row -->
-
-            <div class="clearfix"></div>
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Codes</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <!-- ./ x_title -->
-                  <div class="x_content">
-                     <?php getCodes();?> 
-                  </div>
-                  <!-- ./ x_content -->
-                </div>
-                <!-- ./ x_panel -->
-              </div>
-              <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
             </div>
-            <!-- ./ row -->
-
-
-          </div>
           <!-- "" -->
         </div>
         <!-- /page content -->
@@ -265,20 +234,23 @@
     <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
     <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-    
+    <!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
+    <!-- Bootstrap Select -->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
+
     <script>
-		$(document).ready(function() {
-		
-			$('#streets').DataTable({
-                
-			});
-
-      $('#codes').DataTable({
-                
-			});
-
-		});
-		</script>
+    $(document).ready(function() {
+        $('#call_history').DataTable({
+            
+        });
+    });
+    </script>
 
     <!-- Custom Theme Scripts -->
     <script src="../js/custom.js"></script>

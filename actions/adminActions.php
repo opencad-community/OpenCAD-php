@@ -566,5 +566,70 @@
             </table>
         ';
     }
-    
+
+function getCallHistory()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) { 
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT * FROM call_history";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>There are currently no archived calls</span></div>";
+    }
+    else
+    {
+        echo '
+            <table id="call_history" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Call ID</th>
+                <th>Primary Unit</th>
+                <th>Call Type</th>
+                <th>Street 1</th>
+                <th>Street 2</th>
+                <th>Street 3</th>
+                <th>Narrative</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>           
+        ';
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            echo '
+            <tr>
+                <td>'.$row[0].'</td>
+                <td>'.$row[1].'</td>
+                <td>'.$row[2].'</td>
+                <td>'.$row[3].'</td>
+                <td>'.$row[4].'</td>
+                <td>'.$row[5].'</td>
+                <td>'.$row[6].'</td>
+                <td>
+                    <form action="../actions/dispatchActions.php" method="post">
+                    <input name="call_details" type="submit" class="btn btn-xs btn-link" value="Details" disabled/>
+                    <input name="delete_call" type="submit" class="btn btn-xs btn-link" value="Delete" enabled/>
+                    <input name="call_id" type="hidden" value='.$row[0].' />
+                    </form>                    
+                </td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
 ?>
