@@ -259,13 +259,30 @@ function getActiveCalls()
                 <td>'.$row[2].'</td>
                 <td>'.$row[1].'</td>';
 
-                echo '<td>'.$row[3].'/'.$row[4].'/'.$row[5].'</td>
+                echo '<td>'.$row[3].'/'.$row[4].'/'.$row[5].'</td>';
+
+                if (isset($_GET['responder']))
+                {
+                    echo' 
+                    <td>
+                        <button id="'.$row[0].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
+                    </td>';
+                }
+                else
+                {
+                echo' 
                 <td>
                     <button id="'.$row[0].'" class="btn-link" style="color: red;" value="'.$row[0].'" onclick="test('.$row[0].')">Clear</button>
                     <button id="'.$row[0].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
                     <input name="uid" name="uid" type="hidden" value="'.$row[0].'"/>
                     <input type="submit" name="assign_unit" class="btn-link" value="Assign"/>
-                </td>
+                </td>';
+                }
+                
+
+
+
+            echo'
             </tr>
             ';
             $counter++;
