@@ -57,8 +57,31 @@ if($num_rows < 2)
         }
         else if ($row[0] == "1")
         {
-            header("Location:../dispatch/dispatch.php");
-            
+            header("Location:../dispatch/dispatch.php"); 
+        }
+        else if ($row[0] == "2")
+        {
+            header("Location:../responder/responder.php"); 
+        }
+        else if ($row[0] == "3")
+        {
+            header("Location:../responder/responder.php"); 
+        }
+        else if ($row[0] == "4")
+        {
+            header("Location:../responder/responder.php"); 
+        }
+        else if ($row[0] == "5")
+        {
+            header("Location:../responder/responder.php"); 
+        }
+        else if ($row[0] == "6")
+        {
+            header("Location:../responder/responder.php"); 
+        }
+        else if ($row[0] == "7")
+        {
+            header("Location:../civilian/civilian.php"); 
         }
     }
 }
