@@ -25,6 +25,10 @@ if (isset($_GET['a'])){
 if (isset($_GET['getCalls'])){
     getActiveCalls();
 }
+if (isset($_GET['getCallDetails'])){
+    getCallDetails();
+}
+
 
 function getDispatchers()
 {
@@ -261,10 +265,8 @@ function getActiveCalls()
                     <form name="clear_call_form" class="clear_call_form" id="cidForm'.$counter.'">                        
                         <input id="cid'.$counter.'" name="cid" type="hidden" value="'.$row[0].'"/>
                     </form>
-                    <form name="call_details_form" class="call_details_form">
-                        <input type="submit" name="call_details" class="btn-link" value="Details" />
-                        <input name="uid" name="uid" type="hidden" value="'.$row[0].'"/>
-                    </form>
+                    <button id="'.$row[0].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
+                    <input name="uid" name="uid" type="hidden" value="'.$row[0].'"/>
                     <form name="assign_unit_form" class="assign_unit_form">
                         <input type="submit" name="assign_unit" class="btn-link" value="Assign"/>
                         <input name="uid" name="uid" type="hidden" value="'.$row[0].'"/>
@@ -283,6 +285,36 @@ function getActiveCalls()
     }
 	mysqli_close($link);
 
+}
+
+function getCallDetails()
+{
+    $callId = $_GET['callId'];
+
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+    
+    $sql = "SELECT * FROM calls WHERE call_id = \"$callId\"";
+
+    $result=mysqli_query($link, $sql);
+    
+    $encode = array();
+    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    {
+        $encode["call_id"] = $row[0];
+        $encode["call_type"] = $row[2];
+        $encode["call_street1"] = $row[3];
+        $encode["call_street2"] = $row[4];
+        $encode["call_street3"] = $row[5];
+        $encode["narrative"] = $row[6];
+        
+    }
+    
+    echo json_encode($encode);
+    mysqli_close($link);
 }
 
 ?>

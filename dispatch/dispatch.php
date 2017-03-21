@@ -515,7 +515,6 @@
                 <!-- ./ col-sm-9 -->
               </div>
               <!-- ./ form-group -->
-            
           </div>
           <!-- ./ modal-body -->
           <div class="modal-footer">
@@ -531,6 +530,91 @@
       <!-- ./ modal-dialog modal-lg -->
     </div>
     <!-- ./ modal fade bs-example-modal-lg -->
+
+    <!-- Call Details Modal -->
+    <div class="modal fade" id="callDetails" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" id="closecallDetails"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Call Details</h4>
+          </div>
+          <!-- ./ modal-header -->
+          <div class="modal-body">
+          <form class="callDetailsForm">
+            <div class="form-group">
+              <label class="col-lg-2 control-label">Incident ID</label>
+              <div class="col-lg-10">
+                <input type="text" id="call_id_det" name="call_id_det" class="form-control" disabled>
+              </div>
+              <!-- ./ col-sm-9 -->
+            </div>
+            <br/>
+            <!-- ./ form-group -->
+            <div class="form-group">
+              <label class="col-lg-2 control-label">Incident Type</label>
+              <div class="col-lg-10">
+                <input type="text" id="call_type_det" name="call_type_det" class="form-control" disabled>
+              </div>
+              <!-- ./ col-sm-9 -->
+            </div>
+            <br/>
+            <!-- ./ form-group -->
+            <div class="form-group">
+              <label class="col-lg-2 control-label">Street 1</label>
+              <div class="col-lg-10">
+                <input type="text" id="call_street1_det" name="call_street1_det" class="form-control" disabled>
+              </div>
+              <!-- ./ col-sm-9 -->
+            </div>
+            <br/>
+            <!-- ./ form-group -->
+            <div class="form-group">
+              <label class="col-lg-2 control-label">Street 2</label>
+              <div class="col-lg-10">
+                <input type="text" id="call_street2_det" name="call_street2_det" class="form-control" disabled>
+              </div>
+              <!-- ./ col-sm-9 -->
+            </div>
+            <br/>
+            <!-- ./ form-group -->
+            <div class="form-group">
+              <label class="col-lg-2 control-label">Street 3</label>
+              <div class="col-lg-10">
+                <input type="text" id="call_street3_det" name="call_street3_det" class="form-control" disabled>
+              </div>
+              <!-- ./ col-sm-9 -->
+            </div>
+            
+            <div class="clearfix">
+            <br/><br/><br/><br/>
+            <!-- ./ form-group -->
+            <div class="form-group">
+              <label class="col-lg-2 control-label">Narrative</label>
+              <div class="col-lg-10">
+                <div name="call_narrative" id="call_narrative" contenteditable="false" style="background-color: #eee; opacity: 1; border: 1px solid #ccc; padding: 6px 12px; font-size: 14px;"></div>
+              </div>
+              <!-- ./ col-sm-9 -->
+            </div>
+            <br/>
+            <!-- ./ form-group -->
+          </div>
+          <!-- ./ modal-body -->
+          </form>
+          <br/>
+          <div class="modal-footer">
+            <button id="closeDetailsModal" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
+
+    
 
 
 
@@ -570,7 +654,42 @@
     <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
     
     
-    
+    <script>
+    $('#callDetails').on('show.bs.modal', function(e) {
+      var $modal = $(this), callId = e.relatedTarget.id;
+
+      $.ajax({
+          cache: false,
+          type: 'GET',
+          url: '../actions/api.php',
+          data: {'getCallDetails': 'yes',
+                  'callId' : callId},
+          success: function(result) 
+          {
+            data = JSON.parse(result);
+            console.log(data);
+
+            var mymodal = $('#callDetails');
+            mymodal.find('input[name="call_id_det"]').val(data['call_id']);
+            mymodal.find('input[name="call_type_det"]').val(data['call_type']);
+            mymodal.find('input[name="call_street1_det"]').val(data['call_street1']);
+            mymodal.find('input[name="call_street2_det"]').val(data['call_street2']);
+            mymodal.find('input[name="call_street3_det"]').val(data['call_street3']);
+            mymodal.find('div[name="call_narrative"]').html('');
+            mymodal.find('div[name="call_narrative"]').append(data['narrative']);
+
+            
+            //$('.callDetails #call_type_det').val(data['call_type']);
+            //$('input[name="call_type_det"]').val(data['call_type']);
+            //$('input[name="homeNum"]').val(data['home']); document.getElementById("homeNum").disabled = false;
+
+          },
+
+          error:function(exception){alert('Exeption:'+exception);}
+        });
+    });
+    </script>
+
     <script>
     $(document).ready(function() {
         $(function() {

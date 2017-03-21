@@ -368,29 +368,29 @@
     </script>
 
     <script>
-      $('#editUserModal').on('show.bs.modal', function(e) {
-        var $modal = $(this), userId = e.relatedTarget.id;
+    $('#editUserModal').on('show.bs.modal', function(e) {
+      var $modal = $(this), userId = e.relatedTarget.id;
 
-        $.ajax({
-            cache: false,
-            type: 'POST',
-            url: '../actions/adminActions.php',
-            data: {'getUserDetails': 'yes',
-                   'userId' : userId},
-            success: function(result) 
-            {
-              data = JSON.parse(result);
-                    
-              $('input[name="userName"]').val(data['name']);
-              $('input[name="userEmail"]').val(data['email']);
-              $('input[name="userIdentifier"]').val(data['identifier']);
-              //$('input[name="homeNum"]').val(data['home']); document.getElementById("homeNum").disabled = false;
+      $.ajax({
+          cache: false,
+          type: 'POST',
+          url: '../actions/adminActions.php',
+          data: {'getUserDetails': 'yes',
+                  'userId' : userId},
+          success: function(result) 
+          {
+            data = JSON.parse(result);
+                  
+            $('input[name="userName"]').val(data['name']);
+            $('input[name="userEmail"]').val(data['email']);
+            $('input[name="userIdentifier"]').val(data['identifier']);
+            //$('input[name="homeNum"]').val(data['home']); document.getElementById("homeNum").disabled = false;
 
-            },
+          },
 
-            error:function(exception){alert('Exeption:'+exception);}
-          });
-      });
+          error:function(exception){alert('Exeption:'+exception);}
+        });
+    });
     </script>
 
     <!-- Custom Theme Scripts -->

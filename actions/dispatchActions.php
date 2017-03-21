@@ -39,11 +39,6 @@ if (isset($_GET['term'])) {
 
 }
 
-function addCall()
-{
-    echo var_dump($_POST);
-}
-
 function clearCall()
 {
     /*$callIdString = $_POST['callId']; // Prints like "cid=#" NOT just #
@@ -91,6 +86,16 @@ function newCall()
     $unit2 = str_replace('+',' ', explode("=", $detailsArr[5])[1]);
     $narrative = str_replace('+',' ', explode("=", $detailsArr[6])[1]);
 
+    $created = date("Y-m-d H:i:s").': Call Created<br/>';
+    if ($narrative == "")
+    {
+        $narrative = $created;
+    }
+    else
+    {
+        $narrative = $created.date("Y-m-d H:i:s").': '.$narrative.'<br/>';
+    }
+    
     
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
