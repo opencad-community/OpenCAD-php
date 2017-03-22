@@ -712,7 +712,7 @@
               success: function(response) 
               {
                 $('#live_calls').html(response);
-                setTimeout(getCalls, 5000);
+                //setTimeout(getCalls, 5000);
                 
               },
               error : function(XMLHttpRequest, textStatus, errorThrown)
@@ -778,9 +778,10 @@
               },
               success: function(response) 
               {
+                console.log(response);
                 if (response == "SUCCESS")
                 {
-
+                  
                   $('#closeNewCall').trigger('click');
 
                   new PNotify({

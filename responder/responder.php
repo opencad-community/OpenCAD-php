@@ -193,6 +193,73 @@
             </div>
             <!-- ./ row -->
 
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>My Status</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <form id="myStatusForm">
+                        <div class="form-group">
+                            <label class="col-md-2 col-sm-2 col-xs-2 control-label">My Identifier</label>
+                            <div class="col-md-10 col-sm-10 col-xs-10">
+                                <input type="text" name="identifier" class="form-control" value="<?php echo $_SESSION['identifier'];?>" readonly />
+                            </div>
+                            <!-- ./ col-sm-9 -->
+                        </div>
+                        <!-- ./ form-group -->
+                        <div class="form-group">
+                            <label class="col-md-2 col-sm-2 col-xs-2 control-label">My Callsign</label>
+                            <div class="col-md-10 col-sm-10 col-xs-10">
+                                <input type="text" name="callsign" class="form-control" id="callsign1" value="<?php echo $_SESSION['identifier'];?>" readonly />
+                            </div>
+                            <!-- ./ col-sm-9 -->
+                        </div>
+                        <!-- ./ form-group -->
+                        <div class="form-group">
+                            <label class="col-md-2 col-sm-2 col-xs-2 control-label">My Status</label>
+                            <div class="col-md-10 col-sm-10 col-xs-10">
+                                <input type="text" name="status" id="status" class="form-control" readonly />
+                            </div>
+                            <!-- ./ col-sm-9 -->
+                        </div>
+                        <!-- ./ form-group -->
+                     </form> 
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <!-- ./ x_panel -->
+              </div>
+              <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
+              
+              <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>My Call</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                      <div class="alert alert-info"><span>You're currently not on a call</span></div>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <!-- ./ x_panel -->
+              </div>
+              <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
+            </div>
+            <!-- ./ row -->
+
           </div>
           <!-- "" -->
         </div>
@@ -215,17 +282,17 @@
       <div class="modal-dialog modal-md">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            <button type="button" class="close" id="closeCallsign" data-dismiss="modal"><span aria-hidden="true">×</span>
             </button>
             <h4 class="modal-title" id="myModalLabel">Enter Your Callsign for This Patrol</h4>
           </div>
           <!-- ./ modal-header -->
           <div class="modal-body">
-            <form>
+            <form class="callsignForm" id="callsignForm">
             <div class="form-group">
               <label class="col-md-2 control-label">Callsign</label>
               <div class="col-md-10">
-                <input type="text" id="callign" name="callsign" class="form-control" />
+                <input type="text" id="callsign" name="callsign" class="form-control" />
               </div>
               <!-- ./ col-sm-9 -->
             </div>
@@ -371,6 +438,7 @@
         $('#callsign').modal('show');
 
         getCalls();
+        getStatus();
 
     });
 	</script>
@@ -435,7 +503,6 @@
           success: function(result) 
           {
             data = JSON.parse(result);
-            console.log(data);
 
             var mymodal = $('#callDetails');
             mymodal.find('input[name="call_id_det"]').val(data['call_id']);
@@ -457,6 +524,105 @@
     $('#callsign').on('shown.bs.modal', function(e) {
         $('#callsign').find('input[name="callsign"]').val('<?php echo $_SESSION['identifier'];?>');
     });
+    </script>
+
+    <script>
+    $(function() {
+        $('.callsignForm').submit(function(e) {
+
+            var call2 = $('#callsign').find('input[name="callsign"]').val();
+            if (call2 == "<?php echo $_SESSION['identifier'];?>")
+            {
+                $('#closeCallsign').trigger('click');
+
+                  new PNotify({
+                    title: 'Success',
+                    text: 'Successfully set your callsign',
+                    type: 'success',
+                    styling: 'bootstrap3'
+                  });
+
+                  return false;
+
+            }
+            else
+            {
+
+
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+
+            $.ajax({
+              type: "POST",
+              url: "../actions/responderActions.php",
+              data: {
+                  updateCallsign: 'yes',
+                  details: $("#"+this.id).serialize()
+              },
+              success: function(response) 
+              {
+                
+                if (response.match("^Duplicate"))
+                {
+                    $('#closeCallsign').trigger('click');
+
+                    new PNotify({
+                    title: 'Error',
+                    text: 'That callsign is already in use',
+                    type: 'error',
+                    styling: 'bootstrap3'
+                  }); 
+
+                }
+
+                if (response == "SUCCESS")
+                {
+
+                  $('#closeCallsign').trigger('click');
+
+                  new PNotify({
+                    title: 'Success',
+                    text: 'Successfully set your callsign',
+                    type: 'success',
+                    styling: 'bootstrap3'
+                  }); 
+
+                  var call1 = $('#callsign').find('input[name="callsign"]').val();
+
+                  $('#callsign1').val(call1);
+                }
+                
+              },
+              error : function(XMLHttpRequest, textStatus, errorThrown)
+              {
+                console.log("Error");
+              }
+              
+            });
+            } 
+        });
+      }); 
+    </script>
+
+    <script>
+    function getStatus() {
+    $.ajax({
+        type: "GET",
+        url: "../actions/responderActions.php",
+        data: {
+            getStatus: 'yes'
+        },
+        success: function(response) 
+        {
+            $('#status').val(response);
+            setTimeout(getStatus, 5000);
+        },
+        error : function(XMLHttpRequest, textStatus, errorThrown)
+        {
+        console.log("Error");
+        }
+        
+    }); 
+    }
     </script>
 
     

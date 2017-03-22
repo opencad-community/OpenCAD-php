@@ -26,6 +26,12 @@ if (isset($_POST['create_citation'])){
 if (isset($_POST['delete_citation'])){ 
     delete_citation();
 }
+if (isset($_POST['delete_name'])){ 
+    delete_name();
+}
+if (isset($_POST['delete_plate'])){ 
+    delete_plate();
+}
 if (isset($_POST['delete_warrant'])){ 
     delete_warrant();
 }
@@ -84,8 +90,8 @@ function ncicGetNames()
                 <td>'.$row[9].'</td>
                 <td>
                     <form action="../actions/ncicAdminActions.php" method="post">
-                    <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
-                    <input name="deleteName" type="submit" class="btn btn-xs btn-link" value="Delete" disabled/>
+                    <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" enabled />
+                    <input name="delete_name" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete" enabled/>
                     <input name="uid" type="hidden" value='.$row[0].' />
                     </form>                    
                 </td>
@@ -159,7 +165,7 @@ function ncicGetPlates()
                 <td>
                     <form action="../actions/ncicAdminActions.php" method="post">
                     <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
-                    <input name="deleteName" type="submit" class="btn btn-xs btn-link" value="Delete" disabled/>
+                    <input name="delete_plate" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete" enabled/>
                     <input name="vehid" type="hidden" value='.$row[0].' />
                     </form>                    
                 </td>
@@ -423,6 +429,69 @@ function create_warrant()
     $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully created warrant</span></div>';
 
     header("Location:../administration/ncicAdmin.php#warrant_panel");
+}
+
+function delete_name()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $uid = $_POST['uid'];
+    echo $uid;
+    
+    $query = "DELETE FROM ncic_names WHERE id = ?";
+    
+    try {
+        $stmt = mysqli_prepare($link, $query);
+        mysqli_stmt_bind_param($stmt, "i", $uid);
+        $result = mysqli_stmt_execute($stmt);
+        
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage());
+    }
+
+    session_start();
+    $_SESSION['nameMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian name</span></div>';
+    header("Location: ../administration/ncicAdmin.php#name_panel");
+}
+
+function delete_plate()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $vehid = $_POST['vehid'];
+    echo $vehid;
+    
+    $query = "DELETE FROM ncic_plates WHERE id = ?";
+    
+    try {
+        $stmt = mysqli_prepare($link, $query);
+        mysqli_stmt_bind_param($stmt, "i", $vehid);
+        $result = mysqli_stmt_execute($stmt);
+        
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage());
+    }
+
+    $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian plate</span></div>';
+    header("Location: ../administration/ncicAdmin.php#plate_panel");
 }
 
 function delete_citation()

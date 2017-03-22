@@ -143,41 +143,76 @@ function getUnAvailableUnits()
     {
         echo "<div class=\"alert alert-danger\"><span>No unavailable units</span></div>";
     }
-
-    echo '
-            <table id="activeUsers" class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                <th>Identifier</th>
-                <th>Callsign</th>
-                <th>Status</th>
-                <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-        ';
-
-		
-
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
-        {
-            echo '
-            <tr>
-                <td>'.$row[0].'</td>
-                <td>'.$row[1].'</td>
-                <!--<td>'.$row[3].'</td>-->
-                <td>10-5/Meal Break</td>
-                <td><a href="#" style="color:red;">Logout</a>&nbsp;&nbsp;&nbsp;<a href="#"">Status</a></td>
-                <input name="uid" type="hidden" value='.$row[0].' />
-            </tr>
-            ';
-        }
-
+    else
+    {
         echo '
-            </tbody>
-            </table>
-        ';
+                <table id="activeUsers" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                    <th>Identifier</th>
+                    <th>Callsign</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+            ';
+
+            
+
+            while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+            {
+                echo '
+                <tr>
+                    <td>'.$row[0].'</td>
+                    <td>'.$row[1].'</td>
+                    <td>';
+                    
+                        getIndividualStatus($row[1]);
+
+                    echo '</td>
+                    <td><a href="#" style="color:red;">Logout</a>&nbsp;&nbsp;&nbsp;<a href="#"">Status</a></td>
+                    <input name="uid" type="hidden" value='.$row[0].' />
+                </tr>
+                ';
+            }
+
+            echo '
+                </tbody>
+                </table>
+            ';
+
+      }
 	mysqli_close($link);
+}
+
+function getIndividualStatus($callsign)
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+    
+    $sql = "SELECT status_detail FROM active_users WHERE callsign = \"$callsign\"";
+
+    $result=mysqli_query($link, $sql);
+
+    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    {
+        $statusDetail = $row[0];
+    }
+
+    $sql = "SELECT status_text FROM statuses WHERE status_id = \"$statusDetail\"";
+
+    $result=mysqli_query($link, $sql);
+
+    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    {
+        $statusText = $row[0];
+    }
+
+    echo $statusText;
 }
 
 function getCodesNcic()
@@ -256,8 +291,12 @@ function getActiveCalls()
             echo '
             <tr id="'.$counter.'">
                 <td>'.$row[0].'</td>
-                <td>'.$row[2].'</td>
-                <td>'.$row[1].'</td>';
+                <td>'.$row[1].'</td>
+                <td>';
+
+                    getUnitsOnCall($row[0]);
+
+                echo '</td>';
 
                 echo '<td>'.$row[3].'/'.$row[4].'/'.$row[5].'</td>';
 
@@ -298,6 +337,30 @@ function getActiveCalls()
 
 }
 
+function getUnitsOnCall($callId)
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+    
+    $sql1 = "SELECT * FROM calls_users WHERE call_id = \"$callId\"";
+
+    $result1=mysqli_query($link, $sql1);
+    
+    $units = "";
+
+    while($row1 = mysqli_fetch_array($result1, MYSQLI_BOTH))
+    {
+        $units = $units.''.$row1[1].' ';   
+    }
+    
+    echo $units;
+
+    mysqli_close($link);
+}
+
 function getCallDetails()
 {
     $callId = $_GET['callId'];
@@ -316,7 +379,7 @@ function getCallDetails()
     while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
     {
         $encode["call_id"] = $row[0];
-        $encode["call_type"] = $row[2];
+        $encode["call_type"] = $row[1];
         $encode["call_street1"] = $row[3];
         $encode["call_street2"] = $row[4];
         $encode["call_street3"] = $row[5];
