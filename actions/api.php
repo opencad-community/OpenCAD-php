@@ -141,7 +141,7 @@ function getUnAvailableUnits()
 
     if($num_rows == 0)
     {
-        echo "<div class=\"alert alert-danger\"><span>No unavailable units</span></div>";
+        echo "<div class=\"alert alert-warning\"><span>No unavailable units</span></div>";
     }
     else
     {
