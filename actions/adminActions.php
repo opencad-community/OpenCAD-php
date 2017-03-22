@@ -38,6 +38,9 @@
     if (isset($_POST['getUserDetails'])){
         getUserDetails();
     }
+    if (isset($_POST['delete_callhistory'])){
+        delete_callhistory();
+    }
 
     /* FUNCTIONS */
     /* Gets the user count. Returns value */
@@ -592,8 +595,8 @@ function getCallHistory()
             <thead>
                 <tr>
                 <th>Call ID</th>
-                <th>Primary Unit</th>
                 <th>Call Type</th>
+                <th>Primary Unit</th>
                 <th>Street 1</th>
                 <th>Street 2</th>
                 <th>Street 3</th>
@@ -618,7 +621,7 @@ function getCallHistory()
                 <td>
                     <form action="../actions/dispatchActions.php" method="post">
                     <input name="call_details" type="submit" class="btn btn-xs btn-link" value="Details" disabled/>
-                    <input name="delete_call" type="submit" class="btn btn-xs btn-link" value="Delete" enabled/>
+                    <input name="delete_callhistory" type="submit" class="btn btn-xs btn-link" value="Delete"/>
                     <input name="call_id" type="hidden" value='.$row[0].' />
                     </form>                    
                 </td>
@@ -631,5 +634,37 @@ function getCallHistory()
             </table>
         ';
     }
+}
+
+function delete_callhistory()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $callid = $_POST['callid'];
+    echo $callid;
+    
+    $query = "DELETE FROM call_history WHERE call_id = ?";
+    
+    try {
+        $stmt = mysqli_prepare($link, $query);
+        mysqli_stmt_bind_param($stmt, "i", $callid);
+        $result = mysqli_stmt_execute($stmt);
+        
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage());
+    }
+
+    session_start();
+    $_SESSION['historyMessage'] = '<div class="alert alert-success"><span>Successfully removed archived call</span></div>';
+    header("Location: ../administration/callhistory.php#history_panel");
 }
 ?>

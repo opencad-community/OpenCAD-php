@@ -28,6 +28,12 @@ if (isset($_GET['getCalls'])){
 if (isset($_GET['getCallDetails'])){
     getCallDetails();
 }
+if (isset($_GET['getAvailableUnits'])){
+    getAvailableUnits();
+}
+if (isset($_GET['getUnAvailableUnits'])){
+    getUnAvailableUnits();
+}
 
 
 function getDispatchers()

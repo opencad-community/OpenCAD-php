@@ -429,6 +429,8 @@
     <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
     <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
 
+    <audio id="newCallAudio" src="../sounds/New_Dispatch.mp3" preload="auto"></audio>
+
     <script>
     $(document).ready(function() {
         $(function() {
@@ -611,6 +613,29 @@
         },
         success: function(response) 
         {
+            if (response.match("^10-6/On"))
+            {
+                var currentStatus = $('#status').val();
+                if (currentStatus == "10-6/On a Call")
+                {
+                    //Do nothing
+                }
+                else
+                {
+                    document.getElementById('newCallAudio').play();
+                    new PNotify({
+                        title: 'New Call!',
+                        text: 'You\'ve been assigned a new call!',
+                        type: 'success',
+                        styling: 'bootstrap3'
+                    });
+                }
+            }
+            else
+            {
+
+            }
+
             $('#status').val(response);
             setTimeout(getStatus, 5000);
         },

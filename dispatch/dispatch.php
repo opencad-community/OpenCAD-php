@@ -172,9 +172,9 @@
                   <div class="x_content">
                       <div class="col-md-12">
                         <div class="input-group">
-                            <input type="text" name="cli" class="form-control" id="cli"/>
+                            <input type="text" name="cli" class="form-control" id="cli" placeholder="Coming Soon!"/>
                             <span class="input-group-btn">
-                                <button type="button" class="btn btn-primary">Send</button>
+                                <button type="button" class="btn btn-primary" disabled>Send</button>
                             </span>
                         </div>
                         <!-- ./ input-group -->
@@ -257,7 +257,9 @@
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
-                      <?php getAvailableUnits();?>
+                      <div id="availableUnits">
+                      
+                      </div>
                   </div>
                   <!-- ./ x_content -->
                 </div>
@@ -276,7 +278,9 @@
                     </div>
                     <!-- ./ x_title -->
                     <div class="x_content">
-                        <?php getUnAvailableUnits();?>
+                        <div id="unAvailableUnits">
+                      
+                      </div>
                     </div>
                     <!-- ./ x_content -->
                     </div>
@@ -697,6 +701,8 @@
         });
 
         getCalls();
+        getAvailableUnits();
+        getUnAvailableUnits();
      
     });
 	  </script>
@@ -712,7 +718,49 @@
               success: function(response) 
               {
                 $('#live_calls').html(response);
-                //setTimeout(getCalls, 5000);
+                setTimeout(getCalls, 5000);
+                
+              },
+              error : function(XMLHttpRequest, textStatus, errorThrown)
+              {
+                console.log("Error");
+              }
+              
+            }); 
+      }
+
+      function getAvailableUnits() {
+        $.ajax({
+              type: "GET",
+              url: "../actions/api.php",
+              data: {
+                  getAvailableUnits: 'yes'
+              },
+              success: function(response) 
+              {
+                $('#availableUnits').html(response);
+                setTimeout(getAvailableUnits, 5000);
+                
+              },
+              error : function(XMLHttpRequest, textStatus, errorThrown)
+              {
+                console.log("Error");
+              }
+              
+            }); 
+      }
+
+      function getUnAvailableUnits() {
+        $.ajax({
+              type: "GET",
+              url: "../actions/api.php",
+              data: {
+                  getUnAvailableUnits: 'yes'
+              },
+              success: function(response) 
+              {
+                $('#unAvailableUnits').html(response);
+                setTimeout(getUnAvailableUnits, 5000);
                 
               },
               error : function(XMLHttpRequest, textStatus, errorThrown)
