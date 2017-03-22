@@ -529,26 +529,6 @@
     <script>
     $(function() {
         $('.callsignForm').submit(function(e) {
-
-            var call2 = $('#callsign').find('input[name="callsign"]').val();
-            if (call2 == "<?php echo $_SESSION['identifier'];?>")
-            {
-                $('#closeCallsign').trigger('click');
-
-                  new PNotify({
-                    title: 'Success',
-                    text: 'Successfully set your callsign',
-                    type: 'success',
-                    styling: 'bootstrap3'
-                  });
-
-                  return false;
-
-            }
-            else
-            {
-
-
             e.preventDefault(); // avoid to execute the actual submit of the form.
 
             $.ajax({
@@ -563,14 +543,32 @@
                 
                 if (response.match("^Duplicate"))
                 {
-                    $('#closeCallsign').trigger('click');
+                    var call2 = $('#callsign').find('input[name="callsign"]').val();
+                    if (call2 == "<?php echo $_SESSION['identifier'];?>")
+                    {
+                        $('#closeCallsign').trigger('click');
 
-                    new PNotify({
-                    title: 'Error',
-                    text: 'That callsign is already in use',
-                    type: 'error',
-                    styling: 'bootstrap3'
-                  }); 
+                        new PNotify({
+                            title: 'Success',
+                            text: 'Successfully set your callsign',
+                            type: 'success',
+                            styling: 'bootstrap3'
+                        });
+
+                        return false;
+
+                    }
+                    else
+                    {
+                        $('#closeCallsign').trigger('click');
+
+                        new PNotify({
+                        title: 'Error',
+                        text: 'That callsign is already in use',
+                        type: 'error',
+                        styling: 'bootstrap3'
+                        }); 
+                    }
 
                 }
 
@@ -598,7 +596,7 @@
               }
               
             });
-            } 
+             
         });
       }); 
     </script>
