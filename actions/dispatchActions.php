@@ -116,7 +116,7 @@ function clearUnitFromCall($callId, $unit)
     }
 
     //First delete from calls list
-    $query = "DELETE FROM calls_users WHERE call_id = ? AND call_id = ?";
+    $query = "DELETE FROM calls_users WHERE call_id = ? AND identifier = ?";
         
     try {
         $stmt = mysqli_prepare($link, $query);
