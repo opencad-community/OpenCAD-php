@@ -457,6 +457,261 @@
     </div>
     <!-- ./ modal fade bs-example-modal-lg -->
 
+    <!-- Create Name Modal -->
+    <div class="modal fade" id="createNameModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Add Name to Database</h4>
+          </div>
+          <!-- ./ modal-header -->
+		  <div class="modal-body">
+            <form role="form" action="../actions/ncicAdminActions.php" method="post">
+                <div class="form-group row">
+                </div>
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">First Name</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" name="first_name" />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Last Name</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" name="last_name" />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Date of Birth</label>
+                <div class="col-lg-10">
+                <input type="text" class="form-control" name="dob" />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Address</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" name="address" />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Sex</label>
+                <div class="col-lg-10">
+                  <select class="form-control" name="sex" required>
+                <option value="">  </option>
+                <option value="Male"> Male </option>
+                <option value="Female"> Female </option>
+                </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Race</label>
+                <div class="col-lg-10">
+                <select class="form-control" name="race" required>
+                <option value="">  </option>
+                <option value="White"> White </option>
+                <option value="Black or African American"> Black or African American </option>
+                <option value="American Indian or Alaska Native"> American Indian or Alaska Native </option>
+                <option value="Asian"> Asian </option>
+                <option value="Native Hawaiian or Other Pacific Islander"> Native Hawaiian or Other Pacific Islander </option>
+                <option value="Hispanic"> Asian </option>
+                </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">License Status</label>
+                  <div class="col-lg-10">
+                    <select class="form-control" name="dl_status" required>
+                <option value="">  </option>
+                <option value="Valid"> Valid </option>
+                <option value="Suspended"> Suspended </option>
+                <option value="Expired"> Expired </option>
+                </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Hair Color</label>
+                <div class="col-lg-10">
+                  <select class="form-control" name="hair_color" required>
+                <option value="">  </option>
+                <option value="Black"> Black </option>
+                <option value="Blonde"> Blonde </option>
+                <option value="Red"> Red </option>
+                <option value="Brown"> Brown </option>
+                <option value="Gray"> Gray </option>
+                </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Build</label>
+                <div class="col-lg-10">
+                  <select class="form-control" name="build" required>
+                <option value="">  </option>
+                <option value="Skinny"> Skinny </option>
+                <option value="Average"> Average </option>
+                <option value="Overweight"> Overweight </option>
+                <option value="Muscular"> Muscular </option>
+                </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+            
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+                <input name="create_name" type="submit" class="btn btn-primary" value="Create" /> 
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
+
+    <!-- Create Plate Modal -->
+    <div class="modal fade" id="createPlateModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Add Plate to Database</h4>
+          </div>
+          <!-- ./ modal-header -->
+		  <div class="modal-body">
+            <form role="form" action="../actions/ncicAdminActions.php" method="post">
+                <div class="form-group row">
+                </div>
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Registered Owner</label>
+                <div class="col-lg-10">
+                  <select class="form-control selectpicker" name="civilian_names" id="civilian_names" data-live-search="true" required>
+                    <option> </option>
+                    <?php getCivilianNames();?>
+                  </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">License Plate</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" name="veh_plate" />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Vehicle Make</label>
+                <div class="col-lg-10">
+                <input type="text" class="form-control" name="veh_make" />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Vehicle Modle</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" name="veh_model" />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Vehicle Color</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" name="veh_color" />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Insurance Status</label>
+                <div class="col-lg-10">
+                <select class="form-control" name="veh_insurance" required>
+                <option value="">  </option>
+                <option value="Valid"> Valid </option>
+                <option value="Expired"> Expired </option>
+                </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Vehicle Flags</label>
+                  <div class="col-lg-10">
+                    <select class="form-control" name="flags" required>
+                <option value="">  </option>
+                <option value="None"> None </option>
+                <option value="Stolen"> Stolen </option>
+                <option value="Wanted"> Wanted </option>
+                <option value="Suspended Registration"> Suspended Registration </option>
+                </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Notes</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" name="notes" />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Vehicle's Registered State</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" name="veh_reg_state" />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Hidden Notes</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" name="hidden_notes" />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+            
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+                <input name="create_plate" type="submit" class="btn btn-primary" value="Create" /> 
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
+
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->

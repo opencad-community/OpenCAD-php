@@ -38,6 +38,12 @@ if (isset($_POST['delete_warrant'])){
 if (isset($_POST['create_warrant'])){ 
     create_warrant();
 }
+if (isset($_POST['create_name'])){ 
+    create_name();
+}
+if (isset($_POST['create_plate'])){ 
+    create_plate();
+}
 
 function ncicGetNames()
 {
@@ -496,6 +502,7 @@ function delete_plate()
         die("Failed to run query: " . $e->getMessage());
     }
 
+    session_start();
     $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian plate</span></div>';
     header("Location: ../administration/ncicAdmin.php#plate_panel");
 }
@@ -563,5 +570,88 @@ function delete_warrant()
     header("Location: ../administration/ncicAdmin.php#warrant_panel");
 }
 
+function create_name()
+{
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $dob = $_POST['dob'];
+    $address = $_POST['address'];
+    $sex = $_POST['sex'];
+    $race = $_POST['race'];
+    $dl_status = $_POST['dl_status'];
+    $hair_color = $_POST['hair_color'];
+    $build = $_POST['build'];
 
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $sql = "INSERT INTO ncic_names (first_name, last_name, dob, address, sex, race, dl_status, hair_color, build) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	
+     
+	try {
+		$stmt = mysqli_prepare($link, $sql);
+		mysqli_stmt_bind_param($stmt, "sssssssss", $first_name, $last_name, $dob, $address, $sex, $race, $dl_status, $hair_color, $build);
+		$result = mysqli_stmt_execute($stmt);
+		
+		if ($result == FALSE) {
+			die(mysqli_error($link));
+		}
+	}
+	catch (Exception $e)
+	{
+		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+	}
+	mysqli_close($link);
+
+    session_start();
+    $_SESSION['nameMessage'] = '<div class="alert alert-success"><span>Successfully added name to the database</span></div>';
+
+    header("Location:../administration/ncicAdmin.php#name_panel");
+}
+
+function create_plate()
+{
+    $userId = $_POST['civilian_names'];
+    $veh_plate = $_POST['veh_plate'];
+    $veh_make = $_POST['veh_make'];
+    $veh_model = $_POST['veh_model'];
+    $veh_color = $_POST['veh_color'];
+    $veh_insurance = $_POST['veh_insurance'];
+    $flags = $_POST['flags'];
+    $veh_reg_state = $_POST['veh_reg_state'];
+    $notes = $_POST['notes'];
+    $hidden_notes = $_POST['hidden_notes'];
+
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $sql = "INSERT INTO ncic_plates (name_id, veh_plate, veh_make, veh_model, veh_color, veh_insurance, flags, veh_reg_state, notes, hidden_notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	
+     
+	try {
+		$stmt = mysqli_prepare($link, $sql);
+		mysqli_stmt_bind_param($stmt, "isssssssss", $userId, $veh_plate, $veh_make, $veh_model, $veh_color, $veh_insurance, $flags, $veh_reg_state, $notes, $hidden_notes);
+		$result = mysqli_stmt_execute($stmt);
+		
+		if ($result == FALSE) {
+			die(mysqli_error($link));
+		}
+	}
+	catch (Exception $e)
+	{
+		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+	}
+	mysqli_close($link);
+
+    session_start();
+    $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully added plate to the database</span></div>';
+
+    header("Location:../administration/ncicAdmin.php#plate_panel");
+}
 ?>
