@@ -13,6 +13,19 @@
       $name = $_SESSION['name'];
     }
 
+    if(isset($_SESSION['dispatch']))
+    {
+      
+      if ($_SESSION['dispatch'] == 'YES')
+      {
+          //Do nothing
+      }
+    }
+    else
+    {
+      die("You do not have permission to be here. Request access to dispatch through your administration.");
+    }
+
     $iniContents = parse_ini_file("../properties/config.ini", true); //Gather from config.ini file
     $community = $iniContents['strings']['community'];
 
@@ -98,6 +111,7 @@
                   <li class="active"><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: block;">
                       <li class="current-page"><a href="javascript:void(0)">Dashboard</a></li>
+                      <li><a href="../actions/direction.php">CAD Direction Page</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-clock-o"></i> Stopwatch <span class="fa fa-chevron-down"></span></a>

@@ -52,12 +52,15 @@ if($num_rows < 2)
     {
         if ($row[1] == "0")
         {
-            header("Location:../administration/admin.php");
             $_SESSION['admin'] = 'YES';
+            header("Location:../administration/admin.php");
+            
         }
         else if ($row[1] == "1")
         {
+            $_SESSION['dispatch'] = 'YES';
             header("Location:../dispatch/dispatch.php"); 
+            
         }
         else if ($row[1] == "2")
         {
@@ -69,7 +72,6 @@ if($num_rows < 2)
         }
         else if ($row[1] == "4")
         {
-            echo "Here!";
             header("Location:../responder/responder.php"); 
         }
         else if ($row[1] == "5")
@@ -99,6 +101,7 @@ else
         }
         if ($row[1] == 1)
         {
+            $_SESSION['dispatch'] = 'YES';
             $dispatchButton = "<a href=\"../dispatch/dispatch.php\" class=\"btn btn-primary btn-lg\">Dispatch</a>";
         }
         if ($row[1] == "2")
