@@ -15,13 +15,19 @@
     $iniContents = parse_ini_file("./properties/config.ini", true); //Gather from config.ini file
     $community = $iniContents['strings']['community'];
 
-    $testing = true; //If set to true, will default some data for you
+    $testing = false; //If set to true, will default some data for you
+
+    
 
     session_start();
     $registerError = "";
     $registerSuccess = "";
     $loginMessage = "";
 
+    if (isset($_GET['loggedOut']))
+    {
+        $loginMessage = '<div class="alert alert-success" ><span>You\'ve successfully been logged out</span></div>';  
+    }
     if(isset($_SESSION['register_error']))
     {
         $registerError = '<div class="alert alert-danger" ><span>'.$_SESSION['register_error'].'</span></div>';
@@ -37,6 +43,7 @@
         $loginMessage = '<div class="alert alert-danger" ><span>'.$_SESSION['loginMessageDanger'].'</span></div>';
         unset($_SESSION['loginMessageDanger']);
     }
+
     
 ?>
 

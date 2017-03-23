@@ -35,6 +35,9 @@ if (isset($_POST['delete_plate'])){
 if (isset($_POST['delete_warrant'])){ 
     delete_warrant();
 }
+if (isset($_POST['create_warrant'])){ 
+    create_warrant();
+}
 
 function ncicGetNames()
 {
@@ -349,13 +352,14 @@ function getAgencies()
             WHERE department_name <>"Administrators"
             AND department_name <>"EMS"
             AND department_name <>"Fire"
+            AND department_name <>"Civilian"
             AND department_name <>"Communications (Dispatch)"';
 
 	$result=mysqli_query($link, $sql);
 	
 	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
 	{
-		echo "<option value=\"$row[0]\">$row[1] $row[2]</option>";
+		echo "<option value=\"$row[1]\">$row[1]</option>";
 	}
 	mysqli_close($link);
 }
@@ -391,6 +395,7 @@ function create_citation()
 	}
 	mysqli_close($link);
 
+    session_start();
     $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully created citation</span></div>';
 
     header("Location:../administration/ncicAdmin.php#citation_panel");
@@ -408,7 +413,7 @@ function create_warrant()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $sql = "INSERT INTO ncic_warrants (name_id, expiration_date, warrant_name, issuing_agency) SELECT (?, DATE_ADD(NOW(), INTERVAL 30 day), ?, ?)";
+    $sql = "INSERT INTO ncic_warrants (name_id, expiration_date, warrant_name, issuing_agency) SELECT ?, DATE_ADD(NOW(), INTERVAL 30 day), ?, ?";
 	
     
 	try {
@@ -426,6 +431,7 @@ function create_warrant()
 	}
 	mysqli_close($link);
 
+    session_start();
     $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully created warrant</span></div>';
 
     header("Location:../administration/ncicAdmin.php#warrant_panel");

@@ -231,6 +231,8 @@
                   <!-- ./ x_content -->
                   <div class="x_footer">
                     <button class="btn btn-primary" name="create_name_btn" type="submit" data-toggle="modal" data-target="#createNameModal">Create Name</button>
+                  </div>
+                  <!-- ./ x_footer -->
                 </div>
                 <!-- ./ x_panel -->
               </div>
@@ -260,6 +262,8 @@
                   <!-- ./ x_content -->
                   <div class="x_footer">
                     <button class="btn btn-primary" name="create_plate_btn" type="submit" data-toggle="modal" data-target="#createPlateModal">Create Plate</button>
+                  </div>
+                  <!-- ./ x_footer -->
                 </div>
                 <!-- ./ x_panel -->
               </div>
@@ -272,7 +276,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel" id="warrant_panel">
                   <div class="x_title">
-                    <h2>NCIC Warrants DB</h2>l
+                    <h2>NCIC Warrants DB</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -440,7 +444,7 @@
           </div>
           <!-- ./ modal-body -->
           <div class="modal-footer">
-                <input name="create_citation" type="submit" class="btn btn-primary" value="Create" /> 
+                <input name="create_warrant" type="submit" class="btn btn-primary" value="Create" /> 
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </form>
           </div>

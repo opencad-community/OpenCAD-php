@@ -17,6 +17,7 @@
     $community = $iniContents['strings']['community'];
 
     include("../actions/api.php");
+    setUnitActive("1");
 
 ?>
 
@@ -167,8 +168,8 @@
             </div>
             <!-- ./ page-title -->
 
+            <?php /* hiding for now
             <div class="clearfix"></div>
-
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
@@ -200,6 +201,7 @@
               <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
             </div>
             <!-- ./ row -->
+            */?>
 
             <div class="clearfix"></div>
             <div class="row">
@@ -510,13 +512,13 @@
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Assign Unit to Call</label>
                 <div class="col-lg-10">
-                  <select class="form-control selectpicker" data-live-search="true" name="unit_1" title="Select a Unit or Leave Blank (Will mark call as Pending)">
+                  <select class="form-control selectpicker unit" data-live-search="true" name="unit_1" id="unit_1" title="Select a Unit or Leave Blank (Will mark call as Pending)">
                     <option></option>
-                    <?php getActiveUnits();?>
+                    
                   </select>
-                  <select class="form-control selectpicker" data-live-search="true" name="unit_2" title="Select a Unit or Leave Blank">
+                  <select class="form-control selectpicker unit" data-live-search="true" name="unit_2" id="unit_2" title="Select a Unit or Leave Blank">
                     <option></option>
-                    <?php getActiveUnits();?>
+                    
                   </select>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -669,6 +671,47 @@
     <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
     <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
     
+    <script>
+    $('#newCall').on('show.bs.modal', function(e) {
+      var $modal = $(this), userId = e.relatedTarget.id;
+
+      $.ajax({
+          cache: false,
+          type: 'GET',
+          url: '../actions/api.php',
+          data: {'getActiveUnits': 'yes'},
+          success: function(result) 
+          {
+            data = JSON.parse(result);
+
+            var mymodal = $('#newCallForm');      
+            var select = mymodal.find('#unit_1');
+            select.empty();
+            var select2 = mymodal.find('#unit_2');
+            select2.empty();
+
+
+            $.each(data, function(key, value) {
+              select.append($("<option/>")
+                            .val(key)
+                            .text(value));
+              
+              select2.append($("<option/>")
+                            .val(key)
+                            .text(value));
+            });
+
+            select.selectpicker('refresh');
+            select2.selectpicker('refresh');
+            
+            
+
+          },
+
+          error:function(exception){alert('Exeption:'+exception);}
+        });
+    });
+    </script>
     
     <script>
     $('#callDetails').on('show.bs.modal', function(e) {
@@ -753,9 +796,41 @@
             console.log("Error");
           }
           
-        });
-
+        }); 
+    }
+    </script>
+    <script>
+    function logoutUser(element)
+    {
+      unit = element.className.split(" ")[2];
       
+      $.ajax({
+          type: "POST",
+          url: "../actions/api.php",
+          data: {
+              logoutUser: 'yes',
+              unit: unit
+          },
+          success: function(response) 
+          {
+            console.log(response);
+            if (response == "SUCCESS")
+            {
+              new PNotify({
+                title: 'Success',
+                text: 'Successfully logged out user',
+                type: 'success',
+                styling: 'bootstrap3'
+              }); 
+            }
+            
+          },
+          error : function(XMLHttpRequest, textStatus, errorThrown)
+          {
+            console.log("Error");
+          }
+          
+        });
     }
     </script>
 
@@ -791,6 +866,11 @@
               success: function(response) 
               {
                 $('#availableUnits').html(response);
+                $('#activeUsers').DataTable({
+                  searching: false,
+                  scrollY: "200px",
+                  lengthMenu: [[4, -1], [4, "All"]]
+			          });
                 setTimeout(getAvailableUnits, 5000);
                 
                 
@@ -813,6 +893,11 @@
               success: function(response) 
               {
                 $('#unAvailableUnits').html(response);
+                $('#unAvailableUnitsTable').DataTable({
+                  searching: false,
+                  scrollY: "200px",
+                  lengthMenu: [[4, -1], [4, "All"]]
+			          });
                 setTimeout(getUnAvailableUnits, 5000);
                 
               },

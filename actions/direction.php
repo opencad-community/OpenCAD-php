@@ -50,76 +50,81 @@ if($num_rows < 2)
 {
     while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
     {
-        if ($row[0] == "0")
+        if ($row[1] == "0")
         {
             header("Location:../administration/admin.php");
             $_SESSION['admin'] = 'YES';
         }
-        else if ($row[0] == "1")
+        else if ($row[1] == "1")
         {
             header("Location:../dispatch/dispatch.php"); 
         }
-        else if ($row[0] == "2")
+        else if ($row[1] == "2")
         {
             header("Location:../responder/responder.php"); 
         }
-        else if ($row[0] == "3")
+        else if ($row[1] == "3")
         {
             header("Location:../responder/responder.php"); 
         }
-        else if ($row[0] == "4")
+        else if ($row[1] == "4")
+        {
+            echo "Here!";
+            header("Location:../responder/responder.php"); 
+        }
+        else if ($row[1] == "5")
         {
             header("Location:../responder/responder.php"); 
         }
-        else if ($row[0] == "5")
+        else if ($row[1] == "6")
         {
             header("Location:../responder/responder.php"); 
         }
-        else if ($row[0] == "6")
-        {
-            header("Location:../responder/responder.php"); 
-        }
-        else if ($row[0] == "7")
+        else if ($row[1] == "7")
         {
             header("Location:../civilian/civilian.php"); 
         }
+        
     }
 }
-
-while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+else
 {
-    if ($row[1] == 0)
-    { 
-        $adminButton = "<a href=\"../administration/admin.php\" class=\"btn btn-primary btn-lg\">Administration</a>";
-        $_SESSION['admin'] = 'YES';
-    }
-    if ($row[1] == 1)
+
+    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
     {
-        $dispatchButton = "<a href=\"../dispatch/dispatch.php\" class=\"btn btn-primary btn-lg\">Dispatch</a>";
-    }
-    if ($row[1] == "2")
-    {
-        $emsButton = "<a href=\"../responder/responder.php\" class=\"btn btn-primary btn-lg\">EMS</a>";
-    }
-    if ($row[1] == "3")
-    {
-        $fireButton = "<a href=\"../responder/responder.php\" class=\"btn btn-primary btn-lg\">Fire Department</a>";
-    }
-    if ($row[1] == "4")
-    {
-        $highwayButton = "<a href=\"../responder/responder.php\" class=\"btn btn-primary btn-lg\">Highway Patrol</a>";
-    }
-    if ($row[1] == "5")
-    {
-        $policeButton = "<a href=\"../responder/responder.php\" class=\"btn btn-primary btn-lg\">Police Department</a>";
-    }
-    if ($row[1] == "6")
-    {
-        $sheriffButton = "<a href=\"../responder/responder.php\" class=\"btn btn-primary btn-lg\">Sheriff's Office</a>";
-    }
-    if ($row[1] == "7")
-    { 
-        $civilianButton = "<a href=\"../civilian/civilian.php\" class=\"btn btn-primary btn-lg\">Civilian</a>";
+        if ($row[1] == 0)
+        { 
+            $adminButton = "<a href=\"../administration/admin.php\" class=\"btn btn-primary btn-lg\">Administration</a>";
+            $_SESSION['admin'] = 'YES';
+        }
+        if ($row[1] == 1)
+        {
+            $dispatchButton = "<a href=\"../dispatch/dispatch.php\" class=\"btn btn-primary btn-lg\">Dispatch</a>";
+        }
+        if ($row[1] == "2")
+        {
+            $emsButton = "<a href=\"../responder/responder.php\" class=\"btn btn-primary btn-lg\">EMS</a>";
+        }
+        if ($row[1] == "3")
+        {
+            $fireButton = "<a href=\"../responder/responder.php\" class=\"btn btn-primary btn-lg\">Fire Department</a>";
+        }
+        if ($row[1] == "4")
+        {
+            $highwayButton = "<a href=\"../responder/responder.php\" class=\"btn btn-primary btn-lg\">Highway Patrol</a>";
+        }
+        if ($row[1] == "5")
+        {
+            $policeButton = "<a href=\"../responder/responder.php\" class=\"btn btn-primary btn-lg\">Police Department</a>";
+        }
+        if ($row[1] == "6")
+        {
+            $sheriffButton = "<a href=\"../responder/responder.php\" class=\"btn btn-primary btn-lg\">Sheriff's Office</a>";
+        }
+        if ($row[1] == "7")
+        { 
+            $civilianButton = "<a href=\"../civilian/civilian.php\" class=\"btn btn-primary btn-lg\">Civilian</a>";
+        }
     }
 }
 mysqli_close($link);

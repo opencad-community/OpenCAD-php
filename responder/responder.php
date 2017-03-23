@@ -17,6 +17,7 @@
     $community = $iniContents['strings']['community'];
 
     include("../actions/api.php");
+    setUnitActive("2");
 
 ?>
 
@@ -239,6 +240,8 @@
               </div>
               <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
               
+              <?php /* Commented out for now
+
               <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="x_panel">
                   <div class="x_title">
@@ -257,6 +260,9 @@
                 <!-- ./ x_panel -->
               </div>
               <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
+
+              */?>
+
             </div>
             <!-- ./ row -->
 
@@ -613,6 +619,7 @@
         },
         success: function(response) 
         {
+            console.log(response);
             if (response.match("^10-6/On"))
             {
                 var currentStatus = $('#status').val();
@@ -630,6 +637,12 @@
                         styling: 'bootstrap3'
                     });
                 }
+            }
+            else if (response.match("^<br"))
+            {
+                console.log("LOGGED OUT");
+                window.location.href = '../actions/logout.php';
+                
             }
             else
             {

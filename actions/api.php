@@ -37,6 +37,45 @@ if (isset($_GET['getUnAvailableUnits'])){
 if (isset($_POST['changeStatus'])){
     changeStatus();
 }
+if (isset($_GET['getActiveUnits']))
+{
+    getActiveUnits();
+}
+if (isset($_POST['logoutUser']))
+{
+    logoutUser();
+}
+
+function logoutUser()
+{
+    $identifier = $_POST['unit'];
+
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $sql = "DELETE FROM active_users WHERE identifier = ?";
+
+    try {
+        $stmt = mysqli_prepare($link, $sql);
+        mysqli_stmt_bind_param($stmt, "s", $identifier);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+    } 
+
+    mysqli_close($link);
+    echo "SUCCESS";
+
+}
 
 function changeStatus()
 {
@@ -182,6 +221,45 @@ function getDispatchers()
 
 
 }
+function setUnitActive($dep)
+{
+    $status;
+    switch($dep)
+    {
+        case "1":
+            $status = "2";
+            break;
+        case "2":
+            $status = "1";
+            break;
+    }
+
+    $sql = "INSERT IGNORE INTO active_users (identifier, callsign, status, status_detail) VALUES (?, ?, ?, '1')";
+
+    $identifier = $_SESSION['identifier'];
+
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    try {
+        $stmt = mysqli_prepare($link, $sql);
+        mysqli_stmt_bind_param($stmt, "ssi", $identifier, $identifier, $status);
+        $result = mysqli_stmt_execute($stmt);
+    
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+    }
+
+}
+
 function getAvailableUnits()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -198,7 +276,7 @@ function getAvailableUnits()
 
     if($num_rows == 0)
     {
-        echo "<div class=\"alert alert-danger\"><span>No active units</span></div>";
+        echo "<div class=\"alert alert-danger\"><span>No available units</span></div>";
     }
     else
     {
@@ -265,7 +343,7 @@ function getUnAvailableUnits()
     else
     {
         echo '
-                <table id="activeUsers" class="table table-striped table-bordered">
+                <table id="unAvailableUnitsTable" class="table table-striped table-bordered">
                 <thead>
                     <tr>
                     <th>Identifier</th>
@@ -291,7 +369,7 @@ function getUnAvailableUnits()
 
                     echo '</td>
                     
-                    <td><a href="#" class="nopadding" style="color:red;">Logout</a>&nbsp;&nbsp;&nbsp;
+                    <td><a id="logoutUser" class="nopadding logoutUser '.$row[0].'" onclick="logoutUser(this);" style="color:red; cursor:pointer;">Logout</a>&nbsp;&nbsp;&nbsp;
                     <div class="dropdown"><button class="btn btn-link dropdown-toggle nopadding" style="display: inline-block; vertical-align:top;" type="button" data-toggle="dropdown">Status <span class="caret"></span></button><ul class="dropdown-menu">
                         <li><a id="statusAvail" class="statusAvailBusy '.$row[0].'" onclick="testFunction(this);">10-8/Available</a></li>
                     </ul></div>
@@ -369,10 +447,13 @@ function getActiveUnits()
 
     $result=mysqli_query($link, $query);
 
+    $encode = array();
     while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
     {
-        echo '<option value="'.$row[0].'">'.$row[0].'</option>';
+        $encode[$row[0]] = $row[0];
     }
+    
+    echo json_encode($encode);
 }
 
 function getActiveCalls()
