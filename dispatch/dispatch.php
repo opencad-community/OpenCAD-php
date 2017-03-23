@@ -51,6 +51,13 @@
     <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
     <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
     <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+
+    <style>
+    .nopadding {
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    </style>
     
 
     <!-- Custom Theme Style -->
@@ -90,6 +97,11 @@
                   <li class="active"><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: block;">
                       <li class="current-page"><a href="javascript:void(0)">Dashboard</a></li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-clock-o"></i> Stopwatch <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="https://www.timeanddate.com/stopwatch/" target="_blank">Stopwatch</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -708,6 +720,46 @@
 	  </script>
 
     <script>
+    function testFunction(element)
+    {
+      statusInit = element.className;
+      status = statusInit.split(" ")[0];
+      unit = statusInit.split(" ")[1];
+
+      $.ajax({
+          type: "POST",
+          url: "../actions/api.php",
+          data: {
+              changeStatus: 'yes',
+              unit: unit,
+              status: status
+          },
+          success: function(response) 
+          {
+            console.log(response);
+            if (response == "SUCCESS")
+            {
+              new PNotify({
+                title: 'Success',
+                text: 'Successfully modified user status',
+                type: 'success',
+                styling: 'bootstrap3'
+              }); 
+            }
+            
+          },
+          error : function(XMLHttpRequest, textStatus, errorThrown)
+          {
+            console.log("Error");
+          }
+          
+        });
+
+      
+    }
+    </script>
+
+    <script>
     function getCalls() {
         $.ajax({
               type: "GET",
@@ -856,7 +908,6 @@
         });
       }); 
     </script>
-
 
   
     <!-- TODO: FIX -->

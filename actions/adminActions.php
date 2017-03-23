@@ -619,9 +619,9 @@ function getCallHistory()
                 <td>'.$row[5].'</td>
                 <td>'.$row[6].'</td>
                 <td>
-                    <form action="../actions/dispatchActions.php" method="post">
+                    <form action="../actions/adminActions.php" method="post">
                     <input name="call_details" type="submit" class="btn btn-xs btn-link" value="Details" disabled/>
-                    <input name="delete_callhistory" type="submit" class="btn btn-xs btn-link" value="Delete"/>
+                    <input name="delete_callhistory" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
                     <input name="call_id" type="hidden" value='.$row[0].' />
                     </form>                    
                 </td>
@@ -644,7 +644,7 @@ function delete_callhistory()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $callid = $_POST['callid'];
+    $callid = $_POST['call_id'];
     echo $callid;
     
     $query = "DELETE FROM call_history WHERE call_id = ?";

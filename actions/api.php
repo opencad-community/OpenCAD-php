@@ -34,7 +34,110 @@ if (isset($_GET['getAvailableUnits'])){
 if (isset($_GET['getUnAvailableUnits'])){
     getUnAvailableUnits();
 }
+if (isset($_POST['changeStatus'])){
+    changeStatus();
+}
 
+function changeStatus()
+{
+    $unit = $_POST['unit'];
+    $status = $_POST['status'];
+    $statusId;
+    $statusDet;
+    $onCall = false;
+
+    switch ($status)
+    {
+        case "statusMeal":
+            $statusId = '0';
+            $statusDet = '4';
+            break;
+        case "statusOther":
+            $statusId = '0';
+            $statusDet = '2';
+            break;
+        case "statusAvailBusy":
+            $statusId = '1';
+            $statusDet = '1';
+            $onCall = true;
+            break;
+    }
+
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+	$sql = "UPDATE active_users SET status = ?, status_detail = ? WHERE identifier = ?";
+	
+	try {
+        $stmt = mysqli_prepare($link, $sql);
+        mysqli_stmt_bind_param($stmt, "iis", $statusId, $statusDet, $unit);
+        $result = mysqli_stmt_execute($stmt);
+    
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+    }
+
+    if ($onCall)
+    {
+        //Figure out what call they're on
+        $sql = "SELECT call_id FROM calls_users WHERE identifier = \"$unit\"";
+
+        $result=mysqli_query($link, $sql);
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            $callId = $row[0];
+        }
+
+        //Update the call_notes to say they were cleared
+        $narrativeAdd = date("Y-m-d H:i:s").': Unit Cleared: '.$unit.'<br/>';
+
+        $sql = "UPDATE calls SET call_notes = concat(call_notes, ?) WHERE call_id = ?";
+
+        try {
+            $stmt = mysqli_prepare($link, $sql);
+            mysqli_stmt_bind_param($stmt, "si", $narrativeAdd, $callId);
+            $result = mysqli_stmt_execute($stmt);
+		
+            if ($result == FALSE) {
+                die(mysqli_error($link));
+            }
+        }
+        catch (Exception $e)
+        {
+            die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+        }
+
+
+       //Remove them from the call
+       $sql = "DELETE FROM calls_users WHERE identifier = ?";
+	
+        try {
+            $stmt = mysqli_prepare($link, $sql);
+            mysqli_stmt_bind_param($stmt, "s", $unit);
+            $result = mysqli_stmt_execute($stmt);
+
+            if ($result == FALSE) {
+                die(mysqli_error($link));
+            }
+        }
+        catch (Exception $e)
+        {
+            die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+        } 
+    }
+
+	mysqli_close($link);
+    echo "SUCCESS";
+}
 
 function getDispatchers()
 {
@@ -97,6 +200,8 @@ function getAvailableUnits()
     {
         echo "<div class=\"alert alert-danger\"><span>No active units</span></div>";
     }
+    else
+    {
 
     echo '
             <table id="activeUsers" class="table table-striped table-bordered">
@@ -111,23 +216,31 @@ function getAvailableUnits()
         ';
 
 		
-
+        $counter = 0;
         while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
         {
             echo '
             <tr>
                 <td>'.$row[0].'</td>
                 <td>'.$row[1].'</td>
-                <td><a href="#" style="color:red;">Logout</a>&nbsp;&nbsp;&nbsp;<a href="#"">Status</a></td>
+                <td>
+                <div class="dropdown"><button class="btn btn-link dropdown-toggle nopadding" type="button" data-toggle="dropdown">Status <span class="caret"></span></button><ul class="dropdown-menu">
+                    <li><a id="statusMeal'.$counter.'" class="statusMeal '.$row[0].'" onclick="testFunction(this);">10-5/Meal Break</a></li>
+                    <li><a id="statusOther'.$counter.'" class="statusOther '.$row[0].'" onclick="testFunction(this);">10-6/Other</a></li>
+                </ul></div>
+                
+                </td>
                 <input name="uid" type="hidden" value='.$row[0].' />
             </tr>
             ';
+            $counter++;
         }
 
         echo '
             </tbody>
             </table>
         ';
+    }
 	mysqli_close($link);
 }
 
@@ -177,7 +290,12 @@ function getUnAvailableUnits()
                         getIndividualStatus($row[1]);
 
                     echo '</td>
-                    <td><a href="#" style="color:red;">Logout</a>&nbsp;&nbsp;&nbsp;<a href="#"">Status</a></td>
+                    
+                    <td><a href="#" class="nopadding" style="color:red;">Logout</a>&nbsp;&nbsp;&nbsp;
+                    <div class="dropdown"><button class="btn btn-link dropdown-toggle nopadding" style="display: inline-block; vertical-align:top;" type="button" data-toggle="dropdown">Status <span class="caret"></span></button><ul class="dropdown-menu">
+                        <li><a id="statusAvail" class="statusAvailBusy '.$row[0].'" onclick="testFunction(this);">10-8/Available</a></li>
+                    </ul></div>
+                    </td>
                     <input name="uid" type="hidden" value='.$row[0].' />
                 </tr>
                 ';

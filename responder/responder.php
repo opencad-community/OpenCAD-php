@@ -92,7 +92,7 @@
                       <li class="current-page"><a href="javascript:void(0)">Dashboard</a></li>
                     </ul>
                   </li>
-                  <li class="active"><a><i class="fa fa-external-link"></i> Links <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-external-link"></i> Links <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="https://goo.gl/forms/rEJOoJvIlCM5svSo1" target="_blank">Police PAL</a></li>
                       <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdDd1zZGTqUUuGQYuHzmz3TAIWb49y3BDFr8GwRbisLnwiRGg/viewform" target="_blank">Highway PAL</a></li>
@@ -100,7 +100,7 @@
                       <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScXgKDn0deB7zgnmBvDRJ7KllHLiQdmahvgQbphxZuNhU6h2g/viewform" target="_blank">Fire PAL</a></li>
                     </ul>
                   </li>
-                  <li class="active"><a><i class="fa fa-hashtag"></i> Callsign <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-hashtag"></i> Callsign <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a id="changeCallsign" class="btn-link" name="changeCallsign" data-toggle="modal" data-target="#callsign">Change Callsign</a></li>
                     </ul>
