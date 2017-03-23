@@ -793,6 +793,7 @@
                 $('#availableUnits').html(response);
                 setTimeout(getAvailableUnits, 5000);
                 
+                
               },
               error : function(XMLHttpRequest, textStatus, errorThrown)
               {
