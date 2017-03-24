@@ -100,6 +100,7 @@
                       <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdDd1zZGTqUUuGQYuHzmz3TAIWb49y3BDFr8GwRbisLnwiRGg/viewform" target="_blank">Highway PAL</a></li>
                       <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSd26EN4XdgKhbZBEJ16B8cx5LqTNxguh4O3wNggRqqzKOmXzg/viewform" target="_blank">Sheriff PAL</a></li>
                       <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScXgKDn0deB7zgnmBvDRJ7KllHLiQdmahvgQbphxZuNhU6h2g/viewform" target="_blank">Fire PAL</a></li>
+                      <li><a href="https://puu.sh/tRzTt/330b12ab3c.jpg" target="_blank">GTA 5 DOJRP Map</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-hashtag"></i> Callsign <span class="fa fa-chevron-down"></span></a>
@@ -487,59 +488,6 @@
     </script>
 
     <script>
-    function toggleFullScreen() {
-        if ((document.fullScreenElement && document.fullScreenElement !== null) ||    
-        (!document.mozFullScreen && !document.webkitIsFullScreen)) {
-            if (document.documentElement.requestFullScreen) {  
-            document.documentElement.requestFullScreen();  
-            } else if (document.documentElement.mozRequestFullScreen) {  
-            document.documentElement.mozRequestFullScreen();  
-            } else if (document.documentElement.webkitRequestFullScreen) {  
-            document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);  
-            }  
-        } else {  
-            if (document.cancelFullScreen) {  
-            document.cancelFullScreen();  
-            } else if (document.mozCancelFullScreen) {  
-            document.mozCancelFullScreen();  
-            } else if (document.webkitCancelFullScreen) {  
-            document.webkitCancelFullScreen();  
-            }  
-        }  
-    }
-    </script>
-
-    <script>
-    $('#callDetails').on('shown.bs.modal', function(e) {
-      var $modal = $(this), callId = e.relatedTarget.id;
-
-      $.ajax({
-          cache: false,
-          type: 'GET',
-          url: '../actions/api.php',
-          data: {'getCallDetails': 'yes',
-                  'callId' : callId},
-          success: function(result) 
-          {
-            data = JSON.parse(result);
-
-            var mymodal = $('#callDetails');
-            mymodal.find('input[name="call_id_det"]').val(data['call_id']);
-            mymodal.find('input[name="call_type_det"]').val(data['call_type']);
-            mymodal.find('input[name="call_street1_det"]').val(data['call_street1']);
-            mymodal.find('input[name="call_street2_det"]').val(data['call_street2']);
-            mymodal.find('input[name="call_street3_det"]').val(data['call_street3']);
-            mymodal.find('div[name="call_narrative"]').html('');
-            mymodal.find('div[name="call_narrative"]').append(data['narrative']);
-
-          },
-
-          error:function(exception){alert('Exeption:'+exception);}
-        });
-    });
-    </script>
-
-    <script>
     $('#callsign').on('shown.bs.modal', function(e) {
         $('#callsign').find('input[name="callsign"]').val('<?php echo $_SESSION['identifier'];?>');
     });
@@ -675,7 +623,8 @@
 
     
     
-
+    <!-- openCad Script -->
+    <script src="../js/openCad.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="../js/custom.js"></script>
 

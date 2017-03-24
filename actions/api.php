@@ -45,6 +45,98 @@ if (isset($_POST['logoutUser']))
 {
     logoutUser();
 }
+if (isset($_POST['setTone']))
+{
+    setTone();
+}
+if (isset($_GET['checkTones']))
+{
+    checkTones();
+}
+
+//Checks to see if there are any active tones. Certain tones will add a session variable
+function checkTones()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $sql = "SELECT * from tones";
+
+    $result=mysqli_query($link, $sql);
+
+
+    $encode = array();
+    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    {
+        // If the tone is set to active
+        if ($row[2] == "1")
+        {
+            $encode[$row[1]] = "ACTIVE";
+        }
+        else if ($row[2] == "0")
+        {
+            $encode[$row[1]] = "INACTIVE";  
+        }
+    }
+    
+    mysqli_close($link);
+    echo json_encode($encode);
+    
+}
+
+function setTone()
+{
+    $tone = $_POST['tone'];
+    $action = $_POST['action'];
+    
+    $status;
+    switch ($action)
+    {
+        case "start":
+            $status = '1';
+            break;
+        case "stop":
+            $status = '0';
+            break;
+    }
+
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $sql = "UPDATE tones SET active = ? WHERE name = ?";
+
+    try {
+        $stmt = mysqli_prepare($link, $sql);
+        mysqli_stmt_bind_param($stmt, "ss", $status, $tone);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+    } 
+
+    mysqli_close($link);
+    
+    if ($action == "start")
+    {
+        echo "SUCCESS START";
+    }
+    else
+    {
+        echo "SUCCESS STOP";
+    }
+
+}
 
 function logoutUser()
 {
@@ -516,16 +608,13 @@ function getActiveCalls()
                 {
                 echo' 
                 <td>
-                    <button id="'.$row[0].'" class="btn-link" style="color: red;" value="'.$row[0].'" onclick="test('.$row[0].')">Clear</button>
+                    <button id="'.$row[0].'" class="btn-link" style="color: red;" value="'.$row[0].'" onclick="clearCall('.$row[0].')">Clear</button>
                     <button id="'.$row[0].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
                     <input name="uid" name="uid" type="hidden" value="'.$row[0].'"/>
                     <input type="submit" name="assign_unit" class="btn-link" value="Assign"/>
                 </td>';
                 }
                 
-
-
-
             echo'
             </tr>
             ';

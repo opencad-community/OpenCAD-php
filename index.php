@@ -60,6 +60,8 @@
     <!-- JS -->
     <script type="text/javascript" src="./js/bootstrap-multiselect.js"></script> <!-- Script for MultiSelect Plugin -->
     <script type="text/javascript" src="./js/bootstrap.js"></script><!-- Bootstrap Core JS -->
+    <!-- jQuery -->
+    <script src="./vendors/jquery/dist/jquery.min.js"></script>
 
     <title><?php echo $community;?> CAD System</title>
     <link rel="icon" href="./images/favicon.ico" />
