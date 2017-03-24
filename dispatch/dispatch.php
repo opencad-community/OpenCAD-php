@@ -782,7 +782,11 @@
     {
       statusInit = element.className;
       status = statusInit.split(" ")[0];
-      unit = statusInit.split(" ")[1];
+      //If a user has a space in their username, it'll cause some problems. First, we need to split the string by spaces which will generate
+      // an array. Then, we need to remove the first item from the array which is presumably an "action". Then, we join the array again via spaces
+      unit = statusInit.split(" "); 
+      unit.shift();
+      unit = unit.join(' ');
 
       $.ajax({
           type: "POST",
@@ -817,7 +821,11 @@
     <script>
     function logoutUser(element)
     {
-      unit = element.className.split(" ")[2];
+      unit = element.className.split(" ");
+      unit.shift(); //Remove the nopadding class
+      unit.shift(); //Remove the logoutUser class
+      unit = unit.join(' '); //Rejoin the array
+      console.log(unit);
       
       $.ajax({
           type: "POST",

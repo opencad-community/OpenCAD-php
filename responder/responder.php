@@ -450,6 +450,15 @@
         getCalls();
         getStatus();
 
+        // request permission on page load
+          if (!Notification) {
+            alert('Desktop notifications not available in your browser. Try Chromium.'); 
+            return;
+          }
+
+          if (Notification.permission !== "granted")
+            Notification.requestPermission();
+
     });
 	</script>
 
@@ -550,6 +559,7 @@
               },
               success: function(response) 
               {
+                console.log(response);
                 
                 if (response.match("^Duplicate"))
                 {

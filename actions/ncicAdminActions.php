@@ -359,7 +359,8 @@ function getAgencies()
             AND department_name <>"EMS"
             AND department_name <>"Fire"
             AND department_name <>"Civilian"
-            AND department_name <>"Communications (Dispatch)"';
+            AND department_name <>"Communications (Dispatch)"
+            AND department_name <>"Head Administrators"';
 
 	$result=mysqli_query($link, $sql);
 	

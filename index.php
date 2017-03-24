@@ -132,11 +132,12 @@
                                         <label>Division (Can choose more than one)</label>
                                         <select class="form-control" id="division" name="division[]" multiple="multiple" size="6" required>
                                             <option value="communications">Communications (Dispatch)</option>
-                                            <option value="ems">EMS</option>
+                                            <!--<option value="ems">EMS</option>-->
                                             <option value="fire">Fire</option>
                                             <option value="highway" <?php if($testing){echo "selected=\"selected\"";}?>>Highway Patrol</option>
                                             <option value="police">Police</option>
                                             <option value="sheriff">Sheriff</option>
+                                            <option value="civilian">Civilian</option>
                                         </select>
                                     </div>
                                     <!-- ./ form-group -->

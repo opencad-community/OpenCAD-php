@@ -33,6 +33,8 @@ if (isset($_GET['getStatus']))
 function updateCallsign()
 {
     $details = $_POST['details'];
+    $details = str_replace('+', ' ', $details);
+    $details = str_replace('%7C', '|', $details);
     $detailsArr = explode("&", $details);
     //Now, each item in the details array needs to be exploded by = to get the value
     $callsign = explode("=", $detailsArr[0])[1];

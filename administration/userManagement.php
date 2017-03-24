@@ -195,11 +195,13 @@
                           <div class="count"><?php echo getGroupCount("1");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
+                        <?php /*Hide for DOJRP
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                           <span class="count_top"><i class="fa fa-user"></i> EMS</span>
                           <div class="count"><?php echo getGroupCount("2");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
+                        */?>
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                           <span class="count_top"><i class="fa fa-user"></i> Fire</span>
                           <div class="count"><?php echo getGroupCount("3");?></div>
@@ -318,8 +320,9 @@
               <div class="form-group row">
                 <label class="col-md-3 control-label">User Groups</label>
                 <div class="col-md-9">
-                  <input type="text" name="userIdentifier" class="form-control" id="userIdentifier" />
-                  <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                  <select name="userGroups" class="selectpicker" multiple>
+                      <?php getDepartments();?>
+                  </select>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -360,6 +363,12 @@
     <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
     <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <!-- Bootstrap Select -->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     
     <script>
     $(document).ready(function() {
@@ -381,12 +390,21 @@
                   'userId' : userId},
           success: function(result) 
           {
+            console.log(result);
             data = JSON.parse(result);
                   
             $('input[name="userName"]').val(data['name']);
             $('input[name="userEmail"]').val(data['email']);
             $('input[name="userIdentifier"]').val(data['identifier']);
-            //$('input[name="homeNum"]').val(data['home']); document.getElementById("homeNum").disabled = false;
+            
+            for (var i=0; i<data['department'].length; i++)
+            {
+              $('select[name="userGroups"] option[value="'+data['department'][i]+'"]').val(1);
+              //console.log(option);
+            }
+
+            $('select[name="userGroups"]').selectpicker('refresh');
+            
 
           },
 
