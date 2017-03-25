@@ -384,11 +384,14 @@ function clearCall(btn_id) {
 
 // Gets calls
 function getCalls() {
+    var file = $(location).attr('pathname').split("/")[2]
+
     $.ajax({
         type: "GET",
         url: "../actions/api.php",
         data: {
-            getCalls: 'yes'
+            getCalls: 'yes',
+            type: file
         },
         success: function(response) 
         {

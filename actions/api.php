@@ -596,7 +596,7 @@ function getActiveCalls()
 
                 echo '<td>'.$row[3].'/'.$row[4].'/'.$row[5].'</td>';
 
-                if (isset($_GET['responder']))
+                if (isset($_GET['type']) && $_GET['type'] == "responder")
                 {
                     echo' 
                     <td>
