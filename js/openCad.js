@@ -499,7 +499,6 @@ function checkTones()
         {
             var file = $(location).attr('pathname').split("/")[2]
             data = JSON.parse(response);
-            console.log(data);
 
             if (data['recurring'] == "ACTIVE")
             {
@@ -531,7 +530,6 @@ function checkTones()
             if (data['priority'] == "ACTIVE")
             {
                 var tag = $('#priorityToneAudio')[0];
-                console.log(document.cookie.indexOf('priority='));
                 if (document.cookie.indexOf('priority=') == '-1'){
                     document.cookie = "priority=played;";
                     tag.play();

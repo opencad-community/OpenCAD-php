@@ -33,7 +33,7 @@ if (isset($_POST['reactivateUser'])){
     reactivateUser();
 }
 if (isset($_POST['deleteUser'])){ 
-    echo "Delete";
+    delete_user();
 }
 if (isset($_POST['getUserDetails'])){
     getUserDetails();
@@ -43,6 +43,39 @@ if (isset($_POST['delete_callhistory'])){
 }
 
 /* FUNCTIONS */
+
+function delete_user()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $uid = $_POST['uid'];
+    echo $uid;
+
+    $query = "DELETE FROM users WHERE id = ?";
+
+    try {
+        $stmt = mysqli_prepare($link, $query);
+        mysqli_stmt_bind_param($stmt, "i", $uid);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage());
+    }
+
+    session_start();
+    $_SESSION['userMessage'] = '<div class="alert alert-success"><span>Successfully removed user from database</span></div>';
+    header("Location: ../administration/userManagement.php#user_panel");
+}
+
 /* Gets the user count. Returns value */
 function getUserCount()
 {

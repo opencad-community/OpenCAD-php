@@ -438,6 +438,9 @@
     <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
     <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
 
+    <!-- AUDIO TONES -->
+    <audio id="recurringToneAudio" src="../sounds/recurringTone.mp3" preload="auto"></audio>
+    <audio id="priorityToneAudio" src="../sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
     <audio id="newCallAudio" src="../sounds/New_Dispatch.mp3" preload="auto"></audio>
 
     <script>
@@ -450,18 +453,26 @@
 
         getCalls();
         getStatus();
-
-        // request permission on page load
-          if (!Notification) {
-            alert('Desktop notifications not available in your browser. Try Chromium.'); 
-            return;
-          }
-
-          if (Notification.permission !== "granted")
-            Notification.requestPermission();
+        checkTones();
 
     });
 	</script>
+
+  <script>
+  // PNotify Stuff
+  priorityNotification = new PNotify({
+      title: 'Priority Traffic',
+      text: 'Priority Traffic Only',
+      type: 'error',
+      hide: false,
+      auto_display: false,
+      styling: 'bootstrap3',
+      buttons: {
+          closer: false,
+          sticker: false
+      }
+    });
+    </script>
 
     <script>
     function getCalls() {
