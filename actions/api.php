@@ -67,7 +67,6 @@ function checkTones()
 
     $result=mysqli_query($link, $sql);
 
-
     $encode = array();
     while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
     {

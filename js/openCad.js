@@ -446,8 +446,6 @@ function priorityTone(type)
 
  function sendTone(name, action)
  {
-    console.log(name + ' ' + action);
-
     $.ajax({
         type: "POST",
         url: "../actions/api.php",
@@ -490,7 +488,7 @@ function priorityTone(type)
 
 // Function to check and see if there are any active tones 
 function checkTones()
-{
+{            
     $.ajax({
         type: "GET",
         url: "../actions/api.php",
@@ -499,6 +497,7 @@ function checkTones()
         },
         success: function(response) 
         {
+            var file = $(location).attr('pathname').split("/")[2]
             data = JSON.parse(response);
             console.log(data);
 
@@ -507,21 +506,49 @@ function checkTones()
                 var tag = $('#recurringToneAudio')[0];
                 tag.play();
 
-                PNotify.removeAll();
+                priorityNotification.remove();
+                priorityNotification.open();
 
-                new PNotify({
-                title: 'Priority Traffic',
-                text: 'Priority Traffic Only',
-                type: 'error',
-                hide: false,
-                styling: 'bootstrap3',
-                buttons: {
-                    closer: false,
-                    sticker: false
+                if (file == "dispatch")
+                {
+                    $('#recurringTone').val('1');
+                    $('#recurringTone').text("10-3 Tone - ACTIVE"); 
                 }
-                });
+                
+            }
+            else if (data['recurring'] == "INACTIVE")
+            {
+                priorityNotification.remove();
+                
+                if (file == "dispatch")
+                {
+                    $('#recurringTone').val('0');
+                    $('#recurringTone').text("10-3 Tone"); 
+                } 
+            }
 
 
+            if (data['priority'] == "ACTIVE")
+            {
+                var tag = $('#priorityToneAudio')[0];
+                console.log(document.cookie.indexOf('priority='));
+                if (document.cookie.indexOf('priority=') == '-1'){
+                    document.cookie = "priority=played;";
+                    tag.play();
+
+                    $('#priorityTone').val('1');
+                    $('#priorityTone').text("Priority Tone - ACTIVE"); 
+                } else {
+                    //Do nothing
+                }
+            }
+            else if (data['priority'] == "INACTIVE")
+            {
+                // Make sure the played cookie is unset
+                document.cookie = "priority=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+                $('#priorityTone').val('0');
+                $('#priorityTone').text("Priority Tone");
+                 
             }
 
             setTimeout(checkTones, 7000);        

@@ -651,6 +651,7 @@
 
     <!-- AUDIO TONES -->
     <audio id="recurringToneAudio" src="../sounds/recurringTone.mp3" preload="auto"></audio>
+    <audio id="priorityToneAudio" src="../sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
 
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
@@ -686,10 +687,6 @@
     <script src="../vendors/pnotify/dist/pnotify.js"></script>
     <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
     <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
-    
-    <script>
-    
-    </script>
 
     <script>
     $(document).ready(function() {
@@ -704,6 +701,22 @@
      
     });
 	  </script>
+    
+    <script>
+    // PNotify Stuff
+    priorityNotification = new PNotify({
+        title: 'Priority Traffic',
+        text: 'Priority Traffic Only',
+        type: 'error',
+        hide: false,
+        auto_display: false,
+        styling: 'bootstrap3',
+        buttons: {
+            closer: false,
+            sticker: false
+        }
+    });
+    </script>
 
     <script>
     function testFunction(element)
