@@ -248,7 +248,7 @@
                       <!-- ./ col-sm-9 -->
                     </div>
                     <!-- ./ form-group -->
-                    <?php /*
+                    
                     <div class="form-group row">
                       <label class="col-md-2 control-label">Address</label>
                       <div class="col-md-10">
@@ -258,23 +258,24 @@
                       <!-- ./ col-sm-9 -->
                     </div>
                     <!-- ./ form-group -->
+                    
                     <div class="form-group row">
                       <label class="col-md-2 control-label">Sex</label>
                       <div class="col-md-10">
                         <select name="civSexReq" class="form-control selectpicker" id="civSexReq" title="Select a sex" required>
-                          <option val="male" selected>Male</option>
+                          <option val="male">Male</option>
                           <option val="female">Female</option>
                         </select>
-                          
                       </div>
                       <!-- ./ col-sm-9 -->
                     </div>
                     <!-- ./ form-group -->
+                    
                     <div class="form-group row">
                       <label class="col-md-2 control-label">Race</label>
                       <div class="col-md-10">
                         <select name="civRaceReq" class="form-control selectpicker" id="civRaceReq" title="Select a race or ethnicity" required>
-                          <option val="indian" selected>American Indian or Alaskan Native</option>
+                          <option val="indian">American Indian or Alaskan Native</option>
                           <option val="asian">Asian</option>
                           <option val="black">Black or African American</option>
                           <option val="hispanic">Hispanic</option>
@@ -285,11 +286,12 @@
                       <!-- ./ col-sm-9 -->
                     </div>
                     <!-- ./ form-group -->
+                    
                     <div class="form-group row">
                       <label class="col-md-2 control-label">Hair Color</label>
                       <div class="col-md-10">
                         <select name="civHairReq" class="form-control selectpicker" id="civHairReq" title="Select a hair color" required>
-                          <option val="bld" selected>Bald</option>
+                          <option val="bld">Bald</option>
                           <option val="blk">Black</option>
                           <option val="bln">Blond or Strawberry</option>
                           <option val="blu">Blue</option>
@@ -307,11 +309,12 @@
                       <!-- ./ col-sm-9 -->
                     </div>
                     <!-- ./ form-group -->
+
                     <div class="form-group row">
                       <label class="col-md-2 control-label">Build</label>
                       <div class="col-md-10">
                         <select name="civBuildReq" class="form-control selectpicker" id="civBuildReq" title="Select a build" required>
-                          <option val="Average" selected>Average</option>
+                          <option val="Average">Average</option>
                           <option val="Fit">Fit</option>
                           <option val="Muscular">Muscular</option>
                           <option val="Overweight">Overweight</option>
@@ -322,19 +325,21 @@
                       <!-- ./ col-sm-9 -->
                     </div>
                     <!-- ./ form-group -->
+
                     <div class="form-group row">
                       <label class="col-md-2 control-label">Biography</label>
                       <div class="col-md-10">
-                        <textarea name="civBioReq" class="form-control" id="civBioReq" rows='5' style="resize:none;" placeholder="Describe the character's biography">T</textarea>
+                        <textarea name="civBioReq" class="form-control" id="civBioReq" rows='5' style="resize:none;" placeholder="Describe the character's biography"></textarea>
                       </div>
                       <!-- ./ col-sm-9 -->
                     </div>
                     <!-- ./ form-group -->
+
                     <h4>Vehicle Details</h4>
                     <div class="form-group row">
                       <label class="col-md-2 control-label">License Plate</label>
                       <div class="col-md-10">
-                        <input type="text" name="civPlateReq" class="form-control" id="civPlateReq" style="text-transform:uppercase"/>
+                        <input type="text" name="civPlateReq" class="form-control" id="civPlateReq" style="text-transform:uppercase" maxlength="7"/>
                         <span class="fa fa-car form-control-feedback right" aria-hidden="true"></span>
                       </div>
                       <!-- ./ col-sm-9 -->
@@ -359,14 +364,47 @@
                     </div>
                     <!-- ./ form-group -->
                     <div class="form-group row">
+                    <!-- color codes from: http://publicsafety.ohio.gov/links/bmv5607.pdf -->
                       <label class="col-md-2 control-label">Vehicle Color</label>
                       <div class="col-md-10">
-                        <input type="text" name="civColorReq" class="form-control" id="civColorReq" style="text-transform:uppercase"/>
-                        <span class="fa fa-car form-control-feedback right" aria-hidden="true"></span>
+                        <select name="civVehColReq" class="form-control selectpicker" data-live-search="true" data-size="8" id="civVehColReq" title="Select a vehicle color" required>
+                          <option val="lbl">Light Blue</option>
+                          <option val="trq">Turqoise</option>
+                          <option val="dbl">Dark Blue</option>
+                          <option val="blu">Blue</option>
+                          <option val="ame">Amethyst</option>
+                          <option val="ple">Purple</option>
+                          <option val="lav">Lavender</option>
+                          <option val="mve">Mauve</option>
+                          <option val="pnk">Pink</option>
+                          <option val="red">Red</option>
+                          <option val="mar">Maroon</option>
+                          <option val="ong">Orange</option>
+                          <option val="cpr">Copper</option>
+                          <option val="brz">Bronze</option>
+                          <option val="tan">Tan</option>
+                          <option val="gld">Gold</option>
+                          <option val="yel">Yellow</option>
+                          <option val="lgr">Light Green</option>
+                          <option val="grn">Green</option>
+                          <option val="dgr">Dark Green</option>
+                          <option val="tea">Teal</option>
+                          <option val="bro">Brown</option>
+                          <option val="crm">Cream</option>
+                          <option val="bge">Beige</option>
+                          <option val="tpe">Taupe</option>
+                          <option val="sil">Silver</option>
+                          <option val="com">Chrome</option>
+                          <option val="gry">Gray</option>
+                          <option val="blk">Black</option>
+                          <option val="whi">White</option>
+                          <option val="cam">Camouflage</option>
+                          <option val="mul">Multi-Colored</option>
+                        </select>
                       </div>
                       <!-- ./ col-sm-9 -->
                     </div>
-                    <!-- ./ form-group --> */?>
+                    <!-- ./ form-group -->
                   </div>
                   <!-- ./ x_content -->
                   <div class="x_footer">

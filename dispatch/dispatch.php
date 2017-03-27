@@ -581,7 +581,7 @@
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Narrative</label>
                 <div class="col-lg-10">
-                  <textarea name="narrative" id="narrative" class="form-control" rows="5"></textarea>
+                  <textarea name="narrative" id="narrative" class="form-control" style="text-transform:uppercase" rows="5"></textarea>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>

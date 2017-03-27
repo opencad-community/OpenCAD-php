@@ -18,40 +18,7 @@ if (isset($_POST['requestIdentity']))
 function requestIdentity()
 {
     var_dump($_POST);
-    //session_start();
 
-    //Validation//
-    $name = $_POST['civNameReq'];
-    $nameArr = explode(" ", $name);
-    
-    $length = sizeof($nameArr);
-    if ($length < 2)
-    {
-        $_SESSION['error'] = '<div class="alert alert-danger"><span>You must have both a first and last name</span></div>';
-        header("Location: ../civilian/civilian.php");
-        die("Error");
-    }
-    if ($length > 2)
-    {
-        $_SESSION['error'] = '<div class="alert alert-danger"><span>Too many words in your name. If you need to, hyphenate your last name</span></div>';
-        header("Location: ../civilian/civilian.php");
-        die("Error");
-    }
-    
-    $dob = $_POST['dob'];
-    if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$dob))
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-
-
-    
-    //$fname = explode(" ", $name)[0];
-    //$lname = explode(" ", $name)[1];
 
     /*
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);

@@ -44,6 +44,58 @@ if (isset($_POST['delete_callhistory'])){
 
 /* FUNCTIONS */
 
+function getRanks()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) { 
+        die('Could not connect: ' .mysql_error());
+    }
+    
+    $query = "SELECT * FROM ranks";
+
+    $result=mysqli_query($link, $query);
+
+    echo '
+        <table id="ranks" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+            <th>Rank ID</th>
+            <th>Rank Name</th>
+            <th>User Can Choose <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="This indicates whether or not regular users may select this rank for themselves"></i></th>
+            </tr>
+        </thead>
+        <tbody>           
+    ';
+
+    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    {
+        echo '
+        <tr>
+            <td>'.$row[0].'</td>
+            <td>'.$row[1].'</td>';
+
+            switch ($row[2])
+            {
+                case "1":
+                    echo "<td>True</td>";
+                    break;
+                case "0":
+                    echo "<td>False</td>";
+                    break;
+            }
+
+        echo '    
+        </tr>
+        ';
+    }
+
+    echo '
+        </tbody>
+        </table>
+    ';
+}
+
 function delete_user()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
