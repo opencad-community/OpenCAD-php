@@ -9,6 +9,70 @@ if (isset($_GET['getCivilianDetails']))
     getCivilianDetails();
 }
 
+if (isset($_POST['requestIdentity']))
+{
+    requestIdentity();
+}
+
+//Function to request an identity
+function requestIdentity()
+{
+    var_dump($_POST);
+    //session_start();
+
+    //Validation//
+    $name = $_POST['civNameReq'];
+    $nameArr = explode(" ", $name);
+    
+    $length = sizeof($nameArr);
+    if ($length < 2)
+    {
+        $_SESSION['error'] = '<div class="alert alert-danger"><span>You must have both a first and last name</span></div>';
+        header("Location: ../civilian/civilian.php");
+        die("Error");
+    }
+    if ($length > 2)
+    {
+        $_SESSION['error'] = '<div class="alert alert-danger"><span>Too many words in your name. If you need to, hyphenate your last name</span></div>';
+        header("Location: ../civilian/civilian.php");
+        die("Error");
+    }
+    
+    $dob = $_POST['dob'];
+    if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$dob))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+
+
+    
+    //$fname = explode(" ", $name)[0];
+    //$lname = explode(" ", $name)[1];
+
+    /*
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	
+    if (!$link) { 
+        die('Could not connect: ' .mysql_error());
+    }
+    
+    $query = 'SELECT civilian_names.*, ncic_names.first_name, ncic_names.last_name, ncic_plates.veh_plate, ncic_plates.veh_make, ncic_plates.veh_model, ncic_plates.veh_color FROM `ncic_names` LEFT JOIN `civilian_names` ON `civilian_names`.`names_id` = `ncic_names`.`id` LEFT JOIN `ncic_plates` ON `ncic_plates`.`name_id` = `ncic_names`.`id` WHERE civilian_names.user_id = "'.$uid.'"';
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>You currently have no identities</span></div>";
+    }
+*/
+}
+
 function getIdentities()
 {
     //session_start();

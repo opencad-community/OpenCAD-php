@@ -609,8 +609,8 @@ function getActiveCalls()
                 <td>
                     <button id="'.$row[0].'" class="btn-link" style="color: red;" value="'.$row[0].'" onclick="clearCall('.$row[0].')">Clear</button>
                     <button id="'.$row[0].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
+                    <input id="'.$row[0].'" type="submit" name="assign_unit" data-toggle="modal" data-target="#assign" class="btn-link '.$row[0].'" value="Assign"/>
                     <input name="uid" name="uid" type="hidden" value="'.$row[0].'"/>
-                    <input type="submit" name="assign_unit" class="btn-link" value="Assign"/>
                 </td>';
                 }
                 

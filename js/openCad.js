@@ -246,6 +246,59 @@ $(function() {
     });
 });
 
+// Handles assigning a unit to a call
+$(function() {
+    $('.assignUnitForm').submit(function(e) {
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+
+        $.ajax({
+            type: "POST",
+            url: "../actions/dispatchActions.php",
+            data: {
+                assignUnit: 'yes',
+                details: $("#"+this.id).serialize(),
+            },
+            success: function(response) 
+            {
+            //console.log(response);
+            if (response == "SUCCESS")
+            {
+                $('#closeAssign').trigger('click');
+
+                new PNotify({
+                    title: 'Success',
+                    text: 'Successfully assigned unit to call',
+                    type: 'success',
+                    styling: 'bootstrap3'
+                }); 
+
+                getCalls();
+            }
+
+            if (response == "ERROR")
+            {
+                $('#closeAssign').trigger('click');
+
+                new PNotify({
+                    title: 'Error',
+                    text: 'You must select a unit to assign',
+                    type: 'error',
+                    styling: 'bootstrap3'
+                }); 
+
+                getCalls();
+            }
+            
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown)
+            {
+                console.log("Error");
+            }
+            
+        }); 
+    });
+});
+
 // Handles the unavailable unit poller for the dispatch page
 function getUnAvailableUnits() {
 $.ajax({
@@ -309,6 +362,47 @@ $('#newCall').on('show.bs.modal', function(e) {
         error:function(exception){alert('Exeption:'+exception);}
     });
 });
+
+//Disables enter key in the call narrative textarea
+$('#narrative').keypress(function(event) {
+    if (event.keyCode == 13) {
+        event.preventDefault();
+    }
+})
+
+// Handles the ajax query to auto populate the assign modal with available units
+$('#assign').on('show.bs.modal', function(e) {
+    var $modal = $(this), callId = e.relatedTarget.id;
+    
+    callIdInput = $modal.find('input[name="callId"]');
+    callIdInput.val(callId);
+
+    $.ajax({
+        cache: false,
+        type: 'GET',
+        url: '../actions/api.php',
+        data: {'getActiveUnits': 'yes'},
+        success: function(result) 
+        {
+        data = JSON.parse(result);
+
+        var mymodal = $('#assign');      
+        var select = mymodal.find('#unit');
+        select.empty();
+
+        $.each(data, function(key, value) {
+            select.append($("<option/>")
+                        .val(key)
+                        .text(value));
+        });
+
+        select.selectpicker('refresh');
+        },
+
+        error:function(exception){alert('Exeption:'+exception);}
+    });
+});
+
 
 // Handles the call details panel for the dispatch and responder pages
 $('#callDetails').on('show.bs.modal', function(e) {

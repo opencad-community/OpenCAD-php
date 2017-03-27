@@ -490,6 +490,44 @@
     </div>
     <!-- ./ modal fade bs-example-modal-lg -->
 
+    <!-- Assign User to Call Modal -->
+    <div class="modal fade" id="assign" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Assign a User</h4>
+          </div>
+          <!-- ./ modal-header -->
+          <div class="modal-body">
+            <form class="assignUnitForm" id="assignUnitForm">
+              <div class="form-group row">
+              <label class="col-lg-2 control-label">Assign Unit to Call</label>
+              <div class="col-lg-10">
+                <select class="form-control selectpicker unit" data-live-search="true" name="unit" id="unit" title="Select a Unit">
+                  <option></option>
+                </select>
+                <input type="hidden" value="" name="callId" />
+              </div>
+              <!-- ./ col-sm-9 -->
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+            <input type="submit" name="assign_unit" class="btn btn-primary" value="Send"/>
+            <button id="closeAssign" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+          <!-- ./ modal-footer -->
+          </form>
+          </div>
+          <!-- ./ modal-body -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
+
     <!-- New Call Modal -->
     <div class="modal fade" id="newCall" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg">
@@ -543,7 +581,7 @@
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Narrative</label>
                 <div class="col-lg-10">
-                  <textarea name="narrative" class="form-control" rows="5"></textarea>
+                  <textarea name="narrative" id="narrative" class="form-control" rows="5"></textarea>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -557,6 +595,8 @@
           </div>
           <!-- ./ modal-footer -->
           </form>
+          </div>
+          <!-- ./ modal-body -->
         </div>
         <!-- ./ modal-content -->
       </div>
@@ -650,7 +690,7 @@
     
 
     <!-- AUDIO TONES -->
-    <audio id="recurringToneAudio" src="../sounds/recurringTone.mp3" preload="auto"></audio>
+    <audio id="recurringToneAudio" src="../sounds/priority.mp3" preload="auto"></audio>
     <audio id="priorityToneAudio" src="../sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
 
     <!-- jQuery -->

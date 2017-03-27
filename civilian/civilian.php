@@ -18,6 +18,41 @@
 
     include("../actions/civActions.php");
 
+    $errors = array();
+    // define variables and set to empty values
+    $civNameReq = "";
+
+    error_reporting(E_ALL);
+    ini_set("display_errors", 1);
+
+    $civName = $civDob = "";
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      
+      $civName = $_POST["civNameReq"];
+      
+      $nameArr = explode(" ", $civName);    
+      $length = sizeof($nameArr);
+      if ($length < 2)
+      {
+          array_push($errors,'<div class="alert alert-danger"><span>You must have both a first and last name</span></div>');
+          //return;
+      }
+      if ($length > 2)
+      {
+          array_push($errors,'<div class="alert alert-danger"><span>Too many words in your name. If you need to, hyphenate your last name</span></div>');
+          //return;
+      }
+
+      $civDob = $_POST['civDobReq'];
+      if (!preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$civDob))
+      {
+          array_push($errors,'<div class="alert alert-danger"><span>DOB must be in YYYY-MM-DD format</span></div>');
+      }
+
+    }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -83,6 +118,7 @@
                   <li class="active"><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: block;">
                       <li class="current-page"><a href="javascript:void(0)">Civilian Dashboard</a></li>
+                      <li><a href="../actions/direction.php">CAD Direction Page</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -172,7 +208,7 @@
             <!-- ./ row -->
 
             <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Request an Identity</h2>
@@ -185,10 +221,158 @@
                     <div class="clearfix"></div>
                   </div>
                   <!-- ./ x_title -->
+                  <form name="civRequestForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                   <div class="x_content">
-
+                  <?php 
+                    if(count($errors) > 0){
+                        foreach($errors as $e){
+                            echo $e;
+                        }
+                    }?>
+                    <div class="form-group row">
+                      <label class="col-md-2 control-label">Name</label>
+                      <div class="col-md-10">
+                        <input name="civNameReq" class="form-control" id="civNameReq" value="<?php echo $civName;?>" required/>
+                        <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                      </div>
+                      <!-- ./ col-sm-9 -->
+                    </div>
+                    <!-- ./ form-group -->
+                    
+                    <div class="form-group row">
+                      <label class="col-md-2 control-label">DOB</label>
+                      <div class="col-md-10">
+                        <input type="text" name="civDobReq" class="form-control" id="civDobReq" placeholder="YYYY-MM-DD" maxlength="10" value="<?php echo $civDob;?>" required/>
+                        <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
+                      </div>
+                      <!-- ./ col-sm-9 -->
+                    </div>
+                    <!-- ./ form-group -->
+                    <?php /*
+                    <div class="form-group row">
+                      <label class="col-md-2 control-label">Address</label>
+                      <div class="col-md-10">
+                        <input type="text" name="civAddressReq" class="form-control" id="civAddressReq" required/>
+                        <span class="fa fa-location-arrow form-control-feedback right" aria-hidden="true"></span>
+                      </div>
+                      <!-- ./ col-sm-9 -->
+                    </div>
+                    <!-- ./ form-group -->
+                    <div class="form-group row">
+                      <label class="col-md-2 control-label">Sex</label>
+                      <div class="col-md-10">
+                        <select name="civSexReq" class="form-control selectpicker" id="civSexReq" title="Select a sex" required>
+                          <option val="male" selected>Male</option>
+                          <option val="female">Female</option>
+                        </select>
+                          
+                      </div>
+                      <!-- ./ col-sm-9 -->
+                    </div>
+                    <!-- ./ form-group -->
+                    <div class="form-group row">
+                      <label class="col-md-2 control-label">Race</label>
+                      <div class="col-md-10">
+                        <select name="civRaceReq" class="form-control selectpicker" id="civRaceReq" title="Select a race or ethnicity" required>
+                          <option val="indian" selected>American Indian or Alaskan Native</option>
+                          <option val="asian">Asian</option>
+                          <option val="black">Black or African American</option>
+                          <option val="hispanic">Hispanic</option>
+                          <option val="hawaiian">Native Hawaiian or Other Pacific Islander</option>
+                          <option val="white">White</option>
+                        </select>
+                      </div>
+                      <!-- ./ col-sm-9 -->
+                    </div>
+                    <!-- ./ form-group -->
+                    <div class="form-group row">
+                      <label class="col-md-2 control-label">Hair Color</label>
+                      <div class="col-md-10">
+                        <select name="civHairReq" class="form-control selectpicker" id="civHairReq" title="Select a hair color" required>
+                          <option val="bld" selected>Bald</option>
+                          <option val="blk">Black</option>
+                          <option val="bln">Blond or Strawberry</option>
+                          <option val="blu">Blue</option>
+                          <option val="bro">Brown</option>
+                          <option val="gry">Gray or Partially Gray</option>
+                          <option val="grn">Green</option>
+                          <option val="ong">Orange</option>
+                          <option val="pnk">Pink</option>
+                          <option val="ple">Purple</option>
+                          <option val="red">Red or Auburn</option>
+                          <option val="sdy">Sandy</option>
+                          <option val="whi">White</option>
+                        </select>
+                      </div>
+                      <!-- ./ col-sm-9 -->
+                    </div>
+                    <!-- ./ form-group -->
+                    <div class="form-group row">
+                      <label class="col-md-2 control-label">Build</label>
+                      <div class="col-md-10">
+                        <select name="civBuildReq" class="form-control selectpicker" id="civBuildReq" title="Select a build" required>
+                          <option val="Average" selected>Average</option>
+                          <option val="Fit">Fit</option>
+                          <option val="Muscular">Muscular</option>
+                          <option val="Overweight">Overweight</option>
+                          <option val="Skinny">Skinny</option>
+                          <option val="Thin">Thin</option>
+                        </select>
+                      </div>
+                      <!-- ./ col-sm-9 -->
+                    </div>
+                    <!-- ./ form-group -->
+                    <div class="form-group row">
+                      <label class="col-md-2 control-label">Biography</label>
+                      <div class="col-md-10">
+                        <textarea name="civBioReq" class="form-control" id="civBioReq" rows='5' style="resize:none;" placeholder="Describe the character's biography">T</textarea>
+                      </div>
+                      <!-- ./ col-sm-9 -->
+                    </div>
+                    <!-- ./ form-group -->
+                    <h4>Vehicle Details</h4>
+                    <div class="form-group row">
+                      <label class="col-md-2 control-label">License Plate</label>
+                      <div class="col-md-10">
+                        <input type="text" name="civPlateReq" class="form-control" id="civPlateReq" style="text-transform:uppercase"/>
+                        <span class="fa fa-car form-control-feedback right" aria-hidden="true"></span>
+                      </div>
+                      <!-- ./ col-sm-9 -->
+                    </div>
+                    <!-- ./ form-group -->
+                    <div class="form-group row">
+                      <label class="col-md-2 control-label">Vehicle Make</label>
+                      <div class="col-md-10">
+                        <input type="text" name="civMakeReq" class="form-control" id="civMakeReq" style="text-transform:uppercase"/>
+                        <span class="fa fa-car form-control-feedback right" aria-hidden="true"></span>
+                      </div>
+                      <!-- ./ col-sm-9 -->
+                    </div>
+                    <!-- ./ form-group -->
+                    <div class="form-group row">
+                      <label class="col-md-2 control-label">Vehicle Model</label>
+                      <div class="col-md-10">
+                        <input type="text" name="civModelReq" class="form-control" id="civModelReq" style="text-transform:uppercase"/>
+                        <span class="fa fa-car form-control-feedback right" aria-hidden="true"></span>
+                      </div>
+                      <!-- ./ col-sm-9 -->
+                    </div>
+                    <!-- ./ form-group -->
+                    <div class="form-group row">
+                      <label class="col-md-2 control-label">Vehicle Color</label>
+                      <div class="col-md-10">
+                        <input type="text" name="civColorReq" class="form-control" id="civColorReq" style="text-transform:uppercase"/>
+                        <span class="fa fa-car form-control-feedback right" aria-hidden="true"></span>
+                      </div>
+                      <!-- ./ col-sm-9 -->
+                    </div>
+                    <!-- ./ form-group --> */?>
                   </div>
                   <!-- ./ x_content -->
+                  <div class="x_footer">
+                    <input type="submit" class="btn btn-primary" name="request" value="Submit Identity Request"/>
+                  </div>
+                  </form>
                 </div>
                 <!-- ./ x_panel -->
               </div>
@@ -368,6 +552,15 @@
     <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
     <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
 
+    <!-- Bootstrap Select -->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- openCad Scripts -->
+    <script src="../js/openCad.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="../js/custom.js"></script>
 

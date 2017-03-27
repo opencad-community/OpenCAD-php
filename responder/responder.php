@@ -439,7 +439,7 @@
     <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
 
     <!-- AUDIO TONES -->
-    <audio id="recurringToneAudio" src="../sounds/recurringTone.mp3" preload="auto"></audio>
+    <audio id="recurringToneAudio" src="../sounds/priority.mp3" preload="auto"></audio>
     <audio id="priorityToneAudio" src="../sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
     <audio id="newCallAudio" src="../sounds/New_Dispatch.mp3" preload="auto"></audio>
 
