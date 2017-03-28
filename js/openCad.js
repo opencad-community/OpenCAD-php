@@ -310,9 +310,10 @@ $.ajax({
         success: function(response) 
         {
         $('#dispatchers').html(response);
-        $('#dispatchers').DataTable({
-            searching: false,
-            scrollY: "200px" });
+        $('#dispatchersTable').DataTable({
+            paging: false,
+            searching: false
+        });
 
         setTimeout(getActiveDispatchers, 5000);
         

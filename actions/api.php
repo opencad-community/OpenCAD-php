@@ -286,7 +286,7 @@ function getDispatchers()
 	$result = mysqli_query($link, $sql);
 
     echo '
-            <table id="dispatchers" class="table table-striped table-bordered">
+            <table id="dispatchersTable" class="table table-striped table-bordered">
             <thead>
                 <tr>
                 <th>Identifier</th>
