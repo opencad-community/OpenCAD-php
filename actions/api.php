@@ -53,6 +53,10 @@ if (isset($_GET['checkTones']))
 {
     checkTones();
 }
+if (isset($_GET['getDispatchers']))
+{
+    getDispatchers();
+}
 
 //Checks to see if there are any active tones. Certain tones will add a session variable
 function checkTones()
@@ -286,7 +290,6 @@ function getDispatchers()
             <thead>
                 <tr>
                 <th>Identifier</th>
-                <th>Callsign</th>
                 </tr>
             </thead>
             <tbody>
@@ -299,7 +302,6 @@ function getDispatchers()
             echo '
             <tr>
                 <td>'.$row[0].'</td>
-                <td>'.$row[1].'</td>
             </tr>
             ';
         }

@@ -299,6 +299,32 @@ $(function() {
     });
 });
 
+// Handles the active dispatchers for the dispatch page
+function getActiveDispatchers() {
+$.ajax({
+        type: "GET",
+        url: "../actions/api.php",
+        data: {
+            getDispatchers: 'yes'
+        },
+        success: function(response) 
+        {
+        $('#dispatchers').html(response);
+        $('#dispatchers').DataTable({
+            searching: false,
+            scrollY: "200px" });
+
+        setTimeout(getActiveDispatchers, 5000);
+        
+        },
+        error : function(XMLHttpRequest, textStatus, errorThrown)
+        {
+        console.log("Error");
+        }
+        
+    }); 
+}
+
 // Handles the unavailable unit poller for the dispatch page
 function getUnAvailableUnits() {
 $.ajax({

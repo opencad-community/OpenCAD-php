@@ -250,10 +250,10 @@
             </div>
             <!-- ./ row -->
 
-            <?php /*Removing for now
+            
             <div class="clearfix"></div>
             <div class="row">
-              <div class="col-md-4 col-sm-4 col-xs-4">
+              <div class="col-md-2 col-sm-2 col-xs-2">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Active Dispatchers</h2>
@@ -264,18 +264,18 @@
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
-                      <?php getDispatchers();?>
+                      <div id="dispatchers">
+                      
+                      </div>
                   </div>
                   <!-- ./ x_content -->
                 </div>
                 <!-- ./ x_panel -->
               </div>
               <!-- ./ col-md-2 col-sm-2 col-xs-2 -->
-              */?>
-
-            <div class="clearfix"></div>
-            <div class="row">
-              <div class="col-md-6 col-sm-6 col-xs-6">
+              
+            
+              <div class="col-md-5 col-sm-5 col-xs-5">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Available Units</h2>
@@ -294,9 +294,9 @@
                 </div>
                 <!-- ./ x_panel -->
               </div>
-              <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
+              <!-- ./ col-md-5 col-sm-5 col-xs-5 -->
 
-                <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="col-md-5 col-sm-5 col-xs-5">
                     <div class="x_panel">
                     <div class="x_title">
                         <h2>Unavailable Units</h2>
@@ -315,7 +315,7 @@
                     </div>
                     <!-- ./ x_panel -->
                 </div>
-                <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
+                <!-- ./ col-md-5 col-sm-5 col-xs-5 -->
             </div>
             <!-- ./ row -->        
 
@@ -737,6 +737,7 @@
         getCalls();
         getAvailableUnits();
         getUnAvailableUnits();
+        getActiveDispatchers();
         checkTones();
      
     });
