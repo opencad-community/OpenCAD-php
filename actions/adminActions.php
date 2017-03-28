@@ -476,7 +476,7 @@ function getUsers()
             <td>
                 <form action="../actions/adminActions.php" method="post">
                 <button name="editUser" type="button" data-toggle="modal" id="'.$row[0].'" data-target="#editUserModal" class="btn btn-xs btn-link">Edit</button>
-                <input name="deleteUser" type="submit" class="btn btn-xs btn-link" value="Delete" />
+                <input name="deleteUser" type="submit" class="btn btn-xs btn-link" onclick="deleteUser('.$row[0].')" value="Delete" />
                 ';
             if ($row[4] == '2')
             {

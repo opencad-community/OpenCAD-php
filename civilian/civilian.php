@@ -408,7 +408,7 @@
                   </div>
                   <!-- ./ x_content -->
                   <div class="x_footer">
-                    <input type="submit" class="btn btn-primary" name="request" value="Submit Identity Request"/>
+                    <input type="submit" class="btn btn-primary" name="request" value="Submit Identity Request" disabled/>
                   </div>
                   </form>
                 </div>
