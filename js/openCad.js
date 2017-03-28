@@ -581,14 +581,14 @@ function priorityTone(type)
         if (value == "0")
         {
             priorityButton.val("1");
-            priorityButton.text("Priority Tone - ACTIVE");
+            priorityButton.text("10-3 Tone - ACTIVE");
             sendTone("priority", "start");
         }
         else if (value == "1")
         {
             sendTone("priority", "stop");
             priorityButton.val("0");
-            priorityButton.text("Priority Tone");
+            priorityButton.text("10-3 Tone");
         }
     }
     else if (type == "recurring")
@@ -599,14 +599,14 @@ function priorityTone(type)
         if (value == "0")
         {
             recurringButton.val("1");
-            recurringButton.text("10-3 Tone - ACTIVE");
+            recurringButton.text("Priority Tone - ACTIVE");
             sendTone("recurring", "start");
         }
         else if (value == "1")
         {
             sendTone("recurring", "stop");
             recurringButton.val("0");
-            recurringButton.text("10-3 Tone");
+            recurringButton.text("Priority Tone");
         }
     }
 
@@ -677,7 +677,7 @@ function checkTones()
                 if (file == "dispatch")
                 {
                     $('#recurringTone').val('1');
-                    $('#recurringTone').text("10-3 Tone - ACTIVE"); 
+                    $('#recurringTone').text("Priority Tone - ACTIVE"); 
                 }
                 
             }
@@ -688,7 +688,7 @@ function checkTones()
                 if (file == "dispatch")
                 {
                     $('#recurringTone').val('0');
-                    $('#recurringTone').text("10-3 Tone"); 
+                    $('#recurringTone').text("Priority Tone"); 
                 } 
             }
 
@@ -701,7 +701,7 @@ function checkTones()
                     tag.play();
 
                     $('#priorityTone').val('1');
-                    $('#priorityTone').text("Priority Tone - ACTIVE"); 
+                    $('#priorityTone').text("10-3 Tone - ACTIVE"); 
                 } else {
                     //Do nothing
                 }
@@ -711,7 +711,7 @@ function checkTones()
                 // Make sure the played cookie is unset
                 document.cookie = "priority=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
                 $('#priorityTone').val('0');
-                $('#priorityTone').text("Priority Tone");
+                $('#priorityTone').text("10-3 Tone");
                  
             }
 

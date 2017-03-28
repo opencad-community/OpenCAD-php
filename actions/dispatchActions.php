@@ -255,6 +255,7 @@ function newCall()
     $unit1 = str_replace('+',' ', explode("=", $detailsArr[4])[1]);
     $unit2 = str_replace('+',' ', explode("=", $detailsArr[5])[1]);
     $narrative = str_replace('+',' ', explode("=", $detailsArr[6])[1]);
+    $narrative = strtoupper($narrative);
 
     $created = date("Y-m-d H:i:s").': Call Created<br/>';
     if ($narrative == "")
@@ -266,6 +267,7 @@ function newCall()
         $narrative = $created.date("Y-m-d H:i:s").': '.$narrative.'<br/>';
     }
     
+
     
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);

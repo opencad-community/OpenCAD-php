@@ -112,6 +112,7 @@
                     <ul class="nav child_menu" style="display: block;">
                       <li class="current-page"><a href="javascript:void(0)">Dashboard</a></li>
                       <li><a href="../actions/direction.php">CAD Direction Page</a></li>
+                      <li><a href="https://puu.sh/tRzTt/330b12ab3c.jpg" target="_blank">GTA 5 DOJRP Map</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-clock-o"></i> Stopwatch <span class="fa fa-chevron-down"></span></a>
@@ -240,8 +241,8 @@
                   <!-- ./ x_content -->
                   <div class="x_footer">
                     <button class="btn btn-primary" name="new_call_btn" data-toggle="modal" data-target="#newCall">New Call</button>
-                    <button class="btn btn-danger pull-right" onclick="priorityTone('single')" value="0" id="priorityTone">Priority Tone</button>
-                    <button class="btn btn-danger pull-right" onclick="priorityTone('recurring')" value="0" id="recurringTone">10-3 Tone</button>
+                    <button class="btn btn-danger pull-right" onclick="priorityTone('single')" value="0" id="priorityTone">10-3 Tone</button>
+                    <button class="btn btn-danger pull-right" onclick="priorityTone('recurring')" value="0" id="recurringTone">Priority Tone</button>
                   </div>
                 </div>
                 <!-- ./ x_panel -->
