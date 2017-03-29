@@ -53,7 +53,6 @@ function addNarrative()
     $details = $_POST['details'];
     $callId = $_POST['callId'];
 
-
     $detailsArr = explode("&", $details);
    
     $narrativeAdd = explode("=", $detailsArr[0])[1];
@@ -127,7 +126,7 @@ function assignUnit()
         die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
     }
 
-    //Now we need to modify the assigned user's status'
+    //Now we need to modify the assigned user's status
     $sql = "UPDATE active_users SET status = '0', status_detail = '3' WHERE active_users.callsign = ?";
 
     try {
