@@ -246,6 +246,48 @@ $(function() {
     });
 });
 
+// Handles submission of the add narrative form
+$(function() {
+    $('.callDetailsForm').submit(function(e) {
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+
+        $.ajax({
+            type: "POST",
+            url: "../actions/dispatchActions.php",
+            data: {
+                addNarrative: 'yes',
+                callId: $('#call_id_det').val(), 
+                details: $("#"+this.id).serialize()
+            },
+            success: function(response) 
+            {
+            console.log(response);
+            if (response == "SUCCESS")
+            {
+                
+                new PNotify({
+                title: 'Success',
+                text: 'Successfully added call narrative',
+                type: 'success',
+                styling: 'bootstrap3'
+                }); 
+
+                $('#callDetails').modal('toggle');
+
+                $('.callDetailsForm').find('textarea').val('');
+            }
+            
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown)
+            {
+            console.log("Error");
+            }
+            
+
+        }); 
+    });
+});
+
 // Handles assigning a unit to a call
 $(function() {
     $('.assignUnitForm').submit(function(e) {
@@ -392,6 +434,13 @@ $('#newCall').on('show.bs.modal', function(e) {
 
 //Disables enter key in the call narrative textarea
 $('#narrative').keypress(function(event) {
+    if (event.keyCode == 13) {
+        event.preventDefault();
+    }
+})
+
+//Disables enter key in the add narrative textarea
+$('#narrative_add').keypress(function(event) {
     if (event.keyCode == 13) {
         event.preventDefault();
     }

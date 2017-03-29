@@ -616,7 +616,7 @@
           </div>
           <!-- ./ modal-header -->
           <div class="modal-body">
-          <form class="callDetailsForm">
+          <form class="callDetailsForm" id="callDetailsForm">
             <div class="form-group">
               <label class="col-lg-2 control-label">Incident ID</label>
               <div class="col-lg-10">
@@ -667,7 +667,16 @@
             <div class="form-group">
               <label class="col-lg-2 control-label">Narrative</label>
               <div class="col-lg-10">
-                <div name="call_narrative" id="call_narrative" contenteditable="false" style="background-color: #eee; opacity: 1; border: 1px solid #ccc; padding: 6px 12px; font-size: 14px;"></div>
+                <div name="call_narrative" id="call_narrative" contenteditable="false" style="background-color: #eee; opacity: 1; border: 1px solid #ccc; padding: 6px 12px; font-size: 14px; word-wrap: break-word; overflow-wrap: break-word; white-space: normal;"></div>
+              </div>
+              <!-- ./ col-sm-9 -->
+            </div>
+            <br/><br/><br/><br/>
+            <!-- ./ form-group -->
+            <div class="form-group">
+              <label class="col-lg-2 control-label">Add Narrative</label>
+              <div class="col-lg-10">
+                <textarea name="narrative_add" id="narrative_add" class="form-control" style="text-transform:uppercase" rows="2" required></textarea>
               </div>
               <!-- ./ col-sm-9 -->
             </div>
@@ -675,12 +684,13 @@
             <!-- ./ form-group -->
           </div>
           <!-- ./ modal-body -->
-          </form>
           <br/>
           <div class="modal-footer">
+            <input type="submit" id="addCallNarrative" class="btn btn-primary pull-left" value="Add Narrative" />
             <button id="closeDetailsModal" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
           <!-- ./ modal-footer -->
+          </form>
         </div>
         <!-- ./ modal-content -->
       </div>

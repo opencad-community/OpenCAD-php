@@ -17,6 +17,10 @@ if (isset($_POST['assignUnit']))
 {
     assignUnit();
 }
+if (isset($_POST['addNarrative']))
+{
+    addNarrative();
+}
 
 if (isset($_GET['term'])) {
     $data = array();
@@ -40,6 +44,49 @@ if (isset($_GET['term'])) {
 
     echo json_encode($data);
 
+
+}
+
+function addNarrative()
+{
+    
+    $details = $_POST['details'];
+    $callId = $_POST['callId'];
+
+
+    $detailsArr = explode("&", $details);
+   
+    $narrativeAdd = explode("=", $detailsArr[0])[1];
+    $narrativeAdd = strtoupper($narrativeAdd);
+
+    $narrativeAdd = date("Y-m-d H:i:s").': '.$narrativeAdd.'<br/>';
+
+    $narrativeAdd = str_replace("+", " ", $narrativeAdd);
+
+
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	
+    if (!$link) { 
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $sql = "UPDATE calls SET call_notes = concat(call_notes, ?) WHERE call_id = ?";
+
+    try {
+        $stmt = mysqli_prepare($link, $sql);
+        mysqli_stmt_bind_param($stmt, "si", $narrativeAdd, $callId);
+        $result = mysqli_stmt_execute($stmt);
+    
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+    }
+
+    echo "SUCCESS";
 
 }
 
