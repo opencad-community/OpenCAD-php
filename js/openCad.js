@@ -675,7 +675,7 @@ function priorityTone(type)
             {
                 new PNotify({
                 title: 'Success',
-                text: 'Successfully started tone',
+                text: 'Successfully started tone. It might take up to 7 seconds before everyone hears it.',
                 type: 'success',
                 styling: 'bootstrap3'
                 });
@@ -773,3 +773,49 @@ function checkTones()
         
     })
 }   
+
+function responderChangeStatus(element)
+{
+    statusInit = element.className;
+    var status = element.value;
+    
+    //If a user has a space in their username, it'll cause some problems. First, we need to split the string by spaces which will generate
+    // an array. Then, we need to remove the first item from the array which is presumably an "action". Then, we join the array again via spaces
+    unit = statusInit.split(" "); 
+    unit.shift();
+    unit.shift();
+    unit = unit.join(' ');
+
+
+    $.ajax({
+        type: "POST",
+        url: "../actions/api.php",
+        data: {
+            changeStatus: 'yes',
+            unit: unit,
+            status: status
+        },
+        success: function(response) 
+        {
+        console.log(response);
+        if (response == "SUCCESS")
+        {
+            new PNotify({
+            title: 'Success',
+            text: 'Successfully modified status',
+            type: 'success',
+            styling: 'bootstrap3'
+        }); 
+        
+        $('#statusSelect').val('').selectpicker('refresh');
+
+        }
+        
+        },
+        error : function(XMLHttpRequest, textStatus, errorThrown)
+        {
+        console.log("Error");
+        }
+        
+    }); 
+}

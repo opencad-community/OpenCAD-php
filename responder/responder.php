@@ -235,6 +235,18 @@
                             <!-- ./ col-sm-9 -->
                         </div>
                         <!-- ./ form-group -->
+                        <div class="form-group">
+                            <label class="col-md-2 col-sm-2 col-xs-2 control-label">Change Status</label>
+                            <div class="col-md-10 col-sm-10 col-xs-10">
+                                <select name="statusSelect" class="form-control selectpicker <?php echo $_SESSION['identifier'];?>" id="statusSelect" onchange="responderChangeStatus(this);" title="Select a Status">
+                                  <option value="10-8">10-8/Available</option>
+                                  <option value="10-6">10-6/Busy</option>
+                                  <option value="10-5">10-5/Meal Break</option>
+                                </select>
+                            </div>
+                            <!-- ./ col-sm-9 -->
+                        </div>
+                        <!-- ./ form-group -->
                      </form> 
                   </div>
                   <!-- ./ x_content -->

@@ -195,6 +195,19 @@ function changeStatus()
             $statusDet = '1';
             $onCall = true;
             break;
+        case "10-8":
+            $statusId = '1';
+            $statusDet = '1';
+            $onCall = true;
+            break;
+        case "10-6":
+            $statusId = '0';
+            $statusDet = '2';
+            break;
+        case "10-5":
+            $statusId = '0';
+            $statusDet = '4';
+            break;
     }
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
