@@ -320,7 +320,7 @@
               <div class="form-group row">
                 <label class="col-md-3 control-label">User Groups</label>
                 <div class="col-md-9">
-                  <select name="userGroups" class="selectpicker" multiple>
+                  <select name="userGroups" class="selectpicker form-control" multiple>
                       <?php getDepartments();?>
                   </select>
                 </div>

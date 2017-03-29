@@ -425,7 +425,59 @@
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Warrant Name</label>
                 <div class="col-lg-10">
-                  <input type="text" class="form-control" name="warrant_name" />
+                  <select class="form-control selectpicker" name="warrant_name_sel" id="warrant_name_sel" data-live-search="true" title="Select a Warrant">
+                    <optgroup label="Violent Warrants (60 day expiry)">
+                      <option value="1st Degree Murder 1">1st Degree Murder</option>
+                      <option value="2nd Degree Murder 1">2nd Degree Murder</option>
+                      <option value="3rd Degree Murder 1">3rd Degree Murder</option>
+                      <option value="Attempted Murder 1">Attempted Murder</option>
+                      <option value="Kidnapping 1">Kidnapping</option>
+                      <option value="Attempted Kidnapping 1">Attempted Kidnapping</option>
+                      <option value="Hostage Taking 1">Hostage Taking</option>
+                      <option value="Bank/Fed Robbery 1">Bank/Fed Robbery</option>
+                      <option value="Terroristic Activity 1">Terroristic Activity</option>
+                      <option value="Terroristic Threats 1">Terroristic Threats</option>
+                      <option value="JailBreak 1">JailBreak</option>
+                      <option value="Robbery 1">Robbery</option>
+                      <option value="Grand Theft Auto 1">Grand Theft Auto</option>
+                      <option value="Burglary 1">Burglary</option>
+                      <option value="Threatening an Official 1">Threatening an Official</option>
+                      <option value="Sexual Assault 1">Sexual Assault</option>
+                      <option value="Hate Crime 1">Hate Crime</option>
+                      <option value="Assault 1">Assault</option>
+                      <option value="Conspiracy 1">Conspiracy</option>
+                      <option value="Drug Trafficking 1">Drug Trafficking</option>
+                      <option value="Evasion/Fleeing/Eluding 1">Evasion/Fleeing/Eluding</option>
+                      <option value="Felony Evading 1">Felony Evading</option>
+                      <option value="Resisting Arrest 1">Resisting Arrest</option>
+                      <option value="Firearm in City Limits 1">Firearm in City Limits</option>
+                      <option value="Firearm by Felon 1">Firearm by Felon</option>
+                      <option value="Unlicensed Firearm 1">Unlicensed Firearm</option>
+                      <option value="Firearm Discharge in City Limits 1">Firearm Discharge in City Limits</option>
+                      <option value="Illegal Weapon 1">Illegal Weapon</option>
+                      <option value="Illegal Magazine 1">Illegal Magazine</option>
+                      <option value="Concealed Carry Rifle 1">Concealed Carry Rifle</option>
+                      <option value="Failure to Inform 1">Failure to Inform</option>
+                    </optgroup>
+                    <optgroup label="Non-Violent Warrants (30 day expiry)">
+                      <option value="Lewd Conduct 2">Lewd Conduct</option>
+                      <option value="DUI/DWI 2">DUI/DWI</option>
+                      <option value="Fraud 2">Fraud</option>
+                      <option value="Hit and Run 2">Hit and Run</option>
+                      <option value="Speeding 2">Speeding</option>
+                      <option value="Reckless Driving 2">Reckless Driving</option>
+                      <option value="Obstruction of Justice 2">Obstruction of Justice</option>
+                      <option value="Verbal Abuse 2">Verbal Abuse</option>
+                      <option value="Bribery 2">Bribery</option>
+                      <option value="Disorderly Conduct 2">Disorderly Conduct</option>
+                      <option value="Drug Posession 2">Drug Posession</option>
+                      <option value="Trespassing 2">Trespassing</option>
+                      <option value="Excessive Noise 2">Excessive Noise</option>
+                      <option value="Failure to Identify 2">Failure to Identify</option>
+                      <option value="Stalking 2">Stalking</option>
+                      <option value="Public Intoxication 2">Public Intoxication</option>
+                    </optgroup>
+                  </select>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>

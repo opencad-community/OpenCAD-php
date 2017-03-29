@@ -411,8 +411,22 @@ function create_citation()
 function create_warrant()
 {
     $userId = $_POST['civilian_names'];
-    $warrant_name = $_POST['warrant_name'];
+    $warrant_name = $_POST['warrant_name_sel'];
     $issuing_agency = $_POST['issuing_agency'];
+
+    $expiry = substr($_POST['warrant_name_sel'], -1);
+    
+    $warrant_name = substr($_POST['warrant_name_sel'], 0, -1);
+    
+    switch ($expiry)
+    {
+        case "1":
+            $interval = 60;
+            break;
+        case "2":
+            $interval = 30;
+            break;
+    }
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -420,12 +434,12 @@ function create_warrant()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $sql = "INSERT INTO ncic_warrants (name_id, expiration_date, warrant_name, issuing_agency) SELECT ?, DATE_ADD(NOW(), INTERVAL 30 day), ?, ?";
+    $sql = "INSERT INTO ncic_warrants (name_id, expiration_date, warrant_name, issuing_agency) SELECT ?, DATE_ADD(NOW(), INTERVAL ? day), ?, ?";
 	
     
 	try {
 		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "iss", $userId, $warrant_name, $issuing_agency);
+		mysqli_stmt_bind_param($stmt, "iiss", $userId, $interval, $warrant_name, $issuing_agency);
 		$result = mysqli_stmt_execute($stmt);
 		
 		if ($result == FALSE) {
