@@ -18,7 +18,8 @@
         session_start();
         $_SESSION['register_error'] = "Passwords do not match";
         sleep(1);
-        header("Location:../index.php");
+        header("Location:../index.php#signup");
+        exit();
         
     }
     
@@ -44,7 +45,7 @@
 		session_start();
         $_SESSION['register_error'] = "Email already exists";
         sleep(1);
-        header("Location:../index.php");
+        header("Location:../index.php#signup");
         exit();
 	}
 
@@ -113,6 +114,6 @@
     session_start();
     $_SESSION['register_success'] = "Successfully requested access. Please wait for an administrator to approve your request.";
     sleep(1);
-    header("Location:../index.php");
+    header("Location:../index.php#signup");
 
 ?>

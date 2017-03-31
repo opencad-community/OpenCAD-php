@@ -26,157 +26,164 @@
 
     if (isset($_GET['loggedOut']))
     {
-        $loginMessage = '<div class="alert alert-success" ><span>You\'ve successfully been logged out</span></div>';  
+        $loginMessage = '<div class="alert alert-success" style="text-align: center; font-weight:normal;" ><span>You\'ve successfully been logged out</span></div>';  
     }
     if(isset($_SESSION['register_error']))
     {
-        $registerError = '<div class="alert alert-danger" ><span>'.$_SESSION['register_error'].'</span></div>';
+        $registerError = '<div class="alert alert-danger" style="text-align: center; font-weight:normal;"><span>'.$_SESSION['register_error'].'</span></div>';
         unset($_SESSION['register_error']);
     }
     if(isset($_SESSION['register_success']))
     {
-        $registerError = '<div class="alert alert-success" ><span>'.$_SESSION['register_success'].'</span></div>';
+        $registerError = '<div class="alert alert-success" style="text-align: center; font-weight:normal;"><span>'.$_SESSION['register_success'].'</span></div>';
         unset($_SESSION['register_success']);
     }
     if(isset($_SESSION['loginMessageDanger']))
     {
-        $loginMessage = '<div class="alert alert-danger" ><span>'.$_SESSION['loginMessageDanger'].'</span></div>';
+        $loginMessage = '<div class="alert alert-danger" style="text-align: center; font-weight:normal;"><span>'.$_SESSION['loginMessageDanger'].'</span></div>';
         unset($_SESSION['loginMessageDanger']);
     }
 
     
 ?>
 
-<html>
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <!-- CSS -->
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="./css/bootstrap.css">
-    <link rel="stylesheet" href="./css/bootstrap-multiselect.css"> <!-- CSS for MultiSelect Plugin -->
-
-    <!-- JS -->
-    <script type="text/javascript" src="./js/bootstrap-multiselect.js"></script> <!-- Script for MultiSelect Plugin -->
-    <script type="text/javascript" src="./js/bootstrap.js"></script><!-- Bootstrap Core JS -->
-    <!-- jQuery -->
-    <script src="./vendors/jquery/dist/jquery.min.js"></script>
-    <!-- Custom Theme Style -->
-    <link href="../css/custom.css" rel="stylesheet">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title><?php echo $community;?> CAD System</title>
     <link rel="icon" href="./images/favicon.ico" />
-</head>
-<body>
-    <div id="page-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header" style="text-align:center;"><?php echo $community;?> CAD System</h1>
-                </div>
-                <!-- ./ col-lg-12 -->
-            </div>
-            <!-- ./ row -->
-            <div class="row">
-                <div class="col-lg-6 col-lg-offset-3">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h3 class="panel-title" style="text-align:center;">Please Login to Use This System</h3>
-                        </div>
-                        <!-- ./ panel-heading -->
-                        <div class="panel-body">
-                        <?php echo $loginMessage;?>
-                            <form role="form" action="./actions/login.php" method="post">
-                                <fieldset>
-                                    <div class="form-group">
-                                        <input class="form-control" placeholder="Email" name="email" type="text" value="<?php if($testing){echo "test@test.test";}?>" required>
-                                    </div>
-                                    <!-- ./ form-group -->
-                                    <div class="form-group">
-                                        <input class="form-control" placeholder="Password" name="password" type="password" value="<?php if($testing){echo "password";}?>" required >
-                                    </div>
-                                    <!-- ./ form-group -->
-								    <input name="login_btn" type="submit" class="btn btn-lg btn-primary btn-block" value="Login" />
-                                </fieldset>
-                            </form>
-                        </div>
-                        <!-- ./ panel-body -->
-                    </div>
-                    <!-- ./ panel panel-primary -->
-                </div>
-                <!-- ./ col-lg-6 col-lg-offset-3 -->
-            </div>
-            <!-- ./ row -->
-            <br/><br/>
-            <div class="row">
-                <div class="col-lg-6 col-lg-offset-3">
-                    <div class="panel panel-danger">
-                        <div class="panel-heading">
-                            <h3 class="panel-title" style="text-align:center;">Not Registered? Request Access</h3>
-                        </div>
-                        <!-- ./ panel-heading -->
-                        <div class="panel-body">
-                        <?php echo $registerError, $registerSuccess;?>
-                            <form role="form" action="./actions/register.php" method="post">
-                                <fieldset>
-                                    <div class="form-group">
-                                        <input class="form-control" placeholder="Name" name="uname" type="text" value="<?php if($testing){echo "Test";}?>" required>
-                                    </div>
-                                    <!-- ./ form-group -->
-                                    <div class="form-group">
-                                        <input class="form-control" placeholder="Email" name="email" type="email" value="<?php if($testing){echo "test@test.test";}?>" required>
-                                    </div>
-                                    <!-- ./ form-group -->
-                                    <div class="form-group">
-                                        <input class="form-control" placeholder="Identifier (Code Number, Unit ID)" name="identifier" type="text" value="<?php if($testing){echo "1A-1";}?>" required>
-                                    </div>
-                                    <!-- ./ form-group -->
-                                    <div class="form-group">
-                                        <label>Division (Can choose more than one)</label>
-                                        <select class="form-control" id="division" name="division[]" multiple="multiple" size="6" required>
-                                            <option value="communications">Communications (Dispatch)</option>
-                                            <!--<option value="ems">EMS</option>-->
-                                            <option value="fire">Fire</option>
-                                            <option value="highway" <?php if($testing){echo "selected=\"selected\"";}?>>Highway Patrol</option>
-                                            <option value="police">Police</option>
-                                            <option value="sheriff">Sheriff</option>
-                                            <option value="civilian">Civilian</option>
-                                        </select>
-                                    </div>
-                                    <!-- ./ form-group -->
-                                    <div class="form-group">
-                                        <input class="form-control" placeholder="Password" name="password" type="password" value="<?php if($testing){echo "password";}?>" required>
-                                    </div>
-                                    <!-- ./ form-group -->
-                                    <div class="form-group">
-                                        <input class="form-control" placeholder="Confirm Password" name="password1" type="password" value="<?php if($testing){echo "password";}?>" required>
-                                    </div>
-                                    <!-- ./ form-group -->
 
-								    <input name="login_btn" type="submit" class="btn btn-lg btn-primary btn-block" value="Request Access" />
-                                </fieldset>
-                            </form>
-                        </div>
-                        <!-- ./ panel-body -->
-                    </div>
-                    <!-- ./ panel panel-primary -->
-                </div>
-                <!-- ./ col-lg-6 col-lg-offset-3 -->
-            </div>
-            <!-- ./ row -->
+    
+    <!-- Bootstrap -->
+    <link href="./vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS for MultiSelect Plugin -->
+    <link rel="stylesheet" href="./css/bootstrap-multiselect.css"> 
+    <!-- jQuery -->
+    <script src="./vendors/jquery/dist/jquery.min.js"></script>
+    <!-- JS -->
+    <script type="text/javascript" src="./js/bootstrap-multiselect.js"></script> <!-- Script for MultiSelect Plugin -->
+    <script type="text/javascript" src="./js/bootstrap.js"></script><!-- Bootstrap Core JS -->
+    <!-- Font Awesome -->
+    <link href="./vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="./vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="./vendors/animate.css/animate.min.css" rel="stylesheet">
 
+    <!-- Custom Theme Style -->
+    <link href="./css/custom.css" rel="stylesheet">
+  </head>
+
+  <body class="login">
+    <div>
+      <a class="hiddenanchor" id="signup"></a>
+      <a class="hiddenanchor" id="signin"></a>
+
+      <div class="login_wrapper">
+        <div class="animate form login_form">
+          <?php echo $loginMessage;?>
+          <section class="login_content">
+            <form role="form" action="./actions/login.php" method="post">
+              <h1>Login Form</h1>
+              <div>
+                <input class="form-control" placeholder="Email" name="email" type="text" value="<?php if($testing){echo "test@test.test";}?>" required>
+              </div>
+              <div>
+                <input class="form-control" placeholder="Password" name="password" type="password" value="<?php if($testing){echo "password";}?>" required >
+              </div>
+              <div>
+                <input name="login_btn" type="submit" class="btn btn-default submit" value="Login" />
+                <a class="reset_pass" href="#" onclick="alert('Request an administrator reset your password through your community.');" >Lost your password?</a>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="separator">
+                <p class="change_link">New?
+                  <a href="#signup" class="to_register"> Request Access </a>
+                </p>
+
+                <div class="clearfix"></div>
+                <br />
+
+                <div>
+                  <h1><i class="fa fa-tachometer"></i> <?php echo $community;?> CAD System</h1>
+                  <p>©2017 All Rights Reserved. openCad is open source. <a href="http://www.github.com/ossified/openCad">Download from GitHub.</a></p>
+                </div>
+              </div>
+            </form>
+          </section>
         </div>
-        <!-- ./ container-fluid -->
-    </div>
-    <!-- ./ page-wrapper -->
 
-    <!-- Plugin Intializations -->
-    <!-- Initialize the plugin: -->
+        <div id="register" class="animate form registration_form">
+          <section class="login_content">
+            <?php echo $registerError, $registerSuccess;?>
+            <form action="./actions/register.php" method="post">
+              <h1>Request Access</h1>
+              <div>
+                <input class="form-control" placeholder="Name" name="uname" type="text" value="<?php if($testing){echo "Test";}?>" required>
+              </div>
+              <div>
+                <input class="form-control" placeholder="Email" name="email" type="email" value="<?php if($testing){echo "test@test.test";}?>" required>
+              </div>
+              <div>
+                <input class="form-control" placeholder="Identifier (Code Number, Unit ID)" name="identifier" type="text" value="<?php if($testing){echo "1A-1";}?>" required>
+              </div>
+              <div class="form-group">
+                <label>Division (Can choose more than one)</label>
+                <select class="form-control" id="division" name="division[]" multiple="multiple" size="6" required>
+                    <option value="civilian">Civilian</option>
+                    <option value="communications">Communications (Dispatch)</option>
+                    <!--<option value="ems">EMS</option>-->
+                    <option value="fire">Fire</option>
+                    <option value="highway" <?php if($testing){echo "selected=\"selected\"";}?>>Highway Patrol</option>
+                    <option value="police">Police</option>
+                    <option value="sheriff">Sheriff</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <input class="form-control" placeholder="Password" name="password" type="password" value="<?php if($testing){echo "password";}?>" required>
+            </div>
+            <!-- ./ form-group --> 
+            <div class="form-group">
+                <input class="form-control" placeholder="Confirm Password" name="password1" type="password" value="<?php if($testing){echo "password";}?>" required>
+            </div>
+            <!-- ./ form-group -->
+            <div class="clearfix"></div>
+              <div>
+                <input name="login_btn" type="submit" class="btn btn-default btn-sm pull-right" value="Request Access" />
+              </div>
+              <div class="clearfix"></div>
+
+              <div class="separator">
+                <p class="change_link">Already a member?
+                  <a href="#signin" class="to_register"> Log in </a>
+                </p>
+
+                <div class="clearfix"></div>
+                <br />
+
+                <div>
+                  <h1><i class="fa fa-tachometer"></i> <?php echo $community;?> CAD System</h1>
+                  <p>©2017 All Rights Reserved. openCad is open source. <a href="http://www.github.com/ossified/openCad">Download from GitHub.</a></p>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+
     <script type="text/javascript">
     $(document).ready(function() {
-        $('#division').multiselect();
+       // $('#division').multiselect();
     });
     </script>
-</body>
+  </body>
 </html>
