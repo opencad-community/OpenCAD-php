@@ -658,11 +658,22 @@ function getUnitsOnCall($callId)
     $result1=mysqli_query($link, $sql1);
     
     $units = "";
+    
+    $num_rows = $result1->num_rows;
 
-    while($row1 = mysqli_fetch_array($result1, MYSQLI_BOTH))
+    if($num_rows == 0)
     {
-        $units = $units.''.$row1[1].' ';   
+        $units = '<span style="color: red;">Unassigned</span>';
     }
+    else
+    {
+        while($row1 = mysqli_fetch_array($result1, MYSQLI_BOTH))
+        {
+            $units = $units.''.$row1[1].' ';   
+        }
+    }
+
+    
     
     echo $units;
 
