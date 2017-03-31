@@ -24,6 +24,10 @@ if (isset($_POST['update_profile_btn']))
 {
     updateProfile();
 }
+if (isset($_GET['getMyRank']))
+{
+	getMyRank();
+}
 
 
 
@@ -72,5 +76,51 @@ function updateProfile()
 	
 	sleep(1); //Seconds to wait
 	header("Location: ../profile/profile.php");
+}
+
+function getMyRank()
+{
+	$id = $_GET['unit'];
+	$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    //Get all ranks
+    $query = "SELECT ranks.rank_name FROM ranks_users INNER JOIN ranks ON ranks.rank_id=ranks_users.rank_id WHERE ranks_users.user_id = '$id';";
+        
+    $result=mysqli_query($link, $query);
+	
+	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+	{
+		echo $row[0];
+	}
+}
+
+function getRanks()
+{
+	$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    //Get all ranks
+    $query = "SELECT * FROM ranks";
+        
+    $result=mysqli_query($link, $query);
+	
+	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+	{
+		if ($row[2] == "1")
+		{
+			echo '<option value="'.$row[1].'">'.$row[1].'</option>';
+		}
+		else if ($row[2] == "0")
+		{
+			echo '<option value="'.$row[1].'" style="background: #969aa3; color: #ffffff;" disabled>'.$row[1].'</option>';
+		}
+	}
 }
 ?>

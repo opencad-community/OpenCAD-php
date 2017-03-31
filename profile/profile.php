@@ -23,6 +23,7 @@
         unset($_SESSION['profileUpdate']);
     }
     
+    include("../actions/profileActions.php");
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +35,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?php echo $community;?> Admin</title>
+    <title><?php echo $community;?> Profile</title>
     <link rel="icon" href="../images/favicon.ico" />
 
     <!-- Bootstrap -->
@@ -207,14 +208,19 @@
                         <!-- ./ col-sm-10 -->
                     </div>
                     <!-- ./ form-group -->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">My Rank:</label>
+                        <div class="col-sm-10">
+                            <select class="form-control selectpicker" name="my_rank" id="my_rank">
+                              <?php getRanks();?>
+                            </select>
+                        </div>
+                        <!-- ./ col-sm-10 -->
+                    </div>
+                    <!-- ./ form-group -->
 
                   <input name="update_profile_btn" type="submit" class="btn btn-primary btn-lg btn-block" value="Update" />
                   </fieldset>
-
-
-
-
-                  
                   </form>
                   </div>
                   <!-- ./ x_content -->
@@ -263,12 +269,16 @@
     <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
     <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <!-- Bootstrap Select -->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
     
     <script>
-	$(document).ready(function() {
-		
-
-	});
+    $(document).ready(function() {
+      getMyRank("<?php echo $_SESSION['id'];?>");
+    });
 	</script>
 
     <script>
@@ -277,5 +287,7 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../js/custom.js"></script>
+    <!-- openCad Script -->
+    <script src="../js/openCad.js"></script>
   </body>
 </html>

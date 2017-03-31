@@ -819,3 +819,32 @@ function responderChangeStatus(element)
         
     }); 
 }
+
+function getMyRank(id)
+{
+    console.log(id);
+
+    $.ajax({
+        type: "GET",
+        url: "../actions/profileActions.php",
+        data: {
+            getMyRank: 'yes',
+            unit: id
+        },
+        success: function(response) 
+        {
+        console.log(response);
+
+            $("#my_rank option").filter(function() {
+                return $.trim($(this).text()) == response
+            }).prop('selected', true);
+
+            $("#my_rank").selectpicker('refresh');
+
+        },
+        error : function(XMLHttpRequest, textStatus, errorThrown)
+        {
+        console.log("Error");
+        }     
+    }); 
+}

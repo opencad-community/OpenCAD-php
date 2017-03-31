@@ -62,6 +62,8 @@
     <script type="text/javascript" src="./js/bootstrap.js"></script><!-- Bootstrap Core JS -->
     <!-- jQuery -->
     <script src="./vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Custom Theme Style -->
+    <link href="../css/custom.css" rel="stylesheet">
 
     <title><?php echo $community;?> CAD System</title>
     <link rel="icon" href="./images/favicon.ico" />

@@ -49,16 +49,17 @@ if (isset($_GET['term'])) {
 
 function addNarrative()
 {
-    
+    session_start();   
     $details = $_POST['details'];
     $callId = $_POST['callId'];
+    $who = $_SESSION['identifier'];
 
     $detailsArr = explode("&", $details);
    
     $narrativeAdd = explode("=", $detailsArr[0])[1];
     $narrativeAdd = strtoupper($narrativeAdd);
 
-    $narrativeAdd = date("Y-m-d H:i:s").': '.$narrativeAdd.'<br/>';
+    $narrativeAdd = date("Y-m-d H:i:s").': '.$who.': '.$narrativeAdd.'<br/>';
 
     $narrativeAdd = str_replace("+", " ", $narrativeAdd);
 
