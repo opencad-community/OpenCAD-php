@@ -814,40 +814,49 @@
     <script>
     function logoutUser(element)
     {
-      unit = element.className.split(" ");
-      unit.shift(); //Remove the nopadding class
-      unit.shift(); //Remove the logoutUser class
-      unit = unit.join(' '); //Rejoin the array
-      console.log(unit);
-      
-      $.ajax({
-          type: "POST",
-          url: "../actions/api.php",
-          data: {
-              logoutUser: 'yes',
-              unit: unit
-          },
-          success: function(response) 
-          {
-            console.log(response);
-            if (response == "SUCCESS")
+      var r = confirm("Are you sure you want to log this user out?");
+
+      if (r == true)
+      {
+        unit = element.className.split(" ");
+        unit.shift(); //Remove the nopadding class
+        unit.shift(); //Remove the logoutUser class
+        unit = unit.join(' '); //Rejoin the array
+        console.log(unit);
+        
+        $.ajax({
+            type: "POST",
+            url: "../actions/api.php",
+            data: {
+                logoutUser: 'yes',
+                unit: unit
+            },
+            success: function(response) 
             {
-              new PNotify({
-                title: 'Success',
-                text: 'Successfully logged out user',
-                type: 'success',
-                styling: 'bootstrap3'
-              }); 
+              console.log(response);
+              if (response == "SUCCESS")
+              {
+                new PNotify({
+                  title: 'Success',
+                  text: 'Successfully logged out user',
+                  type: 'success',
+                  styling: 'bootstrap3'
+                }); 
+              }
+              
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown)
+            {
+              console.log("Error");
             }
             
-          },
-          error : function(XMLHttpRequest, textStatus, errorThrown)
-          {
-            console.log("Error");
-          }
-          
-        });
-    }
+          });
+        }
+        else
+        {
+          //Do nothing
+        }
+  }
     </script>
 
     <script>
