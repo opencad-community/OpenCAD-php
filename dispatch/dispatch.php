@@ -781,6 +781,8 @@
       unit.shift();
       unit = unit.join(' ');
 
+      console.log(unit);
+
       $.ajax({
           type: "POST",
           url: "../actions/api.php",

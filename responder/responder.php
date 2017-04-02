@@ -254,13 +254,22 @@
                 <!-- ./ x_panel -->
               </div>
               <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
-              
-              <?php /* Commented out for now
 
-              <div class="col-md-6 col-sm-6 col-xs-6">
+              <?php 
+              if (isset($_GET['fire']))
+              {
+                
+                if ($_GET['fire'] == "true")
+                {
+                  
+                }
+              }
+              else
+              {
+                echo '<div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>My Call</h2>
+                    <h2>Citation Creator</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
                     </ul>
@@ -268,15 +277,15 @@
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
-                      <div class="alert alert-info"><span>You're currently not on a call</span></div>
+                    
                   </div>
                   <!-- ./ x_content -->
                 </div>
                 <!-- ./ x_panel -->
               </div>
-              <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
-
-              */?>
+              <!-- ./ col-md-6 col-sm-6 col-xs-6 -->';
+              }
+              ?>    
 
             </div>
             <!-- ./ row -->
@@ -463,7 +472,21 @@
     <!-- AUDIO TONES -->
     <audio id="recurringToneAudio" src="../sounds/priority.mp3" preload="auto"></audio>
     <audio id="priorityToneAudio" src="../sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
-    <audio id="newCallAudio" src="../sounds/New_Dispatch.mp3" preload="auto"></audio>
+    <?php
+    if (isset($_GET['fire']))
+    {
+      
+      if ($_GET['fire'] == "true")
+      {
+        echo '<audio id="newCallAudio" src="../sounds/Fire_Tones_Aligned.wav" preload="auto"></audio>'; 
+      }
+    }
+    else
+    {
+      echo '<audio id="newCallAudio" src="../sounds/New_Dispatch.mp3" preload="auto"></audio>';
+    }
+    ?>
+    
 
     <script>
     $(document).ready(function() {

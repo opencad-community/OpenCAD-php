@@ -244,8 +244,18 @@ function changeStatus()
             $callId = $row[0];
         }
 
+        //Get their callsign for the narrative
+        $sql = "SELECT callsign FROM active_users WHERE identifier = \"$unit\"";
+
+        $result=mysqli_query($link, $sql);
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            $callsign = $row[0];
+        }
+
         //Update the call_notes to say they were cleared
-        $narrativeAdd = date("Y-m-d H:i:s").': Unit Cleared: '.$unit.'<br/>';
+        $narrativeAdd = date("Y-m-d H:i:s").': Unit Cleared: '.$callsign.'<br/>';
 
         $sql = "UPDATE calls SET call_notes = concat(call_notes, ?) WHERE call_id = ?";
 

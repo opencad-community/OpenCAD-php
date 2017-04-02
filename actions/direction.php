@@ -110,7 +110,7 @@ else
         }
         if ($row[1] == "3")
         {
-            $fireButton = "<a href=\"../responder/responder.php\" class=\"btn btn-primary btn-lg\">Fire Department</a>";
+            $fireButton = "<a href=\"../responder/responder.php?fire=true\" class=\"btn btn-primary btn-lg\">Fire Department</a>";
         }
         if ($row[1] == "4")
         {
