@@ -266,7 +266,17 @@
               }
               else
               {
-                echo '<div class="col-md-6 col-sm-6 col-xs-6">
+               
+               
+                /*
+                
+                PUT THE BELOW DIV IN HERE WHEN DONE CODING
+
+                */
+              }
+              ?> 
+
+              <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Citation Creator</h2>
@@ -277,16 +287,39 @@
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
-                    
+                    <div class="alert alert-info" style="text-align:center;"><span>Citations need to be approved by staff!</span></div>
+
+                    <form id="newCitationForm">
+                      <div class="row">
+                        <div class="form-group">
+                            <select class="form-control selectpicker civilian" data-live-search="true" name="civilian" id="civilian" title="Select Civilian">
+                              <?php getCivilianNamesOption();?>
+                            </select>
+                        </div>
+                        <!-- ./ form-group -->
+                      </div>
+                      <!-- ./ row -->
+                      <div class="row">
+                        <div class="form-group">
+                          <select class="form-control selectpicker citation" data-live-search="true" name="citation[]" id="citation[]" multiple data-max-options="2" title="Select Citations (Limit 2)">
+                            <?php getCitations();?>
+                          </select>
+                        </div>
+                        <!-- ./ form-group -->
+                      </div>
+                      <!-- ./ row -->
                   </div>
                   <!-- ./ x_content -->
+                  <br/>
+                  <div class="x_footer">
+                    <button type="submit" class="btn btn-primary pull-right" id="newCitationSubmit">Submit Citation</button>
+                  </div>
+                  <!-- ./ x_footer -->
+                  </form>
                 </div>
                 <!-- ./ x_panel -->
               </div>
-              <!-- ./ col-md-6 col-sm-6 col-xs-6 -->';
-              }
-              ?>    
-
+              <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
             </div>
             <!-- ./ row -->
 

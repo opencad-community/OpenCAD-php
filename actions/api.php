@@ -720,4 +720,40 @@ function getCallDetails()
     mysqli_close($link);
 }
 
+function getCivilianNamesOption()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+    
+    $sql = "SELECT id, first_name, last_name FROM ncic_names";
+
+    $result=mysqli_query($link, $sql);
+
+    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    {
+        echo "<option value=".$row[0].">".$row[1]." ".$row[2]."</option>";
+    }
+}
+
+function getCitations()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+    
+    $sql = "SELECT citation_name FROM citations";
+
+    $result=mysqli_query($link, $sql);
+
+    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    {
+        echo "<option value=".$row[0].">".$row[0]."</option>";
+    }
+}
+
 ?>

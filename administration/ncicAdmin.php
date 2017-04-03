@@ -367,9 +367,8 @@
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">Civilian Name</label>
                 <div class="col-lg-10">
-                  <select class="form-control selectpicker" name="civilian_names" id="civilian_names" data-live-search="true" required>
-                    <option> </option>
-                    <?php getCivilianNames();?>
+                  <select class="form-control selectpicker" name="civilian_names" id="civilian_names" data-live-search="true" required title="Select Civilian">
+                    <?php getCivilianNamesOption();?>
                   </select>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -378,12 +377,13 @@
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Citation Name</label>
                 <div class="col-lg-10">
-                  <input type="text" class="form-control" name="citation_name" />
+                  <select class="form-control selectpicker citation" data-live-search="true" name="citation_name" id="citation_name" title="Select Citation" required>
+                    <?php getCitations();?>
+                  </select>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
               <!-- ./ form-group -->
-            
           </div>
           <!-- ./ modal-body -->
           <div class="modal-footer">
@@ -460,22 +460,22 @@
                       <option value="Failure to Inform 1">Failure to Inform</option>
                     </optgroup>
                     <optgroup label="Non-Violent Warrants (30 day expiry)">
-                      <option value="Lewd Conduct 2">Lewd Conduct</option>
-                      <option value="DUI/DWI 2">DUI/DWI</option>
-                      <option value="Fraud 2">Fraud</option>
-                      <option value="Hit and Run 2">Hit and Run</option>
-                      <option value="Speeding 2">Speeding</option>
-                      <option value="Reckless Driving 2">Reckless Driving</option>
-                      <option value="Obstruction of Justice 2">Obstruction of Justice</option>
-                      <option value="Verbal Abuse 2">Verbal Abuse</option>
-                      <option value="Bribery 2">Bribery</option>
-                      <option value="Disorderly Conduct 2">Disorderly Conduct</option>
-                      <option value="Drug Posession 2">Drug Posession</option>
-                      <option value="Trespassing 2">Trespassing</option>
-                      <option value="Excessive Noise 2">Excessive Noise</option>
-                      <option value="Failure to Identify 2">Failure to Identify</option>
-                      <option value="Stalking 2">Stalking</option>
-                      <option value="Public Intoxication 2">Public Intoxication</option>
+                      <option value="FTA: Lewd Conduct 2">FTA: Lewd Conduct</option>
+                      <option value="FTA: DUI/DWI 2">FTA: DUI/DWI</option>
+                      <option value="FTA: Fraud 2">FTA: Fraud</option>
+                      <option value="FTA: Hit and Run 2">FTA: Hit and Run</option>
+                      <option value="FTA: Speeding 2">FTA: Speeding</option>
+                      <option value="FTA: Reckless Driving 2">FTA: Reckless Driving</option>
+                      <option value="FTA: Obstruction of Justice 2">FTA: Obstruction of Justice</option>
+                      <option value="FTA: Verbal Abuse 2">FTA: Verbal Abuse</option>
+                      <option value="FTA: Bribery 2">FTA: Bribery</option>
+                      <option value="FTA: Disorderly Conduct 2">FTA: Disorderly Conduct</option>
+                      <option value="FTA: Drug Posession 2">FTA: Drug Posession</option>
+                      <option value="FTA: Trespassing 2">FTA: Trespassing</option>
+                      <option value="FTA: Excessive Noise 2">FTA: Excessive Noise</option>
+                      <option value="FTA: Failure to Identify 2">FTA: Failure to Identify</option>
+                      <option value="FTA: Stalking 2">FTA: Stalking</option>
+                      <option value="FTA: Public Intoxication 2">FTA: Public Intoxication</option>
                     </optgroup>
                   </select>
                 </div>
