@@ -98,9 +98,9 @@ function ncicGetNames()
                 <td>'.$row[8].'</td>
                 <td>'.$row[9].'</td>
                 <td>
+                    <button name="edit_name" data-toggle="modal" data-target="#editNameModal" class="btn btn-xs btn-link">Edit</button>
                     <form action="../actions/ncicAdminActions.php" method="post">
-                    <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" enabled />
-                    <input name="delete_name" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete" enabled/>
+                    <input name="delete_name" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
                     <input name="uid" type="hidden" value='.$row[0].' />
                     </form>                    
                 </td>

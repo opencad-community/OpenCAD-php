@@ -1,42 +1,37 @@
 <?php
-    session_start();
+session_start();
 
-    // TODO: Verify user has permission to be on this page
-	
-    if (empty($_SESSION['logged_in']))
-    {
-        header('Location: ../index.php');
-        die("Not logged in");
-    }
-    else
-    {
-      $name = $_SESSION['name'];
-    }
+include_once ("../actions/adminActions.php");
+include_once ("../actions/permissions.php");
 
-    
-    if(isset($_SESSION['admin']))
-    {
-      if ($_SESSION['admin'] == 'YES')
-      {
-          //Do nothing
-      }
-    }
-    else
-    {
-      die("You do not have permission to be here. This has been recorded");
-    }
+$hasPermission = checkIfHeadAdmin();
 
-    $iniContents = parse_ini_file("../properties/config.ini", true); //Gather from config.ini file
-    $community = $iniContents['strings']['community'];
+if (!$hasPermission)
+{
+    die("You don't have permission to be here");
+}
 
-    include("../actions/adminActions.php");
+// TODO: Verify user has permission to be on this page
 
-    $accessMessage = "";
-    if(isset($_SESSION['accessMessage']))
-    {
-        $accessMessage = $_SESSION['accessMessage'];
-        unset($_SESSION['accessMessage']);
-    }
+if (empty($_SESSION['logged_in']))
+{
+    header('Location: ../index.php');
+    die("Not logged in");
+}
+else
+{
+  $name = $_SESSION['name'];
+}
+
+$iniContents = parse_ini_file("../properties/config.ini", true); //Gather from config.ini file
+$community = $iniContents['strings']['community'];
+
+$accessMessage = "";
+if(isset($_SESSION['accessMessage']))
+{
+    $accessMessage = $_SESSION['accessMessage'];
+    unset($_SESSION['accessMessage']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -99,8 +94,8 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li class="active"><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu" style="display: block;">
+                  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
                       <li class="current-page"><a href="javascript:void(0)">Dashboard</a></li>
                       <li><a href="userManagement.php">User Management</a></li>
                       <li><a href="lov.php">List of Values Management</a></li>
@@ -114,8 +109,8 @@
                     </ul>
                   </li>
 
-                  <li><a><i class="fa fa-key"></i> CAD Permissions <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
+                  <li class="active"><a><i class="fa fa-key"></i> CAD Permissions <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu" style="display: block;">
                       <li><a href="permissionManagement.php">Permissions Management</a></li>
                     </ul>
                   </li>
@@ -178,25 +173,11 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>CAD Administration</h3>
+                <h3>CAD Permission Management</h3>
               </div>
-          
-              <?php /* HIUE SEARCH FUNCTION FOR NOW
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                  </div>
-                  <!-- ./ input-group -->
-                </div>
-                <!-- ./ col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search -->
-              </div>
-              <!-- ./ title_right -->
-              */?>
+              <!-- ./ title_left -->
             </div>
+            <!-- ./ page-title -->
 
             <div class="clearfix"></div>
 
@@ -204,7 +185,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Statistics at a glance</h2>
+                    <h2>CAD Permission Settings</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -215,41 +196,41 @@
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
-                      <div class="row tile_count">
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
-                          <div class="count"><?php echo getUserCount();?></div>
-                        </div>
-                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
-                      </div>
-                      <!-- ./ row tile_count -->
-                  </div>
-                  <!-- ./ x_content -->
-                </div>
-                <!-- ./ x_panel -->
-              </div>
-              <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
-            </div>
-            <!-- ./ row -->
 
-            <div class="clearfix"></div>
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Access Requests</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <!-- ./ x_title -->
-                  <div class="x_content">
-                      <?php echo $accessMessage;?>
-                      <?php getPendingUsers();?>
+                    <table id="permissions" class="table table-striped table-bordered">
+                      <thead>
+                          <tr>
+                            <th>Permission Name</th>
+                            <th>Permission Description</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="font-weight:bold;">User Management Permissions</td>
+                        </tr>
+                        <tr>
+                          <td>Add Users</td>
+                          <td>User/Group can add users to the system</td>
+                        </tr>
+                        <tr>
+                          <td>Edit Users</td>
+                          <td>User/Group can edit users in the system</td>
+                        </tr>
+                        <tr>
+                          <td>Suspend Users</td>
+                          <td>User/Group can user accounts on the system</td>
+                        </tr>
+                        <tr>
+                          <td>Delete Users</td>
+                          <td>User/Group can remove users from the system</td>
+                        </tr>
+                        <tr>
+                          <td>Manage Access Requests</td>
+                          <td>User/Group can manage access requests</td>
+                        </tr>
+                      </tbody>
+                    </table>
+
                   </div>
                   <!-- ./ x_content -->
                 </div>
@@ -298,16 +279,6 @@
     <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
     <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
     
-    <script>
-		$(document).ready(function() {
-		
-			$('#pendingUsers').DataTable({
-        paging: false,
-        searching: false
-			});
-
-		});
-		</script>
 
     <!-- Custom Theme Scripts -->
     <script src="../js/custom.js"></script>

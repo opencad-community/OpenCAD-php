@@ -99,8 +99,51 @@ $('#ncic_plate_btn').on('click', function(e) {
             flags = "<span style=\"color: red;\">"+data['flags']+"</span>";
             }
 
+            //Convert plate to phoentic
+            var phoentic = "";
+            var text = data['plate'];
+            var result = '';
 
-            $('#ncic_plate_return').append("Plate: "+data['plate']+"<br/>Color: "+data['veh_color']+"<br/>Make: "+data['veh_make']+"<br/>Model: "+data['veh_model']+"<br/>Owner: "+data['veh_ro']
+            text = text.toUpperCase();
+
+            for (var i=0; i < text.length; i++)
+            {
+                switch (text.charAt(i))
+                {
+                    case 'A': result = result + 'ALPHA '; break;
+                    case 'B': result = result + 'BRAVO '; break;
+                    case 'C': result = result + 'CHARLIE '; break;
+                    case 'D': result = result + 'DELTA '; break;
+                    case 'E': result = result + 'ECHO '; break;
+                    case 'F': result = result + 'FOXTROT '; break;
+                    case 'G': result = result + 'GOLF '; break;
+                    case 'H': result = result + 'HOTEL '; break;
+                    case 'I': result = result + 'INDIA '; break;
+                    case 'J': result = result + 'JULIET '; break;
+                    case 'K': result = result + 'KILO '; break;
+                    case 'L': result = result + 'LIMA '; break;
+                    case 'M': result = result + 'MIKE '; break;
+                    case 'N': result = result + 'NOVEMBER '; break;
+                    case 'O': result = result + 'OSCAR '; break;
+                    case 'P': result = result + 'PAPA '; break;
+                    case 'Q': result = result + 'QUEBEC '; break;
+                    case 'R': result = result + 'ROMEO '; break;
+                    case 'S': result = result + 'SIERRA '; break;
+                    case 'T': result = result + 'TANGO '; break;
+                    case 'U': result = result + 'UNIFORM '; break;
+                    case 'V': result = result + 'VICTOR '; break;
+                    case 'W': result = result + 'WHISKEY '; break;
+                    case 'X': result = result + 'X-RAY '; break;
+                    case 'Y': result = result + 'YANKEE '; break;
+                    case 'Z': result = result + 'ZULU '; break;
+                    case ' ': result = result + newline + newline; break;
+                    default: result = result + text.charAt(i) + ' ';
+                }
+            }
+
+            phoentic = result;
+
+            $('#ncic_plate_return').append("Plate: "+data['plate']+"<br/>Phoenetic: "+phoentic+"<br/>Color: "+data['veh_color']+"<br/>Make: "+data['veh_make']+"<br/>Model: "+data['veh_model']+"<br/>Owner: "+data['veh_ro']
             +"<br/>Insurance: "+insurance_status+"<br/>Flags: "+flags+"<br/><br/>Notes: "+notes);
 
             $("#ncic_plate_return").attr("tabindex",-1).focus();
