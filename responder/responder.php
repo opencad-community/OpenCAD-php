@@ -261,22 +261,76 @@
                 
                 if ($_GET['fire'] == "true")
                 {
-                  
+                  //End the above row
+                  echo '
+                  </div>
+                  <!-- ./ row -->
+
+                  <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                      <div class="x_panel">
+                        <div class="x_title">
+                          <h2>Fire PAL</h2>
+                          <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                          </ul>
+                          <div class="clearfix"></div>
+                        </div>
+                        <!-- ./ x_title -->
+                        <div class="x_content">
+                          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScXgKDn0deB7zgnmBvDRJ7KllHLiQdmahvgQbphxZuNhU6h2g/viewform" height="400px" width="100%"></iframe>
+                        </div>
+                        <!-- ./ x_content -->
+                      </div>
+                      <!-- ./ x_panel --> 
+                    </div>
+                    <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                      <div class="x_panel">
+                        <div class="x_title">
+                          <h2>Incident Report</h2>
+                          <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                          </ul>
+                          <div class="clearfix"></div>
+                        </div>
+                        <!-- ./ x_title -->
+                        <div class="x_content">
+                          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeusONacJqMrKBoBxzhdn4Q53f7QjPwlDehjCmKPGLQgGVsKg/viewform?c=0&w=1" height="400px" width="100%"></iframe>
+                        </div>
+                        <!-- ./ x_content -->
+                      </div>
+                      <!-- ./ x_panel --> 
+                    </div>
+                    <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                      <div class="x_panel">
+                        <div class="x_title">
+                          <h2>ePCR</h2>
+                          <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                          </ul>
+                          <div class="clearfix"></div>
+                        </div>
+                        <!-- ./ x_title -->
+                        <div class="x_content">
+                          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeD7GBmb70LYfM7PLOOPddnyNrfYoO-m5NQwpTX1bSSn-9olQ/viewform?c=0&w=1" height="400px" width="100%"></iframe>
+                        </div>
+                        <!-- ./ x_content -->
+                      </div>
+                      <!-- ./ x_panel --> 
+                    </div>
+                    <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
+                  </div>
+                  <!-- ./ row -->
+                  ';
                 }
               }
               else
               {
                
-               
-                /*
-                
-                PUT THE BELOW DIV IN HERE WHEN DONE CODING
-
-                */
-              }
-              ?> 
-
-              <div class="col-md-6 col-sm-6 col-xs-6">
+               echo '
+               <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Citation Creator</h2>
@@ -320,9 +374,17 @@
                 <!-- ./ x_panel -->
               </div>
               <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
+            
+               
+               ';
+               
+              }
+              ?> 
+
+              
+              
             </div>
             <!-- ./ row -->
-
           </div>
           <!-- "" -->
         </div>
