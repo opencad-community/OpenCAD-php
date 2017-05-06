@@ -611,13 +611,23 @@ function getActiveCalls()
         {
             echo '
             <tr id="'.$counter.'">
-                <td>'.$row[0].'</td>
-                <td>'.$row[1].'</td>
-                <td>';
+                <td>'.$row[0].'</td>';
 
-                    getUnitsOnCall($row[0]);
-
-                echo '</td>';
+                //Issue #28. Check if $row[1] == bolo. If so, change text color to orange
+                if ($row[1] == "BOLO")
+                {
+                    echo '<td style="color:orange;">'.$row[1].'</td>';
+                    echo '<td><!--Leave blank--></td>';
+                }
+                else
+                {
+                    echo '<td>'.$row[1].'</td>';
+                    echo '
+                        <td>';
+                            getUnitsOnCall($row[0]);
+                        echo '</td>';
+                }
+                
 
                 echo '<td>'.$row[3].'/'.$row[4].'/'.$row[5].'</td>';
 

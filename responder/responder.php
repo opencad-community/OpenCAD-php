@@ -346,7 +346,7 @@
                     <form id="newCitationForm">
                       <div class="row">
                         <div class="form-group">
-                            <select class="form-control selectpicker civilian" data-live-search="true" name="civilian" id="civilian" title="Select Civilian">
+                            <select class="form-control selectpicker civilian" data-live-search="true" name="civilian" id="civilian" title="Select Civilian" disabled>
                               <?php getCivilianNamesOption();?>
                             </select>
                         </div>
@@ -355,7 +355,7 @@
                       <!-- ./ row -->
                       <div class="row">
                         <div class="form-group">
-                          <select class="form-control selectpicker citation" data-live-search="true" name="citation[]" id="citation[]" multiple data-max-options="2" title="Select Citations (Limit 2)">
+                          <select class="form-control selectpicker citation" data-live-search="true" name="citation[]" id="citation[]" multiple data-max-options="2" title="Select Citations (Limit 2)" disabled>
                             <?php getCitations();?>
                           </select>
                         </div>
@@ -366,7 +366,7 @@
                   <!-- ./ x_content -->
                   <br/>
                   <div class="x_footer">
-                    <button type="submit" class="btn btn-primary pull-right" id="newCitationSubmit">Submit Citation</button>
+                    <button type="submit" class="btn btn-primary pull-right" id="newCitationSubmit" disabled>Submit Citation</button>
                   </div>
                   <!-- ./ x_footer -->
                   </form>

@@ -545,6 +545,7 @@
                 <label class="col-lg-2 control-label">Incident Type</label>
                 <div class="col-lg-10">
                   <select class="form-control selectpicker" data-live-search="true" name="call_type" title="Incident Type" required>
+                    <option value="BOLO">BOLO</option>
                     <?php getCodesNcic();?>
                   </select>
                 </div>
