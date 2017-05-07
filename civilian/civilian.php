@@ -414,7 +414,44 @@
                 </div>
                 <!-- ./ x_panel -->
               </div>
-              <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
+              <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
+
+              <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>New 911 Call</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                    <div class="form-group row">
+                      <label class="col-md-2 control-label">Caller Name</label>
+                      <div class="col-md-10">
+                        <input type="text" name="callerName" class="form-control" id="callerName"/>
+                      </div>
+                      <!-- ./ col-sm-9 -->
+                    </div>
+                    <!-- ./ form-group row -->
+                    <div class="form-group row">
+                      <label class="col-md-2 control-label">Location of Emergency</label>
+                      <div class="col-md-10">
+                        <input type="text" name="location" class="form-control" id="location"/>
+                      </div>
+                      <!-- ./ col-sm-9 -->
+                    </div>
+                    <!-- ./ form-group row -->
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <!-- ./ x_panel -->
+              </div>
+              <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
             </div>
             <!-- ./ row -->
 
