@@ -27,7 +27,7 @@
 
     $civName = $civDob = "";
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    /*if ($_SERVER["REQUEST_METHOD"] == "POST") {
       
       $civName = $_POST["civNameReq"];
       
@@ -50,6 +50,13 @@
           array_push($errors,'<div class="alert alert-danger"><span>DOB must be in YYYY-MM-DD format</span></div>');
       }
 
+    }*/
+
+    $good911 = "";
+    if(isset($_SESSION['good911']))
+    {
+        $good911 = $_SESSION['good911'];
+        unset($_SESSION['good911']);
     }
 
 
@@ -430,32 +437,40 @@
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
+                    <?php echo $good911;?>
+                    <form id="new_911" method="post" action="../actions/api.php">
                     <div class="form-group row">
                       <label class="col-md-2 control-label">Caller Name</label>
                       <div class="col-md-10">
-                        <input type="text" name="callerName" class="form-control" id="callerName"/>
+                        <input type="text" name="911_caller" class="form-control" id="911_caller" required/>
                       </div>
                       <!-- ./ col-sm-9 -->
                     </div>
                     <!-- ./ form-group row -->
                     <div class="form-group row">
-                      <label class="col-md-2 control-label">Location of Emergency</label>
+                      <label class="col-md-2 control-label">Location</label>
                       <div class="col-md-10">
-                        <input type="text" name="location" class="form-control" id="location"/>
+                        <input type="text" name="911_location" class="form-control" id="911_location" required/>
                       </div>
                       <!-- ./ col-sm-9 -->
                     </div>
                     <!-- ./ form-group row -->
                     <div class="form-group row">
-                      <label class="col-md-2 control-label">Location of Emergency</label>
+                      <label class="col-md-2 control-label"><span>Description <a data-toggle="modal" href="#911CallHelpModal"><i class="fa fa-question-circle"></i></a></span></label>
                       <div class="col-md-10">
-                        <input type="text" name="location" class="form-control" id="location"/>
+                        <textarea id="911_description" name="911_description" class="form-control" style="resize:none;" rows="4"></textarea>
                       </div>
                       <!-- ./ col-sm-9 -->
                     </div>
                     <!-- ./ form-group row -->
                   </div>
                   <!-- ./ x_content -->
+                  <div class="x_footer">
+                    <button type="reset" class="btn btn-default" value="Reset">Reset</button>
+                    <input type="submit" class="btn btn-primary" name="new_911" value="Submit 911 Call"/>
+                  </div>
+                  <!-- ./ x_footer -->
+                  </form>
                 </div>
                 <!-- ./ x_panel -->
               </div>
@@ -600,6 +615,47 @@
                 <!-- ./ col-sm-9 -->
               </div>
               <!-- ./ form-group -->
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
+
+    <!-- modals -->
+    <!-- 911 Call Help Modal -->
+    <div class="modal fade" id="911CallHelpModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">How to Submit a 911 Call</h4>
+          </div>
+          <!-- ./ modal-header -->
+          <div class="modal-body">
+            <span>
+              <p><b>Where, What, Who, When, How, Why if available are the primary things to provide to a 911 dispatcher.</b></p>
+              <p>Some things to consider reporting:</p>
+              <p>    
+                <ul><li>Your name</li>
+                <li>Address responders need to go to</li>
+                <li>Any weapons?</li>
+                <li>Age of suspect(s) or victim(s)</li>
+                <li>Height and Weight of suspect(s)</li>
+                <li>Clothing description of suspect(s)</li>
+                <li>Drug use (current or past, includes perscription medications) of any victim(s)</li>
+                <li>Any prior violent behavior</li>
+                <li>Any prior information about psychosis, delusions, hallucinations or other mental health considerations</li>
+                </ul>
+              </p>
+            </span>
           </div>
           <!-- ./ modal-body -->
           <div class="modal-footer">

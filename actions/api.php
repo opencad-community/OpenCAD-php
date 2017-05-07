@@ -57,6 +57,58 @@ if (isset($_GET['getDispatchers']))
 {
     getDispatchers();
 }
+if (isset($_POST['new_911']))
+{
+    create911Call();
+}
+
+function create911Call()
+{
+    //var_dump($_POST);
+
+    $caller = $_POST['911_caller'];
+    $location = $_POST['911_location'];
+    $description = $_POST['911_description'];
+
+    $created = date("Y-m-d H:i:s").': 911 Call Received<br/><br/>Caller States: ';
+
+    $call_notes = $created.$description;
+
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $sql = "INSERT IGNORE INTO calls (call_type, call_street1, call_notes) VALUES ('911', ?, ?)";
+
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    try {
+        $stmt = mysqli_prepare($link, $sql);
+        mysqli_stmt_bind_param($stmt, "ss", $location, $call_notes);
+        $result = mysqli_stmt_execute($stmt);
+    
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+    }
+
+    session_start();
+    $_SESSION['good911'] = '<div class="alert alert-success"><span>Successfully created 911 call</span></div>';
+    
+    sleep(1);
+    header("Location:../civilian/civilian.php");
+
+}
 
 //Checks to see if there are any active tones. Certain tones will add a session variable
 function checkTones()
