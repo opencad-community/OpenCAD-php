@@ -446,6 +446,14 @@
                       <!-- ./ col-sm-9 -->
                     </div>
                     <!-- ./ form-group row -->
+                    <div class="form-group row">
+                      <label class="col-md-2 control-label">Location of Emergency</label>
+                      <div class="col-md-10">
+                        <input type="text" name="location" class="form-control" id="location"/>
+                      </div>
+                      <!-- ./ col-sm-9 -->
+                    </div>
+                    <!-- ./ form-group row -->
                   </div>
                   <!-- ./ x_content -->
                 </div>
