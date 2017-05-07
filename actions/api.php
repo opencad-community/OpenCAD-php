@@ -72,7 +72,7 @@ function create911Call()
 
     $created = date("Y-m-d H:i:s").': 911 Call Received<br/><br/>Caller Name: '.$caller;
 
-    $call_notes = $created.'<br/>Caller States: '.$description;
+    $call_notes = $created.'<br/>Caller States: '.$description.'<br/>';
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
