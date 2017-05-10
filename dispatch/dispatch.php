@@ -740,6 +740,11 @@
     <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
     <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
 
+        <script>
+          var vid = document.getElementById("recurringToneAudio");
+          vid.volume = 0.3;
+        </script>
+
     <script>
     $(document).ready(function() {
         $(function() {

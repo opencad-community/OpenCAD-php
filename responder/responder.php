@@ -567,6 +567,10 @@
     <!-- AUDIO TONES -->
     <audio id="recurringToneAudio" src="../sounds/priority.mp3" preload="auto"></audio>
     <audio id="priorityToneAudio" src="../sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
+    <script>
+      var vid = document.getElementById("recurringToneAudio");
+      vid.volume = 0.3;
+    </script>
     <?php
     if (isset($_GET['fire']))
     {
