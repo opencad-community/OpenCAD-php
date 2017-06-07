@@ -25,8 +25,13 @@
     error_reporting(E_ALL);
     ini_set("display_errors", 1);
 
-    $civName = $civDob = "";
+    $civName = $civDob = $civAddr = "";
 
+
+    //Testing, remove this
+    $civName = "TESTING1 TESTER";
+    $civDob = "2017-01-20";
+    $civAddr = "123 Main Street";
     /*if ($_SERVER["REQUEST_METHOD"] == "POST") {
       
       $civName = $_POST["civNameReq"];
@@ -57,6 +62,13 @@
     {
         $good911 = $_SESSION['good911'];
         unset($_SESSION['good911']);
+    }
+
+    $identityMessage = "";
+    if(isset($_SESSION['identityMessage']))
+    {
+        $identityMessage = $_SESSION['identityMessage'];
+        unset($_SESSION['identityMessage']);
     }
 
 
@@ -228,14 +240,9 @@
                     <div class="clearfix"></div>
                   </div>
                   <!-- ./ x_title -->
-                  <form name="civRequestForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                  <form name="civRequestForm" method="post" action="../actions/civActions.php">
                   <div class="x_content">
-                  <?php 
-                    if(count($errors) > 0){
-                        foreach($errors as $e){
-                            echo $e;
-                        }
-                    }?>
+                  <?php echo $identityMessage;?>
                     <div class="form-group row">
                       <label class="col-md-2 control-label">Name</label>
                       <div class="col-md-10">
@@ -259,7 +266,7 @@
                     <div class="form-group row">
                       <label class="col-md-2 control-label">Address</label>
                       <div class="col-md-10">
-                        <input type="text" name="civAddressReq" class="form-control" id="civAddressReq" required/>
+                        <input type="text" name="civAddressReq" class="form-control" id="civAddressReq" value="<?php echo $civAddr;?>" required/>
                         <span class="fa fa-location-arrow form-control-feedback right" aria-hidden="true"></span>
                       </div>
                       <!-- ./ col-sm-9 -->
@@ -346,7 +353,7 @@
                     <div class="form-group row">
                       <label class="col-md-2 control-label">License Plate</label>
                       <div class="col-md-10">
-                        <input type="text" name="civPlateReq" class="form-control" id="civPlateReq" style="text-transform:uppercase" maxlength="7"/>
+                        <input type="text" name="civPlateReq" class="form-control" id="civPlateReq" style="text-transform:uppercase" maxlength="7" required/>
                         <span class="fa fa-car form-control-feedback right" aria-hidden="true"></span>
                       </div>
                       <!-- ./ col-sm-9 -->
@@ -355,7 +362,7 @@
                     <div class="form-group row">
                       <label class="col-md-2 control-label">Vehicle Make</label>
                       <div class="col-md-10">
-                        <input type="text" name="civMakeReq" class="form-control" id="civMakeReq" style="text-transform:uppercase"/>
+                        <input type="text" name="civMakeReq" class="form-control" id="civMakeReq" style="text-transform:uppercase" required/>
                         <span class="fa fa-car form-control-feedback right" aria-hidden="true"></span>
                       </div>
                       <!-- ./ col-sm-9 -->
@@ -364,7 +371,7 @@
                     <div class="form-group row">
                       <label class="col-md-2 control-label">Vehicle Model</label>
                       <div class="col-md-10">
-                        <input type="text" name="civModelReq" class="form-control" id="civModelReq" style="text-transform:uppercase"/>
+                        <input type="text" name="civModelReq" class="form-control" id="civModelReq" style="text-transform:uppercase" required/>
                         <span class="fa fa-car form-control-feedback right" aria-hidden="true"></span>
                       </div>
                       <!-- ./ col-sm-9 -->
@@ -415,7 +422,7 @@
                   </div>
                   <!-- ./ x_content -->
                   <div class="x_footer">
-                    <input type="submit" class="btn btn-primary" name="request" value="Submit Identity Request" disabled/>
+                    <input type="submit" class="btn btn-primary" name="requestIdentity" value="Submit Identity Request"/>
                   </div>
                   </form>
                 </div>

@@ -44,6 +44,99 @@ if (isset($_POST['create_name'])){
 if (isset($_POST['create_plate'])){ 
     create_plate();
 }
+if (isset($_POST['reject_identity_request'])){ 
+    rejectRequest();
+}
+
+function rejectRequest()
+{
+    $req_id = $_POST['id'];
+
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) { 
+        die('Could not connect: ' .mysql_error());
+    }
+    
+    $query = "DELETE FROM identity_requests WHERE req_id = ?";
+    
+    try {
+        $stmt = mysqli_prepare($link, $query);
+        mysqli_stmt_bind_param($stmt, "i", $req_id);
+        $result = mysqli_stmt_execute($stmt);
+        
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage());
+    }
+
+    session_start();
+    $_SESSION['identityRequestMessage'] = '<div class="alert alert-success"><span>Successfully rejected request</span></div>';
+    header("Location: ../administration/ncicAdmin.php");
+}
+
+function getIdentityRequests()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) { 
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT req_id, submittedByName, submitted_on FROM identity_requests";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>There are no identity requests</span></div>";
+    }
+    else
+    {
+        echo '
+            <table id="identityRequests" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Request ID</th>
+                <th>Submitted By</th>
+                <th>Submitted On</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>           
+        ';
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            echo '
+            <tr>
+                <td>'.$row[0].'</td>
+                <td>'.$row[1].'</td>
+                <td>'.$row[2].'</td>
+                <td>
+                    <form action="../actions/ncicAdminActions.php" method="post">
+                    <button name="viewRequestDetails" data-toggle="modal" data-target="#requestDetails" class="btn btn-xs btn-link" type="button">Details</button>
+                    <input name="reject_identity_request" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Quick Reject"/>
+                    <input name="accept_identity_request" type="submit" class="btn btn-xs btn-link" style="color: green;" value="Quick Accept"/>
+                    <input name="id" type="hidden" value='.$row[0].' />
+                    </form>                    
+                </td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
 
 function ncicGetNames()
 {
@@ -98,7 +191,7 @@ function ncicGetNames()
                 <td>'.$row[8].'</td>
                 <td>'.$row[9].'</td>
                 <td>
-                    <button name="edit_name" data-toggle="modal" data-target="#editNameModal" class="btn btn-xs btn-link">Edit</button>
+                    <button name="edit_name" data-toggle="modal" data-target="#editNameModal" class="btn btn-xs btn-link" disabled>Edit</button>
                     <form action="../actions/ncicAdminActions.php" method="post">
                     <input name="delete_name" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
                     <input name="uid" type="hidden" value='.$row[0].' />
