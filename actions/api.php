@@ -41,6 +41,10 @@ if (isset($_GET['getActiveUnits']))
 {
     getActiveUnits();
 }
+if (isset($_GET['getActiveUnitsModal']))
+{
+    getActiveUnitsModal();
+}
 if (isset($_POST['logoutUser']))
 {
     logoutUser();
@@ -226,6 +230,9 @@ function logoutUser()
 
 function changeStatus()
 {
+
+    //var_dump($_POST);
+
     $unit = $_POST['unit'];
     $status = $_POST['status'];
     $statusId;
@@ -286,6 +293,7 @@ function changeStatus()
 
     if ($onCall)
     {
+        //echo $unit;
         //Figure out what call they're on
         $sql = "SELECT call_id FROM calls_users WHERE identifier = \"$unit\"";
 
@@ -624,6 +632,27 @@ function getActiveUnits()
     echo json_encode($encode);
 }
 
+function getActiveUnitsModal()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	
+    if (!$link) { 
+        die('Could not connect: ' .mysql_error());
+    }
+    
+    $query = "SELECT callsign, identifier FROM active_users WHERE status = '1'";
+
+    $result=mysqli_query($link, $query);
+
+    $encode = array();
+    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    {
+        $encode[$row[1]] = $row[0];
+    }
+    
+    echo json_encode($encode);
+}
+
 function getActiveCalls()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -681,7 +710,7 @@ function getActiveCalls()
                 }
                 
 
-                echo '<td>'.$row[3].'/'.$row[4].'/'.$row[5].'</td>';
+                echo '<td>'.$row[2].'/'.$row[3].'/'.$row[4].'</td>';
 
                 if (isset($_GET['type']) && $_GET['type'] == "responder")
                 {
@@ -741,7 +770,7 @@ function getUnitsOnCall($callId)
     {
         while($row1 = mysqli_fetch_array($result1, MYSQLI_BOTH))
         {
-            $units = $units.''.$row1[1].' ';   
+            $units = $units.''.$row1[2].', ';   
         }
     }
 
@@ -771,10 +800,10 @@ function getCallDetails()
     {
         $encode["call_id"] = $row[0];
         $encode["call_type"] = $row[1];
-        $encode["call_street1"] = $row[3];
-        $encode["call_street2"] = $row[4];
-        $encode["call_street3"] = $row[5];
-        $encode["narrative"] = $row[6];
+        $encode["call_street1"] = $row[2];
+        $encode["call_street2"] = $row[3];
+        $encode["call_street3"] = $row[4];
+        $encode["narrative"] = $row[5];
         
     }
     

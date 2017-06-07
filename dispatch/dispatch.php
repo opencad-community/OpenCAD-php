@@ -112,7 +112,8 @@
                     <ul class="nav child_menu" style="display: block;">
                       <li class="current-page"><a href="javascript:void(0)">Dashboard</a></li>
                       <li><a href="../actions/direction.php">CAD Direction Page</a></li>
-                      <li><a href="https://puu.sh/tRzTt/330b12ab3c.jpg" target="_blank">GTA 5 DOJRP Map</a></li>
+                      <li><a href="https://drive.google.com/file/d/0B_6153e5tBW1Y1NwUGRwUGpYeVU/view" target="_blank">GTA 5 DOJRP Map</a></li>
+                      <li><a href="http://oriongc.net/playerloc/leafletmap.php" target="_blank">Live Unit Map</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-clock-o"></i> Stopwatch <span class="fa fa-chevron-down"></span></a>
@@ -507,7 +508,7 @@
               <label class="col-lg-2 control-label">Assign Unit to Call</label>
               <div class="col-lg-10">
                 <select class="form-control selectpicker unit" data-live-search="true" name="unit" id="unit" title="Select a Unit">
-                  <option></option>
+                  <option name="callsign"></option>
                 </select>
                 <input type="hidden" value="" name="callId" />
               </div>

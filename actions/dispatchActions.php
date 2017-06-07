@@ -92,6 +92,7 @@ function addNarrative()
 
 function assignUnit()
 {
+    //var_dump($_POST);
     //Need to explode the details by &
     $details = $_POST['details'];
     $detailsArr = explode("&", $details);
@@ -111,12 +112,21 @@ function assignUnit()
     if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
+
+    $sql = "SELECT callsign FROM active_users WHERE identifier = \"$unit\"";
+
+    $result=mysqli_query($link, $sql);
+	
+	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+	{
+		$callsign = $row[0];
+	}
     
-    $sql = "INSERT INTO calls_users (call_id, identifier) VALUES (?, ?)";
+    $sql = "INSERT INTO calls_users (call_id, identifier, callsign) VALUES (?, ?, ?)";
 
     try {
         $stmt = mysqli_prepare($link, $sql);
-        mysqli_stmt_bind_param($stmt, "is", $callId, $unit);
+        mysqli_stmt_bind_param($stmt, "iss", $callId, $unit, $callsign);
         $result = mysqli_stmt_execute($stmt);
     
         if ($result == FALSE) {
@@ -133,7 +143,7 @@ function assignUnit()
 
     try {
         $stmt = mysqli_prepare($link, $sql);
-        mysqli_stmt_bind_param($stmt, "s", $unit);
+        mysqli_stmt_bind_param($stmt, "s", $callsign);
         $result = mysqli_stmt_execute($stmt);
     
         if ($result == FALSE) {
@@ -146,7 +156,7 @@ function assignUnit()
     }
 
     //Now we'll add data to the call log for unit history
-    $narrativeAdd = date("Y-m-d H:i:s").': Dispatched: '.$unit.'<br/>';
+    $narrativeAdd = date("Y-m-d H:i:s").': Dispatched: '.$callsign.'<br/>';
 
     $sql = "UPDATE calls SET call_notes = concat(call_notes, ?) WHERE call_id = ?";
 
@@ -169,6 +179,7 @@ function assignUnit()
 
 function storeCall()
 {
+    
     $callId = $_POST['callId']; 
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -198,6 +209,7 @@ function storeCall()
 
 function clearCall()
 {
+
     $callId = $_POST['callId']; 
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -254,7 +266,8 @@ function clearUnitFromCall($callId, $unit)
         if ($result == FALSE) {
             die(mysqli_error($link));
         } 
-        
+
+        echo "Here ".$unit;
         freeUnitStatus($unit);
     }
     catch (Exception $e)
@@ -271,7 +284,7 @@ function freeUnitStatus($unit)
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "UPDATE active_users SET status = '1', status_detail = '1' WHERE active_users.callsign = ?";
+    $sql = "UPDATE active_users SET status = '1', status_detail = '1' WHERE active_users.identifier = ?";
 
     try {
         $stmt = mysqli_prepare($link, $sql);
@@ -292,6 +305,8 @@ function newCall()
 {
     //Need to explode the details by &
     $details = $_POST['details'];
+    $details = urldecode($details);
+
     $detailsArr = explode("&", $details);
 
     //Now, each item in the details array needs to be exploded by = to get the value
@@ -320,11 +335,11 @@ function newCall()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $sql = "INSERT INTO calls (call_primary, call_type, call_street1, call_street2, call_street3, call_notes) VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO calls (call_type, call_street1, call_street2, call_street3, call_notes) VALUES (?, ?, ?, ?, ?)";
 
 	try {
 		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "ssssss", $unit1, $call_type, $street1, $street2, $street3, $narrative);
+		mysqli_stmt_bind_param($stmt, "sssss", $call_type, $street1, $street2, $street3, $narrative);
 		$result = mysqli_stmt_execute($stmt);
 
         //Get the ID of the new call to assign units to it
@@ -353,11 +368,11 @@ function newCall()
     { /*Do nothing*/ }
     else
     {
-        $sql = "INSERT INTO calls_users (call_id, identifier) VALUES (?, ?)";
+        $sql = "INSERT INTO calls_users (call_id, identifier, callsign) VALUES (?, ?, ?)";
 
         try {
             $stmt = mysqli_prepare($link, $sql);
-            mysqli_stmt_bind_param($stmt, "is", $last_id, $unit_call_identifier);
+            mysqli_stmt_bind_param($stmt, "iss", $last_id, $unit_call_identifier, $unit1);
             $result = mysqli_stmt_execute($stmt);
 		
             if ($result == FALSE) {

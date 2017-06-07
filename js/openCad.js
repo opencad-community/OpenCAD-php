@@ -345,7 +345,7 @@ $(function() {
             },
             success: function(response) 
             {
-            //console.log(response);
+            console.log(response);
             if (response == "SUCCESS")
             {
                 $('#closeAssign').trigger('click');
@@ -500,9 +500,10 @@ $('#assign').on('show.bs.modal', function(e) {
         cache: false,
         type: 'GET',
         url: '../actions/api.php',
-        data: {'getActiveUnits': 'yes'},
+        data: {'getActiveUnitsModal': 'yes'},
         success: function(result) 
         {
+        //console.log(result);
         data = JSON.parse(result);
 
         var mymodal = $('#assign');      
@@ -535,6 +536,7 @@ $('#callDetails').on('show.bs.modal', function(e) {
                 'callId' : callId},
         success: function(result) 
         {
+        
         data = JSON.parse(result);
 
         var mymodal = $('#callDetails');
