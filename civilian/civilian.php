@@ -29,9 +29,10 @@
 
 
     //Testing, remove this
-    $civName = "TESTING1 TESTER";
-    $civDob = "2017-01-20";
-    $civAddr = "123 Main Street";
+    //$civName = "TESTING1 TESTER";
+    //$civDob = "2017-01-20";
+    //$civAddr = "123 Main Street";
+
     /*if ($_SERVER["REQUEST_METHOD"] == "POST") {
       
       $civName = $_POST["civNameReq"];
