@@ -248,6 +248,10 @@ function changeStatus()
             $statusDet = '1';
             $onCall = true;
             break;
+        case "statusSig11":
+            $statusId = '1';
+            $statusDet = '5';
+            break;
         case "10-8":
             $statusId = '1';
             $statusDet = '1';
@@ -260,6 +264,10 @@ function changeStatus()
         case "10-5":
             $statusId = '0';
             $statusDet = '4';
+            break;
+        case "sig11":
+            $statusId = '1';
+            $statusDet = '5';
             break;
     }
 
@@ -475,6 +483,7 @@ function getAvailableUnits()
                 <div class="dropdown"><button class="btn btn-link dropdown-toggle nopadding" type="button" data-toggle="dropdown">Status <span class="caret"></span></button><ul class="dropdown-menu">
                     <li><a id="statusMeal'.$counter.'" class="statusMeal '.$row[0].'" onclick="testFunction(this);">10-5/Meal Break</a></li>
                     <li><a id="statusOther'.$counter.'" class="statusOther '.$row[0].'" onclick="testFunction(this);">10-6/Other</a></li>
+                    <li><a id="statusSig11'.$counter.'" class="statusSig11 '.$row[0].'" onclick="testFunction(this);">Signal 11</a></li>
                 </ul></div>
                 
                 </td>

@@ -242,6 +242,7 @@
                                   <option value="10-8">10-8/Available</option>
                                   <option value="10-6">10-6/Busy</option>
                                   <option value="10-5">10-5/Meal Break</option>
+                                  <option value="sig11">Signal 11</option>
                                 </select>
                             </div>
                             <!-- ./ col-sm-9 -->
