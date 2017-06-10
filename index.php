@@ -136,7 +136,7 @@
                 <input class="form-control" placeholder="Identifier (Code Number, Unit ID)" name="identifier" type="text" value="<?php if($testing){echo "1A-1";}?>" required>
               </div>
               <div class="form-group">
-                <label>Division (Can choose more than one)</label>
+                <label>Division (Can choose more than one via Ctrl + Click)</label>
                 <select class="form-control" id="division" name="division[]" multiple="multiple" size="6" required>
                     <option value="civilian">Civilian</option>
                     <option value="communications">Communications (Dispatch)</option>
