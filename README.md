@@ -8,10 +8,10 @@ Open source Computer Aided Dispatch System for GTAV RolePlay Communities. This s
 
 Contents of file should be (change the connection_file_location to the correct spot):
 
-[main]
-connection_file_location = "/HIDE/connections.php"
-
-[strings]
-community = "COMMUNITY"
+>[main]
+>connection_file_location = "/HIDE/connections.php"
+>
+>[strings]
+>community = "COMMUNITY"
 
 4. Modify connections.php with correct MySQL Connection values
