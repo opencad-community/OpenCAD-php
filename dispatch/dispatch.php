@@ -881,11 +881,13 @@
               success: function(response) 
               {
                 $('#availableUnits').html(response);
-                $('#activeUsers').DataTable({
+                
+                // SG - Removed until node/real-time data setup
+                /*$('#activeUsers').DataTable({
                   searching: false,
                   scrollY: "200px",
                   lengthMenu: [[4, -1], [4, "All"]]
-			          });
+			          });*/
                 setTimeout(getAvailableUnits, 5000);
                 
                 

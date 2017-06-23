@@ -330,6 +330,10 @@
               else
               {
                
+               /*
+               
+                    SG - Commenting out for now since citation creation isn't going to be a thing for LEOs
+
                echo '
                <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="x_panel">
@@ -377,7 +381,10 @@
               <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
             
                
-               ';
+               '; */
+
+              getMyCall();
+
                
               }
               ?> 
@@ -600,6 +607,37 @@
         getStatus();
         checkTones();
 
+        $('#enroute_btn').click(function(evt) {
+          console.log(evt);
+          var callId = $('#call_id_det').val();
+
+          $.ajax({
+              type: "POST",
+              url: "../actions/api.php",
+              data: {
+                  quickStatus: 'yes',
+                  event: 'enroute',
+                  callId: callId
+              },
+              success: function(response) 
+              {
+                console.log(response);
+
+                new PNotify({
+                  title: 'Success',
+                  text: 'Successfully updated narrative',
+                  type: 'success',
+                  styling: 'bootstrap3'
+                });               
+              },
+              error : function(XMLHttpRequest, textStatus, errorThrown)
+              {
+                console.log("Error");
+              }
+              
+            });
+        });
+
     });
 	</script>
 
@@ -752,6 +790,8 @@
                         type: 'success',
                         styling: 'bootstrap3'
                     });
+
+                    getMyCallDetails();
                 }
             }
             else if (response.match("^<br"))
@@ -774,6 +814,11 @@
         }
         
     }); 
+    }
+
+    function getMyCallDetails()
+    {
+      console.log("Got here");
     }
     </script>
 

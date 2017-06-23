@@ -75,6 +75,7 @@
         $_SESSION['name'] = $name;
         $_SESSION['email'] = $email;
         $_SESSION['identifier'] = $identifier;
+        $_SESSION['callsign'] = $identifier; //Set callsign to default to identifier until the unit changes it
 
         header("Location:./direction.php");
     }

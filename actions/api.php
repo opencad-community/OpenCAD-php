@@ -65,6 +65,234 @@ if (isset($_POST['new_911']))
 {
     create911Call();
 }
+if (isset($_POST['quickStatus']))
+{
+    quickStatus();
+}
+
+function quickStatus()
+{
+    $event = $_POST['event'];
+    $callId = $_POST['callId'];
+    session_start();
+    $callsign = $_SESSION['callsign'];
+    
+    
+    //var_dump($_SESSION);
+
+    switch($event)
+    {
+        case "enroute":
+            $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+            if (!$link) {
+                die('Could not connect: ' .mysql_error());
+            }
+
+            //Update the call_notes to say they're en-route
+            $narrativeAdd = date("Y-m-d H:i:s").': '.$callsign.': En-Route<br/>';
+            
+
+            $sql = "UPDATE calls SET call_notes = concat(call_notes, ?) WHERE call_id = ?";
+
+            try {
+                $stmt = mysqli_prepare($link, $sql);
+                mysqli_stmt_bind_param($stmt, "si", $narrativeAdd, $callId);
+                $result = mysqli_stmt_execute($stmt);
+            
+                if ($result == FALSE) {
+                    die(mysqli_error($link));
+                }
+            }
+            catch (Exception $e)
+            {
+                die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+            }
+
+            break;
+
+        case "onscene":
+            
+            break;
+    }
+    
+}
+
+function getMyCall()
+{
+    //First, check to see if they're on a call
+    $identifier = $_SESSION['identifier'];
+    
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+	
+	$sql = "SELECT * from active_users WHERE identifier = '$identifier' AND status = '0' AND status_detail = '3'";
+	
+	$result = mysqli_query($link, $sql);
+
+    $num_rows = $result->num_rows;
+
+    echo '
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="x_panel">
+                <div class="x_title">
+                <h2>My Call</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                </ul>
+                <div class="clearfix"></div>
+                </div>
+                <!-- ./ x_title -->
+                <div class="x_content">
+    ';
+
+
+    if($num_rows == 0)
+    {
+        echo '<div class="alert alert-info"><span>Not currently on a call</span></div>';
+    }
+    else
+    {
+        //Figure out what call the user is on
+        $sql = "SELECT call_id from calls_users WHERE identifier = '$identifier'";
+	
+	    $result = mysqli_query($link, $sql);
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            $call_id = $row[0];
+        }
+
+        //Get call details
+        $sql = "SELECT * from calls WHERE call_id = '$call_id'";
+	
+	    $result = mysqli_query($link, $sql);
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            $call_type = $row[1];
+            $call_street1 = $row[2];
+            $call_street2 = $row[3];
+            $call_street3 = $row[4];
+            $call_notes = $row[5];
+        }
+
+
+        echo '
+            <p style="font-weight:bold">&nbsp&nbsp&nbspQuick Status Updates</p>
+            <a class="btn btn-app"  id="enroute_btn">
+                <i class="fa fa-car"></i> En Route
+            </a>
+            <a class="btn btn-app">
+                <i class="fa fa-home"></i> On Scene
+            </a>
+            <a class="btn btn-app">
+                <i class="fa fa-check"></i> Code 4
+            </a>
+            <a class="btn btn-app">
+                <i class="fa fa-shield"></i> Subj. in Cust.
+            </a>
+            <a class="btn btn-app">
+                <i class="fa fa-university"></i> En Route Jail
+            </a>
+            <a class="btn btn-app">
+                <i class="fa fa-ambulance"></i> En Route Hospital
+            </a>
+            <a class="btn btn-app">
+                <i class="fa fa-crosshairs" style="color:red"></i> 10-99
+            </a> 
+            <br/><br/>
+
+            <div class="form-group">
+              <label class="col-lg-2 control-label">Incident ID</label>
+              <div class="col-lg-10">
+                <input type="text" id="call_id_det" name="call_id_det" class="form-control" value="'.$call_id.'" disabled>
+              </div>
+              <!-- ./ col-sm-9 -->
+            </div>
+            <br/>
+            <!-- ./ form-group -->
+            <div class="form-group">
+              <label class="col-lg-2 control-label">Incident Type</label>
+              <div class="col-lg-10">
+                <input type="text" id="call_type_det" name="call_type_det" class="form-control" value="'.$call_type.'" disabled>
+              </div>
+              <!-- ./ col-sm-9 -->
+            </div>
+            <br/>
+            <!-- ./ form-group -->
+            <div class="form-group">
+              <label class="col-lg-2 control-label">Street 1</label>
+              <div class="col-lg-10">
+                <input type="text" id="call_street1_det" name="call_street1_det" class="form-control" value="'.$call_street1.'" disabled>
+              </div>
+              <!-- ./ col-sm-9 -->
+            </div>
+            <br/>
+            <!-- ./ form-group -->
+            <div class="form-group">
+              <label class="col-lg-2 control-label">Street 2</label>
+              <div class="col-lg-10">
+                <input type="text" id="call_street2_det" name="call_street2_det" class="form-control" value="'.$call_street2.'" disabled>
+              </div>
+              <!-- ./ col-sm-9 -->
+            </div>
+            <br/>
+            <!-- ./ form-group -->
+            <div class="form-group">
+              <label class="col-lg-2 control-label">Street 3</label>
+              <div class="col-lg-10">
+                <input type="text" id="call_street3_det" name="call_street3_det" class="form-control" value="'.$call_street3.'" disabled>
+              </div>
+              <!-- ./ col-sm-9 -->
+            </div>
+            
+            <div class="clearfix">
+            <br/><br/><br/><br/>
+            <!-- ./ form-group -->
+            <div class="form-group">
+              <label class="col-lg-2 control-label">Narrative</label>
+              <div class="col-lg-10">
+                <div name="call_narrative" id="call_narrative" contenteditable="false" style="background-color: #eee; opacity: 1; border: 1px solid #ccc; padding: 6px 12px; font-size: 14px;">'.$call_notes.'</div>
+              </div>
+              <!-- ./ col-sm-9 -->
+            </div>
+            <br/>
+            <!-- ./ form-group -->
+            <div class="form-group">
+              <label class="col-lg-2 control-label">Add Narrative</label>
+              <div class="col-lg-10">
+                <textarea name="narrative_add" id="narrative_add" class="form-control" style="text-transform:uppercase" rows="2" required></textarea>
+              </div>
+              <!-- ./ col-sm-9 -->
+            </div>
+            <br/>
+            <!-- ./ form-group -->
+
+        ';
+    }
+
+    echo '
+        </div>
+        <!-- ./ x_content -->
+        <br/>
+        <div class="x_footer">
+        
+        </div>
+        <!-- ./ x_footer -->
+        </form>
+    </div>
+    <!-- ./ x_panel -->
+</div>
+<!-- ./ col-md-6 col-sm-6 col-xs-6 -->
+    ';
+    
+
+    
+}
 
 function create911Call()
 {
@@ -522,7 +750,7 @@ function getUnAvailableUnits()
     else
     {
         echo '
-                <table id="unAvailableUnitsTable" class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
                     <th>Identifier</th>
@@ -548,7 +776,8 @@ function getUnAvailableUnits()
 
                     echo '</td>
                     
-                    <td><a id="logoutUser" class="nopadding logoutUser '.$row[0].'" onclick="logoutUser(this);" style="color:red; cursor:pointer;">Logout</a>&nbsp;&nbsp;&nbsp;
+                    <td>
+                    <a id="logoutUser" class="nopadding logoutUser '.$row[0].'" onclick="logoutUser(this);" style="color:red; cursor:pointer;">Logout</a>&nbsp;&nbsp;&nbsp;
                     <div class="dropdown"><button class="btn btn-link dropdown-toggle nopadding" style="display: inline-block; vertical-align:top;" type="button" data-toggle="dropdown">Status <span class="caret"></span></button><ul class="dropdown-menu">
                         <li><a id="statusAvail" class="statusAvailBusy '.$row[0].'" onclick="testFunction(this);">10-8/Available</a></li>
                     </ul></div>

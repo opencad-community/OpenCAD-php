@@ -66,6 +66,8 @@ function updateCallsign()
 	}
 	mysqli_close($link);
 
+    $_SESSION['callsign'] = $callsign;
+
     echo "SUCCESS";
 }
 

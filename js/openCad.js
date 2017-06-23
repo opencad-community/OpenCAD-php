@@ -422,11 +422,14 @@ $.ajax({
         success: function(response) 
         {
         $('#unAvailableUnits').html(response);
-        $('#unAvailableUnitsTable').DataTable({
+
+        // SG - Removed until the node/real time services come available. having datatables messes things up.
+        /*$('#unAvailableUnitsTable').DataTable({
             searching: false,
             scrollY: "200px",
             lengthMenu: [[4, -1], [4, "All"]]
                 });
+        */
         setTimeout(getUnAvailableUnits, 5000);
         
         },
