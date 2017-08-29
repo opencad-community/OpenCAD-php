@@ -141,8 +141,18 @@ mysqli_close($link);
     <!-- CSS -->
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="../css/bootstrap.css">
-
-    <title>User Direction</title>
+    <style>
+    #cadWelcome {
+    height:20px; 
+    width:50px; 
+    margin: 50%px 50%px; 
+    position:relative;
+    top:90%; 
+    left:45%;
+    text-align:center;
+    }
+    </style>
+    <title>CAD/MDT Launcher</title>
     <link rel="icon" href="../images/favicon.ico" />
 </head>
 <body>
@@ -150,15 +160,15 @@ mysqli_close($link);
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header" style="text-align:center;">What would you like to do?</h1>
+                    <h1 class="page-header" style="text-align:center;">Select console to laucnh:</h1>
                 </div>
                 <!-- ./ col-lg-12 -->
             </div>
             <!-- ./ row -->
             </div class="row">
-                <div class="col-lg-12">
-                    <?php echo $adminButton;?>
-                    &nbsp;
+                <div class="col-lg-12" id="cadWelcome">
+                    <?php echo $adminButton;?><br/><br/>
+                    
                     <?php echo $dispatchButton;?>
                     &nbsp;
                     <?php echo $emsButton;?>
