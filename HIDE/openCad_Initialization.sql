@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS "opencad";
-USE "opencad";
+CREATE DATABASE IF NOT EXISTS opencad; 
+USE opencad;
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
