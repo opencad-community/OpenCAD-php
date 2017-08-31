@@ -1,6 +1,7 @@
 <?php
 
-
+$iniContents = parse_ini_file($_SERVER["DOCUMENT_ROOT"]."/properties/config.ini", true); //Gather from config.ini file
+$connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['connection_file_location'];
 
 
 function checkIfHeadAdmin()

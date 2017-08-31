@@ -26,10 +26,10 @@
       die("You do not have permission to be here. Request access to dispatch through your administration.");
     }
 
-    $iniContents = parse_ini_file("../properties/config.ini", true); //Gather from config.ini file
+    $iniContents = parse_ini_file("./properties/config.ini", true); //Gather from config.ini file
     $community = $iniContents['strings']['community'];
 
-    include("../actions/api.php");
+    include("./actions/api.php");
     setUnitActive("1");
 
 ?>

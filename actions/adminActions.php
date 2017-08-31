@@ -14,8 +14,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     This file handles all actions for admin.php script
 */
 
-$iniContents = parse_ini_file("../properties/config.ini", true); //Gather from config.ini file
-$connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"]."/openCad/".$iniContents['main']['connection_file_location'];
+$iniContents = parse_ini_file($_SERVER["DOCUMENT_ROOT"]."/properties/config.ini", true); //Gather from config.ini file
+$connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['connection_file_location'];
 
 require($connectionsFileLocation);
 
@@ -125,7 +125,7 @@ function delete_user()
 
     session_start();
     $_SESSION['userMessage'] = '<div class="alert alert-success"><span>Successfully removed user from database</span></div>';
-    header("Location: ../administration/userManagement.php#user_panel");
+    header("Location: ../oc-admin/userManagement.php#user_panel");
 }
 
 /* Gets the user count. Returns value */
@@ -350,7 +350,7 @@ function approveUser()
     $_SESSION['accessMessage'] = '<div class="alert alert-success"><span>Successfully approved user access</span></div>';
     
     sleep(1);
-    header("Location:../administration/admin.php");
+    header("Location:../oc-admin/admin.php");
     
 
 }
@@ -411,7 +411,7 @@ function rejectUser()
     $_SESSION['accessMessage'] = '<div class="alert alert-danger"><span>Successfully rejected user access</span></div>';
     
     sleep(1);
-    header("Location:../administration/admin.php");
+    header("Location:../oc-admin/admin.php");
     
 }
 
@@ -536,7 +536,7 @@ function suspendUser()
     $_SESSION['accessMessage'] = '<div class="alert alert-success"><span>Successfully suspended user account</span></div>';
     
     sleep(1);
-    header("Location:../administration/userManagement.php");
+    header("Location:../oc-admin/userManagement.php");
 }
 
 function reactivateUser()
@@ -571,7 +571,7 @@ function reactivateUser()
     $_SESSION['accessMessage'] = '<div class="alert alert-success"><span>Successfully reactivated user account</span></div>';
     
     sleep(1);
-    header("Location:../administration/userManagement.php");
+    header("Location:../oc-admin/userManagement.php");
 }
 
 function getUserDetails()
@@ -801,6 +801,6 @@ catch (Exception $e)
 
 session_start();
 $_SESSION['historyMessage'] = '<div class="alert alert-success"><span>Successfully removed archived call</span></div>';
-header("Location: ../administration/callhistory.php#history_panel");
+header("Location: ../oc-admin/callhistory.php#history_panel");
 }
 ?>

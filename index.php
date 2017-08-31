@@ -24,6 +24,11 @@
     $registerSuccess = "";
     $loginMessage = "";
 
+    if ( (isset($_SESSION['logged_in'])) == "YES" )
+    {
+      header ('Location: ./dashboard.php');
+;      //echo $_SESSION['name']." is logged in!";
+    }
     if (isset($_GET['loggedOut']))
     {
         $loginMessage = '<div class="alert alert-success" style="text-align: center; font-weight:normal;" ><span>You\'ve successfully been logged out</span></div>';  
@@ -114,7 +119,7 @@
 
                 <div>
                   <h1><i class="fa fa-tachometer"></i> <?php echo $community;?> CAD System</h1>
-                  <p>©2017 All Rights Reserved. openCad is open source. <a href="http://www.github.com/ossified/openCad">Download from GitHub.</a></p>
+                  <p>openCAD is released under GNU GPL v3.<a href="http://www.github.com/phillf/openCad">Download from GitHub.</a></p>
                 </div>
               </div>
             </form>
@@ -171,7 +176,7 @@
 
                 <div>
                   <h1><i class="fa fa-tachometer"></i> <?php echo $community;?> CAD System</h1>
-                  <p>©2017 All Rights Reserved. openCad is open source. <a href="http://www.github.com/ossified/openCad">Download from GitHub.</a></p>
+                  <p>openCAD is released under GNU GPL v3.<a href="http://www.github.com/phillf/openCad">Download from GitHub.</a></p>
                 </div>
               </div>
             </form>

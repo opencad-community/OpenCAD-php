@@ -5,7 +5,7 @@
 	
     if (empty($_SESSION['logged_in']))
     {
-        header('Location: ../index.php');
+        header('Location: ./index.php');
         die("Not logged in");
     }
     else
@@ -13,11 +13,24 @@
       $name = $_SESSION['name'];
     }
 
-    $iniContents = parse_ini_file("../properties/config.ini", true); //Gather from config.ini file
-    $community = $iniContents['strings']['community'];
+    if(isset($_SESSION['police']))
+    {
+      
+      if ($_SESSION['police'] == 'YES')
+      {
+          //Do nothing
+      }
+    }
+    else
+    {
+      die("You do not have permission to be here. Request access to dispatch through your administration.");
+    }
 
-    include("../actions/api.php");
-    setUnitActive("2");
+$iniContents = parse_ini_file($_SERVER["DOCUMENT_ROOT"]."/properties/config.ini", true); //Gather from config.ini file
+$connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['connection_file_location'];
+
+    include("./actions/api.php");
+    setUnitActive("1");
 
 ?>
 
@@ -31,31 +44,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title><?php echo $community;?> Responder</title>
-    <link rel="icon" href="../images/favicon.ico" />
+    <link rel="icon" href="./images/favicon.ico" />
 
     <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="./vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- iCheck -->
-    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <link href="./vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="./vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- Datatables -->
-    <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <link href="./vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="./vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="./vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="./vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="./vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
     <link href="https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
     <!-- PNotify -->
-    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
-    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
-    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <link href="./vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="./vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="./vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
     
 
     <!-- Custom Theme Style -->
-    <link href="../css/custom.css" rel="stylesheet">
+    <link href="./css/custom.css" rel="stylesheet">
   </head>
   <body class="nav-md">
     <div class="container body">
@@ -71,7 +84,7 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="../images/user.png" alt="..." class="img-circle profile_img">
+                <img src="./images/user.png" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
@@ -91,7 +104,7 @@
                   <li class="active"><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: block;">
                       <li class="current-page"><a href="javascript:void(0)">Dashboard</a></li>
-                      <li><a href="../actions/direction.php">CAD Direction Page</a></li>
+                      <li><a href="./actions/direction.php">CAD Direction Page</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-external-link"></i> Links <span class="fa fa-chevron-down"></span></a>
@@ -125,7 +138,7 @@
               <a data-toggle="tooltip" data-placement="top">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="../actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="./actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -144,13 +157,13 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="../images/user.png" alt=""><?php echo $name;?>
+                    <img src="./images/user.png" alt=""><?php echo $name;?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="../profile/profile.php">My Profile</a></li>
+                    <li><a href="./profile/profile.php">My Profile</a></li>
                     <li><a href="https://github.com/ossified/openCad/issues">Help</a></li>
-                    <li><a href="../actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="./actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
@@ -538,28 +551,28 @@
     <!-- ./ modal fade bs-example-modal-lg -->
 
     <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <script src="./vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
-    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
-    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <script src="./vendors/fastclick/lib/fastclick.js"></script>
     <!-- iCheck -->
-    <script src="../vendors/iCheck/icheck.min.js"></script>
+    <script src="./vendors/iCheck/icheck.min.js"></script>
     <!-- NProgress -->
-    <script src="../vendors/nprogress/nprogress.js"></script>
+    <script src="./vendors/nprogress/nprogress.js"></script>
     <!-- Datatables -->
-    <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-    <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-    <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="./vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="./vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="./vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="./vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="./vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="./vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="./vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="./vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="./vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="./vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="./vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="./vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
     <!-- Bootstrap Select -->
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
@@ -568,13 +581,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     
     <!-- PNotify -->
-    <script src="../vendors/pnotify/dist/pnotify.js"></script>
-    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
-    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
+    <script src="./vendors/pnotify/dist/pnotify.js"></script>
+    <script src="./vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="./vendors/pnotify/dist/pnotify.nonblock.js"></script>
 
     <!-- AUDIO TONES -->
-    <audio id="recurringToneAudio" src="../sounds/priority.mp3" preload="auto"></audio>
-    <audio id="priorityToneAudio" src="../sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
+    <audio id="recurringToneAudio" src="./sounds/priority.mp3" preload="auto"></audio>
+    <audio id="priorityToneAudio" src="./sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
     <script>
       var vid = document.getElementById("recurringToneAudio");
       vid.volume = 0.3;
@@ -585,12 +598,12 @@
       
       if ($_GET['fire'] == "true")
       {
-        echo '<audio id="newCallAudio" src="../sounds/Fire_Tones_Aligned.wav" preload="auto"></audio>'; 
+        echo '<audio id="newCallAudio" src="./sounds/Fire_Tones_Aligned.wav" preload="auto"></audio>'; 
       }
     }
     else
     {
-      echo '<audio id="newCallAudio" src="../sounds/New_Dispatch.mp3" preload="auto"></audio>';
+      echo '<audio id="newCallAudio" src="./sounds/New_Dispatch.mp3" preload="auto"></audio>';
     }
     ?>
     
@@ -613,7 +626,7 @@
 
           $.ajax({
               type: "POST",
-              url: "../actions/api.php",
+              url: "./actions/api.php",
               data: {
                   quickStatus: 'yes',
                   event: 'enroute',
@@ -661,7 +674,7 @@
     function getCalls() {
         $.ajax({
               type: "GET",
-              url: "../actions/api.php",
+              url: "./actions/api.php",
               data: {
                   getCalls: 'yes',
                   responder: 'yes'
@@ -694,7 +707,7 @@
 
             $.ajax({
               type: "POST",
-              url: "../actions/responderActions.php",
+              url: "./actions/responderActions.php",
               data: {
                   updateCallsign: 'yes',
                   details: $("#"+this.id).serialize()
@@ -767,7 +780,7 @@
     function getStatus() {
     $.ajax({
         type: "GET",
-        url: "../actions/responderActions.php",
+        url: "./actions/responderActions.php",
         data: {
             getStatus: 'yes'
         },
@@ -797,7 +810,7 @@
             else if (response.match("^<br"))
             {
                 console.log("LOGGED OUT");
-                window.location.href = '../actions/logout.php';
+                window.location.href = './actions/logout.php';
                 
             }
             else
@@ -825,9 +838,9 @@
     
     
     <!-- openCad Script -->
-    <script src="../js/openCad.js"></script>
+    <script src="./js/openCad.js"></script>
     <!-- Custom Theme Scripts -->
-    <script src="../js/custom.js"></script>
+    <script src="./js/custom.js"></script>
 
   </body>
 </html>

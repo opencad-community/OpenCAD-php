@@ -10,8 +10,8 @@
 
    This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
-$iniContents = parse_ini_file("../properties/config.ini", true); //Gather from config.ini file
-$connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"]."/openCad/".$iniContents['main']['connection_file_location'];
+$iniContents = parse_ini_file($_SERVER["DOCUMENT_ROOT"]."/properties/config.ini", true); //Gather from config.ini file
+$connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['connection_file_location'];
 
 require($connectionsFileLocation);
 

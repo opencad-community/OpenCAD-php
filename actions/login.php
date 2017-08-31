@@ -1,6 +1,6 @@
 <?php
-    $iniContents = parse_ini_file("../properties/config.ini", true); //Gather from config.ini file
-    $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"]."/openCad/".$iniContents['main']['connection_file_location'];
+$iniContents = parse_ini_file($_SERVER["DOCUMENT_ROOT"]."/properties/config.ini", true); //Gather from config.ini file
+$connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['connection_file_location'];
 
     require($connectionsFileLocation);
 
@@ -44,7 +44,7 @@
         {
             session_start();
             $_SESSION['loginMessageDanger'] = 'Invalid credentials';
-            header("Location:../index.php");
+            header("Location:/index.php");
             exit();
         }
 
@@ -57,14 +57,14 @@
         {
             session_start();
             $_SESSION['loginMessageDanger'] = 'Your account hasn\'t been approved yet. Please wait for an administrator to approve your access request.';
-            header("Location:../index.php");
+            header("Location:/index.php");
             exit();
         }
         else if ($approved == "2")
         {
             session_start();
             $_SESSION['loginMessageDanger'] = 'Your account has been suspended by an administrator.';
-            header("Location:../index.php");
+            header("Location:/index.php");
             exit();
         }
         
@@ -77,7 +77,7 @@
         $_SESSION['identifier'] = $identifier;
         $_SESSION['callsign'] = $identifier; //Set callsign to default to identifier until the unit changes it
 
-        header("Location:./direction.php");
+        header("Location:/dashboard.php");
     }
 
 

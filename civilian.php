@@ -5,7 +5,7 @@
 	
     if (empty($_SESSION['logged_in']))
     {
-        header('Location: ../index.php');
+        header('Location: ./index.php');
         die("Not logged in");
     }
     else
@@ -13,10 +13,10 @@
       $name = $_SESSION['name'];
     }
 
-    $iniContents = parse_ini_file("../properties/config.ini", true); //Gather from config.ini file
+    $iniContents = parse_ini_file("./properties/config.ini", true); //Gather from config.ini file
     $community = $iniContents['strings']['community'];
 
-    include("../actions/civActions.php");
+    include("./actions/civActions.php");
 
     $errors = array();
     // define variables and set to empty values
@@ -85,23 +85,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title><?php echo $community;?> Civilian</title>
-    <link rel="icon" href="../images/favicon.ico" />
+    <link rel="icon" href="./images/favicon.ico" />
 
     <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="./vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="./vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- Datatables -->
-    <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <link href="./vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="./vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="./vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="./vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="./vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="../css/custom.css" rel="stylesheet">
+    <link href="./css/custom.css" rel="stylesheet">
   </head>
 
   <body class="nav-md">
@@ -118,7 +118,7 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="../images/user.png" alt="..." class="img-circle profile_img">
+                <img src="./images/user.png" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
@@ -138,7 +138,7 @@
                   <li class="active"><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: block;">
                       <li class="current-page"><a href="javascript:void(0)">Civilian Dashboard</a></li>
-                      <li><a href="../actions/direction.php">CAD Direction Page</a></li>
+                      <li><a href="./actions/direction.php">CAD Direction Page</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -158,7 +158,7 @@
               <a data-toggle="tooltip" data-placement="top">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="../actions/logout.php">
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="./actions/logout.php">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -177,12 +177,12 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="../images/user.png" alt=""><?php echo $name;?>
+                    <img src="./images/user.png" alt=""><?php echo $name;?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="https://github.com/ossified/openCad/issues">Help</a></li>
-                    <li><a href="../actions/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="./actions/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
               </ul>
@@ -241,7 +241,7 @@
                     <div class="clearfix"></div>
                   </div>
                   <!-- ./ x_title -->
-                  <form name="civRequestForm" method="post" action="../actions/civActions.php">
+                  <form name="civRequestForm" method="post" action="./actions/civActions.php">
                   <div class="x_content">
                   <?php echo $identityMessage;?>
                     <div class="form-group row">
@@ -446,7 +446,7 @@
                   <!-- ./ x_title -->
                   <div class="x_content">
                     <?php echo $good911;?>
-                    <form id="new_911" method="post" action="../actions/api.php">
+                    <form id="new_911" method="post" action="./actions/api.php">
                     <div class="form-group row">
                       <label class="col-md-2 control-label">Caller Name</label>
                       <div class="col-md-10">
@@ -678,26 +678,26 @@
     <!-- ./ modal fade bs-example-modal-lg -->
 
     <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <script src="./vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
-    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
-    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <script src="./vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
-    <script src="../vendors/nprogress/nprogress.js"></script>
+    <script src="./vendors/nprogress/nprogress.js"></script>
     <!-- Datatables -->
-    <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-    <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-    <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="./vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="./vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="./vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="./vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="./vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="./vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="./vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="./vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="./vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="./vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="./vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="./vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
 
     <!-- Bootstrap Select -->
     <!-- Latest compiled and minified JavaScript -->
@@ -707,9 +707,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
     <!-- openCad Scripts -->
-    <script src="../js/openCad.js"></script>
+    <script src="./js/openCad.js"></script>
     <!-- Custom Theme Scripts -->
-    <script src="../js/custom.js"></script>
+    <script src="./js/custom.js"></script>
 
     <script>
     $('#civilianDetailsModal').on('show.bs.modal', function(e) {
@@ -719,7 +719,7 @@
     $.ajax({
         cache: false,
         type: 'GET',
-        url: '../actions/civActions.php',
+        url: './actions/civActions.php',
         data: {'getCivilianDetails': 'yes',
                 'name_id' : civId},
         success: function(result) 
