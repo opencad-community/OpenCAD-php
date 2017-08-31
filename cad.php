@@ -2,7 +2,7 @@
     session_start();
 
     // TODO: Verify user has permission to be on this page
-	
+
     if (empty($_SESSION['logged_in']))
     {
         header('Location: ../index.php');
@@ -15,7 +15,7 @@
 
     if(isset($_SESSION['dispatch']))
     {
-      
+
       if ($_SESSION['dispatch'] == 'YES')
       {
           //Do nothing
@@ -26,8 +26,7 @@
       die("You do not have permission to be here. Request access to dispatch through your administration.");
     }
 
-    $iniContents = parse_ini_file("./properties/config.ini", true); //Gather from config.ini file
-    $community = $iniContents['strings']['community'];
+    require_once('../oc-config.php');
 
     include("./actions/api.php");
     setUnitActive("1");
@@ -43,7 +42,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?php echo $community;?> Dispatcher</title>
+    <title><?php echo COMMUNITY_NAME;?> Dispatcher</title>
     <link rel="icon" href="../images/favicon.ico" />
 
     <!-- Bootstrap -->
@@ -72,7 +71,7 @@
       margin: 0 !important;
     }
     </style>
-    
+
 
     <!-- Custom Theme Style -->
     <link href="../css/custom.css" rel="stylesheet">
@@ -83,7 +82,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo $community;?> Dispatch</span></a>
+              <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo COMMUNITY_NAME;?> Dispatch</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -167,7 +166,7 @@
                   </ul>
                 </li>
 
-                
+
               </ul>
             </nav>
           </div>
@@ -252,7 +251,7 @@
             </div>
             <!-- ./ row -->
 
-            
+
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-2 col-sm-2 col-xs-2">
@@ -267,7 +266,7 @@
                   <!-- ./ x_title -->
                   <div class="x_content">
                       <div id="dispatchers">
-                      
+
                       </div>
                   </div>
                   <!-- ./ x_content -->
@@ -275,8 +274,8 @@
                 <!-- ./ x_panel -->
               </div>
               <!-- ./ col-md-2 col-sm-2 col-xs-2 -->
-              
-            
+
+
               <div class="col-md-5 col-sm-5 col-xs-5">
                 <div class="x_panel">
                   <div class="x_title">
@@ -289,7 +288,7 @@
                   <!-- ./ x_title -->
                   <div class="x_content">
                       <div id="availableUnits">
-                      
+
                       </div>
                   </div>
                   <!-- ./ x_content -->
@@ -310,7 +309,7 @@
                     <!-- ./ x_title -->
                     <div class="x_content">
                         <div id="unAvailableUnits">
-                      
+
                       </div>
                     </div>
                     <!-- ./ x_content -->
@@ -319,7 +318,7 @@
                 </div>
                 <!-- ./ col-md-5 col-sm-5 col-xs-5 -->
             </div>
-            <!-- ./ row -->        
+            <!-- ./ row -->
 
           <div class="clearfix"></div>
             <div class="row">
@@ -371,7 +370,7 @@
                     </div>
                     <!-- ./ input-group -->
                     <div name="ncic_plate_return" id="ncic_plate_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
-                    
+
                     </div>
                     <!-- ./ ncic_plate_return -->
                   </div>
@@ -400,7 +399,7 @@
                     </div>
                     <!-- ./ input-group -->
                     <div name="firearm_return">
-                      
+
                     </div>
                   </div>
                   <!-- ./ x_content -->
@@ -420,7 +419,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            <?php echo $community;?> CAD System
+            <?php echo COMMUNITY_NAME;?> CAD System
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -570,11 +569,11 @@
                 <div class="col-lg-10">
                   <select class="form-control selectpicker unit" data-live-search="true" name="unit_1" id="unit_1" title="Select a Unit or Leave Blank (Will mark call as Pending)">
                     <option></option>
-                    
+
                   </select>
                   <select class="form-control selectpicker unit" data-live-search="true" name="unit_2" id="unit_2" title="Select a Unit or Leave Blank">
                     <option></option>
-                    
+
                   </select>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -662,7 +661,7 @@
               </div>
               <!-- ./ col-sm-9 -->
             </div>
-            
+
             <div class="clearfix">
             <br/><br/><br/><br/>
             <!-- ./ form-group -->
@@ -700,7 +699,7 @@
     </div>
     <!-- ./ modal fade bs-example-modal-lg -->
 
-    
+
 
     <!-- AUDIO TONES -->
     <audio id="recurringToneAudio" src="../sounds/priority.mp3" preload="auto"></audio>
@@ -735,7 +734,7 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    
+
     <!-- PNotify -->
     <script src="../vendors/pnotify/dist/pnotify.js"></script>
     <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
@@ -757,10 +756,10 @@
         getUnAvailableUnits();
         getActiveDispatchers();
         checkTones();
-     
+
     });
 	  </script>
-    
+
     <script>
     // PNotify Stuff
     priorityNotification = new PNotify({
@@ -784,7 +783,7 @@
       status = statusInit.split(" ")[0];
       //If a user has a space in their username, it'll cause some problems. First, we need to split the string by spaces which will generate
       // an array. Then, we need to remove the first item from the array which is presumably an "action". Then, we join the array again via spaces
-      unit = statusInit.split(" "); 
+      unit = statusInit.split(" ");
       unit.shift();
       unit = unit.join(' ');
 
@@ -798,7 +797,7 @@
               unit: unit,
               status: status
           },
-          success: function(response) 
+          success: function(response)
           {
             console.log(response);
             if (response == "SUCCESS")
@@ -808,16 +807,16 @@
                 text: 'Successfully modified user status',
                 type: 'success',
                 styling: 'bootstrap3'
-              }); 
+              });
             }
-            
+
           },
           error : function(XMLHttpRequest, textStatus, errorThrown)
           {
             console.log("Error");
           }
-          
-        }); 
+
+        });
     }
     </script>
     <script>
@@ -832,7 +831,7 @@
         unit.shift(); //Remove the logoutUser class
         unit = unit.join(' '); //Rejoin the array
         console.log(unit);
-        
+
         $.ajax({
             type: "POST",
             url: "../actions/api.php",
@@ -840,7 +839,7 @@
                 logoutUser: 'yes',
                 unit: unit
             },
-            success: function(response) 
+            success: function(response)
             {
               console.log(response);
               if (response == "SUCCESS")
@@ -850,15 +849,15 @@
                   text: 'Successfully logged out user',
                   type: 'success',
                   styling: 'bootstrap3'
-                }); 
+                });
               }
-              
+
             },
             error : function(XMLHttpRequest, textStatus, errorThrown)
             {
               console.log("Error");
             }
-            
+
           });
         }
         else
@@ -869,7 +868,7 @@
     </script>
 
     <script>
-    
+
 
       function getAvailableUnits() {
         $.ajax({
@@ -878,10 +877,10 @@
               data: {
                   getAvailableUnits: 'yes'
               },
-              success: function(response) 
+              success: function(response)
               {
                 $('#availableUnits').html(response);
-                
+
                 // SG - Removed until node/real-time data setup
                 /*$('#activeUsers').DataTable({
                   searching: false,
@@ -889,18 +888,18 @@
                   lengthMenu: [[4, -1], [4, "All"]]
 			          });*/
                 setTimeout(getAvailableUnits, 5000);
-                
-                
+
+
               },
               error : function(XMLHttpRequest, textStatus, errorThrown)
               {
                 console.log("Error");
               }
-              
-            }); 
+
+            });
       }
 
-    
+
     </script>
 
     <!-- openCad Script -->

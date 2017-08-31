@@ -2,7 +2,7 @@
     session_start();
 
     // TODO: Verify user has permission to be on this page
-	
+
     if (empty($_SESSION['logged_in']))
     {
         header('Location: ./index.php');
@@ -13,9 +13,7 @@
       $name = $_SESSION['name'];
     }
 
-    $iniContents = parse_ini_file("./properties/config.ini", true); //Gather from config.ini file
-    $community = $iniContents['strings']['community'];
-
+    require_once('../oc-config.php');
     include("./actions/civActions.php");
 
     $errors = array();
@@ -34,10 +32,10 @@
     //$civAddr = "123 Main Street";
 
     /*if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      
+
       $civName = $_POST["civNameReq"];
-      
-      $nameArr = explode(" ", $civName);    
+
+      $nameArr = explode(" ", $civName);
       $length = sizeof($nameArr);
       if ($length < 2)
       {
@@ -84,7 +82,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?php echo $community;?> Civilian</title>
+    <title><?php echo COMMUNITY_NAME;?> Civilian</title>
     <link rel="icon" href="./images/favicon.ico" />
 
     <!-- Bootstrap -->
@@ -110,7 +108,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo $community;?> Civilian</span></a>
+              <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo COMMUNITY_NAME;?> Civilian</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -253,7 +251,7 @@
                       <!-- ./ col-sm-9 -->
                     </div>
                     <!-- ./ form-group -->
-                    
+
                     <div class="form-group row">
                       <label class="col-md-2 control-label">DOB</label>
                       <div class="col-md-10">
@@ -263,7 +261,7 @@
                       <!-- ./ col-sm-9 -->
                     </div>
                     <!-- ./ form-group -->
-                    
+
                     <div class="form-group row">
                       <label class="col-md-2 control-label">Address</label>
                       <div class="col-md-10">
@@ -273,7 +271,7 @@
                       <!-- ./ col-sm-9 -->
                     </div>
                     <!-- ./ form-group -->
-                    
+
                     <div class="form-group row">
                       <label class="col-md-2 control-label">Sex</label>
                       <div class="col-md-10">
@@ -285,7 +283,7 @@
                       <!-- ./ col-sm-9 -->
                     </div>
                     <!-- ./ form-group -->
-                    
+
                     <div class="form-group row">
                       <label class="col-md-2 control-label">Race</label>
                       <div class="col-md-10">
@@ -301,7 +299,7 @@
                       <!-- ./ col-sm-9 -->
                     </div>
                     <!-- ./ form-group -->
-                    
+
                     <div class="form-group row">
                       <label class="col-md-2 control-label">Hair Color</label>
                       <div class="col-md-10">
@@ -494,7 +492,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            <?php echo $community;?> CAD System
+            <?php echo COMMUNITY_NAME;?> CAD System
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -651,7 +649,7 @@
             <span>
               <p><b>Where, What, Who, When, How, Why if available are the primary things to provide to a 911 dispatcher.</b></p>
               <p>Some things to consider reporting:</p>
-              <p>    
+              <p>
                 <ul><li>Your name</li>
                 <li>Address responders need to go to</li>
                 <li>Any weapons?</li>
@@ -722,11 +720,11 @@
         url: './actions/civActions.php',
         data: {'getCivilianDetails': 'yes',
                 'name_id' : civId},
-        success: function(result) 
+        success: function(result)
         {
             console.log(result);
             data = JSON.parse(result);
-                
+
             $('input[name="civName"]').val(data['name']);
             $('input[name="civDob"]').val(data['dob']);
             $('input[name="civAddress"]').val(data['address']);
@@ -738,7 +736,7 @@
             $('input[name="civMake"]').val(data['veh_make']);
             $('input[name="civModel"]').val(data['veh_model']);
             $('input[name="civColor"]').val(data['veh_color']);
-            
+
 
         },
 

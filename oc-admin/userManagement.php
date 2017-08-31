@@ -2,7 +2,7 @@
     session_start();
 
     // TODO: Verify user has permission to be on this page
-	
+
     if (empty($_SESSION['logged_in']))
     {
         header('Location: ../index.php');
@@ -13,9 +13,7 @@
       $name = $_SESSION['name'];
     }
 
-    $iniContents = parse_ini_file("../properties/config.ini", true); //Gather from config.ini file
-    $community = $iniContents['strings']['community'];
-
+    require_once('../oc-config.php');
     include("../actions/adminActions.php");
 
     $accessMessage = "";
@@ -146,7 +144,7 @@
                   </ul>
                 </li>
 
-                
+
               </ul>
             </nav>
           </div>
@@ -375,11 +373,11 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    
+
     <script>
     $(document).ready(function() {
         $('#allUsers').DataTable({
-            
+
         });
     });
     </script>
@@ -394,15 +392,15 @@
           url: '../actions/adminActions.php',
           data: {'getUserDetails': 'yes',
                   'userId' : userId},
-          success: function(result) 
+          success: function(result)
           {
             console.log(result);
             data = JSON.parse(result);
-                  
+
             $('input[name="userName"]').val(data['name']);
             $('input[name="userEmail"]').val(data['email']);
             $('input[name="userIdentifier"]').val(data['identifier']);
-            
+
             for (var i=0; i<data['department'].length; i++)
             {
               $('select[name="userGroups"] option[value="'+data['department'][i]+'"]').val(1);
@@ -410,7 +408,7 @@
             }
 
             $('select[name="userGroups"]').selectpicker('refresh');
-            
+
 
           },
 

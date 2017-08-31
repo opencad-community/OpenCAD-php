@@ -1,23 +1,10 @@
 <?php
 
-/**
-   Open source CAD system for RolePlaying Communities. 
-   Copyright (C) 2017 Shane Gill
-
-   This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-   This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
-**/
-    
-    $iniContents = parse_ini_file("./properties/config.ini", true); //Gather from config.ini file
-    $community = $iniContents['strings']['community'];
+    require("./oc-config.php");
 
     $testing = false; //If set to true, will default some data for you
 
-    
+
 
     session_start();
     $registerError = "";
@@ -31,7 +18,7 @@
     }
     if (isset($_GET['loggedOut']))
     {
-        $loginMessage = '<div class="alert alert-success" style="text-align: center; font-weight:normal;" ><span>You\'ve successfully been logged out</span></div>';  
+        $loginMessage = '<div class="alert alert-success" style="text-align: center; font-weight:normal;" ><span>You\'ve successfully been logged out</span></div>';
     }
     if(isset($_SESSION['register_error']))
     {
@@ -49,7 +36,7 @@
         unset($_SESSION['loginMessageDanger']);
     }
 
-    
+
 ?>
 
 <!DOCTYPE html>
@@ -61,14 +48,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?php echo $community;?> CAD System</title>
+    <title><?php echo COMMUNITY_NAME;?> CAD System</title>
     <link rel="icon" href="./images/favicon.ico" />
 
-    
+
     <!-- Bootstrap -->
     <link href="./vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- CSS for MultiSelect Plugin -->
-    <link rel="stylesheet" href="./css/bootstrap-multiselect.css"> 
+    <link rel="stylesheet" href="./css/bootstrap-multiselect.css">
     <!-- jQuery -->
     <script src="./vendors/jquery/dist/jquery.min.js"></script>
     <!-- JS -->
@@ -118,7 +105,7 @@
                 <br />
 
                 <div>
-                  <h1><i class="fa fa-tachometer"></i> <?php echo $community;?> CAD System</h1>
+                  <h1><i class="fa fa-tachometer"></i> <?php echo COMMUNITY_NAME?> CAD System</h1>
                   <p>openCAD is released under GNU GPL v3.<a href="http://www.github.com/phillf/openCad">Download from GitHub.</a></p>
                 </div>
               </div>
@@ -155,7 +142,7 @@
               <div class="form-group">
                 <input class="form-control" placeholder="Password" name="password" type="password" value="<?php if($testing){echo "password";}?>" required>
             </div>
-            <!-- ./ form-group --> 
+            <!-- ./ form-group -->
             <div class="form-group">
                 <input class="form-control" placeholder="Confirm Password" name="password1" type="password" value="<?php if($testing){echo "password";}?>" required>
             </div>
@@ -175,7 +162,7 @@
                 <br />
 
                 <div>
-                  <h1><i class="fa fa-tachometer"></i> <?php echo $community;?> CAD System</h1>
+                  <h1><i class="fa fa-tachometer"></i> <?php echo COMMUNITY_NAME ?> CAD System</h1>
                   <p>openCAD is released under GNU GPL v3.<a href="http://www.github.com/phillf/openCad">Download from GitHub.</a></p>
                 </div>
               </div>

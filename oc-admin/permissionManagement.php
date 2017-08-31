@@ -23,8 +23,7 @@ else
   $name = $_SESSION['name'];
 }
 
-$iniContents = parse_ini_file("../properties/config.ini", true); //Gather from config.ini file
-$community = $iniContents['strings']['community'];
+require_once('../oc-config.php');
 
 $accessMessage = "";
 if(isset($_SESSION['accessMessage']))
@@ -43,7 +42,7 @@ if(isset($_SESSION['accessMessage']))
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?php echo $community;?> Admin</title>
+    <title><?php echo COMMUNITY_NAME;?> Admin</title>
     <link rel="icon" href="../images/favicon.ico" />
 
     <!-- Bootstrap -->
@@ -69,7 +68,7 @@ if(isset($_SESSION['accessMessage']))
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo $community;?> Admin</span></a>
+              <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo COMMUNITY_NAME;?> Admin</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -161,7 +160,7 @@ if(isset($_SESSION['accessMessage']))
                   </ul>
                 </li>
 
-                
+
               </ul>
             </nav>
           </div>
@@ -249,7 +248,7 @@ if(isset($_SESSION['accessMessage']))
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            <?php echo $community;?> CAD System
+            <?php echo COMMUNITY_NAME;?> CAD System
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -278,7 +277,7 @@ if(isset($_SESSION['accessMessage']))
     <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
     <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-    
+
 
     <!-- Custom Theme Scripts -->
     <script src="../js/custom.js"></script>

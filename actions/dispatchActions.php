@@ -1,9 +1,6 @@
 <?php
 
-$iniContents = parse_ini_file($_SERVER["DOCUMENT_ROOT"]."/properties/config.ini", true); //Gather from config.ini file
-$connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['connection_file_location'];
-
-require($connectionsFileLocation);
+require_once('../oc-config.php');
 
 if (isset($_POST['clearCall']))
 {
@@ -28,18 +25,18 @@ if (isset($_GET['term'])) {
     $term = $_GET['term'];
     //echo json_encode($term);
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-	
-    if (!$link) { 
+
+    if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
-    
+
     $query = "SELECT * from streets WHERE name LIKE \"%$term%\"";
 
     $result=mysqli_query($link, $query);
-    
+
     while($row = $result->fetch_assoc())
     {
-        $data[] = $row['name'];        
+        $data[] = $row['name'];
     }
 
     echo json_encode($data);
@@ -49,13 +46,13 @@ if (isset($_GET['term'])) {
 
 function addNarrative()
 {
-    session_start();   
+    session_start();
     $details = $_POST['details'];
     $callId = $_POST['callId'];
     $who = $_SESSION['identifier'];
 
     $detailsArr = explode("&", $details);
-   
+
     $narrativeAdd = explode("=", $detailsArr[0])[1];
     $narrativeAdd = strtoupper($narrativeAdd);
 
@@ -65,8 +62,8 @@ function addNarrative()
 
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-	
-    if (!$link) { 
+
+    if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
 
@@ -76,7 +73,7 @@ function addNarrative()
         $stmt = mysqli_prepare($link, $sql);
         mysqli_stmt_bind_param($stmt, "si", $narrativeAdd, $callId);
         $result = mysqli_stmt_execute($stmt);
-    
+
         if ($result == FALSE) {
             die(mysqli_error($link));
         }
@@ -108,7 +105,7 @@ function assignUnit()
     $unit = str_replace("+", " ", $unit);
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    
+
     if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
@@ -116,19 +113,19 @@ function assignUnit()
     $sql = "SELECT callsign FROM active_users WHERE identifier = \"$unit\"";
 
     $result=mysqli_query($link, $sql);
-	
+
 	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
 	{
 		$callsign = $row[0];
 	}
-    
+
     $sql = "INSERT INTO calls_users (call_id, identifier, callsign) VALUES (?, ?, ?)";
 
     try {
         $stmt = mysqli_prepare($link, $sql);
         mysqli_stmt_bind_param($stmt, "iss", $callId, $unit, $callsign);
         $result = mysqli_stmt_execute($stmt);
-    
+
         if ($result == FALSE) {
             die(mysqli_error($link));
         }
@@ -145,7 +142,7 @@ function assignUnit()
         $stmt = mysqli_prepare($link, $sql);
         mysqli_stmt_bind_param($stmt, "s", $callsign);
         $result = mysqli_stmt_execute($stmt);
-    
+
         if ($result == FALSE) {
             die(mysqli_error($link));
         }
@@ -164,7 +161,7 @@ function assignUnit()
         $stmt = mysqli_prepare($link, $sql);
         mysqli_stmt_bind_param($stmt, "si", $narrativeAdd, $callId);
         $result = mysqli_stmt_execute($stmt);
-    
+
         if ($result == FALSE) {
             die(mysqli_error($link));
         }
@@ -179,22 +176,22 @@ function assignUnit()
 
 function storeCall()
 {
-    
-    $callId = $_POST['callId']; 
+
+    $callId = $_POST['callId'];
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    
+
     if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
-    
+
     $query = "INSERT INTO call_history SELECT calls.* FROM calls WHERE call_id = ?";
-        
+
     try {
         $stmt = mysqli_prepare($link, $query);
         mysqli_stmt_bind_param($stmt, "i", $callId);
         $result = mysqli_stmt_execute($stmt);
-        
+
         if ($result == FALSE) {
             die(mysqli_error($link));
         }
@@ -203,29 +200,29 @@ function storeCall()
     {
         die("Failed to run query: " . $e->getMessage());
     }
-    
+
     clearCall();
 }
 
 function clearCall()
 {
 
-    $callId = $_POST['callId']; 
+    $callId = $_POST['callId'];
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-	
+
     if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
 
     //First delete from calls list
     $query = "DELETE FROM calls WHERE call_id = ?";
-        
+
     try {
         $stmt = mysqli_prepare($link, $query);
         mysqli_stmt_bind_param($stmt, "i", $callId);
         $result = mysqli_stmt_execute($stmt);
-        
+
         if ($result == FALSE) {
             die(mysqli_error($link));
         }
@@ -237,9 +234,9 @@ function clearCall()
 
     //Get units that were on the call
     $query = "SELECT identifier FROM calls_users WHERE call_id = \"$callId\"";
-        
+
     $result=mysqli_query($link, $query);
-	
+
 	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
 	{
 		clearUnitFromCall($callId, $row[0]);
@@ -250,22 +247,22 @@ function clearCall()
 function clearUnitFromCall($callId, $unit)
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-	
+
     if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
 
     //First delete from calls list
     $query = "DELETE FROM calls_users WHERE call_id = ? AND identifier = ?";
-        
+
     try {
         $stmt = mysqli_prepare($link, $query);
         mysqli_stmt_bind_param($stmt, "is", $callId, $unit);
         $result = mysqli_stmt_execute($stmt);
-        
+
         if ($result == FALSE) {
             die(mysqli_error($link));
-        } 
+        }
 
         echo "Here ".$unit;
         freeUnitStatus($unit);
@@ -279,7 +276,7 @@ function clearUnitFromCall($callId, $unit)
 function freeUnitStatus($unit)
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-	
+
     if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
@@ -290,7 +287,7 @@ function freeUnitStatus($unit)
         $stmt = mysqli_prepare($link, $sql);
         mysqli_stmt_bind_param($stmt, "s", $unit);
         $result = mysqli_stmt_execute($stmt);
-    
+
         if ($result == FALSE) {
             die(mysqli_error($link));
         }
@@ -328,7 +325,7 @@ function newCall()
     {
         $narrative = $created.date("Y-m-d H:i:s").': '.$narrative.'<br/>';
     }
-    
+
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
 	if (!$link) {
@@ -344,7 +341,7 @@ function newCall()
 
         //Get the ID of the new call to assign units to it
         $last_id = mysqli_insert_id($link);
-		
+
 		if ($result == FALSE) {
 			die(mysqli_error($link));
 		}
@@ -357,7 +354,7 @@ function newCall()
     $query = "SELECT identifier FROM active_users WHERE callsign = \"$unit1\"";
 
 	$result=mysqli_query($link, $query);
-	
+
 	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
 	{
 		$unit_call_identifier = $row[0];
@@ -374,7 +371,7 @@ function newCall()
             $stmt = mysqli_prepare($link, $sql);
             mysqli_stmt_bind_param($stmt, "iss", $last_id, $unit_call_identifier, $unit1);
             $result = mysqli_stmt_execute($stmt);
-		
+
             if ($result == FALSE) {
                 die(mysqli_error($link));
             }
@@ -391,7 +388,7 @@ function newCall()
             $stmt = mysqli_prepare($link, $sql);
             mysqli_stmt_bind_param($stmt, "s", $unit1);
             $result = mysqli_stmt_execute($stmt);
-		
+
             if ($result == FALSE) {
                 die(mysqli_error($link));
             }
@@ -410,7 +407,7 @@ function newCall()
             $stmt = mysqli_prepare($link, $sql);
             mysqli_stmt_bind_param($stmt, "si", $narrativeAdd, $last_id);
             $result = mysqli_stmt_execute($stmt);
-		
+
             if ($result == FALSE) {
                 die(mysqli_error($link));
             }
@@ -432,7 +429,7 @@ function newCall()
             $stmt = mysqli_prepare($link, $sql);
             mysqli_stmt_bind_param($stmt, "is", $last_id, $unit2);
             $result = mysqli_stmt_execute($stmt);
-		
+
             if ($result == FALSE) {
                 die(mysqli_error($link));
             }
@@ -449,7 +446,7 @@ function newCall()
             $stmt = mysqli_prepare($link, $sql);
             mysqli_stmt_bind_param($stmt, "s", $unit2);
             $result = mysqli_stmt_execute($stmt);
-		
+
             if ($result == FALSE) {
                 die(mysqli_error($link));
             }
@@ -468,7 +465,7 @@ function newCall()
             $stmt = mysqli_prepare($link, $sql);
             mysqli_stmt_bind_param($stmt, "si", $narrativeAdd, $last_id);
             $result = mysqli_stmt_execute($stmt);
-		
+
             if ($result == FALSE) {
                 die(mysqli_error($link));
             }
@@ -479,7 +476,7 @@ function newCall()
         }
     }
 
-    
+
 
 
 

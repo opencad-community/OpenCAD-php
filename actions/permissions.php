@@ -1,8 +1,6 @@
 <?php
 
-$iniContents = parse_ini_file($_SERVER["DOCUMENT_ROOT"]."/properties/config.ini", true); //Gather from config.ini file
-$connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['connection_file_location'];
-
+require_once('../oc-config.php');
 
 function checkIfHeadAdmin()
 {
@@ -26,14 +24,14 @@ function checkIfHeadAdmin()
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-    if (!$link) { 
+    if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
-    
+
     $sql = 'SELECT * from user_departments WHERE user_id = "'.$user_id.'" AND department_id = "'.$department_id.'"';
-    
+
     $result = mysqli_query($link, $sql);
-    
+
     $num_rows = $result->num_rows;
 
     if ($num_rows == 0)

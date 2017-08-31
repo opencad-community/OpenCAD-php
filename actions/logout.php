@@ -1,19 +1,6 @@
-<?php 
-/**
-   Open source CAD system for RolePlaying Communities. 
-   Copyright (C) 2017 Shane Gill
+<?php
 
-   This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-   This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
-**/
-$iniContents = parse_ini_file($_SERVER["DOCUMENT_ROOT"]."/properties/config.ini", true); //Gather from config.ini file
-$connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['connection_file_location'];
-
-require($connectionsFileLocation);
+require_once('../oc-config.php');
 
 if (isset($_GET['responder']))
 {
@@ -45,7 +32,7 @@ function logoutResponder()
     catch (Exception $e)
     {
         die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-    } 
+    }
 
     mysqli_close($link);
 }

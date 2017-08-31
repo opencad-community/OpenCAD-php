@@ -1,27 +1,24 @@
 <?php
 
 session_start();
-	
+
 if (empty($_SESSION['logged_in']))
 {
 	header('Location: ./index.php');
     die("Not logged in");
 }
 
-/* 
-    The purpose of this page is to simply determine if the user has multiple roles. 
-    If they do, provide them the option to go where they want to go. 
+/*
+    The purpose of this page is to simply determine if the user has multiple roles.
+    If they do, provide them the option to go where they want to go.
     Else, redirect to the only place they can go.
 */
 
-$iniContents = parse_ini_file("./properties/config.ini", true); //Gather from config.ini file
-$connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['connection_file_location'];
+require("./oc-config.php");
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
-require($connectionsFileLocation);
 
 $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -44,7 +41,7 @@ $policeButton = "";
 $civilianButton = "";
 
 $num_rows = $result->num_rows;
-// This loop will auto redirect the user if they only have one option 
+// This loop will auto redirect the user if they only have one option
 // TODO: Add the rest of the headers
 if($num_rows < 2)
 {
@@ -54,45 +51,45 @@ if($num_rows < 2)
         {
             $_SESSION['admin'] = 'YES';
             header("Location:./oc-admin/admin.php");
-            
+
         }
         else if ($row[1] == "1")
         {
             $_SESSION['dispatch'] = 'YES';
-            header("Location:./cad.php"); 
-            
+            header("Location:./cad.php");
+
         }
         else if ($row[1] == "2")
         {
             $_SESSION['ems'] = 'YES';
-            header("Location:./mdt.php"); 
+            header("Location:./mdt.php");
         }
             else if ($row[1] == "3")
         {
             $_SESSION['fire'] = 'YES';
-            header("Location:./mdt.php"); 
+            header("Location:./mdt.php");
         }
         else if ($row[1] == "4")
         {
             $_SESSION['highway'] = 'YES';
-            header("Location:./mdt.php"); 
+            header("Location:./mdt.php");
         }
         else if ($row[1] == "5")
         {
             $_SESSION['police'] = 'YES';
-            header("Location:./mdt.php"); 
+            header("Location:./mdt.php");
         }
         else if ($row[1] == "6")
         {
             $_SESSION['sheriff'] = 'YES';
-            header("Location:./mdt.php"); 
+            header("Location:./mdt.php");
         }
         else if ($row[1] == "7")
         {
             $_SESSION['civilian'] = 'YES';
-            header("Location:./civillian.php"); 
+            header("Location:./civillian.php");
         }
-        
+
     }
 }
 else
@@ -101,7 +98,7 @@ else
     while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
     {
         if ($row[1] == 0)
-        { 
+        {
             $adminButton = "<a href=\"./oc-admin/admin.php\" class=\"btn btn-primary btn-lg\">Administration</a>";
             $_SESSION['admin'] = 'YES';
         }
@@ -136,7 +133,7 @@ else
             $sheriffButton = "<a href=\"./mdt.php\" class=\"btn btn-primary btn-lg\">Sheriff's Office</a>";
         }
         if ($row[1] == "7")
-        { 
+        {
             $_SESSION['civillian'] = 'YES';
             $civilianButton = "<a href=\"./civilian.php\" class=\"btn btn-primary btn-lg\">Civilian</a>";
         }
@@ -155,11 +152,11 @@ mysqli_close($link);
     <link rel="stylesheet" href="./css/bootstrap.css">
     <style>
     #cadWelcome {
-    height:20px; 
-    width:50px; 
-    margin: 50%px 50%px; 
+    height:20px;
+    width:50px;
+    margin: 50%px 50%px;
     position:relative;
-    top:90%; 
+    top:90%;
     left:45%;
     text-align:center;
     }
@@ -183,7 +180,7 @@ mysqli_close($link);
             </div class="row">
                 <div class="col-lg-12" id="cadWelcome">
                     <?php echo $adminButton;?><br/><br/>
-                    
+
                     <?php echo $dispatchButton;?>
                     &nbsp;
                     <?php echo $sheriffButton;?>
@@ -192,7 +189,7 @@ mysqli_close($link);
                     &nbsp;
                     &nbsp;
                     <?php echo $policeButton;?>
-                    &nbsp;                    
+                    &nbsp;
                     <?php echo $fireButton;?>
                     &nbsp;
                     <?php echo $civilianButton;?>

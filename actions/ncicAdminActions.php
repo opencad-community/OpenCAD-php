@@ -1,50 +1,32 @@
 <?php
-/**
-Open source CAD system for RolePlaying Communities. 
-Copyright (C) 2017 Shane Gill
-
-This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
-**/
-/*
-    This file handles all actions for admin.php script
-*/
-
-$iniContents = parse_ini_file($_SERVER["DOCUMENT_ROOT"]."/properties/config.ini", true); //Gather from config.ini file
-$connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['connection_file_location'];
-
-require_once($connectionsFileLocation);
+require_once('../oc-config.php');
 
 /* Handle POST requests */
-if (isset($_POST['create_citation'])){ 
+if (isset($_POST['create_citation'])){
     create_citation();
 }
-if (isset($_POST['delete_citation'])){ 
+if (isset($_POST['delete_citation'])){
     delete_citation();
 }
-if (isset($_POST['delete_name'])){ 
+if (isset($_POST['delete_name'])){
     delete_name();
 }
-if (isset($_POST['delete_plate'])){ 
+if (isset($_POST['delete_plate'])){
     delete_plate();
 }
-if (isset($_POST['delete_warrant'])){ 
+if (isset($_POST['delete_warrant'])){
     delete_warrant();
 }
-if (isset($_POST['create_warrant'])){ 
+if (isset($_POST['create_warrant'])){
     create_warrant();
 }
-if (isset($_POST['create_name'])){ 
+if (isset($_POST['create_name'])){
     create_name();
 }
-if (isset($_POST['create_plate'])){ 
+if (isset($_POST['create_plate'])){
     create_plate();
 }
-if (isset($_POST['reject_identity_request'])){ 
+if (isset($_POST['reject_identity_request'])){
     rejectRequest();
 }
 
@@ -54,17 +36,17 @@ function rejectRequest()
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-    if (!$link) { 
+    if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
-    
+
     $query = "DELETE FROM identity_requests WHERE req_id = ?";
-    
+
     try {
         $stmt = mysqli_prepare($link, $query);
         mysqli_stmt_bind_param($stmt, "i", $req_id);
         $result = mysqli_stmt_execute($stmt);
-        
+
         if ($result == FALSE) {
             die(mysqli_error($link));
         }
@@ -83,7 +65,7 @@ function getIdentityRequests()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-    if (!$link) { 
+    if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
 
@@ -109,7 +91,7 @@ function getIdentityRequests()
                 <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>           
+            <tbody>
         ';
 
         while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
@@ -125,7 +107,7 @@ function getIdentityRequests()
                     <input name="reject_identity_request" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Quick Reject"/>
                     <input name="accept_identity_request" type="submit" class="btn btn-xs btn-link" style="color: green;" value="Quick Accept"/>
                     <input name="id" type="hidden" value='.$row[0].' />
-                    </form>                    
+                    </form>
                 </td>
             </tr>
             ';
@@ -142,7 +124,7 @@ function ncicGetNames()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-    if (!$link) { 
+    if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
 
@@ -174,7 +156,7 @@ function ncicGetNames()
                 <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>           
+            <tbody>
         ';
 
         while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
@@ -195,7 +177,7 @@ function ncicGetNames()
                     <form action="../actions/ncicAdminActions.php" method="post">
                     <input name="delete_name" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
                     <input name="uid" type="hidden" value='.$row[0].' />
-                    </form>                    
+                    </form>
                 </td>
             </tr>
             ';
@@ -212,7 +194,7 @@ function ncicGetPlates()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-    if (!$link) { 
+    if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
 
@@ -245,7 +227,7 @@ function ncicGetPlates()
                 <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>           
+            <tbody>
         ';
 
         while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
@@ -269,7 +251,7 @@ function ncicGetPlates()
                     <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
                     <input name="delete_plate" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete" enabled/>
                     <input name="vehid" type="hidden" value='.$row[0].' />
-                    </form>                    
+                    </form>
                 </td>
             </tr>
             ';
@@ -286,7 +268,7 @@ function ncic_warrants()
 {
    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-    if (!$link) { 
+    if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
 
@@ -316,7 +298,7 @@ function ncic_warrants()
                 <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>           
+            <tbody>
         ';
 
         while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
@@ -345,7 +327,7 @@ function ncic_warrants()
                     echo '
                     <input name="delete_warrant" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Expunge" />
                     <input name="wid" type="hidden" value='.$row[2].' />
-                    </form>                    
+                    </form>
                 </td>
             </tr>
             ';
@@ -355,14 +337,14 @@ function ncic_warrants()
             </tbody>
             </table>
         ';
-    } 
+    }
 }
 
 function ncic_citations()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-    if (!$link) { 
+    if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
 
@@ -390,7 +372,7 @@ function ncic_citations()
                 <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>           
+            <tbody>
         ';
 
         while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
@@ -407,7 +389,7 @@ function ncic_citations()
                     <input name="edit_citation" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
                     <input name="delete_citation" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Expunge"/>
                     <input name="cid" type="hidden" value='.$row[2].' />
-                    </form>                    
+                    </form>
                 </td>
             </tr>
             ';
@@ -426,7 +408,7 @@ function getCivilianNamesOption()
     if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
-    
+
     $sql = "SELECT id, first_name, last_name FROM ncic_names";
 
     $result=mysqli_query($link, $sql);
@@ -444,11 +426,11 @@ function getCivilianNames()
 	if (!$link) {
 		die('Could not connect: ' .mysql_error());
 	}
-	
+
 	$sql = "SELECT ncic_names.id, ncic_names.first_name, ncic_names.last_name FROM ncic_names";
 
 	$result=mysqli_query($link, $sql);
-	
+
 	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
 	{
 		echo "<option value=\"$row[0]\">$row[1] $row[2]</option>";
@@ -463,8 +445,8 @@ function getAgencies()
 	if (!$link) {
 		die('Could not connect: ' .mysql_error());
 	}
-	
-	$sql = 'SELECT * FROM departments 
+
+	$sql = 'SELECT * FROM departments
             WHERE department_name <>"Administrators"
             AND department_name <>"EMS"
             AND department_name <>"Fire"
@@ -473,7 +455,7 @@ function getAgencies()
             AND department_name <>"Head Administrators"';
 
 	$result=mysqli_query($link, $sql);
-	
+
 	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
 	{
 		echo "<option value=\"$row[1]\">$row[1]</option>";
@@ -495,13 +477,13 @@ function create_citation()
 	}
 
     $sql = "INSERT INTO ncic_citations (name_id, citation_name, issued_by, status) VALUES (?, ?, ?, '1')";
-	
-    
+
+
 	try {
 		$stmt = mysqli_prepare($link, $sql);
 		mysqli_stmt_bind_param($stmt, "iss", $userId, $citation_name, $issued_by);
 		$result = mysqli_stmt_execute($stmt);
-		
+
 		if ($result == FALSE) {
 			die(mysqli_error($link));
 		}
@@ -525,9 +507,9 @@ function create_warrant()
     $issuing_agency = $_POST['issuing_agency'];
 
     $expiry = substr($_POST['warrant_name_sel'], -1);
-    
+
     $warrant_name = substr($_POST['warrant_name_sel'], 0, -1);
-    
+
     switch ($expiry)
     {
         case "1":
@@ -545,13 +527,13 @@ function create_warrant()
 	}
 
     $sql = "INSERT INTO ncic_warrants (name_id, expiration_date, warrant_name, issuing_agency) SELECT ?, DATE_ADD(NOW(), INTERVAL ? day), ?, ?";
-	
-    
+
+
 	try {
 		$stmt = mysqli_prepare($link, $sql);
 		mysqli_stmt_bind_param($stmt, "iiss", $userId, $interval, $warrant_name, $issuing_agency);
 		$result = mysqli_stmt_execute($stmt);
-		
+
 		if ($result == FALSE) {
 			die(mysqli_error($link));
 		}
@@ -578,14 +560,14 @@ function delete_name()
 
     $uid = $_POST['uid'];
     echo $uid;
-    
+
     $query = "DELETE FROM ncic_names WHERE id = ?";
-    
+
     try {
         $stmt = mysqli_prepare($link, $query);
         mysqli_stmt_bind_param($stmt, "i", $uid);
         $result = mysqli_stmt_execute($stmt);
-        
+
         if ($result == FALSE) {
             die(mysqli_error($link));
         }
@@ -610,14 +592,14 @@ function delete_plate()
 
     $vehid = $_POST['vehid'];
     echo $vehid;
-    
+
     $query = "DELETE FROM ncic_plates WHERE id = ?";
-    
+
     try {
         $stmt = mysqli_prepare($link, $query);
         mysqli_stmt_bind_param($stmt, "i", $vehid);
         $result = mysqli_stmt_execute($stmt);
-        
+
         if ($result == FALSE) {
             die(mysqli_error($link));
         }
@@ -641,14 +623,14 @@ function delete_citation()
 	}
 
     $cid = $_POST['cid'];
-    
+
     $query = "DELETE FROM ncic_citations WHERE id = ?";
-    
+
     try {
         $stmt = mysqli_prepare($link, $query);
         mysqli_stmt_bind_param($stmt, "i", $cid);
         $result = mysqli_stmt_execute($stmt);
-        
+
         if ($result == FALSE) {
             die(mysqli_error($link));
         }
@@ -673,14 +655,14 @@ function delete_warrant()
 
     $wid = $_POST['wid'];
     echo $wid;
-    
+
     $query = "DELETE FROM ncic_warrants WHERE id = ?";
-    
+
     try {
         $stmt = mysqli_prepare($link, $query);
         mysqli_stmt_bind_param($stmt, "i", $wid);
         $result = mysqli_stmt_execute($stmt);
-        
+
         if ($result == FALSE) {
             die(mysqli_error($link));
         }
@@ -714,13 +696,13 @@ function create_name()
 	}
 
     $sql = "INSERT INTO ncic_names (first_name, last_name, dob, address, sex, race, dl_status, hair_color, build) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	
-     
+
+
 	try {
 		$stmt = mysqli_prepare($link, $sql);
 		mysqli_stmt_bind_param($stmt, "sssssssss", $first_name, $last_name, $dob, $address, $sex, $race, $dl_status, $hair_color, $build);
 		$result = mysqli_stmt_execute($stmt);
-		
+
 		if ($result == FALSE) {
 			die(mysqli_error($link));
 		}
@@ -757,13 +739,13 @@ function create_plate()
 	}
 
     $sql = "INSERT INTO ncic_plates (name_id, veh_plate, veh_make, veh_model, veh_color, veh_insurance, flags, veh_reg_state, notes, hidden_notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	
-     
+
+
 	try {
 		$stmt = mysqli_prepare($link, $sql);
 		mysqli_stmt_bind_param($stmt, "isssssssss", $userId, $veh_plate, $veh_make, $veh_model, $veh_color, $veh_insurance, $flags, $veh_reg_state, $notes, $hidden_notes);
 		$result = mysqli_stmt_execute($stmt);
-		
+
 		if ($result == FALSE) {
 			die(mysqli_error($link));
 		}
@@ -787,7 +769,7 @@ function getCitations()
     if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
-    
+
     $sql = "SELECT citation_name FROM citations";
 
     $result=mysqli_query($link, $sql);

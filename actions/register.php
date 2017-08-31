@@ -1,8 +1,5 @@
 <?php
-$iniContents = parse_ini_file($_SERVER["DOCUMENT_ROOT"]."/properties/config.ini", true); //Gather from config.ini file
-$connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['connection_file_location'];
-
-    require($connectionsFileLocation);
+require_once(../oc-config.php');
 
     $name = $_POST['uname'];
     $email = $_POST['email'];
@@ -12,24 +9,24 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
     {
         array_push($divisions, $selectedOption);
     }
-    
+
     if($_POST['password'] !== $_POST['password1'])
-    {        
+    {
         session_start();
         $_SESSION['register_error'] = "Passwords do not match";
         sleep(1);
         header("Location:../index.php#signup");
         exit();
-        
+
     }
-    
+
     //Hash the password
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    
+
     //Establish database connection
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-	
+
 	if (!$link) {
 		die('Could not connect: ' .mysql_error()); //TODO: A function to send me an email when this occurs
 	}
@@ -39,7 +36,7 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
     echo $query;
     $result = mysqli_query($link, $query);
 	$num_rows = $result->num_rows;
-	
+
 	if ($num_rows>0)
 	{
 		session_start();
@@ -50,13 +47,13 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
 	}
 
     $query = "INSERT INTO users (name, email, password, identifier) VALUES (?, ?, ?, ?)";
-	
-    
+
+
 	try {
 		$stmt = mysqli_prepare($link, $query);
 		mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $password, $identifier);
 		$result = mysqli_stmt_execute($stmt);
-		
+
 		if ($result == FALSE) {
 			die(mysqli_error($link));
 		}
@@ -66,11 +63,11 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
 		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
 	}
 
-    
+
 
     /*Add user to departments they requested, temporary table */
     /*This is really inefficient. There should be a better way*/
- 
+
     foreach($divisions as $division)
     {
         if($division == "communications")
@@ -90,24 +87,24 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
 
         $query = "INSERT INTO user_departments_temp (user_id, department_id)
               SELECT id , ?
-              FROM users 
+              FROM users
               WHERE email = ?";
-    
+
         try {
             $stmt = mysqli_prepare($link, $query);
             mysqli_stmt_bind_param($stmt, "is", $division, $email);
             $result = mysqli_stmt_execute($stmt);
-            
+
             if ($result == FALSE) {
                 die(mysqli_error($link));
             }
         }
         catch (Exception $e)
         {
-            die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+            die("Failed to run query: " . $e->getMessage()); //TODO: A function to send admins an email when this occurs should be made
         }
     }
-    
+
 
     mysqli_close($link);
 

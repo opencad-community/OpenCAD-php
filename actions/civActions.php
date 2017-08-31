@@ -1,8 +1,5 @@
 <?php
-$iniContents = parse_ini_file($_SERVER["DOCUMENT_ROOT"]."/properties/config.ini", true); //Gather from config.ini file
-$connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['connection_file_location'];
-
-require($connectionsFileLocation);
+require_once('../oc-config.php');
 
 if (isset($_GET['getCivilianDetails']))
 {
@@ -18,7 +15,7 @@ if (isset($_POST['requestIdentity']))
 function requestIdentity()
 {
     session_start();
-    
+
     var_dump($_POST);
 
     // Need to handle rank/permissions here
@@ -29,8 +26,8 @@ function requestIdentity()
     $lastName = explode(" ", $fullName)[1];
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-	
-    if (!$link) { 
+
+    if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
 
@@ -43,7 +40,7 @@ function requestIdentity()
     if(!$num_rows == 0)
     {
         $_SESSION['identityMessage'] = '<div class="alert alert-danger"><span>Name already exists</span></div>';
-    
+
         sleep(1);
         header("Location:../civilian/civilian.php");
         die();
@@ -67,15 +64,15 @@ function requestIdentity()
     $veh_make = $_POST['civMakeReq'];
     $veh_model = $_POST['civModelReq'];
     $veh_color = $_POST['civVehColReq'];
-    
-    $sql = "INSERT INTO identity_requests (submittedByName, submittedById, first_name, last_name, dob, address, sex, race, hair_color, build, biography, veh_plate, veh_make, veh_model, veh_color) 
+
+    $sql = "INSERT INTO identity_requests (submittedByName, submittedById, first_name, last_name, dob, address, sex, race, hair_color, build, biography, veh_plate, veh_make, veh_model, veh_color)
     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
     try {
         $stmt = mysqli_prepare($link, $sql);
         mysqli_stmt_bind_param($stmt, "sisssssssssssss", $submittedByName, $submitttedById, $firstName, $lastName, $dob, $address, $sex, $race, $hair, $build, $biography, $veh_plate, $veh_make, $veh_model, $veh_color );
         $result = mysqli_stmt_execute($stmt);
-    
+
         if ($result == FALSE) {
             die(mysqli_error($link));
         }
@@ -86,7 +83,7 @@ function requestIdentity()
     }
 
     $_SESSION['identityMessage'] = '<div class="alert alert-success"><span>Successfully submitted identity request</span></div>';
-    
+
     sleep(1);
     header("Location:../civilian/civilian.php");
     die();
@@ -99,11 +96,11 @@ function getIdentities()
     $uid = $_SESSION['id'];
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-	
-    if (!$link) { 
+
+    if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
-    
+
     $query = 'SELECT civilian_names.*, ncic_names.first_name, ncic_names.last_name, ncic_plates.veh_plate, ncic_plates.veh_make, ncic_plates.veh_model, ncic_plates.veh_color FROM `ncic_names` LEFT JOIN `civilian_names` ON `civilian_names`.`names_id` = `ncic_names`.`id` LEFT JOIN `ncic_plates` ON `ncic_plates`.`name_id` = `ncic_names`.`id` WHERE civilian_names.user_id = "'.$uid.'"';
 
     $result=mysqli_query($link, $query);
@@ -127,7 +124,7 @@ function getIdentities()
                 <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>           
+            <tbody>
         ';
 
         while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
@@ -141,7 +138,7 @@ function getIdentities()
                 <td>
                     <form action="../actions/civActions.php" method="get">
                     <button name="civilianDetails" type="button" data-toggle="modal" id="'.$row[1].'" data-target="#civilianDetailsModal" class="btn btn-xs btn-link">Details</button>
-                    </form>                    
+                    </form>
                 </td>
             </tr>
             ';
@@ -159,15 +156,15 @@ function getCivilianDetails()
     $name_id = $_GET['name_id'];
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-	
-    if (!$link) { 
+
+    if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
-    
+
     $query = 'SELECT ncic_names.*, ncic_plates.* FROM `ncic_names` LEFT JOIN `ncic_plates` ON `ncic_plates`.`name_id` = `ncic_names`.`id` WHERE ncic_names.id = "'.$name_id.'"';
 
     $result=mysqli_query($link, $query);
-    
+
     $encode = array();
     while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
     {
@@ -184,9 +181,9 @@ function getCivilianDetails()
         $encode["veh_model"] = $row[14];
         $encode["veh_color"] = $row[15];
         $encode["veh_reg_state"] = $row[18];
-        
+
     }
-    
+
     echo json_encode($encode);
     mysqli_close($link);
 }

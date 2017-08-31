@@ -10,7 +10,7 @@
     session_start();
 
     // TODO: Verify user has permission to be on this page
-	
+
     if (empty($_SESSION['logged_in']))
     {
         header('Location: ../index.php');
@@ -21,7 +21,7 @@
       $name = $_SESSION['name'];
     }
 
-    
+
     if(isset($_SESSION['admin']))
     {
       if ($_SESSION['admin'] == 'YES')
@@ -34,8 +34,7 @@
       die("You do not have permission to be here. This has been recorded");
     }
 
-    $iniContents = parse_ini_file("../properties/config.ini", true); //Gather from config.ini file
-    $community = $iniContents['strings']['community'];
+    require_once('../oc-config.php');
 
     include("../actions/adminActions.php");
     include("../actions/ncicAdminActions.php");
@@ -53,14 +52,14 @@
         $warrantMessage = $_SESSION['warrantMessage'];
         unset($_SESSION['warrantMessage']);
     }
-    
+
     $plateMessage = "";
     if(isset($_SESSION['plateMessage']))
     {
         $plateMessage = $_SESSION['plateMessage'];
         unset($_SESSION['plateMessage']);
     }
-    
+
     $nameMessage = "";
     if(isset($_SESSION['nameMessage']))
     {
@@ -86,7 +85,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?php echo $community;?> Admin</title>
+    <title><?php echo COMMUNITY_NAME;?> Admin</title>
     <link rel="icon" href="../images/favicon.ico" />
 
     <!-- Bootstrap -->
@@ -116,7 +115,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo $community;?> Admin</span></a>
+              <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo COMMUNITY_NAME;?> Admin</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -201,7 +200,7 @@
                   </ul>
                 </li>
 
-                
+
               </ul>
             </nav>
           </div>
@@ -238,7 +237,7 @@
                   </div>
                   <!-- ./ x_content -->
                   <div class="x_footer">
-                    
+
                   </div>
                   <!-- ./ x_footer -->
                 </div>
@@ -265,7 +264,7 @@
                   <!-- ./ x_title -->
                   <div class="x_content">
                      <?php echo $nameMessage;?>
-                     <?php ncicGetNames();?> 
+                     <?php ncicGetNames();?>
                   </div>
                   <!-- ./ x_content -->
                   <div class="x_footer">
@@ -296,7 +295,7 @@
                   <!-- ./ x_title -->
                   <div class="x_content">
                      <?php echo $plateMessage;?>
-                     <?php ncicGetPlates();?> 
+                     <?php ncicGetPlates();?>
                   </div>
                   <!-- ./ x_content -->
                   <div class="x_footer">
@@ -326,9 +325,9 @@
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
-                     
+
                      <?php echo $warrantMessage;?>
-                     <?php ncic_warrants();?> 
+                     <?php ncic_warrants();?>
                   </div>
                   <!-- ./ x_content -->
                   <div class="x_footer">
@@ -359,7 +358,7 @@
                   <!-- ./ x_title -->
                   <div class="x_content">
                      <?php echo $citationMessage;?>
-                     <?php ncic_citations();?> 
+                     <?php ncic_citations();?>
                   </div>
                   <!-- ./ x_content -->
                   <div class="x_footer">
@@ -381,7 +380,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            <?php echo $community;?> CAD System
+            <?php echo COMMUNITY_NAME;?> CAD System
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -405,7 +404,7 @@
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">Civilian Name</label>
                 <div class="col-lg-10">
-                  
+
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -413,7 +412,7 @@
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Citation Name</label>
                 <div class="col-lg-10">
-                  
+
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -421,7 +420,7 @@
           </div>
           <!-- ./ modal-body -->
           <div class="modal-footer">
-                <input name="edit_name_btn" type="submit" class="btn btn-primary" value="Edit" /> 
+                <input name="edit_name_btn" type="submit" class="btn btn-primary" value="Edit" />
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </form>
           </div>
@@ -468,7 +467,7 @@
           </div>
           <!-- ./ modal-body -->
           <div class="modal-footer">
-                <input name="create_citation" type="submit" class="btn btn-primary" value="Create" /> 
+                <input name="create_citation" type="submit" class="btn btn-primary" value="Create" />
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </form>
           </div>
@@ -574,11 +573,11 @@
                 <!-- ./ col-sm-9 -->
               </div>
               <!-- ./ form-group -->
-            
+
           </div>
           <!-- ./ modal-body -->
           <div class="modal-footer">
-                <input name="create_warrant" type="submit" class="btn btn-primary" value="Create" /> 
+                <input name="create_warrant" type="submit" class="btn btn-primary" value="Create" />
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </form>
           </div>
@@ -706,11 +705,11 @@
                 <!-- ./ col-sm-9 -->
               </div>
               <!-- ./ form-group -->
-            
+
           </div>
           <!-- ./ modal-body -->
           <div class="modal-footer">
-                <input name="create_name" type="submit" class="btn btn-primary" value="Create" /> 
+                <input name="create_name" type="submit" class="btn btn-primary" value="Create" />
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </form>
           </div>
@@ -829,11 +828,11 @@
                 <!-- ./ col-sm-9 -->
               </div>
               <!-- ./ form-group -->
-            
+
           </div>
           <!-- ./ modal-body -->
           <div class="modal-footer">
-                <input name="create_plate" type="submit" class="btn btn-primary" value="Create" /> 
+                <input name="create_plate" type="submit" class="btn btn-primary" value="Create" />
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </form>
           </div>
@@ -875,24 +874,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
-    
+
     <script>
 		$(document).ready(function() {
-		
+
 			$('#ncic_names').DataTable({
-                
+
 			});
 
       $('#ncic_plates').DataTable({
-                
+
 			});
 
       $('#ncic_warrants').DataTable({
-                
+
 			});
 
       $('#ncic_citations').DataTable({
-                
+
 			});
 
 		});

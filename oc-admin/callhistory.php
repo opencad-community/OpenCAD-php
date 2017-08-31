@@ -2,7 +2,7 @@
     session_start();
 
     // TODO: Verify user has permission to be on this page
-	
+
     if (empty($_SESSION['logged_in']))
     {
         header('Location: ../index.php');
@@ -12,7 +12,7 @@
     {
       $name = $_SESSION['name'];
     }
-    
+
     if(isset($_SESSION['admin']))
     {
       if ($_SESSION['admin'] == 'YES')
@@ -25,8 +25,7 @@
       }
     }
 
-    $iniContents = parse_ini_file("../properties/config.ini", true); //Gather from config.ini file
-    $community = $iniContents['strings']['community'];
+    require_once('../oc-config.php');
     include("../actions/adminActions.php");
 
     $historyMessage = "";
@@ -35,7 +34,7 @@
         $historyMessage = $_SESSION['historyMessage'];
         unset($_SESSION['historyMessage']);
     }
-     
+
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +46,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?php echo $community;?> Admin</title>
+    <title><?php echo COMMUNITY_NAME;?> Admin</title>
     <link rel="icon" href="../images/favicon.ico" />
 
     <!-- Bootstrap -->
@@ -66,7 +65,7 @@
     <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
     <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
     <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
-    
+
     <!-- Custom Theme Style -->
     <link href="../css/custom.css" rel="stylesheet">
   </head>
@@ -77,7 +76,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo $community;?> Admin</span></a>
+              <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo COMMUNITY_NAME;?> Admin</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -162,7 +161,7 @@
                   </ul>
                 </li>
 
-                
+
               </ul>
             </nav>
           </div>
@@ -195,7 +194,7 @@
                   <!-- ./ x_title -->
                   <div class="x_content">
                     <?php echo $historyMessage;?>
-                     <?php getCallHistory();?> 
+                     <?php getCallHistory();?>
                   </div>
                   <!-- ./ x_content -->
                 </div>
@@ -212,7 +211,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            <?php echo $community;?> CAD System
+            <?php echo COMMUNITY_NAME;?> CAD System
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -254,7 +253,7 @@
     <script>
     $(document).ready(function() {
         $('#call_history').DataTable({
-            
+
         });
     });
     </script>

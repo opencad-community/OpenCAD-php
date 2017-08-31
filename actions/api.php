@@ -1,6 +1,6 @@
 <?php
 /**
-Open source CAD system for RolePlaying Communities. 
+Open source CAD system for RolePlaying Communities.
 Copyright (C) 2017 Shane Gill
 
 This program is free software: you can redistribute it and/or modify
@@ -14,10 +14,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     This file handles all actions for admin.php script
 */
 
-$iniContents = parse_ini_file($_SERVER["DOCUMENT_ROOT"]."/properties/config.ini", true); //Gather from config.ini file
-$connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['connection_file_location'];
-
-require($connectionsFileLocation);
+require_once('../oc-config.php');
 
 if (isset($_GET['a'])){
     getActiveCalls();
@@ -76,8 +73,8 @@ function quickStatus()
     $callId = $_POST['callId'];
     session_start();
     $callsign = $_SESSION['callsign'];
-    
-    
+
+
     //var_dump($_SESSION);
 
     switch($event)
@@ -91,7 +88,7 @@ function quickStatus()
 
             //Update the call_notes to say they're en-route
             $narrativeAdd = date("Y-m-d H:i:s").': '.$callsign.': En-Route<br/>';
-            
+
 
             $sql = "UPDATE calls SET call_notes = concat(call_notes, ?) WHERE call_id = ?";
 
@@ -99,7 +96,7 @@ function quickStatus()
                 $stmt = mysqli_prepare($link, $sql);
                 mysqli_stmt_bind_param($stmt, "si", $narrativeAdd, $callId);
                 $result = mysqli_stmt_execute($stmt);
-            
+
                 if ($result == FALSE) {
                     die(mysqli_error($link));
                 }
@@ -112,25 +109,25 @@ function quickStatus()
             break;
 
         case "onscene":
-            
+
             break;
     }
-    
+
 }
 
 function getMyCall()
 {
     //First, check to see if they're on a call
     $identifier = $_SESSION['identifier'];
-    
+
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
 	if (!$link) {
 		die('Could not connect: ' .mysql_error());
 	}
-	
+
 	$sql = "SELECT * from active_users WHERE identifier = '$identifier' AND status = '0' AND status_detail = '3'";
-	
+
 	$result = mysqli_query($link, $sql);
 
     $num_rows = $result->num_rows;
@@ -158,7 +155,7 @@ function getMyCall()
     {
         //Figure out what call the user is on
         $sql = "SELECT call_id from calls_users WHERE identifier = '$identifier'";
-	
+
 	    $result = mysqli_query($link, $sql);
 
         while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
@@ -168,7 +165,7 @@ function getMyCall()
 
         //Get call details
         $sql = "SELECT * from calls WHERE call_id = '$call_id'";
-	
+
 	    $result = mysqli_query($link, $sql);
 
         while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
@@ -203,7 +200,7 @@ function getMyCall()
             </a>
             <a class="btn btn-app">
                 <i class="fa fa-crosshairs" style="color:red"></i> 10-99
-            </a> 
+            </a>
             <br/><br/>
 
             <div class="form-group">
@@ -249,7 +246,7 @@ function getMyCall()
               </div>
               <!-- ./ col-sm-9 -->
             </div>
-            
+
             <div class="clearfix">
             <br/><br/><br/><br/>
             <!-- ./ form-group -->
@@ -280,7 +277,7 @@ function getMyCall()
         <!-- ./ x_content -->
         <br/>
         <div class="x_footer">
-        
+
         </div>
         <!-- ./ x_footer -->
         </form>
@@ -289,9 +286,9 @@ function getMyCall()
 </div>
 <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
     ';
-    
 
-    
+
+
 }
 
 function create911Call()
@@ -318,7 +315,7 @@ function create911Call()
         $stmt = mysqli_prepare($link, $sql);
         mysqli_stmt_bind_param($stmt, "ss", $location, $call_notes);
         $result = mysqli_stmt_execute($stmt);
-    
+
         if ($result == FALSE) {
             die(mysqli_error($link));
         }
@@ -330,7 +327,7 @@ function create911Call()
 
     session_start();
     $_SESSION['good911'] = '<div class="alert alert-success"><span>Successfully created 911 call</span></div>';
-    
+
     sleep(1);
     header("Location:../civilian/civilian.php");
 
@@ -359,20 +356,20 @@ function checkTones()
         }
         else if ($row[2] == "0")
         {
-            $encode[$row[1]] = "INACTIVE";  
+            $encode[$row[1]] = "INACTIVE";
         }
     }
-    
+
     mysqli_close($link);
     echo json_encode($encode);
-    
+
 }
 
 function setTone()
 {
     $tone = $_POST['tone'];
     $action = $_POST['action'];
-    
+
     $status;
     switch ($action)
     {
@@ -404,10 +401,10 @@ function setTone()
     catch (Exception $e)
     {
         die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-    } 
+    }
 
     mysqli_close($link);
-    
+
     if ($action == "start")
     {
         echo "SUCCESS START";
@@ -443,7 +440,7 @@ function logoutUser()
     catch (Exception $e)
     {
         die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-    } 
+    }
 
     mysqli_close($link);
     echo "SUCCESS";
@@ -506,12 +503,12 @@ function changeStatus()
 	}
 
 	$sql = "UPDATE active_users SET status = ?, status_detail = ? WHERE identifier = ?";
-	
+
 	try {
         $stmt = mysqli_prepare($link, $sql);
         mysqli_stmt_bind_param($stmt, "iis", $statusId, $statusDet, $unit);
         $result = mysqli_stmt_execute($stmt);
-    
+
         if ($result == FALSE) {
             die(mysqli_error($link));
         }
@@ -553,7 +550,7 @@ function changeStatus()
             $stmt = mysqli_prepare($link, $sql);
             mysqli_stmt_bind_param($stmt, "si", $narrativeAdd, $callId);
             $result = mysqli_stmt_execute($stmt);
-		
+
             if ($result == FALSE) {
                 die(mysqli_error($link));
             }
@@ -566,7 +563,7 @@ function changeStatus()
 
        //Remove them from the call
        $sql = "DELETE FROM calls_users WHERE identifier = ?";
-	
+
         try {
             $stmt = mysqli_prepare($link, $sql);
             mysqli_stmt_bind_param($stmt, "s", $unit);
@@ -579,7 +576,7 @@ function changeStatus()
         catch (Exception $e)
         {
             die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-        } 
+        }
     }
 
 	mysqli_close($link);
@@ -593,9 +590,9 @@ function getDispatchers()
 	if (!$link) {
 		die('Could not connect: ' .mysql_error());
 	}
-	
+
 	$sql = "SELECT * from active_users WHERE status = '2'";
-	
+
 	$result = mysqli_query($link, $sql);
 
     echo '
@@ -608,7 +605,7 @@ function getDispatchers()
             <tbody>
         ';
 
-		
+
 
         while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
         {
@@ -654,7 +651,7 @@ function setUnitActive($dep)
         $stmt = mysqli_prepare($link, $sql);
         mysqli_stmt_bind_param($stmt, "ssi", $identifier, $identifier, $status);
         $result = mysqli_stmt_execute($stmt);
-    
+
         if ($result == FALSE) {
             die(mysqli_error($link));
         }
@@ -673,9 +670,9 @@ function getAvailableUnits()
 	if (!$link) {
 		die('Could not connect: ' .mysql_error());
 	}
-	
+
 	$sql = "SELECT * from active_users WHERE status = '1'";
-	
+
 	$result = mysqli_query($link, $sql);
 
     $num_rows = $result->num_rows;
@@ -699,7 +696,7 @@ function getAvailableUnits()
             <tbody>
         ';
 
-		
+
         $counter = 0;
         while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
         {
@@ -713,7 +710,7 @@ function getAvailableUnits()
                     <li><a id="statusOther'.$counter.'" class="statusOther '.$row[0].'" onclick="testFunction(this);">10-6/Other</a></li>
                     <li><a id="statusSig11'.$counter.'" class="statusSig11 '.$row[0].'" onclick="testFunction(this);">Signal 11</a></li>
                 </ul></div>
-                
+
                 </td>
                 <input name="uid" type="hidden" value='.$row[0].' />
             </tr>
@@ -736,9 +733,9 @@ function getUnAvailableUnits()
 	if (!$link) {
 		die('Could not connect: ' .mysql_error());
 	}
-	
+
 	$sql = "SELECT * from active_users WHERE status = '0'";
-	
+
 	$result = mysqli_query($link, $sql);
 
     $num_rows = $result->num_rows;
@@ -762,7 +759,7 @@ function getUnAvailableUnits()
                 <tbody>
             ';
 
-            
+
 
             while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
             {
@@ -771,11 +768,11 @@ function getUnAvailableUnits()
                     <td>'.$row[0].'</td>
                     <td>'.$row[1].'</td>
                     <td>';
-                    
+
                         getIndividualStatus($row[1]);
 
                     echo '</td>
-                    
+
                     <td>
                     <a id="logoutUser" class="nopadding logoutUser '.$row[0].'" onclick="logoutUser(this);" style="color:red; cursor:pointer;">Logout</a>&nbsp;&nbsp;&nbsp;
                     <div class="dropdown"><button class="btn btn-link dropdown-toggle nopadding" style="display: inline-block; vertical-align:top;" type="button" data-toggle="dropdown">Status <span class="caret"></span></button><ul class="dropdown-menu">
@@ -803,7 +800,7 @@ function getIndividualStatus($callsign)
     if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
-    
+
     $sql = "SELECT status_detail FROM active_users WHERE callsign = \"$callsign\"";
 
     $result=mysqli_query($link, $sql);
@@ -828,11 +825,11 @@ function getIndividualStatus($callsign)
 function getCodesNcic()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-	
-    if (!$link) { 
+
+    if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
-    
+
     $query = "SELECT code_id, code_name FROM codes ORDER BY `code_id` ASC";
 
     $result=mysqli_query($link, $query);
@@ -846,11 +843,11 @@ function getCodesNcic()
 function getActiveUnits()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-	
-    if (!$link) { 
+
+    if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
-    
+
     $query = "SELECT callsign FROM active_users WHERE status = '1'";
 
     $result=mysqli_query($link, $query);
@@ -860,18 +857,18 @@ function getActiveUnits()
     {
         $encode[$row[0]] = $row[0];
     }
-    
+
     echo json_encode($encode);
 }
 
 function getActiveUnitsModal()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-	
-    if (!$link) { 
+
+    if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
-    
+
     $query = "SELECT callsign, identifier FROM active_users WHERE status = '1'";
 
     $result=mysqli_query($link, $query);
@@ -881,7 +878,7 @@ function getActiveUnitsModal()
     {
         $encode[$row[1]] = $row[0];
     }
-    
+
     echo json_encode($encode);
 }
 
@@ -892,9 +889,9 @@ function getActiveCalls()
 	if (!$link) {
 		die('Could not connect: ' .mysql_error());
 	}
-	
+
 	$sql = "SELECT * from calls";
-	
+
 	$result = mysqli_query($link, $sql);
 
     $num_rows = $result->num_rows;
@@ -918,7 +915,7 @@ function getActiveCalls()
             <tbody>
         ';
 
-		
+
         $counter = 0;
         while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
         {
@@ -940,20 +937,20 @@ function getActiveCalls()
                             getUnitsOnCall($row[0]);
                         echo '</td>';
                 }
-                
+
 
                 echo '<td>'.$row[2].'/'.$row[3].'/'.$row[4].'</td>';
 
                 if (isset($_GET['type']) && $_GET['type'] == "responder")
                 {
-                    echo' 
+                    echo'
                     <td>
                         <button id="'.$row[0].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
                     </td>';
                 }
                 else
                 {
-                echo' 
+                echo'
                 <td>
                     <button id="'.$row[0].'" class="btn-link" style="color: red;" value="'.$row[0].'" onclick="clearCall('.$row[0].')">Clear</button>
                     <button id="'.$row[0].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
@@ -961,7 +958,7 @@ function getActiveCalls()
                     <input name="uid" name="uid" type="hidden" value="'.$row[0].'"/>
                 </td>';
                 }
-                
+
             echo'
             </tr>
             ';
@@ -985,13 +982,13 @@ function getUnitsOnCall($callId)
     if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
-    
+
     $sql1 = "SELECT * FROM calls_users WHERE call_id = \"$callId\"";
 
     $result1=mysqli_query($link, $sql1);
-    
+
     $units = "";
-    
+
     $num_rows = $result1->num_rows;
 
     if($num_rows == 0)
@@ -1002,12 +999,12 @@ function getUnitsOnCall($callId)
     {
         while($row1 = mysqli_fetch_array($result1, MYSQLI_BOTH))
         {
-            $units = $units.''.$row1[2].', ';   
+            $units = $units.''.$row1[2].', ';
         }
     }
 
-    
-    
+
+
     echo $units;
 
     mysqli_close($link);
@@ -1022,11 +1019,11 @@ function getCallDetails()
     if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
-    
+
     $sql = "SELECT * FROM calls WHERE call_id = \"$callId\"";
 
     $result=mysqli_query($link, $sql);
-    
+
     $encode = array();
     while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
     {
@@ -1036,9 +1033,9 @@ function getCallDetails()
         $encode["call_street2"] = $row[3];
         $encode["call_street3"] = $row[4];
         $encode["narrative"] = $row[5];
-        
+
     }
-    
+
     echo json_encode($encode);
     mysqli_close($link);
 }
@@ -1050,7 +1047,7 @@ function getCivilianNamesOption()
     if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
-    
+
     $sql = "SELECT id, first_name, last_name FROM ncic_names";
 
     $result=mysqli_query($link, $sql);
@@ -1068,7 +1065,7 @@ function getCitations()
     if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
-    
+
     $sql = "SELECT citation_name FROM citations";
 
     $result=mysqli_query($link, $sql);

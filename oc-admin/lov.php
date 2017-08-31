@@ -1,16 +1,9 @@
 <?php
-/**
- * lov.php
- *
- * Admin page for handling all list of values
- *
- * @author     Shane G
- */
 
     session_start();
 
     // TODO: Verify user has permission to be on this page
-	
+
     if (empty($_SESSION['logged_in']))
     {
         header('Location: ../index.php');
@@ -21,7 +14,7 @@
       $name = $_SESSION['name'];
     }
 
-    
+
     if(isset($_SESSION['admin']))
     {
       if ($_SESSION['admin'] == 'YES')
@@ -34,10 +27,7 @@
       die("You do not have permission to be here. This has been recorded");
     }
 
-    $iniContents = parse_ini_file("../properties/config.ini", true); //Gather from config.ini file
-    $community = $iniContents['strings']['community'];
-
-    include("../actions/adminActions.php");
+    require_once('../oc-config.php');
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +39,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?php echo $community;?> Admin</title>
+    <title><?php echo COMMUNITY_NAME;?> Admin</title>
     <link rel="icon" href="../images/favicon.ico" />
 
     <!-- Bootstrap -->
@@ -75,7 +65,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo $community;?> Admin</span></a>
+              <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo COMMUNITY_NAME;?> Admin</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -160,7 +150,7 @@
                   </ul>
                 </li>
 
-                
+
               </ul>
             </nav>
           </div>
@@ -192,7 +182,7 @@
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
-                     <?php getStreetNames();?> 
+                     <?php getStreetNames();?>
                   </div>
                   <!-- ./ x_content -->
                 </div>
@@ -218,7 +208,7 @@
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
-                     <?php getCodes();?> 
+                     <?php getCodes();?>
                   </div>
                   <!-- ./ x_content -->
                 </div>
@@ -244,7 +234,7 @@
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
-                     <?php getRanks();?> 
+                     <?php getRanks();?>
                   </div>
                   <!-- ./ x_content -->
                 </div>
@@ -263,7 +253,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            <?php echo $community;?> CAD System
+            <?php echo COMMUNITY_NAME;?> CAD System
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -292,20 +282,20 @@
     <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
     <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-    
+
     <script>
 		$(document).ready(function() {
-		
+
 			$('#streets').DataTable({
-                
+
 			});
 
       $('#codes').DataTable({
-                
+
 			});
 
       $('#ranks').DataTable({
-                
+
 			});
 
 		});
