@@ -1,11 +1,11 @@
 <?php
     session_start();
-
+    include("./oc-config.php");
     // TODO: Verify user has permission to be on this page
-	
+
     if (empty($_SESSION['logged_in']))
     {
-        header('Location: ./index.php');
+        //header('Location: /index.php');
         die("Not logged in");
     }
     else
@@ -13,24 +13,8 @@
       $name = $_SESSION['name'];
     }
 
-    if(isset($_SESSION['police']))
-    {
-      
-      if ($_SESSION['police'] == 'YES')
-      {
-          //Do nothing
-      }
-    }
-    else
-    {
-      die("You do not have permission to be here. Request access to dispatch through your administration.");
-    }
-
-$iniContents = parse_ini_file($_SERVER["DOCUMENT_ROOT"]."/properties/config.ini", true); //Gather from config.ini file
-$connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['connection_file_location'];
-
     include("./actions/api.php");
-    setUnitActive("1");
+    setUnitActive("2");
 
 ?>
 
@@ -43,7 +27,7 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?php echo $community;?> Responder</title>
+    <title><?php echo COMMUNITY_NAME?> Dispatch Console</title>
     <link rel="icon" href="./images/favicon.ico" />
 
     <!-- Bootstrap -->
@@ -65,12 +49,15 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
     <link href="./vendors/pnotify/dist/pnotify.css" rel="stylesheet">
     <link href="./vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
     <link href="./vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
-    
+
 
     <!-- Custom Theme Style -->
     <link href="./css/custom.css" rel="stylesheet">
   </head>
   <body class="nav-md">
+    <?php echo "<h3> PHP List All Session Variables</h3>";
+    foreach ($_SESSION as $key=>$val)
+    echo $key." ".$val."<br/>"; ?>
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -167,7 +154,7 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
                   </ul>
                 </li>
 
-                
+
               </ul>
             </nav>
           </div>
@@ -261,7 +248,7 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
                             <!-- ./ col-sm-9 -->
                         </div>
                         <!-- ./ form-group -->
-                     </form> 
+                     </form>
                   </div>
                   <!-- ./ x_content -->
                 </div>
@@ -269,10 +256,10 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
               </div>
               <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
 
-              <?php 
+              <?php
               if (isset($_GET['fire']))
               {
-                
+
                 if ($_GET['fire'] == "true")
                 {
                   //End the above row
@@ -296,7 +283,7 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
                         </div>
                         <!-- ./ x_content -->
                       </div>
-                      <!-- ./ x_panel --> 
+                      <!-- ./ x_panel -->
                     </div>
                     <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
                     <div class="col-md-4 col-sm-4 col-xs-4">
@@ -314,7 +301,7 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
                         </div>
                         <!-- ./ x_content -->
                       </div>
-                      <!-- ./ x_panel --> 
+                      <!-- ./ x_panel -->
                     </div>
                     <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
                     <div class="col-md-4 col-sm-4 col-xs-4">
@@ -332,7 +319,7 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
                         </div>
                         <!-- ./ x_content -->
                       </div>
-                      <!-- ./ x_panel --> 
+                      <!-- ./ x_panel -->
                     </div>
                     <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
                   </div>
@@ -342,9 +329,9 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
               }
               else
               {
-               
+
                /*
-               
+
                     SG - Commenting out for now since citation creation isn't going to be a thing for LEOs
 
                echo '
@@ -392,18 +379,18 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
                 <!-- ./ x_panel -->
               </div>
               <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
-            
-               
+
+
                '; */
 
               getMyCall();
 
-               
-              }
-              ?> 
 
-              
-              
+              }
+              ?>
+
+
+
             </div>
             <!-- ./ row -->
           </div>
@@ -414,7 +401,7 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            <?php echo $community;?> CAD System
+            <?php echo COMMUNITY_NAME?> CAD System
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -512,7 +499,7 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
               </div>
               <!-- ./ col-sm-9 -->
             </div>
-            
+
             <div class="clearfix">
             <br/><br/><br/><br/>
             <!-- ./ form-group -->
@@ -579,7 +566,7 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    
+
     <!-- PNotify -->
     <script src="./vendors/pnotify/dist/pnotify.js"></script>
     <script src="./vendors/pnotify/dist/pnotify.buttons.js"></script>
@@ -595,10 +582,10 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
     <?php
     if (isset($_GET['fire']))
     {
-      
+
       if ($_GET['fire'] == "true")
       {
-        echo '<audio id="newCallAudio" src="./sounds/Fire_Tones_Aligned.wav" preload="auto"></audio>'; 
+        echo '<audio id="newCallAudio" src="./sounds/Fire_Tones_Aligned.wav" preload="auto"></audio>';
       }
     }
     else
@@ -606,7 +593,7 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
       echo '<audio id="newCallAudio" src="./sounds/New_Dispatch.mp3" preload="auto"></audio>';
     }
     ?>
-    
+
 
     <script>
     $(document).ready(function() {
@@ -626,13 +613,13 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
 
           $.ajax({
               type: "POST",
-              url: "./actions/api.php",
+              url: "/actions/api.php",
               data: {
                   quickStatus: 'yes',
                   event: 'enroute',
                   callId: callId
               },
-              success: function(response) 
+              success: function(response)
               {
                 console.log(response);
 
@@ -641,13 +628,13 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
                   text: 'Successfully updated narrative',
                   type: 'success',
                   styling: 'bootstrap3'
-                });               
+                });
               },
               error : function(XMLHttpRequest, textStatus, errorThrown)
               {
                 console.log("Error");
               }
-              
+
             });
         });
 
@@ -674,23 +661,23 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
     function getCalls() {
         $.ajax({
               type: "GET",
-              url: "./actions/api.php",
+              url: "/actions/api.php",
               data: {
                   getCalls: 'yes',
                   responder: 'yes'
               },
-              success: function(response) 
+              success: function(response)
               {
                 $('#live_calls').html(response);
                 setTimeout(getCalls, 5000);
-                
+
               },
               error : function(XMLHttpRequest, textStatus, errorThrown)
               {
                 console.log("Error");
               }
-              
-            }); 
+
+            });
       }
     </script>
 
@@ -707,15 +694,15 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
 
             $.ajax({
               type: "POST",
-              url: "./actions/responderActions.php",
+              url: "/actions/responderActions.php",
               data: {
                   updateCallsign: 'yes',
                   details: $("#"+this.id).serialize()
               },
-              success: function(response) 
+              success: function(response)
               {
                 console.log(response);
-                
+
                 if (response.match("^Duplicate"))
                 {
                     var call2 = $('#callsign').find('input[name="callsign"]').val();
@@ -742,7 +729,7 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
                         text: 'That callsign is already in use',
                         type: 'error',
                         styling: 'bootstrap3'
-                        }); 
+                        });
                     }
 
                 }
@@ -757,34 +744,34 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
                     text: 'Successfully set your callsign',
                     type: 'success',
                     styling: 'bootstrap3'
-                  }); 
+                  });
 
                   var call1 = $('#callsign').find('input[name="callsign"]').val();
 
                   $('#callsign1').val(call1);
                 }
-                
+
               },
               error : function(XMLHttpRequest, textStatus, errorThrown)
               {
                 console.log("Error");
               }
-              
+
             });
-             
+
         });
-      }); 
+      });
     </script>
 
     <script>
     function getStatus() {
     $.ajax({
         type: "GET",
-        url: "./actions/responderActions.php",
+        url: "/actions/responderActions.php",
         data: {
             getStatus: 'yes'
         },
-        success: function(response) 
+        success: function(response)
         {
             console.log(response);
             if (response.match("^10-6/On"))
@@ -807,11 +794,11 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
                     getMyCallDetails();
                 }
             }
-            else if (response.match("^<br"))
+            else if (response.match("^<br>"))
             {
                 console.log("LOGGED OUT");
                 window.location.href = './actions/logout.php';
-                
+
             }
             else
             {
@@ -825,8 +812,8 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
         {
         console.log("Error");
         }
-        
-    }); 
+
+    });
     }
 
     function getMyCallDetails()
@@ -835,8 +822,8 @@ $connectionsFileLocation = $_SERVER["DOCUMENT_ROOT"].$iniContents['main']['conne
     }
     </script>
 
-    
-    
+
+
     <!-- openCad Script -->
     <script src="./js/openCad.js"></script>
     <!-- Custom Theme Scripts -->

@@ -14,7 +14,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     This file handles all actions for admin.php script
 */
 
-require_once('../oc-config.php');
+require_once($_SERVER["DOCUMENT_ROOT"] .'/opencad/oc-config.php');
 
 if (isset($_GET['a'])){
     getActiveCalls();
@@ -329,7 +329,7 @@ function create911Call()
     $_SESSION['good911'] = '<div class="alert alert-success"><span>Successfully created 911 call</span></div>';
 
     sleep(1);
-    header("Location:../civilian/civilian.php");
+    header("Location:../civilian.php");
 
 }
 
