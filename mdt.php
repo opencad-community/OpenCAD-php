@@ -1,6 +1,8 @@
 <?php
     session_start();
-    include("./oc-config.php");
+    if ( !defined('ABSPATH') )
+    	define('ABSPATH', dirname(__FILE__) . '/');
+    include("/oc-config.php");
     // TODO: Verify user has permission to be on this page
 
     if (empty($_SESSION['logged_in']))
@@ -13,7 +15,7 @@
       $name = $_SESSION['name'];
     }
 
-    include("./actions/api.php");
+    include(ABSPATH."/actions/api.php");
     setUnitActive("2");
 
 ?>
@@ -91,7 +93,7 @@
                   <li class="active"><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: block;">
                       <li class="current-page"><a href="javascript:void(0)">Dashboard</a></li>
-                      <li><a href="./actions/direction.php">CAD Direction Page</a></li>
+                      <li><a href="actions/direction.php">CAD Direction Page</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-external-link"></i> Links <span class="fa fa-chevron-down"></span></a>
@@ -166,7 +168,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>CAD Responder</h3>
+                <h3>MDT Console</h3>
               </div>
               <!-- ./ title_left -->
             </div>
@@ -613,7 +615,7 @@
 
           $.ajax({
               type: "POST",
-              url: "/actions/api.php",
+              url: "./actions/api.php",
               data: {
                   quickStatus: 'yes',
                   event: 'enroute',
@@ -661,7 +663,7 @@
     function getCalls() {
         $.ajax({
               type: "GET",
-              url: "/actions/api.php",
+              url: "./actions/api.php",
               data: {
                   getCalls: 'yes',
                   responder: 'yes'
@@ -694,7 +696,7 @@
 
             $.ajax({
               type: "POST",
-              url: "/actions/responderActions.php",
+              url: "actions/responderActions.php",
               data: {
                   updateCallsign: 'yes',
                   details: $("#"+this.id).serialize()
@@ -767,7 +769,7 @@
     function getStatus() {
     $.ajax({
         type: "GET",
-        url: "/actions/responderActions.php",
+        url: "actions/responderActions.php",
         data: {
             getStatus: 'yes'
         },
@@ -797,7 +799,7 @@
             else if (response.match("^<br>"))
             {
                 console.log("LOGGED OUT");
-                window.location.href = './actions/logout.php';
+                window.location.href = 'actions/logout.php';
 
             }
             else

@@ -42,7 +42,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?php echo COMMUNITY_NAME;?> Dispatcher</title>
+    <title><?php echo COMMUNITY_NAME;?> CAD Console</title>
     <link rel="icon" href=<?php ABSPATH;?> "images/favicon.ico" />
 
     <!-- Bootstrap -->
@@ -63,7 +63,7 @@
     <!-- PNotify -->
     <link href="./vendors/pnotify/dist/pnotify.css" rel="stylesheet">
     <link href="./vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
-    <link href= <?php ABSPATH;?> "/vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <link href= "./vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
 
     <style>
     .nopadding {
@@ -178,7 +178,8 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>CAD Dispatcher</h3>
+                <h3>CAD Console</h3>
+                <p>(Not <?php echo $name;?>?, <a href="./actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">Log Out</a>)
               </div>
               <!-- ./ title_left -->
             </div>
@@ -419,7 +420,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            <?php echo COMMUNITY_NAME;?> CAD System
+            <?php echo COMMUNITY_NAME;?> CAD Console
           </div>
           <div class="clearfix"></div>
         </footer>
