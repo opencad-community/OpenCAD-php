@@ -1,6 +1,10 @@
 # openCad
 Open source Computer Aided Dispatch System for GTA V Roleplay Communities.
 
+# Build Status
+
+* dev-stable: [![Build Status](https://travis-ci.org/phillf/openCad.svg?branch=development-stable)](https://travis-ci.org/phillf/openCad)
+
 # Installation Requirements
 * Operating System: Linux
 * Webserver: Apache or Nginx
