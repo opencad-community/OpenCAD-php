@@ -16,6 +16,9 @@ php:
 env:
   - DB=mysql
 
+services:
+  - mysql
+
 #Set MySQL database
 mysql:
   database: travis_ci_opencad_example_test
@@ -24,4 +27,10 @@ mysql:
 
 # Intall packages
 before_install:
-sudo apt-get install -y --force-yes php5 php5-mysql
+- mysql -e  'CREATE DATABASE IF NOT EXISTS opencad;'
+
+test:
+  adapter: mysql2
+  database: opencad
+  username: root
+  encoding: utf8
