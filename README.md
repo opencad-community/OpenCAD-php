@@ -1,19 +1,13 @@
 # openCad
-Open source Computer Aided Dispatch System for GTAV RolePlay Communities. This system is built off PHP
+Open source Computer Aided Dispatch System for GTA V Roleplay Communities.
 
-# Install Notes
-1. Move the HIDE directory to somewhere outside of www access
-2. Create a properties directory under the root/openCad directory
-3. Create a config.ini file
+# Installation Requirements
+* Operating System: Linux
+* Webserver: Apache or Nginx
+* PHP: 5.5 or newer
+* Database: MySQL 5.5 or MariaDB 10.0 (reccomended)
 
-Contents of file should be (change the connection_file_location to the correct spot):
+Note: This could probably run on Apache/PHP/MySQL under Windows but was developed primarily in a Linux environments.
 
->[main]
->
->connection_file_location = "/HIDE/connections.php"
->
->[strings]
->
->community = "COMMUNITY"
-
-4. Modify connections.php with correct MySQL Connection values.
+# Support
+Join the our Discord and someone will be able to help.
