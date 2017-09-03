@@ -15,3 +15,12 @@ php:
 # optionally specify a list of environments, for example to test different RDBMS
 env:
   - DB=mysql
+
+#Set MySQL database
+mysql:
+  database: travis_ci_opencad_example_test
+  username: root
+  encoding: utf8
+
+# Intall packages
+sudo apt-get install -y --force-yes php5 php5-mysql
