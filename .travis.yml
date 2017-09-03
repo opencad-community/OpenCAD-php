@@ -23,4 +23,5 @@ mysql:
   encoding: utf8
 
 # Intall packages
+before_install:
 sudo apt-get install -y --force-yes php5 php5-mysql
