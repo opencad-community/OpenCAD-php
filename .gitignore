@@ -1,2 +1,2 @@
-# Ignore Properties File Changes
-properties/config.ini
+# Ignore config file
+oc-config.php
