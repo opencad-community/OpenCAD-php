@@ -21,16 +21,17 @@ services:
 
 #Set MySQL database
 mysql:
-  database: travis_ci_opencad_example_test
+  database: openCAD
   username: root
   encoding: utf8
 
 # Intall packages
 before_install:
-- mysql -e  'CREATE DATABASE IF NOT EXISTS opencad;'
+- cp oc-config.sample.php oc-config.php
+- mysql -e  'CREATE DATABASE IF NOT EXISTS openCAD;'
 
 test:
   adapter: mysql2
-  database: opencad
+  database: openCAD
   username: root
   encoding: utf8
