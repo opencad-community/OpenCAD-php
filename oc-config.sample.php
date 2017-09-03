@@ -4,10 +4,10 @@
 \define('COMMUNITY_NAME', 'My Community');
 
 /* Database connection variables */
-define('DB_NAME', 'YourMySQLdatabaseName');
-define('DB_USER', 'YourMySQLuser');
-define('DB_PASSWORD', 'YourMySQLDatabasePassword');
-define('DB_HOST', 'HostnameOrIPtoYourDBserver');
+define('DB_NAME', 'openCAD');
+define('DB_USER', 'root');
+define('DB_PASSWORD', '');
+define('DB_HOST', '127.0.0.1');
 
 
 /* To & From emails for system generated emails */
