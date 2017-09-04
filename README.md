@@ -1,5 +1,5 @@
 # openCad
-Open source Computer Aided Dispatch System for GTA V Roleplay Communities.
+Open Source Computer Aided Dispatch System for GTA V Roleplay Communities.
 
 # Build Status
 
@@ -14,4 +14,4 @@ Open source Computer Aided Dispatch System for GTA V Roleplay Communities.
 Note: This could probably run on Apache/PHP/MySQL under Windows but was developed primarily in a Linux environments.
 
 # Support
-Join the our [Discord](https://discord.gg/ufBBmaN "openCAD Discord") and someone will be able to help.
+Join our [Discord](https://discord.gg/ufBBmaN "openCAD Discord") and ask for help. We'll be happy to help!
