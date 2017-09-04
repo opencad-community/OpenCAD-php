@@ -12,12 +12,6 @@ CREATE TABLE `active_users` (
   `status_detail` int(11) NOT NULL COMMENT 'Paired to Statuses table'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
---
--- Dumping data for table `active_users`
---
-
-INSERT INTO `active_users` (`identifier`, `callsign`, `status`, `status_detail`) VALUES
-('1A-98', '1A-98', 0, 2);
 
 -- --------------------------------------------------------
 
