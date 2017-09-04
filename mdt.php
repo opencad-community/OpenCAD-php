@@ -96,6 +96,7 @@
                       <li><a href="actions/direction.php">CAD Direction Page</a></li>
                     </ul>
                   </li>
+                  <!--
                   <li><a><i class="fa fa-external-link"></i> Links <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="https://goo.gl/forms/rEJOoJvIlCM5svSo1" target="_blank">Police PAL</a></li>
@@ -105,6 +106,7 @@
                       <li><a href="https://puu.sh/tRzTt/330b12ab3c.jpg" target="_blank">GTA 5 DOJRP Map</a></li>
                     </ul>
                   </li>
+                  -->
                   <li><a><i class="fa fa-hashtag"></i> Callsign <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a id="changeCallsign" class="btn-link" name="changeCallsign" data-toggle="modal" data-target="#callsign">Change Callsign</a></li>
