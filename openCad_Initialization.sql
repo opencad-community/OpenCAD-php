@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS opencad;
 CREATE DATABASE IF NOT EXISTS opencad;
 USE opencad;
 
