@@ -1,3 +1,9 @@
+- [Home](README.md)
+- [Prerequisite](prerequisite.md)
+- [Installation](installation.md)
+- [__Permissions__][permissions.md]
+- [Support](support.md)
+
 Permissions in openCAD are binary values, No (0) and Yes (1). The tables below describe what abilities each user group possess. There are 3 user groups in addition to the meta group "user". The "user" has the ability to edit any assets they directly own, this includes their profile, NCIC Identity, vehicle registrations. The user cannot edit their citations or warrants. The non-meta groups include Head Administrator, Administrator, Moderator.
 
 # Administrative Permissions
