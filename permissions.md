@@ -20,7 +20,7 @@ Permissions in openCAD are binary values, No (0) and Yes (1). The tables below d
 | Permanently Ban Users           | Yes                   | Yes                  | No                    |
 | Temporarily Ban Users (2 days)  | Yes                   | Yes                  | No                    |
 
-- The temp ban has a default of two (2) days but can be configured by HAs. This is useful for banning a member that has been committing FailRP or someone that is breaking guidelines pertaining to things such as Radio Traffic Etiquette.
+- The temp ban has a default of two (2) days but can be configured by Head Administrators. This is useful for banning a member that has been committing FailRP or someone that is breaking guidelines pertaining to things such as Radio Traffic Etiquette.
 
 # NCIC/Civilian Database Permissions
 |Permission             | Head Administrator   |Administrator         |Mod                   | Identity Owner  |
