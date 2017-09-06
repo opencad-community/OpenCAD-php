@@ -4,6 +4,7 @@ ___
 - [Home](README.md)
 - [Prerequisite](prerequisite.md)
 - [__Installation__](installation.md)
+- [Pemissions](permissions.md)
 - [Support](support.md)
 ___
 ### Instructions
