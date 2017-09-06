@@ -4,8 +4,8 @@ ___
 ### Table of Contents
 - [Home](README.md)
 - [Prerequisite](prerequisite.md)
-- [__Installation__](installation.md)
-- [Pemissions](permissions.md)
+- [Installation](installation.md)
+- [__Pemissions__](permissions.md)
 - [Support](support.md)
 ___
 
