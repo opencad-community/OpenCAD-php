@@ -15,8 +15,6 @@ Note: This could probably run on Apache/PHP/MySQL under Windows but was develope
 
 # Support
 [Join the our Discord](https://discord.gg/bJknKhn) and someone will be able to help.
-=======
-* dev-stable: [![Build Status](https://travis-ci.org/StormlightTech/openCAD-php.svg?branch=development-stable)](https://travis-ci.org/StormlightTech/openCAD-php)
 
 # Wiki
-Click [here](../wiki/README.md) for the wiki.
+Click [here](https://github.com/StormlightTech/openCAD-php/wiki) for the wiki.
