@@ -1,5 +1,5 @@
 <?php
-require_once(../oc-config.php');
+require_once('../oc-config.php');
 
     $name = $_POST['uname'];
     $email = $_POST['email'];
