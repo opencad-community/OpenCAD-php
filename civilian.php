@@ -135,8 +135,7 @@
                 <ul class="nav side-menu">
                   <li class="active"><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: block;">
-                      <li class="current-page"><a href="javascript:void(0)">Civilian Dashboard</a></li>
-                      <li><a href="./actions/direction.php">CAD Direction Page</a></li>
+                      <li class="current-page"><a href="javascript:void(0)">Civilian Dashboard</a></li>-
                     </ul>
                   </li>
                 </ul>
@@ -147,14 +146,16 @@
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
+              <!--
+                —— Left in for user settings. To be introduced later. Probably after RC1. ——
               <a data-toggle="tooltip" data-placement="top">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
+              </a>-->
               <a data-toggle="tooltip" data-placement="top">
                 <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="dashboard.php">
+                <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
               </a>
               <a data-toggle="tooltip" data-placement="top" title="Logout" href="./actions/logout.php">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>

@@ -57,9 +57,6 @@
     <link href="./css/custom.css" rel="stylesheet">
   </head>
   <body class="nav-md">
-    <?php echo "<h3> PHP List All Session Variables</h3>";
-    foreach ($_SESSION as $key=>$val)
-    echo $key." ".$val."<br/>"; ?>
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -93,7 +90,6 @@
                   <li class="active"><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: block;">
                       <li class="current-page"><a href="javascript:void(0)">Dashboard</a></li>
-                      <li><a href="actions/direction.php">CAD Direction Page</a></li>
                     </ul>
                   </li>
                   <!--
@@ -120,14 +116,15 @@
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
+            <!--  —— Left in for user settings. To be introduced later. Probably after RC1. ——
+            <a data-toggle="tooltip" data-placement="top">
+              <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+            </a>-->
               <a data-toggle="tooltip" data-placement="top" title="FullScreen" onclick="toggleFullScreen()">
                 <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="dashboard.php">
+                <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
               </a>
               <a data-toggle="tooltip" data-placement="top" title="Logout" href="./actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
