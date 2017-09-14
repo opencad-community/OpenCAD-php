@@ -110,9 +110,6 @@
                   <li class="active"><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: block;">
                       <li class="current-page"><a href="javascript:void(0)">Dashboard</a></li>
-                      <li><a href="./actions/direction.php">CAD Direction Page</a></li>
-                      <li><a href="https://drive.google.com/file/d/0B_6153e5tBW1Y1NwUGRwUGpYeVU/view" target="_blank">GTA 5 DOJRP Map</a></li>
-                      <li><a href="http://oriongc.net/playerloc/leafletmap.php" target="_blank">Live Unit Map</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-clock-o"></i> Stopwatch <span class="fa fa-chevron-down"></span></a>
@@ -128,14 +125,16 @@
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
+              <!--
+                —— Left in for user settings. To be introduced later. Probably after RC1. ——
               <a data-toggle="tooltip" data-placement="top">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
+              </a>-->
               <a data-toggle="tooltip" data-placement="top" title="FullScreen" onclick="toggleFullScreen()">
                 <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="dashboard.php">
+                <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
               </a>
               <a data-toggle="tooltip" data-placement="top" title="Logout" href="./actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
@@ -835,7 +834,7 @@
 
         $.ajax({
             type: "POST",
-            url: "./actions/api.php",
+            url: "../actions/api.php",
             data: {
                 logoutUser: 'yes',
                 unit: unit
@@ -874,7 +873,7 @@
       function getAvailableUnits() {
         $.ajax({
               type: "GET",
-              url: "./actions/api.php",
+              url: "../actions/api.php",
               data: {
                   getAvailableUnits: 'yes'
               },
