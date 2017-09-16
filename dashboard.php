@@ -1,5 +1,5 @@
 <?php
-
+require("./oc-config.php");
 session_start();
 
 if (empty($_SESSION['logged_in']))
@@ -13,8 +13,6 @@ if (empty($_SESSION['logged_in']))
     If they do, provide them the option to go where they want to go.
     Else, redirect to the only place they can go.
 */
-
-require("./oc-config.php");
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);

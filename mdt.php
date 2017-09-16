@@ -1,8 +1,6 @@
 <?php
+    include("./oc-config.php");
     session_start();
-    if ( !defined('ABSPATH') )
-    	define('ABSPATH', dirname(__FILE__) . '/');
-    include("/oc-config.php");
     // TODO: Verify user has permission to be on this page
 
     if (empty($_SESSION['logged_in']))
@@ -57,9 +55,6 @@
     <link href="./css/custom.css" rel="stylesheet">
   </head>
   <body class="nav-md">
-    <?php echo "<h3> PHP List All Session Variables</h3>";
-    foreach ($_SESSION as $key=>$val)
-    echo $key." ".$val."<br/>"; ?>
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
