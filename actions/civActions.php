@@ -42,7 +42,7 @@ function requestIdentity()
         $_SESSION['identityMessage'] = '<div class="alert alert-danger"><span>Name already exists</span></div>';
 
         sleep(1);
-        header("Location:../civilian/civilian.php");
+        header("Location:../civilian.php");
         die();
     }
 
@@ -85,7 +85,7 @@ function requestIdentity()
     $_SESSION['identityMessage'] = '<div class="alert alert-success"><span>Successfully submitted identity request</span></div>';
 
     sleep(1);
-    header("Location:../civilian/civilian.php");
+    header("Location:../civilian.php");
     die();
 
 }

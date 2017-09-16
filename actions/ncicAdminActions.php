@@ -58,7 +58,7 @@ function rejectRequest()
 
     session_start();
     $_SESSION['identityRequestMessage'] = '<div class="alert alert-success"><span>Successfully rejected request</span></div>';
-    header("Location: ../administration/ncicAdmin.php");
+    header("Location: ../oc-admin/ncicAdmin.php");
 }
 
 function getIdentityRequests()
@@ -497,7 +497,7 @@ function create_citation()
     session_start();
     $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully created citation</span></div>';
 
-    header("Location:../administration/ncicAdmin.php#citation_panel");
+    header("Location:../oc-admin/ncicAdmin.php#citation_panel");
 }
 
 function create_warrant()
@@ -547,7 +547,7 @@ function create_warrant()
     session_start();
     $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully created warrant</span></div>';
 
-    header("Location:../administration/ncicAdmin.php#warrant_panel");
+    header("Location:../oc-admin/ncicAdmin.php#warrant_panel");
 }
 
 function delete_name()
@@ -579,7 +579,7 @@ function delete_name()
 
     session_start();
     $_SESSION['nameMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian name</span></div>';
-    header("Location: ../administration/ncicAdmin.php#name_panel");
+    header("Location: ../oc-admin/ncicAdmin.php#name_panel");
 }
 
 function delete_plate()
@@ -611,7 +611,7 @@ function delete_plate()
 
     session_start();
     $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian plate</span></div>';
-    header("Location: ../administration/ncicAdmin.php#plate_panel");
+    header("Location: ../oc-admin/ncicAdmin.php#plate_panel");
 }
 
 function delete_citation()
@@ -642,7 +642,7 @@ function delete_citation()
 
     session_start();
     $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully removed citation</span></div>';
-    header("Location: ../administration/ncicAdmin.php#citation_panel");
+    header("Location: ../oc-admin/ncicAdmin.php#citation_panel");
 }
 
 function delete_warrant()
@@ -674,7 +674,7 @@ function delete_warrant()
 
     session_start();
     $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully removed warrant</span></div>';
-    header("Location: ../administration/ncicAdmin.php#warrant_panel");
+    header("Location: ../oc-admin/ncicAdmin.php#warrant_panel");
 }
 
 function create_name()
@@ -716,7 +716,7 @@ function create_name()
     session_start();
     $_SESSION['nameMessage'] = '<div class="alert alert-success"><span>Successfully added name to the database</span></div>';
 
-    header("Location:../administration/ncicAdmin.php#name_panel");
+    header("Location:../oc-admin/ncicAdmin.php#name_panel");
 }
 
 function create_plate()
@@ -759,7 +759,7 @@ function create_plate()
     session_start();
     $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully added plate to the database</span></div>';
 
-    header("Location:../administration/ncicAdmin.php#plate_panel");
+    header("Location:../oc-admin/ncicAdmin.php#plate_panel");
 }
 
 function getCitations()
