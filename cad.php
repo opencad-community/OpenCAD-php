@@ -1,4 +1,6 @@
 <?php
+    include("./oc-config.php");
+    include("./actions/api.php");
     session_start();
 
     // TODO: Verify user has permission to be on this page
@@ -25,10 +27,7 @@
     {
       die("You do not have permission to be here. Request access to dispatch through your administration.");
     }
-
-    require_once($_SERVER["DOCUMENT_ROOT"] .'/opencad/oc-config.php');
-
-    include("./actions/api.php");
+    
     setUnitActive("1");
 
 ?>

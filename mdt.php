@@ -1,8 +1,6 @@
 <?php
+    include("./oc-config.php");
     session_start();
-    if ( !defined('ABSPATH') )
-    	define('ABSPATH', dirname(__FILE__) . '/');
-    include("/oc-config.php");
     // TODO: Verify user has permission to be on this page
 
     if (empty($_SESSION['logged_in']))
@@ -15,7 +13,7 @@
       $name = $_SESSION['name'];
     }
 
-    include(ABSPATH."/actions/api.php");
+    include("./actions/api.php");
     setUnitActive("2");
 
 ?>
@@ -149,7 +147,7 @@
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="./profile/profile.php">My Profile</a></li>
+                    <li><a href="./profile.php">My Profile</a></li>
                     <li><a href="https://github.com/ossified/openCad/issues">Help</a></li>
                     <li><a href="./actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
@@ -695,7 +693,7 @@
 
             $.ajax({
               type: "POST",
-              url: "actions/responderActions.php",
+              url: "./actions/responderActions.php",
               data: {
                   updateCallsign: 'yes',
                   details: $("#"+this.id).serialize()
@@ -768,7 +766,7 @@
     function getStatus() {
     $.ajax({
         type: "GET",
-        url: "actions/responderActions.php",
+        url: "./actions/responderActions.php",
         data: {
             getStatus: 'yes'
         },
@@ -798,7 +796,7 @@
             else if (response.match("^<br>"))
             {
                 console.log("LOGGED OUT");
-                window.location.href = 'actions/logout.php';
+                window.location.href = './actions/logout.php';
 
             }
             else

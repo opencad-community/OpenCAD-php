@@ -1,5 +1,5 @@
 /*!
- * Open source CAD system for RolePlaying Communities. 
+ * Open source CAD system for RolePlaying Communities.
  * Copyright (C) 2017 Shane Gill
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -12,24 +12,24 @@
 
 // Full Screen Functionality
 function toggleFullScreen() {
-    if ((document.fullScreenElement && document.fullScreenElement !== null) ||    
+    if ((document.fullScreenElement && document.fullScreenElement !== null) ||
     (!document.mozFullScreen && !document.webkitIsFullScreen)) {
-        if (document.documentElement.requestFullScreen) {  
-        document.documentElement.requestFullScreen();  
-        } else if (document.documentElement.mozRequestFullScreen) {  
-        document.documentElement.mozRequestFullScreen();  
-        } else if (document.documentElement.webkitRequestFullScreen) {  
-        document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);  
-        }  
-    } else {  
-        if (document.cancelFullScreen) {  
-        document.cancelFullScreen();  
-        } else if (document.mozCancelFullScreen) {  
-        document.mozCancelFullScreen();  
-        } else if (document.webkitCancelFullScreen) {  
-        document.webkitCancelFullScreen();  
-        }  
-    }  
+        if (document.documentElement.requestFullScreen) {
+        document.documentElement.requestFullScreen();
+        } else if (document.documentElement.mozRequestFullScreen) {
+        document.documentElement.mozRequestFullScreen();
+        } else if (document.documentElement.webkitRequestFullScreen) {
+        document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+        }
+    } else {
+        if (document.cancelFullScreen) {
+        document.cancelFullScreen();
+        } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+        } else if (document.webkitCancelFullScreen) {
+        document.webkitCancelFullScreen();
+        }
+    }
 }
 
 // When the user presses enter in ncic_name it does a search
@@ -58,7 +58,7 @@ $('#ncic_plate_btn').on('click', function(e) {
         data: {'ncicPlate': 'yes',
                 'ncic_plate' : plate},
 
-        success: function(result) 
+        success: function(result)
         {
         console.log(result);
         data = JSON.parse(result);
@@ -166,7 +166,7 @@ $('#ncic_name_btn').on('click', function(e) {
         data: {'ncicName': 'yes',
                 'ncic_name' : name},
 
-        success: function(result) 
+        success: function(result)
         {
         console.log(result);
         data = JSON.parse(result);
@@ -189,7 +189,7 @@ $('#ncic_name_btn').on('click', function(e) {
             warrantText += "    Count: "+data.warrant_name.length+"<br/>";
             for (i=0; i<data.warrant_name.length; i++)
             {
-                warrantText += "<span style=\"color:red\">&nbsp;&nbsp;&nbsp;&nbsp;"+data.warrant_name[i] + "</span><br/>";  
+                warrantText += "<span style=\"color:red\">&nbsp;&nbsp;&nbsp;&nbsp;"+data.warrant_name[i] + "</span><br/>";
             }
             }
 
@@ -203,7 +203,7 @@ $('#ncic_name_btn').on('click', function(e) {
             citationText += "    Count: "+data.citation_name.length+"<br/>";
             for (i=0; i<data.citation_name.length; i++)
             {
-                citationText += "&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #F78F2B\">"+data.citation_name[i]+"</span><br/>";  
+                citationText += "&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #F78F2B\">"+data.citation_name[i]+"</span><br/>";
             }
             }
 
@@ -257,12 +257,12 @@ $(function() {
                 newCall: 'yes',
                 details: $("#"+this.id).serialize()
             },
-            success: function(response) 
+            success: function(response)
             {
             console.log(response);
             if (response == "SUCCESS")
             {
-                
+
                 $('#closeNewCall').trigger('click');
 
                 new PNotify({
@@ -270,7 +270,7 @@ $(function() {
                 text: 'Successfully created call',
                 type: 'success',
                 styling: 'bootstrap3'
-                }); 
+                });
 
                 //Reset the form
                 $('.newCallForm').find('input:text, textarea').val('');
@@ -278,14 +278,14 @@ $(function() {
 
                 getCalls();
             }
-            
+
             },
             error : function(XMLHttpRequest, textStatus, errorThrown)
             {
             console.log("Error");
             }
-            
-        }); 
+
+        });
     });
 });
 
@@ -299,35 +299,35 @@ $(function() {
             url: "../actions/dispatchActions.php",
             data: {
                 addNarrative: 'yes',
-                callId: $('#call_id_det').val(), 
+                callId: $('#call_id_det').val(),
                 details: $("#"+this.id).serialize()
             },
-            success: function(response) 
+            success: function(response)
             {
             console.log(response);
             if (response == "SUCCESS")
             {
-                
+
                 new PNotify({
                 title: 'Success',
                 text: 'Successfully added call narrative',
                 type: 'success',
                 styling: 'bootstrap3'
-                }); 
+                });
 
                 $('#callDetails').modal('toggle');
 
                 $('.callDetailsForm').find('textarea').val('');
             }
-            
+
             },
             error : function(XMLHttpRequest, textStatus, errorThrown)
             {
             console.log("Error");
             }
-            
 
-        }); 
+
+        });
     });
 });
 
@@ -343,7 +343,7 @@ $(function() {
                 assignUnit: 'yes',
                 details: $("#"+this.id).serialize(),
             },
-            success: function(response) 
+            success: function(response)
             {
             console.log(response);
             if (response == "SUCCESS")
@@ -355,7 +355,7 @@ $(function() {
                     text: 'Successfully assigned unit to call',
                     type: 'success',
                     styling: 'bootstrap3'
-                }); 
+                });
 
                 getCalls();
             }
@@ -369,18 +369,18 @@ $(function() {
                     text: 'You must select a unit to assign',
                     type: 'error',
                     styling: 'bootstrap3'
-                }); 
+                });
 
                 getCalls();
             }
-            
+
             },
             error : function(XMLHttpRequest, textStatus, errorThrown)
             {
                 console.log("Error");
             }
-            
-        }); 
+
+        });
     });
 });
 
@@ -392,7 +392,7 @@ $.ajax({
         data: {
             getDispatchers: 'yes'
         },
-        success: function(response) 
+        success: function(response)
         {
         $('#dispatchers').html(response);
         $('#dispatchersTable').DataTable({
@@ -401,14 +401,14 @@ $.ajax({
         });
 
         setTimeout(getActiveDispatchers, 5000);
-        
+
         },
         error : function(XMLHttpRequest, textStatus, errorThrown)
         {
         console.log("Error");
         }
-        
-    }); 
+
+    });
 }
 
 // Handles the unavailable unit poller for the dispatch page
@@ -419,7 +419,7 @@ $.ajax({
         data: {
             getUnAvailableUnits: 'yes'
         },
-        success: function(response) 
+        success: function(response)
         {
         $('#unAvailableUnits').html(response);
 
@@ -431,14 +431,14 @@ $.ajax({
                 });
         */
         setTimeout(getUnAvailableUnits, 5000);
-        
+
         },
         error : function(XMLHttpRequest, textStatus, errorThrown)
         {
         console.log("Error");
         }
-        
-    }); 
+
+    });
 }
 
 // Handles the ajax query to auto populate the new call modal with available units
@@ -450,11 +450,11 @@ $('#newCall').on('show.bs.modal', function(e) {
         type: 'GET',
         url: '../actions/api.php',
         data: {'getActiveUnits': 'yes'},
-        success: function(result) 
+        success: function(result)
         {
         data = JSON.parse(result);
 
-        var mymodal = $('#newCallForm');      
+        var mymodal = $('#newCallForm');
         var select = mymodal.find('#unit_1');
         select.empty();
         var select2 = mymodal.find('#unit_2');
@@ -464,7 +464,7 @@ $('#newCall').on('show.bs.modal', function(e) {
             select.append($("<option/>")
                         .val(key)
                         .text(value));
-            
+
             select2.append($("<option/>")
                         .val(key)
                         .text(value));
@@ -495,7 +495,7 @@ $('#narrative_add').keypress(function(event) {
 // Handles the ajax query to auto populate the assign modal with available units
 $('#assign').on('show.bs.modal', function(e) {
     var $modal = $(this), callId = e.relatedTarget.id;
-    
+
     callIdInput = $modal.find('input[name="callId"]');
     callIdInput.val(callId);
 
@@ -504,12 +504,12 @@ $('#assign').on('show.bs.modal', function(e) {
         type: 'GET',
         url: '../actions/api.php',
         data: {'getActiveUnitsModal': 'yes'},
-        success: function(result) 
+        success: function(result)
         {
         //console.log(result);
         data = JSON.parse(result);
 
-        var mymodal = $('#assign');      
+        var mymodal = $('#assign');
         var select = mymodal.find('#unit');
         select.empty();
 
@@ -537,9 +537,9 @@ $('#callDetails').on('show.bs.modal', function(e) {
         url: '../actions/api.php',
         data: {'getCallDetails': 'yes',
                 'callId' : callId},
-        success: function(result) 
+        success: function(result)
         {
-        
+
         data = JSON.parse(result);
 
         var mymodal = $('#callDetails');
@@ -555,7 +555,7 @@ $('#callDetails').on('show.bs.modal', function(e) {
 
         error:function(exception){alert('Exeption:'+exception);}
     });
-}); 
+});
 
 function deleteUser(uid) {
     var $tr = $(this).closest('tr');
@@ -570,19 +570,19 @@ function deleteUser(uid) {
             deleteUser: 'yes',
             uid: uid
         },
-        success: function(response) 
+        success: function(response)
         {
             console.log(response);
-            $tr.find('td').fadeOut(1000,function(){ 
-                $tr.remove();                    
+            $tr.find('td').fadeOut(1000,function(){
+                $tr.remove();
             });
-            
+
             new PNotify({
             title: 'Success',
             text: 'Successfully deleted user',
             type: 'success',
             styling: 'bootstrap3'
-            }); 
+            });
 
             getCalls();
         },
@@ -590,13 +590,13 @@ function deleteUser(uid) {
         {
             console.log("Error");
         }
-        
-        }); 
+
+        });
     }
     else
     {
         return; // Do nothing
-    } 
+    }
 }
 
 // Clears calls
@@ -613,19 +613,19 @@ function clearCall(btn_id) {
             clearCall: 'yes',
             callId: btn_id
         },
-        success: function(response) 
+        success: function(response)
         {
             console.log(response);
-            $tr.find('td').fadeOut(1000,function(){ 
-                $tr.remove();                    
+            $tr.find('td').fadeOut(1000,function(){
+                $tr.remove();
             });
-            
+
             new PNotify({
             title: 'Success',
             text: 'Successfully cleared call',
             type: 'success',
             styling: 'bootstrap3'
-            }); 
+            });
 
             getCalls();
         },
@@ -633,8 +633,8 @@ function clearCall(btn_id) {
         {
             console.log("Error");
         }
-        
-        }); 
+
+        });
     }
     else
     {
@@ -653,18 +653,18 @@ function getCalls() {
             getCalls: 'yes',
             type: file
         },
-        success: function(response) 
+        success: function(response)
         {
         $('#live_calls').html(response);
         setTimeout(getCalls, 5000);
-        
+
         },
         error : function(XMLHttpRequest, textStatus, errorThrown)
         {
         console.log("Error");
         }
-        
-    }); 
+
+    });
 }
 
 // Handles tones buttons
@@ -717,7 +717,7 @@ function priorityTone(type)
             tone: name,
             action: action
         },
-        success: function(response) 
+        success: function(response)
         {
             if (response == "SUCCESS START")
             {
@@ -728,7 +728,7 @@ function priorityTone(type)
                 styling: 'bootstrap3'
                 });
             }
-            
+
             else if (response == "SUCCESS STOP")
             {
                 new PNotify({
@@ -744,21 +744,21 @@ function priorityTone(type)
         {
         console.log("Error");
         }
-        
+
     });
- } 
+ }
 }
 
-// Function to check and see if there are any active tones 
+// Function to check and see if there are any active tones
 function checkTones()
-{            
+{
     $.ajax({
         type: "GET",
         url: "../actions/api.php",
         data: {
             checkTones: 'yes'
         },
-        success: function(response) 
+        success: function(response)
         {
             var file = $(location).attr('pathname').split("/")[2]
             data = JSON.parse(response);
@@ -774,19 +774,19 @@ function checkTones()
                 if (file == "dispatch")
                 {
                     $('#recurringTone').val('1');
-                    $('#recurringTone').text("Priority Tone - ACTIVE"); 
+                    $('#recurringTone').text("Priority Tone - ACTIVE");
                 }
-                
+
             }
             else if (data['recurring'] == "INACTIVE")
             {
                 priorityNotification.remove();
-                
+
                 if (file == "dispatch")
                 {
                     $('#recurringTone').val('0');
-                    $('#recurringTone').text("Priority Tone"); 
-                } 
+                    $('#recurringTone').text("Priority Tone");
+                }
             }
 
 
@@ -798,7 +798,7 @@ function checkTones()
                     tag.play();
 
                     $('#priorityTone').val('1');
-                    $('#priorityTone').text("10-3 Tone - ACTIVE"); 
+                    $('#priorityTone').text("10-3 Tone - ACTIVE");
                 } else {
                     //Do nothing
                 }
@@ -809,27 +809,27 @@ function checkTones()
                 document.cookie = "priority=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
                 $('#priorityTone').val('0');
                 $('#priorityTone').text("10-3 Tone");
-                 
+
             }
 
-            setTimeout(checkTones, 7000);        
+            setTimeout(checkTones, 7000);
         },
         error : function(XMLHttpRequest, textStatus, errorThrown)
         {
         console.log("Error");
         }
-        
+
     })
-}   
+}
 
 function responderChangeStatus(element)
 {
     statusInit = element.className;
     var status = element.value;
-    
+
     //If a user has a space in their username, it'll cause some problems. First, we need to split the string by spaces which will generate
     // an array. Then, we need to remove the first item from the array which is presumably an "action". Then, we join the array again via spaces
-    unit = statusInit.split(" "); 
+    unit = statusInit.split(" ");
     unit.shift();
     unit.shift();
     unit = unit.join(' ');
@@ -843,7 +843,7 @@ function responderChangeStatus(element)
             unit: unit,
             status: status
         },
-        success: function(response) 
+        success: function(response)
         {
         console.log(response);
         if (response == "SUCCESS")
@@ -853,19 +853,19 @@ function responderChangeStatus(element)
             text: 'Successfully modified status',
             type: 'success',
             styling: 'bootstrap3'
-        }); 
-        
+        });
+
         $('#statusSelect').val('').selectpicker('refresh');
 
         }
-        
+
         },
         error : function(XMLHttpRequest, textStatus, errorThrown)
         {
         console.log("Error");
         }
-        
-    }); 
+
+    });
 }
 
 function getMyRank(id)
@@ -879,7 +879,7 @@ function getMyRank(id)
             getMyRank: 'yes',
             unit: id
         },
-        success: function(response) 
+        success: function(response)
         {
         console.log(response);
 
@@ -893,6 +893,6 @@ function getMyRank(id)
         error : function(XMLHttpRequest, textStatus, errorThrown)
         {
         console.log("Error");
-        }     
-    }); 
+        }
+    });
 }

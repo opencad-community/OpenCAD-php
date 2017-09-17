@@ -1,4 +1,6 @@
 <?php
+include("./oc-config.php`");
+include("./actions/profilActions.php");
     session_start();
 
     // TODO: Verify user has permission to be on this page
@@ -13,16 +15,12 @@
       $name = $_SESSION['name'];
     }
 
-    require_once('../oc-config.php');
-
     $profileUpdate = "";
     if (isset($_SESSION['profileUpdate']))
     {
         $profileUpdate = $_SESSION['profileUpdate'];
         unset($_SESSION['profileUpdate']);
     }
-
-    include("./actions/profileActions.php");
 ?>
 
 <!DOCTYPE html>

@@ -1,4 +1,6 @@
 <?php
+    require('./oc-config.php');
+    include("./actions/civActions.php");
     session_start();
 
     // TODO: Verify user has permission to be on this page
@@ -13,9 +15,6 @@
       $name = $_SESSION['name'];
     }
 
-    require_once('../oc-config.php');
-    include("./actions/civActions.php");
-
     $errors = array();
     // define variables and set to empty values
     $civNameReq = "";
@@ -24,37 +23,6 @@
     ini_set("display_errors", 1);
 
     $civName = $civDob = $civAddr = "";
-
-
-    //Testing, remove this
-    //$civName = "TESTING1 TESTER";
-    //$civDob = "2017-01-20";
-    //$civAddr = "123 Main Street";
-
-    /*if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-      $civName = $_POST["civNameReq"];
-
-      $nameArr = explode(" ", $civName);
-      $length = sizeof($nameArr);
-      if ($length < 2)
-      {
-          array_push($errors,'<div class="alert alert-danger"><span>You must have both a first and last name</span></div>');
-          //return;
-      }
-      if ($length > 2)
-      {
-          array_push($errors,'<div class="alert alert-danger"><span>Too many words in your name. If you need to, hyphenate your last name</span></div>');
-          //return;
-      }
-
-      $civDob = $_POST['civDobReq'];
-      if (!preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$civDob))
-      {
-          array_push($errors,'<div class="alert alert-danger"><span>DOB must be in YYYY-MM-DD format</span></div>');
-      }
-
-    }*/
 
     $good911 = "";
     if(isset($_SESSION['good911']))
@@ -181,7 +149,10 @@
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="https://github.com/ossified/openCad/issues">Help</a></li>
-                    <li><a href="./actions/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li>
+                      <a href="./actions/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                      <span class="glyphicon glyphicon-log>
+                    </li>
                   </ul>
                 </li>
               </ul>
