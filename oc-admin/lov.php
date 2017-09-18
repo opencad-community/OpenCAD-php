@@ -28,6 +28,7 @@
     }
 
     require_once('../oc-config.php');
+    require_once("../oc-functions.php");
 ?>
 
 <!DOCTYPE html>

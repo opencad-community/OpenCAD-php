@@ -24,6 +24,7 @@ else
 }
 
 require_once('../oc-config.php');
+require_once("../oc-functions.php");
 
 $accessMessage = "";
 if(isset($_SESSION['accessMessage']))

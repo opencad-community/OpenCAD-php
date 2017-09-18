@@ -1,5 +1,6 @@
 <?php
 require("./oc-config.php");
+require("./oc-functions.php");
 session_start();
 
 if (empty($_SESSION['logged_in']))

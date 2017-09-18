@@ -1,5 +1,6 @@
 <?php
     require("./oc-config.php");
+    require("./oc-functions.php");
 
     $testing = false; //If set to true, will default some data for you
 

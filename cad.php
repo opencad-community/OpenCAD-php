@@ -1,5 +1,6 @@
 <?php
-    include("./oc-config.php");
+    require("./oc-config.php");
+    require("./oc-functions.php");
     include("./actions/api.php");
     session_start();
 
@@ -27,7 +28,7 @@
     {
       die("You do not have permission to be here. Request access to dispatch through your administration.");
     }
-    
+
     setUnitActive("1");
 
 ?>
