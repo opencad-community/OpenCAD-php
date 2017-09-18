@@ -27,6 +27,7 @@
     }
 
 require_once('../oc-config.php');
+require_once("../oc-functions.php");
 
     include("../actions/adminActions.php");
 

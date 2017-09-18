@@ -1,5 +1,6 @@
 <?php
-include("./oc-config.php`");
+require("./oc-config.php`");
+require("./oc-functions.php");
 include("./actions/profilActions.php");
     session_start();
 

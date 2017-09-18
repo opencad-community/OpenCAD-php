@@ -1,5 +1,6 @@
 <?php
-    include("./oc-config.php");
+    require("./oc-config.php");
+    require("./oc-functions.php");
     session_start();
     // TODO: Verify user has permission to be on this page
 

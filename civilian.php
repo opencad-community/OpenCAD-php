@@ -1,5 +1,6 @@
 <?php
     require('./oc-config.php');
+    require("./oc-functions.php");
     include("./actions/civActions.php");
     session_start();
 
