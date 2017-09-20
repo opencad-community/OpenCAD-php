@@ -12,20 +12,14 @@ if (version_compare(PHP_VERSION, '5.5', '<' )) {
 /**
  * @source https://gravatar.com/site/implement/images/php/
  */
-function get_avatar($s = 200, $d = 'mm', $r = 'g', $img = false, $atts = array() ) {
+function get_avatar() {
 		if (defined( 'USE_GRAVATAR' ) && USE_GRAVATAR) {
 			$url = 'https://www.gravatar.com/avatar/';
 	    $url .= md5( strtolower( trim( $_SESSION['email'] ) ) );
-	    $url .= "?s=$s&d=$d&r=$r";
-	    if ( $img ) {
-	        $url = '<img src="' . $url . '"';
-	        foreach ( $atts as $key => $val )
-	            $url .= ' ' . $key . '="' . $val . '"';
-	        $url .= ' />';
-	    }
+	    $url .= "?size=200&default=https%3A%2F%2Fnyc3.digitaloceanspaces.com%2Fopencad%2Fimages%2Fuser.png&rating=pg";
 	    return $url;
 		}else{
-			return "./images/user.png";
+			return "https://nyc3.digitaloceanspaces.com/opencad/images/user.png";
 		}
 }
 ?>
