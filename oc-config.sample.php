@@ -17,13 +17,6 @@ define('CAD_FROM_NAME', COMMUNITY_NAME.' CAD');
 define('CAD_TO_EMAIL', 'admins@community.com');
 define('CAD_TO_NAME', COMMUNITY_NAME.' Administrators');
 
-/** Absolute path to the WordPress directory. */
-if ( !defined('ABSPATH') )
-	define('ABSPATH', dirname(__FILE__) . '/');
-
-/** Provides support for enviorments running PHP < 5.5 */
-if (version_compare(PHP_VERSION, '5.5', '<' )) {
-	require_once(ABSPATH . 'vendors/password_compat/password.php');
-}
+define('USE_GRAVATAR', true)
 
 ?>
