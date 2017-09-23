@@ -257,6 +257,12 @@ CREATE TABLE `statuses` (
   `status_text` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
+INSERT INTO statuses ('status_id', 'status_text') VALUES
+    (1, 'Available'),
+    (2, 'Busy'),
+    (4, 'Meal Break')
+    (5, 'Signal 11');
+
 -- --------------------------------------------------------
 
 --
