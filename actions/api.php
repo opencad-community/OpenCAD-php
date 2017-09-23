@@ -14,7 +14,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     This file handles all actions for admin.php script
 */
 
-include("../oc-config.php");
+include(__DIR__ . '/../oc-config.php');
 
 if (isset($_GET['a'])){
     getActiveCalls();
