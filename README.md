@@ -18,3 +18,6 @@ Need Help? [Join our community Discord](https://discord.gg/bJknKhn) and someone 
 
 # Wiki
 Click [here for the wiki](https://github.com/StormlightTech/openCAD-php/wiki).
+
+# Disclosure of Fork
+This version of OpenCAD is baed on the original source from [Shane Gill](https://github.com/ossified/openCad).
