@@ -1,6 +1,6 @@
 <?php
 
-require_once('../oc-config.php');
+require_once(__DIR__ . '/../oc-config.php');
 
 if (isset($_POST['clearCall']))
 {
