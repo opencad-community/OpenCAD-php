@@ -12,7 +12,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
 
-require("./oc-config.php`");
+require("./oc-config.php");
 require("./oc-functions.php");
 include("./actions/profileActions.php");
     session_start();
@@ -143,7 +143,6 @@ include("./actions/profileActions.php");
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="https://github.com/ossified/openCad/issues">Help</a></li>
                     <li><a href="./actions/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
