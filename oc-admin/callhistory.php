@@ -25,9 +25,9 @@
       }
     }
 
-    require_once('../oc-config.php');
-    require_once("../oc-functions.php");
-    include("../actions/adminActions.php");
+    require_once(__DIR__ . '/../oc-config.php');
+    require_once(__DIR__ . '/../oc-functions.php');
+    include(__DIR__ . '/../actions/adminActions.php');
 
     $historyMessage = "";
     if(isset($_SESSION['historyMessage']))

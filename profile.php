@@ -1,7 +1,7 @@
 <?php
 require("./oc-config.php`");
 require("./oc-functions.php");
-include("./actions/profilActions.php");
+include("./actions/profileActions.php");
     session_start();
 
     // TODO: Verify user has permission to be on this page

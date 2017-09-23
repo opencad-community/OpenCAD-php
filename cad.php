@@ -1,5 +1,4 @@
 <?php
-    require("./oc-config.php");
     require("./oc-functions.php");
     include("./actions/api.php");
     session_start();
@@ -159,7 +158,7 @@
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="./profile/profile.php">My Profile</a></li>
+                    <li><a href="./profile.php">My Profile</a></li>
                     <li><a href="./actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>

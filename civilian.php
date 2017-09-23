@@ -151,7 +151,7 @@
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li>
                       <a href="./actions/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
-                      <span class="glyphicon glyphicon-log>
+                      <span class="glyphicon glyphicon-log">
                     </li>
                   </ul>
                 </li>
