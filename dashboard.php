@@ -181,7 +181,7 @@ mysqli_close($link);
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header" style="text-align:center;">Select console to laucnh:</h1>
+                    <h1 class="page-header" style="text-align:center;">Select console to launch:</h1>
                 </div>
                 <!-- ./ col-lg-12 -->
             </div>

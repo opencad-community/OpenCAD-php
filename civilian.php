@@ -162,10 +162,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li>
-                      <a href="./actions/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                      <li><a href="./profile.php">My Profile</a></li>
+                      <li><a href="./actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                       <span class="glyphicon glyphicon-log">
-                    </li>
                   </ul>
                 </li>
               </ul>
