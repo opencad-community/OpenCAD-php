@@ -51,7 +51,7 @@ function updateProfile()
             if (mysqli_errno($link) == 1062) {
                 $_SESSION['profileUpdate'] = '<div class="alert alert-danger"><span>Update unsuccessful. Emails and Identifiers must be unique.</span></div>';
                 sleep(1); //Seconds to wait
-	            header("Location: ../profile.php");
+	            header('Location: ' . $_SERVER['HTTP_REFERER']);
             }
 			die(mysqli_error($link));
 		}
@@ -70,7 +70,7 @@ function updateProfile()
 	$_SESSION['profileUpdate'] = '<div class="alert alert-success"><span>Successfully updated your user information</span></div>';
 
 	sleep(1); //Seconds to wait
-	header("Location: ../profile.php");
+	header('Location: ' . $_SERVER['HTTP_REFERER']);
 }
 
 function getMyRank()
