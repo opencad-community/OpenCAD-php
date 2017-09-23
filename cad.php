@@ -1,5 +1,4 @@
 <?php
-    require("./oc-config.php");
     require("./oc-functions.php");
     include("./actions/api.php");
     session_start();
