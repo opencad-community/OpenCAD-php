@@ -4,7 +4,7 @@
     This file handles all actions for admin.php script
 */
 
-require_once('../oc-config.php');
+require_once(__DIR__ . '/../oc-config.php');
 
 /* Handle POST requests */
 if (isset($_POST['approveUser'])){

@@ -1,5 +1,5 @@
 <?php
-require_once('../oc-config.php');
+require_once(__DIR__ . '/../oc-config.php');
 
 //Handle requests
 if (isset($_POST['update_profile_btn']))

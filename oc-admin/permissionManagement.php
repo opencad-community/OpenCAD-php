@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-include_once ("../actions/adminActions.php");
-include_once ("../actions/permissions.php");
+include_once (__DIR__ . '/../actions/adminActions.php');
+include_once (__DIR__ . '/../actions/permissions.php');
 
 $hasPermission = checkIfHeadAdmin();
 
@@ -23,8 +23,8 @@ else
   $name = $_SESSION['name'];
 }
 
-require_once('../oc-config.php');
-require_once("../oc-functions.php");
+require_once(__DIR__ . '/../oc-config.php');
+require_once(__DIR__ . '/../oc-functions.php');
 
 $accessMessage = "";
 if(isset($_SESSION['accessMessage']))
