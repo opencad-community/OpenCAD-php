@@ -834,7 +834,7 @@
 
         $.ajax({
             type: "POST",
-            url: "../actions/api.php",
+            url: "./actions/api.php",
             data: {
                 logoutUser: 'yes',
                 unit: unit
@@ -873,7 +873,7 @@
       function getAvailableUnits() {
         $.ajax({
               type: "GET",
-              url: "../actions/api.php",
+              url: "./actions/api.php",
               data: {
                   getAvailableUnits: 'yes'
               },
