@@ -164,8 +164,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                     <li><a href="./actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
-
-
               </ul>
             </nav>
           </div>
@@ -237,14 +235,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                             </div>
                             <!-- ./ col-sm-9 -->
                         </div>
-                        <!--
                         <div class="form-group">
                             <label class="col-md-2 col-sm-2 col-xs-2 control-label">My Status</label>
                             <div class="col-md-10 col-sm-10 col-xs-10">
                                 <input type="text" name="status" id="status" class="form-control" readonly />
                             </div>
                         </div>
-                      -->
                         <div class="form-group">
                             <label class="col-md-2 col-sm-2 col-xs-2 control-label">Change Status</label>
                             <div class="col-md-10 col-sm-10 col-xs-10">
