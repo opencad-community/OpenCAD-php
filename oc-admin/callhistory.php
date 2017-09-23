@@ -25,7 +25,7 @@
       }
     }
 
-    require_once(__DIR__ . '/./oc-config.php');
+    require_once(__DIR__ . '/../oc-config.php');
     require_once(__DIR__ . '/../oc-functions.php');
     include(__DIR__ . '/../actions/adminActions.php');
 
