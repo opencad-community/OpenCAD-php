@@ -112,7 +112,6 @@ if(isset($_SESSION['accessMessage']))
                     <ul class="nav child_menu">
                       <li class="current-page"><a href="javascript:void(0)">Dashboard</a></li>
                       <li><a href="userManagement.php">User Management</a></li>
-                      <li><a href="lov.php">List of Values Management</a></li>
                       <li><a href="callhistory.php">Call History</a></li>
                     </ul>
                   </li>
