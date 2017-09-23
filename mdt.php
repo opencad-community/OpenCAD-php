@@ -226,15 +226,14 @@
                             </div>
                             <!-- ./ col-sm-9 -->
                         </div>
-                        <!-- ./ form-group -->
+                        <!--
                         <div class="form-group">
                             <label class="col-md-2 col-sm-2 col-xs-2 control-label">My Status</label>
                             <div class="col-md-10 col-sm-10 col-xs-10">
                                 <input type="text" name="status" id="status" class="form-control" readonly />
                             </div>
-                            <!-- ./ col-sm-9 -->
                         </div>
-                        <!-- ./ form-group -->
+                      -->
                         <div class="form-group">
                             <label class="col-md-2 col-sm-2 col-xs-2 control-label">Change Status</label>
                             <div class="col-md-10 col-sm-10 col-xs-10">
