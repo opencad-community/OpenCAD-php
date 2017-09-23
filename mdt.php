@@ -144,12 +144,11 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="<?php echo get_avatar() ?>" alt=""><?php echo $name;?>
+                    <img src="<?php echo get_avatar() ?>" alt=""><?php echo $_SESSION['name']; ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="./profile.php">My Profile</a></li>
-                    <li><a href="https://github.com/ossified/openCad/issues">Help</a></li>
                     <li><a href="./actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>

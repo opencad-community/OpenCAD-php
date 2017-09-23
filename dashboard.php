@@ -164,9 +164,6 @@ mysqli_close($link);
     <link rel="icon" href="./images/favicon.ico" />
 </head>
 <body>
-    <?php echo "<h3> PHP List All Session Variables</h3>";
-    foreach ($_SESSION as $key=>$val)
-    echo $key." ".$val."<br/>"; ?>
    <div id="page-wrapper">
         <div class="container-fluid">
             <div class="row">

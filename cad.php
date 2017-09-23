@@ -155,12 +155,11 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="<?php echo get_avatar() ?>" alt=""><?php echo $name;?>
+                    <img src="<?php echo get_avatar() ?>" alt=""><?php $_SESSION['name']; ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="./profile/profile.php">My Profile</a></li>
-                    <li><a href="https://github.com/ossified/openCad/issues">Help</a></li>
                     <li><a href="./actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
@@ -380,7 +379,8 @@
               </div>
               <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
 
-              <div class="col-md-4 col-sm-4 col-xs-4">
+              <!-- NCIC Firearm lookup will return in a later RC -->
+              <!-- <div class="col-md-4 col-sm-4 col-xs-4">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>NCIC Firearm Lookup</h2>
@@ -403,7 +403,7 @@
                     </div>
                   </div>
                   <!-- ./ x_content -->
-                </div>
+                </div> -->
                 <!-- ./ x_panel -->
               </div>
               <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
