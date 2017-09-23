@@ -159,7 +159,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                     <ul class="nav child_menu">
                       <li><a href="admin.php">Dashboard</a></li>
                       <li><a href="userManagement.php">User Management</a></li>
-                      <li><a href="lov.php">List of Values Management</a></li>
                       <li><a href="callhistory.php">Call History</a></li>
                     </ul>
                   </li>
