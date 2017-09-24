@@ -510,44 +510,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     </div>
     <!-- ./ modal fade bs-example-modal-lg -->
 
-    <!-- jQuery -->
-    <script src="./vendors/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="./vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="./vendors/fastclick/lib/fastclick.js"></script>
-    <!-- iCheck -->
-    <script src="./vendors/iCheck/icheck.min.js"></script>
-    <!-- NProgress -->
-    <script src="./vendors/nprogress/nprogress.js"></script>
-    <!-- Datatables -->
-    <script src="./vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="./vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="./vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="./vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script src="./vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="./vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="./vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="./vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script src="./vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-    <script src="./vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="./vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-    <script src="./vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-    <!-- Bootstrap Select -->
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
-    <!-- PNotify -->
-    <script src="./vendors/pnotify/dist/pnotify.js"></script>
-    <script src="./vendors/pnotify/dist/pnotify.buttons.js"></script>
-    <script src="./vendors/pnotify/dist/pnotify.nonblock.js"></script>
 
     <!-- AUDIO TONES -->
-    <audio id="recurringToneAudio" src="./sounds/priority.mp3" preload="auto"></audio>
-    <audio id="priorityToneAudio" src="./sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
+    <audio id="recurringToneAudio" src="<?php echo BASE_URL; ?>/sounds/priority.mp3" preload="auto"></audio>
+    <audio id="priorityToneAudio" src="<?php echo BASE_URL; ?>/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
     <script>
       var vid = document.getElementById("recurringToneAudio");
       vid.volume = 0.3;
@@ -558,16 +524,16 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
       if ($_GET['fire'] == "true")
       {
-        echo '<audio id="newCallAudio" src="./sounds/Fire_Tones_Aligned.wav" preload="auto"></audio>';
+        echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/Fire_Tones_Aligned.wav" preload="auto"></audio>';
       }
     }
     else
     {
-      echo '<audio id="newCallAudio" src="./sounds/New_Dispatch.mp3" preload="auto"></audio>';
+      echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/New_Dispatch.mp3" preload="auto"></audio>';
     }
     ?>
 
-
+    <?php include "./oc-includes/jquery-colsolidated.inc.php"; ?>
     <script>
     $(document).ready(function() {
         $(function() {
@@ -586,7 +552,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
           $.ajax({
               type: "POST",
-              url: "./actions/api.php",
+              url: "<?php echo BASE_URL; ?>/actions/api.php",
               data: {
                   quickStatus: 'yes',
                   event: 'enroute',
@@ -634,7 +600,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     function getCalls() {
         $.ajax({
               type: "GET",
-              url: "./actions/api.php",
+              url: "<?php echo BASE_URL; ?>/actions/api.php",
               data: {
                   getCalls: 'yes',
                   responder: 'yes'
@@ -667,7 +633,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
             $.ajax({
               type: "POST",
-              url: "./actions/responderActions.php",
+              url: "<?php echo BASE_URL; ?>/actions/responderActions.php",
               data: {
                   updateCallsign: 'yes',
                   details: $("#"+this.id).serialize()
@@ -740,7 +706,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     function getStatus() {
     $.ajax({
         type: "GET",
-        url: "./actions/responderActions.php",
+        url: "<?php echo BASE_URL; ?>/actions/responderActions.php",
         data: {
             getStatus: 'yes'
         },
@@ -770,7 +736,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             else if (response.match("^<br>"))
             {
                 console.log("LOGGED OUT");
-                window.location.href = './actions/logout.php';
+                window.location.href = '<?php echo BASE_URL; ?>/actions/logout.php';
 
             }
             else
@@ -794,13 +760,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       console.log("Got here");
     }
     </script>
-
-
-
-    <!-- openCad Script -->
-    <script src="./js/openCad.js"></script>
-    <!-- Custom Theme Scripts -->
-    <script src="./js/custom.js"></script>
 
   </body>
 </html>

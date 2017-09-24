@@ -29,7 +29,7 @@ if(basename($_SERVER['PHP_SELF']) == 'admin.php') {
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!--<base href="<?php echo BASE_URL; ?>" target="_blank">-->
+  <base href="<?php echo BASE_URL; ?>">
   <title><?php echo $pageName." | ".COMMUNITY_NAME;?></title>
   <link rel="icon" href="<?php echo BASE_URL; ?>/images/favicon.ico" />
 

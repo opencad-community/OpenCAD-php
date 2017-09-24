@@ -22,16 +22,16 @@
 
     <!-- Bootstrap Select -->
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
     <!-- PNotify -->
-    <script src="./vendors/pnotify/dist/pnotify.js"></script>
-    <script src="./vendors/pnotify/dist/pnotify.buttons.js"></script>
-    <script src="./vendors/pnotify/dist/pnotify.nonblock.js"></script>
+    <script src="<?php echo BASE_URL; ?>/vendors/pnotify/dist/pnotify.js"></script>
+    <script src="<?php echo BASE_URL; ?>/vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="<?php echo BASE_URL; ?>/vendors/pnotify/dist/pnotify.nonblock.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="<?php echo BASE_URL; ?>/js/custom.js"></script>
-    <script src="<?php echo BASE_URL; ?>/js/openCAD.js.js"></script>
+    <script src="<?php echo BASE_URL; ?>/js/openCad.js"></script>
