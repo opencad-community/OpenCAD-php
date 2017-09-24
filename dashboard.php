@@ -158,24 +158,8 @@ mysqli_close($link);
 
 <html lang="en">
 <!DOCTYPE html>
-<head>
-    <!-- CSS -->
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="./css/bootstrap.css">
-    <style>
-    #cadWelcome {
-    height:20px;
-    width:50px;
-    margin: 50%px 50%px;
-    position:relative;
-    top:90%;
-    left:45%;
-    text-align:center;
-    }
-    </style>
-    <title>CAD/MDT Launcher</title>
-    <link rel="icon" href="./images/favicon.ico" />
-</head>
+
+	<?php include "./oc-includes/header.inc.php"; ?>
 <body>
    <div id="page-wrapper">
         <div class="container-fluid">

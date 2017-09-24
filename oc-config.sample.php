@@ -10,6 +10,13 @@ define('DB_PASSWORD', '');
 define('DB_HOST', '127.0.0.1');
 
 
+/* Base URL Settings
+*
+* BASE_URL - The URL to your installation of OpenCAD inlcuding,
+*             if utilized, it's subdirectory
+*/
+define('BASE_URL', 'www.ExampleURL.com/somedir');
+
 /* To & From emails for system generated emails */
 /* To be used in a later version for notificaton emails */
 define('CAD_FROM_EMAIL', 'cad@community.com');
