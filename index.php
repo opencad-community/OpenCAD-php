@@ -54,36 +54,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title><?php echo COMMUNITY_NAME;?> CAD System</title>
-    <link rel="icon" href="./images/favicon.ico" />
-
-
-    <!-- Bootstrap -->
-    <link href="./vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- CSS for MultiSelect Plugin -->
-    <link rel="stylesheet" href="./css/bootstrap-multiselect.css">
-    <!-- jQuery -->
-    <script src="./vendors/jquery/dist/jquery.min.js"></script>
-    <!-- JS -->
-    <script type="text/javascript" src="./js/bootstrap-multiselect.js"></script> <!-- Script for MultiSelect Plugin -->
-    <script type="text/javascript" src="./js/bootstrap.js"></script><!-- Bootstrap Core JS -->
-    <!-- Font Awesome -->
-    <link href="./vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="./vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- Animate.css -->
-    <link href="./vendors/animate.css/animate.min.css" rel="stylesheet">
-
-    <!-- Custom Theme Style -->
-    <link href="./css/custom.css" rel="stylesheet">
-  </head>
+<?php include "./oc-includes/header.inc.php"; ?>
 
   <body class="login">
     <div>
@@ -185,6 +156,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       </div>
     </div>
 
+    <?php include "../oc-includes/jquery-colsolidated.inc.php"; ?>
     <script type="text/javascript">
     $(document).ready(function() {
        // $('#division').multiselect();
