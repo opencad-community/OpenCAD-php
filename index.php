@@ -65,7 +65,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         <div class="animate form login_form">
           <?php echo $loginMessage;?>
           <section class="login_content">
-            <form role="form" action="./actions/login.php" method="post">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/login.php" method="post">
               <h1>Login Form</h1>
               <div>
                 <input class="form-control" placeholder="Email" name="email" type="text" value="<?php if($testing){echo "test@test.test";}?>" required>
@@ -90,7 +90,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
                 <div>
                   <h1><i class="fa fa-tachometer"></i> <?php echo COMMUNITY_NAME?> CAD System</h1>
-                  <p>openCAD is released under GNU GPL v3.<a href="http://www.github.com/phillf/openCad">Download from GitHub.</a></p>
                 </div>
               </div>
             </form>
@@ -147,7 +146,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
                 <div>
                   <h1><i class="fa fa-tachometer"></i> <?php echo COMMUNITY_NAME ?> CAD System</h1>
-                  <p>openCAD is released under GNU GPL v3.<a href="http://www.github.com/phillf/openCad">Download from GitHub.</a></p>
                 </div>
               </div>
             </form>
@@ -156,7 +154,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       </div>
     </div>
 
-    <?php include "../oc-includes/jquery-colsolidated.inc.php"; ?>
+    <?php include "./oc-includes/jquery-colsolidated.inc.php"; ?>
     <script type="text/javascript">
     $(document).ready(function() {
        // $('#division').multiselect();

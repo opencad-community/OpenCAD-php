@@ -11,6 +11,9 @@
  */
 
 // Full Screen Functionality
+var href = window.location.href;
+var hdir = href.substring(0, href.lastIndexOf('/')) + "/";
+
 function toggleFullScreen() {
     if ((document.fullScreenElement && document.fullScreenElement !== null) ||
     (!document.mozFullScreen && !document.webkitIsFullScreen)) {
@@ -54,7 +57,7 @@ $('#ncic_plate_btn').on('click', function(e) {
     $.ajax({
         cache: false,
         type: 'POST',
-        url: 'actions/ncic.php',
+        url: hdir + '/actions/ncic.php',
         data: {'ncicPlate': 'yes',
                 'ncic_plate' : plate},
 
@@ -162,7 +165,7 @@ $('#ncic_name_btn').on('click', function(e) {
     $.ajax({
         cache: false,
         type: 'POST',
-        url: 'actions/ncic.php',
+        url: '../../actions/ncic.php',
         data: {'ncicName': 'yes',
                 'ncic_name' : name},
 
@@ -234,13 +237,13 @@ $('#ncic_name_btn').on('click', function(e) {
 
 // Handles autocompletion on the new call form
 $( ".txt-auto" ).autocomplete({
-    source: "actions/dispatchActions.php",
+    source: hdir + "actions/dispatchActions.php",
     minLength: 2
 });
 $( ".txt-auto" ).autocomplete( "option", "appendTo", ".newCallForm" );
 
 $( ".txt-auto2" ).autocomplete({
-    source: "actions/dispatchActions.php",
+    source: hdir + "actions/dispatchActions.php",
     minLength: 2
 });
 $( ".txt-auto2" ).autocomplete( "option", "appendTo", ".newCallForm" );
@@ -252,7 +255,7 @@ $(function() {
 
         $.ajax({
             type: "POST",
-            url: "actions/dispatchActions.php",
+            url: hdir + "actions/dispatchActions.php",
             data: {
                 newCall: 'yes',
                 details: $("#"+this.id).serialize()
@@ -296,7 +299,7 @@ $(function() {
 
         $.ajax({
             type: "POST",
-            url: "actions/dispatchActions.php",
+            url: hdir + "actions/dispatchActions.php",
             data: {
                 addNarrative: 'yes',
                 callId: $('#call_id_det').val(),
@@ -338,7 +341,7 @@ $(function() {
 
         $.ajax({
             type: "POST",
-            url: "actions/dispatchActions.php",
+            url: hdir + "actions/dispatchActions.php",
             data: {
                 assignUnit: 'yes',
                 details: $("#"+this.id).serialize(),
@@ -388,7 +391,7 @@ $(function() {
 function getActiveDispatchers() {
 $.ajax({
         type: "GET",
-        url: "actions/api.php",
+        url: hdir + "actions/api.php",
         data: {
             getDispatchers: 'yes'
         },
@@ -415,7 +418,7 @@ $.ajax({
 function getUnAvailableUnits() {
 $.ajax({
         type: "GET",
-        url: "actions/api.php",
+        url: hdir + "actions/api.php",
         data: {
             getUnAvailableUnits: 'yes'
         },
@@ -448,7 +451,7 @@ $('#newCall').on('show.bs.modal', function(e) {
     $.ajax({
         cache: false,
         type: 'GET',
-        url: 'actions/api.php',
+        url: hdir + 'actions/api.php',
         data: {'getActiveUnits': 'yes'},
         success: function(result)
         {
@@ -502,7 +505,7 @@ $('#assign').on('show.bs.modal', function(e) {
     $.ajax({
         cache: false,
         type: 'GET',
-        url: 'actions/api.php',
+        url: hdir + 'actions/api.php',
         data: {'getActiveUnitsModal': 'yes'},
         success: function(result)
         {
@@ -534,7 +537,7 @@ $('#callDetails').on('show.bs.modal', function(e) {
     $.ajax({
         cache: false,
         type: 'GET',
-        url: 'actions/api.php',
+        url: hdir + 'actions/api.php',
         data: {'getCallDetails': 'yes',
                 'callId' : callId},
         success: function(result)
@@ -565,7 +568,7 @@ function deleteUser(uid) {
     {
         $.ajax({
         type: "POST",
-        url: "actions/dispatchActions.php",
+        url: hdir + "actions/dispatchActions.php",
         data: {
             deleteUser: 'yes',
             uid: uid
@@ -608,7 +611,7 @@ function clearCall(btn_id) {
     {
         $.ajax({
         type: "POST",
-        url: "actions/dispatchActions.php",
+        url: hdir + "actions/dispatchActions.php",
         data: {
             clearCall: 'yes',
             callId: btn_id
@@ -648,7 +651,7 @@ function getCalls() {
 
     $.ajax({
         type: "GET",
-        url: "actions/api.php",
+        url: hdir + "actions/api.php",
         data: {
             getCalls: 'yes',
             type: file
@@ -711,7 +714,7 @@ function priorityTone(type)
  {
     $.ajax({
         type: "POST",
-        url: "actions/api.php",
+        url: hdir +"actions/api.php",
         data: {
             setTone: 'yes',
             tone: name,
@@ -754,7 +757,7 @@ function checkTones()
 {
     $.ajax({
         type: "GET",
-        url: "actions/api.php",
+        url: hdir +"actions/api.php",
         data: {
             checkTones: 'yes'
         },
@@ -837,7 +840,7 @@ function responderChangeStatus(element)
 
     $.ajax({
         type: "POST",
-        url: "actions/api.php",
+        url: hdir +"actions/api.php",
         data: {
             changeStatus: 'yes',
             unit: unit,
@@ -874,7 +877,7 @@ function getMyRank(id)
 
     $.ajax({
         type: "GET",
-        url: "actions/profileActions.php",
+        url: hdir + "actions/profileActions.php",
         data: {
             getMyRank: 'yes',
             unit: id

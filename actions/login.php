@@ -67,7 +67,7 @@ require_once(__DIR__ . '/../oc-config.php');
         {
             session_start();
             $_SESSION['loginMessageDanger'] = 'Your account hasn\'t been approved yet. Please wait for an administrator to approve your access request.';
-            header("Location:..//index.php");
+            header("Location:../index.php");
             exit();
         }
         else if ($approved == "2")
