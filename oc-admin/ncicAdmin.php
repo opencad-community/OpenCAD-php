@@ -137,6 +137,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                       <li class="current-page"><a href="javascript:void(0)">NCIC Editor</a></li>
                     </ul>
                   </li>
+
+                  <li><a><i class="fa fa-key"></i> CAD Permissions <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="permissionManagement.php">Permissions Management</a></li>
+                    </ul>
+                  </li>
                 </ul>
               </div>
               <!-- ./ menu_section -->
@@ -151,7 +157,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <a data-toggle="tooltip" data-placement="top" title="FullScreen">
                 <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="dashboard.php">
+              <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="../dashboard.php">
                 <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
               </a>
               <a data-toggle="tooltip" data-placement="top" title="Logout" href="../actions/logout.php">
