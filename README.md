@@ -1,4 +1,4 @@
-# openCad
+# openCad [![CLA assistant](https://cla-assistant.io/readme/badge/StormlightTech/openCAD-php)](https://cla-assistant.io/StormlightTech/openCAD-php)
 Open Source Computer Aided Dispatch System for GTA V Roleplay Communities.
 
 # Build Status
