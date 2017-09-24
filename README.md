@@ -1,4 +1,4 @@
-# openCad [![CLA assistant](https://cla-assistant.io/readme/badge/StormlightTech/openCAD-php)](https://cla-assistant.io/StormlightTech/openCAD-php)
+# OpenCAD [![CLA assistant](https://cla-assistant.io/readme/badge/StormlightTech/openCAD-php)](https://cla-assistant.io/StormlightTech/openCAD-php)
 Open Source Computer Aided Dispatch System for GTA V Roleplay Communities.
 
 # Build Status
@@ -14,10 +14,9 @@ Open Source Computer Aided Dispatch System for GTA V Roleplay Communities.
 Note: This could probably run on Apache/PHP/MySQL under Windows but was developed primarily in a Linux environment.
 
 # Support
-Need Help? [Join our community Discord](https://discord.gg/bJknKhn) and someone will be happy to assist.
+Need Help? [View our wiki](https://github.com/StormlightTech/openCAD-php/wiki) which has all the documentation you need.
 
-# Wiki
-Click [here for the wiki](https://github.com/StormlightTech/openCAD-php/wiki).
+Still Having Trouble? If you are still having trouble then [join our community Discord](https://discord.gg/bJknKhn) and post in #community-help and someone will be glad to help.
 
 # Disclosure of Fork
 This version of OpenCAD is based on the original source from [Shane Gill](https://github.com/ossified/openCad).
