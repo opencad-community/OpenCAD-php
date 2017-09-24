@@ -92,19 +92,19 @@ require_once(__DIR__ . '/../oc-functions.php');
                   <li class="active"><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: block;">
                       <li class="current-page"><a href="javascript:void(0)">Dashboard</a></li>
-                      <li><a href="userManagement.php">User Management</a></li>
-                      <li><a href="callhistory.php">Call History</a></li>
+                      <li><a href="./userManagement.php">User Management</a></li>
+                      <li><a href="./callhistory.php">Call History</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-database"></i> NCIC Editor <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="ncicAdmin.php">NCIC Editor</a></li>
+                      <li><a href="./ncicAdmin.php">NCIC Editor</a></li>
                     </ul>
                   </li>
 
                   <li><a><i class="fa fa-key"></i> CAD Permissions <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="permissionManagement.php">Permissions Management</a></li>
+                      <li><a href="./permissionManagement.php">Permissions Management</a></li>
                     </ul>
                   </li>
 
