@@ -85,7 +85,7 @@ if(isset($_SESSION['accessMessage']))
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li class="current-page"><a href="javascript:void(0)">Dashboard</a></li>
+                      <li class="current-page"><a href="./admin.php">Dashboard</a></li>
                       <li><a href="userManagement.php">User Management</a></li>
                       <li><a href="callhistory.php">Call History</a></li>
                     </ul>
@@ -98,7 +98,7 @@ if(isset($_SESSION['accessMessage']))
 
                   <li class="active"><a><i class="fa fa-key"></i> CAD Permissions <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: block;">
-                      <li><a href="permissionManagement.php">Permissions Management</a></li>
+                      <li><a href="javascript:void(0)">Permissions Management</a></li>
                     </ul>
                   </li>
 

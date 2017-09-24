@@ -127,9 +127,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="admin.php">Dashboard</a></li>
-                      <li><a href="userManagement.php">User Management</a></li>
-                      <li><a href="callhistory.php">Call History</a></li>
+                      <li><a href="./admin.php">Dashboard</a></li>
+                      <li><a href="./userManagement.php">User Management</a></li>
+                      <li><a href="./callhistory.php">Call History</a></li>
                     </ul>
                   </li>
                   <li class="active"><a><i class="fa fa-database"></i> NCIC Editor <span class="fa fa-chevron-down"></span></a>
@@ -140,7 +140,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
                   <li><a><i class="fa fa-key"></i> CAD Permissions <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="permissionManagement.php">Permissions Management</a></li>
+                      <li><a href="./permissionManagement.php">Permissions Management</a></li>
                     </ul>
                   </li>
                 </ul>
