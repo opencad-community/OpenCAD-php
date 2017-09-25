@@ -122,13 +122,13 @@ function getMyCall()
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
 
-	$sql = "SELECT * from active_users WHERE identifier = '$identifier' AND status = '0' AND status_detail = '3'";
+    $sql = "SELECT * from active_users WHERE identifier = '$identifier' AND status = '0' AND status_detail = '3'";
 
-	$result = mysqli_query($link, $sql);
+    $result = mysqli_query($link, $sql);
 
     $num_rows = $result->num_rows;
 
@@ -156,7 +156,7 @@ function getMyCall()
         //Figure out what call the user is on
         $sql = "SELECT call_id from calls_users WHERE identifier = '$identifier'";
 
-	    $result = mysqli_query($link, $sql);
+        $result = mysqli_query($link, $sql);
 
         while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
         {
@@ -166,7 +166,7 @@ function getMyCall()
         //Get call details
         $sql = "SELECT * from calls WHERE call_id = '$call_id'";
 
-	    $result = mysqli_query($link, $sql);
+        $result = mysqli_query($link, $sql);
 
         while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
         {
@@ -305,9 +305,9 @@ function create911Call()
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
 
     $sql = "INSERT IGNORE INTO calls (call_type, call_street1, call_notes) VALUES ('911', ?, ?)";
 
@@ -338,9 +338,9 @@ function checkTones()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
 
     $sql = "SELECT * from tones";
 
@@ -383,9 +383,9 @@ function setTone()
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
 
     $sql = "UPDATE tones SET active = ? WHERE name = ?";
 
@@ -422,9 +422,9 @@ function logoutUser()
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
 
     $sql = "DELETE FROM active_users WHERE identifier = ?";
 
@@ -498,13 +498,13 @@ function changeStatus()
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
 
-	$sql = "UPDATE active_users SET status = ?, status_detail = ? WHERE identifier = ?";
+    $sql = "UPDATE active_users SET status = ?, status_detail = ? WHERE identifier = ?";
 
-	try {
+    try {
         $stmt = mysqli_prepare($link, $sql);
         mysqli_stmt_bind_param($stmt, "iis", $statusId, $statusDet, $unit);
         $result = mysqli_stmt_execute($stmt);
@@ -579,7 +579,7 @@ function changeStatus()
         }
     }
 
-	mysqli_close($link);
+    mysqli_close($link);
     echo "SUCCESS";
 }
 
@@ -587,13 +587,13 @@ function getDispatchers()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
 
-	$sql = "SELECT * from active_users WHERE status = '2'";
+    $sql = "SELECT * from active_users WHERE status = '2'";
 
-	$result = mysqli_query($link, $sql);
+    $result = mysqli_query($link, $sql);
 
     echo '
             <table id="dispatchersTable" class="table table-striped table-bordered">
@@ -620,7 +620,7 @@ function getDispatchers()
             </tbody>
             </table>
         ';
-	mysqli_close($link);
+    mysqli_close($link);
 
 
 }
@@ -643,9 +643,9 @@ function setUnitActive($dep)
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
 
     try {
         $stmt = mysqli_prepare($link, $sql);
@@ -667,13 +667,13 @@ function getAvailableUnits()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
 
-	$sql = "SELECT * from active_users WHERE status = '1'";
+    $sql = "SELECT * from active_users WHERE status = '1'";
 
-	$result = mysqli_query($link, $sql);
+    $result = mysqli_query($link, $sql);
 
     $num_rows = $result->num_rows;
 
@@ -723,20 +723,20 @@ function getAvailableUnits()
             </table>
         ';
     }
-	mysqli_close($link);
+    mysqli_close($link);
 }
 
 function getUnAvailableUnits()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
 
-	$sql = "SELECT * from active_users WHERE status = '0'";
+    $sql = "SELECT * from active_users WHERE status = '0'";
 
-	$result = mysqli_query($link, $sql);
+    $result = mysqli_query($link, $sql);
 
     $num_rows = $result->num_rows;
 
@@ -790,7 +790,7 @@ function getUnAvailableUnits()
             ';
 
       }
-	mysqli_close($link);
+    mysqli_close($link);
 }
 
 function getIndividualStatus($callsign)
@@ -886,13 +886,13 @@ function getActiveCalls()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
 
-	$sql = "SELECT * from calls";
+    $sql = "SELECT * from calls";
 
-	$result = mysqli_query($link, $sql);
+    $result = mysqli_query($link, $sql);
 
     $num_rows = $result->num_rows;
 
@@ -971,7 +971,7 @@ function getActiveCalls()
         ';
 
     }
-	mysqli_close($link);
+    mysqli_close($link);
 
 }
 
