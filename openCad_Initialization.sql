@@ -435,21 +435,7 @@ ALTER TABLE `ncic_warrants`
 ALTER TABLE `permissions`
   ADD PRIMARY KEY (`perm_id`) USING BTREE;
 
---
--- Indexes for table `ranks`
---
-ALTER TABLE `ranks`
-  ADD PRIMARY KEY (`rank_id`) USING BTREE;
-
---
--- Indexes for table `ranks_users`
---
-ALTER TABLE `ranks_users`
-  ADD PRIMARY KEY (`user_id`) USING BTREE,
-  ADD UNIQUE KEY `user_id` (`user_id`) USING BTREE,
-  ADD UNIQUE KEY `user_id_2` (`user_id`) USING BTREE,
-  ADD KEY `rank_id` (`rank_id`) USING BTREE;
-
+ 
 --
 -- Indexes for table `statuses`
 --
