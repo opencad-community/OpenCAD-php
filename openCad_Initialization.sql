@@ -226,29 +226,6 @@ CREATE TABLE `permissions` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ranks`
---
-
-CREATE TABLE `ranks` (
-  `rank_id` int(11) UNSIGNED NOT NULL,
-  `rank_name` varchar(255) NOT NULL,
-  `can_select` tinyint(4) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ranks_users`
---
-
-CREATE TABLE `ranks_users` (
-  `user_id` int(11) NOT NULL,
-  `rank_id` int(11) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `statuses`
 --
 
