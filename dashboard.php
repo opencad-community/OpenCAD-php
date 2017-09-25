@@ -156,42 +156,40 @@ mysqli_close($link);
 ?>
 
 <html lang="en">
-<!DOCTYPE html>
-
-	<?php include "./oc-includes/header.inc.php"; ?>
-<body>
-   <div id="page-wrapper">
-        <div class="container-fluid">
+   <!DOCTYPE html>
+   <?php include "./oc-includes/header.inc.php"; ?>
+   <body>
+      <div id="page-wrapper">
+         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header" style="text-align:center;">Select console to launch:</h1>
-                </div>
-                <!-- ./ col-lg-12 -->
+               <div class="col-lg-12">
+                  <h1 class="page-header" style="text-align:center;">Select console to launch:</h1>
+               </div>
+               <!-- ./ col-lg-12 -->
             </div>
             <!-- ./ row -->
             </div class="row">
-                <div class="col-lg-12" id="cadWelcome">
-                    <?php echo $adminButton;?><br/><br/>
-
-                    <?php echo $dispatchButton;?>
-                    &nbsp;
-                    <?php echo $sheriffButton;?>
-                    &nbsp;
-                    <?php echo $highwayButton;?>
-                    &nbsp;
-                    &nbsp;
-                    <?php echo $policeButton;?>
-                    &nbsp;
-                    <?php echo $fireButton;?>
-                    &nbsp;
-                    <?php echo $civilianButton;?>
-                </div>
-                <!-- ./ col-lg-12 -->
+            <div class="col-lg-12" id="cadWelcome">
+               <?php echo $adminButton;?><br/><br/>
+               <?php echo $dispatchButton;?>
+               &nbsp;
+               <?php echo $sheriffButton;?>
+               &nbsp;
+               <?php echo $highwayButton;?>
+               &nbsp;
+               &nbsp;
+               <?php echo $policeButton;?>
+               &nbsp;
+               <?php echo $fireButton;?>
+               &nbsp;
+               <?php echo $civilianButton;?>
             </div>
-            <!-- ./ row -->
-        </div>
-        <!-- ./ container-fluid -->
-    </div>
-    <!-- ./ page-wrapper -->
-</body>
+            <!-- ./ col-lg-12 -->
+         </div>
+         <!-- ./ row -->
+      </div>
+      <!-- ./ container-fluid -->
+      </div>
+      <!-- ./ page-wrapper -->
+   </body>
 </html>
