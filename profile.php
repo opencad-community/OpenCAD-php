@@ -191,17 +191,6 @@ include("./actions/profileActions.php");
                         </div>
                         <!-- ./ col-sm-10 -->
                     </div>
-                    <!-- ./ form-group -->
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">My Rank:</label>
-                        <div class="col-sm-10">
-                            <select class="form-control selectpicker" name="my_rank" id="my_rank">
-                              <?php getRanks();?>
-                            </select>
-                        </div>
-                        <!-- ./ col-sm-10 -->
-                    </div>
-                    <!-- ./ form-group -->
 
                   <input name="update_profile_btn" type="submit" class="btn btn-primary btn-lg btn-block" value="Update" />
                   </fieldset>
@@ -233,11 +222,6 @@ include("./actions/profileActions.php");
     </div>
 
     <?php include "../oc-includes/jquery-colsolidated.inc.php"; ?>
-    <script>
-    $(document).ready(function() {
-      getMyRank("<?php echo $_SESSION['id'];?>");
-    });
-	</script>
 
     <script>
 
