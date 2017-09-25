@@ -512,11 +512,6 @@ ALTER TABLE `ncic_plates`
 ALTER TABLE `ncic_warrants`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
--- AUTO_INCREMENT for table `ranks`
---
-ALTER TABLE `ranks`
-  MODIFY `rank_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
---
 -- AUTO_INCREMENT for table `statuses`
 --
 ALTER TABLE `statuses`
@@ -553,13 +548,6 @@ ALTER TABLE `ncic_citations`
 --
 ALTER TABLE `ncic_plates`
   ADD CONSTRAINT `Name Pair` FOREIGN KEY (`name_id`) REFERENCES `ncic_names` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `ranks_users`
---
-ALTER TABLE `ranks_users`
-  ADD CONSTRAINT `Ranks` FOREIGN KEY (`rank_id`) REFERENCES `ranks` (`rank_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `user_departments`
