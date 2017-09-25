@@ -11,7 +11,10 @@ Open Source Computer Aided Dispatch System for GTA V Roleplay Communities.
 * PHP: >= 5.5.0 (Recommended), 5.3.7 (Minimum)
 * Database: MySQL 5.5 or MariaDB 10.0 (Recommended)
 
-Note: This could probably run on Apache/PHP/MySQL under Windows but was developed primarily in a Linux environment.
+## Deployment Notes
+
+* This could probably run on Apache/PHP/MySQL under Windows but was developed primarily in a Linux environment.
+* The OpenCAD Development team **DOES NOT** reccomend the utilization of "free" webhosting solutions due to a multitude of reason. The team has copiled a *[list of Reccomended Hosting Providers]*(https://github.com/StormlightTech/openCAD-php/wiki/Recommended_Hosting_Provieders).
 
 # Support
 Need Help? [View our wiki](https://github.com/StormlightTech/openCAD-php/wiki) which has all the documentation you need.
