@@ -187,13 +187,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <!-- ./ x_title -->
                   <div class="x_content">
                      <form id="myStatusForm">
-                        <div class="form-group">
-                            <label class="col-md-2 col-sm-2 col-xs-2 control-label">My Identifier</label>
-                            <div class="col-md-10 col-sm-10 col-xs-10">
-                                <input type="text" name="identifier" class="form-control" value="<?php echo $_SESSION['identifier'];?>" readonly />
-                            </div>
-                            <!-- ./ col-sm-9 -->
-                        </div>
+                        
                         <!-- ./ form-group -->
                         <div class="form-group">
                             <label class="col-md-2 col-sm-2 col-xs-2 control-label">My Callsign</label>

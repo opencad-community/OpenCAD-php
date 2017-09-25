@@ -29,12 +29,23 @@ include("./actions/profileActions.php");
       $name = $_SESSION['name'];
     }
 
-    $profileUpdate = "";
-    if (isset($_SESSION['profileUpdate']))
-    {
-        $profileUpdate = $_SESSION['profileUpdate'];
-        unset($_SESSION['profileUpdate']);
+    $con = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+$result = mysqli_query($con, "SELECT * FROM `users`") or die(mysqli_error($con));
+$row = mysqli_fetch_array($result);
+
+$id = $row['id'];
+$password = $row['password'];
+
+$id = $_SESSION['id'];
+$password = $_SESSION['password'];
+
+    if (isset($_POST['resetpass'])) {
+    $newpassword = $_POST['password'];
+    $hashed_password = password_hash($newpassword, PASSWORD_DEFAULT);
+    mysqli_query($con,"UPDATE `users` SET `password` = '$hashed_password' WHERE `id` = '$id'") or die(mysqli_error($con));
     }
+
 ?>
 
 <!DOCTYPE html>
@@ -133,7 +144,7 @@ include("./actions/profileActions.php");
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>CAD User Profile</h3>
+                <h3>Reset Password</h3>
               </div>
               <!-- ./ title_left -->
             </div>
@@ -144,7 +155,7 @@ include("./actions/profileActions.php");
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>My Information</h2>
+                    <h2>Reset My Password</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -155,55 +166,21 @@ include("./actions/profileActions.php");
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
-                  <?php echo $profileUpdate;?>
-                  <form action="./actions/profileActions.php" method="post" class="form-horizontal">
+                  
+                  <form action="reset-password.php" method="post" class="form-horizontal">
                   <fieldset>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Name:</label>
+                        <label class="col-sm-2 control-label">New Password:</label>
                         <div class="col-sm-10">
-                            <input name="name" class="form-control" type="text" maxlength="255" value="<?php echo $name;?>" required>
+                            <input name="password" class="form-control" type="password" maxlength="255" placeholder="Enter your new password..." value="" required>
                         </div>
                         <!-- ./ col-sm-10 -->
                     </div>
                     <!-- ./ form-group -->
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Email:</label>
-                        <div class="col-sm-10">
-                            <input name="email" class="form-control" type="email" maxlength="255" value="<?php echo $_SESSION['email'];?>" required>
-                            <span class="muted">Note: Your email is how you login, so make sure it's valid!</span>
-                        </div>
-                        <!-- ./ col-sm-10 -->
-                    </div>
-                    <!-- ./ form-group -->
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Password:</label>
-                        <div class="col-sm-10">
-                            <a class="btn btn-primary" href="reset-password.php">Change Password</a>
-                        </div>
-                        <!-- ./ col-sm-10 -->
-                    </div>
-                    <!-- ./ form-group -->
-                    <!-- ./ form-group -->
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Identifier:</label>
-                        <div class="col-sm-10">
-                            <input name="identifier" class="form-control" type="text" maxlength="255" value="<?php echo $_SESSION['identifier'];?>" required>
-                        </div>
-                        <!-- ./ col-sm-10 -->
-                    </div>
-                    <!-- ./ form-group -->
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">My Rank:</label>
-                        <div class="col-sm-10">
-                            <select class="form-control selectpicker" name="my_rank" id="my_rank">
-                              <?php getRanks();?>
-                            </select>
-                        </div>
-                        <!-- ./ col-sm-10 -->
-                    </div>
+                    
                     <!-- ./ form-group -->
 
-                  <input name="update_profile_btn" type="submit" class="btn btn-primary btn-lg btn-block" value="Update" />
+                  <input type="submit" name="resetpass" id="resetpass" class="btn btn-primary btn-lg btn-block" value="Change Password" />
                   </fieldset>
                   </form>
                   </div>
