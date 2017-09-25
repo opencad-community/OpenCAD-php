@@ -26,17 +26,27 @@ include("./actions/profileActions.php");
     {
       $name = $_SESSION['name'];
     }
+	
+	$passwordUpdate = "";
+    if (isset($_SESSION['passwordUpdate']))
+    {
+        $passwordUpdate = $_SESSION['passwordUpdate'];
+        unset($_SESSION['passwordUpdate']);
+    }
+	
     $con = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-$result = mysqli_query($con, "SELECT * FROM `users`") or die(mysqli_error($con));
-$row = mysqli_fetch_array($result);
-$id = $row['id'];
-$password = $row['password'];
-$id = $_SESSION['id'];
-$password = $_SESSION['password'];
+    $result = mysqli_query($con, "SELECT * FROM `users`") or die(mysqli_error($con));
+    $row = mysqli_fetch_array($result);
+    $id = $row['id'];
+    $password = $row['password'];
+    $id = $_SESSION['id'];
+    $password = $_SESSION['password'];
     if (isset($_POST['resetpass'])) {
     $newpassword = $_POST['password'];
     $hashed_password = password_hash($newpassword, PASSWORD_DEFAULT);
     mysqli_query($con,"UPDATE `users` SET `password` = '$hashed_password' WHERE `id` = '$id'") or die(mysqli_error($con));
+
+	$_SESSION['passwordUpdate'] = '<div class="alert alert-success"><span>Your password has been updated!</span></div>';
     }
 ?>
 
@@ -146,17 +156,23 @@ $password = $_SESSION['password'];
                               <div class="clearfix"></div>
                            </div>
                            <!-- ./ x_title -->
+						   <?php echo $passwordUpdate;?>
                            <div class="x_content">
-                              <form action="reset-password.php" method="post" class="form-horizontal">
+                              <form id="resetPassword" action="reset-password.php" method="post" class="form-horizontal">
                                  <fieldset>
                                     <div class="form-group">
-                                       <label class="col-sm-2 control-label">New Password:</label>
+                                       <label class="col-sm-2 control-label">New Password:</label> 
                                        <div class="col-sm-10">
-                                          <input name="password" class="form-control" type="password" maxlength="255" placeholder="Enter your new password..." value="" required>
+                                          <input name="password" id="password" class="form-control" type="password" maxlength="255" placeholder="Enter your new password..." value="" required>
+                                       </div>
+									   
+									   <label class="col-sm-2 control-label">Confirm Password:</label> 
+                                       <div class="col-sm-10">
+                                          <input name="confirm_password" id="confirm_password" class="form-control" type="password" maxlength="255" placeholder="Retype your new password..." value="" required>
                                        </div>
                                        <!-- ./ col-sm-10 -->
                                     </div>
-                                    <!-- ./ form-group -->
+                                    <!-- ./ form-group --><br />
                                     <!-- ./ form-group -->
                                     <input type="submit" name="resetpass" id="resetpass" class="btn btn-primary btn-lg btn-block" value="Change Password" />
                                  </fieldset>
@@ -183,7 +199,8 @@ $password = $_SESSION['password'];
             <!-- /footer content -->
          </div>
       </div>
-      <?php include "../oc-includes/jquery-colsolidated.inc.php"; ?>
+    
+	  
       <script>
          $(document).ready(function() {
            getMyRank("<?php echo $_SESSION['id'];?>");
@@ -192,6 +209,7 @@ $password = $_SESSION['password'];
       <script></script>
       <!-- Custom Theme Scripts -->
       <script src="./js/custom.js"></script>
+	  <script  src="./js/passconfirm.js"></script>
       <!-- openCad Script -->
       <script src="./js/openCad.js"></script>
    </body>

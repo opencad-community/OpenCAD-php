@@ -1,0 +1,83 @@
+div.tagsinput {
+    background: #ffffff;
+    width: 100%;
+    height: auto;
+    padding: 6px 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+}
+
+div.tagsinput span.tag {
+    border: 1px solid #3399FF;
+    background-color: #3399FF;
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 2px;
+    display: block;
+    float: left;
+    padding: 0 20px 0 5px;
+    height: 20px;
+    line-height: 18px;
+    text-decoration: none;
+    margin-right: 4px;
+    margin-bottom: 6px;
+    font-size: 12px;
+    position: relative;
+}
+
+div.tagsinput span.tag a {
+    position: absolute;
+    color: #ffffff;
+    display: block;
+    top: 0;
+    right: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 16px;
+    height: 20px;
+    width: 10px;
+    text-align: center;
+}
+
+div.tagsinput span.tag a,
+div.tagsinput span.tag a:hover,
+div.tagsinput span.tag a:focus {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+div.tagsinput input {
+    width: 80px;
+    margin: 0px;
+    font-family: helvetica;
+    font-size: 12px;
+    border: 1px solid transparent;
+    padding: 0 5px;
+    height: 20px;
+    line-height: 20px;
+    background: transparent;
+    outline: 0;
+    margin-right: 4px;
+    margin-bottom: 6px;
+}
+
+div.tagsinput div {
+    display: block;
+    float: left;
+}
+
+div.tagsinput:before,
+div.tagsinput:after {
+    content:" ";
+    display:table;
+}
+
+div.tagsinput:after {
+    clear:both;
+}
+
+.not_valid {
+    background: #fbd8db !important;
+    color: #90111a !important;
+}
