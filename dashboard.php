@@ -62,44 +62,44 @@ if($num_rows < 2)
         if ($row[1] == "0")
         {
             $_SESSION['admin'] = 'YES';
-            header("Location:./oc-admin/admin.php");
+            header("Location:/oc-admin/admin.php");
 
         }
         else if ($row[1] == "1")
         {
             $_SESSION['dispatch'] = 'YES';
-            header("Location:./cad.php");
+            header("Location:/cad.php");
 
         }
         else if ($row[1] == "2")
         {
             $_SESSION['ems'] = 'YES';
-            header("Location:./mdt.php");
+            header("Location:/mdt.php");
         }
             else if ($row[1] == "3")
         {
             $_SESSION['fire'] = 'YES';
-            header("Location:./mdt.php");
+            header("Location:/mdt.php");
         }
         else if ($row[1] == "4")
         {
             $_SESSION['highway'] = 'YES';
-            header("Location:./mdt.php");
+            header("Location:/mdt.php");
         }
         else if ($row[1] == "5")
         {
             $_SESSION['police'] = 'YES';
-            header("Location:./mdt.php");
+            header("Location:/mdt.php");
         }
         else if ($row[1] == "6")
         {
             $_SESSION['sheriff'] = 'YES';
-            header("Location:./mdt.php");
+            header("Location:/mdt.php");
         }
         else if ($row[1] == "7")
         {
             $_SESSION['civilian'] = 'YES';
-            header("Location:./civillian.php");
+            header("Location:civillian.php");
         }
 
     }
@@ -111,43 +111,42 @@ else
     {
         if ($row[1] == 0)
         {
-            $adminButton = "<a href=\"./oc-admin/admin.php\" class=\"btn btn-primary btn-lg\">Administration</a>";
             $_SESSION['admin'] = 'YES';
+						$adminButton = "<a href=\"".BASE_URL."/oc-admin/admin.php\" class=\"btn btn-primary btn-lg\">Admin</a>";
         }
         if ($row[1] == 1)
         {
             $_SESSION['dispatch'] = 'YES';
-            $dispatchButton = "<a href=\"./cad.php\" class=\"btn btn-primary btn-lg\">Dispatch</a>";
+            $dispatchButton = "<a href=\"".BASE_URL."/cad.php\" class=\"btn btn-primary btn-lg\">Dispatch</a>";
         }
         if ($row[1] == "2")
         {
             $_SESSION['ems'] = 'YES';
-            $emsButton = "<a href=\"./mdt.php\" class=\"btn btn-primary btn-lg\">EMS</a>";
+            $civilianButton = "<a href=\"".BASE_URL."/mdt.php\" class=\"btn btn-primary btn-lg\">EMS</a>";
         }
         if ($row[1] == "3")
         {
             $_SESSION['fire'] = 'YES';
-            $fireButton = "<a href=\"./mdt.php?fire=true\" class=\"btn btn-primary btn-lg\">Fire Department</a>";
+            $fireButton = "<a href=\"".BASE_URL."/mdt.php\" class=\"btn btn-primary btn-lg\">Fire</a>";
         }
         if ($row[1] == "4")
         {
             $_SESSION['highway'] = 'YES';
-            $highwayButton = "<a href=\"./mdt.php\" class=\"btn btn-primary btn-lg\">Highway Patrol</a>";
+            $highwayButton = "<a href=\"".BASE_URL."/mdt.php\" class=\"btn btn-primary btn-lg\">State Police</a>";
         }
         if ($row[1] == "5")
         {
             $_SESSION['police'] = 'YES';
-            $policeButton = "<a href=\"./mdt.php\" class=\"btn btn-primary btn-lg\">Police Department</a>";
-        }
+            $policeButton = "<a href=\"".BASE_URL."/mdt.php\" class=\"btn btn-primary btn-lg\">Police Department</a>";        }
         if ($row[1] == "6")
         {
             $_SESSION['sheriff'] = 'YES';
-            $sheriffButton = "<a href=\"./mdt.php\" class=\"btn btn-primary btn-lg\">Sheriff's Office</a>";
+            $sheriffButton = "<a href=\"".BASE_URL."/mdt.php\" class=\"btn btn-primary btn-lg\">Sheriff's Office</a>";
         }
         if ($row[1] == "7")
         {
             $_SESSION['civillian'] = 'YES';
-            $civilianButton = "<a href=\"./civilian.php\" class=\"btn btn-primary btn-lg\">Civilian</a>";
+            $civilianButton = "<a href=\"".BASE_URL."/civilian.php\" class=\"btn btn-primary btn-lg\">Civilian</a>";
         }
     }
 }

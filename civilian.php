@@ -634,7 +634,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     </div>
     <!-- ./ modal fade bs-example-modal-lg -->
 
-    <?php include "../oc-includes/jquery-colsolidated.inc.php"; ?>
+    <?php include "./oc-includes/jquery-colsolidated.inc.php"; ?>
 
     <script>
     $('#civilianDetailsModal').on('show.bs.modal', function(e) {

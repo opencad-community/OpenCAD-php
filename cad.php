@@ -675,10 +675,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 
     <!-- AUDIO TONES -->
-    <audio id="recurringToneAudio" src="./sounds/priority.mp3" preload="auto"></audio>
-    <audio id="priorityToneAudio" src="./sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
+    <audio id="recurringToneAudio" src="<?php echo BASE_URL; ?>/sounds/priority.mp3" preload="auto"></audio>
+    <audio id="priorityToneAudio" src="<?php echo BASE_URL; ?>/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
 
-    <?php include "../oc-includes/jquery-colsolidated.inc.php"; ?>
+    <?php include "./oc-includes/jquery-colsolidated.inc.php"; ?>
 
         <script>
           var vid = document.getElementById("recurringToneAudio");
@@ -731,7 +731,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
       $.ajax({
           type: "POST",
-          url: "./actions/api.php",
+          url: "<?php echo BASE_URL; ?>/actions/api.php",
           data: {
               changeStatus: 'yes',
               unit: unit,
@@ -774,7 +774,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
         $.ajax({
             type: "POST",
-            url: "./actions/api.php",
+            url: "<?php echo BASE_URL; ?>/actions/api.php",
             data: {
                 logoutUser: 'yes',
                 unit: unit
@@ -813,7 +813,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       function getAvailableUnits() {
         $.ajax({
               type: "GET",
-              url: "./actions/api.php",
+              url: "<?php echo BASE_URL; ?>/actions/api.php",
               data: {
                   getAvailableUnits: 'yes'
               },
