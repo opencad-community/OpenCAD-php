@@ -110,7 +110,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="dashboard.php">
                      <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
                      </a>
-                     <a data-toggle="tooltip" data-placement="top" title="Logout" href="./actions/logout.php">
+                     <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php">
                      <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                      </a>
                   </div>
@@ -131,8 +131,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <span class=" fa fa-angle-down"></span>
                            </a>
                            <ul class="dropdown-menu dropdown-usermenu pull-right">
-                              <li><a href="./profile.php">My Profile</a></li>
-                              <li><a href="./actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                              <li><a href="<?php echo BASE_URL; ?>/profile.php">My Profile</a></li>
+                              <li><a href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                               <span class="glyphicon glyphicon-log">
                            </ul>
                         </li>
@@ -188,7 +188,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                               <div class="clearfix"></div>
                            </div>
                            <!-- ./ x_title -->
-                           <form name="civRequestForm" method="post" action="./actions/civActions.php">
+                           <form name="civRequestForm" method="post" action="<?php echo BASE_URL; ?>/actions/civActions.php">
                               <div class="x_content">
                                  <?php echo $identityMessage;?>
                                  <div class="form-group row">
@@ -384,7 +384,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <!-- ./ x_title -->
                            <div class="x_content">
                               <?php echo $good911;?>
-                              <form id="new_911" method="post" action="./actions/api.php">
+                              <form id="new_911" method="post" action="<?php echo BASE_URL; ?>/actions/api.php">
                                  <div class="form-group row">
                                     <label class="col-md-2 control-label">Caller Name</label>
                                     <div class="col-md-10">
@@ -615,8 +615,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <script>
          $('#civilianDetailsModal').on('show.bs.modal', function(e) {
          var $modal = $(this), civId = e.relatedTarget.id;
-         
-         
+
+
          $.ajax({
              cache: false,
              type: 'GET',
@@ -627,7 +627,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
              {
                  console.log(result);
                  data = JSON.parse(result);
-         
+
                  $('input[name="civName"]').val(data['name']);
                  $('input[name="civDob"]').val(data['dob']);
                  $('input[name="civAddress"]').val(data['address']);
@@ -639,10 +639,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                  $('input[name="civMake"]').val(data['veh_make']);
                  $('input[name="civModel"]').val(data['veh_model']);
                  $('input[name="civColor"]').val(data['veh_color']);
-         
-         
+
+
              },
-         
+
              error:function(exception){alert('Exeption:'+exception);}
              });
          });

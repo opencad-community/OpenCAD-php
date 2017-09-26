@@ -127,9 +127,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="/oc-admin/admin.php">Dashboard</a></li>
-                      <li><a href="/oc-admin/userManagement.php">User Management</a></li>
-                      <li><a href="/oc-admin/callhistory.php">Call History</a></li>
+                      <li><a href="<?php echo BASE_URL; ?>/oc-admin/admin.php">Dashboard</a></li>
+                      <li><a href="<?php echo BASE_URL; ?>/oc-admin/userManagement.php">User Management</a></li>
+                      <li><a href="<?php echo BASE_URL; ?>/oc-admin/callhistory.php">Call History</a></li>
                     </ul>
                   </li>
                   <li class="active"><a><i class="fa fa-database"></i> NCIC Editor <span class="fa fa-chevron-down"></span></a>
@@ -140,7 +140,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
                   <li><a><i class="fa fa-key"></i> CAD Permissions <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="/oc-admin/permissionManagement.php">Permissions Management</a></li>
+                      <li><a href="<?php echo BASE_URL; ?>/oc-admin/permissionManagement.php">Permissions Management</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -185,7 +185,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="../profile.php">My Profile</a></li>
                     <li><a href="https://github.com/ossified/openCad/issues">Help</a></li>
-                    <li><a href="../actions/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
@@ -389,7 +389,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           </div>
           <!-- ./ modal-header -->
           <div class="modal-body">
-            <form role="form" action="../actions/ncicAdminActions.php" method="post">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/ncicAdminActions.php" method="post">
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">Civilian Name</label>
                 <div class="col-lg-10">
@@ -432,7 +432,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           </div>
           <!-- ./ modal-header -->
           <div class="modal-body">
-            <form role="form" action="../actions/ncicAdminActions.php" method="post">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/ncicAdminActions.php" method="post">
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">Civilian Name</label>
                 <div class="col-lg-10">
@@ -479,7 +479,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           </div>
           <!-- ./ modal-header -->
           <div class="modal-body">
-            <form role="form" action="../actions/ncicAdminActions.php" method="post">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/ncicAdminActions.php" method="post">
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">Civilian Name</label>
                 <div class="col-lg-10">
@@ -589,7 +589,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           </div>
           <!-- ./ modal-header -->
 		  <div class="modal-body">
-            <form role="form" action="../actions/ncicAdminActions.php" method="post">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/ncicAdminActions.php" method="post">
                 <div class="form-group row">
                 </div>
                 <div class="form-group row">
@@ -721,7 +721,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           </div>
           <!-- ./ modal-header -->
 		  <div class="modal-body">
-            <form role="form" action="../actions/ncicAdminActions.php" method="post">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/ncicAdminActions.php" method="post">
                 <div class="form-group row">
                 </div>
                 <div class="form-group row">

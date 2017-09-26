@@ -92,7 +92,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             <div id="register" class="animate form registration_form">
                <section class="login_content">
                   <?php echo $registerError, $registerSuccess;?>
-                  <form action="./actions/register.php" method="post">
+                  <form action="<?php echo BASE_URL; ?>/actions/register.php" method="post">
                      <h1>Request Access</h1>
                      <div>
                         <input class="form-control" placeholder="Name" name="uname" type="text" value="<?php if($testing){echo "Test";}?>" required>
