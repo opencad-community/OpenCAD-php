@@ -92,19 +92,19 @@ require_once(__DIR__ . '/../oc-functions.php');
                   <li class="active"><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: block;">
                       <li class="current-page"><a href="javascript:void(0)">Dashboard</a></li>
-                      <li><a href="/oc-admin/userManagement.php">User Management</a></li>
-                      <li><a href="/oc-admin/callhistory.php">Call History</a></li>
+                      <li><a href="<?php echo BASE_URL; ?>/oc-admin/userManagement.php">User Management</a></li>
+                      <li><a href="<?php echo BASE_URL; ?>/oc-admin/callhistory.php">Call History</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-database"></i> NCIC Editor <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="/oc-admin/ncicAdmin.php">NCIC Editor</a></li>
+                      <li><a href="<?php echo BASE_URL; ?>/oc-admin/ncicAdmin.php">NCIC Editor</a></li>
                     </ul>
                   </li>
 
                   <li><a><i class="fa fa-key"></i> CAD Permissions <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="/oc-admin/permissionManagement.php">Permissions Management</a></li>
+                      <li><a href="<?php echo BASE_URL; ?>/oc-admin/permissionManagement.php">Permissions Management</a></li>
                     </ul>
                   </li>
 
@@ -151,8 +151,8 @@ require_once(__DIR__ . '/../oc-functions.php');
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="../profile.php">My Profile</a></li>
-                    <li><a href="../actions/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>/profile.php">My Profile</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 

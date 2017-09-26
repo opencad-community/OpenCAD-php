@@ -204,7 +204,7 @@ function getPendingUsers()
 
             echo ' </td>
                 <td>
-                    <form action="../actions/adminActions.php" method="post">
+                    <form action="actions/adminActions.php" method="post">
                     <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Approve" />
                     <input name="rejectUser" type="submit" class="btn btn-xs btn-link" value="Reject" />
                     <input name="uid" type="hidden" value=' . $row[0] . ' />
@@ -496,7 +496,7 @@ function getUsers()
 
         echo ' </td>
             <td>
-                <form action="../actions/adminActions.php" method="post">
+                <form action="actions/adminActions.php" method="post">
                 <button name="editUser" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editUserModal" class="btn btn-xs btn-link">Edit</button>
                 <input name="deleteUser" type="submit" class="btn btn-xs btn-link" onclick="deleteUser(' . $row[0] . ')" value="Delete" />
                 ';
@@ -788,7 +788,7 @@ function getCallHistory()
             <td>' . $row[5] . '</td>
             <td>' . $row[6] . '</td>
             <td>
-                <form action="../actions/adminActions.php" method="post">
+                <form action="actions/adminActions.php" method="post">
                 <input name="delete_callhistory" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
                 <input name="call_id" type="hidden" value=' . $row[0] . ' />
                 </form>

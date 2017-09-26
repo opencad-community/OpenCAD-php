@@ -85,14 +85,14 @@ if(isset($_SESSION['accessMessage']))
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li class="current-page"><a href="/oc-admin/admin.php">Dashboard</a></li>
-                      <li><a href="/oc-admin/userManagement.php">User Management</a></li>
-                      <li><a href="/oc-admin/callhistory.php">Call History</a></li>
+                      <li class="current-page"><a href="<?php echo BASE_URL; ?>/oc-admin/admin.php">Dashboard</a></li>
+                      <li><a href="<?php echo BASE_URL; ?>/oc-admin/userManagement.php">User Management</a></li>
+                      <li><a href="<?php echo BASE_URL; ?>/oc-admin/callhistory.php">Call History</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-database"></i> NCIC Editor <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="/oc-admin/ncicAdmin.php">NCIC Editor</a></li>
+                      <li><a href="<?php echo BASE_URL; ?>/oc-admin/ncicAdmin.php">NCIC Editor</a></li>
                     </ul>
                   </li>
 
@@ -144,7 +144,7 @@ if(isset($_SESSION['accessMessage']))
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="../profile.php">My Profile</a></li>
                     <li><a href="https://github.com/ossified/openCad/issues">Help</a></li>
-                    <li><a href="../actions/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 

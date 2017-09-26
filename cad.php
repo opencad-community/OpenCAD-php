@@ -106,7 +106,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="dashboard.php">
                      <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
                      </a>
-                     <a data-toggle="tooltip" data-placement="top" title="Logout" href="./actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
+                     <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
                      <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                      </a>
                   </div>
@@ -127,8 +127,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <span class=" fa fa-angle-down"></span>
                            </a>
                            <ul class="dropdown-menu dropdown-usermenu pull-right">
-                              <li><a href="./profile.php">My Profile</a></li>
-                              <li><a href="./actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                              <li><a href="<?php echo BASE_URL; ?>/profile.php">My Profile</a></li>
+                              <li><a href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                            </ul>
                         </li>
                      </ul>
@@ -142,7 +142,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="page-title">
                      <div class="title_left">
                         <h3>CAD Console</h3>
-                        <p>(Not <?php echo $name;?>?, <a href="./actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">Log Out</a>)
+                        <p>(Not <?php echo $name;?>?, <a href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">Log Out</a>)
                      </div>
                      <!-- ./ title_left -->
                   </div>
@@ -652,13 +652,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
              $(function() {
                  $('#menu_toggle').click();
              });
-         
+
              getCalls();
              getAvailableUnits();
              getUnAvailableUnits();
              getActiveDispatchers();
              checkTones();
-         
+
          });
       </script>
       <script>
@@ -686,9 +686,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
            unit = statusInit.split(" ");
            unit.shift();
            unit = unit.join(' ');
-         
+
            console.log(unit);
-         
+
            $.ajax({
                type: "POST",
                url: "<?php echo BASE_URL; ?>/actions/api.php",
@@ -709,13 +709,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      styling: 'bootstrap3'
                    });
                  }
-         
+
                },
                error : function(XMLHttpRequest, textStatus, errorThrown)
                {
                  console.log("Error");
                }
-         
+
              });
          }
       </script>
@@ -723,7 +723,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          function logoutUser(element)
          {
            var r = confirm("Are you sure you want to log this user out?");
-         
+
            if (r == true)
            {
              unit = element.className.split(" ");
@@ -731,7 +731,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
              unit.shift(); //Remove the logoutUser class
              unit = unit.join(' '); //Rejoin the array
              console.log(unit);
-         
+
              $.ajax({
                  type: "POST",
                  url: "<?php echo BASE_URL; ?>/actions/api.php",
@@ -751,13 +751,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                        styling: 'bootstrap3'
                      });
                    }
-         
+
                  },
                  error : function(XMLHttpRequest, textStatus, errorThrown)
                  {
                    console.log("Error");
                  }
-         
+
                });
              }
              else
@@ -777,7 +777,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                  success: function(response)
                  {
                    $('#availableUnits').html(response);
-         
+
                    // SG - Removed until node/real-time data setup
                    /*$('#activeUsers').DataTable({
                      searching: false,
@@ -785,18 +785,18 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      lengthMenu: [[4, -1], [4, "All"]]
                 });*/
                    setTimeout(getAvailableUnits, 5000);
-         
-         
+
+
                  },
                  error : function(XMLHttpRequest, textStatus, errorThrown)
                  {
                    console.log("Error");
                  }
-         
+
                });
          }
-         
-         
+
+
       </script>
    </body>
 </html>

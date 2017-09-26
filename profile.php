@@ -94,7 +94,7 @@ include("./actions/profileActions.php");
               <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="dashboard.php">
                 <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="./actions/logout.php">
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -117,7 +117,7 @@ include("./actions/profileActions.php");
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="./actions/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
@@ -156,7 +156,7 @@ include("./actions/profileActions.php");
                   <!-- ./ x_title -->
                   <div class="x_content">
                   <?php echo $profileUpdate;?>
-                  <form action="./actions/profileActions.php" method="post" class="form-horizontal">
+                  <form action="<?php echo BASE_URL; ?>/actions/profileActions.php" method="post" class="form-horizontal">
                   <fieldset>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Name:</label>

@@ -101,7 +101,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="dashboard.php">
                      <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
                      </a>
-                     <a data-toggle="tooltip" data-placement="top" title="Logout" href="./actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
+                     <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
                      <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                      </a>
                   </div>
@@ -122,8 +122,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <span class=" fa fa-angle-down"></span>
                            </a>
                            <ul class="dropdown-menu dropdown-usermenu pull-right">
-                              <li><a href="./profile.php">My Profile</a></li>
-                              <li><a href="./actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                              <li><a href="<?php echo BASE_URL; ?>/profile.php">My Profile</a></li>
+                              <li><a href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                            </ul>
                         </li>
                      </ul>
@@ -215,14 +215,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <?php
                         if (isset($_GET['fire']))
                         {
-                        
+
                           if ($_GET['fire'] == "true")
                           {
                             //End the above row
                             echo '
                             </div>
                             <!-- ./ row -->
-                        
+
                             <div class="row">
                               <div class="col-md-4 col-sm-4 col-xs-4">
                                 <div class="x_panel">
@@ -285,11 +285,11 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         }
                         else
                         {
-                        
+
                          /*
-                        
+
                               SG - Commenting out for now since citation creation isn't going to be a thing for LEOs
-                        
+
                          echo '
                          <div class="col-md-6 col-sm-6 col-xs-6">
                           <div class="x_panel">
@@ -303,7 +303,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                             <!-- ./ x_title -->
                             <div class="x_content">
                               <div class="alert alert-info" style="text-align:center;"><span>Citations need to be approved by staff!</span></div>
-                        
+
                               <form id="newCitationForm">
                                 <div class="row">
                                   <div class="form-group">
@@ -490,7 +490,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <?php
          if (isset($_GET['fire']))
          {
-         
+
            if ($_GET['fire'] == "true")
            {
              echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/Fire_Tones_Aligned.wav" preload="auto"></audio>';
@@ -507,17 +507,17 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
              $(function() {
                  $('#menu_toggle').click();
              });
-         
+
              $('#callsign').modal('show');
-         
+
              getCalls();
              getStatus();
              checkTones();
-         
+
              $('#enroute_btn').click(function(evt) {
                console.log(evt);
                var callId = $('#call_id_det').val();
-         
+
                $.ajax({
                    type: "POST",
                    url: "<?php echo BASE_URL; ?>/actions/api.php",
@@ -529,7 +529,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                    success: function(response)
                    {
                      console.log(response);
-         
+
                      new PNotify({
                        title: 'Success',
                        text: 'Successfully updated narrative',
@@ -541,10 +541,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                    {
                      console.log("Error");
                    }
-         
+
                  });
              });
-         
+
          });
       </script>
       <script>
@@ -561,7 +561,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                  sticker: false
              }
            });
-           
+
       </script>
       <script>
          function getCalls() {
@@ -576,13 +576,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                    {
                      $('#live_calls').html(response);
                      setTimeout(getCalls, 5000);
-         
+
                    },
                    error : function(XMLHttpRequest, textStatus, errorThrown)
                    {
                      console.log("Error");
                    }
-         
+
                  });
            }
       </script>
@@ -595,7 +595,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          $(function() {
              $('.callsignForm').submit(function(e) {
                  e.preventDefault(); // avoid to execute the actual submit of the form.
-         
+
                  $.ajax({
                    type: "POST",
                    url: "<?php echo BASE_URL; ?>/actions/responderActions.php",
@@ -606,28 +606,28 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                    success: function(response)
                    {
                      console.log(response);
-         
+
                      if (response.match("^Duplicate"))
                      {
                          var call2 = $('#callsign').find('input[name="callsign"]').val();
                          if (call2 == "<?php echo $_SESSION['identifier'];?>")
                          {
                              $('#closeCallsign').trigger('click');
-         
+
                              new PNotify({
                                  title: 'Success',
                                  text: 'Successfully set your callsign',
                                  type: 'success',
                                  styling: 'bootstrap3'
                              });
-         
+
                              return false;
-         
+
                          }
                          else
                          {
                              $('#closeCallsign').trigger('click');
-         
+
                              new PNotify({
                              title: 'Error',
                              text: 'That callsign is already in use',
@@ -635,34 +635,34 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                              styling: 'bootstrap3'
                              });
                          }
-         
+
                      }
-         
+
                      if (response == "SUCCESS")
                      {
-         
+
                        $('#closeCallsign').trigger('click');
-         
+
                        new PNotify({
                          title: 'Success',
                          text: 'Successfully set your callsign',
                          type: 'success',
                          styling: 'bootstrap3'
                        });
-         
+
                        var call1 = $('#callsign').find('input[name="callsign"]').val();
-         
+
                        $('#callsign1').val(call1);
                      }
-         
+
                    },
                    error : function(XMLHttpRequest, textStatus, errorThrown)
                    {
                      console.log("Error");
                    }
-         
+
                  });
-         
+
              });
            });
       </script>
@@ -693,7 +693,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                              type: 'success',
                              styling: 'bootstrap3'
                          });
-         
+
                          getMyCallDetails();
                      }
                  }
@@ -701,13 +701,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                  {
                      console.log("LOGGED OUT");
                      window.location.href = '<?php echo BASE_URL; ?>/actions/logout.php';
-         
+
                  }
                  else
                  {
-         
+
                  }
-         
+
                  $('#status').val(response);
                  setTimeout(getStatus, 5000);
              },
@@ -715,10 +715,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
              {
              console.log("Error");
              }
-         
+
          });
          }
-         
+
          function getMyCallDetails()
          {
            console.log("Got here");
