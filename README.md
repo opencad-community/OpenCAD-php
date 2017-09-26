@@ -14,7 +14,7 @@ Open Source Computer Aided Dispatch System for GTA V Roleplay Communities.
 ## Deployment Notes
 
 * This could probably run on Apache/PHP/MySQL under Windows but was developed primarily in a Linux environment.
-* The OpenCAD Development team **DOES NOT** reccomend the utilization of "free" webhosting solutions due to a multitude of reason. The team has copiled a *[list of Reccomended Hosting Providers]*(https://github.com/StormlightTech/openCAD-php/wiki/Recommended_Hosting_Provieders).
+* The OpenCAD Development team **DOES NOT** recommend the utilization of "free" webhosting solutions due to a multitude of reasons. The team has copiled a *[list of Recommended Hosting Providers](https://github.com/StormlightTech/openCAD-php/wiki/Recommended_Hosting_Provieders)*.
 
 # Support
 Need Help? [View our wiki](https://github.com/StormlightTech/openCAD-php/wiki) which has all the documentation you need.
