@@ -235,10 +235,13 @@ CREATE TABLE `statuses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 INSERT INTO `statuses` (`status_id`, `status_text`) VALUES
-  (1, 'Available'),
-  (2, 'Busy'),
-  (4, 'Meal Break'),
-  (5, 'Signal 11');
+  (1, '10-8 | Available'),
+  (2, '10-6 | Busy'),
+  (4, '10-5 | Meal Break'),
+  (5, 'Signal 11'),
+  (6, '10-7 | Unavailable'),
+  (7, '10-23 | Arrived on Scene'),
+  (8, '10-65 | Transporting Prisoner');
 
 -- --------------------------------------------------------
 

@@ -473,14 +473,45 @@ function changeStatus()
             $statusDet = '1';
             $onCall = true;
             break;
+		case "statusUnavailBusy":
+            $statusId = '6';
+            $statusDet = '6';
+            $onCall = true;
+            break;
         case "statusSig11":
             $statusId = '1';
             $statusDet = '5';
+            break;
+		case "statusArrivedOC":
+            $statusId = '7';
+            $statusDet = '7';
+            $onCall = true;
+            break;
+		case "statusTransporting":
+            $statusId = '8';
+            $statusDet = '8';
+            $onCall = true;
+            break;
+		
+		case "10-65":
+            $statusId = '8';
+            $statusDet = '8';
+            $onCall = true;
+            break;
+		case "10-23":
+            $statusId = '7';
+            $statusDet = '7';
+            $onCall = true;
             break;
         case "10-8":
             $statusId = '1';
             $statusDet = '1';
             $onCall = true;
+            break;
+		case "10-7":
+            $statusId = '6';
+            $statusDet = '6';
+            $onCall = false;
             break;
         case "10-6":
             $statusId = '0';
