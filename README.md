@@ -11,20 +11,24 @@ Open Source Computer Aided Dispatch System for GTA V Roleplay Communities.
 * PHP: >= 5.5.0 (Recommended), 5.3.7 (Minimum)
 * Database: MySQL 5.5 or MariaDB 10.0 (Recommended)
 
-## Supported Environments
-* Linux
-* Windows
-* Cpanel - Paid hosting
-
-## Unsuppported Environments
-* Free hosting of any kind
-
 ## Deployment Notes
 
-* This has been tested to work on linux, Windows and Cpanel, on discord we have setup the retrospective channels to get assistance #linux-support #windows-support
+### Supported Environments
+* Linux
+* Windows
+* cPanel - Paid hosting
+
+### Unsuppported Environments
+* Free hosting of any kind
+
+### Important Notes
+
 * The OpenCAD Development team **DOES NOT** recommend the utilization of "free" webhosting solutions due to a multitude of reasons. The team has compiled a *[list of Recommended Hosting Providers](https://github.com/StormlightTech/openCAD-php/wiki/Recommended_Hosting_Provieders)*.
 
 # Support
+
+This has been tested to work on Linux, Windows and cPanel. on the community Discord we have setup the corresponding channels to get assistance []#linux-support](https://discord.gg/3bzVhnZ), [#windows-support](https://discord.gg/Zs3F9T). In addition to the Discord support channel we urge you to [register an account on our JIRA](https://jira.opencad.io/secure/Signup!default.jspa) and [submit any issues you have there so they may be tracked](https://jira.opencad.io/secure/CreateIssue!default.jspa). If you encounter problems with registering in JIRA please let someone in []#general-support](https://discord.gg/KYrdyv2) know.
+
 Need Help? [View our wiki](https://github.com/StormlightTech/openCAD-php/wiki) which has all the documentation you need.
 
 Still Having Trouble? If you are still having trouble then [join our community Discord](https://discord.gg/bJknKhn) and post in #community-help and someone will be glad to help.
