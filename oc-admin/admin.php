@@ -239,6 +239,7 @@ require_once(__DIR__ . '/../oc-functions.php');
                   <!-- ./ x_title -->
                   <div class="x_content">
                       <?php echo $accessMessage;?>
+					  
                       <?php getPendingUsers();?>
                   </div>
                   <!-- ./ x_content -->

@@ -423,16 +423,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <br/>
                   <!-- ./ form-group -->
                   <div class="form-group">
-                     <label class="col-lg-2 control-label">Street 1</label>
-                     <div class="col-lg-10">
-                        <input type="text" id="call_street1_det" name="call_street1_det" class="form-control" disabled>
-                     </div>
-                     <!-- ./ col-sm-9 -->
-                  </div>
-                  <br/>
-                  <!-- ./ form-group -->
-                  <div class="form-group">
-                     <label class="col-lg-2 control-label">Street 2</label>
+                     <label class="col-lg-2 control-label">Main Street</label>
                      <div class="col-lg-10">
                         <input type="text" id="call_street2_det" name="call_street2_det" class="form-control" disabled>
                      </div>
@@ -441,34 +432,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <br/>
                   <!-- ./ form-group -->
                   <div class="form-group">
-                     <label class="col-lg-2 control-label">Street 3</label>
+                     <label class="col-lg-2 control-label">Cross Street</label>
                      <div class="col-lg-10">
                         <input type="text" id="call_street3_det" name="call_street3_det" class="form-control" disabled>
                      </div>
                      <!-- ./ col-sm-9 -->
                   </div>
-                  <div class="clearfix">
-                     <br/><br/><br/><br/>
-                     <!-- ./ form-group -->
-                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Narrative</label>
-                        <div class="col-lg-10">
-                           <div name="call_narrative" id="call_narrative" contenteditable="false" style="background-color: #eee; opacity: 1; border: 1px solid #ccc; padding: 6px 12px; font-size: 14px;"></div>
-                        </div>
-                        <!-- ./ col-sm-9 -->
-                     </div>
-                     <br/>
-                     <!-- ./ form-group -->
-                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Add Narrative</label>
-                        <div class="col-lg-10">
-                           <textarea name="narrative_add" id="narrative_add" class="form-control" style="text-transform:uppercase" rows="2" required></textarea>
-                        </div>
-                        <!-- ./ col-sm-9 -->
-                     </div>
-                     <br/>
-                     <!-- ./ form-group -->
-                  </div>
+                  <br/>
+                  <br />
                   <!-- ./ modal-body -->
                   <br/>
                   <div class="modal-footer">

@@ -382,7 +382,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       $.ajax({
           cache: false,
           type: 'POST',
-          url: '../actions/adminActions.php',
+          url: '/actions/adminActions.php',
           data: {'getUserDetails': 'yes',
                   'userId' : userId},
           success: function(result)
