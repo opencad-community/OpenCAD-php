@@ -853,7 +853,7 @@ function getIndividualStatus($callsign)
     echo $statusText;
 }
 
-function getCodesNcic()
+function getIncidentType()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -861,7 +861,7 @@ function getCodesNcic()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT code_id, code_name FROM codes ORDER BY `code_id` ASC";
+    $query = "SELECT code_id, code_name FROM incident_type ORDER BY `code_id` ASC";
 
     $result=mysqli_query($link, $query);
 

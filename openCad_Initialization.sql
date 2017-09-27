@@ -82,17 +82,6 @@ CREATE TABLE `civilian_names` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `codes`
---
-
-CREATE TABLE `codes` (
-  `code_id` varchar(11) NOT NULL DEFAULT '',
-  `code_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Table for 10 codes and their english meaning' ROW_FORMAT=COMPACT;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `departments`
 --
 
@@ -141,6 +130,32 @@ CREATE TABLE `identity_requests` (
   `veh_color` text,
   `submitted_on` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `incident_type`
+--
+
+CREATE TABLE `incident_type` (
+  `code_id` varchar(255) NOT NULL DEFAULT '',
+  `code_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `incident_type` (`code_id`, `code_name`) VALUES
+  (10, 'Fight in Progress'),
+  (11, 'Traffic Stop'),
+  (13, 'Shots Fired'),
+  (16, 'Stolen Vehicle'),
+  (17, 'Suspicious Person'),
+  (25, 'Domestic Dispute'),
+  (49, 'Homicide'),
+  (50, 'Vehicle Accident'),
+  (55, 'Intoxicated Driver'),
+  (56, 'Intoxicated Person'),
+  (62, 'Kidnapping'),
+  (66, 'Reckless Driver'),
+  (68, 'Armed Robbery');
 
 -- --------------------------------------------------------
 
@@ -383,13 +398,6 @@ ALTER TABLE `civilian_names`
   ADD UNIQUE KEY `names_id` (`names_id`) USING BTREE;
 
 --
--- Indexes for table `codes`
---
-ALTER TABLE `codes`
-  ADD PRIMARY KEY (`code_id`) USING BTREE,
-  ADD UNIQUE KEY `code_name` (`code_name`) USING BTREE;
-
---
 -- Indexes for table `departments`
 --
 ALTER TABLE `departments`
@@ -401,6 +409,13 @@ ALTER TABLE `departments`
 ALTER TABLE `identity_requests`
   ADD PRIMARY KEY (`req_id`) USING BTREE;
 
+--
+-- Indexes for table `incident_type`
+--
+ALTER TABLE `incident_type`
+  ADD PRIMARY KEY (`code_id`) USING BTREE,
+  ADD UNIQUE KEY `code_name` (`code_name`) USING BTREE;
+  
 --
 -- Indexes for table `ncic_citations`
 --
