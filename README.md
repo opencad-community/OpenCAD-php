@@ -18,7 +18,7 @@ Open Source Computer Aided Dispatch System for GTA V Roleplay Communities.
 * Windows
 * cPanel - Paid hosting
 
-### Unsupported Environments
+### Unsuppported Environments
 * Free hosting of any kind
 
 ### Important Notes
@@ -27,9 +27,9 @@ Open Source Computer Aided Dispatch System for GTA V Roleplay Communities.
 
 # Support
 
-Need Help? on the community Discord we have setup the corresponding channels to get assistance [#linux-support](https://discord.gg/3bzVhnZ), [#windows-support](https://discord.gg/Zs3F9T). In addition to the Discord support channel we urge you to [register an account on our JIRA](https://jira.opencad.io/secure/Signup!default.jspa) and [submit any issues you have there so they may be tracked](https://jira.opencad.io/secure/CreateIssue!default.jspa). If you encounter problems with registering in JIRA please let someone in [#general-support](https://discord.gg/KYrdyv2) know.
+Need Help? [View our wiki](https://github.com/StormlightTech/openCAD-php/wiki) which has all the documentation you need.
 
-Still Having Trouble? If you are still having trouble then [join our community Discord](https://discord.gg/bJknKhn) and post in #community-help and someone will be glad to help.
+Still Having Trouble? on the community Discord we have setup the corresponding channels to get assistance [#linux-support](https://discord.gg/3bzVhnZ), [#windows-support](https://discord.gg/Zs3F9T). In addition to the Discord support channel we urge you to [register an account on our JIRA](https://jira.opencad.io/secure/Signup!default.jspa) and [submit any issues you have there so they may be tracked](https://jira.opencad.io/secure/CreateIssue!default.jspa). If you encounter problems with registering in JIRA please let someone in [#general-support](https://discord.gg/KYrdyv2) know.
 
 # Disclosure of Fork
 This version of OpenCAD is based on the original source from [Shane Gill](https://github.com/ossified/openCad).
