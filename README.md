@@ -6,10 +6,18 @@ Open Source Computer Aided Dispatch System for GTA V Roleplay Communities.
 * release\wiki: [![Build Status](https://travis-ci.org/StormlightTech/openCAD-wiki.svg?branch=master)](https://travis-ci.org/StormlightTech/openCAD-wiki)
 
 # Installation Requirements
-* Operating System: Linux
+* Operating System: Linux, Windows or Cpanel
 * Webserver: Apache or Nginx
 * PHP: >= 5.5.0 (Recommended), 5.3.7 (Minimum)
 * Database: MySQL 5.5 or MariaDB 10.0 (Recommended)
+
+#Supported Environments
+* Linux
+* Windows
+* Cpanel - Paid hosting
+
+#Unsuppported Environments
+* Free hosting of any kind
 
 ## Deployment Notes
 
