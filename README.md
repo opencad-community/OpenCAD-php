@@ -11,12 +11,12 @@ Open Source Computer Aided Dispatch System for GTA V Roleplay Communities.
 * PHP: >= 5.5.0 (Recommended), 5.3.7 (Minimum)
 * Database: MySQL 5.5 or MariaDB 10.0 (Recommended)
 
-#Supported Environments
+# Supported Environments
 * Linux
 * Windows
 * Cpanel - Paid hosting
 
-#Unsuppported Environments
+# Unsuppported Environments
 * Free hosting of any kind
 
 ## Deployment Notes
