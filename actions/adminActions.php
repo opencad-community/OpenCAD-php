@@ -51,7 +51,7 @@ if (isset($_POST['delete_callhistory']))
 function getRanks()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
+    $site = BASE_URL;
     if (!$link)
     {
         die('Could not connect: ' . mysql_error());
@@ -104,7 +104,7 @@ function getRanks()
 function delete_user()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
+    $site = BASE_URL;
     if (!$link)
     {
         die('Could not connect: ' . mysql_error());
@@ -140,7 +140,7 @@ function delete_user()
 function getUserCount()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
+    $site = BASE_URL;
     if (!$link)
     {
         die('Could not connect: ' . mysql_error());
@@ -159,7 +159,7 @@ function getUserCount()
 function getPendingUsers()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
+    $site = BASE_URL;
     if (!$link)
     {
         die('Could not connect: ' . mysql_error());
@@ -204,7 +204,7 @@ function getPendingUsers()
 
             echo ' </td>
                 <td>
-                    <form action="actions/adminActions.php" method="post">
+                    <form action="'.$site.'/actions/adminActions.php" method="post">
                     <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Approve" />
                     <input name="rejectUser" type="submit" class="btn btn-xs btn-link" value="Reject" />
                     <input name="uid" type="hidden" value=' . $row[0] . ' />
@@ -224,7 +224,7 @@ function getPendingUsers()
 function getDepartments()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
+    $site = BASE_URL;
     if (!$link)
     {
         die('Could not connect: ' . mysql_error());
@@ -252,7 +252,7 @@ function getDepartments()
 function getUserGroups($uid)
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
+    $site = BASE_URL;
     if (!$link)
     {
         die('Could not connect: ' . mysql_error());
@@ -272,7 +272,7 @@ function getUserGroups($uid)
 function getUserGroupsApproved($uid)
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
+    $site = BASE_URL;
     if (!$link)
     {
         die('Could not connect: ' . mysql_error());
@@ -291,7 +291,7 @@ function getUserGroupsApproved($uid)
 function approveUser()
 {
     $uid = $_POST['uid'];
-
+    $site = BASE_URL;
     /* If a user has been approved, the following needs to be done:
     1. Insert user's groups from temp table to regular table
     2. Set user's approved status to 1
@@ -382,7 +382,7 @@ function rejectUser()
 
     /* Delete groups from temp table */
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
+    $site = BASE_URL;
     if (!$link)
     {
         die('Could not connect: ' . mysql_error());
@@ -439,7 +439,7 @@ function rejectUser()
 function getGroupCount($gid)
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
+    $site = BASE_URL;
     if (!$link)
     {
         die('Could not connect: ' . mysql_error());
@@ -459,7 +459,7 @@ function getGroupCount($gid)
 function getUsers()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
+    $site = BASE_URL;
     if (!$link)
     {
         die('Could not connect: ' . mysql_error());
@@ -496,7 +496,7 @@ function getUsers()
 
         echo ' </td>
             <td>
-                <form action="actions/adminActions.php" method="post">
+                <form action="'.$site.'/actions/adminActions.php" method="post">
                 <button name="editUser" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editUserModal" class="btn btn-xs btn-link">Edit</button>
                 <input name="deleteUser" type="submit" class="btn btn-xs btn-link" onclick="deleteUser(' . $row[0] . ')" value="Delete" />
                 ';
@@ -529,7 +529,7 @@ function getUsers()
 function suspendUser()
 {
     $uid = $_POST['uid'];
-
+    $site = BASE_URL;
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
     if (!$link)
@@ -567,7 +567,7 @@ function suspendUser()
 function reactivateUser()
 {
     $uid = $_POST['uid'];
-
+    $site = BASE_URL;
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
     if (!$link)
@@ -605,7 +605,7 @@ function reactivateUser()
 function getUserDetails()
 {
     $userId = $_POST['userId'];
-
+    $site = BASE_URL;
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
     if (!$link)
@@ -636,7 +636,7 @@ function getUserDetails()
 function getUserGroupsEditor($encode, $userId)
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
+    $site = BASE_URL;
     if (!$link)
     {
         die('Could not connect: ' . mysql_error());
@@ -661,7 +661,7 @@ function getUserGroupsEditor($encode, $userId)
 function getStreetNames()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
+    $site = BASE_URL;
     if (!$link)
     {
         die('Could not connect: ' . mysql_error());
@@ -701,7 +701,7 @@ function getStreetNames()
 function getCodes()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
+    $site = BASE_URL;
     if (!$link)
     {
         die('Could not connect: ' . mysql_error());
@@ -741,7 +741,7 @@ function getCodes()
 function getCallHistory()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
+    $site = BASE_URL;
     if (!$link)
     {
         die('Could not connect: ' . mysql_error());
@@ -788,7 +788,7 @@ function getCallHistory()
             <td>' . $row[5] . '</td>
             <td>' . $row[6] . '</td>
             <td>
-                <form action="actions/adminActions.php" method="post">
+                <form action="'.$site.'/actions/adminActions.php" method="post">
                 <input name="delete_callhistory" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
                 <input name="call_id" type="hidden" value=' . $row[0] . ' />
                 </form>
@@ -807,7 +807,7 @@ function getCallHistory()
 function delete_callhistory()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
+    $site = BASE_URL;
     if (!$link)
     {
         die('Could not connect: ' . mysql_error());

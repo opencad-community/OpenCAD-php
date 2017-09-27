@@ -714,7 +714,7 @@ function priorityTone(type)
  {
     $.ajax({
         type: "POST",
-        url: hdir +"actions/api.php",
+        url: hdir + "actions/api.php",
         data: {
             setTone: 'yes',
             tone: name,
@@ -757,7 +757,7 @@ function checkTones()
 {
     $.ajax({
         type: "GET",
-        url: hdir +"actions/api.php",
+        url: hdir + "actions/api.php",
         data: {
             checkTones: 'yes'
         },

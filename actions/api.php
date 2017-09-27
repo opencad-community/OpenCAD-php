@@ -170,11 +170,11 @@ function getMyCall()
 
         while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
         {
-            $call_type = $row[1];
-            $call_street1 = $row[2];
-            $call_street2 = $row[3];
-            $call_street3 = $row[4];
-            $call_notes = $row[5];
+            $call_type = $row[2];
+            $call_street1 = $row[3];
+            $call_street2 = $row[4];
+            $call_street3 = $row[5];
+            $call_notes = $row[6];
         }
 
 
