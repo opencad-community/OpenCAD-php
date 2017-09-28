@@ -80,34 +80,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
             <br />
 
-            <!-- sidebar menu -->
-            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-              <div class="menu_section">
-                <h3>General</h3>
-                <ul class="nav side-menu">
-                  <li class="active"><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu" style="display: block;">
-                      <li><a href="<?php echo BASE_URL; ?>/oc-admin/admin.php">Dashboard</a></li>
-                      <li><a href= "<?php echo BASE_URL; ?>/oc-admin/userManagement.php"> User Management</a></li>
-                      <li class="current-page"><a href="javascript:void(0)">Call History</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-database"></i> NCIC Editor <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="<?php echo BASE_URL; ?>/oc-admin/ncicAdmin.php">NCIC Editor</a></li>
-                    </ul>
-                  </li>
-
-                  <li><a><i class="fa fa-key"></i> CAD Permissions <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="<?php echo BASE_URL; ?>/oc-admin/permissionManagement.php">Permissions Management</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-              <!-- ./ menu_section -->
-            </div>
-            <!-- /sidebar menu -->
+            <?php include "oc-admin-includes/sidebarNav.inc.php"; ?>;
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
