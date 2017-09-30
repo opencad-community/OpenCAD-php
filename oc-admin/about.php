@@ -184,7 +184,7 @@ require_once(__DIR__ . '/../oc-functions.php');
                         <li><em><a href="https://keybase.io/murfasa">Murfasa Curry</a></em> — <i>Documentation Manager, Developer</i></li>
                         <li><em>Justin Farmer</em> — <i>Test Engineer</i></li>
                         <li><em><a href="https://keybase.io/Cambridgeport90">Katherine Moss</a></em> — <i>Accessibility Manager, Developer</i></li>
-                        <li><em><a href="https://keybase.io/termanator1128">Brennan Stapleton</a></em> — <i>Co-Revitalizer, Developer</i></li>
+                        <li><em><a href="https://keybase.io/termanator1128">Brennen Stapleton</a></em> — <i>Co-Revitalizer, Developer</i></li>
                       </ul>
                   </div>
                   <!-- ./ x_content -->
