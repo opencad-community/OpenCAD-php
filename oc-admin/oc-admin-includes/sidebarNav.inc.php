@@ -20,6 +20,7 @@
         <ul class="nav child_menu">
           <li><a href="<?php echo BASE_URL; ?>/oc-admin/permissionManagement.php">Permissions Management</a></li>
         </ul>
+        <li><li ><a><i class="fa fa-info"></i> About OpenCAD<span class="fa fa-chevron-down"></span></a></li>
       </li>
 
     </ul>
