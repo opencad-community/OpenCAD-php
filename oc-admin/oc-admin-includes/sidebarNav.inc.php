@@ -3,24 +3,21 @@
   <div class="menu_section">
     <h3>General</h3>
     <ul class="nav side-menu">
-      <li class="active"><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-        <ul class="nav child_menu" style="display: block;">
-          <li class="current-page"><a href="javascript:void(0)">Dashboard</a></li>
-          <li><a href="<?php echo BASE_URL; ?>/oc-admin/userManagement.php">User Management</a></li>
-          <li><a href="<?php echo BASE_URL; ?>/oc-admin/callhistory.php">Call History</a></li>
-        </ul>
+        <li <?php if ( $pageName == "Dashboard") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/admin.php">Dashboard</a></li>
+        <li <?php if ( $pageName == "User Management") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/userManagement.php">User Management</a></li>
+        <li <?php if ( $pageName == "Call History") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/callhistory.php">Call History</a></li>
       </li>
       <li><a><i class="fa fa-database"></i> NCIC Editor <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
-          <li><a href="<?php echo BASE_URL; ?>/oc-admin/ncicAdmin.php">NCIC Editor</a></li>
+          <li <?php if ( $pageName == "NCIC Editor") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/ncicAdmin.php">NCIC Editor</a></li>
         </ul>
       </li>
 
       <li><a><i class="fa fa-key"></i> CAD Permissions <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
-          <li><a href="<?php echo BASE_URL; ?>/oc-admin/permissionManagement.php">Permissions Management</a></li>
+          <li <?php if ( $pageName == "Permissions Management") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/permissionManagement.php">Permissions Management</a></li>
         </ul>
-        <li><li ><a><i class="fa fa-info"></i> About OpenCAD<span class="fa fa-chevron-down"></span></a></li>
+        <li <?php if ( $pageName == "About OpenCAD") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/about.php">About OpenCAD</a></li>
       </li>
 
     </ul>

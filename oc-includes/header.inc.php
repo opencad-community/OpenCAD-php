@@ -1,24 +1,34 @@
 <?php
 if(basename($_SERVER['PHP_SELF']) == 'admin.php') {
   $pageName = "OpenCAD Admin Dashboard";
+  $currentPage = 'class="acitve"';
 } else  if(basename($_SERVER['PHP_SELF']) == 'callhistory.php') {
   $pageName = "Call History";
+  $currentPage = 'class="acitve"';
 } else  if(basename($_SERVER['PHP_SELF']) == 'ncicAdmin.php') {
   $pageName = "Civillian Profile Manager (CPM)";
+  $currentPage = 'class="acitve"';
 } else  if(basename($_SERVER['PHP_SELF']) == 'permissionManagmeent.php') {
   $pageName = "Permissions Management";
+  $currentPage = 'class="acitve"';
 } else  if(basename($_SERVER['PHP_SELF']) == 'userManagement.php') {
   $pageName = "User Management";
+  $currentPage = 'class="acitve"';
 } else  if(basename($_SERVER['PHP_SELF']) == 'cad.php') {
   $pageName = "Computer Aided Dispatch (CAD)";
+  $currentPage = 'class="acitve"';
 } else  if(basename($_SERVER['PHP_SELF']) == 'mdt.php') {
   $pageName = "Mobile Data Terminal (MDT)";
+  $currentPage = 'class="acitve"';
 } else  if(basename($_SERVER['PHP_SELF']) == 'civilian.php') {
   $pageName = "Civillian Central";
+  $currentPage = 'class="acitve"';
 } else  if(basename($_SERVER['PHP_SELF']) == 'dashboard.php') {
   $pageName = "OpenCAD Dashboard";
+  $currentPage = 'class="acitve"';
 } else  if(basename($_SERVER['PHP_SELF']) == 'about.php') {
   $pageName = "About OpenCad";
+  $currentPage = 'class="acitve"';
 } else {
   $pageName = "OpenCAD";
 }
