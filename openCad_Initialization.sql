@@ -105,7 +105,7 @@ INSERT
 INTO
   `departments`(`department_id`,
   `department_name`)
-VALUES(0, 'Head Administrators'),(1, 'Communications'),(2, 'EMS'),(3, 'Fire'),(4, 'Highway'),(5, 'Police'),(6, 'Sheriff'),(7, 'Civilian'),(8, 'Admins');
+VALUES(0, 'Head Administrators'),(1, 'Communications'),(2, 'EMS'),(3, 'Fire'),(4, 'Highway'),(5, 'Police'),(6, 'Sheriff'),(7, 'Civilian'),(8, 'Admins'), (9, 'State');
 
 
 -- --------------------------------------------------------
@@ -1236,7 +1236,7 @@ INSERT
 INTO
   `user_departments`(`user_id`,
   `department_id`)
-VALUES(21, 0),(21, 1),(21, 2),(21, 3),(21, 4),(21, 5),(21, 6),(21, 7),(21, 8);
+VALUES(21, 0),(21, 1),(21, 2),(21, 3),(21, 4),(21, 5),(21, 6),(21, 7),(21, 8), (21, 9);
 
 
 -- --------------------------------------------------------

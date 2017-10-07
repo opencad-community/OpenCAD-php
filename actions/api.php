@@ -861,13 +861,31 @@ function getIncidentType()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT code_id, code_name FROM incident_type ORDER BY `code_id` ASC";
+    $sql = "SELECT code_name FROM incident_type";
 
-    $result=mysqli_query($link, $query);
+    $result=mysqli_query($link, $sql);
 
     while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
     {
-        echo '<option value="'.$row[0].'">'.$row[0].'/'.$row[1].'</option>';
+        echo '<option value="'.$row[0].'">'.$row[0].'</option>';
+    }
+}
+
+function getStreet()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $sql = "SELECT name FROM streets";
+
+    $result=mysqli_query($link, $sql);
+
+    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    {
+        echo '<option value="'.$row[0].'">'.$row[0].'</option>';
     }
 }
 

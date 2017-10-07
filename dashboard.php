@@ -46,6 +46,7 @@ $result=mysqli_query($link, $sql);
 $adminButton = "";
 $dispatchButton = "";
 $highwayButton = "";
+$stateButton = "";
 $fireButton = "";
 $emsButton = "";
 $sheriffButton = "";
@@ -132,7 +133,7 @@ else
         if ($row[1] == "4")
         {
             $_SESSION['highway'] = 'YES';
-            $highwayButton = "<a href=\"".BASE_URL."/mdt.php\" class=\"btn btn-primary btn-lg\">State Police</a>";
+            $highwayButton = "<a href=\"".BASE_URL."/mdt.php\" class=\"btn btn-primary btn-lg\">Highway Patrol</a>";
         }
         if ($row[1] == "5")
         {
@@ -142,6 +143,11 @@ else
         {
             $_SESSION['sheriff'] = 'YES';
             $sheriffButton = "<a href=\"".BASE_URL."/mdt.php\" class=\"btn btn-primary btn-lg\">Sheriff's Office</a>";
+        }
+        if ($row[1] == "9")
+        {
+            $_SESSION['state'] = 'YES';
+            $stateButton = "<a href=\"".BASE_URL."/mdt.php\" class=\"btn btn-primary btn-lg\">State Police</a>";
         }
         if ($row[1] == "7")
         {
@@ -177,10 +183,13 @@ mysqli_close($link);
                &nbsp;
                <?php echo $highwayButton;?>
                &nbsp;
+               <?php echo $stateButton;?>
                &nbsp;
                <?php echo $policeButton;?>
                &nbsp;
                <?php echo $fireButton;?>
+			   &nbsp;
+			   <?php echo $emsButton;?>
                &nbsp;
                <?php echo $civilianButton;?>
             </div>
