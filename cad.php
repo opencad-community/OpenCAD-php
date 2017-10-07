@@ -500,9 +500,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <div class="form-group row">
                         <label class="col-lg-2 control-label">Address</label>
                         <div class="col-lg-10">
-                           <input type="text" class="form-control txt-auto" id="street1" name="street1" placeholder="Street 1" required/>
-                           <input type="text" class="form-control txt-auto2" name="street2" id="street2" placeholder="Street 2/Cross/Postal" />
-                           <input type="text" class="form-control" name="additionalLocation" placeholder="Any Additional Location Information" />
+                           <select class="form-control selectpicker" data-live-search="true" name="street1" id="street1" title="Street 1" required>
+								<?php getStreet();?>
+							</select>
+							<select class="form-control selectpicker" data-live-search="true" name="street2" id="street2" title="Street 2/Cross/Postal" >
+								<?php getStreet();?>
+							</select>
+								<input type="text" class="form-control" name="additionalLocation" placeholder="Any Additional Location Information" />
                         </div>
                         <!-- ./ col-sm-9 -->
                      </div>
