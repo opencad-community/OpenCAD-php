@@ -123,7 +123,7 @@ else
         if ($row[1] == "2")
         {
             $_SESSION['ems'] = 'YES';
-            $civilianButton = "<a href=\"".BASE_URL."/mdt.php\" class=\"btn btn-primary btn-lg\">EMS</a>";
+            $emsButton = "<a href=\"".BASE_URL."/mdt.php\" class=\"btn btn-primary btn-lg\">EMS</a>";
         }
         if ($row[1] == "3")
         {
