@@ -1,12 +1,14 @@
 <?php
 
-/* Community Name
+/**#@+
+ *Community Name
  *
  * @since 1.0a RC1
  */
 define('COMMUNITY_NAME', 'My Community');
 
-/* Database connection variables
+/**#@+
+ * Database connection variables
  *
  * @since 1.0a RC1
  */
@@ -16,22 +18,23 @@ define('DB_PASSWORD', '');
 define('DB_HOST', '127.0.0.1');
 
 
-/* Base URL Settings
-*
-* BASE_URL - The URL to your installation of OpenCAD inlcuding,
-*             if utilized, it's subdirectory
-*
-*             Valid Examples include:
-*             //example.com/ - Root domain, no subdirectory
-*             //subdomain.example.com/ - subdomain, no subdirectory
-*             //subdomain.example.com/subdir - subdomain with subdirectory
-*             //example.com/subdir - root domain with subdirectory
-*
-* @since 1.0a RC1
-*/
+/**#@+
+ * Base URL Settings
+ *
+ * BASE_URL - The URL to your installation of OpenCAD inlcuding,
+ *             if utilized, it's subdirectory
+ *
+ *             Valid Examples include:
+ *             //example.com/ - Root domain, no subdirectory
+ *             //subdomain.example.com/ - subdomain, no subdirectory
+ *             //subdomain.example.com/subdir - subdomain with subdirectory
+ *             //example.com/subdir - root domain with subdirectory
+ *
+ * @since 1.0a RC1
 define('BASE_URL', '//example.com/');
 
-/* To & From emails for system generated emails
+/**#@+
+ *To & From emails for system generated emails
  * To be used in a later version for notificaton emails
  *
  * @since 1.0a RC2
@@ -43,13 +46,13 @@ define('CAD_TO_EMAIL', 'admins@community.com');
 define('CAD_TO_NAME', COMMUNITY_NAME.' Administrators');
 
 /**#@+
- * Toggle Gravatar
- *
- * OpenCAD will dynamically retrieve your avatar from {@link Gravatar http://en.gravatar.com/} if you have an account. Otherwise
- * it will use the default generic avatar image included with OpenCAD.
- *
- * @since 1.0a RC1
- */
+  * Toggle Gravatar
+  *
+  * OpenCAD will dynamically retrieve your avatar from {@link Gravatar http://en.gravatar.com/} if you have an account. Otherwise
+ * it will use the default generic avatar image included with OpenCAD .
+  *
+  * @since 1.0a RC1
+  */
 define('USE_GRAVATAR', true);
 
 /**#@+
