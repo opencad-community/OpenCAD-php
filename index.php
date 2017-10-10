@@ -13,7 +13,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
     require("./oc-config.php");
-    require("./oc-functions.php");
 
     $testing = false; //If set to true, will default some data for you
 

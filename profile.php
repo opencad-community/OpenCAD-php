@@ -13,7 +13,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 
 require("./oc-config.php");
-require("./oc-functions.php");
+
 include("./actions/profileActions.php");
     session_start();
 
@@ -221,7 +221,7 @@ include("./actions/profileActions.php");
       </div>
     </div>
 
-    <?php include "../oc-includes/jquery-colsolidated.inc.php"; ?>
+    <?php include "./oc-includes/jquery-colsolidated.inc.php"; ?>
 
     <script>
 

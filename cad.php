@@ -13,7 +13,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
 
-    require("./oc-functions.php");
+    
     include("./actions/api.php");
     session_start();
 
