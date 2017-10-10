@@ -25,13 +25,18 @@ define('DB_HOST', '127.0.0.1');
  *             if utilized, it's subdirectory
  *
  *             Valid Examples include:
- *             //example.com/ - Root domain, no subdirectory
- *             //subdomain.example.com/ - subdomain, no subdirectory
- *             //subdomain.example.com/subdir - subdomain with subdirectory
+ *             //example.com - Root domain, no subdirectory
+ *             //subdomain.example.com - subdomain, no subdirectory
+ *             //subdomain.example.comsubdir - subdomain with subdirectory
  *             //example.com/subdir - root domain with subdirectory
  *
+ *						We do not reccomend including the trailing / on any of the above examples.
+ * 						It won't necessarily break anything but just make reference look strange having
+ * 						two slashed when it isn't needed.
+ *
  * @since 1.0a RC1
-define('BASE_URL', '//example.com/');
+ */
+define('BASE_URL', '//example.com');
 
 /**#@+
  *To & From emails for system generated emails
