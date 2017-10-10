@@ -12,7 +12,7 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
-    require("./oc-functions.php");
+
     session_start();
     // TODO: Verify user has permission to be on this page
 
