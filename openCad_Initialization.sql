@@ -1181,11 +1181,11 @@ SET
 CREATE TABLE `bolo_vehicle`(
 `id` INT(11) NOT NULL COMMENT 'Primary key for each bolo person',
 `vehicle_make` TEXT NOT NULL COMMENT 'Make of BOLO vheicle.',
-`vehicle_model` TEXT NOT NULL COMMENT 'Model of BOLO vehicle'
-`vehicle_plate` TEXT NOT NULL COMMENT 'BOLO license plate.'
-`vehicle_color_primary` TEXT NOT NULL COMMENT 'BOLO vehicle primary color.'
-`vehicle_color_secondary` TEXT NOT NULL COMMENT 'BOLO vehicle secondary color.'
-`reason_wanted` TEXT NOT NULL COMMENT 'BOLO Wanted reason.'
+`vehicle_model` TEXT NOT NULL COMMENT 'Model of BOLO vehicle',
+`vehicle_plate` TEXT NOT NULL COMMENT 'BOLO license plate.',
+`vehicle_color_primary` TEXT NOT NULL COMMENT 'BOLO vehicle primary color.',
+`vehicle_color_secondary` TEXT NOT NULL COMMENT 'BOLO vehicle secondary color.',
+`reason_wanted` TEXT NOT NULL COMMENT 'BOLO Wanted reason.',
 `last_seen` TEXT NOT NULL COMMENT 'BOLO last seen.'
 ) ENGINE = InnoDB DEFAULT CHARSET = latin1 ROW_FORMAT = COMPACT;
 
@@ -1198,10 +1198,10 @@ CREATE TABLE `bolo_vehicle`(
 CREATE TABLE `bolo_person`(
   `id` INT(11) NOT NULL COMMENT 'Primary key for each bolo person',
   `first_name` TEXT NOT NULL COMMENT 'First Name of bolo id.',
-  `last_name` TEXT NOT NULL COMMENT 'Last Name of bolo id.'
-  `physical_description` TEXT NOT NULL COMMENT 'Physical description of bolo id.'
-  `Gender` TEXT NOT NULL COMMENT 'Gender of BOLO suspect'
-  `reason_wanted` TEXT NOT NULL COMMENT 'BOLO Wanted reason.'
+  `last_name` TEXT NOT NULL COMMENT 'Last Name of bolo id.',
+  `physical_description` TEXT NOT NULL COMMENT 'Physical description of bolo id.',
+  `Gender` TEXT NOT NULL COMMENT 'Gender of BOLO suspect',
+  `reason_wanted` TEXT NOT NULL COMMENT 'BOLO Wanted reason.',
   `last_seen` TEXT NOT NULL COMMENT 'BOLO last seen.'
 ) ENGINE = InnoDB DEFAULT CHARSET = latin1 ROW_FORMAT = COMPACT;
 

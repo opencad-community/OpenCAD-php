@@ -3817,7 +3817,7 @@ fieldset {
     display: block
 }
 .cropper .docs-cropped .modal-body {
-    text-align: center
+    text-align: center;
 }
 .cropper .docs-cropped .modal-body>img,
 .cropper .docs-cropped .modal-body>canvas {

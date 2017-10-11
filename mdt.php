@@ -27,6 +27,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     }
 
     include("./actions/api.php");
+    include("./actions/responderActions.php");
+
     setUnitActive("2");
 
 ?>
@@ -138,11 +140,16 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <div class="title_left">
                         <h3>MDT Console</h3>
                      </div>
+                     <div class="x_footer">
+                        <button class="btn btn-danger pull-right" name="new_call_btn" data-toggle="modal" data-target="#vehicle-bolo-board">View Vehicle BOLOs</button>
+                        <button class="btn btn-danger pull-right" name="new_call_btn" data-toggle="modal" data-target="#person-bolo-board">View Person BOLOs</button>
+                     </div>
                      <!-- ./ title_left -->
                   </div>
                   <!-- ./ page-title -->
                   <div class="clearfix"></div>
                   <div class="row">
+                    <!-- ./ x_content -->
                      <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                            <div class="x_title">
@@ -210,7 +217,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                  <!-- ./ form-group -->
                               </form>
                            </div>
-                           <!-- ./ x_content -->
                         </div>
                         <!-- ./ x_panel -->
                      </div>
@@ -392,6 +398,60 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          <!-- ./ modal-dialog modal-md -->
       </div>
       <!-- ./ modal fade -->
+
+      <!-- Vehicle BOLO Board Modal -->
+      <div class="modal fade" id="vehicle-bolo-board" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog modal-md">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" id="closeCallsign" data-dismiss="modal"><span aria-hidden="true">×</span>
+                  </button>
+                  <h4 class="modal-title" id="myModalLabel">Currently Active Vehicle BOLOs</h4>
+               </div>
+               <!-- ./ modal-header -->
+               <div class="modal-body">
+                  <form class="callsignForm" id="callsignForm">
+                    <?php cadGetVehicleBOLOS(); ?>
+                        <!-- ./ col-sm-9 -->
+                     </div>
+                     <!-- ./ form-group -->
+               </div>
+               <!-- ./ modal-body -->
+               </form>
+            </div>
+            <!-- ./ modal-content -->
+         </div>
+         <!-- ./ modal-dialog modal-md -->
+      </div>
+      <!-- ./ modal fade -->
+
+      <!-- Vehicle BOLO Board Modal -->
+      <div class="modal fade" id="person-bolo-board" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog modal-md">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" id="closeCallsign" data-dismiss="modal"><span aria-hidden="true">×</span>
+                  </button>
+                  <h4 class="modal-title" id="myModalLabel">Currently Active Person BOLOs</h4>
+               </div>
+               <!-- ./ modal-header -->
+               <div class="modal-body">
+                  <form class="callsignForm" id="callsignForm">
+                    <?php cadGetPersonBOLOS(); ?>
+                        <!-- ./ col-sm-9 -->
+                     </div>
+                     <!-- ./ form-group -->
+               </div>
+               <!-- ./ modal-body -->
+               </form>
+            </div>
+            <!-- ./ modal-content -->
+         </div>
+         <!-- ./ modal-dialog modal-md -->
+      </div>
+      <!-- ./ modal fade -->
+
+
       <!-- Call Details Modal -->
       <div class="modal fade" id="callDetails" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg">
