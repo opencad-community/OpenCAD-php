@@ -11,11 +11,12 @@ This program is free software: you can redistribute it and/or modify
 
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
-
-    require('./oc-config.php');
-    
-    include("./actions/civActions.php");
     session_start();
+	
+    require("/./oc-config.php");
+
+    include("/./actions/civActions.php");
+
 
     // TODO: Verify user has permission to be on this page
 
@@ -27,14 +28,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     else
     {
       $name = $_SESSION['name'];
+      $uid = $_SESSION['id'];
     }
-
-    $errors = array();
-    // define variables and set to empty values
-    $civNameReq = "";
-
-    error_reporting(E_ALL);
-    ini_set("display_errors", 1);
 
     $civName = $civDob = $civAddr = "";
 
@@ -50,6 +45,20 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     {
         $identityMessage = $_SESSION['identityMessage'];
         unset($_SESSION['identityMessage']);
+    }
+	
+    $plateMessage = "";
+    if(isset($_SESSION['plateMessage']))
+    {
+        $plateMessage = $_SESSION['plateMessage'];
+        unset($_SESSION['plateMessage']);
+    }
+	
+    $nameMessage = "";
+    if(isset($_SESSION['nameMessage']))
+    {
+        $nameMessage = $_SESSION['nameMessage'];
+        unset($_SESSION['nameMessage']);
     }
 
 
@@ -165,209 +174,49 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            </div>
                            <!-- ./ x_title -->
                            <div class="x_content">
-                              <?php getIdentities();?>
+							  <?php echo $nameMessage;?>
+							  <?php echo $identityMessage;?>
+                              <?php ncicGetNames();?>
                            </div>
                            <!-- ./ x_content -->
+						   <div class="x_footer">
+							<button class="btn btn-primary" name="submitIdentity_btn" type="submit" data-toggle="modal" data-target="#IdentityModal">New Identity</button>
                         </div>
                         <!-- ./ x_panel -->
                      </div>
-                     <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
+					</div>
+					</div>
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel" id="plate_panel">
+                  <div class="x_title">
+                    <h2>My Vehicles</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
                   </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php echo $plateMessage;?>
+                     <?php ncicGetPlates();?>
+                  </div>
+                  <!-- ./ x_content -->
+                  <div class="x_footer">
+                    <button class="btn btn-primary" name="create_plate_btn" type="submit" data-toggle="modal" data-target="#createPlateModal">Create Plate</button>
+                  </div>
+                  <!-- ./ x_footer -->
+                </div>
+                <!-- ./ x_panel -->
+              </div>
+              <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
+            </div>
+            <!-- ./ row -->
                   <!-- ./ row -->
-                  <div class="row">
-                     <div class="col-md-6 col-sm-6 col-xs-6">
-                        <div class="x_panel">
-                           <div class="x_title">
-                              <h2>Request an Identity</h2>
-                              <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                 </li>
-                                 <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                 </li>
-                              </ul>
-                              <div class="clearfix"></div>
-                           </div>
-                           <!-- ./ x_title -->
-                           <form name="civRequestForm" method="post" action="<?php echo BASE_URL; ?>/actions/civActions.php">
-                              <div class="x_content">
-                                 <?php echo $identityMessage;?>
-                                 <div class="form-group row">
-                                    <label class="col-md-2 control-label">Name</label>
-                                    <div class="col-md-10">
-                                       <input name="civNameReq" class="form-control" id="civNameReq" value="<?php echo $civName;?>" required/>
-                                       <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-                                    </div>
-                                    <!-- ./ col-sm-9 -->
-                                 </div>
-                                 <!-- ./ form-group -->
-                                 <div class="form-group row">
-                                    <label class="col-md-2 control-label">DOB</label>
-                                    <div class="col-md-10">
-                                       <input type="text" name="civDobReq" class="form-control" id="civDobReq" placeholder="YYYY-MM-DD" maxlength="10" value="<?php echo $civDob;?>" required/>
-                                       <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
-                                    </div>
-                                    <!-- ./ col-sm-9 -->
-                                 </div>
-                                 <!-- ./ form-group -->
-                                 <div class="form-group row">
-                                    <label class="col-md-2 control-label">Address</label>
-                                    <div class="col-md-10">
-                                       <input type="text" name="civAddressReq" class="form-control" id="civAddressReq" value="<?php echo $civAddr;?>" required/>
-                                       <span class="fa fa-location-arrow form-control-feedback right" aria-hidden="true"></span>
-                                    </div>
-                                    <!-- ./ col-sm-9 -->
-                                 </div>
-                                 <!-- ./ form-group -->
-                                 <div class="form-group row">
-                                    <label class="col-md-2 control-label">Sex</label>
-                                    <div class="col-md-10">
-                                       <select name="civSexReq" class="form-control selectpicker" id="civSexReq" title="Select a sex" required>
-                                          <option val="male">Male</option>
-                                          <option val="female">Female</option>
-                                       </select>
-                                    </div>
-                                    <!-- ./ col-sm-9 -->
-                                 </div>
-                                 <!-- ./ form-group -->
-                                 <div class="form-group row">
-                                    <label class="col-md-2 control-label">Race</label>
-                                    <div class="col-md-10">
-                                       <select name="civRaceReq" class="form-control selectpicker" id="civRaceReq" title="Select a race or ethnicity" required>
-                                          <option val="indian">American Indian or Alaskan Native</option>
-                                          <option val="asian">Asian</option>
-                                          <option val="black">Black or African American</option>
-                                          <option val="hispanic">Hispanic</option>
-                                          <option val="hawaiian">Native Hawaiian or Other Pacific Islander</option>
-                                          <option val="white">White</option>
-                                       </select>
-                                    </div>
-                                    <!-- ./ col-sm-9 -->
-                                 </div>
-                                 <!-- ./ form-group -->
-                                 <div class="form-group row">
-                                    <label class="col-md-2 control-label">Hair Color</label>
-                                    <div class="col-md-10">
-                                       <select name="civHairReq" class="form-control selectpicker" id="civHairReq" title="Select a hair color" required>
-                                          <option val="bld">Bald</option>
-                                          <option val="blk">Black</option>
-                                          <option val="bln">Blond or Strawberry</option>
-                                          <option val="blu">Blue</option>
-                                          <option val="bro">Brown</option>
-                                          <option val="gry">Gray or Partially Gray</option>
-                                          <option val="grn">Green</option>
-                                          <option val="ong">Orange</option>
-                                          <option val="pnk">Pink</option>
-                                          <option val="ple">Purple</option>
-                                          <option val="red">Red or Auburn</option>
-                                          <option val="sdy">Sandy</option>
-                                          <option val="whi">White</option>
-                                       </select>
-                                    </div>
-                                    <!-- ./ col-sm-9 -->
-                                 </div>
-                                 <!-- ./ form-group -->
-                                 <div class="form-group row">
-                                    <label class="col-md-2 control-label">Build</label>
-                                    <div class="col-md-10">
-                                       <select name="civBuildReq" class="form-control selectpicker" id="civBuildReq" title="Select a build" required>
-                                          <option val="Average">Average</option>
-                                          <option val="Fit">Fit</option>
-                                          <option val="Muscular">Muscular</option>
-                                          <option val="Overweight">Overweight</option>
-                                          <option val="Skinny">Skinny</option>
-                                          <option val="Thin">Thin</option>
-                                       </select>
-                                    </div>
-                                    <!-- ./ col-sm-9 -->
-                                 </div>
-                                 <!-- ./ form-group -->
-                                 <div class="form-group row">
-                                    <label class="col-md-2 control-label">Biography</label>
-                                    <div class="col-md-10">
-                                       <textarea name="civBioReq" class="form-control" id="civBioReq" rows='5' style="resize:none;" placeholder="Describe the character's biography"></textarea>
-                                    </div>
-                                    <!-- ./ col-sm-9 -->
-                                 </div>
-                                 <!-- ./ form-group -->
-                                 <h4>Vehicle Details</h4>
-                                 <div class="form-group row">
-                                    <label class="col-md-2 control-label">License Plate</label>
-                                    <div class="col-md-10">
-                                       <input type="text" name="civPlateReq" class="form-control" id="civPlateReq" style="text-transform:uppercase" maxlength="7" required/>
-                                       <span class="fa fa-car form-control-feedback right" aria-hidden="true"></span>
-                                    </div>
-                                    <!-- ./ col-sm-9 -->
-                                 </div>
-                                 <!-- ./ form-group -->
-                                 <div class="form-group row">
-                                    <label class="col-md-2 control-label">Vehicle Make</label>
-                                    <div class="col-md-10">
-                                       <input type="text" name="civMakeReq" class="form-control" id="civMakeReq" style="text-transform:uppercase" required/>
-                                       <span class="fa fa-car form-control-feedback right" aria-hidden="true"></span>
-                                    </div>
-                                    <!-- ./ col-sm-9 -->
-                                 </div>
-                                 <!-- ./ form-group -->
-                                 <div class="form-group row">
-                                    <label class="col-md-2 control-label">Vehicle Model</label>
-                                    <div class="col-md-10">
-                                       <input type="text" name="civModelReq" class="form-control" id="civModelReq" style="text-transform:uppercase" required/>
-                                       <span class="fa fa-car form-control-feedback right" aria-hidden="true"></span>
-                                    </div>
-                                    <!-- ./ col-sm-9 -->
-                                 </div>
-                                 <!-- ./ form-group -->
-                                 <div class="form-group row">
-                                    <!-- color codes from: http://publicsafety.ohio.gov/links/bmv5607.pdf -->
-                                    <label class="col-md-2 control-label">Vehicle Color</label>
-                                    <div class="col-md-10">
-                                       <select name="civVehColReq" class="form-control selectpicker" data-live-search="true" data-size="8" id="civVehColReq" title="Select a vehicle color" required>
-                                          <option val="lbl">Light Blue</option>
-                                          <option val="trq">Turqoise</option>
-                                          <option val="dbl">Dark Blue</option>
-                                          <option val="blu">Blue</option>
-                                          <option val="ame">Amethyst</option>
-                                          <option val="ple">Purple</option>
-                                          <option val="lav">Lavender</option>
-                                          <option val="mve">Mauve</option>
-                                          <option val="pnk">Pink</option>
-                                          <option val="red">Red</option>
-                                          <option val="mar">Maroon</option>
-                                          <option val="ong">Orange</option>
-                                          <option val="cpr">Copper</option>
-                                          <option val="brz">Bronze</option>
-                                          <option val="tan">Tan</option>
-                                          <option val="gld">Gold</option>
-                                          <option val="yel">Yellow</option>
-                                          <option val="lgr">Light Green</option>
-                                          <option val="grn">Green</option>
-                                          <option val="dgr">Dark Green</option>
-                                          <option val="tea">Teal</option>
-                                          <option val="bro">Brown</option>
-                                          <option val="crm">Cream</option>
-                                          <option val="bge">Beige</option>
-                                          <option val="tpe">Taupe</option>
-                                          <option val="sil">Silver</option>
-                                          <option val="com">Chrome</option>
-                                          <option val="gry">Gray</option>
-                                          <option val="blk">Black</option>
-                                          <option val="whi">White</option>
-                                          <option val="cam">Camouflage</option>
-                                          <option val="mul">Multi-Colored</option>
-                                       </select>
-                                    </div>
-                                    <!-- ./ col-sm-9 -->
-                                 </div>
-                                 <!-- ./ form-group -->
-                              </div>
-                              <!-- ./ x_content -->
-                              <div class="x_footer">
-                                 <input type="submit" class="btn btn-primary" name="requestIdentity" value="Submit Identity Request"/>
-                              </div>
-                           </form>
-                        </div>
-                        <!-- ./ x_panel -->
-                     </div>
                      <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
                      <div class="col-md-6 col-sm-6 col-xs-6">
                         <div class="x_panel">
@@ -438,138 +287,363 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          </div>
       </div>
       <!-- modals -->
-      <!-- Civilian Details Modal -->
-      <div class="modal fade" id="civilianDetailsModal" tabindex="-1" role="dialog" aria-hidden="true">
-         <div class="modal-dialog modal-md">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                  </button>
-                  <h4 class="modal-title" id="myModalLabel">Civilian Details</h4>
-               </div>
-               <!-- ./ modal-header -->
-               <div class="modal-body">
-                  <h4>Character Details</h4>
-                  <div class="form-group row">
-                     <label class="col-md-3 control-label">Name</label>
-                     <div class="col-md-9">
-                        <input name="civName" class="form-control" id="civName" disabled/>
-                        <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-                     </div>
-                     <!-- ./ col-sm-9 -->
-                  </div>
-                  <!-- ./ form-group -->
-                  <div class="form-group row">
-                     <label class="col-md-3 control-label">DOB</label>
-                     <div class="col-md-9">
-                        <input type="text" name="civDob" class="form-control" id="civDob" disabled/>
-                        <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
-                     </div>
-                     <!-- ./ col-sm-9 -->
-                  </div>
-                  <!-- ./ form-group -->
-                  <div class="form-group row">
-                     <label class="col-md-3 control-label">Address</label>
-                     <div class="col-md-9">
-                        <input type="text" name="civAddress" class="form-control" id="civAddress" disabled/>
-                        <span class="fa fa-location-arrow form-control-feedback right" aria-hidden="true"></span>
-                     </div>
-                     <!-- ./ col-sm-9 -->
-                  </div>
-                  <!-- ./ form-group -->
-                  <div class="form-group row">
-                     <label class="col-md-3 control-label">Sex</label>
-                     <div class="col-md-9">
-                        <input type="text" name="civSex" class="form-control" id="civSex" disabled/>
-                        <span class="fa fa-transgender form-control-feedback right" aria-hidden="true"></span>
-                     </div>
-                     <!-- ./ col-sm-9 -->
-                  </div>
-                  <!-- ./ form-group -->
-                  <div class="form-group row">
-                     <label class="col-md-3 control-label">Race</label>
-                     <div class="col-md-9">
-                        <input type="text" name="civRace" class="form-control" id="civRace" disabled/>
-                        <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-                     </div>
-                     <!-- ./ col-sm-9 -->
-                  </div>
-                  <!-- ./ form-group -->
-                  <div class="form-group row">
-                     <label class="col-md-3 control-label">Hair Color</label>
-                     <div class="col-md-9">
-                        <input type="text" name="civHair" class="form-control" id="civHair" disabled/>
-                        <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-                     </div>
-                     <!-- ./ col-sm-9 -->
-                  </div>
-                  <!-- ./ form-group -->
-                  <div class="form-group row">
-                     <label class="col-md-3 control-label">Build</label>
-                     <div class="col-md-9">
-                        <input type="text" name="civBuild" class="form-control" id="civBuild" disabled/>
-                        <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-                     </div>
-                     <!-- ./ col-sm-9 -->
-                  </div>
-                  <!-- ./ form-group -->
-                  <div class="form-group row">
-                     <label class="col-md-3 control-label">Biography</label>
-                     <div class="col-md-9">
-                        <textarea name="civBio" class="form-control" id="civBio" rows='4' disabled>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In libero odio, commodo volutpat tellus elementum, feugiat iaculis nisl. Vivamus convallis augue nec semper suscipit. Donec eu odio interdum erat iaculis venenatis. Curabitur velit tortor, imperdiet ac est ac, tincidunt mattis elit. In hac habitasse platea dictumst. Aliquam tincidunt odio quis convallis ullamcorper. </textarea>
-                     </div>
-                     <!-- ./ col-sm-9 -->
-                  </div>
-                  <!-- ./ form-group -->
-                  <h4>Vehicle Details</h4>
-                  <div class="form-group row">
-                     <label class="col-md-3 control-label">License Plate</label>
-                     <div class="col-md-9">
-                        <input type="text" name="civPlate" class="form-control" id="civPlate" disabled/>
-                        <span class="fa fa-car form-control-feedback right" aria-hidden="true"></span>
-                     </div>
-                     <!-- ./ col-sm-9 -->
-                  </div>
-                  <!-- ./ form-group -->
-                  <div class="form-group row">
-                     <label class="col-md-3 control-label">Vehicle Make</label>
-                     <div class="col-md-9">
-                        <input type="text" name="civMake" class="form-control" id="civMake" disabled/>
-                        <span class="fa fa-car form-control-feedback right" aria-hidden="true"></span>
-                     </div>
-                     <!-- ./ col-sm-9 -->
-                  </div>
-                  <!-- ./ form-group -->
-                  <div class="form-group row">
-                     <label class="col-md-3 control-label">Vehicle Model</label>
-                     <div class="col-md-9">
-                        <input type="text" name="civModel" class="form-control" id="civModel" disabled/>
-                        <span class="fa fa-car form-control-feedback right" aria-hidden="true"></span>
-                     </div>
-                     <!-- ./ col-sm-9 -->
-                  </div>
-                  <!-- ./ form-group -->
-                  <div class="form-group row">
-                     <label class="col-md-3 control-label">Vehicle Color</label>
-                     <div class="col-md-9">
-                        <input type="text" name="civColor" class="form-control" id="civColor" disabled/>
-                        <span class="fa fa-car form-control-feedback right" aria-hidden="true"></span>
-                     </div>
-                     <!-- ./ col-sm-9 -->
-                  </div>
-                  <!-- ./ form-group -->
-               </div>
-               <!-- ./ modal-body -->
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-               </div>
-               <!-- ./ modal-footer -->
-            </div>
-            <!-- ./ modal-content -->
-         </div>
-         <!-- ./ modal-dialog modal-lg -->
+	  
+    <div class="modal fade" id="IdentityModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Create Identity</h4>
+          </div>
+          <!-- ./ modal-header -->
+		  <div class="modal-body">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/civActions.php" method="post">
+                <div class="form-group row">
+                </div>
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Name</label>
+                <div class="col-lg-10">
+					<input name="civNameReq" class="form-control" id="civNameReq" value="<?php echo $civName;?>" required/>
+					<span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Date of Birth</label>
+                <div class="col-lg-10">
+					<input type="text" name="civDobReq" class="form-control" id="civDobReq" placeholder="YYYY-MM-DD" maxlength="10" value="<?php echo $civDob;?>" required/>
+					<span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Address</label>
+                <div class="col-lg-10">
+					<input type="text" name="civAddressReq" class="form-control" id="civAddressReq" value="<?php echo $civAddr;?>" required/>
+					<span class="fa fa-location-arrow form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Sex</label>
+                <div class="col-lg-10">
+					<select name="civSexReq" class="form-control selectpicker" id="civSexReq" title="Select a sex" required>
+						<option val="agender">Agender</option>
+						<option val="androgyne">Androgyne</option>
+						<option val="androgynous">Androgynous</option>
+						<option val="bigender">Bigender</option>
+						<option val="cfemale">Cis Female</option>
+						<option val="cmale">Cis Male</option>
+						<option val="female">Female</option>
+						<option val="gfluid">Gender Fluid</option>
+						<option val="gnoncom">Gender Nonconforming</option>
+						<option val="gquestion">Gender Questioning</option>
+						<option val="gvariant">Gender Variant</option>
+						<option val="gqueer">Genderqueer</option>
+						<option val="intersex">Intersex</option>
+						<option val="male">Male</option>
+						<option val="neither">Neither</option>
+						<option val="neutrois">Neutrois</option>
+						<option val="nonbi">Non-binary</option>
+						<option val="other">Other</option>
+						<option val="pangender">Pangender</option>
+						<option val="trangfemale">Transgender Female</option>
+						<option val="trangmale">Transgender Male</option>
+						<option val="trangperson">Transgender Person</option>
+						<option val="transfemale">Transsexual Female</option>
+						<option val="transmale">Transsexual Male</option>
+						<option val="transperson">Transsexual Person</option>
+						<option val="twospirit">Two-Spirit</option>
+					</select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Race</label>
+                <div class="col-lg-10">
+					<select name="civRaceReq" class="form-control selectpicker" id="civRaceReq" title="Select a race or ethnicity" required>
+						<option val="indian">American Indian or Alaskan Native</option>
+						<option val="asian">Asian</option>
+						<option val="black">Black or African American</option>
+						<option val="hispanic">Hispanic</option>
+						<option val="hawaiian">Native Hawaiian or Other Pacific Islander</option>
+						<option val="white">White</option>
+					</select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">License Status</label>
+                  <div class="col-lg-10">
+                    <select name="civDL" class="form-control selectpicker" id="civDL" title="Select a license status" required>
+                <option value="Valid"> Valid </option>
+                <option value="Suspended"> Suspended </option>
+                <option value="Expired"> Expired </option>
+                </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+				<label class="col-lg-2 control-label">Hair Color</label>
+				<div class="col-lg-10">
+				<select name="civHairReq" class="form-control selectpicker" id="civHairReq" title="Select a hair color" required>
+					<option val="bld">Bald</option>
+					<option val="blk">Black</option>
+					<option val="bln">Blond or Strawberry</option>
+					<option val="blu">Blue</option>
+					<option val="bro">Brown</option>
+					<option val="gry">Gray or Partially Gray</option>
+					<option val="grn">Green</option>
+					<option val="ong">Orange</option>
+					<option val="pnk">Pink</option>
+					<option val="ple">Purple</option>
+					<option val="red">Red or Auburn</option>
+					<option val="sdy">Sandy</option>
+					<option val="whi">White</option>
+					</select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Build</label>
+                <div class="col-lg-10">
+					<select name="civBuildReq" class="form-control selectpicker" id="civBuildReq" title="Select a build" required>
+						<option val="Average">Average</option>
+						<option val="Fit">Fit</option>
+						<option val="Muscular">Muscular</option>
+						<option val="Overweight">Overweight</option>
+						<option val="Skinny">Skinny</option>
+						<option val="Thin">Thin</option>
+						</select>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+                <input name="create_name" type="submit" class="btn btn-primary" value="Create" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
       </div>
-      <!-- ./ modal fade bs-example-modal-lg -->
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+	</div>
+    <!-- ./ modal fade bs-example-modal-lg -->
+	  
+    <div class="modal fade" id="createPlateModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Add Plate to Database</h4>
+          </div>
+          <!-- ./ modal-header -->
+		  <div class="modal-body">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/civActions.php" method="post">
+                <div class="form-group row">
+                </div>
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Registered Owner</label>
+                <div class="col-lg-10">
+                  <select class="form-control selectpicker" name="civilian_names" id="civilian_names" data-live-search="true" required>
+                    <option> </option>
+                    <?php getCivilianNames();?>
+                  </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">License Plate</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" name="veh_plate" required/>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Vehicle Make</label>
+                <div class="col-lg-10">
+                <input type="text" class="form-control" name="veh_make" required/>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Vehicle Model</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" name="veh_model" required/>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Vehicle Color</label>
+                <div class="col-lg-10">
+                  <select class="form-control" name="veh_color" required>
+				  <option val="">  </option>
+				  <option val="lbl">Light Blue</option>
+				  <option val="trq">Turqoise</option>
+				  <option val="dbl">Dark Blue</option>
+				  <option val="blu">Blue</option>
+				  <option val="ame">Amethyst</option>
+				  <option val="ple">Purple</option>
+				  <option val="lav">Lavender</option>
+				  <option val="mve">Mauve</option>
+				  <option val="pnk">Pink</option>
+				  <option val="red">Red</option>
+				  <option val="mar">Maroon</option>
+				  <option val="ong">Orange</option>
+				  <option val="cpr">Copper</option>
+				  <option val="brz">Bronze</option>
+				  <option val="tan">Tan</option>
+				  <option val="gld">Gold</option>
+				  <option val="yel">Yellow</option>
+				  <option val="lgr">Light Green</option>
+				  <option val="grn">Green</option>
+				  <option val="dgr">Dark Green</option>
+				  <option val="tea">Teal</option>
+				  <option val="bro">Brown</option>
+				  <option val="crm">Cream</option>
+				  <option val="bge">Beige</option>
+				  <option val="tpe">Taupe</option>
+				  <option val="sil">Silver</option>
+				  <option val="com">Chrome</option>
+				  <option val="gry">Gray</option>
+				  <option val="blk">Black</option>
+				  <option val="whi">White</option>
+				  <option val="cam">Camouflage</option>
+				  <option val="mul">Multi-Colored</option>
+				  </select>
+				  </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Insurance Status</label>
+                <div class="col-lg-10">
+                <select class="form-control" name="veh_insurance" required>
+                <option value="">  </option>
+                <option value="Valid"> Valid </option>
+                <option value="Expired"> Expired </option>
+                </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Vehicle Flags</label>
+                  <div class="col-lg-10">
+                    <select class="form-control" name="flags" required>
+                <option value="">  </option>
+                <option value="None"> None </option>
+                <option value="Stolen"> Stolen </option>
+                <option value="Wanted"> Wanted </option>
+                <option value="Suspended Registration"> Suspended Registration </option>
+                </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Notes</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" name="notes" />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Vehicle's Registered State</label>
+                <div class="col-lg-10">
+                  <select class="form-control" name="veh_reg_state" required>
+				  <option value"">  </option>
+				  <option value"Alabama"> Alabama </option>
+				  <option value"Alaska"> Alaska </option>
+				  <option value"Arizona"> Arizona </option>
+				  <option value"Arkansas"> Arkansas </option>
+				  <option value"California"> California </option>
+				  <option value"Colorado"> Colorado </option>
+				  <option value"Connecticut"> Connecticut </option>
+				  <option value"Delaware"> Delaware </option>
+				  <option value"Florida"> Florida </option>
+				  <option value"Georgia"> Georgia </option>
+				  <option value"Hawaii"> Hawaii </option>
+				  <option value"Idaho"> Idaho </option>
+				  <option value"Illinois"> Illinois </option>
+				  <option value"Indiana"> Indiana </option>
+				  <option value"Iowa"> Iowa </option>
+				  <option value"Kansas"> Kansas </option>
+				  <option value"Kentucky"> Kentucky </option>
+				  <option value"Louisiana"> Louisiana </option>
+				  <option value"Maine"> Maine </option>
+				  <option value"Maryland"> Maryland </option>
+				  <option value"Massachusetts"> Massachusetts </option>
+				  <option value"Michigan"> Michigan </option>
+				  <option value"Minnesota"> Minnesota </option>
+				  <option value"Mississippi"> Mississippi </option>
+				  <option value"Missouri"> Missouri </option>
+				  <option value"Montana"> Montana </option>
+				  <option value"Nebraska"> Nebraska </option>
+				  <option value"Nevada"> Nevada </option>
+				  <option value"New Hampshire"> New Hampshire </option>
+				  <option value"New Jersey"> New Jersey </option>
+				  <option value"New Mexico"> New Mexico </option>
+				  <option value"New York"> New York </option>
+				  <option value"North Carolina"> North Carolina </option>
+				  <option value"North Dakota"> North Dakota </option>
+				  <option value"Ohio"> Ohio </option>
+				  <option value"Oklahoma"> Oklahoma </option>
+				  <option value"Oregon"> Oregon </option>
+				  <option value"Pennsylvania"> Pennsylvania </option>
+				  <option value"Rhode Island"> Rhode Island </option>
+				  <option value"South Carolina"> South Carolina </option>
+				  <option value"South Dakota"> South Dakota </option>
+				  <option value"Tennessee"> Tennessee </option>
+				  <option value"Texas"> Texas </option>
+				  <option value"Utah"> Utah </option>
+				  <option value"Vermont"> Vermont </option>
+				  <option value"Virginia"> Virginia </option>
+				  <option value"Washington"> Washington </option>
+				  <option value"West Virginia"> West Virginia </option>
+				  <option value"Wisconsin"> Wisconsin </option>
+				  <option value"Wyoming"> Wyoming </option>
+				  </select>
+				  </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <!-- ./ form-group -->
+
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+                <input name="create_plate" type="submit" class="btn btn-primary" value="Create" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
+
       <!-- modals -->
       <!-- 911 Call Help Modal -->
       <div class="modal fade" id="911CallHelpModal" tabindex="-1" role="dialog" aria-hidden="true">

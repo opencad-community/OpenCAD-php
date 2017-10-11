@@ -176,8 +176,6 @@ function ncicGetNames()
         {
             echo '
             <tr>
-                <td>'.$row[1].'</td>
-                <td>'.$row[2].'</td>
                 <td>'.$row[3].'</td>
                 <td>'.$row[4].'</td>
                 <td>'.$row[5].'</td>
@@ -185,6 +183,8 @@ function ncicGetNames()
                 <td>'.$row[7].'</td>
                 <td>'.$row[8].'</td>
                 <td>'.$row[9].'</td>
+                <td>'.$row[10].'</td>
+                <td>'.$row[11].'</td>
                 <td>
                     <button name="edit_name" data-toggle="modal" data-target="#editNameModal" class="btn btn-xs btn-link" disabled>Edit</button>
                     <form action="../actions/ncicAdminActions.php" method="post">
@@ -227,7 +227,8 @@ function ncicGetPlates()
             <table id="ncic_plates" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                <th>Owner</th>
+                <th>First Name</th>
+                <th>Last Name</th>
                 <th>Plate</th>
                 <th>Reg. State</th>
                 <th>Make</th>
@@ -236,7 +237,6 @@ function ncicGetPlates()
                 <th>Ins. Status</th>
                 <th>Flags</th>
                 <th>Notes</th>
-                <th>Admin Notes</th>
                 <th>Actions</th>
                 </tr>
             </thead>
@@ -245,11 +245,12 @@ function ncicGetPlates()
 
         while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
         {
-            $owner = $row[11]." ".$row[12];
+            $owner = $row[12]." ".$row[13];
 
             echo '
             <tr>
-                <td>'.$owner.'</td>
+                <td>'.$row[12].'</td>
+                <td>'.$row[13].'</td>
                 <td>'.$row[2].'</td>
                 <td>'.$row[8].'</td>
                 <td>'.$row[3].'</td>
@@ -258,7 +259,6 @@ function ncicGetPlates()
                 <td>'.$row[6].'</td>
                 <td>'.$row[7].'</td>
                 <td>'.$row[9].'</td>
-                <td>'.$row[10].'</td>
                 <td>
                     <form action="../actions/ncicAdminActions.php" method="post">
                     <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
@@ -451,6 +451,26 @@ function getCivilianNames()
 	mysqli_close($link);
 }
 
+function getUserList()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+	$sql = "SELECT users.id, users.name FROM users";
+
+	$result=mysqli_query($link, $sql);
+
+	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+	{
+		echo "<option value=\"$row[0]\">$row[1] $row[2]</option>";
+	}
+	mysqli_close($link);
+    
+}
+
 function getAgencies()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -572,7 +592,6 @@ function delete_name()
 	}
 
     $uid = $_POST['uid'];
-    echo $uid;
 
     $query = "DELETE FROM ncic_names WHERE id = ?";
 
@@ -692,48 +711,75 @@ function delete_warrant()
 
 function create_name()
 {
-    $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
-    $dob = $_POST['dob'];
-    $address = $_POST['address'];
-    $sex = $_POST['sex'];
-    $race = $_POST['race'];
-    $dl_status = $_POST['dl_status'];
-    $hair_color = $_POST['hair_color'];
-    $build = $_POST['build'];
+    session_start();
+
+    $fullName = $_POST['civNameReq'];
+    $firstName = explode(" ", $fullName) [0];
+    $lastName = explode(" ", $fullName) [1];
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    if (!$link)
+    {
+        die('Could not connect: ' . mysql_error());
+    }
 
-    $sql = "INSERT INTO ncic_names (first_name, last_name, dob, address, sex, race, dl_status, hair_color, build) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $query = 'SELECT first_name, last_name FROM ncic_names WHERE first_name = "' . $firstName . '" AND last_name = "' . $lastName . '"';
 
+    $result = mysqli_query($link, $query);
 
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "sssssssss", $first_name, $last_name, $dob, $address, $sex, $race, $dl_status, $hair_color, $build);
-		$result = mysqli_stmt_execute($stmt);
+    $num_rows = $result->num_rows;
 
-		if ($result == FALSE) {
-			die(mysqli_error($link));
-		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
+    if (!$num_rows == 0)
+    {
+        $_SESSION['identityMessage'] = '<div class="alert alert-danger"><span>Name already exists</span></div>';
 
-    session_start();
-    $_SESSION['nameMessage'] = '<div class="alert alert-success"><span>Successfully added name to the database</span></div>';
+        sleep(1);
+        header("Location:../oc-admin/ncicAdmin.php#plate_panel");
+    }
 
+    $firstName;
+    $lastName;
+    $dob = $_POST['civDobReq'];
+    $address = $_POST['civAddressReq'];
+    $sex = $_POST['civSexReq'];
+    $race = $_POST['civRaceReq'];
+	$dlstatus = $_POST['civDL'];
+    $hair = $_POST['civHairReq'];
+    $build = $_POST['civBuildReq'];
+
+    $query = "INSERT INTO ncic_names (first_name, last_name, dob, address, sex, race, dl_status, hair_color, build)
+    VALUES (?,?,?,?,?,?,?,?,?)";
+
+    try
+    {
+        $stmt = mysqli_prepare($link, $query);
+        mysqli_stmt_bind_param($stmt, "sssssssss", $firstName, $lastName, $dob, $address, $sex, $race, $dlstatus, $hair, $build);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == false)
+        {
+            die(mysqli_error($link));
+        }
+    }
+    catch(Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+        
+    }
+
+    $_SESSION['identityMessage'] = '<div class="alert alert-success"><span>Successfully submitted identity request</span></div>';
+
+    sleep(1);
     header("Location:../oc-admin/ncicAdmin.php#name_panel");
+
 }
 
 function create_plate()
 {
+	session_start();
+	
+    $submittedById = $_SESSION['id'];
     $userId = $_POST['civilian_names'];
     $veh_plate = $_POST['veh_plate'];
     $veh_make = $_POST['veh_make'];
@@ -751,12 +797,12 @@ function create_plate()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $sql = "INSERT INTO ncic_plates (name_id, veh_plate, veh_make, veh_model, veh_color, veh_insurance, flags, veh_reg_state, notes, hidden_notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO ncic_plates (name_id, veh_plate, veh_make, veh_model, veh_color, veh_insurance, flags, veh_reg_state, notes, hidden_notes, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 
 	try {
 		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "isssssssss", $userId, $veh_plate, $veh_make, $veh_model, $veh_color, $veh_insurance, $flags, $veh_reg_state, $notes, $hidden_notes);
+		mysqli_stmt_bind_param($stmt, "issssssssss", $userId, $veh_plate, $veh_make, $veh_model, $veh_color, $veh_insurance, $flags, $veh_reg_state, $notes, $hidden_notes, $submittedById);
 		$result = mysqli_stmt_execute($stmt);
 
 		if ($result == FALSE) {

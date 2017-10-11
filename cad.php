@@ -13,7 +13,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
 
-    
+
     include("./actions/api.php");
     session_start();
 
@@ -331,7 +331,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      </div>
                      <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
                      <!-- NCIC Firearm lookup will return in a later RC -->
-                     <!-- <div class="col-md-4 col-sm-4 col-xs-4">
+                     <div class="col-md-4 col-sm-4 col-xs-4">
                         <div class="x_panel">
                           <div class="x_title">
                             <h2>NCIC Firearm Lookup</h2>
@@ -354,7 +354,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      </div>
                      <!-- ./ x_content -->
                   </div>
-                  -->
                   <!-- ./ x_panel -->
                </div>
                <!-- ./ col-md-4 col-sm-4 col-xs-4 -->

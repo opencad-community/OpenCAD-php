@@ -177,38 +177,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <h3>CAD NCIC Admin</h3>
               </div>
             </div>
-
-            <div class="clearfix"></div>
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel" id="name_panel">
-                  <div class="x_title">
-                    <h2>Civilian Identity Requests</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <!-- ./ x_title -->
-                  <div class="x_content">
-                      <?php echo $identityRequestMessage;?>
-                      <?php getIdentityRequests();?>
-                  </div>
-                  <!-- ./ x_content -->
-                  <div class="x_footer">
-
-                  </div>
-                  <!-- ./ x_footer -->
-                </div>
-                <!-- ./ x_panel -->
-              </div>
-              <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
-            </div>
-            <!-- ./ row -->
-
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -566,17 +534,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="form-group row">
                 </div>
                 <div class="form-group row">
-                <label class="col-lg-2 control-label">First Name</label>
+                <label class="col-lg-2 control-label">Name</label>
                 <div class="col-lg-10">
-                  <input type="text" class="form-control" name="first_name" />
-                </div>
-                <!-- ./ col-sm-9 -->
-              </div>
-              <!-- ./ form-group -->
-              <div class="form-group row">
-                <label class="col-lg-2 control-label">Last Name</label>
-                <div class="col-lg-10">
-                  <input type="text" class="form-control" name="last_name" />
+					<input name="civNameReq" class="form-control" id="civNameReq" value="<?php echo $civName;?>" required/>
+					<span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -584,7 +545,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Date of Birth</label>
                 <div class="col-lg-10">
-                <input type="text" class="form-control" name="dob" />
+					<input type="text" name="civDobReq" class="form-control" id="civDobReq" placeholder="YYYY-MM-DD" maxlength="10" value="<?php echo $civDob;?>" required/>
+					<span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -592,7 +554,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Address</label>
                 <div class="col-lg-10">
-                  <input type="text" class="form-control" name="address" />
+					<input type="text" name="civAddressReq" class="form-control" id="civAddressReq" value="<?php echo $civAddr;?>" required/>
+					<span class="fa fa-location-arrow form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -600,11 +563,34 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Sex</label>
                 <div class="col-lg-10">
-                  <select class="form-control" name="sex" required>
-                <option value="">  </option>
-                <option value="Male"> Male </option>
-                <option value="Female"> Female </option>
-                </select>
+					<select name="civSexReq" class="form-control selectpicker" id="civSexReq" title="Select a sex" required>
+						<option val="agender">Agender</option>
+						<option val="androgyne">Androgyne</option>
+						<option val="androgynous">Androgynous</option>
+						<option val="bigender">Bigender</option>
+						<option val="cfemale">Cis Female</option>
+						<option val="cmale">Cis Male</option>
+						<option val="female">Female</option>
+						<option val="gfluid">Gender Fluid</option>
+						<option val="gnoncom">Gender Nonconforming</option>
+						<option val="gquestion">Gender Questioning</option>
+						<option val="gvariant">Gender Variant</option>
+						<option val="gqueer">Genderqueer</option>
+						<option val="intersex">Intersex</option>
+						<option val="male">Male</option>
+						<option val="neither">Neither</option>
+						<option val="neutrois">Neutrois</option>
+						<option val="nonbi">Non-binary</option>
+						<option val="other">Other</option>
+						<option val="pangender">Pangender</option>
+						<option val="trangfemale">Transgender Female</option>
+						<option val="trangmale">Transgender Male</option>
+						<option val="trangperson">Transgender Person</option>
+						<option val="transfemale">Transsexual Female</option>
+						<option val="transmale">Transsexual Male</option>
+						<option val="transperson">Transsexual Person</option>
+						<option val="twospirit">Two-Spirit</option>
+					</select>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -612,15 +598,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Race</label>
                 <div class="col-lg-10">
-                <select class="form-control" name="race" required>
-                <option value="">  </option>
-                <option value="White"> White </option>
-                <option value="Black or African American"> Black or African American </option>
-                <option value="American Indian or Alaska Native"> American Indian or Alaska Native </option>
-                <option value="Asian"> Asian </option>
-                <option value="Native Hawaiian or Other Pacific Islander"> Native Hawaiian or Other Pacific Islander </option>
-                <option value="Hispanic"> Asian </option>
-                </select>
+					<select name="civRaceReq" class="form-control selectpicker" id="civRaceReq" title="Select a race or ethnicity" required>
+						<option val="indian">American Indian or Alaskan Native</option>
+						<option val="asian">Asian</option>
+						<option val="black">Black or African American</option>
+						<option val="hispanic">Hispanic</option>
+						<option val="hawaiian">Native Hawaiian or Other Pacific Islander</option>
+						<option val="white">White</option>
+					</select>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -628,8 +613,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">License Status</label>
                   <div class="col-lg-10">
-                    <select class="form-control" name="dl_status" required>
-                <option value="">  </option>
+                    <select name="civDL" class="form-control selectpicker" id="civDL" title="Select a license status" required>
                 <option value="Valid"> Valid </option>
                 <option value="Suspended"> Suspended </option>
                 <option value="Expired"> Expired </option>
@@ -639,16 +623,23 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               </div>
               <!-- ./ form-group -->
               <div class="form-group row">
-                <label class="col-lg-2 control-label">Hair Color</label>
-                <div class="col-lg-10">
-                  <select class="form-control" name="hair_color" required>
-                <option value="">  </option>
-                <option value="Black"> Black </option>
-                <option value="Blonde"> Blonde </option>
-                <option value="Red"> Red </option>
-                <option value="Brown"> Brown </option>
-                <option value="Gray"> Gray </option>
-                </select>
+				<label class="col-lg-2 control-label">Hair Color</label>
+				<div class="col-lg-10">
+				<select name="civHairReq" class="form-control selectpicker" id="civHairReq" title="Select a hair color" required>
+					<option val="bld">Bald</option>
+					<option val="blk">Black</option>
+					<option val="bln">Blond or Strawberry</option>
+					<option val="blu">Blue</option>
+					<option val="bro">Brown</option>
+					<option val="gry">Gray or Partially Gray</option>
+					<option val="grn">Green</option>
+					<option val="ong">Orange</option>
+					<option val="pnk">Pink</option>
+					<option val="ple">Purple</option>
+					<option val="red">Red or Auburn</option>
+					<option val="sdy">Sandy</option>
+					<option val="whi">White</option>
+					</select>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -656,14 +647,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Build</label>
                 <div class="col-lg-10">
-                  <select class="form-control" name="build" required>
-                <option value="">  </option>
-                <option value="Skinny"> Skinny </option>
-                <option value="Average"> Average </option>
-                <option value="Overweight"> Overweight </option>
-                <option value="Muscular"> Muscular </option>
-                </select>
-                </div>
+					<select name="civBuildReq" class="form-control selectpicker" id="civBuildReq" title="Select a build" required>
+						<option val="Average">Average</option>
+						<option val="Fit">Fit</option>
+						<option val="Muscular">Muscular</option>
+						<option val="Overweight">Overweight</option>
+						<option val="Skinny">Skinny</option>
+						<option val="Thin">Thin</option>
+						</select>
                 <!-- ./ col-sm-9 -->
               </div>
               <!-- ./ form-group -->
@@ -681,6 +672,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       </div>
       <!-- ./ modal-dialog modal-lg -->
     </div>
+	</div>
     <!-- ./ modal fade bs-example-modal-lg -->
 
     <!-- Create Plate Modal -->
@@ -711,7 +703,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">License Plate</label>
                 <div class="col-lg-10">
-                  <input type="text" class="form-control" name="veh_plate" />
+                  <input type="text" class="form-control" name="veh_plate" required/>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -719,15 +711,15 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Vehicle Make</label>
                 <div class="col-lg-10">
-                <input type="text" class="form-control" name="veh_make" />
+                <input type="text" class="form-control" name="veh_make" required/>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
               <!-- ./ form-group -->
               <div class="form-group row">
-                <label class="col-lg-2 control-label">Vehicle Modle</label>
+                <label class="col-lg-2 control-label">Vehicle Model</label>
                 <div class="col-lg-10">
-                  <input type="text" class="form-control" name="veh_model" />
+                  <input type="text" class="form-control" name="veh_model" required/>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -735,8 +727,42 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Vehicle Color</label>
                 <div class="col-lg-10">
-                  <input type="text" class="form-control" name="veh_color" />
-                </div>
+                  <select class="form-control" name="veh_color" required>
+				  <option val="">  </option>
+				  <option val="lbl">Light Blue</option>
+				  <option val="trq">Turqoise</option>
+				  <option val="dbl">Dark Blue</option>
+				  <option val="blu">Blue</option>
+				  <option val="ame">Amethyst</option>
+				  <option val="ple">Purple</option>
+				  <option val="lav">Lavender</option>
+				  <option val="mve">Mauve</option>
+				  <option val="pnk">Pink</option>
+				  <option val="red">Red</option>
+				  <option val="mar">Maroon</option>
+				  <option val="ong">Orange</option>
+				  <option val="cpr">Copper</option>
+				  <option val="brz">Bronze</option>
+				  <option val="tan">Tan</option>
+				  <option val="gld">Gold</option>
+				  <option val="yel">Yellow</option>
+				  <option val="lgr">Light Green</option>
+				  <option val="grn">Green</option>
+				  <option val="dgr">Dark Green</option>
+				  <option val="tea">Teal</option>
+				  <option val="bro">Brown</option>
+				  <option val="crm">Cream</option>
+				  <option val="bge">Beige</option>
+				  <option val="tpe">Taupe</option>
+				  <option val="sil">Silver</option>
+				  <option val="com">Chrome</option>
+				  <option val="gry">Gray</option>
+				  <option val="blk">Black</option>
+				  <option val="whi">White</option>
+				  <option val="cam">Camouflage</option>
+				  <option val="mul">Multi-Colored</option>
+				  </select>
+				  </div>
                 <!-- ./ col-sm-9 -->
               </div>
               <!-- ./ form-group -->
@@ -777,18 +803,63 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Vehicle's Registered State</label>
                 <div class="col-lg-10">
-                  <input type="text" class="form-control" name="veh_reg_state" />
-                </div>
+                  <select class="form-control" name="veh_reg_state" required>
+				  <option value"">  </option>
+				  <option value"Alabama"> Alabama </option>
+				  <option value"Alaska"> Alaska </option>
+				  <option value"Arizona"> Arizona </option>
+				  <option value"Arkansas"> Arkansas </option>
+				  <option value"California"> California </option>
+				  <option value"Colorado"> Colorado </option>
+				  <option value"Connecticut"> Connecticut </option>
+				  <option value"Delaware"> Delaware </option>
+				  <option value"Florida"> Florida </option>
+				  <option value"Georgia"> Georgia </option>
+				  <option value"Hawaii"> Hawaii </option>
+				  <option value"Idaho"> Idaho </option>
+				  <option value"Illinois"> Illinois </option>
+				  <option value"Indiana"> Indiana </option>
+				  <option value"Iowa"> Iowa </option>
+				  <option value"Kansas"> Kansas </option>
+				  <option value"Kentucky"> Kentucky </option>
+				  <option value"Louisiana"> Louisiana </option>
+				  <option value"Maine"> Maine </option>
+				  <option value"Maryland"> Maryland </option>
+				  <option value"Massachusetts"> Massachusetts </option>
+				  <option value"Michigan"> Michigan </option>
+				  <option value"Minnesota"> Minnesota </option>
+				  <option value"Mississippi"> Mississippi </option>
+				  <option value"Missouri"> Missouri </option>
+				  <option value"Montana"> Montana </option>
+				  <option value"Nebraska"> Nebraska </option>
+				  <option value"Nevada"> Nevada </option>
+				  <option value"New Hampshire"> New Hampshire </option>
+				  <option value"New Jersey"> New Jersey </option>
+				  <option value"New Mexico"> New Mexico </option>
+				  <option value"New York"> New York </option>
+				  <option value"North Carolina"> North Carolina </option>
+				  <option value"North Dakota"> North Dakota </option>
+				  <option value"Ohio"> Ohio </option>
+				  <option value"Oklahoma"> Oklahoma </option>
+				  <option value"Oregon"> Oregon </option>
+				  <option value"Pennsylvania"> Pennsylvania </option>
+				  <option value"Rhode Island"> Rhode Island </option>
+				  <option value"South Carolina"> South Carolina </option>
+				  <option value"South Dakota"> South Dakota </option>
+				  <option value"Tennessee"> Tennessee </option>
+				  <option value"Texas"> Texas </option>
+				  <option value"Utah"> Utah </option>
+				  <option value"Vermont"> Vermont </option>
+				  <option value"Virginia"> Virginia </option>
+				  <option value"Washington"> Washington </option>
+				  <option value"West Virginia"> West Virginia </option>
+				  <option value"Wisconsin"> Wisconsin </option>
+				  <option value"Wyoming"> Wyoming </option>
+				  </select>
+				  </div>
                 <!-- ./ col-sm-9 -->
               </div>
               <!-- ./ form-group -->
-              <div class="form-group row">
-                <label class="col-lg-2 control-label">Hidden Notes</label>
-                <div class="col-lg-10">
-                  <input type="text" class="form-control" name="hidden_notes" />
-                </div>
-                <!-- ./ col-sm-9 -->
-              </div>
               <!-- ./ form-group -->
 
           </div>
