@@ -98,7 +98,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                               <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                               <ul class="nav child_menu" style="display: block;">
                                  <li class="current-page"><a href="javascript:void(0)">Civilian Dashboard</a></li>
-                                 -
                               </ul>
                            </li>
                         </ul>
