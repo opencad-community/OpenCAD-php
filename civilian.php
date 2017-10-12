@@ -13,9 +13,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
     session_start();
 	
-    require("/./oc-config.php");
+    require("./oc-config.php");
 
-    include("/./actions/civActions.php");
+    include("./actions/civActions.php");
 
 
     // TODO: Verify user has permission to be on this page
