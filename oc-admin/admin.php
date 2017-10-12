@@ -84,7 +84,7 @@ require_once(__DIR__ . '/../oc-functions.php');
 
             <br />
 
-            <?php include "oc-admin-includes/sidebarNav.inc.php"; ?>;
+            <?php include "oc-admin-includes/sidebarNav.inc.php"; ?>
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">

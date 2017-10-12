@@ -181,6 +181,8 @@ CREATE TABLE `ncic_citations`(
 
 CREATE TABLE `ncic_names`(
   `id` INT(11) NOT NULL,
+  `submittedByName` VARCHAR(255) NOT NULL,
+  `submittedById` VARCHAR(255) NOT NULL,
   `first_name` VARCHAR(255) NOT NULL,
   `last_name` VARCHAR(255) NOT NULL,
   `dob` DATE NOT NULL COMMENT 'Date of birth',
@@ -229,7 +231,7 @@ SET
   ) NOT NULL DEFAULT 'NONE',
   `veh_reg_state` TEXT NOT NULL,
   `notes` TEXT DEFAULT NULL COMMENT 'Any special flags visible to dispatchers',
-  `hidden_notes` TEXT DEFAULT NULL COMMENT 'Notes only visible in the admin panel'
+  `user_id` INT(11) NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = latin1 ROW_FORMAT = COMPACT;
 
 

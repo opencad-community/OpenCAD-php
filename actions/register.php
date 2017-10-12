@@ -46,7 +46,6 @@ require_once(__DIR__ . '/../oc-config.php');
 
     //Check to see if the email has already been used
     $query = "SELECT email from users where email = \"".$email."\"";
-    echo $query;
     $result = mysqli_query($link, $query);
 	$num_rows = $result->num_rows;
 
@@ -97,6 +96,8 @@ require_once(__DIR__ . '/../oc-config.php');
             {$division = "6";}
         elseif($division == "civilian")
             {$division = "7";}
+        elseif($division == "state")
+            {$division = "9";}
 
         $query = "INSERT INTO user_departments_temp (user_id, department_id)
               SELECT id , ?
