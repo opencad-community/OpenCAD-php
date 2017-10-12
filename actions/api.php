@@ -625,7 +625,7 @@ function deleteDispatcher()
     $identifier = $_SESSION['identifier'];
 
 
-mysqli_query($link,"DELETE FROM dispatchers WHERE identifier='".$identifier."'");
+mysqli_query($link,"DELETE FROM dispatcher WHERE identifier='".$identifier."'");
 mysqli_close($link);
 
 } 
@@ -655,7 +655,7 @@ function setDispatcher($dep)
     
     deleteDispatcher();
 
-    $sql = "INSERT INTO dispatchers (identifier, callsign, status) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO dispatcher (identifier, callsign, status) VALUES (?, ?, ?)";
     
 
     try {
@@ -682,9 +682,18 @@ function getDispatchers()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "SELECT * from dispatchers WHERE status = '1'";
+    $sql = "SELECT * from dispatcher WHERE status = '1'";
 
     $result = mysqli_query($link, $sql);
+    
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-danger\"><span>No available units</span></div>";
+    }
+    else
+    {
 
     echo '
             <table id="dispatchersTable" class="table table-striped table-bordered">
@@ -695,9 +704,6 @@ function getDispatchers()
             </thead>
             <tbody>
         ';
-
-
-
         while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
         {
             echo '
@@ -712,8 +718,7 @@ function getDispatchers()
             </table>
         ';
     mysqli_close($link);
-
-
+}
 }
 function setUnitActive($dep)
 {
