@@ -625,7 +625,7 @@ function deleteDispatcher()
     $identifier = $_SESSION['identifier'];
 
 
-mysqli_query($link,"DELETE FROM dispatcher WHERE identifier='".$identifier."'");
+mysqli_query($link,"DELETE FROM dispatchers WHERE identifier='".$identifier."'");
 mysqli_close($link);
 
 } 
@@ -655,7 +655,7 @@ function setDispatcher($dep)
     
     deleteDispatcher();
 
-    $sql = "INSERT INTO dispatcher (identifier, callsign, status) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO dispatchers (identifier, callsign, status) VALUES (?, ?, ?)";
     
 
     try {
@@ -682,7 +682,7 @@ function getDispatchers()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "SELECT * from dispatcher WHERE status = '1'";
+    $sql = "SELECT * from dispatchers WHERE status = '1'";
 
     $result = mysqli_query($link, $sql);
     
