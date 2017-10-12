@@ -117,6 +117,18 @@ INSERT INTO `departments` (`department_id`, `department_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `dispatchers`
+--
+
+CREATE TABLE `dispatchers` (
+  `identifier` varchar(255) NOT NULL,
+  `callsign` varchar(255) NOT NULL COMMENT 'Unit Callsign',
+  `status` int(11) NOT NULL COMMENT 'Unit status, 0=offline, 1=online'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `identity_requests`
 --
 
@@ -1155,6 +1167,14 @@ ALTER TABLE `civilian_names`
 --
 ALTER TABLE `departments`
   ADD PRIMARY KEY (`department_id`) USING BTREE;
+  
+--
+-- Indexes for table `dispatchers`
+--
+ALTER TABLE `dispatchers`
+  ADD PRIMARY KEY (`identifier`) USING BTREE,
+  ADD UNIQUE KEY `callsign` (`callsign`) USING BTREE,
+  ADD UNIQUE KEY `identifier` (`identifier`) USING BTREE;
 
 --
 -- Indexes for table `identity_requests`
