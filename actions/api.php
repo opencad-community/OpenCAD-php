@@ -614,6 +614,66 @@ function changeStatus()
     echo "SUCCESS";
 }
 
+function deleteDispatcher()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $identifier = $_SESSION['identifier'];
+
+
+mysqli_query($link,"DELETE FROM dispatchers WHERE identifier='".$identifier."'");
+mysqli_close($link);
+
+} 
+
+function setDispatcher($dep)
+{
+    session_start();
+    
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+    
+    $identifier = $_SESSION['identifier'];
+    
+    $status;
+    switch($dep)
+    {
+        case "1":
+            $status = "0";
+            break;
+        case "2":
+            $status = "1";
+            break;
+    }
+    
+    deleteDispatcher();
+
+    $sql = "INSERT INTO dispatchers (identifier, callsign, status) VALUES (?, ?, ?)";
+    
+
+    try {
+        $stmt = mysqli_prepare($link, $sql);
+        mysqli_stmt_bind_param($stmt, "sss", $identifier, $identifier, $status);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+    }
+
+}
+
 function getDispatchers()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -622,7 +682,7 @@ function getDispatchers()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "SELECT * from active_users WHERE status = '2'";
+    $sql = "SELECT * from dispatchers WHERE status = '1'";
 
     $result = mysqli_query($link, $sql);
 
@@ -657,26 +717,29 @@ function getDispatchers()
 }
 function setUnitActive($dep)
 {
-    $status;
-    switch($dep)
-    {
-        case "1":
-            $status = "2";
-            break;
-        case "2":
-            $status = "1";
-            break;
-    }
-
-    $sql = "INSERT IGNORE INTO active_users (identifier, callsign, status, status_detail) VALUES (?, ?, ?, '1')";
-
-    $identifier = $_SESSION['identifier'];
-
+    session_start();
+    
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
     if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
+    
+    $identifier = $_SESSION['identifier'];
+    
+    $status;
+    switch($dep)
+    {
+        case "1":
+            $status = "1";
+            break;
+        case "2":
+            $status = "2";
+            break;
+    }
+
+    $sql = "REPLACE INTO active_users (identifier, callsign, status, status_detail) VALUES (?, ?, ?, '6')";
+
 
     try {
         $stmt = mysqli_prepare($link, $sql);
