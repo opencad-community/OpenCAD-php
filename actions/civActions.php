@@ -59,7 +59,7 @@ function ncicGetNames()
                 <th>Last Name</th>
                 <th>DOB</th>
                 <th>Address</th>
-                <th>Sex</th>
+                <th>Gender</th>
                 <th>Race</th>
                 <th>DL Status</th>
                 <th>Hair Color</th>
@@ -329,7 +329,7 @@ function create_name()
     $hair = $_POST['civHairReq'];
     $build = $_POST['civBuildReq'];
 
-    $query = "INSERT INTO ncic_names (submittedByName, submittedById, first_name, last_name, dob, address, sex, race, dl_status, hair_color, build)
+    $query = "INSERT INTO ncic_names (submittedByName, submittedById, first_name, last_name, dob, address, gender, race, dl_status, hair_color, build)
     VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
     try
