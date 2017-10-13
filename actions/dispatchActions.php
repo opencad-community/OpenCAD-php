@@ -498,4 +498,153 @@ function newCall()
     echo "SUCCESS";
 
 }
+
+/**#@+
+ * function cadGetVehicleBOLOS()
+ *
+ * Querys database to retrieve all currently entered Vehicle BOLOS.
+ *
+ * @since 1.0a RC2
+ */
+
+function mdtGetVehicleBOLOS()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT bolo_vehicle.* FROM bolo_vehicle";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>Good work! No Active Vehicle BOLOS.</span></div>";
+    }
+    else
+    {
+        echo '
+            <table id="ncic_plates" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Vehicle Make</th>
+                <th>Vehicle Model</th>
+                <th>Vehicle Plate</th>
+                <th>Primary Color</th>
+                <th>Secondary Color</th>
+                <th>Reason Wanted</th>
+                <th>Last Seen</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+
+            echo '
+            <tr>
+                <td>'.$row[1].'</td>
+                <td>'.$row[2].'</td>
+                <td>'.$row[3].'</td>
+                <td>'.$row[4].'</td>
+                <td>'.$row[5].'</td>
+                <td>'.$row[6].'</td>
+                <td>'.$row[7].'</td>
+                <td>
+                    <form action="../actions/ncicAdminActions.php" method="post">
+                    <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
+                    <input name="delete_plate" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete" disabled/>
+                    <input name="id" type="hidden" value='.$row[0].' />
+                    </form>
+                </td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
+
+/**#@+
+ * function cadGetPersonBOLOS()
+ *
+ * Querys database to retrieve all currently entered Person BOLOS.
+ *
+ * @since 1.0a RC2
+ */
+
+function mdtGetPersonBOLOS()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT bolo_person.* FROM bolo_person";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>Good work! No Active Person BOLOS.</span></div>";
+    }
+    else
+    {
+        echo '
+            <table id="bolo_board" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Gender</th>
+                <th>Physical Description</th>
+                <th>Reason Wanted</th>
+                <th>Last Seen</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+
+            echo '
+            <tr>
+                <td>'.$row[1].'</td>
+                <td>'.$row[2].'</td>
+                <td>'.$row[3].'</td>
+                <td>'.$row[4].'</td>
+                <td>'.$row[5].'</td>
+                <td>'.$row[6].'</td>
+                <td>
+                    <form action="../actions/ncicAdminActions.php" method="post">
+                    <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
+                    <input name="delete_plate" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete" disabled/>
+                    <input name="id" type="hidden" value='.$row[0].' />
+                    </form>
+                </td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
+
 ?>

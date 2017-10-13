@@ -98,4 +98,136 @@ function getStatus()
     echo $statusText;
 }
 
+
+/**#@+
+ * function cadGetVehicleBOLOS()
+ *
+ * Querys database to retrieve all currently entered Vehicle BOLOS.
+ *
+ * @since 1.0a RC2
+ */
+
+function cadGetVehicleBOLOS()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT bolo_vehicle.* FROM bolo_vehicle";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>Good work! No Active Vehicle BOLOS.</span></div>";
+    }
+    else
+    {
+        echo '
+            <table id="bolo_board" class="table table-striped table-bordered bolo_board">
+            <thead>
+                <tr>
+                  <th style="text-align: center;" >Vehicle Make</th>
+                  <th>Vehicle Model</th>
+                  <th>Vehicle Plate</th>
+                  <th>Primary Color</th>
+                  <th>Secondary Color</th>
+                  <th>Reason Wanted</th>
+                  <th>Last Seen</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+
+            echo '
+            <tr>
+                <td>'.$row[1].'</td>
+                <td>'.$row[2].'</td>
+                <td>'.$row[3].'</td>
+                <td>'.$row[4].'</td>
+                <td>'.$row[5].'</td>
+                <td>'.$row[6].'</td>
+                <td>'.$row[7].'</td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
+
+/**#@+
+ * function cadGetPersonBOLOS()
+ *
+ * Querys database to retrieve all currently entered Person BOLOS.
+ *
+ * @since 1.0a RC2
+ */
+
+function cadGetPersonBOLOS()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT bolo_person.* FROM bolo_person";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>Good work! No Active Persons BOLOS.</span></div>";
+    }
+    else
+    {
+        echo '
+            <table id="bolo_board" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Gender</th>
+                  <th>Physical Description</th>
+                  <th>Reason Wanted</th>
+                  <th>Last Seen</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            echo '
+            <tr>
+                <td>'.$row[1].'</td>
+                <td>'.$row[2].'</td>
+                <td>'.$row[4].'</td>
+                <td>'.$row[3].'</td>
+                <td>'.$row[5].'</td>
+                <td>'.$row[6].'</td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
+
 ?>

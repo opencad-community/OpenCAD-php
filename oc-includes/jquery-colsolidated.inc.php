@@ -34,4 +34,4 @@
 
     <!-- Custom Theme Scripts -->
     <script src="<?php echo BASE_URL; ?>/js/custom.js"></script>
-    <script src="<?php echo BASE_URL; ?>/js/openCad.js"></script>
+    <script src="<?php echo BASE_URL; ?>/js/OpenCAD.js"></script>

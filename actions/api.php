@@ -492,7 +492,7 @@ function changeStatus()
             $statusDet = '8';
             $onCall = true;
             break;
-		
+
 		case "10-65":
             $statusId = '8';
             $statusDet = '8';

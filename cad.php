@@ -12,8 +12,6 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
-
-    require("./oc-functions.php");
     include("./actions/api.php");
     session_start();
 
@@ -202,6 +200,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <!-- ./ x_content -->
                            <div class="x_footer">
                               <button class="btn btn-primary" name="new_call_btn" data-toggle="modal" data-target="#newCall">New Call</button>
+                              <button class="btn btn-warning" name="new_call_btn" data-toggle="modal" data-target="#newPersonsBOLO">New Persons BOLO</button>
+                              <button class="btn btn-warning" name="new_call_btn" data-toggle="modal" data-target="#newVehicleBOLO">New Vehicle BOLO</button>
                               <button class="btn btn-danger pull-right" onclick="priorityTone('single')" value="0" id="priorityTone">10-3 Tone</button>
                               <button class="btn btn-danger pull-right" onclick="priorityTone('recurring')" value="0" id="recurringTone">Priority Tone</button>
                            </div>
@@ -337,7 +337,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                             </ul>
                             <div class="clearfix"></div>
                           </div>
-                          <!-- ./ x_title -->
+                          <!-- ./ x_title --
                      <div class="x_content">
                         <div class="input-group">
                            <input type="text" name="ncic_firearm" class="form-control" id="ncic_firearm" placeholder="Serial Number"/>
@@ -345,11 +345,11 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <button type="button" class="btn btn-primary" disabled>Send</button>
                            </span>
                         </div>
-                        <!-- ./ input-group -->
+                        <!-- ./ input-group --
                         <div name="firearm_return">
                         </div>
                      </div>
-                     <!-- ./ x_content -->
+                     <!-- ./ x_content --
                   </div>
                   <!-- ./ x_panel -->
                </div>
@@ -545,6 +545,159 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          <!-- ./ modal-content -->
       </div>
       <!-- ./ modal-dialog modal-lg -->
+
+      <!-- New Persons BOLO Modal -->
+      <div class="modal fade" id="newPersonsBOLO" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
+                  </button>
+                  <h4 class="modal-title" id="myModalLabel">New Persons BOLO</h4>
+               </div>
+               <!-- ./ modal-header -->
+               <div class="modal-body">
+                  <form class="newCallForm" id="newCallForm">
+                     <div class="form-group row">
+                        <label class="col-lg-2 control-label">Vehicle Make</label>
+                        <div class="col-lg-10">
+                           <select class="form-control selectpicker" data-live-search="true" name="vehicle_make" title="Incident Type" required>
+                              <?php getIncidentType();?>
+                           </select>
+                        </div>
+                        <!-- ./ col-sm-9 -->
+                     </div>
+                     <br/>
+                     <!-- ./ form-group -->
+                     <div class="form-group row">
+                        <label class="col-lg-2 control-label">Address</label>
+                        <div class="col-lg-10">
+                           <select class="form-control selectpicker" data-live-search="true" name="street1" id="street1" title="Street 1" required>
+                <?php getStreet();?>
+              </select>
+              <select class="form-control selectpicker" data-live-search="true" name="street2" id="street2" title="Street 2/Cross/Postal" >
+                <?php getStreet();?>
+              </select>
+                <input type="text" class="form-control" name="additionalLocation" placeholder="Any Additional Location Information" />
+                        </div>
+                        <!-- ./ col-sm-9 -->
+                     </div>
+                     <!-- ./ form-group -->
+                     <br/>
+                     <div class="form-group row">
+                        <label class="col-lg-2 control-label">Assign Unit to Call</label>
+                        <div class="col-lg-10">
+                           <select class="form-control selectpicker unit" data-live-search="true" name="unit_1" id="unit_1" title="Select a Unit or Leave Blank (Will mark call as Pending)">
+                              <option></option>
+                           </select>
+                           <select class="form-control selectpicker unit" data-live-search="true" name="unit_2" id="unit_2" title="Select a Unit or Leave Blank">
+                              <option></option>
+                           </select>
+                        </div>
+                        <!-- ./ col-sm-9 -->
+                     </div>
+                     <br/>
+                     <!-- ./ form-group -->
+                     <div class="form-group row">
+                        <label class="col-lg-2 control-label">Narrative</label>
+                        <div class="col-lg-10">
+                           <textarea name="narrative" id="narrative" class="form-control" style="text-transform:uppercase" rows="5"></textarea>
+                        </div>
+                        <!-- ./ col-sm-9 -->
+                     </div>
+                     <!-- ./ form-group -->
+               </div>
+               <!-- ./ modal-body -->
+               <div class="modal-footer">
+               <input type="submit" name="create_call" class="btn btn-primary" value="Send"/>
+               <button type="reset" class="btn btn-default" value="Reset">Reset</button>
+               <button id="newCallReset" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+               </div>
+               <!-- ./ modal-footer -->
+               </form>
+            </div>
+            <!-- ./ modal-body -->
+         </div>
+         <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+
+      <!-- New Vehicle BOLO Modal -->
+      <div class="modal fade" id="newVehicleBOLO" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
+                  </button>
+                  <h4 class="modal-title" id="myModalLabel">New Vehicle BOLO</h4>
+               </div>
+               <!-- ./ modal-header -->
+               <div class="modal-body">
+                  <form class="newCallForm" id="newCallForm">
+                     <div class="form-group row">
+                        <label class="col-lg-2 control-label">Incident Type</label>
+                        <div class="col-lg-10">
+                           <select class="form-control selectpicker" data-live-search="true" name="call_type" title="Incident Type" required>
+                              <?php getIncidentType();?>
+                           </select>
+                        </div>
+                        <!-- ./ col-sm-9 -->
+                     </div>
+                     <br/>
+                     <!-- ./ form-group -->
+                     <div class="form-group row">
+                        <label class="col-lg-2 control-label">Address</label>
+                        <div class="col-lg-10">
+                           <select class="form-control selectpicker" data-live-search="true" name="street1" id="street1" title="Street 1" required>
+								<?php getStreet();?>
+							</select>
+							<select class="form-control selectpicker" data-live-search="true" name="street2" id="street2" title="Street 2/Cross/Postal" >
+								<?php getStreet();?>
+							</select>
+								<input type="text" class="form-control" name="additionalLocation" placeholder="Any Additional Location Information" />
+                        </div>
+                        <!-- ./ col-sm-9 -->
+                     </div>
+                     <!-- ./ form-group -->
+                     <br/>
+                     <div class="form-group row">
+                        <label class="col-lg-2 control-label">Assign Unit to Call</label>
+                        <div class="col-lg-10">
+                           <select class="form-control selectpicker unit" data-live-search="true" name="unit_1" id="unit_1" title="Select a Unit or Leave Blank (Will mark call as Pending)">
+                              <option></option>
+                           </select>
+                           <select class="form-control selectpicker unit" data-live-search="true" name="unit_2" id="unit_2" title="Select a Unit or Leave Blank">
+                              <option></option>
+                           </select>
+                        </div>
+                        <!-- ./ col-sm-9 -->
+                     </div>
+                     <br/>
+                     <!-- ./ form-group -->
+                     <div class="form-group row">
+                        <label class="col-lg-2 control-label">Narrative</label>
+                        <div class="col-lg-10">
+                           <textarea name="narrative" id="narrative" class="form-control" style="text-transform:uppercase" rows="5"></textarea>
+                        </div>
+                        <!-- ./ col-sm-9 -->
+                     </div>
+                     <!-- ./ form-group -->
+               </div>
+               <!-- ./ modal-body -->
+               <div class="modal-footer">
+               <input type="submit" name="create_call" class="btn btn-primary" value="Send"/>
+               <button type="reset" class="btn btn-default" value="Reset">Reset</button>
+               <button id="newCallReset" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+               </div>
+               <!-- ./ modal-footer -->
+               </form>
+            </div>
+            <!-- ./ modal-body -->
+         </div>
+         <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+
       </div>
       <!-- ./ modal fade bs-example-modal-lg -->
       <!-- Call Details Modal -->
