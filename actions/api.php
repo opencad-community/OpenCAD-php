@@ -14,7 +14,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     This file handles all actions for admin.php script
 */
 
-include(__DIR__ . '/../oc-config.php');
+include("../oc-config.php");
 
 if (isset($_GET['a'])){
     getActiveCalls();
@@ -628,20 +628,20 @@ function deleteDispatcher()
 mysqli_query($link,"DELETE FROM dispatchers WHERE identifier='".$identifier."'");
 mysqli_close($link);
 
-} 
+}
 
 function setDispatcher($dep)
 {
     session_start();
-    
+
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
     if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
-    
+
     $identifier = $_SESSION['identifier'];
-    
+
     $status;
     switch($dep)
     {
@@ -652,11 +652,11 @@ function setDispatcher($dep)
             $status = "1";
             break;
     }
-    
+
     deleteDispatcher();
 
     $sql = "INSERT INTO dispatchers (identifier, callsign, status) VALUES (?, ?, ?)";
-    
+
 
     try {
         $stmt = mysqli_prepare($link, $sql);
@@ -685,7 +685,7 @@ function getDispatchers()
     $sql = "SELECT * from dispatchers WHERE status = '1'";
 
     $result = mysqli_query($link, $sql);
-    
+
     $num_rows = $result->num_rows;
 
     if($num_rows == 0)
@@ -723,15 +723,15 @@ function getDispatchers()
 function setUnitActive($dep)
 {
     session_start();
-    
+
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
     if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
-    
+
     $identifier = $_SESSION['identifier'];
-    
+
     $status;
     switch($dep)
     {
@@ -1190,6 +1190,89 @@ function getCitations()
     while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
     {
         echo "<option value=".$row[0].">".$row[0]."</option>";
+    }
+}
+
+/**#@+
+ * function getVehicleMakes()
+ *
+ * Querys database to retrieve all vehicle makes.
+ *
+ * @since 1.0a RC2
+ */
+function getVehicleMakes()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT DISTINCT vehicles.Make FROM vehicles";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    {
+        echo '<option value="'.$row[0].'">'.$row[0].'</option>';
+    }
+}
+
+
+/**#@+
+ * function getVehicleModels()
+ *
+ * Querys database to retrieve all vehicle models.
+ *
+ * @since 1.0a RC2
+ */
+function getVehicleModels()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT DISTINCT vehicles.Model FROM vehicles";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    {
+        echo '<option value="'.$row[0].'">'.$row[0].'</option>';
+    }
+}
+
+
+/**#@+
+ * function getGenders()
+ *
+ * Querys database to retrieve genders.
+ *
+ * @since 1.0a RC2
+ */
+function getGenders()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT DISTINCT genders.genders FROM genders";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    {
+        echo '<option value="'.$row[0].'">'.$row[0].'</option>';
     }
 }
 
