@@ -11,8 +11,9 @@ This program is free software: you can redistribute it and/or modify
 
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
-
+    include("./oc-config.php");
     include("./actions/api.php");
+    include("./actions/dispatchActions.php");
     session_start();
 
     // TODO: Verify user has permission to be on this page
@@ -337,7 +338,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                             </ul>
                             <div class="clearfix"></div>
                           </div>
-                          <!-- ./ x_title --
+                          <!-- ./ x_title -->
                      <div class="x_content">
                         <div class="input-group">
                            <input type="text" name="ncic_firearm" class="form-control" id="ncic_firearm" placeholder="Serial Number"/>
@@ -345,11 +346,11 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <button type="button" class="btn btn-primary" disabled>Send</button>
                            </span>
                         </div>
-                        <!-- ./ input-group --
+                        <!-- ./ input-group -->>
                         <div name="firearm_return">
                         </div>
                      </div>
-                     <!-- ./ x_content --
+                     <!-- ./ x_content -->
                   </div>
                   <!-- ./ x_panel -->
                </div>
@@ -558,27 +559,29 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                <!-- ./ modal-header -->
                <div class="modal-body">
                   <form class="newCallForm" id="newCallForm">
+                    <div class="form-group row">
+                       <label class="col-lg-2 control-label">First Name</label>
+                       <div class="col-lg-10">
+                           <input type="text" class="form-control" name="First_Name" placeholder="First Name of the BOLO subject.." />
+                       </div>
+                       <!-- ./ col-sm-9 -->
+                    </div>
+                    <!-- ./ form-group -->
+                    <div class="form-group row">
+                       <label class="col-lg-2 control-label">Last Name</label>
+                       <div class="col-lg-10">
+                           <input type="text" class="form-control" name="Last_Name" placeholder="Last Name of the BOLO subject.." />
+                       </div>
+                       <!-- ./ col-sm-9 -->
+                    </div>
+                    <br />
+                    <!-- ./ form-group -->
                      <div class="form-group row">
-                        <label class="col-lg-2 control-label">Vehicle Make</label>
+                        <label class="col-lg-2 control-label">Gender</label>
                         <div class="col-lg-10">
-                           <select class="form-control selectpicker" data-live-search="true" name="vehicle_make" title="Incident Type" required>
-                              <?php getIncidentType();?>
-                           </select>
-                        </div>
-                        <!-- ./ col-sm-9 -->
-                     </div>
-                     <br/>
-                     <!-- ./ form-group -->
-                     <div class="form-group row">
-                        <label class="col-lg-2 control-label">Address</label>
-                        <div class="col-lg-10">
-                           <select class="form-control selectpicker" data-live-search="true" name="street1" id="street1" title="Street 1" required>
-                <?php getStreet();?>
-              </select>
-              <select class="form-control selectpicker" data-live-search="true" name="street2" id="street2" title="Street 2/Cross/Postal" >
-                <?php getStreet();?>
-              </select>
-                <input type="text" class="form-control" name="additionalLocation" placeholder="Any Additional Location Information" />
+                           <select class="form-control selectpicker" data-live-search="true" name="street1" id="street1" title="Gender" required>
+                              <?php getGenders();?>
+                            </select>
                         </div>
                         <!-- ./ col-sm-9 -->
                      </div>
@@ -635,10 +638,16 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                <div class="modal-body">
                   <form class="newCallForm" id="newCallForm">
                      <div class="form-group row">
-                        <label class="col-lg-2 control-label">Incident Type</label>
+                        <label class="col-lg-2 control-label">Vehicle Make</label>
                         <div class="col-lg-10">
-                           <select class="form-control selectpicker" data-live-search="true" name="call_type" title="Incident Type" required>
-                              <?php getIncidentType();?>
+                           <select class="form-control selectpicker" data-live-search="true" name="vehicle_make" title="Vehicle Make" required>
+                              <?php getVehicleMakes();?>
+                           </select>
+                        </div>
+                        <label class="col-lg-2 control-label">Vehicle Model</label>
+                        <div class="col-lg-10">
+                           <select class="form-control selectpicker" data-live-search="true" name="Vehicle_Make" title="Vehicle Make" required>
+                              <?php getVehicleModels();?>
                            </select>
                         </div>
                         <!-- ./ col-sm-9 -->
@@ -646,38 +655,34 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <br/>
                      <!-- ./ form-group -->
                      <div class="form-group row">
-                        <label class="col-lg-2 control-label">Address</label>
+                        <label class="col-lg-2 control-label">Primary Color</label>
                         <div class="col-lg-10">
-                           <select class="form-control selectpicker" data-live-search="true" name="street1" id="street1" title="Street 1" required>
-								<?php getStreet();?>
-							</select>
-							<select class="form-control selectpicker" data-live-search="true" name="street2" id="street2" title="Street 2/Cross/Postal" >
-								<?php getStreet();?>
-							</select>
-								<input type="text" class="form-control" name="additionalLocation" placeholder="Any Additional Location Information" />
+                						<input type="text" class="form-control" name="Primary_Color" placeholder="The primary color of the BOLO vehicle." />
                         </div>
+                        <!-- ./ col-sm-9 -->
+                     </div>
+                     <!-- ./ form-group -->
+                     <div class="form-group row">
+                        <label class="col-lg-2 control-label">Secondary Color</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" name="Secondary_Color" placeholder="The secondary color, if any, of the BOLO vehicle." />                        </div>
                         <!-- ./ col-sm-9 -->
                      </div>
                      <!-- ./ form-group -->
                      <br/>
                      <div class="form-group row">
-                        <label class="col-lg-2 control-label">Assign Unit to Call</label>
+                        <label class="col-lg-2 control-label">Reason Wanted</label>
                         <div class="col-lg-10">
-                           <select class="form-control selectpicker unit" data-live-search="true" name="unit_1" id="unit_1" title="Select a Unit or Leave Blank (Will mark call as Pending)">
-                              <option></option>
-                           </select>
-                           <select class="form-control selectpicker unit" data-live-search="true" name="unit_2" id="unit_2" title="Select a Unit or Leave Blank">
-                              <option></option>
-                           </select>
+                                <textarea name="Reason_Wanted" id="narrative" class="form-control" style="text-transform:uppercase" rows="5"></textarea>
                         </div>
                         <!-- ./ col-sm-9 -->
                      </div>
                      <br/>
                      <!-- ./ form-group -->
                      <div class="form-group row">
-                        <label class="col-lg-2 control-label">Narrative</label>
+                        <label class="col-lg-2 control-label">Last Seen</label>
                         <div class="col-lg-10">
-                           <textarea name="narrative" id="narrative" class="form-control" style="text-transform:uppercase" rows="5"></textarea>
+                           <input type="text" class="form-control" name="Last_Seen" placeholder="Last observed location of the BOLOed vehicle." />
                         </div>
                         <!-- ./ col-sm-9 -->
                      </div>
@@ -948,10 +953,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                    console.log("Error");
                  }
 
-               });
+               );
          }
-
-
       </script>
    </body>
 </html>
