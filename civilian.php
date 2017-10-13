@@ -331,32 +331,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Sex</label>
                 <div class="col-lg-10">
 					<select name="civSexReq" class="form-control selectpicker" id="civSexReq" title="Select a sex" required>
-						<option val="agender">Agender</option>
-						<option val="androgyne">Androgyne</option>
-						<option val="androgynous">Androgynous</option>
-						<option val="bigender">Bigender</option>
-						<option val="cfemale">Cis Female</option>
-						<option val="cmale">Cis Male</option>
-						<option val="female">Female</option>
-						<option val="gfluid">Gender Fluid</option>
-						<option val="gnoncom">Gender Nonconforming</option>
-						<option val="gquestion">Gender Questioning</option>
-						<option val="gvariant">Gender Variant</option>
-						<option val="gqueer">Genderqueer</option>
-						<option val="intersex">Intersex</option>
-						<option val="male">Male</option>
-						<option val="neither">Neither</option>
-						<option val="neutrois">Neutrois</option>
-						<option val="nonbi">Non-binary</option>
-						<option val="other">Other</option>
-						<option val="pangender">Pangender</option>
-						<option val="trangfemale">Transgender Female</option>
-						<option val="trangmale">Transgender Male</option>
-						<option val="trangperson">Transgender Person</option>
-						<option val="transfemale">Transsexual Female</option>
-						<option val="transmale">Transsexual Male</option>
-						<option val="transperson">Transsexual Person</option>
-						<option val="twospirit">Two-Spirit</option>
+                    <option> </option>
+                    <?php getGenders();?>
 					</select>
                 </div>
                 <!-- ./ col-sm-9 -->
