@@ -129,6 +129,49 @@ CREATE TABLE `dispatchers` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `genders`
+--
+
+CREATE TABLE `genders` (
+  `id` INT(11) NOT NULL,
+  `genders` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+--
+-- Dumping data for table `departments`
+--
+
+INSERT INTO `genders` (`id`, `name`) VALUES
+(0, 'Agender'),
+(1, 'Androgyne'),
+(2, 'Androgynous'),
+(3, 'Bigender'),
+(4, 'Cis Female'),
+(5, 'Cis Male'),
+(6, 'Female'),
+(7, 'Gender Fluid'),
+(8, 'Gender Nonconforming'),
+(9, 'Gender Questioning'),
+(10, 'Gender Variant'),
+(11, 'Genderqueer'),
+(12, 'Intersex'),
+(13, 'Male'),
+(14, 'Neither'),
+(15, 'Neutrois'),
+(16, 'Non-binary'),
+(17, 'Other'),
+(18, 'Pangender'),
+(19, 'Transgender Female'),
+(20, 'Transgender Male'),
+(21, 'Transgender Person'),
+(22, 'Transsexual Female'),
+(23, 'Transsexual Male'),
+(24, 'Transsexual Person'),
+(25, 'Two-Spirit');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `identity_requests`
 --
 
@@ -1175,6 +1218,12 @@ ALTER TABLE `dispatchers`
   ADD PRIMARY KEY (`identifier`) USING BTREE,
   ADD UNIQUE KEY `callsign` (`callsign`) USING BTREE,
   ADD UNIQUE KEY `identifier` (`identifier`) USING BTREE;
+  
+--
+-- Indexes for table `genders`
+--
+ALTER TABLE `genders`
+  ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
 -- Indexes for table `identity_requests`
