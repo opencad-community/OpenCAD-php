@@ -603,7 +603,7 @@ function mdtGetPersonBOLOS()
     else
     {
         echo '
-            <table id="ncic_plates" class="table table-striped table-bordered">
+            <table id="bolo_board" class="table table-striped table-bordered">
             <thead>
                 <tr>
                 <th>First Name</th>

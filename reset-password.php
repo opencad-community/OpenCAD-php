@@ -211,6 +211,6 @@ include("./actions/profileActions.php");
       <script src="./js/custom.js"></script>
 	  <script  src="./js/passconfirm.js"></script>
       <!-- openCad Script -->
-      <script src="./js/openCad.js"></script>
+      <script src="./js/OpenCAD.js"></script>
    </body>
 </html>

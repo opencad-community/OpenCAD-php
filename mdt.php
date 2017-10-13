@@ -401,7 +401,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
       <!-- Vehicle BOLO Board Modal -->
       <div class="modal fade" id="vehicle-bolo-board" tabindex="-1" role="dialog" aria-hidden="true">
-         <div class="modal-dialog modal-md">
+         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                <div class="modal-header">
                   <button type="button" class="close" id="closeCallsign" data-dismiss="modal"><span aria-hidden="true">×</span>
@@ -427,7 +427,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
       <!-- Vehicle BOLO Board Modal -->
       <div class="modal fade" id="person-bolo-board" tabindex="-1" role="dialog" aria-hidden="true">
-         <div class="modal-dialog modal-md">
+         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                <div class="modal-header">
                   <button type="button" class="close" id="closeCallsign" data-dismiss="modal"><span aria-hidden="true">×</span>

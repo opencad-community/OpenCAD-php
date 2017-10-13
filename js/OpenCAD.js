@@ -165,7 +165,7 @@ $('#ncic_name_btn').on('click', function(e) {
     $.ajax({
         cache: false,
         type: 'POST',
-        url: '../../actions/ncic.php',
+        url: hdir + "/actions/ncic.php",
         data: {'ncicName': 'yes',
                 'ncic_name' : name},
 

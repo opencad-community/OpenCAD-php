@@ -230,6 +230,6 @@ include("./actions/profileActions.php");
     <!-- Custom Theme Scripts -->
     <script src="./js/custom.js"></script>
     <!-- openCad Script -->
-    <script src="./js/openCad.js"></script>
+    <script src="./js/OpenCAD.js"></script>
   </body>
 </html>

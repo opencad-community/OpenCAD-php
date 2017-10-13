@@ -128,16 +128,16 @@ function cadGetVehicleBOLOS()
     else
     {
         echo '
-            <table id="ncic_plates" class="table table-striped table-bordered">
+            <table id="bolo_board" class="table table-striped table-bordered bolo_board">
             <thead>
                 <tr>
-                <th>Vehicle Make</th>
-                <th>Vehicle Model</th>
-                <th>Vehicle Plate</th>
-                <th>Primary Color</th>
-                <th>Secondary Color</th>
-                <th>Reason Wanted</th>
-                <th>Last Seen</th>
+                  <th style="text-align: center;" >Vehicle Make</th>
+                  <th>Vehicle Model</th>
+                  <th>Vehicle Plate</th>
+                  <th>Primary Color</th>
+                  <th>Secondary Color</th>
+                  <th>Reason Wanted</th>
+                  <th>Last Seen</th>
                 </tr>
             </thead>
             <tbody>
@@ -190,12 +190,12 @@ function cadGetPersonBOLOS()
 
     if($num_rows == 0)
     {
-        echo "<div class=\"alert alert-info\"><span>Good work! No Active Person BOLOS.</span></div>";
+        echo "<div class=\"alert alert-info\"><span>Good work! No Active Persons BOLOS.</span></div>";
     }
     else
     {
         echo '
-            <table id="ncic_plates" class="table table-striped table-bordered">
+            <table id="bolo_board" class="table table-striped table-bordered">
             <thead>
                 <tr>
                   <th>First Name</th>
