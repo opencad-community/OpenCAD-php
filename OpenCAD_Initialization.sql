@@ -141,7 +141,7 @@ CREATE TABLE `genders` (
 -- Dumping data for table `departments`
 --
 
-INSERT INTO `genders` (`id`, `name`) VALUES
+INSERT INTO `genders` (`id`, `genders`) VALUES
 (0, 'Agender'),
 (1, 'Androgyne'),
 (2, 'Androgynous'),
