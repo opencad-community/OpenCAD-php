@@ -1,14 +1,8 @@
 --
 -- OpenCAD Database Scheme
--- Last Updated: 12 October 2017
+-- Last Updated: 13 October 2017
 -- Updated By: Phill Fernandes <pfernandes@winterhillsolutions.com>
 --
--- --------------------------------------------------------
- 
---
--- Database: `opencad`
---
-
 -- --------------------------------------------------------
 
 --
@@ -22,6 +16,46 @@ CREATE TABLE `active_users` (
   `status_detail` int(11) NOT NULL COMMENT 'Paired to Statuses table'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
+--
+-- Dumping data for table `active_users`
+--
+
+INSERT INTO `active_users` (`identifier`, `callsign`, `status`, `status_detail`) VALUES
+('1A-98', '1A-98', 0, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bolos_persons`
+--
+
+CREATE TABLE `bolos_persons` (
+  `id` int(11) NOT NULL COMMENT 'Unqiue ID of persons BOLO record.',
+  `first_name` varchar(255) NOT NULL COMMENT 'First name of BOLO suspect.',
+  `last_name` varchar(255) NOT NULL COMMENT 'Last name of BOLO suspect.',
+  `gender` varchar(255) NOT NULL COMMENT 'Gender of BOLO suspect.',
+  `physical_description` varchar(255) NOT NULL COMMENT 'Physical description of BOLO suspect.',
+  `reason_wanted` varchar(255) NOT NULL COMMENT 'Reason BOLO suspect is wanted.',
+  `last_seen` varchar(255) NOT NULL COMMENT 'Last observed location of BOLO suspect.'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bolos_vehicles`
+--
+
+CREATE TABLE `bolos_vehicles` (
+  `id` int(11) NOT NULL COMMENT 'Unqiue ID of vehicle BOLO record.',
+  `vehicle_make` varchar(255) NOT NULL COMMENT 'Make of BOLO vehicle.',
+  `vehicle_model` varchar(255) NOT NULL COMMENT 'Model of BOLO vehicle.',
+  `vehicle_plate` varchar(255) NOT NULL COMMENT 'License plate of BOLO vehicles.',
+  `primary_color` varchar(255) NOT NULL COMMENT 'Primary color of BOLO vehicle..',
+  `secondary_color` varchar(255) NOT NULL COMMENT 'Secondary color of BOLO vehicle.',
+  `reason_wanted` varchar(255) NOT NULL COMMENT 'Reason why BOLO vehicle is wanted.',
+  `last_seen` varchar(255) NOT NULL COMMENT 'Last observed location of BOLO vehicle.'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 -- --------------------------------------------------------
 
 --
@@ -33,8 +67,8 @@ CREATE TABLE `calls` (
   `call_type` text NOT NULL,
   `call_primary` text NOT NULL,
   `call_street1` text NOT NULL,
-  `call_street2` text,
-  `call_street3` text,
+  `call_street2` text DEFAULT NULL,
+  `call_street3` text DEFAULT NULL,
   `call_notes` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
@@ -60,8 +94,8 @@ CREATE TABLE `call_history` (
   `call_primary` text NOT NULL,
   `call_type` text NOT NULL,
   `call_street1` text NOT NULL,
-  `call_street2` text,
-  `call_street3` text,
+  `call_street2` text DEFAULT NULL,
+  `call_street3` text DEFAULT NULL,
   `call_notes` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
@@ -126,6 +160,13 @@ CREATE TABLE `dispatchers` (
   `status` int(11) NOT NULL COMMENT 'Unit status, 0=offline, 1=online'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
+--
+-- Dumping data for table `dispatchers`
+--
+
+INSERT INTO `dispatchers` (`identifier`, `callsign`, `status`) VALUES
+('1A-98', '1A-98', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -133,12 +174,12 @@ CREATE TABLE `dispatchers` (
 --
 
 CREATE TABLE `genders` (
-  `id` INT(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `genders` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data for table `departments`
+-- Dumping data for table `genders`
 --
 
 INSERT INTO `genders` (`id`, `genders`) VALUES
@@ -182,17 +223,17 @@ CREATE TABLE `identity_requests` (
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
   `dob` date DEFAULT NULL,
-  `address` text,
-  `sex` text,
-  `race` text,
-  `hair_color` text,
-  `build` text,
-  `biography` text,
-  `veh_plate` text,
-  `veh_make` text,
-  `veh_model` text,
-  `veh_color` text,
-  `submitted_on` text
+  `address` text DEFAULT NULL,
+  `sex` text DEFAULT NULL,
+  `race` text DEFAULT NULL,
+  `hair_color` text DEFAULT NULL,
+  `build` text DEFAULT NULL,
+  `biography` text DEFAULT NULL,
+  `veh_plate` text DEFAULT NULL,
+  `veh_make` text DEFAULT NULL,
+  `veh_model` text DEFAULT NULL,
+  `veh_color` text DEFAULT NULL,
+  `submitted_on` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
@@ -233,11 +274,11 @@ INSERT INTO `incident_type` (`code_id`, `code_name`) VALUES
 
 CREATE TABLE `ncic_citations` (
   `id` int(11) NOT NULL,
-  `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '0 = Pending, 1 = Approved/Active',
+  `status` tinyint(2) NOT NULL DEFAULT 0 COMMENT '0 = Pending, 1 = Approved/Active',
   `name_id` int(11) NOT NULL COMMENT 'Paired to ID of ncic_names table',
   `citation_name` text NOT NULL,
-  `issued_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `issued_date` timestamp NOT NULL DEFAULT current_timestamp
+) ;
 
 -- --------------------------------------------------------
 
@@ -253,7 +294,7 @@ CREATE TABLE `ncic_names` (
   `last_name` varchar(255) NOT NULL,
   `dob` date NOT NULL COMMENT 'Date of birth',
   `address` text NOT NULL,
-  `gender` varchar(255) NOT NULL,
+  `sex` set('Male','Female') NOT NULL,
   `race` text NOT NULL,
   `dl_status` set('Valid','Suspended','Expired') NOT NULL,
   `hair_color` text NOT NULL,
@@ -276,7 +317,7 @@ CREATE TABLE `ncic_plates` (
   `veh_insurance` set('VALID','EXPIRED') NOT NULL DEFAULT 'VALID',
   `flags` set('NONE','STOLEN','WANTED','SUSPENDED REGISTRATION','UC FLAG','HPIU FLAG') NOT NULL DEFAULT 'NONE',
   `veh_reg_state` text NOT NULL,
-  `notes` text COMMENT 'Any special flags visible to dispatchers',
+  `notes` text DEFAULT NULL COMMENT 'Any special flags visible to dispatchers',
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
@@ -289,8 +330,8 @@ CREATE TABLE `ncic_plates` (
 CREATE TABLE `ncic_warrants` (
   `id` int(11) NOT NULL,
   `name_id` int(11) NOT NULL COMMENT 'Key that pairs to the ncic_name id',
-  `issued_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `issued_date` timestamp NOT NULL DEFAULT current_timestamp
+) ;
 
 -- --------------------------------------------------------
 
@@ -601,10 +642,10 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `email` varchar(255) NOT NULL,
-  `password` text,
+  `password` text DEFAULT NULL,
   `identifier` varchar(255) DEFAULT NULL,
-  `password_reset` int(1) NOT NULL DEFAULT '0' COMMENT '1 means password reset required. 0 means it''s not.',
-  `approved` int(1) NOT NULL DEFAULT '0' COMMENT 'Three main statuses: 0 means pending approval. 1 means has access. 2 means banned'
+  `password_reset` int(1) NOT NULL DEFAULT 0 COMMENT '1 means password reset required. 0 means it''s not.',
+  `approved` int(1) NOT NULL DEFAULT 0 COMMENT 'Three main statuses: 0 means pending approval. 1 means has access. 2 means banned'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='User table' ROW_FORMAT=COMPACT;
 
 --
@@ -1174,6 +1215,18 @@ ALTER TABLE `active_users`
   ADD UNIQUE KEY `identifier` (`identifier`) USING BTREE;
 
 --
+-- Indexes for table `bolos_persons`
+--
+ALTER TABLE `bolos_persons`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `bolos_vehicles`
+--
+ALTER TABLE `bolos_vehicles`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `calls`
 --
 ALTER TABLE `calls`
@@ -1210,7 +1263,7 @@ ALTER TABLE `civilian_names`
 --
 ALTER TABLE `departments`
   ADD PRIMARY KEY (`department_id`) USING BTREE;
-  
+
 --
 -- Indexes for table `dispatchers`
 --
@@ -1218,7 +1271,7 @@ ALTER TABLE `dispatchers`
   ADD PRIMARY KEY (`identifier`) USING BTREE,
   ADD UNIQUE KEY `callsign` (`callsign`) USING BTREE,
   ADD UNIQUE KEY `identifier` (`identifier`) USING BTREE;
-  
+
 --
 -- Indexes for table `genders`
 --
@@ -1239,12 +1292,6 @@ ALTER TABLE `incident_type`
   ADD UNIQUE KEY `code_name` (`code_name`) USING BTREE;
 
 --
--- Indexes for table `ncic_citations`
---
-ALTER TABLE `ncic_citations`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `ncic_names`
 --
 ALTER TABLE `ncic_names`
@@ -1259,12 +1306,6 @@ ALTER TABLE `ncic_plates`
   ADD PRIMARY KEY (`id`) USING BTREE,
   ADD UNIQUE KEY `veh_plate` (`veh_plate`(55)) USING BTREE,
   ADD KEY `name_id` (`name_id`) USING BTREE;
-
---
--- Indexes for table `ncic_warrants`
---
-ALTER TABLE `ncic_warrants`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `permissions`
@@ -1317,6 +1358,16 @@ ALTER TABLE `vehicles`
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `bolos_persons`
+--
+ALTER TABLE `bolos_persons`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unqiue ID of persons BOLO record.';
+--
+-- AUTO_INCREMENT for table `bolos_vehicles`
+--
+ALTER TABLE `bolos_vehicles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unqiue ID of vehicle BOLO record.';
 --
 -- AUTO_INCREMENT for table `calls`
 --
@@ -1399,4 +1450,3 @@ ALTER TABLE `ncic_plates`
 --
 ALTER TABLE `user_departments`
   ADD CONSTRAINT `Department` FOREIGN KEY (`department_id`) REFERENCES `departments` (`department_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
