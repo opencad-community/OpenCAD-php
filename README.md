@@ -2,8 +2,8 @@
 Open Source Computer Aided Dispatch System for GTA V Roleplay Communities.
 
 # Build Status
-* dev\v1_RC1: [![Build Status](https://travis-ci.org/StormlightTech/openCAD-php.svg?branch=development-stable)](https://travis-ci.org/StormlightTech/openCAD-php)
-* release\wiki: [![Build Status](https://travis-ci.org/StormlightTech/openCAD-wiki.svg?branch=master)](https://travis-ci.org/StormlightTech/openCAD-wiki)
+* dev\v1_RC1: [![Build Status](https://travis-ci.org/StormlightTech/OpenCAD-php.svg?branch=master)](https://travis-ci.org/StormlightTech/OpenCAD-php)
+* release\wiki: [![Build Status](https://travis-ci.org/StormlightTech/OpenCAD-wiki.svg?branch=master)](https://travis-ci.org/StormlightTech/OpenCAD-wiki)
 
 # Installation Requirements
 * Operating System: Linux or Windows
