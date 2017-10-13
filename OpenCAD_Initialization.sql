@@ -253,7 +253,7 @@ CREATE TABLE `ncic_names` (
   `last_name` varchar(255) NOT NULL,
   `dob` date NOT NULL COMMENT 'Date of birth',
   `address` text NOT NULL,
-  `sex` varchar(255) NOT NULL,
+  `gender` varchar(255) NOT NULL,
   `race` text NOT NULL,
   `dl_status` set('Valid','Suspended','Expired') NOT NULL,
   `hair_color` text NOT NULL,
