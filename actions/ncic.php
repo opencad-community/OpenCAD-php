@@ -181,7 +181,7 @@ function plate()
 
         while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
         {
-            $owner = $row[11]." ".$row[12];
+            $owner = $row[12]." ".$row[13];
 
             $encode["plate"] = $row[2];
             $encode["veh_make"] = $row[3];

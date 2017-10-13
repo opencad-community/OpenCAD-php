@@ -78,7 +78,7 @@ if(isset($_SESSION['accessMessage']))
 
             <br />
 
-            <?php include "oc-admin-includes/sidebarNav.inc.php"; ?>;
+            <?php include "oc-admin-includes/sidebarNav.inc.php"; ?>
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">

@@ -13,6 +13,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
 require("./oc-config.php");
+require("./actions/api.php");
+require("./oc-functions.php");
 session_start();
 
 if (empty($_SESSION['logged_in']))
@@ -20,6 +22,7 @@ if (empty($_SESSION['logged_in']))
 	header('Location: ./index.php');
     die("Not logged in");
 }
+    setDispatcher("1");
 
 /*
     The purpose of this page is to simply determine if the user has multiple roles.

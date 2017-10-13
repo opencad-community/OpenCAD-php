@@ -12,8 +12,6 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
-
-
     include("./actions/api.php");
     session_start();
 
@@ -34,7 +32,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
       if ($_SESSION['dispatch'] == 'YES')
       {
-          //Do nothing
+    setDispatcher("2");
       }
     }
     else
@@ -42,7 +40,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       die("You do not have permission to be here. Request access to dispatch through your administration.");
     }
 
-    setUnitActive("1");
 
 ?>
 
@@ -227,13 +224,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            </div>
                            <!-- ./ x_title -->
                            <div class="x_content">
-                              <div id="dispatchers">
-                              </div>
+                              <div id="activeDispatchers"></div>
                            </div>
                            <!-- ./ x_content -->
                         </div>
+                        </div>
                         <!-- ./ x_panel -->
-                     </div>
                      <!-- ./ col-md-2 col-sm-2 col-xs-2 -->
                      <div class="col-md-5 col-sm-5 col-xs-5">
                         <div class="x_panel">
@@ -246,8 +242,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            </div>
                            <!-- ./ x_title -->
                            <div class="x_content">
-                              <div id="availableUnits">
-                              </div>
+                              <div id="availableUnits"></div>
                            </div>
                            <!-- ./ x_content -->
                         </div>
@@ -333,7 +328,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      </div>
                      <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
                      <!-- NCIC Firearm lookup will return in a later RC -->
-                     <!-- <div class="col-md-4 col-sm-4 col-xs-4">
+                     <div class="col-md-4 col-sm-4 col-xs-4">
                         <div class="x_panel">
                           <div class="x_title">
                             <h2>NCIC Firearm Lookup</h2>
@@ -356,7 +351,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      </div>
                      <!-- ./ x_content --
                   </div>
-                  -->
                   <!-- ./ x_panel -->
                </div>
                <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
@@ -785,7 +779,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
              getCalls();
              getAvailableUnits();
              getUnAvailableUnits();
-             getActiveDispatchers();
+             getDispatchers();
              checkTones();
 
          });
@@ -914,6 +908,38 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      lengthMenu: [[4, -1], [4, "All"]]
                 });*/
                    setTimeout(getAvailableUnits, 5000);
+
+
+                 },
+                 error : function(XMLHttpRequest, textStatus, errorThrown)
+                 {
+                   console.log("Error");
+                 }
+
+               });
+         }
+
+
+      </script>
+      <script>
+         function getDispatchers() {
+           $.ajax({
+                 type: "GET",
+                 url: "<?php echo BASE_URL; ?>/actions/api.php",
+                 data: {
+                     getDispatchers: 'yes'
+                 },
+                 success: function(response)
+                 {
+                   $('#activeDispatchers').html(response);
+
+                   // SG - Removed until node/real-time data setup
+                   /*$('#activeUsers').DataTable({
+                     searching: false,
+                     scrollY: "200px",
+                     lengthMenu: [[4, -1], [4, "All"]]
+                });*/
+                   setTimeout(getDispatchers, 5000);
 
 
                  },
