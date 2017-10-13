@@ -12,7 +12,7 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
-require_once(__DIR__ . '/../oc-config.php');
+include("../oc-config.php");
 
 /* Handle POST requests */
 if (isset($_POST['delete_name'])){
@@ -32,7 +32,7 @@ if (isset($_POST['create_plate'])){
 function ncicGetNames()
 {
     $uid = $_SESSION['id'];
-    
+
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
     if (!$link) {
@@ -40,7 +40,7 @@ function ncicGetNames()
     }
 
     $query = 'SELECT ncic_names.* FROM `ncic_names` WHERE ncic_names.submittedById = "' . $uid . '"';
-    
+
     $result=mysqli_query($link, $query);
 
     $num_rows = $result->num_rows;
@@ -103,9 +103,9 @@ function ncicGetNames()
 
 function ncicGetPlates()
 {
-    
+
     $uid = $_SESSION['id'];
-    
+
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
     if (!$link) {
@@ -181,9 +181,9 @@ function ncicGetPlates()
 function getCivilianNamesOption()
 {
     session_start();
-    
+
     $uid = $_SESSION['id'];
-    
+
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
     if (!$link) {
@@ -203,8 +203,8 @@ function getCivilianNamesOption()
 function getCivilianNames()
 {
     session_start();
-    
-    
+
+
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
 	if (!$link) {
@@ -346,7 +346,7 @@ function create_name()
     catch(Exception $e)
     {
         die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-        
+
     }
 
     $_SESSION['identityMessage'] = '<div class="alert alert-success"><span>Successfully submitted identity request</span></div>';
@@ -360,7 +360,7 @@ function create_plate()
 {
 	session_start();
     $uid = $_SESSION['id'];
-	    
+
     $submittedById = $_SESSION['id'];
     $userId = $_POST['civilian_names'];
     $veh_plate = $_POST['veh_plate'];
