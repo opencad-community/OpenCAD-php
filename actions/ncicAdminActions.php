@@ -249,8 +249,8 @@ function ncicGetPlates()
 
             echo '
             <tr>
+                <td>'.$row[11].'</td>
                 <td>'.$row[12].'</td>
-                <td>'.$row[13].'</td>
                 <td>'.$row[2].'</td>
                 <td>'.$row[8].'</td>
                 <td>'.$row[3].'</td>
