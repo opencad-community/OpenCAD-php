@@ -141,8 +141,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <h3>MDT Console</h3>
                      </div>
                      <div class="x_footer">
-                        <button class="btn btn-danger pull-right" name="new_call_btn" data-toggle="modal" data-target="#vehicle-bolo-board">View Vehicle BOLOs</button>
-                        <button class="btn btn-danger pull-right" name="new_call_btn" data-toggle="modal" data-target="#person-bolo-board">View Person BOLOs</button>
+                        <button class="btn btn-danger pull-right" name="new_call_btn" data-toggle="modal" data-target="#vehicles-bolo-board">View Vehicle BOLOs</button>
+                        <button class="btn btn-danger pull-right" name="new_call_btn" data-toggle="modal" data-target="#persons-bolo-board">View Person BOLOs</button>
                      </div>
                      <!-- ./ title_left -->
                   </div>
@@ -400,7 +400,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <!-- ./ modal fade -->
 
       <!-- Vehicle BOLO Board Modal -->
-      <div class="modal fade" id="vehicle-bolo-board" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal fade" id="vehicles-bolo-board" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog modal-lg">
             <div class="modal-content">
                <div class="modal-header">
@@ -411,7 +411,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                <!-- ./ modal-header -->
                <div class="modal-body">
                   <form class="callsignForm" id="callsignForm">
-                    <?php cadGetVehicleBOLOS(); ?>
+                    <?php mdtGetVehiclesBOLOS(); ?>
                         <!-- ./ col-sm-9 -->
                      </div>
                      <!-- ./ form-group -->
@@ -426,18 +426,18 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <!-- ./ modal fade -->
 
       <!-- Vehicle BOLO Board Modal -->
-      <div class="modal fade" id="person-bolo-board" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal fade" id="persons-bolo-board" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog modal-lg">
             <div class="modal-content">
                <div class="modal-header">
                   <button type="button" class="close" id="closeCallsign" data-dismiss="modal"><span aria-hidden="true">×</span>
                   </button>
-                  <h4 class="modal-title" id="myModalLabel">Currently Active Person BOLOs</h4>
+                  <h4 class="modal-title" id="myModalLabel">Currently Active Persons BOLOs</h4>
                </div>
                <!-- ./ modal-header -->
                <div class="modal-body">
                   <form class="callsignForm" id="callsignForm">
-                    <?php cadGetPersonBOLOS(); ?>
+                    <?php mdtGetPersonsBOLOS(); ?>
                         <!-- ./ col-sm-9 -->
                      </div>
                      <!-- ./ form-group -->
