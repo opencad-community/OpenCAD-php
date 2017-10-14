@@ -25,7 +25,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     {
       $name = $_SESSION['name'];
     }
-
+    include("./oc-config.php");
     include("./actions/api.php");
     include("./actions/responderActions.php");
 
