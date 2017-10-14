@@ -100,14 +100,14 @@ function getStatus()
 
 
 /**#@+
- * function cadGetVehicleBOLOS()
+ * function mdtGetVehicleBOLOS()
  *
  * Querys database to retrieve all currently entered Vehicle BOLOS.
  *
  * @since 1.0a RC2
  */
 
-function cadGetVehicleBOLOS()
+function mdtGetVehiclesBOLOS()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -115,7 +115,7 @@ function cadGetVehicleBOLOS()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT bolo_vehicle.* FROM bolo_vehicle";
+    $query = "SELECT bolos_vehicles.* FROM bolos_vehicles";
 
     $result=mysqli_query($link, $query);
 
@@ -167,14 +167,14 @@ function cadGetVehicleBOLOS()
 }
 
 /**#@+
- * function cadGetPersonBOLOS()
+ * function mdtGetPersonsBOLOS()
  *
  * Querys database to retrieve all currently entered Person BOLOS.
  *
  * @since 1.0a RC2
  */
 
-function cadGetPersonBOLOS()
+function mdtGetPersonsBOLOS()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -182,7 +182,7 @@ function cadGetPersonBOLOS()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT bolo_person.* FROM bolo_person";
+    $query = "SELECT bolos_persons.* FROM bolos_persons";
 
     $result=mysqli_query($link, $query);
 
