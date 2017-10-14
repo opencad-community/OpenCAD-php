@@ -506,7 +506,7 @@ function newCall()
  * @since 1.0a RC2
  */
 
-function mdtGetVehicleBOLOS()
+function cadGetVehicleBOLOS()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -514,7 +514,7 @@ function mdtGetVehicleBOLOS()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT bolo_vehicle.* FROM bolo_vehicle";
+    $query = "SELECT bolos_vehicles.* FROM bolos_vehicles";
 
     $result=mysqli_query($link, $query);
 
@@ -581,7 +581,7 @@ function mdtGetVehicleBOLOS()
  * @since 1.0a RC2
  */
 
-function mdtGetPersonBOLOS()
+function cadGetPersonBOLOS()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -589,7 +589,7 @@ function mdtGetPersonBOLOS()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT bolo_person.* FROM bolo_person";
+    $query = "SELECT bolos_persons.* FROM bolos_persons";
 
     $result=mysqli_query($link, $query);
 
