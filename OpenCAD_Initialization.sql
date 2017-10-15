@@ -1292,6 +1292,12 @@ ALTER TABLE `incident_type`
   ADD UNIQUE KEY `code_name` (`code_name`) USING BTREE;
 
 --
+-- Indexes for table `ncic_citations`
+--
+ALTER TABLE `ncic_citations`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+  
+--
 -- Indexes for table `ncic_names`
 --
 ALTER TABLE `ncic_names`
@@ -1307,6 +1313,12 @@ ALTER TABLE `ncic_plates`
   ADD UNIQUE KEY `veh_plate` (`veh_plate`(55)) USING BTREE,
   ADD KEY `name_id` (`name_id`) USING BTREE;
 
+--
+-- Indexes for table `ncic_warrants`
+--
+ALTER TABLE `ncic_warrants`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+  
 --
 -- Indexes for table `permissions`
 --
