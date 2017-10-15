@@ -1,6 +1,6 @@
 --
 -- OpenCAD Database Scheme
--- Last Updated: 12 October 2017
+-- Last Updated: 15 October 2017
 -- Updated By: Phill Fernandes <pfernandes@winterhillsolutions.com>
 --
 -- --------------------------------------------------------
@@ -24,38 +24,38 @@ CREATE TABLE `active_users` (
 
 -- --------------------------------------------------------
 
----		
- --- Table structure for table `bolos_persons`		
- ---		
- -		
- -CREATE TABLE `bolos_persons` (		
- -  `id` int(11) NOT NULL COMMENT 'Unqiue ID of persons BOLO record.',		
- -  `first_name` varchar(255) NOT NULL COMMENT 'First name of BOLO suspect.',		
- -  `last_name` varchar(255) NOT NULL COMMENT 'Last name of BOLO suspect.',		
- -  `gender` varchar(255) NOT NULL COMMENT 'Gender of BOLO suspect.',		
- -  `physical_description` varchar(255) NOT NULL COMMENT 'Physical description of BOLO suspect.',		
- -  `reason_wanted` varchar(255) NOT NULL COMMENT 'Reason BOLO suspect is wanted.',		
- -  `last_seen` varchar(255) NOT NULL COMMENT 'Last observed location of BOLO suspect.'		
- -) ENGINE=InnoDB DEFAULT CHARSET=latin1;		
- -		
- --- --------------------------------------------------------		
- -		
- ---		
- --- Table structure for table `bolos_vehicles`		
- ---		
- -		
- -CREATE TABLE `bolos_vehicles` (		
- -  `id` int(11) NOT NULL COMMENT 'Unqiue ID of vehicle BOLO record.',		
- -  `vehicle_make` varchar(255) NOT NULL COMMENT 'Make of BOLO vehicle.',		
- -  `vehicle_model` varchar(255) NOT NULL COMMENT 'Model of BOLO vehicle.',		
- -  `vehicle_plate` varchar(255) NOT NULL COMMENT 'License plate of BOLO vehicles.',		
- -  `primary_color` varchar(255) NOT NULL COMMENT 'Primary color of BOLO vehicle..',		
- -  `secondary_color` varchar(255) NOT NULL COMMENT 'Secondary color of BOLO vehicle.',		
- -  `reason_wanted` varchar(255) NOT NULL COMMENT 'Reason why BOLO vehicle is wanted.',		
- -  `last_seen` varchar(255) NOT NULL COMMENT 'Last observed location of BOLO vehicle.'		
- -) ENGINE=InnoDB DEFAULT CHARSET=latin1;		
- -		
-  -- --------------------------------------------------------
+--
+-- Table structure for table `bolos_persons`
+--
+
+CREATE TABLE `bolos_persons` (
+  `id` int(11) NOT NULL COMMENT 'Unqiue ID of persons BOLO record.',
+  `first_name` varchar(255) NOT NULL COMMENT 'First name of BOLO suspect.',
+  `last_name` varchar(255) NOT NULL COMMENT 'Last name of BOLO suspect.',
+  `gender` varchar(255) NOT NULL COMMENT 'Gender of BOLO suspect.',
+  `physical_description` varchar(255) NOT NULL COMMENT 'Physical description of BOLO suspect.',
+  `reason_wanted` varchar(255) NOT NULL COMMENT 'Reason BOLO suspect is wanted.',
+  `last_seen` varchar(255) NOT NULL COMMENT 'Last observed location of BOLO suspect.'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bolos_vehicles`
+--
+
+CREATE TABLE `bolos_vehicles` (
+  `id` int(11) NOT NULL COMMENT 'Unqiue ID of vehicle BOLO record.',
+  `vehicle_make` varchar(255) NOT NULL COMMENT 'Make of BOLO vehicle.',
+  `vehicle_model` varchar(255) NOT NULL COMMENT 'Model of BOLO vehicle.',
+  `vehicle_plate` varchar(255) NOT NULL COMMENT 'License of BOLO vehicle.',
+  `primary_color` varchar(255) NOT NULL COMMENT 'Primary color of BOLO vehicle.',
+  `secondary_color` varchar(255) NOT NULL COMMENT 'Secondary color of BOLO vehicle.',
+  `reason_wanted` varchar(255) NOT NULL COMMENT 'Reason BOLO suspect is wanted.',
+  `last_seen` varchar(255) NOT NULL COMMENT 'Last observed location of BOLO vehicle.'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `calls`
@@ -1184,17 +1184,17 @@ ALTER TABLE `active_users`
   ADD PRIMARY KEY (`identifier`) USING BTREE,
   ADD UNIQUE KEY `callsign` (`callsign`) USING BTREE,
   ADD UNIQUE KEY `identifier` (`identifier`) USING BTREE;
-
---- Indexes for table `bolos_persons`		
- ---		
- ALTER TABLE `bolos_persons`
- ADD PRIMARY KEY (`id`) USING BTREE;		
- 
- ---		
- --- Indexes for table `bolos_vehicles`		
- ---		
- ALTER TABLE `bolos_vehicles`
- ADD PRIMARY KEY (`id`) USING BTREE;		
+--
+-- Indexes for table `bolos_persons`
+--
+ALTER TABLE `bolos_persons`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+--
+-- Indexes for table `bolos_persons`
+--
+ALTER TABLE `bolos_vehicles`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+  
 --
 -- Indexes for table `calls`
 --
@@ -1328,19 +1328,16 @@ ALTER TABLE `user_departments`
 --
 ALTER TABLE `vehicles`
   ADD PRIMARY KEY (`id`);
-
----
---- AUTO_INCREMENT for table `bolos_persons`
----
+--
+-- AUTO_INCREMENT for table `bolos_persons`
+--
 ALTER TABLE `bolos_persons`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unqiue ID of persons BOLO record.';		
-
----		
---- AUTO_INCREMENT for table `bolos_vehicles`
----
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+--
+-- AUTO_INCREMENT for table `bolos_persons`
+--
 ALTER TABLE `bolos_vehicles`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unqiue ID of vehicle BOLO record.';
-  
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `calls`
 --
