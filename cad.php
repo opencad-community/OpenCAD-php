@@ -347,7 +347,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            </span>
                         </div>
                         <!-- ./ input-group -->
-                        <div name="firearm_return"
+                        <div name="firearm_return">
                         </div>
                      </div>
                      <!-- ./ x_content -->
