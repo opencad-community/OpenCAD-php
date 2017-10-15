@@ -13,6 +13,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
 require_once(__DIR__ . '/../oc-config.php');
+include(__DIR__ . '/api.php');
 
 /* Handle POST requests */
 if (isset($_POST['create_citation'])){
@@ -249,16 +250,16 @@ function ncicGetPlates()
 
             echo '
             <tr>
-                <td>'.$row[11].'</td>
                 <td>'.$row[12].'</td>
+                <td>'.$row[13].'</td>
                 <td>'.$row[2].'</td>
                 <td>'.$row[8].'</td>
                 <td>'.$row[3].'</td>
                 <td>'.$row[4].'</td>
-                <td>'.$row[5].'</td>
-                <td>'.$row[6].'</td>
+                <td>'.$row[5].'/'.$row[6].'</td>
                 <td>'.$row[7].'</td>
-                <td>'.$row[9].'</td>
+                <td>'.$row[8].'</td>
+                <td>'.$row[10].'</td>
                 <td>
                     <form action="../actions/ncicAdminActions.php" method="post">
                     <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
@@ -285,7 +286,7 @@ function ncic_warrants()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT ncic_names.first_name, ncic_names.last_name, ncic_warrants.id, ncic_warrants.issued_date, ncic_warrants.expiration_date, ncic_warrants.warrant_name, ncic_warrants.issuing_agency, ncic_warrants.status FROM ncic_warrants INNER JOIN ncic_names ON ncic_warrants.name_id=ncic_names.id";
+    $query = "SELECT ncic_warrants.*, ncic_names.first_name, ncic_names.last_name FROM ncic_warrants INNER JOIN ncic_names ON ncic_names.id=ncic_warrants.name_id";
 
     $result=mysqli_query($link, $query);
 
@@ -318,18 +319,18 @@ function ncic_warrants()
         {
             echo '
             <tr>
-                <td>'.$row[7].'</td>
-                <td>'.$row[0].'</td>
-                <td>'.$row[1].'</td>
-                <td>'.$row[5].'</td>
-                <td>'.$row[3].'</td>
-                <td>'.$row[4].'</td>
                 <td>'.$row[6].'</td>
+                <td>'.$row[7].'</td>
+                <td>'.$row[8].'</td>
+                <td>'.$row[2].'</td>
+                <td>'.$row[5].'</td>
+                <td>'.$row[1].'</td>
+                <td>'.$row[3].'</td>
                 <td>
                     <form action="../actions/ncicAdminActions.php" method="post">
                     <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
                     ';
-                        if ($row[7] == "Active")
+                        if ($row[6] == "Active")
                         {
                             echo '<input name="serveWarrant" type="submit" class="btn btn-xs btn-link" value="Serve" disabled/>';
                         }
@@ -339,7 +340,7 @@ function ncic_warrants()
                         }
                     echo '
                     <input name="delete_warrant" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Expunge" />
-                    <input name="wid" type="hidden" value='.$row[2].' />
+                    <input name="wid" type="hidden" value='.$row[0].' />
                     </form>
                 </td>
             </tr>
@@ -412,23 +413,6 @@ function ncic_citations()
             </tbody>
             </table>
         ';
-    }
-}
-function getCivilianNamesOption()
-{
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
-    }
-
-    $sql = "SELECT id, first_name, last_name FROM ncic_names";
-
-    $result=mysqli_query($link, $sql);
-
-    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
-    {
-        echo "<option value=".$row[0].">".$row[1]." ".$row[2]."</option>";
     }
 }
 
@@ -558,13 +542,15 @@ function create_warrant()
 	if (!$link) {
 		die('Could not connect: ' .mysql_error());
 	}
+	$status = 'Active';
+	$date = date('Y-m-d H:i:s');
 
-    $sql = "INSERT INTO ncic_warrants (name_id, expiration_date, warrant_name, issuing_agency) SELECT ?, DATE_ADD(NOW(), INTERVAL ? day), ?, ?";
+    $sql = "INSERT INTO ncic_warrants (name_id, expiration_date, warrant_name, issuing_agency, status, issued_date) SELECT ?, DATE_ADD(NOW(), INTERVAL ? day), ?, ?, ?, ?";
 
 
 	try {
 		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "iiss", $userId, $interval, $warrant_name, $issuing_agency);
+		mysqli_stmt_bind_param($stmt, "iissss", $userId, $interval, $warrant_name, $issuing_agency, $status, $date);
 		$result = mysqli_stmt_execute($stmt);
 
 		if ($result == FALSE) {
@@ -623,7 +609,6 @@ function delete_plate()
 	}
 
     $vehid = $_POST['vehid'];
-    echo $vehid;
 
     $query = "DELETE FROM ncic_plates WHERE id = ?";
 
@@ -686,7 +671,6 @@ function delete_warrant()
 	}
 
     $wid = $_POST['wid'];
-    echo $wid;
 
     $query = "DELETE FROM ncic_warrants WHERE id = ?";
 
@@ -784,12 +768,12 @@ function create_plate()
     $veh_plate = $_POST['veh_plate'];
     $veh_make = $_POST['veh_make'];
     $veh_model = $_POST['veh_model'];
-    $veh_color = $_POST['veh_color'];
+    $veh_pcolor = $_POST['veh_pcolor'];
+    $veh_scolor = $_POST['veh_scolor'];
     $veh_insurance = $_POST['veh_insurance'];
     $flags = $_POST['flags'];
     $veh_reg_state = $_POST['veh_reg_state'];
     $notes = $_POST['notes'];
-    $hidden_notes = $_POST['hidden_notes'];
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -797,12 +781,12 @@ function create_plate()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $sql = "INSERT INTO ncic_plates (name_id, veh_plate, veh_make, veh_model, veh_color, veh_insurance, flags, veh_reg_state, notes, hidden_notes, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO ncic_plates (name_id, veh_plate, veh_make, veh_model, veh_pcolor, veh_scolor, veh_insurance, flags, veh_reg_state, notes, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 
 	try {
 		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "issssssssss", $userId, $veh_plate, $veh_make, $veh_model, $veh_color, $veh_insurance, $flags, $veh_reg_state, $notes, $hidden_notes, $submittedById);
+		mysqli_stmt_bind_param($stmt, "issssssssss", $userId, $veh_plate, $veh_make, $veh_model, $veh_pcolor, $veh_scolor, $veh_insurance, $flags, $veh_reg_state, $notes, $submittedById);
 		$result = mysqli_stmt_execute($stmt);
 
 		if ($result == FALSE) {
@@ -819,23 +803,5 @@ function create_plate()
     $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully added plate to the database</span></div>';
 
     header("Location:../oc-admin/ncicAdmin.php#plate_panel");
-}
-
-function getCitations()
-{
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
-    }
-
-    $sql = "SELECT citation_name FROM citations";
-
-    $result=mysqli_query($link, $sql);
-
-    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
-    {
-        echo "<option value=".$row[0].">".$row[0]."</option>";
-    }
 }
 ?>

@@ -49,7 +49,7 @@ $("#ncic_plate").keyup(function(event){
     }
 });
 
-// Handles the NCIC Plate Lookup on dispatch.php
+// Handles the NCIC Plate Lookup on cad.php
 $('#ncic_plate_btn').on('click', function(e) {
     var plate = document.getElementById('ncic_plate').value;
     $('#ncic_plate_return').empty();
@@ -146,7 +146,7 @@ $('#ncic_plate_btn').on('click', function(e) {
 
             phoentic = result;
 
-            $('#ncic_plate_return').append("Plate: "+data['plate']+"<br/>Phoenetic: "+phoentic+"<br/>Color: "+data['veh_color']+"<br/>Make: "+data['veh_make']+"<br/>Model: "+data['veh_model']+"<br/>Owner: "+data['veh_ro']
+            $('#ncic_plate_return').append("Plate: "+data['plate']+"<br/>Phoenetic: "+phoentic+"<br/>Primary Color: "+data['veh_pcolor']+"<br/>Secondary Color: "+data['veh_scolor']+"<br/>Make: "+data['veh_make']+"<br/>Model: "+data['veh_model']+"<br/>Owner: "+data['veh_ro']
             +"<br/>Insurance: "+insurance_status+"<br/>Flags: "+flags+"<br/><br/>Notes: "+notes);
 
             $("#ncic_plate_return").attr("tabindex",-1).focus();
@@ -157,7 +157,7 @@ $('#ncic_plate_btn').on('click', function(e) {
     });
 });
 
-// Handles the NCIC Name Lookup on dispatch.php
+// Handles the NCIC Name Lookup on cad.php
 $('#ncic_name_btn').on('click', function(e) {
     var name = document.getElementById('ncic_name').value;
     $('#ncic_name_return').empty();
