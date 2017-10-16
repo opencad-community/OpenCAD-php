@@ -1,8 +1,14 @@
 --
 -- OpenCAD Database Scheme
--- Last Updated: 13 October 2017
+-- Last Updated: 15 October 2017
 -- Updated By: Phill Fernandes <pfernandes@winterhillsolutions.com>
 --
+-- --------------------------------------------------------
+ 
+--
+-- Database: `opencad`
+--
+
 -- --------------------------------------------------------
 
 --
@@ -15,13 +21,6 @@ CREATE TABLE `active_users` (
   `status` int(11) NOT NULL COMMENT 'Unit status, 0=busy/unavailable, 1=available, 2=dispatcher',
   `status_detail` int(11) NOT NULL COMMENT 'Paired to Statuses table'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
-
---
--- Dumping data for table `active_users`
---
-
-INSERT INTO `active_users` (`identifier`, `callsign`, `status`, `status_detail`) VALUES
-('1A-98', '1A-98', 0, 2);
 
 -- --------------------------------------------------------
 
@@ -37,7 +36,7 @@ CREATE TABLE `bolos_persons` (
   `physical_description` varchar(255) NOT NULL COMMENT 'Physical description of BOLO suspect.',
   `reason_wanted` varchar(255) NOT NULL COMMENT 'Reason BOLO suspect is wanted.',
   `last_seen` varchar(255) NOT NULL COMMENT 'Last observed location of BOLO suspect.'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
@@ -49,12 +48,12 @@ CREATE TABLE `bolos_vehicles` (
   `id` int(11) NOT NULL COMMENT 'Unqiue ID of vehicle BOLO record.',
   `vehicle_make` varchar(255) NOT NULL COMMENT 'Make of BOLO vehicle.',
   `vehicle_model` varchar(255) NOT NULL COMMENT 'Model of BOLO vehicle.',
-  `vehicle_plate` varchar(255) NOT NULL COMMENT 'License plate of BOLO vehicles.',
-  `primary_color` varchar(255) NOT NULL COMMENT 'Primary color of BOLO vehicle..',
+  `vehicle_plate` varchar(255) NOT NULL COMMENT 'License of BOLO vehicle.',
+  `primary_color` varchar(255) NOT NULL COMMENT 'Primary color of BOLO vehicle.',
   `secondary_color` varchar(255) NOT NULL COMMENT 'Secondary color of BOLO vehicle.',
-  `reason_wanted` varchar(255) NOT NULL COMMENT 'Reason why BOLO vehicle is wanted.',
+  `reason_wanted` varchar(255) NOT NULL COMMENT 'Reason BOLO suspect is wanted.',
   `last_seen` varchar(255) NOT NULL COMMENT 'Last observed location of BOLO vehicle.'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
@@ -124,6 +123,271 @@ CREATE TABLE `civilian_names` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `colors`
+--
+
+CREATE TABLE `colors` (
+  `id` int(11) DEFAULT NULL,
+  `color_group` varchar(255) DEFAULT NULL,
+  `color_name` varchar(255) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `colors`
+--
+
+INSERT INTO `colors` (`id`, `color_group`, `color_name`) VALUES
+(1, 'Chrome', 'Chrome'),
+(2, 'Classic', 'Black'),
+(3, 'Classic', 'Carbon Black'),
+(4, 'Classic', 'Graphite'),
+(5, 'Classic', 'Anthracite Black'),
+(6, 'Classic', 'Black Steel'),
+(7, 'Classic', 'Dark Steel'),
+(8, 'Classic', 'Silver'),
+(9, 'Classic', 'Bluish Silver'),
+(10, 'Classic', 'Rolled Steel'),
+(11, 'Classic', 'Shadow Silver'),
+(12, 'Classic', 'Midnigh Silver'),
+(13, 'Classic', 'Cast Iron Silver'),
+(14, 'Classic', 'Red'),
+(15, 'Classic', 'Torino Red'),
+(16, 'Classic', 'Forumula Red'),
+(17, 'Classic', 'Lava Red'),
+(18, 'Classic', 'Blaze Red'),
+(19, 'Classic', 'Grace Red'),
+(20, 'Classic', 'Garnet Red'),
+(21, 'Classic', 'Sunset Red'),
+(22, 'Classic', 'Cabernet Red'),
+(23, 'Classic', 'Wine Red'),
+(24, 'Classic', 'Candy Red'),
+(25, 'Classic', 'Hot Pink'),
+(26, 'Classic', 'Pfister Pink'),
+(27, 'Classic', 'Salmon Pink'),
+(28, 'Classic', 'Sunrise Orange'),
+(29, 'Classic', 'Orange'),
+(30, 'Classic', 'Bright Orange'),
+(31, 'Classic', 'Gold'),
+(32, 'Classic', 'Bronze'),
+(33, 'Classic', 'Yellow'),
+(34, 'Classic', 'Race Yellow'),
+(35, 'Classic', 'Dew Yellow'),
+(36, 'Classic', 'Dark Green'),
+(37, 'Classic', 'Racing Green'),
+(38, 'Classic', 'Sea Green'),
+(39, 'Classic', 'Olive Green'),
+(40, 'Classic', 'Bright Green'),
+(41, 'Classic', 'Gasoline Green'),
+(42, 'Classic', 'Lime Green'),
+(43, 'Classic', 'Midnight Blue'),
+(44, 'Classic', 'Galaxy Blue'),
+(45, 'Classic', 'Dark Blue'),
+(46, 'Classic', 'Saxon Blue'),
+(47, 'Classic', 'Blue'),
+(48, 'Classic', 'Mariner Blue'),
+(49, 'Classic', 'Harbor Blue'),
+(50, 'Classic', 'Diamond Blue'),
+(51, 'Classic', 'Surf Blue'),
+(52, 'Classic', 'Nautical Blue'),
+(53, 'Classic', 'Racaing Blue'),
+(54, 'Classic', 'Ultra Blue'),
+(55, 'Classic', 'Light Blue'),
+(56, 'Classic', 'Chocolate Brown'),
+(57, 'Classic', 'Bison Brown'),
+(58, 'Classic', 'Creek Brown'),
+(59, 'Classic', 'Feltzer Brown'),
+(60, 'Classic', 'Maple Brown'),
+(61, 'Classic', 'Beechwood Brown'),
+(62, 'Classic', 'Sienna Brown'),
+(63, 'Classic', 'Saddle Brown'),
+(64, 'Classic', 'Moss Brown'),
+(65, 'Classic', 'Woodbeech Brown'),
+(66, 'Classic', 'Straw Brown'),
+(67, 'Classic', 'Sandy Brown'),
+(68, 'Classic', 'Bleached Brown'),
+(69, 'Classic', 'Schafter Purple'),
+(70, 'Classic', 'Spinnaker Purple'),
+(71, 'Classic', 'Midnight Purple'),
+(72, 'Classic', 'Bright Purple'),
+(73, 'Classic', 'Cream'),
+(74, 'Classic', 'Ice White'),
+(75, 'Classic', 'Frost White'),
+(76, 'Matte', 'Black'),
+(77, 'Matte', 'Gray'),
+(78, 'Matte', 'Light Gray'),
+(79, 'Matte', 'Ice White'),
+(80, 'Matte', 'Blue'),
+(81, 'Matte', 'Dark Blue'),
+(82, 'Matte', 'Midnight Blue'),
+(83, 'Matte', 'Midnight Purple'),
+(84, 'Matte', 'Shafter Purple'),
+(85, 'Matte', 'Red'),
+(86, 'Matte', 'Dark REd'),
+(87, 'Matte', 'Orange'),
+(88, 'Matte', 'Yellow'),
+(89, 'Matte', 'Lime Green'),
+(90, 'Matte', 'Green'),
+(91, 'Matte', 'Forest Green'),
+(92, 'Matte', 'Foliage Green'),
+(93, 'Matte', 'Olive Drag'),
+(94, 'Matte', 'Dark Earch'),
+(95, 'Matte', 'Desert Tan'),
+(96, 'Metallic', 'Black'),
+(97, 'Metallic', 'Carbon Black'),
+(98, 'Metallic', 'Graphite'),
+(99, 'Metallic', 'Anthracite Black'),
+(100, 'Metallic', 'Black Steel'),
+(101, 'Metallic', 'Dark Steel'),
+(102, 'Metallic', 'Silver'),
+(103, 'Metallic', 'Bluish Silver'),
+(104, 'Metallic', 'Rolled Steel'),
+(105, 'Metallic', 'Shadow Silver'),
+(106, 'Metallic', 'Stone Silver'),
+(107, 'Metallic', 'Midnight Silver'),
+(108, 'Metallic', 'Cast Iron Silver'),
+(109, 'Metallic', 'Red'),
+(110, 'Metallic', 'Torino Red'),
+(111, 'Metallic', 'Formula Red'),
+(112, 'Metallic', 'Lava Red'),
+(113, 'Metallic', 'Blaze REd'),
+(114, 'Metallic', 'Grace REd'),
+(115, 'Metallic', 'Garnet Red'),
+(116, 'Metallic', 'Sunset Red'),
+(117, 'Metallic', 'Cabernet REd'),
+(118, 'Metallic', 'Wine REd'),
+(119, 'Metallic', 'Candy Red'),
+(120, 'Metallic', 'Hot Pink'),
+(121, 'Metallic', 'Pfister Pink'),
+(122, 'Metallic', 'salmon Pink'),
+(123, 'Metallic', 'Sunrise Orange'),
+(124, 'Metallic', 'Orange'),
+(125, 'Metallic', 'Bright Orange'),
+(126, 'Metallic', 'Gold Bronze'),
+(127, 'Metallic', 'Yellow'),
+(128, 'Metallic', 'Race Yellow'),
+(129, 'Metallic', 'Dew Yellow'),
+(130, 'Metallic', 'Dark Green'),
+(131, 'Metallic', 'Racing Green'),
+(132, 'Metallic', 'Sea Green'),
+(133, 'Metallic', 'Olive Green'),
+(134, 'Metallic', 'Bright Green'),
+(135, 'Metallic', 'Gasoline Green'),
+(136, 'Metallic', 'Lime Green'),
+(137, 'Metallic', 'Midnight Blue'),
+(138, 'Metallic', 'Galazy BLue'),
+(139, 'Metallic', 'Dark Blue'),
+(140, 'Metallic', 'Saxon Blue'),
+(141, 'Metallic', 'Blue'),
+(142, 'Metallic', 'Mariner Bue'),
+(143, 'Metallic', 'Harbor Blue'),
+(144, 'Metallic', 'Diamond BLue'),
+(145, 'Metallic', 'Surf Blue'),
+(146, 'Metallic', 'Nauical Blue'),
+(147, 'Metallic', 'Racing BLue'),
+(148, 'Metallic', 'Ultra BLue'),
+(149, 'Metallic', 'Light BLue'),
+(150, 'Metallic', 'Chocolate Brown'),
+(151, 'Metallic', 'Bison Brown'),
+(152, 'Metallic', 'Creek Brown'),
+(153, 'Metallic', 'Feltzer Brown'),
+(154, 'Metallic', 'Maple Brown'),
+(155, 'Metallic', 'Beechwood Brown'),
+(156, 'Metallic', 'Sienna Brown'),
+(157, 'Metallic', 'Saddle Brown'),
+(158, 'Metallic', 'Moss Brown'),
+(159, 'Metallic', 'Woodbeech Brown'),
+(160, 'Metallic', 'Straw Brown'),
+(161, 'Metallic', 'Sandy BRown'),
+(162, 'Metallic', 'Bleached Brown'),
+(163, 'Metallic', 'Schafter Purple'),
+(164, 'Metallic', 'Spinnaker Purple'),
+(165, 'Metallic', 'Midnight Purple'),
+(166, 'Metallic', 'Bright Purple'),
+(167, 'Metallic', 'Cream'),
+(168, 'Metallic', 'Ice White'),
+(169, 'Metallic', 'Frost White'),
+(170, 'Metals', 'Brushed STeel'),
+(171, 'Metals', 'Brushed Black Steel'),
+(172, 'Metals', 'Brushed Aluminium'),
+(173, 'Metals', 'Pure Gold'),
+(174, 'Metals', 'Brushed Gold'),
+(175, 'Pearlescent', 'Black'),
+(176, 'Pearlescent', 'Carbon Black'),
+(177, 'Pearlescent', 'Graphite'),
+(178, 'Pearlescent', 'Anthracite Black'),
+(179, 'Pearlescent', 'Black Steel'),
+(180, 'Pearlescent', 'Dark Steel'),
+(181, 'Pearlescent', 'Silver'),
+(182, 'Pearlescent', 'Bluish Silver'),
+(183, 'Pearlescent', 'Rolled Steel'),
+(184, 'Pearlescent', 'Shadow Silver'),
+(185, 'Pearlescent', 'Stone Silver'),
+(186, 'Pearlescent', 'Midnight Silver'),
+(187, 'Pearlescent', 'Cast Iron Silver'),
+(188, 'Pearlescent', 'Red'),
+(189, 'Pearlescent', 'Torino Red'),
+(190, 'Pearlescent', 'Formula Red'),
+(191, 'Pearlescent', 'Lava Red'),
+(192, 'Pearlescent', 'Blaze REd'),
+(193, 'Pearlescent', 'Grace REd'),
+(194, 'Pearlescent', 'Garnet Red'),
+(195, 'Pearlescent', 'Sunset Red'),
+(196, 'Pearlescent', 'Cabernet REd'),
+(197, 'Pearlescent', 'Wine REd'),
+(198, 'Pearlescent', 'Candy Red'),
+(199, 'Pearlescent', 'Hot Pink'),
+(200, 'Pearlescent', 'Pfister Pink'),
+(201, 'Pearlescent', 'salmon Pink'),
+(202, 'Pearlescent', 'Sunrise Orange'),
+(203, 'Pearlescent', 'Orange'),
+(204, 'Pearlescent', 'Bright Orange'),
+(205, 'Pearlescent', 'Gold Bronze'),
+(206, 'Pearlescent', 'Yellow'),
+(207, 'Pearlescent', 'Race Yellow'),
+(208, 'Pearlescent', 'Dew Yellow'),
+(209, 'Pearlescent', 'Dark Green'),
+(210, 'Pearlescent', 'Racing Green'),
+(211, 'Pearlescent', 'Sea Green'),
+(212, 'Pearlescent', 'Olive Green'),
+(213, 'Pearlescent', 'Bright Green'),
+(214, 'Pearlescent', 'Gasoline Green'),
+(215, 'Pearlescent', 'Lime Green'),
+(216, 'Pearlescent', 'Midnight Blue'),
+(217, 'Pearlescent', 'Galazy BLue'),
+(218, 'Pearlescent', 'Dark Blue'),
+(219, 'Pearlescent', 'Saxon Blue'),
+(220, 'Pearlescent', 'Blue'),
+(221, 'Pearlescent', 'Mariner Bue'),
+(222, 'Pearlescent', 'Harbor Blue'),
+(223, 'Pearlescent', 'Diamond BLue'),
+(224, 'Pearlescent', 'Surf Blue'),
+(225, 'Pearlescent', 'Nauical Blue'),
+(226, 'Pearlescent', 'Racing BLue'),
+(227, 'Pearlescent', 'Ultra BLue'),
+(228, 'Pearlescent', 'Light BLue'),
+(229, 'Pearlescent', 'Chocolate Brown'),
+(230, 'Pearlescent', 'Bison Brown'),
+(231, 'Pearlescent', 'Creek Brown'),
+(232, 'Pearlescent', 'Feltzer Brown'),
+(233, 'Pearlescent', 'Maple Brown'),
+(234, 'Pearlescent', 'Beechwood Brown'),
+(235, 'Pearlescent', 'Sienna Brown'),
+(236, 'Pearlescent', 'Saddle Brown'),
+(237, 'Pearlescent', 'Moss Brown'),
+(238, 'Pearlescent', 'Woodbeech Brown'),
+(239, 'Pearlescent', 'Straw Brown'),
+(240, 'Pearlescent', 'Sandy BRown'),
+(241, 'Pearlescent', 'Bleached Brown'),
+(242, 'Pearlescent', 'Schafter Purple'),
+(243, 'Pearlescent', 'Spinnaker Purple'),
+(244, 'Pearlescent', 'Midnight Purple'),
+(245, 'Pearlescent', 'Bright Purple'),
+(246, 'Pearlescent', 'Cream'),
+(247, 'Pearlescent', 'Ice White'),
+(248, 'Pearlescent', 'Frost White');
+
+
+--
 -- Table structure for table `departments`
 --
 
@@ -160,13 +424,6 @@ CREATE TABLE `dispatchers` (
   `status` int(11) NOT NULL COMMENT 'Unit status, 0=offline, 1=online'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
---
--- Dumping data for table `dispatchers`
---
-
-INSERT INTO `dispatchers` (`identifier`, `callsign`, `status`) VALUES
-('1A-98', '1A-98', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -174,7 +431,7 @@ INSERT INTO `dispatchers` (`identifier`, `callsign`, `status`) VALUES
 --
 
 CREATE TABLE `genders` (
-  `id` int(11) NOT NULL,
+  `id` INT(11) NOT NULL,
   `genders` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
@@ -209,32 +466,6 @@ INSERT INTO `genders` (`id`, `genders`) VALUES
 (23, 'Transsexual Male'),
 (24, 'Transsexual Person'),
 (25, 'Two-Spirit');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `identity_requests`
---
-
-CREATE TABLE `identity_requests` (
-  `req_id` int(11) NOT NULL,
-  `submittedByName` varchar(255) DEFAULT NULL,
-  `submittedById` int(20) DEFAULT NULL,
-  `first_name` varchar(255) DEFAULT NULL,
-  `last_name` varchar(255) DEFAULT NULL,
-  `dob` date DEFAULT NULL,
-  `address` text DEFAULT NULL,
-  `sex` text DEFAULT NULL,
-  `race` text DEFAULT NULL,
-  `hair_color` text DEFAULT NULL,
-  `build` text DEFAULT NULL,
-  `biography` text DEFAULT NULL,
-  `veh_plate` text DEFAULT NULL,
-  `veh_make` text DEFAULT NULL,
-  `veh_model` text DEFAULT NULL,
-  `veh_color` text DEFAULT NULL,
-  `submitted_on` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
@@ -274,11 +505,11 @@ INSERT INTO `incident_type` (`code_id`, `code_name`) VALUES
 
 CREATE TABLE `ncic_citations` (
   `id` int(11) NOT NULL,
-  `status` tinyint(2) NOT NULL DEFAULT 0 COMMENT '0 = Pending, 1 = Approved/Active',
+  `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '0 = Pending, 1 = Approved/Active',
   `name_id` int(11) NOT NULL COMMENT 'Paired to ID of ncic_names table',
   `citation_name` text NOT NULL,
-  `issued_date` timestamp NOT NULL DEFAULT current_timestamp
-) ;
+  `issued_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -294,7 +525,7 @@ CREATE TABLE `ncic_names` (
   `last_name` varchar(255) NOT NULL,
   `dob` date NOT NULL COMMENT 'Date of birth',
   `address` text NOT NULL,
-  `sex` set('Male','Female') NOT NULL,
+  `gender` varchar(255) NOT NULL,
   `race` text NOT NULL,
   `dl_status` set('Valid','Suspended','Expired') NOT NULL,
   `hair_color` text NOT NULL,
@@ -313,7 +544,8 @@ CREATE TABLE `ncic_plates` (
   `veh_plate` text NOT NULL,
   `veh_make` text NOT NULL,
   `veh_model` text NOT NULL,
-  `veh_color` text NOT NULL,
+  `veh_pcolor` text NOT NULL,
+  `veh_scolor` text NOT NULL,
   `veh_insurance` set('VALID','EXPIRED') NOT NULL DEFAULT 'VALID',
   `flags` set('NONE','STOLEN','WANTED','SUSPENDED REGISTRATION','UC FLAG','HPIU FLAG') NOT NULL DEFAULT 'NONE',
   `veh_reg_state` text NOT NULL,
@@ -329,9 +561,13 @@ CREATE TABLE `ncic_plates` (
 
 CREATE TABLE `ncic_warrants` (
   `id` int(11) NOT NULL,
+  `expiration_date` date DEFAULT NULL,
+  `warrant_name` varchar(255) NOT NULL,
+  `issuing_agency` varchar(255) NOT NULL,
   `name_id` int(11) NOT NULL COMMENT 'Key that pairs to the ncic_name id',
-  `issued_date` timestamp NOT NULL DEFAULT current_timestamp
-) ;
+  `issued_date` date DEFAULT NULL,
+  `status` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -644,8 +880,8 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `password` text DEFAULT NULL,
   `identifier` varchar(255) DEFAULT NULL,
-  `password_reset` int(1) NOT NULL DEFAULT 0 COMMENT '1 means password reset required. 0 means it''s not.',
-  `approved` int(1) NOT NULL DEFAULT 0 COMMENT 'Three main statuses: 0 means pending approval. 1 means has access. 2 means banned'
+  `password_reset` int(1) NOT NULL DEFAULT '0' COMMENT '1 means password reset required. 0 means it''s not.',
+  `approved` int(1) NOT NULL DEFAULT '0' COMMENT 'Three main statuses: 0 means pending approval. 1 means has access. 2 means banned'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='User table' ROW_FORMAT=COMPACT;
 
 --
@@ -1213,19 +1449,17 @@ ALTER TABLE `active_users`
   ADD PRIMARY KEY (`identifier`) USING BTREE,
   ADD UNIQUE KEY `callsign` (`callsign`) USING BTREE,
   ADD UNIQUE KEY `identifier` (`identifier`) USING BTREE;
-
 --
 -- Indexes for table `bolos_persons`
 --
 ALTER TABLE `bolos_persons`
-  ADD PRIMARY KEY (`id`);
-
+  ADD PRIMARY KEY (`id`) USING BTREE;
 --
--- Indexes for table `bolos_vehicles`
+-- Indexes for table `bolos_persons`
 --
 ALTER TABLE `bolos_vehicles`
-  ADD PRIMARY KEY (`id`);
-
+  ADD PRIMARY KEY (`id`) USING BTREE;
+  
 --
 -- Indexes for table `calls`
 --
@@ -1259,11 +1493,17 @@ ALTER TABLE `civilian_names`
   ADD UNIQUE KEY `names_id` (`names_id`) USING BTREE;
 
 --
+-- Indexes for table `colors`
+--
+ALTER TABLE `colors`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+  
+--
 -- Indexes for table `departments`
 --
 ALTER TABLE `departments`
   ADD PRIMARY KEY (`department_id`) USING BTREE;
-
+  
 --
 -- Indexes for table `dispatchers`
 --
@@ -1271,18 +1511,12 @@ ALTER TABLE `dispatchers`
   ADD PRIMARY KEY (`identifier`) USING BTREE,
   ADD UNIQUE KEY `callsign` (`callsign`) USING BTREE,
   ADD UNIQUE KEY `identifier` (`identifier`) USING BTREE;
-
+  
 --
 -- Indexes for table `genders`
 --
 ALTER TABLE `genders`
   ADD PRIMARY KEY (`id`) USING BTREE;
-
---
--- Indexes for table `identity_requests`
---
-ALTER TABLE `identity_requests`
-  ADD PRIMARY KEY (`req_id`) USING BTREE;
 
 --
 -- Indexes for table `incident_type`
@@ -1296,7 +1530,7 @@ ALTER TABLE `incident_type`
 --
 ALTER TABLE `ncic_citations`
   ADD PRIMARY KEY (`id`) USING BTREE;
-  
+
 --
 -- Indexes for table `ncic_names`
 --
@@ -1318,12 +1552,12 @@ ALTER TABLE `ncic_plates`
 --
 ALTER TABLE `ncic_warrants`
   ADD PRIMARY KEY (`id`) USING BTREE;
-  
+
 --
 -- Indexes for table `permissions`
 --
 ALTER TABLE `permissions`
-  ADD PRIMARY KEY (`perm_id`);
+  ADD PRIMARY KEY (`perm_id`) USING BTREE;
 
 --
 -- Indexes for table `statuses`
@@ -1335,7 +1569,7 @@ ALTER TABLE `statuses`
 -- Indexes for table `streets`
 --
 ALTER TABLE `streets`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
 -- Indexes for table `tones`
@@ -1365,21 +1599,16 @@ ALTER TABLE `user_departments`
 --
 ALTER TABLE `vehicles`
   ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
 --
 -- AUTO_INCREMENT for table `bolos_persons`
 --
 ALTER TABLE `bolos_persons`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unqiue ID of persons BOLO record.';
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
--- AUTO_INCREMENT for table `bolos_vehicles`
+-- AUTO_INCREMENT for table `bolos_persons`
 --
 ALTER TABLE `bolos_vehicles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unqiue ID of vehicle BOLO record.';
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `calls`
 --
@@ -1390,11 +1619,6 @@ ALTER TABLE `calls`
 --
 ALTER TABLE `citations`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
---
--- AUTO_INCREMENT for table `identity_requests`
---
-ALTER TABLE `identity_requests`
-  MODIFY `req_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `ncic_citations`
 --

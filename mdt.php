@@ -25,7 +25,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     {
       $name = $_SESSION['name'];
     }
-    include("./oc-config.php");
+
     include("./actions/api.php");
     include("./actions/responderActions.php");
 
@@ -411,7 +411,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                <!-- ./ modal-header -->
                <div class="modal-body">
                   <form class="callsignForm" id="callsignForm">
-                    <?php mdtGetVehiclesBOLOS(); ?>
+                    <?php mdtGetVehicleBOLOS(); ?>
                         <!-- ./ col-sm-9 -->
                      </div>
                      <!-- ./ form-group -->
@@ -432,12 +432,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                <div class="modal-header">
                   <button type="button" class="close" id="closeCallsign" data-dismiss="modal"><span aria-hidden="true">×</span>
                   </button>
-                  <h4 class="modal-title" id="myModalLabel">Currently Active Persons BOLOs</h4>
+                  <h4 class="modal-title" id="myModalLabel">Currently Active Person BOLOs</h4>
                </div>
                <!-- ./ modal-header -->
                <div class="modal-body">
                   <form class="callsignForm" id="callsignForm">
-                    <?php mdtGetPersonsBOLOS(); ?>
+                    <?php mdtGetPersonBOLOS(); ?>
                         <!-- ./ col-sm-9 -->
                      </div>
                      <!-- ./ form-group -->

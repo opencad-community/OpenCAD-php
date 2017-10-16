@@ -12,7 +12,7 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
-include("../oc-config.php");
+require_once(__DIR__ . "/../oc-config.php");
 
 if (isset($_POST['clearCall']))
 {
@@ -514,7 +514,7 @@ function cadGetVehicleBOLOS()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT bolos_vehicles.* FROM bolos_vehicles";
+    $query = "SELECT bolos_vehicle.* FROM bolo_svehicle";
 
     $result=mysqli_query($link, $query);
 
@@ -589,7 +589,7 @@ function cadGetPersonBOLOS()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT bolos_persons.* FROM bolos_persons";
+    $query = "SELECT bolos_person.* FROM bolos_person";
 
     $result=mysqli_query($link, $query);
 

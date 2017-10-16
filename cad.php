@@ -346,7 +346,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <button type="button" class="btn btn-primary" disabled>Send</button>
                            </span>
                         </div>
-                        <!-- ./ input-group -->>
+                        <!-- ./ input-group -->
                         <div name="firearm_return">
                         </div>
                      </div>
@@ -953,8 +953,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                    console.log("Error");
                  }
 
-               );
+               });
          }
+
+
       </script>
    </body>
 </html>

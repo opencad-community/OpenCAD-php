@@ -545,7 +545,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Date of Birth</label>
                 <div class="col-lg-10">
-					<input type="text" name="civDobReq" class="form-control" id="civDobReq" placeholder="YYYY-MM-DD" maxlength="10" value="<?php echo $civDob;?>" required/>
+					<input type="text" name="civDobReq" class="form-control" id="datepicker" maxlength="10" value="<?php echo $civDob;?>" required/>
 					<span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -564,32 +564,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Sex</label>
                 <div class="col-lg-10">
 					<select name="civSexReq" class="form-control selectpicker" id="civSexReq" title="Select a sex" required>
-						<option val="agender">Agender</option>
-						<option val="androgyne">Androgyne</option>
-						<option val="androgynous">Androgynous</option>
-						<option val="bigender">Bigender</option>
-						<option val="cfemale">Cis Female</option>
-						<option val="cmale">Cis Male</option>
-						<option val="female">Female</option>
-						<option val="gfluid">Gender Fluid</option>
-						<option val="gnoncom">Gender Nonconforming</option>
-						<option val="gquestion">Gender Questioning</option>
-						<option val="gvariant">Gender Variant</option>
-						<option val="gqueer">Genderqueer</option>
-						<option val="intersex">Intersex</option>
-						<option val="male">Male</option>
-						<option val="neither">Neither</option>
-						<option val="neutrois">Neutrois</option>
-						<option val="nonbi">Non-binary</option>
-						<option val="other">Other</option>
-						<option val="pangender">Pangender</option>
-						<option val="trangfemale">Transgender Female</option>
-						<option val="trangmale">Transgender Male</option>
-						<option val="trangperson">Transgender Person</option>
-						<option val="transfemale">Transsexual Female</option>
-						<option val="transmale">Transsexual Male</option>
-						<option val="transperson">Transsexual Person</option>
-						<option val="twospirit">Two-Spirit</option>
+                    <option> </option>
+                    <?php getGenders();?>
 					</select>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -725,42 +701,22 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               </div>
               <!-- ./ form-group -->
               <div class="form-group row">
-                <label class="col-lg-2 control-label">Vehicle Color</label>
+                <label class="col-lg-2 control-label">Vehicle Primary Color</label>
                 <div class="col-lg-10">
-                  <select class="form-control" name="veh_color" required>
+                  <select class="form-control selectpicker" name="veh_pcolor" data-live-search="true" required>
 				  <option val="">  </option>
-				  <option val="lbl">Light Blue</option>
-				  <option val="trq">Turqoise</option>
-				  <option val="dbl">Dark Blue</option>
-				  <option val="blu">Blue</option>
-				  <option val="ame">Amethyst</option>
-				  <option val="ple">Purple</option>
-				  <option val="lav">Lavender</option>
-				  <option val="mve">Mauve</option>
-				  <option val="pnk">Pink</option>
-				  <option val="red">Red</option>
-				  <option val="mar">Maroon</option>
-				  <option val="ong">Orange</option>
-				  <option val="cpr">Copper</option>
-				  <option val="brz">Bronze</option>
-				  <option val="tan">Tan</option>
-				  <option val="gld">Gold</option>
-				  <option val="yel">Yellow</option>
-				  <option val="lgr">Light Green</option>
-				  <option val="grn">Green</option>
-				  <option val="dgr">Dark Green</option>
-				  <option val="tea">Teal</option>
-				  <option val="bro">Brown</option>
-				  <option val="crm">Cream</option>
-				  <option val="bge">Beige</option>
-				  <option val="tpe">Taupe</option>
-				  <option val="sil">Silver</option>
-				  <option val="com">Chrome</option>
-				  <option val="gry">Gray</option>
-				  <option val="blk">Black</option>
-				  <option val="whi">White</option>
-				  <option val="cam">Camouflage</option>
-				  <option val="mul">Multi-Colored</option>
+				  <?php getColors();?>
+				  </select>
+				  </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Vehicle Secondary Color</label>
+                <div class="col-lg-10">
+                  <select class="form-control selectpicker" name="veh_scolor" data-live-search="true" >
+				  <option val="">  </option>
+				  <?php getColors();?>
 				  </select>
 				  </div>
                 <!-- ./ col-sm-9 -->
@@ -899,5 +855,15 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 		});
 		</script>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Datepicker - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker({dateFormat: 'yy-mm-dd'});
+  } );
+  </script>
   </body>
 </html>
