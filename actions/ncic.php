@@ -147,17 +147,6 @@ function plate()
 {
     $plate = $_POST['ncic_plate'];
 
-    //Remove all spaces from plate
-    $plate = str_replace(' ', '', $plate);
-    //Set plate to all uppercase
-    $plate = strtoupper($plate);
-    //Convert all O to 0
-    $plate = str_replace('O', '0', $plate);
-    //Remove al hyphens
-    $plate = str_replace('-', '', $plate);
-    //Remove all special characters
-    $plate = preg_replace('/[^A-Za-z0-9\-]/', '', $plate);
-
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
     if (!$link) {
@@ -186,7 +175,7 @@ function plate()
             $encode["plate"] = $row[2];
             $encode["veh_make"] = $row[3];
             $encode["veh_model"] = $row[4];
-            $encode["veh_color"] = "$row[5]/$row[6].";
+            $encode["veh_color"] = "$row[5]/$row[6]";
             $encode["veh_ro"] = $owner;
             $encode["veh_insurance"] = $row[7];
             $encode["flags"] = $row[8];

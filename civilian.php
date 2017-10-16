@@ -332,7 +332,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Sex</label>
                 <div class="col-lg-10">
-					<select name="civSexReq" class="form-control selectpicker" id="civSexReq" title="Select a sex" required>
+					<select name="civSexReq" class="form-control selectpicker" id="civSexReq" title="Select a sex" data-live-search="true" required>
                     <option> </option>
                     <?php getGenders();?>
 					</select>
@@ -482,7 +482,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Vehicle Secondary Color</label>
                 <div class="col-lg-10">
-                  <select class="form-control selectpicker" name="veh_scolor" data-live-search="true" >
+                  <select class="form-control selectpicker" name="veh_scolor" data-live-search="true" required>
 				  <option val="">  </option>
 				  <?php getColors();?>
 				  </select>

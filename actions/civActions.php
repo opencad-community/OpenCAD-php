@@ -273,6 +273,20 @@ function create_name()
     $fullName = $_POST['civNameReq'];
     $firstName = explode(" ", $fullName) [0];
     $lastName = explode(" ", $fullName) [1];
+    
+    //Set first name to all lowercase
+    $firstName = strtolower($firstName);
+    //Remove all special characters
+    $firstName = preg_replace('/[^A-Za-z0-9\-]/', '', $firstName);
+    //Set first letter to uppercase
+    $firstName = ucfirst($firstName);
+
+    //Set last name to all lowercase
+    $lastName = strtolower($lastName);
+    //Remove all special characters
+    $lastName = preg_replace('/[^A-Za-z0-9\-]/', '', $lastName);
+    //Set first letter to uppercase
+    $lastName = ucfirst($lastName);
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -340,6 +354,17 @@ function create_name()
 function create_plate()
 {
 	session_start();
+	
+	$plate = $_POST['veh_plate'];
+	
+    //Remove all spaces from plate
+    $plate = str_replace(' ', '', $plate);
+    //Set plate to all uppercase
+    $plate = strtoupper($plate);
+    //Remove all hyphens
+    $plate = str_replace('-', '', $plate);
+    //Remove all special characters
+    $plate = preg_replace('/[^A-Za-z0-9\-]/', '', $plate);
    
     $query = 'SELECT color_group, color_name FROM colors WHERE color_group = "' . $firstName . '" AND last_name = "' . $lastName . '"';
 
@@ -352,7 +377,7 @@ function create_plate()
 
     $submittedById = $_SESSION['id'];
     $userId = $_POST['civilian_names'];
-    $veh_plate = $_POST['veh_plate'];
+    $veh_plate = $plate;
     $veh_make = $_POST['veh_make'];
     $veh_model = $_POST['veh_model'];
     $veh_pcolor = $_POST['veh_pcolor'];
