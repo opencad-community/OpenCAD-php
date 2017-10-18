@@ -109,6 +109,53 @@ CREATE TABLE `citations` (
   `citation_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
+--
+-- Dumping data for table `citations`
+--
+
+INSERT INTO `citations` (`id`, `citation_name`) VALUES
+(6, 'ABANDON VEH - D MIS.'),
+(10, 'BLOCKING EMERG VEH - A MIS.'),
+(27, 'DESTRUCTION OF PROPERTY - A MIS.'),
+(26, 'DESTRUCTION OF PROPERTY - B MIS.'),
+(11, 'DRIVING W/O LICENSE - D MIS.'),
+(18, 'EXCESSIVE USE OF HORN - B MIS.'),
+(17, 'EXCESSIVE USE OF HORN - C MIS.'),
+(21, 'FAIL. NOTIFY CCP - B MIS.'),
+(20, 'FAIL. NOTIFY CCP - C MIS.'),
+(8, 'FAIL. YIELD FOR EMERG VEH - C MIS.'),
+(7, 'FAIL. YIELD FOR EMERG VEH - D MIS.'),
+(23, 'HARASSMENT - B MIS.'),
+(22, 'HARASSMENT - C MIS.'),
+(25, 'IMPEDING PEACE OFFICER - A MIS.'),
+(24, 'IMPEDING PEACE OFFICER - B MIS.'),
+(9, 'IMPEDING TRAFFIC - D MIS.'),
+(16, 'LICENSE PLATE - C MIS.'),
+(40, 'OTHER - A MIS.'),
+(39, 'OTHER - B MIS.'),
+(38, 'OTHER - C MIS.'),
+(37, 'OTHER - D MIS.'),
+(30, 'POSS. CNTRL SUB. - A MIS.'),
+(29, 'POSS. CNTRL SUB. - B MIS.'),
+(28, 'POSS. CNTRL SUB. - C MIS.'),
+(32, 'POSS. ILLEGAL SUB. - A MIS.'),
+(31, 'POSS. ILLEGAL SUB. - B MIS.'),
+(34, 'PROSTITUTION / SOLICITATION - A MIS.'),
+(33, 'PROSTITUTION / SOLICITATION - B MIS.'),
+(36, 'PUBLIC INTOX. B MIS.'),
+(35, 'PUBLIC INTOX. C MIS.'),
+(13, 'RECKLESS DRIVING - C MIS.'),
+(12, 'RECKLESS DRIVING - D MIS.'),
+(5, 'RUNNING STOP SIGN - D MIS.'),
+(3, 'SPEEDING - A. MIS'),
+(2, 'SPEEDING - B. MIS'),
+(1, 'SPEEDING - C. MIS'),
+(0, 'SPEEDING - D. MIS'),
+(4, 'U-TURN - D. MIS'),
+(15, 'UNAUTHORIZED LIGHTING - B MIS.'),
+(14, 'UNAUTHORIZED LIGHTING - C MIS.'),
+(19, 'WINDOW TINT - C MIS.');
+
 -- --------------------------------------------------------
 
 --
@@ -508,7 +555,8 @@ CREATE TABLE `ncic_citations` (
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '0 = Pending, 1 = Approved/Active',
   `name_id` int(11) NOT NULL COMMENT 'Paired to ID of ncic_names table',
   `citation_name` text NOT NULL,
-  `issued_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `issued_date` date NOT NULL DEFAULT,
+  `issued_by` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

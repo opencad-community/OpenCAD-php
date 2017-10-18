@@ -588,6 +588,8 @@ mysqli_close($link);
 
 function setDispatcher($dep)
 {
+    session_start();
+
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
     if (!$link) {
@@ -1143,7 +1145,7 @@ function getCitations()
 
     while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
     {
-        echo "<option value=".$row[0].">".$row[0]."</option>";
+        echo '<option value="'.$row[0].'">'.$row[0].'</option>';
     }
 }
 
@@ -1255,6 +1257,51 @@ function getColors()
     {
         echo '<option value="'.$row[0].'-'.$row[1].'">'.$row[0].'-'.$row[1].'</option>';
     }
+}
+
+
+function getCivilianNames()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+	$sql = "SELECT ncic_names.id, ncic_names.first_name, ncic_names.last_name FROM ncic_names";
+
+	$result=mysqli_query($link, $sql);
+
+	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+	{
+		echo "<option value=\"$row[0]\">$row[1] $row[2]</option>";
+	}
+	mysqli_close($link);
+}
+
+function getAgencies()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+	$sql = 'SELECT * FROM departments
+            WHERE department_name <>"Administrators"
+            AND department_name <>"EMS"
+            AND department_name <>"Fire"
+            AND department_name <>"Civilian"
+            AND department_name <>"Communications (Dispatch)"
+            AND department_name <>"Head Administrators"';
+
+	$result=mysqli_query($link, $sql);
+
+	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+	{
+		echo "<option value=\"$row[1]\">$row[1]</option>";
+	}
+	mysqli_close($link);
 }
 
 ?>
