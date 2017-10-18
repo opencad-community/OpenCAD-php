@@ -24,6 +24,9 @@ if (isset($_GET['getStatus']))
 {
     getStatus();
 }
+if (isset($_POST['create_citation'])){
+    create_citation();
+}
 
 function updateCallsign()
 {
@@ -228,6 +231,44 @@ function mdtGetPersonBOLOS()
             </table>
         ';
     }
+}
+
+function create_citation()
+{
+    $userId = $_POST['civilian_names'];
+    $citation_name = $_POST['citation_name'];
+    session_start();
+    $issued_by = $_SESSION['name'];
+    $date = date('Y-m-d');
+
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $sql = "INSERT INTO ncic_citations (name_id, citation_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)";
+
+
+	try {
+		$stmt = mysqli_prepare($link, $sql);
+		mysqli_stmt_bind_param($stmt, "isss", $userId, $citation_name, $issued_by, $date);
+		$result = mysqli_stmt_execute($stmt);
+
+		if ($result == FALSE) {
+			die(mysqli_error($link));
+		}
+	}
+	catch (Exception $e)
+	{
+		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+	}
+	mysqli_close($link);
+
+    session_start();
+    $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully created citation</span></div>';
+
+    header("Location:../mdt.php");
 }
 
 ?>
