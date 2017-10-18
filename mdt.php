@@ -30,7 +30,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     include("./actions/responderActions.php");
 
     setUnitActive("2");
-
+    
+    $citationMessage = "";
+    if(isset($_SESSION['citationMessage']))
+    {
+        $citationMessage = $_SESSION['citationMessage'];
+        unset($_SESSION['citationMessage']);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -67,6 +73,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                               <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                               <ul class="nav child_menu" style="display: block;">
                                  <li class="current-page"><a href="javascript:void(0)">Dashboard</a></li>
+                              </ul>
+                           </li>
+                           <li>
+                              <a><i class="fa fa-book"></i> Citations <span class="fa fa-chevron-down"></span></a>
+                              <ul class="nav child_menu">
+                                 <li><a type="button" data-toggle="modal" data-target="#asdf" > Create Citation</a></li>
                               </ul>
                            </li>
                            <!--
@@ -139,10 +151,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="page-title">
                      <div class="title_left">
                         <h3>MDT Console</h3>
+                        <?php echo $citationMessage;?>
                      </div>
                      <div class="x_footer">
                         <button class="btn btn-danger pull-right" name="new_call_btn" data-toggle="modal" data-target="#vehicles-bolo-board">View Vehicle BOLOs</button>
                         <button class="btn btn-danger pull-right" name="new_call_btn" data-toggle="modal" data-target="#persons-bolo-board">View Person BOLOs</button>
+
                      </div>
                      <!-- ./ title_left -->
                   </div>
@@ -452,6 +466,52 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <!-- ./ modal fade -->
 
 
+      <!-- Call Details Modal -->
+      <div class="modal fade" id="asdf" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" id="closecallDetails"><span aria-hidden="true">×</span>
+               </button>
+               <h4 class="modal-title" id="myModalLabel">Citation Creation</h4>
+            </div>
+            <!-- ./ modal-header -->
+          <div class="modal-body">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/responderActions.php" method="post">
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Civilian Name</label>
+                <div class="col-lg-10">
+                  <select class="form-control selectpicker" name="civilian_names" id="civilian_names" data-live-search="true" required title="Select Civilian">
+                    <?php getCivilianNamesOption();?>
+                  </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Citation Name</label>
+                <div class="col-lg-10">
+                  <select class="form-control selectpicker" data-live-search="true" name="citation_name" id="citation_name" title="Select Citation" required>
+                    <?php getCitations();?>
+                  </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+                <input name="create_citation" type="submit" class="btn btn-primary" value="Create" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
       <!-- Call Details Modal -->
       <div class="modal fade" id="callDetails" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg">
