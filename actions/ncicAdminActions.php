@@ -16,9 +16,6 @@ require_once(__DIR__ . '/../oc-config.php');
 include(__DIR__ . '/api.php');
 
 /* Handle POST requests */
-if (isset($_POST['create_citation'])){
-    create_citation();
-}
 if (isset($_POST['delete_citation'])){
     delete_citation();
 }
@@ -31,9 +28,6 @@ if (isset($_POST['delete_plate'])){
 if (isset($_POST['delete_warrant'])){
     delete_warrant();
 }
-if (isset($_POST['create_warrant'])){
-    create_warrant();
-}
 if (isset($_POST['create_name'])){
     create_name();
 }
@@ -42,6 +36,12 @@ if (isset($_POST['create_plate'])){
 }
 if (isset($_POST['reject_identity_request'])){
     rejectRequest();
+}
+if (isset($_POST['create_warrant'])){
+    create_warrant();
+}
+if (isset($_POST['create_citation'])){
+    create_citation();
 }
 
 function rejectRequest()
@@ -354,6 +354,85 @@ function ncic_warrants()
     }
 }
 
+function create_citation()
+{
+    $userId = $_POST['civilian_names'];
+    $citation_name = $_POST['citation_name'];
+    session_start();
+    $issued_by = $_SESSION['name'];
+
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $sql = "INSERT INTO ncic_citations (name_id, citation_name, issued_by, status) VALUES (?, ?, ?, '1')";
+
+
+	try {
+		$stmt = mysqli_prepare($link, $sql);
+		mysqli_stmt_bind_param($stmt, "iss", $userId, $citation_name, $issued_by);
+		$result = mysqli_stmt_execute($stmt);
+
+		if ($result == FALSE) {
+			die(mysqli_error($link));
+		}
+	}
+	catch (Exception $e)
+	{
+		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+	}
+	mysqli_close($link);
+
+    session_start();
+    $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully created citation</span></div>';
+
+    header("Location:../oc-admin/ncicAdmin.php#citation_panel");
+}
+
+function create_warrant()
+{
+    $userId = $_POST['civilian_names'];
+    $warrant_name = $_POST['warrant_name_sel'];
+    $issuing_agency = $_POST['issuing_agency'];
+
+    $warrant_name = $_POST['warrant_name_sel'];
+
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+	$status = 'Active';
+	$date = date('Y-m-d');
+
+    $expire = date('Y-m-d',strtotime('+1 day',strtotime($date)));
+
+    $sql = "INSERT INTO ncic_warrants (name_id, expiration_date, warrant_name, issuing_agency, status, issued_date) SELECT ?, ?, ?, ?, ?, ?";
+
+
+	try {
+		$stmt = mysqli_prepare($link, $sql);
+		mysqli_stmt_bind_param($stmt, "isssss", $userId, $expire, $warrant_name, $issuing_agency, $status, $date);
+		$result = mysqli_stmt_execute($stmt);
+
+		if ($result == FALSE) {
+			die(mysqli_error($link));
+		}
+	}
+	catch (Exception $e)
+	{
+		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+	}
+	mysqli_close($link);
+
+    session_start();
+    $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully created warrant</span></div>';
+
+    header("Location:../oc-admin/ncicAdmin.php#warrant_panel");
+}
+
 function ncic_citations()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -416,25 +495,6 @@ function ncic_citations()
     }
 }
 
-function getCivilianNames()
-{
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-
-	$sql = "SELECT ncic_names.id, ncic_names.first_name, ncic_names.last_name FROM ncic_names";
-
-	$result=mysqli_query($link, $sql);
-
-	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
-	{
-		echo "<option value=\"$row[0]\">$row[1] $row[2]</option>";
-	}
-	mysqli_close($link);
-}
-
 function getUserList()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -453,120 +513,6 @@ function getUserList()
 	}
 	mysqli_close($link);
     
-}
-
-function getAgencies()
-{
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-
-	$sql = 'SELECT * FROM departments
-            WHERE department_name <>"Administrators"
-            AND department_name <>"EMS"
-            AND department_name <>"Fire"
-            AND department_name <>"Civilian"
-            AND department_name <>"Communications (Dispatch)"
-            AND department_name <>"Head Administrators"';
-
-	$result=mysqli_query($link, $sql);
-
-	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
-	{
-		echo "<option value=\"$row[1]\">$row[1]</option>";
-	}
-	mysqli_close($link);
-}
-
-function create_citation()
-{
-    $userId = $_POST['civilian_names'];
-    $citation_name = $_POST['citation_name'];
-    session_start();
-    $issued_by = $_SESSION['name'];
-
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-
-    $sql = "INSERT INTO ncic_citations (name_id, citation_name, issued_by, status) VALUES (?, ?, ?, '1')";
-
-
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "iss", $userId, $citation_name, $issued_by);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
-		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
-
-    session_start();
-    $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully created citation</span></div>';
-
-    header("Location:../oc-admin/ncicAdmin.php#citation_panel");
-}
-
-function create_warrant()
-{
-    $userId = $_POST['civilian_names'];
-    $warrant_name = $_POST['warrant_name_sel'];
-    $issuing_agency = $_POST['issuing_agency'];
-
-    $expiry = substr($_POST['warrant_name_sel'], -1);
-
-    $warrant_name = substr($_POST['warrant_name_sel'], 0, -1);
-
-    switch ($expiry)
-    {
-        case "1":
-            $interval = 60;
-            break;
-        case "2":
-            $interval = 30;
-            break;
-    }
-
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-	$status = 'Active';
-	$date = date('Y-m-d H:i:s');
-
-    $sql = "INSERT INTO ncic_warrants (name_id, expiration_date, warrant_name, issuing_agency, status, issued_date) SELECT ?, DATE_ADD(NOW(), INTERVAL ? day), ?, ?, ?, ?";
-
-
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "iissss", $userId, $interval, $warrant_name, $issuing_agency, $status, $date);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
-		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
-
-    session_start();
-    $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully created warrant</span></div>';
-
-    header("Location:../oc-admin/ncicAdmin.php#warrant_panel");
 }
 
 function delete_name()
