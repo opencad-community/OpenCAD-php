@@ -554,8 +554,8 @@ CREATE TABLE `ncic_citations` (
   `id` int(11) NOT NULL,
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '0 = Pending, 1 = Approved/Active',
   `name_id` int(11) NOT NULL COMMENT 'Paired to ID of ncic_names table',
-  `citation_name` text NOT NULL,
-  `issued_date` date NOT NULL DEFAULT,
+  `citation_name` varchar(255) NOT NULL,
+  `issued_date` date DEFAULT NULL,
   `issued_by` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -616,6 +616,21 @@ CREATE TABLE `ncic_warrants` (
   `issued_date` date DEFAULT NULL,
   `status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ncic_weapons`
+--
+
+CREATE TABLE `ncic_weapons` (
+  `id` int(11) NOT NULL,
+  `name_id` int(11) NOT NULL COMMENT 'Links to ncic_names db for driver information',
+  `serial` varchar(255) NOT NULL,
+  `weapon_type` varchar(255) NOT NULL,
+  `weapon_name` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
@@ -1600,6 +1615,14 @@ ALTER TABLE `ncic_plates`
 --
 ALTER TABLE `ncic_warrants`
   ADD PRIMARY KEY (`id`) USING BTREE;
+  
+--
+-- Indexes for table `ncic_weapons`
+--
+ALTER TABLE `ncic_weapons`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD UNIQUE KEY `serial` (`serial`(55)) USING BTREE,
+  ADD KEY `name_id` (`name_id`) USING BTREE;
 
 --
 -- Indexes for table `permissions`
@@ -1661,32 +1684,32 @@ ALTER TABLE `bolos_vehicles`
 -- AUTO_INCREMENT for table `calls`
 --
 ALTER TABLE `calls`
-  MODIFY `call_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `citations`
---
-ALTER TABLE `citations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `call_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `ncic_citations`
 --
 ALTER TABLE `ncic_citations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `ncic_names`
 --
 ALTER TABLE `ncic_names`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=175;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `ncic_plates`
 --
 ALTER TABLE `ncic_plates`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `ncic_warrants`
 --
 ALTER TABLE `ncic_warrants`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `ncic_weapons`
+--
+ALTER TABLE `ncic_weapons`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `permissions`
 --
@@ -1696,22 +1719,22 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `statuses`
 --
 ALTER TABLE `statuses`
-  MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `streets`
 --
 ALTER TABLE `streets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key for each street', AUTO_INCREMENT=235;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key for each street', AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `vehicles`
 --
 ALTER TABLE `vehicles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=481;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- Constraints for dumped tables
 --
@@ -1729,6 +1752,12 @@ ALTER TABLE `civilian_names`
 ALTER TABLE `ncic_plates`
   ADD CONSTRAINT `Name Pair` FOREIGN KEY (`name_id`) REFERENCES `ncic_names` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
+--
+-- Constraints for table `ncic_weapons`
+--
+ALTER TABLE `ncic_weapons`
+  ADD CONSTRAINT `Name Pair Weapon` FOREIGN KEY (`name_id`) REFERENCES `ncic_names` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  
 --
 -- Constraints for table `user_departments`
 --
