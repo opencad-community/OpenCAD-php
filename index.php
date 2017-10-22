@@ -107,7 +107,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <select class="form-control" id="division" name="division[]" multiple="multiple" size="6" required>
                            <option value="civilian">Civilian</option>
                            <option value="communications">Communications (Dispatch)</option>
-                           <!--<option value="ems">EMS</option>-->
+                           <option value="ems">EMS</option>
                            <option value="fire">Fire</option>
                            <option value="highway" <?php if($testing){echo "selected=\"selected\"";}?>>Highway Patrol</option>
                            <option value="police">Police</option>
