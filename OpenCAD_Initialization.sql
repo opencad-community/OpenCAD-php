@@ -662,6 +662,7 @@ CREATE TABLE `statuses` (
 INSERT INTO `statuses` (`status_id`, `status_text`) VALUES
 (1, '10-8 | Available'),
 (2, '10-6 | Busy'),
+(3, '10-7 | Unavailable | On Call)
 (4, '10-5 | Meal Break'),
 (5, 'Signal 11'),
 (6, '10-7 | Unavailable'),
