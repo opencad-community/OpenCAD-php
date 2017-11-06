@@ -438,7 +438,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="col-lg-10">
                   <select class="form-control selectpicker" name="civilian_names" id="civilian_names" data-live-search="true" required>
                     <option> </option>
-                    <?php getCivilianNames();?>
+                    <?php getCivilianNamesOwn();?>
                   </select>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -453,17 +453,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               </div>
               <!-- ./ form-group -->
               <div class="form-group row">
-                <label class="col-lg-2 control-label">Vehicle Make</label>
+                <label class="col-lg-2 control-label">Vehicle Make-Model</label>
                 <div class="col-lg-10">
-                <input type="text" class="form-control" name="veh_make" required/>
-                </div>
-                <!-- ./ col-sm-9 -->
-              </div>
-              <!-- ./ form-group -->
-              <div class="form-group row">
-                <label class="col-lg-2 control-label">Vehicle Model</label>
-                <div class="col-lg-10">
-                  <input type="text" class="form-control" name="veh_model" required/>
+                  <select class="form-control selectpicker" name="veh_make_model" id="veh_make_model" data-live-search="true" required>
+                    <option> </option>
+                    <?php getVehicle();?>
+                  </select>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
