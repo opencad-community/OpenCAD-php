@@ -177,7 +177,7 @@ function ncicGetPlates()
                 <td>'.$row[12].'</td>
                 <td>'.$row[13].'</td>
                 <td>'.$row[2].'</td>
-                <td>'.$row[8].'</td>
+                <td>'.$row[9].'</td>
                 <td>'.$row[3].'</td>
                 <td>'.$row[4].'</td>
                 <td>'.$row[5].'/'.$row[6].'</td>
@@ -363,6 +363,10 @@ function create_plate()
     $plate = str_replace('-', '', $plate);
     //Remove all special characters
     $plate = preg_replace('/[^A-Za-z0-9\-]/', '', $plate);
+	
+    $vehicle = $_POST['veh_make_model'];
+    $veh_make = explode(" ", $vehicle) [0];
+    $veh_model = explode(" ", $vehicle) [1];
    
     $query = 'SELECT color_group, color_name FROM colors WHERE color_group = "' . $firstName . '" AND last_name = "' . $lastName . '"';
 
@@ -376,8 +380,8 @@ function create_plate()
     $submittedById = $_SESSION['id'];
     $userId = $_POST['civilian_names'];
     $veh_plate = $plate;
-    $veh_make = $_POST['veh_make'];
-    $veh_model = $_POST['veh_model'];
+    $veh_make;
+    $veh_model;
     $veh_pcolor = $_POST['veh_pcolor'];
     $veh_scolor = $_POST['veh_scolor'];
     $veh_insurance = $_POST['veh_insurance'];
