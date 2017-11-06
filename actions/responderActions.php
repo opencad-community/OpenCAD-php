@@ -118,7 +118,7 @@ function mdtGetVehicleBOLOS()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT bolos_vehicle.* FROM bolos_vehicle";
+    $query = "SELECT bolos_vehicles.* FROM bolos_vehicles";
 
     $result=mysqli_query($link, $query);
 
@@ -185,7 +185,7 @@ function mdtGetPersonBOLOS()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT bolos_person.* FROM bolos_person";
+    $query = "SELECT bolos_persons.* FROM bolos_persons";
 
     $result=mysqli_query($link, $query);
 

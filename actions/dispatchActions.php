@@ -14,11 +14,17 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 require_once(__DIR__ . "/../oc-config.php");
 
-if (isset($_POST['delete_plate'])){
-    delete_plate();
+if (isset($_POST['delete_citation'])){
+    delete_citation();
 }
 if (isset($_POST['delete_warrant'])){
     delete_warrant();
+}
+if (isset($_POST['delete_personbolo'])){
+    delete_personbolo();
+}
+if (isset($_POST['delete_vehiclebolo'])){
+    delete_vehiclebolo();
 }
 if (isset($_POST['clearCall']))
 {
@@ -41,6 +47,12 @@ if (isset($_POST['create_warrant'])){
 }
 if (isset($_POST['create_citation'])){
     create_citation();
+}
+if (isset($_POST['create_personbolo'])){
+    create_personbolo();
+}
+if (isset($_POST['create_vehiclebolo'])){
+    create_vehiclebolo();
 }
 
 if (isset($_GET['term'])) {
@@ -134,20 +146,21 @@ function assignUnit()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "SELECT callsign FROM active_users WHERE identifier = \"$unit\"";
+    $sql = "SELECT callsign, id FROM active_users WHERE identifier = \"$unit\"";
 
     $result=mysqli_query($link, $sql);
 
 	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
 	{
 		$callsign = $row[0];
+		$id = $row[1];
 	}
 
-    $sql = "INSERT INTO calls_users (call_id, identifier, callsign) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO calls_users (call_id, identifier, callsign, id) VALUES (?, ?, ?, ?)";
 
     try {
         $stmt = mysqli_prepare($link, $sql);
-        mysqli_stmt_bind_param($stmt, "iss", $callId, $unit, $callsign);
+        mysqli_stmt_bind_param($stmt, "issi", $callId, $unit, $callsign, $id);
         $result = mysqli_stmt_execute($stmt);
 
         if ($result == FALSE) {
@@ -518,7 +531,7 @@ function newCall()
  * @since 1.0a RC2
  */
 
-function mdtGetVehicleBOLOS()
+function cadGetVehicleBOLOS()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -526,7 +539,7 @@ function mdtGetVehicleBOLOS()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT bolo_vehicle.* FROM bolo_vehicle";
+    $query = "SELECT bolos_vehicles.* FROM bolos_vehicles";
 
     $result=mysqli_query($link, $query);
 
@@ -568,10 +581,10 @@ function mdtGetVehicleBOLOS()
                 <td>'.$row[6].'</td>
                 <td>'.$row[7].'</td>
                 <td>
-                    <form action="../actions/ncicAdminActions.php" method="post">
                     <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
-                    <input name="delete_plate" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete" disabled/>
-                    <input name="id" type="hidden" value='.$row[0].' />
+					<form action="../actions/dispatchActions.php" method="post">
+                    <input name="delete_vehiclebolo" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
+                    <input name="vbid" type="hidden" value='.$row[0].' />
                     </form>
                 </td>
             </tr>
@@ -593,7 +606,7 @@ function mdtGetVehicleBOLOS()
  * @since 1.0a RC2
  */
 
-function mdtGetPersonBOLOS()
+function cadGetPersonBOLOS()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -601,7 +614,7 @@ function mdtGetPersonBOLOS()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT bolo_person.* FROM bolo_person";
+    $query = "SELECT bolos_persons.* FROM bolos_persons";
 
     $result=mysqli_query($link, $query);
 
@@ -641,10 +654,10 @@ function mdtGetPersonBOLOS()
                 <td>'.$row[5].'</td>
                 <td>'.$row[6].'</td>
                 <td>
-                    <form action="../actions/ncicAdminActions.php" method="post">
+                    <form action="./actions/dispatchActions.php" method="post">
                     <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
-                    <input name="delete_plate" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete" disabled/>
-                    <input name="id" type="hidden" value='.$row[0].' />
+                    <input name="delete_personbolo" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
+                    <input name="pbid" type="hidden" value='.$row[0].' />
                     </form>
                 </td>
             </tr>
@@ -782,7 +795,7 @@ function ncic_citations()
                 <td>'.$row[4].'</td>
                 <td>'.$row[5].'</td>
                 <td>
-                    <form action="../actions/dispatchActions.php" method="post">
+                    <form action="./actions/dispatchActions.php" method="post">
                     <input name="edit_citation" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
                     <input name="delete_citation" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Expunge" disabled/>
                     <input name="cid" type="hidden" value='.$row[2].' />
@@ -827,7 +840,7 @@ function delete_citation()
 
     session_start();
     $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully removed citation</span></div>';
-    header("Location: ../oc-admin/ncicAdmin.php#citation_panel");
+    header("Location: ../cad.php");
 }
 
 function delete_warrant()
@@ -858,7 +871,7 @@ function delete_warrant()
 
     session_start();
     $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully removed warrant</span></div>';
-    header("Location: ../oc-admin/ncicAdmin.php#warrant_panel");
+    header("Location: ../cad.php");
 }
 
 function ncic_warrants()
@@ -910,7 +923,7 @@ function ncic_warrants()
                 <td>'.$row[1].'</td>
                 <td>'.$row[3].'</td>
                 <td>
-                    <form action="../actions/ncicAdminActions.php" method="post">
+                    <form action="./actions/dispatchActions.php" method="post">
                     <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
                     ';
                         if ($row[6] == "Active")
@@ -936,5 +949,148 @@ function ncic_warrants()
         ';
     }
 }
+
+function create_personbolo()
+{
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $gender = $_POST['gender'];
+    $physical_description = $_POST['physical_description'];
+    $reason_wanted = $_POST['reason_wanted'];
+    $last_seen = $_POST['last_seen'];
+
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $sql = "INSERT INTO bolos_persons (first_name, last_name, gender, physical_description, reason_wanted, last_seen) SELECT ?, ?, ?, ?, ?, ?";
+
+
+	try {
+		$stmt = mysqli_prepare($link, $sql);
+		mysqli_stmt_bind_param($stmt, "ssssss", $first_name, $last_name, $gender, $physical_description, $reason_wanted, $last_seen);
+		$result = mysqli_stmt_execute($stmt);
+
+		if ($result == FALSE) {
+			die(mysqli_error($link));
+		}
+	}
+	catch (Exception $e)
+	{
+		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+	}
+	mysqli_close($link);
+
+    session_start();
+    $_SESSION['boloMessage'] = '<div class="alert alert-success"><span>Successfully created BOLO</span></div>';
+
+    header("Location:../cad.php");
+}
+
+function create_vehiclebolo()
+{
+    $vehicle_make = $_POST['vehicle_make'];
+    $vehicle_model = $_POST['vehicle_model'];
+    $vehicle_plate = $_POST['vehicle_plate'];
+    $primary_color = $_POST['primary_color'];
+    $secondary_color = $_POST['secondary_color'];
+    $reason_wanted = $_POST['reason_wanted'];
+    $last_seen = $_POST['last_seen'];
+
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $sql = "INSERT INTO bolos_vehicles (vehicle_make, vehicle_model, vehicle_plate, primary_color, secondary_color, reason_wanted, last_seen) SELECT ?, ?, ?, ?, ?, ?, ?";
+
+
+	try {
+		$stmt = mysqli_prepare($link, $sql);
+		mysqli_stmt_bind_param($stmt, "sssssss", $vehicle_make, $vehicle_model, $vehicle_plate, $primary_color, $secondary_color, $reason_wanted, $last_seen);
+		$result = mysqli_stmt_execute($stmt);
+
+		if ($result == FALSE) {
+			die(mysqli_error($link));
+		}
+	}
+	catch (Exception $e)
+	{
+		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+	}
+	mysqli_close($link);
+
+    session_start();
+    $_SESSION['boloMessage'] = '<div class="alert alert-success"><span>Successfully created BOLO</span></div>';
+
+    header("Location:../cad.php");
+}
+
+function delete_personbolo()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $pbid = $_POST['pbid'];
+
+    $query = "DELETE FROM bolos_persons WHERE id = ?";
+
+    try {
+        $stmt = mysqli_prepare($link, $query);
+        mysqli_stmt_bind_param($stmt, "i", $pbid);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage());
+    }
+
+    session_start();
+    $_SESSION['boloMessage'] = '<div class="alert alert-success"><span>Successfully removed person BOLO</span></div>';
+    header("Location: ../cad.php");
+}
+
+
+function delete_vehiclebolo()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $vbid = $_POST['vbid'];
+
+    $query = "DELETE FROM bolos_vehicles WHERE id = ?";
+
+    try {
+        $stmt = mysqli_prepare($link, $query);
+        mysqli_stmt_bind_param($stmt, "i", $vbid);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage());
+    }
+
+    session_start();
+    $_SESSION['boloMessage'] = '<div class="alert alert-success"><span>Successfully removed vehicle BOLO</span></div>';
+    header("Location: ../cad.php");
+}
+
 
 ?>

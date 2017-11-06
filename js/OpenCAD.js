@@ -670,6 +670,31 @@ function getCalls() {
     });
 }
 
+// Gets Mycalls
+function getMyCall() {
+    var file = $(location).attr('pathname').split("/")[2]
+
+    $.ajax({
+        type: "GET",
+        url: hdir + "actions/api.php",
+        data: {
+            getMyCall: 'yes',
+            type: file
+        },
+        success: function(response)
+        {
+        $('#mycall').html(response);
+        setTimeout(getMyCall, 5000);
+
+        },
+        error : function(XMLHttpRequest, textStatus, errorThrown)
+        {
+        console.log("Error");
+        }
+
+    });
+}
+
 // Handles tones buttons
 function priorityTone(type)
 {

@@ -55,6 +55,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         unset($_SESSION['warrantMessage']);
     }
 
+	$boloMessage = "";
+    if(isset($_SESSION['boloMessage']))
+    {
+        $boloMessage = $_SESSION['boloMessage'];
+        unset($_SESSION['boloMessage']);
+    }
 
 ?>
 
@@ -231,10 +237,39 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <!-- ./ x_content -->
                            <div class="x_footer">
                               <button class="btn btn-primary" name="new_call_btn" data-toggle="modal" data-target="#newCall">New Call</button>
-                              <button class="btn btn-warning" name="new_call_btn" data-toggle="modal" data-target="#newPersonsBOLO">New Persons BOLO</button>
-                              <button class="btn btn-warning" name="new_call_btn" data-toggle="modal" data-target="#newVehicleBOLO">New Vehicle BOLO</button>
                               <button class="btn btn-danger pull-right" onclick="priorityTone('single')" value="0" id="priorityTone">10-3 Tone</button>
                               <button class="btn btn-danger pull-right" onclick="priorityTone('recurring')" value="0" id="recurringTone">Priority Tone</button>
+                           </div>
+                        </div>
+                        <!-- ./ x_panel -->
+                     </div>
+                     <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="row">
+                     <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                           <div class="x_title">
+                              <h2>Active BOLOs</h2>
+                              <ul class="nav navbar-right panel_toolbox">
+                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                              </ul>
+                              <div class="clearfix"></div>
+                           </div>
+                           <!-- ./ x_title -->
+                           <div class="x_content">
+                              <div id="noCallsAlertHolder">
+							  <?php echo $boloMessage;?>
+                                 <?php cadGetPersonBOLOS();?>
+								 <?php cadGetVehicleBOLOS();?>
+                                 <span id="noCallsAlertSpan"></span>
+                              </div>
+                              <div id="live_calls"></div>
+                           </div>
+                           <!-- ./ x_content -->
+                           <div class="x_footer">
+                              <button class="btn btn-warning" name="new_call_btn" data-toggle="modal" data-target="#newPersonsBOLO">New Persons BOLO</button>
+                              <button class="btn btn-warning" name="new_call_btn" data-toggle="modal" data-target="#newVehicleBOLO">New Vehicle BOLO</button>
                            </div>
                         </div>
                         <!-- ./ x_panel -->
@@ -576,164 +611,170 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          <!-- ./ modal-content -->
       </div>
       <!-- ./ modal-dialog modal-lg -->
-      <!-- New Persons BOLO Modal -->
-      <div class="modal fade" id="newPersonsBOLO" tabindex="-1" role="dialog" aria-hidden="true">
-         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
-                  </button>
-                  <h4 class="modal-title" id="myModalLabel">New Persons BOLO</h4>
-               </div>
-               <!-- ./ modal-header -->
-               <div class="modal-body">
-                  <form class="newCallForm" id="newCallForm">
-                    <div class="form-group row">
-                       <label class="col-lg-2 control-label">First Name</label>
-                       <div class="col-lg-10">
-                           <input type="text" class="form-control" name="First_Name" placeholder="First Name of the BOLO subject.." />
-                       </div>
-                       <!-- ./ col-sm-9 -->
-                    </div>
-                    <!-- ./ form-group -->
-                    <div class="form-group row">
-                       <label class="col-lg-2 control-label">Last Name</label>
-                       <div class="col-lg-10">
-                           <input type="text" class="form-control" name="Last_Name" placeholder="Last Name of the BOLO subject.." />
-                       </div>
-                       <!-- ./ col-sm-9 -->
-                    </div>
-                    <br />
-                    <!-- ./ form-group -->
-                     <div class="form-group row">
-                        <label class="col-lg-2 control-label">Gender</label>
-                        <div class="col-lg-10">
-                           <select class="form-control selectpicker" data-live-search="true" name="street1" id="street1" title="Gender" required>
-                              <?php getGenders();?>
-                            </select>
-                        </div>
-                        <!-- ./ col-sm-9 -->
-                     </div>
-                     <!-- ./ form-group -->
-                     <br/>
-                     <div class="form-group row">
-                        <label class="col-lg-2 control-label">Assign Unit to Call</label>
-                        <div class="col-lg-10">
-                           <select class="form-control selectpicker unit" data-live-search="true" name="unit_1" id="unit_1" title="Select a Unit or Leave Blank (Will mark call as Pending)">
-                              <option></option>
-                           </select>
-                           <select class="form-control selectpicker unit" data-live-search="true" name="unit_2" id="unit_2" title="Select a Unit or Leave Blank">
-                              <option></option>
-                           </select>
-                        </div>
-                        <!-- ./ col-sm-9 -->
-                     </div>
-                     <br/>
-                     <!-- ./ form-group -->
-                     <div class="form-group row">
-                        <label class="col-lg-2 control-label">Narrative</label>
-                        <div class="col-lg-10">
-                           <textarea name="narrative" id="narrative" class="form-control" style="text-transform:uppercase" rows="5"></textarea>
-                        </div>
-                        <!-- ./ col-sm-9 -->
-                     </div>
-                     <!-- ./ form-group -->
-               </div>
-               <!-- ./ modal-body -->
-               <div class="modal-footer">
-               <input type="submit" name="create_call" class="btn btn-primary" value="Send"/>
+	<!-- New Person Bolo Modal -->
+    <div class="modal fade" id="newPersonsBOLO" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Create Person BOLO</h4>
+          </div>
+          <!-- ./ modal-header -->
+		  <div class="modal-body">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/dispatchActions.php" method="post">
+                <div class="form-group row">
+                </div>
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">First Name</label>
+                <div class="col-lg-10">
+					<input name="first_name" class="form-control" id="first_name" placeholder="First Name of the BOLOed subject."/>
+					<span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Last Name</label>
+                <div class="col-lg-10">
+					<input name="last_name" class="form-control" id="last_name" placeholder="Last Name of the BOLOed subject."/>
+					<span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Gender</label>
+                <div class="col-lg-10">
+					<select name="gender" class="form-control selectpicker" id="gender" title="Select a sex" data-live-search="true">
+                    <option> </option>
+                    <?php getGenders();?>
+					</select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Physical Description</label>
+                <div class="col-lg-10">
+					<input name="physical_description" class="form-control" id="physical_description" placeholder="Physical description of the BOLOed subject."/>
+					<span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Reason Wanted</label>
+                <div class="col-lg-10">
+					<textarea name="reason_wanted" class="form-control" style="text-transform:uppercase" rows="5" id="reason_wanted" placeholder="Wanted reason of the BOLOed subject." required> </textarea>
+					<span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Last Seen</label>
+                <div class="col-lg-10">
+					<input name="last_seen" class="form-control" id="last_seen" placeholder="Last observed location of the BOLOed subject."/>
+					<span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+          <div class="modal-footer">
+                <input name="create_personbolo" type="submit" class="btn btn-primary" value="Send" />
                <button type="reset" class="btn btn-default" value="Reset">Reset</button>
-               <button id="newCallReset" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-               </div>
-               <!-- ./ modal-footer -->
-               </form>
-            </div>
-            <!-- ./ modal-body -->
-         </div>
-         <!-- ./ modal-content -->
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
       </div>
       <!-- ./ modal-dialog modal-lg -->
+    </div>
+	</div>
+    <!-- ./ modal fade bs-example-modal-lg -->
 
-      <!-- New Vehicle BOLO Modal -->
-      <div class="modal fade" id="newVehicleBOLO" tabindex="-1" role="dialog" aria-hidden="true">
-         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
-                  </button>
-                  <h4 class="modal-title" id="myModalLabel">New Vehicle BOLO</h4>
-               </div>
-               <!-- ./ modal-header -->
-               <div class="modal-body">
-                  <form class="newCallForm" id="newCallForm">
-                     <div class="form-group row">
+	<!-- New Vehicle Bolo Modal -->
+    <div class="modal fade" id="newVehicleBOLO" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Create Vehicle BOLO</h4>
+          </div>
+          <!-- ./ modal-header -->
+		  <div class="modal-body">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/dispatchActions.php" method="post">
+                <div class="form-group row">
+                </div>
+                <div class="form-group row">
                         <label class="col-lg-2 control-label">Vehicle Make</label>
                         <div class="col-lg-10">
                            <select class="form-control selectpicker" data-live-search="true" name="vehicle_make" title="Vehicle Make" required>
                               <?php getVehicleMakes();?>
                            </select>
                         </div>
+              <!-- ./ form-group -->
+                <div class="form-group row">
                         <label class="col-lg-2 control-label">Vehicle Model</label>
                         <div class="col-lg-10">
-                           <select class="form-control selectpicker" data-live-search="true" name="Vehicle_Make" title="Vehicle Make" required>
+                           <select class="form-control selectpicker" data-live-search="true" name="vehicle_model" title="Vehicle Make" required>
                               <?php getVehicleModels();?>
                            </select>
                         </div>
-                        <!-- ./ col-sm-9 -->
-                     </div>
-                     <br/>
-                     <!-- ./ form-group -->
-                     <div class="form-group row">
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
                         <label class="col-lg-2 control-label">Primary Color</label>
                         <div class="col-lg-10">
-                						<input type="text" class="form-control" name="Primary_Color" placeholder="The primary color of the BOLO vehicle." />
+                						<input type="text" class="form-control" name="primary_color" placeholder="The primary color of the BOLO vehicle." />
                         </div>
-                        <!-- ./ col-sm-9 -->
-                     </div>
-                     <!-- ./ form-group -->
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
                      <div class="form-group row">
                         <label class="col-lg-2 control-label">Secondary Color</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" name="Secondary_Color" placeholder="The secondary color, if any, of the BOLO vehicle." />                        </div>
+                            <input type="text" class="form-control" name="secondary_color" placeholder="The secondary color, if any, of the BOLO vehicle." />                        </div>
                         <!-- ./ col-sm-9 -->
                      </div>
-                     <!-- ./ form-group -->
-                     <br/>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
                      <div class="form-group row">
                         <label class="col-lg-2 control-label">Reason Wanted</label>
                         <div class="col-lg-10">
-                                <textarea name="Reason_Wanted" id="narrative" class="form-control" style="text-transform:uppercase" rows="5"></textarea>
+                                <textarea name="reason_wanted" id="narrative" class="form-control" style="text-transform:uppercase" rows="5"></textarea>
                         </div>
                         <!-- ./ col-sm-9 -->
                      </div>
-                     <br/>
-                     <!-- ./ form-group -->
+              <!-- ./ form-group -->
                      <div class="form-group row">
                         <label class="col-lg-2 control-label">Last Seen</label>
                         <div class="col-lg-10">
-                           <input type="text" class="form-control" name="Last_Seen" placeholder="Last observed location of the BOLOed vehicle." />
+                           <input type="text" class="form-control" name="last_seen" placeholder="Last observed location of the BOLOed vehicle." />
                         </div>
                         <!-- ./ col-sm-9 -->
                      </div>
-                     <!-- ./ form-group -->
-               </div>
-               <!-- ./ modal-body -->
-               <div class="modal-footer">
-               <input type="submit" name="create_call" class="btn btn-primary" value="Send"/>
+              <!-- ./ form-group -->
+          <div class="modal-footer">
+                <input name="create_vehiclebolo" type="submit" class="btn btn-primary" value="Send" />
                <button type="reset" class="btn btn-default" value="Reset">Reset</button>
-               <button id="newCallReset" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-               </div>
-               <!-- ./ modal-footer -->
-               </form>
-            </div>
-            <!-- ./ modal-body -->
-         </div>
-         <!-- ./ modal-content -->
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
       </div>
       <!-- ./ modal-dialog modal-lg -->
-
-      </div>
-      <!-- ./ modal fade bs-example-modal-lg -->
+    </div>
+	</div>
+    <!-- ./ modal fade bs-example-modal-lg -->
       <!-- Call Details Modal -->
       <div class="modal fade" id="callDetails" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg">

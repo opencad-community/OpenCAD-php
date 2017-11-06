@@ -101,7 +101,7 @@ if($num_rows < 2)
         else if ($row[1] == "7")
         {
             $_SESSION['civilian'] = 'YES';
-            header("Location:civillian.php");
+            header("Location:/civilian.php");
         }
 
     }

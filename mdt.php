@@ -25,11 +25,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     {
       $name = $_SESSION['name'];
     }
-
+	
+	
     include("./actions/api.php");
     include("./actions/responderActions.php");
 
-    setUnitActive("2");
+	callCheck();
     
     $citationMessage = "";
     if(isset($_SESSION['citationMessage']))
@@ -79,6 +80,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                               <a><i class="fa fa-book"></i> Citations <span class="fa fa-chevron-down"></span></a>
                               <ul class="nav child_menu">
                                  <li><a type="button" data-toggle="modal" data-target="#asdf" > Create Citation</a></li>
+                              </ul>
+                           </li>
+                           <li>
+                              <a><i class="fa fa-database"></i> NCIC <span class="fa fa-chevron-down"></span></a>
+                              <ul class="nav child_menu">
+                                 <li><a type="button" data-toggle="modal" data-target="#namelookup" > Name Lookup</a></li>
                               </ul>
                            </li>
                            <!--
@@ -234,6 +241,23 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         </div>
                         <!-- ./ x_panel -->
                      </div>
+                     <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="x_panel">
+                           <div class="x_title">
+                              <h2>My Call</h2>
+                              <ul class="nav navbar-right panel_toolbox">
+                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                              </ul>
+                              <div class="clearfix"></div>
+                           </div>
+                           <!-- ./ x_title -->
+                           <div class="x_content">
+						   <?php getMyCall(); ?>
+                           </div>
+                           <!-- ./ x_content -->
+                        </div>
+                        <!-- ./ x_panel -->
+                     </div>
                      <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
                      <?php
                         if (isset($_GET['fire']))
@@ -359,10 +383,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       </div>
       <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
       '; */
-      getMyCall();
       }
       ?>
-      </div>
       <!-- ./ row -->
       </div>
       <!-- "" -->
@@ -412,7 +434,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          <!-- ./ modal-dialog modal-md -->
       </div>
       <!-- ./ modal fade -->
-
       <!-- Vehicle BOLO Board Modal -->
       <div class="modal fade" id="vehicles-bolo-board" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog modal-lg">
@@ -436,10 +457,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             <!-- ./ modal-content -->
          </div>
          <!-- ./ modal-dialog modal-md -->
-      </div>
-      <!-- ./ modal fade -->
 
-      <!-- Vehicle BOLO Board Modal -->
+      <!-- Person BOLO Board Modal -->
       <div class="modal fade" id="persons-bolo-board" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -462,8 +481,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             <!-- ./ modal-content -->
          </div>
          <!-- ./ modal-dialog modal-md -->
-      </div>
-      <!-- ./ modal fade -->
 
 
       <!-- Call Details Modal -->
@@ -670,6 +687,29 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                    {
                      $('#live_calls').html(response);
                      setTimeout(getCalls, 5000);
+
+                   },
+                   error : function(XMLHttpRequest, textStatus, errorThrown)
+                   {
+                     console.log("Error");
+                   }
+
+                 });
+           }
+      </script>
+      <script>
+         function getMyCall() {
+             $.ajax({
+                   type: "GET",
+                   url: "<?php echo BASE_URL; ?>/actions/api.php",
+                   data: {
+                       getMyCall: 'yes',
+                       responder: 'yes'
+                   },
+                   success: function(response)
+                   {
+                     $('#mycall').html(response);
+                     setTimeout(getMyCall, 5000);
 
                    },
                    error : function(XMLHttpRequest, textStatus, errorThrown)
