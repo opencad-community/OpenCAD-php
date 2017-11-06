@@ -25,11 +25,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     {
       $name = $_SESSION['name'];
     }
-
+	
+	
     include("./actions/api.php");
     include("./actions/responderActions.php");
 
-    setUnitActive("2");
+	callCheck();
     
     $citationMessage = "";
     if(isset($_SESSION['citationMessage']))
@@ -79,6 +80,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                               <a><i class="fa fa-book"></i> Citations <span class="fa fa-chevron-down"></span></a>
                               <ul class="nav child_menu">
                                  <li><a type="button" data-toggle="modal" data-target="#asdf" > Create Citation</a></li>
+                              </ul>
+                           </li>
+                           <li>
+                              <a><i class="fa fa-database"></i> NCIC <span class="fa fa-chevron-down"></span></a>
+                              <ul class="nav child_menu">
+                                 <li><a type="button" data-toggle="modal" data-target="#namelookup" > Name Lookup</a></li>
                               </ul>
                            </li>
                            <!--
@@ -234,6 +241,23 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         </div>
                         <!-- ./ x_panel -->
                      </div>
+                     <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="x_panel">
+                           <div class="x_title">
+                              <h2>My Call</h2>
+                              <ul class="nav navbar-right panel_toolbox">
+                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                              </ul>
+                              <div class="clearfix"></div>
+                           </div>
+                           <!-- ./ x_title -->
+                           <div class="x_content">
+						   <?php getMyCall(); ?>
+                           </div>
+                           <!-- ./ x_content -->
+                        </div>
+                        <!-- ./ x_panel -->
+                     </div>
                      <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
                      <?php
                         if (isset($_GET['fire']))
@@ -359,14 +383,96 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       </div>
       <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
       '; */
-      getMyCall();
       }
       ?>
-      </div>
       <!-- ./ row -->
       </div>
       <!-- "" -->
+                  <div class="clearfix"></div>
+                  <div class="row">
+                     <div class="col-md-4 col-sm-4 col-xs-4">
+                        <div class="x_panel">
+                           <div class="x_title">
+                              <h2>NCIC Name Lookup</h2>
+                              <ul class="nav navbar-right panel_toolbox">
+                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                              </ul>
+                              <div class="clearfix"></div>
+                           </div>
+                           <!-- ./ x_title -->
+                           <div class="x_content">
+                              <div class="input-group">
+                                 <input type="text" name="ncic_name" class="form-control" id="ncic_name" placeholder="John Doe"/>
+                                 <span class="input-group-btn">
+                                 <button type="button" class="btn btn-primary" name="ncic_name_btn" id="ncic_name_btn">Send</button>
+                                 </span>
+                              </div>
+                              <!-- ./ input-group -->
+                              <div name="ncic_name_return" id="ncic_name_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
+                                 <!--<textarea class="form-control" style="resize:none;" id="ncic_name_return" name="ncic_name_return" readonly="readonly"></textarea> -->
+                              </div>
+                              <!-- ./ ncic_name_return -->
+                           </div>
+                           <!-- ./ x_content -->
+                        </div>
+                        <!-- ./ x_panel -->
+                     </div>
+                     <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
+                     <div class="col-md-4 col-sm-4 col-xs-4">
+                        <div class="x_panel">
+                           <div class="x_title">
+                              <h2>NCIC Plate Lookup</h2>
+                              <ul class="nav navbar-right panel_toolbox">
+                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                              </ul>
+                              <div class="clearfix"></div>
+                           </div>
+                           <!-- ./ x_title -->
+                           <div class="x_content">
+                              <div class="input-group">
+                                 <input type="text" name="ncic_plate" class="form-control" id="ncic_plate" placeholder="License Plate, (ABC123)"/>
+                                 <span class="input-group-btn">
+                                 <button type="button" class="btn btn-primary" id="ncic_plate_btn">Send</button>
+                                 </span>
+                              </div>
+                              <!-- ./ input-group -->
+                              <div name="ncic_plate_return" id="ncic_plate_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
+                              </div>
+                              <!-- ./ ncic_plate_return -->
+                           </div>
+                           <!-- ./ x_content -->
+                        </div>
+                        <!-- ./ x_panel -->
+                     </div>
+                     <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
+                     <!-- NCIC Firearm lookup will return in a later RC -->
+                     <div class="col-md-4 col-sm-4 col-xs-4">
+                        <div class="x_panel">
+                          <div class="x_title">
+                            <h2>NCIC Firearm Lookup</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                            </ul>
+                            <div class="clearfix"></div>
+                          </div>
+                          <!-- ./ x_title -->
+                     <div class="x_content">
+                        <div class="input-group">
+                           <input type="text" name="ncic_firearm" class="form-control" id="ncic_firearm" placeholder="Serial Number"/>
+                           <span class="input-group-btn">
+                           <button type="button" class="btn btn-primary" disabled>Send</button>
+                           </span>
+                        </div>
+                        <!-- ./ input-group -->
+                        <div name="firearm_return"
+                        </div>
+                     </div>
+                     <!-- ./ x_content -->
+                  </div>
+                  <!-- ./ x_panel -->
+               </div>
       </div>
+	  </div> 
       <!-- /page content -->
       <!-- footer content -->
       <footer>
@@ -412,7 +518,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          <!-- ./ modal-dialog modal-md -->
       </div>
       <!-- ./ modal fade -->
-
       <!-- Vehicle BOLO Board Modal -->
       <div class="modal fade" id="vehicles-bolo-board" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog modal-lg">
@@ -436,10 +541,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             <!-- ./ modal-content -->
          </div>
          <!-- ./ modal-dialog modal-md -->
-      </div>
-      <!-- ./ modal fade -->
 
-      <!-- Vehicle BOLO Board Modal -->
+      <!-- Person BOLO Board Modal -->
       <div class="modal fade" id="persons-bolo-board" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -462,8 +565,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             <!-- ./ modal-content -->
          </div>
          <!-- ./ modal-dialog modal-md -->
-      </div>
-      <!-- ./ modal fade -->
 
 
       <!-- Call Details Modal -->
@@ -670,6 +771,29 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                    {
                      $('#live_calls').html(response);
                      setTimeout(getCalls, 5000);
+
+                   },
+                   error : function(XMLHttpRequest, textStatus, errorThrown)
+                   {
+                     console.log("Error");
+                   }
+
+                 });
+           }
+      </script>
+      <script>
+         function getMyCall() {
+             $.ajax({
+                   type: "GET",
+                   url: "<?php echo BASE_URL; ?>/actions/api.php",
+                   data: {
+                       getMyCall: 'yes',
+                       responder: 'yes'
+                   },
+                   success: function(response)
+                   {
+                     $('#mycall').html(response);
+                     setTimeout(getMyCall, 5000);
 
                    },
                    error : function(XMLHttpRequest, textStatus, errorThrown)

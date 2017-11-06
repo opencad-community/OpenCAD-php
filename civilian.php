@@ -438,7 +438,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="col-lg-10">
                   <select class="form-control selectpicker" name="civilian_names" id="civilian_names" data-live-search="true" required>
                     <option> </option>
-                    <?php getCivilianNames();?>
+                    <?php getCivilianNamesOwn();?>
                   </select>
                 </div>
                 <!-- ./ col-sm-9 -->

@@ -32,6 +32,27 @@ if (isset($_POST['new_911']))
     create911Call();
 }
 
+function getCivilianNamesOwn()
+{
+    $uid = $_SESSION['id'];
+	
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+	$sql = 'SELECT ncic_names.id, ncic_names.first_name, ncic_names.last_name FROM ncic_names where ncic_names.submittedByID = "' . $uid . '"';
+
+	$result=mysqli_query($link, $sql);
+
+	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+	{
+		echo "<option value=\"$row[0]\">$row[1] $row[2]</option>";
+	}
+	mysqli_close($link);
+}
+
 function ncicGetNames()
 {
     $uid = $_SESSION['id'];

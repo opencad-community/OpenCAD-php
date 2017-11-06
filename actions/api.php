@@ -22,6 +22,9 @@ if (isset($_GET['a'])){
 if (isset($_GET['getCalls'])){
     getActiveCalls();
 }
+if (isset($_GET['getMyCall'])){
+    getMyCall();
+}
 if (isset($_GET['getCallDetails'])){
     getCallDetails();
 }
@@ -57,6 +60,10 @@ if (isset($_GET['checkTones']))
 if (isset($_GET['getDispatchers']))
 {
     getDispatchers();
+}
+if (isset($_GET['getDispatchersMDT']))
+{
+    getDispatchersMDT();
 }
 if (isset($_POST['quickStatus']))
 {
@@ -114,7 +121,7 @@ function quickStatus()
 function getMyCall()
 {
     //First, check to see if they're on a call
-    $identifier = $_SESSION['identifier'];
+    $uid = $_SESSION['id'];
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -122,26 +129,11 @@ function getMyCall()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "SELECT * from active_users WHERE identifier = '$identifier' AND status = '0' AND status_detail = '3'";
+    $sql = 'SELECT active_users.* from `active_users` WHERE active_users.id = "' . $uid . '" AND active_users.status = "0" AND active_users.status_detail = "3"';
 
     $result = mysqli_query($link, $sql);
 
     $num_rows = $result->num_rows;
-
-    echo '
-        <div class="col-md-6 col-sm-6 col-xs-6">
-            <div class="x_panel">
-                <div class="x_title">
-                <h2>My Call</h2>
-                <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-                </ul>
-                <div class="clearfix"></div>
-                </div>
-                <!-- ./ x_title -->
-                <div class="x_content">
-    ';
-
 
     if($num_rows == 0)
     {
@@ -150,7 +142,7 @@ function getMyCall()
     else
     {
         //Figure out what call the user is on
-        $sql = "SELECT call_id from calls_users WHERE identifier = '$identifier'";
+        $sql = 'SELECT call_id from calls_users WHERE id = "' . $uid . '"';
 
         $result = mysqli_query($link, $sql);
 
@@ -160,131 +152,87 @@ function getMyCall()
         }
 
         //Get call details
-        $sql = "SELECT * from calls WHERE call_id = '$call_id'";
+        $sql = 'SELECT * from calls WHERE call_id = "' . $call_id . '"';
 
         $result = mysqli_query($link, $sql);
+		
+		$num_rows = $result->num_rows;
+		
+		if($num_rows == 0)
+		{
+			echo '<div class="alert alert-info"><span>Not currently on a call</span></div>';
+		}
+		else
+    {
+        echo '<table id="activeCalls" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Type</th>
+                <th>Call Type</th>
+                <th>Units</th>
+                <th>Location</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
 
+
+        $counter = 0;
         while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
         {
-            $call_type = $row[2];
-            $call_street1 = $row[3];
-            $call_street2 = $row[4];
-            $call_street3 = $row[5];
-            $call_notes = $row[6];
+            echo '
+            <tr id="'.$counter.'">
+                <td>'.$row[0].'</td>';
+
+                //Issue #28. Check if $row[1] == bolo. If so, change text color to orange
+                if ($row[1] == "BOLO")
+                {
+                    echo '<td style="color:orange;">'.$row[1].'</td>';
+                    echo '<td><!--Leave blank--></td>';
+                }
+                else
+                {
+                    echo '<td>'.$row[1].'</td>';
+                    echo '
+                        <td>';
+                            getUnitsOnCall($row[0]);
+                        echo '</td>';
+                }
+
+
+                echo '<td>'.$row[3].'/'.$row[4].'/'.$row[5].'</td>';
+
+                if (isset($_GET['type']) && $_GET['type'] == "responder")
+                {
+                    echo'
+                    <td>
+                        <button id="'.$row[0].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
+                    </td>';
+                }
+                else
+                {
+                echo'
+                <td>
+                    <button id="'.$row[0].'" class="btn-link" style="color: red;" value="'.$row[0].'" onclick="clearCall('.$row[0].')">Clear</button>
+                    <button id="'.$row[0].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
+                    <input name="uid" name="uid" type="hidden" value="'.$row[0].'"/>
+                </td>';
+                }
+
+            echo'
+            </tr>
+            ';
+            $counter++;
         }
 
-
         echo '
-            <p style="font-weight:bold">&nbsp&nbsp&nbspQuick Status Updates</p>
-            <a class="btn btn-app"  id="enroute_btn">
-                <i class="fa fa-car"></i> En Route
-            </a>
-            <a class="btn btn-app">
-                <i class="fa fa-home"></i> On Scene
-            </a>
-            <a class="btn btn-app">
-                <i class="fa fa-check"></i> Code 4
-            </a>
-            <a class="btn btn-app">
-                <i class="fa fa-shield"></i> Subj. in Cust.
-            </a>
-            <a class="btn btn-app">
-                <i class="fa fa-university"></i> En Route Jail
-            </a>
-            <a class="btn btn-app">
-                <i class="fa fa-ambulance"></i> En Route Hospital
-            </a>
-            <a class="btn btn-app">
-                <i class="fa fa-crosshairs" style="color:red"></i> 10-99
-            </a>
-            <br/><br/>
-
-            <div class="form-group">
-              <label class="col-lg-2 control-label">Incident ID</label>
-              <div class="col-lg-10">
-                <input type="text" id="call_id_det" name="call_id_det" class="form-control" value="'.$call_id.'" disabled>
-              </div>
-              <!-- ./ col-sm-9 -->
-            </div>
-            <br/>
-            <!-- ./ form-group -->
-            <div class="form-group">
-              <label class="col-lg-2 control-label">Incident Type</label>
-              <div class="col-lg-10">
-                <input type="text" id="call_type_det" name="call_type_det" class="form-control" value="'.$call_type.'" disabled>
-              </div>
-              <!-- ./ col-sm-9 -->
-            </div>
-            <br/>
-            <!-- ./ form-group -->
-            <div class="form-group">
-              <label class="col-lg-2 control-label">Street 1</label>
-              <div class="col-lg-10">
-                <input type="text" id="call_street1_det" name="call_street1_det" class="form-control" value="'.$call_street1.'" disabled>
-              </div>
-              <!-- ./ col-sm-9 -->
-            </div>
-            <br/>
-            <!-- ./ form-group -->
-            <div class="form-group">
-              <label class="col-lg-2 control-label">Street 2</label>
-              <div class="col-lg-10">
-                <input type="text" id="call_street2_det" name="call_street2_det" class="form-control" value="'.$call_street2.'" disabled>
-              </div>
-              <!-- ./ col-sm-9 -->
-            </div>
-            <br/>
-            <!-- ./ form-group -->
-            <div class="form-group">
-              <label class="col-lg-2 control-label">Street 3</label>
-              <div class="col-lg-10">
-                <input type="text" id="call_street3_det" name="call_street3_det" class="form-control" value="'.$call_street3.'" disabled>
-              </div>
-              <!-- ./ col-sm-9 -->
-            </div>
-
-            <div class="clearfix">
-            <br/><br/><br/><br/>
-            <!-- ./ form-group -->
-            <div class="form-group">
-              <label class="col-lg-2 control-label">Narrative</label>
-              <div class="col-lg-10">
-                <div name="call_narrative" id="call_narrative" contenteditable="false" style="background-color: #eee; opacity: 1; border: 1px solid #ccc; padding: 6px 12px; font-size: 14px;">'.$call_notes.'</div>
-              </div>
-              <!-- ./ col-sm-9 -->
-            </div>
-            <br/>
-            <!-- ./ form-group -->
-            <div class="form-group">
-              <label class="col-lg-2 control-label">Add Narrative</label>
-              <div class="col-lg-10">
-                <textarea name="narrative_add" id="narrative_add" class="form-control" style="text-transform:uppercase" rows="2" required></textarea>
-              </div>
-              <!-- ./ col-sm-9 -->
-            </div>
-            <br/>
-            <!-- ./ form-group -->
-
+            </tbody>
+            </table>
         ';
+
     }
-
-    echo '
-        </div>
-        <!-- ./ x_content -->
-        <br/>
-        <div class="x_footer">
-
-        </div>
-        <!-- ./ x_footer -->
-        </form>
-    </div>
-    <!-- ./ x_panel -->
-</div>
-<!-- ./ col-md-6 col-sm-6 col-xs-6 -->
-    ';
-
-
-
+}
 }
 
 
@@ -674,6 +622,32 @@ function getDispatchers()
     mysqli_close($link);
 }
 }
+
+function getDispatchersMDT()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $sql = "SELECT * from dispatchers WHERE status = '1'";
+
+    $result = mysqli_query($link, $sql);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        $dispatcher = "false";
+    }
+    else
+    {
+        $dispatcher = "true";
+    mysqli_close($link);
+}
+}
+
 function setUnitActive($dep)
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -683,7 +657,7 @@ function setUnitActive($dep)
     }
 
     $identifier = $_SESSION['identifier'];
-
+    $uid = $_SESSION['id'];
     $status;
     switch($dep)
     {
@@ -695,12 +669,12 @@ function setUnitActive($dep)
             break;
     }
 
-    $sql = "REPLACE INTO active_users (identifier, callsign, status, status_detail) VALUES (?, ?, ?, '6')";
+    $sql = "REPLACE INTO active_users (identifier, callsign, status, status_detail, id) VALUES (?, ?, ?, '6', ?)";
 
 
     try {
         $stmt = mysqli_prepare($link, $sql);
-        mysqli_stmt_bind_param($stmt, "ssi", $identifier, $identifier, $status);
+        mysqli_stmt_bind_param($stmt, "ssii", $identifier, $identifier, $status, $uid);
         $result = mysqli_stmt_execute($stmt);
 
         if ($result == FALSE) {
@@ -975,6 +949,99 @@ function getActiveCalls()
             <thead>
                 <tr>
                 <th>Call ID</th>
+                <th>Call Type</th>
+                <th>Units</th>
+                <th>Location</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+
+        $counter = 0;
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            echo '
+            <tr id="'.$counter.'">
+                <td>'.$row[0].'</td>';
+
+                //Issue #28. Check if $row[1] == bolo. If so, change text color to orange
+                if ($row[1] == "BOLO")
+                {
+                    echo '<td style="color:orange;">'.$row[1].'</td>';
+                    echo '<td><!--Leave blank--></td>';
+                }
+                else
+                {
+                    echo '<td>'.$row[1].'</td>';
+                    echo '
+                        <td>';
+                            getUnitsOnCall($row[0]);
+                        echo '</td>';
+                }
+
+
+                echo '<td>'.$row[3].'/'.$row[4].'/'.$row[5].'</td>';
+
+                if (isset($_GET['type']) && $_GET['type'] == "responder")
+                {
+                    echo'
+                    <td>
+                        <button id="'.$row[0].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
+                    </td>';
+                }
+                else
+                {
+                echo'
+                <td>
+                    <button id="'.$row[0].'" class="btn-link" style="color: red;" value="'.$row[0].'" onclick="clearCall('.$row[0].')">Clear</button>
+                    <button id="'.$row[0].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
+                    <input id="'.$row[0].'" type="submit" name="assign_unit" data-toggle="modal" data-target="#assign" class="btn-link '.$row[0].'" value="Assign"/>
+                    <input name="uid" name="uid" type="hidden" value="'.$row[0].'"/>
+                </td>';
+                }
+
+            echo'
+            </tr>
+            ';
+            $counter++;
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+
+    }
+    mysqli_close($link);
+
+}
+
+function getActivePersonBOLO()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $sql = "SELECT * from bolos_persons";
+
+    $result = mysqli_query($link, $sql);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo '<div class="alert alert-info"><span>No active calls</span></div>';
+    }
+    else
+    {
+        echo '<table id="activeCalls" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Type</th>
                 <th>Call Type</th>
                 <th>Units</th>
                 <th>Location</th>
@@ -1298,6 +1365,67 @@ function getAgencies()
 		echo "<option value=\"$row[1]\">$row[1]</option>";
 	}
 	mysqli_close($link);
+}
+
+
+function callCheck()
+{
+    $uid = $_SESSION['id'];
+    $identifier = $_SESSION['identifier'];
+	
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+	
+	$sql = 'SELECT * FROM calls_users WHERE id = "'.$uid.'"';
+	
+	$result=mysqli_query($link, $sql);
+	
+	$num_rows = $result->num_rows;
+	
+	if($num_rows == 0)
+	{
+		
+		$sql = "REPLACE INTO active_users (identifier, callsign, status, status_detail, id) VALUES (?, ?, '0', '6', ?)";
+
+
+    try {
+        $stmt = mysqli_prepare($link, $sql);
+        mysqli_stmt_bind_param($stmt, "ssi", $identifier, $identifier, $uid);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+    }
+	}
+	else
+	{
+			
+		$sql = "REPLACE INTO active_users (identifier, callsign, status, status_detail, id) VALUES (?, ?, '0', '3', ?)";
+
+
+    try {
+        $stmt = mysqli_prepare($link, $sql);
+        mysqli_stmt_bind_param($stmt, "ssi", $identifier, $identifier, $uid);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+    }
+	}
+	
 }
 
 ?>
