@@ -38,6 +38,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         $citationMessage = $_SESSION['citationMessage'];
         unset($_SESSION['citationMessage']);
     }
+    $warningMessage = "";
+    if(isset($_SESSION['warningMessage']))
+    {
+        $citationMessage = $_SESSION['warningMessage'];
+        unset($_SESSION['warningMessage']);
+    }
+	
 ?>
 
 <!DOCTYPE html>
@@ -77,15 +84,15 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                               </ul>
                            </li>
                            <li>
-                              <a><i class="fa fa-book"></i> Citations <span class="fa fa-chevron-down"></span></a>
+                              <a><i class="fa fa-book"></i> Warnings <span class="fa fa-chevron-down"></span></a>
                               <ul class="nav child_menu">
-                                 <li><a type="button" data-toggle="modal" data-target="#asdf" > Create Citation</a></li>
+                                 <li><a type="button" data-toggle="modal" data-target="#createWarning" > Create Warning</a></li>
                               </ul>
                            </li>
                            <li>
-                              <a><i class="fa fa-database"></i> NCIC <span class="fa fa-chevron-down"></span></a>
+                              <a><i class="fa fa-book"></i> Citations <span class="fa fa-chevron-down"></span></a>
                               <ul class="nav child_menu">
-                                 <li><a type="button" data-toggle="modal" data-target="#namelookup" > Name Lookup</a></li>
+                                 <li><a type="button" data-toggle="modal" data-target="#asdf" > Create Citation</a></li>
                               </ul>
                            </li>
                            <!--
@@ -389,6 +396,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       </div>
       <!-- "" -->
       </div>
+	  </div> 
       <!-- /page content -->
       <!-- footer content -->
       <footer>
@@ -519,6 +527,50 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <!-- ./ modal-body -->
           <div class="modal-footer">
                 <input name="create_citation" type="submit" class="btn btn-primary" value="Create" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
+      <!-- Create Warning Modal -->
+      <div class="modal fade" id="createWarning" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
+                  </button>
+            <h4 class="modal-title" id="myModalLabel">Warning Creator</h4>
+          </div>
+          <!-- ./ modal-header -->
+          <div class="modal-body">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/responderActions.php" method="post">
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Civilian Name</label>
+                <div class="col-lg-10">
+                  <select class="form-control selectpicker" name="civilian_names" id="civilian_names" data-live-search="true" required title="Select Civilian">
+                    <?php getCivilianNamesOption();?>
+                  </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Warning Name</label>
+                <div class="col-lg-10">
+					<input type="text" class="form-control" name="warning_name" id="warning_name" placeholder="Enter a warning" />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+                <input name="create_warning" type="submit" class="btn btn-primary" value="Create" />
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </form>
           </div>

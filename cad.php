@@ -47,6 +47,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         $citationMessage = $_SESSION['citationMessage'];
         unset($_SESSION['citationMessage']);
     }
+    $warningMessage = "";
+    if(isset($_SESSION['warningMessage']))
+    {
+        $citationMessage = $_SESSION['warningMessage'];
+        unset($_SESSION['warningMessage']);
+    }
 
     $warrantMessage = "";
     if(isset($_SESSION['warrantMessage']))
@@ -104,6 +110,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                               <a><i class="fa fa-clock-o"></i> Stopwatch <span class="fa fa-chevron-down"></span></a>
                               <ul class="nav child_menu">
                                  <li><a href="https://www.timeanddate.com/stopwatch/" target="_blank">Stopwatch</a></li>
+                              </ul>
+                           </li>
+                           <li>
+                              <a><i class="fa fa-book"></i> Warnings <span class="fa fa-chevron-down"></span></a>
+                              <ul class="nav child_menu">
+                                 <li><a type="button" data-toggle="modal" data-target="#createWarning" > Create Warning</a></li>
+                                 <li><a type="button" data-toggle="modal" data-target="#viewWarning" > View Warnings</a></li>
                               </ul>
                            </li>
                            <li>
@@ -177,6 +190,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <p>(Not <?php echo $name;?>?, <a href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">Log Out</a>)
                         <?php echo $citationMessage;?>
                         <?php echo $warrantMessage;?>
+						<?php echo $warningMessage;?>
                      </div>
                      <!-- ./ title_left -->
                   </div>
@@ -1009,6 +1023,96 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <!-- ./ modal-dialog modal-lg -->
     </div>
     <!-- ./ modal fade bs-example-modal-lg -->
+      <!-- Create Warning Modal -->
+      <div class="modal fade" id="createWarning" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
+                  </button>
+            <h4 class="modal-title" id="myModalLabel">Warning Creator</h4>
+          </div>
+          <!-- ./ modal-header -->
+          <div class="modal-body">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/dispatchActions.php" method="post">
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Civilian Name</label>
+                <div class="col-lg-10">
+                  <select class="form-control selectpicker" name="civilian_names" id="civilian_names" data-live-search="true" required title="Select Civilian">
+                    <?php getCivilianNamesOption();?>
+                  </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Warning Name</label>
+                <div class="col-lg-10">
+					<input type="text" class="form-control" name="warning_name" id="warning_name" placeholder="Enter a warning" />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+                <input name="create_warning" type="submit" class="btn btn-primary" value="Create" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
+      <!-- View Warning Modal -->
+      <div class="modal fade" id="viewWarning" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
+                  </button>
+            <h4 class="modal-title" id="myModalLabel">Warning Viewer</h4>
+          </div>
+          <!-- ./ modal-header -->
+          <div class="modal-body">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel" id="citation_panel">
+                  <div class="x_title">
+                    <h2>NCIC Warnings</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php ncic_warnings();?>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <!-- ./ x_panel -->
+              </div>
+              <!-- ./ form-group -->
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
+	
       <!-- Create Warrant Modal -->
       <div class="modal fade" id="createWarrant" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog modal-lg">
