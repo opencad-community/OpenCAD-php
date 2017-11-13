@@ -728,6 +728,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <!-- ./ col-sm-9 -->
               </div>
               <!-- ./ form-group -->
+                <div class="form-group row">
+                        <label class="col-lg-2 control-label">Vehicle Plate</label>
+                        <div class="col-lg-10">
+                						<input type="text" class="form-control" name="vehicle_plate" placeholder="The plate of the BOLO vehicle." />
+                        </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
               <div class="form-group row">
                         <label class="col-lg-2 control-label">Primary Color</label>
                         <div class="col-lg-10">
