@@ -607,6 +607,19 @@ CREATE TABLE `ncic_plates` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ncic_warnings`
+--
+
+CREATE TABLE `ncic_warnings` (
+  `id` int(11) NOT NULL,
+  `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '0 = Pending, 1 = Approved/Active',
+  `name_id` int(11) NOT NULL COMMENT 'Paired to ID of ncic_names table',
+  `warning_name` varchar(255) NOT NULL,
+  `issued_date` date DEFAULT NULL,
+  `issued_by` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
 -- Table structure for table `ncic_warrants`
 --
 
@@ -1615,6 +1628,12 @@ ALTER TABLE `ncic_plates`
   ADD KEY `name_id` (`name_id`) USING BTREE;
 
 --
+-- Indexes for table `ncic_warnings`
+--
+ALTER TABLE `ncic_warnings`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+  
+--
 -- Indexes for table `ncic_warrants`
 --
 ALTER TABLE `ncic_warrants`
@@ -1704,6 +1723,11 @@ ALTER TABLE `ncic_names`
 --
 ALTER TABLE `ncic_plates`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+--
+-- AUTO_INCREMENT for table `ncic_warnings`
+--
+ALTER TABLE `ncic_warnings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `ncic_warrants`
 --

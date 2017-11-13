@@ -17,6 +17,9 @@ require_once(__DIR__ . "/../oc-config.php");
 if (isset($_POST['delete_citation'])){
     delete_citation();
 }
+if (isset($_POST['delete_warning'])){
+    delete_citation();
+}
 if (isset($_POST['delete_warrant'])){
     delete_warrant();
 }
@@ -47,6 +50,9 @@ if (isset($_POST['create_warrant'])){
 }
 if (isset($_POST['create_citation'])){
     create_citation();
+}
+if (isset($_POST['create_warning'])){
+    create_warning();
 }
 if (isset($_POST['create_personbolo'])){
     create_personbolo();
@@ -709,6 +715,44 @@ function create_citation()
     header("Location:../cad.php");
 }
 
+function create_warning()
+{
+    $userId = $_POST['civilian_names'];
+    $warning_name = $_POST['warning_name'];
+    session_start();
+    $issued_by = $_SESSION['name'];
+    $date = date('Y-m-d');
+
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $sql = "INSERT INTO ncic_warnings (name_id, warning_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)";
+
+
+	try {
+		$stmt = mysqli_prepare($link, $sql);
+		mysqli_stmt_bind_param($stmt, "isss", $userId, $warning_name, $issued_by, $date);
+		$result = mysqli_stmt_execute($stmt);
+
+		if ($result == FALSE) {
+			die(mysqli_error($link));
+		}
+	}
+	catch (Exception $e)
+	{
+		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+	}
+	mysqli_close($link);
+
+    session_start();
+    $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully created warning</span></div>';
+
+    header("Location:../cad.php");
+}
+
 function create_warrant()
 {
     $userId = $_POST['civilian_names'];
@@ -812,6 +856,68 @@ function ncic_citations()
     }
 }
 
+function ncic_warnings()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT ncic_names.first_name, ncic_names.last_name, ncic_warnings.id, ncic_warnings.warning_name, ncic_warnings.issued_date, ncic_warnings.issued_by FROM ncic_warnings INNER JOIN ncic_names ON ncic_warnings.name_id=ncic_names.id WHERE ncic_warnings.status = '1'";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>There are currently no warnings in the NCIC Database</span></div>";
+    }
+    else
+    {
+        echo '
+            <table id="ncic_warnings" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Warning Name</th>
+                <th>Issued On</th>
+                <th>Issued By</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            echo '
+            <tr>
+                <td>'.$row[0].'</td>
+                <td>'.$row[1].'</td>
+                <td>'.$row[3].'</td>
+                <td>'.$row[4].'</td>
+                <td>'.$row[5].'</td>
+                <td>
+                    <form action="./actions/dispatchActions.php" method="post">
+                    <input name="edit_citation" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
+                    <input name="delete_citation" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Remove" disabled/>
+                    <input name="cid" type="hidden" value='.$row[2].' />
+                    </form>
+                </td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
+
 function delete_citation()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -840,6 +946,38 @@ function delete_citation()
 
     session_start();
     $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully removed citation</span></div>';
+    header("Location: ../cad.php");
+}
+
+
+function delete_warning()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $cid = $_POST['cid'];
+
+    $query = "DELETE FROM ncic_warnings WHERE id = ?";
+
+    try {
+        $stmt = mysqli_prepare($link, $query);
+        mysqli_stmt_bind_param($stmt, "i", $cid);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage());
+    }
+
+    session_start();
+    $_SESSION['warningMessage'] = '<div class="alert alert-success"><span>Successfully removed warning</span></div>';
     header("Location: ../cad.php");
 }
 

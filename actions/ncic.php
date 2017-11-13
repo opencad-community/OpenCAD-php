@@ -130,6 +130,35 @@ function name()
                 }
                 mysqli_close($link);
             }
+			
+            /* Check for Warnings */
+            $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+            if (!$link) {
+                die('Could not connect: ' .mysql_error());
+            }
+
+            $sql = "SELECT id, name_id, warning_name FROM ncic_warnings WHERE name_id = \"$userId\"";
+
+            $result=mysqli_query($link, $sql);
+
+            $num_rows = $result->num_rows;
+            if($num_rows == 0)
+            {
+                $encode["noWarnings"] = "true";
+            }
+            else
+            {
+                $warningIndex = 0;
+                while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+                {
+                    $encode["warningId"][$warningIndex] = $row[0];
+                    $encode["warning_name"][$warningIndex] = $row[2];
+
+                    $warningIndex++;
+                }
+                mysqli_close($link);
+            }
 
         }
 

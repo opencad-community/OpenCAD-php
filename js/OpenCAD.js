@@ -198,7 +198,7 @@ $('#ncic_name_btn').on('click', function(e) {
 
             if (data['noCitations'] == "true")
             {
-            var citationText = "&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: green\">NO CITATIONS</span>";
+            var citationText = "&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: green\">NO CITATIONS</span><br/>";
             }
             else
             {
@@ -207,6 +207,20 @@ $('#ncic_name_btn').on('click', function(e) {
             for (i=0; i<data.citation_name.length; i++)
             {
                 citationText += "&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #F78F2B\">"+data.citation_name[i]+"</span><br/>";
+            }
+            }
+			
+            if (data['noWarnings'] == "true")
+            {
+            var warningText = "&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: green\">NO WARNINGS</span>";
+            }
+            else
+            {
+            var warningText = "";
+            warningText += "    Count: "+data.warning_name.length+"<br/>";
+            for (i=0; i<data.warning_name.length; i++)
+            {
+                warningText += "&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #F78F2B\">"+data.warning_name[i]+"</span><br/>";
             }
             }
 
@@ -225,7 +239,7 @@ $('#ncic_name_btn').on('click', function(e) {
             +"<br/>Build: "+data['build']
             +"<br/>Address: "+data['address']
             +"<br/>DL Status: "+dl_status_text
-            +"<br/><br/>Warrants: <br/>"+warrantText+"<br/>Citations:<br/>"+citationText);
+            +"<br/><br/>Warrants: <br/>"+warrantText+"<br/>Citations:<br/>"+citationText+"<br/>Warnings:<br/>"+warningText);
 
             $("#ncic_name_return").attr("tabindex",-1).focus();
         }
