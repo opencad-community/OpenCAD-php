@@ -722,14 +722,12 @@ function priorityTone(type)
             priorityButton.val("1");
             priorityButton.text("10-3 Tone - ACTIVE");
             sendTone("priority", "start");
-            document.getElementById('priorityToneAudio').play();
         }
         else if (value == "1")
         {
             sendTone("priority", "stop");
             priorityButton.val("0");
             priorityButton.text("10-3 Tone");
-            document.getElementById('priorityToneAudio').stop();
         }
     }
     else if (type == "recurring")
@@ -742,20 +740,17 @@ function priorityTone(type)
             recurringButton.val("1");
             recurringButton.text("Priority Tone - ACTIVE");
             sendTone("recurring", "start");
-            document.getElementById('recurringToneAudio').play();
         }
         else if (value == "1")
         {
             sendTone("recurring", "stop");
             recurringButton.val("0");
             recurringButton.text("Priority Tone");
-            document.getElementById('recurringToneAudio').stop();
         }
     }
 
- function sendTone(name, action)
+ function setTone(name, action)
  {
-     console.log('was here');
     $.ajax({
         type: "POST",
         url: hdir + "actions/api.php",

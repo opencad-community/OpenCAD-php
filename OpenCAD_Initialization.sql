@@ -948,6 +948,11 @@ CREATE TABLE `tones` (
   `active` set('0','1') NOT NULL DEFAULT '0' COMMENT '0 = inactive, 1 = active'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tones table. DO NOT ADD ROWS TO THIS TABLE' ROW_FORMAT=COMPACT;
 
+
+INSERT INTO `tones` (`id`, `name`, `active`) VALUES
+(0, 'priority', '0'),
+(1, 'recurring', '0');
+
 -- --------------------------------------------------------
 
 --
