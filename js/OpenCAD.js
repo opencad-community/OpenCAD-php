@@ -749,7 +749,7 @@ function priorityTone(type)
         }
     }
 
- function setTone(name, action)
+ function sendTone(name, action)
  {
     $.ajax({
         type: "POST",
