@@ -729,7 +729,8 @@ function priorityTone(type)
             sendTone("priority", "stop");
             priorityButton.val("0");
             priorityButton.text("10-3 Tone");
-            document.getElementById('priorityToneAudio').stop();
+            document.getElementById('priorityToneAudio').pause();
+            document.getElementById('priorityToneAudio').currentTime = 0;
         }
     }
     else if (type == "recurring")
@@ -749,7 +750,8 @@ function priorityTone(type)
             sendTone("recurring", "stop");
             recurringButton.val("0");
             recurringButton.text("Priority Tone");
-            document.getElementById('recurringToneAudio').stop();
+            document.getElementById('recurringToneAudio').pause();
+            document.getElementById('recurringToneAudio').currentTime = 0;
         }
     }
 
