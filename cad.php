@@ -742,14 +742,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <!-- ./ col-sm-9 -->
               </div>
               <!-- ./ form-group -->
-                <div class="form-group row">
-                        <label class="col-lg-2 control-label">Vehicle Plate</label>
-                        <div class="col-lg-10">
-                						<input type="text" class="form-control" name="vehicle_plate" placeholder="The plate of the BOLO vehicle." />
-                        </div>
-                <!-- ./ col-sm-9 -->
-              </div>
-              <!-- ./ form-group -->
               <div class="form-group row">
                         <label class="col-lg-2 control-label">Primary Color</label>
                         <div class="col-lg-10">
@@ -1276,8 +1268,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     </div>
     <!-- ./ modal fade bs-example-modal-lg -->
       <!-- AUDIO TONES -->
-      <audio id="recurringToneAudio" src="<?php echo BASE_URL; ?>/sounds/priority.mp3" preload="auto"></audio>
-      <audio id="priorityToneAudio" src="<?php echo BASE_URL; ?>/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
+      <audio id="recurringToneAudio" src="<?php echo BASE_URL; ?>/sounds/priority.mp3" loop="true" preload="auto"></audio>
+      <audio id="priorityToneAudio" src="<?php echo BASE_URL; ?>/sounds/Priority_Traffic_Alert.mp3" loop="true" preload="auto"></audio>
       <?php include "./oc-includes/jquery-colsolidated.inc.php"; ?>
       <script>
          var vid = document.getElementById("recurringToneAudio");
