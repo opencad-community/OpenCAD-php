@@ -22,7 +22,7 @@ require_once(__DIR__ . '/../oc-config.php');
         $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
         if (!$link) {
-            die('Could not connect: ' .mysql_error());
+            die('Please fix your database credentials. ' .mysql_error());
         }
 
         $query = "SELECT id, name, password, email, identifier, password_reset, approved FROM users WHERE email = ?";
