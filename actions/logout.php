@@ -12,7 +12,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
 
-require_once(__DIR__ . '/../oc-config.php');
+require_once(__DIR__ . "/../oc-config.php");
 
 if (isset($_GET['responder']))
 {
@@ -53,6 +53,6 @@ session_start();
 session_unset();
 session_destroy();
 
-header("Location: ../index.php?loggedOut=true");
+header("Location: ".BASE_URL."/index.php?loggedOut=true");
 exit();
 ?>

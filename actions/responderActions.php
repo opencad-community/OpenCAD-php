@@ -12,7 +12,7 @@ This program is free software: you can redistribute it and/or modify
 
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
-require_once(__DIR__ . '/../oc-config.php');
+require_once(__DIR__ . "/../oc-config.php");
 
 /* Handle POST requests */
 if (isset($_POST['updateCallsign'])){
@@ -272,7 +272,7 @@ function create_citation()
     session_start();
     $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully created citation</span></div>';
 
-    header("Location:../mdt.php");
+    header("Location:".BASE_URL."/mdt.php");
 }
 
 
@@ -311,7 +311,7 @@ function create_warning()
     session_start();
     $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully created warning</span></div>';
 
-    header("Location:../mdt.php");
+    header("Location:".BASE_URL."/mdt.php");
 }
 
 ?>

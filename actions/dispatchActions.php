@@ -588,7 +588,7 @@ function cadGetVehicleBOLOS()
                 <td>'.$row[7].'</td>
                 <td>
                     <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
-					<form action="../actions/dispatchActions.php" method="post">
+					<form action="".BASE_URL."/actions/dispatchActions.php" method="post">
                     <input name="delete_vehiclebolo" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
                     <input name="vbid" type="hidden" value='.$row[0].' />
                     </form>
@@ -660,7 +660,7 @@ function cadGetPersonBOLOS()
                 <td>'.$row[5].'</td>
                 <td>'.$row[6].'</td>
                 <td>
-                    <form action="./actions/dispatchActions.php" method="post">
+                    <form action="".BASE_URL."/actions/dispatchActions.php" method="post">
                     <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
                     <input name="delete_personbolo" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
                     <input name="pbid" type="hidden" value='.$row[0].' />
@@ -712,7 +712,7 @@ function create_citation()
     session_start();
     $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully created citation</span></div>';
 
-    header("Location:../cad.php");
+    header("Location:".BASE_URL."/cad.php");
 }
 
 function create_warning()
@@ -750,7 +750,7 @@ function create_warning()
     session_start();
     $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully created warning</span></div>';
 
-    header("Location:../cad.php");
+    header("Location:".BASE_URL."/cad.php");
 }
 
 function create_warrant()
@@ -792,7 +792,7 @@ function create_warrant()
     session_start();
     $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully created warrant</span></div>';
 
-    header("Location:../cad.php");
+    header("Location:".BASE_URL."/cad.php");
 }
 function ncic_citations()
 {
@@ -839,7 +839,7 @@ function ncic_citations()
                 <td>'.$row[4].'</td>
                 <td>'.$row[5].'</td>
                 <td>
-                    <form action="./actions/dispatchActions.php" method="post">
+                    <form action="".BASE_URL."/actions/dispatchActions.php" method="post">
                     <input name="edit_citation" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
                     <input name="delete_citation" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Expunge" disabled/>
                     <input name="cid" type="hidden" value='.$row[2].' />
@@ -901,7 +901,7 @@ function ncic_warnings()
                 <td>'.$row[4].'</td>
                 <td>'.$row[5].'</td>
                 <td>
-                    <form action="./actions/dispatchActions.php" method="post">
+                    <form action="".BASE_URL."/actions/dispatchActions.php" method="post">
                     <input name="edit_citation" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
                     <input name="delete_citation" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Remove" disabled/>
                     <input name="cid" type="hidden" value='.$row[2].' />
@@ -946,7 +946,7 @@ function delete_citation()
 
     session_start();
     $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully removed citation</span></div>';
-    header("Location: ../cad.php");
+    header("Location: ".BASE_URL."/cad.php");
 }
 
 
@@ -978,7 +978,7 @@ function delete_warning()
 
     session_start();
     $_SESSION['warningMessage'] = '<div class="alert alert-success"><span>Successfully removed warning</span></div>';
-    header("Location: ../cad.php");
+    header("Location: ".BASE_URL."/cad.php");
 }
 
 function delete_warrant()
@@ -1009,7 +1009,7 @@ function delete_warrant()
 
     session_start();
     $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully removed warrant</span></div>';
-    header("Location: ../cad.php");
+    header("Location: ".BASE_URL."/cad.php");
 }
 
 function ncic_warrants()
@@ -1061,7 +1061,7 @@ function ncic_warrants()
                 <td>'.$row[1].'</td>
                 <td>'.$row[3].'</td>
                 <td>
-                    <form action="./actions/dispatchActions.php" method="post">
+                    <form action="".BASE_URL."/actions/dispatchActions.php" method="post">
                     <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
                     ';
                         if ($row[6] == "Active")
@@ -1124,7 +1124,7 @@ function create_personbolo()
     session_start();
     $_SESSION['boloMessage'] = '<div class="alert alert-success"><span>Successfully created BOLO</span></div>';
 
-    header("Location:../cad.php");
+    header("Location:".BASE_URL."/cad.php");
 }
 
 function create_vehiclebolo()
@@ -1164,7 +1164,7 @@ function create_vehiclebolo()
     session_start();
     $_SESSION['boloMessage'] = '<div class="alert alert-success"><span>Successfully created BOLO</span></div>';
 
-    header("Location:../cad.php");
+    header("Location:".BASE_URL."/cad.php");
 }
 
 function delete_personbolo()
@@ -1195,7 +1195,7 @@ function delete_personbolo()
 
     session_start();
     $_SESSION['boloMessage'] = '<div class="alert alert-success"><span>Successfully removed person BOLO</span></div>';
-    header("Location: ../cad.php");
+    header("Location: ".BASE_URL."/cad.php");
 }
 
 
@@ -1227,7 +1227,7 @@ function delete_vehiclebolo()
 
     session_start();
     $_SESSION['boloMessage'] = '<div class="alert alert-success"><span>Successfully removed vehicle BOLO</span></div>';
-    header("Location: ../cad.php");
+    header("Location: ".BASE_URL."/cad.php");
 }
 
 

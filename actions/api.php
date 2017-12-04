@@ -120,6 +120,7 @@ function quickStatus()
 
 function getMyCall()
 {
+    session_start();
     //First, check to see if they're on a call
     $uid = $_SESSION['id'];
 

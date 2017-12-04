@@ -109,7 +109,7 @@ function ncicGetNames()
                 <td>'.$row[11].'</td>
                 <td>
                     <button name="edit_name" data-toggle="modal" data-target="#editNameModal" class="btn btn-xs btn-link" disabled>Edit</button>
-                    <form action="../actions/civActions.php" method="post">
+                    <form action="".BASE_URL."/actions/civActions.php" method="post">
                     <input name="delete_name" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
                     <input name="uid" type="hidden" value='.$row[0].' />
                     </form>
@@ -185,7 +185,7 @@ function ncicGetPlates()
                 <td>'.$row[8].'</td>
                 <td>'.$row[10].'</td>
                 <td>
-                    <form action="../actions/civActions.php" method="post">
+                    <form action="".BASE_URL."/actions/civActions.php" method="post">
                     <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
                     <input name="delete_plate" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete" enabled/>
                     <input name="vehid" type="hidden" value='.$row[0].' />
@@ -230,7 +230,7 @@ function delete_name()
 
     session_start();
     $_SESSION['nameMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian name</span></div>';
-    header("Location: ../civilian.php");
+    header("Location: ".BASE_URL."/civilian.php");
 }
 
 function delete_plate()
@@ -261,7 +261,7 @@ function delete_plate()
 
     session_start();
     $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian plate</span></div>';
-    header("Location: ../civilian.php");
+    header("Location: ".BASE_URL."/civilian.php");
 }
 
 function create_name()
@@ -304,7 +304,7 @@ function create_name()
         $_SESSION['identityMessage'] = '<div class="alert alert-danger"><span>Name already exists</span></div>';
 
         sleep(1);
-        header("Location:../civilian.php");
+        header("Location:".BASE_URL."/civilian.php");
     }
 
     // If name doesn't exist, add it to ncic_requests table
@@ -345,7 +345,7 @@ function create_name()
     $_SESSION['identityMessage'] = '<div class="alert alert-success"><span>Successfully create an identity</span></div>';
 
     sleep(1);
-    header("Location:../civilian.php#name_panel");
+    header("Location:".BASE_URL."/civilian.php#name_panel");
 
 }
 
@@ -416,7 +416,7 @@ function create_plate()
     session_start();
     $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully added plate to the database</span></div>';
 
-    header("Location:../civilian.php#plate_panel");
+    header("Location:".BASE_URL."/civilian.php#plate_panel");
 }
 
 function create911Call()
@@ -457,7 +457,7 @@ function create911Call()
     $_SESSION['good911'] = '<div class="alert alert-success"><span>Successfully created 911 call</span></div>';
 
     sleep(1);
-    header("Location:../civilian.php#911_panel");
+    header("Location:".BASE_URL."/civilian.php#911_panel");
 
 }
 
