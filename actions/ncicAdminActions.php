@@ -12,7 +12,7 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
-require_once(__DIR__ . '/../oc-config.php');
+require_once(__DIR__ . "/../oc-config.php");
 include(__DIR__ . '/api.php');
 
 /* Handle POST requests */
@@ -72,7 +72,7 @@ function rejectRequest()
 
     session_start();
     $_SESSION['identityRequestMessage'] = '<div class="alert alert-success"><span>Successfully rejected request</span></div>';
-    header("Location: ../oc-admin/ncicAdmin.php");
+    header("Location: ".BASE_URL."/oc-admin/ncicAdmin.php");
 }
 
 function getIdentityRequests()
@@ -116,7 +116,7 @@ function getIdentityRequests()
                 <td>'.$row[1].'</td>
                 <td>'.$row[2].'</td>
                 <td>
-                    <form action="../actions/ncicAdminActions.php" method="post">
+                    <form action="".BASE_URL."/actions/ncicAdminActions.php" method="post">
                     <button name="viewRequestDetails" data-toggle="modal" data-target="#requestDetails" class="btn btn-xs btn-link" type="button">Details</button>
                     <input name="reject_identity_request" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Quick Reject"/>
                     <input name="accept_identity_request" type="submit" class="btn btn-xs btn-link" style="color: green;" value="Quick Accept"/>
@@ -188,7 +188,7 @@ function ncicGetNames()
                 <td>'.$row[11].'</td>
                 <td>
                     <button name="edit_name" data-toggle="modal" data-target="#editNameModal" class="btn btn-xs btn-link" disabled>Edit</button>
-                    <form action="../actions/ncicAdminActions.php" method="post">
+                    <form action="".BASE_URL."/actions/ncicAdminActions.php" method="post">
                     <input name="delete_name" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
                     <input name="uid" type="hidden" value='.$row[0].' />
                     </form>
@@ -261,7 +261,7 @@ function ncicGetPlates()
                 <td>'.$row[8].'</td>
                 <td>'.$row[10].'</td>
                 <td>
-                    <form action="../actions/ncicAdminActions.php" method="post">
+                    <form action="".BASE_URL."/actions/ncicAdminActions.php" method="post">
                     <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
                     <input name="delete_plate" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete" enabled/>
                     <input name="vehid" type="hidden" value='.$row[0].' />
@@ -327,7 +327,7 @@ function ncic_warrants()
                 <td>'.$row[1].'</td>
                 <td>'.$row[3].'</td>
                 <td>
-                    <form action="../actions/ncicAdminActions.php" method="post">
+                    <form action="".BASE_URL."/actions/ncicAdminActions.php" method="post">
                     <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
                     ';
                         if ($row[6] == "Active")
@@ -352,85 +352,6 @@ function ncic_warrants()
             </table>
         ';
     }
-}
-
-function create_citation()
-{
-    $userId = $_POST['civilian_names'];
-    $citation_name = $_POST['citation_name'];
-    session_start();
-    $issued_by = $_SESSION['name'];
-
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-
-    $sql = "INSERT INTO ncic_citations (name_id, citation_name, issued_by, status) VALUES (?, ?, ?, '1')";
-
-
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "iss", $userId, $citation_name, $issued_by);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
-		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
-
-    session_start();
-    $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully created citation</span></div>';
-
-    header("Location:../oc-admin/ncicAdmin.php#citation_panel");
-}
-
-function create_warrant()
-{
-    $userId = $_POST['civilian_names'];
-    $warrant_name = $_POST['warrant_name_sel'];
-    $issuing_agency = $_POST['issuing_agency'];
-
-    $warrant_name = $_POST['warrant_name_sel'];
-
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-	$status = 'Active';
-	$date = date('Y-m-d');
-
-    $expire = date('Y-m-d',strtotime('+1 day',strtotime($date)));
-
-    $sql = "INSERT INTO ncic_warrants (name_id, expiration_date, warrant_name, issuing_agency, status, issued_date) SELECT ?, ?, ?, ?, ?, ?";
-
-
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "isssss", $userId, $expire, $warrant_name, $issuing_agency, $status, $date);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
-		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
-
-    session_start();
-    $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully created warrant</span></div>';
-
-    header("Location:../oc-admin/ncicAdmin.php#warrant_panel");
 }
 
 function ncic_citations()
@@ -478,7 +399,7 @@ function ncic_citations()
                 <td>'.$row[4].'</td>
                 <td>'.$row[5].'</td>
                 <td>
-                    <form action="../actions/ncicAdminActions.php" method="post">
+                    <form action="".BASE_URL."/actions/ncicAdminActions.php" method="post">
                     <input name="edit_citation" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
                     <input name="delete_citation" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Expunge"/>
                     <input name="cid" type="hidden" value='.$row[2].' />
@@ -543,7 +464,7 @@ function delete_name()
 
     session_start();
     $_SESSION['nameMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian name</span></div>';
-    header("Location: ../oc-admin/ncicAdmin.php#name_panel");
+    header("Location: ".BASE_URL."/oc-admin/ncicAdmin.php#name_panel");
 }
 
 function delete_plate()
@@ -574,7 +495,7 @@ function delete_plate()
 
     session_start();
     $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian plate</span></div>';
-    header("Location: ../oc-admin/ncicAdmin.php#plate_panel");
+    header("Location: ".BASE_URL."/oc-admin/ncicAdmin.php#plate_panel");
 }
 
 function delete_citation()
@@ -605,7 +526,7 @@ function delete_citation()
 
     session_start();
     $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully removed citation</span></div>';
-    header("Location: ../oc-admin/ncicAdmin.php#citation_panel");
+    header("Location: ".BASE_URL."/oc-admin/ncicAdmin.php#citation_panel");
 }
 
 function delete_warrant()
@@ -636,118 +557,7 @@ function delete_warrant()
 
     session_start();
     $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully removed warrant</span></div>';
-    header("Location: ../oc-admin/ncicAdmin.php#warrant_panel");
+    header("Location: ".BASE_URL."/oc-admin/ncicAdmin.php#warrant_panel");
 }
 
-function create_name()
-{
-    session_start();
-
-    $fullName = $_POST['civNameReq'];
-    $firstName = explode(" ", $fullName) [0];
-    $lastName = explode(" ", $fullName) [1];
-
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link)
-    {
-        die('Could not connect: ' . mysql_error());
-    }
-
-    $query = 'SELECT first_name, last_name FROM ncic_names WHERE first_name = "' . $firstName . '" AND last_name = "' . $lastName . '"';
-
-    $result = mysqli_query($link, $query);
-
-    $num_rows = $result->num_rows;
-
-    if (!$num_rows == 0)
-    {
-        $_SESSION['identityMessage'] = '<div class="alert alert-danger"><span>Name already exists</span></div>';
-
-        sleep(1);
-        header("Location:../oc-admin/ncicAdmin.php#plate_panel");
-    }
-
-    $firstName;
-    $lastName;
-    $dob = $_POST['civDobReq'];
-    $address = $_POST['civAddressReq'];
-    $sex = $_POST['civSexReq'];
-    $race = $_POST['civRaceReq'];
-	$dlstatus = $_POST['civDL'];
-    $hair = $_POST['civHairReq'];
-    $build = $_POST['civBuildReq'];
-
-    $query = "INSERT INTO ncic_names (first_name, last_name, dob, address, gender, race, dl_status, hair_color, build)
-    VALUES (?,?,?,?,?,?,?,?,?)";
-
-    try
-    {
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "sssssssss", $firstName, $lastName, $dob, $address, $sex, $race, $dlstatus, $hair, $build);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == false)
-        {
-            die(mysqli_error($link));
-        }
-    }
-    catch(Exception $e)
-    {
-        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-        
-    }
-
-    $_SESSION['identityMessage'] = '<div class="alert alert-success"><span>Successfully submitted identity request</span></div>';
-
-    sleep(1);
-    header("Location:../oc-admin/ncicAdmin.php#name_panel");
-
-}
-
-function create_plate()
-{
-	session_start();
-	
-    $submittedById = $_SESSION['id'];
-    $userId = $_POST['civilian_names'];
-    $veh_plate = $_POST['veh_plate'];
-    $veh_make = $_POST['veh_make'];
-    $veh_model = $_POST['veh_model'];
-    $veh_pcolor = $_POST['veh_pcolor'];
-    $veh_scolor = $_POST['veh_scolor'];
-    $veh_insurance = $_POST['veh_insurance'];
-    $flags = $_POST['flags'];
-    $veh_reg_state = $_POST['veh_reg_state'];
-    $notes = $_POST['notes'];
-
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-
-    $sql = "INSERT INTO ncic_plates (name_id, veh_plate, veh_make, veh_model, veh_pcolor, veh_scolor, veh_insurance, flags, veh_reg_state, notes, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "issssssssss", $userId, $veh_plate, $veh_make, $veh_model, $veh_pcolor, $veh_scolor, $veh_insurance, $flags, $veh_reg_state, $notes, $submittedById);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
-		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
-
-    session_start();
-    $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully added plate to the database</span></div>';
-
-    header("Location:../oc-admin/ncicAdmin.php#plate_panel");
-}
 ?>

@@ -159,13 +159,11 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                           <div class="count"><?php echo getGroupCount("1");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
-                        <?php /*Hide for DOJRP
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                           <span class="count_top"><i class="fa fa-user"></i> EMS</span>
                           <div class="count"><?php echo getGroupCount("2");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
-                        */?>
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                           <span class="count_top"><i class="fa fa-user"></i> Fire</span>
                           <div class="count"><?php echo getGroupCount("3");?></div>
@@ -186,6 +184,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                           <div class="count"><?php echo getGroupCount("6");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
+                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                          <span class="count_top"><i class="fa fa-user"></i> State Police</span>
+                          <div class="count"><?php echo getGroupCount("9");?></div>
+                        </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                           <span class="count_top"><i class="fa fa-user"></i> Civilian</span>

@@ -197,9 +197,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <?php ncicGetNames();?>
                   </div>
                   <!-- ./ x_content -->
-                  <div class="x_footer">
-                    <button class="btn btn-primary" name="create_name_btn" type="submit" data-toggle="modal" data-target="#createNameModal">Create Name</button>
-                  </div>
                   <!-- ./ x_footer -->
                 </div>
                 <!-- ./ x_panel -->
@@ -228,9 +225,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <?php ncicGetPlates();?>
                   </div>
                   <!-- ./ x_content -->
-                  <div class="x_footer">
-                    <button class="btn btn-primary" name="create_plate_btn" type="submit" data-toggle="modal" data-target="#createPlateModal">Create Plate</button>
-                  </div>
                   <!-- ./ x_footer -->
                 </div>
                 <!-- ./ x_panel -->
@@ -260,9 +254,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <?php ncic_warrants();?>
                   </div>
                   <!-- ./ x_content -->
-                  <div class="x_footer">
-                    <button class="btn btn-primary" name="create_warrant_btn" type="submit" data-toggle="modal" data-target="#createWarrantModal">Create Warrant</button>
-                  </div>
                   <!-- ./ x_footer -->
                 </div>
                 <!-- ./ x_panel -->
@@ -291,9 +282,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <?php ncic_citations();?>
                   </div>
                   <!-- ./ x_content -->
-                  <div class="x_footer">
-                    <button class="btn btn-primary" name="create_citation_btn" type="submit" data-toggle="modal" data-target="#createCitationModal">Create Citation</button>
-                  </div>
                 </div>
                 <!-- ./ x_panel -->
               </div>

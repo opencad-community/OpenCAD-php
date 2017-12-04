@@ -12,7 +12,7 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
-require_once(__DIR__ . '/../oc-config.php');
+require_once(__DIR__ . "/../oc-config.php");
 
     $name = $_POST['uname'];
     $email = $_POST['email'];
@@ -28,7 +28,7 @@ require_once(__DIR__ . '/../oc-config.php');
         session_start();
         $_SESSION['register_error'] = "Passwords do not match";
         sleep(1);
-        header("Location:../index.php#signup");
+        header("Location:".BASE_URL."/index.php#signup");
         exit();
 
     }
@@ -54,7 +54,7 @@ require_once(__DIR__ . '/../oc-config.php');
 		session_start();
         $_SESSION['register_error'] = "Email already exists";
         sleep(1);
-        header("Location:../index.php#signup");
+        header("Location:".BASE_URL."/index.php#signup");
         exit();
 	}
 
@@ -125,6 +125,6 @@ require_once(__DIR__ . '/../oc-config.php');
     session_start();
     $_SESSION['register_success'] = "Successfully requested access. Please wait for an administrator to approve your request.";
     sleep(1);
-    header("Location:../index.php#signup");
+    header("Location:".BASE_URL."/index.php#signup");
 
 ?>

@@ -29,8 +29,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	
     include("./actions/api.php");
     include("./actions/responderActions.php");
-
-	callCheck();
     
     $citationMessage = "";
     if(isset($_SESSION['citationMessage']))
@@ -92,7 +90,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <li>
                               <a><i class="fa fa-book"></i> Citations <span class="fa fa-chevron-down"></span></a>
                               <ul class="nav child_menu">
-                                 <li><a type="button" data-toggle="modal" data-target="#asdf" > Create Citation</a></li>
+                                 <li><a type="button" data-toggle="modal" data-target="#createCitation" > Create Citation</a></li>
                               </ul>
                            </li>
                            <!--
@@ -259,7 +257,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            </div>
                            <!-- ./ x_title -->
                            <div class="x_content">
-						   <?php getMyCall(); ?>
+                              <div id="mycall">
+                              </div>
                            </div>
                            <!-- ./ x_content -->
                         </div>
@@ -269,9 +268,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <?php
                         if (isset($_GET['fire']))
                         {
-
-                          if ($_GET['fire'] == "true")
-                          {
                             //End the above row
                             echo '
                             </div>
@@ -335,7 +331,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                             </div>
                             <!-- ./ row -->
                             ';
-                          }
                         }
                         else
                         {
@@ -454,7 +449,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                <!-- ./ modal-header -->
                <div class="modal-body">
                   <form class="callsignForm" id="callsignForm">
-                    <?php mdtGetVehicleBOLOS(); ?>
+                              <div id="vehiclebolo">
+                              </div>
                         <!-- ./ col-sm-9 -->
                      </div>
                      <!-- ./ form-group -->
@@ -478,7 +474,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                <!-- ./ modal-header -->
                <div class="modal-body">
                   <form class="callsignForm" id="callsignForm">
-                    <?php mdtGetPersonBOLOS(); ?>
+                              <div id="personbolo">
+                              </div>
                         <!-- ./ col-sm-9 -->
                      </div>
                      <!-- ./ form-group -->
@@ -492,7 +489,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 
       <!-- Call Details Modal -->
-      <div class="modal fade" id="asdf" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal fade" id="createCitation" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg">
          <div class="modal-content">
             <div class="modal-header">
@@ -614,7 +611,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="form-group">
                      <label class="col-lg-2 control-label">Main Street</label>
                      <div class="col-lg-10">
-                        <input type="text" id="call_street2_det" name="call_street2_det" class="form-control" disabled>
+                        <input type="text" id="call_street2_det" name="call_street1_det" class="form-control" disabled>
                      </div>
                      <!-- ./ col-sm-9 -->
                   </div>
@@ -623,12 +620,41 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="form-group">
                      <label class="col-lg-2 control-label">Cross Street</label>
                      <div class="col-lg-10">
-                        <input type="text" id="call_street3_det" name="call_street3_det" class="form-control" disabled>
+                        <input type="text" id="call_street3_det" name="call_street2_det" class="form-control" disabled>
                      </div>
                      <!-- ./ col-sm-9 -->
                   </div>
                   <br/>
-                  <br />
+                  <!-- ./ form-group -->
+                  <div class="form-group">
+                     <label class="col-lg-2 control-label">Additional Location Info</label>
+                     <div class="col-lg-10">
+                        <input type="text" id="call_street3_det" name="call_street3_det" class="form-control" disabled>
+                     </div>
+                     <!-- ./ col-sm-9 -->
+                  </div>
+                     <br/>
+                  <div class="clearfix">
+                     <br/><br/><br/><br/>
+                     <!-- ./ form-group -->
+                     <div class="form-group">
+                        <label class="col-lg-2 control-label">Narrative</label>
+                        <div class="col-lg-10">
+                           <div name="call_narrative" id="call_narrative" contenteditable="false" style="background-color: #eee; opacity: 1; border: 1px solid #ccc; padding: 6px 12px; font-size: 14px; word-wrap: break-word; overflow-wrap: break-word; white-space: normal;"></div>
+                        </div>
+                        <!-- ./ col-sm-9 -->
+                     </div>
+                     <br/>
+                     <br/><br/><br/><br/>
+                     <!-- ./ form-group -->
+                     <div class="form-group">
+                        <label class="col-lg-2 control-label">Add Narrative</label>
+                        <div class="col-lg-10">
+                           <textarea name="narrative_add" id="narrative_add" class="form-control" style="text-transform:uppercase" rows="2" required></textarea>
+                        </div>
+                        <!-- ./ col-sm-9 -->
+                     </div>
+                     <br/>
                   <!-- ./ modal-body -->
                   <br/>
                   <div class="modal-footer">
@@ -676,6 +702,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
              getCalls();
              getStatus();
              checkTones();
+			 getMyCall();
+			 mdtGetVehicleBOLOS();
+			 mdtGetPersonBOLOS();
 
              $('#enroute_btn').click(function(evt) {
                console.log(evt);
@@ -762,6 +791,52 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                    {
                      $('#mycall').html(response);
                      setTimeout(getMyCall, 5000);
+
+                   },
+                   error : function(XMLHttpRequest, textStatus, errorThrown)
+                   {
+                     console.log("Error");
+                   }
+
+                 });
+           }
+      </script>
+      <script>
+         function mdtGetVehicleBOLOS() {
+             $.ajax({
+                   type: "GET",
+                   url: "<?php echo BASE_URL; ?>/actions/api.php",
+                   data: {
+                       mdtGetVehicleBOLOS: 'yes',
+                       responder: 'yes'
+                   },
+                   success: function(response)
+                   {
+                     $('#vehiclebolo').html(response);
+                     setTimeout(mdtGetVehicleBOLOS, 5000);
+
+                   },
+                   error : function(XMLHttpRequest, textStatus, errorThrown)
+                   {
+                     console.log("Error");
+                   }
+
+                 });
+           }
+      </script>
+      <script>
+         function mdtGetPersonBOLOS() {
+             $.ajax({
+                   type: "GET",
+                   url: "<?php echo BASE_URL; ?>/actions/api.php",
+                   data: {
+                       mdtGetPersonBOLOS: 'yes',
+                       responder: 'yes'
+                   },
+                   success: function(response)
+                   {
+                     $('#personbolo').html(response);
+                     setTimeout(mdtGetPersonBOLOS, 5000);
 
                    },
                    error : function(XMLHttpRequest, textStatus, errorThrown)
@@ -863,10 +938,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
              success: function(response)
              {
                  console.log(response);
-                 if (response.match("^10-6/On"))
+                 if (response.match("^10-6 | On"))
                  {
                      var currentStatus = $('#status').val();
-                     if (currentStatus == "10-6/On a Call")
+                     if (currentStatus == "10-6 | On Call")
                      {
                          //Do nothing
                      }

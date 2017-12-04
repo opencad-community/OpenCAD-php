@@ -133,7 +133,7 @@ function delete_user()
 
     session_start();
     $_SESSION['userMessage'] = '<div class="alert alert-success"><span>Successfully removed user from database</span></div>';
-    header("Location: ../oc-admin/userManagement.php#user_panel");
+    header("Location: ".BASE_URL."oc-admin/userManagement.php#user_panel");
 }
 
 /* Gets the user count. Returns value */
@@ -368,7 +368,7 @@ function approveUser()
     $_SESSION['accessMessage'] = '<div class="alert alert-success"><span>Successfully approved user access</span></div>';
 
     sleep(1);
-    header("Location:../oc-admin/admin.php");
+    header("Location:".BASE_URL."oc-admin/admin.php");
 
 }
 
@@ -432,7 +432,7 @@ function rejectUser()
     $_SESSION['accessMessage'] = '<div class="alert alert-danger"><span>Successfully rejected user access</span></div>';
 
     sleep(1);
-    header("Location:../oc-admin/admin.php");
+    header("Location:".BASE_URL."oc-admin/admin.php");
 
 }
 
@@ -561,7 +561,7 @@ function suspendUser()
     $_SESSION['accessMessage'] = '<div class="alert alert-success"><span>Successfully suspended user account</span></div>';
 
     sleep(1);
-    header("Location:../oc-admin/userManagement.php");
+    header("Location:".BASE_URL."oc-admin/userManagement.php");
 }
 
 function reactivateUser()
@@ -599,7 +599,7 @@ function reactivateUser()
     $_SESSION['accessMessage'] = '<div class="alert alert-success"><span>Successfully reactivated user account</span></div>';
 
     sleep(1);
-    header("Location:../oc-admin/userManagement.php");
+    header("Location:".BASE_URL."oc-admin/userManagement.php");
 }
 
 function getUserDetails()
@@ -836,6 +836,6 @@ function delete_callhistory()
 
     session_start();
     $_SESSION['historyMessage'] = '<div class="alert alert-success"><span>Successfully removed archived call</span></div>';
-    header("Location: ../oc-admin/callhistory.php#history_panel");
+    header("Location: ".BASE_URL."oc-admin/callhistory.php#history_panel");
 }
 ?>

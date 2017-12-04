@@ -12,7 +12,7 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
-require_once(__DIR__ . '/../oc-config.php');
+require_once(__DIR__ . "/../oc-config.php");
 
 //Handle requests
 if (isset($_POST['update_profile_btn']))
@@ -51,7 +51,7 @@ function updateProfile()
             if (mysqli_errno($link) == 1062) {
                 $_SESSION['profileUpdate'] = '<div class="alert alert-danger"><span>Update unsuccessful. Emails and Identifiers must be unique.</span></div>';
                 sleep(1); //Seconds to wait
-	            header("Location: ../profile.php");
+	            header("Location: ".BASE_URL."/profile.php");
             }
 			die(mysqli_error($link));
 		}
@@ -70,7 +70,7 @@ function updateProfile()
 	$_SESSION['profileUpdate'] = '<div class="alert alert-success"><span>Successfully updated your user information</span></div>';
 
 	sleep(1); //Seconds to wait
-	header("Location: ../profile.php");
+	header("Location: ".BASE_URL."/profile.php");
 }
 
 function getMyRank()
