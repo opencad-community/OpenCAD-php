@@ -51,7 +51,7 @@ function updateCallsign()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $sql = "UPDATE `active_users` SET `callsign` = ?, status = '0', status_detail='2' WHERE `active_users`.`identifier` = ?";
+    $sql = "UPDATE `active_users` SET `callsign` = ?, status = '0' WHERE `active_users`.`identifier` = ?";
 
 	try {
 		$stmt = mysqli_prepare($link, $sql);

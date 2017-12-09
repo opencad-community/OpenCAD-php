@@ -89,11 +89,11 @@ function quickStatus()
                 die('Could not connect: ' .mysql_error());
             }
 
-            //Update the call_notes to say they're en-route
+            //Update the call_narrative to say they're en-route
             $narrativeAdd = date("Y-m-d H:i:s").': '.$callsign.': En-Route<br/>';
 
 
-            $sql = "UPDATE calls SET call_notes = concat(call_notes, ?) WHERE call_id = ?";
+            $sql = "UPDATE calls SET call_narrative = concat(call_narrative, ?) WHERE call_id = ?";
 
             try {
                 $stmt = mysqli_prepare($link, $sql);
@@ -477,10 +477,10 @@ function changeStatus()
             $callsign = $row[0];
         }
 
-        //Update the call_notes to say they were cleared
+        //Update the call_narrative to say they were cleared
         $narrativeAdd = date("Y-m-d H:i:s").': Unit Cleared: '.$callsign.'<br/>';
 
-        $sql = "UPDATE calls SET call_notes = concat(call_notes, ?) WHERE call_id = ?";
+        $sql = "UPDATE calls SET call_narrative = concat(call_narrative, ?) WHERE call_id = ?";
 
         try {
             $stmt = mysqli_prepare($link, $sql);
@@ -1166,10 +1166,10 @@ function getCallDetails()
     {
         $encode["call_id"] = $row[0];
         $encode["call_type"] = $row[1];
-        $encode["call_street1"] = $row[2];
-        $encode["call_street2"] = $row[3];
-        $encode["call_street3"] = $row[4];
-        $encode["narrative"] = $row[5];
+        $encode["call_street1"] = $row[3];
+        $encode["call_street2"] = $row[4];
+        $encode["call_street3"] = $row[5];
+        $encode["narrative"] = $row[6];
 
     }
 

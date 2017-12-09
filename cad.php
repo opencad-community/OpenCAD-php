@@ -422,12 +422,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <div class="input-group">
                            <input type="text" name="ncic_firearm" class="form-control" id="ncic_firearm" placeholder="Serial Number"/>
                            <span class="input-group-btn">
-                           <button type="button" class="btn btn-primary" disabled>Send</button>
+                           <button type="button" class="btn btn-primary" id="ncic_firearm_btn">Send</button>
                            </span>
                         </div>
                         <!-- ./ input-group -->
-                        <div name="firearm_return"
-                        </div>
+                              <div name="firearm_return" id="firearm_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
+                              </div>
                      </div>
                      <!-- ./ x_content -->
                   </div>
@@ -588,18 +588,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      </div>
                      <!-- ./ form-group -->
                      <br/>
-                     <div class="form-group row">
-                        <label class="col-lg-2 control-label">Assign Unit to Call</label>
-                        <div class="col-lg-10">
-                           <select class="form-control selectpicker unit" data-live-search="true" name="unit_1" id="unit_1" title="Select a Unit or Leave Blank (Will mark call as Pending)">
-                              <option></option>
-                           </select>
-                           <select class="form-control selectpicker unit" data-live-search="true" name="unit_2" id="unit_2" title="Select a Unit or Leave Blank">
-                              <option></option>
-                           </select>
-                        </div>
-                        <!-- ./ col-sm-9 -->
-                     </div>
                      <br/>
                      <!-- ./ form-group -->
                      <div class="form-group row">
@@ -830,7 +818,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="form-group">
                      <label class="col-lg-2 control-label">Main Street</label>
                      <div class="col-lg-10">
-                        <input type="text" id="call_street2_det" name="call_street2_det" class="form-control" disabled>
+                        <input type="text" id="call_street1_det" name="call_street1_det" class="form-control" disabled>
                      </div>
                      <!-- ./ col-sm-9 -->
                   </div>
@@ -839,11 +827,43 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="form-group">
                      <label class="col-lg-2 control-label">Cross Street</label>
                      <div class="col-lg-10">
+                        <input type="text" id="call_street2_det" name="call_street2_det" class="form-control" disabled>
+                     </div>
+                     <!-- ./ col-sm-9 -->
+                  </div>
+                  <br/>
+                  <!-- ./ form-group -->
+                  <div class="form-group">
+                     <label class="col-lg-2 control-label">Additional Location Info</label>
+                     <div class="col-lg-10">
                         <input type="text" id="call_street3_det" name="call_street3_det" class="form-control" disabled>
                      </div>
                      <!-- ./ col-sm-9 -->
                   </div>
                      <br/>
+                  <div class="clearfix">
+                     <br/><br/><br/><br/>
+                     <!-- ./ form-group -->
+                  <div class="clearfix">
+                     <br/><br/><br/><br/>
+                     <!-- ./ form-group -->
+                     <div class="form-group">
+                        <label class="col-lg-2 control-label">Narrative</label>
+                        <div class="col-lg-10">
+                           <div name="call_narrative" id="call_narrative" contenteditable="false" style="background-color: #eee; opacity: 1; border: 1px solid #ccc; padding: 6px 12px; font-size: 14px; word-wrap: break-word; overflow-wrap: break-word; white-space: normal;"></div>
+                        </div>
+                        <!-- ./ col-sm-9 -->
+                     </div>
+                     <br/>
+                     <br/><br/><br/><br/>
+                     <!-- ./ form-group -->
+                     <div class="form-group">
+                        <label class="col-lg-2 control-label">Add Narrative</label>
+                        <div class="col-lg-10">
+                           <textarea name="narrative_add" id="narrative_add" class="form-control" style="text-transform:uppercase" rows="2" required></textarea>
+                        </div>
+                        <!-- ./ col-sm-9 -->
+                     </div>
                      <br/>
                   <!-- ./ modal-body -->
                   <br/>
