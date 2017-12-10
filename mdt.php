@@ -26,7 +26,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       $name = $_SESSION['name'];
     }
 	
-	
     include("./actions/api.php");
     include("./actions/responderActions.php");
     
@@ -42,6 +41,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         $citationMessage = $_SESSION['warningMessage'];
         unset($_SESSION['warningMessage']);
     }
+		callCheck();
 	
 ?>
 
@@ -121,7 +121,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <a data-toggle="tooltip" data-placement="top">
                           <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                         </a>-->
-                     <a data-toggle="tooltip" data-placement="top" title="FullScreen" onclick="toggleFullScreen()">
+                     <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
                      <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
                      </a>
                      <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
@@ -228,7 +228,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                  <div class="form-group">
                                     <label class="col-md-2 col-sm-2 col-xs-2 control-label">Change Status</label>
                                     <div class="col-md-10 col-sm-10 col-xs-10">
-                                       <select name="statusSelect" class="form-control selectpicker <?php echo $_SESSION['identifier'];?>" id="statusSelect" onchange="responderChangeStatus(this);" title="Select a Status">
+                                       <select name="statusSelect" class="form-control selectpicker <?php echo $_SESSION['identifier'];?>" id="statusSelect" onChange="responderChangeStatus(this);" title="Select a Status">
                                           <option value="10-6">10-6/Busy</option>
 										  <option value="10-5">10-5/Meal Break</option>
 										  <option value="10-7">10-7/Unavailable</option>
@@ -266,7 +266,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      </div>
                      <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
                      <?php
-                        if (isset($_GET['fire']))
+                        if (isset($_GET['Fire']))
                         {
                             //End the above row
                             echo '
@@ -677,10 +677,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          vid.volume = 0.3;
       </script>
       <?php
-         if (isset($_GET['fire']))
+         if (isset($_GET['Fire']))
          {
 
-           if ($_GET['fire'] == "true")
+           if ($_GET['Fire'] == "true")
            {
              echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/Fire_Tones_Aligned.wav" preload="auto"></audio>';
            }
@@ -938,10 +938,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
              success: function(response)
              {
                  console.log(response);
-                 if (response.match("^10-6 | On"))
+                 if (response.match("^10-7 | Unavailable"))
                  {
                      var currentStatus = $('#status').val();
-                     if (currentStatus == "10-6 | On Call")
+                     if (currentStatus == "10-7 | Unavailable | On Call")
                      {
                          //Do nothing
                      }
