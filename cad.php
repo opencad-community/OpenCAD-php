@@ -145,7 +145,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <a data-toggle="tooltip" data-placement="top">
                         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                         </a>-->
-                     <a data-toggle="tooltip" data-placement="top" title="FullScreen" onclick="toggleFullScreen()">
+                     <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
                      <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
                      </a>
                      <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
@@ -251,8 +251,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <!-- ./ x_content -->
                            <div class="x_footer">
                               <button class="btn btn-primary" name="new_call_btn" data-toggle="modal" data-target="#newCall">New Call</button>
-                              <button class="btn btn-danger pull-right" onclick="priorityTone('single')" value="0" id="priorityTone">10-3 Tone</button>
-                              <button class="btn btn-danger pull-right" onclick="priorityTone('recurring')" value="0" id="recurringTone">Priority Tone</button>
+                              <button class="btn btn-danger pull-right" onClick="priorityTone('single')" value="0" id="priorityTone">10-3 Tone</button>
+                              <button class="btn btn-danger pull-right" onClick="priorityTone('recurring')" value="0" id="recurringTone">Priority Tone</button>
                            </div>
                         </div>
                         <!-- ./ x_panel -->
@@ -274,8 +274,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <div class="x_content">
                               <div id="noCallsAlertHolder">
 							  <?php echo $boloMessage;?>
-                                 <?php cadGetPersonBOLOS();?>
-								 <?php cadGetVehicleBOLOS();?>
+                           <div class="x_content">
+                              <div id="cadpersonbolo"></div>
+                           </div>
+                           <div class="x_content">
+                              <div id="cadvehiclebolo"></div>
+                           </div>
                                  <span id="noCallsAlertSpan"></span>
                               </div>
                               <div id="live_calls"></div>
@@ -697,7 +701,90 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     </div>
 	</div>
     <!-- ./ modal fade bs-example-modal-lg -->
-
+    <!-- Edit Person Bolo Modal -->
+    <div class="modal fade" id="editPersonboloModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Edit Person BOLO</h4>
+          </div>
+          <!-- ./ modal-header -->
+      <div class="modal-body">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/dispatchActions.php" method="post">
+                <div class="form-group row">
+                </div>
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">First Name</label>
+                <div class="col-lg-10">
+          <input name="first_name" class="form-control" id="first_name" placeholder="First Name of the BOLOed subject."/>
+          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Last Name</label>
+                <div class="col-lg-10">
+          <input name="last_name" class="form-control" id="last_name" placeholder="Last Name of the BOLOed subject."/>
+          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Gender</label>
+                <div class="col-lg-10">
+          <select name="gender" class="form-control selectpicker gender_picker" id="gender" title="Select a sex" data-live-search="true">
+                    <option> </option>
+                    <?php getGenders();?>
+          </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Physical Description</label>
+                <div class="col-lg-10">
+          <input name="physical_description" class="form-control" id="physical_description" placeholder="Physical description of the BOLOed subject."/>
+          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Reason Wanted</label>
+                <div class="col-lg-10">
+          <textarea name="reason_wanted" class="form-control" style="text-transform:uppercase" rows="5" id="reason_wanted" placeholder="Wanted reason of the BOLOed subject." required> </textarea>
+          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Last Seen</label>
+                <div class="col-lg-10">
+          <input name="last_seen" class="form-control" id="last_seen" placeholder="Last observed location of the BOLOed subject."/>
+          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+          <div class="modal-footer">
+                <input type="hidden" name="edit_personId" class="Editdataid">
+                <input name="edit_personbolo" type="submit" class="btn btn-primary" value="Edit" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+  </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
 	<!-- New Vehicle Bolo Modal -->
     <div class="modal fade" id="newVehicleBOLO" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg">
@@ -733,7 +820,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="form-group row">
                         <label class="col-lg-2 control-label">Vehicle Plate</label>
                         <div class="col-lg-10">
-                						<input type="text" class="form-control" name="vehicle_plate" placeholder="The plate of the BOLO vehicle." />
+                						<input type="text" class="form-control vehicle_plate" name="vehicle_plate" placeholder="The plate of the BOLO vehicle." />
                         </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -741,7 +828,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                         <label class="col-lg-2 control-label">Primary Color</label>
                         <div class="col-lg-10">
-                						<input type="text" class="form-control" name="primary_color" placeholder="The primary color of the BOLO vehicle." />
+                						<input type="text" class="form-control primary_color" name="primary_color" placeholder="The primary color of the BOLO vehicle." />
                         </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -749,7 +836,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <div class="form-group row">
                         <label class="col-lg-2 control-label">Secondary Color</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" name="secondary_color" placeholder="The secondary color, if any, of the BOLO vehicle." />                        </div>
+                            <input type="text" class="form-control secondary_color" name="secondary_color" placeholder="The secondary color, if any, of the BOLO vehicle." />                        </div>
                         <!-- ./ col-sm-9 -->
                      </div>
                 <!-- ./ col-sm-9 -->
@@ -758,7 +845,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <div class="form-group row">
                         <label class="col-lg-2 control-label">Reason Wanted</label>
                         <div class="col-lg-10">
-                                <textarea name="reason_wanted" id="narrative" class="form-control" style="text-transform:uppercase" rows="5"></textarea>
+                                <textarea name="reason_wanted" id="narrative" class="form-control reason_wanted" style="text-transform:uppercase" rows="5"></textarea>
                         </div>
                         <!-- ./ col-sm-9 -->
                      </div>
@@ -766,13 +853,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <div class="form-group row">
                         <label class="col-lg-2 control-label">Last Seen</label>
                         <div class="col-lg-10">
-                           <input type="text" class="form-control" name="last_seen" placeholder="Last observed location of the BOLOed vehicle." />
+                           <input type="text" class="form-control last_seen" name="last_seen" placeholder="Last observed location of the BOLOed vehicle." />
                         </div>
                         <!-- ./ col-sm-9 -->
                      </div>
               <!-- ./ form-group -->
           <div class="modal-footer">
-                <input name="create_vehiclebolo" type="submit" class="btn btn-primary" value="Send" />
+              <input name="create_vehiclebolo" type="submit" class="btn btn-primary" value="Send" />
                <button type="reset" class="btn btn-default" value="Reset">Reset</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </form>
@@ -785,6 +872,92 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     </div>
 	</div>
     <!-- ./ modal fade bs-example-modal-lg -->
+    <!-- Edit Vehicle Bolo Modal -->
+    <div class="modal fade" id="editVehicleBOLO" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Edit Vehicle BOLO</h4>
+          </div>
+          <!-- ./ modal-header -->
+      <div class="modal-body">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/dispatchActions.php" method="post">
+                <div class="form-group row">
+                </div>
+                <div class="form-group row">
+                        <label class="col-lg-2 control-label">Vehicle Make</label>
+                        <div class="col-lg-10">
+                           <select class="form-control selectpicker vehicle_make" data-live-search="true" name="vehicle_make" title="Vehicle Make" required>
+                              <?php getVehicleMakes();?>
+                           </select>
+                        </div>
+              <!-- ./ form-group -->
+                <div class="form-group row">
+                        <label class="col-lg-2 control-label">Vehicle Model</label>
+                        <div class="col-lg-10">
+                           <select class="form-control selectpicker vehicle_model" data-live-search="true" name="vehicle_model" title="Vehicle Make" required>
+                              <?php getVehicleModels();?>
+                           </select>
+                        </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+                <div class="form-group row">
+                        <label class="col-lg-2 control-label">Vehicle Plate</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control vehicle_plate" name="vehicle_plate" placeholder="The plate of the BOLO vehicle." />
+                        </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                        <label class="col-lg-2 control-label">Primary Color</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control primary_color" name="primary_color" placeholder="The primary color of the BOLO vehicle." />
+                        </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+                     <div class="form-group row">
+                        <label class="col-lg-2 control-label">Secondary Color</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control secondary_color" name="secondary_color" placeholder="The secondary color, if any, of the BOLO vehicle." />                        </div>
+                        <!-- ./ col-sm-9 -->
+                     </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+                     <div class="form-group row">
+                        <label class="col-lg-2 control-label">Reason Wanted</label>
+                        <div class="col-lg-10">
+                                <textarea name="reason_wanted" id="narrative" class="form-control reason_wanted" style="text-transform:uppercase" rows="5"></textarea>
+                        </div>
+                        <!-- ./ col-sm-9 -->
+                     </div>
+              <!-- ./ form-group -->
+                     <div class="form-group row">
+                        <label class="col-lg-2 control-label">Last Seen</label>
+                        <div class="col-lg-10">
+                           <input type="text" class="form-control last_seen" name="last_seen" placeholder="Last observed location of the BOLOed vehicle." />
+                        </div>
+                        <!-- ./ col-sm-9 -->
+                     </div>
+              <!-- ./ form-group -->
+          <div class="modal-footer">
+                <input type="hidden" name="edit_vehicleboloid" class="EditVehicleId">
+                <input name="edit_vehiclebolo" type="submit" class="btn btn-primary" value="Edit" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+  </div>
       <!-- Call Details Modal -->
       <div class="modal fade" id="callDetails" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg">
@@ -841,10 +1014,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <!-- ./ col-sm-9 -->
                   </div>
                      <br/>
-                  <div class="clearfix">
+                  <div class=" clearfix">
                      <br/><br/><br/><br/>
                      <!-- ./ form-group -->
-                  <div class="clearfix">
+                  <div  class="clearfix">
                      <br/><br/><br/><br/>
                      <!-- ./ form-group -->
                      <div class="form-group">
@@ -878,6 +1051,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          </div>
          <!-- ./ modal-dialog modal-lg -->
       </div>
+	  </div>
+	  </div>
+	  </div>
       <!-- ./ modal fade bs-example-modal-lg -->
       
       <!-- New Vehicle BOLO Modal -->
@@ -959,7 +1135,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <!-- ./ modal-dialog modal-lg -->
 
       </div>
-      <!-- ./ modal fade bs-example-modal-lg -->
+	   
+       <!-- Edit Vehicle BOLO Modal -->
+      
       <!-- Create Citation Modal -->
       <div class="modal fade" id="createCitation" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog modal-lg">
@@ -1314,6 +1492,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
              getUnAvailableUnits();
              getDispatchers();
              checkTones();
+             cadGetPersonBOLOS();
+             cadGetVehicleBOLOS();
 
          });
       </script>
@@ -1485,6 +1665,115 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          }
 
 
+      </script>
+      <script>
+         function cadGetPersonBOLOS() {
+           $.ajax({
+                 type: "GET",
+                 url: "<?php echo BASE_URL; ?>/actions/dispatchActions.php",
+                 data: {
+                     cadGetPersonBOLOS: 'yes'
+                 },
+                 success: function(response)
+                 {
+                   $('#cadpersonbolo').html(response);
+
+                   // SG - Removed until node/real-time data setup
+                   /*$('#activeUsers').DataTable({
+                     searching: false,
+                     scrollY: "200px",
+                     lengthMenu: [[4, -1], [4, "All"]]
+                });*/
+                   setTimeout(cadGetPersonBOLOS, 5000);
+
+
+                 },
+                 error : function(XMLHttpRequest, textStatus, errorThrown)
+                 {
+                   console.log("Error");
+                 }
+
+               });
+         }
+
+
+      </script>
+      <script>
+         function cadGetVehicleBOLOS() {
+           $.ajax({
+                 type: "GET",
+                 url: "<?php echo BASE_URL; ?>/actions/dispatchActions.php",
+                 data: {
+                     cadGetVehicleBOLOS: 'yes'
+                 },
+                 success: function(response)
+                 {
+                   $('#cadvehiclebolo').html(response);
+
+                   // SG - Removed until node/real-time data setup
+                   /*$('#activeUsers').DataTable({
+                     searching: false,
+                     scrollY: "200px",
+                     lengthMenu: [[4, -1], [4, "All"]]
+                });*/
+                   setTimeout(cadGetVehicleBOLOS, 5000);
+
+
+                 },
+                 error : function(XMLHttpRequest, textStatus, errorThrown)
+                 {
+                   console.log("Error");
+                 }
+
+               });
+         }
+
+
+      </script>
+      <script>
+        $(function(){
+            $(document).on('click', '#edit_personbolo', function(e){
+                e.preventDefault();
+                var edit_id = $(this).data('id');
+                $.ajax({
+                  url: '<?php echo BASE_URL; ?>/actions/dispatchActions.php',
+                  type: 'POST',
+                  data: 'bolos_personid='+edit_id,
+                  dataType: 'json',
+                  cache: false
+                  })
+                  .done(function(data){
+                    $('#editPersonboloModal #first_name').val(data.first_name);
+                    $('#editPersonboloModal #last_name').val(data.last_name);
+                    $('#editPersonboloModal #physical_description').val(data.physical_description);
+                    $('.gender_picker').selectpicker('val', data.gender);
+                    $('#editPersonboloModal #reason_wanted').val(data.reason_wanted);
+                    $('#editPersonboloModal #last_seen').val(data.last_seen);
+                    $('#editPersonboloModal .Editdataid').val(data.id);
+                  });
+              });
+              $(document).on('click', '#edit_vehiclebolo', function(e){
+                e.preventDefault();
+                var edit_id = $(this).data('id');
+                $.ajax({
+                  url: '<?php echo BASE_URL; ?>/actions/dispatchActions.php',
+                  type: 'POST',
+                  data: 'bolos_vehicleid='+edit_id,
+                  dataType: 'json',
+                  cache: false
+                  })
+                  .done(function(data){
+                    $('#editVehicleBOLO .vehicle_make').selectpicker('val', data.vehicle_make);
+                    $('#editVehicleBOLO .vehicle_model').selectpicker('val', data.vehicle_model);
+                    $('#editVehicleBOLO .vehicle_plate').val(data.vehicle_plate);
+                    $('#editVehicleBOLO .primary_color').val(data.primary_color);
+                    $('#editVehicleBOLO .secondary_color').val(data.secondary_color);
+                    $('#editVehicleBOLO .last_seen').val(data.last_seen);
+                    $('#editVehicleBOLO .reason_wanted').val(data.reason_wanted);
+                    $('#editVehicleBOLO .EditVehicleId').val(data.id);
+                  });
+              })
+          });
       </script>
    </body>
 </html>

@@ -29,6 +29,14 @@ if (isset($_POST['delete_personbolo'])){
 if (isset($_POST['delete_vehiclebolo'])){
     delete_vehiclebolo();
 }
+if (isset($_GET['cadGetPersonBOLOS']))
+{
+    cadGetPersonBOLOS();
+}
+if (isset($_GET['cadGetVehicleBOLOS']))
+{
+    cadGetVehicleBOLOS();
+}
 if (isset($_POST['clearCall']))
 {
     storeCall();
@@ -60,7 +68,18 @@ if (isset($_POST['create_personbolo'])){
 if (isset($_POST['create_vehiclebolo'])){
     create_vehiclebolo();
 }
-
+if (isset($_POST['bolos_personid'])){
+    cadGetPersonBOLOSid();
+}
+if(isset($_POST['bolos_vehicleid'])){
+    cadGetVehicleBOLOSid();
+}
+if(isset($_POST['edit_personbolo'])){
+    editPersonBOLOS();
+}
+if(isset($_POST['edit_vehiclebolo'])){
+    edit_vehiclebolo();
+}
 if (isset($_GET['term'])) {
     $data = array();
 
@@ -482,7 +501,7 @@ function cadGetVehicleBOLOS()
                 <td>'.$row[6].'</td>
                 <td>'.$row[7].'</td>
                 <td>
-                    <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
+                    <button name="edit_vehiclebolo" data-toggle="modal" data-target="#editVehicleBOLO" id="edit_vehiclebolo" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
 					<form action="".BASE_URL."/actions/dispatchActions.php" method="post">
                     <input name="delete_vehiclebolo" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
                     <input name="vbid" type="hidden" value='.$row[0].' />
@@ -555,8 +574,8 @@ function cadGetPersonBOLOS()
                 <td>'.$row[5].'</td>
                 <td>'.$row[6].'</td>
                 <td>
+                    <button name="edit_personbolo" data-toggle="modal" data-target="#editPersonboloModal" id="edit_personbolo" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
                     <form action="".BASE_URL."/actions/dispatchActions.php" method="post">
-                    <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
                     <input name="delete_personbolo" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
                     <input name="pbid" type="hidden" value='.$row[0].' />
                     </form>
@@ -1124,6 +1143,110 @@ function delete_vehiclebolo()
     $_SESSION['boloMessage'] = '<div class="alert alert-success"><span>Successfully removed vehicle BOLO</span></div>';
     header("Location: ".BASE_URL."/cad.php");
 }
+function cadGetPersonBOLOSid()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
 
+    $query = "SELECT bolos_persons.* FROM bolos_persons WHERE id=".$_POST['bolos_personid'];
+    $resultset = mysqli_query($link, $query) or die("database error:". mysqli_error($link));
+    $person = array();
+    while( $rows = mysqli_fetch_assoc($resultset) ) {
+    $person = $rows;
+    }
+    echo json_encode($person);
+}
+function cadGetVehicleBOLOSid()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT bolos_vehicles.* FROM bolos_vehicles WHERE id=".$_POST['bolos_vehicleid'];
+    $resultset = mysqli_query($link, $query) or die("database error:". mysqli_error($link));
+    $vehicle = array();
+    while( $rows = mysqli_fetch_assoc($resultset) ) {
+    $vehicle = $rows;
+    }
+    echo json_encode($vehicle);
+}
+function editPersonBOLOS(){
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $gender = $_POST['gender'];
+    $physical_description = $_POST['physical_description'];
+    $reason_wanted = $_POST['reason_wanted'];
+    $last_seen = $_POST['last_seen'];
+    $person_id = $_POST['edit_personId'];
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $sql = "UPDATE bolos_persons SET first_name = ?, last_name = ?, gender = ?, physical_description = ?, reason_wanted = ?, last_seen = ? WHERE id = ?";
+
+    try {
+        $stmt = mysqli_prepare($link, $sql);
+        mysqli_stmt_bind_param($stmt, "sssssss", $first_name, $last_name, $gender, $physical_description, $reason_wanted, $last_seen, $person_id);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+    }
+    mysqli_close($link);
+
+    session_start();
+    $_SESSION['boloMessage'] = '<div class="alert alert-success"><span>Successfully updated BOLO</span></div>';
+
+    header("Location:".BASE_URL."/cad.php");
+}
+function edit_vehiclebolo()
+{
+    $vehicle_make = $_POST['vehicle_make'];
+    $vehicle_model = $_POST['vehicle_model'];
+    $vehicle_plate = $_POST['vehicle_plate'];
+    $primary_color = $_POST['primary_color'];
+    $secondary_color = $_POST['secondary_color'];
+    $reason_wanted = $_POST['reason_wanted'];
+    $last_seen = $_POST['last_seen'];
+    $vehicle_id = $_POST['edit_vehicleboloid'];
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $sql = "UPDATE bolos_vehicles SET vehicle_make = ?, vehicle_model = ?, vehicle_plate = ?, primary_color = ?, secondary_color = ?, reason_wanted = ?, last_seen = ? WHERE id = ?";
+
+    try {
+        $stmt = mysqli_prepare($link, $sql);
+        mysqli_stmt_bind_param($stmt, "ssssssss", $vehicle_make, $vehicle_model, $vehicle_plate, $primary_color, $secondary_color, $reason_wanted, $last_seen, $vehicle_id);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+    }
+    mysqli_close($link);
+
+    session_start();
+    $_SESSION['boloMessage'] = '<div class="alert alert-success"><span>Successfully Updated BOLO</span></div>';
+
+    header("Location:".BASE_URL."/cad.php");
+}
 ?>

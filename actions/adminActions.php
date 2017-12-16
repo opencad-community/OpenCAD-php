@@ -17,9 +17,21 @@ This file handles all actions for admin.php script
 */
 
 /* Handle POST requests */
+
+
+if (isset($_GET['dept_id']) && isset($_GET['user_id']))
+{
+    deleteGroupItem();
+}
+
 if (isset($_POST['approveUser']))
 {
     approveUser();
+}
+
+if (isset($_POST['editUserAccount']))
+{
+    editUserAccount();
 }
 if (isset($_POST['rejectUser']))
 {
@@ -48,6 +60,61 @@ if (isset($_POST['delete_callhistory']))
 
 /* FUNCTIONS */
 
+
+
+function deleteGroupItem()
+{ 
+	$dept_id 		= !empty($_GET['dept_id']) ? $_GET['dept_id'] : '';
+	$user_id 		= !empty($_GET['user_id']) ? $_GET['user_id'] : '';
+	$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+		$site = BASE_URL;
+		if (!$link)
+		{
+		die('Could not connect: ' . mysql_error());
+		}
+	$sql = "DELETE FROM user_departments WHERE user_id = $user_id AND department_id = $dept_id";
+	
+	if (mysqli_query($link, $sql)) {
+        
+		$show_record=getUserGroupsApproved($user_id);
+	  //$response = json_encode(array("show_record"=>$show_record));
+	 echo  $show_record;
+   } else {
+      echo "Error updating record: " . mysqli_error($link);
+   }
+}
+function editUserAccount()
+{
+	$userName 		= !empty($_POST['userName']) ? $_POST['userName'] : '';
+	$userEmail 		= !empty($_POST['userEmail']) ? $_POST['userEmail'] : '';
+	
+	$userID 		= !empty($_POST['userID']) ? $_POST['userID'] : '';
+	$userIdentifier = !empty($_POST['userIdentifier']) ? $_POST['userIdentifier'] : '';
+	$userGroups 	= !empty($_POST['userGroups']) ? $_POST['userGroups'] : '';
+	
+		$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+		$site = BASE_URL;
+		if (!$link)
+		{
+		die('Could not connect: ' . mysql_error());
+		}
+	if(!empty($userGroups))
+	{	
+		foreach($userGroups as $key=>$val)
+		{
+			$sql1 = "INSERT INTO user_departments (user_id, department_id) VALUES ('$userID', '$val')";
+			mysqli_query($link, $sql1);
+		}
+	}		   
+	$sql="UPDATE users SET name = '$userName', email = '$userEmail', identifier = '$userIdentifier'  WHERE id = $userID";
+	if (mysqli_query($link, $sql)) {
+    ("Location: ".BASE_URL."/oc-admin/userManagement.php");
+   } else {
+      echo "Error updating record: " . mysqli_error($link);
+   }
+	
+
+}
 function getRanks()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -133,7 +200,7 @@ function delete_user()
 
     session_start();
     $_SESSION['userMessage'] = '<div class="alert alert-success"><span>Successfully removed user from database</span></div>';
-    header("Location: ".BASE_URL."oc-admin/userManagement.php#user_panel");
+    header("Location: ".BASE_URL."/oc-admin/userManagement.php#user_panel");
 }
 
 /* Gets the user count. Returns value */
@@ -236,7 +303,7 @@ function getDepartments()
 
     while ($row = mysqli_fetch_array($result, MYSQLI_BOTH))
     {
-        if ($row[0] == '0' || $row[0] == '8')
+        if ($row[0] == '8')
         {
             echo '<option value="' . $row[0] . '" disabled>' . $row[1] . '</option>';
         }
@@ -278,13 +345,14 @@ function getUserGroupsApproved($uid)
         die('Could not connect: ' . mysql_error());
     }
 
-    $sql = "SELECT departments.department_name FROM user_departments INNER JOIN departments on user_departments.department_id=departments.department_id WHERE user_departments.user_id = \"$uid\"";
+    $sql = "SELECT departments.department_name,departments.department_id FROM user_departments INNER JOIN departments on user_departments.department_id=departments.department_id WHERE user_departments.user_id = \"$uid\"";
 
     $result1 = mysqli_query($link, $sql);
 
     while ($row1 = mysqli_fetch_array($result1, MYSQLI_BOTH))
     {
-        echo $row1[0] . "<br/>";
+        echo $row1[0] . "&nbsp;<i class='fa fa-remove delete_group' style='font-size:16px;color:red;' data-dept-id=".$row1[1]." data-user-id=".$uid."></i>
+<br/>";
     }
 }
 
@@ -368,7 +436,7 @@ function approveUser()
     $_SESSION['accessMessage'] = '<div class="alert alert-success"><span>Successfully approved user access</span></div>';
 
     sleep(1);
-    header("Location:".BASE_URL."oc-admin/admin.php");
+    header("Location:".BASE_URL."/oc-admin/admin.php");
 
 }
 
@@ -432,7 +500,7 @@ function rejectUser()
     $_SESSION['accessMessage'] = '<div class="alert alert-danger"><span>Successfully rejected user access</span></div>';
 
     sleep(1);
-    header("Location:".BASE_URL."oc-admin/admin.php");
+    header("Location:".BASE_URL."/oc-admin/admin.php");
 
 }
 
@@ -490,7 +558,7 @@ function getUsers()
             <td>' . $row[1] . '</td>
             <td>' . $row[2] . '</td>
             <td>' . $row[3] . '</td>
-            <td>';
+            <td id="show_group">';
 
         getUserGroupsApproved($row[0]);
 
@@ -561,7 +629,7 @@ function suspendUser()
     $_SESSION['accessMessage'] = '<div class="alert alert-success"><span>Successfully suspended user account</span></div>';
 
     sleep(1);
-    header("Location:".BASE_URL."oc-admin/userManagement.php");
+    header("Location:".BASE_URL."/oc-admin/userManagement.php");
 }
 
 function reactivateUser()
@@ -599,7 +667,7 @@ function reactivateUser()
     $_SESSION['accessMessage'] = '<div class="alert alert-success"><span>Successfully reactivated user account</span></div>';
 
     sleep(1);
-    header("Location:".BASE_URL."oc-admin/userManagement.php");
+    header("Location:".BASE_URL."/oc-admin/userManagement.php");
 }
 
 function getUserDetails()
@@ -836,6 +904,6 @@ function delete_callhistory()
 
     session_start();
     $_SESSION['historyMessage'] = '<div class="alert alert-success"><span>Successfully removed archived call</span></div>';
-    header("Location: ".BASE_URL."oc-admin/callhistory.php#history_panel");
+    header("Location: ".BASE_URL."/oc-admin/callhistory.php#history_panel");
 }
 ?>

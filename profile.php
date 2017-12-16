@@ -178,7 +178,7 @@ include("./actions/profileActions.php");
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Password:</label>
                         <div class="col-sm-10">
-                            <a class="btn btn-primary" href="reset-password.php">Change Password</a>
+                            <a class="btn btn-primary" href="<?php echo BASE_URL; ?>/reset-password.php">Change Password</a>
                         </div>
                         <!-- ./ col-sm-10 -->
                     </div>

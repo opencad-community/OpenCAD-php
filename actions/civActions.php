@@ -31,7 +31,12 @@ if (isset($_POST['new_911']))
 {
     create911Call();
 }
-
+if (isset($_POST['edit_name'])){
+    edit_name();
+}
+if (isset($_POST['edit_plate'])){
+    edit_plate();
+}
 function getCivilianNamesOwn()
 {
     $uid = $_SESSION['id'];
@@ -108,7 +113,7 @@ function ncicGetNames()
                 <td>'.$row[10].'</td>
                 <td>'.$row[11].'</td>
                 <td>
-                    <button name="edit_name" data-toggle="modal" data-target="#editNameModal" class="btn btn-xs btn-link" disabled>Edit</button>
+                    <button name="edit_name" data-toggle="modal" data-target="#IdentityEditModal" id="edit_nameBtn" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
                     <form action="".BASE_URL."/actions/civActions.php" method="post">
                     <input name="delete_name" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
                     <input name="uid" type="hidden" value='.$row[0].' />
@@ -185,8 +190,8 @@ function ncicGetPlates()
                 <td>'.$row[8].'</td>
                 <td>'.$row[10].'</td>
                 <td>
+                    <button name="edit_plate" data-toggle="modal" data-target="#editPlateModal" id="edit_plateBtn" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
                     <form action="".BASE_URL."/actions/civActions.php" method="post">
-                    <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
                     <input name="delete_plate" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete" enabled/>
                     <input name="vehid" type="hidden" value='.$row[0].' />
                     </form>
@@ -367,13 +372,6 @@ function create_plate()
     $vehicle = $_POST['veh_make_model'];
     $veh_make = explode(" ", $vehicle) [0];
     $veh_model = explode(" ", $vehicle) [1];
-   
-    $query = 'SELECT color_group, color_name FROM colors WHERE color_group = "' . $firstName . '" AND last_name = "' . $lastName . '"';
-
-    $result = mysqli_query($link, $query);
-
-    $num_rows = $result->num_rows;
-	
 	
     $uid = $_SESSION['id'];
 
@@ -460,5 +458,179 @@ function create911Call()
     header("Location:".BASE_URL."/civilian.php#911_panel");
 
 }
+function edit_name()
+{
+    session_start();
 
+    $fullName = $_POST['civNameReq'];
+    $firstName = explode(" ", $fullName) [0];
+    $lastName = explode(" ", $fullName) [1];
+    
+    //Set first name to all lowercase
+    $firstName = strtolower($firstName);
+    //Remove all special characters
+    $firstName = preg_replace('/[^A-Za-z0-9\-]/', '', $firstName);
+    //Set first letter to uppercase
+    $firstName = ucfirst($firstName);
+
+    //Set last name to all lowercase
+    $lastName = strtolower($lastName);
+    //Remove all special characters
+    $lastName = preg_replace('/[^A-Za-z0-9\-]/', '', $lastName);
+    //Set first letter to uppercase
+    $lastName = ucfirst($lastName);
+
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link)
+    {
+        die('Could not connect: ' . mysql_error());
+    }
+
+    $query = 'SELECT first_name, last_name FROM ncic_names WHERE first_name = "' . $firstName . '" AND last_name = "' . $lastName . '"';
+
+    $result = mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    if (!$num_rows == 0)
+    {
+        $_SESSION['identityMessage'] = '<div class="alert alert-danger"><span>Name already exists</span></div>';
+
+        sleep(1);
+        header("Location:".BASE_URL."/civilian.php");
+    }
+
+    // If name doesn't exist, add it to ncic_requests table
+    //Who submitted it
+    $submittedByName = $_SESSION['name'];
+    $submitttedById = $_SESSION['id'];
+    //Submission Data
+    $firstName;
+    $lastName;
+    $dob = $_POST['civDobReq'];
+    $address = $_POST['civAddressReq'];
+    $sex = $_POST['civSexReq'];
+    $race = $_POST['civRaceReq'];
+    $dlstatus = $_POST['civDL'];
+    $hair = $_POST['civHairReq'];
+    $build = $_POST['civBuildReq'];
+    $editid = $_POST['Edit_id'];
+
+    $query = "UPDATE ncic_names SET first_name = ?, last_name = ?, dob = ?, address = ?, gender = ?, race = ?, dl_status = ?, hair_color = ?, build = ? WHERE id = ?";
+    try
+    {
+        $stmt = mysqli_prepare($link, $query);
+        mysqli_stmt_bind_param($stmt, "ssssssssss", $firstName, $lastName, $dob, $address, $sex, $race, $dlstatus, $hair, $build, $editid);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == false)
+        {
+            die(mysqli_error($link));
+        }
+    }
+    catch(Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+
+    }
+
+    $_SESSION['identityMessage'] = '<div class="alert alert-success"><span>Successfully Update an identity</span></div>';
+
+    sleep(1);
+    header("Location:".BASE_URL."/civilian.php#name_panel");
+
+}
+function edit_plate()
+{
+    session_start();
+    
+    $plate = $_POST['veh_plate'];
+    
+    //Remove all spaces from plate
+    $plate = str_replace(' ', '', $plate);
+    //Set plate to all uppercase
+    $plate = strtoupper($plate);
+    //Remove all hyphens
+    $plate = str_replace('-', '', $plate);
+    //Remove all special characters
+    $plate = preg_replace('/[^A-Za-z0-9\-]/', '', $plate);
+    
+    $vehicle = $_POST['veh_make_model'];
+    $veh_make = explode(" ", $vehicle) [0];
+    $veh_model = explode(" ", $vehicle) [1];
+    
+    $uid = $_SESSION['id'];
+
+    $submittedById = $_SESSION['id'];
+    $userId = $_POST['civilian_names'];
+    $veh_plate = $plate;
+    $veh_make;
+    $veh_model;
+    $veh_pcolor = $_POST['veh_pcolor'];
+    $veh_scolor = $_POST['veh_scolor'];
+    $veh_insurance = $_POST['veh_insurance'];
+    $flags = $_POST['flags'];
+    $veh_reg_state = $_POST['veh_reg_state'];
+    $notes = $_POST['notes'];
+    $plate_id = $_POST['Edit_plateId'];
+
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    
+    $sql = "UPDATE ncic_plates SET name_id = ?, veh_plate = ?, veh_make = ?, veh_model = ?, veh_pcolor = ?, veh_scolor = ?, veh_insurance = ?, flags = ?, veh_reg_state = ?, notes = ? WHERE id = ?";
+
+    try {
+        $stmt = mysqli_prepare($link, $sql);
+        mysqli_stmt_bind_param($stmt, "issssssssss", $userId, $veh_plate, $veh_make, $veh_model, $veh_pcolor, $veh_scolor, $veh_insurance, $flags, $veh_reg_state, $notes, $plate_id);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+    }
+    mysqli_close($link);
+
+    session_start();
+    $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully Updated plate to the database</span></div>';
+
+    header("Location:".BASE_URL."/civilian.php#plate_panel");
+}
+?>
+<?php
+include_once(__DIR__ . "/../oc-config.php");
+if($_REQUEST['editid']) {
+	$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+	$sql = 'SELECT ncic_names.* FROM `ncic_names` WHERE ncic_names.id = "' . $_REQUEST['editid'] . '"';
+	$resultset = mysqli_query($link, $sql) or die("database error:". mysqli_error($link));
+	$data = array();
+	while( $rows = mysqli_fetch_assoc($resultset) ) {
+	$data = $rows;
+	}
+	echo json_encode($data);
+}
+if($_REQUEST['edit_plate_id']){
+	$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+	$sql = 'SELECT ncic_plates.* FROM `ncic_plates` WHERE ncic_plates.id = "' . $_REQUEST['edit_plate_id'] . '"';
+	$resultset = mysqli_query($link, $sql) or die("database error:". mysqli_error($link));
+	$plates = array();
+	while( $rows = mysqli_fetch_assoc($resultset) ) {
+	$plates = $rows;
+	}
+	echo json_encode($plates);
+}
 ?>

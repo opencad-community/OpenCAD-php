@@ -24,6 +24,14 @@ if (isset($_GET['getStatus']))
 {
     getStatus();
 }
+if (isset($_GET['mdtGetVehicleBOLOS']))
+{
+    mdtGetVehicleBOLOS();
+}
+if (isset($_GET['mdtGetPersonBOLOS']))
+{
+    mdtGetPersonBOLOS();
+}
 if (isset($_POST['create_citation'])){
     create_citation();
 }
