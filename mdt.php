@@ -672,16 +672,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <!-- AUDIO TONES -->
       <audio id="recurringToneAudio" src="<?php echo BASE_URL; ?>/sounds/priority.mp3" preload="auto"></audio>
       <audio id="priorityToneAudio" src="<?php echo BASE_URL; ?>/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
-    <?php    if (isset($_GET['Fire']))
-         {
-
-           if ($_GET['Fire'] == "true")
-           {?>
-			<script type="text/javascript">
-			var vid = document.getElementById("recurringToneAudio");
-			vid.volume = 0.3;
-			</script>
-	  <?php }}?>
+      <script>
+         var vid = document.getElementById("recurringToneAudio");
+         vid.volume = 0.3;
+      </script>
       <?php
          if (isset($_GET['Fire']))
          {
@@ -705,11 +699,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
              $('#callsign').modal('show');
 
-          getCalls();
-            
+             getCalls();
+             getStatus();
              checkTones();
-			 getMyCall(); 
-			 getStatus();
+			 getMyCall();
 			 mdtGetVehicleBOLOS();
 			 mdtGetPersonBOLOS();
 
@@ -954,8 +947,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      }
                      else
                      {
-                        <?php if(isset($_GET['Fire'])){ if($_GET['Fire'] == "true"){?>
-						 document.getElementById('newCallAudio').play();
+                         document.getElementById('newCallAudio').play();
                          new PNotify({
                              title: 'New Call!',
                              text: 'You\'ve been assigned a new call!',
@@ -964,7 +956,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                          });
 
                          getMyCallDetails();
-						 <?php }}?>
                      }
                  }
                  else if (response.match("^<br>"))
