@@ -805,7 +805,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          function mdtGetVehicleBOLOS() {
              $.ajax({
                    type: "GET",
-                   url: "<?php echo BASE_URL; ?>/actions/api.php",
+                   url: "<?php echo BASE_URL; ?>/actions/responderActions.php",
                    data: {
                        mdtGetVehicleBOLOS: 'yes',
                        responder: 'yes'
@@ -828,7 +828,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          function mdtGetPersonBOLOS() {
              $.ajax({
                    type: "GET",
-                   url: "<?php echo BASE_URL; ?>/actions/api.php",
+                   url: "<?php echo BASE_URL; ?>/actions/responderActions.php",
                    data: {
                        mdtGetPersonBOLOS: 'yes',
                        responder: 'yes'
