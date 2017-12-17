@@ -427,7 +427,7 @@ function create911Call()
 
     $created = date("Y-m-d H:i:s").': 911 Call Received<br/><br/>Caller Name: '.$caller;
 
-    $call_notes = $created.'<br/>Caller States: '.$description.'<br/>';
+    $call_narrative = $created.'<br/>Caller States: '.$description.'<br/>';
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -435,11 +435,11 @@ function create911Call()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "INSERT IGNORE INTO calls (call_type, call_street1, call_notes) VALUES ('911', ?, ?)";
+    $sql = "INSERT IGNORE INTO calls (call_type, call_street1, call_narrative) VALUES ('911', ?, ?)";
 
     try {
         $stmt = mysqli_prepare($link, $sql);
-        mysqli_stmt_bind_param($stmt, "ss", $location, $call_notes);
+        mysqli_stmt_bind_param($stmt, "ss", $location, $call_narrative);
         $result = mysqli_stmt_execute($stmt);
 
         if ($result == FALSE) {
