@@ -689,6 +689,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				  <option value"New York"> New York </option>
 				  <option value"North Carolina"> North Carolina </option>
 				  <option value"North Dakota"> North Dakota </option>
+			          <option value"North Yankton"> North Yankton </option>
 				  <option value"Ohio"> Ohio </option>
 				  <option value"Oklahoma"> Oklahoma </option>
 				  <option value"Oregon"> Oregon </option>
@@ -706,7 +707,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				  <option value"West Virginia"> West Virginia </option>
 				  <option value"Wisconsin"> Wisconsin </option>
 				  <option value"Wyoming"> Wyoming </option>
-			          <option value"Yankton"> Yankton </option>
 				  </select>
 				  </div>
                 <!-- ./ col-sm-9 -->
