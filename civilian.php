@@ -706,6 +706,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				  <option value"West Virginia"> West Virginia </option>
 				  <option value"Wisconsin"> Wisconsin </option>
 				  <option value"Wyoming"> Wyoming </option>
+			          <option value"Yankton"> Yankton </option>
 				  </select>
 				  </div>
                 <!-- ./ col-sm-9 -->
