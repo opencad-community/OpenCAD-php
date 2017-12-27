@@ -689,11 +689,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				  <option value"New York"> New York </option>
 				  <option value"North Carolina"> North Carolina </option>
 				  <option value"North Dakota"> North Dakota </option>
+			          <option value"North Yankton"> North Yankton </option>
 				  <option value"Ohio"> Ohio </option>
 				  <option value"Oklahoma"> Oklahoma </option>
 				  <option value"Oregon"> Oregon </option>
 				  <option value"Pennsylvania"> Pennsylvania </option>
 				  <option value"Rhode Island"> Rhode Island </option>
+				  <option value"San Andreas"> San Andreas </option>
 				  <option value"South Carolina"> South Carolina </option>
 				  <option value"South Dakota"> South Dakota </option>
 				  <option value"Tennessee"> Tennessee </option>
