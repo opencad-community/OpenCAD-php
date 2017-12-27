@@ -499,7 +499,6 @@ INSERT INTO `genders` (`id`, `genders`) VALUES
 (0, 'Male'),
 (1, 'Female');
 
-
 -- --------------------------------------------------------
 
 --
@@ -962,7 +961,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `identifier`, `password_reset`, `approved`) VALUES
-(21, 'Default Admin', 'admin@test.com', '$2y$10$xHvogGcqQs8jhTPbFEDHJO9KWu2FCLgJ5XGxH.hHMA0BY1brgCkSG', '1A-98', 0, 1);
+(1, 'Default Admin', 'admin@test.com', '$2y$10$xHvogGcqQs8jhTPbFEDHJO9KWu2FCLgJ5XGxH.hHMA0BY1brgCkSG', '1A-98', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -1034,7 +1033,7 @@ INSERT INTO `vehicles` (`id`, `Make`, `Model`) VALUES
 (13, 'Albany', 'Primo Custom'),
 (14, 'Albany', 'Police Road Crusiser'),
 (15, 'Albany', 'Police Stinger'),
-(16, 'Albany', 'Roman’s Taxi'),
+(16, 'Albany', 'Roman`s Taxi'),
 (17, 'Albany', 'Romero'),
 (18, 'Albany', 'Roosevelt'),
 (19, 'Albany', 'Roosevelt Valor'),

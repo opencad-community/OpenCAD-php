@@ -102,6 +102,17 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                  <li class="current-page"><a href="javascript:void(0)">Civilian Dashboard</a></li>
                               </ul>
                            </li>
+                           <?php
+						   if (CIV_WARRANT === true) { ?> <li>
+                              <a><i class="fa fa-warning"></i> Warrants <span class="fa fa-chevron-down"></span></a>
+                              <ul class="nav child_menu">
+                                 <li><a type="button" data-toggle="modal" data-target="#createWarrant" > Create Warrants</a></li>
+                                 <li><a type="button" data-toggle="modal" data-target="#viewWarrant" > View Warrants</a></li>
+                              </ul>
+                           </li>
+						    <?php } else { ?>
+							<?php } 
+							?>
                         </ul>
                      </div>
                      <!-- ./ menu_section -->
@@ -288,6 +299,159 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          </div>
       </div>
       <!-- modals -->
+      <!-- Create Warrant Modal -->
+      <div class="modal fade" id="createWarrant" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
+                  </button>
+            <h4 class="modal-title" id="myModalLabel">Warrant Creator</h4>
+          </div>
+          <!-- ./ modal-header -->
+          <div class="modal-body">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/civActions.php" method="post">
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Civilian Name</label>
+                <div class="col-lg-10">
+                  <select class="form-control selectpicker" name="civilian_names" id="civilian_names" data-live-search="true" required>
+                    <option> </option>
+                    <?php getCivilianNamesOwn();?>
+                  </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Warrant Name</label>
+                <div class="col-lg-10">
+                  <select class="form-control selectpicker" name="warrant_name_sel" id="warrant_name_sel" data-live-search="true" title="Select a Warrant">
+                    <optgroup label="Violent Warrants (60 day expiry)">
+                      <option value="1st Degree Murder">1st Degree Murder</option>
+                      <option value="2nd Degree Murder">2nd Degree Murder</option>
+                      <option value="3rd Degree Murder">3rd Degree Murder</option>
+                      <option value="Attempted Murder">Attempted Murder</option>
+                      <option value="Kidnapping">Kidnapping</option>
+                      <option value="Attempted Kidnapping">Attempted Kidnapping</option>
+                      <option value="Hostage Taking">Hostage Taking</option>
+                      <option value="Bank/Fed Robbery">Bank/Fed Robbery</option>
+                      <option value="Terroristic Activity">Terroristic Activity</option>
+                      <option value="Terroristic Threats">Terroristic Threats</option>
+                      <option value="JailBreak">JailBreak</option>
+                      <option value="Robbery">Robbery</option>
+                      <option value="Grand Theft Auto">Grand Theft Auto</option>
+                      <option value="Burglary">Burglary</option>
+                      <option value="Threatening an Official">Threatening an Official</option>
+                      <option value="Sexual Assault">Sexual Assault</option>
+                      <option value="Hate Crime">Hate Crime</option>
+                      <option value="Assault">Assault</option>
+                      <option value="Conspiracy">Conspiracy</option>
+                      <option value="Drug Trafficking">Drug Trafficking</option>
+                      <option value="Evasion/Fleeing/Eluding">Evasion/Fleeing/Eluding</option>
+                      <option value="Felony Evading">Felony Evading</option>
+                      <option value="Resisting Arrest">Resisting Arrest</option>
+                      <option value="Firearm in City Limits">Firearm in City Limits</option>
+                      <option value="Firearm by Felon">Firearm by Felon</option>
+                      <option value="Unlicensed Firearm">Unlicensed Firearm</option>
+                      <option value="Firearm Discharge in City Limits">Firearm Discharge in City Limits</option>
+                      <option value="Illegal Weapon">Illegal Weapon</option>
+                      <option value="Illegal Magazine">Illegal Magazine</option>
+                      <option value="Concealed Carry Rifle">Concealed Carry Rifle</option>
+                      <option value="Failure to Inform">Failure to Inform</option>
+                    </optgroup>
+                    <optgroup label="Non-Violent Warrants (30 day expiry)">
+                      <option value="FTA: Lewd Conduct">FTA: Lewd Conduct</option>
+                      <option value="FTA: DUI/DWI">FTA: DUI/DWI</option>
+                      <option value="FTA: Fraud">FTA: Fraud</option>
+                      <option value="FTA: Hit and Run">FTA: Hit and Run</option>
+                      <option value="FTA: Speeding">FTA: Speeding</option>
+                      <option value="FTA: Reckless Driving">FTA: Reckless Driving</option>
+                      <option value="FTA: Obstruction of Justice">FTA: Obstruction of Justice</option>
+                      <option value="FTA: Verbal Abuse">FTA: Verbal Abuse</option>
+                      <option value="FTA: Bribery">FTA: Bribery</option>
+                      <option value="FTA: Disorderly Conduct">FTA: Disorderly Conduct</option>
+                      <option value="FTA: Drug Posession">FTA: Drug Posession</option>
+                      <option value="FTA: Trespassing">FTA: Trespassing</option>
+                      <option value="FTA: Excessive Noise">FTA: Excessive Noise</option>
+                      <option value="FTA: Failure to Identify">FTA: Failure to Identify</option>
+                      <option value="FTA: Stalking">FTA: Stalking</option>
+                      <option value="FTA: Public Intoxication">FTA: Public Intoxication</option>
+                    </optgroup>
+                  </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Issuing Agency</label>
+                <div class="col-lg-10">
+                  <select class="form-control selectpicker" name="issuing_agency" id="issuing_agency" data-live-search="true" required>
+                    <option> </option>
+                    <?php getAgencies();?>
+                  </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+                <input name="create_warrant" type="submit" class="btn btn-primary" value="Create" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+
+      <!-- View Warrant Modal -->
+      <div class="modal fade" id="viewWarrant" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
+                  </button>
+            <h4 class="modal-title" id="myModalLabel">Warrant Viewer</h4>
+          </div>
+          <!-- ./ modal-header -->
+          <div class="modal-body">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel" id="citation_panel">
+                  <div class="x_title">
+                    <h2>NCIC Warrants</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php ncic_warrants();?>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <!-- ./ x_panel -->
+              </div>
+              <!-- ./ form-group -->
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
 	  
     <div class="modal fade" id="IdentityModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg">
@@ -999,7 +1163,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         var edit_id = $(this).data('id');
         console.log(edit_id);
         $.ajax({
-          url: './actions/civActions.php',
+          url: '<?php echo BASE_URL; ?>/actions/civActions.php',
           type: 'POST',
           data: 'editid='+edit_id,
           dataType: 'json',
@@ -1023,9 +1187,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         e.preventDefault();
         var edit_id = $(this).data('id');
         $.ajax({
-          url: './actions/civActions.php',
+          url: '<?php echo BASE_URL; ?>/actions/civActions.php',
           type: 'POST',
-          data: 'edit_plate_id='+edit_id,
+          data: 'edit_plateid='+edit_id,
           dataType: 'json',
           cache: false
           })

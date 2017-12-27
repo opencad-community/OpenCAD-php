@@ -37,6 +37,18 @@ if (isset($_POST['edit_name'])){
 if (isset($_POST['edit_plate'])){
     edit_plate();
 }
+if (isset($_POST['editid'])){
+    editnameid();
+}
+if (isset($_POST['edit_plateid'])){
+    editplateid();
+}
+if (isset($_POST['delete_warrant'])){
+    delete_warrant();
+}
+if (isset($_POST['create_warrant'])){
+    create_warrant();
+}
 function getCivilianNamesOwn()
 {
     $uid = $_SESSION['id'];
@@ -604,33 +616,191 @@ function edit_plate()
 
     header("Location:".BASE_URL."/civilian.php#plate_panel");
 }
-?>
-<?php
-include_once(__DIR__ . "/../oc-config.php");
-if($_REQUEST['editid']) {
-	$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+function editnameid()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
     if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
-	$sql = 'SELECT ncic_names.* FROM `ncic_names` WHERE ncic_names.id = "' . $_REQUEST['editid'] . '"';
-	$resultset = mysqli_query($link, $sql) or die("database error:". mysqli_error($link));
-	$data = array();
-	while( $rows = mysqli_fetch_assoc($resultset) ) {
-	$data = $rows;
-	}
-	echo json_encode($data);
+
+    $query = "SELECT ncic_names.* FROM ncic_names WHERE id=".$_POST['editid'];
+    $resultset = mysqli_query($link, $query) or die("database error:". mysqli_error($link));
+    $data = array();
+    while( $rows = mysqli_fetch_assoc($resultset) ) {
+    $data = $rows;
+    }
+    echo json_encode($data);
 }
-if($_REQUEST['edit_plate_id']){
-	$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+function editplateid()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
     if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
-	$sql = 'SELECT ncic_plates.* FROM `ncic_plates` WHERE ncic_plates.id = "' . $_REQUEST['edit_plate_id'] . '"';
-	$resultset = mysqli_query($link, $sql) or die("database error:". mysqli_error($link));
-	$plates = array();
-	while( $rows = mysqli_fetch_assoc($resultset) ) {
-	$plates = $rows;
+
+    $query = "SELECT ncic_plates.* FROM ncic_plates WHERE id=".$_POST['edit_plateid'];
+    $resultset = mysqli_query($link, $query) or die("database error:". mysqli_error($link));
+    $plates = array();
+    while( $rows = mysqli_fetch_assoc($resultset) ) {
+    $plates = $rows;
+    }
+    echo json_encode($plates);
+}
+function create_warrant()
+{
+    $userId = $_POST['civilian_names'];
+    $warrant_name = $_POST['warrant_name_sel'];
+    $issuing_agency = $_POST['issuing_agency'];
+
+    $warrant_name = $_POST['warrant_name_sel'];
+
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
 	}
-	echo json_encode($plates);
+	$status = 'Active';
+	$date = date('Y-m-d');
+
+    $expire = date('Y-m-d',strtotime('+1 day',strtotime($date)));
+
+    $sql = "INSERT INTO ncic_warrants (name_id, expiration_date, warrant_name, issuing_agency, status, issued_date) SELECT ?, ?, ?, ?, ?, ?";
+
+
+	try {
+		$stmt = mysqli_prepare($link, $sql);
+		mysqli_stmt_bind_param($stmt, "isssss", $userId, $expire, $warrant_name, $issuing_agency, $status, $date);
+		$result = mysqli_stmt_execute($stmt);
+
+		if ($result == FALSE) {
+			die(mysqli_error($link));
+		}
+	}
+	catch (Exception $e)
+	{
+		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+	}
+	mysqli_close($link);
+
+    session_start();
+    $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully created warrant</span></div>';
+
+    header("Location:".BASE_URL."/civilian.php");
+}
+function ncic_warrants()
+{
+    $uid = $_SESSION['id'];
+	
+   $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+	$sql = 'SELECT ncic_names.id from ncic_names where submittedById = "' . $uid . '"';
+	
+	$results=mysqli_query($link, $sql);
+	while($row = mysqli_fetch_array($results, MYSQLI_BOTH))
+        {
+            $nameid = ''.$row[0].'';
+		}
+
+    $query = 'SELECT ncic_warrants.*, ncic_names.first_name, ncic_names.last_name FROM ncic_warrants INNER JOIN ncic_names ON ncic_names.id=ncic_warrants.name_id WHERE name_id = "' . $nameid . '"';
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>There are currently no warrants in the NCIC Database</span></div>";
+    }
+    else
+    {
+        echo '
+            <table id="ncic_warrants" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Status</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Warrant Name</th>
+                <th>Issued On</th>
+                <th>Expires On</th>
+                <th>Issuing Agency</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            echo '
+            <tr>
+                <td>'.$row[6].'</td>
+                <td>'.$row[7].'</td>
+                <td>'.$row[8].'</td>
+                <td>'.$row[2].'</td>
+                <td>'.$row[5].'</td>
+                <td>'.$row[1].'</td>
+                <td>'.$row[3].'</td>
+                <td>
+                    <form action="".BASE_URL."/actions/civActions.php" method="post">
+                    <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
+                    ';
+                        if ($row[6] == "Active")
+                        {
+                            echo '<input name="serveWarrant" type="submit" class="btn btn-xs btn-link" value="Serve" disabled/>';
+                        }
+                        else
+                        {
+                            //Do Nothing
+                        }
+                    echo '
+                    <input name="delete_warrant" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Expunge"/>
+                    <input name="wid" type="hidden" value='.$row[0].' />
+                    </form>
+                </td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
+function delete_warrant()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $wid = $_POST['wid'];
+
+    $query = "DELETE FROM ncic_warrants WHERE id = ?";
+
+    try {
+        $stmt = mysqli_prepare($link, $query);
+        mysqli_stmt_bind_param($stmt, "i", $wid);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage());
+    }
+
+    session_start();
+    $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully removed warrant</span></div>';
+    header("Location: ".BASE_URL."/civilian.php");
 }
 ?>

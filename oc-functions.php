@@ -23,10 +23,10 @@ function get_avatar() {
 		if (defined( 'USE_GRAVATAR' ) && USE_GRAVATAR) {
 			$url = 'https://www.gravatar.com/avatar/';
 	    $url .= md5( strtolower( trim( $_SESSION['email'] ) ) );
-	    $url .= "?size=200&default=https%3A%2F%2Fnyc3.digitaloceanspaces.com%2Fopencad%2Fimages%2Fuser.png&rating=pg";
+	    $url .= "?size=200&default=https://i.imgur.com/VN4YCW7.png";
 	    return $url;
 		}else{
-			return "https://nyc3.digitaloceanspaces.com/opencad/images/user.png";
+			return "https://i.imgur.com/VN4YCW7.png";
 		}
 }
 ?>
