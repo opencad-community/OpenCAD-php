@@ -204,7 +204,8 @@ function plate()
             $encode["plate"] = $row[2];
             $encode["veh_make"] = $row[3];
             $encode["veh_model"] = $row[4];
-            $encode["veh_color"] = "$row[5]/$row[6]";
+            $encode["veh_color"] = $row[5];
+            $encode["veh_color"] = $row[6];
             $encode["veh_ro"] = $owner;
             $encode["veh_insurance"] = $row[7];
             $encode["flags"] = $row[8];

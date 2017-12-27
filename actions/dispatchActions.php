@@ -18,7 +18,7 @@ if (isset($_POST['delete_citation'])){
     delete_citation();
 }
 if (isset($_POST['delete_warning'])){
-    delete_citation();
+    delete_warning();
 }
 if (isset($_POST['delete_warrant'])){
     delete_warrant();
@@ -755,7 +755,7 @@ function ncic_citations()
                 <td>
                     <form action="".BASE_URL."/actions/dispatchActions.php" method="post">
                     <input name="edit_citation" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
-                    <input name="delete_citation" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Expunge" disabled/>
+                    <input name="delete_citation" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Expunge"/>
                     <input name="cid" type="hidden" value='.$row[2].' />
                     </form>
                 </td>
@@ -816,9 +816,9 @@ function ncic_warnings()
                 <td>'.$row[5].'</td>
                 <td>
                     <form action="".BASE_URL."/actions/dispatchActions.php" method="post">
-                    <input name="edit_citation" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
-                    <input name="delete_citation" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Remove" disabled/>
-                    <input name="cid" type="hidden" value='.$row[2].' />
+                    <input name="edit_warning" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
+                    <input name="delete_warning" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Remove"/>
+                    <input name="wgid" type="hidden" value='.$row[2].' />
                     </form>
                 </td>
             </tr>
@@ -872,13 +872,13 @@ function delete_warning()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $cid = $_POST['cid'];
+    $wgid = $_POST['wgid'];
 
     $query = "DELETE FROM ncic_warnings WHERE id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "i", $cid);
+        mysqli_stmt_bind_param($stmt, "i", $wgid);
         $result = mysqli_stmt_execute($stmt);
 
         if ($result == FALSE) {
@@ -987,7 +987,7 @@ function ncic_warrants()
                             //Do Nothing
                         }
                     echo '
-                    <input name="delete_warrant" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Expunge" disabled/>
+                    <input name="delete_warrant" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Expunge"/>
                     <input name="wid" type="hidden" value='.$row[0].' />
                     </form>
                 </td>

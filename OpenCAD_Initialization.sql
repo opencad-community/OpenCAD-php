@@ -496,32 +496,8 @@ CREATE TABLE `genders` (
 --
 
 INSERT INTO `genders` (`id`, `genders`) VALUES
-(0, 'Agender'),
-(1, 'Androgyne'),
-(2, 'Androgynous'),
-(3, 'Bigender'),
-(4, 'Cis Female'),
-(5, 'Cis Male'),
-(6, 'Female'),
-(7, 'Gender Fluid'),
-(8, 'Gender Nonconforming'),
-(9, 'Gender Questioning'),
-(10, 'Gender Variant'),
-(11, 'Genderqueer'),
-(12, 'Intersex'),
-(13, 'Male'),
-(14, 'Neither'),
-(15, 'Neutrois'),
-(16, 'Non-binary'),
-(17, 'Other'),
-(18, 'Pangender'),
-(19, 'Transgender Female'),
-(20, 'Transgender Male'),
-(21, 'Transgender Person'),
-(22, 'Transsexual Female'),
-(23, 'Transsexual Male'),
-(24, 'Transsexual Person'),
-(25, 'Two-Spirit');
+(0, 'Male'),
+(1, 'Female');
 
 -- --------------------------------------------------------
 
@@ -985,7 +961,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `identifier`, `password_reset`, `approved`) VALUES
-(21, 'Default Admin', 'admin@test.com', '$2y$10$xHvogGcqQs8jhTPbFEDHJO9KWu2FCLgJ5XGxH.hHMA0BY1brgCkSG', '1A-98', 0, 1);
+(1, 'Default Admin', 'admin@test.com', '$2y$10$xHvogGcqQs8jhTPbFEDHJO9KWu2FCLgJ5XGxH.hHMA0BY1brgCkSG', '1A-98', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -1057,7 +1033,7 @@ INSERT INTO `vehicles` (`id`, `Make`, `Model`) VALUES
 (13, 'Albany', 'Primo Custom'),
 (14, 'Albany', 'Police Road Crusiser'),
 (15, 'Albany', 'Police Stinger'),
-(16, 'Albany', 'Roman’s Taxi'),
+(16, 'Albany', 'Roman`s Taxi'),
 (17, 'Albany', 'Romero'),
 (18, 'Albany', 'Roosevelt'),
 (19, 'Albany', 'Roosevelt Valor'),
