@@ -496,32 +496,9 @@ CREATE TABLE `genders` (
 --
 
 INSERT INTO `genders` (`id`, `genders`) VALUES
-(0, 'Agender'),
-(1, 'Androgyne'),
-(2, 'Androgynous'),
-(3, 'Bigender'),
-(4, 'Cis Female'),
-(5, 'Cis Male'),
-(6, 'Female'),
-(7, 'Gender Fluid'),
-(8, 'Gender Nonconforming'),
-(9, 'Gender Questioning'),
-(10, 'Gender Variant'),
-(11, 'Genderqueer'),
-(12, 'Intersex'),
-(13, 'Male'),
-(14, 'Neither'),
-(15, 'Neutrois'),
-(16, 'Non-binary'),
-(17, 'Other'),
-(18, 'Pangender'),
-(19, 'Transgender Female'),
-(20, 'Transgender Male'),
-(21, 'Transgender Person'),
-(22, 'Transsexual Female'),
-(23, 'Transsexual Male'),
-(24, 'Transsexual Person'),
-(25, 'Two-Spirit');
+(0, 'Male'),
+(1, 'Female');
+
 
 -- --------------------------------------------------------
 
