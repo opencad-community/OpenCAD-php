@@ -497,7 +497,7 @@ CREATE TABLE `genders` (
 
 INSERT INTO `genders` (`id`, `genders`) VALUES
 (0, 'Male'),
-(1, 'Female'),
+(1, 'Female');
 
 
 -- --------------------------------------------------------
