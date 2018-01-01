@@ -1,7 +1,7 @@
 --
 -- OpenCAD Database Scheme
 -- Last Updated: 1 January 2018
--- Updated By: Brennen Stapleton <bstapleton@opencad.io>
+-- Updated By: Brennen Stapleton <bgstapleton@opencad.io>
 --
 -- --------------------------------------------------------
 
