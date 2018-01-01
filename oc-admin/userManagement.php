@@ -358,7 +358,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       $.ajax({
           cache: false,
           type: 'POST',
-          url: '/actions/adminActions.php',
+          url: '<?php echo BASE_URL; ?>/actions/adminActions.php',
           data: {'getUserDetails': 'yes',
                   'userId' : userId},
           success: function(result)
@@ -396,7 +396,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			$.ajax({
 			cache: false,
 			type: 'GET',
-			url: '/actions/adminActions.php',
+			url: '<?php echo BASE_URL; ?>/actions/adminActions.php',
 			data	: 'dept_id='+dept_id+'&user_id='+user_id,
 			success: function(result)
 			{

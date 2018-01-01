@@ -17,6 +17,11 @@ define('DB_USER', 'root');
 define('DB_PASSWORD', '');
 define('DB_HOST', '127.0.0.1');
 
+/* Enable or disable NCIC in MDT */
+define('POLICE_NCIC', false);
+
+/* Enable or disable civilians to be able to create or delete warrants from their character */
+define('CIV_WARRANT', false);
 
 /**#@+
  * Base URL Settings

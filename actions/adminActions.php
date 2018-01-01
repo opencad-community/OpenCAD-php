@@ -108,7 +108,7 @@ function editUserAccount()
 	}		   
 	$sql="UPDATE users SET name = '$userName', email = '$userEmail', identifier = '$userIdentifier'  WHERE id = $userID";
 	if (mysqli_query($link, $sql)) {
-    ("Location: ".BASE_URL."/oc-admin/userManagement.php");
+    header("Location: ".BASE_URL."/oc-admin/userManagement.php");
    } else {
       echo "Error updating record: " . mysqli_error($link);
    }
