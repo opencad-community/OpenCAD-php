@@ -1,7 +1,7 @@
 --
 -- OpenCAD Database Scheme
--- Last Updated: 15 October 2017
--- Updated By: Phill Fernandes <pfernandes@winterhillsolutions.com>
+-- Last Updated: 1 January 2018
+-- Updated By: Brennen Stapleton <bstapleton@opencad.io>
 --
 -- --------------------------------------------------------
 
