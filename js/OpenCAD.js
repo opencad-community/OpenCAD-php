@@ -49,6 +49,13 @@ $("#ncic_plate").keyup(function(event){
     }
 });
 
+// When the user presses enter in ncic_weapon it does a search
+$("#ncic_weapon").keyup(function(event){
+    if(event.keyCode == 13){
+        $("#ncic_weapon_btn").click();
+    }
+});
+
 // Handles the NCIC Plate Lookup on cad.php
 $('#ncic_plate_btn').on('click', function(e) {
     var plate = document.getElementById('ncic_plate').value;
@@ -233,12 +240,34 @@ $('#ncic_name_btn').on('click', function(e) {
             {
             dl_status_text = "<span style=\"color: red;\">"+data['dl_status']+"</span>";
             }
+			
+            var weapon_permit_text = "";
+            if (data['weapon_permit'] == "Obtained")
+            {
+                weapon_permit_text = "<span style=\"color: green;\">Obtained</span>";
+            }
+            else
+            {
+            weapon_permit_text = "<span style=\"color: red;\">"+data['weapon_permit']+"</span>";
+            }
+			
+            var deceased_text = "";
+            if (data['deceased'] == "No")
+            {
+                deceased_text = "<span style=\"color: green;\">No</span>";
+            }
+            else
+            {
+            deceased_text = "<span style=\"color: red;\">"+data['deceased']+"</span>";
+            }
 
             $('#ncic_name_return').append("Name: "+data['first_name']+" "+data['last_name']+"<br/>DOB: "+data['dob']+"<br/>Age: "+data['age']+"<br/>Sex: "+data['sex']
             +"<br/>Race: "+data['race']+"<br/>Hair Color: "+data['hair_color']
             +"<br/>Build: "+data['build']
             +"<br/>Address: "+data['address']
             +"<br/>DL Status: "+dl_status_text
+			+"<br/>Weapon Permit: "+weapon_permit_text
+			+"<br/>Deceased: "+deceased_text
             +"<br/><br/>Warrants: <br/>"+warrantText+"<br/>Citations:<br/>"+citationText+"<br/>Warnings:<br/>"+warningText);
 
             $("#ncic_name_return").attr("tabindex",-1).focus();
@@ -248,6 +277,66 @@ $('#ncic_name_btn').on('click', function(e) {
         error:function(exception){alert('Exeption:'+exception);}
     });
 });
+
+
+$('#ncic_weapon_btn').on('click', function(e) {
+    var name = document.getElementById('ncic_weapon').value;
+    $('#ncic_weapon_return').empty();
+
+    $.ajax({
+        cache: false,
+        type: 'POST',
+        url: hdir + "/actions/ncic.php",
+        data: {'ncicWeapon': 'yes',
+                'ncic_weapon' : name},
+
+        success: function(result)
+        {
+        console.log(result);
+        data = JSON.parse(result);
+
+        var textarea = document.getElementById("ncic_weapon_return");
+
+        if (data['noResult'] == "true")
+        {
+            $('#ncic_weapon_return').append("<p style=\"color:red;\">NAME NOT FOUND");
+        }
+        else
+        {
+            if (data['noWeapons'] == "true")
+            {
+            var weaponText = "&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: green\">No weapons</span><br/>";
+            }
+            else
+            {
+            var weaponText = "";
+            for (i=0; i<data.weapon_name.length; i++)
+            {
+                weaponText += "<span style=\"color:red\">&nbsp;&nbsp;&nbsp;&nbsp;"+data.weapon_name[i] + "</span><br/>";
+            }
+            }
+            var weapon_permit_text = "";
+            if (data['weapon_permit'] == "Obtained")
+            {
+                weapon_permit_text = "<span style=\"color: green;\">Obtained</span>";
+            }
+            else
+            {
+            weapon_permit_text = "<span style=\"color: red;\">"+data['weapon_permit']+"</span>";
+            }
+
+
+            $('#ncic_weapon_return').append("Name: "+data['first_name']+" "+data['last_name']+"<br/>Weapon Permit: "+weapon_permit_text
+            +"<br/><br/>Weapons: <br/>"+weaponText);
+
+            $("#ncic_weapon_return").attr("tabindex",-1).focus();
+        }
+        },
+
+        error:function(exception){alert('Exeption:'+exception);}
+    });
+});
+
 
 // Handles autocompletion on the new call form
 $( ".txt-auto" ).autocomplete({

@@ -62,7 +62,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         $nameMessage = $_SESSION['nameMessage'];
         unset($_SESSION['nameMessage']);
     }
-
+    $weaponMessage = "";
+    if(isset($_SESSION['weaponMessage']))
+    {
+        $weaponMessage = $_SESSION['weaponMessage'];
+        unset($_SESSION['weaponMessage']);
+    }
 
 ?>
 
@@ -220,6 +225,35 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <!-- ./ x_content -->
                   <div class="x_footer">
                     <button class="btn btn-primary" name="create_plate_btn" type="submit" data-toggle="modal" data-target="#createPlateModal">Create Plate</button>
+                  </div>
+                  <!-- ./ x_footer -->
+                </div>
+                <!-- ./ x_panel -->
+              </div>
+              <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel" id="plate_panel">
+                  <div class="x_title">
+                    <h2>My Weapons</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php echo $weaponMessage;?>
+                     <?php ncicGetWeapons();?>
+                  </div>
+                  <!-- ./ x_content -->
+                  <div class="x_footer">
+                    <button class="btn btn-primary" name="create_weapon_btn" type="submit" data-toggle="modal" data-target="#createWeaponModal">Create Weapon</button>
                   </div>
                   <!-- ./ x_footer -->
                 </div>
@@ -497,7 +531,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Sex</label>
                 <div class="col-lg-10">
 					<select name="civSexReq" class="form-control selectpicker" id="civSexReq" title="Select a sex" data-live-search="true" required>
-                    <option> </option>
                     <?php getGenders();?>
 					</select>
                 </div>
@@ -569,6 +602,30 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <!-- ./ form-group -->
 
           </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Weapon Status</label>
+                <div class="col-lg-10">
+					<select name="civWepStat" class="form-control selectpicker" id="civWepStat" title="Select a status" required>
+						<option val="Obtained">Obtained</option>
+						<option val="Unobtained">Unobtained</option>
+						</select>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+
+          </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Deceased</label>
+                <div class="col-lg-10">
+					<select name="civDec" class="form-control selectpicker" id="civDec" title="Are you deceased?" required>
+						<option val="Yes">Yes</option>
+						<option val="No">No</option>
+						</select>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+
+          </div>
           <!-- ./ modal-body -->
           <div class="modal-footer">
                 <input name="create_name" type="submit" class="btn btn-primary" value="Create" />
@@ -627,7 +684,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Sex</label>
                 <div class="col-lg-10">
           <select name="civSexReq" class="form-control selectpicker selectpicker3" id="civSexReq" title="Select a sex" data-live-search="true" required>
-                    <option> </option>
                     <?php getGenders();?>
           </select>
                 </div>
@@ -694,6 +750,30 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             <option val="Skinny">Skinny</option>
             <option val="Thin">Thin</option>
             </select>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+
+          </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Weapon Status</label>
+                <div class="col-lg-10">
+					<select name="civWepStat" class="form-control civWepStat_picker" id="civWepStat" title="Select a status" required>
+						<option val="Obtained">Obtained</option>
+						<option val="Unobtained">Unobtained</option>
+						</select>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+
+          </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Deceased</label>
+                <div class="col-lg-10">
+					<select name="civDec" class="form-control civDec_picker" id="civDec" title="Are you deceased?" required>
+						<option val="Yes">Yes</option>
+						<option val="No">No</option>
+						</select>
                 <!-- ./ col-sm-9 -->
               </div>
               <!-- ./ form-group -->
@@ -853,7 +933,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				  <option value"New York"> New York </option>
 				  <option value"North Carolina"> North Carolina </option>
 				  <option value"North Dakota"> North Dakota </option>
-			          <option value"North Yankton"> North Yankton </option>
 				  <option value"Ohio"> Ohio </option>
 				  <option value"Oklahoma"> Oklahoma </option>
 				  <option value"Oregon"> Oregon </option>
@@ -1070,6 +1149,55 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     </div>
     <!-- ./ modal fade bs-example-modal-lg -->
       <!-- modals -->
+    <div class="modal fade" id="createWeaponModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Add Plate to Database</h4>
+          </div>
+          <!-- ./ modal-header -->
+		  <div class="modal-body">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/civActions.php" method="post">
+                <div class="form-group row">
+                </div>
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Registered Owner</label>
+                <div class="col-lg-10">
+                  <select class="form-control selectpicker" name="civilian_names" id="civilian_names" data-live-search="true" required>
+                    <option> </option>
+                    <?php getCivilianNamesOwn();?>
+                  </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Weapon Type-Name</label>
+                <div class="col-lg-10">
+                  <select class="form-control selectpicker" name="weapon_all" id="weapon_all" data-live-search="true" required>
+                    <option> </option>
+                    <?php getWeapons();?>
+                  </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+                <input name="create_weapon" type="submit" class="btn btn-primary" value="Create" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
+	  
       <!-- 911 Call Help Modal -->
       <div class="modal fade" id="911CallHelpModal" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog modal-lg">
@@ -1178,6 +1306,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             $('.civDL_picker').selectpicker('val', data.dl_status);
             $('.civHairReq_picker').selectpicker('val', data.hair_color);
             $('.civBuildReq_picker').selectpicker('val', data.build);
+			$('.civWepStat_picker').selectpicker('val', data.weapon_permit);
+			$('.civDec_picker').selectpicker('val', data.deceased);
             $('#IdentityEditModal .Editdataid').val(data.id);
           });
           

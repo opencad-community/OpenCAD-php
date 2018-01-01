@@ -562,7 +562,9 @@ CREATE TABLE `ncic_names` (
   `race` text NOT NULL,
   `dl_status` set('Valid','Suspended','Expired') NOT NULL,
   `hair_color` text NOT NULL,
-  `build` text NOT NULL
+  `build` text NOT NULL,
+  `weapon_permit` varchar(255) NOT NULL,
+  `deceased` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
@@ -626,7 +628,6 @@ CREATE TABLE `ncic_warrants` (
 CREATE TABLE `ncic_weapons` (
   `id` int(11) NOT NULL,
   `name_id` int(11) NOT NULL COMMENT 'Links to ncic_names db for driver information',
-  `serial` varchar(255) NOT NULL,
   `weapon_type` varchar(255) NOT NULL,
   `weapon_name` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL
@@ -1500,6 +1501,54 @@ INSERT INTO `vehicles` (`id`, `Make`, `Model`) VALUES
 (480, 'Zirconium', 'Stratum');
 
 --
+-- Table structure for table `weapons`
+--
+
+CREATE TABLE `weapons` (
+  `id` int(11) NOT NULL,
+  `weapon_type` varchar(255) NOT NULL,
+  `weapon_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `weapons`
+--
+
+INSERT INTO `weapons` (`id`, `weapon_type`, `weapon_name`) VALUES
+(1, 'Pistols', 'Pistol'),
+(2, 'Pistols', 'Combat-Pistol'),
+(3, 'Pistols', 'AP-Pistol'),
+(4, 'Pistols', 'Pistol-.50'),
+(5, 'Pistols', 'SNS-Pistol'),
+(6, 'Pistols', 'Heavy-Pistol'),
+(7, 'Pistols', 'Vintage-Pistol'),
+(8, 'Sub-Machine-Guns', 'Micro-SMG'),
+(9, 'Sub-Machine-Guns', 'SMG'),
+(10, 'Sub-Machine-Guns', 'Assault-SMG'),
+(11, 'Sub-Machine-Guns', 'Gusenberg-Sweeper'),
+(12, 'Shotguns', 'Pump-Shotgun'),
+(13, 'Shotguns', 'Sawed-off-Shotgun'),
+(14, 'Shotguns', 'Assault-Shotgun'),
+(15, 'Shotguns', 'Bullpup-Shotgun'),
+(16, 'Shotguns', 'Heavy-Shotgun'),
+(17, 'Shotguns', 'Musket'),
+(18, 'Light-Machine-Guns', 'MG'),
+(19, 'Light-Machine-Guns', 'Combat-MG'),
+(20, 'Assault-Rifles', 'Assault-Rifle'),
+(21, 'Assault-Rifles', 'Carbine-Rifle'),
+(22, 'Assault-Rifles', 'Advanced-Rifle'),
+(23, 'Assault-Rifles', 'Special-Carbine'),
+(24, 'Assault-Rifles', 'Bullpup-Rifle'),
+(25, 'Sniper-Rifles', 'Sniper-Rifle'),
+(26, 'Sniper-Rifles', 'Heave-Sniper'),
+(27, 'Sniper-Rifles', 'Marksman-Rifle'),
+(28, 'Heavy', 'RPG'),
+(29, 'Heavy', 'Minigun'),
+(30, 'Heavy', 'Homing-Launcher'),
+(31, 'Heavy', 'Grenade-Launcher'),
+(32, 'Heavy', 'Firework-Launcher');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -1627,7 +1676,6 @@ ALTER TABLE `ncic_warrants`
 --
 ALTER TABLE `ncic_weapons`
   ADD PRIMARY KEY (`id`) USING BTREE,
-  ADD UNIQUE KEY `serial` (`serial`(55)) USING BTREE,
   ADD KEY `name_id` (`name_id`) USING BTREE;
 
 --
@@ -1677,6 +1725,12 @@ ALTER TABLE `user_departments`
 ALTER TABLE `vehicles`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `weapons`
+--
+ALTER TABLE `weapons`
+  ADD PRIMARY KEY (`id`);
+  
 --
 -- AUTO_INCREMENT for dumped tables
 --
