@@ -414,29 +414,31 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <!-- NCIC Firearm lookup will return in a later RC -->
                      <div class="col-md-4 col-sm-4 col-xs-4">
                         <div class="x_panel">
-                          <div class="x_title">
-                            <h2>NCIC Firearm Lookup</h2>
-                            <ul class="nav navbar-right panel_toolbox">
-                              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-                            </ul>
-                            <div class="clearfix"></div>
-                          </div>
-                          <!-- ./ x_title -->
-                     <div class="x_content">
-                        <div class="input-group">
-                           <input type="text" name="ncic_firearm" class="form-control" id="ncic_firearm" placeholder="Serial Number"/>
-                           <span class="input-group-btn">
-                           <button type="button" class="btn btn-primary" id="ncic_firearm_btn">Send</button>
-                           </span>
-                        </div>
-                        <!-- ./ input-group -->
-                              <div name="firearm_return" id="firearm_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
+                           <div class="x_title">
+                              <h2>NCIC Weapon Lookup</h2>
+                              <ul class="nav navbar-right panel_toolbox">
+                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                              </ul>
+                              <div class="clearfix"></div>
+                           </div>
+                           <!-- ./ x_title -->
+                           <div class="x_content">
+                              <div class="input-group">
+                                 <input type="text" name="ncic_weapon" class="form-control" id="ncic_weapon" placeholder="John Doe"/>
+                                 <span class="input-group-btn">
+                                 <button type="button" class="btn btn-primary" name="ncic_weapon_btn" id="ncic_weapon_btn">Send</button>
+                                 </span>
                               </div>
+                              <!-- ./ input-group -->
+                              <div name="ncic_weapon_return" id="ncic_weapon_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
+                                 <!--<textarea class="form-control" style="resize:none;" id="ncic_name_return" name="ncic_name_return" readonly="readonly"></textarea> -->
+                              </div>
+                              <!-- ./ ncic_name_return -->
+                           </div>
+                           <!-- ./ x_content -->
+                        </div>
+                        <!-- ./ x_panel -->
                      </div>
-                     <!-- ./ x_content -->
-                  </div>
-                  <!-- ./ x_panel -->
-               </div>
                <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
             </div>
             <!-- ./ row -->

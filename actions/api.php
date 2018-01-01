@@ -1456,4 +1456,25 @@ function callCheck()
 	
 }
 
+
+function getWeapons()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT * FROM weapons";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    {
+        echo '<option value="'.$row[1].' '.$row[2].'">'.$row[1].'-'.$row[2].'</option>';
+    }
+}
+
 ?>
