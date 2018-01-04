@@ -225,6 +225,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                        <input type="text" name="status" id="status" class="form-control" readonly />
                                     </div>
                                  </div>
+								 
+								 
                                  <div class="form-group">
                                     <label class="col-md-2 col-sm-2 col-xs-2 control-label">Change Status</label>
                                     <div class="col-md-10 col-sm-10 col-xs-10">
@@ -516,7 +518,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                </div>
                <!-- ./ modal-body -->
                <div class="modal-footer">
-               <input type="submit" name="setCallsign" class="btn btn-primary" value="Set Callsign"/>
+               <input type="submit" name="setCallsign" class="btn btn-primary setcall_cls" value="Set Callsign"/>
                </div>
                <!-- ./ modal-footer -->
                </form>
@@ -772,24 +774,30 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
            if ($_GET['Fire'] == "true")
            {
              echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/Fire_Tones_Aligned.wav" preload="auto"></audio>';
+             
+             
            }
          }
          else
          {
-           echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/New_Dispatch.mp3" preload="auto"></audio>';
+             // echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/Fire_Tones_Aligned.wav" preload="auto"></audio>   newCallAudio src="'.BASE_URL.'/sounds/New_Dispatch.mp3"';
+			
+			echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/New_Dispatch.mp3"  preload="auto"></audio>';
+           
+			//echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/chk.mp3" preload="auto"></audio>';
          }
          ?>
       <?php include "./oc-includes/jquery-colsolidated.inc.php"; ?>
       <script>
          $(document).ready(function() {
+			
              $(function() {
                  $('#menu_toggle').click();
              });
 
              $('#callsign').modal('show');
-
              getCalls();
-             getStatus();
+             //getStatus();
              checkTones();
 			 getMyCall();
 			 mdtGetVehicleBOLOS();
@@ -955,8 +963,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                    },
                    success: function(response)
                    {
-                     console.log(response);
-
+                     					 
                      if (response.match("^Duplicate"))
                      {
                          var call2 = $('#callsign').find('input[name="callsign"]').val();
@@ -1017,6 +1024,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
            });
       </script>
       <script>
+		
          function getStatus() {
          $.ajax({
              type: "GET",
@@ -1027,48 +1035,60 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
              success: function(response)
              {
                  console.log(response);
-                 if (response.match("^10-7 | Unavailable | On Call"))
+				 
+                 if (response.match("^10-7 | Unavailable"))
                  {
                      var currentStatus = $('#status').val();
-                     if (currentStatus == "10-7 | Unavailable")
+                     if (currentStatus == "10-7 | Unavailable | On Call")
                      {
-                         //Do nothing
+                        //do nothing
                      }
-                     else
-                     {
-                         document.getElementById('newCallAudio').play();
-                         new PNotify({
-                             title: 'New Call!',
-                             text: 'You\'ve been assigned a new call!',
-                             type: 'success',
-                             styling: 'bootstrap3'
-                         });
-
-                         getMyCallDetails();
+                     else if(currentStatus == '10-7 | Unavailable')
+					 {
+						 
+					 }
+					 else
+					 {
+						 
+						 document.getElementById('newCallAudio').play();
+						 new PNotify({
+							 title: 'New Call!',
+							 text: 'You\'ve been assigned a new call!',
+							 type: 'success',
+							 styling: 'bootstrap3'
+						 });
+						 getMyCallDetails();
+						
                      }
+					 
+					
                  }
                  else if (response.match("^<br>"))
                  {
                      console.log("LOGGED OUT");
                      window.location.href = '<?php echo BASE_URL; ?>/actions/logout.php';
-
                  }
                  else
                  {
 
                  }
-
-                 $('#status').val(response);
-                 setTimeout(getStatus, 5000);
+				
+				
+				 $('#status').val(response);
+				 setTimeout(getStatus, 5000);
              },
              error : function(XMLHttpRequest, textStatus, errorThrown)
              {
-             console.log("Error");
+				console.log("Error");
              }
 
          });
          }
-
+		 
+		 $('.setcall_cls').click(function (){
+			getStatus();
+		 });
+		 
          function getMyCallDetails()
          {
            console.log("Got here");
