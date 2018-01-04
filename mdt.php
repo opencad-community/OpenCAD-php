@@ -774,17 +774,11 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
            if ($_GET['Fire'] == "true")
            {
              echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/Fire_Tones_Aligned.wav" preload="auto"></audio>';
-             
-             
            }
          }
          else
          {
-             // echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/Fire_Tones_Aligned.wav" preload="auto"></audio>   newCallAudio src="'.BASE_URL.'/sounds/New_Dispatch.mp3"';
-			
 			echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/New_Dispatch.mp3"  preload="auto"></audio>';
-           
-			//echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/chk.mp3" preload="auto"></audio>';
          }
          ?>
       <?php include "./oc-includes/jquery-colsolidated.inc.php"; ?>
