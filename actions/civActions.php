@@ -443,7 +443,37 @@ function create_plate()
 
 function create911Call()
 {
-    //var_dump($_POST);
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+	
+	$sql = "SELECT MAX(call_id) AS max FROM call_list";
+	$result=mysqli_query($link, $sql);
+
+	while($r=mysqli_fetch_array($result))
+	{
+		$callid = $r['max'];
+	}
+	
+	$callid++;
+	
+    $sql = "REPLACE INTO call_list (call_id) VALUES (?)";
+
+	try {
+		$stmt = mysqli_prepare($link, $sql);
+		mysqli_stmt_bind_param($stmt, "s", $callid);
+		$result = mysqli_stmt_execute($stmt);
+
+		if ($result == FALSE) {
+			die(mysqli_error($link));
+		}
+	}
+	catch (Exception $e)
+	{
+		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+	}
 
     $caller = $_POST['911_caller'];
     $location = $_POST['911_location'];
@@ -459,11 +489,11 @@ function create911Call()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "INSERT IGNORE INTO calls (call_type, call_street1, call_narrative) VALUES ('911', ?, ?)";
+    $sql = "INSERT IGNORE INTO calls (call_id, call_type, call_street1, call_narrative) VALUES (?, '911', ?, ?)";
 
     try {
         $stmt = mysqli_prepare($link, $sql);
-        mysqli_stmt_bind_param($stmt, "ss", $location, $call_narrative);
+        mysqli_stmt_bind_param($stmt, "sss", $callid, $location, $call_narrative);
         $result = mysqli_stmt_execute($stmt);
 
         if ($result == FALSE) {
