@@ -47,6 +47,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         $citationMessage = $_SESSION['citationMessage'];
         unset($_SESSION['citationMessage']);
     }
+    $arrestMessage = "";
+    if(isset($_SESSION['arrestMessage']))
+    {
+        $arrestMessage = $_SESSION['arrestMessage'];
+        unset($_SESSION['arrestMessage']);
+    }
     $warningMessage = "";
     if(isset($_SESSION['warningMessage']))
     {
@@ -127,11 +133,21 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                               </ul>
                            </li>
                            <li>
+                              <a><i class="fa fa-warning"></i> Arrest Report <span class="fa fa-chevron-down"></span></a>
+                              <ul class="nav child_menu">
+                                 <li><a type="button" data-toggle="modal" data-target="#createArrest" > Create Arrest Report</a></li>
+                                 <li><a type="button" data-toggle="modal" data-target="#viewArrest" > View Arrests</a></li>
+                              </ul>
+                           </li>
+                           <li>
                               <a><i class="fa fa-warning"></i> Warrants <span class="fa fa-chevron-down"></span></a>
                               <ul class="nav child_menu">
                                  <li><a type="button" data-toggle="modal" data-target="#createWarrant" > Create Warrants</a></li>
                                  <li><a type="button" data-toggle="modal" data-target="#viewWarrant" > View Warrants</a></li>
                               </ul>
+                           </li>
+                           <li>
+                                 <a type="button" data-toggle="modal" data-target="#rms" > Report Management System</a>
                            </li>
                         </ul>
                      </div>
@@ -368,7 +384,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <!-- ./ x_title -->
                            <div class="x_content">
                               <div class="input-group">
-                                 <input type="text" name="ncic_name" class="form-control" id="ncic_name" placeholder="John Doe"/>
+                                 <input id="ncic_name" type="text" class="form-control" placeholder="John Doe" name="ncic_name"/>
                                  <span class="input-group-btn">
                                  <button type="button" class="btn btn-primary" name="ncic_name_btn" id="ncic_name_btn">Send</button>
                                  </span>
@@ -519,6 +535,101 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          <!-- ./ modal-dialog modal-lg -->
       </div>
       <!-- ./ modal fade bs-example-modal-lg -->
+      <div class="modal fade" id="rms" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
+                  </button>
+            <h4 class="modal-title" id="myModalLabel">Warning Viewer</h4>
+          </div>
+          <!-- ./ modal-header -->
+          <div class="modal-body">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel" id="citation_panel">
+                  <div class="x_title">
+                    <h2>RMS Warnings</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php rms_warnings();?>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <div class="x_panel" id="citation_panel">
+                  <div class="x_title">
+                    <h2>RMS Citations</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php rms_citations();?>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <div class="x_panel" id="citation_panel">
+                  <div class="x_title">
+                    <h2>RMS Arrests</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php rms_arrests();?>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <div class="x_panel" id="citation_panel">
+                  <div class="x_title">
+                    <h2>RMS Warrants</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php rms_warrants();?>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <!-- ./ x_panel -->
+              </div>
+              <!-- ./ form-group -->
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
       <!-- Assign User to Call Modal -->
       <div class="modal fade" id="assign" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog modal-lg">
@@ -1163,11 +1274,43 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               </div>
               <!-- ./ form-group -->
               <div class="form-group row">
-                <label class="col-lg-2 control-label">Citation Name</label>
+                <label class="col-lg-2 control-label">Citation Name 1</label>
                 <div class="col-lg-10">
-                  <select class="form-control selectpicker" data-live-search="true" name="citation_name" id="citation_name" title="Select Citation" required>
-                    <?php getCitations();?>
-                  </select>
+					<input type="text" name="citation_name_1" id="citation_name_1" size="70" placeholder="Enter a citation" required />
+					<input type="number" name="citation_fine_1" id="citation_fine_1" size="10" placeholder="Enter a fine amount" required />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+			  <p>Optional</p>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Citation Name 2</label>
+                <div class="col-lg-10">
+					<input type="text" name="citation_name_2" id="citation_name_2" size="70" placeholder="Enter a citation"  />
+					<input type="number" name="citation_fine_2" id="citation_fine_2" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Citation Name 3</label>
+                <div class="col-lg-10">
+					<input type="text" name="citation_name_3" id="citation_name_3" size="70" placeholder="Enter a citation"  />
+					<input type="number" name="citation_fine_3" id="citation_fine_3" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Citation Name 4</label>
+                <div class="col-lg-10">
+					<input type="text" name="citation_name_4" id="citation_name_4" size="70" placeholder="Enter a citation"  />
+					<input type="number" name="citation_fine_4" id="citation_fine_4" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Citation Name 5</label>
+                <div class="col-lg-10">
+					<input type="text" name="citation_name_5" id="citation_name_5" size="70" placeholder="Enter a citation"  />
+					<input type="number" name="citation_fine_5" id="citation_fine_5" placeholder="Enter a fine amount"  />
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -1254,9 +1397,38 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               </div>
               <!-- ./ form-group -->
               <div class="form-group row">
-                <label class="col-lg-2 control-label">Warning Name</label>
+                <label class="col-lg-2 control-label">Warning Name 1</label>
                 <div class="col-lg-10">
-					<input type="text" class="form-control" name="warning_name" id="warning_name" placeholder="Enter a warning" />
+					<input type="text" class="form-control" name="warning_name_1" id="warning_name_1" placeholder="Enter a warning" required />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+			  <p>Optional</p>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Warning Name 2</label>
+                <div class="col-lg-10">
+					<input type="text" class="form-control" name="warning_name_2" id="warning_name_2" placeholder="Enter a warning"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Warning Name 3</label>
+                <div class="col-lg-10">
+					<input type="text" class="form-control" name="warning_name_3" id="warning_name_3" placeholder="Enter a warning"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Warning Name 4</label>
+                <div class="col-lg-10">
+					<input type="text" class="form-control" name="warning_name_4" id="warning_name_4" placeholder="Enter a warning"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Warning Name 5</label>
+                <div class="col-lg-10">
+					<input type="text" class="form-control" name="warning_name_5" id="warning_name_5" placeholder="Enter a warning"  />
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -1265,6 +1437,127 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <!-- ./ modal-body -->
           <div class="modal-footer">
                 <input name="create_warning" type="submit" class="btn btn-primary" value="Create" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
+      <div class="modal fade" id="createArrest" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" id="closecallDetails"><span aria-hidden="true">×</span>
+               </button>
+               <h4 class="modal-title" id="myModalLabel">Arrest Report</h4>
+            </div>
+            <!-- ./ modal-header -->
+          <div class="modal-body">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/responderActions.php" method="post">
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Civilian Name</label>
+                <div class="col-lg-10">
+                  <select class="form-control selectpicker" name="civilian_names" id="civilian_names" data-live-search="true" required title="Select Civilian">
+                    <?php getCivilianNamesOption();?>
+                  </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Arrest Reason 1</label>
+                <div class="col-lg-10">
+					<input type="text" name="arrest_reason_1" id="arrest_reason_1" size="70" placeholder="Enter a reason for arrest" required />
+					<input type="number" name="arrest_fine_1" id="arrest_fine_1" size="10" placeholder="Enter a fine amount" />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+			  <p>Optional</p>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Arrest Reason 2</label>
+                <div class="col-lg-10">
+					<input type="text" name="arrest_reason_2" id="arrest_reason_2" size="70" placeholder="Enter a reason for arrest"  />
+					<input type="number" name="arrest_fine_2" id="arrest_fine_2" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Arrest Reason 3</label>
+                <div class="col-lg-10">
+					<input type="text" name="arrest_reason_3" id="arrest_reason_3" size="70" placeholder="Enter a reason for arrest"  />
+					<input type="number" name="arrest_fine_3" id="arrest_fine_3" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Arrest Reason 4</label>
+                <div class="col-lg-10">
+					<input type="text" name="arrest_reason_4" id="arrest_reason_4" size="70" placeholder="Enter a reason for arrest"  />
+					<input type="number" name="arrest_fine_4" id="arrest_fine_4" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Arrest Reason 5</label>
+                <div class="col-lg-10">
+					<input type="text" name="arrest_reason_5" id="arrest_reason_5" size="70" placeholder="Enter a reason for arrest"  />
+					<input type="number" name="arrest_fine_5" id="arrest_fine_5" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+                <input name="create_arrest" type="submit" class="btn btn-primary" value="Create" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
+      <div class="modal fade" id="viewArrest" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
+                  </button>
+            <h4 class="modal-title" id="myModalLabel">Arrests Viewer</h4>
+          </div>
+          <!-- ./ modal-header -->
+          <div class="modal-body">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel" id="citation_panel">
+                  <div class="x_title">
+                    <h2>NCIC Arrests</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php ncic_arrests();?>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <!-- ./ x_panel -->
+              </div>
+              <!-- ./ form-group -->
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </form>
           </div>
@@ -1483,6 +1776,85 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          var vid = document.getElementById("recurringToneAudio");
          vid.volume = 0.3;
       </script>
+</style>
+
+      <script>
+  $(function() {
+    $( "#ncic_name" ).autocomplete({
+      source: "<?php echo BASE_URL; ?>/js/search_name.php"
+    });
+  });
+  </script>
+      <script>
+  $(function() {
+    $( "#ncic_plate" ).autocomplete({
+      source: "<?php echo BASE_URL; ?>/js/search_plate.php"
+    });
+  });
+  </script>
+      <script>
+  $(function() {
+    $( "#ncic_weapon" ).autocomplete({
+      source: "<?php echo BASE_URL; ?>/js/search_name.php"
+    });
+  });
+  </script>
+    <script>
+    $(document).ready(function() {
+        $('#ncic_warnings').DataTable({
+
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#ncic_citations').DataTable({
+
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#ncic_arrests').DataTable({
+
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#ncic_warrants').DataTable({
+
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#rms_warnings').DataTable({
+
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#rms_citations').DataTable({
+
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#rms_arrests').DataTable({
+
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#rms_warrants').DataTable({
+
+        });
+    });
+    </script>
       <script>
          $(document).ready(function() {
              $(function() {

@@ -532,6 +532,22 @@ INSERT INTO `incident_type` (`code_id`, `code_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ncic_arrests`
+--
+
+CREATE TABLE `ncic_arrests` (
+  `id` int(11) NOT NULL,
+  `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '0 = Pending, 1 = Approved/Active',
+  `name_id` int(11) NOT NULL COMMENT 'Paired to ID of ncic_names table',
+  `arrest_reason` varchar(255) NOT NULL,
+  `arrest_fine` int(11) NOT NULL,
+  `issued_date` date DEFAULT NULL,
+  `issued_by` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ncic_citations`
 --
 
@@ -540,6 +556,7 @@ CREATE TABLE `ncic_citations` (
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '0 = Pending, 1 = Approved/Active',
   `name_id` int(11) NOT NULL COMMENT 'Paired to ID of ncic_names table',
   `citation_name` varchar(255) NOT NULL,
+  `citation_fine` int(11) NOT NULL,
   `issued_date` date DEFAULT NULL,
   `issued_by` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -554,8 +571,7 @@ CREATE TABLE `ncic_names` (
   `id` int(11) NOT NULL,
   `submittedByName` varchar(255) NOT NULL,
   `submittedById` varchar(255) NOT NULL,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `dob` date NOT NULL COMMENT 'Date of birth',
   `address` text NOT NULL,
   `gender` varchar(255) NOT NULL,
@@ -1649,7 +1665,7 @@ ALTER TABLE `ncic_citations`
 ALTER TABLE `ncic_names`
   ADD PRIMARY KEY (`id`) USING BTREE,
   ADD UNIQUE KEY `id_UNIQUE` (`id`) USING BTREE,
-  ADD UNIQUE KEY `first_name` (`first_name`,`last_name`) USING BTREE;
+  ADD UNIQUE KEY `name` (`name`) USING BTREE;
 
 --
 -- Indexes for table `ncic_plates`

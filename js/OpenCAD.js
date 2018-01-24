@@ -217,6 +217,20 @@ $('#ncic_name_btn').on('click', function(e) {
             }
             }
 			
+            if (data['noArrest'] == "true")
+            {
+            var arrestText = "&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: green\">NO ARRESTS</span><br/>";
+            }
+            else
+            {
+            var arrestText = "";
+            arrestText += "    Count: "+data.arrest_reason.length+"<br/>";
+            for (i=0; i<data.arrest_reason.length; i++)
+            {
+                arrestText += "&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #F78F2B\">"+data.arrest_reason[i]+"</span><br/>";
+            }
+            }
+			
             if (data['noWarnings'] == "true")
             {
             var warningText = "&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: green\">NO WARNINGS</span>";
@@ -261,14 +275,14 @@ $('#ncic_name_btn').on('click', function(e) {
             deceased_text = "<span style=\"color: red;\">"+data['deceased']+"</span>";
             }
 
-            $('#ncic_name_return').append("Name: "+data['first_name']+" "+data['last_name']+"<br/>DOB: "+data['dob']+"<br/>Age: "+data['age']+"<br/>Sex: "+data['sex']
+            $('#ncic_name_return').append("Name: "+data['name']+"<br/>DOB: "+data['dob']+"<br/>Age: "+data['age']+"<br/>Sex: "+data['sex']
             +"<br/>Race: "+data['race']+"<br/>Hair Color: "+data['hair_color']
             +"<br/>Build: "+data['build']
             +"<br/>Address: "+data['address']
             +"<br/>DL Status: "+dl_status_text
 			+"<br/>Weapon Permit: "+weapon_permit_text
 			+"<br/>Deceased: "+deceased_text
-            +"<br/><br/>Warrants: <br/>"+warrantText+"<br/>Citations:<br/>"+citationText+"<br/>Warnings:<br/>"+warningText);
+			+"<br/><br/>Warnings:<br/>"+warningText+"<br/>Citations:<br/>"+citationText+"<br/>Arrests:<br/>"+arrestText+"<br/>Warrants:<br/>"+warrantText);
 
             $("#ncic_name_return").attr("tabindex",-1).focus();
         }
