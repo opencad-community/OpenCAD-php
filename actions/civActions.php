@@ -65,13 +65,13 @@ function getCivilianNamesOwn()
 		die('Could not connect: ' .mysql_error());
 	}
 
-	$sql = 'SELECT ncic_names.id, ncic_names.first_name, ncic_names.last_name FROM ncic_names where ncic_names.submittedByID = "' . $uid . '"';
+	$sql = 'SELECT ncic_names.id, ncic_names.name FROM ncic_names where ncic_names.submittedByID = "' . $uid . '"';
 
 	$result=mysqli_query($link, $sql);
 
 	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
 	{
-		echo "<option value=\"$row[0]\">$row[1] $row[2]</option>";
+		echo "<option value=\"$row[0]\">$row[1]</option>";
 	}
 	mysqli_close($link);
 }
@@ -102,8 +102,7 @@ function ncicGetNames()
             <table id="ncic_names" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Name</th>
                 <th>DOB</th>
                 <th>Address</th>
                 <th>Gender</th>
@@ -133,7 +132,6 @@ function ncicGetNames()
                 <td>'.$row[10].'</td>
                 <td>'.$row[11].'</td>
 				<td>'.$row[12].'</td>
-				<td>'.$row[13].'</td>
                 <td>
                     <button name="edit_name" data-toggle="modal" data-target="#IdentityEditModal" id="edit_nameBtn" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
                     <form action="".BASE_URL."/actions/civActions.php" method="post">
@@ -164,7 +162,7 @@ function ncicGetPlates()
     }
     
 
-    $query = 'SELECT ncic_plates.*, ncic_names.first_name, ncic_names.last_name FROM ncic_plates INNER JOIN ncic_names ON ncic_names.id=ncic_plates.name_id WHERE ncic_plates.user_id = "' . $uid . '"';
+    $query = 'SELECT ncic_plates.*, ncic_names.name FROM ncic_plates INNER JOIN ncic_names ON ncic_names.id=ncic_plates.name_id WHERE ncic_plates.user_id = "' . $uid . '"';
 
     $result=mysqli_query($link, $query);
 
@@ -180,8 +178,7 @@ function ncicGetPlates()
             <table id="ncic_plates" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Name</th>
                 <th>Plate</th>
                 <th>Reg. State</th>
                 <th>Make</th>
@@ -202,7 +199,6 @@ function ncicGetPlates()
             echo '
             <tr>
                 <td>'.$row[12].'</td>
-                <td>'.$row[13].'</td>
                 <td>'.$row[2].'</td>
                 <td>'.$row[9].'</td>
                 <td>'.$row[3].'</td>
@@ -312,6 +308,8 @@ function create_name()
     $lastName = preg_replace('/[^A-Za-z0-9\-]/', '', $lastName);
     //Set first letter to uppercase
     $lastName = ucfirst($lastName);
+	
+	$name = $firstName . ' ' . $lastName;
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -320,7 +318,7 @@ function create_name()
         die('Could not connect: ' . mysql_error());
     }
 
-    $query = 'SELECT first_name, last_name FROM ncic_names WHERE first_name = "' . $firstName . '" AND last_name = "' . $lastName . '"';
+    $query = 'SELECT name FROM ncic_names WHERE name = "' . $name . '" ';
 
     $result = mysqli_query($link, $query);
 
@@ -339,8 +337,7 @@ function create_name()
     $submittedByName = $_SESSION['name'];
     $submitttedById = $_SESSION['id'];
     //Submission Data
-    $firstName;
-    $lastName;
+    $name;
     $dob = $_POST['civDobReq'];
     $address = $_POST['civAddressReq'];
     $sex = $_POST['civSexReq'];
@@ -351,13 +348,13 @@ function create_name()
 	$weapon = $_POST['civWepStat'];
 	$deceased = $_POST['civDec'];
 
-    $query = "INSERT INTO ncic_names (submittedByName, submittedById, first_name, last_name, dob, address, gender, race, dl_status, hair_color, build, weapon_permit, deceased)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    $query = "INSERT INTO ncic_names (submittedByName, submittedById, name, dob, address, gender, race, dl_status, hair_color, build, weapon_permit, deceased)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
     try
     {
         $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "sssssssssssss", $submittedByName, $submitttedById, $firstName, $lastName, $dob, $address, $sex, $race, $dlstatus, $hair, $build, $weapon, $deceased);
+        mysqli_stmt_bind_param($stmt, "ssssssssssss", $submittedByName, $submitttedById, $name, $dob, $address, $sex, $race, $dlstatus, $hair, $build, $weapon, $deceased);
         $result = mysqli_stmt_execute($stmt);
 
         if ($result == false)
@@ -533,6 +530,8 @@ function edit_name()
     $lastName = preg_replace('/[^A-Za-z0-9\-]/', '', $lastName);
     //Set first letter to uppercase
     $lastName = ucfirst($lastName);
+	
+	$name = $firstName . ' ' . $lastName;
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -541,7 +540,7 @@ function edit_name()
         die('Could not connect: ' . mysql_error());
     }
 
-    $query = 'SELECT first_name, last_name FROM ncic_names WHERE first_name = "' . $firstName . '" AND last_name = "' . $lastName . '"';
+    $query = 'SELECT first_name FROM ncic_names WHERE first_name = "' . $name . '"';
 
     $result = mysqli_query($link, $query);
 
@@ -560,8 +559,7 @@ function edit_name()
     $submittedByName = $_SESSION['name'];
     $submitttedById = $_SESSION['id'];
     //Submission Data
-    $firstName;
-    $lastName;
+    $name;
     $dob = $_POST['civDobReq'];
     $address = $_POST['civAddressReq'];
     $sex = $_POST['civSexReq'];
@@ -573,11 +571,11 @@ function edit_name()
 	$deceased = $_POST['civDec'];
     $editid = $_POST['Edit_id'];
 
-    $query = "UPDATE ncic_names SET first_name = ?, last_name = ?, dob = ?, address = ?, gender = ?, race = ?, dl_status = ?, hair_color = ?, build = ?, weapon_permit = ?, deceased = ? WHERE id = ?";
+    $query = "UPDATE ncic_names SET name = ?, dob = ?, address = ?, gender = ?, race = ?, dl_status = ?, hair_color = ?, build = ?, weapon_permit = ?, deceased = ? WHERE id = ?";
     try
     {
         $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "ssssssssssss", $firstName, $lastName, $dob, $address, $sex, $race, $dlstatus, $hair, $build, $weapon, $deceased, $editid);
+        mysqli_stmt_bind_param($stmt, "sssssssssss", $name, $dob, $address, $sex, $race, $dlstatus, $hair, $build, $weapon, $deceased, $editid);
         $result = mysqli_stmt_execute($stmt);
 
         if ($result == false)
@@ -750,7 +748,7 @@ function ncic_warrants()
             $nameid = ''.$row[0].'';
 		}
 
-    $query = 'SELECT ncic_warrants.*, ncic_names.first_name, ncic_names.last_name FROM ncic_warrants INNER JOIN ncic_names ON ncic_names.id=ncic_warrants.name_id WHERE name_id = "' . $nameid . '"';
+    $query = 'SELECT ncic_warrants.*, ncic_names.name FROM ncic_warrants INNER JOIN ncic_names ON ncic_names.id=ncic_warrants.name_id WHERE name_id = "' . $nameid . '"';
 
     $result=mysqli_query($link, $query);
 
@@ -902,7 +900,7 @@ function ncicGetWeapons()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = 'SELECT ncic_weapons.*, ncic_names.first_name, ncic_names.last_name FROM ncic_weapons INNER JOIN ncic_names ON ncic_names.id=ncic_weapons.name_id WHERE ncic_weapons.user_id = "' . $uid . '"';
+    $query = 'SELECT ncic_weapons.*, ncic_names.name FROM ncic_weapons INNER JOIN ncic_names ON ncic_names.id=ncic_weapons.name_id WHERE ncic_weapons.user_id = "' . $uid . '"';
 
     $result=mysqli_query($link, $query);
 
@@ -918,8 +916,7 @@ function ncicGetWeapons()
             <table id="ncic_names" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Name</th>
                 <th>Weapon Type</th>
                 <th>Weapon Name</th>
                 <th>Actions</th>
@@ -933,7 +930,6 @@ function ncicGetWeapons()
             echo '
             <tr>
                 <td>'.$row[5].'</td>
-                <td>'.$row[6].'</td>
                 <td>'.$row[2].'</td>
                 <td>'.$row[3].'</td>
                 <td>

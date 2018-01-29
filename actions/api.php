@@ -1185,13 +1185,13 @@ function getCivilianNamesOption()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "SELECT id, first_name, last_name FROM ncic_names";
+    $sql = "SELECT id, name FROM ncic_names";
 
     $result=mysqli_query($link, $sql);
 
     while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
     {
-        echo "<option value=".$row[0].">".$row[1]." ".$row[2]."</option>";
+        echo "<option value=".$row[0].">".$row[1]."</option>";
     }
 }
 
@@ -1359,13 +1359,13 @@ function getCivilianNames()
 		die('Could not connect: ' .mysql_error());
 	}
 
-	$sql = "SELECT ncic_names.id, ncic_names.first_name, ncic_names.last_name FROM ncic_names";
+	$sql = "SELECT ncic_names.id, ncic_names.name FROM ncic_names";
 
 	$result=mysqli_query($link, $sql);
 
 	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
 	{
-		echo "<option value=\"$row[0]\">$row[1] $row[2]</option>";
+		echo "<option value=\"$row[0]\">$row[1]</option>";
 	}
 	mysqli_close($link);
 }
@@ -1477,4 +1477,217 @@ function getWeapons()
     }
 }
 
+function rms_warnings()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT ncic_names.name, ncic_warnings.id, ncic_warnings.warning_name, ncic_warnings.issued_date, ncic_warnings.issued_by FROM ncic_warnings INNER JOIN ncic_names ON ncic_warnings.name_id=ncic_names.id WHERE ncic_warnings.status = '1'";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>There are currently no warnings in the NCIC Database</span></div>";
+    }
+    else
+    {
+        echo '
+            <table id="rms_warnings" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Name</th>
+                <th>Warning Name</th>
+                <th>Issued On</th>
+                <th>Issued By</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            echo '
+            <tr>
+                <td>'.$row[0].'</td>
+                <td>'.$row[2].'</td>
+                <td>'.$row[3].'</td>
+                <td>'.$row[4].'</td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
+function rms_citations()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT ncic_names.name, ncic_citations.id, ncic_citations.citation_name, ncic_citations.citation_fine, ncic_citations.issued_date, ncic_citations.issued_by FROM ncic_citations INNER JOIN ncic_names ON ncic_citations.name_id=ncic_names.id WHERE ncic_citations.status = '1'";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>There are currently no citations in the NCIC Database</span></div>";
+    }
+    else
+    {
+        echo '
+            <table id="rms_citations" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Name</th>
+                <th>Citation Name</th>
+				<th>Citation Ammount</th>
+                <th>Issued On</th>
+                <th>Issued By</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            echo '
+            <tr>
+                <td>'.$row[0].'</td>
+                <td>'.$row[2].'</td>
+                <td>'.$row[3].'</td>
+                <td>'.$row[4].'</td>
+                <td>'.$row[5].'</td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
+function rms_arrests()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT ncic_names.name, ncic_arrests.id, ncic_arrests.arrest_reason, ncic_arrests.arrest_fine, ncic_arrests.issued_date, ncic_arrests.issued_by FROM ncic_arrests INNER JOIN ncic_names ON ncic_arrests.name_id=ncic_names.id WHERE ncic_arrests.status = '1'";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>There are currently no arrests in the NCIC Database</span></div>";
+    }
+    else
+    {
+        echo '
+            <table id="rms_arrests" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Name</th>
+                <th>Arrest reason</th>
+				<th>Arrest Ammount</th>
+                <th>Issued On</th>
+                <th>Issued By</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            echo '
+            <tr>
+                <td>'.$row[0].'</td>
+                <td>'.$row[2].'</td>
+                <td>'.$row[3].'</td>
+                <td>'.$row[4].'</td>
+                <td>'.$row[5].'</td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
+function rms_warrants()
+{
+   $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT ncic_warrants.*, ncic_names.name FROM ncic_warrants INNER JOIN ncic_names ON ncic_names.id=ncic_warrants.name_id";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>There are currently no warrants in the NCIC Database</span></div>";
+    }
+    else
+    {
+        echo '
+            <table id="rms_warrants" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Status</th>
+                <th>Name</th>
+                <th>Warrant Name</th>
+                <th>Issued On</th>
+                <th>Expires On</th>
+                <th>Issuing Agency</th>
+
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            echo '
+            <tr>
+                <td>'.$row[6].'</td>
+                <td>'.$row[7].'</td>
+                <td>'.$row[2].'</td>
+                <td>'.$row[5].'</td>
+                <td>'.$row[1].'</td>
+                <td>'.$row[3].'</td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
 ?>

@@ -17,6 +17,9 @@ require_once(__DIR__ . "/../oc-config.php");
 if (isset($_POST['delete_citation'])){
     delete_citation();
 }
+if (isset($_POST['delete_arrest'])){
+    delete_arrest();
+}
 if (isset($_POST['delete_warning'])){
     delete_warning();
 }
@@ -55,6 +58,9 @@ if (isset($_POST['addNarrative']))
 }
 if (isset($_POST['create_warrant'])){
     create_warrant();
+}
+if (isset($_POST['create_arrest'])){
+    create_arrest();
 }
 if (isset($_POST['create_citation'])){
     create_citation();
@@ -594,7 +600,16 @@ function cadGetPersonBOLOS()
 function create_citation()
 {
     $userId = $_POST['civilian_names'];
-    $citation_name = $_POST['citation_name'];
+    $citation_name_1 = $_POST['citation_name_1'];
+    $citation_fine_1 = $_POST['citation_fine_1'];
+	$citation_name_2 = $_POST['citation_name_2'];
+	$citation_fine_2 = $_POST['citation_fine_2'];
+	$citation_name_3 = $_POST['citation_name_3'];
+	$citation_fine_3 = $_POST['citation_fine_3'];
+	$citation_name_4 = $_POST['citation_name_4'];
+	$citation_fine_4 = $_POST['citation_fine_4'];
+	$citation_name_5 = $_POST['citation_name_5'];
+	$citation_fine_5 = $_POST['citation_fine_5'];
     session_start();
     $issued_by = $_SESSION['name'];
     $date = date('Y-m-d');
@@ -605,12 +620,12 @@ function create_citation()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $sql = "INSERT INTO ncic_citations (name_id, citation_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)";
+    $sql = "INSERT INTO ncic_citations (name_id, citation_name, citation_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
 
 
 	try {
 		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "isss", $userId, $citation_name, $issued_by, $date);
+		mysqli_stmt_bind_param($stmt, "isiss", $userId, $citation_name_1, $citation_fine_1, $issued_by, $date);
 		$result = mysqli_stmt_execute($stmt);
 
 		if ($result == FALSE) {
@@ -622,7 +637,105 @@ function create_citation()
 		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
 	}
 	mysqli_close($link);
+	if ($citation_name_2){
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+	
+	    $sql = "INSERT INTO ncic_citations (name_id, citation_name, citation_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
+
+
+	try {
+		$stmt = mysqli_prepare($link, $sql);
+		mysqli_stmt_bind_param($stmt, "isiss", $userId, $citation_name_2, $citation_fine_2, $issued_by, $date);
+		$result = mysqli_stmt_execute($stmt);
+
+		if ($result == FALSE) {
+			die(mysqli_error($link));
+		}
+	}
+	catch (Exception $e)
+	{
+		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+	}
+	mysqli_close($link);
+	}
+	if ($citation_name_3) {
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+	
+    $sql = "INSERT INTO ncic_citations (name_id, citation_name, citation_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
+
+
+	try {
+		$stmt = mysqli_prepare($link, $sql);
+		mysqli_stmt_bind_param($stmt, "isiss", $userId, $citation_name_3, $citation_fine_3, $issued_by, $date);
+		$result = mysqli_stmt_execute($stmt);
+
+		if ($result == FALSE) {
+			die(mysqli_error($link));
+		}
+	}
+	catch (Exception $e)
+	{
+		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+	}
+	mysqli_close($link);
+	}
+	if ($citation_name_4) {
+   $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+	
+	    $sql = "INSERT INTO ncic_citations (name_id, citation_name, citation_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
+
+
+	try {
+		$stmt = mysqli_prepare($link, $sql);
+		mysqli_stmt_bind_param($stmt, "isiss", $userId, $citation_name_4, $citation_fine_4, $issued_by, $date);
+		$result = mysqli_stmt_execute($stmt);
+
+		if ($result == FALSE) {
+			die(mysqli_error($link));
+		}
+	}
+	catch (Exception $e)
+	{
+		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+	}
+	mysqli_close($link);
+	}
+	if ($citation_name_5) {
+	$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+	    $sql = "INSERT INTO ncic_citations (name_id, citation_name, citation_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
+
+
+	try {
+		$stmt = mysqli_prepare($link, $sql);
+		mysqli_stmt_bind_param($stmt, "isiss", $userId, $citation_name_5, $citation_fine_5, $issued_by, $date);
+		$result = mysqli_stmt_execute($stmt);
+
+		if ($result == FALSE) {
+			die(mysqli_error($link));
+		}
+	}
+	catch (Exception $e)
+	{
+		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+	}
+	mysqli_close($link);
+	}
     session_start();
     $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully created citation</span></div>';
 
@@ -632,7 +745,11 @@ function create_citation()
 function create_warning()
 {
     $userId = $_POST['civilian_names'];
-    $warning_name = $_POST['warning_name'];
+    $warning_name_1 = $_POST['warning_name_1'];
+	$warning_name_2 = $_POST['warning_name_2'];
+	$warning_name_3 = $_POST['warning_name_3'];
+	$warning_name_4 = $_POST['warning_name_4'];
+	$warning_name_5 = $_POST['warning_name_5'];
     session_start();
     $issued_by = $_SESSION['name'];
     $date = date('Y-m-d');
@@ -648,7 +765,7 @@ function create_warning()
 
 	try {
 		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "isss", $userId, $warning_name, $issued_by, $date);
+		mysqli_stmt_bind_param($stmt, "isss", $userId, $warning_name_1, $issued_by, $date);
 		$result = mysqli_stmt_execute($stmt);
 
 		if ($result == FALSE) {
@@ -660,6 +777,110 @@ function create_warning()
 		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
 	}
 	mysqli_close($link);
+	
+	if ($warning_name_2){
+		    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $sql = "INSERT INTO ncic_warnings (name_id, warning_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)";
+
+
+	try {
+		$stmt = mysqli_prepare($link, $sql);
+		mysqli_stmt_bind_param($stmt, "isss", $userId, $warning_name_2, $issued_by, $date);
+		$result = mysqli_stmt_execute($stmt);
+
+		if ($result == FALSE) {
+			die(mysqli_error($link));
+		}
+	}
+	catch (Exception $e)
+	{
+		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+	}
+	mysqli_close($link);
+	}
+	
+	if ($warning_name_3) {
+		    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $sql = "INSERT INTO ncic_warnings (name_id, warning_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)";
+
+
+	try {
+		$stmt = mysqli_prepare($link, $sql);
+		mysqli_stmt_bind_param($stmt, "isss", $userId, $warning_name_3, $issued_by, $date);
+		$result = mysqli_stmt_execute($stmt);
+
+		if ($result == FALSE) {
+			die(mysqli_error($link));
+		}
+	}
+	catch (Exception $e)
+	{
+		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+	}
+	mysqli_close($link);
+	}
+	
+	if ($warning_name_4) {
+		    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $sql = "INSERT INTO ncic_warnings (name_id, warning_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)";
+
+
+	try {
+		$stmt = mysqli_prepare($link, $sql);
+		mysqli_stmt_bind_param($stmt, "isss", $userId, $warning_name_4, $issued_by, $date);
+		$result = mysqli_stmt_execute($stmt);
+
+		if ($result == FALSE) {
+			die(mysqli_error($link));
+		}
+	}
+	catch (Exception $e)
+	{
+		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+	}
+	mysqli_close($link);
+	}
+	
+	if ($warning_name_5) {
+		    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $sql = "INSERT INTO ncic_warnings (name_id, warning_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)";
+
+
+	try {
+		$stmt = mysqli_prepare($link, $sql);
+		mysqli_stmt_bind_param($stmt, "isss", $userId, $warning_name_5, $issued_by, $date);
+		$result = mysqli_stmt_execute($stmt);
+
+		if ($result == FALSE) {
+			die(mysqli_error($link));
+		}
+	}
+	catch (Exception $e)
+	{
+		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+	}
+	mysqli_close($link);
+	}
 
     session_start();
     $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully created warning</span></div>';
@@ -708,129 +929,7 @@ function create_warrant()
 
     header("Location:".BASE_URL."/cad.php");
 }
-function ncic_citations()
-{
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
-    }
-
-    $query = "SELECT ncic_names.first_name, ncic_names.last_name, ncic_citations.id, ncic_citations.citation_name, ncic_citations.issued_date, ncic_citations.issued_by FROM ncic_citations INNER JOIN ncic_names ON ncic_citations.name_id=ncic_names.id WHERE ncic_citations.status = '1'";
-
-    $result=mysqli_query($link, $query);
-
-    $num_rows = $result->num_rows;
-
-    if($num_rows == 0)
-    {
-        echo "<div class=\"alert alert-info\"><span>There are currently no citations in the NCIC Database</span></div>";
-    }
-    else
-    {
-        echo '
-            <table id="ncic_citations" class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Citation Name</th>
-                <th>Issued On</th>
-                <th>Issued By</th>
-                <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-        ';
-
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
-        {
-            echo '
-            <tr>
-                <td>'.$row[0].'</td>
-                <td>'.$row[1].'</td>
-                <td>'.$row[3].'</td>
-                <td>'.$row[4].'</td>
-                <td>'.$row[5].'</td>
-                <td>
-                    <form action="".BASE_URL."/actions/dispatchActions.php" method="post">
-                    <input name="edit_citation" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
-                    <input name="delete_citation" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Expunge"/>
-                    <input name="cid" type="hidden" value='.$row[2].' />
-                    </form>
-                </td>
-            </tr>
-            ';
-        }
-
-        echo '
-            </tbody>
-            </table>
-        ';
-    }
-}
-
-function ncic_warnings()
-{
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
-    }
-
-    $query = "SELECT ncic_names.first_name, ncic_names.last_name, ncic_warnings.id, ncic_warnings.warning_name, ncic_warnings.issued_date, ncic_warnings.issued_by FROM ncic_warnings INNER JOIN ncic_names ON ncic_warnings.name_id=ncic_names.id WHERE ncic_warnings.status = '1'";
-
-    $result=mysqli_query($link, $query);
-
-    $num_rows = $result->num_rows;
-
-    if($num_rows == 0)
-    {
-        echo "<div class=\"alert alert-info\"><span>There are currently no warnings in the NCIC Database</span></div>";
-    }
-    else
-    {
-        echo '
-            <table id="ncic_warnings" class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Warning Name</th>
-                <th>Issued On</th>
-                <th>Issued By</th>
-                <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-        ';
-
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
-        {
-            echo '
-            <tr>
-                <td>'.$row[0].'</td>
-                <td>'.$row[1].'</td>
-                <td>'.$row[3].'</td>
-                <td>'.$row[4].'</td>
-                <td>'.$row[5].'</td>
-                <td>
-                    <form action="".BASE_URL."/actions/dispatchActions.php" method="post">
-                    <input name="edit_warning" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
-                    <input name="delete_warning" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Remove"/>
-                    <input name="wgid" type="hidden" value='.$row[2].' />
-                    </form>
-                </td>
-            </tr>
-            ';
-        }
-
-        echo '
-            </tbody>
-            </table>
-        ';
-    }
-}
 
 function delete_citation()
 {
@@ -862,7 +961,36 @@ function delete_citation()
     $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully removed citation</span></div>';
     header("Location: ".BASE_URL."/cad.php");
 }
+function delete_arrest()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $aid = $_POST['aid'];
+
+    $query = "DELETE FROM ncic_arrests WHERE id = ?";
+
+    try {
+        $stmt = mysqli_prepare($link, $query);
+        mysqli_stmt_bind_param($stmt, "i", $aid);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage());
+    }
+
+    session_start();
+    $_SESSION['arrestMessage'] = '<div class="alert alert-success"><span>Successfully removed arrest</span></div>';
+    header("Location: ".BASE_URL."/cad.php");
+}
 
 function delete_warning()
 {
@@ -925,7 +1053,67 @@ function delete_warrant()
     $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully removed warrant</span></div>';
     header("Location: ".BASE_URL."/cad.php");
 }
+function ncic_arrests()
+{
+   $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT ncic_arrests.*, ncic_names.name FROM ncic_arrests INNER JOIN ncic_names ON ncic_names.id=ncic_arrests.name_id";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>There are currently no arrests in the NCIC Database</span></div>";
+    }
+    else
+    {
+        echo '
+            <table id="ncic_arrests" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Name</th>
+                <th>Arrest Reason</th>
+                <th>Arrest Amount</th>
+                <th>Issued On</th>
+                <th>Issued By</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            echo '
+            <tr>
+                <td>'.$row[6].'</td>
+                <td>'.$row[2].'</td>
+                <td>'.$row[3].'</td>
+                <td>'.$row[4].'</td>
+                <td>'.$row[5].'</td>
+                <td>
+                    <form action="".BASE_URL."/actions/dispatchActions.php" method="post">
+                    <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
+                    <input name="delete_arrest" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Remove"/>
+                    <input name="aid" type="hidden" value='.$row[0].' />
+                    </form>
+                </td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
 function ncic_warrants()
 {
    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -934,7 +1122,7 @@ function ncic_warrants()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT ncic_warrants.*, ncic_names.first_name, ncic_names.last_name FROM ncic_warrants INNER JOIN ncic_names ON ncic_names.id=ncic_warrants.name_id";
+    $query = "SELECT ncic_warrants.*, ncic_names.name FROM ncic_warrants INNER JOIN ncic_names ON ncic_names.id=ncic_warrants.name_id";
 
     $result=mysqli_query($link, $query);
 
@@ -951,8 +1139,7 @@ function ncic_warrants()
             <thead>
                 <tr>
                 <th>Status</th>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Name</th>
                 <th>Warrant Name</th>
                 <th>Issued On</th>
                 <th>Expires On</th>
@@ -969,7 +1156,6 @@ function ncic_warrants()
             <tr>
                 <td>'.$row[6].'</td>
                 <td>'.$row[7].'</td>
-                <td>'.$row[8].'</td>
                 <td>'.$row[2].'</td>
                 <td>'.$row[5].'</td>
                 <td>'.$row[1].'</td>
@@ -1001,7 +1187,126 @@ function ncic_warrants()
         ';
     }
 }
+function ncic_citations()
+{
+   $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT ncic_citations.*, ncic_names.name FROM ncic_citations INNER JOIN ncic_names ON ncic_names.id=ncic_citations.name_id";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>There are currently no arrests in the NCIC Database</span></div>";
+    }
+    else
+    {
+        echo '
+            <table id="ncic_citations" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Name</th>
+                <th>Citation Name</th>
+                <th>Citation Amount</th>
+                <th>Issued On</th>
+                <th>Issued By</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            echo '
+            <tr>
+                <td>'.$row[7].'</td>
+                <td>'.$row[3].'</td>
+                <td>'.$row[4].'</td>
+                <td>'.$row[5].'</td>
+                <td>'.$row[6].'</td>
+                <td>
+                    <form action="".BASE_URL."/actions/dispatchActions.php" method="post">
+                    <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
+                    <input name="delete_citation" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Remove"/>
+                    <input name="cid" type="hidden" value='.$row[0].' />
+                    </form>
+                </td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
+function ncic_warnings()
+{
+   $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT ncic_warnings.*, ncic_names.name FROM ncic_warnings INNER JOIN ncic_names ON ncic_names.id=ncic_warnings.name_id";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>There are currently no arrests in the NCIC Database</span></div>";
+    }
+    else
+    {
+        echo '
+            <table id="ncic_warnings" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Name</th>
+                <th>Warning Name</th>
+                <th>Issued On</th>
+                <th>Issued By</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            echo '
+            <tr>
+                <td>'.$row[6].'</td>
+                <td>'.$row[3].'</td>
+                <td>'.$row[4].'</td>
+                <td>'.$row[5].'</td>
+                <td>
+                    <form action="".BASE_URL."/actions/dispatchActions.php" method="post">
+                    <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
+                    <input name="delete_warning" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Remove"/>
+                    <input name="wgid" type="hidden" value='.$row[0].' />
+                    </form>
+                </td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
 function create_personbolo()
 {
     $first_name = $_POST['first_name'];
@@ -1246,6 +1551,150 @@ function edit_vehiclebolo()
 
     session_start();
     $_SESSION['boloMessage'] = '<div class="alert alert-success"><span>Successfully Updated BOLO</span></div>';
+
+    header("Location:".BASE_URL."/cad.php");
+}
+function create_arrest()
+{
+    $userId = $_POST['civilian_names'];
+    $arrest_reason_1 = $_POST['arrest_reason_1'];
+    $arrest_fine_1 = $_POST['arrest_fine_1'];
+	$arrest_reason_2 = $_POST['arrest_reason_2'];
+	$arrest_fine_2 = $_POST['arrest_fine_2'];
+	$arrest_reason_3 = $_POST['arrest_reason_3'];
+	$arrest_fine_3 = $_POST['arrest_fine_3'];
+	$arrest_reason_4 = $_POST['arrest_reason_4'];
+	$arrest_fine_4 = $_POST['arrest_fine_4'];
+	$arrest_reason_5 = $_POST['arrest_reason_5'];
+	$arrest_fine_5 = $_POST['arrest_fine_5'];
+    session_start();
+    $issued_by = $_SESSION['name'];
+    $date = date('Y-m-d');
+
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $sql = "INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
+
+
+	try {
+		$stmt = mysqli_prepare($link, $sql);
+		mysqli_stmt_bind_param($stmt, "isiss", $userId, $arrest_reason_1, $arrest_fine_1, $issued_by, $date);
+		$result = mysqli_stmt_execute($stmt);
+
+		if ($result == FALSE) {
+			die(mysqli_error($link));
+		}
+	}
+	catch (Exception $e)
+	{
+		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+	}
+	mysqli_close($link);
+	if ($arrest_reason_2){
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+	
+	    $sql = "INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
+
+
+	try {
+		$stmt = mysqli_prepare($link, $sql);
+		mysqli_stmt_bind_param($stmt, "isiss", $userId, $arrest_reason_2, $arrest_fine_2, $issued_by, $date);
+		$result = mysqli_stmt_execute($stmt);
+
+		if ($result == FALSE) {
+			die(mysqli_error($link));
+		}
+	}
+	catch (Exception $e)
+	{
+		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+	}
+	mysqli_close($link);
+	}
+	if ($arrest_reason_3) {
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+	
+    $sql = "INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
+
+
+	try {
+		$stmt = mysqli_prepare($link, $sql);
+		mysqli_stmt_bind_param($stmt, "isiss", $userId, $arrest_reason_3, $arrest_fine_3, $issued_by, $date);
+		$result = mysqli_stmt_execute($stmt);
+
+		if ($result == FALSE) {
+			die(mysqli_error($link));
+		}
+	}
+	catch (Exception $e)
+	{
+		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+	}
+	mysqli_close($link);
+	}
+	if ($arrest_reason_4) {
+   $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+	
+	    $sql = "INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
+
+
+	try {
+		$stmt = mysqli_prepare($link, $sql);
+		mysqli_stmt_bind_param($stmt, "isiss", $userId, $arrest_reason_4, $arrest_fine_4, $issued_by, $date);
+		$result = mysqli_stmt_execute($stmt);
+
+		if ($result == FALSE) {
+			die(mysqli_error($link));
+		}
+	}
+	catch (Exception $e)
+	{
+		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+	}
+	mysqli_close($link);
+	}
+	if ($arrest_reason_5) {
+	$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+	    $sql = "INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
+
+
+	try {
+		$stmt = mysqli_prepare($link, $sql);
+		mysqli_stmt_bind_param($stmt, "isiss", $userId, $arrest_reason_5, $arrest_fine_5, $issued_by, $date);
+		$result = mysqli_stmt_execute($stmt);
+
+		if ($result == FALSE) {
+			die(mysqli_error($link));
+		}
+	}
+	catch (Exception $e)
+	{
+		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+	}
+	mysqli_close($link);
+	}
+    session_start();
+    $_SESSION['arrestMessage'] = '<div class="alert alert-success"><span>Successfully created arrest report</span></div>';
 
     header("Location:".BASE_URL."/cad.php");
 }

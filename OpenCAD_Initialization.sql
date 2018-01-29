@@ -537,7 +537,6 @@ INSERT INTO `incident_type` (`code_id`, `code_name`) VALUES
 
 CREATE TABLE `ncic_arrests` (
   `id` int(11) NOT NULL,
-  `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '0 = Pending, 1 = Approved/Active',
   `name_id` int(11) NOT NULL COMMENT 'Paired to ID of ncic_names table',
   `arrest_reason` varchar(255) NOT NULL,
   `arrest_fine` int(11) NOT NULL,
@@ -1654,6 +1653,12 @@ ALTER TABLE `incident_type`
   ADD UNIQUE KEY `code_name` (`code_name`) USING BTREE;
 
 --
+-- Indexes for table `ncic_arrests`
+--
+ALTER TABLE `ncic_arrests`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+  
+--
 -- Indexes for table `ncic_citations`
 --
 ALTER TABLE `ncic_citations`
@@ -1766,6 +1771,11 @@ ALTER TABLE `bolos_vehicles`
 --
 ALTER TABLE `calls`
   MODIFY `call_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `ncic_arrests`
+--
+ALTER TABLE `ncic_arrests`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `ncic_citations`
 --
