@@ -217,7 +217,7 @@ $('#ncic_name_btn').on('click', function(e) {
             }
             }
 			
-            if (data['noArrest'] == "true")
+            if (data['noArrests'] == "true")
             {
             var arrestText = "&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: green\">NO ARRESTS</span><br/>";
             }
@@ -282,7 +282,7 @@ $('#ncic_name_btn').on('click', function(e) {
             +"<br/>DL Status: "+dl_status_text
 			+"<br/>Weapon Permit: "+weapon_permit_text
 			+"<br/>Deceased: "+deceased_text
-			+"<br/><br/>Warnings:<br/>"+warningText+"<br/>Citations:<br/>"+citationText+"<br/>Arrests:<br/>"+arrestText+"<br/>Warrants:<br/>"+warrantText);
+			+"<br/><br/>Warnings:<br/>"+warningText+"<br/><br/>Citations:<br/>"+citationText+"<br/>Arrests:<br/>"+arrestText+"<br/>Warrants:<br/>"+warrantText);
 
             $("#ncic_name_return").attr("tabindex",-1).focus();
         }
