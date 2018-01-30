@@ -1577,7 +1577,7 @@ function create_arrest()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $sql = "INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
+    $sql = "INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, issued_date) VALUES (?, ?, ?, ?, ?)";
 
 
 	try {
@@ -1601,7 +1601,7 @@ function create_arrest()
 		die('Could not connect: ' .mysql_error());
 	}
 	
-	    $sql = "INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
+	    $sql = "INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, issued_date) VALUES (?, ?, ?, ?, ?)";
 
 
 	try {
@@ -1626,7 +1626,7 @@ function create_arrest()
 		die('Could not connect: ' .mysql_error());
 	}
 	
-    $sql = "INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
+    $sql = "INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, issued_date) VALUES (?, ?, ?, ?, ?)";
 
 
 	try {
@@ -1651,7 +1651,7 @@ function create_arrest()
 		die('Could not connect: ' .mysql_error());
 	}
 	
-	    $sql = "INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
+	    $sql = "INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, issued_date) VALUES (?, ?, ?, ?, ?)";
 
 
 	try {
@@ -1675,7 +1675,7 @@ function create_arrest()
 	if (!$link) {
 		die('Could not connect: ' .mysql_error());
 	}
-	    $sql = "INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
+	    $sql = "INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, issued_date) VALUES (?, ?, ?, ?, ?)";
 
 
 	try {
