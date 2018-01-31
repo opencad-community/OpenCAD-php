@@ -60,7 +60,7 @@ CREATE TABLE `bolos_vehicles` (
 CREATE TABLE `calls` (
   `call_id` int(4) NOT NULL,
   `call_type` text NOT NULL,
-  `call_primary` text NOT NULL,
+  `call_primary` text NULL,
   `call_street1` text NOT NULL,
   `call_street2` text,
   `call_street3` text,
