@@ -11,7 +11,12 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
-/** Provides support for enviorments running PHP < 5.5 */
+/**#@+
+   * Check PHP Version
+	 * Provides support for enviorments running PHP < 5.5
+	 *
+	 * @since 1.0a RC1  
+   **/
 if (version_compare(PHP_VERSION, '5.5', '<' )) {
 	require_once(ABSPATH . 'vendors/password_compat/password.php');
 }
