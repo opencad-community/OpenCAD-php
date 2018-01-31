@@ -11,14 +11,23 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
-/** Provides support for enviorments running PHP < 5.5 */
+/**#@+
+   * Provides support for enviorments running PHP < 5.5
+	 *
+	 * @since 1.0a RC1
+   **/
 if (version_compare(PHP_VERSION, '5.5', '<' )) {
 	require_once(ABSPATH . 'vendors/password_compat/password.php');
 }
 
-/**
- * @source https://gravatar.com/site/implement/images/php/
- */
+/**#@+
+  * function get_avatar()
+	* Fetch user's Gravatar image based on their profile email.
+	*
+	* @since 1.0a RC1
+	*
+  * @source https://gravatar.com/site/implement/images/php/
+  **/
 function get_avatar() {
 		if (defined( 'USE_GRAVATAR' ) && USE_GRAVATAR) {
 			$url = 'https://www.gravatar.com/avatar/';
@@ -29,4 +38,23 @@ function get_avatar() {
 			return "https://i.imgur.com/VN4YCW7.png";
 		}
 }
+
+/**#@+
+	* function pageLoadTime();
+  * Get page load time
+	*
+	* @since 1.0a RC2
+	*
+  **/
+	function pageLoadTime() {
+		$time = microtime(true);
+		$time = explode(' ', $time);
+		$time = $time[1] + $time[0];
+		$finish = $time;
+		$total_msec = round(($finish - $start), 2);
+		$total_time = $total_msec/60/60/60/60/60;
+		$final_time = round(($total_time), 2);
+		echo 'Page generated in '.$final_time.' seconds.';
+	}
+
 ?>
