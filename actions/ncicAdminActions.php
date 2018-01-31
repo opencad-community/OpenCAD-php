@@ -19,14 +19,23 @@ include(__DIR__ . '/api.php');
 if (isset($_POST['delete_citation'])){
     delete_citation();
 }
+if (isset($_POST['delete_arrest'])){
+    delete_arrest();
+}
+if (isset($_POST['delete_warning'])){
+    delete_warning();
+}
+if (isset($_POST['delete_warrant'])){
+    delete_warrant();
+}
 if (isset($_POST['delete_name'])){
     delete_name();
 }
 if (isset($_POST['delete_plate'])){
     delete_plate();
 }
-if (isset($_POST['delete_warrant'])){
-    delete_warrant();
+if (isset($_POST['delete_weapon'])){
+    delete_weapon();
 }
 if (isset($_POST['create_name'])){
     create_name();
@@ -42,6 +51,18 @@ if (isset($_POST['create_warrant'])){
 }
 if (isset($_POST['create_citation'])){
     create_citation();
+}
+if (isset($_POST['edit_name'])){
+    edit_name();
+}
+if (isset($_POST['edit_plate'])){
+    edit_plate();
+}
+if (isset($_POST['editid'])){
+    editnameid();
+}
+if (isset($_POST['edit_plateid'])){
+    editplateid();
 }
 
 function rejectRequest()
@@ -158,8 +179,7 @@ function ncicGetNames()
             <table id="ncic_names" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Name</th>
                 <th>DOB</th>
                 <th>Address</th>
                 <th>Gender</th>
@@ -167,6 +187,8 @@ function ncicGetNames()
                 <th>DL Status</th>
                 <th>Hair Color</th>
                 <th>Build</th>
+				<th>Weapon Status</th>
+				<th>Deceased</th>
                 <th>Actions</th>
                 </tr>
             </thead>
@@ -186,8 +208,9 @@ function ncicGetNames()
                 <td>'.$row[9].'</td>
                 <td>'.$row[10].'</td>
                 <td>'.$row[11].'</td>
+				<td>'.$row[12].'</td>
                 <td>
-                    <button name="edit_name" data-toggle="modal" data-target="#editNameModal" class="btn btn-xs btn-link" disabled>Edit</button>
+                    <button name="edit_name" data-toggle="modal" data-target="#IdentityEditModal" id="edit_nameBtn" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
                     <form action="".BASE_URL."/actions/ncicAdminActions.php" method="post">
                     <input name="delete_name" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
                     <input name="uid" type="hidden" value='.$row[0].' />
@@ -212,7 +235,7 @@ function ncicGetPlates()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT ncic_plates.*, ncic_names.first_name, ncic_names.last_name FROM ncic_plates INNER JOIN ncic_names ON ncic_names.id=ncic_plates.name_id";
+    $query = "SELECT ncic_plates.*, ncic_names.name FROM ncic_plates INNER JOIN ncic_names ON ncic_names.id=ncic_plates.name_id";
 
     $result=mysqli_query($link, $query);
 
@@ -228,8 +251,7 @@ function ncicGetPlates()
             <table id="ncic_plates" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Name</th>
                 <th>Plate</th>
                 <th>Reg. State</th>
                 <th>Make</th>
@@ -246,14 +268,11 @@ function ncicGetPlates()
 
         while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
         {
-            $owner = $row[12]." ".$row[13];
-
             echo '
             <tr>
                 <td>'.$row[12].'</td>
-                <td>'.$row[13].'</td>
                 <td>'.$row[2].'</td>
-                <td>'.$row[8].'</td>
+                <td>'.$row[9].'</td>
                 <td>'.$row[3].'</td>
                 <td>'.$row[4].'</td>
                 <td>'.$row[5].'/'.$row[6].'</td>
@@ -262,7 +281,7 @@ function ncicGetPlates()
                 <td>'.$row[10].'</td>
                 <td>
                     <form action="".BASE_URL."/actions/ncicAdminActions.php" method="post">
-                    <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
+                    <button name="edit_plate" data-toggle="modal" data-target="#editPlateModal" id="edit_plateBtn" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
                     <input name="delete_plate" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete" enabled/>
                     <input name="vehid" type="hidden" value='.$row[0].' />
                     </form>
@@ -277,7 +296,274 @@ function ncicGetPlates()
         ';
     }
 }
+function ncicGetWeapons()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = 'SELECT ncic_weapons.*, ncic_names.name FROM ncic_weapons INNER JOIN ncic_names ON ncic_names.id=ncic_weapons.name_id';
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>There are currently no weapons in the NCIC Database</span></div>";
+    }
+    else
+    {
+        echo '
+            <table id="ncic_names" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Name</th>
+                <th>Weapon Type</th>
+                <th>Weapon Name</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            echo '
+            <tr>
+                <td>'.$row[5].'</td>
+                <td>'.$row[2].'</td>
+                <td>'.$row[3].'</td>
+                <td>
+                    <form action="".BASE_URL."/actions/ncicAdminActions.php" method="post">
+                    <input name="delete_weapon" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
+                    <input name="weaid" type="hidden" value='.$row[0].' />
+                    </form>
+                </td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
+function delete_weapon()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $weaid = $_POST['weaid'];
+
+    $query = "DELETE FROM ncic_weapons WHERE id = ?";
+
+    try {
+        $stmt = mysqli_prepare($link, $query);
+        mysqli_stmt_bind_param($stmt, "i", $weaid);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage());
+    }
+
+    session_start();
+    $_SESSION['weaponMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian weapon</span></div>';
+    header("Location: ".BASE_URL."/oc-admin/ncicAdmin.php");
+}
+function delete_citation()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $cid = $_POST['cid'];
+
+    $query = "DELETE FROM ncic_citations WHERE id = ?";
+
+    try {
+        $stmt = mysqli_prepare($link, $query);
+        mysqli_stmt_bind_param($stmt, "i", $cid);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage());
+    }
+
+    session_start();
+    $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully removed citation</span></div>';
+    header("Location: ".BASE_URL."/oc-admin/ncicAdmin.php");
+}
+function delete_arrest()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $aid = $_POST['aid'];
+
+    $query = "DELETE FROM ncic_arrests WHERE id = ?";
+
+    try {
+        $stmt = mysqli_prepare($link, $query);
+        mysqli_stmt_bind_param($stmt, "i", $aid);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage());
+    }
+
+    session_start();
+    $_SESSION['arrestMessage'] = '<div class="alert alert-success"><span>Successfully removed arrest</span></div>';
+    header("Location: ".BASE_URL."/oc-admin/ncicAdmin.php");
+}
+
+function delete_warning()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $wgid = $_POST['wgid'];
+
+    $query = "DELETE FROM ncic_warnings WHERE id = ?";
+
+    try {
+        $stmt = mysqli_prepare($link, $query);
+        mysqli_stmt_bind_param($stmt, "i", $wgid);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage());
+    }
+
+    session_start();
+    $_SESSION['warningMessage'] = '<div class="alert alert-success"><span>Successfully removed warning</span></div>';
+    header("Location: ".BASE_URL."/oc-admin/ncicAdmin.php");
+}
+
+function delete_warrant()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+    $wid = $_POST['wid'];
+
+    $query = "DELETE FROM ncic_warrants WHERE id = ?";
+
+    try {
+        $stmt = mysqli_prepare($link, $query);
+        mysqli_stmt_bind_param($stmt, "i", $wid);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage());
+    }
+
+    session_start();
+    $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully removed warrant</span></div>';
+    header("Location: ".BASE_URL."/oc-admin/ncicAdmin.php");
+}
+function ncic_arrests()
+{
+   $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT ncic_arrests.*, ncic_names.name FROM ncic_arrests INNER JOIN ncic_names ON ncic_names.id=ncic_arrests.name_id";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>There are currently no arrests in the NCIC Database</span></div>";
+    }
+    else
+    {
+        echo '
+            <table id="ncic_arrests" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Name</th>
+                <th>Arrest Reason</th>
+                <th>Arrest Amount</th>
+                <th>Issued On</th>
+                <th>Issued By</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            echo '
+            <tr>
+                <td>'.$row[7].'</td>
+                <td>'.$row[3].'</td>
+                <td>'.$row[4].'</td>
+                <td>'.$row[5].'</td>
+                <td>'.$row[6].'</td>
+                <td>
+                    <form action="".BASE_URL."/actions/ncicAdminActions.php" method="post">
+                    <input name="delete_arrest" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Remove"/>
+                    <input name="aid" type="hidden" value='.$row[0].' />
+                    </form>
+                </td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
 function ncic_warrants()
 {
    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -286,7 +572,7 @@ function ncic_warrants()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT ncic_warrants.*, ncic_names.first_name, ncic_names.last_name FROM ncic_warrants INNER JOIN ncic_names ON ncic_names.id=ncic_warrants.name_id";
+    $query = "SELECT ncic_warrants.*, ncic_names.name FROM ncic_warrants INNER JOIN ncic_names ON ncic_names.id=ncic_warrants.name_id";
 
     $result=mysqli_query($link, $query);
 
@@ -303,8 +589,7 @@ function ncic_warrants()
             <thead>
                 <tr>
                 <th>Status</th>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Name</th>
                 <th>Warrant Name</th>
                 <th>Issued On</th>
                 <th>Expires On</th>
@@ -321,14 +606,12 @@ function ncic_warrants()
             <tr>
                 <td>'.$row[6].'</td>
                 <td>'.$row[7].'</td>
-                <td>'.$row[8].'</td>
                 <td>'.$row[2].'</td>
                 <td>'.$row[5].'</td>
                 <td>'.$row[1].'</td>
                 <td>'.$row[3].'</td>
                 <td>
                     <form action="".BASE_URL."/actions/ncicAdminActions.php" method="post">
-                    <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
                     ';
                         if ($row[6] == "Active")
                         {
@@ -339,7 +622,7 @@ function ncic_warrants()
                             //Do Nothing
                         }
                     echo '
-                    <input name="delete_warrant" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Expunge" />
+                    <input name="delete_warrant" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Expunge"/>
                     <input name="wid" type="hidden" value='.$row[0].' />
                     </form>
                 </td>
@@ -353,16 +636,15 @@ function ncic_warrants()
         ';
     }
 }
-
 function ncic_citations()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+   $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
     if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT ncic_names.first_name, ncic_names.last_name, ncic_citations.id, ncic_citations.citation_name, ncic_citations.issued_date, ncic_citations.issued_by FROM ncic_citations INNER JOIN ncic_names ON ncic_citations.name_id=ncic_names.id WHERE ncic_citations.status = '1'";
+    $query = "SELECT ncic_citations.*, ncic_names.name FROM ncic_citations INNER JOIN ncic_names ON ncic_names.id=ncic_citations.name_id";
 
     $result=mysqli_query($link, $query);
 
@@ -378,9 +660,9 @@ function ncic_citations()
             <table id="ncic_citations" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Name</th>
                 <th>Citation Name</th>
+                <th>Citation Amount</th>
                 <th>Issued On</th>
                 <th>Issued By</th>
                 <th>Actions</th>
@@ -393,16 +675,73 @@ function ncic_citations()
         {
             echo '
             <tr>
-                <td>'.$row[0].'</td>
-                <td>'.$row[1].'</td>
+                <td>'.$row[7].'</td>
+                <td>'.$row[3].'</td>
+                <td>'.$row[4].'</td>
+                <td>'.$row[5].'</td>
+                <td>'.$row[6].'</td>
+                <td>
+                    <form action="".BASE_URL."/actions/ncicAdminActions.php" method="post">
+                    <input name="delete_citation" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Remove"/>
+                    <input name="cid" type="hidden" value='.$row[0].' />
+                    </form>
+                </td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
+function ncic_warnings()
+{
+   $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT ncic_warnings.*, ncic_names.name FROM ncic_warnings INNER JOIN ncic_names ON ncic_names.id=ncic_warnings.name_id";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>There are currently no warnings in the NCIC Database</span></div>";
+    }
+    else
+    {
+        echo '
+            <table id="ncic_warnings" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Name</th>
+                <th>Warning Name</th>
+                <th>Issued On</th>
+                <th>Issued By</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            echo '
+            <tr>
+                <td>'.$row[6].'</td>
                 <td>'.$row[3].'</td>
                 <td>'.$row[4].'</td>
                 <td>'.$row[5].'</td>
                 <td>
                     <form action="".BASE_URL."/actions/ncicAdminActions.php" method="post">
-                    <input name="edit_citation" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
-                    <input name="delete_citation" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Expunge"/>
-                    <input name="cid" type="hidden" value='.$row[2].' />
+                    <input name="delete_warning" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Remove"/>
+                    <input name="wgid" type="hidden" value='.$row[0].' />
                     </form>
                 </td>
             </tr>
@@ -497,22 +836,138 @@ function delete_plate()
     $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian plate</span></div>';
     header("Location: ".BASE_URL."/oc-admin/ncicAdmin.php#plate_panel");
 }
-
-function delete_citation()
+function edit_name()
 {
+    session_start();
+
+    $fullName = $_POST['civNameReq'];
+    $firstName = explode(" ", $fullName) [0];
+    $lastName = explode(" ", $fullName) [1];
+    
+    //Set first name to all lowercase
+    $firstName = strtolower($firstName);
+    //Remove all special characters
+    $firstName = preg_replace('/[^A-Za-z0-9\-]/', '', $firstName);
+    //Set first letter to uppercase
+    $firstName = ucfirst($firstName);
+
+    //Set last name to all lowercase
+    $lastName = strtolower($lastName);
+    //Remove all special characters
+    $lastName = preg_replace('/[^A-Za-z0-9\-]/', '', $lastName);
+    //Set first letter to uppercase
+    $lastName = ucfirst($lastName);
+	
+	$name = $firstName . ' ' . $lastName;
+
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    if (!$link)
+    {
+        die('Could not connect: ' . mysql_error());
+    }
 
-    $cid = $_POST['cid'];
+    $query = 'SELECT first_name FROM ncic_names WHERE first_name = "' . $name . '"';
 
-    $query = "DELETE FROM ncic_citations WHERE id = ?";
+    $result = mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    if (!$num_rows == 0)
+    {
+        $_SESSION['identityMessage'] = '<div class="alert alert-danger"><span>Name already exists</span></div>';
+
+        sleep(1);
+        header("Location:".BASE_URL."/oc-admin/ncicAdmin.php");
+    }
+
+    // If name doesn't exist, add it to ncic_requests table
+    //Who submitted it
+    $submittedByName = $_SESSION['name'];
+    $submitttedById = $_SESSION['id'];
+    //Submission Data
+    $name;
+    $dob = $_POST['civDobReq'];
+    $address = $_POST['civAddressReq'];
+    $sex = $_POST['civSexReq'];
+    $race = $_POST['civRaceReq'];
+    $dlstatus = $_POST['civDL'];
+    $hair = $_POST['civHairReq'];
+    $build = $_POST['civBuildReq'];
+	$weapon = $_POST['civWepStat'];
+	$deceased = $_POST['civDec'];
+    $editid = $_POST['Edit_id'];
+
+    $query = "UPDATE ncic_names SET name = ?, dob = ?, address = ?, gender = ?, race = ?, dl_status = ?, hair_color = ?, build = ?, weapon_permit = ?, deceased = ? WHERE id = ?";
+    try
+    {
+        $stmt = mysqli_prepare($link, $query);
+        mysqli_stmt_bind_param($stmt, "sssssssssss", $name, $dob, $address, $sex, $race, $dlstatus, $hair, $build, $weapon, $deceased, $editid);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == false)
+        {
+            die(mysqli_error($link));
+        }
+    }
+    catch(Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+
+    }
+
+    $_SESSION['identityMessage'] = '<div class="alert alert-success"><span>Successfully Update an identity</span></div>';
+
+    sleep(1);
+    header("Location:".BASE_URL."/oc-admin/ncicAdmin.php#name_panel");
+
+}
+function edit_plate()
+{
+    session_start();
+    
+    $plate = $_POST['veh_plate'];
+    
+    //Remove all spaces from plate
+    $plate = str_replace(' ', '', $plate);
+    //Set plate to all uppercase
+    $plate = strtoupper($plate);
+    //Remove all hyphens
+    $plate = str_replace('-', '', $plate);
+    //Remove all special characters
+    $plate = preg_replace('/[^A-Za-z0-9\-]/', '', $plate);
+    
+    $vehicle = $_POST['veh_make_model'];
+    $veh_make = explode(" ", $vehicle) [0];
+    $veh_model = explode(" ", $vehicle) [1];
+    
+    $uid = $_SESSION['id'];
+
+    $submittedById = $_SESSION['id'];
+    $userId = $_POST['civilian_names'];
+    $veh_plate = $plate;
+    $veh_make;
+    $veh_model;
+    $veh_pcolor = $_POST['veh_pcolor'];
+    $veh_scolor = $_POST['veh_scolor'];
+    $veh_insurance = $_POST['veh_insurance'];
+    $flags = $_POST['flags'];
+    $veh_reg_state = $_POST['veh_reg_state'];
+    $notes = $_POST['notes'];
+    $plate_id = $_POST['Edit_plateId'];
+
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    
+    $sql = "UPDATE ncic_plates SET name_id = ?, veh_plate = ?, veh_make = ?, veh_model = ?, veh_pcolor = ?, veh_scolor = ?, veh_insurance = ?, flags = ?, veh_reg_state = ?, notes = ? WHERE id = ?";
 
     try {
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "i", $cid);
+        $stmt = mysqli_prepare($link, $sql);
+        mysqli_stmt_bind_param($stmt, "issssssssss", $userId, $veh_plate, $veh_make, $veh_model, $veh_pcolor, $veh_scolor, $veh_insurance, $flags, $veh_reg_state, $notes, $plate_id);
         $result = mysqli_stmt_execute($stmt);
 
         if ($result == FALSE) {
@@ -521,43 +976,45 @@ function delete_citation()
     }
     catch (Exception $e)
     {
-        die("Failed to run query: " . $e->getMessage());
+        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
     }
+    mysqli_close($link);
 
     session_start();
-    $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully removed citation</span></div>';
-    header("Location: ".BASE_URL."/oc-admin/ncicAdmin.php#citation_panel");
-}
+    $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully Updated plate to the database</span></div>';
 
-function delete_warrant()
+    header("Location:".BASE_URL."/oc-admin/ncicAdmin.php#plate_panel");
+}
+function editnameid()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-
-    $wid = $_POST['wid'];
-
-    $query = "DELETE FROM ncic_warrants WHERE id = ?";
-
-    try {
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "i", $wid);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == FALSE) {
-            die(mysqli_error($link));
-        }
-    }
-    catch (Exception $e)
-    {
-        die("Failed to run query: " . $e->getMessage());
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
     }
 
-    session_start();
-    $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully removed warrant</span></div>';
-    header("Location: ".BASE_URL."/oc-admin/ncicAdmin.php#warrant_panel");
+    $query = "SELECT ncic_names.* FROM ncic_names WHERE id=".$_POST['editid'];
+    $resultset = mysqli_query($link, $query) or die("database error:". mysqli_error($link));
+    $data = array();
+    while( $rows = mysqli_fetch_assoc($resultset) ) {
+    $data = $rows;
+    }
+    echo json_encode($data);
 }
+function editplateid()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT ncic_plates.* FROM ncic_plates WHERE id=".$_POST['edit_plateid'];
+    $resultset = mysqli_query($link, $query) or die("database error:". mysqli_error($link));
+    $plates = array();
+    while( $rows = mysqli_fetch_assoc($resultset) ) {
+    $plates = $rows;
+    }
+    echo json_encode($plates);
+}
 ?>

@@ -1099,7 +1099,6 @@ function ncic_arrests()
                 <td>'.$row[5].'</td>
                 <td>
                     <form action="".BASE_URL."/actions/dispatchActions.php" method="post">
-                    <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
                     <input name="delete_arrest" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Remove"/>
                     <input name="aid" type="hidden" value='.$row[0].' />
                     </form>
@@ -1162,7 +1161,6 @@ function ncic_warrants()
                 <td>'.$row[3].'</td>
                 <td>
                     <form action="".BASE_URL."/actions/dispatchActions.php" method="post">
-                    <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
                     ';
                         if ($row[6] == "Active")
                         {
@@ -1203,7 +1201,7 @@ function ncic_citations()
 
     if($num_rows == 0)
     {
-        echo "<div class=\"alert alert-info\"><span>There are currently no arrests in the NCIC Database</span></div>";
+        echo "<div class=\"alert alert-info\"><span>There are currently no citations in the NCIC Database</span></div>";
     }
     else
     {
@@ -1233,7 +1231,6 @@ function ncic_citations()
                 <td>'.$row[6].'</td>
                 <td>
                     <form action="".BASE_URL."/actions/dispatchActions.php" method="post">
-                    <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
                     <input name="delete_citation" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Remove"/>
                     <input name="cid" type="hidden" value='.$row[0].' />
                     </form>
@@ -1264,7 +1261,7 @@ function ncic_warnings()
 
     if($num_rows == 0)
     {
-        echo "<div class=\"alert alert-info\"><span>There are currently no arrests in the NCIC Database</span></div>";
+        echo "<div class=\"alert alert-info\"><span>There are currently no warnings in the NCIC Database</span></div>";
     }
     else
     {
@@ -1292,7 +1289,6 @@ function ncic_warnings()
                 <td>'.$row[5].'</td>
                 <td>
                     <form action="".BASE_URL."/actions/dispatchActions.php" method="post">
-                    <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
                     <input name="delete_warning" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Remove"/>
                     <input name="wgid" type="hidden" value='.$row[0].' />
                     </form>

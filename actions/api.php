@@ -1589,7 +1589,7 @@ function rms_arrests()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT ncic_names.name, ncic_arrests.id, ncic_arrests.arrest_reason, ncic_arrests.arrest_fine, ncic_arrests.issued_date, ncic_arrests.issued_by FROM ncic_arrests INNER JOIN ncic_names ON ncic_arrests.name_id=ncic_names.id WHERE ncic_arrests.status = '1'";
+    $query = "SELECT ncic_names.name, ncic_arrests.id, ncic_arrests.arrest_reason, ncic_arrests.arrest_fine, ncic_arrests.issued_date, ncic_arrests.issued_by FROM ncic_arrests INNER JOIN ncic_names ON ncic_arrests.name_id=ncic_names.id";
 
     $result=mysqli_query($link, $query);
 
