@@ -17,7 +17,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     // TODO: Verify user has permission to be on this page
 
-    if (empty($_SESSION['logged_in']))
+  /**  if (empty($_SESSION['logged_in']))
     {
         header('Location: ../index.php');
         die("Not logged in");
@@ -39,7 +39,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     {
       die("You do not have permission to be here. This has been recorded");
     }
-
+**/
 require_once(__DIR__ . '/../oc-config.php');
 
     include("../actions/adminActions.php");
@@ -152,6 +152,19 @@ require_once(__DIR__ . '/../oc-config.php');
                     <div style="text-align:center;">
                       <img src="<?php echo BASE_URL; ?>/images/logo.png" width="239px" height="104px" alt="The Official OpenCAD project logo, Three tails colors red, blue, and red, swoop down from top above the O in Open and finish just below the C in CAD. Stacked words, Open in a bold red font face, and CAD in a bold blue font face."/> <img src="<?php echo BASE_URL; ?>/images/gplv3-127x51.png" height="128px" width="251px"  />
                     </div>
+                    <div class="row tile_count">
+                        <h2>About Your Environment</h2>
+                        <div class="input-group">
+                           PHP Version:<input type="text" class="form-control" readonly="readonly" placeholder="<?php echo phpversion(); ?>" />
+                           <p><em>Note:</em> The active version of PHP.</p>
+                        </div>
+                      <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
+                        <div class="input-group">
+                           PHP Version:<input type="text" class="form-control" readonly="readonly" placeholder="<?php echo getMySQLVersion(); ?>" />
+                           <p><em>Note:</em> The active version of MySQL.</p>
+                        </div>
+                    </div>
+                    <!-- ./ row tile_count -->
                       <div class="row tile_count">
                           <h2>About Your Application</h2>
                           <div class="input-group">
@@ -181,7 +194,7 @@ require_once(__DIR__ . '/../oc-config.php');
                       <h3>Project Staff</h3>
                       <ul>
                         <li><em><a href="https://keybase.io/murfasa">Murfasa Curry</a></em> — <i>Documentation Manager, Developer</i></li>
-                        <li><em>Justin Farmer</em> — <i>Test Engineer</i></li>
+                        <li><em><a href="https://keybase.io/gam3vidz">Justin Farmer</a></em> — <i>Test Engineer</i></li>
                         <li><em><a href="https://keybase.io/Cambridgeport90">Katherine Moss</a></em> — <i>Accessibility Manager, Developer</i></li>
                         <li><em><a href="https://keybase.io/termanator1128">Brennen Stapleton</a></em> — <i>Co-Revitalizer, Developer</i></li>
                       </ul>
