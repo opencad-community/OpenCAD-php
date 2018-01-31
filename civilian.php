@@ -12,11 +12,11 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
     session_start();
-
+	
     require("./oc-config.php");
 
     include("./actions/civActions.php");
-
+    
 	include("./actions/api.php");
 
 
@@ -48,14 +48,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         $identityMessage = $_SESSION['identityMessage'];
         unset($_SESSION['identityMessage']);
     }
-
+	
     $plateMessage = "";
     if(isset($_SESSION['plateMessage']))
     {
         $plateMessage = $_SESSION['plateMessage'];
         unset($_SESSION['plateMessage']);
     }
-
+	
     $nameMessage = "";
     if(isset($_SESSION['nameMessage']))
     {
@@ -116,7 +116,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                               </ul>
                            </li>
 						    <?php } else { ?>
-							<?php }
+							<?php } 
 							?>
                         </ul>
                      </div>
@@ -325,7 +325,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             <!-- footer content -->
             <footer>
                <div class="pull-right">
-                  <?php echo COMMUNITY_NAME;?> CAD System | <?php pageLoadTime(); ?>
+                  <?php echo COMMUNITY_NAME;?> CAD System
                </div>
                <div class="clearfix"></div>
             </footer>
@@ -486,7 +486,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       </div>
       <!-- ./ modal-dialog modal-lg -->
     </div>
-
+	  
     <div class="modal fade" id="IdentityModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -794,7 +794,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     </div>
   </div>
     <!-- ./ modal fade bs-example-modal-lg -->
-
+	  
     <div class="modal fade" id="createPlateModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -1198,7 +1198,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <!-- ./ modal-dialog modal-lg -->
     </div>
     <!-- ./ modal fade bs-example-modal-lg -->
-
+	  
       <!-- 911 Call Help Modal -->
       <div class="modal fade" id="911CallHelpModal" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog modal-lg">
@@ -1311,7 +1311,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			$('.civDec_picker').selectpicker('val', data.deceased);
             $('#IdentityEditModal .Editdataid').val(data.id);
           });
-
+          
       })
       /* Edit Plate */
       $(document).on('click', '#edit_plateBtn', function(e){
