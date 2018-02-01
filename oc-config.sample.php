@@ -4,7 +4,9 @@
   *Application Settings
 	*
 	* This section includes settings for Database connectivity, base url, email config, and
+	* These settings are MANDATORY. If they are not configured properly OpenCAD will not function correctly.
 	*
+	* When editing configuration constants be sure to only edit the contents of the second set of quotes in each.
 	* @since 1.0a RC2
 	**/
 
