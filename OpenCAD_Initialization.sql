@@ -60,7 +60,7 @@ CREATE TABLE `bolos_vehicles` (
 CREATE TABLE `calls` (
   `call_id` int(4) NOT NULL,
   `call_type` text NOT NULL,
-  `call_primary` text NULL,
+  `call_primary` text NOT NULL,
   `call_street1` text NOT NULL,
   `call_street2` text,
   `call_street3` text,
@@ -498,36 +498,6 @@ CREATE TABLE `genders` (
 INSERT INTO `genders` (`id`, `genders`) VALUES
 (0, 'Male'),
 (1, 'Female');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `incident_type`
---
-
-CREATE TABLE `incident_type` (
-  `code_id` varchar(255) NOT NULL DEFAULT '',
-  `code_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `incident_type`
---
-
-INSERT INTO `incident_type` (`code_id`, `code_name`) VALUES
-('68', 'Armed Robbery'),
-('25', 'Domestic Dispute'),
-('10', 'Fight in Progress'),
-('49', 'Homicide'),
-('55', 'Intoxicated Driver'),
-('56', 'Intoxicated Person'),
-('62', 'Kidnapping'),
-('66', 'Reckless Driver'),
-('13', 'Shots Fired'),
-('16', 'Stolen Vehicle'),
-('17', 'Suspicious Person'),
-('11', 'Traffic Stop'),
-('50', 'Vehicle Accident');
 
 -- --------------------------------------------------------
 
@@ -1644,13 +1614,6 @@ ALTER TABLE `dispatchers`
 --
 ALTER TABLE `genders`
   ADD PRIMARY KEY (`id`) USING BTREE;
-
---
--- Indexes for table `incident_type`
---
-ALTER TABLE `incident_type`
-  ADD PRIMARY KEY (`code_id`) USING BTREE,
-  ADD UNIQUE KEY `code_name` (`code_name`) USING BTREE;
 
 --
 -- Indexes for table `ncic_arrests`

@@ -848,24 +848,6 @@ function getIndividualStatus($callsign)
     echo $statusText;
 }
 
-function getIncidentType()
-{
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
-    }
-
-    $sql = "SELECT code_name FROM incident_type";
-
-    $result=mysqli_query($link, $sql);
-
-    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
-    {
-        echo '<option value="'.$row[0].'">'.$row[0].'</option>';
-    }
-}
-
 function getStreet()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);

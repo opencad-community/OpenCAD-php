@@ -25,10 +25,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     {
       $name = $_SESSION['name'];
     }
-
+	
     include("./actions/api.php");
     include("./actions/responderActions.php");
-
+    
     $citationMessage = "";
     if(isset($_SESSION['citationMessage']))
     {
@@ -48,7 +48,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         unset($_SESSION['warningMessage']);
     }
 		callCheck();
-
+	
 ?>
 
 <!DOCTYPE html>
@@ -230,8 +230,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                        <input type="text" name="status" id="status" class="form-control" readonly />
                                     </div>
                                  </div>
-
-
+								 
+								 
                                  <div class="form-group">
                                     <label class="col-md-2 col-sm-2 col-xs-2 control-label">Change Status</label>
                                     <div class="col-md-10 col-sm-10 col-xs-10">
@@ -484,17 +484,17 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
             </div>
  <?php } else { ?>
- <?php }
+ <?php } 
       ?>
       </div>
       <!-- "" -->
       </div>
-	  </div>
+	  </div> 
       <!-- /page content -->
       <!-- footer content -->
       <footer>
          <div class="pull-right">
-            <?php echo COMMUNITY_NAME?> CAD System | <?php pageLoadTime(); ?>
+            <?php echo COMMUNITY_NAME?> CAD System
          </div>
          <div class="clearfix"></div>
       </footer>
@@ -1124,7 +1124,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     </script>
       <script>
          $(document).ready(function() {
-
+			
              $(function() {
                  $('#menu_toggle').click();
              });
@@ -1318,7 +1318,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                    },
                    success: function(response)
                    {
-
+                     					 
                      if (response.match("^Duplicate"))
                      {
                          var call2 = $('#callsign').find('input[name="callsign"]').val();
@@ -1379,7 +1379,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
            });
       </script>
       <script>
-
+		
          function getStatus() {
          $.ajax({
              type: "GET",
@@ -1390,7 +1390,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
              success: function(response)
              {
                  console.log(response);
-
+				 
                  if (response.match("^10-7 | Unavailable"))
                  {
                      var currentStatus = $('#status').val();
@@ -1400,11 +1400,11 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      }
                      else if(currentStatus == '10-7 | Unavailable')
 					 {
-
+						 
 					 }
 					 else
 					 {
-
+						 
 						 document.getElementById('newCallAudio').play();
 						 new PNotify({
 							 title: 'New Call!',
@@ -1413,10 +1413,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							 styling: 'bootstrap3'
 						 });
 						 getMyCallDetails();
-
+						
                      }
-
-
+					 
+					
                  }
                  else if (response.match("^<br>"))
                  {
@@ -1427,8 +1427,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                  {
 
                  }
-
-
+				
+				
 				 $('#status').val(response);
 				 setTimeout(getStatus, 5000);
              },
@@ -1439,11 +1439,11 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
          });
          }
-
+		 
 		 $('.setcall_cls').click(function (){
 			getStatus();
 		 });
-
+		 
          function getMyCallDetails()
          {
            console.log("Got here");
