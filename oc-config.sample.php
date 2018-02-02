@@ -1,8 +1,19 @@
 <?php
 
 /**#@+
+  *Application Settings
+	*
+	* This section includes settings for Database connectivity, base url, email config, and
+	* These settings are MANDATORY. If they are not configured properly OpenCAD will not function correctly.
+	*
+	* When editing configuration constants be sure to only edit the contents of the second set of quotes in each.
+	* @since 1.0a RC2
+	**/
+
+/**#@+
  *Community Name
  *
+ * Set your communities name by changing 'My Community'
  * @since 1.0a RC1
  */
 define('COMMUNITY_NAME', 'My Community');
@@ -16,12 +27,6 @@ define('DB_NAME', 'openCAD');
 define('DB_USER', 'root');
 define('DB_PASSWORD', '');
 define('DB_HOST', '127.0.0.1');
-
-/* Enable or disable NCIC in MDT */
-define('POLICE_NCIC', false);
-
-/* Enable or disable civilians to be able to create or delete warrants from their character */
-define('CIV_WARRANT', false);
 
 /**#@+
  * Base URL Settings
@@ -56,16 +61,6 @@ define('CAD_TO_EMAIL', 'admins@community.com');
 define('CAD_TO_NAME', COMMUNITY_NAME.' Administrators');
 
 /**#@+
-  * Toggle Gravatar
-  *
-  * OpenCAD will dynamically retrieve your avatar from {@link Gravatar http://en.gravatar.com/} if you have an account. Otherwise
- * it will use the default generic avatar image included with OpenCAD .
-  *
-  * @since 1.0a RC1
-  */
-define('USE_GRAVATAR', true);
-
-/**#@+
  * Authentication Unique Keys and Salts.
  *
  * Change these to different unique phrases!
@@ -86,8 +81,32 @@ define('SECURE_AUTH_SALT', 'put your unique phrase here');
 define('LOGGED_IN_SALT',   'put your unique phrase here');
 define('NONCE_SALT',       'put your unique phrase here');
 
-/* That's all, stop editing! Happy dispatching. */
+/**#@+
+  * Extra Settings
+	*
+	* This section included boolean settings for Gravatar Fetch, NCIC in MDT, and more.
+	* These setting will likely be moved to an *_options table in a future version.
+	*
+	* @since  1.0a RC2
+	**/
 
+/**#@+
+  * Gravatar Fetch
+  *
+  * OpenCAD will dynamically retrieve your avatar from {@link Gravatar http://en.gravatar.com/} if you have an account. Otherwise
+ * it will use the default generic avatar image included with OpenCAD .
+  *
+  * @since 1.0a RC1
+  */
+define('USE_GRAVATAR', true);
+
+/* Enable or disable NCIC in MDT */
+define('POLICE_NCIC', false);
+
+/* Enable or disable civilians to be able to create or delete warrants from their character */
+define('CIV_WARRANT', false);
+
+/* That's all, stop editing! Happy dispatching. */
 /** Absolute path to the OpenCAD directory. */
 if ( !defined('ABSPATH') )
 	define('ABSPATH', dirname(__FILE__) . '/');
