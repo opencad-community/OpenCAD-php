@@ -13,7 +13,7 @@
 /**#@+
  *Community Name
  *
- * Set your communities name by changing 'My Community0'
+ * Set your communities name by changing 'My Community'
  * @since 1.0a RC1
  */
 define('COMMUNITY_NAME', 'My Community');
