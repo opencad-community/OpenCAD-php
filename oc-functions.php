@@ -16,9 +16,16 @@ if (version_compare(PHP_VERSION, '5.5', '<' )) {
 	require_once(ABSPATH . 'vendors/password_compat/password.php');
 }
 
-/**
+/**#@+
+ * function get_avatar()
+ * Function fetches user's gravatar based on their profile email, if one
+ * doesn't exist then default to a silhouette.
+ *
  * @source https://gravatar.com/site/implement/images/php/
- */
+ *
+ * @since 1.0a RC2
+ *
+ **/
 function get_avatar() {
 		if (defined( 'USE_GRAVATAR' ) && USE_GRAVATAR) {
 			$url = 'https://www.gravatar.com/avatar/';
@@ -30,7 +37,13 @@ function get_avatar() {
 		}
 }
 
-
+/**#@+
+  * function getMySQLVersion()
+	* Get current installed version of MySQL.
+	*
+	* @since 1.0a RC2
+	*
+	**/
 function getMySQLVersion()
 {
 	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD);
