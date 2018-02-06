@@ -71,10 +71,9 @@ function getMySQLVersion()
 function pageLoadTime() {
 		$time = microtime(true);
 		$time = explode(' ', $time);
-		$time = $time[1] + $time[0];
+		$time = $time[0];
 		$finish = $time;
-		$total_msec = round(($finish - $start), 2);
-		$total_time = $total_msec/60/60/60/60/60;
+		$total_time = $finish/60/60/60/60/60;
 		$final_time = round(($total_time), 2);
 		echo 'Page generated in '.$final_time.' seconds.';
 }
