@@ -14,13 +14,16 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     This file handles all actions for admin.php script
 */
 
-include(__DIR__ . '/../oc-config.php');
+require_once(__DIR__ . "/../oc-config.php");
 
 if (isset($_GET['a'])){
     getActiveCalls();
 }
 if (isset($_GET['getCalls'])){
     getActiveCalls();
+}
+if (isset($_GET['getMyCall'])){
+    getMyCall();
 }
 if (isset($_GET['getCallDetails'])){
     getCallDetails();
@@ -58,9 +61,9 @@ if (isset($_GET['getDispatchers']))
 {
     getDispatchers();
 }
-if (isset($_POST['new_911']))
+if (isset($_GET['getDispatchersMDT']))
 {
-    create911Call();
+    getDispatchersMDT();
 }
 if (isset($_POST['quickStatus']))
 {
@@ -86,11 +89,11 @@ function quickStatus()
                 die('Could not connect: ' .mysql_error());
             }
 
-            //Update the call_notes to say they're en-route
+            //Update the call_narrative to say they're en-route
             $narrativeAdd = date("Y-m-d H:i:s").': '.$callsign.': En-Route<br/>';
 
 
-            $sql = "UPDATE calls SET call_notes = concat(call_notes, ?) WHERE call_id = ?";
+            $sql = "UPDATE calls SET call_narrative = concat(call_narrative, ?) WHERE call_id = ?";
 
             try {
                 $stmt = mysqli_prepare($link, $sql);
@@ -117,35 +120,21 @@ function quickStatus()
 
 function getMyCall()
 {
+    session_start();
     //First, check to see if they're on a call
-    $identifier = $_SESSION['identifier'];
+    $uid = $_SESSION['id'];
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
 
-	$sql = "SELECT * from active_users WHERE identifier = '$identifier' AND status = '0' AND status_detail = '3'";
+    $sql = 'SELECT active_users.* from `active_users` WHERE active_users.id = "' . $uid . '" AND active_users.status = "0" AND active_users.status_detail = "3"';
 
-	$result = mysqli_query($link, $sql);
+    $result = mysqli_query($link, $sql);
 
     $num_rows = $result->num_rows;
-
-    echo '
-        <div class="col-md-6 col-sm-6 col-xs-6">
-            <div class="x_panel">
-                <div class="x_title">
-                <h2>My Call</h2>
-                <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-                </ul>
-                <div class="clearfix"></div>
-                </div>
-                <!-- ./ x_title -->
-                <div class="x_content">
-    ';
-
 
     if($num_rows == 0)
     {
@@ -154,9 +143,9 @@ function getMyCall()
     else
     {
         //Figure out what call the user is on
-        $sql = "SELECT call_id from calls_users WHERE identifier = '$identifier'";
+        $sql = 'SELECT call_id from calls_users WHERE id = "' . $uid . '"';
 
-	    $result = mysqli_query($link, $sql);
+        $result = mysqli_query($link, $sql);
 
         while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
         {
@@ -164,183 +153,99 @@ function getMyCall()
         }
 
         //Get call details
-        $sql = "SELECT * from calls WHERE call_id = '$call_id'";
+        $sql = 'SELECT * from calls WHERE call_id = "' . $call_id . '"';
 
-	    $result = mysqli_query($link, $sql);
+        $result = mysqli_query($link, $sql);
+		
+		$num_rows = $result->num_rows;
+		
+		if($num_rows == 0)
+		{
+			echo '<div class="alert alert-info"><span>Not currently on a call</span></div>';
+		}
+		else
+    {
+        echo '<table id="activeCalls" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Type</th>
+                <th>Call Type</th>
+                <th>Units</th>
+                <th>Location</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
 
+
+        $counter = 0;
         while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
         {
-            $call_type = $row[1];
-            $call_street1 = $row[2];
-            $call_street2 = $row[3];
-            $call_street3 = $row[4];
-            $call_notes = $row[5];
-        }
+            echo '
+            <tr id="'.$counter.'">
+                <td>'.$row[0].'</td>';
 
+                //Issue #28. Check if $row[1] == bolo. If so, change text color to orange
+                if ($row[1] == "BOLO")
+                {
+                    echo '<td style="color:orange;">'.$row[1].'</td>';
+                    echo '<td><!--Leave blank--></td>';
+                }
+                else
+                {
+                    echo '<td>'.$row[1].'</td>';
+                    echo '
+                        <td>';
+                            getUnitsOnCall($row[0]);
+                        echo '</td>';
+                }
+
+
+                echo '<td>'.$row[3].'/'.$row[4].'/'.$row[5].'</td>';
+
+                if (isset($_GET['type']) && $_GET['type'] == "responder")
+                {
+                    echo'
+                    <td>
+                        <button id="'.$row[0].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
+                    </td>';
+                }
+                else
+                {
+                echo'
+                <td>
+                    <button id="'.$row[0].'" class="btn-link" style="color: red;" value="'.$row[0].'" onclick="clearCall('.$row[0].')">Clear</button>
+                    <button id="'.$row[0].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
+                    <input name="uid" name="uid" type="hidden" value="'.$row[0].'"/>
+                </td>';
+                }
+
+            echo'
+            </tr>
+            ';
+            $counter++;
+        }
 
         echo '
-            <p style="font-weight:bold">&nbsp&nbsp&nbspQuick Status Updates</p>
-            <a class="btn btn-app"  id="enroute_btn">
-                <i class="fa fa-car"></i> En Route
-            </a>
-            <a class="btn btn-app">
-                <i class="fa fa-home"></i> On Scene
-            </a>
-            <a class="btn btn-app">
-                <i class="fa fa-check"></i> Code 4
-            </a>
-            <a class="btn btn-app">
-                <i class="fa fa-shield"></i> Subj. in Cust.
-            </a>
-            <a class="btn btn-app">
-                <i class="fa fa-university"></i> En Route Jail
-            </a>
-            <a class="btn btn-app">
-                <i class="fa fa-ambulance"></i> En Route Hospital
-            </a>
-            <a class="btn btn-app">
-                <i class="fa fa-crosshairs" style="color:red"></i> 10-99
-            </a>
-            <br/><br/>
-
-            <div class="form-group">
-              <label class="col-lg-2 control-label">Incident ID</label>
-              <div class="col-lg-10">
-                <input type="text" id="call_id_det" name="call_id_det" class="form-control" value="'.$call_id.'" disabled>
-              </div>
-              <!-- ./ col-sm-9 -->
-            </div>
-            <br/>
-            <!-- ./ form-group -->
-            <div class="form-group">
-              <label class="col-lg-2 control-label">Incident Type</label>
-              <div class="col-lg-10">
-                <input type="text" id="call_type_det" name="call_type_det" class="form-control" value="'.$call_type.'" disabled>
-              </div>
-              <!-- ./ col-sm-9 -->
-            </div>
-            <br/>
-            <!-- ./ form-group -->
-            <div class="form-group">
-              <label class="col-lg-2 control-label">Street 1</label>
-              <div class="col-lg-10">
-                <input type="text" id="call_street1_det" name="call_street1_det" class="form-control" value="'.$call_street1.'" disabled>
-              </div>
-              <!-- ./ col-sm-9 -->
-            </div>
-            <br/>
-            <!-- ./ form-group -->
-            <div class="form-group">
-              <label class="col-lg-2 control-label">Street 2</label>
-              <div class="col-lg-10">
-                <input type="text" id="call_street2_det" name="call_street2_det" class="form-control" value="'.$call_street2.'" disabled>
-              </div>
-              <!-- ./ col-sm-9 -->
-            </div>
-            <br/>
-            <!-- ./ form-group -->
-            <div class="form-group">
-              <label class="col-lg-2 control-label">Street 3</label>
-              <div class="col-lg-10">
-                <input type="text" id="call_street3_det" name="call_street3_det" class="form-control" value="'.$call_street3.'" disabled>
-              </div>
-              <!-- ./ col-sm-9 -->
-            </div>
-
-            <div class="clearfix">
-            <br/><br/><br/><br/>
-            <!-- ./ form-group -->
-            <div class="form-group">
-              <label class="col-lg-2 control-label">Narrative</label>
-              <div class="col-lg-10">
-                <div name="call_narrative" id="call_narrative" contenteditable="false" style="background-color: #eee; opacity: 1; border: 1px solid #ccc; padding: 6px 12px; font-size: 14px;">'.$call_notes.'</div>
-              </div>
-              <!-- ./ col-sm-9 -->
-            </div>
-            <br/>
-            <!-- ./ form-group -->
-            <div class="form-group">
-              <label class="col-lg-2 control-label">Add Narrative</label>
-              <div class="col-lg-10">
-                <textarea name="narrative_add" id="narrative_add" class="form-control" style="text-transform:uppercase" rows="2" required></textarea>
-              </div>
-              <!-- ./ col-sm-9 -->
-            </div>
-            <br/>
-            <!-- ./ form-group -->
-
+            </tbody>
+            </table>
         ';
+
     }
-
-    echo '
-        </div>
-        <!-- ./ x_content -->
-        <br/>
-        <div class="x_footer">
-
-        </div>
-        <!-- ./ x_footer -->
-        </form>
-    </div>
-    <!-- ./ x_panel -->
-</div>
-<!-- ./ col-md-6 col-sm-6 col-xs-6 -->
-    ';
-
-
-
+}
 }
 
-function create911Call()
-{
-    //var_dump($_POST);
 
-    $caller = $_POST['911_caller'];
-    $location = $_POST['911_location'];
-    $description = $_POST['911_description'];
-
-    $created = date("Y-m-d H:i:s").': 911 Call Received<br/><br/>Caller Name: '.$caller;
-
-    $call_notes = $created.'<br/>Caller States: '.$description.'<br/>';
-
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-
-    $sql = "INSERT IGNORE INTO calls (call_type, call_street1, call_notes) VALUES ('911', ?, ?)";
-
-    try {
-        $stmt = mysqli_prepare($link, $sql);
-        mysqli_stmt_bind_param($stmt, "ss", $location, $call_notes);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == FALSE) {
-            die(mysqli_error($link));
-        }
-    }
-    catch (Exception $e)
-    {
-        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-    }
-
-    session_start();
-    $_SESSION['good911'] = '<div class="alert alert-success"><span>Successfully created 911 call</span></div>';
-
-    sleep(1);
-    header("Location:../civilian.php");
-
-}
 
 //Checks to see if there are any active tones. Certain tones will add a session variable
 function checkTones()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
 
     $sql = "SELECT * from tones";
 
@@ -383,9 +288,9 @@ function setTone()
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
 
     $sql = "UPDATE tones SET active = ? WHERE name = ?";
 
@@ -422,9 +327,9 @@ function logoutUser()
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
 
     $sql = "DELETE FROM active_users WHERE identifier = ?";
 
@@ -473,14 +378,45 @@ function changeStatus()
             $statusDet = '1';
             $onCall = true;
             break;
+		case "statusUnavailBusy":
+            $statusId = '6';
+            $statusDet = '6';
+            $onCall = true;
+            break;
         case "statusSig11":
             $statusId = '1';
             $statusDet = '5';
+            break;
+		case "statusArrivedOC":
+            $statusId = '7';
+            $statusDet = '7';
+            $onCall = true;
+            break;
+		case "statusTransporting":
+            $statusId = '8';
+            $statusDet = '8';
+            $onCall = true;
+            break;
+
+		case "10-65":
+            $statusId = '8';
+            $statusDet = '8';
+            $onCall = true;
+            break;
+		case "10-23":
+            $statusId = '7';
+            $statusDet = '7';
+            $onCall = true;
             break;
         case "10-8":
             $statusId = '1';
             $statusDet = '1';
             $onCall = true;
+            break;
+		case "10-7":
+            $statusId = '6';
+            $statusDet = '6';
+            $onCall = false;
             break;
         case "10-6":
             $statusId = '0';
@@ -498,13 +434,13 @@ function changeStatus()
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
 
-	$sql = "UPDATE active_users SET status = ?, status_detail = ? WHERE identifier = ?";
+    $sql = "UPDATE active_users SET status = ?, status_detail = ? WHERE identifier = ?";
 
-	try {
+    try {
         $stmt = mysqli_prepare($link, $sql);
         mysqli_stmt_bind_param($stmt, "iis", $statusId, $statusDet, $unit);
         $result = mysqli_stmt_execute($stmt);
@@ -541,10 +477,10 @@ function changeStatus()
             $callsign = $row[0];
         }
 
-        //Update the call_notes to say they were cleared
+        //Update the call_narrative to say they were cleared
         $narrativeAdd = date("Y-m-d H:i:s").': Unit Cleared: '.$callsign.'<br/>';
 
-        $sql = "UPDATE calls SET call_notes = concat(call_notes, ?) WHERE call_id = ?";
+        $sql = "UPDATE calls SET call_narrative = concat(call_narrative, ?) WHERE call_id = ?";
 
         try {
             $stmt = mysqli_prepare($link, $sql);
@@ -579,21 +515,88 @@ function changeStatus()
         }
     }
 
-	mysqli_close($link);
+    mysqli_close($link);
     echo "SUCCESS";
+}
+
+function deleteDispatcher()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $identifier = $_SESSION['identifier'];
+
+
+mysqli_query($link,"DELETE FROM dispatchers WHERE identifier='".$identifier."'");
+mysqli_close($link);
+
+}
+
+function setDispatcher($dep)
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $identifier = $_SESSION['identifier'];
+
+    $status;
+    switch($dep)
+    {
+        case "1":
+            $status = "0";
+            break;
+        case "2":
+            $status = "1";
+            break;
+    }
+
+    deleteDispatcher();
+
+    $sql = "INSERT INTO dispatchers (identifier, callsign, status) VALUES (?, ?, ?)";
+
+
+    try {
+        $stmt = mysqli_prepare($link, $sql);
+        mysqli_stmt_bind_param($stmt, "sss", $identifier, $identifier, $status);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+    }
+
 }
 
 function getDispatchers()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
 
-	$sql = "SELECT * from active_users WHERE status = '2'";
+    $sql = "SELECT * from dispatchers WHERE status = '1'";
 
-	$result = mysqli_query($link, $sql);
+    $result = mysqli_query($link, $sql);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-danger\"><span>No available units</span></div>";
+    }
+    else
+    {
 
     echo '
             <table id="dispatchersTable" class="table table-striped table-bordered">
@@ -604,9 +607,6 @@ function getDispatchers()
             </thead>
             <tbody>
         ';
-
-
-
         while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
         {
             echo '
@@ -620,36 +620,62 @@ function getDispatchers()
             </tbody>
             </table>
         ';
-	mysqli_close($link);
-
-
+    mysqli_close($link);
 }
+}
+
+function getDispatchersMDT()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $sql = "SELECT * from dispatchers WHERE status = '1'";
+
+    $result = mysqli_query($link, $sql);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        $dispatcher = "false";
+    }
+    else
+    {
+        $dispatcher = "true";
+    mysqli_close($link);
+}
+}
+
 function setUnitActive($dep)
 {
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $identifier = $_SESSION['identifier'];
+    $uid = $_SESSION['id'];
     $status;
     switch($dep)
     {
         case "1":
-            $status = "2";
+            $status = "1";
             break;
         case "2":
-            $status = "1";
+            $status = "2";
             break;
     }
 
-    $sql = "INSERT IGNORE INTO active_users (identifier, callsign, status, status_detail) VALUES (?, ?, ?, '1')";
+    $sql = "REPLACE INTO active_users (identifier, callsign, status, status_detail, id) VALUES (?, ?, ?, '6', ?)";
 
-    $identifier = $_SESSION['identifier'];
-
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
 
     try {
         $stmt = mysqli_prepare($link, $sql);
-        mysqli_stmt_bind_param($stmt, "ssi", $identifier, $identifier, $status);
+        mysqli_stmt_bind_param($stmt, "ssii", $identifier, $identifier, $status, $uid);
         $result = mysqli_stmt_execute($stmt);
 
         if ($result == FALSE) {
@@ -667,13 +693,13 @@ function getAvailableUnits()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
 
-	$sql = "SELECT * from active_users WHERE status = '1'";
+    $sql = "SELECT * from active_users WHERE status = '1'";
 
-	$result = mysqli_query($link, $sql);
+    $result = mysqli_query($link, $sql);
 
     $num_rows = $result->num_rows;
 
@@ -723,20 +749,20 @@ function getAvailableUnits()
             </table>
         ';
     }
-	mysqli_close($link);
+    mysqli_close($link);
 }
 
 function getUnAvailableUnits()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
 
-	$sql = "SELECT * from active_users WHERE status = '0'";
+    $sql = "SELECT * from active_users WHERE status = '0'";
 
-	$result = mysqli_query($link, $sql);
+    $result = mysqli_query($link, $sql);
 
     $num_rows = $result->num_rows;
 
@@ -790,7 +816,7 @@ function getUnAvailableUnits()
             ';
 
       }
-	mysqli_close($link);
+    mysqli_close($link);
 }
 
 function getIndividualStatus($callsign)
@@ -822,7 +848,7 @@ function getIndividualStatus($callsign)
     echo $statusText;
 }
 
-function getCodesNcic()
+function getIncidentType()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -830,13 +856,31 @@ function getCodesNcic()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT code_id, code_name FROM codes ORDER BY `code_id` ASC";
+    $sql = "SELECT code_name FROM incident_type";
 
-    $result=mysqli_query($link, $query);
+    $result=mysqli_query($link, $sql);
 
     while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
     {
-        echo '<option value="'.$row[0].'">'.$row[0].'/'.$row[1].'</option>';
+        echo '<option value="'.$row[0].'">'.$row[0].'</option>';
+    }
+}
+
+function getStreet()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $sql = "SELECT name FROM streets";
+
+    $result=mysqli_query($link, $sql);
+
+    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    {
+        echo '<option value="'.$row[0].'">'.$row[0].'</option>';
     }
 }
 
@@ -886,13 +930,13 @@ function getActiveCalls()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
 
-	$sql = "SELECT * from calls";
+    $sql = "SELECT * from calls";
 
-	$result = mysqli_query($link, $sql);
+    $result = mysqli_query($link, $sql);
 
     $num_rows = $result->num_rows;
 
@@ -906,6 +950,99 @@ function getActiveCalls()
             <thead>
                 <tr>
                 <th>Call ID</th>
+                <th>Call Type</th>
+                <th>Units</th>
+                <th>Location</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+
+        $counter = 0;
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            echo '
+            <tr id="'.$counter.'">
+                <td>'.$row[0].'</td>';
+
+                //Issue #28. Check if $row[1] == bolo. If so, change text color to orange
+                if ($row[1] == "BOLO")
+                {
+                    echo '<td style="color:orange;">'.$row[1].'</td>';
+                    echo '<td><!--Leave blank--></td>';
+                }
+                else
+                {
+                    echo '<td>'.$row[1].'</td>';
+                    echo '
+                        <td>';
+                            getUnitsOnCall($row[0]);
+                        echo '</td>';
+                }
+
+
+                echo '<td>'.$row[3].'/'.$row[4].'/'.$row[5].'</td>';
+
+                if (isset($_GET['type']) && $_GET['type'] == "responder")
+                {
+                    echo'
+                    <td>
+                        <button id="'.$row[0].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
+                    </td>';
+                }
+                else
+                {
+                echo'
+                <td>
+                    <button id="'.$row[0].'" class="btn-link" style="color: red;" value="'.$row[0].'" onclick="clearCall('.$row[0].')">Clear</button>
+                    <button id="'.$row[0].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
+                    <input id="'.$row[0].'" type="submit" name="assign_unit" data-toggle="modal" data-target="#assign" class="btn-link '.$row[0].'" value="Assign"/>
+                    <input name="uid" name="uid" type="hidden" value="'.$row[0].'"/>
+                </td>';
+                }
+
+            echo'
+            </tr>
+            ';
+            $counter++;
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+
+    }
+    mysqli_close($link);
+
+}
+
+function getActivePersonBOLO()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $sql = "SELECT * from bolos_persons";
+
+    $result = mysqli_query($link, $sql);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo '<div class="alert alert-info"><span>No active calls</span></div>';
+    }
+    else
+    {
+        echo '<table id="activeCalls" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Type</th>
                 <th>Call Type</th>
                 <th>Units</th>
                 <th>Location</th>
@@ -971,7 +1108,7 @@ function getActiveCalls()
         ';
 
     }
-	mysqli_close($link);
+    mysqli_close($link);
 
 }
 
@@ -1029,10 +1166,10 @@ function getCallDetails()
     {
         $encode["call_id"] = $row[0];
         $encode["call_type"] = $row[1];
-        $encode["call_street1"] = $row[2];
-        $encode["call_street2"] = $row[3];
-        $encode["call_street3"] = $row[4];
-        $encode["narrative"] = $row[5];
+        $encode["call_street1"] = $row[3];
+        $encode["call_street2"] = $row[4];
+        $encode["call_street3"] = $row[5];
+        $encode["narrative"] = $row[6];
 
     }
 
@@ -1048,13 +1185,13 @@ function getCivilianNamesOption()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "SELECT id, first_name, last_name FROM ncic_names";
+    $sql = "SELECT id, name FROM ncic_names";
 
     $result=mysqli_query($link, $sql);
 
     while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
     {
-        echo "<option value=".$row[0].">".$row[1]." ".$row[2]."</option>";
+        echo "<option value=".$row[0].">".$row[1]."</option>";
     }
 }
 
@@ -1072,8 +1209,485 @@ function getCitations()
 
     while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
     {
-        echo "<option value=".$row[0].">".$row[0]."</option>";
+        echo '<option value="'.$row[0].'">'.$row[0].'</option>';
     }
 }
 
+/**#@+
+ * function getVehicleMakes()
+ *
+ * Querys database to retrieve all vehicle makes.
+ *
+ * @since 1.0a RC2
+ */
+function getVehicleMakes()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT DISTINCT vehicles.Make FROM vehicles";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    {
+        echo '<option value="'.$row[0].'">'.$row[0].'</option>';
+    }
+}
+
+
+/**#@+
+ * function getVehicleModels()
+ *
+ * Querys database to retrieve all vehicle models.
+ *
+ * @since 1.0a RC2
+ */
+function getVehicleModels()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT DISTINCT vehicles.Model FROM vehicles";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    {
+        echo '<option value="'.$row[0].'">'.$row[0].'</option>';
+    }
+}
+
+/**#@+
+ * function getVehicle()
+ *
+ * Querys database to retrieve all vehicle models.
+ *
+ * @since 1.0a RC2
+ */
+function getVehicle()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT * FROM vehicles";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    {
+        echo '<option value="'.$row[1].' '.$row[2].'">'.$row[1].'-'.$row[2].'</option>';
+    }
+}
+
+
+/**#@+
+ * function getGenders()
+ *
+ * Querys database to retrieve genders.
+ *
+ * @since 1.0a RC2
+ */
+function getGenders()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT DISTINCT genders.genders FROM genders";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    {
+        echo '<option value="'.$row[0].'">'.$row[0].'</option>';
+    }
+}
+
+/**#@+
+ * function getColors()
+ *
+ * Querys database to retrieve genders.
+ *
+ * @since 1.0a RC2
+ */
+function getColors()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT color_group, color_name FROM colors";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    {
+        echo '<option value="'.$row[0].'-'.$row[1].'">'.$row[0].'-'.$row[1].'</option>';
+    }
+}
+
+
+function getCivilianNames()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+	$sql = "SELECT ncic_names.id, ncic_names.name FROM ncic_names";
+
+	$result=mysqli_query($link, $sql);
+
+	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+	{
+		echo "<option value=\"$row[0]\">$row[1]</option>";
+	}
+	mysqli_close($link);
+}
+
+function getAgencies()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+
+	$sql = 'SELECT * FROM departments
+            WHERE department_name <>"Administrators"
+            AND department_name <>"EMS"
+            AND department_name <>"Fire"
+            AND department_name <>"Civilian"
+            AND department_name <>"Communications (Dispatch)"
+            AND department_name <>"Head Administrators"';
+
+	$result=mysqli_query($link, $sql);
+
+	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+	{
+		echo "<option value=\"$row[1]\">$row[1]</option>";
+	}
+	mysqli_close($link);
+}
+
+
+function callCheck()
+{
+    $uid = $_SESSION['id'];
+    $identifier = $_SESSION['identifier'];
+	
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	
+	if (!$link) {
+		die('Could not connect: ' .mysql_error());
+	}
+	
+	$sql = 'SELECT * FROM calls_users WHERE id = "'.$uid.'"';
+	
+	$result=mysqli_query($link, $sql);
+	
+	$num_rows = $result->num_rows;
+	
+	if($num_rows == 0)
+	{
+		
+		$sql = "REPLACE INTO active_users (identifier, callsign, status, status_detail, id) VALUES (?, ?, '0', '6', ?)";
+
+
+    try {
+        $stmt = mysqli_prepare($link, $sql);
+        mysqli_stmt_bind_param($stmt, "ssi", $identifier, $identifier, $uid);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+    }
+	}
+	else
+	{
+			
+		$sql = "REPLACE INTO active_users (identifier, callsign, status, status_detail, id) VALUES (?, ?, '0', '3', ?)";
+
+
+    try {
+        $stmt = mysqli_prepare($link, $sql);
+        mysqli_stmt_bind_param($stmt, "ssi", $identifier, $identifier, $uid);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+    }
+	}
+	
+}
+
+
+function getWeapons()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT * FROM weapons";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    {
+        echo '<option value="'.$row[1].' '.$row[2].'">'.$row[1].'-'.$row[2].'</option>';
+    }
+}
+
+function rms_warnings()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT ncic_names.name, ncic_warnings.id, ncic_warnings.warning_name, ncic_warnings.issued_date, ncic_warnings.issued_by FROM ncic_warnings INNER JOIN ncic_names ON ncic_warnings.name_id=ncic_names.id WHERE ncic_warnings.status = '1'";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>There are currently no warnings in the NCIC Database</span></div>";
+    }
+    else
+    {
+        echo '
+            <table id="rms_warnings" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Name</th>
+                <th>Warning Name</th>
+                <th>Issued On</th>
+                <th>Issued By</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            echo '
+            <tr>
+                <td>'.$row[0].'</td>
+                <td>'.$row[2].'</td>
+                <td>'.$row[3].'</td>
+                <td>'.$row[4].'</td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
+function rms_citations()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT ncic_names.name, ncic_citations.id, ncic_citations.citation_name, ncic_citations.citation_fine, ncic_citations.issued_date, ncic_citations.issued_by FROM ncic_citations INNER JOIN ncic_names ON ncic_citations.name_id=ncic_names.id WHERE ncic_citations.status = '1'";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>There are currently no citations in the NCIC Database</span></div>";
+    }
+    else
+    {
+        echo '
+            <table id="rms_citations" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Name</th>
+                <th>Citation Name</th>
+				<th>Citation Ammount</th>
+                <th>Issued On</th>
+                <th>Issued By</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            echo '
+            <tr>
+                <td>'.$row[0].'</td>
+                <td>'.$row[2].'</td>
+                <td>'.$row[3].'</td>
+                <td>'.$row[4].'</td>
+                <td>'.$row[5].'</td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
+function rms_arrests()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT ncic_names.name, ncic_arrests.id, ncic_arrests.arrest_reason, ncic_arrests.arrest_fine, ncic_arrests.issued_date, ncic_arrests.issued_by FROM ncic_arrests INNER JOIN ncic_names ON ncic_arrests.name_id=ncic_names.id";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>There are currently no arrests in the NCIC Database</span></div>";
+    }
+    else
+    {
+        echo '
+            <table id="rms_arrests" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Name</th>
+                <th>Arrest reason</th>
+				<th>Arrest Ammount</th>
+                <th>Issued On</th>
+                <th>Issued By</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            echo '
+            <tr>
+                <td>'.$row[0].'</td>
+                <td>'.$row[2].'</td>
+                <td>'.$row[3].'</td>
+                <td>'.$row[4].'</td>
+                <td>'.$row[5].'</td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
+function rms_warrants()
+{
+   $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $query = "SELECT ncic_warrants.*, ncic_names.name FROM ncic_warrants INNER JOIN ncic_names ON ncic_names.id=ncic_warrants.name_id";
+
+    $result=mysqli_query($link, $query);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>There are currently no warrants in the NCIC Database</span></div>";
+    }
+    else
+    {
+        echo '
+            <table id="rms_warrants" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Status</th>
+                <th>Name</th>
+                <th>Warrant Name</th>
+                <th>Issued On</th>
+                <th>Expires On</th>
+                <th>Issuing Agency</th>
+
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            echo '
+            <tr>
+                <td>'.$row[6].'</td>
+                <td>'.$row[7].'</td>
+                <td>'.$row[2].'</td>
+                <td>'.$row[5].'</td>
+                <td>'.$row[1].'</td>
+                <td>'.$row[3].'</td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
 ?>

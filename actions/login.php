@@ -1,5 +1,18 @@
 <?php
-require_once(__DIR__ . '/../oc-config.php');
+
+/**
+Open source CAD system for RolePlaying Communities.
+Copyright (C) 2017 Shane Gill
+
+This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
+**/
+
+require_once(__DIR__ . "/../oc-config.php");
 
     if(!empty($_POST))
     {
@@ -9,7 +22,7 @@ require_once(__DIR__ . '/../oc-config.php');
         $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
         if (!$link) {
-            die('Could not connect: ' .mysql_error());
+            die('Please fix your database credentials. ' .mysql_error());
         }
 
         $query = "SELECT id, name, password, email, identifier, password_reset, approved FROM users WHERE email = ?";
@@ -41,7 +54,7 @@ require_once(__DIR__ . '/../oc-config.php');
         {
             session_start();
             $_SESSION['loginMessageDanger'] = 'Invalid credentials';
-            header("Location:../index.php");
+            header("Location:".BASE_URL."/index.php");
             exit();
         }
 
@@ -54,14 +67,14 @@ require_once(__DIR__ . '/../oc-config.php');
         {
             session_start();
             $_SESSION['loginMessageDanger'] = 'Your account hasn\'t been approved yet. Please wait for an administrator to approve your access request.';
-            header("Location:..//index.php");
+            header("Location:".BASE_URL."/index.php");
             exit();
         }
         else if ($approved == "2")
         {
             session_start();
             $_SESSION['loginMessageDanger'] = 'Your account has been suspended by an administrator.';
-            header("Location:../index.php");
+            header("Location:".BASE_URL."/index.php");
             exit();
         }
 
@@ -74,7 +87,7 @@ require_once(__DIR__ . '/../oc-config.php');
         $_SESSION['identifier'] = $identifier;
         $_SESSION['callsign'] = $identifier; //Set callsign to default to identifier until the unit changes it
 
-        header("Location:../dashboard.php");
+        header("Location:".BASE_URL."/dashboard.php");
     }
 
 

@@ -1,5 +1,18 @@
 <?php
-require_once(__DIR__ . '/../oc-config.php');
+
+/**
+Open source CAD system for RolePlaying Communities.
+Copyright (C) 2017 Shane Gill
+
+This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
+**/
+
+require_once(__DIR__ . "/../oc-config.php");
 
 //Handle requests
 if (isset($_POST['update_profile_btn']))
@@ -38,7 +51,7 @@ function updateProfile()
             if (mysqli_errno($link) == 1062) {
                 $_SESSION['profileUpdate'] = '<div class="alert alert-danger"><span>Update unsuccessful. Emails and Identifiers must be unique.</span></div>';
                 sleep(1); //Seconds to wait
-	            header("Location: ../profile/profile.php");
+	            header("Location: ".BASE_URL."/profile.php");
             }
 			die(mysqli_error($link));
 		}
@@ -57,7 +70,7 @@ function updateProfile()
 	$_SESSION['profileUpdate'] = '<div class="alert alert-success"><span>Successfully updated your user information</span></div>';
 
 	sleep(1); //Seconds to wait
-	header("Location: ../profile/profile.php");
+	header("Location: ".BASE_URL."/profile.php");
 }
 
 function getMyRank()
