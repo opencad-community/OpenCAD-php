@@ -81,7 +81,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
                 <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="/actions/logout.php">
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -292,7 +292,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-md-3 control-label">User Groups</label>
                 <div class="col-md-9">
-                  <select name="userGroups" class="selectpicker form-control" multiple>
+                  <select name="userGroups[]" class="selectpicker form-control" id="userGroups" multiple>
                       <?php getDepartments();?>
                   </select>
                 </div>
@@ -303,6 +303,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <!-- ./ modal-body -->
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<input type="hidden" name="userID" id="userID">
             <input type="submit" name="editUserAccount" class="btn btn-primary" value="Edit User"/>
           </div>
           <!-- ./ modal-footer -->
@@ -357,7 +358,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       $.ajax({
           cache: false,
           type: 'POST',
-          url: '/actions/adminActions.php',
+          url: '<?php echo BASE_URL; ?>/actions/adminActions.php',
           data: {'getUserDetails': 'yes',
                   'userId' : userId},
           success: function(result)
@@ -368,6 +369,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             $('input[name="userName"]').val(data['name']);
             $('input[name="userEmail"]').val(data['email']);
             $('input[name="userIdentifier"]').val(data['identifier']);
+			
+			$('input[name="userID"]').val(data['userId']);
 
             for (var i=0; i<data['department'].length; i++)
             {
@@ -383,6 +386,30 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           error:function(exception){alert('Exeption:'+exception);}
         });
     });
+	
+	
+	$(".delete_group").click(function(){
+	var dept_id=$(this).attr("data-dept-id");
+	var user_id=$(this).attr("data-user-id");
+	if(confirm("Are you sure to delete the selected Group?"))
+		{
+			$.ajax({
+			cache: false,
+			type: 'GET',
+			url: '<?php echo BASE_URL; ?>/actions/adminActions.php',
+			data	: 'dept_id='+dept_id+'&user_id='+user_id,
+			success: function(result)
+			{
+				 //obj = jQuery.parseJSON(result);
+				
+					$("#show_group").html(result);
+					window.location.href= '<?php echo BASE_URL; ?>/oc-admin/userManagement.php';
+				
+			}
+			
+			});
+		}
+	});
     </script>
 
     <!-- Custom Theme Scripts -->

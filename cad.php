@@ -47,6 +47,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         $citationMessage = $_SESSION['citationMessage'];
         unset($_SESSION['citationMessage']);
     }
+    $arrestMessage = "";
+    if(isset($_SESSION['arrestMessage']))
+    {
+        $arrestMessage = $_SESSION['arrestMessage'];
+        unset($_SESSION['arrestMessage']);
+    }
     $warningMessage = "";
     if(isset($_SESSION['warningMessage']))
     {
@@ -127,11 +133,21 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                               </ul>
                            </li>
                            <li>
+                              <a><i class="fa fa-warning"></i> Arrest Report <span class="fa fa-chevron-down"></span></a>
+                              <ul class="nav child_menu">
+                                 <li><a type="button" data-toggle="modal" data-target="#createArrest" > Create Arrest Report</a></li>
+                                 <li><a type="button" data-toggle="modal" data-target="#viewArrest" > View Arrests</a></li>
+                              </ul>
+                           </li>
+                           <li>
                               <a><i class="fa fa-warning"></i> Warrants <span class="fa fa-chevron-down"></span></a>
                               <ul class="nav child_menu">
                                  <li><a type="button" data-toggle="modal" data-target="#createWarrant" > Create Warrants</a></li>
                                  <li><a type="button" data-toggle="modal" data-target="#viewWarrant" > View Warrants</a></li>
                               </ul>
+                           </li>
+                           <li>
+                                 <a type="button" data-toggle="modal" data-target="#rms" > Report Management System</a>
                            </li>
                         </ul>
                      </div>
@@ -145,7 +161,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <a data-toggle="tooltip" data-placement="top">
                         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                         </a>-->
-                     <a data-toggle="tooltip" data-placement="top" title="FullScreen" onclick="toggleFullScreen()">
+                     <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
                      <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
                      </a>
                      <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
@@ -251,8 +267,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <!-- ./ x_content -->
                            <div class="x_footer">
                               <button class="btn btn-primary" name="new_call_btn" data-toggle="modal" data-target="#newCall">New Call</button>
-                              <button class="btn btn-danger pull-right" onclick="priorityTone('single')" value="0" id="priorityTone">10-3 Tone</button>
-                              <button class="btn btn-danger pull-right" onclick="priorityTone('recurring')" value="0" id="recurringTone">Priority Tone</button>
+                              <button class="btn btn-danger pull-right" onClick="priorityTone('single')" value="0" id="priorityTone">10-3 Tone</button>
+                              <button class="btn btn-danger pull-right" onClick="priorityTone('recurring')" value="0" id="recurringTone">Priority Tone</button>
                            </div>
                         </div>
                         <!-- ./ x_panel -->
@@ -274,8 +290,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <div class="x_content">
                               <div id="noCallsAlertHolder">
 							  <?php echo $boloMessage;?>
-                                 <?php cadGetPersonBOLOS();?>
-								 <?php cadGetVehicleBOLOS();?>
+                           <div class="x_content">
+                              <div id="cadpersonbolo"></div>
+                           </div>
+                           <div class="x_content">
+                              <div id="cadvehiclebolo"></div>
+                           </div>
                                  <span id="noCallsAlertSpan"></span>
                               </div>
                               <div id="live_calls"></div>
@@ -364,7 +384,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <!-- ./ x_title -->
                            <div class="x_content">
                               <div class="input-group">
-                                 <input type="text" name="ncic_name" class="form-control" id="ncic_name" placeholder="John Doe"/>
+                                 <input id="ncic_name" type="text" class="form-control" placeholder="John Doe" name="ncic_name"/>
                                  <span class="input-group-btn">
                                  <button type="button" class="btn btn-primary" name="ncic_name_btn" id="ncic_name_btn">Send</button>
                                  </span>
@@ -410,29 +430,31 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <!-- NCIC Firearm lookup will return in a later RC -->
                      <div class="col-md-4 col-sm-4 col-xs-4">
                         <div class="x_panel">
-                          <div class="x_title">
-                            <h2>NCIC Firearm Lookup</h2>
-                            <ul class="nav navbar-right panel_toolbox">
-                              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-                            </ul>
-                            <div class="clearfix"></div>
-                          </div>
-                          <!-- ./ x_title -->
-                     <div class="x_content">
-                        <div class="input-group">
-                           <input type="text" name="ncic_firearm" class="form-control" id="ncic_firearm" placeholder="Serial Number"/>
-                           <span class="input-group-btn">
-                           <button type="button" class="btn btn-primary" disabled>Send</button>
-                           </span>
+                           <div class="x_title">
+                              <h2>NCIC Weapon Lookup</h2>
+                              <ul class="nav navbar-right panel_toolbox">
+                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                              </ul>
+                              <div class="clearfix"></div>
+                           </div>
+                           <!-- ./ x_title -->
+                           <div class="x_content">
+                              <div class="input-group">
+                                 <input type="text" name="ncic_weapon" class="form-control" id="ncic_weapon" placeholder="John Doe"/>
+                                 <span class="input-group-btn">
+                                 <button type="button" class="btn btn-primary" name="ncic_weapon_btn" id="ncic_weapon_btn">Send</button>
+                                 </span>
+                              </div>
+                              <!-- ./ input-group -->
+                              <div name="ncic_weapon_return" id="ncic_weapon_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
+                                 <!--<textarea class="form-control" style="resize:none;" id="ncic_name_return" name="ncic_name_return" readonly="readonly"></textarea> -->
+                              </div>
+                              <!-- ./ ncic_name_return -->
+                           </div>
+                           <!-- ./ x_content -->
                         </div>
-                        <!-- ./ input-group -->
-                        <div name="firearm_return"
-                        </div>
+                        <!-- ./ x_panel -->
                      </div>
-                     <!-- ./ x_content -->
-                  </div>
-                  <!-- ./ x_panel -->
-               </div>
                <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
             </div>
             <!-- ./ row -->
@@ -513,6 +535,101 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          <!-- ./ modal-dialog modal-lg -->
       </div>
       <!-- ./ modal fade bs-example-modal-lg -->
+      <div class="modal fade" id="rms" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
+                  </button>
+            <h4 class="modal-title" id="myModalLabel">Warning Viewer</h4>
+          </div>
+          <!-- ./ modal-header -->
+          <div class="modal-body">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel" id="citation_panel">
+                  <div class="x_title">
+                    <h2>RMS Warnings</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php rms_warnings();?>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <div class="x_panel" id="citation_panel">
+                  <div class="x_title">
+                    <h2>RMS Citations</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php rms_citations();?>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <div class="x_panel" id="citation_panel">
+                  <div class="x_title">
+                    <h2>RMS Arrests</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php rms_arrests();?>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <div class="x_panel" id="citation_panel">
+                  <div class="x_title">
+                    <h2>RMS Warrants</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php rms_warrants();?>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <!-- ./ x_panel -->
+              </div>
+              <!-- ./ form-group -->
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
       <!-- Assign User to Call Modal -->
       <div class="modal fade" id="assign" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog modal-lg">
@@ -588,18 +705,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      </div>
                      <!-- ./ form-group -->
                      <br/>
-                     <div class="form-group row">
-                        <label class="col-lg-2 control-label">Assign Unit to Call</label>
-                        <div class="col-lg-10">
-                           <select class="form-control selectpicker unit" data-live-search="true" name="unit_1" id="unit_1" title="Select a Unit or Leave Blank (Will mark call as Pending)">
-                              <option></option>
-                           </select>
-                           <select class="form-control selectpicker unit" data-live-search="true" name="unit_2" id="unit_2" title="Select a Unit or Leave Blank">
-                              <option></option>
-                           </select>
-                        </div>
-                        <!-- ./ col-sm-9 -->
-                     </div>
                      <br/>
                      <!-- ./ form-group -->
                      <div class="form-group row">
@@ -709,7 +814,90 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     </div>
 	</div>
     <!-- ./ modal fade bs-example-modal-lg -->
-
+    <!-- Edit Person Bolo Modal -->
+    <div class="modal fade" id="editPersonboloModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Edit Person BOLO</h4>
+          </div>
+          <!-- ./ modal-header -->
+      <div class="modal-body">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/dispatchActions.php" method="post">
+                <div class="form-group row">
+                </div>
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">First Name</label>
+                <div class="col-lg-10">
+          <input name="first_name" class="form-control" id="first_name" placeholder="First Name of the BOLOed subject."/>
+          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Last Name</label>
+                <div class="col-lg-10">
+          <input name="last_name" class="form-control" id="last_name" placeholder="Last Name of the BOLOed subject."/>
+          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Gender</label>
+                <div class="col-lg-10">
+          <select name="gender" class="form-control selectpicker gender_picker" id="gender" title="Select a sex" data-live-search="true">
+                    <option> </option>
+                    <?php getGenders();?>
+          </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Physical Description</label>
+                <div class="col-lg-10">
+          <input name="physical_description" class="form-control" id="physical_description" placeholder="Physical description of the BOLOed subject."/>
+          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Reason Wanted</label>
+                <div class="col-lg-10">
+          <textarea name="reason_wanted" class="form-control" style="text-transform:uppercase" rows="5" id="reason_wanted" placeholder="Wanted reason of the BOLOed subject." required> </textarea>
+          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Last Seen</label>
+                <div class="col-lg-10">
+          <input name="last_seen" class="form-control" id="last_seen" placeholder="Last observed location of the BOLOed subject."/>
+          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+          <div class="modal-footer">
+                <input type="hidden" name="edit_personId" class="Editdataid">
+                <input name="edit_personbolo" type="submit" class="btn btn-primary" value="Edit" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+  </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
 	<!-- New Vehicle Bolo Modal -->
     <div class="modal fade" id="newVehicleBOLO" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg">
@@ -735,7 +923,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="form-group row">
                         <label class="col-lg-2 control-label">Vehicle Model</label>
                         <div class="col-lg-10">
-                           <select class="form-control selectpicker" data-live-search="true" name="vehicle_model" title="Vehicle Make" required>
+                           <select class="form-control selectpicker" data-live-search="true" name="vehicle_model" title="Vehicle Model" required>
                               <?php getVehicleModels();?>
                            </select>
                         </div>
@@ -745,7 +933,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="form-group row">
                         <label class="col-lg-2 control-label">Vehicle Plate</label>
                         <div class="col-lg-10">
-                						<input type="text" class="form-control" name="vehicle_plate" placeholder="The plate of the BOLO vehicle." />
+                						<input type="text" class="form-control vehicle_plate" name="vehicle_plate" placeholder="The plate of the BOLO vehicle." />
                         </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -753,7 +941,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                         <label class="col-lg-2 control-label">Primary Color</label>
                         <div class="col-lg-10">
-                						<input type="text" class="form-control" name="primary_color" placeholder="The primary color of the BOLO vehicle." />
+                						<input type="text" class="form-control primary_color" name="primary_color" placeholder="The primary color of the BOLO vehicle." />
                         </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -761,7 +949,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <div class="form-group row">
                         <label class="col-lg-2 control-label">Secondary Color</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" name="secondary_color" placeholder="The secondary color, if any, of the BOLO vehicle." />                        </div>
+                            <input type="text" class="form-control secondary_color" name="secondary_color" placeholder="The secondary color, if any, of the BOLO vehicle." />                        </div>
                         <!-- ./ col-sm-9 -->
                      </div>
                 <!-- ./ col-sm-9 -->
@@ -770,7 +958,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <div class="form-group row">
                         <label class="col-lg-2 control-label">Reason Wanted</label>
                         <div class="col-lg-10">
-                                <textarea name="reason_wanted" id="narrative" class="form-control" style="text-transform:uppercase" rows="5"></textarea>
+                                <textarea name="reason_wanted" id="narrative" class="form-control reason_wanted" style="text-transform:uppercase" rows="5"></textarea>
                         </div>
                         <!-- ./ col-sm-9 -->
                      </div>
@@ -778,13 +966,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <div class="form-group row">
                         <label class="col-lg-2 control-label">Last Seen</label>
                         <div class="col-lg-10">
-                           <input type="text" class="form-control" name="last_seen" placeholder="Last observed location of the BOLOed vehicle." />
+                           <input type="text" class="form-control last_seen" name="last_seen" placeholder="Last observed location of the BOLOed vehicle." />
                         </div>
                         <!-- ./ col-sm-9 -->
                      </div>
               <!-- ./ form-group -->
           <div class="modal-footer">
-                <input name="create_vehiclebolo" type="submit" class="btn btn-primary" value="Send" />
+              <input name="create_vehiclebolo" type="submit" class="btn btn-primary" value="Send" />
                <button type="reset" class="btn btn-default" value="Reset">Reset</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </form>
@@ -797,6 +985,92 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     </div>
 	</div>
     <!-- ./ modal fade bs-example-modal-lg -->
+    <!-- Edit Vehicle Bolo Modal -->
+    <div class="modal fade" id="editVehicleBOLO" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Edit Vehicle BOLO</h4>
+          </div>
+          <!-- ./ modal-header -->
+      <div class="modal-body">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/dispatchActions.php" method="post">
+                <div class="form-group row">
+                </div>
+                <div class="form-group row">
+                        <label class="col-lg-2 control-label">Vehicle Make</label>
+                        <div class="col-lg-10">
+                           <select class="form-control selectpicker vehicle_make" data-live-search="true" name="vehicle_make" title="Vehicle Make" required>
+                              <?php getVehicleMakes();?>
+                           </select>
+                        </div>
+              <!-- ./ form-group -->
+                <div class="form-group row">
+                        <label class="col-lg-2 control-label">Vehicle Model</label>
+                        <div class="col-lg-10">
+                           <select class="form-control selectpicker vehicle_model" data-live-search="true" name="vehicle_model" title="Vehicle Model" required>
+                              <?php getVehicleModels();?>
+                           </select>
+                        </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+                <div class="form-group row">
+                        <label class="col-lg-2 control-label">Vehicle Plate</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control vehicle_plate" name="vehicle_plate" placeholder="The plate of the BOLO vehicle." />
+                        </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                        <label class="col-lg-2 control-label">Primary Color</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control primary_color" name="primary_color" placeholder="The primary color of the BOLO vehicle." />
+                        </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+                     <div class="form-group row">
+                        <label class="col-lg-2 control-label">Secondary Color</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control secondary_color" name="secondary_color" placeholder="The secondary color, if any, of the BOLO vehicle." />                        </div>
+                        <!-- ./ col-sm-9 -->
+                     </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+                     <div class="form-group row">
+                        <label class="col-lg-2 control-label">Reason Wanted</label>
+                        <div class="col-lg-10">
+                                <textarea name="reason_wanted" id="narrative" class="form-control reason_wanted" style="text-transform:uppercase" rows="5"></textarea>
+                        </div>
+                        <!-- ./ col-sm-9 -->
+                     </div>
+              <!-- ./ form-group -->
+                     <div class="form-group row">
+                        <label class="col-lg-2 control-label">Last Seen</label>
+                        <div class="col-lg-10">
+                           <input type="text" class="form-control last_seen" name="last_seen" placeholder="Last observed location of the BOLOed vehicle." />
+                        </div>
+                        <!-- ./ col-sm-9 -->
+                     </div>
+              <!-- ./ form-group -->
+          <div class="modal-footer">
+                <input type="hidden" name="edit_vehicleboloid" class="EditVehicleId">
+                <input name="edit_vehiclebolo" type="submit" class="btn btn-primary" value="Edit" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+  </div>
       <!-- Call Details Modal -->
       <div class="modal fade" id="callDetails" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg">
@@ -830,7 +1104,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="form-group">
                      <label class="col-lg-2 control-label">Main Street</label>
                      <div class="col-lg-10">
-                        <input type="text" id="call_street2_det" name="call_street2_det" class="form-control" disabled>
+                        <input type="text" id="call_street1_det" name="call_street1_det" class="form-control" disabled>
                      </div>
                      <!-- ./ col-sm-9 -->
                   </div>
@@ -839,11 +1113,43 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="form-group">
                      <label class="col-lg-2 control-label">Cross Street</label>
                      <div class="col-lg-10">
+                        <input type="text" id="call_street2_det" name="call_street2_det" class="form-control" disabled>
+                     </div>
+                     <!-- ./ col-sm-9 -->
+                  </div>
+                  <br/>
+                  <!-- ./ form-group -->
+                  <div class="form-group">
+                     <label class="col-lg-2 control-label">Additional Location Info</label>
+                     <div class="col-lg-10">
                         <input type="text" id="call_street3_det" name="call_street3_det" class="form-control" disabled>
                      </div>
                      <!-- ./ col-sm-9 -->
                   </div>
                      <br/>
+                  <div class=" clearfix">
+                     <br/><br/><br/><br/>
+                     <!-- ./ form-group -->
+                  <div  class="clearfix">
+                     <br/><br/><br/><br/>
+                     <!-- ./ form-group -->
+                     <div class="form-group">
+                        <label class="col-lg-2 control-label">Narrative</label>
+                        <div class="col-lg-10">
+                           <div name="call_narrative" id="call_narrative" contenteditable="false" style="background-color: #eee; opacity: 1; border: 1px solid #ccc; padding: 6px 12px; font-size: 14px; word-wrap: break-word; overflow-wrap: break-word; white-space: normal;"></div>
+                        </div>
+                        <!-- ./ col-sm-9 -->
+                     </div>
+                     <br/>
+                     <br/><br/><br/><br/>
+                     <!-- ./ form-group -->
+                     <div class="form-group">
+                        <label class="col-lg-2 control-label">Add Narrative</label>
+                        <div class="col-lg-10">
+                           <textarea name="narrative_add" id="narrative_add" class="form-control" style="text-transform:uppercase" rows="2" required></textarea>
+                        </div>
+                        <!-- ./ col-sm-9 -->
+                     </div>
                      <br/>
                   <!-- ./ modal-body -->
                   <br/>
@@ -858,6 +1164,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          </div>
          <!-- ./ modal-dialog modal-lg -->
       </div>
+	  </div>
+	  </div>
+	  </div>
       <!-- ./ modal fade bs-example-modal-lg -->
       
       <!-- New Vehicle BOLO Modal -->
@@ -939,7 +1248,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <!-- ./ modal-dialog modal-lg -->
 
       </div>
-      <!-- ./ modal fade bs-example-modal-lg -->
+	   
+       <!-- Edit Vehicle BOLO Modal -->
+      
       <!-- Create Citation Modal -->
       <div class="modal fade" id="createCitation" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog modal-lg">
@@ -963,11 +1274,43 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               </div>
               <!-- ./ form-group -->
               <div class="form-group row">
-                <label class="col-lg-2 control-label">Citation Name</label>
+                <label class="col-lg-2 control-label">Citation Name 1</label>
                 <div class="col-lg-10">
-                  <select class="form-control selectpicker" data-live-search="true" name="citation_name" id="citation_name" title="Select Citation" required>
-                    <?php getCitations();?>
-                  </select>
+					<input type="text" name="citation_name_1" id="citation_name_1" size="70" placeholder="Enter a citation" required />
+					<input type="number" name="citation_fine_1" id="citation_fine_1" size="10" placeholder="Enter a fine amount" required />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+			  <p>Optional</p>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Citation Name 2</label>
+                <div class="col-lg-10">
+					<input type="text" name="citation_name_2" id="citation_name_2" size="70" placeholder="Enter a citation"  />
+					<input type="number" name="citation_fine_2" id="citation_fine_2" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Citation Name 3</label>
+                <div class="col-lg-10">
+					<input type="text" name="citation_name_3" id="citation_name_3" size="70" placeholder="Enter a citation"  />
+					<input type="number" name="citation_fine_3" id="citation_fine_3" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Citation Name 4</label>
+                <div class="col-lg-10">
+					<input type="text" name="citation_name_4" id="citation_name_4" size="70" placeholder="Enter a citation"  />
+					<input type="number" name="citation_fine_4" id="citation_fine_4" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Citation Name 5</label>
+                <div class="col-lg-10">
+					<input type="text" name="citation_name_5" id="citation_name_5" size="70" placeholder="Enter a citation"  />
+					<input type="number" name="citation_fine_5" id="citation_fine_5" placeholder="Enter a fine amount"  />
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -1054,9 +1397,38 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               </div>
               <!-- ./ form-group -->
               <div class="form-group row">
-                <label class="col-lg-2 control-label">Warning Name</label>
+                <label class="col-lg-2 control-label">Warning Name 1</label>
                 <div class="col-lg-10">
-					<input type="text" class="form-control" name="warning_name" id="warning_name" placeholder="Enter a warning" />
+					<input type="text" class="form-control" name="warning_name_1" id="warning_name_1" placeholder="Enter a warning" required />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+			  <p>Optional</p>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Warning Name 2</label>
+                <div class="col-lg-10">
+					<input type="text" class="form-control" name="warning_name_2" id="warning_name_2" placeholder="Enter a warning"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Warning Name 3</label>
+                <div class="col-lg-10">
+					<input type="text" class="form-control" name="warning_name_3" id="warning_name_3" placeholder="Enter a warning"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Warning Name 4</label>
+                <div class="col-lg-10">
+					<input type="text" class="form-control" name="warning_name_4" id="warning_name_4" placeholder="Enter a warning"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Warning Name 5</label>
+                <div class="col-lg-10">
+					<input type="text" class="form-control" name="warning_name_5" id="warning_name_5" placeholder="Enter a warning"  />
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -1065,6 +1437,127 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <!-- ./ modal-body -->
           <div class="modal-footer">
                 <input name="create_warning" type="submit" class="btn btn-primary" value="Create" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
+      <div class="modal fade" id="createArrest" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" id="closecallDetails"><span aria-hidden="true">×</span>
+               </button>
+               <h4 class="modal-title" id="myModalLabel">Arrest Report</h4>
+            </div>
+            <!-- ./ modal-header -->
+          <div class="modal-body">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/dispatchActions.php" method="post">
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Civilian Name</label>
+                <div class="col-lg-10">
+                  <select class="form-control selectpicker" name="civilian_names" id="civilian_names" data-live-search="true" required title="Select Civilian">
+                    <?php getCivilianNamesOption();?>
+                  </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Arrest Reason 1</label>
+                <div class="col-lg-10">
+					<input type="text" name="arrest_reason_1" id="arrest_reason_1" size="70" placeholder="Enter a reason for arrest" required />
+					<input type="number" name="arrest_fine_1" id="arrest_fine_1" size="10" placeholder="Enter a fine amount" />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+			  <p>Optional</p>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Arrest Reason 2</label>
+                <div class="col-lg-10">
+					<input type="text" name="arrest_reason_2" id="arrest_reason_2" size="70" placeholder="Enter a reason for arrest"  />
+					<input type="number" name="arrest_fine_2" id="arrest_fine_2" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Arrest Reason 3</label>
+                <div class="col-lg-10">
+					<input type="text" name="arrest_reason_3" id="arrest_reason_3" size="70" placeholder="Enter a reason for arrest"  />
+					<input type="number" name="arrest_fine_3" id="arrest_fine_3" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Arrest Reason 4</label>
+                <div class="col-lg-10">
+					<input type="text" name="arrest_reason_4" id="arrest_reason_4" size="70" placeholder="Enter a reason for arrest"  />
+					<input type="number" name="arrest_fine_4" id="arrest_fine_4" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Arrest Reason 5</label>
+                <div class="col-lg-10">
+					<input type="text" name="arrest_reason_5" id="arrest_reason_5" size="70" placeholder="Enter a reason for arrest"  />
+					<input type="number" name="arrest_fine_5" id="arrest_fine_5" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+                <input name="create_arrest" type="submit" class="btn btn-primary" value="Create" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
+      <div class="modal fade" id="viewArrest" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
+                  </button>
+            <h4 class="modal-title" id="myModalLabel">Arrests Viewer</h4>
+          </div>
+          <!-- ./ modal-header -->
+          <div class="modal-body">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel" id="citation_panel">
+                  <div class="x_title">
+                    <h2>NCIC Arrests</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php ncic_arrests();?>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <!-- ./ x_panel -->
+              </div>
+              <!-- ./ form-group -->
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </form>
           </div>
@@ -1283,6 +1776,85 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          var vid = document.getElementById("recurringToneAudio");
          vid.volume = 0.3;
       </script>
+</style>
+
+      <script>
+  $(function() {
+    $( "#ncic_name" ).autocomplete({
+      source: "<?php echo BASE_URL; ?>/js/search_name.php"
+    });
+  });
+  </script>
+      <script>
+  $(function() {
+    $( "#ncic_plate" ).autocomplete({
+      source: "<?php echo BASE_URL; ?>/js/search_plate.php"
+    });
+  });
+  </script>
+      <script>
+  $(function() {
+    $( "#ncic_weapon" ).autocomplete({
+      source: "<?php echo BASE_URL; ?>/js/search_name.php"
+    });
+  });
+  </script>
+    <script>
+    $(document).ready(function() {
+        $('#ncic_warnings').DataTable({
+
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#ncic_citations').DataTable({
+
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#ncic_arrests').DataTable({
+
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#ncic_warrants').DataTable({
+
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#rms_warnings').DataTable({
+
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#rms_citations').DataTable({
+
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#rms_arrests').DataTable({
+
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#rms_warrants').DataTable({
+
+        });
+    });
+    </script>
       <script>
          $(document).ready(function() {
              $(function() {
@@ -1294,6 +1866,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
              getUnAvailableUnits();
              getDispatchers();
              checkTones();
+             cadGetPersonBOLOS();
+             cadGetVehicleBOLOS();
 
          });
       </script>
@@ -1465,6 +2039,115 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          }
 
 
+      </script>
+      <script>
+         function cadGetPersonBOLOS() {
+           $.ajax({
+                 type: "GET",
+                 url: "<?php echo BASE_URL; ?>/actions/dispatchActions.php",
+                 data: {
+                     cadGetPersonBOLOS: 'yes'
+                 },
+                 success: function(response)
+                 {
+                   $('#cadpersonbolo').html(response);
+
+                   // SG - Removed until node/real-time data setup
+                   /*$('#activeUsers').DataTable({
+                     searching: false,
+                     scrollY: "200px",
+                     lengthMenu: [[4, -1], [4, "All"]]
+                });*/
+                   setTimeout(cadGetPersonBOLOS, 5000);
+
+
+                 },
+                 error : function(XMLHttpRequest, textStatus, errorThrown)
+                 {
+                   console.log("Error");
+                 }
+
+               });
+         }
+
+
+      </script>
+      <script>
+         function cadGetVehicleBOLOS() {
+           $.ajax({
+                 type: "GET",
+                 url: "<?php echo BASE_URL; ?>/actions/dispatchActions.php",
+                 data: {
+                     cadGetVehicleBOLOS: 'yes'
+                 },
+                 success: function(response)
+                 {
+                   $('#cadvehiclebolo').html(response);
+
+                   // SG - Removed until node/real-time data setup
+                   /*$('#activeUsers').DataTable({
+                     searching: false,
+                     scrollY: "200px",
+                     lengthMenu: [[4, -1], [4, "All"]]
+                });*/
+                   setTimeout(cadGetVehicleBOLOS, 5000);
+
+
+                 },
+                 error : function(XMLHttpRequest, textStatus, errorThrown)
+                 {
+                   console.log("Error");
+                 }
+
+               });
+         }
+
+
+      </script>
+      <script>
+        $(function(){
+            $(document).on('click', '#edit_personbolo', function(e){
+                e.preventDefault();
+                var edit_id = $(this).data('id');
+                $.ajax({
+                  url: '<?php echo BASE_URL; ?>/actions/dispatchActions.php',
+                  type: 'POST',
+                  data: 'bolos_personid='+edit_id,
+                  dataType: 'json',
+                  cache: false
+                  })
+                  .done(function(data){
+                    $('#editPersonboloModal #first_name').val(data.first_name);
+                    $('#editPersonboloModal #last_name').val(data.last_name);
+                    $('#editPersonboloModal #physical_description').val(data.physical_description);
+                    $('.gender_picker').selectpicker('val', data.gender);
+                    $('#editPersonboloModal #reason_wanted').val(data.reason_wanted);
+                    $('#editPersonboloModal #last_seen').val(data.last_seen);
+                    $('#editPersonboloModal .Editdataid').val(data.id);
+                  });
+              });
+              $(document).on('click', '#edit_vehiclebolo', function(e){
+                e.preventDefault();
+                var edit_id = $(this).data('id');
+                $.ajax({
+                  url: '<?php echo BASE_URL; ?>/actions/dispatchActions.php',
+                  type: 'POST',
+                  data: 'bolos_vehicleid='+edit_id,
+                  dataType: 'json',
+                  cache: false
+                  })
+                  .done(function(data){
+                    $('#editVehicleBOLO .vehicle_make').selectpicker('val', data.vehicle_make);
+                    $('#editVehicleBOLO .vehicle_model').selectpicker('val', data.vehicle_model);
+                    $('#editVehicleBOLO .vehicle_plate').val(data.vehicle_plate);
+                    $('#editVehicleBOLO .primary_color').val(data.primary_color);
+                    $('#editVehicleBOLO .secondary_color').val(data.secondary_color);
+                    $('#editVehicleBOLO .last_seen').val(data.last_seen);
+                    $('#editVehicleBOLO .reason_wanted').val(data.reason_wanted);
+                    $('#editVehicleBOLO .EditVehicleId').val(data.id);
+                  });
+              })
+          });
       </script>
    </body>
 </html>

@@ -1,14 +1,8 @@
 --
 -- OpenCAD Database Scheme
--- Last Updated: 15 October 2017
--- Updated By: Phill Fernandes <pfernandes@winterhillsolutions.com>
+-- Last Updated: 1 January 2018
+-- Updated By: Brennen Stapleton <bgstapleton@opencad.io>
 --
--- --------------------------------------------------------
- 
---
--- Database: `opencad`
---
-
 -- --------------------------------------------------------
 
 --
@@ -23,6 +17,7 @@ CREATE TABLE `active_users` (
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
+
 -- --------------------------------------------------------
 
 --
@@ -30,7 +25,7 @@ CREATE TABLE `active_users` (
 --
 
 CREATE TABLE `bolos_persons` (
-  `id` int(11) NOT NULL COMMENT 'Unqiue ID of persons BOLO record.',
+  `id` int(11) NOT NULL,
   `first_name` varchar(255) NOT NULL COMMENT 'First name of BOLO suspect.',
   `last_name` varchar(255) NOT NULL COMMENT 'Last name of BOLO suspect.',
   `gender` varchar(255) NOT NULL COMMENT 'Gender of BOLO suspect.',
@@ -46,7 +41,7 @@ CREATE TABLE `bolos_persons` (
 --
 
 CREATE TABLE `bolos_vehicles` (
-  `id` int(11) NOT NULL COMMENT 'Unqiue ID of vehicle BOLO record.',
+  `id` int(11) NOT NULL,
   `vehicle_make` varchar(255) NOT NULL COMMENT 'Make of BOLO vehicle.',
   `vehicle_model` varchar(255) NOT NULL COMMENT 'Model of BOLO vehicle.',
   `vehicle_plate` varchar(255) NOT NULL COMMENT 'License of BOLO vehicle.',
@@ -67,9 +62,9 @@ CREATE TABLE `calls` (
   `call_type` text NOT NULL,
   `call_primary` text NOT NULL,
   `call_street1` text NOT NULL,
-  `call_street2` text DEFAULT NULL,
-  `call_street3` text DEFAULT NULL,
-  `call_notes` text NOT NULL
+  `call_street2` text,
+  `call_street3` text,
+  `call_narrative` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
@@ -96,9 +91,19 @@ CREATE TABLE `call_history` (
   `call_primary` text NOT NULL,
   `call_type` text NOT NULL,
   `call_street1` text NOT NULL,
-  `call_street2` text DEFAULT NULL,
-  `call_street3` text DEFAULT NULL,
-  `call_notes` text NOT NULL
+  `call_street2` text,
+  `call_street3` text,
+  `call_narrative` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `call_list`
+--
+
+CREATE TABLE `call_list` (
+  `call_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
@@ -177,7 +182,7 @@ CREATE TABLE `civilian_names` (
 --
 
 CREATE TABLE `colors` (
-  `id` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL,
   `color_group` varchar(255) DEFAULT NULL,
   `color_name` varchar(255) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -272,7 +277,7 @@ INSERT INTO `colors` (`id`, `color_group`, `color_name`) VALUES
 (83, 'Matte', 'Midnight Purple'),
 (84, 'Matte', 'Shafter Purple'),
 (85, 'Matte', 'Red'),
-(86, 'Matte', 'Dark REd'),
+(86, 'Matte', 'Dark Red'),
 (87, 'Matte', 'Orange'),
 (88, 'Matte', 'Yellow'),
 (89, 'Matte', 'Lime Green'),
@@ -299,16 +304,16 @@ INSERT INTO `colors` (`id`, `color_group`, `color_name`) VALUES
 (110, 'Metallic', 'Torino Red'),
 (111, 'Metallic', 'Formula Red'),
 (112, 'Metallic', 'Lava Red'),
-(113, 'Metallic', 'Blaze REd'),
-(114, 'Metallic', 'Grace REd'),
+(113, 'Metallic', 'Blaze Red'),
+(114, 'Metallic', 'Grace Red'),
 (115, 'Metallic', 'Garnet Red'),
 (116, 'Metallic', 'Sunset Red'),
-(117, 'Metallic', 'Cabernet REd'),
-(118, 'Metallic', 'Wine REd'),
+(117, 'Metallic', 'Cabernet Red'),
+(118, 'Metallic', 'Wine Red'),
 (119, 'Metallic', 'Candy Red'),
 (120, 'Metallic', 'Hot Pink'),
 (121, 'Metallic', 'Pfister Pink'),
-(122, 'Metallic', 'salmon Pink'),
+(122, 'Metallic', 'Salmon Pink'),
 (123, 'Metallic', 'Sunrise Orange'),
 (124, 'Metallic', 'Orange'),
 (125, 'Metallic', 'Bright Orange'),
@@ -333,9 +338,9 @@ INSERT INTO `colors` (`id`, `color_group`, `color_name`) VALUES
 (144, 'Metallic', 'Diamond BLue'),
 (145, 'Metallic', 'Surf Blue'),
 (146, 'Metallic', 'Nauical Blue'),
-(147, 'Metallic', 'Racing BLue'),
-(148, 'Metallic', 'Ultra BLue'),
-(149, 'Metallic', 'Light BLue'),
+(147, 'Metallic', 'Racing Blue'),
+(148, 'Metallic', 'Ultra Blue'),
+(149, 'Metallic', 'Light Blue'),
 (150, 'Metallic', 'Chocolate Brown'),
 (151, 'Metallic', 'Bison Brown'),
 (152, 'Metallic', 'Creek Brown'),
@@ -356,7 +361,7 @@ INSERT INTO `colors` (`id`, `color_group`, `color_name`) VALUES
 (167, 'Metallic', 'Cream'),
 (168, 'Metallic', 'Ice White'),
 (169, 'Metallic', 'Frost White'),
-(170, 'Metals', 'Brushed STeel'),
+(170, 'Metals', 'Brushed Steel'),
 (171, 'Metals', 'Brushed Black Steel'),
 (172, 'Metals', 'Brushed Aluminium'),
 (173, 'Metals', 'Pure Gold'),
@@ -378,16 +383,16 @@ INSERT INTO `colors` (`id`, `color_group`, `color_name`) VALUES
 (189, 'Pearlescent', 'Torino Red'),
 (190, 'Pearlescent', 'Formula Red'),
 (191, 'Pearlescent', 'Lava Red'),
-(192, 'Pearlescent', 'Blaze REd'),
-(193, 'Pearlescent', 'Grace REd'),
+(192, 'Pearlescent', 'Blaze Red'),
+(193, 'Pearlescent', 'Grace Red'),
 (194, 'Pearlescent', 'Garnet Red'),
 (195, 'Pearlescent', 'Sunset Red'),
-(196, 'Pearlescent', 'Cabernet REd'),
-(197, 'Pearlescent', 'Wine REd'),
+(196, 'Pearlescent', 'Cabernet Red'),
+(197, 'Pearlescent', 'Wine Red'),
 (198, 'Pearlescent', 'Candy Red'),
 (199, 'Pearlescent', 'Hot Pink'),
 (200, 'Pearlescent', 'Pfister Pink'),
-(201, 'Pearlescent', 'salmon Pink'),
+(201, 'Pearlescent', 'Salmon Pink'),
 (202, 'Pearlescent', 'Sunrise Orange'),
 (203, 'Pearlescent', 'Orange'),
 (204, 'Pearlescent', 'Bright Orange'),
@@ -426,7 +431,7 @@ INSERT INTO `colors` (`id`, `color_group`, `color_name`) VALUES
 (237, 'Pearlescent', 'Moss Brown'),
 (238, 'Pearlescent', 'Woodbeech Brown'),
 (239, 'Pearlescent', 'Straw Brown'),
-(240, 'Pearlescent', 'Sandy BRown'),
+(240, 'Pearlescent', 'Sandy Brown'),
 (241, 'Pearlescent', 'Bleached Brown'),
 (242, 'Pearlescent', 'Schafter Purple'),
 (243, 'Pearlescent', 'Spinnaker Purple'),
@@ -436,6 +441,7 @@ INSERT INTO `colors` (`id`, `color_group`, `color_name`) VALUES
 (247, 'Pearlescent', 'Ice White'),
 (248, 'Pearlescent', 'Frost White');
 
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `departments`
@@ -481,7 +487,7 @@ CREATE TABLE `dispatchers` (
 --
 
 CREATE TABLE `genders` (
-  `id` INT(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `genders` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
@@ -490,32 +496,8 @@ CREATE TABLE `genders` (
 --
 
 INSERT INTO `genders` (`id`, `genders`) VALUES
-(0, 'Agender'),
-(1, 'Androgyne'),
-(2, 'Androgynous'),
-(3, 'Bigender'),
-(4, 'Cis Female'),
-(5, 'Cis Male'),
-(6, 'Female'),
-(7, 'Gender Fluid'),
-(8, 'Gender Nonconforming'),
-(9, 'Gender Questioning'),
-(10, 'Gender Variant'),
-(11, 'Genderqueer'),
-(12, 'Intersex'),
-(13, 'Male'),
-(14, 'Neither'),
-(15, 'Neutrois'),
-(16, 'Non-binary'),
-(17, 'Other'),
-(18, 'Pangender'),
-(19, 'Transgender Female'),
-(20, 'Transgender Male'),
-(21, 'Transgender Person'),
-(22, 'Transsexual Female'),
-(23, 'Transsexual Male'),
-(24, 'Transsexual Person'),
-(25, 'Two-Spirit');
+(0, 'Male'),
+(1, 'Female');
 
 -- --------------------------------------------------------
 
@@ -550,6 +532,21 @@ INSERT INTO `incident_type` (`code_id`, `code_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ncic_arrests`
+--
+
+CREATE TABLE `ncic_arrests` (
+  `id` int(11) NOT NULL,
+  `name_id` int(11) NOT NULL COMMENT 'Paired to ID of ncic_names table',
+  `arrest_reason` varchar(255) NOT NULL,
+  `arrest_fine` int(11) NOT NULL,
+  `issued_date` date DEFAULT NULL,
+  `issued_by` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ncic_citations`
 --
 
@@ -558,6 +555,7 @@ CREATE TABLE `ncic_citations` (
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '0 = Pending, 1 = Approved/Active',
   `name_id` int(11) NOT NULL COMMENT 'Paired to ID of ncic_names table',
   `citation_name` varchar(255) NOT NULL,
+  `citation_fine` int(11) NOT NULL,
   `issued_date` date DEFAULT NULL,
   `issued_by` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -572,15 +570,16 @@ CREATE TABLE `ncic_names` (
   `id` int(11) NOT NULL,
   `submittedByName` varchar(255) NOT NULL,
   `submittedById` varchar(255) NOT NULL,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `dob` date NOT NULL COMMENT 'Date of birth',
   `address` text NOT NULL,
   `gender` varchar(255) NOT NULL,
   `race` text NOT NULL,
   `dl_status` set('Valid','Suspended','Expired') NOT NULL,
   `hair_color` text NOT NULL,
-  `build` text NOT NULL
+  `build` text NOT NULL,
+  `weapon_permit` varchar(255) NOT NULL,
+  `deceased` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
@@ -600,7 +599,7 @@ CREATE TABLE `ncic_plates` (
   `veh_insurance` set('VALID','EXPIRED') NOT NULL DEFAULT 'VALID',
   `flags` set('NONE','STOLEN','WANTED','SUSPENDED REGISTRATION','UC FLAG','HPIU FLAG') NOT NULL DEFAULT 'NONE',
   `veh_reg_state` text NOT NULL,
-  `notes` text DEFAULT NULL COMMENT 'Any special flags visible to dispatchers',
+  `notes` text COMMENT 'Any special flags visible to dispatchers',
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
@@ -618,6 +617,8 @@ CREATE TABLE `ncic_warnings` (
   `issued_date` date DEFAULT NULL,
   `issued_by` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `ncic_warrants`
@@ -642,7 +643,6 @@ CREATE TABLE `ncic_warrants` (
 CREATE TABLE `ncic_weapons` (
   `id` int(11) NOT NULL,
   `name_id` int(11) NOT NULL COMMENT 'Links to ncic_names db for driver information',
-  `serial` varchar(255) NOT NULL,
   `weapon_type` varchar(255) NOT NULL,
   `weapon_name` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL
@@ -948,6 +948,9 @@ CREATE TABLE `tones` (
   `active` set('0','1') NOT NULL DEFAULT '0' COMMENT '0 = inactive, 1 = active'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tones table. DO NOT ADD ROWS TO THIS TABLE' ROW_FORMAT=COMPACT;
 
+--
+-- Dumping data for table `tones`
+--
 
 INSERT INTO `tones` (`id`, `name`, `active`) VALUES
 (0, 'priority', '0'),
@@ -963,7 +966,7 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `email` varchar(255) NOT NULL,
-  `password` text DEFAULT NULL,
+  `password` text,
   `identifier` varchar(255) DEFAULT NULL,
   `password_reset` int(1) NOT NULL DEFAULT '0' COMMENT '1 means password reset required. 0 means it''s not.',
   `approved` int(1) NOT NULL DEFAULT '0' COMMENT 'Three main statuses: 0 means pending approval. 1 means has access. 2 means banned'
@@ -974,7 +977,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `identifier`, `password_reset`, `approved`) VALUES
-(21, 'Default Admin', 'admin@test.com', '$2y$10$xHvogGcqQs8jhTPbFEDHJO9KWu2FCLgJ5XGxH.hHMA0BY1brgCkSG', '1A-98', 0, 1);
+(1, 'Default Admin', 'admin@test.com', '$2y$10$xHvogGcqQs8jhTPbFEDHJO9KWu2FCLgJ5XGxH.hHMA0BY1brgCkSG', '1A-98', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -992,16 +995,16 @@ CREATE TABLE `user_departments` (
 --
 
 INSERT INTO `user_departments` (`user_id`, `department_id`) VALUES
-(21, 0),
-(21, 1),
-(21, 2),
-(21, 3),
-(21, 4),
-(21, 5),
-(21, 6),
-(21, 7),
-(21, 8),
-(21, 9);
+(1, 0),
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(1, 5),
+(1, 6),
+(1, 7),
+(1, 8),
+(1, 9);
 
 -- --------------------------------------------------------
 
@@ -1013,17 +1016,6 @@ CREATE TABLE `user_departments_temp` (
   `user_id` int(11) NOT NULL,
   `department_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Temporary table - stores user departments for non-approved users' ROW_FORMAT=COMPACT;
-
---
--- Dumping data for table `user_departments_temp`
---
-
-INSERT INTO `user_departments_temp` (`user_id`, `department_id`) VALUES
-(21, 7),
-(21, 1),
-(21, 5),
-(24, 1),
-(26, 7);
 
 -- --------------------------------------------------------
 
@@ -1057,7 +1049,7 @@ INSERT INTO `vehicles` (`id`, `Make`, `Model`) VALUES
 (13, 'Albany', 'Primo Custom'),
 (14, 'Albany', 'Police Road Crusiser'),
 (15, 'Albany', 'Police Stinger'),
-(16, 'Albany', 'Roman’s Taxi'),
+(16, 'Albany', 'Roman`s Taxi'),
 (17, 'Albany', 'Romero'),
 (18, 'Albany', 'Roosevelt'),
 (19, 'Albany', 'Roosevelt Valor'),
@@ -1524,6 +1516,54 @@ INSERT INTO `vehicles` (`id`, `Make`, `Model`) VALUES
 (480, 'Zirconium', 'Stratum');
 
 --
+-- Table structure for table `weapons`
+--
+
+CREATE TABLE `weapons` (
+  `id` int(11) NOT NULL,
+  `weapon_type` varchar(255) NOT NULL,
+  `weapon_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `weapons`
+--
+
+INSERT INTO `weapons` (`id`, `weapon_type`, `weapon_name`) VALUES
+(1, 'Pistols', 'Pistol'),
+(2, 'Pistols', 'Combat-Pistol'),
+(3, 'Pistols', 'AP-Pistol'),
+(4, 'Pistols', 'Pistol-.50'),
+(5, 'Pistols', 'SNS-Pistol'),
+(6, 'Pistols', 'Heavy-Pistol'),
+(7, 'Pistols', 'Vintage-Pistol'),
+(8, 'Sub-Machine-Guns', 'Micro-SMG'),
+(9, 'Sub-Machine-Guns', 'SMG'),
+(10, 'Sub-Machine-Guns', 'Assault-SMG'),
+(11, 'Sub-Machine-Guns', 'Gusenberg-Sweeper'),
+(12, 'Shotguns', 'Pump-Shotgun'),
+(13, 'Shotguns', 'Sawed-off-Shotgun'),
+(14, 'Shotguns', 'Assault-Shotgun'),
+(15, 'Shotguns', 'Bullpup-Shotgun'),
+(16, 'Shotguns', 'Heavy-Shotgun'),
+(17, 'Shotguns', 'Musket'),
+(18, 'Light-Machine-Guns', 'MG'),
+(19, 'Light-Machine-Guns', 'Combat-MG'),
+(20, 'Assault-Rifles', 'Assault-Rifle'),
+(21, 'Assault-Rifles', 'Carbine-Rifle'),
+(22, 'Assault-Rifles', 'Advanced-Rifle'),
+(23, 'Assault-Rifles', 'Special-Carbine'),
+(24, 'Assault-Rifles', 'Bullpup-Rifle'),
+(25, 'Sniper-Rifles', 'Sniper-Rifle'),
+(26, 'Sniper-Rifles', 'Heave-Sniper'),
+(27, 'Sniper-Rifles', 'Marksman-Rifle'),
+(28, 'Heavy', 'RPG'),
+(29, 'Heavy', 'Minigun'),
+(30, 'Heavy', 'Homing-Launcher'),
+(31, 'Heavy', 'Grenade-Launcher'),
+(32, 'Heavy', 'Firework-Launcher');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -1534,17 +1574,19 @@ ALTER TABLE `active_users`
   ADD PRIMARY KEY (`identifier`) USING BTREE,
   ADD UNIQUE KEY `callsign` (`callsign`) USING BTREE,
   ADD UNIQUE KEY `identifier` (`identifier`) USING BTREE;
+
 --
 -- Indexes for table `bolos_persons`
 --
 ALTER TABLE `bolos_persons`
   ADD PRIMARY KEY (`id`) USING BTREE;
+
 --
--- Indexes for table `bolos_persons`
+-- Indexes for table `bolos_vehicles`
 --
 ALTER TABLE `bolos_vehicles`
   ADD PRIMARY KEY (`id`) USING BTREE;
-  
+
 --
 -- Indexes for table `calls`
 --
@@ -1582,13 +1624,13 @@ ALTER TABLE `civilian_names`
 --
 ALTER TABLE `colors`
   ADD PRIMARY KEY (`id`) USING BTREE;
-  
+
 --
 -- Indexes for table `departments`
 --
 ALTER TABLE `departments`
   ADD PRIMARY KEY (`department_id`) USING BTREE;
-  
+
 --
 -- Indexes for table `dispatchers`
 --
@@ -1596,7 +1638,7 @@ ALTER TABLE `dispatchers`
   ADD PRIMARY KEY (`identifier`) USING BTREE,
   ADD UNIQUE KEY `callsign` (`callsign`) USING BTREE,
   ADD UNIQUE KEY `identifier` (`identifier`) USING BTREE;
-  
+
 --
 -- Indexes for table `genders`
 --
@@ -1611,6 +1653,12 @@ ALTER TABLE `incident_type`
   ADD UNIQUE KEY `code_name` (`code_name`) USING BTREE;
 
 --
+-- Indexes for table `ncic_arrests`
+--
+ALTER TABLE `ncic_arrests`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+  
+--
 -- Indexes for table `ncic_citations`
 --
 ALTER TABLE `ncic_citations`
@@ -1622,7 +1670,7 @@ ALTER TABLE `ncic_citations`
 ALTER TABLE `ncic_names`
   ADD PRIMARY KEY (`id`) USING BTREE,
   ADD UNIQUE KEY `id_UNIQUE` (`id`) USING BTREE,
-  ADD UNIQUE KEY `first_name` (`first_name`,`last_name`) USING BTREE;
+  ADD UNIQUE KEY `name` (`name`) USING BTREE;
 
 --
 -- Indexes for table `ncic_plates`
@@ -1637,19 +1685,18 @@ ALTER TABLE `ncic_plates`
 --
 ALTER TABLE `ncic_warnings`
   ADD PRIMARY KEY (`id`) USING BTREE;
-  
+
 --
 -- Indexes for table `ncic_warrants`
 --
 ALTER TABLE `ncic_warrants`
   ADD PRIMARY KEY (`id`) USING BTREE;
-  
+
 --
 -- Indexes for table `ncic_weapons`
 --
 ALTER TABLE `ncic_weapons`
   ADD PRIMARY KEY (`id`) USING BTREE,
-  ADD UNIQUE KEY `serial` (`serial`(55)) USING BTREE,
   ADD KEY `name_id` (`name_id`) USING BTREE;
 
 --
@@ -1698,41 +1745,57 @@ ALTER TABLE `user_departments`
 --
 ALTER TABLE `vehicles`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `weapons`
+--
+ALTER TABLE `weapons`
+  ADD PRIMARY KEY (`id`);
+  
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
 --
 -- AUTO_INCREMENT for table `bolos_persons`
 --
 ALTER TABLE `bolos_persons`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `bolos_persons`
+-- AUTO_INCREMENT for table `bolos_vehicles`
 --
 ALTER TABLE `bolos_vehicles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `calls`
 --
 ALTER TABLE `calls`
-  MODIFY `call_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `call_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `ncic_arrests`
+--
+ALTER TABLE `ncic_arrests`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `ncic_citations`
 --
 ALTER TABLE `ncic_citations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `ncic_names`
 --
 ALTER TABLE `ncic_names`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `ncic_plates`
 --
 ALTER TABLE `ncic_plates`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `ncic_warnings`
 --
 ALTER TABLE `ncic_warnings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `ncic_warrants`
 --
@@ -1742,7 +1805,7 @@ ALTER TABLE `ncic_warrants`
 -- AUTO_INCREMENT for table `ncic_weapons`
 --
 ALTER TABLE `ncic_weapons`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `permissions`
 --
@@ -1752,22 +1815,22 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `statuses`
 --
 ALTER TABLE `statuses`
-  MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `streets`
 --
 ALTER TABLE `streets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key for each street', AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key for each street', AUTO_INCREMENT=235;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `vehicles`
 --
 ALTER TABLE `vehicles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=481;
 --
 -- Constraints for dumped tables
 --
@@ -1790,9 +1853,10 @@ ALTER TABLE `ncic_plates`
 --
 ALTER TABLE `ncic_weapons`
   ADD CONSTRAINT `Name Pair Weapon` FOREIGN KEY (`name_id`) REFERENCES `ncic_names` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-  
+
 --
 -- Constraints for table `user_departments`
 --
 ALTER TABLE `user_departments`
   ADD CONSTRAINT `Department` FOREIGN KEY (`department_id`) REFERENCES `departments` (`department_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;

@@ -24,6 +24,14 @@ if (isset($_GET['getStatus']))
 {
     getStatus();
 }
+if (isset($_GET['mdtGetVehicleBOLOS']))
+{
+    mdtGetVehicleBOLOS();
+}
+if (isset($_GET['mdtGetPersonBOLOS']))
+{
+    mdtGetPersonBOLOS();
+}
 if (isset($_POST['create_citation'])){
     create_citation();
 }
@@ -51,7 +59,7 @@ function updateCallsign()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $sql = "UPDATE `active_users` SET `callsign` = ?, status = '0', status_detail='2' WHERE `active_users`.`identifier` = ?";
+    $sql = "UPDATE `active_users` SET `callsign` = ?, status = '0' WHERE `active_users`.`identifier` = ?";
 
 	try {
 		$stmt = mysqli_prepare($link, $sql);
@@ -222,8 +230,8 @@ function mdtGetPersonBOLOS()
             <tr>
                 <td>'.$row[1].'</td>
                 <td>'.$row[2].'</td>
-                <td>'.$row[4].'</td>
                 <td>'.$row[3].'</td>
+                <td>'.$row[4].'</td>
                 <td>'.$row[5].'</td>
                 <td>'.$row[6].'</td>
             </tr>

@@ -26,7 +26,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       $name = $_SESSION['name'];
     }
 	
-	
     include("./actions/api.php");
     include("./actions/responderActions.php");
     
@@ -36,12 +35,19 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         $citationMessage = $_SESSION['citationMessage'];
         unset($_SESSION['citationMessage']);
     }
+    $arrestMessage = "";
+    if(isset($_SESSION['arrestMessage']))
+    {
+        $arrestMessage = $_SESSION['arrestMessage'];
+        unset($_SESSION['arrestMessage']);
+    }
     $warningMessage = "";
     if(isset($_SESSION['warningMessage']))
     {
-        $citationMessage = $_SESSION['warningMessage'];
+        $warningMessage = $_SESSION['warningMessage'];
         unset($_SESSION['warningMessage']);
     }
+		callCheck();
 	
 ?>
 
@@ -82,16 +88,16 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                               </ul>
                            </li>
                            <li>
-                              <a><i class="fa fa-book"></i> Warnings <span class="fa fa-chevron-down"></span></a>
-                              <ul class="nav child_menu">
-                                 <li><a type="button" data-toggle="modal" data-target="#createWarning" > Create Warning</a></li>
-                              </ul>
+                                 <a type="button" data-toggle="modal" data-target="#createWarning" > Create Warning</a>
                            </li>
                            <li>
-                              <a><i class="fa fa-book"></i> Citations <span class="fa fa-chevron-down"></span></a>
-                              <ul class="nav child_menu">
-                                 <li><a type="button" data-toggle="modal" data-target="#createCitation" > Create Citation</a></li>
-                              </ul>
+                                 <a type="button" data-toggle="modal" data-target="#createCitation" > Create Citation</a>
+                           </li>
+                           <li>
+                                 <a type="button" data-toggle="modal" data-target="#createArrest" > Create Arrest Report</a
+                           </li>
+                           <li>
+                                 <a type="button" data-toggle="modal" data-target="#rms" > Report Management System</a
                            </li>
                            <!--
                               <li><a><i class="fa fa-external-link"></i> Links <span class="fa fa-chevron-down"></span></a>
@@ -105,10 +111,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                               </li>
                               -->
                            <li>
-                              <a><i class="fa fa-hashtag"></i> Callsign <span class="fa fa-chevron-down"></span></a>
-                              <ul class="nav child_menu">
-                                 <li><a id="changeCallsign" class="btn-link" name="changeCallsign" data-toggle="modal" data-target="#callsign">Change Callsign</a></li>
-                              </ul>
+                                 <a id="changeCallsign" class="btn-link" name="changeCallsign" data-toggle="modal" data-target="#callsign">Change Callsign</a>
                            </li>
                         </ul>
                      </div>
@@ -121,7 +124,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <a data-toggle="tooltip" data-placement="top">
                           <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                         </a>-->
-                     <a data-toggle="tooltip" data-placement="top" title="FullScreen" onclick="toggleFullScreen()">
+                     <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
                      <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
                      </a>
                      <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
@@ -164,6 +167,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <div class="title_left">
                         <h3>MDT Console</h3>
                         <?php echo $citationMessage;?>
+						<?php echo $arrestMessage;?>
+						<?php echo $warningMessage;?>
                      </div>
                      <div class="x_footer">
                         <button class="btn btn-danger pull-right" name="new_call_btn" data-toggle="modal" data-target="#vehicles-bolo-board">View Vehicle BOLOs</button>
@@ -225,10 +230,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                        <input type="text" name="status" id="status" class="form-control" readonly />
                                     </div>
                                  </div>
+								 
+								 
                                  <div class="form-group">
                                     <label class="col-md-2 col-sm-2 col-xs-2 control-label">Change Status</label>
                                     <div class="col-md-10 col-sm-10 col-xs-10">
-                                       <select name="statusSelect" class="form-control selectpicker <?php echo $_SESSION['identifier'];?>" id="statusSelect" onchange="responderChangeStatus(this);" title="Select a Status">
+                                       <select name="statusSelect" class="form-control selectpicker <?php echo $_SESSION['identifier'];?>" id="statusSelect" onChange="responderChangeStatus(this);" title="Select a Status">
                                           <option value="10-6">10-6/Busy</option>
 										  <option value="10-5">10-5/Meal Break</option>
 										  <option value="10-7">10-7/Unavailable</option>
@@ -266,7 +273,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      </div>
                      <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
                      <?php
-                        if (isset($_GET['fire']))
+                        if (isset($_GET['Fire']))
                         {
                             //End the above row
                             echo '
@@ -387,7 +394,98 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       '; */
       }
       ?>
-      <!-- ./ row -->
+      <!-- ./ row --><?php
+  if (POLICE_NCIC === true) { ?>
+                      <div class="clearfix"></div>
+                  <div class="row">
+                     <div class="col-md-4 col-sm-4 col-xs-4">
+                        <div class="x_panel">
+                           <div class="x_title">
+                              <h2>NCIC Name Lookup</h2>
+                              <ul class="nav navbar-right panel_toolbox">
+                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                              </ul>
+                              <div class="clearfix"></div>
+                           </div>
+                           <!-- ./ x_title -->
+                           <div class="x_content">
+                              <div class="input-group">
+                                 <input type="text" name="ncic_name" class="form-control" id="ncic_name" placeholder="John Doe"/>
+                                 <span class="input-group-btn">
+                                 <button type="button" class="btn btn-primary" name="ncic_name_btn" id="ncic_name_btn">Send</button>
+                                 </span>
+                              </div>
+                              <!-- ./ input-group -->
+                              <div name="ncic_name_return" id="ncic_name_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
+                                 <!--<textarea class="form-control" style="resize:none;" id="ncic_name_return" name="ncic_name_return" readonly="readonly"></textarea> -->
+                              </div>
+                              <!-- ./ ncic_name_return -->
+                           </div>
+                           <!-- ./ x_content -->
+                        </div>
+                        <!-- ./ x_panel -->
+                     </div>
+                     <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
+                     <div class="col-md-4 col-sm-4 col-xs-4">
+                        <div class="x_panel">
+                           <div class="x_title">
+                              <h2>NCIC Plate Lookup</h2>
+                              <ul class="nav navbar-right panel_toolbox">
+                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                              </ul>
+                              <div class="clearfix"></div>
+                           </div>
+                           <!-- ./ x_title -->
+                           <div class="x_content">
+                              <div class="input-group">
+                                 <input type="text" name="ncic_plate" class="form-control" id="ncic_plate" placeholder="License Plate, (ABC123)"/>
+                                 <span class="input-group-btn">
+                                 <button type="button" class="btn btn-primary" id="ncic_plate_btn">Send</button>
+                                 </span>
+                              </div>
+                              <!-- ./ input-group -->
+                              <div name="ncic_plate_return" id="ncic_plate_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
+                              </div>
+                              <!-- ./ ncic_plate_return -->
+                           </div>
+                           <!-- ./ x_content -->
+                        </div>
+                        <!-- ./ x_panel -->
+                     </div>
+                     <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
+                     <!-- NCIC Firearm lookup will return in a later RC -->
+                     <div class="col-md-4 col-sm-4 col-xs-4">
+                        <div class="x_panel">
+                           <div class="x_title">
+                              <h2>NCIC Weapon Lookup</h2>
+                              <ul class="nav navbar-right panel_toolbox">
+                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                              </ul>
+                              <div class="clearfix"></div>
+                           </div>
+                           <!-- ./ x_title -->
+                           <div class="x_content">
+                              <div class="input-group">
+                                 <input type="text" name="ncic_weapon" class="form-control" id="ncic_weapon" placeholder="John Doe"/>
+                                 <span class="input-group-btn">
+                                 <button type="button" class="btn btn-primary" name="ncic_weapon_btn" id="ncic_weapon_btn">Send</button>
+                                 </span>
+                              </div>
+                              <!-- ./ input-group -->
+                              <div name="ncic_weapon_return" id="ncic_weapon_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
+                                 <!--<textarea class="form-control" style="resize:none;" id="ncic_name_return" name="ncic_name_return" readonly="readonly"></textarea> -->
+                              </div>
+                              <!-- ./ ncic_name_return -->
+                           </div>
+                           <!-- ./ x_content -->
+                        </div>
+                        <!-- ./ x_panel -->
+                     </div>
+               <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
+            </div>
+ <?php } else { ?>
+ <?php } 
+      ?>
       </div>
       <!-- "" -->
       </div>
@@ -427,7 +525,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                </div>
                <!-- ./ modal-body -->
                <div class="modal-footer">
-               <input type="submit" name="setCallsign" class="btn btn-primary" value="Set Callsign"/>
+               <input type="submit" name="setCallsign" class="btn btn-primary setcall_cls" value="Set Callsign"/>
                </div>
                <!-- ./ modal-footer -->
                </form>
@@ -487,7 +585,179 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          </div>
          <!-- ./ modal-dialog modal-md -->
 
-
+      <!-- Call Details Modal -->
+      <div class="modal fade" id="createArrest" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" id="closecallDetails"><span aria-hidden="true">×</span>
+               </button>
+               <h4 class="modal-title" id="myModalLabel">Arrest Report</h4>
+            </div>
+            <!-- ./ modal-header -->
+          <div class="modal-body">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/responderActions.php" method="post">
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Civilian Name</label>
+                <div class="col-lg-10">
+                  <select class="form-control selectpicker" name="civilian_names" id="civilian_names" data-live-search="true" required title="Select Civilian">
+                    <?php getCivilianNamesOption();?>
+                  </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Arrest Reason 1</label>
+                <div class="col-lg-10">
+					<input type="text" name="arrest_reason_1" id="arrest_reason_1" size="70" placeholder="Enter a reason for arrest" required />
+					<input type="number" name="arrest_fine_1" id="arrest_fine_1" size="10" placeholder="Enter a fine amount" />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+			  <p>Optional</p>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Arrest Reason 2</label>
+                <div class="col-lg-10">
+					<input type="text" name="arrest_reason_2" id="arrest_reason_2" size="70" placeholder="Enter a reason for arrest"  />
+					<input type="number" name="arrest_fine_2" id="arrest_fine_2" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Arrest Reason 3</label>
+                <div class="col-lg-10">
+					<input type="text" name="arrest_reason_3" id="arrest_reason_3" size="70" placeholder="Enter a reason for arrest"  />
+					<input type="number" name="arrest_fine_3" id="arrest_fine_3" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Arrest Reason 4</label>
+                <div class="col-lg-10">
+					<input type="text" name="arrest_reason_4" id="arrest_reason_4" size="70" placeholder="Enter a reason for arrest"  />
+					<input type="number" name="arrest_fine_4" id="arrest_fine_4" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Arrest Reason 5</label>
+                <div class="col-lg-10">
+					<input type="text" name="arrest_reason_5" id="arrest_reason_5" size="70" placeholder="Enter a reason for arrest"  />
+					<input type="number" name="arrest_fine_5" id="arrest_fine_5" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+                <input name="create_arrest" type="submit" class="btn btn-primary" value="Create" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
+      <div class="modal fade" id="rms" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
+                  </button>
+            <h4 class="modal-title" id="myModalLabel">Warning Viewer</h4>
+          </div>
+          <!-- ./ modal-header -->
+          <div class="modal-body">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel" id="citation_panel">
+                  <div class="x_title">
+                    <h2>RMS Warnings</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php rms_warnings();?>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <div class="x_panel" id="citation_panel">
+                  <div class="x_title">
+                    <h2>RMS Citations</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php rms_citations();?>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <div class="x_panel" id="citation_panel">
+                  <div class="x_title">
+                    <h2>RMS Arrests</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php rms_arrests();?>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <div class="x_panel" id="citation_panel">
+                  <div class="x_title">
+                    <h2>RMS Warrants</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php rms_warrants();?>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <!-- ./ x_panel -->
+              </div>
+              <!-- ./ form-group -->
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
       <!-- Call Details Modal -->
       <div class="modal fade" id="createCitation" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg">
@@ -511,11 +781,43 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               </div>
               <!-- ./ form-group -->
               <div class="form-group row">
-                <label class="col-lg-2 control-label">Citation Name</label>
+                <label class="col-lg-2 control-label">Citation Name 1</label>
                 <div class="col-lg-10">
-                  <select class="form-control selectpicker" data-live-search="true" name="citation_name" id="citation_name" title="Select Citation" required>
-                    <?php getCitations();?>
-                  </select>
+					<input type="text" name="citation_name_1" id="citation_name_1" size="70" placeholder="Enter a citation" required />
+					<input type="number" name="citation_fine_1" id="citation_fine_1" size="10" placeholder="Enter a fine amount" required />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+			  <p>Optional</p>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Citation Name 2</label>
+                <div class="col-lg-10">
+					<input type="text" name="citation_name_2" id="citation_name_2" size="70" placeholder="Enter a citation"  />
+					<input type="number" name="citation_fine_2" id="citation_fine_2" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Citation Name 3</label>
+                <div class="col-lg-10">
+					<input type="text" name="citation_name_3" id="citation_name_3" size="70" placeholder="Enter a citation"  />
+					<input type="number" name="citation_fine_3" id="citation_fine_3" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Citation Name 4</label>
+                <div class="col-lg-10">
+					<input type="text" name="citation_name_4" id="citation_name_4" size="70" placeholder="Enter a citation"  />
+					<input type="number" name="citation_fine_4" id="citation_fine_4" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Citation Name 5</label>
+                <div class="col-lg-10">
+					<input type="text" name="citation_name_5" id="citation_name_5" size="70" placeholder="Enter a citation"  />
+					<input type="number" name="citation_fine_5" id="citation_fine_5" placeholder="Enter a fine amount"  />
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -557,9 +859,38 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               </div>
               <!-- ./ form-group -->
               <div class="form-group row">
-                <label class="col-lg-2 control-label">Warning Name</label>
+                <label class="col-lg-2 control-label">Warning Name 1</label>
                 <div class="col-lg-10">
-					<input type="text" class="form-control" name="warning_name" id="warning_name" placeholder="Enter a warning" />
+					<input type="text" class="form-control" name="warning_name_1" id="warning_name_1" placeholder="Enter a warning" required />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+			  <p>Optional</p>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Warning Name 2</label>
+                <div class="col-lg-10">
+					<input type="text" class="form-control" name="warning_name_2" id="warning_name_2" placeholder="Enter a warning"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Warning Name 3</label>
+                <div class="col-lg-10">
+					<input type="text" class="form-control" name="warning_name_3" id="warning_name_3" placeholder="Enter a warning"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Warning Name 4</label>
+                <div class="col-lg-10">
+					<input type="text" class="form-control" name="warning_name_4" id="warning_name_4" placeholder="Enter a warning"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Warning Name 5</label>
+                <div class="col-lg-10">
+					<input type="text" class="form-control" name="warning_name_5" id="warning_name_5" placeholder="Enter a warning"  />
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -669,6 +1000,78 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          <!-- ./ modal-dialog modal-lg -->
       </div>
       <!-- ./ modal fade bs-example-modal-lg -->
+      <div class="modal fade" id="rms" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
+                  </button>
+            <h4 class="modal-title" id="myModalLabel">Warning Creator</h4>
+          </div>
+          <!-- ./ modal-header -->
+          <div class="modal-body">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/responderActions.php" method="post">
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Civilian Name</label>
+                <div class="col-lg-10">
+                  <select class="form-control selectpicker" name="civilian_names" id="civilian_names" data-live-search="true" required title="Select Civilian">
+                    <?php getCivilianNamesOption();?>
+                  </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Warning Name 1</label>
+                <div class="col-lg-10">
+					<input type="text" class="form-control" name="warning_name_1" id="warning_name_1" placeholder="Enter a warning" required />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+			  <p>Optional</p>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Warning Name 2</label>
+                <div class="col-lg-10">
+					<input type="text" class="form-control" name="warning_name_2" id="warning_name_2" placeholder="Enter a warning"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Warning Name 3</label>
+                <div class="col-lg-10">
+					<input type="text" class="form-control" name="warning_name_3" id="warning_name_3" placeholder="Enter a warning"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Warning Name 4</label>
+                <div class="col-lg-10">
+					<input type="text" class="form-control" name="warning_name_4" id="warning_name_4" placeholder="Enter a warning"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Warning Name 5</label>
+                <div class="col-lg-10">
+					<input type="text" class="form-control" name="warning_name_5" id="warning_name_5" placeholder="Enter a warning"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+                <input name="create_warning" type="submit" class="btn btn-primary" value="Create" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
       <!-- AUDIO TONES -->
       <audio id="recurringToneAudio" src="<?php echo BASE_URL; ?>/sounds/priority.mp3" preload="auto"></audio>
       <audio id="priorityToneAudio" src="<?php echo BASE_URL; ?>/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
@@ -677,28 +1080,56 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          vid.volume = 0.3;
       </script>
       <?php
-         if (isset($_GET['fire']))
+         if (isset($_GET['Fire']))
          {
 
-           if ($_GET['fire'] == "true")
+           if ($_GET['Fire'] == "true")
            {
              echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/Fire_Tones_Aligned.wav" preload="auto"></audio>';
            }
          }
          else
          {
-           echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/New_Dispatch.mp3" preload="auto"></audio>';
+			echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/New_Dispatch.mp3"  preload="auto"></audio>';
          }
          ?>
       <?php include "./oc-includes/jquery-colsolidated.inc.php"; ?>
+    <script>
+    $(document).ready(function() {
+        $('#rms_warnings').DataTable({
+
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#rms_citations').DataTable({
+
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#rms_arrests').DataTable({
+
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#rms_warrants').DataTable({
+
+        });
+    });
+    </script>
       <script>
          $(document).ready(function() {
+			
              $(function() {
                  $('#menu_toggle').click();
              });
 
-             $('#callsign').modal('show');
-
+             //$('#callsign').modal('show');
              getCalls();
              getStatus();
              checkTones();
@@ -739,6 +1170,27 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
          });
       </script>
+      <script>
+  $(function() {
+    $( "#ncic_name" ).autocomplete({
+      source: "<?php echo BASE_URL; ?>/js/search_name.php"
+    });
+  });
+  </script>
+      <script>
+  $(function() {
+    $( "#ncic_plate" ).autocomplete({
+      source: "<?php echo BASE_URL; ?>/js/search_plate.php"
+    });
+  });
+  </script>
+      <script>
+  $(function() {
+    $( "#ncic_weapon" ).autocomplete({
+      source: "<?php echo BASE_URL; ?>/js/search_name.php"
+    });
+  });
+  </script>
       <script>
          // PNotify Stuff
          priorityNotification = new PNotify({
@@ -805,7 +1257,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          function mdtGetVehicleBOLOS() {
              $.ajax({
                    type: "GET",
-                   url: "<?php echo BASE_URL; ?>/actions/api.php",
+                   url: "<?php echo BASE_URL; ?>/actions/responderActions.php",
                    data: {
                        mdtGetVehicleBOLOS: 'yes',
                        responder: 'yes'
@@ -828,7 +1280,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          function mdtGetPersonBOLOS() {
              $.ajax({
                    type: "GET",
-                   url: "<?php echo BASE_URL; ?>/actions/api.php",
+                   url: "<?php echo BASE_URL; ?>/actions/responderActions.php",
                    data: {
                        mdtGetPersonBOLOS: 'yes',
                        responder: 'yes'
@@ -866,8 +1318,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                    },
                    success: function(response)
                    {
-                     console.log(response);
-
+                     					 
                      if (response.match("^Duplicate"))
                      {
                          var call2 = $('#callsign').find('input[name="callsign"]').val();
@@ -928,6 +1379,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
            });
       </script>
       <script>
+		
          function getStatus() {
          $.ajax({
              type: "GET",
@@ -938,48 +1390,60 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
              success: function(response)
              {
                  console.log(response);
-                 if (response.match("^10-6 | On"))
+				 
+                 if (response.match("^10-7 | Unavailable"))
                  {
                      var currentStatus = $('#status').val();
-                     if (currentStatus == "10-6 | On Call")
+                     if (currentStatus == "10-7 | Unavailable | On Call")
                      {
-                         //Do nothing
+                        //do nothing
                      }
-                     else
-                     {
-                         document.getElementById('newCallAudio').play();
-                         new PNotify({
-                             title: 'New Call!',
-                             text: 'You\'ve been assigned a new call!',
-                             type: 'success',
-                             styling: 'bootstrap3'
-                         });
-
-                         getMyCallDetails();
+                     else if(currentStatus == '10-7 | Unavailable')
+					 {
+						 
+					 }
+					 else
+					 {
+						 
+						 document.getElementById('newCallAudio').play();
+						 new PNotify({
+							 title: 'New Call!',
+							 text: 'You\'ve been assigned a new call!',
+							 type: 'success',
+							 styling: 'bootstrap3'
+						 });
+						 getMyCallDetails();
+						
                      }
+					 
+					
                  }
                  else if (response.match("^<br>"))
                  {
                      console.log("LOGGED OUT");
                      window.location.href = '<?php echo BASE_URL; ?>/actions/logout.php';
-
                  }
                  else
                  {
 
                  }
-
-                 $('#status').val(response);
-                 setTimeout(getStatus, 5000);
+				
+				
+				 $('#status').val(response);
+				 setTimeout(getStatus, 5000);
              },
              error : function(XMLHttpRequest, textStatus, errorThrown)
              {
-             console.log("Error");
+				console.log("Error");
              }
 
          });
          }
-
+		 
+		 $('.setcall_cls').click(function (){
+			getStatus();
+		 });
+		 
          function getMyCallDetails()
          {
            console.log("Got here");
