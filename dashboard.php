@@ -64,44 +64,44 @@ if($num_rows < 2)
         if ($row[1] == "0")
         {
             $_SESSION['admin'] = 'YES';
-            header("Location:/oc-admin/admin.php");
+            header("Location:".BASE_URL."/oc-admin/admin.php");
 
         }
         else if ($row[1] == "1")
         {
             $_SESSION['dispatch'] = 'YES';
-            header("Location:/cad.php");
+            header("Location:".BASE_URL."/cad.php");
 
         }
         else if ($row[1] == "2")
         {
             $_SESSION['ems'] = 'YES';
-            header("Location:/mdt.php");
+            header("Location:".BASE_URL."/mdt.php");
         }
             else if ($row[1] == "3")
         {
             $_SESSION['fire'] = 'YES';
-            header("Location:/mdt.php");
+            header("Location:".BASE_URL."/mdt.php");
         }
         else if ($row[1] == "4")
         {
             $_SESSION['highway'] = 'YES';
-            header("Location:/mdt.php");
+            header("Location:".BASE_URL."/mdt.php");
         }
         else if ($row[1] == "5")
         {
             $_SESSION['police'] = 'YES';
-            header("Location:/mdt.php");
+            header("Location:".BASE_URL."/mdt.php");
         }
         else if ($row[1] == "6")
         {
             $_SESSION['sheriff'] = 'YES';
-            header("Location:/mdt.php");
+            header("Location:".BASE_URL."/mdt.php");
         }
         else if ($row[1] == "7")
         {
             $_SESSION['civilian'] = 'YES';
-            header("Location:/civilian.php");
+            header("Location:".BASE_URL."/civilian.php");
         }
 
     }

@@ -133,7 +133,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
                 <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="/actions/logout.php">
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -232,6 +232,115 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
             </div>
             <!-- ./ row -->
+			
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel" id="plate_panel">
+                  <div class="x_title">
+                    <h2>NCIC Weapon DB</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php echo $plateMessage;?>
+                     <?php ncicGetWeapons();?>
+                  </div>
+                  <!-- ./ x_content -->
+                  <!-- ./ x_footer -->
+                </div>
+                <!-- ./ x_panel -->
+              </div>
+              <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
+            </div>
+            <!-- ./ row -->
+			
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel" id="citation_panel">
+                  <div class="x_title">
+                    <h2>NCIC Warnings DB</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php echo $citationMessage;?>
+                     <?php ncic_warnings();?>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <!-- ./ x_panel -->
+              </div>
+              <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
+            </div>
+            <!-- ./ row -->
+			
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel" id="citation_panel">
+                  <div class="x_title">
+                    <h2>NCIC Citations DB</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php echo $citationMessage;?>
+                     <?php ncic_citations();?>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <!-- ./ x_panel -->
+              </div>
+              <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
+            </div>
+            <!-- ./ row -->
+			
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel" id="citation_panel">
+                  <div class="x_title">
+                    <h2>NCIC Arrests DB</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php echo $citationMessage;?>
+                     <?php ncic_arrests();?>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <!-- ./ x_panel -->
+              </div>
+              <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
+            </div>
+            <!-- ./ row -->
 
             <div class="clearfix"></div>
             <div class="row">
@@ -261,34 +370,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
             </div>
             <!-- ./ row -->
-
-            <div class="clearfix"></div>
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel" id="citation_panel">
-                  <div class="x_title">
-                    <h2>NCIC Citations DB</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <!-- ./ x_title -->
-                  <div class="x_content">
-                     <?php echo $citationMessage;?>
-                     <?php ncic_citations();?>
-                  </div>
-                  <!-- ./ x_content -->
-                </div>
-                <!-- ./ x_panel -->
-              </div>
-              <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
-            </div>
-            <!-- ./ row -->
-
 
           </div>
           <!-- "" -->
@@ -508,24 +589,24 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     <!-- ./ modal fade bs-example-modal-lg -->
 
     <!-- Create Name Modal -->
-    <div class="modal fade" id="createNameModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="IdentityEditModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
             </button>
-            <h4 class="modal-title" id="myModalLabel">Add Name to Database</h4>
+            <h4 class="modal-title" id="myModalLabel">Edit Identity</h4>
           </div>
           <!-- ./ modal-header -->
-		  <div class="modal-body">
-            <form role="form" action="<?php echo BASE_URL; ?>/actions/ncicAdminActions.php" method="post">
+      <div class="modal-body">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/civActions.php" class="editname_modalform" method="post">
                 <div class="form-group row">
                 </div>
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">Name</label>
                 <div class="col-lg-10">
-					<input name="civNameReq" class="form-control" id="civNameReq" value="<?php echo $civName;?>" required/>
-					<span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+          <input name="civNameReq" class="form-control" id="civNameReq" value="<?php echo $civName;?>" required/>
+          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -533,8 +614,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Date of Birth</label>
                 <div class="col-lg-10">
-					<input type="text" name="civDobReq" class="form-control" id="datepicker" maxlength="10" value="<?php echo $civDob;?>" required/>
-					<span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
+          <input type="text" name="civDobReq" class="form-control" id="datepicker2" maxlength="10" value="<?php echo $civDob;?>" required/>
+          <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -542,8 +623,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Address</label>
                 <div class="col-lg-10">
-					<input type="text" name="civAddressReq" class="form-control" id="civAddressReq" value="<?php echo $civAddr;?>" required/>
-					<span class="fa fa-location-arrow form-control-feedback right" aria-hidden="true"></span>
+          <input type="text" name="civAddressReq" class="form-control" id="civAddressReq" value="<?php echo $civAddr;?>" required/>
+          <span class="fa fa-location-arrow form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -551,10 +632,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Sex</label>
                 <div class="col-lg-10">
-					<select name="civSexReq" class="form-control selectpicker" id="civSexReq" title="Select a sex" required>
-                    <option> </option>
+          <select name="civSexReq" class="form-control selectpicker selectpicker3" id="civSexReq" title="Select a sex" data-live-search="true" required>
                     <?php getGenders();?>
-					</select>
+          </select>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -562,14 +642,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Race</label>
                 <div class="col-lg-10">
-					<select name="civRaceReq" class="form-control selectpicker" id="civRaceReq" title="Select a race or ethnicity" required>
-						<option val="indian">American Indian or Alaskan Native</option>
-						<option val="asian">Asian</option>
-						<option val="black">Black or African American</option>
-						<option val="hispanic">Hispanic</option>
-						<option val="hawaiian">Native Hawaiian or Other Pacific Islander</option>
-						<option val="white">White</option>
-					</select>
+          <select name="civRaceReq" class="form-control selectpicker civRaceReq_picker" id="civRaceReq" title="Select a race or ethnicity" required>
+            <option val="indian">American Indian or Alaskan Native</option>
+            <option val="asian">Asian</option>
+            <option val="black">Black or African American</option>
+            <option val="hispanic">Hispanic</option>
+            <option val="hawaiian">Native Hawaiian or Other Pacific Islander</option>
+            <option val="white">White</option>
+          </select>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -577,7 +657,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">License Status</label>
                   <div class="col-lg-10">
-                    <select name="civDL" class="form-control selectpicker" id="civDL" title="Select a license status" required>
+                    <select name="civDL" class="form-control selectpicker civDL_picker" id="civDL" title="Select a license status" required>
                 <option value="Valid"> Valid </option>
                 <option value="Suspended"> Suspended </option>
                 <option value="Expired"> Expired </option>
@@ -587,23 +667,23 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               </div>
               <!-- ./ form-group -->
               <div class="form-group row">
-				<label class="col-lg-2 control-label">Hair Color</label>
-				<div class="col-lg-10">
-				<select name="civHairReq" class="form-control selectpicker" id="civHairReq" title="Select a hair color" required>
-					<option val="bld">Bald</option>
-					<option val="blk">Black</option>
-					<option val="bln">Blond or Strawberry</option>
-					<option val="blu">Blue</option>
-					<option val="bro">Brown</option>
-					<option val="gry">Gray or Partially Gray</option>
-					<option val="grn">Green</option>
-					<option val="ong">Orange</option>
-					<option val="pnk">Pink</option>
-					<option val="ple">Purple</option>
-					<option val="red">Red or Auburn</option>
-					<option val="sdy">Sandy</option>
-					<option val="whi">White</option>
-					</select>
+        <label class="col-lg-2 control-label">Hair Color</label>
+        <div class="col-lg-10">
+        <select name="civHairReq" class="form-control selectpicker civHairReq_picker" id="civHairReq" title="Select a hair color" required>
+          <option val="bld">Bald</option>
+          <option val="blk">Black</option>
+          <option val="bln">Blond or Strawberry</option>
+          <option val="blu">Blue</option>
+          <option val="bro">Brown</option>
+          <option val="gry">Gray or Partially Gray</option>
+          <option val="grn">Green</option>
+          <option val="ong">Orange</option>
+          <option val="pnk">Pink</option>
+          <option val="ple">Purple</option>
+          <option val="red">Red or Auburn</option>
+          <option val="sdy">Sandy</option>
+          <option val="whi">White</option>
+          </select>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -611,13 +691,37 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Build</label>
                 <div class="col-lg-10">
-					<select name="civBuildReq" class="form-control selectpicker" id="civBuildReq" title="Select a build" required>
-						<option val="Average">Average</option>
-						<option val="Fit">Fit</option>
-						<option val="Muscular">Muscular</option>
-						<option val="Overweight">Overweight</option>
-						<option val="Skinny">Skinny</option>
-						<option val="Thin">Thin</option>
+          <select name="civBuildReq" class="form-control selectpicker civBuildReq_picker" id="civBuildReq" title="Select a build" required>
+            <option val="Average">Average</option>
+            <option val="Fit">Fit</option>
+            <option val="Muscular">Muscular</option>
+            <option val="Overweight">Overweight</option>
+            <option val="Skinny">Skinny</option>
+            <option val="Thin">Thin</option>
+            </select>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+
+          </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Weapon Status</label>
+                <div class="col-lg-10">
+					<select name="civWepStat" class="form-control civWepStat_picker" id="civWepStat" title="Select a status" required>
+						<option val="Obtained">Obtained</option>
+						<option val="Unobtained">Unobtained</option>
+						</select>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+
+          </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Deceased</label>
+                <div class="col-lg-10">
+					<select name="civDec" class="form-control civDec_picker" id="civDec" title="Are you deceased?" required>
+						<option val="Yes">Yes</option>
+						<option val="No">No</option>
 						</select>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -626,7 +730,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           </div>
           <!-- ./ modal-body -->
           <div class="modal-footer">
-                <input name="create_name" type="submit" class="btn btn-primary" value="Create" />
+                <input type="hidden" name="Edit_id" value="" class="Editdataid"/>
+                <input name="edit_name" type="submit" class="btn btn-primary" value="Edit" />
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </form>
           </div>
@@ -640,23 +745,23 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     <!-- ./ modal fade bs-example-modal-lg -->
 
     <!-- Create Plate Modal -->
-    <div class="modal fade" id="createPlateModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="editPlateModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
             </button>
-            <h4 class="modal-title" id="myModalLabel">Add Plate to Database</h4>
+            <h4 class="modal-title" id="myModalLabel">Edit Plate to Database</h4>
           </div>
           <!-- ./ modal-header -->
-		  <div class="modal-body">
+      <div class="modal-body">
             <form role="form" action="<?php echo BASE_URL; ?>/actions/ncicAdminActions.php" method="post">
                 <div class="form-group row">
                 </div>
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">Registered Owner</label>
                 <div class="col-lg-10">
-                  <select class="form-control selectpicker" name="civilian_names" id="civilian_names" data-live-search="true" required>
+                  <select class="form-control selectpicker civilian_names_picker" name="civilian_names" id="civilian_names" data-live-search="true" required>
                     <option> </option>
                     <?php getCivilianNames();?>
                   </select>
@@ -667,23 +772,18 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">License Plate</label>
                 <div class="col-lg-10">
-                  <input type="text" class="form-control" name="veh_plate" required/>
+                  <input type="text" class="form-control veh_plate" name="veh_plate" required/>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
               <!-- ./ form-group -->
               <div class="form-group row">
-                <label class="col-lg-2 control-label">Vehicle Make</label>
+                <label class="col-lg-2 control-label">Vehicle Make-Model</label>
                 <div class="col-lg-10">
-                <input type="text" class="form-control" name="veh_make" required/>
-                </div>
-                <!-- ./ col-sm-9 -->
-              </div>
-              <!-- ./ form-group -->
-              <div class="form-group row">
-                <label class="col-lg-2 control-label">Vehicle Model</label>
-                <div class="col-lg-10">
-                  <input type="text" class="form-control" name="veh_model" required/>
+                  <select class="form-control selectpicker veh_makemodelpicker" name="veh_make_model" id="veh_make_model" data-live-search="true" required>
+                    <option> </option>
+                    <?php getVehicle();?>
+                  </select>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -691,32 +791,32 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Vehicle Primary Color</label>
                 <div class="col-lg-10">
-                  <select class="form-control selectpicker" name="veh_pcolor" data-live-search="true" required>
-				  <option val="">  </option>
-				  <?php getColors();?>
-				  </select>
-				  </div>
+                  <select class="form-control selectpicker veh_pcolor_picker" name="veh_pcolor" data-live-search="true" required>
+          <option val="">  </option>
+          <?php getColors();?>
+          </select>
+          </div>
                 <!-- ./ col-sm-9 -->
               </div>
               <!-- ./ form-group -->
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Vehicle Secondary Color</label>
                 <div class="col-lg-10">
-                  <select class="form-control selectpicker" name="veh_scolor" data-live-search="true" >
-				  <option val="">  </option>
-				  <?php getColors();?>
-				  </select>
-				  </div>
+                  <select class="form-control selectpicker veh_scolor_picker" name="veh_scolor" data-live-search="true" required>
+          <option val="">  </option>
+          <?php getColors();?>
+          </select>
+          </div>
                 <!-- ./ col-sm-9 -->
               </div>
               <!-- ./ form-group -->
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Insurance Status</label>
                 <div class="col-lg-10">
-                <select class="form-control" name="veh_insurance" required>
+                <select class="form-control veh_insurance_option" name="veh_insurance" id="insurance_edit" required>
                 <option value="">  </option>
-                <option value="Valid"> Valid </option>
-                <option value="Expired"> Expired </option>
+                <option value="VALID"> Valid </option>
+                <option value="EXPIRED"> Expired </option>
                 </select>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -725,12 +825,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Vehicle Flags</label>
                   <div class="col-lg-10">
-                    <select class="form-control" name="flags" required>
+                    <select class="form-control flags_option" name="flags" required>
                 <option value="">  </option>
-                <option value="None"> None </option>
-                <option value="Stolen"> Stolen </option>
-                <option value="Wanted"> Wanted </option>
-                <option value="Suspended Registration"> Suspended Registration </option>
+                <option value="NONE"> None </option>
+                <option value="STOLEN"> Stolen </option>
+                <option value="WANTED"> Wanted </option>
+                <option value="SUSPENDED REGISTRATION"> Suspended Registration </option>
                 </select>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -739,7 +839,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Notes</label>
                 <div class="col-lg-10">
-                  <input type="text" class="form-control" name="notes" />
+                  <input type="text" class="form-control notes" name="notes" />
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -747,8 +847,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Vehicle's Registered State</label>
                 <div class="col-lg-10">
-                  <select class="form-control" name="veh_reg_state" required>
-				  <option value"">  </option>
+                  <select class="form-control veh_reg_state_option" name="veh_reg_state" required>
+          <option value"">  </option>
 				  <option value"Alabama"> Alabama </option>
 				  <option value"Alaska"> Alaska </option>
 				  <option value"Arizona"> Arizona </option>
@@ -788,6 +888,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				  <option value"Oregon"> Oregon </option>
 				  <option value"Pennsylvania"> Pennsylvania </option>
 				  <option value"Rhode Island"> Rhode Island </option>
+				  <option value"San Andreas"> San Andreas </option>
 				  <option value"South Carolina"> South Carolina </option>
 				  <option value"South Dakota"> South Dakota </option>
 				  <option value"Tennessee"> Tennessee </option>
@@ -799,8 +900,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				  <option value"West Virginia"> West Virginia </option>
 				  <option value"Wisconsin"> Wisconsin </option>
 				  <option value"Wyoming"> Wyoming </option>
-				  </select>
-				  </div>
+          </select>
+          </div>
                 <!-- ./ col-sm-9 -->
               </div>
               <!-- ./ form-group -->
@@ -809,7 +910,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           </div>
           <!-- ./ modal-body -->
           <div class="modal-footer">
-                <input name="create_plate" type="submit" class="btn btn-primary" value="Create" />
+                <input type="hidden" class="editplateid" name="Edit_plateId" />
+                <input name="edit_plate" type="submit" class="btn btn-primary" value="Edit" />
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </form>
           </div>
@@ -841,8 +943,70 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 			});
 
+      $('#ncic_arrests').DataTable({
+
+			});
+
+      $('#ncic_warnings').DataTable({
+
+			});
+
 		});
 		</script>
+  <script>
+    $(function(){
+      $(document).on('click', '#edit_nameBtn', function(e){
+        e.preventDefault();
+        var edit_id = $(this).data('id');
+        console.log(edit_id);
+        $.ajax({
+          url: '<?php echo BASE_URL; ?>/actions/ncicAdminActions.php',
+          type: 'POST',
+          data: 'editid='+edit_id,
+          dataType: 'json',
+          cache: false
+          })
+          .done(function(data){
+            $('#IdentityEditModal #civNameReq').val(data.name);
+            $('#IdentityEditModal #datepicker2').datepicker({dateFormat: 'yy-mm-dd'}).datepicker('setDate', new Date(data.dob));
+            $('#IdentityEditModal #civAddressReq').val(data.address);
+            $('.selectpicker3').selectpicker('val', data.gender);
+            $('.civRaceReq_picker').selectpicker('val', data.race);
+            $('.civDL_picker').selectpicker('val', data.dl_status);
+            $('.civHairReq_picker').selectpicker('val', data.hair_color);
+            $('.civBuildReq_picker').selectpicker('val', data.build);
+			$('.civWepStat_picker').selectpicker('val', data.weapon_permit);
+			$('.civDec_picker').selectpicker('val', data.deceased);
+            $('#IdentityEditModal .Editdataid').val(data.id);
+          });
+          
+      })
+      /* Edit Plate */
+      $(document).on('click', '#edit_plateBtn', function(e){
+        e.preventDefault();
+        var edit_id = $(this).data('id');
+        $.ajax({
+          url: '<?php echo BASE_URL; ?>/actions/ncicAdminActions.php',
+          type: 'POST',
+          data: 'edit_plateid='+edit_id,
+          dataType: 'json',
+          cache: false
+          })
+          .done(function(data){
+            $('.civilian_names_picker').selectpicker('val', data.name_id);
+            $('.veh_plate').val(data.veh_plate);
+            $('.veh_makemodelpicker').selectpicker('val', data.veh_make+' '+data.veh_model);
+            $('.veh_pcolor_picker').selectpicker('val', data.veh_pcolor);
+            $('.veh_scolor_picker').selectpicker('val', data.veh_scolor);
+            $('#insurance_edit').val(data.veh_insurance);
+            $('.flags_option').val(data.flags);
+            $('.notes').val(data.notes);
+            $('.veh_reg_state_option').val(data.veh_reg_state);
+            $('.editplateid').val(data.id);
+          });
+      });
+    })
+  </script>
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>jQuery UI Datepicker - Default functionality</title>
