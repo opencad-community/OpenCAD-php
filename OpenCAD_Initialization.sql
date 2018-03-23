@@ -924,7 +924,8 @@ CREATE TABLE `tones` (
 
 INSERT INTO `tones` (`id`, `name`, `active`) VALUES
 (0, 'priority', '0'),
-(1, 'recurring', '0');
+(1, 'recurring', '0'),
+(2, 'panic', '0');
 
 -- --------------------------------------------------------
 

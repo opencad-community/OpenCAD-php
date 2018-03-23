@@ -1075,24 +1075,21 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <!-- AUDIO TONES -->
       <audio id="recurringToneAudio" src="<?php echo BASE_URL; ?>/sounds/priority.mp3" preload="auto"></audio>
       <audio id="priorityToneAudio" src="<?php echo BASE_URL; ?>/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
+	  <audio id="panicToneAudio" src="<?php echo BASE_URL; ?>/sounds/Panic_Button.m4a" preload="auto"></audio>
       <script>
          var vid = document.getElementById("recurringToneAudio");
          vid.volume = 0.3;
       </script>
       <?php
-         if (isset($_GET['Fire']))
-         {
-
-           if ($_GET['Fire'] == "true")
+           if ($_SESSION['fire'] == 'YdES')
            {
              echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/Fire_Tones_Aligned.wav" preload="auto"></audio>';
            }
-         }
-         else
-         {
-			echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/New_Dispatch.mp3"  preload="auto"></audio>';
-         }
-         ?>
+		   else
+		   {
+			   echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/New_Dispatch.mp3"  preload="auto"></audio>';
+			   }
+			   ?>
       <?php include "./oc-includes/jquery-colsolidated.inc.php"; ?>
     <script>
     $(document).ready(function() {
