@@ -3490,6 +3490,25 @@ a.hiddenanchor {
 #signin:target ~ .login_wrapper .registration_form {
     animation-name: fadeOutLeft
 }
+.civilian_form,
+.civ_login {
+	position: absolute;
+	top: 0px;
+	width: 100%}
+.civilian_form {
+	z-index: 21;
+	opacity: 0;
+	width: 100%}
+.civ_login {
+	z-index: 22}
+#civreg:target ~ .login_wrapper .civilian_form,
+#signin:target ~ .login_wrapper .civ_login {
+	z-index: 22;
+	animation-name: fadeInLeft;
+	animation-delay: .1s}
+#civreg:target ~ .login_wrapper .civ_login,
+#signin:target ~ .login_wrapper .civilian_form {
+	animation-name: fadeOutLeft}
 .animate {
     -webkit-animation-duration: 0.5s;
     -webkit-animation-timing-function: ease;

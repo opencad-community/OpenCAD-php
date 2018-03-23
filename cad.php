@@ -269,6 +269,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                               <button class="btn btn-primary" name="new_call_btn" data-toggle="modal" data-target="#newCall">New Call</button>
                               <button class="btn btn-danger pull-right" onClick="priorityTone('single')" value="0" id="priorityTone">10-3 Tone</button>
                               <button class="btn btn-danger pull-right" onClick="priorityTone('recurring')" value="0" id="recurringTone">Priority Tone</button>
+                              <button class="btn btn-danger pull-right" onClick="priorityTone('panic')" value="0" id="panicTone">Panic Button</button>
                            </div>
                         </div>
                         <!-- ./ x_panel -->
@@ -682,7 +683,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <div class="form-group row">
                         <label class="col-lg-2 control-label">Incident Type</label>
                         <div class="col-lg-10">
-						   <input type="text" class="form-control" name="call_type" placeholder="Incident Type" required />
+                           <select class="form-control selectpicker" data-live-search="true" name="call_type" title="Incident Type" required>
+                              <?php getIncidentType();?>
+                           </select>
                         </div>
                         <!-- ./ col-sm-9 -->
                      </div>
@@ -1769,12 +1772,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <!-- AUDIO TONES -->
       <audio id="recurringToneAudio" src="<?php echo BASE_URL; ?>/sounds/priority.mp3" preload="auto"></audio>
       <audio id="priorityToneAudio" src="<?php echo BASE_URL; ?>/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
+      <audio id="panicToneAudio" src="<?php echo BASE_URL; ?>/sounds/Panic_Button.m4a" preload="auto"></audio>
       <?php include "./oc-includes/jquery-colsolidated.inc.php"; ?>
       <script>
          var vid = document.getElementById("recurringToneAudio");
          vid.volume = 0.3;
       </script>
 </style>
+
       <script>
   $(function() {
     $( "#ncic_name" ).autocomplete({

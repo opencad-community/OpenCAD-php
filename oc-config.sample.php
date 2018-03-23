@@ -106,6 +106,9 @@ define('POLICE_NCIC', false);
 /* Enable or disable civilians to be able to create or delete warrants from their character */
 define('CIV_WARRANT', false);
 
+/*Enable or disable people to register as only a civilian without having them to be approved */
+define('CIV_REG', false);
+
 /* That's all, stop editing! Happy dispatching. */
 /** Absolute path to the OpenCAD directory. */
 if ( !defined('ABSPATH') )
