@@ -82,6 +82,61 @@ define('LOGGED_IN_SALT',   'put your unique phrase here');
 define('NONCE_SALT',       'put your unique phrase here');
 
 /**#@+
+  * Feature Settings
+	*
+	* These settings effect OpenCAD's core functions
+	* These setting will likely be moved to an *_options table in a future version.
+	*
+	* @since  OpenCAD 1804
+	**/
+
+/**#@+
+ * HIDE_NCIC_RESCUCE
+ *
+ * These settings effect OpenCAD's core functions
+ * These setting will likely be moved to an *_options table in a future version.
+ *
+ * @since  OpenCAD 1804
+**/
+define('HIDE_NCIC_RESCUCE', true);
+
+/**#@+
+ * POLICE_NCIC
+ *
+ * Show/Hide NCIC in MDT. If set to 'true' the NCIC will appear in the MDT, else
+ * If set to 'false' the MDT will not show the NCIC.
+ * These settings will likely be moved to an *_options table in a future version.
+ *
+ * @since  OpenCAD 1803
+ **/
+define('POLICE_NCIC', false);
+
+/**#@+
+ * CIV_WARRANT
+ *
+ * Allow/Disallow Civiliians from managing their warrants. If set to 'true'
+ * then Civs will be able to delete warrants from their profile, else if set
+ * to 'false' then Civs will not have the ability to remove warrants.
+ * These settings will likely be moved to an *_options table in a future version.
+ *
+ * @since  OpenCAD 1803
+ **/
+define('CIV_WARRANT', false);
+
+/**#@+
+ * CIV_REG
+ *
+ * Allow/Disallow direct registration for Civillians.
+ * If set to 'true' then civillians will not require admin approval, esle if
+ * set to 'false' then Civillian registartion will require Admin approval.
+ * These settings will likely be moved to an *_options table in a future version.
+ *
+ * @since  OpenCAD 1803
+ **/
+/*Enable or disable people to register as only a civilian without having them to be approved */
+define('CIV_REG', false);
+
+/**#@+
   * Extra Settings
 	*
 	* This section included boolean settings for Gravatar Fetch, NCIC in MDT, and more.
@@ -97,17 +152,8 @@ define('NONCE_SALT',       'put your unique phrase here');
  * it will use the default generic avatar image included with OpenCAD .
   *
   * @since 1.0a RC1
-  */
+  **/
 define('USE_GRAVATAR', true);
-
-/* Enable or disable NCIC in MDT */
-define('POLICE_NCIC', false);
-
-/* Enable or disable civilians to be able to create or delete warrants from their character */
-define('CIV_WARRANT', false);
-
-/*Enable or disable people to register as only a civilian without having them to be approved */
-define('CIV_REG', false);
 
 /* That's all, stop editing! Happy dispatching. */
 /** Absolute path to the OpenCAD directory. */
