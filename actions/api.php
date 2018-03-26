@@ -156,9 +156,9 @@ function getMyCall()
         $sql = 'SELECT * from calls WHERE call_id = "' . $call_id . '"';
 
         $result = mysqli_query($link, $sql);
-		
+
 		$num_rows = $result->num_rows;
-		
+
 		if($num_rows == 0)
 		{
 			echo '<div class="alert alert-info"><span>Not currently on a call</span></div>';
@@ -848,6 +848,25 @@ function getIndividualStatus($callsign)
     echo $statusText;
 }
 
+function getIncidentType()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $sql = "SELECT code_name FROM incident_type";
+
+    $result=mysqli_query($link, $sql);
+
+    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    {
+        echo '<option value="'.$row[0].'">'.$row[0].'</option>';
+    }
+}
+
+
 function getStreet()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -1382,22 +1401,22 @@ function callCheck()
 {
     $uid = $_SESSION['id'];
     $identifier = $_SESSION['identifier'];
-	
+
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-	
+
 	if (!$link) {
 		die('Could not connect: ' .mysql_error());
 	}
-	
+
 	$sql = 'SELECT * FROM calls_users WHERE id = "'.$uid.'"';
-	
+
 	$result=mysqli_query($link, $sql);
-	
+
 	$num_rows = $result->num_rows;
-	
+
 	if($num_rows == 0)
 	{
-		
+
 		$sql = "REPLACE INTO active_users (identifier, callsign, status, status_detail, id) VALUES (?, ?, '0', '6', ?)";
 
 
@@ -1417,7 +1436,7 @@ function callCheck()
 	}
 	else
 	{
-			
+
 		$sql = "REPLACE INTO active_users (identifier, callsign, status, status_detail, id) VALUES (?, ?, '0', '3', ?)";
 
 
@@ -1435,7 +1454,7 @@ function callCheck()
         die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
     }
 	}
-	
+
 }
 
 
