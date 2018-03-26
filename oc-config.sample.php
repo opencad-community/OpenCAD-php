@@ -82,6 +82,54 @@ define('LOGGED_IN_SALT',   'put your unique phrase here');
 define('NONCE_SALT',       'put your unique phrase here');
 
 /**#@+
+ * OpenCAD Feature Settings
+ *
+ * This section controls settings for OpenCAD's core features.
+ * These setting will likely be moved to an *_options table in a future version.
+ *
+ * @since OpenCAD 1804
+ **/
+
+ /**#@+
+  * POLICE_NCIC
+  *
+  * Shows/Hides NCIC functionality on MDT console.
+  * If 'true' then LEO will be able to use NCIC functions without the need for
+	* a dispatcher, else if 'flase' then LEO will require the presence of
+	* dispatcher to use NCIC funcationality.
+	* These settings will likely be moved to an *_options table in a future version.
+  *
+  * @sicne OpenCAD 1804
+  **/
+/* Enable or disable NCIC in MDT */
+define('POLICE_NCIC', false);
+
+/**#@+
+ * CIV_WARRANT
+ *
+ * Allow/Disallow Civiliians from managing their warrants. If set to 'true'
+ * then Civs will be able to delete warrants from their profile, else if set
+ * to 'false' then Civs will not have the ability to remove warrants.
+ * These settings will likely be moved to an *_options table in a future version.
+ *
+ * @since  OpenCAD 1803
+ **/
+define('CIV_WARRANT', false);
+
+/**#@+
+ * CIV_REG
+ *
+ * Allow/Disallow immediate regitration for civilians.
+ * If 'true' then civilian registartion will require Administrator approval
+ * else if 'false' then civilian registrations will NOT require
+ * Administrator approval.
+ * These settings will likely be moved to an *_options table in a future version.
+ *
+ * @since  OpenCAD 1803
+ **/
+define('CIV_REG', false);
+
+/**#@+
   * Extra Settings
 	*
 	* This section included boolean settings for Gravatar Fetch, NCIC in MDT, and more.
@@ -99,15 +147,6 @@ define('NONCE_SALT',       'put your unique phrase here');
   * @since 1.0a RC1
   */
 define('USE_GRAVATAR', true);
-
-/* Enable or disable NCIC in MDT */
-define('POLICE_NCIC', false);
-
-/* Enable or disable civilians to be able to create or delete warrants from their character */
-define('CIV_WARRANT', false);
-
-/*Enable or disable people to register as only a civilian without having them to be approved */
-define('CIV_REG', false);
 
 /* That's all, stop editing! Happy dispatching. */
 /** Absolute path to the OpenCAD directory. */
