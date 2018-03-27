@@ -1,8 +1,25 @@
 --
 -- OpenCAD Database Scheme
--- Last Updated: 1 January 2018
--- Updated By: Brennen Stapleton <bgstapleton@opencad.io>
+-- Last Updated: 26 March 2018
+-- Updated By: Phill Fernandes <pfernandes@opencad.io>
 --
+-- --------------------------------------------------------
+-- phpMyAdmin SQL Dump
+-- version 4.6.6deb5
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost
+-- Generation Time: Mar 26, 2018 at 10:15 PM
+-- Server version: 10.1.30-MariaDB-0ubuntu0.17.10.1
+-- PHP Version: 7.1.15-0ubuntu0.17.10.1
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `opencad_test`
+--
+
 -- --------------------------------------------------------
 
 --
@@ -16,7 +33,6 @@ CREATE TABLE `active_users` (
   `status_detail` int(11) NOT NULL COMMENT 'Paired to Statuses table',
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
-
 
 -- --------------------------------------------------------
 
@@ -480,6 +496,13 @@ CREATE TABLE `dispatchers` (
   `status` int(11) NOT NULL COMMENT 'Unit status, 0=offline, 1=online'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
+--
+-- Dumping data for table `dispatchers`
+--
+
+INSERT INTO `dispatchers` (`identifier`, `callsign`, `status`) VALUES
+('1A-98', '1A-98', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -498,6 +521,36 @@ CREATE TABLE `genders` (
 INSERT INTO `genders` (`id`, `genders`) VALUES
 (0, 'Male'),
 (1, 'Female');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `incident_type`
+--
+
+CREATE TABLE `incident_type` (
+  `code_id` varchar(255) NOT NULL DEFAULT '',
+  `code_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `incident_type`
+--
+
+INSERT INTO `incident_type` (`code_id`, `code_name`) VALUES
+('68', 'Armed Robbery'),
+('25', 'Domestic Dispute'),
+('10', 'Fight in Progress'),
+('49', 'Homicide'),
+('55', 'Intoxicated Driver'),
+('56', 'Intoxicated Person'),
+('62', 'Kidnapping'),
+('66', 'Reckless Driver'),
+('13', 'Shots Fired'),
+('16', 'Stolen Vehicle'),
+('17', 'Suspicious Person'),
+('11', 'Traffic Stop'),
+('50', 'Vehicle Accident');
 
 -- --------------------------------------------------------
 
@@ -1508,6 +1561,8 @@ INSERT INTO `vehicles` (`id`, `Make`, `Model`) VALUES
 (501, 'Zirconium', 'Journey'),
 (502, 'Zirconium', 'Stratum');
 
+-- --------------------------------------------------------
+
 --
 -- Table structure for table `weapons`
 --
@@ -1639,11 +1694,18 @@ ALTER TABLE `genders`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
+-- Indexes for table `incident_type`
+--
+ALTER TABLE `incident_type`
+  ADD PRIMARY KEY (`code_id`) USING BTREE,
+  ADD UNIQUE KEY `code_name` (`code_name`) USING BTREE;
+
+--
 -- Indexes for table `ncic_arrests`
 --
 ALTER TABLE `ncic_arrests`
   ADD PRIMARY KEY (`id`) USING BTREE;
-  
+
 --
 -- Indexes for table `ncic_citations`
 --
@@ -1737,7 +1799,7 @@ ALTER TABLE `vehicles`
 --
 ALTER TABLE `weapons`
   ADD PRIMARY KEY (`id`);
-  
+
 --
 -- AUTO_INCREMENT for dumped tables
 --
@@ -1816,7 +1878,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `vehicles`
 --
 ALTER TABLE `vehicles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=481;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=503;
 --
 -- Constraints for dumped tables
 --
@@ -1845,4 +1907,3 @@ ALTER TABLE `ncic_weapons`
 --
 ALTER TABLE `user_departments`
   ADD CONSTRAINT `Department` FOREIGN KEY (`department_id`) REFERENCES `departments` (`department_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
