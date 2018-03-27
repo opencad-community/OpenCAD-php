@@ -85,6 +85,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <br />
                         <div>
                            <h1><i class="fa fa-tachometer"></i> <?php echo COMMUNITY_NAME?> CAD System</h1>
+				<a href="https://help.opencad.io">Report a Bug or Issue with OpenCAD</a>
                         </div>
                      </div>
 					 <?php } else { ?>
