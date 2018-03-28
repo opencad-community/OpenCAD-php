@@ -41,6 +41,10 @@ if (isset($_POST['suspendUser']))
 {
     suspendUser();
 }
+if (isset($_POST['suspendUserWithReason']))
+{
+    suspendUserWithReason();
+}
 if (isset($_POST['reactivateUser']))
 {
     reactivateUser();
@@ -63,7 +67,7 @@ if (isset($_POST['delete_callhistory']))
 
 
 function deleteGroupItem()
-{ 
+{
 	$dept_id 		= !empty($_GET['dept_id']) ? $_GET['dept_id'] : '';
 	$user_id 		= !empty($_GET['user_id']) ? $_GET['user_id'] : '';
 	$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -73,9 +77,9 @@ function deleteGroupItem()
 		die('Could not connect: ' . mysql_error());
 		}
 	$sql = "DELETE FROM user_departments WHERE user_id = $user_id AND department_id = $dept_id";
-	
+
 	if (mysqli_query($link, $sql)) {
-        
+
 		$show_record=getUserGroupsApproved($user_id);
 	  //$response = json_encode(array("show_record"=>$show_record));
 	 echo  $show_record;
@@ -87,11 +91,11 @@ function editUserAccount()
 {
 	$userName 		= !empty($_POST['userName']) ? $_POST['userName'] : '';
 	$userEmail 		= !empty($_POST['userEmail']) ? $_POST['userEmail'] : '';
-	
+
 	$userID 		= !empty($_POST['userID']) ? $_POST['userID'] : '';
 	$userIdentifier = !empty($_POST['userIdentifier']) ? $_POST['userIdentifier'] : '';
 	$userGroups 	= !empty($_POST['userGroups']) ? $_POST['userGroups'] : '';
-	
+
 		$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 		$site = BASE_URL;
 		if (!$link)
@@ -99,20 +103,20 @@ function editUserAccount()
 		die('Could not connect: ' . mysql_error());
 		}
 	if(!empty($userGroups))
-	{	
+	{
 		foreach($userGroups as $key=>$val)
 		{
 			$sql1 = "INSERT INTO user_departments (user_id, department_id) VALUES ('$userID', '$val')";
 			mysqli_query($link, $sql1);
 		}
-	}		   
+	}
 	$sql="UPDATE users SET name = '$userName', email = '$userEmail', identifier = '$userIdentifier'  WHERE id = $userID";
 	if (mysqli_query($link, $sql)) {
     header("Location: ".BASE_URL."/oc-admin/userManagement.php");
    } else {
       echo "Error updating record: " . mysqli_error($link);
    }
-	
+
 
 }
 function getRanks()
@@ -574,7 +578,8 @@ function getUsers()
         }
         else
         {
-            echo '<input name="suspendUser" type="submit" class="btn btn-xs btn-link" value="Suspend" />';
+            echo '<input name="suspendUser" type="submit" class="btn btn-xs btn-link" value="Suspend without Reason" />';
+            echo '<input name="suspendUserWithReason" type="submit" class="btn btn-xs btn-link" method="post" value="Suspend With Reason: " /><input type="text" method="post" placeholder="Reason Here" name="suspend_reason" id="suspend_reason">';
         }
         echo '
 
@@ -631,6 +636,59 @@ function suspendUser()
     sleep(1);
     header("Location:".BASE_URL."/oc-admin/userManagement.php");
 }
+
+/* Function to Suspend a user with a Reason */
+
+function suspendUserWithReason()
+{
+    $uid = $_POST['uid'];
+    $site = BASE_URL;
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    $suspend_reason = $_POST['suspend_reason'];
+
+    if (!$link)
+    {
+        die('Could not connect: ' . mysql_error());
+    }
+
+    $query = "UPDATE users SET approved = '2' WHERE id = ?";
+    $query2 = "UPDATE users SET suspend_reason = ('$suspend_reason') WHERE id = ?";
+
+    try
+    {
+      /*Adding the reason into the database */
+        $stmt = mysqli_prepare($link, $query2);
+        mysqli_stmt_bind_param($stmt, "i", $uid);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == false)
+        {
+            die(mysqli_error($link));
+        }
+        /*Sets user account to suspended status */
+        $stmt = mysqli_prepare($link, $query);
+        mysqli_stmt_bind_param($stmt, "i", $uid);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == false)
+        {
+            die(mysqli_error($link));
+        }
+    }
+    catch(Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage());
+    }
+
+    mysqli_close($link);
+
+    session_start();
+    $_SESSION['accessMessage'] = '<div class="alert alert-success"><span>Successfully suspended user account with reason</span></div>';
+
+    sleep(1);
+    header("Location:".BASE_URL."/oc-admin/userManagement.php");
+}
+
 
 function reactivateUser()
 {
