@@ -1,3 +1,6 @@
+.dynamic-content {
+		display:none;
+}
 .ui-helper-hidden-accessible { display:none; }
 
     .ui-autocomplete {

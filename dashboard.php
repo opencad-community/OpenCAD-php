@@ -76,27 +76,27 @@ if($num_rows < 2)
         else if ($row[1] == "2")
         {
             $_SESSION['ems'] = 'YES';
-            header("Location:".BASE_URL."/mdt.php");
+            header("Location:".BASE_URL."/mdt.php?dep=fire");
         }
             else if ($row[1] == "3")
         {
             $_SESSION['fire'] = 'YES';
-            header("Location:".BASE_URL."/mdt.php");
+            header("Location:".BASE_URL."/mdt.php?dep=fire");
         }
         else if ($row[1] == "4")
         {
             $_SESSION['highway'] = 'YES';
-            header("Location:".BASE_URL."/mdt.php");
+            header("Location:".BASE_URL."/mdt.php?dep=police");
         }
         else if ($row[1] == "5")
         {
             $_SESSION['police'] = 'YES';
-            header("Location:".BASE_URL."/mdt.php");
+            header("Location:".BASE_URL."/mdt.php?dep=police");
         }
         else if ($row[1] == "6")
         {
             $_SESSION['sheriff'] = 'YES';
-            header("Location:".BASE_URL."/mdt.php");
+            header("Location:".BASE_URL."/mdt.php?dep=police");
         }
         else if ($row[1] == "7")
         {
@@ -124,31 +124,31 @@ else
         if ($row[1] == "2")
         {
             $_SESSION['ems'] = 'YES';
-            $emsButton = "<a href=\"".BASE_URL."/mdt.php\" class=\"btn btn-primary btn-lg\">EMS</a>";
+            $emsButton = "<a href=\"".BASE_URL."/mdt.php?dep=fire\" class=\"btn btn-primary btn-lg\">EMS</a>";
         }
         if ($row[1] == "3")
         {
             $_SESSION['fire'] = 'YES';
-            $fireButton = "<a href=\"".BASE_URL."/mdt.php\" class=\"btn btn-primary btn-lg\">Fire</a>";
+            $fireButton = "<a href=\"".BASE_URL."/mdt.php?dep=fire\" class=\"btn btn-primary btn-lg\">Fire</a>";
         }
         if ($row[1] == "4")
         {
             $_SESSION['highway'] = 'YES';
-            $highwayButton = "<a href=\"".BASE_URL."/mdt.php\" class=\"btn btn-primary btn-lg\">Highway Patrol</a>";
+            $highwayButton = "<a href=\"".BASE_URL."/mdt.php?dep=police\" class=\"btn btn-primary btn-lg\">Highway Patrol</a>";
         }
         if ($row[1] == "5")
         {
             $_SESSION['police'] = 'YES';
-            $policeButton = "<a href=\"".BASE_URL."/mdt.php\" class=\"btn btn-primary btn-lg\">Police Department</a>";        }
+            $policeButton = "<a href=\"".BASE_URL."/mdt.php?dep=police\" class=\"btn btn-primary btn-lg\">Police Department</a>";        }
         if ($row[1] == "6")
         {
             $_SESSION['sheriff'] = 'YES';
-            $sheriffButton = "<a href=\"".BASE_URL."/mdt.php\" class=\"btn btn-primary btn-lg\">Sheriff's Office</a>";
+            $sheriffButton = "<a href=\"".BASE_URL."/mdt.php?dep=police\" class=\"btn btn-primary btn-lg\">Sheriff's Office</a>";
         }
         if ($row[1] == "9")
         {
             $_SESSION['state'] = 'YES';
-            $stateButton = "<a href=\"".BASE_URL."/mdt.php\" class=\"btn btn-primary btn-lg\">State Police</a>";
+            $stateButton = "<a href=\"".BASE_URL."/mdt.php?dep=police\" class=\"btn btn-primary btn-lg\">State Police</a>";
         }
         if ($row[1] == "7")
         {

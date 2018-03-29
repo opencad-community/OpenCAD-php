@@ -77,15 +77,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <!-- /menu profile quick info -->
                   <br />
                   <!-- sidebar menu -->
-                  <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                  <div id="police" class="dynamic-content main_menu_side hidden-print main_menu">
                      <div class="menu_section">
                         <h3>General</h3>
                         <ul class="nav side-menu">
                            <li class="active">
                               <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                              <ul class="nav child_menu" style="display: block;">
-                                 <li class="current-page"><a href="javascript:void(0)">Dashboard</a></li>
-                              </ul>
                            </li>
                            <li>
                                  <a type="button" data-toggle="modal" data-target="#createWarning" > Create Warning</a>
@@ -99,17 +96,20 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <li>
                                  <a type="button" data-toggle="modal" data-target="#rms" > Report Management System</a
                            </li>
-                           <!--
-                              <li><a><i class="fa fa-external-link"></i> Links <span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                  <li><a href="https://goo.gl/forms/rEJOoJvIlCM5svSo1" target="_blank">Police PAL</a></li>
-                                  <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdDd1zZGTqUUuGQYuHzmz3TAIWb49y3BDFr8GwRbisLnwiRGg/viewform" target="_blank">Highway PAL</a></li>
-                                  <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSd26EN4XdgKhbZBEJ16B8cx5LqTNxguh4O3wNggRqqzKOmXzg/viewform" target="_blank">Sheriff PAL</a></li>
-                                  <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScXgKDn0deB7zgnmBvDRJ7KllHLiQdmahvgQbphxZuNhU6h2g/viewform" target="_blank">Fire PAL</a></li>
-                                  <li><a href="https://puu.sh/tRzTt/330b12ab3c.jpg" target="_blank">GTA 5 DOJRP Map</a></li>
-                                </ul>
-                              </li>
-                              -->
+                           <li>
+                                 <a id="changeCallsign" class="btn-link" name="changeCallsign" data-toggle="modal" data-target="#callsign">Change Callsign</a>
+                           </li>
+                        </ul>
+                     </div>
+                     <!-- ./ menu_section -->
+                  </div>
+                  <div id="fire" class="dynamic-content main_menu_side hidden-print main_menu">
+                     <div class="menu_section">
+                        <h3>General</h3>
+                        <ul class="nav side-menu">
+                           <li class="active">
+                              <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                           </li>
                            <li>
                                  <a id="changeCallsign" class="btn-link" name="changeCallsign" data-toggle="modal" data-target="#callsign">Change Callsign</a>
                            </li>
@@ -397,7 +397,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <!-- ./ row --><?php
   if (POLICE_NCIC === true) { ?>
                       <div class="clearfix"></div>
-                  <div class="row">
+                  <div id="ncic" class="dynamic-content row">
                      <div class="col-md-4 col-sm-4 col-xs-4">
                         <div class="x_panel">
                            <div class="x_title">
@@ -1091,6 +1091,32 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			   }
 			   ?>
       <?php include "./oc-includes/jquery-colsolidated.inc.php"; ?>
+<script type="text/javascript">
+	// Parse the URL parameter
+	function getParameterByName(name, url) {
+	    if (!url) url = window.location.href;
+	    name = name.replace(/[\[\]]/g, "\\$&");
+	    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+	        results = regex.exec(url);
+	    if (!results) return null;
+	    if (!results[2]) return '';
+	    return decodeURIComponent(results[2].replace(/\+/g, " "));
+	}
+	// Give the parameter a variable name
+	var dynamicContent = getParameterByName('dep');
+ 
+	 $(document).ready(function() {
+ 
+		// Check if the URL parameter is police
+		if (dynamicContent == 'police') {
+			$('#police').show();
+			$('#ncic').show();
+		}
+	 else if (dynamicContent == 'fire') {
+			$('#fire').show();
+	 }
+	 });
+	</script>
     <script>
     $(document).ready(function() {
         $('#rms_warnings').DataTable({
