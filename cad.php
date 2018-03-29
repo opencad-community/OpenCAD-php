@@ -40,7 +40,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     {
       die("You do not have permission to be here. Request access to dispatch through your administration.");
     }
-    
+
     $citationMessage = "";
     if(isset($_SESSION['citationMessage']))
     {
@@ -169,6 +169,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      </a>
                      <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
                      <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                     </a>
+                     <a data-toggle="tooltip" data-placement="top" title="Need Help?" href="https://help.opencad.io/">
+                     <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
                      </a>
                   </div>
                   <!-- /menu footer buttons -->
@@ -1169,7 +1172,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	  </div>
 	  </div>
       <!-- ./ modal fade bs-example-modal-lg -->
-      
+
       <!-- New Vehicle BOLO Modal -->
       <div class="modal fade" id="createVehicleBOLO" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog modal-lg">
@@ -1249,9 +1252,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <!-- ./ modal-dialog modal-lg -->
 
       </div>
-	   
+
        <!-- Edit Vehicle BOLO Modal -->
-      
+
       <!-- Create Citation Modal -->
       <div class="modal fade" id="createCitation" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog modal-lg">
@@ -1614,7 +1617,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <!-- ./ modal-dialog modal-lg -->
     </div>
     <!-- ./ modal fade bs-example-modal-lg -->
-	
+
       <!-- Create Warrant Modal -->
       <div class="modal fade" id="createWarrant" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog modal-lg">
