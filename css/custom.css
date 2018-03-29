@@ -10,7 +10,7 @@
     z-index: 1000;
     float: left;
     display: none;
-    min-width: 160px;   
+    min-width: 160px;
     padding: 4px 0;
     margin: 0 0 10px 25px;
     list-style: none;
@@ -4262,6 +4262,8 @@ ul.notifications {
 @media (max-width: 767px) {
    .dataTables_length { float:none; }
 }
+
+
 
 
 

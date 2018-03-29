@@ -82,6 +82,7 @@ define('LOGGED_IN_SALT',   'put your unique phrase here');
 define('NONCE_SALT',       'put your unique phrase here');
 
 /**#@+
+<<<<<<< HEAD
   * Feature Settings
 	*
 	* These settings effect OpenCAD's core functions
@@ -109,6 +110,28 @@ define('HIDE_NCIC_RESCUCE', true);
  *
  * @since  OpenCAD 1803
  **/
+=======
+ * OpenCAD Feature Settings
+ *
+ * This section controls settings for OpenCAD's core features.
+ * These setting will likely be moved to an *_options table in a future version.
+ *
+ * @since OpenCAD 1804
+ **/
+
+ /**#@+
+  * POLICE_NCIC
+  *
+  * Shows/Hides NCIC functionality on MDT console.
+  * If 'true' then LEO will be able to use NCIC functions without the need for
+	* a dispatcher, else if 'flase' then LEO will require the presence of
+	* dispatcher to use NCIC funcationality.
+	* These settings will likely be moved to an *_options table in a future version.
+  *
+  * @sicne OpenCAD 1804
+  **/
+/* Enable or disable NCIC in MDT */
+>>>>>>> 3f20689d3a543601c25d31b5b56daeb07bf9e77c
 define('POLICE_NCIC', false);
 
 /**#@+
@@ -126,14 +149,24 @@ define('CIV_WARRANT', false);
 /**#@+
  * CIV_REG
  *
+<<<<<<< HEAD
  * Allow/Disallow direct registration for Civillians.
  * If set to 'true' then civillians will not require admin approval, esle if
  * set to 'false' then Civillian registartion will require Admin approval.
+=======
+ * Allow/Disallow immediate regitration for civilians.
+ * If 'true' then civilian registartion will require Administrator approval
+ * else if 'false' then civilian registrations will NOT require
+ * Administrator approval.
+>>>>>>> 3f20689d3a543601c25d31b5b56daeb07bf9e77c
  * These settings will likely be moved to an *_options table in a future version.
  *
  * @since  OpenCAD 1803
  **/
+<<<<<<< HEAD
 /*Enable or disable people to register as only a civilian without having them to be approved */
+=======
+>>>>>>> 3f20689d3a543601c25d31b5b56daeb07bf9e77c
 define('CIV_REG', false);
 
 /**#@+

@@ -24,7 +24,11 @@ Open Source Computer Aided Dispatch System for GTA V Roleplay Communities.
 
 Need Help? [View our wiki](https://github.com/StormlightTech/openCAD-php/wiki) which has all the documentation you need.
 
-Still Having Trouble? on the community Discord we have setup the corresponding channels to get assistance [#linux-support](https://discord.gg/3bzVhnZ), [#windows-support](https://discord.gg/Zs3F9T). In addition to the Discord support channel we urge you to [register an account on our JIRA](https://jira.opencad.io/secure/Signup!default.jspa) and [submit any issues you have there so they may be tracked](https://jira.opencad.io/servicedesk/customer/portals). If you encounter problems with registering in JIRA please let someone in [#general-support](https://discord.gg/KYrdyv2) know.
+Still Having Trouble? on the community Discord post your issue in [#peer-support](https://discord.gg/ufBBmaN) In addition to the Discord support channel we urge you to [register an account on our JIRA](https://jira.opencad.io/secure/Signup!default.jspa) and [submit any issues you have there so they may be tracked](https://help.opencad.io/). If you encounter problems with registering in JIRA please let someone in [#general](https://discord.gg/ufBBmaN) know.
+
+# License Violation/Plagerism
+
+Do you suspect someone of violating the license of OpenCAD or plagerising code? Please [send these reports to our security desk](https://security.opencad.io/).
 
 # Disclosure of Fork
 This version of OpenCAD is based on the original source from [Shane Gill](https://github.com/ossified/openCad).

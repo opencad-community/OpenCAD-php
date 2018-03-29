@@ -102,6 +102,9 @@ require_once(__DIR__ . '/../oc-config.php');
               <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
+              <a data-toggle="tooltip" data-placement="top" title="Need Help?" href="https://help.opencad.io/">
+                <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+              </a>
             </div>
             <!-- /menu footer buttons -->
           </div>
@@ -198,6 +201,9 @@ require_once(__DIR__ . '/../oc-config.php');
                         <li><em><a href="https://keybase.io/Cambridgeport90">Katherine Moss</a></em> — <i>Accessibility Manager, Developer</i></li>
                         <li><em><a href="https://keybase.io/termanator1128">Brennen Stapleton</a></em> — <i>Co-Revitalizer, Developer</i></li>
                       </ul>
+                      <h3>Got Feedback?</h3>
+                      <p>The OpenCAD team wants to know what you think. Please send us your feedback today!</p>
+                      <a href="#" id="getFeddbackJIRA">Send Feedback</a>
                   </div>
                   <!-- ./ x_content -->
                 </div>
@@ -224,15 +230,15 @@ require_once(__DIR__ . '/../oc-config.php');
 
     <?php include "../oc-includes/jquery-colsolidated.inc.php"; ?>
 
-    <script>
-		$(document).ready(function() {
+    <script type="text/javascript" src="https://jira.opencad.io/s/a0c4d8ca8eced10a4b49aaf45ec76490-T/-f9bgig/77001/9e193173deda371ba40b4eda00f7488e/2.0.24/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=296607a1"></script>
 
-			$('#pendingUsers').DataTable({
-        paging: false,
-        searching: false
-			});
-
-		});
-		</script>
+        <script type="text/javascript">window.ATL_JQ_PAGE_PROPS =  {
+    	"triggerFunction": function(showCollectorDialog) {
+    		//Requires that jQuery is available!
+    		jQuery("#getFeddbackJIRA").click(function(e) {
+    			e.preventDefault();
+    			showCollectorDialog();
+    		});
+    	}};</script>
   </body>
 </html>
