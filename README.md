@@ -28,7 +28,11 @@ Still Having Trouble? on the community Discord post your issue in [#peer-support
 
 # License Violation/Plagerism
 
+<<<<<<< HEAD
 Do you suspec someone of violating the license of OpenCAD or plagerising code? Please [send these reports to our security desk](https://security.opencad.io/).
+=======
+Do you suspect someone of violating the license of OpenCAD or plagerising code? Please [send these reports to our security desk](https://security.opencad.io/).
+>>>>>>> 0cbc3b6398858b7dfb3488ca8af9ac0fc5fdfb54
 
 # Disclosure of Fork
 This version of OpenCAD is based on the original source from [Shane Gill](https://github.com/ossified/openCad).
