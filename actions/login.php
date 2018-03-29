@@ -72,8 +72,9 @@ require_once(__DIR__ . "/../oc-config.php");
         }
         else if ($approved == "2")
         {
+          /* TODO: Show reason why user is suspended */
             session_start();
-            $_SESSION['loginMessageDanger'] = 'Your account has been suspended by an administrator.';
+            $_SESSION['loginMessageDanger'] = 'Your account has been suspended by an administrator';
             header("Location:".BASE_URL."/index.php");
             exit();
         }

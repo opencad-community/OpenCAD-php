@@ -987,14 +987,25 @@ INSERT INTO `tones` (`id`, `name`, `active`) VALUES
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `name` text NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` text,
-  `identifier` varchar(255) DEFAULT NULL,
-  `password_reset` int(1) NOT NULL DEFAULT '0' COMMENT '1 means password reset required. 0 means it''s not.',
-  `approved` int(1) NOT NULL DEFAULT '0' COMMENT 'Three main statuses: 0 means pending approval. 1 means has access. 2 means banned'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='User table' ROW_FORMAT=COMPACT;
+	`id` INT(11) NOT NULL,
+	`name` TEXT NOT NULL,
+	`email` VARCHAR(255) NOT NULL,
+	`password` TEXT NULL,
+	`identifier` VARCHAR(255) NULL DEFAULT NULL,
+	`password_reset` INT(1) NOT NULL DEFAULT '0' COMMENT '1 means password reset required. 0 means it\'s not.',
+	`approved` INT(1) NOT NULL DEFAULT '0' COMMENT 'Three main statuses: 0 means pending approval. 1 means has access. 2 means suspended',
+	`suspend_reason` TEXT(255) NOT NULL COMMENT 'Stores the reason why a user is Suspended',
+	`suspend_duration` DATE NOT NULL COMMENT 'Stores the duration a user is Suspended for',
+	PRIMARY KEY (`id`) USING BTREE,
+	UNIQUE INDEX `email` (`email`) USING BTREE,
+	UNIQUE INDEX `identifier` (`identifier`) USING BTREE
+)
+COMMENT='User table'
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+ROW_FORMAT=COMPACT
+;
+
 
 --
 -- Dumping data for table `users`
