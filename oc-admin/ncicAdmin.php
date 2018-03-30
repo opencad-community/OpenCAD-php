@@ -136,6 +136,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
+              <a data-toggle="tooltip" data-placement="top" title="Need Help?" href="https://help.opencad.io/">
+                <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+              </a>
             </div>
             <!-- /menu footer buttons -->
           </div>
@@ -232,7 +235,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
             </div>
             <!-- ./ row -->
-			
+
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -260,7 +263,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
             </div>
             <!-- ./ row -->
-			
+
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -287,7 +290,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
             </div>
             <!-- ./ row -->
-			
+
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -314,7 +317,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
             </div>
             <!-- ./ row -->
-			
+
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -979,7 +982,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			$('.civDec_picker').selectpicker('val', data.deceased);
             $('#IdentityEditModal .Editdataid').val(data.id);
           });
-          
+
       })
       /* Edit Plate */
       $(document).on('click', '#edit_plateBtn', function(e){
@@ -1017,5 +1020,16 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     $( "#datepicker" ).datepicker({dateFormat: 'yy-mm-dd'});
   } );
   </script>
+  <script>
+  $(document).ready(function() {
+
+    $('#pendingUsers').DataTable({
+      paging: false,
+      searching: false
+    });
+
+  });
+  </script>
+  <script type="text/javascript" src="https://jira.opencad.io/s/a0c4d8ca8eced10a4b49aaf45ec76490-T/-f9bgig/77001/9e193173deda371ba40b4eda00f7488e/2.0.24/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=ede74ac1"></script>
   </body>
 </html>
