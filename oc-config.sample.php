@@ -40,9 +40,9 @@ define('DB_HOST', '127.0.0.1');
  *             //subdomain.example.comsubdir - subdomain with subdirectory
  *             //example.com/subdir - root domain with subdirectory
  *
- *						We do not reccomend including the trailing / on any of the above examples.
- * 						It won't necessarily break anything but just make reference look strange having
- * 						two slashed when it isn't needed.
+ *             The OpenCAD teams does not reccomend including the trailing / on any of the above examples.
+ *             It won't necessarily break anything but just makes reference look strange having
+ *             two slashed when it isn't needed.
  *
  * @since 1.0a RC1
  */
