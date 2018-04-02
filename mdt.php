@@ -103,20 +103,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      </div>
                      <!-- ./ menu_section -->
                   </div>
-                  <div id="fire" class="dynamic-content main_menu_side hidden-print main_menu">
-                     <div class="menu_section">
-                        <h3>General</h3>
-                        <ul class="nav side-menu">
-                           <li class="active">
-                              <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                           </li>
-                           <li>
-                                 <a id="changeCallsign" class="btn-link" name="changeCallsign" data-toggle="modal" data-target="#callsign">Change Callsign</a>
-                           </li>
-                        </ul>
-                     </div>
-                     <!-- ./ menu_section -->
-                  </div>
                   <!-- /sidebar menu -->
                   <!-- /menu footer buttons -->
                   <div class="sidebar-footer hidden-small">
@@ -1107,9 +1093,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	}
 	// Give the parameter a variable name
 	var dynamicContent = getParameterByName('dep');
- 
+
 	 $(document).ready(function() {
- 
+
 		// Check if the URL parameter is police
 		if (dynamicContent == 'police') {
 			$('#police').show();
