@@ -76,25 +76,27 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <a class="reset_pass" href="#" onclick="alert('Request an administrator reset your password through your community.');" >Lost your password?</a>
                      </div>
 					 <?php if (CIV_REG === true) { ?>
-                     <div class="clearfix"></div>
-                     <div class="separator">
-                        <p class="change_link">New?
-                           <a href="#signup" class="to_register"> Request Access </a>
-                        </p>
-                        <div class="clearfix"></div>
-                        <br />
-                        <div>
-                           <h1><i class="fa fa-tachometer"></i> <?php echo COMMUNITY_NAME?> CAD System</h1>
-                        </div>
-                     </div>
+             <div class="clearfix"></div>
+             <div class="separator">
+                <p class="change_link">New?
+                   <a href="#signup" class="to_register"> Request Access </a>
+                </p>
+                <p class="change_link">Civilian Only?
+                   <a href="#civreg" class="to_register"> Request Access as Civilian </a>
+                </p>
+                <div class="clearfix"></div>
+                <br />
+                <div>
+                   <h1><i class="fa fa-tachometer"></i> <?php echo COMMUNITY_NAME?> CAD System</h1>
+                </div>
+             </div>
 					 <?php } else { ?>
                      <div class="clearfix"></div>
                      <div class="separator">
                         <p class="change_link">New?
                            <a href="#signup" class="to_register"> Request Access </a>
                         </p>
-                        <p class="change_link">Civilian Only?
-                           <a href="#civreg" class="to_register"> Request Access </a>
+                        <p class="change_link">Civilian Only? Not Enabled
                         </p>
                         <div class="clearfix"></div>
                         <br />
@@ -102,7 +104,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <h1><i class="fa fa-tachometer"></i> <?php echo COMMUNITY_NAME?> CAD System</h1>
                         </div>
                      </div>
-					 <?php } 
+					 <?php }
 					 ?>
                   </form>
                </section>
@@ -209,3 +211,4 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       </script>
    </body>
 </html>
+
