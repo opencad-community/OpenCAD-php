@@ -82,6 +82,33 @@ define('LOGGED_IN_SALT',   'put your unique phrase here');
 define('NONCE_SALT',       'put your unique phrase here');
 
 /**#@+
+  * Feature Settings
+	*
+	* These settings effect OpenCAD's core functions
+	* These setting will likely be moved to an *_options table in a future version.
+	*
+	* @since  OpenCAD 1804
+	**/
+
+/**#@+
+ * HIDE_NCIC_RESCUCE
+ *
+ * These settings effect OpenCAD's core functions
+ * These setting will likely be moved to an *_options table in a future version.
+ *
+ * @since  OpenCAD 1804
+**/
+define('HIDE_NCIC_RESCUCE', true);
+
+/**#@+
+ * POLICE_NCIC
+ *
+ * Show/Hide NCIC in MDT. If set to 'true' the NCIC will appear in the MDT, else
+ * If set to 'false' the MDT will not show the NCIC.
+ * These settings will likely be moved to an *_options table in a future version.
+ *
+ * @since  OpenCAD 1803
+ **
  * OpenCAD Feature Settings
  *
  * This section controls settings for OpenCAD's core features.
@@ -119,14 +146,19 @@ define('CIV_WARRANT', false);
 /**#@+
  * CIV_REG
  *
+ * Allow/Disallow direct registration for Civillians.
+ * If set to 'true' then civillians will not require admin approval, esle if
+ * set to 'false' then Civillian registartion will require Admin approval.
  * Allow/Disallow immediate regitration for civilians.
  * If 'true' then civilian registartion will require Administrator approval
  * else if 'false' then civilian registrations will NOT require
  * Administrator approval.
+>>>>>>> 3f20689d3a543601c25d31b5b56daeb07bf9e77c
  * These settings will likely be moved to an *_options table in a future version.
  *
  * @since  OpenCAD 1803
  **/
+/*Enable or disable people to register as only a civilian without having them to be approved */
 define('CIV_REG', false);
 
 /**#@+
@@ -145,7 +177,7 @@ define('CIV_REG', false);
  * it will use the default generic avatar image included with OpenCAD .
   *
   * @since 1.0a RC1
-  */
+  **/
 define('USE_GRAVATAR', true);
 
 /* That's all, stop editing! Happy dispatching. */
@@ -154,3 +186,4 @@ if ( !defined('ABSPATH') )
 	define('ABSPATH', dirname(__FILE__) . '/');
 
 include ABSPATH . "oc-functions.php";
+?>

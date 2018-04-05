@@ -1555,7 +1555,7 @@ function rms_citations()
                 <tr>
                 <th>Name</th>
                 <th>Citation Name</th>
-				<th>Citation Ammount</th>
+				<th>Citation Amount</th>
                 <th>Issued On</th>
                 <th>Issued By</th>
                 </tr>
@@ -1607,8 +1607,8 @@ function rms_arrests()
             <thead>
                 <tr>
                 <th>Name</th>
-                <th>Arrest reason</th>
-				<th>Arrest Ammount</th>
+                <th>Arrest Reason</th>
+				<th>Arrest Amount</th>
                 <th>Issued On</th>
                 <th>Issued By</th>
                 </tr>

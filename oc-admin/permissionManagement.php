@@ -94,6 +94,9 @@ if(isset($_SESSION['accessMessage']))
               <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
+              <a data-toggle="tooltip" data-placement="top" title="Need Help?" href="https://help.opencad.io/">
+                <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+              </a>
             </div>
             <!-- /menu footer buttons -->
           </div>
@@ -217,5 +220,16 @@ if(isset($_SESSION['accessMessage']))
     </div>
 
     <?php include "../oc-includes/jquery-colsolidated.inc.php"; ?>
+    <script>
+    $(document).ready(function() {
+
+      $('#pendingUsers').DataTable({
+        paging: false,
+        searching: false
+      });
+
+    });
+    </script>
+    <script type="text/javascript" src="https://jira.opencad.io/s/a0c4d8ca8eced10a4b49aaf45ec76490-T/-f9bgig/77001/9e193173deda371ba40b4eda00f7488e/2.0.24/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=ede74ac1"></script>
   </body>
 </html>
