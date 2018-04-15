@@ -2,13 +2,13 @@
 
 /**#@+
   *Application Settings
-	*
-	* This section includes settings for Database connectivity, base url, email config, and
-	* These settings are MANDATORY. If they are not configured properly OpenCAD will not function correctly.
-	*
-	* When editing configuration constants be sure to only edit the contents of the second set of quotes in each.
-	* @since 1.0a RC2
-	**/
+  *
+  * This section includes settings for Database connectivity, base url, email config, and
+  * These settings are MANDATORY. If they are not configured properly OpenCAD will not function correctly.
+  *
+  * When editing configuration constants be sure to only edit the contents of the second set of quotes in each.
+  * @since 1.0a RC2
+  **/
 
 /**#@+
  *Community Name
@@ -40,9 +40,9 @@ define('DB_HOST', '127.0.0.1');
  *             //subdomain.example.comsubdir - subdomain with subdirectory
  *             //example.com/subdir - root domain with subdirectory
  *
- *						We do not reccomend including the trailing / on any of the above examples.
- * 						It won't necessarily break anything but just make reference look strange having
- * 						two slashed when it isn't needed.
+ *             The OpenCAD teams does not reccomend including the trailing / on any of the above examples.
+ *             It won't necessarily break anything but just makes reference look strange having
+ *             two slashed when it isn't needed.
  *
  * @since 1.0a RC1
  */
@@ -71,7 +71,7 @@ define('CAD_TO_NAME', COMMUNITY_NAME.' Administrators');
  *
  * @since 1.0a RC2
  *
- */
+ **/
 define('AUTH_KEY',         'put your unique phrase here');
 define('SECURE_AUTH_KEY',  'put your unique phrase here');
 define('LOGGED_IN_KEY',    'put your unique phrase here');
@@ -82,14 +82,13 @@ define('LOGGED_IN_SALT',   'put your unique phrase here');
 define('NONCE_SALT',       'put your unique phrase here');
 
 /**#@+
-<<<<<<< HEAD
   * Feature Settings
-	*
-	* These settings effect OpenCAD's core functions
-	* These setting will likely be moved to an *_options table in a future version.
-	*
-	* @since  OpenCAD 1804
-	**/
+  *
+  * These settings effect OpenCAD's core functions
+  * These setting will likely be moved to an *_options table in a future version.
+  *
+  * @since  OpenCAD 1804
+  **/
 
 /**#@+
  * HIDE_NCIC_RESCUCE
@@ -102,15 +101,6 @@ define('NONCE_SALT',       'put your unique phrase here');
 define('HIDE_NCIC_RESCUCE', true);
 
 /**#@+
- * POLICE_NCIC
- *
- * Show/Hide NCIC in MDT. If set to 'true' the NCIC will appear in the MDT, else
- * If set to 'false' the MDT will not show the NCIC.
- * These settings will likely be moved to an *_options table in a future version.
- *
- * @since  OpenCAD 1803
- **/
-=======
  * OpenCAD Feature Settings
  *
  * This section controls settings for OpenCAD's core features.
@@ -124,14 +114,12 @@ define('HIDE_NCIC_RESCUCE', true);
   *
   * Shows/Hides NCIC functionality on MDT console.
   * If 'true' then LEO will be able to use NCIC functions without the need for
-	* a dispatcher, else if 'flase' then LEO will require the presence of
-	* dispatcher to use NCIC funcationality.
-	* These settings will likely be moved to an *_options table in a future version.
+  * a dispatcher, else if 'flase' then LEO will require the presence of
+  * dispatcher to use NCIC funcationality.
+  * These settings will likely be moved to an *_options table in a future version.
   *
   * @sicne OpenCAD 1804
   **/
-/* Enable or disable NCIC in MDT */
->>>>>>> 3f20689d3a543601c25d31b5b56daeb07bf9e77c
 define('POLICE_NCIC', false);
 
 /**#@+
@@ -149,48 +137,42 @@ define('CIV_WARRANT', false);
 /**#@+
  * CIV_REG
  *
-<<<<<<< HEAD
  * Allow/Disallow direct registration for Civillians.
  * If set to 'true' then civillians will not require admin approval, esle if
  * set to 'false' then Civillian registartion will require Admin approval.
-=======
  * Allow/Disallow immediate regitration for civilians.
  * If 'true' then civilian registartion will require Administrator approval
  * else if 'false' then civilian registrations will NOT require
  * Administrator approval.
->>>>>>> 3f20689d3a543601c25d31b5b56daeb07bf9e77c
  * These settings will likely be moved to an *_options table in a future version.
  *
  * @since  OpenCAD 1803
  **/
-<<<<<<< HEAD
-/*Enable or disable people to register as only a civilian without having them to be approved */
-=======
->>>>>>> 3f20689d3a543601c25d31b5b56daeb07bf9e77c
 define('CIV_REG', false);
 
 /**#@+
   * Extra Settings
-	*
-	* This section included boolean settings for Gravatar Fetch, NCIC in MDT, and more.
-	* These setting will likely be moved to an *_options table in a future version.
-	*
-	* @since  1.0a RC2
-	**/
+  *
+  * This section included boolean settings for Gravatar Fetch, NCIC in MDT, and more.
+  * These setting will likely be moved to an *_options table in a future version.
+  *
+  * @since  1.0a RC2
+  **/
 
 /**#@+
   * Gravatar Fetch
   *
   * OpenCAD will dynamically retrieve your avatar from {@link Gravatar http://en.gravatar.com/} if you have an account. Otherwise
- * it will use the default generic avatar image included with OpenCAD .
+  * it will use the default generic avatar image included with OpenCAD .
   *
   * @since 1.0a RC1
   **/
 define('USE_GRAVATAR', true);
 
-/* That's all, stop editing! Happy dispatching. */
-/** Absolute path to the OpenCAD directory. */
+/** That's all, stop editing! Happy roleplaying. **/
+/**    Absolute path to the OpenCAD directory.   **/
 if ( !defined('ABSPATH') )
 	define('ABSPATH', dirname(__FILE__) . '/');
 
 include ABSPATH . "oc-functions.php";
+?>
