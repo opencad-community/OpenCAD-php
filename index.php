@@ -104,8 +104,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <h1><i class="fa fa-tachometer"></i> <?php echo COMMUNITY_NAME?> CAD System</h1>
                         </div>
                      </div>
-					 <?php }
-					 ?>
+					 <?php } ?>
                   </form>
                </section>
             </div>
@@ -161,6 +160,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   </form>
                </section>
             </div>
+             <?php if (CIV_REG === true) { ?>
             <div id="civ" class="animate form civilian_form">
                <section class="login_content">
                   <?php echo $registerError, $registerSuccess;?>
@@ -201,6 +201,23 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   </form>
                </section>
             </div>
+            <?php } else { ?>
+              <div id="civ" class="animate form civilian_form">
+                    <?php echo $registerError, $registerSuccess;?>
+                       <p>Stop trying to backdoor into OpenCAD
+                          This has been logged. </p>
+                       <div class="clearfix"></div>
+                       <div class="separator">
+                          <p class="change_link">Already a member?
+                             <a href="#signin" class="to_register"> Log in </a>
+                          </p>
+                          <div class="clearfix"></div>
+                          <div>
+                             <h1><i class="fa fa-tachometer"></i> <?php echo COMMUNITY_NAME ?> CAD System</h1>
+                          </div>
+                       </div>
+              </div>
+               <?php } ?>
          </div>
       </div>
       <?php include "./oc-includes/jquery-colsolidated.inc.php"; ?>
