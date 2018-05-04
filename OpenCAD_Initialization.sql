@@ -1,7 +1,7 @@
 --
 -- OpenCAD Database Scheme
--- Last Updated: 26 March 2018
--- Updated By: Phill Fernandes <pfernandes@opencad.io>
+-- Last Updated: 3 May 2018
+-- Updated By: Matt Myers <mmyers@opencad.io>
 --
 -- --------------------------------------------------------
 -- phpMyAdmin SQL Dump
@@ -82,6 +82,9 @@ CREATE TABLE `calls` (
   `call_street3` text,
   `call_narrative` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+ALTER TABLE `calls`
+	CHANGE COLUMN `call_primary` `call_primary` TEXT NULL DEFAULT NULL AFTER `call_type`;
+
 
 -- --------------------------------------------------------
 
@@ -997,6 +1000,9 @@ CREATE TABLE `users` (
 	`suspend_reason` TEXT(255) NOT NULL COMMENT 'Stores the reason why a user is Suspended',
 	`suspend_duration` DATE NOT NULL COMMENT 'Stores the duration a user is Suspended for'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='User table' ROW_FORMAT=COMPACT;
+ALTER TABLE `users`
+	CHANGE COLUMN `suspend_reason` `suspend_reason` TINYTEXT NULL DEFAULT NULL COMMENT 'Stores the reason why a user is Suspended' AFTER `approved`,
+	CHANGE COLUMN `suspend_duration` `suspend_duration` DATE NULL DEFAULT NULL COMMENT 'Stores the duration a user is Suspended for' AFTER `suspend_reason`;
 
 
 --
