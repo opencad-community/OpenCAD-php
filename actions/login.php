@@ -25,7 +25,7 @@ require_once(__DIR__ . "/../oc-config.php");
             die('Please fix your database credentials. ' .mysql_error());
         }
 
-        $query = "SELECT id, name, password, email, identifier, password_reset, approved FROM users WHERE email = ?";
+        $query = "SELECT id, name, password, email, identifier, password_reset, approved, suspend_reason FROM users WHERE email = ?";
 
         try {
             $stmt = mysqli_prepare($link, $query);
@@ -43,7 +43,7 @@ require_once(__DIR__ . "/../oc-config.php");
 
         $login_ok = false;
 
-        mysqli_stmt_bind_result($stmt, $id, $name, $pw, $email, $identifier, $password_reset, $approved);
+        mysqli_stmt_bind_result($stmt, $id, $name, $pw, $email, $identifier, $password_reset, $approved, $suspended_reason);
 	    mysqli_stmt_fetch($stmt);
 
         if (password_verify($password, $pw))
@@ -74,7 +74,7 @@ require_once(__DIR__ . "/../oc-config.php");
         {
           /* TODO: Show reason why user is suspended */
             session_start();
-            $_SESSION['loginMessageDanger'] = 'Your account has been suspended by an administrator';
+            $_SESSION['loginMessageDanger'] = "Your account has been suspended by an administrator for: $suspended_reason";
             header("Location:".BASE_URL."/index.php");
             exit();
         }
@@ -91,5 +91,5 @@ require_once(__DIR__ . "/../oc-config.php");
         header("Location:".BASE_URL."/dashboard.php");
     }
 
-
 ?>
+
