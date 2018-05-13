@@ -919,7 +919,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="form-group row">
                         <label class="col-lg-2 control-label">Vehicle Make</label>
                         <div class="col-lg-10">
-                           <select class="form-control selectpicker" data-live-search="true" name="vehicle_make" title="Vehicle Make" required>
+                           <select class="form-control selectpicker" data-live-search="true" name="vehicle_make" title="Vehicle Make">
                               <?php getVehicleMakes();?>
                            </select>
                         </div>
@@ -927,7 +927,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="form-group row">
                         <label class="col-lg-2 control-label">Vehicle Model</label>
                         <div class="col-lg-10">
-                           <select class="form-control selectpicker" data-live-search="true" name="vehicle_model" title="Vehicle Model" required>
+                           <select class="form-control selectpicker" data-live-search="true" name="vehicle_model" title="Vehicle Model">
                               <?php getVehicleModels();?>
                            </select>
                         </div>
