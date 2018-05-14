@@ -171,7 +171,7 @@ require_once(__DIR__ . '/../oc-config.php');
                       <div class="row tile_count">
                           <h2>About Your Application</h2>
                           <div class="input-group">
-                             OpenCAD Version:<input type="text" class="form-control" readonly="readonly" placeholder="API KEY HERE" />
+                             OpenCAD Version:<input type="text" class="form-control" readonly="readonly" placeholder="<?php echo getOpenCADVersion(); ?>" />
                              <p><em>Note:</em> If the limit of ten (10) requests per one (1) minute the API key will be blacklisted and support will <em>not</em> remove the block.</p>
                           </div>
                           <div class="input-group">
