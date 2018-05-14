@@ -78,5 +78,16 @@ function pageLoadTime() {
 		echo 'Page generated in '.$final_time.' seconds.';
 }
 
+/**#@+
+  * function getOpenCADVersion()
+	* Get current installed version of OpenCAD.
+	*
+	* @since 0.2.0
+	*
+	**/
+function getOpenCADVersion()
+{
+	echo '0.2.0';
+}
 
 ?>

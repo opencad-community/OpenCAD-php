@@ -26,21 +26,23 @@ include("./actions/profileActions.php");
     {
       $name = $_SESSION['name'];
     }
-	
+
 	$passwordUpdate = "";
     if (isset($_SESSION['passwordUpdate']))
     {
         $passwordUpdate = $_SESSION['passwordUpdate'];
         unset($_SESSION['passwordUpdate']);
     }
-	
+	  if (isset($_SESSION['password']))
+    {
+      $password = $_SESSION['password'];
+    }
     $con = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
     $result = mysqli_query($con, "SELECT * FROM `users`") or die(mysqli_error($con));
     $row = mysqli_fetch_array($result);
     $id = $row['id'];
     $password = $row['password'];
     $id = $_SESSION['id'];
-    $password = $_SESSION['password'];
     if (isset($_POST['resetpass'])) {
     $newpassword = $_POST['password'];
     $hashed_password = password_hash($newpassword, PASSWORD_DEFAULT);
@@ -158,15 +160,15 @@ include("./actions/profileActions.php");
                            <!-- ./ x_title -->
 						   <?php echo $passwordUpdate;?>
                            <div class="x_content">
-                              <form id="resetPassword" action="reset-password.php" method="post" class="form-horizontal">
+                              <form id="resetPassword" action="<?php echo BASE_URL; ?>/reset-password.php" method="post" class="form-horizontal">
                                  <fieldset>
                                     <div class="form-group">
-                                       <label class="col-sm-2 control-label">New Password:</label> 
+                                       <label class="col-sm-2 control-label">New Password:</label>
                                        <div class="col-sm-10">
                                           <input name="password" id="password" class="form-control" type="password" maxlength="255" placeholder="Enter your new password..." value="" required>
                                        </div>
-									   
-									   <label class="col-sm-2 control-label">Confirm Password:</label> 
+
+									   <label class="col-sm-2 control-label">Confirm Password:</label>
                                        <div class="col-sm-10">
                                           <input name="confirm_password" id="confirm_password" class="form-control" type="password" maxlength="255" placeholder="Retype your new password..." value="" required>
                                        </div>
@@ -175,6 +177,7 @@ include("./actions/profileActions.php");
                                     <!-- ./ form-group --><br />
                                     <!-- ./ form-group -->
                                     <input type="submit" name="resetpass" id="resetpass" class="btn btn-primary btn-lg btn-block" value="Change Password" />
+                                    <p> Note: If you click this button and nothing shows up, hit refresh, then resend, then logout. </p>
                                  </fieldset>
                               </form>
                            </div>
@@ -199,8 +202,8 @@ include("./actions/profileActions.php");
             <!-- /footer content -->
          </div>
       </div>
-    
-	  
+
+
       <script>
          $(document).ready(function() {
            getMyRank("<?php echo $_SESSION['id'];?>");
@@ -214,3 +217,4 @@ include("./actions/profileActions.php");
       <script src="./js/OpenCAD.js"></script>
    </body>
 </html>
+

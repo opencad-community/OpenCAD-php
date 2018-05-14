@@ -102,7 +102,7 @@ require_once(__DIR__ . '/../oc-config.php');
               <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Need Help?" href="https://help.opencad.io/">
+              <a data-toggle="tooltip" data-placement="top" title="Need Help?" href="https://guides.opencad.io/">
                 <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
               </a>
             </div>
@@ -171,7 +171,7 @@ require_once(__DIR__ . '/../oc-config.php');
                       <div class="row tile_count">
                           <h2>About Your Application</h2>
                           <div class="input-group">
-                             OpenCAD Version:<input type="text" class="form-control" readonly="readonly" placeholder="API KEY HERE" />
+                             OpenCAD Version:<input type="text" class="form-control" readonly="readonly" placeholder="<?php echo getOpenCADVersion(); ?>" />
                              <p><em>Note:</em> If the limit of ten (10) requests per one (1) minute the API key will be blacklisted and support will <em>not</em> remove the block.</p>
                           </div>
                           <div class="input-group">
