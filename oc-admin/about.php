@@ -189,18 +189,6 @@ require_once(__DIR__ . '/../oc-config.php');
                       <!-- ./ row tile_count -->
                       <h2>About OpenCAD</h2>
                       <p>OpenCAD is an opensource project licensed under GNU GPL v3. The original code and concept by <a href="https://github.com/ossified" title="a link to the original developer's GitHub.">Shane Gill</a>. This project is maintained Stormlight Tech.</p>
-                      <h3>Project Maintainers</h3>
-                        <ul>
-                          <li><em><a href="https://keybase.io/jrharper">Justin Harper</a></em> — <i>Co-Revitalizer, Project Manager</i></li>
-                          <li><em><a href="https://keybase.io/phillf">Phill Fernandes</a></em> — <i>Co-Revitalizer, Developer</i></li>
-                        </ul>
-                      <h3>Project Staff</h3>
-                      <ul>
-                        <li><em><a href="https://keybase.io/murfasa">Murfasa Curry</a></em> — <i>Documentation Manager, Developer</i></li>
-                        <li><em><a href="https://keybase.io/gam3vidz">Justin Farmer</a></em> — <i>Test Engineer</i></li>
-                        <li><em><a href="https://keybase.io/Cambridgeport90">Katherine Moss</a></em> — <i>Accessibility Manager, Developer</i></li>
-                        <li><em><a href="https://keybase.io/termanator1128">Brennen Stapleton</a></em> — <i>Co-Revitalizer, Developer</i></li>
-                      </ul>
                       <h3>Got Feedback?</h3>
                       <p>The OpenCAD team wants to know what you think. Please send us your feedback today!</p>
                       <a href="#" id="getFeedbackJIRA">Send Feedback</a>
