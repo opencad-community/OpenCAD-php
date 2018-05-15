@@ -114,46 +114,46 @@ else
         if ($row[1] == 0)
         {
             $_SESSION['admin'] = 'YES';
-						$adminButton = "<a href=\"".BASE_URL."/oc-admin/admin.php\" class=\"btn btn-primary btn-lg\">Admin</a>";
+						$adminButton = "<a href=\"".BASE_URL."/oc-admin/admin.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Admin</a>";
         }
         if ($row[1] == 1)
         {
             $_SESSION['dispatch'] = 'YES';
-            $dispatchButton = "<a href=\"".BASE_URL."/cad.php\" class=\"btn btn-primary btn-lg\">Dispatch</a>";
+            $dispatchButton = "<a href=\"".BASE_URL."/cad.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Dispatch</a>";
         }
         if ($row[1] == "2")
         {
             $_SESSION['ems'] = 'YES';
-            $emsButton = "<a href=\"".BASE_URL."/mdt.php?dep=fire\" class=\"btn btn-primary btn-lg\">EMS</a>";
+            $emsButton = "<a href=\"".BASE_URL."/mdt.php?dep=fire\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">EMS</a>";
         }
         if ($row[1] == "3")
         {
             $_SESSION['fire'] = 'YES';
-            $fireButton = "<a href=\"".BASE_URL."/mdt.php?dep=fire\" class=\"btn btn-primary btn-lg\">Fire</a>";
+            $fireButton = "<a href=\"".BASE_URL."/mdt.php?dep=fire\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Fire</a>";
         }
         if ($row[1] == "4")
         {
             $_SESSION['highway'] = 'YES';
-            $highwayButton = "<a href=\"".BASE_URL."/mdt.php?dep=police\" class=\"btn btn-primary btn-lg\">Highway Patrol</a>";
+            $highwayButton = "<a href=\"".BASE_URL."/mdt.php?dep=police\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Highway Patrol</a>";
         }
         if ($row[1] == "5")
         {
             $_SESSION['police'] = 'YES';
-            $policeButton = "<a href=\"".BASE_URL."/mdt.php?dep=police\" class=\"btn btn-primary btn-lg\">Police Department</a>";        }
+            $policeButton = "<a href=\"".BASE_URL."/mdt.php?dep=police\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Police Department</a>";        }
         if ($row[1] == "6")
         {
             $_SESSION['sheriff'] = 'YES';
-            $sheriffButton = "<a href=\"".BASE_URL."/mdt.php?dep=police\" class=\"btn btn-primary btn-lg\">Sheriff's Office</a>";
+            $sheriffButton = "<a href=\"".BASE_URL."/mdt.php?dep=police\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Sheriff's Office</a>";
         }
         if ($row[1] == "9")
         {
             $_SESSION['state'] = 'YES';
-            $stateButton = "<a href=\"".BASE_URL."/mdt.php?dep=police\" class=\"btn btn-primary btn-lg\">State Police</a>";
+            $stateButton = "<a href=\"".BASE_URL."/mdt.php?dep=police\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">State Police</a>";
         }
         if ($row[1] == "7")
         {
             $_SESSION['civillian'] = 'YES';
-            $civilianButton = "<a href=\"".BASE_URL."/civilian.php\" class=\"btn btn-primary btn-lg\">Civilian</a>";
+            $civilianButton = "<a href=\"".BASE_URL."/civilian.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Civilian</a>";
         }
     }
 }
@@ -165,35 +165,46 @@ mysqli_close($link);
 <html lang="en">
    <!DOCTYPE html>
    <?php include "./oc-includes/header.inc.php"; ?>
-   <body>
+   <body id="body">
+   <button type="button" onclick="night()" class="btn">NIGHT</button>
+            <button type="button" onclick="day()" class="btn">DAY</button>
       <div id="page-wrapper">
          <div class="container-fluid">
             <div class="row">
                <div class="col-lg-12">
-                  <h1 class="page-header" style="text-align:center;">Select console to launch:</h1>
+                  <h1 class="page-header animate fadeInLeft delay2" style="text-align:center;">Hello! What would you like to do today?</h1>
                </div>
                <!-- ./ col-lg-12 -->
             </div>
             <!-- ./ row -->
             </div class="row">
-            <div class="col-lg-12" id="cadWelcome">
-               <?php echo $adminButton;?><br/><br/>
+            <div class="col-lg-12">
+                <div id="buttongroup">
+                &nbsp;
+               <?php echo $adminButton;?>
+               </div>
+               &nbsp;
+               <div id="buttongroup">
                <?php echo $dispatchButton;?>
+               </div>
                &nbsp;
-               <?php echo $sheriffButton;?>
-               &nbsp;
-               <?php echo $highwayButton;?>
-               &nbsp;
-               <?php echo $stateButton;?>
-               &nbsp;
-               <?php echo $policeButton;?>
-               &nbsp;
-               <?php echo $fireButton;?>
-			   &nbsp;
-			   <?php echo $emsButton;?>
-               &nbsp;
+               <div id="buttongroup">
                <?php echo $civilianButton;?>
-            </div>
+               </div>
+               &nbsp;
+               <div id="buttongroup">
+               <?php echo $fireButton;?>
+			   <?php echo $emsButton;?>
+               </div>
+               &nbsp;
+               <div id="buttongroup">
+               <?php echo $sheriffButton;?>
+               <?php echo $highwayButton;?>
+               <?php echo $stateButton;?>
+               <?php echo $policeButton;?>
+               </div>
+               &nbsp;
+             </div>
             <!-- ./ col-lg-12 -->
          </div>
          <!-- ./ row -->
@@ -203,3 +214,4 @@ mysqli_close($link);
       <!-- ./ page-wrapper -->
    </body>
 </html>
+
