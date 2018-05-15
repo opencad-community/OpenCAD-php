@@ -203,7 +203,7 @@ require_once(__DIR__ . '/../oc-config.php');
                       </ul>
                       <h3>Got Feedback?</h3>
                       <p>The OpenCAD team wants to know what you think. Please send us your feedback today!</p>
-                      <a href="#" id="getFeddbackJIRA">Send Feedback</a>
+                      <a href="#" id="getFeedbackJIRA">Send Feedback</a>
                   </div>
                   <!-- ./ x_content -->
                 </div>
@@ -235,7 +235,7 @@ require_once(__DIR__ . '/../oc-config.php');
         <script type="text/javascript">window.ATL_JQ_PAGE_PROPS =  {
     	"triggerFunction": function(showCollectorDialog) {
     		//Requires that jQuery is available!
-    		jQuery("#getFeddbackJIRA").click(function(e) {
+    		jQuery("#getFeedbackJIRA").click(function(e) {
     			e.preventDefault();
     			showCollectorDialog();
     		});
