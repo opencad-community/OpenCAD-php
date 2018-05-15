@@ -17,7 +17,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     // TODO: Verify user has permission to be on this page
 
-  /**  if (empty($_SESSION['logged_in']))
+    if (empty($_SESSION['logged_in']))
     {
         header('Location: ../index.php');
         die("Not logged in");
@@ -39,7 +39,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     {
       die("You do not have permission to be here. This has been recorded");
     }
-**/
+
 require_once(__DIR__ . '/../oc-config.php');
 
     include("../actions/adminActions.php");
