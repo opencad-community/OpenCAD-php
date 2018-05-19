@@ -301,7 +301,7 @@ function getDepartments()
         die('Could not connect: ' . mysql_error());
     }
 
-    $sql = 'SELECT * from departments WHERE department_name <>"EMS"';
+    $sql = 'SELECT * from departments';
 
     $result = mysqli_query($link, $sql);
 
