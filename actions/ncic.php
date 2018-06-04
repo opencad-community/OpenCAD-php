@@ -232,7 +232,7 @@ function plate()
             $encode["plate"] = $row[2];
             $encode["veh_make"] = $row[3];
             $encode["veh_model"] = $row[4];
-            $encode["veh_pcolor"] = $row[6];
+            $encode["veh_pcolor"] = $row[5];
             $encode["veh_scolor"] = $row[6];
             $encode["veh_ro"] = $row[12];
             $encode["veh_insurance"] = $row[7];
