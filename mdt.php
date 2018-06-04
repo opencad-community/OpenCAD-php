@@ -160,9 +160,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						<?php echo $warningMessage;?>
                      </div>
                      <div class="x_footer">
-                        <button class="btn btn-danger pull-right" name="new_call_btn" data-toggle="modal" data-target="#vehicles-bolo-board">View Vehicle BOLOs</button>
-                        <button class="btn btn-danger pull-right" name="new_call_btn" data-toggle="modal" data-target="#persons-bolo-board">View Person BOLOs</button>
-
+                        <button class="btn btn-primary pull-right" name="new_call_btn" data-toggle="modal" data-target="#vehicles-bolo-board">View Vehicle BOLOs</button>
+                        <button class="btn btn-primary pull-right" name="new_call_btn" data-toggle="modal" data-target="#persons-bolo-board">View Person BOLOs</button>
+                        <button class="btn btn-danger pull-right" onClick="priorityTone('panic')" value="0" id="panicTone">Panic Button</button>
                      </div>
                      <!-- ./ title_left -->
                   </div>
