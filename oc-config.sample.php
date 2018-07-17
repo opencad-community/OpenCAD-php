@@ -37,7 +37,7 @@ define('DB_HOST', '127.0.0.1');
  *             Valid Examples include:
  *             //example.com - Root domain, no subdirectory
  *             //subdomain.example.com - subdomain, no subdirectory
- *             //subdomain.example.comsubdir - subdomain with subdirectory
+ *             //subdomain.example.com/subdir - subdomain with subdirectory
  *             //example.com/subdir - root domain with subdirectory
  *
  *             The OpenCAD teams does not reccomend including the trailing / on any of the above examples.
