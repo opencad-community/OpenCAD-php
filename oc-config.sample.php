@@ -6,14 +6,14 @@
   * This section includes settings for Database connectivity, base url, email config, and
   * These settings are MANDATORY. If they are not configured properly OpenCAD will not function correctly.
   *
-  * When editing configuration constants be sure to only edit the contents of the second set of quotes in each.
+  * When editing configuration constants, be sure to only edit the contents of the second set of quotes in each.
   * @since 1.0a RC2
   **/
 
 /**#@+
  *Community Name
  *
- * Set your communities name by changing 'My Community'
+ * Set your community's name by changing 'My Community'
  * @since 1.0a RC1
  */
 define('COMMUNITY_NAME', 'My Community');
@@ -31,7 +31,7 @@ define('DB_HOST', '127.0.0.1');
 /**#@+
  * Base URL Settings
  *
- * BASE_URL - The URL to your installation of OpenCAD inlcuding,
+ * BASE_URL - The URL to your installation of OpenCAD including,
  *             if utilized, it's subdirectory
  *
  *             Valid Examples include:
@@ -40,9 +40,9 @@ define('DB_HOST', '127.0.0.1');
  *             //subdomain.example.comsubdir - subdomain with subdirectory
  *             //example.com/subdir - root domain with subdirectory
  *
- *             The OpenCAD teams does not reccomend including the trailing / on any of the above examples.
+ *             The OpenCAD team does not recommend including the trailing / on any of the above examples.
  *             It won't necessarily break anything but just makes reference look strange having
- *             two slashed when it isn't needed.
+ *             two slashes when it isn't needed.
  *
  * @since 1.0a RC1
  */
@@ -114,8 +114,8 @@ define('HIDE_NCIC_RESCUCE', true);
   *
   * Shows/Hides NCIC functionality on MDT console.
   * If 'true' then LEO will be able to use NCIC functions without the need for
-  * a dispatcher, else if 'flase' then LEO will require the presence of
-  * dispatcher to use NCIC funcationality.
+  * a dispatcher, else if 'false' then LEO will require the presence of
+  * dispatcher to use NCIC functionality.
   * These settings will likely be moved to an *_options table in a future version.
   *
   * @sicne OpenCAD 1804
@@ -125,7 +125,7 @@ define('POLICE_NCIC', false);
 /**#@+
  * CIV_WARRANT
  *
- * Allow/Disallow Civiliians from managing their warrants. If set to 'true'
+ * Allow/Disallow Civilians from managing their warrants. If set to 'true'
  * then Civs will be able to delete warrants from their profile, else if set
  * to 'false' then Civs will not have the ability to remove warrants.
  * These settings will likely be moved to an *_options table in a future version.
@@ -138,10 +138,10 @@ define('CIV_WARRANT', false);
  * CIV_REG
  *
  * Allow/Disallow direct registration for Civillians.
- * If set to 'true' then civillians will not require admin approval, esle if
- * set to 'false' then Civillian registartion will require Admin approval.
- * Allow/Disallow immediate regitration for civilians.
- * If 'true' then civilian registartion will require Administrator approval
+ * If set to 'true' then civillians will not require admin approval, else if
+ * set to 'false' then Civillian registration will require Admin approval.
+ * Allow/Disallow immediate registration for civilians.
+ * If 'true' then civilian registration will require Administrator approval
  * else if 'false' then civilian registrations will NOT require
  * Administrator approval.
  * These settings will likely be moved to an *_options table in a future version.
