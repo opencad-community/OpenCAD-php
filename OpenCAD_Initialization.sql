@@ -74,7 +74,7 @@ CREATE TABLE `bolos_vehicles` (
 --
 
 CREATE TABLE `calls` (
-  `call_id` int(4) NOT NULL,
+  `call_id` int(11) NOT NULL,
   `call_type` text NOT NULL,
   `call_primary` text NOT NULL,
   `call_street1` text NOT NULL,
@@ -107,13 +107,15 @@ CREATE TABLE `calls_users` (
 
 CREATE TABLE `call_history` (
   `call_id` int(11) NOT NULL,
-  `call_primary` text NOT NULL,
   `call_type` text NOT NULL,
+  `call_primary` text NOT NULL,
   `call_street1` text NOT NULL,
   `call_street2` text,
   `call_street3` text,
   `call_narrative` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+ALTER TABLE `call_history`
+	CHANGE COLUMN `call_primary` `call_primary` TEXT NULL DEFAULT NULL AFTER `call_type`;
 
 -- --------------------------------------------------------
 
