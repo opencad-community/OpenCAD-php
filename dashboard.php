@@ -53,6 +53,7 @@ $emsButton = "";
 $sheriffButton = "";
 $policeButton = "";
 $civilianButton = "";
+$roadsideAssistButton = "";
 
 $num_rows = $result->num_rows;
 // This loop will auto redirect the user if they only have one option
@@ -103,6 +104,11 @@ if($num_rows < 2)
             $_SESSION['civilian'] = 'YES';
             header("Location:".BASE_URL."/civilian.php");
         }
+				else if ($row[1] == "8")
+				{
+						$_SESSION['sheriff'] = 'YES';
+						header("Location:".BASE_URL."/mdt.php?dep=roadsideAssist");
+				}
 
     }
 }
@@ -155,6 +161,11 @@ else
             $_SESSION['civillian'] = 'YES';
             $civilianButton = "<a href=\"".BASE_URL."/civilian.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Civilian</a>";
         }
+				if ($row[1] == "10")
+				{
+						$_SESSION['roadsideAssist'] = 'YES';
+						$roadsideAssistButton = "<a href=\"".BASE_URL."/mdt.php?dep=roadsideAssist\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Roadside Assistance</a>";
+				}
     }
 }
 mysqli_close($link);
@@ -163,13 +174,13 @@ mysqli_close($link);
 ?>
 
 <html lang="en">
-   <!DOCTYPE html>
-   <?php include "./oc-includes/header.inc.php"; ?>
-   <body id="body">
-   <button type="button" onclick="night()" class="btn">NIGHT</button>
-            <button type="button" onclick="day()" class="btn">DAY</button>
-      <div id="page-wrapper">
-         <div class="container-fluid">
+	<!DOCTYPE html>
+	<?php include "./oc-includes/header.inc.php"; ?>
+	<body id="body">
+		<button type="button" onclick="night()" class="btn">NIGHT</button>
+		<button type="button" onclick="day()" class="btn">DAY</button>
+		<div id="page-wrapper">
+			<div class="container-fluid">
             <div class="row">
                <div class="col-lg-12">
                   <h1 class="page-header animate fadeInLeft delay2" style="text-align:center;">Hello! What would you like to do today?</h1>
@@ -180,38 +191,38 @@ mysqli_close($link);
             </div class="row">
             <div class="col-lg-12">
                 <div id="buttongroup">
-                &nbsp;
-               <?php echo $adminButton;?>
-               </div>
-               &nbsp;
-               <div id="buttongroup">
-               <?php echo $dispatchButton;?>
-               </div>
-               &nbsp;
-               <div id="buttongroup">
-               <?php echo $civilianButton;?>
-               </div>
-               &nbsp;
-               <div id="buttongroup">
-               <?php echo $fireButton;?>
-			   <?php echo $emsButton;?>
-               </div>
-               &nbsp;
-               <div id="buttongroup">
-               <?php echo $sheriffButton;?>
-               <?php echo $highwayButton;?>
-               <?php echo $stateButton;?>
-               <?php echo $policeButton;?>
-               </div>
-               &nbsp;
-             </div>
-            <!-- ./ col-lg-12 -->
-         </div>
-         <!-- ./ row -->
-      </div>
-      <!-- ./ container-fluid -->
-      </div>
-      <!-- ./ page-wrapper -->
-   </body>
+									&nbsp;
+									<?php echo $adminButton;?>
+								</div>
+								&nbsp;
+								<div id="buttongroup">
+									<?php echo $dispatchButton;?>
+								</div>
+								&nbsp;
+								<div id="buttongroup">
+									<?php echo $civilianButton; ?>
+									<?php echo $roadsideAssistButton; ?>
+								</div>
+								&nbsp;
+								<div id="buttongroup">
+									<?php echo $fireButton;?>
+									<?php echo $emsButton;?>
+								</div>
+								&nbsp;
+								<div id="buttongroup">
+									<?php echo $sheriffButton;?>
+									<?php echo $highwayButton;?>
+									<?php echo $stateButton;?>
+									<?php echo $policeButton;?>
+								</div>
+								&nbsp;
+							</div>
+							<!-- ./ col-lg-12 -->
+						</div>
+						<!-- ./ row -->
+					</div>
+					<!-- ./ container-fluid -->
+				</div>
+				<!-- ./ page-wrapper -->
+			</body>
 </html>
-

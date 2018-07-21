@@ -104,6 +104,21 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <!-- ./ menu_section -->
                   </div>
                   <!-- /sidebar menu -->
+                  <div id="roadsideAssist" class="dynamic-content main_menu_side hidden-print main_menu">
+                     <div class="menu_section">
+                        <h3>General</h3>
+                        <ul class="nav side-menu">
+                           <li class="active">
+                              <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                           </li>
+                           <li>
+                                 <a id="changeCallsign" class="btn-link" name="changeCallsign" data-toggle="modal" data-target="#callsign">Change Callsign</a>
+                           </li>
+                        </ul>
+                     </div>
+                     <!-- ./ menu_section -->
+                  </div>
+                  <!-- /sidebar menu -->
                   <!-- /menu footer buttons -->
                   <div class="sidebar-footer hidden-small">
                      <!--  —— Left in for user settings. To be introduced later. Probably after RC1. ——
@@ -442,7 +457,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <!-- ./ x_panel -->
                      </div>
                      <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
-                     <!-- NCIC Firearm lookup will return in a later RC -->
                      <div class="col-md-4 col-sm-4 col-xs-4">
                         <div class="x_panel">
                            <div class="x_title">
@@ -472,7 +486,38 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      </div>
                <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
             </div>
- <?php } else { ?>
+ <?php } else if (ROADSIDE_NCIC === true) { ?>
+                     <div class="clearfix"></div>
+                 <div id="ncic roadsideAssist" class="dynamic-content row">
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                       <div class="x_panel">
+                          <div class="x_title">
+                             <h2>NCIC Plate Lookup</h2>
+                             <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                             </ul>
+                             <div class="clearfix"></div>
+                          </div>
+                          <!-- ./ x_title -->
+                          <div class="x_content">
+                             <div class="input-group">
+                                <input type="text" name="ncic_plate" class="form-control" id="ncic_plate" placeholder="License Plate, (ABC123)"/>
+                                <span class="input-group-btn">
+                                <button type="button" class="btn btn-primary" id="ncic_plate_btn">Send</button>
+                                </span>
+                             </div>
+                             <!-- ./ input-group -->
+                             <div name="ncic_plate_return" id="ncic_plate_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
+                             </div>
+                             <!-- ./ ncic_plate_return -->
+                          </div>
+                          <!-- ./ x_content -->
+                       </div>
+                       <!-- ./ x_panel -->
+                    </div>
+                    <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
+           </div>
+<?php } else { ?>
  <?php }
       ?>
       </div>
@@ -1070,7 +1115,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          vid.volume = 0.3;
       </script>
       <?php
-           if ($_SESSION['fire'] == 'YdES')
+           if ($_SESSION['fire'] == 'YES')
            {
              echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/Fire_Tones_Aligned.wav" preload="auto"></audio>';
            }
@@ -1101,6 +1146,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			$('#police').show();
 			$('#ncic').show();
 		}
+    if (dynamicContent == 'roadsideAssist') {
+      $('#roadsideAssist').show();
+    }
 	 else if (dynamicContent == 'fire') {
 			$('#fire').show();
 	 }
@@ -1145,9 +1193,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
              getCalls();
              getStatus();
              checkTones();
-			 getMyCall();
-			 mdtGetVehicleBOLOS();
-			 mdtGetPersonBOLOS();
+             getMyCall();
+             mdtGetVehicleBOLOS();
+             mdtGetPersonBOLOS();
 
              $('#enroute_btn').click(function(evt) {
                console.log(evt);

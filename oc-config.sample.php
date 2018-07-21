@@ -123,6 +123,19 @@ define('HIDE_NCIC_RESCUCE', true);
 define('POLICE_NCIC', false);
 
 /**#@+
+ * ROADSIDE_NCIC
+ *
+ * Shows/Hides NCIC functionality on MDT console for Roadside Assistance
+ * If 'true' then RAO will be able to use NCIC plate query without the need for
+ * a dispatcher, else if 'false' then RAO will require the presence of
+ * dispatcher to use NCIC plate query funcationality.
+ * These settings will likely be moved to an *_options table in a future version.
+ *
+ * @sicne OpenCAD 0.2.2
+ **/
+define('ROADSIDE_NCIC', false);
+
+/**#@+
  * CIV_WARRANT
  *
  * Allow/Disallow Civiliians from managing their warrants. If set to 'true'
