@@ -479,16 +479,15 @@ CREATE TABLE `departments` (
 --
 
 INSERT INTO `departments` (`department_id`, `department_name`) VALUES
-(0, 'Head Administrators'),
 (1, 'Communications'),
-(2, 'EMS'),
-(3, 'Fire'),
-(4, 'Highway'),
+(2, 'State'),
+(3, 'Highway'),
+(4, 'Sheriff'),
 (5, 'Police'),
-(6, 'Sheriff'),
-(7, 'Civilian'),
-(8, 'Admins'),
-(9, 'State');
+(6, 'Fire'),
+(7, 'EMS'),
+(8, 'Civilian');
+
 
 -- --------------------------------------------------------
 
@@ -998,6 +997,7 @@ CREATE TABLE `users` (
 	`email` VARCHAR(255) NOT NULL,
 	`password` TEXT NULL,
 	`identifier` VARCHAR(255) NULL DEFAULT NULL,
+  `admin_privilege` INT(1) NOT NULL DEFAULT '0' COMMENT 'NULL = No Perms, 0 = Moderator, 1 = Administrator',
 	`password_reset` INT(1) NOT NULL DEFAULT '0' COMMENT '1 means password reset required. 0 means it\'s not.',
 	`approved` INT(1) NOT NULL DEFAULT '0' COMMENT 'Three main statuses: 0 means pending approval. 1 means has access. 2 means suspended',
 	`suspend_reason` TEXT(255) NOT NULL COMMENT 'Stores the reason why a user is Suspended',
@@ -1012,8 +1012,8 @@ ALTER TABLE `users`
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `identifier`, `password_reset`, `approved`) VALUES
-(1, 'Default Admin', 'admin@test.com', '$2y$10$xHvogGcqQs8jhTPbFEDHJO9KWu2FCLgJ5XGxH.hHMA0BY1brgCkSG', '1A-98', 0, 1);
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `identifier`, `admin_privilege`, `password_reset`, `approved`) VALUES
+(1, 'Default Admin', 'admin@test.com', '$2y$10$xHvogGcqQs8jhTPbFEDHJO9KWu2FCLgJ5XGxH.hHMA0BY1brgCkSG', '1A-98', 2, 0, 1);
 
 -- --------------------------------------------------------
 

@@ -78,6 +78,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 <!DOCTYPE html>
 <html lang="en">
+<?php
+    session_start();
+    echo "<h3> PHP List All Session Variables</h3>";
+    foreach ($_SESSION as $key=>$val)
+    echo $key." ".$val."<br/>";
+?>
    <?php include "./oc-includes/header.inc.php"; ?>
    <body class="nav-md">
       <div class="container body">
