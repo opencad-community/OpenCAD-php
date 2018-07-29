@@ -25,17 +25,25 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     {
       $name = $_SESSION['name'];
     }
-	
-	if(isset($_SESSION['admin']))
+
+    if ( $_SESSION['admin_privilege'] == 2)
     {
-      if ($_SESSION['admin'] == 'YES')
+      if ($_SESSION['admin_privilege'] == 'Administrator')
       {
           //Do nothing
+      }
+    }
+    else if ($_SESSION['admin_privilege'] == 1)
+    {
+      if ($_SESSION['admin_privilege'] == 'Moderator')
+      {
+          // Do Nothing
       }
     }
     else
     {
       die("You do not have permission to be here. This has been recorded");
+
     }
 
     require_once(__DIR__ . '/../oc-config.php');
@@ -160,32 +168,22 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="x_content">
                       <div class="row tile_count">
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
-                          <div class="count"><?php echo getUserCount();?></div>
-                        </div>
-                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> Admins</span>
-                          <div class="count"><?php echo getGroupCount("0");?></div>
-                        </div>
-                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                           <span class="count_top"><i class="fa fa-user"></i> Communications</span>
                           <div class="count"><?php echo getGroupCount("1");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> EMS</span>
+                          <span class="count_top"><i class="fa fa-user"></i> State</span>
                           <div class="count"><?php echo getGroupCount("2");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> Fire</span>
+                          <span class="count_top"><i class="fa fa-user"></i> Highway Patrol</span>
                           <div class="count"><?php echo getGroupCount("3");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> Highway Patrol</span>
+                          <span class="count_top"><i class="fa fa-user"></i> Sheriff</span>
                           <div class="count"><?php echo getGroupCount("4");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
@@ -195,18 +193,18 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> Sheriff</span>
+                          <span class="count_top"><i class="fa fa-user"></i> Fire</span>
                           <div class="count"><?php echo getGroupCount("6");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> State Police</span>
-                          <div class="count"><?php echo getGroupCount("9");?></div>
+                          <span class="count_top"><i class="fa fa-user"></i> EMS</span>
+                          <div class="count"><?php echo getGroupCount("7");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                           <span class="count_top"><i class="fa fa-user"></i> Civilian</span>
-                          <div class="count"><?php echo getGroupCount("7");?></div>
+                          <div class="count"><?php echo getGroupCount("8");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                       </div>
@@ -309,6 +307,18 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="col-md-9">
                   <select name="userGroups[]" class="selectpicker form-control" id="userGroups" multiple>
                       <?php getDepartments();?>
+                  </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-md-3 control-label">Roles</label>
+                <div class="col-md-9">
+                  <select name="userRole[]" class="selectpicker form-control" id="userRole">
+                      <option value="0">User</option>
+                      <option value="1">Moderator</option>
+                      <option value="2">Administrator</option>
                   </select>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -442,4 +452,3 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     <script type="text/javascript" src="https://jira.opencad.io/s/a0c4d8ca8eced10a4b49aaf45ec76490-T/-f9bgig/77001/9e193173deda371ba40b4eda00f7488e/2.0.24/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=ede74ac1"></script>
   </body>
 </html>
-

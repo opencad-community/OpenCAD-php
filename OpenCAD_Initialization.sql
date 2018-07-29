@@ -74,17 +74,14 @@ CREATE TABLE `bolos_vehicles` (
 --
 
 CREATE TABLE `calls` (
-  `call_id` int(11) NOT NULL,
+  `call_id` int(4) NOT NULL,
   `call_type` text NOT NULL,
-  `call_primary` text NOT NULL,
+  `call_primary` text,
   `call_street1` text NOT NULL,
   `call_street2` text,
   `call_street3` text,
   `call_narrative` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
-ALTER TABLE `calls`
-	CHANGE COLUMN `call_primary` `call_primary` TEXT NULL DEFAULT NULL AFTER `call_type`;
-
 
 -- --------------------------------------------------------
 
@@ -107,15 +104,13 @@ CREATE TABLE `calls_users` (
 
 CREATE TABLE `call_history` (
   `call_id` int(11) NOT NULL,
-  `call_type` text NOT NULL,
   `call_primary` text NOT NULL,
+  `call_type` text NOT NULL,
   `call_street1` text NOT NULL,
   `call_street2` text,
   `call_street3` text,
   `call_narrative` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
-ALTER TABLE `call_history`
-	CHANGE COLUMN `call_primary` `call_primary` TEXT NULL DEFAULT NULL AFTER `call_type`;
 
 -- --------------------------------------------------------
 
@@ -487,7 +482,6 @@ INSERT INTO `departments` (`department_id`, `department_name`) VALUES
 (6, 'Fire'),
 (7, 'EMS'),
 (8, 'Civilian');
-
 
 -- --------------------------------------------------------
 
@@ -992,28 +986,23 @@ INSERT INTO `tones` (`id`, `name`, `active`) VALUES
 --
 
 CREATE TABLE `users` (
-	`id` INT(11) NOT NULL,
-	`name` TEXT NOT NULL,
-	`email` VARCHAR(255) NOT NULL,
-	`password` TEXT NULL,
-	`identifier` VARCHAR(255) NULL DEFAULT NULL,
-  `admin_privilege` INT(1) NOT NULL DEFAULT '0' COMMENT 'NULL = No Perms, 0 = Moderator, 1 = Administrator',
-	`password_reset` INT(1) NOT NULL DEFAULT '0' COMMENT '1 means password reset required. 0 means it\'s not.',
-	`approved` INT(1) NOT NULL DEFAULT '0' COMMENT 'Three main statuses: 0 means pending approval. 1 means has access. 2 means suspended',
-	`suspend_reason` TEXT(255) NOT NULL COMMENT 'Stores the reason why a user is Suspended',
-	`suspend_duration` DATE NOT NULL COMMENT 'Stores the duration a user is Suspended for'
+  `id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` text,
+  `identifier` varchar(255) DEFAULT NULL,
+  `password_reset` int(1) NOT NULL DEFAULT '0' COMMENT '1 means password reset required. 0 means it''s not.',
+  `approved` int(1) NOT NULL DEFAULT '0' COMMENT 'Three main statuses: 0 means pending approval. 1 means has access. 2 means suspended',
+  `suspend_reason` tinytext COMMENT 'Stores the reason why a user is Suspended',
+  `suspend_duration` date DEFAULT NULL COMMENT 'Stores the duration a user is Suspended for'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='User table' ROW_FORMAT=COMPACT;
-ALTER TABLE `users`
-	CHANGE COLUMN `suspend_reason` `suspend_reason` TINYTEXT NULL DEFAULT NULL COMMENT 'Stores the reason why a user is Suspended' AFTER `approved`,
-	CHANGE COLUMN `suspend_duration` `suspend_duration` DATE NULL DEFAULT NULL COMMENT 'Stores the duration a user is Suspended for' AFTER `suspend_reason`;
-
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `identifier`, `admin_privilege`, `password_reset`, `approved`) VALUES
-(1, 'Default Admin', 'admin@test.com', '$2y$10$xHvogGcqQs8jhTPbFEDHJO9KWu2FCLgJ5XGxH.hHMA0BY1brgCkSG', '1A-98', 2, 0, 1);
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `identifier`, `password_reset`, `approved`, `suspend_reason`, `suspend_duration`) VALUES
+(1, 'Default Admin', 'admin@test.com', '$2y$10$xHvogGcqQs8jhTPbFEDHJO9KWu2FCLgJ5XGxH.hHMA0BY1brgCkSG', '1A-98', 0, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1913,9 +1902,3 @@ ALTER TABLE `ncic_plates`
 --
 ALTER TABLE `ncic_weapons`
   ADD CONSTRAINT `Name Pair Weapon` FOREIGN KEY (`name_id`) REFERENCES `ncic_names` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `user_departments`
---
-ALTER TABLE `user_departments`
-  ADD CONSTRAINT `Department` FOREIGN KEY (`department_id`) REFERENCES `departments` (`department_id`) ON DELETE CASCADE ON UPDATE CASCADE;

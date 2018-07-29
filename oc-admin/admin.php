@@ -28,16 +28,24 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     }
 
 
-    if(isset($_SESSION['admin']))
+    if ( $_SESSION['admin_privilege'] == 2)
     {
-      if ($_SESSION['admin'] == 'YES')
+      if ($_SESSION['admin_privilege'] == 'Administrator')
       {
           //Do nothing
+      }
+    }
+    else if ($_SESSION['admin_privilege'] == 1)
+    {
+      if ($_SESSION['admin_privilege'] == 'Moderator')
+      {
+          // Do Nothing
       }
     }
     else
     {
       die("You do not have permission to be here. This has been recorded");
+
     }
 
 require_once(__DIR__ . '/../oc-config.php');
