@@ -87,7 +87,7 @@ function pageLoadTime() {
 	**/
 function getOpenCADVersion()
 {
-	echo '0.2.1';
+	echo '0.2.2';
 }
 
 ?>
