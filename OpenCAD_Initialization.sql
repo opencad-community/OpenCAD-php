@@ -1,7 +1,5 @@
 --
 -- OpenCAD Database Scheme
--- Last Updated: 3 May 2018
--- Updated By: Matt Myers <mmyers@opencad.io>
 --
 
 -- --------------------------------------------------------
