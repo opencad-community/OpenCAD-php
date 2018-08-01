@@ -307,15 +307,7 @@ function getDepartments()
 
     while ($row = mysqli_fetch_array($result, MYSQLI_BOTH))
     {
-        if ($row[0] == '8')
-        {
-            echo '<option value="' . $row[0] . '" disabled>' . $row[1] . '</option>';
-        }
-        else
-        {
             echo '<option value="' . $row[0] . '">' . $row[1] . '</option>';
-        }
-
     }
 }
 

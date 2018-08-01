@@ -25,7 +25,7 @@ require_once(__DIR__ . "/../oc-config.php");
             die('Please fix your database credentials. ' .mysql_error());
         }
 
-        $query = "SELECT id, name, password, email, identifier, password_reset, approved, suspend_reason FROM users WHERE email = ?";
+        $query = "SELECT id, name, password, email, identifier, admin_privilege, password_reset, approved, suspend_reason FROM users WHERE email = ?";
 
         try {
             $stmt = mysqli_prepare($link, $query);
@@ -43,7 +43,7 @@ require_once(__DIR__ . "/../oc-config.php");
 
         $login_ok = false;
 
-        mysqli_stmt_bind_result($stmt, $id, $name, $pw, $email, $identifier, $password_reset, $approved, $suspended_reason);
+        mysqli_stmt_bind_result($stmt, $id, $name, $pw, $email, $identifier, $admin_privilege, $password_reset, $approved, $suspended_reason);
 	    mysqli_stmt_fetch($stmt);
 
         if (password_verify($password, $pw))
@@ -87,9 +87,8 @@ require_once(__DIR__ . "/../oc-config.php");
         $_SESSION['email'] = $email;
         $_SESSION['identifier'] = $identifier;
         $_SESSION['callsign'] = $identifier; //Set callsign to default to identifier until the unit changes it
-
+        $_SESSION['admin_privilege'] = $admin_privilege; //Set callsign to default to identifier until the unit changes it
         header("Location:".BASE_URL."/dashboard.php");
     }
 
 ?>
-

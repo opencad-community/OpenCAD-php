@@ -37,6 +37,26 @@ else
   $name = $_SESSION['name'];
 }
 
+if ( $_SESSION['admin_privilege'] == 2)
+{
+  if ($_SESSION['admin_privilege'] == 'Administrator')
+  {
+      //Do nothing
+  }
+}
+else if ($_SESSION['admin_privilege'] == 1)
+{
+  if ($_SESSION['admin_privilege'] == 'Moderator')
+  {
+      // Do Nothing
+  }
+}
+else
+{
+  die("You do not have permission to be here. This has been recorded");
+
+}
+
 require_once(__DIR__ . '/../oc-config.php');
 require_once(__DIR__ . '/../oc-functions.php');
 
