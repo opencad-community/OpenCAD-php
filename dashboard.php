@@ -176,8 +176,6 @@ mysqli_close($link);
    <!DOCTYPE html>
    <?php include "./oc-includes/header.inc.php"; ?>
    <body id="body">
-   <button type="button" onclick="night()" class="btn">NIGHT</button>
-            <button type="button" onclick="day()" class="btn">DAY</button>
       <div id="page-wrapper">
          <div class="container-fluid">
             <div class="row">
