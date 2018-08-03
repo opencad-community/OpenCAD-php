@@ -45,7 +45,7 @@ function register()
     //Hash the password
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     //Establish database connection
- 
+
     //Check to see if the email has already been used
     $query = "SELECT email from users where email = \"".$email."\"";
     $result = mysqli_query($link, $query);
@@ -77,20 +77,20 @@ function register()
     {
         if($division == "communications")
         {$division = "1";}
-        elseif($division == "ems")
+        elseif($division == "state")
             {$division = "2";}
-        elseif($division == "fire")
-            {$division = "3";}
         elseif($division == "highway")
+            {$division = "3";}
+        elseif($division == "sheriff")
             {$division = "4";}
         elseif($division == "police")
             {$division = "5";}
-        elseif($division == "sheriff")
+        elseif($division == "fire")
             {$division = "6";}
-        elseif($division == "civilian")
+        elseif($division == "ems")
             {$division = "7";}
-        elseif($division == "state")
-            {$division = "9";}
+        elseif($division == "civillian")
+            {$division = "8";}
         $query = "INSERT INTO user_departments_temp (user_id, department_id)
               SELECT id , ?
               FROM users
@@ -134,7 +134,7 @@ function civreg()
     //Hash the password
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     //Establish database connection
- 
+
     //Check to see if the email has already been used
     $query = "SELECT email from users where email = \"".$email."\"";
     $result = mysqli_query($link, $query);
@@ -181,6 +181,6 @@ function civreg()
     session_start();
     $_SESSION['register_success'] = "Successfully registered. You may now log-in.";
     sleep(1);
-    header("Location:".BASE_URL."/index.php#civreg");	
+    header("Location:".BASE_URL."/index.php#civreg");
 }
 ?>
