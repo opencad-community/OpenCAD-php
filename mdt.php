@@ -29,6 +29,19 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     include("./actions/api.php");
     include("./actions/responderActions.php");
 
+    if ( $_GET['dep'] == "police" )
+        $activeDepartment = "Police";
+      else if ( $_GET['dep'] == "sheriff" )
+        $activeDepartment = "Sheriff";
+      else if ( $_GET['dep'] == "state" )
+        $activeDepartment = "State Police";
+      else if ( $_GET['dep'] == "highway" )
+        $activeDepartment = "Highway Patrol";
+      else if ( $_GET['dep'] == "fire" )
+        $activeDepartment = "Fire";
+      else if ( $_GET['dep'] == "EMS" )
+        $activeDepartment = "EMS";
+
     $citationMessage = "";
     if(isset($_SESSION['citationMessage']))
     {
@@ -60,7 +73,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             <div class="col-md-3 left_col">
                <div class="left_col scroll-view">
                   <div class="navbar nav_title" style="border: 0;">
-                     <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span>Responder</span></a>
+                     <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo $activeDepartment; ?></span></a>
                   </div>
                   <div class="clearfix"></div>
                   <!-- menu profile quick info -->
@@ -77,7 +90,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <!-- /menu profile quick info -->
                   <br />
                   <!-- sidebar menu -->
-                  <div id="police" class="dynamic-content main_menu_side hidden-print main_menu">
+                  <div id="lawenforcement" class="dynamic-content main_menu_side hidden-print main_menu">
                      <div class="menu_section">
                         <h3>General</h3>
                         <ul class="nav side-menu">
@@ -1097,8 +1110,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	 $(document).ready(function() {
 
 		// Check if the URL parameter is police
-		if (dynamicContent == 'police') {
-			$('#police').show();
+		if (dynamicContent == 'police' || dynamicContent == 'highway' || dynamicContent == 'state' || dynamicContent == 'sheriff') {
+			$('#lawenforcement').show();
 			$('#ncic').show();
 		}
 	 else if (dynamicContent == 'fire') {

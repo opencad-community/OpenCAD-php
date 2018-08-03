@@ -1,23 +1,5 @@
 --
 -- OpenCAD Database Scheme
--- Last Updated: 3 May 2018
--- Updated By: Matt Myers <mmyers@opencad.io>
---
--- --------------------------------------------------------
--- phpMyAdmin SQL Dump
--- version 4.6.6deb5
--- https://www.phpmyadmin.net/
---
--- Host: localhost
--- Generation Time: Mar 26, 2018 at 10:15 PM
--- Server version: 10.1.30-MariaDB-0ubuntu0.17.10.1
--- PHP Version: 7.1.15-0ubuntu0.17.10.1
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
---
--- Database: `opencad_test`
 --
 
 -- --------------------------------------------------------
@@ -76,15 +58,12 @@ CREATE TABLE `bolos_vehicles` (
 CREATE TABLE `calls` (
   `call_id` int(11) NOT NULL,
   `call_type` text NOT NULL,
-  `call_primary` text NOT NULL,
+  `call_primary` text,
   `call_street1` text NOT NULL,
   `call_street2` text,
   `call_street3` text,
   `call_narrative` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
-ALTER TABLE `calls`
-	CHANGE COLUMN `call_primary` `call_primary` TEXT NULL DEFAULT NULL AFTER `call_type`;
-
 
 -- --------------------------------------------------------
 
@@ -108,14 +87,12 @@ CREATE TABLE `calls_users` (
 CREATE TABLE `call_history` (
   `call_id` int(11) NOT NULL,
   `call_type` text NOT NULL,
-  `call_primary` text NOT NULL,
+  `call_primary` text,
   `call_street1` text NOT NULL,
   `call_street2` text,
   `call_street3` text,
   `call_narrative` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
-ALTER TABLE `call_history`
-	CHANGE COLUMN `call_primary` `call_primary` TEXT NULL DEFAULT NULL AFTER `call_type`;
 
 -- --------------------------------------------------------
 
@@ -479,16 +456,14 @@ CREATE TABLE `departments` (
 --
 
 INSERT INTO `departments` (`department_id`, `department_name`) VALUES
-(0, 'Head Administrators'),
 (1, 'Communications'),
-(2, 'EMS'),
-(3, 'Fire'),
-(4, 'Highway'),
+(2, 'State'),
+(3, 'Highway'),
+(4, 'Sheriff'),
 (5, 'Police'),
-(6, 'Sheriff'),
-(7, 'Civilian'),
-(8, 'Admins'),
-(9, 'State');
+(6, 'Fire'),
+(7, 'EMS'),
+(8, 'Civilian');
 
 -- --------------------------------------------------------
 
@@ -507,7 +482,7 @@ CREATE TABLE `dispatchers` (
 --
 
 INSERT INTO `dispatchers` (`identifier`, `callsign`, `status`) VALUES
-('1A-98', '1A-98', 1);
+('1A-98', '1A-98', 0);
 
 -- --------------------------------------------------------
 
@@ -993,27 +968,25 @@ INSERT INTO `tones` (`id`, `name`, `active`) VALUES
 --
 
 CREATE TABLE `users` (
-	`id` INT(11) NOT NULL,
-	`name` TEXT NOT NULL,
-	`email` VARCHAR(255) NOT NULL,
-	`password` TEXT NULL,
-	`identifier` VARCHAR(255) NULL DEFAULT NULL,
-	`password_reset` INT(1) NOT NULL DEFAULT '0' COMMENT '1 means password reset required. 0 means it\'s not.',
-	`approved` INT(1) NOT NULL DEFAULT '0' COMMENT 'Three main statuses: 0 means pending approval. 1 means has access. 2 means suspended',
-	`suspend_reason` TEXT(255) NOT NULL COMMENT 'Stores the reason why a user is Suspended',
-	`suspend_duration` DATE NOT NULL COMMENT 'Stores the duration a user is Suspended for'
+  `id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` text,
+  `identifier` varchar(255) DEFAULT NULL,
+  `admin_privilege` int(1) NOT NULL DEFAULT '0' COMMENT '0 = No Perms, 0 = Moderator, 1 = Administrator',
+  `supervisor_privilege` int(1) NOT NULL DEFAULT '0' COMMENT 'If 0 then user does not posses any supervisor privileges else 1 then user possess supervisor privileges.',
+  `password_reset` int(1) NOT NULL DEFAULT '0' COMMENT '1 means password reset required. 0 means it''s not.',
+  `approved` int(1) NOT NULL DEFAULT '0' COMMENT 'Three main statuses: 0 means pending approval. 1 means has access. 2 means suspended',
+  `suspend_reason` tinytext COMMENT 'Stores the reason why a user is Suspended',
+  `suspend_duration` date DEFAULT NULL COMMENT 'Stores the duration a user is Suspended for'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='User table' ROW_FORMAT=COMPACT;
-ALTER TABLE `users`
-	CHANGE COLUMN `suspend_reason` `suspend_reason` TINYTEXT NULL DEFAULT NULL COMMENT 'Stores the reason why a user is Suspended' AFTER `approved`,
-	CHANGE COLUMN `suspend_duration` `suspend_duration` DATE NULL DEFAULT NULL COMMENT 'Stores the duration a user is Suspended for' AFTER `suspend_reason`;
-
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `identifier`, `password_reset`, `approved`) VALUES
-(1, 'Default Admin', 'admin@test.com', '$2y$10$xHvogGcqQs8jhTPbFEDHJO9KWu2FCLgJ5XGxH.hHMA0BY1brgCkSG', '1A-98', 0, 1);
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `identifier`, `admin_privilege`, `supervisor_privilege`, `password_reset`, `approved`, `suspend_reason`, `suspend_duration`) VALUES
+(0, 'Default Admin', 'admin@test.com', '$2y$10$xHvogGcqQs8jhTPbFEDHJO9KWu2FCLgJ5XGxH.hHMA0BY1brgCkSG', '1A-98', 2, 1, 0, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1026,21 +999,6 @@ CREATE TABLE `user_departments` (
   `department_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
---
--- Dumping data for table `user_departments`
---
-
-INSERT INTO `user_departments` (`user_id`, `department_id`) VALUES
-(1, 0),
-(1, 1),
-(1, 2),
-(1, 3),
-(1, 4),
-(1, 5),
-(1, 6),
-(1, 7),
-(1, 8),
-(1, 9);
 
 -- --------------------------------------------------------
 
@@ -1642,280 +1600,7 @@ ALTER TABLE `bolos_persons`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Indexes for table `bolos_vehicles`
---
-ALTER TABLE `bolos_vehicles`
-  ADD PRIMARY KEY (`id`) USING BTREE;
-
---
--- Indexes for table `calls`
---
-ALTER TABLE `calls`
-  ADD PRIMARY KEY (`call_id`) USING BTREE;
-
---
--- Indexes for table `calls_users`
---
-ALTER TABLE `calls_users`
-  ADD PRIMARY KEY (`call_id`,`identifier`) USING BTREE;
-
---
--- Indexes for table `call_history`
---
-ALTER TABLE `call_history`
-  ADD PRIMARY KEY (`call_id`) USING BTREE;
-
---
--- Indexes for table `citations`
---
-ALTER TABLE `citations`
-  ADD PRIMARY KEY (`id`) USING BTREE,
-  ADD UNIQUE KEY `citation_name` (`citation_name`) USING BTREE;
-
---
--- Indexes for table `civilian_names`
---
-ALTER TABLE `civilian_names`
-  ADD PRIMARY KEY (`user_id`,`names_id`) USING BTREE,
-  ADD UNIQUE KEY `names_id` (`names_id`) USING BTREE;
-
---
--- Indexes for table `colors`
---
-ALTER TABLE `colors`
-  ADD PRIMARY KEY (`id`) USING BTREE;
-
---
--- Indexes for table `departments`
---
-ALTER TABLE `departments`
-  ADD PRIMARY KEY (`department_id`) USING BTREE;
-
---
--- Indexes for table `dispatchers`
---
-ALTER TABLE `dispatchers`
-  ADD PRIMARY KEY (`identifier`) USING BTREE,
-  ADD UNIQUE KEY `callsign` (`callsign`) USING BTREE,
-  ADD UNIQUE KEY `identifier` (`identifier`) USING BTREE;
-
---
--- Indexes for table `genders`
---
-ALTER TABLE `genders`
-  ADD PRIMARY KEY (`id`) USING BTREE;
-
---
--- Indexes for table `incident_type`
---
-ALTER TABLE `incident_type`
-  ADD PRIMARY KEY (`code_id`) USING BTREE,
-  ADD UNIQUE KEY `code_name` (`code_name`) USING BTREE;
-
---
--- Indexes for table `ncic_arrests`
---
-ALTER TABLE `ncic_arrests`
-  ADD PRIMARY KEY (`id`) USING BTREE;
-
---
--- Indexes for table `ncic_citations`
---
-ALTER TABLE `ncic_citations`
-  ADD PRIMARY KEY (`id`) USING BTREE;
-
---
--- Indexes for table `ncic_names`
---
-ALTER TABLE `ncic_names`
-  ADD PRIMARY KEY (`id`) USING BTREE,
-  ADD UNIQUE KEY `id_UNIQUE` (`id`) USING BTREE,
-  ADD UNIQUE KEY `name` (`name`) USING BTREE;
-
---
--- Indexes for table `ncic_plates`
---
-ALTER TABLE `ncic_plates`
-  ADD PRIMARY KEY (`id`) USING BTREE,
-  ADD UNIQUE KEY `veh_plate` (`veh_plate`(55)) USING BTREE,
-  ADD KEY `name_id` (`name_id`) USING BTREE;
-
---
--- Indexes for table `ncic_warnings`
---
-ALTER TABLE `ncic_warnings`
-  ADD PRIMARY KEY (`id`) USING BTREE;
-
---
--- Indexes for table `ncic_warrants`
---
-ALTER TABLE `ncic_warrants`
-  ADD PRIMARY KEY (`id`) USING BTREE;
-
---
--- Indexes for table `ncic_weapons`
---
-ALTER TABLE `ncic_weapons`
-  ADD PRIMARY KEY (`id`) USING BTREE,
-  ADD KEY `name_id` (`name_id`) USING BTREE;
-
---
--- Indexes for table `permissions`
---
-ALTER TABLE `permissions`
-  ADD PRIMARY KEY (`perm_id`) USING BTREE;
-
---
--- Indexes for table `statuses`
---
-ALTER TABLE `statuses`
-  ADD PRIMARY KEY (`status_id`) USING BTREE;
-
---
--- Indexes for table `streets`
---
-ALTER TABLE `streets`
-  ADD PRIMARY KEY (`id`) USING BTREE;
-
---
--- Indexes for table `tones`
---
-ALTER TABLE `tones`
-  ADD PRIMARY KEY (`id`) USING BTREE,
-  ADD UNIQUE KEY `name` (`name`) USING BTREE;
-
---
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`) USING BTREE,
-  ADD UNIQUE KEY `email` (`email`) USING BTREE,
-  ADD UNIQUE KEY `identifier` (`identifier`) USING BTREE;
-
---
--- Indexes for table `user_departments`
---
-ALTER TABLE `user_departments`
-  ADD PRIMARY KEY (`user_id`,`department_id`) USING BTREE,
-  ADD KEY `user_id` (`user_id`) USING BTREE,
-  ADD KEY `department_id` (`department_id`) USING BTREE;
-
---
--- Indexes for table `vehicles`
---
-ALTER TABLE `vehicles`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `weapons`
---
-ALTER TABLE `weapons`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `bolos_persons`
---
-ALTER TABLE `bolos_persons`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `bolos_vehicles`
---
-ALTER TABLE `bolos_vehicles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `calls`
---
-ALTER TABLE `calls`
-  MODIFY `call_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `ncic_arrests`
---
-ALTER TABLE `ncic_arrests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `ncic_citations`
---
-ALTER TABLE `ncic_citations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `ncic_names`
---
-ALTER TABLE `ncic_names`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `ncic_plates`
---
-ALTER TABLE `ncic_plates`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `ncic_warnings`
---
-ALTER TABLE `ncic_warnings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `ncic_warrants`
---
-ALTER TABLE `ncic_warrants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `ncic_weapons`
---
-ALTER TABLE `ncic_weapons`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `permissions`
---
-ALTER TABLE `permissions`
-  MODIFY `perm_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `statuses`
---
-ALTER TABLE `statuses`
-  MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT for table `streets`
---
-ALTER TABLE `streets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key for each street', AUTO_INCREMENT=235;
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
---
--- AUTO_INCREMENT for table `vehicles`
---
-ALTER TABLE `vehicles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=503;
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `civilian_names`
---
-ALTER TABLE `civilian_names`
-  ADD CONSTRAINT `Name ID` FOREIGN KEY (`names_id`) REFERENCES `ncic_names` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `User ID` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `ncic_plates`
---
-ALTER TABLE `ncic_plates`
-  ADD CONSTRAINT `Name Pair` FOREIGN KEY (`name_id`) REFERENCES `ncic_names` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `ncic_weapons`
---
-ALTER TABLE `ncic_weapons`
-  ADD CONSTRAINT `Name Pair Weapon` FOREIGN KEY (`name_id`) REFERENCES `ncic_names` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `user_departments`
---
-ALTER TABLE `user_departments`
-  ADD CONSTRAINT `Department` FOREIGN KEY (`department_id`) REFERENCES `departments` (`department_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD UNIQUE KEY `id` (`id`);

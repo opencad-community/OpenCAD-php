@@ -41,8 +41,11 @@ if (!$link) {
 
 $id = $_SESSION['id'];
 $sql = "SELECT * from user_departments WHERE user_id = \"$id\"";
+$getAdminPriv = "SELECT `admin_privilege` from users WHERE id = \"$id\"";
 
 $result=mysqli_query($link, $sql);
+$adminPriv=mysqli_query($link, $getAdminPriv);
+
 
 $adminButton = "";
 $dispatchButton = "";
@@ -55,55 +58,51 @@ $policeButton = "";
 $civilianButton = "";
 
 $num_rows = $result->num_rows;
-// This loop will auto redirect the user if they only have one option
-// TODO: Add the rest of the headers
 if($num_rows < 2)
 {
     while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
     {
-        if ($row[1] == "0")
-        {
-            $_SESSION['admin'] = 'YES';
-            header("Location:".BASE_URL."/oc-admin/admin.php");
-
-        }
-        else if ($row[1] == "1")
+			if ($row[1] == "1")
         {
             $_SESSION['dispatch'] = 'YES';
             header("Location:".BASE_URL."/cad.php");
 
         }
-        else if ($row[1] == "2")
-        {
-            $_SESSION['ems'] = 'YES';
-            header("Location:".BASE_URL."/mdt.php?dep=fire");
-        }
-            else if ($row[1] == "3")
-        {
-            $_SESSION['fire'] = 'YES';
-            header("Location:".BASE_URL."/mdt.php?dep=fire");
-        }
-        else if ($row[1] == "4")
-        {
-            $_SESSION['highway'] = 'YES';
-            header("Location:".BASE_URL."/mdt.php?dep=police");
-        }
-        else if ($row[1] == "5")
+				else if ($row[1] == "2")
+				{
+						$_SESSION['state'] = 'YES';
+						header("Location:".BASE_URL."/mdt.php?dep=state");
+				}
+				else if ($row[1] == "3")
+				{
+						$_SESSION['highway'] = 'YES';
+						header("Location:".BASE_URL."/mdt.php?dep=highway");
+				}
+				else if ($row[1] == "4")
+				{
+						$_SESSION['sheriff'] = 'YES';
+						header("Location:".BASE_URL."/mdt.php?dep=sheriff");
+				}
+				else if ($row[1] == "5")
         {
             $_SESSION['police'] = 'YES';
             header("Location:".BASE_URL."/mdt.php?dep=police");
         }
-        else if ($row[1] == "6")
+				else if ($row[1] == "6")
+				{
+				$_SESSION['fire'] = 'YES';
+				header("Location:".BASE_URL."/mdt.php?dep=fire");
+				}
+        else if ($row[1] == "7")
         {
-            $_SESSION['sheriff'] = 'YES';
-            header("Location:".BASE_URL."/mdt.php?dep=police");
+            $_SESSION['ems'] = 'YES';
+            header("Location:".BASE_URL."/mdt.php?dep=ems");
         }
         else if ($row[1] == "7")
         {
             $_SESSION['civilian'] = 'YES';
             header("Location:".BASE_URL."/civilian.php");
         }
-
     }
 }
 else
@@ -111,52 +110,63 @@ else
 
     while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
     {
-        if ($row[1] == 0)
-        {
-            $_SESSION['admin'] = 'YES';
-						$adminButton = "<a href=\"".BASE_URL."/oc-admin/admin.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Admin</a>";
-        }
-        if ($row[1] == 1)
+        if ($row[1] == "1")
         {
             $_SESSION['dispatch'] = 'YES';
             $dispatchButton = "<a href=\"".BASE_URL."/cad.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Dispatch</a>";
         }
-        if ($row[1] == "2")
+        if ($row[1] == "7")
         {
             $_SESSION['ems'] = 'YES';
-            $emsButton = "<a href=\"".BASE_URL."/mdt.php?dep=fire\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">EMS</a>";
+            $emsButton = "<a href=\"".BASE_URL."/mdt.php?dep=ems\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">EMS</a>";
         }
-        if ($row[1] == "3")
+        if ($row[1] == "6")
         {
             $_SESSION['fire'] = 'YES';
             $fireButton = "<a href=\"".BASE_URL."/mdt.php?dep=fire\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Fire</a>";
         }
-        if ($row[1] == "4")
+        if ($row[1] == "3")
         {
             $_SESSION['highway'] = 'YES';
-            $highwayButton = "<a href=\"".BASE_URL."/mdt.php?dep=police\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Highway Patrol</a>";
+            $highwayButton = "<a href=\"".BASE_URL."/mdt.php?dep=highway\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Highway Patrol</a>";
         }
         if ($row[1] == "5")
         {
             $_SESSION['police'] = 'YES';
             $policeButton = "<a href=\"".BASE_URL."/mdt.php?dep=police\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Police Department</a>";        }
-        if ($row[1] == "6")
+        if ($row[1] == "4")
         {
             $_SESSION['sheriff'] = 'YES';
-            $sheriffButton = "<a href=\"".BASE_URL."/mdt.php?dep=police\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Sheriff's Office</a>";
+            $sheriffButton = "<a href=\"".BASE_URL."/mdt.php?dep=sheriff\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Sheriff's Office</a>";
         }
-        if ($row[1] == "9")
+        if ($row[1] == "2")
         {
             $_SESSION['state'] = 'YES';
-            $stateButton = "<a href=\"".BASE_URL."/mdt.php?dep=police\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">State Police</a>";
+            $stateButton = "<a href=\"".BASE_URL."/mdt.php?dep=state\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">State Police</a>";
         }
-        if ($row[1] == "7")
+        if ($row[1] == "8")
         {
             $_SESSION['civillian'] = 'YES';
             $civilianButton = "<a href=\"".BASE_URL."/civilian.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Civilian</a>";
         }
     }
 }
+$adminRows = $adminPriv->num_rows;
+if($adminRows < 2)
+{
+	while($adminRow = mysqli_fetch_array($adminPriv, MYSQLI_BOTH))
+	{
+		if ($adminRow[0] == "2")
+		{
+			$adminButton = "<a href=\"".BASE_URL."/oc-admin/admin.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Admin</a>";
+		}
+		if ($adminRow[0] == "1")
+		{
+			$adminButton = "<a href=\"".BASE_URL."/oc-admin/Moderator.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Moderator</a>";
+		}
+	}
+}
+
 mysqli_close($link);
 
 
@@ -166,8 +176,6 @@ mysqli_close($link);
    <!DOCTYPE html>
    <?php include "./oc-includes/header.inc.php"; ?>
    <body id="body">
-   <button type="button" onclick="night()" class="btn">NIGHT</button>
-            <button type="button" onclick="day()" class="btn">DAY</button>
       <div id="page-wrapper">
          <div class="container-fluid">
             <div class="row">
@@ -184,26 +192,26 @@ mysqli_close($link);
                <?php echo $adminButton;?>
                </div>
                &nbsp;
+							 <div id="buttongroup">
+							 <?php echo $sheriffButton;?>
+							 <?php echo $highwayButton;?>
+							 <?php echo $stateButton;?>
+							 <?php echo $policeButton;?>
+							 </div>
+							 &nbsp;
                <div id="buttongroup">
                <?php echo $dispatchButton;?>
                </div>
                &nbsp;
                <div id="buttongroup">
-               <?php echo $civilianButton;?>
-               </div>
-               &nbsp;
-               <div id="buttongroup">
                <?php echo $fireButton;?>
-			   <?php echo $emsButton;?>
+			   	 			<?php echo $emsButton;?>
                </div>
                &nbsp;
-               <div id="buttongroup">
-               <?php echo $sheriffButton;?>
-               <?php echo $highwayButton;?>
-               <?php echo $stateButton;?>
-               <?php echo $policeButton;?>
-               </div>
-               &nbsp;
+							 <div id="buttongroup">
+							 <?php echo $civilianButton;?>
+							 </div>
+							 &nbsp;
              </div>
             <!-- ./ col-lg-12 -->
          </div>
@@ -214,4 +222,3 @@ mysqli_close($link);
       <!-- ./ page-wrapper -->
    </body>
 </html>
-
