@@ -313,7 +313,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               </div>
               <!-- ./ form-group -->
               <div class="form-group row">
-                <label class="col-md-3 control-label">Roles</label>
+                <label class="col-md-3 control-label">User Role</label>
                 <div class="col-md-9">
                   <select name="userRole[]" class="selectpicker form-control" id="userRole">
                       <option value="0">User</option>

@@ -95,6 +95,7 @@ function editUserAccount()
 	$userID 		= !empty($_POST['userID']) ? $_POST['userID'] : '';
 	$userIdentifier = !empty($_POST['userIdentifier']) ? $_POST['userIdentifier'] : '';
 	$userGroups 	= !empty($_POST['userGroups']) ? $_POST['userGroups'] : '';
+  $userRole     = !empty($_POST['userRole']) ? $_POST['userRole'] : '';
 
 		$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 		$site = BASE_URL;
@@ -110,7 +111,7 @@ function editUserAccount()
 			mysqli_query($link, $sql1);
 		}
 	}
-	$sql="UPDATE users SET name = '$userName', email = '$userEmail', identifier = '$userIdentifier'  WHERE id = $userID";
+	$sql="UPDATE users SET name = '$userName', email = '$userEmail', identifier = '$userIdentifier', admin_privilege = '$userRole'  WHERE id = $userID";
 	if (mysqli_query($link, $sql)) {
     header("Location: ".BASE_URL."/oc-admin/userManagement.php");
    } else {
@@ -529,7 +530,7 @@ function getUsers()
         die('Could not connect: ' . mysql_error());
     }
 
-    $query = "SELECT id, name, email, identifier, approved FROM users WHERE approved = '1' OR approved = '2'";
+    $query = "SELECT id, name, email, admin_privilege, identifier, approved FROM users WHERE approved = '1' OR approved = '2'";
 
     $result = mysqli_query($link, $query);
 
@@ -539,6 +540,7 @@ function getUsers()
             <tr>
             <th>Name</th>
             <th>Email</th>
+            <th>Role</th>
             <th>Identifier</th>
             <th>Groups</th>
             <th>Actions</th>
@@ -549,11 +551,24 @@ function getUsers()
 
     while ($row = mysqli_fetch_array($result, MYSQLI_BOTH))
     {
+
+        if ( $row[3] == 1 )
+        {
+          $roleIs = "Moderator";
+        }
+        else if ( $row[3] == 2 )
+        {
+          $roleIs = "Administrator";
+        }
+        else {
+          $roleIs = "User";
+        }
         echo '
         <tr>
             <td>' . $row[1] . '</td>
             <td>' . $row[2] . '</td>
-            <td>' . $row[3] . '</td>
+            <td>' . $roleIs . '</td>
+            <td>' . $row[4] . '</td>
             <td id="show_group">';
 
         getUserGroupsApproved($row[0]);
