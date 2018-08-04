@@ -16,9 +16,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 require_once(__DIR__ . "/../oc-config.php");
 
-if (isset($_GET['dep'])){
-    getActiveCalls();
-}
 if (isset($_GET['a'])){
     getActiveCalls();
 }
