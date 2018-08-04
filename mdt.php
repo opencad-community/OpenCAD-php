@@ -29,18 +29,37 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     include("./actions/api.php");
     include("./actions/responderActions.php");
 
-    if ( $_GET['dep'] == "police" )
-        $activeDepartment = "Police";
-      else if ( $_GET['dep'] == "sheriff" )
+    if ( $_GET['dep'] == "state" || $_SESSION['activeDepartment'] == "state" )
+    {
+        $activeDepartment = "State";
+        $_SESSION['activeDepartment'] = 'State';
+    }
+    else if ( $_GET['dep'] == "sheriff" || $_SESSION['activeDepartment'] == "sheriff" )
+    {
         $activeDepartment = "Sheriff";
-      else if ( $_GET['dep'] == "state" )
-        $activeDepartment = "State Police";
-      else if ( $_GET['dep'] == "highway" )
+        $_SESSION['activeDepartment'] = 'sheriff';
+    }
+    else if ( $_GET['dep'] == "highway" || $_SESSION['activeDepartment'] == "highway" )
+    {
         $activeDepartment = "Highway Patrol";
-      else if ( $_GET['dep'] == "fire" )
+        $_SESSION['activeDepartment'] = 'highway';
+    }
+    else if ( $_GET['dep'] == "police" || $_SESSION['activeDepartment'] == "police" )
+    {
+        $activeDepartment = "police";
+        $_SESSION['activeDepartment'] = 'police';
+    }
+    else if ( $_GET['dep'] == "fire" || $_SESSION['activeDepartment'] == "fire" )
+    {
         $activeDepartment = "Fire";
-      else if ( $_GET['dep'] == "EMS" )
+        $_SESSION['activeDepartment'] = 'Fire';
+    }
+    else if ( $_GET['dep'] == "ems" || $_SESSION['activeDepartment'] == "ems" )
+    {
         $activeDepartment = "EMS";
+        $_SESSION['activeDepartment'] = 'ems';
+    }
+
 
     $citationMessage = "";
     if(isset($_SESSION['citationMessage']))
@@ -68,6 +87,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 <html lang="en">
    <?php include "./oc-includes/header.inc.php"; ?>
    <body class="nav-md">
+    <?php echo $_SESSION['activeDepartment']; ?>
       <div class="container body">
          <div class="main_container">
             <div class="col-md-3 left_col">
@@ -1105,7 +1125,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	    return decodeURIComponent(results[2].replace(/\+/g, " "));
 	}
 	// Give the parameter a variable name
-	var dynamicContent = getParameterByName('dep');
+	var dynamicContent = "<?php echo $_SESSION['activeDepartment'];?>"
 
 	 $(document).ready(function() {
 
