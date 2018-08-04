@@ -32,7 +32,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     if ( $_GET['dep'] == "state" || $_SESSION['activeDepartment'] == "state" )
     {
         $activeDepartment = "State";
-        $_SESSION['activeDepartment'] = 'State';
+        $_SESSION['activeDepartment'] = 'state';
     }
     else if ( $_GET['dep'] == "sheriff" || $_SESSION['activeDepartment'] == "sheriff" )
     {
