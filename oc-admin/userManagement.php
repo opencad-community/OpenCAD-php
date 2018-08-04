@@ -271,6 +271,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
             </button>
             <h4 class="modal-title" id="myModalLabel">Edit User</h4>
+            <div class="clearifx">
+            <div class="speparator">
+              <h5><strong>ALWAYS</strong> select proper user role before saving.</h5>
+            </div>
           </div>
           <!-- ./ modal-header -->
           <div class="modal-body">
@@ -315,10 +319,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-md-3 control-label">User Role</label>
                 <div class="col-md-9">
-                  <select name="userRole[]" class="selectpicker form-control" id="userRole">
-                      <option value="0">User</option>
-                      <option value="1">Moderator</option>
-                      <option value="2">Administrator</option>
+                  <select name="userRole" class="selectpicker form-control" id="userRole">
+                      <?php getRole() ?>
                   </select>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -329,7 +331,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			<input type="hidden" name="userID" id="userID">
-            <input type="submit" name="editUserAccount" class="btn btn-primary" value="Edit User"/>
+            <input type="submit" name="editUserAccount" class="btn btn-primary" value="Update User"/>
           </div>
           <!-- ./ modal-footer -->
           </form>
@@ -402,8 +404,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               $('select[name="userGroups"] option[value="'+data['department'][i]+'"]').val(1);
               //console.log(option);
             }
+            for (var i=0; i<data['role'].length; i++)
+            {
+              $('select[name="userRole"] option[value="'+data['role'][i]+'"]').val(1);
+              //console.log(option);
+            }
 
             $('select[name="userGroups"]').selectpicker('refresh');
+            $('select[name="userRole"]').selectpicker('refresh');
 
 
           },

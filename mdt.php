@@ -32,7 +32,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     if ( $_GET['dep'] == "state" || $_SESSION['activeDepartment'] == "state" )
     {
         $activeDepartment = "State";
-        $_SESSION['activeDepartment'] = 'State';
+        $_SESSION['activeDepartment'] = 'state';
     }
     else if ( $_GET['dep'] == "sheriff" || $_SESSION['activeDepartment'] == "sheriff" )
     {
@@ -87,7 +87,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 <html lang="en">
    <?php include "./oc-includes/header.inc.php"; ?>
    <body class="nav-md">
-    <?php echo $_SESSION['activeDepartment']; ?>
       <div class="container body">
          <div class="main_container">
             <div class="col-md-3 left_col">

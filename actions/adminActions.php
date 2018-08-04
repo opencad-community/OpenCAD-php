@@ -312,6 +312,29 @@ function getDepartments()
     }
 }
 
+function getRole()
+{
+  $userID 		= !empty($_POST['userID']) ? $_POST['userID'] : '';
+  $userId = $_POST['userId'];
+
+  echo $_POST['userId'];
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    $site = BASE_URL;
+    if (!$link)
+    {
+        die('Could not connect: ' . mysql_error());
+    }
+
+    $sql = 'SELECT admin_privilege FROM users WHERE id = \'$userID\'';
+
+    $result = mysqli_query($link, $sql);
+    echo '
+            <option value="0">User</option>
+            <option value="1" disabled>Moderator</option>
+            <option value="2">Administrator</option>
+            ';
+}
+
 /* Get from temp table */
 function getUserGroups($uid)
 {
