@@ -29,6 +29,38 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     include("./actions/api.php");
     include("./actions/responderActions.php");
 
+    if ( $_GET['dep'] == "state" || $_SESSION['activeDepartment'] == "state" )
+    {
+        $activeDepartment = "State";
+        $_SESSION['activeDepartment'] = 'state';
+    }
+    else if ( $_GET['dep'] == "sheriff" || $_SESSION['activeDepartment'] == "sheriff" )
+    {
+        $activeDepartment = "Sheriff";
+        $_SESSION['activeDepartment'] = 'sheriff';
+    }
+    else if ( $_GET['dep'] == "highway" || $_SESSION['activeDepartment'] == "highway" )
+    {
+        $activeDepartment = "Highway Patrol";
+        $_SESSION['activeDepartment'] = 'highway';
+    }
+    else if ( $_GET['dep'] == "police" || $_SESSION['activeDepartment'] == "police" )
+    {
+        $activeDepartment = "police";
+        $_SESSION['activeDepartment'] = 'police';
+    }
+    else if ( $_GET['dep'] == "fire" || $_SESSION['activeDepartment'] == "fire" )
+    {
+        $activeDepartment = "Fire";
+        $_SESSION['activeDepartment'] = 'Fire';
+    }
+    else if ( $_GET['dep'] == "ems" || $_SESSION['activeDepartment'] == "ems" )
+    {
+        $activeDepartment = "EMS";
+        $_SESSION['activeDepartment'] = 'ems';
+    }
+
+
     $citationMessage = "";
     if(isset($_SESSION['citationMessage']))
     {
@@ -60,7 +92,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             <div class="col-md-3 left_col">
                <div class="left_col scroll-view">
                   <div class="navbar nav_title" style="border: 0;">
-                     <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span>Responder</span></a>
+                     <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo $activeDepartment; ?></span></a>
                   </div>
                   <div class="clearfix"></div>
                   <!-- menu profile quick info -->
@@ -77,7 +109,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <!-- /menu profile quick info -->
                   <br />
                   <!-- sidebar menu -->
-                  <div id="police" class="dynamic-content main_menu_side hidden-print main_menu">
+                  <div id="lawenforcement" class="dynamic-content main_menu_side hidden-print main_menu">
                      <div class="menu_section">
                         <h3>General</h3>
                         <ul class="nav side-menu">
@@ -1137,13 +1169,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	    return decodeURIComponent(results[2].replace(/\+/g, " "));
 	}
 	// Give the parameter a variable name
-	var dynamicContent = getParameterByName('dep');
+	var dynamicContent = "<?php echo $_SESSION['activeDepartment'];?>"
 
 	 $(document).ready(function() {
 
 		// Check if the URL parameter is police
-		if (dynamicContent == 'police') {
-			$('#police').show();
+		if (dynamicContent == 'police' || dynamicContent == 'highway' || dynamicContent == 'state' || dynamicContent == 'sheriff') {
+			$('#lawenforcement').show();
 			$('#ncic').show();
 		}
     if (dynamicContent == 'roadsideAssist') {
