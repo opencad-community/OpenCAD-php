@@ -118,12 +118,12 @@ else
         if ($row[1] == "7")
         {
             $_SESSION['ems'] = 'YES';
-            $emsButton = "<a href=\"".BASE_URL."/mdt.php?dep=ems\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">EMS</a>";
+						$emsButton = "<a href=\"".BASE_URL."/mdt.php?dep=ems\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">EMS</a>";
         }
         if ($row[1] == "6")
         {
             $_SESSION['fire'] = 'YES';
-            $fireButton = "<a href=\"".BASE_URL."/mdt.php?dep=fire\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Fire</a>";
+						$fireButton = "<a href=\"".BASE_URL."/mdt.php?dep=fire\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Fire</a>";
         }
         if ($row[1] == "3")
         {
