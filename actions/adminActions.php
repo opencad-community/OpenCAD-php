@@ -111,7 +111,7 @@ function editUserAccount()
 			mysqli_query($link, $sql1);
 		}
 	}
-	$sql="UPDATE users SET name = '$userName', email = '$userEmail', identifier = '$userIdentifier', admin_privilege = '$userRole'  WHERE id = $userID";
+	$sql = "UPDATE users SET name = '$userName', email = '$userEmail', identifier = '$userIdentifier', admin_privilege = '$userRole' WHERE id = '$userID'";
 	if (mysqli_query($link, $sql)) {
     header("Location: ".BASE_URL."/oc-admin/userManagement.php");
    } else {
