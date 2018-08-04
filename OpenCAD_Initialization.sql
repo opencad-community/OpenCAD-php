@@ -1604,3 +1604,9 @@ ALTER TABLE `bolos_persons`
 --
 ALTER TABLE `users`
   ADD UNIQUE KEY `id` (`id`);
+
+  --
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
