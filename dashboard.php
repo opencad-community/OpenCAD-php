@@ -99,7 +99,7 @@ if($num_rows < 2)
             $_SESSION['ems'] = 'YES';
             header("Location:".BASE_URL."/mdt.php?dep=ems");
         }
-        else if ($row[1] == "7")
+        else if ($row[1] == "8")
         {
             $_SESSION['civilian'] = 'YES';
             header("Location:".BASE_URL."/civilian.php");
@@ -177,7 +177,7 @@ if($adminRows < 2)
 		}
 		if ($adminRow[0] == "1")
 		{
-			$adminButton = "<a href=\"".BASE_URL."/oc-admin/Moderator.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Moderator</a>";
+			$adminButton = "<a href=\"".BASE_URL."/oc-admin/moderator.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Moderator</a>";
 		}
 	}
 }
