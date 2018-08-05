@@ -166,7 +166,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                <section class="login_content">
                   <?php echo $registerError, $registerSuccess;?>
                   <form action="<?php echo BASE_URL; ?>/actions/register.php" method="post">
-                     <h1>Register as a civilian</h1>
+                     <h1>Civilian Registration</h1>
                      <div>
                         <input class="form-control" placeholder="Name" name="uname" type="text" value="<?php if($testing){echo "Test";}?>" required>
                      </div>
@@ -229,4 +229,3 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       </script>
    </body>
 </html>
-
