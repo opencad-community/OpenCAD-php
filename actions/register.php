@@ -164,7 +164,7 @@ function civreg()
 		SELECT id , ?
 		FROM users
 		WHERE email = ?';
-		$civ = "7";
+		$civ = "8";
 	try {
 		$stmt = mysqli_prepare($link, $query);
 		mysqli_stmt_bind_param($stmt, "is", $civ, $email);
