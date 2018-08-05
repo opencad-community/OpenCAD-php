@@ -28,7 +28,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     include("./actions/api.php");
     include("./actions/responderActions.php");
-
+    unset($_SESSION['activeDepartment']);
     if ( $_GET['dep'] == "state" || $_SESSION['activeDepartment'] == "state" )
     {
         $activeDepartment = "State";
@@ -58,6 +58,11 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     {
         $activeDepartment = "EMS";
         $_SESSION['activeDepartment'] = 'ems';
+    }
+    else if ( $_GET['dep'] == "roadsideAssist" || $_SESSION['activeDepartment'] == "roadsideAssist" )
+    {
+        $activeDepartment = "Roadside Assistance";
+        $_SESSION['activeDepartment'] = 'roadsideAssist';
     }
 
 
@@ -206,10 +211,17 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						<?php echo $arrestMessage;?>
 						<?php echo $warningMessage;?>
                      </div>
+
                      <div class="x_footer">
+
                         <button class="btn btn-primary pull-right" name="new_call_btn" data-toggle="modal" data-target="#vehicles-bolo-board">View Vehicle BOLOs</button>
                         <button class="btn btn-primary pull-right" name="new_call_btn" data-toggle="modal" data-target="#persons-bolo-board">View Person BOLOs</button>
-                        <button class="btn btn-danger pull-right" onClick="priorityTone('panic')" value="0" id="panicTone">Panic Button</button>
+                        <?php if ($_SESSION['activeDepartment'] == 'state' || $_SESSION['activeDepartment'] == 'sheriff' || $_SESSION['activeDepartment'] == 'highway' || $_SESSION['activeDepartment'] == 'police') { ?>
+                        <button class="btn btn-danger pull-right" onClick="priorityTone(\'panic\')" value="0" id="panicTone">Panic Button</button>
+                        <?php }  else if (ROADSIDE_PANIC == true || FIRE_PANIC == true || EMS_PANIC == true ) { ?>
+                        <button class="btn btn-danger pull-right" onClick="priorityTone(\'panic\')" value="0" id="panicTone">Panic Button</button>
+                        <?php } else {} ?>
+
                      </div>
                      <!-- ./ title_left -->
                   </div>
@@ -1141,21 +1153,21 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <!-- AUDIO TONES -->
       <audio id="recurringToneAudio" src="<?php echo BASE_URL; ?>/sounds/priority.mp3" preload="auto"></audio>
       <audio id="priorityToneAudio" src="<?php echo BASE_URL; ?>/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
-	  <audio id="panicToneAudio" src="<?php echo BASE_URL; ?>/sounds/Panic_Button.m4a" preload="auto"></audio>
+  	  <audio id="panicToneAudio" src="<?php echo BASE_URL; ?>/sounds/Panic_Button.m4a" preload="auto"></audio>
       <script>
          var vid = document.getElementById("recurringToneAudio");
          vid.volume = 0.3;
       </script>
       <?php
-           if ($_SESSION['fire'] == 'YES')
-           {
-             echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/Fire_Tones_Aligned.wav" preload="auto"></audio>';
-           }
-		   else
-		   {
-			   echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/New_Dispatch.mp3"  preload="auto"></audio>';
-			   }
-			   ?>
+            if ($_GET['dep'] == 'fire' || $_GET['dep'] == 'ems')
+            {
+              echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/Fire_Tones_Aligned.wav" preload="auto"></audio>';
+            }
+            else
+            {
+              echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/New_Dispatch.mp3"  preload="auto"></audio>';
+            }
+      ?>
       <?php include "./oc-includes/jquery-colsolidated.inc.php"; ?>
 <script type="text/javascript">
 	// Parse the URL parameter

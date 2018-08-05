@@ -136,6 +136,42 @@ define('POLICE_NCIC', false);
 define('ROADSIDE_NCIC', false);
 
 /**#@+
+ * ROADSIDE_PANIC
+ *
+ * Shows/Hides Panic functionality on MDT console for Roadside Assistance
+ * If 'true' then RAO will be able to use the Panic button,
+ * else if 'false' then RAO will not be able to use the Panic button.
+ * These settings will likely be moved to an *_options table in a future version.
+ *
+ * @sicne OpenCAD 0.2.3
+ **/
+define('ROADSIDE_PANIC', true);
+
+/**#@+
+ * FIRE_PANIC
+ *
+ * Shows/Hides Panic functionality on MDT console for Fire
+ * If 'true' then Fire personnel will be able to use the Panic button,
+ * else if 'false' then Fire personnel will not be able to use the Panic button.
+ * These settings will likely be moved to an *_options table in a future version.
+ *
+ * @sicne OpenCAD 0.2.3
+ **/
+define('FIRE_PANIC', true);
+
+/**#@+
+ * EMS_PANIC
+ *
+ * Shows/Hides Panic functionality on MDT console for EMS
+ * If 'true' then EMS personnel will be able to use the Panic button,
+ * else if 'false' then EMS personnel will not be able to use the Panic button.
+ * These settings will likely be moved to an *_options table in a future version.
+ *
+ * @sicne OpenCAD 0.2.3
+ **/
+define('EMS_PANIC', true);
+
+/**#@+
  * CIV_WARRANT
  *
  * Allow/Disallow Civiliians from managing their warrants. If set to 'true'
