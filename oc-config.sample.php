@@ -91,22 +91,12 @@ define('NONCE_SALT',       'put your unique phrase here');
   **/
 
 /**#@+
- * HIDE_NCIC_RESCUCE
+ * OpenCAD Feature Settings - LEO
  *
- * These settings effect OpenCAD's core functions
+ * This section controls settings for OpenCAD's core features for LEO
  * These setting will likely be moved to an *_options table in a future version.
  *
- * @since  OpenCAD 1804
-**/
-define('HIDE_NCIC_RESCUCE', true);
-
-/**#@+
- * OpenCAD Feature Settings
- *
- * This section controls settings for OpenCAD's core features.
- * These setting will likely be moved to an *_options table in a future version.
- *
- * @since OpenCAD 1804
+ * @since OpenCAD 0.2.4
  **/
 
  /**#@+
@@ -122,6 +112,108 @@ define('HIDE_NCIC_RESCUCE', true);
   **/
 define('POLICE_NCIC', false);
 
+
+/**#@+
+ * OpenCAD Feature Settings - Fire
+ *
+ * This section controls settings for OpenCAD's core features for Fire
+ * These setting will likely be moved to an *_options table in a future version.
+ *
+ * @since OpenCAD 0.2.4
+ **/
+
+ /**#@+
+	* FIRE_PANIC
+	*
+	* Shows/Hides Panic functionality on MDT console for Fire
+	* If 'true' then Fire personnel will be able to use the Panic button,
+	* else if 'false' then Fire personnel will not be able to use the Panic button.
+	* These settings will likely be moved to an *_options table in a future version.
+	*
+	* @sicne OpenCAD 0.2.4
+	**/
+  define('FIRE_PANIC', false);
+
+
+ /**#@+
+	* FIRE_BOLO
+	*
+	* Shows/Hides Panic functionality on MDT console for Fire
+	* If 'true' then Fire personnel will be able to use the Panic button,
+	* else if 'false' then Fire personnel will not be able to use the Panic button.
+	* These settings will likely be moved to an *_options table in a future version.
+	*
+	* @sicne OpenCAD 0.2.4
+	**/
+ define('FIRE_BOLO', false);
+
+ /**#@+
+	* FIRE_NCIC
+	*
+	* Shows/Hides Panic functionality on MDT console for Fire
+	* If 'true' then Fire personnel will be able to use the Panic button,
+	* else if 'false' then Fire personnel will not be able to use the Panic button.
+	* These settings will likely be moved to an *_options table in a future version.
+	*
+	* @sicne OpenCAD 0.2.4
+	**/
+ define('FIRE_NCIC', false);
+
+
+ /**#@+
+  * OpenCAD Feature Settings - EMS
+  *
+  * This section controls settings for OpenCAD's core features for LEO
+  * These setting will likely be moved to an *_options table in a future version.
+  *
+  * @since OpenCAD 0.2.4
+  **/
+
+	/**#@+
+	 * EMS_NCIC
+	 *
+	 * Shows/Hides Panic functionality on MDT console for EMS
+	 * If 'true' then EMS personnel will be able to use the Panic button,
+	 * else if 'false' then EMS personnel will not be able to use the Panic button.
+	 * These settings will likely be moved to an *_options table in a future version.
+	 *
+	 * @sicne OpenCAD 0.2.4
+	 **/
+	define('EMS_NCIC', false);
+
+	/**#@+
+	 * EMS_PANIC
+	 *
+	 * Shows/Hides Panic functionality on MDT console for EMS
+	 * If 'true' then EMS personnel will be able to use the Panic button,
+	 * else if 'false' then EMS personnel will not be able to use the Panic button.
+	 * These settings will likely be moved to an *_options table in a future version.
+	 *
+	 * @sicne OpenCAD 0.2.4
+	 **/
+	define('EMS_PANIC', false);
+
+	/**#@+
+	 * EMS_BOLO
+	 *
+	 * Shows/Hides Panic functionality on MDT console for EMS
+	 * If 'true' then EMS personnel will be able to use the Panic button,
+	 * else if 'false' then EMS personnel will not be able to use the Panic button.
+	 * These settings will likely be moved to an *_options table in a future version.
+	 *
+	 * @sicne OpenCAD 0.2.4
+	 **/
+	define('EMS_BOLO', false);
+
+	/**#@+
+	 * OpenCAD Feature Settings - Roadside Assistance
+	 *
+	 * This section controls settings for OpenCAD's core features for Roadside Assistance
+	 * These setting will likely be moved to an *_options table in a future version.
+	 *
+	 * @since OpenCAD 0.2.4
+	 **/
+
 /**#@+
  * ROADSIDE_NCIC
  *
@@ -131,7 +223,7 @@ define('POLICE_NCIC', false);
  * dispatcher to use NCIC plate query funcationality.
  * These settings will likely be moved to an *_options table in a future version.
  *
- * @sicne OpenCAD 0.2.2
+ * @sicne OpenCAD 0.2.4
  **/
 define('ROADSIDE_NCIC', false);
 
@@ -143,33 +235,31 @@ define('ROADSIDE_NCIC', false);
  * else if 'false' then RAO will not be able to use the Panic button.
  * These settings will likely be moved to an *_options table in a future version.
  *
- * @sicne OpenCAD 0.2.3
+ * @sicne OpenCAD 0.2.4
  **/
-define('ROADSIDE_PANIC', true);
+define('ROADSIDE_PANIC', false);
 
 /**#@+
- * FIRE_PANIC
+ * ROADSIDE_BOLO
  *
- * Shows/Hides Panic functionality on MDT console for Fire
- * If 'true' then Fire personnel will be able to use the Panic button,
- * else if 'false' then Fire personnel will not be able to use the Panic button.
+ * Shows/Hides BOLO functionality on MDT console for Roadside Assistance
+ * If 'true' then RAO will be able to use the Panic button,
+ * else if 'false' then RAO will not be able to use the Panic button.
  * These settings will likely be moved to an *_options table in a future version.
  *
- * @sicne OpenCAD 0.2.3
+ * @sicne OpenCAD 0.2.4
  **/
-define('FIRE_PANIC', true);
+define('ROADSIDE_BOLO', true);
+
 
 /**#@+
- * EMS_PANIC
+ * OpenCAD Feature Settings - Civilian
  *
- * Shows/Hides Panic functionality on MDT console for EMS
- * If 'true' then EMS personnel will be able to use the Panic button,
- * else if 'false' then EMS personnel will not be able to use the Panic button.
- * These settings will likely be moved to an *_options table in a future version.
+ * This section controls settings for OpenCAD's core features for Roadside Assistance
+ * These setting will likely be moved to an *_options table in a future version.
  *
- * @sicne OpenCAD 0.2.3
+ * @since OpenCAD 0.2.4
  **/
-define('EMS_PANIC', true);
 
 /**#@+
  * CIV_WARRANT

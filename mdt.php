@@ -537,9 +537,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      </div>
                <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
             </div>
- <?php } else if (ROADSIDE_NCIC === true) { ?>
+ <?php } else if (ROADSIDE_NCIC == true) { ?>
                      <div class="clearfix"></div>
-                 <div id="ncic roadsideAssist" class="dynamic-content row">
+                 <div id="ncic" class="dynamic-content row">
                     <div class="col-md-4 col-sm-4 col-xs-4">
                        <div class="x_panel">
                           <div class="x_title">
@@ -1199,6 +1199,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		}
     if (dynamicContent == 'roadsideAssist') {
       $('#roadsideAssist').show();
+      $('#ncic').show();
     }
 	 else if (dynamicContent == 'fire') {
 			$('#fire').show();
