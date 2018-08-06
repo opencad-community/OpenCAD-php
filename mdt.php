@@ -214,13 +214,20 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
                      <div class="x_footer">
 
+                       <?php if ($_SESSION['activeDepartment'] == 'state' || $_SESSION['activeDepartment'] == 'sheriff' || $_SESSION['activeDepartment'] == 'highway' || $_SESSION['activeDepartment'] == 'police') { ?>
                         <button class="btn btn-primary pull-right" name="new_call_btn" data-toggle="modal" data-target="#vehicles-bolo-board">View Vehicle BOLOs</button>
                         <button class="btn btn-primary pull-right" name="new_call_btn" data-toggle="modal" data-target="#persons-bolo-board">View Person BOLOs</button>
+                      <?php }  else if (ROADSIDE_BOLO == true xor FIRE_BOLO == true xor EMS_BOLO == true ) { ?>
+                        <button class="btn btn-primary pull-right" name="new_call_btn" data-toggle="modal" data-target="#vehicles-bolo-board">View Vehicle BOLOs</button>
+                        <button class="btn btn-primary pull-right" name="new_call_btn" data-toggle="modal" data-target="#persons-bolo-board">View Person BOLOs</button>
+                        <?php
+                      } else {} ?>
+
                         <?php if ($_SESSION['activeDepartment'] == 'state' || $_SESSION['activeDepartment'] == 'sheriff' || $_SESSION['activeDepartment'] == 'highway' || $_SESSION['activeDepartment'] == 'police') { ?>
                         <button class="btn btn-danger pull-right" onClick="priorityTone(\'panic\')" value="0" id="panicTone">Panic Button</button>
-                        <?php }  else if (ROADSIDE_PANIC == true || FIRE_PANIC == true || EMS_PANIC == true ) { ?>
+                      <?php }  else if ( FIRE_PANIC == true xor EMS_PANIC == true xor ROADSIDE_PANIC == true ) { ?>
                         <button class="btn btn-danger pull-right" onClick="priorityTone(\'panic\')" value="0" id="panicTone">Panic Button</button>
-                        <?php } else {} ?>
+                      <?php } else {} ?>
 
                      </div>
                      <!-- ./ title_left -->
