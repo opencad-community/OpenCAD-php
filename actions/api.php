@@ -935,7 +935,7 @@ function getActiveCalls()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "SELECT * from calls";
+      $sql = "SELECT * from calls";
 
     $result = mysqli_query($link, $sql);
 

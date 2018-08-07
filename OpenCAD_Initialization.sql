@@ -531,7 +531,8 @@ INSERT INTO `incident_type` (`code_id`, `code_name`) VALUES
 ('16', 'Stolen Vehicle'),
 ('17', 'Suspicious Person'),
 ('11', 'Traffic Stop'),
-('50', 'Vehicle Accident');
+('50', 'Vehicle Accident'),
+('200', 'Tow & Recovery');
 
 -- --------------------------------------------------------
 
