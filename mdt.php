@@ -28,7 +28,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     include("./actions/api.php");
     include("./actions/responderActions.php");
-    unset($_SESSION['activeDepartment']);
+
     if ( $_GET['dep'] == "state" || $_SESSION['activeDepartment'] == "state" )
     {
         $activeDepartment = "State";
@@ -58,11 +58,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     {
         $activeDepartment = "EMS";
         $_SESSION['activeDepartment'] = 'ems';
-    }
-    else if ( $_GET['dep'] == "roadsideAssist" || $_SESSION['activeDepartment'] == "roadsideAssist" )
-    {
-        $activeDepartment = "Roadside Assistance";
-        $_SESSION['activeDepartment'] = 'roadsideAssist';
     }
 
 
@@ -211,24 +206,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						<?php echo $arrestMessage;?>
 						<?php echo $warningMessage;?>
                      </div>
-
                      <div class="x_footer">
-
-                       <?php if ($_SESSION['activeDepartment'] == 'state' || $_SESSION['activeDepartment'] == 'sheriff' || $_SESSION['activeDepartment'] == 'highway' || $_SESSION['activeDepartment'] == 'police') { ?>
                         <button class="btn btn-primary pull-right" name="new_call_btn" data-toggle="modal" data-target="#vehicles-bolo-board">View Vehicle BOLOs</button>
                         <button class="btn btn-primary pull-right" name="new_call_btn" data-toggle="modal" data-target="#persons-bolo-board">View Person BOLOs</button>
-                      <?php }  else if (ROADSIDE_BOLO == true xor FIRE_BOLO == true xor EMS_BOLO == true ) { ?>
-                        <button class="btn btn-primary pull-right" name="new_call_btn" data-toggle="modal" data-target="#vehicles-bolo-board">View Vehicle BOLOs</button>
-                        <button class="btn btn-primary pull-right" name="new_call_btn" data-toggle="modal" data-target="#persons-bolo-board">View Person BOLOs</button>
-                        <?php
-                      } else {} ?>
-
-                        <?php if ($_SESSION['activeDepartment'] == 'state' || $_SESSION['activeDepartment'] == 'sheriff' || $_SESSION['activeDepartment'] == 'highway' || $_SESSION['activeDepartment'] == 'police') { ?>
-                        <button class="btn btn-danger pull-right" onClick="priorityTone(\'panic\')" value="0" id="panicTone">Panic Button</button>
-                      <?php }  else if ( FIRE_PANIC == true xor EMS_PANIC == true xor ROADSIDE_PANIC == true ) { ?>
-                        <button class="btn btn-danger pull-right" onClick="priorityTone(\'panic\')" value="0" id="panicTone">Panic Button</button>
-                      <?php } else {} ?>
-
+                        <button class="btn btn-danger pull-right" onClick="priorityTone('panic')" value="0" id="panicTone">Panic Button</button>
                      </div>
                      <!-- ./ title_left -->
                   </div>
@@ -449,10 +430,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       '; */
       }
       ?>
-      <!-- ./ row --><?php
-  if (POLICE_NCIC === true) { ?>
+      <!-- ./ row -->
+      <?php  if (POLICE_NCIC == true) { ?>
+                    <div id="ncic" class="dynamic-content row">
                       <div class="clearfix"></div>
-                  <div id="ncic" class="dynamic-content row">
                      <div class="col-md-4 col-sm-4 col-xs-4">
                         <div class="x_panel">
                            <div class="x_title">
@@ -537,9 +518,43 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      </div>
                <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
             </div>
- <?php } else if (ROADSIDE_NCIC == true) { ?>
-                     <div class="clearfix"></div>
-                 <div id="ncic" class="dynamic-content row">
+          <?php } else if ( FIRE_NCIC_NAME == true xor EMS_NCIC_NAME == true xor ROADSIDE_NCIC_NAME == true ) { ?>
+
+            <div class="clearfix"></div>
+          <div id="ncic" class="row">
+           <div class="col-md-4 col-sm-4 col-xs-4">
+              <div class="x_panel">
+                 <div class="x_title">
+                    <h2>NCIC Name Lookup</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                 </div>
+                 <!-- ./ x_title -->
+                 <div class="x_content">
+                    <div class="input-group">
+                       <input type="text" name="ncic_name" class="form-control" id="ncic_name" placeholder="John Doe"/>
+                       <span class="input-group-btn">
+                       <button type="button" class="btn btn-primary" name="ncic_name_btn" id="ncic_name_btn">Send</button>
+                       </span>
+                    </div>
+                    <!-- ./ input-group -->
+                    <div name="ncic_name_return" id="ncic_name_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
+                       <!--<textarea class="form-control" style="resize:none;" id="ncic_name_return" name="ncic_name_return" readonly="readonly"></textarea> -->
+                    </div>
+                    <!-- ./ ncic_name_return -->
+                 </div>
+                 <!-- ./ x_content -->
+              </div>
+              <!-- ./ x_panel -->
+           </div>
+           <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
+
+         <?php } else {}
+
+          if ( FIRE_NCIC_PLATE === true xor EMS_NCIC_PLATE === true xor ROADSIDE_NCIC_PLATE === true ) { ?>
+                 <div id="ncic" class="row">
                     <div class="col-md-4 col-sm-4 col-xs-4">
                        <div class="x_panel">
                           <div class="x_title">
@@ -567,13 +582,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                        <!-- ./ x_panel -->
                     </div>
                     <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
+                  <?php } else {} ?>
            </div>
-<?php } else { ?>
- <?php }
-      ?>
-      </div>
       <!-- "" -->
-      </div>
+    </div>
+  </div>
+</div>
 	  </div>
       <!-- /page content -->
       <!-- footer content -->
@@ -1160,21 +1174,21 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <!-- AUDIO TONES -->
       <audio id="recurringToneAudio" src="<?php echo BASE_URL; ?>/sounds/priority.mp3" preload="auto"></audio>
       <audio id="priorityToneAudio" src="<?php echo BASE_URL; ?>/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
-  	  <audio id="panicToneAudio" src="<?php echo BASE_URL; ?>/sounds/Panic_Button.m4a" preload="auto"></audio>
+	  <audio id="panicToneAudio" src="<?php echo BASE_URL; ?>/sounds/Panic_Button.m4a" preload="auto"></audio>
       <script>
          var vid = document.getElementById("recurringToneAudio");
          vid.volume = 0.3;
       </script>
       <?php
-            if ($_GET['dep'] == 'fire' || $_GET['dep'] == 'ems')
-            {
-              echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/Fire_Tones_Aligned.wav" preload="auto"></audio>';
-            }
-            else
-            {
-              echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/New_Dispatch.mp3"  preload="auto"></audio>';
-            }
-      ?>
+           if ($_SESSION['activeDepartment'] == 'fire')
+           {
+             echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/Fire_Tones_Aligned.wav" preload="auto"></audio>';
+           }
+		   else
+		   {
+			   echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/New_Dispatch.mp3"  preload="auto"></audio>';
+			   }
+			   ?>
       <?php include "./oc-includes/jquery-colsolidated.inc.php"; ?>
 <script type="text/javascript">
 	// Parse the URL parameter
@@ -1197,13 +1211,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			$('#lawenforcement').show();
 			$('#ncic').show();
 		}
-    if (dynamicContent == 'roadsideAssist') {
+    else if (dynamicContent == 'roadsideAssist') {
       $('#roadsideAssist').show();
-      $('#ncic').show();
     }
-	 else if (dynamicContent == 'fire') {
-			$('#fire').show();
-	 }
 	 });
 	</script>
     <script>
