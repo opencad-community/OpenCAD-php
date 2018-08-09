@@ -48,7 +48,8 @@ if(basename($_SERVER['PHP_SELF']) == 'admin.php') {
   <!-- Bootstrap -->
   <link href="<?php echo BASE_URL; ?>/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
-  <link href="<?php echo BASE_URL; ?>/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <!--<link href="<?php echo BASE_URL; ?>/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">-->
   <!-- NProgress -->
   <link href="<?php echo BASE_URL; ?>/vendors/nprogress/nprogress.css" rel="stylesheet">
   <!-- Animate.css -->
@@ -69,7 +70,7 @@ if(basename($_SERVER['PHP_SELF']) == 'admin.php') {
     text-align:center;
   }
   .cusbtn {
-      color: grey; 
+      color: grey;
       border: 3px solid grey;
       padding: 16px 32px;
       text-align: center;
@@ -81,7 +82,7 @@ if(basename($_SERVER['PHP_SELF']) == 'admin.php') {
       cursor: pointer;
       text-decoration: none;
       text-transform: uppercase;
-      
+
   }
   .animate {
   -webkit-animation-duration: 1s;
@@ -134,4 +135,3 @@ animation-delay: 0.5s;
         }
     </script>
 </head>
-
