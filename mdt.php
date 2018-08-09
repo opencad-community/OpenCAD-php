@@ -49,7 +49,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     }
     else if ( $_GET['dep'] == "police" || $_SESSION['activeDepartment'] == "police" )
     {
-        $activeDepartment = "police";
+        $activeDepartment = "Police";
         $activeBadge="gavel";
         $_SESSION['activeDepartment'] = 'police';
     }
@@ -126,7 +126,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <h3>General</h3>
                         <ul class="nav side-menu">
                            <li class="active">
-                              <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                              <a><i class="fas fa-home"></i> Home</span></a>
                            </li>
                            <li>
                                  <a type="button" data-toggle="modal" data-target="#createWarning" > Create Warning</a>
