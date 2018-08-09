@@ -28,36 +28,48 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     include("./actions/api.php");
     include("./actions/responderActions.php");
-
+    unset($_SESSION['activeDepartment']);
     if ( $_GET['dep'] == "state" || $_SESSION['activeDepartment'] == "state" )
     {
         $activeDepartment = "State";
+        $activeBadge="gavel";
         $_SESSION['activeDepartment'] = 'state';
     }
     else if ( $_GET['dep'] == "sheriff" || $_SESSION['activeDepartment'] == "sheriff" )
     {
         $activeDepartment = "Sheriff";
+        $activeBadge="gavel";
         $_SESSION['activeDepartment'] = 'sheriff';
     }
     else if ( $_GET['dep'] == "highway" || $_SESSION['activeDepartment'] == "highway" )
     {
         $activeDepartment = "Highway Patrol";
+        $activeBadge="gavel";
         $_SESSION['activeDepartment'] = 'highway';
     }
     else if ( $_GET['dep'] == "police" || $_SESSION['activeDepartment'] == "police" )
     {
-        $activeDepartment = "police";
+        $activeDepartment = "Police";
+        $activeBadge="gavel";
         $_SESSION['activeDepartment'] = 'police';
     }
     else if ( $_GET['dep'] == "fire" || $_SESSION['activeDepartment'] == "fire" )
     {
         $activeDepartment = "Fire";
+        $activeBadge="fire";
         $_SESSION['activeDepartment'] = 'Fire';
     }
     else if ( $_GET['dep'] == "ems" || $_SESSION['activeDepartment'] == "ems" )
     {
         $activeDepartment = "EMS";
+        $activeBadge="ambulance";
         $_SESSION['activeDepartment'] = 'ems';
+    }
+    else if ( $_GET['dep'] == "roadsideAssist" || $_SESSION['activeDepartment'] == "roadsideAssist" )
+    {
+        $activeDepartment = "Roadside Assistance";
+        $activeBadge="wrench";
+        $_SESSION['activeDepartment'] = 'roadsideAssist';
     }
 
 
@@ -92,7 +104,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             <div class="col-md-3 left_col">
                <div class="left_col scroll-view">
                   <div class="navbar nav_title" style="border: 0;">
-                     <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo $activeDepartment; ?></span></a>
+                     <a href="javascript:void(0)" class="site_title"><i class="fas fa-<?php echo $activeBadge; ?>"></i> <span><?php echo $activeDepartment; ?></span></a>
                   </div>
                   <div class="clearfix"></div>
                   <!-- menu profile quick info -->
@@ -114,7 +126,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <h3>General</h3>
                         <ul class="nav side-menu">
                            <li class="active">
-                              <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                              <a><i class="fas fa-home"></i> Home</span></a>
                            </li>
                            <li>
                                  <a type="button" data-toggle="modal" data-target="#createWarning" > Create Warning</a>
