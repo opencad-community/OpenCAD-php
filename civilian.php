@@ -80,7 +80,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             <div class="col-md-3 left_col">
                <div class="left_col scroll-view">
                   <div class="navbar nav_title" style="border: 0;">
-                     <a href="javascript:void(0)" class="site_title"><i class="fas fa fa-user"></i> <span><?php echo COMMUNITY_NAME;?> Civilian</span></a>
+                     <a href="javascript:void(0)" class="site_title"><i class="fas fa fa-user"></i> <span> Civilian</span></a>
                   </div>
                   <div class="clearfix"></div>
                   <!-- menu profile quick info -->
