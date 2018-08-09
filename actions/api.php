@@ -69,6 +69,10 @@ if (isset($_POST['quickStatus']))
 {
     quickStatus();
 }
+if (isset($_GET['getAOP']))
+{
+    getAOP();
+}
 
 function quickStatus()
 {
@@ -575,6 +579,36 @@ function setDispatcher($dep)
         die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
     }
 
+}
+
+function getAOP()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $sql = "SELECT * from aop";
+
+    $result = mysqli_query($link, $sql);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "NO AOP SET";
+    }
+    else
+    {
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            echo 'AOP: '.$row[0].' ';
+        }
+
+    mysqli_close($link);
+}
 }
 
 function getDispatchers()
