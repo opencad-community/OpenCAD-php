@@ -14,10 +14,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     require_once(__DIR__ . "/oc-config.php");
 
-    $testing = false; //If set to true, will default some data for you
-
-
-
     session_start();
     $registerError = "";
     $registerSuccess = "";
@@ -66,10 +62,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <form role="form" action="<?php echo BASE_URL; ?>/actions/login.php" method="post">
                      <h1>Login Form</h1>
                      <div>
-                        <input class="form-control" placeholder="Email" name="email" type="text" value="<?php if($testing){echo "test@test.test";}?>" required>
+                        <input class="form-control" placeholder="Email" name="email" type="text"  required>
                      </div>
                      <div>
-                        <input class="form-control" placeholder="Password" name="password" type="password" value="<?php if($testing){echo "password";}?>" required >
+                        <input class="form-control" placeholder="Password" name="password" type="password" required >
                      </div>
                      <div>
                         <input name="login_btn" type="submit" class="btn btn-default submit" value="Login" />
@@ -115,13 +111,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <form action="<?php echo BASE_URL; ?>/actions/register.php" method="post">
                      <h1>Request Access</h1>
                      <div>
-                        <input class="form-control" placeholder="Name" name="uname" type="text" value="<?php if($testing){echo "Test";}?>" required>
+                        <input class="form-control" placeholder="Name" name="uname" type="text" required>
                      </div>
                      <div>
-                        <input class="form-control" placeholder="Email" name="email" type="email" value="<?php if($testing){echo "test@test.test";}?>" required>
+                        <input class="form-control" placeholder="Email" name="email" type="email" required>
                      </div>
                      <div>
-                        <input class="form-control" placeholder="Identifier (Code Number, Unit ID)" name="identifier" type="text" value="<?php if($testing){echo "1A-1";}?>" required>
+                        <input class="form-control" placeholder="Identifier (Code Number, Unit ID)" name="identifier" type="text" required>
                      </div>
                      <div class="form-group">
                         <label>Division (Can choose more than one via Ctrl + Click)</label>
@@ -130,17 +126,17 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <option value="communications">Communications (Dispatch)</option>
                            <option value="ems">EMS</option>
                            <option value="fire">Fire</option>
-                           <option value="highway" <?php if($testing){echo "selected=\"selected\"";}?>>Highway Patrol</option>
+                           <option value="highway">Highway Patrol</option>
                            <option value="police">Police</option>
                            <option value="sheriff">Sheriff</option>
                         </select>
                      </div>
                      <div class="form-group">
-                        <input class="form-control" placeholder="Password" name="password" type="password" value="<?php if($testing){echo "password";}?>" required>
+                        <input class="form-control" placeholder="Password" name="password" type="password" required>
                      </div>
                      <!-- ./ form-group -->
                      <div class="form-group">
-                        <input class="form-control" placeholder="Confirm Password" name="password1" type="password" value="<?php if($testing){echo "password";}?>" required>
+                        <input class="form-control" placeholder="Confirm Password" name="password1" type="password" required>
                      </div>
                      <!-- ./ form-group -->
                      <div class="clearfix"></div>
@@ -168,20 +164,20 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <form action="<?php echo BASE_URL; ?>/actions/register.php" method="post">
                      <h1>Civilian Registration</h1>
                      <div>
-                        <input class="form-control" placeholder="Name" name="uname" type="text" value="<?php if($testing){echo "Test";}?>" required>
+                        <input class="form-control" placeholder="Name" name="uname" type="text" required>
                      </div>
                      <div>
-                        <input class="form-control" placeholder="Email" name="email" type="email" value="<?php if($testing){echo "test@test.test";}?>" required>
+                        <input class="form-control" placeholder="Email" name="email" type="email"  required>
                      </div>
                      <div>
-                        <input class="form-control" placeholder="Identifier (Code Number, Unit ID)" name="identifier" type="text" value="<?php if($testing){echo "1A-1";}?>" required>
+                        <input class="form-control" placeholder="Identifier (Code Number, Unit ID)" name="identifier" type="text" required>
                      </div>
                      <div class="form-group">
-                        <input class="form-control" placeholder="Password" name="password" type="password" value="<?php if($testing){echo "password";}?>" required>
+                        <input class="form-control" placeholder="Password" name="password" type="password" required>
                      </div>
                      <!-- ./ form-group -->
                      <div class="form-group">
-                        <input class="form-control" placeholder="Confirm Password" name="password1" type="password" value="<?php if($testing){echo "password";}?>" required>
+                        <input class="form-control" placeholder="Confirm Password" name="password1" type="password" required>
                      </div>
                      <!-- ./ form-group -->
                      <div class="clearfix"></div>
