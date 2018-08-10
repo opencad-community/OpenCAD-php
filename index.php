@@ -69,9 +69,18 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      </div>
                      <div>
                         <input name="login_btn" type="submit" class="btn btn-default submit" value="Login" />
+                        <?php if ( DEMO_MODE == false ) { ?>
                         <a class="reset_pass" href="#" onclick="alert('Request an administrator reset your password through your community.');" >Lost your password?</a>
+                      <?php } ?>
                      </div>
-					 <?php if (CIV_REG === true) { ?>
+
+
+
+            <?php if ( DEMO_MODE == false ) {
+
+              if ( CIV_REG == ture ) {
+              ?>
+
              <div class="clearfix"></div>
              <div class="separator">
                 <p class="change_link">New?
@@ -81,33 +90,34 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                    <a href="#civreg" class="to_register"> Request Access as Civilian </a>
                 </p>
                 <div class="clearfix"></div>
+              <?php } else { ?>
+                  <div class="clearfix"></div>
+                  <div class="separator">
+                     <p class="change_link">New?
+                        <a href="#signup" class="to_register"> Request Access </a>
+                     </p>
+                     <p class="change_link">Civilian Only? Not Enabled
+                     </p>
+                     <?php
+                   }
+                 }
+                 ?>
+                 <div class="clearfix"></div>
                 <br />
                 <div>
                    <h1><i class="fa fa-tachometer"></i> <?php echo COMMUNITY_NAME?> CAD System</h1>
                    <h2> OpenCAD Version <?php getOpenCADVersion();?> </h2>
                 </div>
              </div>
-					 <?php } else { ?>
-                     <div class="clearfix"></div>
-                     <div class="separator">
-                        <p class="change_link">New?
-                           <a href="#signup" class="to_register"> Request Access </a>
-                        </p>
-                        <p class="change_link">Civilian Only? Not Enabled
-                        </p>
-                        <div class="clearfix"></div>
                         <br />
-                        <div>
-                           <h1><i class="fa fa-tachometer"></i> <?php echo COMMUNITY_NAME?> CAD System</h1>
-                        </div>
                      </div>
-					 <?php } ?>
                   </form>
                </section>
             </div>
             <div id="register" class="animate form registration_form">
                <section class="login_content">
                   <?php echo $registerError, $registerSuccess;?>
+                  <?php if ( DEMO_MODE == false ) { ?>
                   <form action="<?php echo BASE_URL; ?>/actions/register.php" method="post">
                      <h1>Request Access</h1>
                      <div>
@@ -157,6 +167,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   </form>
                </section>
             </div>
+          <?php } ?>
              <?php if (CIV_REG === true) { ?>
             <div id="civ" class="animate form civilian_form">
                <section class="login_content">

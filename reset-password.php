@@ -61,7 +61,7 @@ include("./actions/profileActions.php");
             <div class="col-md-3 left_col">
                <div class="left_col scroll-view">
                   <div class="navbar nav_title" style="border: 0;">
-                     <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo COMMUNITY_NAME;?> User</span></a>
+                     <a href="javascript:void(0)" class="site_title"><i class="fas fa-user"></i> <span><?php echo COMMUNITY_NAME;?> User</span></a>
                   </div>
                   <div class="clearfix"></div>
                   <!-- menu profile quick info -->
@@ -83,7 +83,7 @@ include("./actions/profileActions.php");
                         <h3>General</h3>
                         <ul class="nav side-menu">
                            <li class="active">
-                              <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                              <a><i class="fas fa-home"></i> Home</a>
                               <ul class="nav child_menu" style="display: block;">
                                  <li class="current-page"><a href="javascript:void(0)">My Profile</a></li>
                               </ul>
@@ -165,18 +165,18 @@ include("./actions/profileActions.php");
                                     <div class="form-group">
                                        <label class="col-sm-2 control-label">New Password:</label>
                                        <div class="col-sm-10">
-                                          <input name="password" id="password" class="form-control" type="password" maxlength="255" placeholder="Enter your new password..." value="" required>
+                                          <input name="password" id="password" class="form-control" type="password" maxlength="255" placeholder="Enter your new password..." value="" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?>>
                                        </div>
 
 									   <label class="col-sm-2 control-label">Confirm Password:</label>
                                        <div class="col-sm-10">
-                                          <input name="confirm_password" id="confirm_password" class="form-control" type="password" maxlength="255" placeholder="Retype your new password..." value="" required>
+                                          <input name="confirm_password" id="confirm_password" class="form-control" type="password" maxlength="255" placeholder="Retype your new password..." value="" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?>>
                                        </div>
                                        <!-- ./ col-sm-10 -->
                                     </div>
                                     <!-- ./ form-group --><br />
                                     <!-- ./ form-group -->
-                                    <input type="submit" name="resetpass" id="resetpass" class="btn btn-primary btn-lg btn-block" value="Change Password" />
+                                    <input type="submit" name="resetpass" id="resetpass" class="btn btn-primary btn-lg btn-block" value="Change Password"  <?php if ( DEMO_MODE == true ) {?> disabled <?php } ?>/>
                                     <p> Note: If you click this button and nothing shows up, hit refresh, then resend, then logout. </p>
                                  </fieldset>
                               </form>
@@ -217,4 +217,3 @@ include("./actions/profileActions.php");
       <script src="./js/OpenCAD.js"></script>
    </body>
 </html>
-
