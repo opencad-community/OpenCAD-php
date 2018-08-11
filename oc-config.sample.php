@@ -347,6 +347,21 @@ define('CIV_REG', false);
   * @since  1.0a RC2
   **/
 
+  /**#@+
+    * Demo Mode
+    *
+    * If 'ture' then various user management features of OpenCAD will be
+    * locked down, else if 'false' then OpenCAD's full functionality
+    * will be available to use.
+    *
+    * it will use the default generic avatar image included with OpenCAD .
+    *
+  	* These setting will likely be moved to an *_options table in a future version.
+  	*
+    * @since 0.2.3
+    **/
+  define('DEMO_MODE', true);
+
 /**#@+
   * Gravatar Fetch
   *

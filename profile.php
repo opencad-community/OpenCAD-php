@@ -47,7 +47,7 @@ include("./actions/profileActions.php");
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo COMMUNITY_NAME;?> User</span></a>
+              <a href="javascript:void(0)" class="site_title"><i class="fas fa-user"></i> <span><?php echo $name;?></span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -72,7 +72,7 @@ include("./actions/profileActions.php");
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li class="active"><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                  <li class="active"><a><i class="fas fa-home"></i> Home</span></a>
                     <ul class="nav child_menu" style="display: block;">
                       <li class="current-page"><a href="javascript:void(0)">My Profile</a></li>
                     </ul>
@@ -133,7 +133,7 @@ include("./actions/profileActions.php");
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>CAD User Profile</h3>
+                <h3><?php echo $name; ?>'s Profile</h3>
               </div>
               <!-- ./ title_left -->
             </div>
@@ -161,7 +161,7 @@ include("./actions/profileActions.php");
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Name:</label>
                         <div class="col-sm-10">
-                            <input name="name" class="form-control" type="text" maxlength="255" value="<?php echo $name;?>" required>
+                            <input name="name" class="form-control" type="text" maxlength="255" value="<?php echo $name;?>" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?>>
                         </div>
                         <!-- ./ col-sm-10 -->
                     </div>
@@ -169,30 +169,32 @@ include("./actions/profileActions.php");
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Email:</label>
                         <div class="col-sm-10">
-                            <input name="email" class="form-control" type="email" maxlength="255" value="<?php echo $_SESSION['email'];?>" required>
+                            <input name="email" class="form-control" type="email" maxlength="255" value="<?php echo $_SESSION['email'];?>" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?>>
                             <span class="muted">Note: Your email is how you login, so make sure it's valid!</span>
                         </div>
                         <!-- ./ col-sm-10 -->
                     </div>
                     <!-- ./ form-group -->
+                    <?php if ( DEMO_MODE == false ) {?>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Password:</label>
                         <div class="col-sm-10">
-                            <a class="btn btn-primary" href="<?php echo BASE_URL; ?>/reset-password.php">Change Password</a>
+                            <a class="btn btn-primary" href="<?php echo BASE_URL; ?>/reset-password.php" disab>Change Password</a>
                         </div>
                         <!-- ./ col-sm-10 -->
                     </div>
+                  <?php } else {} ?>
                     <!-- ./ form-group -->
                     <!-- ./ form-group -->
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Identifier:</label>
                         <div class="col-sm-10">
-                            <input name="identifier" class="form-control" type="text" maxlength="255" value="<?php echo $_SESSION['identifier'];?>" required>
+                            <input name="identifier" class="form-control" type="text" maxlength="255" value="<?php echo $_SESSION['identifier'];?>" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?>>
                         </div>
                         <!-- ./ col-sm-10 -->
                     </div>
 
-                  <input name="update_profile_btn" type="submit" class="btn btn-primary btn-lg btn-block" value="Update" />
+                  <input name="update_profile_btn" type="submit" class="btn btn-primary btn-lg btn-block" value="Update" <?php if ( DEMO_MODE == true ) {?> disabled <?php } ?>/>
                   </fieldset>
                   </form>
                   </div>
