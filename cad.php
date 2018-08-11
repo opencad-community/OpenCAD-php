@@ -73,6 +73,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         $boloMessage = $_SESSION['boloMessage'];
         unset($_SESSION['boloMessage']);
     }
+    
 
 ?>
 
@@ -211,7 +212,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <?php echo $warrantMessage;?>
 						<?php echo $warningMessage;?>
                      </div>
-                     <!-- ./ title_left -->
+						<button class="btn btn-primary pull-right" name="aop" data-toggle="modal" data-target="#aop" id="getAOP"></button>
                   </div>
                   <!-- ./ page-title -->
                   <?php /* hiding for now
@@ -671,6 +672,43 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          <!-- ./ modal-dialog modal-lg -->
       </div>
       <!-- ./ modal fade bs-example-modal-lg -->
+	<!-- AOP Modal -->
+    <div class="modal fade" id="aop" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Create Person BOLO</h4>
+          </div>
+          <!-- ./ modal-header -->
+		  <div class="modal-body">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/dispatchActions.php" method="post">
+                <div class="form-group row">
+                </div>
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">AOP</label>
+                <div class="col-lg-10">
+					<input name="aop" class="form-control" id="aop" placeholder="Set AOP"/>
+					<span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+          <div class="modal-footer">
+                <input name="change_aop" type="submit" class="btn btn-primary" value="Send" />
+               <button type="reset" class="btn btn-default" value="Reset">Reset</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+	</div>
+    <!-- ./ modal fade bs-example-modal-lg -->
       <!-- New Call Modal -->
       <div class="modal fade" id="newCall" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog modal-lg">
@@ -1882,6 +1920,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
              checkTones();
              cadGetPersonBOLOS();
              cadGetVehicleBOLOS();
+             getAOP();
 
          });
       </script>
@@ -2041,6 +2080,38 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      lengthMenu: [[4, -1], [4, "All"]]
                 });*/
                    setTimeout(getDispatchers, 5000);
+
+
+                 },
+                 error : function(XMLHttpRequest, textStatus, errorThrown)
+                 {
+                   console.log("Error");
+                 }
+
+               });
+         }
+
+
+      </script>
+      <script>
+         function getAOP() {
+           $.ajax({
+                 type: "GET",
+                 url: "<?php echo BASE_URL; ?>/actions/api.php",
+                 data: {
+                     getAOP: 'yes'
+                 },
+                 success: function(response)
+                 {
+                   $('#getAOP').html(response);
+
+                   // SG - Removed until node/real-time data setup
+                   /*$('#activeUsers').DataTable({
+                     searching: false,
+                     scrollY: "200px",
+                     lengthMenu: [[4, -1], [4, "All"]]
+                });*/
+                   setTimeout(getAOP, 5000);
 
 
                  },

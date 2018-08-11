@@ -219,6 +219,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						<?php echo $warningMessage;?>
                      </div>
                      <div class="x_footer">
+						<button class="btn btn-primary" name="aop" data-target="#aop" id="getAOP" disabled></button>
                         <button class="btn btn-primary pull-right" name="new_call_btn" data-toggle="modal" data-target="#vehicles-bolo-board">View Vehicle BOLOs</button>
                         <button class="btn btn-primary pull-right" name="new_call_btn" data-toggle="modal" data-target="#persons-bolo-board">View Person BOLOs</button>
                         <button class="btn btn-danger pull-right" onClick="priorityTone('panic')" value="0" id="panicTone">Panic Button</button>
@@ -1270,6 +1271,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
              getMyCall();
              mdtGetVehicleBOLOS();
              mdtGetPersonBOLOS();
+			 getAOP();
 
              $('#enroute_btn').click(function(evt) {
                console.log(evt);
@@ -1339,6 +1341,38 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                  sticker: false
              }
            });
+
+      </script>
+      <script>
+         function getAOP() {
+           $.ajax({
+                 type: "GET",
+                 url: "<?php echo BASE_URL; ?>/actions/api.php",
+                 data: {
+                     getAOP: 'yes'
+                 },
+                 success: function(response)
+                 {
+                   $('#getAOP').html(response);
+
+                   // SG - Removed until node/real-time data setup
+                   /*$('#activeUsers').DataTable({
+                     searching: false,
+                     scrollY: "200px",
+                     lengthMenu: [[4, -1], [4, "All"]]
+                });*/
+                   setTimeout(getAOP, 5000);
+
+
+                 },
+                 error : function(XMLHttpRequest, textStatus, errorThrown)
+                 {
+                   console.log("Error");
+                 }
+
+               });
+         }
+
 
       </script>
       <script>

@@ -18,6 +18,19 @@ CREATE TABLE `active_users` (
 
 -- --------------------------------------------------------
 
+CREATE TABLE `aop` (
+  `aop` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `aop`
+--
+
+INSERT INTO `aop` (`aop`) VALUES
+('Placeholder');
+
+-- --------------------------------------------------------
+
 --
 -- Table structure for table `bolos_persons`
 --
