@@ -1,0 +1,58 @@
+<a name="top"></a>
+<h2>Die Installation eines Programms v1.0 (Beispiel)</h2>  
+<table border=0 width="100%">
+<tbody>
+<tr>
+	<td>
+		<ul>
+			<li><a href="#Schritt_1._Uncompressing_heruntergeladene_Datei."><span>Schritt 1. Uncompressing heruntergeladene Datei.</span></a> 
+			<li><a href="#Schritt_2._Hochladen_von_Dateien."><span>Schritt 2. Hochladen von Dateien.</span></a> 
+			<li><a href="#Schritt_3._Erstellen_Datenbank."><span>Schritt 3. Erstellen Datenbank.</span></a>                        
+			<li><a href="#Schritt_4._Einstellungen_und_Zugriffsrechte."><span>Schritt 4. Einstellungen und Zugriffsrechte.</span></a>                        
+			<li><a href="#Schritt_5._Laufen_Beispiel-Datei."><span>Schritt 5. Laufen Beispiel-Datei.</span></a>
+		</ul>
+	</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>(für Version X.0.0 oder höher) </p>
+<p>Eine neue Installation eines Programms ist ein sehr geradlinig Prozess: </p>
+
+<div style="float:right;">[<a href="#top">Top</a>]</div>
+<a name="Schritt_1._Uncompressing_heruntergeladene_Datei."></a>
+<h3><b>Schritt 1. Uncompressing heruntergeladene Datei.</b></h3>
+<hr>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pretium vulputate diam et hendrerit. Duis libero felis, luctus et facilisis at, placerat non leo. Maecenas viverra, justo eu laoreet tristique, sem purus elementum mi, vel viverra nisl sem sed diam. Aenean eu augue justo, at viverra diam. In id lacus quis orci aliquam tristique. Mauris consequat erat congue neque gravida malesuada.</p>
+<p><br /></p>
+
+<div style="float:right;">[<a href="#top">Top</a>]</div>
+<a name="Schritt_2._Hochladen_von_Dateien."></a>
+<h3><b>Schritt 2. Hochladen von Dateien.</b></h3>
+<hr>
+<p>Nam sit amet quam nisl, quis pretium libero. Etiam tincidunt libero ut lectus condimentum tristique. Pellentesque risus risus, consequat vel dapibus at, ultricies sed quam. Integer laoreet dignissim sapien pretium tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ultricies massa ac erat hendrerit sed volutpat metus volutpat. Nam sed gravida nulla. Sed augue leo, iaculis quis dapibus sagittis, ultricies lobortis massa.</p>
+<p><br /></p>
+
+<div style="float:right;">[<a href="#top">Top</a>]</div>
+<a name="Schritt_3._Erstellen_Datenbank."></a>
+<h3><b>Schritt 3. Erstellen Datenbank.</b></h3>
+<hr>
+<p>Nunc vehicula convallis velit, eu feugiat metus sodales sit amet. Suspendisse luctus erat ut lacus elementum vehicula blandit dui malesuada. Vestibulum vitae pretium odio. Proin turpis turpis, gravida at hendrerit quis, congue id massa. Maecenas eu ipsum sapien. Mauris id mauris velit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<p><br /></p>
+
+<div style="float:right;">[<a href="#top">Top</a>]</div>
+<a name="Schritt_4._Einstellungen_und_Zugriffsrechte."></a>
+<h3><b>Schritt 4. Einstellungen und Zugriffsrechte.</b></h3>
+<hr>
+<p>Ut interdum ante a erat dictum ultrices. Maecenas nec nibh sit amet dolor ullamcorper elementum id sodales nunc. Vestibulum feugiat, elit sed interdum rhoncus, lectus felis varius purus, id fermentum mi odio et elit. Vivamus ut erat dolor, et imperdiet tellus.</p>
+<p><br /></p>
+
+<div style="float:right;">[<a href="#top">Top</a>]</div>
+<a name="Schritt_5._Laufen_Beispiel-Datei."></a>
+<h3><b>Schritt 5. Laufen Beispiel-Datei.</b></h3>
+<hr>
+<p>Aenean dapibus, odio et vehicula blandit, nunc sapien rhoncus neque, at accumsan nunc nunc a libero. Cras nec risus elit. Phasellus rutrum, ligula lobortis mattis scelerisque, enim eros dictum leo, ut lobortis metus nibh et dolor. Duis scelerisque ultricies lacus non congue.</p>
+<p><br /></p>
+
+Herzlichen Glückwunsch, Sie haben jetzt Ihr Programm vX.XX Installed!					
