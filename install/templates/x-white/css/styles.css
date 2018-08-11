@@ -1,0 +1,84 @@
+HTML, BODY                 { background: #fefefe; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; padding:0px; margin:0px; }
+H1, H2                     { margin-left:2px; }
+A                          { color:#222; } 
+
+H2                         { }
+H3                         { margin-bottom:10px; }
+H4                         { margin-bottom:10px; }
+
+IMG.loading_img            { display:none; }
+
+DIV#main                   { width:100%; margin:0; padding:0px; }
+DIV#main H1                { border-bottom:1px solid #dedede; font-size:20px; background:url('../images/wizard.png') #eeeeee no-repeat 15px center; height:50px; line-height:35px; padding:0 60px; margin:0px; }
+DIV#main H2.sub-title      { margin:-22px 0 12px 60px; font-size:11px; color:#777; }
+
+DIV#content                { width:100%; margin:10px 0px; }
+DIV#content .left-part     { width:19%; float:left;  }
+DIV#content .central-part  { width:79%; float:right; padding-bottom: 50px;}
+DIV#content .clear         { clear: both; }
+
+DIV#divManually            { padding:5px 10px; margin:10px; font-size:12px; text-align:left; }
+DIV#divManually DIV.content{ height:505px; overflow-y:scroll; padding-right:10px; }
+DIV#divManually DIV.footer { padding-top:10px; }
+DIV#divManually H3         { margin-bottom:0px; }
+
+DIV.notes_container        { -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; }
+DIV.notes_container P      { margin:0em 0em 1.2em 0.2em; color:#666666; }
+DIV.notes_container H4     { margin:3px 1px 3px 0px; padding:3px 3px 3px 20px; border-bottom:#666666 1px dotted; color:#aa4444; font-size:13px; background:#fffff1 url('../images/help_icon.png') no-repeat left top; }
+DIV.notes_container        { display:none; border:#666666 1px solid; padding:2px 5px 5px 5px; background-color:#fffff1; margin:0px 0px 10px 10px; width:230px; height:auto; color:#666666; font-size:12px; }
+
+DIV#notes_message H4       { margin:3px 1px 3px 0px; padding:3px 3px 3px 20px; border-bottom:#666666 1px dotted; color:#aa4444; font-size:13px;  }
+DIV#notes_message H4.success { margin:3px 1px 3px 0px; padding:3px 3px 3px 20px; border-bottom:#666666 1px dotted; color:#44aa44; font-size:13px;  }
+
+DIV.buttons-wrapper        { margin-top:15px; margin-bottom:12px; }
+
+UL.left-menu               { padding:3px 0 0 0; list-style:circle; border-right:1px solid #dedede; margin-left:35px; line-height:17px; height:410px; }
+UL.left-menu LI A          { text-decoration:none; color:#003300; }
+UL.left-menu LI.passed     { color:#003300; list-style-type: disc }
+UL.left-menu LI.current    { font-weight:bold; list-style-type: square  }
+
+#footer 		           { background: #f5f5f5; width:100%; position:fixed; bottom:0; height:40px; line-height:38px; padding:0; margin-top:40px; border-top:1px solid #d6d6d6; }
+#footer DIV                { margin:0 10px; }
+#footer SPAN               { padding:0px; color:#bb5500; } 
+
+SPAN.unknown               { color:#9a9a9a; }
+SPAN.found                 { color:darkgreen; }
+SPAN.disabled              { color:darkred; }
+SPAN.alert                 { color:#bb5500; }
+SPAN.star                  { color:#a60000; }
+
+SPAN.passed                { background:url('../images/passed.png') no-repeat left center; padding:2px 0px 0px 20px; color:darkgreen; margin-right:10px; } 
+SPAN.failed                { background:url('../images/failed.png') no-repeat left center; padding:2px 0px 0px 20px; color:darkred; margin-right:10px; } 
+
+/* action buttons
+---------------------------------------------------------- */
+.form_button               { background: #73B6FF; background: -moz-linear-gradient(top, #0086cc 0%, #0058cc 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#0086cc), color-stop(100%,#0058cc)); background: -webkit-linear-gradient(top, #0086cc 0%,#0058cc 100%); background: -o-linear-gradient(top, #0086cc 0%,#0058cc 100%); background: -ms-linear-gradient(top, #0086cc 0%,#0058cc 100%); background: linear-gradient(top, #0086cc 0%,#0058cc 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0086cc', endColorstr='#0058cc',GradientType=0 ); border: 1px solid #0068b7; border-bottom: 1px solid #005799; border-radius:3px; font-weight: normal; font-size:15px; text-align: center; color: #fff; display: inline-block; min-width:65px; text-decoration:none; text-shadow: 0 1px 0 #52a8ec; cursor: pointer; padding:2px 3px; }
+.form_button:hover         { box-shadow: 0 2px 5px -1px #aaa; cursor: pointer; }
+
+/* messages
+---------------------------------------------------------- */
+.alert                     { font-family:'Lucida Grande',Verdana,Arial,Sans-Serif; margin:6px auto;margin-right:25px;height:auto;padding:10px 12px;color:#000; -moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px;-khtml-border-radius:4px; white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word; }
+.alert-success             { background-color:#dff0d8; border:1px solid #d6e9c6; color:#468847; }
+.alert-error               { background-color:#f6e5e5; border:1px solid #eed3d7; color:#b94a48; }
+.alert-warning             { background-color:#fcf8e3; border:1px solid #fbeed5; color:#c09853; }
+.alert-info                { background-color:#dff0fa; border:1px solid #bce8f1; color:#3a87ad; }
+.alert-validation          { background-color:#ffd9cc; border:1px solid #ffc6b3; color:#c84f39; }
+.alert .close              { float:right;font-size:20px;font-weight:bold;line-height:18px;color:#000000;text-shadow:0 1px 0 #ffffff;opacity:0.2;filter:alpha(opacity=20);}
+.alert .close:hover        { color:#000000;text-decoration:none;cursor:pointer;opacity:0.4;filter:alpha(opacity=40); }
+.alert button.close,
+.alert button.close:hover  { padding:0;cursor:pointer;background:transparent;border:0;-webkit-appearance:none; min-width:18px; }
+
+/* TEXT FIELDS
+---------------------------------------------------------- */
+INPUT.form_text,
+INPUT[type=text],
+INPUT[type=password],
+SELECT,
+TEXTAREA                   { padding:3px; border: 1px solid #aaaaaa; -moz-border-radius: 1px; -webkit-border-radius: 1px; -khtml-border-radius: 1px; border-radius: 1px; -moz-box-shadow: 0 0 1px #aaa; -webkit-box-shadow: 0 0 1px #aaa; box-shadow: 0 0 1px #aaa; }
+
+INPUT.form_text:focus,
+INPUT[type=text]:focus,
+INPUT[type=password]:focus,
+SELECT:focus,
+TEXTAREA:focus             { border: 1px solid #82a8ec; -moz-box-shadow: 0 0 3px #82a8ec; -webkit-box-shadow: 0 0 3px #82a8ec; box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(82, 168, 236, 0.6); }
+

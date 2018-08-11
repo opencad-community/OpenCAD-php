@@ -1,0 +1,58 @@
+<a name="top"></a>
+<h2>Instalación de su programa v1.0 (ejemplo)</h2>  
+<table border=0 width="100%">
+<tbody>
+<tr>
+	<td>
+		<ul>
+			<li><a href="#Paso_1._Descomprimir_el_archivo_descargado."><span>Paso 1. Descomprimir el archivo descargado.</span></a> 
+			<li><a href="#Paso_2._La_carga_de_archivos."><span>Paso 2. La carga de archivos.</span></a> 
+			<li><a href="#Paso_3._Creación_de_la_Base_de_Datos."><span>Paso 3. Creación de la Base de Datos.</span></a>                        
+			<li><a href="#Paso_4._Los_ajustes_y_los_derechos_de_acceso."><span>Paso 4. Los ajustes y los derechos de acceso.</span></a>                        
+			<li><a href="#Paso_5._Ejemplo_ejecutar_el_archivo."><span>Paso 5. Ejemplo, ejecutar el archivo.</span></a>
+		</ul>
+	</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>(de la versión X.0.0 o por encima de) </p>
+<p>Una instalación nueva de su programa es un proceso sencillo muy sencillo: </p>
+
+<div style="float:right;">[<a href="#top">top</a>]</div>
+<a name="Paso_1._Descomprimir_el_archivo_descargado."></a>
+<h3><b>Paso 1. Descomprimir el archivo descargado.</b></h3>
+<hr>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pretium vulputate diam et hendrerit. Duis libero felis, luctus et facilisis at, placerat non leo. Maecenas viverra, justo eu laoreet tristique, sem purus elementum mi, vel viverra nisl sem sed diam. Aenean eu augue justo, at viverra diam. In id lacus quis orci aliquam tristique. Mauris consequat erat congue neque gravida malesuada.</p>
+<p><br /></p>
+
+<div style="float:right;">[<a href="#top">top</a>]</div>
+<a name="Paso_2._La_carga_de_archivos."></a>
+<h3><b>Paso 2. la carga de archivos.</b></h3>
+<hr>
+<p>Nam sit amet quam nisl, quis pretium libero. Etiam tincidunt libero ut lectus condimentum tristique. Pellentesque risus risus, consequat vel dapibus at, ultricies sed quam. Integer laoreet dignissim sapien pretium tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ultricies massa ac erat hendrerit sed volutpat metus volutpat. Nam sed gravida nulla. Sed augue leo, iaculis quis dapibus sagittis, ultricies lobortis massa.</p>
+<p><br /></p>
+
+<div style="float:right;">[<a href="#top">top</a>]</div>
+<a name="Paso_3._Creación_de_la_Base_de_Datos."></a>
+<h3><b>Paso 3. Creación de la Base de Datos.</b></h3>
+<hr>
+<p>Nunc vehicula convallis velit, eu feugiat metus sodales sit amet. Suspendisse luctus erat ut lacus elementum vehicula blandit dui malesuada. Vestibulum vitae pretium odio. Proin turpis turpis, gravida at hendrerit quis, congue id massa. Maecenas eu ipsum sapien. Mauris id mauris velit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<p><br /></p>
+
+<div style="float:right;">[<a href="#top">top</a>]</div>
+<a name="Paso_4._Los_ajustes_y_los_derechos_de_acceso."></a>
+<h3><b>Paso 4. Los ajustes y los derechos de acceso.</b></h3>
+<hr>
+<p>Ut interdum ante a erat dictum ultrices. Maecenas nec nibh sit amet dolor ullamcorper elementum id sodales nunc. Vestibulum feugiat, elit sed interdum rhoncus, lectus felis varius purus, id fermentum mi odio et elit. Vivamus ut erat dolor, et imperdiet tellus.</p>
+<p><br /></p>
+
+<div style="float:right;">[<a href="#top">top</a>]</div>
+<a name="Paso_5._Ejemplo_ejecutar_el_archivo."></a>
+<h3><b>Paso 5. Ejemplo, ejecutar el archivo.</b></h3>
+<hr>
+<p>Aenean dapibus, odio et vehicula blandit, nunc sapien rhoncus neque, at accumsan nunc nunc a libero. Cras nec risus elit. Phasellus rutrum, ligula lobortis mattis scelerisque, enim eros dictum leo, ut lobortis metus nibh et dolor. Duis scelerisque ultricies lacus non congue.</p>
+<p><br /></p>
+
+Felicitaciones, ahora tiene su programa Vx.xx Instalado!

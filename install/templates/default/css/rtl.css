@@ -1,0 +1,13 @@
+HTML { direction:rtl; }
+
+DIV#main H1               { background:url('../images/wizard.png') no-repeat right center; padding:0 40px; }
+DIV#main H2.sub-title     { margin:-27px 40px 12px 0px; }
+
+DIV#content               { }
+DIV#content .left-part    { width:200px; float:right; }
+DIV#content .central-part { width:751px; float:left; padding-left:0; padding-right:5px; }
+
+UL                        { margin-top:10px; margin-bottom:10px; margin-left:0px; margin-right:0px; }
+UL.left-menu              { border-right:0px; border-left:1px solid #dedede; margin-left:5px; margin-right:30px; }
+
+.alert                    { margin-right:0px; margin-left:20px; }
