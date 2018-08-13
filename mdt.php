@@ -28,36 +28,48 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     include("./actions/api.php");
     include("./actions/responderActions.php");
-
+    unset($_SESSION['activeDepartment']);
     if ( $_GET['dep'] == "state" || $_SESSION['activeDepartment'] == "state" )
     {
         $activeDepartment = "State";
+        $activeBadge="gavel";
         $_SESSION['activeDepartment'] = 'state';
     }
     else if ( $_GET['dep'] == "sheriff" || $_SESSION['activeDepartment'] == "sheriff" )
     {
         $activeDepartment = "Sheriff";
+        $activeBadge="gavel";
         $_SESSION['activeDepartment'] = 'sheriff';
     }
     else if ( $_GET['dep'] == "highway" || $_SESSION['activeDepartment'] == "highway" )
     {
         $activeDepartment = "Highway Patrol";
+        $activeBadge="gavel";
         $_SESSION['activeDepartment'] = 'highway';
     }
     else if ( $_GET['dep'] == "police" || $_SESSION['activeDepartment'] == "police" )
     {
-        $activeDepartment = "police";
+        $activeDepartment = "Police";
+        $activeBadge="gavel";
         $_SESSION['activeDepartment'] = 'police';
     }
     else if ( $_GET['dep'] == "fire" || $_SESSION['activeDepartment'] == "fire" )
     {
         $activeDepartment = "Fire";
+        $activeBadge="fire";
         $_SESSION['activeDepartment'] = 'Fire';
     }
     else if ( $_GET['dep'] == "ems" || $_SESSION['activeDepartment'] == "ems" )
     {
         $activeDepartment = "EMS";
+        $activeBadge="ambulance";
         $_SESSION['activeDepartment'] = 'ems';
+    }
+    else if ( $_GET['dep'] == "roadsideAssist" || $_SESSION['activeDepartment'] == "roadsideAssist" )
+    {
+        $activeDepartment = "Roadside Assistance";
+        $activeBadge="wrench";
+        $_SESSION['activeDepartment'] = 'roadsideAssist';
     }
 
 
@@ -92,7 +104,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             <div class="col-md-3 left_col">
                <div class="left_col scroll-view">
                   <div class="navbar nav_title" style="border: 0;">
-                     <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo $activeDepartment; ?></span></a>
+                     <a href="javascript:void(0)" class="site_title"><i class="fas fa-<?php echo $activeBadge; ?>"></i> <span><?php echo $activeDepartment; ?></span></a>
                   </div>
                   <div class="clearfix"></div>
                   <!-- menu profile quick info -->
@@ -114,7 +126,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <h3>General</h3>
                         <ul class="nav side-menu">
                            <li class="active">
-                              <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                              <a><i class="fas fa-home"></i> Home</span></a>
                            </li>
                            <li>
                                  <a type="button" data-toggle="modal" data-target="#createWarning" > Create Warning</a>
@@ -127,6 +139,21 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            </li>
                            <li>
                                  <a type="button" data-toggle="modal" data-target="#rms" > Report Management System</a
+                           </li>
+                           <li>
+                                 <a id="changeCallsign" class="btn-link" name="changeCallsign" data-toggle="modal" data-target="#callsign">Change Callsign</a>
+                           </li>
+                        </ul>
+                     </div>
+                     <!-- ./ menu_section -->
+                  </div>
+                  <!-- /sidebar menu -->
+                  <div id="roadsideAssist" class="dynamic-content main_menu_side hidden-print main_menu">
+                     <div class="menu_section">
+                        <h3>General</h3>
+                        <ul class="nav side-menu">
+                           <li class="active">
+                              <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                            </li>
                            <li>
                                  <a id="changeCallsign" class="btn-link" name="changeCallsign" data-toggle="modal" data-target="#callsign">Change Callsign</a>
@@ -192,6 +219,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						<?php echo $warningMessage;?>
                      </div>
                      <div class="x_footer">
+						<button class="btn btn-primary" name="aop" data-target="#aop" id="getAOP" disabled></button>
                         <button class="btn btn-primary pull-right" name="new_call_btn" data-toggle="modal" data-target="#vehicles-bolo-board">View Vehicle BOLOs</button>
                         <button class="btn btn-primary pull-right" name="new_call_btn" data-toggle="modal" data-target="#persons-bolo-board">View Person BOLOs</button>
                         <button class="btn btn-danger pull-right" onClick="priorityTone('panic')" value="0" id="panicTone">Panic Button</button>
@@ -415,10 +443,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       '; */
       }
       ?>
-      <!-- ./ row --><?php
-  if (POLICE_NCIC === true) { ?>
+      <!-- ./ row -->
+      <?php  if (POLICE_NCIC == true) { ?>
+                    <div id="ncic" class="dynamic-content row">
                       <div class="clearfix"></div>
-                  <div id="ncic" class="dynamic-content row">
                      <div class="col-md-4 col-sm-4 col-xs-4">
                         <div class="x_panel">
                            <div class="x_title">
@@ -474,7 +502,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <!-- ./ x_panel -->
                      </div>
                      <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
-                     <!-- NCIC Firearm lookup will return in a later RC -->
                      <div class="col-md-4 col-sm-4 col-xs-4">
                         <div class="x_panel">
                            <div class="x_title">
@@ -504,12 +531,76 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      </div>
                <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
             </div>
- <?php } else { ?>
- <?php }
-      ?>
-      </div>
+          <?php } else if ( FIRE_NCIC_NAME == true xor EMS_NCIC_NAME == true xor ROADSIDE_NCIC_NAME == true ) { ?>
+
+            <div class="clearfix"></div>
+          <div id="ncic" class="row">
+           <div class="col-md-4 col-sm-4 col-xs-4">
+              <div class="x_panel">
+                 <div class="x_title">
+                    <h2>NCIC Name Lookup</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                 </div>
+                 <!-- ./ x_title -->
+                 <div class="x_content">
+                    <div class="input-group">
+                       <input type="text" name="ncic_name" class="form-control" id="ncic_name" placeholder="John Doe"/>
+                       <span class="input-group-btn">
+                       <button type="button" class="btn btn-primary" name="ncic_name_btn" id="ncic_name_btn">Send</button>
+                       </span>
+                    </div>
+                    <!-- ./ input-group -->
+                    <div name="ncic_name_return" id="ncic_name_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
+                       <!--<textarea class="form-control" style="resize:none;" id="ncic_name_return" name="ncic_name_return" readonly="readonly"></textarea> -->
+                    </div>
+                    <!-- ./ ncic_name_return -->
+                 </div>
+                 <!-- ./ x_content -->
+              </div>
+              <!-- ./ x_panel -->
+           </div>
+           <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
+
+         <?php } else {}
+
+          if ( FIRE_NCIC_PLATE === true xor EMS_NCIC_PLATE === true xor ROADSIDE_NCIC_PLATE === true ) { ?>
+                 <div id="ncic" class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                       <div class="x_panel">
+                          <div class="x_title">
+                             <h2>NCIC Plate Lookup</h2>
+                             <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                             </ul>
+                             <div class="clearfix"></div>
+                          </div>
+                          <!-- ./ x_title -->
+                          <div class="x_content">
+                             <div class="input-group">
+                                <input type="text" name="ncic_plate" class="form-control" id="ncic_plate" placeholder="License Plate, (ABC123)"/>
+                                <span class="input-group-btn">
+                                <button type="button" class="btn btn-primary" id="ncic_plate_btn">Send</button>
+                                </span>
+                             </div>
+                             <!-- ./ input-group -->
+                             <div name="ncic_plate_return" id="ncic_plate_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
+                             </div>
+                             <!-- ./ ncic_plate_return -->
+                          </div>
+                          <!-- ./ x_content -->
+                       </div>
+                       <!-- ./ x_panel -->
+                    </div>
+                    <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
+                  <?php } else {} ?>
+           </div>
       <!-- "" -->
-      </div>
+    </div>
+  </div>
+</div>
 	  </div>
       <!-- /page content -->
       <!-- footer content -->
@@ -1102,7 +1193,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          vid.volume = 0.3;
       </script>
       <?php
-           if ($_SESSION['fire'] == 'YdES')
+           if ($_SESSION['activeDepartment'] == 'fire')
            {
              echo '<audio id="newCallAudio" src="'.BASE_URL.'/sounds/Fire_Tones_Aligned.wav" preload="auto"></audio>';
            }
@@ -1133,9 +1224,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			$('#lawenforcement').show();
 			$('#ncic').show();
 		}
-	 else if (dynamicContent == 'fire') {
-			$('#fire').show();
-	 }
+    else if (dynamicContent == 'roadsideAssist') {
+      $('#roadsideAssist').show();
+    }
 	 });
 	</script>
     <script>
@@ -1177,9 +1268,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
              getCalls();
              getStatus();
              checkTones();
-			 getMyCall();
-			 mdtGetVehicleBOLOS();
-			 mdtGetPersonBOLOS();
+             getMyCall();
+             mdtGetVehicleBOLOS();
+             mdtGetPersonBOLOS();
+			 getAOP();
 
              $('#enroute_btn').click(function(evt) {
                console.log(evt);
@@ -1249,6 +1341,38 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                  sticker: false
              }
            });
+
+      </script>
+      <script>
+         function getAOP() {
+           $.ajax({
+                 type: "GET",
+                 url: "<?php echo BASE_URL; ?>/actions/api.php",
+                 data: {
+                     getAOP: 'yes'
+                 },
+                 success: function(response)
+                 {
+                   $('#getAOP').html(response);
+
+                   // SG - Removed until node/real-time data setup
+                   /*$('#activeUsers').DataTable({
+                     searching: false,
+                     scrollY: "200px",
+                     lengthMenu: [[4, -1], [4, "All"]]
+                });*/
+                   setTimeout(getAOP, 5000);
+
+
+                 },
+                 error : function(XMLHttpRequest, textStatus, errorThrown)
+                 {
+                   console.log("Error");
+                 }
+
+               });
+         }
+
 
       </script>
       <script>

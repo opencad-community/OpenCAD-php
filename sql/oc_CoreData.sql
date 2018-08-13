@@ -1,19 +1,24 @@
+-- phpMyAdmin SQL Dump
+-- version 4.6.6deb5
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost
+-- Generation Time: Aug 10, 2018 at 05:14 PM
+-- Server version: 10.1.34-MariaDB-0ubuntu0.18.04.1
+-- PHP Version: 7.1.15-0ubuntu0.17.10.1
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Dumping data for table `users`
+-- Database: `opencad`
 --
-
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `identifier`, `admin_privilege`, `supervisor_privilege`, `password_reset`, `approved`, `suspend_reason`, `suspend_duration`) VALUES
-(1, 'Default Admin', 'admin@opencad.demo', '$2y$10$xHvogGcqQs8jhTPbFEDHJO9KWu2FCLgJ5XGxH.hHMA0BY1brgCkSG', '1A-1', 2, 1, 0, 1, NULL, NULL),
-(2, 'Default Admin', 'user@opencad.demo', '$2y$10$xHvogGcqQs8jhTPbFEDHJO9KWu2FCLgJ5XGxH.hHMA0BY1brgCkSG', '1A-1', 0, 0, 0, 1, NULL, NULL),
-(3, 'Default Admin', 'civ@opencad.demo', '$2y$10$xHvogGcqQs8jhTPbFEDHJO9KWu2FCLgJ5XGxH.hHMA0BY1brgCkSG', '1A-1', 0, 0, 0, 1, NULL, NULL);
-
---
--- Dumping data for table `aop`
---
-
-INSERT INTO `aop` (`aop`) VALUES
-('Placeholder');
 
 --
 -- Dumping data for table `citations`
@@ -368,31 +373,6 @@ INSERT INTO `incident_type` (`code_id`, `code_name`) VALUES
 ('200', 'Tow & Recovery');
 
 --
--- Dumping data for table `ncic_names`
---
-
-INSERT INTO `ncic_names` (`id`, `submittedByName`, `submittedById`, `name`, `dob`, `address`, `gender`, `race`, `dl_status`, `hair_color`, `build`, `weapon_permit`, `deceased`) VALUES
-(1, 'Default Civ', '3', 'Joe Amorasino', '1967-08-10', '3210 Mountainview Drive', 'Male', 'White', 'Valid', 'Bald', 'Fit', 'Obtained', 'No'),
-(2, 'Default Civ', '3', 'Tricia Takanawa', '1967-01-08', '1060 Elgan Avenue', 'Female', 'Asian', 'Suspended', 'Black', 'Thin', 'Obtained', 'No');
-
---
--- Dumping data for table `ncic_plates`
---
-
-INSERT INTO `ncic_plates` (`id`, `name_id`, `veh_plate`, `veh_make`, `veh_model`, `veh_pcolor`, `veh_scolor`, `veh_insurance`, `flags`, `veh_reg_state`, `notes`, `user_id`) VALUES
-(0, 0, 'YZT219', 'Albany', 'Alpha', 'Chrome-Chrome', 'Classic-Carbon Black', 'VALID', 'NONE', 'Massachusetts', '', 3),
-(0, 1, 'TY2QT1', 'Albany', 'Alpha', 'Classic-Carbon Black', 'Classic-Carbon Black', 'VALID', 'NONE', 'Massachusetts', '', 3),
-(0, 2, 'UYT144', 'Bravado', 'Buffalo', 'Matte-Midnight Blue', 'Matte-Midnight Blue', 'EXPIRED', 'SUSPENDED REGISTRATION', 'Kentucky', '', 3);
-
---
--- Dumping data for table `ncic_weapons`
---
-
-INSERT INTO `ncic_weapons` (`id`, `name_id`, `weapon_type`, `weapon_name`, `user_id`) VALUES
-(0, 0, 'Pistols', 'SNS-Pistol', 3),
-(0, 1, 'Pistols', 'Pistol', 3);
-
---
 -- Dumping data for table `statuses`
 --
 
@@ -654,23 +634,6 @@ INSERT INTO `tones` (`id`, `name`, `active`) VALUES
 (0, 'priority', '0'),
 (1, 'recurring', '0'),
 (2, 'panic', '0');
-
---
--- Dumping data for table `user_departments`
---
-
-INSERT INTO `user_departments` (`user_id`, `department_id`) VALUES
-(1, 1),
-(1, 2),
-(1, 3),
-(1, 4),
-(1, 5),
-(1, 6),
-(1, 7),
-(1, 8),
-(2, 3),
-(2, 7),
-(3, 8);
 
 --
 -- Dumping data for table `vehicles`
@@ -1217,3 +1180,7 @@ INSERT INTO `weapons` (`id`, `weapon_type`, `weapon_name`) VALUES
 (30, 'Heavy', 'Homing-Launcher'),
 (31, 'Heavy', 'Grenade-Launcher'),
 (32, 'Heavy', 'Firework-Launcher');
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

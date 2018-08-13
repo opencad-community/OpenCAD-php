@@ -86,6 +86,9 @@ if(isset($_POST['edit_personbolo'])){
 if(isset($_POST['edit_vehiclebolo'])){
     edit_vehiclebolo();
 }
+if (isset($_POST['change_aop'])){
+    changeaop();
+}
 if (isset($_GET['term'])) {
     $data = array();
 
@@ -1475,6 +1478,34 @@ function cadGetVehicleBOLOSid()
     $vehicle = $rows;
     }
     echo json_encode($vehicle);
+}
+function changeaop(){
+    $aop = $_POST['aop'];
+
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $sql = "UPDATE aop SET aop = ?";
+
+    try {
+        $stmt = mysqli_prepare($link, $sql);
+        mysqli_stmt_bind_param($stmt, "s", $aop);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result == FALSE) {
+            die(mysqli_error($link));
+        }
+    }
+    catch (Exception $e)
+    {
+        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+    }
+    mysqli_close($link);
+
+    header("Location:".BASE_URL."/cad.php");
 }
 function editPersonBOLOS(){
     $first_name = $_POST['first_name'];
