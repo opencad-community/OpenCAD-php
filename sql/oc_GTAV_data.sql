@@ -516,14 +516,6 @@ INSERT INTO `departments` (`department_id`, `department_name`) VALUES
 (5, 'Police'),
 (6, 'Fire'),
 (7, 'EMS'),
-(8, 'Civilian'),
-(1, 'Communications'),
-(2, 'State'),
-(3, 'Highway'),
-(4, 'Sheriff'),
-(5, 'Police'),
-(6, 'Fire'),
-(7, 'EMS'),
 (8, 'Civilian');
 
 --
