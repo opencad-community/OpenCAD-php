@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 -- phpMyAdmin SQL Dump
 -- version 4.6.6deb5
 -- https://www.phpmyadmin.net/
@@ -22,6 +23,8 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
+=======
+>>>>>>> c743d005e17ffeca7cc02690c7668d7f453c2d27
 --
 -- Table structure for table `active_users`
 --
@@ -475,6 +478,9 @@ ALTER TABLE `ncic_names`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+<<<<<<< HEAD
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+=======
+>>>>>>> c743d005e17ffeca7cc02690c7668d7f453c2d27

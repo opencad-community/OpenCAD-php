@@ -1,80 +1,6 @@
--- phpMyAdmin SQL Dump
--- version 4.6.6deb5
--- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Aug 10, 2018 at 05:13 PM
--- Server version: 10.1.34-MariaDB-0ubuntu0.18.04.1
--- PHP Version: 7.1.15-0ubuntu0.17.10.1
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
+-- Database: `opencad_dev`
 --
--- Database: `opencad`
---
-
---
--- Dumping data for table `aop`
---
-
-INSERT INTO `aop` (`aop`) VALUES
-('Placeholder'),
-('Placeholder');
-
---
--- Dumping data for table `citations`
---
-
-INSERT INTO `citations` (`id`, `citation_name`) VALUES
-(6, 'ABANDON VEH - D MIS.'),
-(10, 'BLOCKING EMERG VEH - A MIS.'),
-(27, 'DESTRUCTION OF PROPERTY - A MIS.'),
-(26, 'DESTRUCTION OF PROPERTY - B MIS.'),
-(11, 'DRIVING W/O LICENSE - D MIS.'),
-(18, 'EXCESSIVE USE OF HORN - B MIS.'),
-(17, 'EXCESSIVE USE OF HORN - C MIS.'),
-(21, 'FAIL. NOTIFY CCP - B MIS.'),
-(20, 'FAIL. NOTIFY CCP - C MIS.'),
-(8, 'FAIL. YIELD FOR EMERG VEH - C MIS.'),
-(7, 'FAIL. YIELD FOR EMERG VEH - D MIS.'),
-(23, 'HARASSMENT - B MIS.'),
-(22, 'HARASSMENT - C MIS.'),
-(25, 'IMPEDING PEACE OFFICER - A MIS.'),
-(24, 'IMPEDING PEACE OFFICER - B MIS.'),
-(9, 'IMPEDING TRAFFIC - D MIS.'),
-(16, 'LICENSE PLATE - C MIS.'),
-(41, 'OBSTRUCTING A LAW ENFORCEMENT OFFICER - A MIS.'),
-(40, 'OTHER - A MIS.'),
-(39, 'OTHER - B MIS.'),
-(38, 'OTHER - C MIS.'),
-(37, 'OTHER - D MIS.'),
-(30, 'POSS. CNTRL SUB. - A MIS.'),
-(29, 'POSS. CNTRL SUB. - B MIS.'),
-(28, 'POSS. CNTRL SUB. - C MIS.'),
-(32, 'POSS. ILLEGAL SUB. - A MIS.'),
-(31, 'POSS. ILLEGAL SUB. - B MIS.'),
-(34, 'PROSTITUTION / SOLICITATION - A MIS.'),
-(33, 'PROSTITUTION / SOLICITATION - B MIS.'),
-(36, 'PUBLIC INTOX. B MIS.'),
-(35, 'PUBLIC INTOX. C MIS.'),
-(13, 'RECKLESS DRIVING - C MIS.'),
-(12, 'RECKLESS DRIVING - D MIS.'),
-(5, 'RUNNING STOP SIGN - D MIS.'),
-(3, 'SPEEDING - A. MIS'),
-(2, 'SPEEDING - B. MIS'),
-(1, 'SPEEDING - C. MIS'),
-(0, 'SPEEDING - D. MIS'),
-(4, 'U-TURN - D. MIS'),
-(15, 'UNAUTHORIZED LIGHTING - B MIS.'),
-(14, 'UNAUTHORIZED LIGHTING - C MIS.'),
-(19, 'WINDOW TINT - C MIS.');
 
 --
 -- Dumping data for table `colors`
@@ -345,14 +271,6 @@ INSERT INTO `departments` (`department_id`, `department_name`) VALUES
 (8, 'Civilian');
 
 --
--- Dumping data for table `dispatchers`
---
-
-INSERT INTO `dispatchers` (`identifier`, `callsign`, `status`) VALUES
-('1A-98', '1A-98', 0),
-('Civ-666', 'Civ-666', 0);
-
---
 -- Dumping data for table `genders`
 --
 
@@ -379,31 +297,6 @@ INSERT INTO `incident_type` (`code_id`, `code_name`) VALUES
 ('11', 'Traffic Stop'),
 ('50', 'Vehicle Accident'),
 ('200', 'Tow & Recovery');
-
---
--- Dumping data for table `ncic_names`
---
-
-INSERT INTO `ncic_names` (`id`, `submittedByName`, `submittedById`, `name`, `dob`, `address`, `gender`, `race`, `dl_status`, `hair_color`, `build`, `weapon_permit`, `deceased`) VALUES
-(1, 'Default Civ', '3', 'Joe Amorasino', '1967-08-10', '3210 Mountainview Drive', 'Male', 'White', 'Valid', 'Bald', 'Fit', 'Obtained', 'No'),
-(2, 'Default Civ', '3', 'Tricia Takanawa', '1967-01-08', '1060 Elgan Avenue', 'Female', 'Asian', 'Suspended', 'Black', 'Thin', 'Obtained', 'No');
-
---
--- Dumping data for table `ncic_plates`
---
-
-INSERT INTO `ncic_plates` (`id`, `name_id`, `veh_plate`, `veh_make`, `veh_model`, `veh_pcolor`, `veh_scolor`, `veh_insurance`, `flags`, `veh_reg_state`, `notes`, `user_id`) VALUES
-(0, 0, 'YZT219', 'Albany', 'Alpha', 'Chrome-Chrome', 'Classic-Carbon Black', 'VALID', 'NONE', 'Massachusetts', '', 3),
-(0, 1, 'TY2QT1', 'Albany', 'Alpha', 'Classic-Carbon Black', 'Classic-Carbon Black', 'VALID', 'NONE', 'Massachusetts', '', 3),
-(0, 2, 'UYT144', 'Bravado', 'Buffalo', 'Matte-Midnight Blue', 'Matte-Midnight Blue', 'EXPIRED', 'SUSPENDED REGISTRATION', 'Kentucky', '', 3);
-
---
--- Dumping data for table `ncic_weapons`
---
-
-INSERT INTO `ncic_weapons` (`id`, `name_id`, `weapon_type`, `weapon_name`, `user_id`) VALUES
-(0, 0, 'Pistols', 'SNS-Pistol', 3),
-(0, 1, 'Pistols', 'Pistol', 3);
 
 --
 -- Dumping data for table `statuses`
@@ -657,7 +550,7 @@ INSERT INTO `streets` (`id`, `name`, `county`) VALUES
 (231, 'Route 20', 'State'),
 (232, 'Route 22', 'State'),
 (233, 'Route 23', 'State'),
-(234, 'Route 68', 'State\r\n    ');
+(234, 'Route 68', 'State;');
 
 --
 -- Dumping data for table `tones`
@@ -667,32 +560,6 @@ INSERT INTO `tones` (`id`, `name`, `active`) VALUES
 (0, 'priority', '0'),
 (1, 'recurring', '0'),
 (2, 'panic', '0');
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `identifier`, `admin_privilege`, `supervisor_privilege`, `password_reset`, `approved`, `suspend_reason`, `suspend_duration`) VALUES
-(1, 'Default Admin', 'admin@opencad.demo', '$2y$10$xHvogGcqQs8jhTPbFEDHJO9KWu2FCLgJ5XGxH.hHMA0BY1brgCkSG', '1A-1', 2, 1, 0, 1, NULL, NULL),
-(2, 'Default User', 'user@opencad.demo', '$2y$10$xHvogGcqQs8jhTPbFEDHJO9KWu2FCLgJ5XGxH.hHMA0BY1brgCkSG', '1A-99', 0, 0, 0, 1, NULL, NULL),
-(3, 'Default Civ', 'civ@opencad.demo', '$2y$10$xHvogGcqQs8jhTPbFEDHJO9KWu2FCLgJ5XGxH.hHMA0BY1brgCkSG', 'Civ-666', 0, 0, 0, 1, NULL, NULL);
-
---
--- Dumping data for table `user_departments`
---
-
-INSERT INTO `user_departments` (`user_id`, `department_id`) VALUES
-(1, 1),
-(1, 2),
-(1, 3),
-(1, 4),
-(1, 5),
-(1, 6),
-(1, 7),
-(1, 8),
-(2, 3),
-(2, 7),
-(3, 8);
 
 --
 -- Dumping data for table `vehicles`
@@ -1239,7 +1106,3 @@ INSERT INTO `weapons` (`id`, `weapon_type`, `weapon_name`) VALUES
 (30, 'Heavy', 'Homing-Launcher'),
 (31, 'Heavy', 'Grenade-Launcher'),
 (32, 'Heavy', 'Firework-Launcher');
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
