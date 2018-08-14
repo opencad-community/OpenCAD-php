@@ -73,7 +73,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         $boloMessage = $_SESSION['boloMessage'];
         unset($_SESSION['boloMessage']);
     }
-    
+
 
 ?>
 
@@ -162,18 +162,21 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <a data-toggle="tooltip" data-placement="top">
                         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                         </a>-->
-                     <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
-                     <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-                     </a>
-                     <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
-                     <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
-                     </a>
-                     <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
-                     <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                     </a>
-                     <a data-toggle="tooltip" data-placement="top" title="Need Help?" href="https://guides.opencad.io/">
-                     <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                     </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
+                        <span class="fas fa-clipboard-list" aria-hidden="true"></span>
+                        </a>
+                        <a id="changeCallsign" class="btn-link" name="changeCallsign" data-toggle="modal" data-target="#callsign">
+                          <span class="fas fa-hashtag" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
+                        <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
+                        <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Need Help?" href="https://guides.opencad.io/">
+                        <span class="fas fa-info-circle" aria-hidden="true"></span>
+                        </a>
                   </div>
                   <!-- /menu footer buttons -->
                </div>

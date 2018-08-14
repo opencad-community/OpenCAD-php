@@ -129,20 +129,15 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                               <a><i class="fas fa-home"></i> Home</span></a>
                            </li>
                            <li>
-                                 <a type="button" data-toggle="modal" data-target="#createWarning" > Create Warning</a>
+                                 <a type="button" data-toggle="modal" data-target="#createWarning" ><i class="fas fa-exclamation-triangle"></i> Create Warning</a>
                            </li>
                            <li>
-                                 <a type="button" data-toggle="modal" data-target="#createCitation" > Create Citation</a>
+                                 <a type="button" data-toggle="modal" data-target="#createCitation" ><i class="fas fa-ticket-alt"></i> Create Citation</a>
                            </li>
                            <li>
-                                 <a type="button" data-toggle="modal" data-target="#createArrest" > Create Arrest Report</a
+                                 <a type="button" data-toggle="modal" data-target="#createArrest" ><i class="fas fa-ban"></i> Create Arrest Report</a
                            </li>
-                           <li>
-                                 <a type="button" data-toggle="modal" data-target="#rms" > Report Management System</a
-                           </li>
-                           <li>
-                                 <a id="changeCallsign" class="btn-link" name="changeCallsign" data-toggle="modal" data-target="#callsign">Change Callsign</a>
-                           </li>
+
                         </ul>
                      </div>
                      <!-- ./ menu_section -->
@@ -155,9 +150,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <li class="active">
                               <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                            </li>
-                           <li>
-                                 <a id="changeCallsign" class="btn-link" name="changeCallsign" data-toggle="modal" data-target="#callsign">Change Callsign</a>
-                           </li>
                         </ul>
                      </div>
                      <!-- ./ menu_section -->
@@ -169,17 +161,20 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <a data-toggle="tooltip" data-placement="top">
                           <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                         </a>-->
+                     <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
+                     <span class="fas fa-clipboard-list" aria-hidden="true"></span>
+                     </a>
+                     <a id="changeCallsign" class="btn-link" name="changeCallsign" data-toggle="modal" data-target="#callsign">
+                       <span class="fas fa-hashtag" aria-hidden="true"></span>
+                     </a>
                      <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
                      <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
                      </a>
-                     <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
-                     <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
-                     </a>
                      <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
-                     <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                     <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
                      </a>
                      <a data-toggle="tooltip" data-placement="top" title="Need Help?" href="https://guides.opencad.io/">
-                     <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                     <span class="fas fa-info-circle" aria-hidden="true"></span>
                      </a>
                   </div>
                   <!-- /menu footer buttons -->
