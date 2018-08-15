@@ -165,7 +165,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <span class="fas fa-clipboard-list" aria-hidden="true"></span>
                      </a>
                      <a id="changeCallsign" class="btn-link" name="changeCallsign" data-toggle="modal" data-target="#callsign">
-                       <span class="fas fa-hashtag" aria-hidden="true"></span>
+                       <span class="glyphicon glyphicon-text-background" aria-hidden="true"></span>
                      </a>
                      <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
                      <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>

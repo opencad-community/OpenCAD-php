@@ -92,7 +92,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <!-- menu profile quick info -->
                   <div class="profile clearfix">
                      <div class="profile_pic">
-                        <img src="<?php echo get_avatar() ?>" alt="..." class="img-circle profile_img"> <?php echo $_SESSION['name']; ?>
+                        <img src="<?php echo get_avatar() ?>" alt="..." class="img-circle profile_img">
                      </div>
                      <div class="profile_info">
                         <span>Welcome,</span>
@@ -114,7 +114,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                               </ul>
                            </li>
                            <li>
-                              <a><i class="fas fa-clock-o"></i> Stopwatch <span class="fas fa-chevron-down"></span></a>
+                              <a><i class="fas fa-stopwatch"></i> Stopwatch <span class="fas fa-chevron-down"></span></a>
                               <ul class="nav child_menu">
                                  <li><a href="https://www.timeanddate.com/stopwatch/" target="_blank">Stopwatch</a></li>
                               </ul>
@@ -134,21 +134,18 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                               </ul>
                            </li>
                            <li>
-                              <a><i class="fas fa-warning"></i> Arrest Report <span class="fas fa-chevron-down"></span></a>
+                              <a><i class="fas fa-book"></i> Arrest Report <span class="fas fa-chevron-down"></span></a>
                               <ul class="nav child_menu">
                                  <li><a type="button" data-toggle="modal" data-target="#createArrest" > Create Arrest Report</a></li>
                                  <li><a type="button" data-toggle="modal" data-target="#viewArrest" > View Arrests</a></li>
                               </ul>
                            </li>
                            <li>
-                              <a><i class="fas fa-warning"></i> Warrants <span class="fas fa-chevron-down"></span></a>
+                              <a><i class="fas fa-book"></i> Warrants <span class="fas fa-chevron-down"></span></a>
                               <ul class="nav child_menu">
                                  <li><a type="button" data-toggle="modal" data-target="#createWarrant" > Create Warrants</a></li>
                                  <li><a type="button" data-toggle="modal" data-target="#viewWarrant" > View Warrants</a></li>
                               </ul>
-                           </li>
-                           <li>
-                                 <a type="button" data-toggle="modal" data-target="#rms" > Report Management System</a>
                            </li>
                         </ul>
                      </div>
@@ -166,7 +163,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <span class="fas fa-clipboard-list" aria-hidden="true"></span>
                         </a>
                         <a id="changeCallsign" class="btn-link" name="changeCallsign" data-toggle="modal" data-target="#callsign">
-                          <span class="fas fa-hashtag" aria-hidden="true"></span>
+                          <span class="glyphicon glyphicon-text-background" aria-hidden="true"></span>
                         </a>
                         <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
                         <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
