@@ -129,20 +129,15 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                               <a><i class="fas fa-home"></i> Home</span></a>
                            </li>
                            <li>
-                                 <a type="button" data-toggle="modal" data-target="#createWarning" > Create Warning</a>
+                                 <a type="button" data-toggle="modal" data-target="#createWarning" ><i class="fas fa-exclamation-triangle"></i> Create Warning</a>
                            </li>
                            <li>
-                                 <a type="button" data-toggle="modal" data-target="#createCitation" > Create Citation</a>
+                                 <a type="button" data-toggle="modal" data-target="#createCitation" ><i class="fas fa-ticket-alt"></i> Create Citation</a>
                            </li>
                            <li>
-                                 <a type="button" data-toggle="modal" data-target="#createArrest" > Create Arrest Report</a
+                                 <a type="button" data-toggle="modal" data-target="#createArrest" ><i class="fas fa-ban"></i> Create Arrest Report</a
                            </li>
-                           <li>
-                                 <a type="button" data-toggle="modal" data-target="#rms" > Report Management System</a
-                           </li>
-                           <li>
-                                 <a id="changeCallsign" class="btn-link" name="changeCallsign" data-toggle="modal" data-target="#callsign">Change Callsign</a>
-                           </li>
+
                         </ul>
                      </div>
                      <!-- ./ menu_section -->
@@ -153,10 +148,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <h3>General</h3>
                         <ul class="nav side-menu">
                            <li class="active">
-                              <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                           </li>
-                           <li>
-                                 <a id="changeCallsign" class="btn-link" name="changeCallsign" data-toggle="modal" data-target="#callsign">Change Callsign</a>
+                              <a><i class="fas fa-home"></i> Home <span class="fas fa-chevron-down"></span></a>
                            </li>
                         </ul>
                      </div>
@@ -169,17 +161,20 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <a data-toggle="tooltip" data-placement="top">
                           <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                         </a>-->
+                     <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
+                     <span class="fas fa-clipboard-list" aria-hidden="true"></span>
+                     </a>
+                     <a id="changeCallsign" class="btn-link" name="changeCallsign" data-toggle="modal" data-target="#callsign">
+                       <span class="glyphicon glyphicon-text-background" aria-hidden="true"></span>
+                     </a>
                      <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
                      <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
                      </a>
-                     <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
-                     <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
-                     </a>
                      <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
-                     <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                     <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
                      </a>
                      <a data-toggle="tooltip" data-placement="top" title="Need Help?" href="https://guides.opencad.io/">
-                     <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                     <span class="fas fa-info-circle" aria-hidden="true"></span>
                      </a>
                   </div>
                   <!-- /menu footer buttons -->
@@ -190,17 +185,17 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                <div class="nav_menu">
                   <nav>
                      <div class="nav toggle">
-                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        <a id="menu_toggle"><i class="fas fa-bars"></i></a>
                      </div>
                      <ul class="nav navbar-nav navbar-right">
                         <li class="">
                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                           <img src="<?php echo get_avatar() ?>" alt=""><?php echo $_SESSION['name']; ?>
-                           <span class=" fa fa-angle-down"></span>
+                           <img src="<?php echo get_avatar() ?>" alt=""> <?php echo $name; ?>
+                           <span class=" fas fa-angle-down"></span>
                            </a>
                            <ul class="dropdown-menu dropdown-usermenu pull-right">
-                              <li><a href="<?php echo BASE_URL; ?>/profile.php">My Profile</a></li>
-                              <li><a href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                              <li><a href="<?php echo BASE_URL; ?>/profile.php"><i class="fas fa-user pull-right"></i> My Profile</a></li>
+                              <li><a href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
                            </ul>
                         </li>
                      </ul>
@@ -235,7 +230,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <div class="x_title">
                               <h2>Active Calls</h2>
                               <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                 <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
                               </ul>
                               <div class="clearfix"></div>
                            </div>
@@ -258,7 +253,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <div class="x_title">
                               <h2>My Status</h2>
                               <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                 <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
                               </ul>
                               <div class="clearfix"></div>
                            </div>
@@ -307,7 +302,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <div class="x_title">
                               <h2>My Call</h2>
                               <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                 <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
                               </ul>
                               <div class="clearfix"></div>
                            </div>
@@ -335,7 +330,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                   <div class="x_title">
                                     <h2>Fire PAL</h2>
                                     <ul class="nav navbar-right panel_toolbox">
-                                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
                                     </ul>
                                     <div class="clearfix"></div>
                                   </div>
@@ -353,7 +348,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                   <div class="x_title">
                                     <h2>Incident Report</h2>
                                     <ul class="nav navbar-right panel_toolbox">
-                                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
                                     </ul>
                                     <div class="clearfix"></div>
                                   </div>
@@ -371,7 +366,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                   <div class="x_title">
                                     <h2>ePCR</h2>
                                     <ul class="nav navbar-right panel_toolbox">
-                                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
                                     </ul>
                                     <div class="clearfix"></div>
                                   </div>
@@ -401,7 +396,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                             <div class="x_title">
                               <h2>Citation Creator</h2>
                               <ul class="nav navbar-right panel_toolbox">
-                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
                               </ul>
                               <div class="clearfix"></div>
                             </div>
@@ -452,7 +447,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <div class="x_title">
                               <h2>NCIC Name Lookup</h2>
                               <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                 <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
                               </ul>
                               <div class="clearfix"></div>
                            </div>
@@ -480,7 +475,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <div class="x_title">
                               <h2>NCIC Plate Lookup</h2>
                               <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                 <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
                               </ul>
                               <div class="clearfix"></div>
                            </div>
@@ -507,7 +502,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <div class="x_title">
                               <h2>NCIC Weapon Lookup</h2>
                               <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                 <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
                               </ul>
                               <div class="clearfix"></div>
                            </div>
@@ -540,7 +535,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                  <div class="x_title">
                     <h2>NCIC Name Lookup</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                       <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
                     </ul>
                     <div class="clearfix"></div>
                  </div>
@@ -573,7 +568,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                           <div class="x_title">
                              <h2>NCIC Plate Lookup</h2>
                              <ul class="nav navbar-right panel_toolbox">
-                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
                              </ul>
                              <div class="clearfix"></div>
                           </div>
@@ -790,9 +785,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="x_title">
                     <h2>RMS Warnings</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      <li><a class="close-link"><i class="fas fa-close"></i></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -807,9 +802,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="x_title">
                     <h2>RMS Citations</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      <li><a class="close-link"><i class="fas fa-close"></i></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -824,9 +819,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="x_title">
                     <h2>RMS Arrests</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      <li><a class="close-link"><i class="fas fa-close"></i></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -841,9 +836,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="x_title">
                     <h2>RMS Warrants</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      <li><a class="close-link"><i class="fas fa-close"></i></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
