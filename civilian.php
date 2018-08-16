@@ -160,8 +160,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <span class=" fa fa-angle-down"></span>
                            </a>
                            <ul class="dropdown-menu dropdown-usermenu pull-right">
-                              <li><a href="<?php echo BASE_URL; ?>/profile.php">My Profile</a></li>
-                              <li><a href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i class="fasfa-sign-out pull-right"></i> Log Out</a></li>
+                              <li><a href="<?php echo BASE_URL; ?>/profile.php"><i class="fas fa-user pull-right"></i> My Profile</a></li>
+                              <li><a href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
                               <span class="glyphicon glyphicon-log">
                            </ul>
                         </li>
