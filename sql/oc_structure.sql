@@ -1,44 +1,3 @@
-<<<<<<< HEAD
--- phpMyAdmin SQL Dump
--- version 4.6.6deb5
--- https://www.phpmyadmin.net/
---
--- Host: localhost
--- Generation Time: Aug 10, 2018 at 05:12 PM
--- Server version: 10.1.34-MariaDB-0ubuntu0.18.04.1
--- PHP Version: 7.1.15-0ubuntu0.17.10.1
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `opencad`
---
-
--- --------------------------------------------------------
-
-=======
->>>>>>> c743d005e17ffeca7cc02690c7668d7f453c2d27
---
--- Table structure for table `active_users`
---
-
-CREATE TABLE `active_users` (
-  `identifier` varchar(255) NOT NULL,
-  `callsign` varchar(255) NOT NULL COMMENT 'Unit Callsign',
-  `status` int(11) NOT NULL COMMENT 'Unit status, 0=busy/unavailable, 1=available, 2=dispatcher',
-  `status_detail` int(11) NOT NULL COMMENT 'Paired to Statuses table',
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
-
--- --------------------------------------------------------
-
 --
 -- Table structure for table `aop`
 --
@@ -336,6 +295,17 @@ CREATE TABLE `ncic_weapons` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `permissions`
+--
+
+CREATE TABLE `permissions` (
+  `perm_id` int(11) NOT NULL,
+  `perm_desc` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `statuses`
 --
 
@@ -439,14 +409,6 @@ CREATE TABLE `weapons` (
 --
 
 --
--- Indexes for table `active_users`
---
-ALTER TABLE `active_users`
-  ADD PRIMARY KEY (`identifier`) USING BTREE,
-  ADD UNIQUE KEY `callsign` (`callsign`) USING BTREE,
-  ADD UNIQUE KEY `identifier` (`identifier`) USING BTREE;
-
---
 -- Indexes for table `bolos_persons`
 --
 ALTER TABLE `bolos_persons`
@@ -456,6 +418,24 @@ ALTER TABLE `bolos_persons`
 -- Indexes for table `ncic_names`
 --
 ALTER TABLE `ncic_names`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ncic_warnings`
+--
+ALTER TABLE `ncic_warnings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ncic_warrants`
+--
+ALTER TABLE `ncic_warrants`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ncic_weapons`
+--
+ALTER TABLE `ncic_weapons`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -473,14 +453,28 @@ ALTER TABLE `users`
 --
 ALTER TABLE `ncic_names`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `ncic_warnings`
+--
+ALTER TABLE `ncic_warnings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ncic_warrants`
+--
+ALTER TABLE `ncic_warrants`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ncic_weapons`
+--
+ALTER TABLE `ncic_weapons`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-<<<<<<< HEAD
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-=======
->>>>>>> c743d005e17ffeca7cc02690c7668d7f453c2d27
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+COMMIT;
