@@ -432,10 +432,46 @@ ALTER TABLE `ncic_names`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `ncic_warnings`
+--
+ALTER TABLE `ncic_warnings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ncic_warrants`
+--
+ALTER TABLE `ncic_warrants`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ncic_weapons`
+--
+ALTER TABLE `ncic_weapons`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `streets`
+--
+ALTER TABLE `streets`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Indexes for table `vehicles`
+--
+ALTER TABLE `vehicles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `weapons`
+--
+ALTER TABLE `weapons`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -446,8 +482,46 @@ ALTER TABLE `users`
 --
 ALTER TABLE `ncic_names`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `ncic_warnings`
+--
+ALTER TABLE `ncic_warnings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ncic_warrants`
+--
+ALTER TABLE `ncic_warrants`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ncic_weapons`
+--
+ALTER TABLE `ncic_weapons`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `streets`
+--
+ALTER TABLE `streets`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key for each street', AUTO_INCREMENT=235;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `vehicles`
+--
+ALTER TABLE `vehicles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=503;
+
+--
+-- AUTO_INCREMENT for table `weapons`
+--
+ALTER TABLE `weapons`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+COMMIT;
