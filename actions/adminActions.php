@@ -330,7 +330,7 @@ function getRole()
     $result = mysqli_query($link, $sql);
     echo '
             <option value="0">User</option>
-            <option value="1" disabled>Moderator</option>
+            <option value="1">Moderator</option>
             <option value="2">Administrator</option>
             ';
 }
