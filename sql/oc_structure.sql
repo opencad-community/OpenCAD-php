@@ -1,10 +1,4 @@
 --
--- Database: `opencad_sheatest`
---
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `active_users`
 --
 
