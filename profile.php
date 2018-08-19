@@ -60,7 +60,7 @@ include("./actions/profileActions.php");
   	$_SESSION['passwordUpdate'] = '<div class="alert alert-success"><span>Your password has been updated!</span></div>';
       }
 
-
+var_dump($_SESSION);
 ?>
 
 <!DOCTYPE html>
