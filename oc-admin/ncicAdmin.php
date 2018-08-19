@@ -108,7 +108,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo COMMUNITY_NAME;?> Admin</span></a>
+              <a href="javascript:void(0)" class="site_title"><i class="fas fa-lock"></i> <span><?php echo COMMUNITY_NAME;?> Admin</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -132,20 +132,17 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
               <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
-                <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+              <span class="fas fa-clipboard-list" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
+              <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
+              <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
               </a>
               <a data-toggle="tooltip" data-placement="top" title="Need Help?" href="https://guides.opencad.io/">
-                <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+              <span class="fas fa-info-circle" aria-hidden="true"></span>
               </a>
             </div>
             <!-- /menu footer buttons -->
@@ -157,19 +154,18 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <div class="nav_menu">
             <nav>
               <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                <a id="menu_toggle"><i class="fas fa-bars"></i></a>
               </div>
 
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     <img src="<?php echo get_avatar() ?>" alt=""><?php echo $name;?>
-                    <span class=" fa fa-angle-down"></span>
+                    <span class="fas fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="../profile.php">My Profile</a></li>
-                    <li><a href="https://github.com/ossified/openCad/issues">Help</a></li>
-                    <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="../profile.php"><i class="fas fa-user pull-right"></i>My Profile</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
@@ -195,9 +191,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="x_title">
                     <h2>NCIC Names DB</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      <li><a class="close-link"><i class="fas fa-close"></i></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -223,9 +219,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="x_title">
                     <h2>NCIC Vehicle DB</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      <li><a class="close-link"><i class="fas fa-close"></i></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -251,9 +247,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="x_title">
                     <h2>NCIC Weapon DB</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      <li><a class="close-link"><i class="fas fa-close"></i></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -279,9 +275,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="x_title">
                     <h2>NCIC Warnings DB</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      <li><a class="close-link"><i class="fas fa-close"></i></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -306,9 +302,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="x_title">
                     <h2>NCIC Citations DB</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      <li><a class="close-link"><i class="fas fa-close"></i></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -333,9 +329,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="x_title">
                     <h2>NCIC Arrests DB</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      <li><a class="close-link"><i class="fas fa-close"></i></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -360,9 +356,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="x_title">
                     <h2>NCIC Warrants DB</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      <li><a class="close-link"><i class="fas fa-close"></i></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -617,7 +613,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Name</label>
                 <div class="col-lg-10">
           <input name="civNameReq" class="form-control" id="civNameReq" value="<?php echo $civName;?>" required/>
-          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+          <span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -626,7 +622,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Date of Birth</label>
                 <div class="col-lg-10">
           <input type="text" name="civDobReq" class="form-control" id="datepicker2" maxlength="10" value="<?php echo $civDob;?>" required/>
-          <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
+          <span class="fas fa-calendar form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -635,7 +631,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Address</label>
                 <div class="col-lg-10">
           <input type="text" name="civAddressReq" class="form-control" id="civAddressReq" value="<?php echo $civAddr;?>" required/>
-          <span class="fa fa-location-arrow form-control-feedback right" aria-hidden="true"></span>
+          <span class="fas fa-location-arrow form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
