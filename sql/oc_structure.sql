@@ -1,30 +1,3 @@
-<<<<<<< HEAD
--- phpMyAdmin SQL Dump
--- version 4.6.6deb5
--- https://www.phpmyadmin.net/
---
--- Host: localhost
--- Generation Time: Aug 10, 2018 at 05:12 PM
--- Server version: 10.1.34-MariaDB-0ubuntu0.18.04.1
--- PHP Version: 7.1.15-0ubuntu0.17.10.1
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `opencad`
---
-
--- --------------------------------------------------------
-
-=======
->>>>>>> c743d005e17ffeca7cc02690c7668d7f453c2d27
 --
 -- Table structure for table `active_users`
 --
@@ -439,23 +412,63 @@ CREATE TABLE `weapons` (
 --
 
 --
--- Indexes for table `active_users`
---
-ALTER TABLE `active_users`
-  ADD PRIMARY KEY (`identifier`) USING BTREE,
-  ADD UNIQUE KEY `callsign` (`callsign`) USING BTREE,
-  ADD UNIQUE KEY `identifier` (`identifier`) USING BTREE;
-
---
 -- Indexes for table `bolos_persons`
 --
 ALTER TABLE `bolos_persons`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
+-- Indexes for table `bolos_vehicles`
+--
+ALTER TABLE `bolos_vehicles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ncic_arrests`
+--
+ALTER TABLE `ncic_arrests`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ncic_citations`
+--
+ALTER TABLE `ncic_citations`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `ncic_names`
 --
 ALTER TABLE `ncic_names`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ncic_plates`
+--
+ALTER TABLE `ncic_plates`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ncic_warnings`
+--
+ALTER TABLE `ncic_warnings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ncic_warrants`
+--
+ALTER TABLE `ncic_warrants`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ncic_weapons`
+--
+ALTER TABLE `ncic_weapons`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `streets`
+--
+ALTER TABLE `streets`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -465,22 +478,96 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `id` (`id`);
 
 --
+-- Indexes for table `vehicles`
+--
+ALTER TABLE `vehicles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `weapons`
+--
+ALTER TABLE `weapons`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `bolos_persons`
+--
+ALTER TABLE `bolos_persons`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `bolos_vehicles`
+--
+ALTER TABLE `bolos_vehicles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ncic_arrests`
+--
+ALTER TABLE `ncic_arrests`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ncic_citations`
+--
+ALTER TABLE `ncic_citations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ncic_names`
 --
 ALTER TABLE `ncic_names`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `ncic_plates`
+--
+ALTER TABLE `ncic_plates`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `ncic_warnings`
+--
+ALTER TABLE `ncic_warnings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ncic_warrants`
+--
+ALTER TABLE `ncic_warrants`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ncic_weapons`
+--
+ALTER TABLE `ncic_weapons`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `streets`
+--
+ALTER TABLE `streets`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key for each street', AUTO_INCREMENT=235;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-<<<<<<< HEAD
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-=======
->>>>>>> c743d005e17ffeca7cc02690c7668d7f453c2d27
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `vehicles`
+--
+ALTER TABLE `vehicles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=503;
+
+--
+-- AUTO_INCREMENT for table `weapons`
+--
+ALTER TABLE `weapons`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  
