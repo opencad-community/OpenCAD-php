@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 --
 -- Table structure for table `active_users`
 --
@@ -12,6 +13,8 @@ CREATE TABLE `active_users` (
 
 -- --------------------------------------------------------
 
+=======
+>>>>>>> 19435a305400ab7bcda811c3933ab507fbec8385
 --
 -- Table structure for table `aop`
 --
@@ -309,6 +312,17 @@ CREATE TABLE `ncic_weapons` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `permissions`
+--
+
+CREATE TABLE `permissions` (
+  `perm_id` int(11) NOT NULL,
+  `perm_desc` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `statuses`
 --
 
@@ -442,12 +456,15 @@ ALTER TABLE `ncic_names`
   ADD PRIMARY KEY (`id`);
 
 --
+<<<<<<< HEAD
 -- Indexes for table `ncic_plates`
 --
 ALTER TABLE `ncic_plates`
   ADD PRIMARY KEY (`id`);
 
 --
+=======
+>>>>>>> 19435a305400ab7bcda811c3933ab507fbec8385
 -- Indexes for table `ncic_warnings`
 --
 ALTER TABLE `ncic_warnings`
@@ -466,12 +483,15 @@ ALTER TABLE `ncic_weapons`
   ADD PRIMARY KEY (`id`);
 
 --
+<<<<<<< HEAD
 -- Indexes for table `streets`
 --
 ALTER TABLE `streets`
   ADD PRIMARY KEY (`id`);
 
 --
+=======
+>>>>>>> 19435a305400ab7bcda811c3933ab507fbec8385
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -521,6 +541,7 @@ ALTER TABLE `ncic_citations`
 -- AUTO_INCREMENT for table `ncic_names`
 --
 ALTER TABLE `ncic_names`
+<<<<<<< HEAD
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
@@ -528,6 +549,9 @@ ALTER TABLE `ncic_names`
 --
 ALTER TABLE `ncic_plates`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+=======
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+>>>>>>> 19435a305400ab7bcda811c3933ab507fbec8385
 
 --
 -- AUTO_INCREMENT for table `ncic_warnings`
@@ -547,16 +571,20 @@ ALTER TABLE `ncic_warrants`
 ALTER TABLE `ncic_weapons`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
+<<<<<<< HEAD
 --
 -- AUTO_INCREMENT for table `streets`
 --
 ALTER TABLE `streets`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key for each street', AUTO_INCREMENT=235;
 
+=======
+>>>>>>> 19435a305400ab7bcda811c3933ab507fbec8385
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
+<<<<<<< HEAD
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
@@ -571,3 +599,7 @@ ALTER TABLE `vehicles`
 ALTER TABLE `weapons`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
   
+=======
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+COMMIT;
+>>>>>>> 19435a305400ab7bcda811c3933ab507fbec8385
