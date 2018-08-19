@@ -1018,6 +1018,7 @@ INSERT INTO `vehicles` (`id`, `Make`, `Model`) VALUES
 (450, 'Zirconium', 'Stratum');
 
 
+
 --
 -- Dumping data for table `weapons`
 --
