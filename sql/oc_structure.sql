@@ -412,23 +412,39 @@ CREATE TABLE `weapons` (
 --
 
 --
--- Indexes for table `active_users`
---
-ALTER TABLE `active_users`
-  ADD PRIMARY KEY (`identifier`) USING BTREE,
-  ADD UNIQUE KEY `callsign` (`callsign`) USING BTREE,
-  ADD UNIQUE KEY `identifier` (`identifier`) USING BTREE;
-
---
 -- Indexes for table `bolos_persons`
 --
 ALTER TABLE `bolos_persons`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
+-- Indexes for table `bolos_vehicles`
+--
+ALTER TABLE `bolos_vehicles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ncic_arrests`
+--
+ALTER TABLE `ncic_arrests`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ncic_citations`
+--
+ALTER TABLE `ncic_citations`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `ncic_names`
 --
 ALTER TABLE `ncic_names`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ncic_plates`
+--
+ALTER TABLE `ncic_plates`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -478,10 +494,40 @@ ALTER TABLE `weapons`
 --
 
 --
+-- AUTO_INCREMENT for table `bolos_persons`
+--
+ALTER TABLE `bolos_persons`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `bolos_vehicles`
+--
+ALTER TABLE `bolos_vehicles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ncic_arrests`
+--
+ALTER TABLE `ncic_arrests`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ncic_citations`
+--
+ALTER TABLE `ncic_citations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `ncic_names`
 --
 ALTER TABLE `ncic_names`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `ncic_plates`
+--
+ALTER TABLE `ncic_plates`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ncic_warnings`
@@ -511,7 +557,7 @@ ALTER TABLE `streets`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `vehicles`
@@ -524,4 +570,4 @@ ALTER TABLE `vehicles`
 --
 ALTER TABLE `weapons`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
-COMMIT;
+  
