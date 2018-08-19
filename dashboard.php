@@ -23,12 +23,6 @@ if (empty($_SESSION['logged_in']))
 }
     setDispatcher("1");
 
-/*
-    The purpose of this page is to simply determine if the user has multiple roles.
-    If they do, provide them the option to go where they want to go.
-    Else, redirect to the only place they can go.
-*/
-
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -174,7 +168,7 @@ if($adminRows < 2)
 		}
 		if ($adminRow[0] == "1")
 		{
-			$adminButton = "<a href=\"".BASE_URL."/oc-admin/moderator.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Moderator</a>";
+			$adminButton = "<a href=\"".BASE_URL."/oc-admin/admin.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Moderator</a>";
 		}
 	}
 }
