@@ -665,6 +665,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">License Status</label>
                   <div class="col-lg-10">
                     <select name="civDL" class="form-control selectpicker civDL_picker" id="civDL" title="Select a license status" required>
+                <option value="Unobtained"> Unobtained </option>
                 <option value="Valid"> Valid </option>
                 <option value="Suspended"> Suspended </option>
                 <option value="Expired"> Expired </option>
