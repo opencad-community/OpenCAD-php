@@ -847,7 +847,7 @@ INSERT INTO `vehicles` (`id`, `Make`, `Model`) VALUES
 (279, 'Maibatsu', 'Mule Custom'),
 (280, 'Maibatsu', 'Penumbra'),
 (281, 'Maibatsu', 'Sanchez'),
-(282, 'Maibatsu', 'Sanchez w/ Livery')
+(282, 'Maibatsu', 'Sanchez w/ Livery'),
 (283, 'Mammoth', 'Patriot'),
 (284, 'Mammoth', 'Patriot Stretch'),
 (285, 'Mammoth', 'Thruster Jetpack'),
