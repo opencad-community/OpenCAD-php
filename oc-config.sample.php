@@ -407,6 +407,30 @@ define('MODERATOR_SUSPEND_WITH_REASON', true);
 define('MODERATOR_SUSPEND_WITHOUT_REASON', true);
 
 /**#@+
+  * Moderator Settings - Reactivate User
+  *
+  * If 'true' then Moderators will be able to ractvate users else,
+  * if 'false' Moderators will not be able to reactivate users.
+  *
+  * These setting will likely be moved to an *_options table in a future version.
+  *
+  * @since OpenCAD version 0.2.3
+  **/
+define('MODERATOR_REACTIVATE_USER', true);
+
+/**#@+
+  * Moderator Settings - Remove Group
+  *
+  * If 'true' then Moderators will be able to ractvate users else,
+  * if 'false' Moderators will not be able to reactivate users.
+  *
+  * These setting will likely be moved to an *_options table in a future version.
+  *
+  * @since OpenCAD version 0.2.3
+  **/
+define('MODERATOR_REMOVE_GROUP', true);
+
+/**#@+
   * Moderator Settings - Delete User
   *
   * If 'true' then Moderators will be able to delete users,
