@@ -136,7 +136,9 @@ CREATE TABLE `colors` (
 
 CREATE TABLE `departments` (
   `department_id` int(11) NOT NULL,
-  `department_name` varchar(255) DEFAULT NULL
+  `department_name` varchar(255) DEFAULT NULL COMMENT 'The functional name of the department. (eg. Police, Fire, EMS)',
+  `department_long_name` varchar(255) DEFAULT NULL COMMENT 'The name of the department. (eg. Los Angeles Police Department, Blaine County Sheriffs\' Office',
+  `department_short_name` varchar(6) DEFAULT NULL COMMENT 'The acronym of the department name. (eg. BCSO, LAPD, LAFD)'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
