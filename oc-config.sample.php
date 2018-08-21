@@ -443,6 +443,18 @@ define('MODERATOR_REMOVE_GROUP', true);
 define('MODERATOR_DELETE_USER', true);
 
 /**#@+
+  * Moderator Settings - NCIC Editor
+  *
+  * If 'true' then Moderators will be able to access the NCIC editor,
+  * if 'false' Moderators will not be able to access the NCCIC editor.
+  *
+  * These setting will likely be moved to an *_options table in a future version.
+  *
+  * @since OpenCAD version 0.2.3
+  **/
+define('MODERATOR_NCIC_EDITOR', true);
+
+/**#@+
   * Extra Settings
 	*
   * These setting will likely be moved to an *_options table in a future version.
