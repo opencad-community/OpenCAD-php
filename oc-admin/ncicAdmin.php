@@ -35,6 +35,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       $name = $_SESSION['name'];
     }
 
+    require_once(__DIR__ . '/../oc-config.php');
+    require_once(__DIR__ . '/../oc-functions.php');
+
+    include(__DIR__ . '/../actions/adminActions.php');
+    include(__DIR__ . '/../actions/ncicAdminActions.php');
+
+
 
     if ( $_SESSION['admin_privilege'] == 2)
     {
@@ -43,24 +50,18 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           //Do nothing
       }
     }
-    else if ($_SESSION['admin_privilege'] == 1)
+    else if ( $_SESSION['admin_privilege'] == 1 && MODERATOR_NCIC_EDITOR == true )
     {
       if ($_SESSION['admin_privilege'] == 'Moderator')
       {
-          // Do Nothing
+          //Do nothing
       }
     }
     else
     {
       die("You do not have permission to be here. This has been recorded");
-
     }
 
-    require_once(__DIR__ . '/../oc-config.php');
-    require_once(__DIR__ . '/../oc-functions.php');
-
-    include(__DIR__ . '/../actions/adminActions.php');
-    include(__DIR__ . '/../actions/ncicAdminActions.php');
 
     $citationMessage = "";
     if(isset($_SESSION['citationMessage']))
@@ -108,7 +109,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="javascript:void(0)" class="site_title"><i class="fas fa-lock"></i> <span><?php echo COMMUNITY_NAME;?> Admin</span></a>
+              <a href="javascript:void(0)" class="site_title"><i class="fas fa-lock"></i> <span>Administrator</span></a>
             </div>
 
             <div class="clearfix"></div>

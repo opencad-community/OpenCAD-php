@@ -1,7 +1,7 @@
 <?php
 
 /**#@+
-  *Application Settings
+  * Application Settings
   *
   * This section includes settings for Database connectivity, base url, email config, and more.
   * These settings are MANDATORY. If they are not configured properly OpenCAD will not function correctly.
@@ -11,22 +11,27 @@
   **/
 
 /**#@+
- *Community Name
+ * Community Name
+ *
  * This is where you will change the community name to suit your Community.
  * Only change the variable named 'My Community'
+ *
  * @since 1.0a RC1
- */
+ **/
 define('COMMUNITY_NAME', 'My Community');
 
 /**#@+
+ *
  * Database connection variables
  * These are viable to the CAD system, and must be correct.
  * DB_NAME will typically have a subdirectory, such as 'OpenCAD_(database name)'
  * DB_USER is sometimes different, it can have a subdirectory and sometimes it doesn't. An example would be 'opencad_(username)'
  * DB_PASSWORD will be your password that you created with the user. This has no subdirectory.
  * DB_HOST can vary, it can be localhost or '127.0.0.1', if these do not work then please contact our support desk.
+ *
  * @since 1.0a RC1
- */
+ *
+ **/
 define('DB_NAME', 'DatabaseName');
 define('DB_USER', 'DatabaseUser');
 define('DB_PASSWORD', 'DatabasePassword');
@@ -49,16 +54,16 @@ define('DB_HOST', '127.0.0.1');
  *             two slashed when it isn't needed.
  *
  * @since 1.0a RC1
- */
+ **/
 define('BASE_URL', '//example.com');
 
 /**#@+
- *To & From emails for system generated emails
+ * To & From emails for system generated emails
  * To be used in a later version for notificaton emails
  *
  * @since 1.0a RC2
  *
- */
+ **/
 define('CAD_FROM_EMAIL', 'cad@community.com');
 define('CAD_FROM_NAME', COMMUNITY_NAME.' CAD');
 define('CAD_TO_EMAIL', 'admins@community.com');
@@ -75,7 +80,7 @@ define('CAD_TO_NAME', COMMUNITY_NAME.' Administrators');
  *
  * @since 1.0a RC2
  *
- * **These do nothing so far, we are working on this.
+ * These do nothing so far, we are working on this.
  **/
 define('AUTH_KEY',         'put your unique phrase here');
 define('SECURE_AUTH_KEY',  'put your unique phrase here');
@@ -158,7 +163,7 @@ define('POLICE_NCIC', false);
 	**/
  define('FIRE_BOLO', false);
 
- /**#@+
+/**#@+
   * FIRE_NCIC_NAME
   *
   * Shows or hides NCIC name functionality on MDT console for Fire
@@ -172,7 +177,7 @@ define('POLICE_NCIC', false);
   **/
  define('FIRE_NCIC_NAME', false);
 
- /**#@+
+/**#@+
 	* FIRE_NCIC_PLATE
 	*
 	* Shows or hides NCIC plate functionality on MDT console for Fire
@@ -186,7 +191,7 @@ define('POLICE_NCIC', false);
 	**/
  define('FIRE_NCIC_PLATE', false);
 
- /**#@+
+/**#@+
   * OpenCAD Feature Settings - EMS
   *
   * This section controls settings for OpenCAD's core features for EMS
@@ -196,7 +201,7 @@ define('POLICE_NCIC', false);
   * @since OpenCAD version 0.2.3
   **/
 
-	/**#@+
+/**#@+
 	 * EMS_PANIC
 	 *
 	 * Shows or hides Panic functionality on MDT console for EMS
@@ -208,7 +213,7 @@ define('POLICE_NCIC', false);
 	 **/
 	define('EMS_PANIC', false);
 
-	/**#@+
+/**#@+
 	 * EMS_BOLO
 	 *
 	 * Shows or hides BOLO functionality on MDT console for EMS
@@ -221,7 +226,7 @@ define('POLICE_NCIC', false);
 	define('EMS_BOLO', false);
 
 
-	/**#@+
+/**#@+
 	 * EMS_NCIC_NAME
 	 *
 	 * Shows or hides NCIC name functionality on MDT console for EMS
@@ -235,7 +240,7 @@ define('POLICE_NCIC', false);
 	 **/
 	define('EMS_NCIC_NAME', false);
 
-	/**#@+
+/**#@+
 	 * EMS_NCIC_PLATE
 	 *
 	 * Shows or hides NCIC plate functionality on MDT console for EMS
@@ -247,7 +252,7 @@ define('POLICE_NCIC', false);
 	 **/
 	define('EMS_NCIC_PLATE', false);
 
-	/**#@+
+/**#@+
 	 * OpenCAD Feature Settings - Roadside Assistance / Tow
 	 *
 	 * This section controls settings for OpenCAD's core features for Roadside Assistance
@@ -345,14 +350,119 @@ define('CIV_WARRANT', false);
 define('CIV_REG', false);
 
 /**#@+
+  * Administrative Settings
+	*
+  * These setting will likely be moved to an *_options table in a future version.
+  *
+  * @since  OpenCAD 0.2.3
+  **/
+
+/**#@+
+  * Moderator Settings - Approve User
+  *
+  * If 'true' then Moderators will be able to approve new user requests
+  * else, if 'false' then Moderators will not be able to approve new
+  * user requests.
+  *
+  * These setting will likely be moved to an *_options table in a future version.
+  *
+  * @since OpenCAD version 0.2.3
+  **/
+define('MODERATOR_APPROVE_USER', true);
+
+/**#@+
+  * Moderator Settings - Edit User
+  *
+  * If 'true' then Moderators will be able to edit users,
+  * if 'false' then Moderators will not be able to edit users.
+  *
+  * These setting will likely be moved to an *_options table in a future version.
+  *
+  * @since OpenCAD version 0.2.3
+  **/
+define('MODERATOR_EDIT_USER', true);
+
+/**#@+
+  * Moderator Settings - Suspend With Reason
+  *
+  * If 'true' then Moderators will be able Suspend users with a reason,
+  *if 'false' Moderators will not be able to do so.
+  *
+  * These setting will likely be moved to an *_options table in a future version.
+  *
+  * @since OpenCAD version 0.2.3
+  **/
+define('MODERATOR_SUSPEND_WITH_REASON', true);
+
+/**#@+
+  * Moderator Settings - Approve User
+  *
+  * If 'true' then Moderators will be able Suspend users without a reason,
+  * if 'false' Moderators will not be able to do so.
+  *
+  * These setting will likely be moved to an *_options table in a future version.
+  *
+  * @since OpenCAD version 0.2.3
+  **/
+define('MODERATOR_SUSPEND_WITHOUT_REASON', true);
+
+/**#@+
+  * Moderator Settings - Reactivate User
+  *
+  * If 'true' then Moderators will be able to ractvate users else,
+  * if 'false' Moderators will not be able to reactivate users.
+  *
+  * These setting will likely be moved to an *_options table in a future version.
+  *
+  * @since OpenCAD version 0.2.3
+  **/
+define('MODERATOR_REACTIVATE_USER', true);
+
+/**#@+
+  * Moderator Settings - Remove Group
+  *
+  * If 'true' then Moderators will be able to ractvate users else,
+  * if 'false' Moderators will not be able to reactivate users.
+  *
+  * These setting will likely be moved to an *_options table in a future version.
+  *
+  * @since OpenCAD version 0.2.3
+  **/
+define('MODERATOR_REMOVE_GROUP', true);
+
+/**#@+
+  * Moderator Settings - Delete User
+  *
+  * If 'true' then Moderators will be able to delete users,
+  * if 'false' Moderators will not be able to delete users.
+  *
+  * These setting will likely be moved to an *_options table in a future version.
+  *
+  * @since OpenCAD version 0.2.3
+  **/
+define('MODERATOR_DELETE_USER', true);
+
+/**#@+
+  * Moderator Settings - NCIC Editor
+  *
+  * If 'true' then Moderators will be able to access the NCIC editor,
+  * if 'false' Moderators will not be able to access the NCCIC editor.
+  *
+  * These setting will likely be moved to an *_options table in a future version.
+  *
+  * @since OpenCAD version 0.2.3
+  **/
+define('MODERATOR_NCIC_EDITOR', true);
+
+/**#@+
   * Extra Settings
 	*
   * These setting will likely be moved to an *_options table in a future version.
   *
-  * @since  1.0a RC2
+  * @since OpenCAD version 0.2.3
   **/
 
-  /**#@+
+/**#@+
   * Demo Mode
   *
   * If 'true' then various user management features of OpenCAD will be
