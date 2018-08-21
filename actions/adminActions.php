@@ -372,8 +372,13 @@ function getUserGroupsApproved($uid)
     if ( DEMO_MODE == false ) {
     while ($row1 = mysqli_fetch_array($result1, MYSQLI_BOTH))
     {
-        echo $row1[0] . "&nbsp;<i class='fas fa-user-times delete_group' style='font-size:16px;color:red;' data-dept-id=".$row1[1]." data-user-id=".$uid."></i>
-<br/>";
+        if ( ( MODERATOR_REMOVE_GROUP == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
+        {
+        echo $row1[0] . "&nbsp;<i class='fas fa-user-times delete_group' style='font-size:16px;color:red;' data-dept-id=".$row1[1]." data-user-id=".$uid."></i><br/>";
+      } else {
+        echo $row1[0] . "&nbsp;<br/>";
+      }
+
     }
   } else {
     while ($row1 = mysqli_fetch_array($result1, MYSQLI_BOTH))
@@ -606,18 +611,46 @@ function getUsers()
         if ( DEMO_MODE == false) {
         echo ' </td>
             <td>
-                <form action="'.$site.'/actions/adminActions.php" method="post">
-                <button name="editUser" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editUserModal" class="btn btn-xs btn-link" >Edit</button>
-                <input name="deleteUser" type="submit" class="btn btn-xs btn-link" onclick="deleteUser(' . $row[0] . ')" value="Delete" />
-                ';
+                <form action="'.$site.'/actions/adminActions.php" method="post">';
+
+                if ( ( MODERATOR_EDIT_USER == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
+                {
+                 echo '<button name="editUser" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editUserModal" class="btn btn-xs btn-link" >Edit</button>';
+                } else {
+                echo '<button name="editUser" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editUserModal" class="btn btn-xs btn-link" disabled >Edit</button>';
+                }
+
+                if ( ( MODERATOR_DELETE_USER == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
+                {
+                echo '<input name="deleteUser" type="submit" class="btn btn-xs btn-link" onclick="deleteUser(' . $row[0] . ')" value="Delete" />';
+              } else {
+                echo '<input name="deleteUser" type="submit" class="btn btn-xs btn-link" onclick="deleteUser(' . $row[0] . ')" value="Delete" disabled />';
+              }
+
         if ($row[4] == '2')
         {
+          if ( ( MODERATOR_REACTIVATE_USER == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
+          {
             echo '<input name="reactivateUser" type="submit" class="btn btn-xs btn-link" value="Reactivate" />';
+          } else {
+              echo '<input name="reactivateUser" type="submit" class="btn btn-xs btn-link" value="Reactivate" disabled />';
+          }
+
         }
         else
         {
+          if ( ( MODERATOR_SUSPEND_WITHOUT_REASON == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
+          {
             echo '<input name="suspendUser" type="submit" class="btn btn-xs btn-link" value="Suspend without Reason" />';
+          } else {
+            echo '<input name="suspendUser" type="submit" class="btn btn-xs btn-link" value="Suspend without Reason" disabled />';
+          }
+          if ( ( MODERATOR_SUSPEND_WITH_REASON == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
+          {
             echo '<input name="suspendUserWithReason" type="submit" class="btn btn-xs btn-link" method="post" value="Suspend With Reason: " /><input type="text" method="post" placeholder="Reason Here" name="suspend_reason" id="suspend_reason">';
+          } else {
+            echo '<input name="suspendUserWithReason" type="submit" class="btn btn-xs btn-link" method="post" value="Suspend With Reason: " disabled /><input type="text" method="post" placeholder="Reason Here" name="suspend_reason" id="suspend_reason" readonly>';
+          }
         }
       } else {
         echo ' </td>
@@ -633,7 +666,8 @@ function getUsers()
         else
         {
             echo '<input name="suspendUser" type="submit" class="btn btn-xs btn-link" value="Suspend without Reason" disabled />';
-            echo '<input name="suspendUserWithReason" type="submit" class="btn btn-xs btn-link" method="post" value="Suspend With Reason: " disabled  /><input type="text" method="post" placeholder="Reason Here" name="suspend_reason" id="suspend_reason" disabled>';
+            echo '<input name="suspendUserWithReason" type="submit" class="btn btn-xs btn-link" method="post" value="Suspend With Reason: " disabled  /><input type="text" method="post" placeholder="Reason Here" name="suspend_reason" id="suspend_reason" readonly>';
+
         }
 
 
