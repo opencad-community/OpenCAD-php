@@ -373,7 +373,7 @@ define('MODERATOR_APPROVE_USER', true);
 /**#@+
   * Moderator Settings - Edit User
   *
-  * If 'true' then Moderators will be able to edit users else,
+  * If 'true' then Moderators will be able to edit users,
   * if 'false' then Moderators will not be able to edit users.
   *
   * These setting will likely be moved to an *_options table in a future version.
@@ -385,8 +385,8 @@ define('MODERATOR_EDIT_USER', true);
 /**#@+
   * Moderator Settings - Suspend With Reason
   *
-  * If 'true' then Moderators will be able Suspend users with a reason
-  * else, if 'false' Moderators will not be able to do so.
+  * If 'true' then Moderators will be able Suspend users with a reason,
+  *if 'false' Moderators will not be able to do so.
   *
   * These setting will likely be moved to an *_options table in a future version.
   *
@@ -397,8 +397,8 @@ define('MODERATOR_SUSPEND_WITH_REASON', true);
 /**#@+
   * Moderator Settings - Approve User
   *
-  * If 'true' then Moderators will be able Suspend users without a reason
-  * else, if 'false' Moderators will not be able to do so.
+  * If 'true' then Moderators will be able Suspend users without a reason,
+  * if 'false' Moderators will not be able to do so.
   *
   * These setting will likely be moved to an *_options table in a future version.
   *
@@ -409,7 +409,7 @@ define('MODERATOR_SUSPEND_WITHOUT_REASON', true);
 /**#@+
   * Moderator Settings - Delete User
   *
-  * If 'true' then Moderators will be able to delete users else,
+  * If 'true' then Moderators will be able to delete users,
   * if 'false' Moderators will not be able to delete users.
   *
   * These setting will likely be moved to an *_options table in a future version.
@@ -423,7 +423,7 @@ define('MODERATOR_DELETE_USER', true);
 	*
   * These setting will likely be moved to an *_options table in a future version.
   *
-  * @since  1.0a RC2
+  * @since OpenCAD version 0.2.3
   **/
 
 /**#@+

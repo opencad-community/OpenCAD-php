@@ -219,7 +219,7 @@ CREATE TABLE `ncic_names` (
   `address` text NOT NULL,
   `gender` varchar(255) NOT NULL,
   `race` text NOT NULL,
-  `dl_status` set('Valid','Suspended','Expired') NOT NULL,
+  `dl_status` set('Unobtained','Valid','Suspended','Expired') NOT NULL,
   `hair_color` text NOT NULL,
   `build` text NOT NULL,
   `weapon_permit` varchar(255) NOT NULL,
