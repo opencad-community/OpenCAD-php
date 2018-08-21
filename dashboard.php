@@ -53,60 +53,7 @@ $civilianButton = "";
 $roadsideAssistButton = "";
 
 $num_rows = $result->num_rows;
-if($num_rows < 2)
-{
-    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
-    {
-				if ($row[1] == "1")
-        {
-            $_SESSION['dispatch'] = 'YES';
-            header("Location:".BASE_URL."/cad.php");
 
-        }
-				else if ($row[1] == "2")
-				{
-						$_SESSION['state'] = 'YES';
-						header("Location:".BASE_URL."/mdt.php?dep=state");
-				}
-				else if ($row[1] == "3")
-				{
-						$_SESSION['highway'] = 'YES';
-						header("Location:".BASE_URL."/mdt.php?dep=highway");
-				}
-				else if ($row[1] == "4")
-				{
-						$_SESSION['sheriff'] = 'YES';
-						header("Location:".BASE_URL."/mdt.php?dep=sheriff");
-				}
-				else if ($row[1] == "5")
-        {
-            $_SESSION['police'] = 'YES';
-            header("Location:".BASE_URL."/mdt.php?dep=police");
-        }
-				else if ($row[1] == "6")
-				{
-				$_SESSION['fire'] = 'YES';
-				header("Location:".BASE_URL."/mdt.php?dep=fire");
-				}
-        else if ($row[1] == "7")
-        {
-            $_SESSION['ems'] = 'YES';
-            header("Location:".BASE_URL."/mdt.php?dep=ems");
-        }
-        else if ($row[1] == "8")
-        {
-            $_SESSION['civilian'] = 'YES';
-            header("Location:".BASE_URL."/civilian.php");
-        }
-				else if ($row[1] == "9")
-				{
-						$_SESSION['sheriff'] = 'YES';
-						header("Location:".BASE_URL."/mdt.php?dep=roadsideAssist");
-				}
-    }
-}
-else
-{
 
     while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
     {
@@ -155,7 +102,6 @@ else
 						$_SESSION['roadsideAssist'] = 'YES';
 						$roadsideAssistButton = "<a href=\"".BASE_URL."/mdt.php?dep=roadsideAssist\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Roadside Assistance</a>";
 				}
-    }
 }
 $adminRows = $adminPriv->num_rows;
 if($adminRows < 2)
