@@ -15,6 +15,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 require("./oc-config.php");
 
 include("./actions/profileActions.php");
+
     session_start();
 
     // TODO: Verify user has permission to be on this page
@@ -36,7 +37,13 @@ include("./actions/profileActions.php");
         unset($_SESSION['profileUpdate']);
     }
 
-var_dump($_SESSION);
+
+    if (isset($_GET['changePassword']))
+    {
+        $changePassword = '<div class="alert alert-success"><span>Password successfully updated.</span></div>';
+        unset($_SESSION['changePassword']);
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -119,6 +126,7 @@ var_dump($_SESSION);
                     <span class="fas fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="<?php echo BASE_URL; ?>/profile.php"><i class="fas fa-user pull-right"></i> My Profile</a></li>
                     <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
@@ -156,9 +164,8 @@ var_dump($_SESSION);
                     <div class="clearfix"></div>
                   </div>
                   <!-- ./ x_title -->
-                  <?php echo $passwordUpdate;?>
                   <div class="x_content">
-                  <?php echo $profileUpdate;?>
+                  <?php echo $profileUpdate, $changePassword;?>
                   <form action="<?php echo BASE_URL; ?>/actions/profileActions.php" method="post" class="form-horizontal">
                   <fieldset>
                     <div class="form-group">
