@@ -36,30 +36,6 @@ include("./actions/profileActions.php");
         unset($_SESSION['profileUpdate']);
     }
 
-    $passwordUpdate = "";
-      if (isset($_SESSION['passwordUpdate']))
-      {
-          $passwordUpdate = $_SESSION['passwordUpdate'];
-          unset($_SESSION['passwordUpdate']);
-      }
-  	  if (isset($_SESSION['password']))
-      {
-        $password = $_SESSION['password'];
-      }
-      $con = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-      $result = mysqli_query($con, "SELECT * FROM `users`") or die(mysqli_error($con));
-      $row = mysqli_fetch_array($result);
-      $id = $row['id'];
-      $password = $row['password'];
-      $id = $_SESSION['id'];
-      if (isset($_POST['resetpass'])) {
-      $newpassword = $_POST['password'];
-      $hashed_password = password_hash($newpassword, PASSWORD_DEFAULT);
-      mysqli_query($con,"UPDATE `users` SET `password` = '$hashed_password' WHERE `id` = '$id'") or die(mysqli_error($con));
-
-  	$_SESSION['passwordUpdate'] = '<div class="alert alert-success"><span>Your password has been updated!</span></div>';
-      }
-
 var_dump($_SESSION);
 ?>
 
@@ -263,7 +239,7 @@ var_dump($_SESSION);
         </div>
         <!-- ./ modal-header -->
         <div class="modal-body">
-          <form role="form" action="<?php echo BASE_URL; ?>/profile.php" method="post">
+          <form role="form" action="<?php echo BASE_URL; ?>/actions/profileActions.php" method="post">
             <div class="form-group row">
               <label class="col-lg-2 control-label">Password</label>
               <div class="col-lg-10">
@@ -281,7 +257,7 @@ var_dump($_SESSION);
         </div>
         <!-- ./ modal-body -->
         <div class="modal-footer">
-              <input type="submit" name="resetpass" id="resetpass" class="btn btn-primary" value="Change Password" />
+              <input type="submit" name="changePassword" id="changePassword" class="btn btn-primary" value="Change Password" />
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </form>
         </div>
