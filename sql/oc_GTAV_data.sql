@@ -256,7 +256,7 @@ INSERT INTO `colors` (`id`, `color_group`, `color_name`) VALUES
 -- Dumping data for table `departments`
 --
 
-INSERT INTO `departments` (`department_id`, `department_name`, `department_short_name`, `department_long_name`) VALUES
+INSERT INTO `departments` (`department_id`, `department_name`, `department_short_name`, `department_long_name`, `allow_department`) VALUES
 (1, 'Communications', 'SAECOMM', 'San Andreas Emergency Communications', 0),
 (2, 'State', 'SASP', 'San Andreas State Police', 0),
 (3, 'Highway', 'SAHP', 'San Andreas Highway Patrol', 0),
