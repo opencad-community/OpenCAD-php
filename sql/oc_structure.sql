@@ -4,9 +4,7 @@
 
 CREATE TABLE `aop` (
   `aop` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
 -- Table structure for table `bolos_persons`
@@ -21,8 +19,6 @@ CREATE TABLE `bolos_persons` (
   `reason_wanted` varchar(255) NOT NULL COMMENT 'Reason BOLO suspect is wanted.',
   `last_seen` varchar(255) NOT NULL COMMENT 'Last observed location of BOLO suspect.'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `bolos_vehicles`
@@ -126,7 +122,7 @@ CREATE TABLE `colors` (
   `id` int(11) NOT NULL,
   `color_group` varchar(255) DEFAULT NULL,
   `color_name` varchar(255) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
@@ -135,9 +131,9 @@ CREATE TABLE `colors` (
 --
 
 CREATE TABLE `departments` (
-  `department_id` int(11) NOT NULL COMMENT 'The functional name of the department. (eg. Police, Fire, EMS)',
-  `department_name` varchar(255) DEFAULT NULL,
-  `department_short_name` varchar(10) NOT NULL COMMENT 'The name of the department. (eg. Los Angeles Police Department, Blaine County Sheriffs\' Office',
+  `department_id` int(11) NOT NULL,
+  `department_name` varchar(255) DEFAULT NULL COMMENT 'The functional name of the department. (eg. Police, Fire, EMS)',
+  `department_short_name` varchar(10) NOT NULL COMMENT 'The name of the department. (eg. Los Angeles Police Department, Blaine County Sheriffs'' Office',
   `department_long_name` varchar(255) NOT NULL COMMENT 'The acronym of the department name. (eg. BCSO, LAPD, LAFD)',
   `allow_department` int(11) NOT NULL COMMENT 'If 0 then department is disabled, if 1 then department is enabled.'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
