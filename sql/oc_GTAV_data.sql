@@ -1,8 +1,4 @@
 --
--- Database: `opencad_dev`
---
-
---
 -- Dumping data for table `colors`
 --
 
@@ -260,15 +256,15 @@ INSERT INTO `colors` (`id`, `color_group`, `color_name`) VALUES
 -- Dumping data for table `departments`
 --
 
-INSERT INTO `departments` (`department_id`, `department_name`) VALUES
-(1, 'Communications'),
-(2, 'State'),
-(3, 'Highway'),
-(4, 'Sheriff'),
-(5, 'Police'),
-(6, 'Fire'),
-(7, 'EMS'),
-(8, 'Civilian');
+INSERT INTO `departments` (`department_id`, `department_name`, `department_short_name`, `department_long_name`) VALUES
+(1, 'Communications', 'SAECOMM', 'San Andreas Emergency Communications', 0),
+(2, 'State', 'SASP', 'San Andreas State Police', 0),
+(3, 'Highway', 'SAHP', 'San Andreas Highway Patrol', 0),
+(4, 'Sheriff', 'BCSO', 'Blaine County Sheriffs\' Office', 0),
+(5, 'Police', 'SAPD', 'San Andreas Police Department', 0),
+(6, 'Fire', 'SAFD', 'San Andreas Fire Department', 0),
+(7, 'EMS', 'SAEMS', 'San Andreas Emergency Services', 0),
+(8, 'Civilian', 'SACS', 'San Andreas Civilian Services', 0);
 
 --
 -- Dumping data for table `genders`
