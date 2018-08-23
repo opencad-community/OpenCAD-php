@@ -15,6 +15,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 require("./oc-config.php");
 
 include("./actions/profileActions.php");
+
     session_start();
 
     // TODO: Verify user has permission to be on this page
@@ -35,6 +36,14 @@ include("./actions/profileActions.php");
         $profileUpdate = $_SESSION['profileUpdate'];
         unset($_SESSION['profileUpdate']);
     }
+
+
+    if (isset($_GET['changePassword']))
+    {
+        $changePassword = '<div class="alert alert-success"><span>Password successfully updated.</span></div>';
+        unset($_SESSION['changePassword']);
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -74,7 +83,7 @@ include("./actions/profileActions.php");
                 <ul class="nav side-menu">
                   <li class="active"><a><i class="fas fa-home"></i> Home</span></a>
                     <ul class="nav child_menu" style="display: block;">
-                      <li class="current-page"><a href="javascript:void(0)">My Profile</a></li>
+                      <li class="current-page"><a href="javascript:void(0)"><i class="fas fa-user"></i> My Profile</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -117,6 +126,7 @@ include("./actions/profileActions.php");
                     <span class="fas fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="<?php echo BASE_URL; ?>/profile.php"><i class="fas fa-user pull-right"></i> My Profile</a></li>
                     <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
@@ -155,7 +165,7 @@ include("./actions/profileActions.php");
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
-                  <?php echo $profileUpdate;?>
+                  <?php echo $profileUpdate, $changePassword;?>
                   <form action="<?php echo BASE_URL; ?>/actions/profileActions.php" method="post" class="form-horizontal">
                   <fieldset>
                     <div class="form-group">
@@ -179,7 +189,7 @@ include("./actions/profileActions.php");
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Password:</label>
                         <div class="col-sm-10">
-                            <a class="btn btn-primary" href="<?php echo BASE_URL; ?>/reset-password.php" disab>Change Password</a>
+                            <a class="btn btn-primary" data-toggle="modal" data-target="#changePassword" ?>Change Password</a>
                         </div>
                         <!-- ./ col-sm-10 -->
                     </div>
@@ -223,15 +233,67 @@ include("./actions/profileActions.php");
       </div>
     </div>
 
+    <!-- modals -->
+
+    <!-- Change Password -->
+    <div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-hidden="true">
+       <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" id="closeChangePassword"><span aria-hidden="true">×</span>
+                </button>
+          <h4 class="modal-title" id="myModalLabel">Change Password</h4>
+        </div>
+        <!-- ./ modal-header -->
+        <div class="modal-body">
+          <form role="form" action="<?php echo BASE_URL; ?>/actions/profileActions.php" method="post">
+            <div class="form-group row">
+              <label class="col-lg-2 control-label">Password</label>
+              <div class="col-lg-10">
+        <input class="form-control" type="password" name="password" id="password" size="30" maxlength="255" placeholder="Enter your new password..." value="" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?> />
+              </div>
+              <!-- ./ col-sm-9 -->
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-2 control-label">Confirm Password</label>
+              <div class="col-lg-10">
+        <input class="form-control" type="password" name="confirm_password" size="30" id="confirm_password" maxlength="255" placeholder="Retype your new password..." value="" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?> />
+              </div>
+              <!-- ./ col-sm-9 -->
+            </div>
+        </div>
+        <!-- ./ modal-body -->
+        <div class="modal-footer">
+              <input type="submit" name="changePassword" id="changePassword" class="btn btn-primary" value="Change Password" />
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </form>
+        </div>
+        <!-- ./ modal-footer -->
+      </div>
+      <!-- ./ modal-content -->
+    </div>
+    <!-- ./ modal-dialog modal-lg -->
+  </div>
+  <!-- ./ modal fade bs-example-modal-lg -->
+
+  <!-- modals -->
+
     <?php include "./oc-includes/jquery-colsolidated.inc.php"; ?>
 
     <script>
 
     </script>
 
+    <script>
+       $(document).ready(function() {
+         getMyRank("<?php echo $_SESSION['id'];?>");
+       });
+    </script>
+
     <!-- Custom Theme Scripts -->
     <script src="./js/custom.js"></script>
     <!-- openCad Script -->
     <script src="./js/OpenCAD.js"></script>
+
   </body>
 </html>
