@@ -1,4 +1,16 @@
 --
+-- Table structure for table `active_users`
+--
+
+CREATE TABLE `active_users` (
+  `identifier` varchar(255) NOT NULL,
+  `callsign` varchar(255) NOT NULL COMMENT 'Unit Callsign',
+  `status` int(11) NOT NULL COMMENT 'Unit status, 0=busy/unavailable, 1=available, 2=dispatcher',
+  `status_detail` int(11) NOT NULL COMMENT 'Paired to Statuses table',
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+--
 -- Table structure for table `aop`
 --
 
