@@ -16,8 +16,8 @@ require_once(__DIR__ . "/../oc-config.php");
 
     if(!empty($_POST))
     {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+        $email = htmlspecialchars($_POST['email']);
+        $password = htmlspecialchars($_POST['password']);
 
         $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 

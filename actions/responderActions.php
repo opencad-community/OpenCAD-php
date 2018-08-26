@@ -45,7 +45,7 @@ if (isset($_POST['create_arrest'])){
 
 function updateCallsign()
 {
-    $details = $_POST['details'];
+    $details = htmlspecialchars($_POST['details']);
     $details = str_replace('+', ' ', $details);
     $details = str_replace('%7C', '|', $details);
     $detailsArr = explode("&", $details);
@@ -250,17 +250,17 @@ function mdtGetPersonBOLOS()
 
 function create_citation()
 {
-    $userId = $_POST['civilian_names'];
-    $citation_name_1 = $_POST['citation_name_1'];
-    $citation_fine_1 = $_POST['citation_fine_1'];
-	$citation_name_2 = $_POST['citation_name_2'];
-	$citation_fine_2 = $_POST['citation_fine_2'];
-	$citation_name_3 = $_POST['citation_name_3'];
-	$citation_fine_3 = $_POST['citation_fine_3'];
-	$citation_name_4 = $_POST['citation_name_4'];
-	$citation_fine_4 = $_POST['citation_fine_4'];
-	$citation_name_5 = $_POST['citation_name_5'];
-	$citation_fine_5 = $_POST['citation_fine_5'];
+    $userId = htmlspecialchars($_POST['civilian_names']);
+    $citation_name_1 = htmlspecialchars($_POST['citation_name_1']);
+    $citation_fine_1 = htmlspecialchars($_POST['citation_fine_1']);
+	$citation_name_2 = htmlspecialchars($_POST['citation_name_2']);
+	$citation_fine_2 = htmlspecialchars($_POST['citation_fine_2']);
+	$citation_name_3 = htmlspecialchars($_POST['citation_name_3']);
+	$citation_fine_3 = htmlspecialchars($_POST['citation_fine_3']);
+	$citation_name_4 = htmlspecialchars($_POST['citation_name_4']);
+	$citation_fine_4 = htmlspecialchars($_POST['citation_fine_4']);
+	$citation_name_5 = htmlspecialchars($_POST['citation_name_5']);
+	$citation_fine_5 = htmlspecialchars($_POST['citation_fine_5']);
     session_start();
     $issued_by = $_SESSION['name'];
     $date = date('Y-m-d');
@@ -394,12 +394,12 @@ function create_citation()
 
 function create_warning()
 {
-    $userId = $_POST['civilian_names'];
-    $warning_name_1 = $_POST['warning_name_1'];
-	$warning_name_2 = $_POST['warning_name_2'];
-	$warning_name_3 = $_POST['warning_name_3'];
-	$warning_name_4 = $_POST['warning_name_4'];
-	$warning_name_5 = $_POST['warning_name_5'];
+    $userId = htmlspecialchars($_POST['civilian_names']);
+    $warning_name_1 = htmlspecialchars($_POST['warning_name_1']);
+	$warning_name_2 = htmlspecialchars($_POST['warning_name_2']);
+	$warning_name_3 = htmlspecialchars($_POST['warning_name_3']);
+	$warning_name_4 = htmlspecialchars($_POST['warning_name_4']);
+	$warning_name_5 = htmlspecialchars($_POST['warning_name_5']);
     session_start();
     $issued_by = $_SESSION['name'];
     $date = date('Y-m-d');
@@ -538,17 +538,17 @@ function create_warning()
 }
 function create_arrest()
 {
-    $userId = $_POST['civilian_names'];
-    $arrest_reason_1 = $_POST['arrest_reason_1'];
-    $arrest_fine_1 = $_POST['arrest_fine_1'];
-	$arrest_reason_2 = $_POST['arrest_reason_2'];
-	$arrest_fine_2 = $_POST['arrest_fine_2'];
-	$arrest_reason_3 = $_POST['arrest_reason_3'];
-	$arrest_fine_3 = $_POST['arrest_fine_3'];
-	$arrest_reason_4 = $_POST['arrest_reason_4'];
-	$arrest_fine_4 = $_POST['arrest_fine_4'];
-	$arrest_reason_5 = $_POST['arrest_reason_5'];
-	$arrest_fine_5 = $_POST['arrest_fine_5'];
+    $userId = htmlspecialchars($_POST['civilian_names']);
+    $arrest_reason_1 = htmlspecialchars($_POST['arrest_reason_1']);
+    $arrest_fine_1 = htmlspecialchars($_POST['arrest_fine_1']);
+	$arrest_reason_2 = htmlspecialchars($_POST['arrest_reason_2']);
+	$arrest_fine_2 = htmlspecialchars($_POST['arrest_fine_2']);
+	$arrest_reason_3 = htmlspecialchars($_POST['arrest_reason_3']);
+	$arrest_fine_3 = htmlspecialchars($_POST['arrest_fine_3']);
+	$arrest_reason_4 = htmlspecialchars($_POST['arrest_reason_4']);
+	$arrest_fine_4 = htmlspecialchars($_POST['arrest_fine_4']);
+	$arrest_reason_5 = htmlspecialchars($_POST['arrest_reason_5']);
+	$arrest_fine_5 = htmlspecialchars($_POST['arrest_fine_5']);
     session_start();
     $issued_by = $_SESSION['name'];
     $date = date('Y-m-d');
