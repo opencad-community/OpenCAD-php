@@ -182,7 +182,7 @@ function delete_user()
         die('Could not connect: ' . mysql_error());
     }
 
-    $uid = $_POST['uid'];
+    $uid = htmlspecialchars($_POST['uid']);
     echo $uid;
 
     $query = "DELETE FROM users WHERE id = ?";
@@ -315,7 +315,7 @@ function getDepartments()
 function getRole()
 {
   $userID 		= !empty($_POST['userID']) ? $_POST['userID'] : '';
-  $userId = $_POST['userId'];
+  $userId = htmlspecialchars($_POST['userId']);
 
   echo $_POST['userId'];
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -391,7 +391,7 @@ function getUserGroupsApproved($uid)
 
 function approveUser()
 {
-    $uid = $_POST['uid'];
+    $uid = htmlspecialchars($_POST['uid']);
     $site = BASE_URL;
     /* If a user has been approved, the following needs to be done:
     1. Insert user's groups from temp table to regular table
@@ -479,7 +479,7 @@ function rejectUser()
     1. Delete user's group's from user_departments_temp table
     2. Delete user's profile from users table
     */
-    $uid = $_POST['uid'];
+    $uid = htmlspecialchars($_POST['uid']);
 
     /* Delete groups from temp table */
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -693,7 +693,7 @@ function getUsers()
 // TODO: Add reason, duration
 function suspendUser()
 {
-    $uid = $_POST['uid'];
+    $uid = htmlspecialchars($_POST['uid']);
     $site = BASE_URL;
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -733,10 +733,10 @@ function suspendUser()
 
 function suspendUserWithReason()
 {
-    $uid = $_POST['uid'];
+    $uid = htmlspecialchars($_POST['uid']);
     $site = BASE_URL;
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    $suspend_reason = $_POST['suspend_reason'];
+    $suspend_reason = htmlspecialchars($_POST['suspend_reason']);
 
     if (!$link)
     {
@@ -784,7 +784,7 @@ function suspendUserWithReason()
 
 function reactivateUser()
 {
-    $uid = $_POST['uid'];
+    $uid = htmlspecialchars($_POST['uid']);
     $site = BASE_URL;
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -822,7 +822,7 @@ function reactivateUser()
 
 function getUserDetails()
 {
-    $userId = $_POST['userId'];
+    $userId = htmlspecialchars($_POST['userId']);
     $site = BASE_URL;
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -1031,7 +1031,7 @@ function delete_callhistory()
         die('Could not connect: ' . mysql_error());
     }
 
-    $callid = $_POST['call_id'];
+    $callid = htmlspecialchars($_POST['call_id']);
     echo $callid;
 
     $query = "DELETE FROM call_history WHERE call_id = ?";

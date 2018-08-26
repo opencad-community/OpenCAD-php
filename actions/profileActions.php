@@ -34,9 +34,9 @@ function updateProfile()
 {
     session_start();
     $id = $_SESSION['id'];
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $identifier = $_POST['identifier'];
+    $name = htmlspecialchars($_POST['name']);
+    $email = htmlspecialchars($_POST['email']);
+    $identifier = htmlspecialchars($_POST['identifier']);
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -116,7 +116,7 @@ function changePassword()
   $row = mysqli_fetch_array($query);
   $id = $row['id'];
   $password = $row['password'];
-  $newpassword = $_POST['password'];
+  $newpassword = htmlspecialchars($_POST['password']);
   $hashed_password = password_hash($newpassword, PASSWORD_DEFAULT);
   mysqli_query($link,"UPDATE `users` SET `password` = '$hashed_password' WHERE `id` = '$id'") or die(mysqli_error($link));
 

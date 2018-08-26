@@ -67,7 +67,7 @@ if (isset($_POST['edit_plateid'])){
 
 function rejectRequest()
 {
-    $req_id = $_POST['id'];
+    $req_id = htmlspecialchars($_POST['id']);
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -360,7 +360,7 @@ function delete_weapon()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $weaid = $_POST['weaid'];
+    $weaid = htmlspecialchars($_POST['weaid']);
 
     $query = "DELETE FROM ncic_weapons WHERE id = ?";
 
@@ -390,7 +390,7 @@ function delete_citation()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $cid = $_POST['cid'];
+    $cid = htmlspecialchars($_POST['cid']);
 
     $query = "DELETE FROM ncic_citations WHERE id = ?";
 
@@ -420,7 +420,7 @@ function delete_arrest()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $aid = $_POST['aid'];
+    $aid = htmlspecialchars($_POST['aid']);
 
     $query = "DELETE FROM ncic_arrests WHERE id = ?";
 
@@ -451,7 +451,7 @@ function delete_warning()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $wgid = $_POST['wgid'];
+    $wgid = htmlspecialchars($_POST['wgid']);
 
     $query = "DELETE FROM ncic_warnings WHERE id = ?";
 
@@ -482,7 +482,7 @@ function delete_warrant()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $wid = $_POST['wid'];
+    $wid = htmlspecialchars($_POST['wid']);
 
     $query = "DELETE FROM ncic_warrants WHERE id = ?";
 
@@ -783,7 +783,7 @@ function delete_name()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $uid = $_POST['uid'];
+    $uid = htmlspecialchars($_POST['uid']);
 
     $query = "DELETE FROM ncic_names WHERE id = ?";
 
@@ -814,7 +814,7 @@ function delete_plate()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $vehid = $_POST['vehid'];
+    $vehid = htmlspecialchars($_POST['vehid']);
 
     $query = "DELETE FROM ncic_plates WHERE id = ?";
 
@@ -840,7 +840,7 @@ function edit_name()
 {
     session_start();
 
-    $fullName = $_POST['civNameReq'];
+    $fullName = htmlspecialchars($_POST['civNameReq']);
     $firstName = explode(" ", $fullName) [0];
     $lastName = explode(" ", $fullName) [1];
     
@@ -887,16 +887,16 @@ function edit_name()
     $submitttedById = $_SESSION['id'];
     //Submission Data
     $name;
-    $dob = $_POST['civDobReq'];
-    $address = $_POST['civAddressReq'];
-    $sex = $_POST['civSexReq'];
-    $race = $_POST['civRaceReq'];
-    $dlstatus = $_POST['civDL'];
-    $hair = $_POST['civHairReq'];
-    $build = $_POST['civBuildReq'];
-	$weapon = $_POST['civWepStat'];
-	$deceased = $_POST['civDec'];
-    $editid = $_POST['Edit_id'];
+    $dob = htmlspecialchars($_POST['civDobReq']);
+    $address = htmlspecialchars($_POST['civAddressReq']);
+    $sex = htmlspecialchars($_POST['civSexReq']);
+    $race = htmlspecialchars($_POST['civRaceReq']);
+    $dlstatus = htmlspecialchars($_POST['civDL']);
+    $hair = htmlspecialchars($_POST['civHairReq']);
+    $build = htmlspecialchars($_POST['civBuildReq']);
+	$weapon = htmlspecialchars($_POST['civWepStat']);
+	$deceased = htmlspecialchars($_POST['civDec']);
+    $editid = htmlspecialchars($_POST['Edit_id']);
 
     $query = "UPDATE ncic_names SET name = ?, dob = ?, address = ?, gender = ?, race = ?, dl_status = ?, hair_color = ?, build = ?, weapon_permit = ?, deceased = ? WHERE id = ?";
     try
@@ -926,7 +926,7 @@ function edit_plate()
 {
     session_start();
     
-    $plate = $_POST['veh_plate'];
+    $plate = htmlspecialchars($_POST['veh_plate']);
     
     //Remove all spaces from plate
     $plate = str_replace(' ', '', $plate);
@@ -937,24 +937,24 @@ function edit_plate()
     //Remove all special characters
     $plate = preg_replace('/[^A-Za-z0-9\-]/', '', $plate);
     
-    $vehicle = $_POST['veh_make_model'];
+    $vehicle = htmlspecialchars($_POST['veh_make_model']);
     $veh_make = explode(" ", $vehicle) [0];
     $veh_model = explode(" ", $vehicle) [1];
     
     $uid = $_SESSION['id'];
 
     $submittedById = $_SESSION['id'];
-    $userId = $_POST['civilian_names'];
+    $userId = htmlspecialchars($_POST['civilian_names']);
     $veh_plate = $plate;
     $veh_make;
     $veh_model;
-    $veh_pcolor = $_POST['veh_pcolor'];
-    $veh_scolor = $_POST['veh_scolor'];
-    $veh_insurance = $_POST['veh_insurance'];
-    $flags = $_POST['flags'];
-    $veh_reg_state = $_POST['veh_reg_state'];
-    $notes = $_POST['notes'];
-    $plate_id = $_POST['Edit_plateId'];
+    $veh_pcolor = htmlspecialchars($_POST['veh_pcolor']);
+    $veh_scolor = htmlspecialchars($_POST['veh_scolor']);
+    $veh_insurance = htmlspecialchars($_POST['veh_insurance']);
+    $flags = htmlspecialchars($_POST['flags']);
+    $veh_reg_state = htmlspecialchars($_POST['veh_reg_state']);
+    $notes = htmlspecialchars($_POST['notes']);
+    $plate_id = htmlspecialchars($_POST['Edit_plateId']);
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 

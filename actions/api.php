@@ -76,8 +76,8 @@ if (isset($_GET['getAOP']))
 
 function quickStatus()
 {
-    $event = $_POST['event'];
-    $callId = $_POST['callId'];
+    $event = htmlspecialchars($_POST['event']);
+    $callId = htmlspecialchars($_POST['callId']);
     session_start();
     $callsign = $_SESSION['callsign'];
 
@@ -276,8 +276,8 @@ function checkTones()
 
 function setTone()
 {
-    $tone = $_POST['tone'];
-    $action = $_POST['action'];
+    $tone = htmlspecialchars($_POST['tone']);
+    $action = htmlspecialchars($_POST['action']);
 
     $status;
     switch ($action)
@@ -327,7 +327,7 @@ function setTone()
 
 function logoutUser()
 {
-    $identifier = $_POST['unit'];
+    $identifier = htmlspecialchars($_POST['unit']);
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -361,8 +361,8 @@ function changeStatus()
 
     //var_dump($_POST);
 
-    $unit = $_POST['unit'];
-    $status = $_POST['status'];
+    $unit = htmlspecialchars($_POST['unit']);
+    $status = htmlspecialchars($_POST['status']);
     $statusId;
     $statusDet;
     $onCall = false;
