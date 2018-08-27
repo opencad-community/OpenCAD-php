@@ -959,15 +959,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <div class="col-lg-10">
                            <select class="form-control selectpicker" data-live-search="true" name="vehicle_make" title="Vehicle Make">
                               <?php getVehicleMakes();?>
-		  <div class="modal-body">
-            <form role="form" action="<?php echo BASE_URL; ?>/actions/dispatchActions.php" method="post">
-                <div class="form-group row">
-                </div>
-                <div class="form-group row">
-                        <label class="col-lg-2 control-label">Vehicle Make</label>
-                        <div class="col-lg-10">
-                           <select class="form-control selectpicker" data-live-search="true" name="vehicle_make" title="Vehicle Make">
-                              <?php getVehicleMakes();?>
                            </select>
                         </div>
 				</div>
