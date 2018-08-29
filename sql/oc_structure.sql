@@ -419,6 +419,15 @@ CREATE TABLE `weapons` (
 -- Indexes for dumped tables
 --
 
+
+--
+-- Indexes for table `active_users`
+--
+ALTER TABLE `active_users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `identifier` (`identifier`) USING BTREE;
+
+
 --
 -- Indexes for table `bolos_persons`
 --
@@ -430,6 +439,13 @@ ALTER TABLE `bolos_persons`
 --
 ALTER TABLE `bolos_vehicles`
   ADD PRIMARY KEY (`id`);
+
+
+  --
+  -- Indexes for table `dispatchers`
+  --
+  ALTER TABLE `dispatchers`
+    ADD UNIQUE KEY `identifier` (`identifier`);
 
 --
 -- Indexes for table `ncic_arrests`
