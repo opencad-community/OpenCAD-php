@@ -18,120 +18,121 @@ This file handles all actions for admin.php script
 
 /* Handle POST requests */
 
-
+/**
+ * Patch notes:
+ * Adding the `else` to make a `else if` prevents the execution
+ * of multiple functions at the same time by the same client
+ *
+ * Running multiple functions at the same time doesnt seem to
+ * be a needed feature.
+ */
 if (isset($_GET['dept_id']) && isset($_GET['user_id']))
 {
     deleteGroupItem();
-}
-
-if (isset($_POST['approveUser']))
+}else if (isset($_POST['approveUser']))
 {
     approveUser();
-}
-
-if (isset($_POST['editUserAccount']))
+}else if (isset($_POST['editUserAccount']))
 {
     editUserAccount();
-}
-if (isset($_POST['rejectUser']))
+}else if (isset($_POST['rejectUser']))
 {
     rejectUser();
-}
-if (isset($_POST['suspendUser']))
+}else if (isset($_POST['suspendUser']))
 {
     suspendUser();
-}
-if (isset($_POST['suspendUserWithReason']))
+}else if (isset($_POST['suspendUserWithReason']))
 {
     suspendUserWithReason();
-}
-if (isset($_POST['reactivateUser']))
+}else if (isset($_POST['reactivateUser']))
 {
     reactivateUser();
-}
-if (isset($_POST['deleteUser']))
+}else if (isset($_POST['deleteUser']))
 {
     delete_user();
-}
-if (isset($_POST['getUserDetails']))
+}else if (isset($_POST['getUserDetails']))
 {
     getUserDetails();
-}
-if (isset($_POST['delete_callhistory']))
+}else if (isset($_POST['delete_callhistory']))
 {
     delete_callhistory();
 }
 
 /* FUNCTIONS */
-
-
-
 function deleteGroupItem()
 {
 	$dept_id 		= !empty($_GET['dept_id']) ? $_GET['dept_id'] : '';
-	$user_id 		= !empty($_GET['user_id']) ? $_GET['user_id'] : '';
-	$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-		$site = BASE_URL;
-		if (!$link)
-		{
-		die('Could not connect: ' . mysql_error());
-		}
-	$sql = "DELETE FROM user_departments WHERE user_id = $user_id AND department_id = $dept_id";
+    $user_id 		= !empty($_GET['user_id']) ? $_GET['user_id'] : '';
 
-	if (mysqli_query($link, $sql)) {
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
+    }
+
+    $stmt = $pdo->prepare("DELETE FROM user_departments WHERE user_id = ? AND department_id = ?");
+	if ($stmt->execute(array($user_id, $dept_id))) {
 
 		$show_record=getUserGroupsApproved($user_id);
-	  //$response = json_encode(array("show_record"=>$show_record));
-	 echo  $show_record;
-   } else {
-      echo "Error updating record: " . mysqli_error($link);
-   }
+        //$response = json_encode(array("show_record"=>$show_record));
+        echo  $show_record;
+    } else {
+        echo "Error updating record: " . $stmt->errorInfo();
+    }
+    $pdo = null;
 }
+
 function editUserAccount()
 {
-	$userName 		= !empty($_POST['userName']) ? $_POST['userName'] : '';
-	$userEmail 		= !empty($_POST['userEmail']) ? $_POST['userEmail'] : '';
-
-	$userID 		= !empty($_POST['userID']) ? $_POST['userID'] : '';
-	$userIdentifier = !empty($_POST['userIdentifier']) ? $_POST['userIdentifier'] : '';
+	$userName 		= !empty($_POST['userName']) ? htmlspecialchars($_POST['userName']) : '';
+	$userEmail 		= !empty($_POST['userEmail']) ? htmlspecialchars($_POST['userEmail']) : '';
+	$userID 		= !empty($_POST['userID']) ? htmlspecialchars($_POST['userID']) : '';
+	$userIdentifier = !empty($_POST['userIdentifier']) ? htmlspecialchars($_POST['userIdentifier']) : '';
 	$userGroups 	= !empty($_POST['userGroups']) ? $_POST['userGroups'] : '';
-  $userRole     = !empty($_POST['userRole']) ? $_POST['userRole'] : '';
+    $userRole       = !empty($_POST['userRole']) ? htmlspecialchars($_POST['userRole']) : '';
 
-		$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-		$site = BASE_URL;
-		if (!$link)
-		{
-		die('Could not connect: ' . mysql_error());
-		}
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
+    }
+
 	if(!empty($userGroups))
 	{
 		foreach($userGroups as $key=>$val)
 		{
-			$sql1 = "INSERT INTO user_departments (user_id, department_id) VALUES ('$userID', '$val')";
-			mysqli_query($link, $sql1);
+            $val = htmlspecialchars($val);
+			$stmt = $pdo->prepare("INSERT INTO user_departments (user_id, department_id) VALUES (?, ?)");
+            $stmt->execute(array($userID, $val));
 		}
 	}
-	$sql = "UPDATE users SET name = '$userName', email = '$userEmail', identifier = '$userIdentifier', admin_privilege = '$userRole' WHERE id = '$userID'";
-	if (mysqli_query($link, $sql)) {
-    header("Location: ".BASE_URL."/oc-admin/userManagement.php");
-   } else {
-      echo "Error updating record: " . mysqli_error($link);
-   }
+    $stmt = $pdo->prepare("UPDATE users SET name = ?, email = ?, identifier = ?, admin_privilege = ? WHERE id = ?");
 
-
+    if ($stmt->execute(array($userName, $userEmail, $userIdentifier, $userRole, $userID))) {
+        $pdo = null;
+        header("Location: ".BASE_URL."/oc-admin/userManagement.php");
+    } else {
+        echo "Error updating record: " . mysqli_error($link);
+    }
+    $pdo = null;
 }
+
 function getRanks()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    $site = BASE_URL;
-    if (!$link)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die('Could not connect: ' . mysql_error());
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "SELECT * FROM ranks";
-
-    $result = mysqli_query($link, $query);
+    $result = $pdo->query("SELECT * FROM ranks");
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
 
     echo '
         <table id="ranks" class="table table-striped table-bordered">
@@ -145,7 +146,7 @@ function getRanks()
         <tbody>
     ';
 
-    while ($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    foreach($result as $row)
     {
         echo '
         <tr>
@@ -171,36 +172,24 @@ function getRanks()
         </tbody>
         </table>
     ';
+    $pdo = null;
 }
 
 function delete_user()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    $site = BASE_URL;
-    if (!$link)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die('Could not connect: ' . mysql_error());
+        die('Could not connect: ' . $ex);
     }
 
     $uid = htmlspecialchars($_POST['uid']);
-    echo $uid;
 
-    $query = "DELETE FROM users WHERE id = ?";
-
-    try
+    $stmt = $pdo->prepare("DELETE FROM users WHERE id = ?");
+    if (!$stmt->execute(array($uid)))
     {
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "i", $uid);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == false)
-        {
-            die(mysqli_error($link));
-        }
-    }
-    catch(Exception $e)
-    {
-        die("Failed to run query: " . $e->getMessage());
+        die($stmt->errorInfo());
     }
 
     session_start();
@@ -211,37 +200,38 @@ function delete_user()
 /* Gets the user count. Returns value */
 function getUserCount()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    $site = BASE_URL;
-    if (!$link)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die('Could not connect: ' . mysql_error());
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "SELECT COUNT(*) from users";
-
-    $result = mysqli_query($link, $query);
-    $row = mysqli_fetch_array($result, MYSQLI_BOTH);
-
-    mysqli_close($link);
-
-    return $row[0];
+    $result = $pdo->query("SELECT COUNT(*) from users")->fetch(PDO::FETCH_NUM);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
+    return $result[0];
 }
 
 function getPendingUsers()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    $site = BASE_URL;
-    if (!$link)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die('Could not connect: ' . mysql_error());
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "SELECT id, name, email, identifier FROM users WHERE approved = '0'";
-
-    $result = mysqli_query($link, $query);
-
-    $num_rows = $result->num_rows;
+    $result = $pdo->query("SELECT id, name, email, identifier FROM users WHERE approved = '0'");
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $num_rows = $result->rowCount();
+    $pdo = null;
 
     if ($num_rows == 0)
     {
@@ -263,7 +253,7 @@ function getPendingUsers()
             <tbody>
         ';
 
-        while ($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        foreach($result as $row)
         {
             echo '
             <tr>
@@ -276,7 +266,7 @@ function getPendingUsers()
 
             echo ' </td>
                 <td>
-                    <form action="'.$site.'/actions/adminActions.php" method="post">
+                    <form action="'.BASE_URL.'/actions/adminActions.php" method="post">
                     <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Approve" />
                     <input name="rejectUser" type="submit" class="btn btn-xs btn-link" value="Reject" />
                     <input name="uid" type="hidden" value=' . $row[0] . ' />
@@ -295,39 +285,44 @@ function getPendingUsers()
 
 function getDepartments()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    $site = BASE_URL;
-    if (!$link)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die('Could not connect: ' . mysql_error());
+        die('Could not connect: ' . $ex);
     }
 
-    $sql = 'SELECT * from departments';
-
-    $result = mysqli_query($link, $sql);
-
-    while ($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    $result = $pdo->query("SELECT * from departments");
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    foreach ($result as $row)
     {
             echo '<option value="' . $row[0] . '">' . $row[1] . '</option>';
     }
+    $pdo = null;
 }
 
 function getRole()
 {
-  $userID 		= !empty($_POST['userID']) ? $_POST['userID'] : '';
-  $userId = htmlspecialchars($_POST['userId']);
+    $userID = !empty($_POST['userID']) ? htmlspecialchars($_POST['userID']) : '';
 
-  echo $_POST['userId'];
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    $site = BASE_URL;
-    if (!$link)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die('Could not connect: ' . mysql_error());
+        die('Could not connect: ' . $ex);
     }
 
-    $sql = 'SELECT admin_privilege FROM users WHERE id = \'$userID\'';
+    $stmt = $pdo->prepare("SELECT admin_privilege FROM users WHERE id = ?");
+    $result = $stmt->execute(array($userID));
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
+    $pdo = null;
 
-    $result = mysqli_query($link, $sql);
     echo '
             <option value="0">User</option>
             <option value="1">Moderator</option>
@@ -338,132 +333,98 @@ function getRole()
 /* Get from temp table */
 function getUserGroups($uid)
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    $site = BASE_URL;
-    if (!$link)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die('Could not connect: ' . mysql_error());
+        die('Could not connect: ' . $ex);
     }
 
-    $sql = "SELECT departments.department_name FROM user_departments_temp INNER JOIN departments on user_departments_temp.department_id=departments.department_id WHERE user_departments_temp.user_id = \"$uid\"";
+    $stmt = $pdo->prepare("SELECT departments.department_name FROM user_departments_temp INNER JOIN departments on user_departments_temp.department_id=departments.department_id WHERE user_departments_temp.user_id = ?");
+    $resStatus = $stmt->execute(array(htmlspecialchars($uid)));
 
-    $result1 = mysqli_query($link, $sql);
-
-    while ($row1 = mysqli_fetch_array($result1, MYSQLI_BOTH))
+    if (!$resStatus)
     {
-        echo $row1[0] . "<br/>";
+        die($stmt->errorInfo());
     }
+    foreach ($stmt as $row)
+    {
+        echo $row[0] . "<br/>";
+    }
+    $pdo = null;
 }
 
 /* Get from perm table */
 function getUserGroupsApproved($uid)
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    $site = BASE_URL;
-    if (!$link)
+    $uid = htmlspecialchars($uid);
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die('Could not connect: ' . mysql_error());
+        die('Could not connect: ' . $ex);
     }
 
-    $sql = "SELECT departments.department_name,departments.department_id FROM user_departments INNER JOIN departments on user_departments.department_id=departments.department_id WHERE user_departments.user_id = \"$uid\"";
+    $stmt = $pdo->prepare("SELECT departments.department_name,departments.department_id FROM user_departments INNER JOIN departments on user_departments.department_id=departments.department_id WHERE user_departments.user_id = ?");
+    $resStatus = $stmt->execute(array($uid));
 
-    $result1 = mysqli_query($link, $sql);
+    if (!$resStatus)
+    {
+        die($stmt->errorInfo());
+    }
 
     if ( DEMO_MODE == false ) {
-    while ($row1 = mysqli_fetch_array($result1, MYSQLI_BOTH))
-    {
-        if ( ( MODERATOR_REMOVE_GROUP == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
+        foreach($stmt as $row)
         {
-        echo $row1[0] . "&nbsp;<i class='fas fa-user-times delete_group' style='font-size:16px;color:red;' data-dept-id=".$row1[1]." data-user-id=".$uid."></i><br/>";
-      } else {
-        echo $row1[0] . "&nbsp;<br/>";
-      }
-
+            if ( ( MODERATOR_REMOVE_GROUP == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
+            {
+                echo $row[0] . "&nbsp;<i class='fas fa-user-times delete_group' style='font-size:16px;color:red;' data-dept-id=".$row[1]." data-user-id=".$uid."></i><br/>";
+            } else {
+                echo $row[0] . "&nbsp;<br/>";
+            }
+        }
+    } else {
+        foreach($result as $row)
+        {
+            echo $row[0] . "<br/>";
+        }
     }
-  } else {
-    while ($row1 = mysqli_fetch_array($result1, MYSQLI_BOTH))
-    {
-        echo $row1[0] . "<br/>";
-    }
-
-  }
 }
 
 function approveUser()
 {
     $uid = htmlspecialchars($_POST['uid']);
-    $site = BASE_URL;
-    /* If a user has been approved, the following needs to be done:
-    1. Insert user's groups from temp table to regular table
-    2. Set user's approved status to 1
-    */
-
-    /* Copy from temp table to regular table */
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die('Could not connect: ' . mysql_error());
+        die('Could not connect: ' . $ex);
     }
 
-    //Insert into user_departments
-    $query = "INSERT INTO user_departments SELECT u.* FROM user_departments_temp u WHERE user_id = ?";
+    $stmt = $pdo->prepare("INSERT INTO user_departments SELECT u.* FROM user_departments_temp u WHERE user_id = ?");
+    $result = $stmt->execute(array($uid));
 
-    try
+    if (!$result)
     {
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "i", $uid);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == false)
-        {
-            die(mysqli_error($link));
-        }
-    }
-    catch(Exception $e)
-    {
-        die("Failed to run query: " . $e->getMessage());
+        die($stmt->errorInfo());
     }
 
-    /* Delete from user_departments_temp */
-    $query = "DELETE FROM user_departments_temp WHERE user_id = ?";
+    $stmt = $pdo->prepare("DELETE FROM user_departments_temp WHERE user_id = ?");
+    $result = $stmt->execute(array($uid));
 
-    try
+    if (!$result)
     {
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "i", $uid);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == false)
-        {
-            die(mysqli_error($link));
-        }
-    }
-    catch(Exception $e)
-    {
-        die("Failed to run query: " . $e->getMessage());
+        die($stmt->errorInfo());
     }
 
-    /* Set user's approved status */
-    $query = "UPDATE users SET approved = '1' WHERE id = ?";
+    $stmt = $pdo->prepare("UPDATE users SET approved = '1' WHERE id = ?");
+    $result = $stmt->execute(array($uid));
 
-    try
+    if (!$result)
     {
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "i", $uid);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == false)
-        {
-            die(mysqli_error($link));
-        }
+        die($stmt->errorInfo());
     }
-    catch(Exception $e)
-    {
-        die("Failed to run query: " . $e->getMessage());
-    }
-
-    mysqli_close($link);
+    $pdo = null;
 
     session_start();
     $_SESSION['accessMessage'] = '<div class="alert alert-success"><span>Successfully approved user access</span></div>';
@@ -475,59 +436,30 @@ function approveUser()
 
 function rejectUser()
 {
-    /* If a user has been rejected, the following needs to be done:
-    1. Delete user's group's from user_departments_temp table
-    2. Delete user's profile from users table
-    */
     $uid = htmlspecialchars($_POST['uid']);
-
-    /* Delete groups from temp table */
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    $site = BASE_URL;
-    if (!$link)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die('Could not connect: ' . mysql_error());
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "DELETE FROM user_departments_temp where user_id = ?";
+    $stmt = $pdo->prepare("DELETE FROM user_departments_temp where user_id = ?");
+    $result = $stmt->execute(array($uid));
 
-    try
+    if (!$result)
     {
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "i", $uid);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == false)
-        {
-            die(mysqli_error($link));
-        }
-    }
-    catch(Exception $e)
-    {
-        die("Failed to run query: " . $e->getMessage());
+        die($stmt->errorInfo());
     }
 
-    /* Delete user from user table */
+    $stmt = $pdo->prepare("DELETE FROM users where id = ?");
+    $result = $stmt->execute(array($uid));
 
-    $query = "DELETE FROM users where id = ?";
-
-    try
+    if (!$result)
     {
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "i", $uid);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == false)
-        {
-            die(mysqli_error($link));
-        }
+        die($stmt->errorInfo());
     }
-    catch(Exception $e)
-    {
-        die("Failed to run query: " . $e->getMessage());
-    }
-
-    mysqli_close($link);
+    $pdo = null;
 
     session_start();
     $_SESSION['accessMessage'] = '<div class="alert alert-danger"><span>Successfully rejected user access</span></div>';
@@ -539,36 +471,43 @@ function rejectUser()
 
 function getGroupCount($gid)
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    $site = BASE_URL;
-    if (!$link)
+    $gid = htmlspecialchars($gid);
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die('Could not connect: ' . mysql_error());
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "SELECT COUNT(*) from user_departments WHERE department_id = \"$gid\"";
+    $stmt = $pdo->prepare("SELECT COUNT(*) from user_departments WHERE department_id = ?");
+    $stmt->execute(array($gid));
+    $result = $stmt->fetch(PDO::FETCH_NUM);
 
-    $result = mysqli_query($link, $query);
-    $row = mysqli_fetch_array($result, MYSQLI_BOTH);
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
 
-    mysqli_close($link);
-
-    return $row[0];
+    $pdo = null;
+    return $result[0];
 }
 
 /* NOTE: This function will only build table for users with status 1 & 2. Unapproved users will not be included in this list */
 function getUsers()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    $site = BASE_URL;
-    if (!$link)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die('Could not connect: ' . mysql_error());
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "SELECT id, name, email, admin_privilege, identifier, approved FROM users WHERE approved = '1' OR approved = '2'";
+    $result = $pdo->query("SELECT id, name, email, admin_privilege, identifier, approved FROM users WHERE approved = '1' OR approved = '2'");
 
-    $result = mysqli_query($link, $query);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
 
     echo '
         <table id="allUsers" class="table table-striped table-bordered">
@@ -585,7 +524,7 @@ function getUsers()
         <tbody>
     ';
 
-    while ($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    foreach($result as $row)
     {
 
         if ( $row[3] == 1 )
@@ -608,57 +547,54 @@ function getUsers()
             <td id="show_group">';
 
         getUserGroupsApproved($row[0]);
-        if ( DEMO_MODE == false) {
-        echo ' </td>
-            <td>
-                <form action="'.$site.'/actions/adminActions.php" method="post">';
+        echo '</td><td>';
+    if ( DEMO_MODE == false) {
+        echo '<form action="'.$site.'/actions/adminActions.php" method="post">';
+        if ( ( MODERATOR_EDIT_USER == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
+        {
+            echo '<button name="editUser" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editUserModal" class="btn btn-xs btn-link" >Edit</button>';
+        } else {
+            echo '<button name="editUser" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editUserModal" class="btn btn-xs btn-link" disabled >Edit</button>';
+        }
 
-                if ( ( MODERATOR_EDIT_USER == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
-                {
-                 echo '<button name="editUser" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editUserModal" class="btn btn-xs btn-link" >Edit</button>';
-                } else {
-                echo '<button name="editUser" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editUserModal" class="btn btn-xs btn-link" disabled >Edit</button>';
-                }
-
-                if ( ( MODERATOR_DELETE_USER == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
-                {
-                echo '<input name="deleteUser" type="submit" class="btn btn-xs btn-link" onclick="deleteUser(' . $row[0] . ')" value="Delete" />';
-              } else {
-                echo '<input name="deleteUser" type="submit" class="btn btn-xs btn-link" onclick="deleteUser(' . $row[0] . ')" value="Delete" disabled />';
-              }
+        if ( ( MODERATOR_DELETE_USER == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
+        {
+            echo '<input name="deleteUser" type="submit" class="btn btn-xs btn-link" onclick="deleteUser(' . $row[0] . ')" value="Delete" />';
+        } else {
+            echo '<input name="deleteUser" type="submit" class="btn btn-xs btn-link" onclick="deleteUser(' . $row[0] . ')" value="Delete" disabled />';
+        }
 
         if ($row[5] == '2')
         {
-          if ( ( MODERATOR_REACTIVATE_USER == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
-          {
-            echo '<input name="reactivateUser" type="submit" class="btn btn-xs btn-link" value="Reactivate" />';
-          } else {
-              echo '<input name="reactivateUser" type="submit" class="btn btn-xs btn-link" value="Reactivate" disabled />';
-          }
-
+            if ( ( MODERATOR_REACTIVATE_USER == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
+            {
+                echo '<input name="reactivateUser" type="submit" class="btn btn-xs btn-link" value="Reactivate" />';
+            } else {
+                echo '<input name="reactivateUser" type="submit" class="btn btn-xs btn-link" value="Reactivate" disabled />';
+            }
         }
         else
         {
-          if ( ( MODERATOR_SUSPEND_WITHOUT_REASON == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
-          {
-            echo '<input name="suspendUser" type="submit" class="btn btn-xs btn-link" value="Suspend without Reason" />';
-          } else {
-            echo '<input name="suspendUser" type="submit" class="btn btn-xs btn-link" value="Suspend without Reason" disabled />';
-          }
-          if ( ( MODERATOR_SUSPEND_WITH_REASON == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
-          {
-            echo '<input name="suspendUserWithReason" type="submit" class="btn btn-xs btn-link" method="post" value="Suspend With Reason: " /><input type="text" method="post" placeholder="Reason Here" name="suspend_reason" id="suspend_reason">';
-          } else {
-            echo '<input name="suspendUserWithReason" type="submit" class="btn btn-xs btn-link" method="post" value="Suspend With Reason: " disabled /><input type="text" method="post" placeholder="Reason Here" name="suspend_reason" id="suspend_reason" readonly>';
-          }
+            if ( ( MODERATOR_SUSPEND_WITHOUT_REASON == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
+            {
+                echo '<input name="suspendUser" type="submit" class="btn btn-xs btn-link" value="Suspend without Reason" />';
+            } else {
+                echo '<input name="suspendUser" type="submit" class="btn btn-xs btn-link" value="Suspend without Reason" disabled />';
+            }
+            if ( ( MODERATOR_SUSPEND_WITH_REASON == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
+            {
+                echo '<input name="suspendUserWithReason" type="submit" class="btn btn-xs btn-link" method="post" value="Suspend With Reason: " /><input class="form-control" type="text" method="post" placeholder="Reason Here" name="suspend_reason" id="suspend_reason">';
+            } else {
+                echo '<input name="suspendUserWithReason" type="submit" class="btn btn-xs btn-link" method="post" value="Suspend With Reason: " disabled /><input class="form-control" type="text" method="post" placeholder="Reason Here" name="suspend_reason" id="suspend_reason" readonly>';
+            }
         }
-      } else {
+    } else {
         echo ' </td>
             <td>
-                <form action="'.$site.'/actions/adminActions.php" method="post">
-                <button name="editUser" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editUserModal" class="btn btn-xs btn-link" disabled >Edit</button>
-                <input name="deleteUser" type="submit" class="btn btn-xs btn-link" onclick="deleteUser(' . $row[0] . ')" value="Delete" disabled />
-                ';
+            <form action="'.BASE_URL.'/actions/adminActions.php" method="post">
+            <button name="editUser" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editUserModal" class="btn btn-xs btn-link" disabled >Edit</button>
+            <input name="deleteUser" type="submit" class="btn btn-xs btn-link" onclick="deleteUser(' . $row[0] . ')" value="Delete" disabled />
+            ';
         if ($row[5] == '2')
         {
             echo '<input name="reactivateUser" type="submit" class="btn btn-xs btn-link" value="Reactivate"  disabled/>';
@@ -666,18 +602,12 @@ function getUsers()
         else
         {
             echo '<input name="suspendUser" type="submit" class="btn btn-xs btn-link" value="Suspend without Reason" disabled />';
-            echo '<input name="suspendUserWithReason" type="submit" class="btn btn-xs btn-link" method="post" value="Suspend With Reason: " disabled  /><input type="text" method="post" placeholder="Reason Here" name="suspend_reason" id="suspend_reason" readonly>';
-
+            echo '<input name="suspendUserWithReason" type="submit" class="btn btn-xs btn-link" method="post" value="Suspend With Reason: " disabled  /><input class="form-control" type="text" method="post" placeholder="Reason Here" name="suspend_reason" id="suspend_reason" readonly>';
         }
-
-
-
-      }
-        echo '
-
-                <input name="uid" type="hidden" value=' . $row[0] . ' />
-                </form>
-            </td>
+    }
+    echo '<input name="uid" type="hidden" value=' . $row[0] . ' />
+        </form>
+        </td>
         </tr>
         ';
     }
@@ -686,7 +616,6 @@ function getUsers()
         </tbody>
         </table>
     ';
-
 }
 
 //Function to suspend a user account
@@ -694,33 +623,22 @@ function getUsers()
 function suspendUser()
 {
     $uid = htmlspecialchars($_POST['uid']);
-    $site = BASE_URL;
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-    if (!$link)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die('Could not connect: ' . mysql_error());
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "UPDATE users SET approved = '2' WHERE id = ?";
+    $stmt = $pdo->prepare("UPDATE users SET approved = '2' WHERE id = ?");
+    $result = $stmt->execute(array($uid));
 
-    try
+    if (!$result)
     {
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "i", $uid);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == false)
-        {
-            die(mysqli_error($link));
-        }
+        die($stmt->errorInfo());
     }
-    catch(Exception $e)
-    {
-        die("Failed to run query: " . $e->getMessage());
-    }
-
-    mysqli_close($link);
+    $pdo = null;
 
     session_start();
     $_SESSION['accessMessage'] = '<div class="alert alert-success"><span>Successfully suspended user account</span></div>';
@@ -734,45 +652,31 @@ function suspendUser()
 function suspendUserWithReason()
 {
     $uid = htmlspecialchars($_POST['uid']);
-    $site = BASE_URL;
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
     $suspend_reason = htmlspecialchars($_POST['suspend_reason']);
 
-    if (!$link)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die('Could not connect: ' . mysql_error());
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "UPDATE users SET approved = '2' WHERE id = ?";
-    $query2 = "UPDATE users SET suspend_reason = ('$suspend_reason') WHERE id = ?";
+    $stmt = $pdo->prepare("UPDATE users SET approved = '2' WHERE id = ?");
+    $result = $stmt->execute(array($uid));
 
-    try
+    if (!$result)
     {
-      /*Adding the reason into the database */
-        $stmt = mysqli_prepare($link, $query2);
-        mysqli_stmt_bind_param($stmt, "i", $uid);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == false)
-        {
-            die(mysqli_error($link));
-        }
-        /*Sets user account to suspended status */
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "i", $uid);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == false)
-        {
-            die(mysqli_error($link));
-        }
-    }
-    catch(Exception $e)
-    {
-        die("Failed to run query: " . $e->getMessage());
+        die($stmt->errorInfo());
     }
 
-    mysqli_close($link);
+    $stmt = $pdo->prepare("UPDATE users SET suspend_reason = (?) WHERE id = ?");
+    $result = $stmt->execute(array($suspend_reason,$uid));
+
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
+    $pdo = null;
 
     session_start();
     $_SESSION['accessMessage'] = '<div class="alert alert-success"><span>Successfully suspended user account with reason</span></div>';
@@ -785,33 +689,22 @@ function suspendUserWithReason()
 function reactivateUser()
 {
     $uid = htmlspecialchars($_POST['uid']);
-    $site = BASE_URL;
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-    if (!$link)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die('Could not connect: ' . mysql_error());
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "UPDATE users SET approved = '1' WHERE id = ?";
+    $stmt = $pdo->prepare("UPDATE users SET approved = '1' WHERE id = ?");
+    $result = $stmt->execute(array($uid));
 
-    try
+    if (!$result)
     {
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "i", $uid);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == false)
-        {
-            die(mysqli_error($link));
-        }
+        die($stmt->errorInfo());
     }
-    catch(Exception $e)
-    {
-        die("Failed to run query: " . $e->getMessage());
-    }
-
-    mysqli_close($link);
+    $pdo = null;
 
     session_start();
     $_SESSION['accessMessage'] = '<div class="alert alert-success"><span>Successfully reactivated user account</span></div>';
@@ -823,20 +716,24 @@ function reactivateUser()
 function getUserDetails()
 {
     $userId = htmlspecialchars($_POST['userId']);
-    $site = BASE_URL;
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die('Could not connect: ' . mysql_error());
+        die('Could not connect: ' . $ex);
     }
 
-    $sql = "SELECT id, name, email, identifier FROM users WHERE ID = $userId";
+    $stmt = $pdo->prepare("SELECT id, name, email, identifier FROM users WHERE ID = ?");
+    $result = $stmt->execute(array($userId));
 
-    $result = mysqli_query($link, $sql);
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
+    $pdo = null;
 
     $encode = array();
-    while ($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    foreach($result as $row)
     {
         $encode["userId"] = $row[0];
         $encode["name"] = $row[1];
@@ -845,49 +742,54 @@ function getUserDetails()
 
     }
 
-    mysqli_close($link);
     //Pass the array and userID to getUserGroupsEditor which will return it
     getUserGroupsEditor($encode, $userId);
-
 }
 
 function getUserGroupsEditor($encode, $userId)
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    $site = BASE_URL;
-    if (!$link)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die('Could not connect: ' . mysql_error());
+        die('Could not connect: ' . $ex);
     }
 
-    $sql = "SELECT departments.department_name FROM user_departments INNER JOIN departments on user_departments.department_id=departments.department_id WHERE user_departments.user_id = \"$userId\"";
+    $stmt = $pdo->prepare("SELECT departments.department_name FROM user_departments INNER JOIN departments on user_departments.department_id=departments.department_id WHERE user_departments.user_id = ?");
+    $result = $stmt->execute(array($userId));
 
-    $result = mysqli_query($link, $sql);
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
+    $pdo = null;
 
     $counter = 0;
-    while ($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    foreach($result as $row)
     {
         $encode["department"][$counter] = $row[0];
         $counter++;
     }
 
     echo json_encode($encode);
-
-    mysqli_close($link);
 }
 
 function getStreetNames()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    $site = BASE_URL;
-    if (!$link)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die('Could not connect: ' . mysql_error());
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "SELECT name, county FROM streets";
+    $result = $pdo->query("SELECT name, county FROM streets");
 
-    $result = mysqli_query($link, $query);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
     echo '
         <table id="streets" class="table table-striped table-bordered">
@@ -900,7 +802,7 @@ function getStreetNames()
         <tbody>
     ';
 
-    while ($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    foreach($result as $row)
     {
         echo '
         <tr>
@@ -918,16 +820,20 @@ function getStreetNames()
 
 function getCodes()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    $site = BASE_URL;
-    if (!$link)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die('Could not connect: ' . mysql_error());
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "SELECT code_id, code_name FROM codes";
+    $result = $pdo->query("SELECT code_id, code_name FROM codes");
 
-    $result = mysqli_query($link, $query);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
     echo '
         <table id="codes" class="table table-striped table-bordered">
@@ -940,7 +846,7 @@ function getCodes()
         <tbody>
     ';
 
-    while ($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    foreach($result as $row)
     {
         echo '
         <tr>
@@ -958,18 +864,22 @@ function getCodes()
 
 function getCallHistory()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    $site = BASE_URL;
-    if (!$link)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die('Could not connect: ' . mysql_error());
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "SELECT * FROM call_history";
+    $result = $pdo->query("SELECT * FROM call_history");
 
-    $result = mysqli_query($link, $query);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
     if ($num_rows == 0)
     {
@@ -994,7 +904,7 @@ function getCallHistory()
         <tbody>
     ';
 
-        while ($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        foreach($result as $row)
         {
             echo '
         <tr>
@@ -1006,7 +916,7 @@ function getCallHistory()
             <td>' . $row[5] . '</td>
             <td>' . $row[6] . '</td>
             <td>
-                <form action="'.$site.'/actions/adminActions.php" method="post">
+                <form action="'.BASE_URL.'/actions/adminActions.php" method="post">
                 <input name="delete_callhistory" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
                 <input name="call_id" type="hidden" value=' . $row[0] . ' />
                 </form>
@@ -1024,33 +934,23 @@ function getCallHistory()
 
 function delete_callhistory()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    $site = BASE_URL;
-    if (!$link)
-    {
-        die('Could not connect: ' . mysql_error());
-    }
-
     $callid = htmlspecialchars($_POST['call_id']);
-    echo $callid;
 
-    $query = "DELETE FROM call_history WHERE call_id = ?";
-
-    try
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "i", $callid);
-        $result = mysqli_stmt_execute($stmt);
+        die('Could not connect: ' . $ex);
+    }
 
-        if ($result == false)
-        {
-            die(mysqli_error($link));
-        }
-    }
-    catch(Exception $e)
+    $stmt = $pdo->prepare("DELETE FROM call_history WHERE call_id = ?");
+    $result = $stmt->execute(array($callid));
+
+    if (!$result)
     {
-        die("Failed to run query: " . $e->getMessage());
+        die($stmt->errorInfo());
     }
+    $pdo = null;
 
     session_start();
     $_SESSION['historyMessage'] = '<div class="alert alert-success"><span>Successfully removed archived call</span></div>';
