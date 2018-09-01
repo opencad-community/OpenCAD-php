@@ -549,7 +549,7 @@ function getUsers()
         getUserGroupsApproved($row[0]);
         echo '</td><td>';
     if ( DEMO_MODE == false) {
-        echo '<form action="'.$site.'/actions/adminActions.php" method="post">';
+        echo '<form action="'.BASE_URL.'/actions/adminActions.php" method="post">';
         if ( ( MODERATOR_EDIT_USER == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
         {
             echo '<button name="editUser" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editUserModal" class="btn btn-xs btn-link" >Edit</button>';

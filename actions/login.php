@@ -55,14 +55,14 @@ if(!empty($_POST))
         1 = Approved
         2 = Suspended
     */
-    if ($approved == "0")
+    if ($result['approved'] == "0")
     {
         session_start();
         $_SESSION['loginMessageDanger'] = 'Your account hasn\'t been approved yet. Please wait for an administrator to approve your access request.';
         header("Location:".BASE_URL."/index.php");
         exit();
     }
-    else if ($approved == "2")
+    else if ($result['approved'] == "2")
     {
         /* TODO: Show reason why user is suspended */
         session_start();
