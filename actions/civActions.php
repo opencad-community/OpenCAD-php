@@ -711,9 +711,10 @@ function ncic_warrants()
     }
 
     $stmt = $pdo->prepare("SELECT ncic_names.id from ncic_names where submittedById = ?");
-    $result = $stmt->execute(array($uid));
+    $resStatus = $stmt->execute(array($uid));
+    $result = $stmt;
 
-    if (!$result)
+    if (!$resStatus)
     {
         die($stmt->errorInfo());
     }
