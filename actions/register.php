@@ -51,9 +51,10 @@ function register()
     }
 
     $stmt = $pdo->prepare("SELECT email from users where email = ?");
-    $result = $stmt->execute(array($email));
+    $resStatus = $stmt->execute(array($email));
+    $result = $stmt;
 
-    if (!$result)
+    if (!$resStatus)
     {
         die($stmt->errorInfo());
     }
@@ -138,10 +139,11 @@ function civreg()
     }
 
     $stmt = $pdo->prepare("SELECT email from users where email = ?");
-    $result = $stmt->execute(array($email));
+    $resStatus = $stmt->execute(array($email));
+    $result = $stmt;
 
 
-    if (!$result)
+    if (!$resStatus)
     {
         die($stmt->errorInfo());
     }
