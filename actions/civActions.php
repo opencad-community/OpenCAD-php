@@ -63,9 +63,10 @@ function getCivilianNamesOwn()
     }
 
     $stmt = $pdo->prepare("SELECT ncic_names.id, ncic_names.name FROM ncic_names where ncic_names.submittedByID = ?");
-    $result = $stmt->execute(array($uid));
+    $resStatus = $stmt->execute(array($uid));
+    $result = $stmt;
 
-    if (!$result)
+    if (!$resStatus)
     {
         die($stmt->errorInfo());
     }
