@@ -382,7 +382,7 @@ function changeStatus()
             $onCall = true;
             break;
 
-		case "10-52":
+		case "10-65":
             $statusId = '8';
             $statusDet = '8';
             $onCall = true;
@@ -1454,7 +1454,7 @@ function getAgencies()
         die('Could not connect: ' . $ex);
     }
 
-    $result = $pdo->query("SELECT * FROM departments WHERE department_name <>'Administrators' AND department_name <>'EMS' AND department_name <>'Fire' AND department_name <>'Civilian' AND department_name <>'Communications (Dispatch)' AND department_name <>'Head Administrators");
+    $result = $pdo->query("SELECT * FROM departments WHERE department_name <>'Administrators' AND department_name <>'EMS' AND department_name <>'Fire' AND department_name <>'Civilian' AND department_name <>'Communications (Dispatch)' AND department_name <>'Head Administrators'");
 
     if (!$result)
     {
@@ -1483,9 +1483,10 @@ function callCheck()
     }
 
     $stmt = $pdo->prepare("SELECT * FROM calls_users WHERE id = ?");
-    $result = $stmt->execute(array($identifier, $identifier, $status, $uid));
+    $resStatus = $stmt->execute(array($uid));
+    $result = $stmt;
 
-    if (!$result)
+    if (!$resStatus)
     {
         die($stmt->errorInfo());
     }

@@ -869,7 +869,7 @@ function ncicGetWeapons()
     }
 
     $stmt = $pdo->prepare("SELECT ncic_weapons.*, ncic_names.name FROM ncic_weapons INNER JOIN ncic_names ON ncic_names.id=ncic_weapons.name_id WHERE ncic_weapons.user_id = ?");
-    $resStatus = $stmt->execute(array($userId, $wea_type, $wea_name, $submittedById));
+    $resStatus = $stmt->execute(array($uid));
     $result = $stmt;
 
     if (!$resStatus)
