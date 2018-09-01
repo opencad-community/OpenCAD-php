@@ -192,6 +192,14 @@ function delete_user()
         die($stmt->errorInfo());
     }
 
+    $stmt = $pdo->prepare("DELETE FROM user_departments WHERE user_id = ?");
+    if (!$stmt->execute(array($uid)))
+    {
+        die($stmt->errorInfo());
+    }
+
+    $pdo = null;
+
     session_start();
     $_SESSION['userMessage'] = '<div class="alert alert-success"><span>Successfully removed user from database</span></div>';
     header("Location: ".BASE_URL."/oc-admin/userManagement.php#user_panel");
@@ -724,9 +732,10 @@ function getUserDetails()
     }
 
     $stmt = $pdo->prepare("SELECT id, name, email, identifier FROM users WHERE ID = ?");
-    $result = $stmt->execute(array($userId));
+    $resStatus = $stmt->execute(array($userId));
+    $result = $stmt;
 
-    if (!$result)
+    if (!$resStatus)
     {
         die($stmt->errorInfo());
     }
@@ -756,9 +765,10 @@ function getUserGroupsEditor($encode, $userId)
     }
 
     $stmt = $pdo->prepare("SELECT departments.department_name FROM user_departments INNER JOIN departments on user_departments.department_id=departments.department_id WHERE user_departments.user_id = ?");
-    $result = $stmt->execute(array($userId));
+    $resStatus = $stmt->execute(array($userId));
+    $result = $stmt;
 
-    if (!$result)
+    if (!$resStatus)
     {
         die($stmt->errorInfo());
     }
