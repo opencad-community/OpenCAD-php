@@ -28,50 +28,48 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     include("./actions/api.php");
     include("./actions/responderActions.php");
-    unset($_SESSION['activeDepartment']);
-    if ( $_GET['dep'] == "state" || $_SESSION['activeDepartment'] == "state" )
+    if ( $_GET['dep'] == "state" || $_SESSION['activeDepartment'] == "state")
     {
         $activeDepartment = "State";
         $activeBadge="gavel";
         $_SESSION['activeDepartment'] = 'state';
     }
-    else if ( $_GET['dep'] == "sheriff" || $_SESSION['activeDepartment'] == "sheriff" )
+    else if ( $_GET['dep'] == "sheriff" || $_SESSION['activeDepartment'] == "sheriff")
     {
         $activeDepartment = "Sheriff";
         $activeBadge="gavel";
         $_SESSION['activeDepartment'] = 'sheriff';
     }
-    else if ( $_GET['dep'] == "highway" || $_SESSION['activeDepartment'] == "highway" )
+    else if ( $_GET['dep'] == "highway" || $_SESSION['activeDepartment'] == "highway")
     {
         $activeDepartment = "Highway Patrol";
         $activeBadge="gavel";
         $_SESSION['activeDepartment'] = 'highway';
     }
-    else if ( $_GET['dep'] == "police" || $_SESSION['activeDepartment'] == "police" )
+    else if ( $_GET['dep'] == "police" || $_SESSION['activeDepartment'] == "police")
     {
         $activeDepartment = "Police";
         $activeBadge="gavel";
         $_SESSION['activeDepartment'] = 'police';
     }
-    else if ( $_GET['dep'] == "fire" || $_SESSION['activeDepartment'] == "fire" )
+    else if ( $_GET['dep'] == "fire" || $_SESSION['activeDepartment'] == "fire")
     {
         $activeDepartment = "Fire";
         $activeBadge="fire";
         $_SESSION['activeDepartment'] = 'Fire';
     }
-    else if ( $_GET['dep'] == "ems" || $_SESSION['activeDepartment'] == "ems" )
+    else if ( $_GET['dep'] == "ems" || $_SESSION['activeDepartment'] == "ems")
     {
         $activeDepartment = "EMS";
         $activeBadge="ambulance";
         $_SESSION['activeDepartment'] = 'ems';
     }
-    else if ( $_GET['dep'] == "roadsideAssist" || $_SESSION['activeDepartment'] == "roadsideAssist" )
+    else if ( $_GET['dep'] == "roadsideAssist" || $_SESSION['activeDepartment'] == "roadsideAssist")
     {
         $activeDepartment = "Roadside Assistance";
         $activeBadge="wrench";
         $_SESSION['activeDepartment'] = 'roadsideAssist';
     }
-
 
     $citationMessage = "";
     if(isset($_SESSION['citationMessage']))

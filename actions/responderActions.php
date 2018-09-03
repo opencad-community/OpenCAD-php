@@ -97,6 +97,7 @@ function getStatus()
         die($stmt->errorInfo());
     }
 
+    $statusDetail = "";
     foreach($result as $row)
     {
         $statusDetail = $row[0];
@@ -111,6 +112,7 @@ function getStatus()
         die($stmt->errorInfo());
     }
 
+    $statusText = "";
     foreach($result as $row)
     {
         $statusText = $row[0];
@@ -279,12 +281,6 @@ function create_citation()
     $issued_by = $_SESSION['name'];
     $date = date('Y-m-d');
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-
 	try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
     } catch(PDOException $ex)
@@ -339,7 +335,7 @@ function create_citation()
     $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully created citation</span></div>';
 
 	$pdo = null;
-    header("Location:".BASE_URL."/mdt.php");
+    header("Location:".BASE_URL."/mdt.php?dep=".$_SESSION['activeDepartment']);
 }
 
 function create_warning()
@@ -412,7 +408,7 @@ function create_warning()
     $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully created warning</span></div>';
 
 	$pdo = null;
-    header("Location:".BASE_URL."/mdt.php");
+    header("Location:".BASE_URL."/mdt.php?dep=".$_SESSION['activeDepartment']);
 }
 function create_arrest()
 {
@@ -430,6 +426,13 @@ function create_arrest()
     session_start();
     $issued_by = $_SESSION['name'];
     $date = date('Y-m-d');
+
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
+    }
 
 	$stmt = $pdo->prepare("INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, issued_date) VALUES (?, ?, ?, ?, ?)");
 	$result = $stmt->execute(array($userId, $arrest_reason_1, $arrest_fine_1, $issued_by, $date));
@@ -475,10 +478,9 @@ function create_arrest()
 			die($stmt->errorInfo());
 		}
 	}
-    session_start();
     $_SESSION['arrestMessage'] = '<div class="alert alert-success"><span>Successfully created arrest report</span></div>';
 
 	$pdo = null;
-    header("Location:".BASE_URL."/mdt.php");
+    header("Location:".BASE_URL."/mdt.php?dep=".$_SESSION['activeDepartment']);
 }
 ?>

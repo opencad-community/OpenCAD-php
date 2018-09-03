@@ -70,7 +70,7 @@ $num_rows = $result->rowCount();
 
 foreach($result as $row)
 {
-    if ($row[1] == "0")
+    if ($row[1] == "1")
     {
         $_SESSION['dispatch'] = 'YES';
         $dispatchButton = "<a href=\"".BASE_URL."/cad.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Dispatch</a>";
