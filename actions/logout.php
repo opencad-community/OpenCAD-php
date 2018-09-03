@@ -22,31 +22,23 @@ if (isset($_GET['responder']))
 //Need to make sure they're out of the active_users table
 function logoutResponder()
 {
-    $identifier = $_GET['responder'];
+    $identifier = htmlspecialchars($_GET['responder']);
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-
-    $sql = "DELETE FROM active_users WHERE identifier = ?";
-
-    try {
-        $stmt = mysqli_prepare($link, $sql);
-        mysqli_stmt_bind_param($stmt, "s", $identifier);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == FALSE) {
-            die(mysqli_error($link));
-        }
-    }
-    catch (Exception $e)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+        die('Could not connect: ' . $ex);
     }
 
-    mysqli_close($link);
+    $stmt = $pdo->prepare("DELETE FROM active_users WHERE identifier = ?");
+    $result = $stmt->execute(array($identifier));
+
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
+    $pdo = null;
 }
 
 session_start();

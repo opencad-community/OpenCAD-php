@@ -16,60 +16,51 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 require_once(__DIR__ . "/../oc-config.php");
 
-if (isset($_GET['a'])){
-    getActiveCalls();
-}
+/**
+ * Patch notes:
+ * Adding the `else` to make a `else if` prevents the execution
+ * of multiple functions at the same time by the same client
+ *
+ * Running multiple functions at the same time doesnt seem to
+ * be a needed feature.
+ */
 if (isset($_GET['getCalls'])){
     getActiveCalls();
-}
-if (isset($_GET['getMyCall'])){
+}else if (isset($_GET['getMyCall'])){
     getMyCall();
-}
-if (isset($_GET['getCallDetails'])){
+}else if (isset($_GET['getCallDetails'])){
     getCallDetails();
-}
-if (isset($_GET['getAvailableUnits'])){
+}else if (isset($_GET['getAvailableUnits'])){
     getAvailableUnits();
-}
-if (isset($_GET['getUnAvailableUnits'])){
+}else if (isset($_GET['getUnAvailableUnits'])){
     getUnAvailableUnits();
-}
-if (isset($_POST['changeStatus'])){
+}else if (isset($_POST['changeStatus'])){
     changeStatus();
-}
-if (isset($_GET['getActiveUnits']))
+}else if (isset($_GET['getActiveUnits']))
 {
     getActiveUnits();
-}
-if (isset($_GET['getActiveUnitsModal']))
+}else if (isset($_GET['getActiveUnitsModal']))
 {
     getActiveUnitsModal();
-}
-if (isset($_POST['logoutUser']))
+}else if (isset($_POST['logoutUser']))
 {
     logoutUser();
-}
-if (isset($_POST['setTone']))
+}else if (isset($_POST['setTone']))
 {
     setTone();
-}
-if (isset($_GET['checkTones']))
+}else if (isset($_GET['checkTones']))
 {
     checkTones();
-}
-if (isset($_GET['getDispatchers']))
+}else if (isset($_GET['getDispatchers']))
 {
     getDispatchers();
-}
-if (isset($_GET['getDispatchersMDT']))
+}else if (isset($_GET['getDispatchersMDT']))
 {
     getDispatchersMDT();
-}
-if (isset($_POST['quickStatus']))
+}else if (isset($_POST['quickStatus']))
 {
     quickStatus();
-}
-if (isset($_GET['getAOP']))
+}else if (isset($_GET['getAOP']))
 {
     getAOP();
 }
@@ -81,37 +72,26 @@ function quickStatus()
     session_start();
     $callsign = $_SESSION['callsign'];
 
-
-    //var_dump($_SESSION);
-
     switch($event)
     {
         case "enroute":
-            $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-            if (!$link) {
-                die('Could not connect: ' .mysql_error());
-            }
-
-            //Update the call_narrative to say they're en-route
             $narrativeAdd = date("Y-m-d H:i:s").': '.$callsign.': En-Route<br/>';
 
-
-            $sql = "UPDATE calls SET call_narrative = concat(call_narrative, ?) WHERE call_id = ?";
-
-            try {
-                $stmt = mysqli_prepare($link, $sql);
-                mysqli_stmt_bind_param($stmt, "si", $narrativeAdd, $callId);
-                $result = mysqli_stmt_execute($stmt);
-
-                if ($result == FALSE) {
-                    die(mysqli_error($link));
-                }
-            }
-            catch (Exception $e)
+            try{
+                $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+            } catch(PDOException $ex)
             {
-                die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+                die('Could not connect: ' . $ex);
             }
+
+            $stmt = $pdo->prepare("UPDATE calls SET call_narrative = concat(call_narrative, ?) WHERE call_id = ?");
+            $result = $stmt->execute(array($narrativeAdd, $callId));
+
+            if (!$result)
+            {
+                die($stmt->errorInfo());
+            }
+            $pdo = null;
 
             break;
 
@@ -128,17 +108,22 @@ function getMyCall()
     //First, check to see if they're on a call
     $uid = $_SESSION['id'];
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $sql = 'SELECT active_users.* from `active_users` WHERE active_users.id = "' . $uid . '" AND active_users.status = "0" AND active_users.status_detail = "3"';
+    $stmt = $pdo->prepare("SELECT active_users.* from `active_users` WHERE active_users.id = ? AND active_users.status = '0' AND active_users.status_detail = '3'");
+    $result = $stmt->execute(array($uid));
 
-    $result = mysqli_query($link, $sql);
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
 
-    $num_rows = $result->num_rows;
+    $num_rows = $stmt->rowCount();
 
     if($num_rows == 0)
     {
@@ -147,116 +132,131 @@ function getMyCall()
     else
     {
         //Figure out what call the user is on
-        $sql = 'SELECT call_id from calls_users WHERE id = "' . $uid . '"';
+        $sql = '';
 
-        $result = mysqli_query($link, $sql);
+        $stmt = $pdo->prepare("SELECT call_id from calls_users WHERE id = ?");
+        $resStatus = $stmt->execute(array($uid));
+        $result = $stmt;
 
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        if (!$resStatus)
+        {
+            die($stmt->errorInfo());
+        }
+
+        foreach($result as $row)
         {
             $call_id = $row[0];
         }
 
-        //Get call details
-        $sql = 'SELECT * from calls WHERE call_id = "' . $call_id . '"';
+        $stmt = $pdo->prepare("SELECT * from calls WHERE call_id = ?");
+        $resStatus = $stmt->execute(array($uid));
+        $result = $stmt;
 
-        $result = mysqli_query($link, $sql);
-
-		$num_rows = $result->num_rows;
-
-		if($num_rows == 0)
-		{
-			echo '<div class="alert alert-info"><span>Not currently on a call</span></div>';
-		}
-		else
-    {
-        echo '<table id="activeCalls" class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                <th>Type</th>
-                <th>Call Type</th>
-                <th>Units</th>
-                <th>Location</th>
-                <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-        ';
-
-
-        $counter = 0;
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        if (!$resStatus)
         {
-            echo '
-            <tr id="'.$counter.'">
-                <td>'.$row[0].'</td>';
-
-                //Issue #28. Check if $row[1] == bolo. If so, change text color to orange
-                if ($row[1] == "BOLO")
-                {
-                    echo '<td style="color:orange;">'.$row[1].'</td>';
-                    echo '<td><!--Leave blank--></td>';
-                }
-                else
-                {
-                    echo '<td>'.$row[1].'</td>';
-                    echo '
-                        <td>';
-                            getUnitsOnCall($row[0]);
-                        echo '</td>';
-                }
-
-
-                echo '<td>'.$row[3].'/'.$row[4].'/'.$row[5].'</td>';
-
-                if (isset($_GET['type']) && $_GET['type'] == "responder")
-                {
-                    echo'
-                    <td>
-                        <button id="'.$row[0].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
-                    </td>';
-                }
-                else
-                {
-                echo'
-                <td>
-                    <button id="'.$row[0].'" class="btn-link" style="color: red;" value="'.$row[0].'" onclick="clearCall('.$row[0].')">Clear</button>
-                    <button id="'.$row[0].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
-                    <input name="uid" name="uid" type="hidden" value="'.$row[0].'"/>
-                </td>';
-                }
-
-            echo'
-            </tr>
-            ';
-            $counter++;
+            die($stmt->errorInfo());
         }
 
-        echo '
-            </tbody>
-            </table>
-        ';
+        $num_rows = $result->rowCount();
 
+        if($num_rows == 0)
+        {
+            echo '<div class="alert alert-info"><span>Not currently on a call</span></div>';
+        }
+        else
+        {
+            echo '<table id="activeCalls" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                    <th>Type</th>
+                    <th>Call Type</th>
+                    <th>Units</th>
+                    <th>Location</th>
+                    <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+            ';
+
+
+            $counter = 0;
+            foreach($result as $row)
+            {
+                echo '
+                <tr id="'.$counter.'">
+                    <td>'.$row[0].'</td>';
+
+                    //Issue #28. Check if $row[1] == bolo. If so, change text color to orange
+                    if ($row[1] == "BOLO")
+                    {
+                        echo '<td style="color:orange;">'.$row[1].'</td>';
+                        echo '<td><!--Leave blank--></td>';
+                    }
+                    else
+                    {
+                        echo '<td>'.$row[1].'</td>';
+                        echo '
+                            <td>';
+                                getUnitsOnCall($row[0]);
+                            echo '</td>';
+                    }
+
+
+                    echo '<td>'.$row[3].'/'.$row[4].'/'.$row[5].'</td>';
+
+                    if (isset($_GET['type']) && $_GET['type'] == "responder")
+                    {
+                        echo'
+                        <td>
+                            <button id="'.$row[0].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
+                        </td>';
+                    }
+                    else
+                    {
+                    echo'
+                    <td>
+                        <button id="'.$row[0].'" class="btn-link" style="color: red;" value="'.$row[0].'" onclick="clearCall('.$row[0].')">Clear</button>
+                        <button id="'.$row[0].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
+                        <input name="uid" name="uid" type="hidden" value="'.$row[0].'"/>
+                    </td>';
+                    }
+
+                echo'
+                </tr>
+                ';
+                $counter++;
+            }
+
+            echo '
+                </tbody>
+                </table>
+            ';
+
+        }
     }
+    $pdo = null;
 }
-}
-
-
 
 //Checks to see if there are any active tones. Certain tones will add a session variable
 function checkTones()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $sql = "SELECT * from tones";
+    $result = $pdo->query("SELECT * from tones");
 
-    $result=mysqli_query($link, $sql);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
     $encode = array();
-    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    foreach($result as $row)
     {
         // If the tone is set to active
         if ($row[2] == "1")
@@ -268,10 +268,7 @@ function checkTones()
             $encode[$row[1]] = "INACTIVE";
         }
     }
-
-    mysqli_close($link);
     echo json_encode($encode);
-
 }
 
 function setTone()
@@ -290,29 +287,21 @@ function setTone()
             break;
     }
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
-    }
-
-    $sql = "UPDATE tones SET active = ? WHERE name = ?";
-
-    try {
-        $stmt = mysqli_prepare($link, $sql);
-        mysqli_stmt_bind_param($stmt, "ss", $status, $tone);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == FALSE) {
-            die(mysqli_error($link));
-        }
-    }
-    catch (Exception $e)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+        die('Could not connect: ' . $ex);
     }
 
-    mysqli_close($link);
+    $stmt = $pdo->prepare("UPDATE tones SET active = ? WHERE name = ?");
+    $result = $stmt->execute(array($status,$tone));
+
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
+    $pdo = null;
 
     if ($action == "start")
     {
@@ -322,38 +311,29 @@ function setTone()
     {
         echo "SUCCESS STOP";
     }
-
 }
 
 function logoutUser()
 {
     $identifier = htmlspecialchars($_POST['unit']);
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
-    }
-
-    $sql = "DELETE FROM active_users WHERE identifier = ?";
-
-    try {
-        $stmt = mysqli_prepare($link, $sql);
-        mysqli_stmt_bind_param($stmt, "s", $identifier);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == FALSE) {
-            die(mysqli_error($link));
-        }
-    }
-    catch (Exception $e)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+        die('Could not connect: ' . $ex);
     }
 
-    mysqli_close($link);
-    echo "SUCCESS";
+    $stmt = $pdo->prepare("DELETE FROM active_users WHERE identifier = ?");
+    $result = $stmt->execute(array($identifier));
 
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
+    $pdo = null;
+
+    echo "SUCCESS";
 }
 
 function changeStatus()
@@ -436,47 +416,45 @@ function changeStatus()
             break;
     }
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
-    }
-
-    $sql = "UPDATE active_users SET status = ?, status_detail = ? WHERE identifier = ?";
-
-    try {
-        $stmt = mysqli_prepare($link, $sql);
-        mysqli_stmt_bind_param($stmt, "iis", $statusId, $statusDet, $unit);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == FALSE) {
-            die(mysqli_error($link));
-        }
-    }
-    catch (Exception $e)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+        die('Could not connect: ' . $ex);
+    }
+
+    $stmt = $pdo->prepare("UPDATE active_users SET status = ?, status_detail = ? WHERE identifier = ?");
+    $result = $stmt->execute(array($statusId, $statusDet, $unit));
+
+    if (!$result)
+    {
+        die($stmt->errorInfo());
     }
 
     if ($onCall)
     {
-        //echo $unit;
-        //Figure out what call they're on
-        $sql = "SELECT call_id FROM calls_users WHERE identifier = \"$unit\"";
+        $stmt = $pdo->prepare("SELECT call_id FROM calls_users WHERE identifier = ?");
+        $result = $stmt->execute(array($unit));
 
-        $result=mysqli_query($link, $sql);
+        if (!$result)
+        {
+            die($stmt->errorInfo());
+        }
 
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        foreach($result as $row)
         {
             $callId = $row[0];
         }
 
-        //Get their callsign for the narrative
-        $sql = "SELECT callsign FROM active_users WHERE identifier = \"$unit\"";
+        $stmt = $pdo->prepare("SELECT callsign FROM active_users WHERE identifier = ?");
+        $result = $stmt->execute(array($unit));
 
-        $result=mysqli_query($link, $sql);
+        if (!$result)
+        {
+            die($stmt->errorInfo());
+        }
 
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        foreach($result as $row)
         {
             $callsign = $row[0];
         }
@@ -484,71 +462,48 @@ function changeStatus()
         //Update the call_narrative to say they were cleared
         $narrativeAdd = date("Y-m-d H:i:s").': Unit Cleared: '.$callsign.'<br/>';
 
-        $sql = "UPDATE calls SET call_narrative = concat(call_narrative, ?) WHERE call_id = ?";
+        $stmt = $pdo->prepare("UPDATE calls SET call_narrative = concat(call_narrative, ?) WHERE call_id = ?");
+        $result = $stmt->execute(array($narrativeAdd, $callId));
 
-        try {
-            $stmt = mysqli_prepare($link, $sql);
-            mysqli_stmt_bind_param($stmt, "si", $narrativeAdd, $callId);
-            $result = mysqli_stmt_execute($stmt);
-
-            if ($result == FALSE) {
-                die(mysqli_error($link));
-            }
-        }
-        catch (Exception $e)
+        if (!$result)
         {
-            die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+            die($stmt->errorInfo());
         }
 
+        $stmt = $pdo->prepare("DELETE FROM calls_users WHERE identifier = ?");
+        $result = $stmt->execute(array($unit));
 
-       //Remove them from the call
-       $sql = "DELETE FROM calls_users WHERE identifier = ?";
-
-        try {
-            $stmt = mysqli_prepare($link, $sql);
-            mysqli_stmt_bind_param($stmt, "s", $unit);
-            $result = mysqli_stmt_execute($stmt);
-
-            if ($result == FALSE) {
-                die(mysqli_error($link));
-            }
-        }
-        catch (Exception $e)
+        if (!$result)
         {
-            die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+            die($stmt->errorInfo());
         }
     }
 
-    mysqli_close($link);
+    $pdo = null;
     echo "SUCCESS";
 }
 
 function deleteDispatcher()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $identifier = $_SESSION['identifier'];
+    $stmt = $pdo->prepare("DELETE FROM dispatchers WHERE identifier = ?");
+    $result = $stmt->execute(array($_SESSION['identifier']));
 
-
-mysqli_query($link,"DELETE FROM dispatchers WHERE identifier='".$identifier."'");
-mysqli_close($link);
-
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
+    $pdo = null;
 }
 
 function setDispatcher($dep)
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
-    }
-
-    $identifier = $_SESSION['identifier'];
-
     $status;
     switch($dep)
     {
@@ -562,38 +517,41 @@ function setDispatcher($dep)
 
     deleteDispatcher();
 
-    $sql = "INSERT INTO dispatchers (identifier, callsign, status) VALUES (?, ?, ?)";
-
-
-    try {
-        $stmt = mysqli_prepare($link, $sql);
-        mysqli_stmt_bind_param($stmt, "sss", $identifier, $identifier, $status);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == FALSE) {
-            die(mysqli_error($link));
-        }
-    }
-    catch (Exception $e)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+        die('Could not connect: ' . $ex);
     }
 
+    $stmt = $pdo->prepare("INSERT INTO dispatchers (identifier, callsign, status) VALUES (?, ?, ?)");
+    $result = $stmt->execute(array($_SESSION['identifier'], $_SESSION['identifier'], $status));
+
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
+    $pdo = null;
 }
 
 function getAOP()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $sql = "SELECT * from aop";
+    $result = $pdo->query("SELECT * from aop");
 
-    $result = mysqli_query($link, $sql);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
     if($num_rows == 0)
     {
@@ -601,29 +559,31 @@ function getAOP()
     }
     else
     {
-
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        foreach($result as $row)
         {
             echo 'AOP: '.$row[0].' ';
         }
-
-    mysqli_close($link);
-}
+    }
 }
 
 function getDispatchers()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $sql = "SELECT * from dispatchers WHERE status = '1'";
+    $result = $pdo->query("SELECT * from dispatchers WHERE status = '1'");
 
-    $result = mysqli_query($link, $sql);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
     if($num_rows == 0)
     {
@@ -641,7 +601,7 @@ function getDispatchers()
             </thead>
             <tbody>
         ';
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        foreach($result as $row)
         {
             echo '
             <tr>
@@ -654,23 +614,27 @@ function getDispatchers()
             </tbody>
             </table>
         ';
-    mysqli_close($link);
-}
+    }
 }
 
 function getDispatchersMDT()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $sql = "SELECT * from dispatchers WHERE status = '1'";
+    $result = $pdo->query("SELECT * from dispatchers WHERE status = '1'");
 
-    $result = mysqli_query($link, $sql);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
     if($num_rows == 0)
     {
@@ -679,18 +643,11 @@ function getDispatchersMDT()
     else
     {
         $dispatcher = "true";
-    mysqli_close($link);
-}
+    }
 }
 
 function setUnitActive($dep)
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
-    }
-
     $identifier = $_SESSION['identifier'];
     $uid = $_SESSION['id'];
     $status;
@@ -704,38 +661,41 @@ function setUnitActive($dep)
             break;
     }
 
-    $sql = "REPLACE INTO active_users (identifier, callsign, status, status_detail, id) VALUES (?, ?, ?, '6', ?)";
-
-
-    try {
-        $stmt = mysqli_prepare($link, $sql);
-        mysqli_stmt_bind_param($stmt, "ssii", $identifier, $identifier, $status, $uid);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == FALSE) {
-            die(mysqli_error($link));
-        }
-    }
-    catch (Exception $e)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+        die('Could not connect: ' . $ex);
     }
 
+    $stmt = $pdo->prepare("REPLACE INTO active_users (identifier, callsign, status, status_detail, id) VALUES (?, ?, ?, '6', ?)");
+    $result = $stmt->execute(array($identifier, $identifier, $status, $uid));
+
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
+    $pdo = null;
 }
 
 function getAvailableUnits()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $sql = "SELECT * from active_users WHERE status = '1'";
+    $result = $pdo->query("SELECT * from active_users WHERE status = '1'");
 
-    $result = mysqli_query($link, $sql);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
     if($num_rows == 0)
     {
@@ -758,7 +718,7 @@ function getAvailableUnits()
 
 
         $counter = 0;
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        foreach($result as $row)
         {
             echo '
             <tr>
@@ -783,22 +743,26 @@ function getAvailableUnits()
             </table>
         ';
     }
-    mysqli_close($link);
 }
 
 function getUnAvailableUnits()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $sql = "SELECT * from active_users WHERE status = '0'";
+    $result = $pdo->query("SELECT * from active_users WHERE status = '0'");
 
-    $result = mysqli_query($link, $sql);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
     if($num_rows == 0)
     {
@@ -819,82 +783,93 @@ function getUnAvailableUnits()
                 <tbody>
             ';
 
-
-
-            while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
-            {
-                echo '
-                <tr>
-                    <td>'.$row[0].'</td>
-                    <td>'.$row[1].'</td>
-                    <td>';
-
-                        getIndividualStatus($row[1]);
-
-                    echo '</td>
-
-                    <td>
-                    <a id="logoutUser" class="nopadding logoutUser '.$row[0].'" onclick="logoutUser(this);" style="color:red; cursor:pointer;">Logout</a>&nbsp;&nbsp;&nbsp;
-                    <div class="dropdown"><button class="btn btn-link dropdown-toggle nopadding" style="display: inline-block; vertical-align:top;" type="button" data-toggle="dropdown">Status <span class="caret"></span></button><ul class="dropdown-menu">
-                        <li><a id="statusAvail" class="statusAvailBusy '.$row[0].'" onclick="testFunction(this);">10-8/Available</a></li>
-                    </ul></div>
-                    </td>
-                    <input name="uid" type="hidden" value='.$row[0].' />
-                </tr>
-                ';
-            }
-
+        foreach($result as $row)
+        {
             echo '
-                </tbody>
-                </table>
-            ';
+            <tr>
+                <td>'.$row[0].'</td>
+                <td>'.$row[1].'</td>
+                <td>';
 
+                    getIndividualStatus($row[1]);
+
+                echo '</td>
+
+                <td>
+                <a id="logoutUser" class="nopadding logoutUser '.$row[0].'" onclick="logoutUser(this);" style="color:red; cursor:pointer;">Logout</a>&nbsp;&nbsp;&nbsp;
+                <div class="dropdown"><button class="btn btn-link dropdown-toggle nopadding" style="display: inline-block; vertical-align:top;" type="button" data-toggle="dropdown">Status <span class="caret"></span></button><ul class="dropdown-menu">
+                    <li><a id="statusAvail" class="statusAvailBusy '.$row[0].'" onclick="testFunction(this);">10-8/Available</a></li>
+                </ul></div>
+                </td>
+                <input name="uid" type="hidden" value='.$row[0].' />
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
       }
-    mysqli_close($link);
 }
 
 function getIndividualStatus($callsign)
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $sql = "SELECT status_detail FROM active_users WHERE callsign = \"$callsign\"";
+    $stmt = $pdo->prepare("SELECT status_detail FROM active_users WHERE callsign = ?");
+    $result = $stmt->execute(htmlspecialchars($callsign));
 
-    $result=mysqli_query($link, $sql);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
 
-    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    foreach($result as $row)
     {
         $statusDetail = $row[0];
     }
 
-    $sql = "SELECT status_text FROM statuses WHERE status_id = \"$statusDetail\"";
+    $stmt = $pdo->prepare("SELECT status_text FROM statuses WHERE status_id = ?");
+    $result = $stmt->execute($statusDetail);
 
-    $result=mysqli_query($link, $sql);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
 
-    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    foreach($result as $row)
     {
         $statusText = $row[0];
     }
 
+    $pdo = null;
     echo $statusText;
 }
 
 function getIncidentType()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $sql = "SELECT code_name FROM incident_type";
+    $result = $pdo->query("SELECT code_name FROM incident_type");
 
-    $result=mysqli_query($link, $sql);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
-    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    foreach($result as $row)
     {
         echo '<option value="'.$row[0].'">'.$row[0].'</option>';
     }
@@ -903,17 +878,22 @@ function getIncidentType()
 
 function getStreet()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $sql = "SELECT name FROM streets";
+    $result = $pdo->query("SELECT name FROM streets");
 
-    $result=mysqli_query($link, $sql);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
-    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    foreach($result as $row)
     {
         echo '<option value="'.$row[0].'">'.$row[0].'</option>';
     }
@@ -921,18 +901,23 @@ function getStreet()
 
 function getActiveUnits()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "SELECT callsign FROM active_users WHERE status = '1'";
+    $result = $pdo->query("SELECT callsign FROM active_users WHERE status = '1'");
 
-    $result=mysqli_query($link, $query);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
     $encode = array();
-    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    foreach($result as $row)
     {
         $encode[$row[0]] = $row[0];
     }
@@ -942,18 +927,23 @@ function getActiveUnits()
 
 function getActiveUnitsModal()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "SELECT callsign, identifier FROM active_users WHERE status = '1'";
+    $result = $pdo->query("SELECT callsign, identifier FROM active_users WHERE status = '1'");
 
-    $result=mysqli_query($link, $query);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
     $encode = array();
-    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    foreach($result as $row)
     {
         $encode[$row[1]] = $row[0];
     }
@@ -963,17 +953,22 @@ function getActiveUnitsModal()
 
 function getActiveCalls()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-      $sql = "SELECT * from calls";
+    $result = $pdo->query("SELECT * from calls");
 
-    $result = mysqli_query($link, $sql);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
     if($num_rows == 0)
     {
@@ -996,7 +991,7 @@ function getActiveCalls()
 
 
         $counter = 0;
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        foreach($result as $row)
         {
             echo '
             <tr id="'.$counter.'">
@@ -1050,23 +1045,26 @@ function getActiveCalls()
         ';
 
     }
-    mysqli_close($link);
-
 }
 
 function getActivePersonBOLO()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $sql = "SELECT * from bolos_persons";
+    $result = $pdo->query("SELECT * from bolos_persons");
 
-    $result = mysqli_query($link, $sql);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
     if($num_rows == 0)
     {
@@ -1089,7 +1087,7 @@ function getActivePersonBOLO()
 
 
         $counter = 0;
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        foreach($result as $row)
         {
             echo '
             <tr id="'.$counter.'">
@@ -1143,25 +1141,28 @@ function getActivePersonBOLO()
         ';
 
     }
-    mysqli_close($link);
-
 }
 
 function getUnitsOnCall($callId)
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $sql1 = "SELECT * FROM calls_users WHERE call_id = \"$callId\"";
+    $stmt = $pdo->prepare("SELECT * FROM calls_users WHERE call_id = ?");
+    $resStatus = $stmt->execute(array(htmlspecialchars($callId)));
+    $result = $stmt;
 
-    $result1=mysqli_query($link, $sql1);
+    if (!$resStatus)
+    {
+        die($stmt->errorInfo());
+    }
+    $pdo = null;
 
-    $units = "";
-
-    $num_rows = $result1->num_rows;
+    $num_rows = $result->rowCount();
 
     if($num_rows == 0)
     {
@@ -1169,35 +1170,37 @@ function getUnitsOnCall($callId)
     }
     else
     {
-        while($row1 = mysqli_fetch_array($result1, MYSQLI_BOTH))
+        foreach($result as $row)
         {
             $units = $units.''.$row1[2].', ';
         }
     }
 
-
-
     echo $units;
-
-    mysqli_close($link);
 }
 
 function getCallDetails()
 {
-    $callId = $_GET['callId'];
+    $callId = htmlspecialchars($_GET['callId']);
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $sql = "SELECT * FROM calls WHERE call_id = \"$callId\"";
+    $stmt = $pdo->prepare("SELECT * FROM calls WHERE call_id = ?");
+    $result = $stmt->execute(array($callId));
 
-    $result=mysqli_query($link, $sql);
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
+    $pdo = null;
 
     $encode = array();
-    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    foreach($result as $row)
     {
         $encode["call_id"] = $row[0];
         $encode["call_type"] = $row[1];
@@ -1209,22 +1212,26 @@ function getCallDetails()
     }
 
     echo json_encode($encode);
-    mysqli_close($link);
 }
 
 function getCivilianNamesOption()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $sql = "SELECT id, name FROM ncic_names";
+    $result = $pdo->query("SELECT id, name FROM ncic_names");
 
-    $result=mysqli_query($link, $sql);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
-    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    foreach($result as $row)
     {
         echo "<option value=".$row[0].">".$row[1]."</option>";
     }
@@ -1232,17 +1239,22 @@ function getCivilianNamesOption()
 
 function getCitations()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $sql = "SELECT citation_name FROM citations";
+    $result = $pdo->query("SELECT citation_name FROM citations");
 
-    $result=mysqli_query($link, $sql);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
-    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    foreach($result as $row)
     {
         echo '<option value="'.$row[0].'">'.$row[0].'</option>';
     }
@@ -1257,24 +1269,28 @@ function getCitations()
  */
 function getVehicleMakes()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "SELECT DISTINCT vehicles.Make FROM vehicles";
+    $result = $pdo->query("SELECT DISTINCT vehicles.Make FROM vehicles");
 
-    $result=mysqli_query($link, $query);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
-    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    foreach($result as $row)
     {
         echo '<option value="'.$row[0].'">'.$row[0].'</option>';
     }
 }
-
 
 /**#@+
  * function getVehicleModels()
@@ -1285,19 +1301,24 @@ function getVehicleMakes()
  */
 function getVehicleModels()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "SELECT DISTINCT vehicles.Model FROM vehicles";
+    $result = $pdo->query("SELECT DISTINCT vehicles.Model FROM vehicles");
 
-    $result=mysqli_query($link, $query);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
-    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    foreach($result as $row)
     {
         echo '<option value="'.$row[0].'">'.$row[0].'</option>';
     }
@@ -1312,24 +1333,28 @@ function getVehicleModels()
  */
 function getVehicle()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "SELECT * FROM vehicles";
+    $result = $pdo->query("SELECT * FROM vehicles");
 
-    $result=mysqli_query($link, $query);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
-    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    foreach($result as $row)
     {
         echo '<option value="'.$row[1].' '.$row[2].'">'.$row[1].'-'.$row[2].'</option>';
     }
 }
-
 
 /**#@+
  * function getGenders()
@@ -1340,19 +1365,24 @@ function getVehicle()
  */
 function getGenders()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "SELECT DISTINCT genders.genders FROM genders";
+    $result = $pdo->query("SELECT DISTINCT genders.genders FROM genders");
 
-    $result=mysqli_query($link, $query);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
-    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    foreach($result as $row)
     {
         echo '<option value="'.$row[0].'">'.$row[0].'</option>';
     }
@@ -1367,146 +1397,146 @@ function getGenders()
  */
 function getColors()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "SELECT color_group, color_name FROM colors";
+    $result = $pdo->query("SELECT color_group, color_name FROM colors");
 
-    $result=mysqli_query($link, $query);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
-    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    foreach($result as $row)
     {
         echo '<option value="'.$row[0].'-'.$row[1].'">'.$row[0].'-'.$row[1].'</option>';
     }
 }
 
-
 function getCivilianNames()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
+    }
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    $result = $pdo->query("SELECT ncic_names.id, ncic_names.name FROM ncic_names");
 
-	$sql = "SELECT ncic_names.id, ncic_names.name FROM ncic_names";
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
-	$result=mysqli_query($link, $sql);
+    $num_rows = $result->rowCount();
 
-	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    foreach($result as $row)
 	{
 		echo "<option value=\"$row[0]\">$row[1]</option>";
 	}
-	mysqli_close($link);
 }
 
 function getAgencies()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
+    }
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    $result = $pdo->query("SELECT * FROM departments WHERE department_name <>'Administrators' AND department_name <>'EMS' AND department_name <>'Fire' AND department_name <>'Civilian' AND department_name <>'Communications (Dispatch)' AND department_name <>'Head Administrators'");
 
-	$sql = 'SELECT * FROM departments
-            WHERE department_name <>"Administrators"
-            AND department_name <>"EMS"
-            AND department_name <>"Fire"
-            AND department_name <>"Civilian"
-            AND department_name <>"Communications (Dispatch)"
-            AND department_name <>"Head Administrators"';
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
-	$result=mysqli_query($link, $sql);
+    $num_rows = $result->rowCount();
 
-	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    foreach($result as $row)
 	{
 		echo "<option value=\"$row[1]\">$row[1]</option>";
 	}
-	mysqli_close($link);
 }
-
 
 function callCheck()
 {
     $uid = $_SESSION['id'];
     $identifier = $_SESSION['identifier'];
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
+    }
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    $stmt = $pdo->prepare("SELECT * FROM calls_users WHERE id = ?");
+    $resStatus = $stmt->execute(array($uid));
+    $result = $stmt;
 
-	$sql = 'SELECT * FROM calls_users WHERE id = "'.$uid.'"';
+    if (!$resStatus)
+    {
+        die($stmt->errorInfo());
+    }
 
-	$result=mysqli_query($link, $sql);
-
-	$num_rows = $result->num_rows;
+	$num_rows = $result->rowCount();
 
 	if($num_rows == 0)
 	{
+        $stmt = $pdo->prepare("REPLACE INTO active_users (identifier, callsign, status, status_detail, id) VALUES (?, ?, '0', '6', ?)");
+        $result = $stmt->execute(array($identifier, $identifier, $uid));
 
-		$sql = "REPLACE INTO active_users (identifier, callsign, status, status_detail, id) VALUES (?, ?, '0', '6', ?)";
-
-
-    try {
-        $stmt = mysqli_prepare($link, $sql);
-        mysqli_stmt_bind_param($stmt, "ssi", $identifier, $identifier, $uid);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == FALSE) {
-            die(mysqli_error($link));
+        if (!$result)
+        {
+            die($stmt->errorInfo());
         }
     }
-    catch (Exception $e)
-    {
-        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-    }
-	}
 	else
 	{
+        $stmt = $pdo->prepare("REPLACE INTO active_users (identifier, callsign, status, status_detail, id) VALUES (?, ?, '0', '3', ?)");
+        $result = $stmt->execute(array($identifier, $identifier, $uid));
 
-		$sql = "REPLACE INTO active_users (identifier, callsign, status, status_detail, id) VALUES (?, ?, '0', '3', ?)";
-
-
-    try {
-        $stmt = mysqli_prepare($link, $sql);
-        mysqli_stmt_bind_param($stmt, "ssi", $identifier, $identifier, $uid);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == FALSE) {
-            die(mysqli_error($link));
+        if (!$result)
+        {
+            die($stmt->errorInfo());
         }
-    }
-    catch (Exception $e)
-    {
-        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-    }
 	}
 
+    $pdo = null;
 }
-
 
 function getWeapons()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "SELECT * FROM weapons";
+    $result = $pdo->query("SELECT * FROM weapons");
 
-    $result=mysqli_query($link, $query);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
-    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    foreach($result as $row)
     {
         echo '<option value="'.$row[1].' '.$row[2].'">'.$row[1].'-'.$row[2].'</option>';
     }
@@ -1514,17 +1544,22 @@ function getWeapons()
 
 function rms_warnings()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "SELECT ncic_names.name, ncic_warnings.id, ncic_warnings.warning_name, ncic_warnings.issued_date, ncic_warnings.issued_by FROM ncic_warnings INNER JOIN ncic_names ON ncic_warnings.name_id=ncic_names.id WHERE ncic_warnings.status = '1'";
+    $result = $pdo->query("SELECT ncic_names.name, ncic_warnings.id, ncic_warnings.warning_name, ncic_warnings.issued_date, ncic_warnings.issued_by FROM ncic_warnings INNER JOIN ncic_names ON ncic_warnings.name_id=ncic_names.id WHERE ncic_warnings.status = '1'");
 
-    $result=mysqli_query($link, $query);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
     if($num_rows == 0)
     {
@@ -1545,7 +1580,7 @@ function rms_warnings()
             <tbody>
         ';
 
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        foreach($result as $row)
         {
             echo '
             <tr>
@@ -1563,19 +1598,25 @@ function rms_warnings()
         ';
     }
 }
+
 function rms_citations()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "SELECT ncic_names.name, ncic_citations.id, ncic_citations.citation_name, ncic_citations.citation_fine, ncic_citations.issued_date, ncic_citations.issued_by FROM ncic_citations INNER JOIN ncic_names ON ncic_citations.name_id=ncic_names.id WHERE ncic_citations.status = '1'";
+    $result = $pdo->query("SELECT ncic_names.name, ncic_citations.id, ncic_citations.citation_name, ncic_citations.citation_fine, ncic_citations.issued_date, ncic_citations.issued_by FROM ncic_citations INNER JOIN ncic_names ON ncic_citations.name_id=ncic_names.id WHERE ncic_citations.status = '1'");
 
-    $result=mysqli_query($link, $query);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
     if($num_rows == 0)
     {
@@ -1597,7 +1638,7 @@ function rms_citations()
             <tbody>
         ';
 
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        foreach($result as $row)
         {
             echo '
             <tr>
@@ -1616,19 +1657,25 @@ function rms_citations()
         ';
     }
 }
+
 function rms_arrests()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "SELECT ncic_names.name, ncic_arrests.id, ncic_arrests.arrest_reason, ncic_arrests.arrest_fine, ncic_arrests.issued_date, ncic_arrests.issued_by FROM ncic_arrests INNER JOIN ncic_names ON ncic_arrests.name_id=ncic_names.id";
+    $result = $pdo->query("SELECT ncic_names.name, ncic_arrests.id, ncic_arrests.arrest_reason, ncic_arrests.arrest_fine, ncic_arrests.issued_date, ncic_arrests.issued_by FROM ncic_arrests INNER JOIN ncic_names ON ncic_arrests.name_id=ncic_names.id");
 
-    $result=mysqli_query($link, $query);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
     if($num_rows == 0)
     {
@@ -1650,7 +1697,7 @@ function rms_arrests()
             <tbody>
         ';
 
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        foreach($result as $row)
         {
             echo '
             <tr>
@@ -1669,19 +1716,25 @@ function rms_arrests()
         ';
     }
 }
+
 function rms_warrants()
 {
-   $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "SELECT ncic_warrants.*, ncic_names.name FROM ncic_warrants INNER JOIN ncic_names ON ncic_names.id=ncic_warrants.name_id";
+    $result = $pdo->query("SELECT ncic_warrants.*, ncic_names.name FROM ncic_warrants INNER JOIN ncic_names ON ncic_names.id=ncic_warrants.name_id");
 
-    $result=mysqli_query($link, $query);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+    $pdo = null;
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
     if($num_rows == 0)
     {
@@ -1705,7 +1758,7 @@ function rms_warrants()
             <tbody>
         ';
 
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        foreach($result as $row)
         {
             echo '
             <tr>
