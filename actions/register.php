@@ -19,7 +19,6 @@ if (isset($_POST['civreg']))
     civreg();
 }
 
-
 function register()
 {
     $name = htmlspecialchars($_POST['uname']);
@@ -81,7 +80,7 @@ function register()
     foreach($divisions as $division)
     {
         if($division == "communications")
-        {$division = "1";}
+            {$division = "1";}
         elseif($division == "state")
             {$division = "2";}
         elseif($division == "highway")
@@ -141,7 +140,6 @@ function civreg()
     $stmt = $pdo->prepare("SELECT email from users where email = ?");
     $resStatus = $stmt->execute(array($email));
     $result = $stmt;
-
 
     if (!$resStatus)
     {

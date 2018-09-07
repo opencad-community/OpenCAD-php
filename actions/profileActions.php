@@ -115,7 +115,6 @@ function changePassword()
     $password = $row['password'];
     $newpassword = htmlspecialchars($_POST['password']);
     $hashed_password = password_hash($newpassword, PASSWORD_DEFAULT);
-    mysqli_query($link,"UPDATE `users` SET `password` = '$hashed_password' WHERE `id` = '$id'") or die(mysqli_error($link));
 
     $stmt = $pdo->prepare("UPDATE users SET password = ? WHERE id = ?");
     $result = $stmt->execute(array($hashed_password, $id));
