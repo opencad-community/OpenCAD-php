@@ -442,7 +442,6 @@ function create911Call()
     {
         die($pdo->errorInfo());
     }
-    $pdo = null;
 
 	foreach($result as $row)
 	{
@@ -451,7 +450,8 @@ function create911Call()
 
 	$callid++;
 
-	$result = $pdo->query("REPLACE INTO call_list (call_id) VALUES (?)");
+	$stmt = $pdo->prepare("REPLACE INTO call_list (call_id) VALUES (?)");
+    $result = $stmt->execute(array($callid));
 
     if (!$result)
     {
