@@ -817,12 +817,13 @@ function delete_plate()
         die('Could not connect: ' . $ex);
     }
 
-    $stmt = $pdo->prepare("DELETE FROM ncic_vehicle WHERE id = ?");
-    $result = $stmt->execute(array(htmlspecialchars($_POST['uid'])));
+    $stmt = $pdo->prepare("DELETE FROM ncic_plates WHERE id = ?");
+    $result = $stmt->execute(array($vehid));
 
     if (!$result)
     {
-        die($stmt->errorInfo());
+        print_r($stmt->errorInfo());
+        die();
     }
     $pdo = null;
 
@@ -936,8 +937,6 @@ function edit_plate()
     $submittedById = $_SESSION['id'];
     $userId = htmlspecialchars($_POST['civilian_names']);
     $veh_plate = $plate;
-    $veh_make;
-    $veh_model;
     $veh_pcolor = htmlspecialchars($_POST['veh_pcolor']);
     $veh_scolor = htmlspecialchars($_POST['veh_scolor']);
     $veh_insurance = htmlspecialchars($_POST['veh_insurance']);
