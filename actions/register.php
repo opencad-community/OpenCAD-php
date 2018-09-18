@@ -19,20 +19,15 @@ if (isset($_POST['civreg']))
     civreg();
 }
 
-
 function register()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    if (!$link) {
-        die('Could not connect: ' .mysql_error()); //TODO: A function to send me an email when this occurs
-    }
-    $name = $link->real_escape_string($_POST['uname']);
-    $email = $link->real_escape_string($_POST['email']);
-    $identifier = $link->real_escape_string($_POST['identifier']);
+    $name = htmlspecialchars($_POST['uname']);
+    $email = htmlspecialchars($_POST['email']);
+    $identifier = htmlspecialchars($_POST['identifier']);
     $divisions = array();
     foreach ($_POST['division'] as $selectedOption)
     {
-        array_push($divisions, $selectedOption);
+        array_push($divisions, htmlspecialchars($selectedOption));
     }
     if($_POST['password'] !== $_POST['password1'])
     {
@@ -47,9 +42,23 @@ function register()
     //Establish database connection
 
     //Check to see if the email has already been used
-    $query = "SELECT email from users where email = \"".$email."\"";
-    $result = mysqli_query($link, $query);
-    $num_rows = $result->num_rows;
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
+    }
+
+    $stmt = $pdo->prepare("SELECT email from users where email = ?");
+    $resStatus = $stmt->execute(array($email));
+    $result = $stmt;
+
+    if (!$resStatus)
+    {
+        die($stmt->errorInfo());
+    }
+
+    $num_rows = $result->rowCount();
     if ($num_rows>0)
     {
         session_start();
@@ -58,25 +67,20 @@ function register()
         header("Location:".BASE_URL."/index.php#signup");
         exit();
     }
-    $query = "INSERT INTO users (name, email, password, identifier) VALUES (?, ?, ?, ?)";
-    try {
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $password, $identifier);
-        $result = mysqli_stmt_execute($stmt);
-        if ($result == FALSE) {
-            die(mysqli_error($link));
-        }
-    }
-    catch (Exception $e)
+
+    $stmt = $pdo->prepare("INSERT INTO users (name, email, password, identifier) VALUES (?, ?, ?, ?)");
+    $result = $stmt->execute(array($name, $email, $password, $identifier));
+
+    if (!$result)
     {
-        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+        die($stmt->errorInfo());
     }
     /*Add user to departments they requested, temporary table */
     /*This is really inefficient. There should be a better way*/
     foreach($divisions as $division)
     {
         if($division == "communications")
-        {$division = "1";}
+            {$division = "1";}
         elseif($division == "state")
             {$division = "2";}
         elseif($division == "highway")
@@ -89,40 +93,30 @@ function register()
             {$division = "6";}
         elseif($division == "ems")
             {$division = "7";}
-        elseif($division == "civillian")
+        elseif($division == "civilian")
             {$division = "8";}
-        $query = "INSERT INTO user_departments_temp (user_id, department_id)
-              SELECT id , ?
-              FROM users
-              WHERE email = ?";
-        try {
-            $stmt = mysqli_prepare($link, $query);
-            mysqli_stmt_bind_param($stmt, "is", $division, $email);
-            $result = mysqli_stmt_execute($stmt);
-            if ($result == FALSE) {
-                die(mysqli_error($link));
-            }
-        }
-        catch (Exception $e)
+
+        $stmt = $pdo->prepare("INSERT INTO user_departments_temp (user_id, department_id) SELECT id , ? FROM users WHERE email = ?");
+        $result = $stmt->execute(array($division, $email));
+
+        if (!$result)
         {
-            die("Failed to run query: " . $e->getMessage()); //TODO: A function to send admins an email when this occurs should be made
+            die($stmt->errorInfo());
         }
     }
-    mysqli_close($link);
+
+    $pdo = null;
     session_start();
     $_SESSION['register_success'] = "Successfully requested access. Please wait for an administrator to approve your request.";
     sleep(1);
     header("Location:".BASE_URL."/index.php#signup");
 }
+
 function civreg()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    if (!$link) {
-        die('Could not connect: ' .mysql_error()); //TODO: A function to send me an email when this occurs
-    }
-    $name = $link->real_escape_string($_POST['uname']);
-    $email = $link->real_escape_string($_POST['email']);
-    $identifier = $link->real_escape_string($_POST['identifier']);
+    $name = htmlspecialchars($_POST['uname']);
+    $email = htmlspecialchars($_POST['email']);
+    $identifier = htmlspecialchars($_POST['identifier']);
     if($_POST['password'] !== $_POST['password1'])
     {
         session_start();
@@ -136,9 +130,23 @@ function civreg()
     //Establish database connection
 
     //Check to see if the email has already been used
-    $query = "SELECT email from users where email = \"".$email."\"";
-    $result = mysqli_query($link, $query);
-    $num_rows = $result->num_rows;
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
+    }
+
+    $stmt = $pdo->prepare("SELECT email from users where email = ?");
+    $resStatus = $stmt->execute(array($email));
+    $result = $stmt;
+
+    if (!$resStatus)
+    {
+        die($stmt->errorInfo());
+    }
+    $num_rows = $result->rowCount();
+
     if ($num_rows>0)
     {
         session_start();
@@ -147,37 +155,25 @@ function civreg()
         header("Location:".BASE_URL."/index.php#civreg");
         exit();
     }
-    $query = 'INSERT INTO users (name, email, password, identifier, approved) VALUES (?, ?, ?, ?, "1")';
-    try {
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $password, $identifier);
-        $result = mysqli_stmt_execute($stmt);
-        if ($result == FALSE) {
-            die(mysqli_error($link));
-        }
-    }
-    catch (Exception $e)
+
+    $stmt = $pdo->prepare("INSERT INTO users (name, email, password, identifier, approved) VALUES (?, ?, ?, ?, '1')");
+    $result = $stmt->execute(array($name, $email, $password, $identifier));
+
+    if (!$result)
     {
-        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+        die($stmt->errorInfo());
     }
-	$query = 'INSERT INTO user_departments (user_id, department_id)
-		SELECT id , ?
-		FROM users
-		WHERE email = ?';
-		$civ = "8";
-	try {
-		$stmt = mysqli_prepare($link, $query);
-		mysqli_stmt_bind_param($stmt, "is", $civ, $email);
-		$result = mysqli_stmt_execute($stmt);
-		if ($result == FALSE) {
-			die(mysqli_error($link));
-			}
-		}
-        catch (Exception $e)
-        {
-            die("Failed to run query: " . $e->getMessage()); //TODO: A function to send admins an email when this occurs should be made
-        }
-    mysqli_close($link);
+
+    $civ = "8";
+    $stmt = $pdo->prepare("INSERT INTO users (name, emailINSERT INTO user_departments (user_id, department_id) SELECT id , ? FROM users WHERE email = ?");
+    $result = $stmt->execute(array($civ, $email));
+
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
+
+    $pdo = null;
     session_start();
     $_SESSION['register_success'] = "Successfully registered. You may now log-in.";
     sleep(1);

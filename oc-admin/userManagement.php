@@ -68,7 +68,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo COMMUNITY_NAME;?> Admin</span></a>
+              <a href="javascript:void(0)" class="site_title"><i class="fas fa-lock"></i> <span>Administrator</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -92,20 +92,17 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
               <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
-                <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+              <span class="fas fa-clipboard-list" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
+              <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
+              <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
               </a>
               <a data-toggle="tooltip" data-placement="top" title="Need Help?" href="https://guides.opencad.io/">
-                <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+              <span class="fas fa-info-circle" aria-hidden="true"></span>
               </a>
             </div>
             <!-- /menu footer buttons -->
@@ -117,19 +114,18 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <div class="nav_menu">
             <nav>
               <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                <a id="menu_toggle"><i class="fas fa-bars"></i></a>
               </div>
 
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     <img src="<?php echo get_avatar() ?>" alt=""><?php echo $name;?>
-                    <span class=" fa fa-angle-down"></span>
+                    <span class="fas fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="../profile.php">My Profile</a></li>
-                    <li><a href="https://github.com/ossified/openCad/issues">Help</a></li>
-                    <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>/profile.php"><i class="fas fa-user pull-right"></i>My Profile</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
@@ -157,9 +153,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="x_title">
                     <h2>At A Glance</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      <li><a class="close-link"><i class="fas fa-close"></i></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -168,42 +164,42 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="x_content">
                       <div class="row tile_count">
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> Communications</span>
+                          <span class="count_top"><i class="fas fa-user"></i> Communications</span>
                           <div class="count"><?php echo getGroupCount("1");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> State</span>
+                          <span class="count_top"><i class="fas fa-user"></i> State</span>
                           <div class="count"><?php echo getGroupCount("2");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> Highway Patrol</span>
+                          <span class="count_top"><i class="fas fa-user"></i> Highway Patrol</span>
                           <div class="count"><?php echo getGroupCount("3");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> Sheriff</span>
+                          <span class="count_top"><i class="fas fa-user"></i> Sheriff</span>
                           <div class="count"><?php echo getGroupCount("4");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> Police</span>
+                          <span class="count_top"><i class="fas fa-user"></i> Police</span>
                           <div class="count"><?php echo getGroupCount("5");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> Fire</span>
+                          <span class="count_top"><i class="fas fa-user"></i> Fire</span>
                           <div class="count"><?php echo getGroupCount("6");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> EMS</span>
+                          <span class="count_top"><i class="fas fa-user"></i> EMS</span>
                           <div class="count"><?php echo getGroupCount("7");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> Civilian</span>
+                          <span class="count_top"><i class="fas fa-user"></i> Civilian</span>
                           <div class="count"><?php echo getGroupCount("8");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
@@ -225,9 +221,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="x_title">
                     <h2>Account Management</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      <li><a class="close-link"><i class="fas fa-close"></i></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -283,7 +279,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-md-3 control-label">Name</label>
                 <div class="col-md-9">
                   <input name="userName" class="form-control" id="userName" />
-                  <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                  <span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -292,7 +288,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-md-3 control-label">Email</label>
                 <div class="col-md-9">
                   <input type="email" name="userEmail" class="form-control" id="userEmail" />
-                  <span class="fa fa-envelope form-control-feedback right" aria-hidden="true"></span>
+                  <span class="fas fa-envelope form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -301,7 +297,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-md-3 control-label">Identifier</label>
                 <div class="col-md-9">
                   <input type="text" name="userIdentifier" class="form-control" id="userIdentifier" />
-                  <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                  <span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>

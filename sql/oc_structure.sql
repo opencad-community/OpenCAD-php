@@ -10,17 +10,13 @@ CREATE TABLE `active_users` (
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
--- --------------------------------------------------------
-
 --
 -- Table structure for table `aop`
 --
 
 CREATE TABLE `aop` (
   `aop` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
 -- Table structure for table `bolos_persons`
@@ -35,8 +31,6 @@ CREATE TABLE `bolos_persons` (
   `reason_wanted` varchar(255) NOT NULL COMMENT 'Reason BOLO suspect is wanted.',
   `last_seen` varchar(255) NOT NULL COMMENT 'Last observed location of BOLO suspect.'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `bolos_vehicles`
@@ -140,7 +134,7 @@ CREATE TABLE `colors` (
   `id` int(11) NOT NULL,
   `color_group` varchar(255) DEFAULT NULL,
   `color_name` varchar(255) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
@@ -150,7 +144,10 @@ CREATE TABLE `colors` (
 
 CREATE TABLE `departments` (
   `department_id` int(11) NOT NULL,
-  `department_name` varchar(255) DEFAULT NULL
+  `department_name` varchar(255) DEFAULT NULL COMMENT 'The functional name of the department. (eg. Police, Fire, EMS)',
+  `department_short_name` varchar(10) NOT NULL COMMENT 'The name of the department. (eg. Los Angeles Police Department, Blaine County Sheriffs'' Office',
+  `department_long_name` varchar(255) NOT NULL COMMENT 'The acronym of the department name. (eg. BCSO, LAPD, LAFD)',
+  `allow_department` int(11) NOT NULL COMMENT 'If 0 then department is disabled, if 1 then department is enabled.'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
@@ -233,7 +230,7 @@ CREATE TABLE `ncic_names` (
   `address` text NOT NULL,
   `gender` varchar(255) NOT NULL,
   `race` text NOT NULL,
-  `dl_status` set('Valid','Suspended','Expired') NOT NULL,
+  `dl_status` set('Unobtained','Valid','Suspended','Expired') NOT NULL,
   `hair_color` text NOT NULL,
   `build` text NOT NULL,
   `weapon_permit` varchar(255) NOT NULL,
@@ -304,6 +301,17 @@ CREATE TABLE `ncic_weapons` (
   `weapon_type` varchar(255) NOT NULL,
   `weapon_name` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `permissions`
+--
+
+CREATE TABLE `permissions` (
+  `perm_id` int(11) NOT NULL,
+  `perm_desc` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
@@ -411,6 +419,15 @@ CREATE TABLE `weapons` (
 -- Indexes for dumped tables
 --
 
+
+--
+-- Indexes for table `active_users`
+--
+ALTER TABLE `active_users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `identifier` (`identifier`) USING BTREE;
+
+
 --
 -- Indexes for table `bolos_persons`
 --
@@ -422,6 +439,13 @@ ALTER TABLE `bolos_persons`
 --
 ALTER TABLE `bolos_vehicles`
   ADD PRIMARY KEY (`id`);
+
+
+  --
+  -- Indexes for table `dispatchers`
+  --
+  ALTER TABLE `dispatchers`
+    ADD UNIQUE KEY `identifier` (`identifier`);
 
 --
 -- Indexes for table `ncic_arrests`
@@ -570,4 +594,3 @@ ALTER TABLE `vehicles`
 --
 ALTER TABLE `weapons`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
-  
