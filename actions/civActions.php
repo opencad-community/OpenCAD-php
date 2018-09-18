@@ -15,82 +15,91 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 include_once(__DIR__ . "/../oc-config.php");
 
 /* Handle POST requests */
+/**
+ * Patch notes:
+ * Adding the `else` to make a `else if` prevents the execution
+ * of multiple functions at the same time by the same client
+ *
+ * Running multiple functions at the same time doesnt seem to
+ * be a needed feature.
+ */
 if (isset($_POST['delete_name'])){
     delete_name();
-}
-if (isset($_POST['delete_plate'])){
+}else if (isset($_POST['delete_plate'])){
     delete_plate();
-}
-if (isset($_POST['delete_weapon'])){
+}else if (isset($_POST['delete_weapon'])){
     delete_weapon();
-}
-if (isset($_POST['create_name'])){
+}else if (isset($_POST['create_name'])){
     create_name();
-}
-if (isset($_POST['create_plate'])){
+}else if (isset($_POST['create_plate'])){
     create_plate();
-}
-if (isset($_POST['create_weapon'])){
+}else if (isset($_POST['create_weapon'])){
     create_weapon();
-}
-if (isset($_POST['new_911']))
-{
+}else if (isset($_POST['new_911'])){
     create911Call();
-}
-if (isset($_POST['edit_name'])){
+}else if (isset($_POST['edit_name'])){
     edit_name();
-}
-if (isset($_POST['edit_plate'])){
+}else if (isset($_POST['edit_plate'])){
     edit_plate();
-}
-if (isset($_POST['editid'])){
+}else if (isset($_POST['editid'])){
     editnameid();
-}
-if (isset($_POST['edit_plateid'])){
+}else if (isset($_POST['edit_plateid'])){
     editplateid();
-}
-if (isset($_POST['delete_warrant'])){
+}else if (isset($_POST['delete_warrant'])){
     delete_warrant();
-}
-if (isset($_POST['create_warrant'])){
+}else if (isset($_POST['create_warrant'])){
     create_warrant();
 }
+
 function getCivilianNamesOwn()
 {
     $uid = $_SESSION['id'];
-	
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
+    }
 
-	$sql = 'SELECT ncic_names.id, ncic_names.name FROM ncic_names where ncic_names.submittedByID = "' . $uid . '"';
+    $stmt = $pdo->prepare("SELECT ncic_names.id, ncic_names.name FROM ncic_names where ncic_names.submittedByID = ?");
+    $resStatus = $stmt->execute(array($uid));
+    $result = $stmt;
 
-	$result=mysqli_query($link, $sql);
+    if (!$resStatus)
+    {
+        die($stmt->errorInfo());
+    }
+    $pdo = null;
 
-	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+	foreach($result as $row)
 	{
 		echo "<option value=\"$row[0]\">$row[1]</option>";
 	}
-	mysqli_close($link);
 }
 
 function ncicGetNames()
 {
     $uid = $_SESSION['id'];
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $query = 'SELECT ncic_names.* FROM `ncic_names` WHERE ncic_names.submittedById = "' . $uid . '"';
+    $stmt = $pdo->prepare("SELECT ncic_names.* FROM `ncic_names` WHERE ncic_names.submittedById = ?");
+    $resStatus = $stmt->execute(array($uid));
+    $result = $stmt;
 
-    $result=mysqli_query($link, $query);
+    if (!$resStatus)
+    {
+        die($stmt->errorInfo());
+    }
+    $pdo = null;
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
     if($num_rows == 0)
     {
@@ -118,7 +127,7 @@ function ncicGetNames()
             <tbody>
         ';
 
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        foreach($result as $row)
         {
             echo '
             <tr>
@@ -155,18 +164,24 @@ function ncicGetPlates()
 
     $uid = $_SESSION['id'];
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
-    
 
-    $query = 'SELECT ncic_plates.*, ncic_names.name FROM ncic_plates INNER JOIN ncic_names ON ncic_names.id=ncic_plates.name_id WHERE ncic_plates.user_id = "' . $uid . '"';
+    $stmt = $pdo->prepare("SELECT ncic_plates.*, ncic_names.name FROM ncic_plates INNER JOIN ncic_names ON ncic_names.id=ncic_plates.name_id WHERE ncic_plates.user_id = ?");
+    $resStatus = $stmt->execute(array($uid));
+    $result = $stmt;
 
-    $result=mysqli_query($link, $query);
+    if (!$resStatus)
+    {
+        die($stmt->errorInfo());
+    }
+    $pdo = null;
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
     if($num_rows == 0)
     {
@@ -193,7 +208,7 @@ function ncicGetPlates()
             <tbody>
         ';
 
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        foreach($result as $row)
         {
 
             echo '
@@ -227,29 +242,23 @@ function ncicGetPlates()
 
 function delete_name()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    $uid = htmlspecialchars($_POST['uid']);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-
-    $uid = $_POST['uid'];
-
-    $query = "DELETE FROM ncic_names WHERE id = ?";
-
-    try {
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "i", $uid);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == FALSE) {
-            die(mysqli_error($link));
-        }
-    }
-    catch (Exception $e)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die("Failed to run query: " . $e->getMessage());
+        die('Could not connect: ' . $ex);
     }
+
+    $stmt = $pdo->prepare("DELETE FROM ncic_names WHERE id = ?");
+    $result = $stmt->execute(array($uid));
+
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
+    $pdo = null;
 
     session_start();
     $_SESSION['nameMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian name</span></div>';
@@ -258,29 +267,23 @@ function delete_name()
 
 function delete_plate()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    $vehid = htmlspecialchars($_POST['vehid']);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-
-    $vehid = $_POST['vehid'];
-
-    $query = "DELETE FROM ncic_plates WHERE id = ?";
-
-    try {
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "i", $vehid);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == FALSE) {
-            die(mysqli_error($link));
-        }
-    }
-    catch (Exception $e)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die("Failed to run query: " . $e->getMessage());
+        die('Could not connect: ' . $ex);
     }
+
+    $stmt = $pdo->prepare("DELETE FROM ncic_plates WHERE id = ?");
+    $result = $stmt->execute(array($uid));
+
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
+    $pdo = null;
 
     session_start();
     $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian plate</span></div>';
@@ -291,10 +294,10 @@ function create_name()
 {
     session_start();
 
-    $fullName = $_POST['civNameReq'];
+    $fullName = htmlspecialchars($_POST['civNameReq']);
     $firstName = explode(" ", $fullName) [0];
     $lastName = explode(" ", $fullName) [1];
-    
+
     //Set first name to all lowercase
     $firstName = strtolower($firstName);
     //Remove all special characters
@@ -308,21 +311,26 @@ function create_name()
     $lastName = preg_replace('/[^A-Za-z0-9\-]/', '', $lastName);
     //Set first letter to uppercase
     $lastName = ucfirst($lastName);
-	
+
 	$name = $firstName . ' ' . $lastName;
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die('Could not connect: ' . mysql_error());
+        die('Could not connect: ' . $ex);
     }
 
-    $query = 'SELECT name FROM ncic_names WHERE name = "' . $name . '" ';
+    $stmt = $pdo->prepare("SELECT name FROM ncic_names WHERE name = ?");
+    $resStatus = $stmt->execute(array($name));
+    $result = $stmt;
 
-    $result = mysqli_query($link, $query);
+    if (!$resStatus)
+    {
+        die($stmt->errorInfo());
+    }
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
     if (!$num_rows == 0)
     {
@@ -338,49 +346,38 @@ function create_name()
     $submitttedById = $_SESSION['id'];
     //Submission Data
     $name;
-    $dob = $_POST['civDobReq'];
-    $address = $_POST['civAddressReq'];
-    $sex = $_POST['civSexReq'];
-    $race = $_POST['civRaceReq'];
-	$dlstatus = $_POST['civDL'];
-    $hair = $_POST['civHairReq'];
-    $build = $_POST['civBuildReq'];
-	$weapon = $_POST['civWepStat'];
-	$deceased = $_POST['civDec'];
+    $dob = htmlspecialchars($_POST['civDobReq']);
+    $address = htmlspecialchars($_POST['civAddressReq']);
+    $sex = htmlspecialchars($_POST['civSexReq']);
+    $race = htmlspecialchars($_POST['civRaceReq']);
+	$dlstatus = htmlspecialchars($_POST['civDL']);
+    $hair = htmlspecialchars($_POST['civHairReq']);
+    $build = htmlspecialchars($_POST['civBuildReq']);
+	$weapon = htmlspecialchars($_POST['civWepStat']);
+	$deceased = htmlspecialchars($_POST['civDec']);
 
-    $query = "INSERT INTO ncic_names (submittedByName, submittedById, name, dob, address, gender, race, dl_status, hair_color, build, weapon_permit, deceased)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+    $stmt = $pdo->prepare("INSERT INTO ncic_names (submittedByName, submittedById, name, dob, address, gender, race, dl_status, hair_color, build, weapon_permit, deceased)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+    $result = $stmt->execute(array($submittedByName, $submitttedById, $name, $dob, $address, $sex, $race, $dlstatus, $hair, $build, $weapon, $deceased));
 
-    try
+    if (!$result)
     {
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "ssssssssssss", $submittedByName, $submitttedById, $name, $dob, $address, $sex, $race, $dlstatus, $hair, $build, $weapon, $deceased);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == false)
-        {
-            die(mysqli_error($link));
-        }
+        die($stmt->errorInfo());
     }
-    catch(Exception $e)
-    {
-        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+    $pdo = null;
 
-    }
-
-    $_SESSION['identityMessage'] = '<div class="alert alert-success"><span>Successfully create an identity</span></div>';
+    $_SESSION['identityMessage'] = '<div class="alert alert-success"><span>Successfully created your identity!</span></div>';
 
     sleep(1);
     header("Location:".BASE_URL."/civilian.php#name_panel");
-
 }
 
 function create_plate()
 {
 	session_start();
-	
-	$plate = $_POST['veh_plate'];
-	
+
+	$plate = htmlspecialchars($_POST['veh_plate']);
+
     //Remove all spaces from plate
     $plate = str_replace(' ', '', $plate);
     //Set plate to all uppercase
@@ -389,48 +386,40 @@ function create_plate()
     $plate = str_replace('-', '', $plate);
     //Remove all special characters
     $plate = preg_replace('/[^A-Za-z0-9\-]/', '', $plate);
-	
-    $vehicle = $_POST['veh_make_model'];
+
+    $vehicle = htmlspecialchars($_POST['veh_make_model']);
     $veh_make = explode(" ", $vehicle) [0];
     $veh_model = explode(" ", $vehicle) [1];
-	
+
     $uid = $_SESSION['id'];
 
     $submittedById = $_SESSION['id'];
-    $userId = $_POST['civilian_names'];
+    $userId = htmlspecialchars($_POST['civilian_names']);
     $veh_plate = $plate;
     $veh_make;
     $veh_model;
-    $veh_pcolor = $_POST['veh_pcolor'];
-    $veh_scolor = $_POST['veh_scolor'];
-    $veh_insurance = $_POST['veh_insurance'];
-    $flags = $_POST['flags'];
-    $veh_reg_state = $_POST['veh_reg_state'];
-    $notes = $_POST['notes'];
+    $veh_pcolor = htmlspecialchars($_POST['veh_pcolor']);
+    $veh_scolor = htmlspecialchars($_POST['veh_scolor']);
+    $veh_insurance = htmlspecialchars($_POST['veh_insurance']);
+    $flags = htmlspecialchars($_POST['flags']);
+    $veh_reg_state = htmlspecialchars($_POST['veh_reg_state']);
+    $notes = htmlspecialchars($_POST['notes']);
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
+    }
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    $stmt = $pdo->prepare("INSERT INTO ncic_plates (name_id, veh_plate, veh_make, veh_model, veh_pcolor, veh_scolor, veh_insurance, flags, veh_reg_state, notes, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $result = $stmt->execute(array($userId, $veh_plate, $veh_make, $veh_model, $veh_pcolor, $veh_scolor, $veh_insurance, $flags, $veh_reg_state, $notes, $submittedById));
 
-    $sql = "INSERT INTO ncic_plates (name_id, veh_plate, veh_make, veh_model, veh_pcolor, veh_scolor, veh_insurance, flags, veh_reg_state, notes, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "issssssssss", $userId, $veh_plate, $veh_make, $veh_model, $veh_pcolor, $veh_scolor, $veh_insurance, $flags, $veh_reg_state, $notes, $submittedById);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
-		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
+    $pdo = null;
 
     session_start();
     $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully added plate to the database</span></div>';
@@ -440,67 +429,51 @@ function create_plate()
 
 function create911Call()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
+    }
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-	
-	$sql = "SELECT MAX(call_id) AS max FROM call_list";
-	$result=mysqli_query($link, $sql);
+    $result = $pdo->query("SELECT MAX(call_id) AS max FROM call_list");
 
-	while($r=mysqli_fetch_array($result))
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+
+	foreach($result as $row)
 	{
-		$callid = $r['max'];
+		$callid = $row['max'];
 	}
-	
+
 	$callid++;
-	
-    $sql = "REPLACE INTO call_list (call_id) VALUES (?)";
 
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "s", $callid);
-		$result = mysqli_stmt_execute($stmt);
+	$stmt = $pdo->prepare("REPLACE INTO call_list (call_id) VALUES (?)");
+    $result = $stmt->execute(array($callid));
 
-		if ($result == FALSE) {
-			die(mysqli_error($link));
-		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
 
-    $caller = $_POST['911_caller'];
-    $location = $_POST['911_location'];
-    $description = $_POST['911_description'];
+    $caller = htmlspecialchars($_POST['911_caller']);
+    $location = htmlspecialchars($_POST['911_location']);
+    $description = htmlspecialchars($_POST['911_description']);
 
     $created = date("Y-m-d H:i:s").': 911 Call Received<br/><br/>Caller Name: '.$caller;
 
     $call_narrative = $created.'<br/>Caller States: '.$description.'<br/>';
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    $stmt = $pdo->prepare("INSERT IGNORE INTO calls (call_id, call_type, call_street1, call_narrative) VALUES (?, '911', ?, ?)");
+    $result = $stmt->execute(array($callid, $location, $call_narrative));
 
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
-    }
-
-    $sql = "INSERT IGNORE INTO calls (call_id, call_type, call_street1, call_narrative) VALUES (?, '911', ?, ?)";
-
-    try {
-        $stmt = mysqli_prepare($link, $sql);
-        mysqli_stmt_bind_param($stmt, "sss", $callid, $location, $call_narrative);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == FALSE) {
-            die(mysqli_error($link));
-        }
-    }
-    catch (Exception $e)
+    if (!$result)
     {
-        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+        die($stmt->errorInfo());
     }
+    $pdo = null;
 
     session_start();
     $_SESSION['good911'] = '<div class="alert alert-success"><span>Successfully created 911 call</span></div>';
@@ -509,14 +482,15 @@ function create911Call()
     header("Location:".BASE_URL."/civilian.php#911_panel");
 
 }
+
 function edit_name()
 {
     session_start();
 
-    $fullName = $_POST['civNameReq'];
+    $fullName = htmlspecialchars($_POST['civNameReq']);
     $firstName = explode(" ", $fullName) [0];
     $lastName = explode(" ", $fullName) [1];
-    
+
     //Set first name to all lowercase
     $firstName = strtolower($firstName);
     //Remove all special characters
@@ -530,21 +504,25 @@ function edit_name()
     $lastName = preg_replace('/[^A-Za-z0-9\-]/', '', $lastName);
     //Set first letter to uppercase
     $lastName = ucfirst($lastName);
-	
+
 	$name = $firstName . ' ' . $lastName;
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die('Could not connect: ' . mysql_error());
+        die('Could not connect: ' . $ex);
     }
 
-    $query = 'SELECT first_name FROM ncic_names WHERE first_name = "' . $name . '"';
+    $stmt = $pdo->prepare("SELECT first_name FROM ncic_names WHERE first_name = ?");
+    $result = $stmt->execute(array($name));
 
-    $result = mysqli_query($link, $query);
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
 
-    $num_rows = $result->num_rows;
+    $num_rows = $stmt->rowCount();
 
     if (!$num_rows == 0)
     {
@@ -560,47 +538,39 @@ function edit_name()
     $submitttedById = $_SESSION['id'];
     //Submission Data
     $name;
-    $dob = $_POST['civDobReq'];
-    $address = $_POST['civAddressReq'];
-    $sex = $_POST['civSexReq'];
-    $race = $_POST['civRaceReq'];
-    $dlstatus = $_POST['civDL'];
-    $hair = $_POST['civHairReq'];
-    $build = $_POST['civBuildReq'];
-	$weapon = $_POST['civWepStat'];
-	$deceased = $_POST['civDec'];
-    $editid = $_POST['Edit_id'];
+    $dob = htmlspecialchars($_POST['civDobReq']);
+    $address = htmlspecialchars($_POST['civAddressReq']);
+    $sex = htmlspecialchars($_POST['civSexReq']);
+    $race = htmlspecialchars($_POST['civRaceReq']);
+    $dlstatus = htmlspecialchars($_POST['civDL']);
+    $hair = htmlspecialchars($_POST['civHairReq']);
+    $build = htmlspecialchars($_POST['civBuildReq']);
+	$weapon = htmlspecialchars($_POST['civWepStat']);
+	$deceased = htmlspecialchars($_POST['civDec']);
+    $editid = htmlspecialchars($_POST['Edit_id']);
 
-    $query = "UPDATE ncic_names SET name = ?, dob = ?, address = ?, gender = ?, race = ?, dl_status = ?, hair_color = ?, build = ?, weapon_permit = ?, deceased = ? WHERE id = ?";
-    try
+    $stmt = $pdo->prepare("UPDATE ncic_names SET name = ?, dob = ?, address = ?, gender = ?, race = ?, dl_status = ?, hair_color = ?, build = ?, weapon_permit = ?, deceased = ? WHERE id = ?");
+    $result = $stmt->execute(array($name, $dob, $address, $sex, $race, $dlstatus, $hair, $build, $weapon, $deceased, $editid));
+
+    if (!$result)
     {
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "sssssssssss", $name, $dob, $address, $sex, $race, $dlstatus, $hair, $build, $weapon, $deceased, $editid);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == false)
-        {
-            die(mysqli_error($link));
-        }
+        die($stmt->errorInfo());
     }
-    catch(Exception $e)
-    {
-        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+    $pdo = null;
 
-    }
-
-    $_SESSION['identityMessage'] = '<div class="alert alert-success"><span>Successfully Update an identity</span></div>';
+    $_SESSION['identityMessage'] = '<div class="alert alert-success"><span>Successfully updated the identity.</span></div>';
 
     sleep(1);
     header("Location:".BASE_URL."/civilian.php#name_panel");
 
 }
+
 function edit_plate()
 {
     session_start();
-    
-    $plate = $_POST['veh_plate'];
-    
+
+    $plate = htmlspecialchars($_POST['veh_plate']);
+
     //Remove all spaces from plate
     $plate = str_replace(' ', '', $plate);
     //Set plate to all uppercase
@@ -609,150 +579,161 @@ function edit_plate()
     $plate = str_replace('-', '', $plate);
     //Remove all special characters
     $plate = preg_replace('/[^A-Za-z0-9\-]/', '', $plate);
-    
-    $vehicle = $_POST['veh_make_model'];
+
+    $vehicle = htmlspecialchars($_POST['veh_make_model']);
     $veh_make = explode(" ", $vehicle) [0];
     $veh_model = explode(" ", $vehicle) [1];
-    
+
     $uid = $_SESSION['id'];
 
     $submittedById = $_SESSION['id'];
-    $userId = $_POST['civilian_names'];
+    $userId = htmlspecialchars($_POST['civilian_names']);
     $veh_plate = $plate;
     $veh_make;
     $veh_model;
-    $veh_pcolor = $_POST['veh_pcolor'];
-    $veh_scolor = $_POST['veh_scolor'];
-    $veh_insurance = $_POST['veh_insurance'];
-    $flags = $_POST['flags'];
-    $veh_reg_state = $_POST['veh_reg_state'];
-    $notes = $_POST['notes'];
-    $plate_id = $_POST['Edit_plateId'];
+    $veh_pcolor = htmlspecialchars($_POST['veh_pcolor']);
+    $veh_scolor = htmlspecialchars($_POST['veh_scolor']);
+    $veh_insurance = htmlspecialchars($_POST['veh_insurance']);
+    $flags = htmlspecialchars($_POST['flags']);
+    $veh_reg_state = htmlspecialchars($_POST['veh_reg_state']);
+    $notes = htmlspecialchars($_POST['notes']);
+    $plate_id = htmlspecialchars($_POST['Edit_plateId']);
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
-    }
-
-    
-    $sql = "UPDATE ncic_plates SET name_id = ?, veh_plate = ?, veh_make = ?, veh_model = ?, veh_pcolor = ?, veh_scolor = ?, veh_insurance = ?, flags = ?, veh_reg_state = ?, notes = ? WHERE id = ?";
-
-    try {
-        $stmt = mysqli_prepare($link, $sql);
-        mysqli_stmt_bind_param($stmt, "issssssssss", $userId, $veh_plate, $veh_make, $veh_model, $veh_pcolor, $veh_scolor, $veh_insurance, $flags, $veh_reg_state, $notes, $plate_id);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == FALSE) {
-            die(mysqli_error($link));
-        }
-    }
-    catch (Exception $e)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+        die('Could not connect: ' . $ex);
     }
-    mysqli_close($link);
+
+    $stmt = $pdo->prepare("UPDATE ncic_plates SET name_id = ?, veh_plate = ?, veh_make = ?, veh_model = ?, veh_pcolor = ?, veh_scolor = ?, veh_insurance = ?, flags = ?, veh_reg_state = ?, notes = ? WHERE id = ?");
+    $result = $stmt->execute(array($userId, $veh_plate, $veh_make, $veh_model, $veh_pcolor, $veh_scolor, $veh_insurance, $flags, $veh_reg_state, $notes, $plate_id));
+
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
+    $pdo = null;
 
     session_start();
     $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully Updated plate to the database</span></div>';
 
     header("Location:".BASE_URL."/civilian.php#plate_panel");
 }
+
 function editnameid()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "SELECT ncic_names.* FROM ncic_names WHERE id=".$_POST['editid'];
-    $resultset = mysqli_query($link, $query) or die("database error:". mysqli_error($link));
-    $data = array();
-    while( $rows = mysqli_fetch_assoc($resultset) ) {
-    $data = $rows;
+    $stmt = $pdo->prepare("SELECT ncic_names.* FROM ncic_names WHERE id = ?");
+    $result = $stmt->execute(array(htmlspecialchars($_POST['editid'])));
+
+    if (!$result)
+    {
+        die($stmt->errorInfo());
     }
+    $pdo = null;
+
+    $data = $stmt->fetch(PDO::FETCH_NUM);
     echo json_encode($data);
 }
+
 function editplateid()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "SELECT ncic_plates.* FROM ncic_plates WHERE id=".$_POST['edit_plateid'];
-    $resultset = mysqli_query($link, $query) or die("database error:". mysqli_error($link));
-    $plates = array();
-    while( $rows = mysqli_fetch_assoc($resultset) ) {
-    $plates = $rows;
+    $stmt = $pdo->prepare("SELECT ncic_plates.* FROM ncic_plates WHERE id = ?");
+    $result = $stmt->execute(array(htmlspecialchars($_POST['edit_plateid'])));
+
+    if (!$result)
+    {
+        die($stmt->errorInfo());
     }
-    echo json_encode($plates);
+    $pdo = null;
+
+    $data = $stmt->fetch(PDO::FETCH_NUM);
+    echo json_encode($data);
 }
+
 function create_warrant()
 {
-    $userId = $_POST['civilian_names'];
-    $warrant_name = $_POST['warrant_name_sel'];
-    $issuing_agency = $_POST['issuing_agency'];
+    $userId = htmlspecialchars($_POST['civilian_names']);
+    $warrant_name = htmlspecialchars($_POST['warrant_name_sel']);
+    $issuing_agency = htmlspecialchars($_POST['issuing_agency']);
+    $warrant_name = htmlspecialchars($_POST['warrant_name_sel']);
 
-    $warrant_name = $_POST['warrant_name_sel'];
-
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
 	$status = 'Active';
 	$date = date('Y-m-d');
 
     $expire = date('Y-m-d',strtotime('+1 day',strtotime($date)));
 
-    $sql = "INSERT INTO ncic_warrants (name_id, expiration_date, warrant_name, issuing_agency, status, issued_date) SELECT ?, ?, ?, ?, ?, ?";
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
+    }
 
+    $stmt = $pdo->prepare("INSERT INTO ncic_warrants (name_id, expiration_date, warrant_name, issuing_agency, status, issued_date) SELECT ?, ?, ?, ?, ?, ?");
+    $result = $stmt->execute(array($userId, $expire, $warrant_name, $issuing_agency, $status, $date));
 
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "isssss", $userId, $expire, $warrant_name, $issuing_agency, $status, $date);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
-		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
+    $pdo = null;
 
     session_start();
     $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully created warrant</span></div>';
 
     header("Location:".BASE_URL."/civilian.php");
 }
+
 function ncic_warrants()
 {
     $uid = $_SESSION['id'];
-	
-   $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
-	$sql = 'SELECT ncic_names.id from ncic_names where submittedById = "' . $uid . '"';
-	
-	$results=mysqli_query($link, $sql);
-	while($row = mysqli_fetch_array($results, MYSQLI_BOTH))
-        {
-            $nameid = ''.$row[0].'';
-		}
 
-    $query = 'SELECT ncic_warrants.*, ncic_names.name FROM ncic_warrants INNER JOIN ncic_names ON ncic_names.id=ncic_warrants.name_id WHERE name_id = "' . $nameid . '"';
+    $stmt = $pdo->prepare("SELECT ncic_names.id from ncic_names where submittedById = ?");
+    $resStatus = $stmt->execute(array($uid));
+    $result = $stmt;
 
-    $result=mysqli_query($link, $query);
+    if (!$resStatus)
+    {
+        die($stmt->errorInfo());
+    }
 
-    $num_rows = $result->num_rows;
+	foreach($result as $row)
+    {
+        $nameid = ''.$row[0].'';
+    }
+
+    $stmt = $pdo->prepare("SELECT ncic_warrants.*, ncic_names.name FROM ncic_warrants INNER JOIN ncic_names ON ncic_names.id=ncic_warrants.name_id WHERE name_id = ?");
+    $resStatus = $stmt->execute(array($nameid));
+    $result = $stmt;
+
+    if (!$resStatus)
+    {
+        die($stmt->errorInfo());
+    }
+
+    $num_rows = $result->rowCount();
 
     if($num_rows == 0)
     {
@@ -777,7 +758,7 @@ function ncic_warrants()
             <tbody>
         ';
 
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        foreach($result as $row)
         {
             echo '
             <tr>
@@ -814,32 +795,27 @@ function ncic_warrants()
             </table>
         ';
     }
+    $pdo = null;
 }
+
 function delete_warrant()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-
-    $wid = $_POST['wid'];
-
-    $query = "DELETE FROM ncic_warrants WHERE id = ?";
-
-    try {
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "i", $wid);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == FALSE) {
-            die(mysqli_error($link));
-        }
-    }
-    catch (Exception $e)
+    $wid = htmlspecialchars($_POST['wid']);
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die("Failed to run query: " . $e->getMessage());
+        die('Could not connect: ' . $ex);
     }
+
+    $stmt = $pdo->prepare("DELETE FROM ncic_warrants WHERE id = ?");
+    $result = $stmt->execute(array($wid));
+
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
+    $pdo = null;
 
     session_start();
     $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully removed warrant</span></div>';
@@ -849,62 +825,62 @@ function delete_warrant()
 function create_weapon()
 {
 	session_start();
-	
-    $weapon = $_POST['weapon_all'];
+
+    $weapon = htmlspecialchars($_POST['weapon_all']);
     $wea_type = explode(" ", $weapon) [0];
     $wea_name = explode(" ", $weapon) [1];
-	
+
     $uid = $_SESSION['id'];
 
     $submittedById = $_SESSION['id'];
-    $userId = $_POST['civilian_names'];
+    $userId = htmlspecialchars($_POST['civilian_names']);
     $wea_type;
     $wea_name;
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
+    }
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    $stmt = $pdo->prepare("INSERT INTO ncic_weapons (name_id, weapon_type, weapon_name, user_id) VALUES (?, ?, ?, ?)");
+    $result = $stmt->execute(array($userId, $wea_type, $wea_name, $submittedById));
 
-    $sql = "INSERT INTO ncic_weapons (name_id, weapon_type, weapon_name, user_id) VALUES (?, ?, ?, ?)";
-
-
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "isss", $userId, $wea_type, $wea_name, $submittedById);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
-		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
+    $pdo = null;
 
     session_start();
     $_SESSION['weaponMessage'] = '<div class="alert alert-success"><span>Successfully added a weapon to the database</span></div>';
 
     header("Location:".BASE_URL."/civilian.php#weapon_panel");
 }
+
 function ncicGetWeapons()
 {
     $uid = $_SESSION['id'];
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $query = 'SELECT ncic_weapons.*, ncic_names.name FROM ncic_weapons INNER JOIN ncic_names ON ncic_names.id=ncic_weapons.name_id WHERE ncic_weapons.user_id = "' . $uid . '"';
+    $stmt = $pdo->prepare("SELECT ncic_weapons.*, ncic_names.name FROM ncic_weapons INNER JOIN ncic_names ON ncic_names.id=ncic_weapons.name_id WHERE ncic_weapons.user_id = ?");
+    $resStatus = $stmt->execute(array($uid));
+    $result = $stmt;
 
-    $result=mysqli_query($link, $query);
+    if (!$resStatus)
+    {
+        die($stmt->errorInfo());
+    }
+    $pdo = null;
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
     if($num_rows == 0)
     {
@@ -925,7 +901,7 @@ function ncicGetWeapons()
             <tbody>
         ';
 
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        foreach($result as $row)
         {
             echo '
             <tr>
@@ -948,31 +924,26 @@ function ncicGetWeapons()
         ';
     }
 }
+
 function delete_weapon()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    $weaid = htmlspecialchars($_POST['weaid']);
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-
-    $weaid = $_POST['weaid'];
-
-    $query = "DELETE FROM ncic_weapons WHERE id = ?";
-
-    try {
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "i", $weaid);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == FALSE) {
-            die(mysqli_error($link));
-        }
-    }
-    catch (Exception $e)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die("Failed to run query: " . $e->getMessage());
+        die('Could not connect: ' . $ex);
     }
+
+    $stmt = $pdo->prepare("DELETE FROM ncic_weapons WHERE id = ?");
+    $result = $stmt->execute(array($weaid));
+
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
+    $pdo = null;
 
     session_start();
     $_SESSION['weaponMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian weapon</span></div>';

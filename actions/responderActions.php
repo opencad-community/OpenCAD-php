@@ -45,7 +45,7 @@ if (isset($_POST['create_arrest'])){
 
 function updateCallsign()
 {
-    $details = $_POST['details'];
+    $details = htmlspecialchars($_POST['details']);
     $details = str_replace('+', ' ', $details);
     $details = str_replace('%7C', '|', $details);
     $detailsArr = explode("&", $details);
@@ -56,31 +56,23 @@ function updateCallsign()
     session_start();
     $identifier = $_SESSION['identifier'];
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
+    }
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    $stmt = $pdo->prepare("UPDATE active_users SET callsign = ?, status = '0' WHERE active_users.identifier = ?");
+    $result = $stmt->execute(array($callsign, $identifier));
 
-    $sql = "UPDATE `active_users` SET `callsign` = ?, status = '0' WHERE `active_users`.`identifier` = ?";
-
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "ss", $callsign, $identifier);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
-		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
+	$pdo = null;
 
     $_SESSION['callsign'] = $callsign;
-
     echo "SUCCESS";
 }
 
@@ -89,30 +81,44 @@ function getStatus()
     session_start();
     $identifier = $_SESSION['identifier'];
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $sql = "SELECT status_detail FROM active_users WHERE identifier = \"$identifier\"";
+    $stmt = $pdo->prepare("SELECT status_detail FROM active_users WHERE identifier = ?");
+	$resStatus = $stmt->execute(array($identifier));
+	$result = $stmt;
 
-    $result=mysqli_query($link, $sql);
+    if (!$resStatus)
+    {
+        die($stmt->errorInfo());
+    }
 
-    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    $statusDetail = "";
+    foreach($result as $row)
     {
         $statusDetail = $row[0];
     }
 
-    $sql = "SELECT status_text FROM statuses WHERE status_id = \"$statusDetail\"";
+    $stmt = $pdo->prepare("SELECT status_text FROM statuses WHERE status_id = ?");
+	$resStatus = $stmt->execute(array($statusDetail));
+	$result = $stmt;
 
-    $result=mysqli_query($link, $sql);
+    if (!$resStatus)
+    {
+        die($stmt->errorInfo());
+    }
 
-    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    $statusText = "";
+    foreach($result as $row)
     {
         $statusText = $row[0];
     }
 
+	$pdo = null;
     echo $statusText;
 }
 
@@ -127,17 +133,22 @@ function getStatus()
 
 function mdtGetVehicleBOLOS()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+	try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "SELECT bolos_vehicles.* FROM bolos_vehicles";
+    $result = $pdo->query("SELECT bolos_vehicles.* FROM bolos_vehicles");
 
-    $result=mysqli_query($link, $query);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+	$pdo = null;
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
     if($num_rows == 0)
     {
@@ -161,7 +172,7 @@ function mdtGetVehicleBOLOS()
             <tbody>
         ';
 
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        foreach($result as $row)
         {
 
             echo '
@@ -194,17 +205,22 @@ function mdtGetVehicleBOLOS()
 
 function mdtGetPersonBOLOS()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $query = "SELECT bolos_persons.* FROM bolos_persons";
+    $result = $pdo->query("SELECT bolos_persons.* FROM bolos_persons");
 
-    $result=mysqli_query($link, $query);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
+	$pdo = null;
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
     if($num_rows == 0)
     {
@@ -227,7 +243,7 @@ function mdtGetPersonBOLOS()
             <tbody>
         ';
 
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        foreach($result as $row)
         {
             echo '
             <tr>
@@ -250,434 +266,221 @@ function mdtGetPersonBOLOS()
 
 function create_citation()
 {
-    $userId = $_POST['civilian_names'];
-    $citation_name_1 = $_POST['citation_name_1'];
-    $citation_fine_1 = $_POST['citation_fine_1'];
-	$citation_name_2 = $_POST['citation_name_2'];
-	$citation_fine_2 = $_POST['citation_fine_2'];
-	$citation_name_3 = $_POST['citation_name_3'];
-	$citation_fine_3 = $_POST['citation_fine_3'];
-	$citation_name_4 = $_POST['citation_name_4'];
-	$citation_fine_4 = $_POST['citation_fine_4'];
-	$citation_name_5 = $_POST['citation_name_5'];
-	$citation_fine_5 = $_POST['citation_fine_5'];
+    $userId = htmlspecialchars($_POST['civilian_names']);
+    $citation_name_1 = htmlspecialchars($_POST['citation_name_1']);
+    $citation_fine_1 = htmlspecialchars($_POST['citation_fine_1']);
+	$citation_name_2 = htmlspecialchars($_POST['citation_name_2']);
+	$citation_fine_2 = htmlspecialchars($_POST['citation_fine_2']);
+	$citation_name_3 = htmlspecialchars($_POST['citation_name_3']);
+	$citation_fine_3 = htmlspecialchars($_POST['citation_fine_3']);
+	$citation_name_4 = htmlspecialchars($_POST['citation_name_4']);
+	$citation_fine_4 = htmlspecialchars($_POST['citation_fine_4']);
+	$citation_name_5 = htmlspecialchars($_POST['citation_name_5']);
+	$citation_fine_5 = htmlspecialchars($_POST['citation_fine_5']);
     session_start();
     $issued_by = $_SESSION['name'];
     $date = date('Y-m-d');
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
+    }
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    $stmt = $pdo->prepare("INSERT INTO ncic_citations (name_id, citation_name, citation_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)");
+    $result = $stmt->execute(array($userId, $citation_name_1, $citation_fine_1, $issued_by, $date));
 
-    $sql = "INSERT INTO ncic_citations (name_id, citation_name, citation_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
 
-
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "isiss", $userId, $citation_name_1, $citation_fine_1, $issued_by, $date);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
-		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
 	if ($citation_name_2){
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+		$stmt = $pdo->prepare("INSERT INTO ncic_citations (name_id, citation_name, citation_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)");
+		$result = $stmt->execute(array($userId, $citation_name_2, $citation_fine_2, $issued_by, $date));
 	
-	    $sql = "INSERT INTO ncic_citations (name_id, citation_name, citation_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
-
-
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "isiss", $userId, $citation_name_2, $citation_fine_2, $issued_by, $date);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
+		if (!$result)
+		{
+			die($stmt->errorInfo());
 		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
 	}
 	if ($citation_name_3) {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+		$stmt = $pdo->prepare("INSERT INTO ncic_citations (name_id, citation_name, citation_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)");
+		$result = $stmt->execute(array($userId, $citation_name_3, $citation_fine_3, $issued_by, $date));
 	
-    $sql = "INSERT INTO ncic_citations (name_id, citation_name, citation_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
-
-
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "isiss", $userId, $citation_name_3, $citation_fine_3, $issued_by, $date);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
+		if (!$result)
+		{
+			die($stmt->errorInfo());
 		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
 	}
 	if ($citation_name_4) {
-   $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+		$stmt = $pdo->prepare("INSERT INTO ncic_citations (name_id, citation_name, citation_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)");
+		$result = $stmt->execute(array($userId, $citation_name_4, $citation_fine_4, $issued_by, $date));
 	
-	    $sql = "INSERT INTO ncic_citations (name_id, citation_name, citation_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
-
-
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "isiss", $userId, $citation_name_4, $citation_fine_4, $issued_by, $date);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
+		if (!$result)
+		{
+			die($stmt->errorInfo());
 		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
 	}
 	if ($citation_name_5) {
-	$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-	    $sql = "INSERT INTO ncic_citations (name_id, citation_name, citation_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
-
-
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "isiss", $userId, $citation_name_5, $citation_fine_5, $issued_by, $date);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
+		$stmt = $pdo->prepare("INSERT INTO ncic_citations (name_id, citation_name, citation_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)");
+		$result = $stmt->execute(array($userId, $citation_name_5, $citation_fine_5, $issued_by, $date));
+	
+		if (!$result)
+		{
+			die($stmt->errorInfo());
 		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
 	}
     $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully created citation</span></div>';
 
-    header("Location:".BASE_URL."/mdt.php");
+	$pdo = null;
+    header("Location:".BASE_URL."/mdt.php?dep=".$_SESSION['activeDepartment']);
 }
 
 function create_warning()
 {
-    $userId = $_POST['civilian_names'];
-    $warning_name_1 = $_POST['warning_name_1'];
-	$warning_name_2 = $_POST['warning_name_2'];
-	$warning_name_3 = $_POST['warning_name_3'];
-	$warning_name_4 = $_POST['warning_name_4'];
-	$warning_name_5 = $_POST['warning_name_5'];
+    $userId = htmlspecialchars($_POST['civilian_names']);
+    $warning_name_1 = htmlspecialchars($_POST['warning_name_1']);
+	$warning_name_2 = htmlspecialchars($_POST['warning_name_2']);
+	$warning_name_3 = htmlspecialchars($_POST['warning_name_3']);
+	$warning_name_4 = htmlspecialchars($_POST['warning_name_4']);
+	$warning_name_5 = htmlspecialchars($_POST['warning_name_5']);
     session_start();
     $issued_by = $_SESSION['name'];
     $date = date('Y-m-d');
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
+    }
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    $stmt = $pdo->prepare("INSERT INTO ncic_warnings (name_id, warning_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)");
+    $result = $stmt->execute(array($userId, $warning_name_1, $issued_by, $date));
 
-    $sql = "INSERT INTO ncic_warnings (name_id, warning_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)";
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
 
-
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "isss", $userId, $warning_name_1, $issued_by, $date);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
-		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
-	
 	if ($warning_name_2){
-		    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-
-    $sql = "INSERT INTO ncic_warnings (name_id, warning_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)";
-
-
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "isss", $userId, $warning_name_2, $issued_by, $date);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
+		$stmt = $pdo->prepare("INSERT INTO ncic_warnings (name_id, warning_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)");
+		$result = $stmt->execute(array($userId, $warning_name_2, $issued_by, $date));
+	
+		if (!$result)
+		{
+			die($stmt->errorInfo());
 		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
 	}
 	
 	if ($warning_name_3) {
-		    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-
-    $sql = "INSERT INTO ncic_warnings (name_id, warning_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)";
-
-
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "isss", $userId, $warning_name_3, $issued_by, $date);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
+		$stmt = $pdo->prepare("INSERT INTO ncic_warnings (name_id, warning_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)");
+		$result = $stmt->execute(array($userId, $warning_name_3, $issued_by, $date));
+	
+		if (!$result)
+		{
+			die($stmt->errorInfo());
 		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
 	}
 	
 	if ($warning_name_4) {
-		    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-
-    $sql = "INSERT INTO ncic_warnings (name_id, warning_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)";
-
-
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "isss", $userId, $warning_name_4, $issued_by, $date);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
+		$stmt = $pdo->prepare("INSERT INTO ncic_warnings (name_id, warning_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)");
+		$result = $stmt->execute(array($userId, $warning_name_4, $issued_by, $date));
+	
+		if (!$result)
+		{
+			die($stmt->errorInfo());
 		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
 	}
 	
 	if ($warning_name_5) {
-		    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-
-    $sql = "INSERT INTO ncic_warnings (name_id, warning_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)";
-
-
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "isss", $userId, $warning_name_5, $issued_by, $date);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
+		$stmt = $pdo->prepare("INSERT INTO ncic_warnings (name_id, warning_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)");
+		$result = $stmt->execute(array($userId, $warning_name_5, $issued_by, $date));
+	
+		if (!$result)
+		{
+			die($stmt->errorInfo());
 		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
 	}
 
     $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully created warning</span></div>';
 
-    header("Location:".BASE_URL."/mdt.php");
+	$pdo = null;
+    header("Location:".BASE_URL."/mdt.php?dep=".$_SESSION['activeDepartment']);
 }
 function create_arrest()
 {
-    $userId = $_POST['civilian_names'];
-    $arrest_reason_1 = $_POST['arrest_reason_1'];
-    $arrest_fine_1 = $_POST['arrest_fine_1'];
-	$arrest_reason_2 = $_POST['arrest_reason_2'];
-	$arrest_fine_2 = $_POST['arrest_fine_2'];
-	$arrest_reason_3 = $_POST['arrest_reason_3'];
-	$arrest_fine_3 = $_POST['arrest_fine_3'];
-	$arrest_reason_4 = $_POST['arrest_reason_4'];
-	$arrest_fine_4 = $_POST['arrest_fine_4'];
-	$arrest_reason_5 = $_POST['arrest_reason_5'];
-	$arrest_fine_5 = $_POST['arrest_fine_5'];
+    $userId = htmlspecialchars($_POST['civilian_names']);
+    $arrest_reason_1 = htmlspecialchars($_POST['arrest_reason_1']);
+    $arrest_fine_1 = htmlspecialchars($_POST['arrest_fine_1']);
+	$arrest_reason_2 = htmlspecialchars($_POST['arrest_reason_2']);
+	$arrest_fine_2 = htmlspecialchars($_POST['arrest_fine_2']);
+	$arrest_reason_3 = htmlspecialchars($_POST['arrest_reason_3']);
+	$arrest_fine_3 = htmlspecialchars($_POST['arrest_fine_3']);
+	$arrest_reason_4 = htmlspecialchars($_POST['arrest_reason_4']);
+	$arrest_fine_4 = htmlspecialchars($_POST['arrest_fine_4']);
+	$arrest_reason_5 = htmlspecialchars($_POST['arrest_reason_5']);
+	$arrest_fine_5 = htmlspecialchars($_POST['arrest_fine_5']);
     session_start();
     $issued_by = $_SESSION['name'];
     $date = date('Y-m-d');
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
+    }
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+	$stmt = $pdo->prepare("INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, issued_date) VALUES (?, ?, ?, ?, ?)");
+	$result = $stmt->execute(array($userId, $arrest_reason_1, $arrest_fine_1, $issued_by, $date));
 
-    $sql = "INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, issued_date) VALUES (?, ?, ?, ?, ?)";
-
-
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "isiss", $userId, $arrest_reason_1, $arrest_fine_1, $issued_by, $date);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
-		}
-	}
-	catch (Exception $e)
+	if (!$result)
 	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+		die($stmt->errorInfo());
 	}
-	mysqli_close($link);
+
 	if ($arrest_reason_2){
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+		$stmt = $pdo->prepare("INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, issued_date) VALUES (?, ?, ?, ?, ?)");
+		$result = $stmt->execute(array($userId, $arrest_reason_2, $arrest_fine_2, $issued_by, $date));
 	
-	    $sql = "INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, issued_date) VALUES (?, ?, ?, ?, ?)";
-
-
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "isiss", $userId, $arrest_reason_2, $arrest_fine_2, $issued_by, $date);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
+		if (!$result)
+		{
+			die($stmt->errorInfo());
 		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
 	}
 	if ($arrest_reason_3) {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+		$stmt = $pdo->prepare("INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, issued_date) VALUES (?, ?, ?, ?, ?)");
+		$result = $stmt->execute(array($userId, $arrest_reason_3, $arrest_fine_3, $issued_by, $date));
 	
-    $sql = "INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, issued_date) VALUES (?, ?, ?, ?, ?)";
-
-
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "isiss", $userId, $arrest_reason_3, $arrest_fine_3, $issued_by, $date);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
+		if (!$result)
+		{
+			die($stmt->errorInfo());
 		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
 	}
 	if ($arrest_reason_4) {
-   $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+		$stmt = $pdo->prepare("INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, issued_date) VALUES (?, ?, ?, ?, ?)");
+		$result = $stmt->execute(array($userId, $arrest_reason_4, $arrest_fine_4, $issued_by, $date));
 	
-	    $sql = "INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, issued_date) VALUES (?, ?, ?, ?, ?)";
-
-
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "isiss", $userId, $arrest_reason_4, $arrest_fine_4, $issued_by, $date);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
+		if (!$result)
+		{
+			die($stmt->errorInfo());
 		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
 	}
 	if ($arrest_reason_5) {
-	$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-	    $sql = "INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, issued_date) VALUES (?, ?, ?, ?, ?)";
-
-
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "isiss", $userId, $arrest_reason_5, $arrest_fine_5, $issued_by, $date);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
+		$stmt = $pdo->prepare("INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, issued_date) VALUES (?, ?, ?, ?, ?)");
+		$result = $stmt->execute(array($userId, $arrest_reason_5, $arrest_fine_5, $issued_by, $date));
+	
+		if (!$result)
+		{
+			die($stmt->errorInfo());
 		}
 	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
-	}
-    session_start();
     $_SESSION['arrestMessage'] = '<div class="alert alert-success"><span>Successfully created arrest report</span></div>';
 
-    header("Location:".BASE_URL."/mdt.php");
+	$pdo = null;
+    header("Location:".BASE_URL."/mdt.php?dep=".$_SESSION['activeDepartment']);
 }
 ?>
