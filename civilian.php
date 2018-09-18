@@ -12,11 +12,11 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
     session_start();
-	
+
     require("./oc-config.php");
 
     include("./actions/civActions.php");
-    
+
 	include("./actions/api.php");
 
 
@@ -48,14 +48,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         $identityMessage = $_SESSION['identityMessage'];
         unset($_SESSION['identityMessage']);
     }
-	
+
     $plateMessage = "";
     if(isset($_SESSION['plateMessage']))
     {
         $plateMessage = $_SESSION['plateMessage'];
         unset($_SESSION['plateMessage']);
     }
-	
+
     $nameMessage = "";
     if(isset($_SESSION['nameMessage']))
     {
@@ -80,7 +80,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             <div class="col-md-3 left_col">
                <div class="left_col scroll-view">
                   <div class="navbar nav_title" style="border: 0;">
-                     <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo COMMUNITY_NAME;?> Civilian</span></a>
+                     <a href="javascript:void(0)" class="site_title"><i class="fas fa-user"></i> <span> Civilian</span></a>
                   </div>
                   <div class="clearfix"></div>
                   <!-- menu profile quick info -->
@@ -102,21 +102,21 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <h3>General</h3>
                         <ul class="nav side-menu">
                            <li class="active">
-                              <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                              <a><i class="fas fa-home"></i> Home</a>
                               <ul class="nav child_menu" style="display: block;">
                                  <li class="current-page"><a href="javascript:void(0)">Civilian Dashboard</a></li>
                               </ul>
                            </li>
                            <?php
 						   if (CIV_WARRANT === true) { ?> <li>
-                              <a><i class="fa fa-warning"></i> Warrants <span class="fa fa-chevron-down"></span></a>
+                              <a><i class="fas fa-warning"></i> Warrants <span class="fas fa-chevron-down"></span></a>
                               <ul class="nav child_menu">
                                  <li><a type="button" data-toggle="modal" data-target="#createWarrant" > Create Warrants</a></li>
                                  <li><a type="button" data-toggle="modal" data-target="#viewWarrant" > View Warrants</a></li>
                               </ul>
                            </li>
 						    <?php } else { ?>
-							<?php } 
+							<?php }
 							?>
                         </ul>
                      </div>
@@ -130,15 +130,18 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <a data-toggle="tooltip" data-placement="top">
                         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                         </a>-->
-                     <a data-toggle="tooltip" data-placement="top">
-                     <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-                     </a>
-                     <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
-                     <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
-                     </a>
-                     <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php">
-                     <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                     </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
+                        <span class="fas fa-clipboard-list" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
+                        <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
+                        <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Need Help?" href="https://guides.opencad.io/">
+                        <span class="fas fa-info-circle" aria-hidden="true"></span>
+                        </a>
                   </div>
                   <!-- /menu footer buttons -->
                </div>
@@ -148,7 +151,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                <div class="nav_menu">
                   <nav>
                      <div class="nav toggle">
-                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        <a id="menu_toggle"><i class="fas fa-bars"></i></a>
                      </div>
                      <ul class="nav navbar-nav navbar-right">
                         <li class="">
@@ -157,8 +160,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <span class=" fa fa-angle-down"></span>
                            </a>
                            <ul class="dropdown-menu dropdown-usermenu pull-right">
-                              <li><a href="<?php echo BASE_URL; ?>/profile.php">My Profile</a></li>
-                              <li><a href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                              <li><a href="<?php echo BASE_URL; ?>/profile.php"><i class="fas fa-user pull-right"></i> My Profile</a></li>
+                              <li><a href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
                               <span class="glyphicon glyphicon-log">
                            </ul>
                         </li>
@@ -182,9 +185,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <div class="x_title">
                               <h2>My Identities</h2>
                               <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                 <li><a class="collapse-link"><i class="fasfa-chevron-up"></i></a>
                                  </li>
-                                 <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                 <li><a class="close-link"><i class="fasfa-close"></i></a>
                                  </li>
                               </ul>
                               <div class="clearfix"></div>
@@ -210,9 +213,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="x_title">
                     <h2>My Vehicles</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      <li><a class="collapse-link"><i class="fasfa-chevron-up"></i></a>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      <li><a class="close-link"><i class="fasfa-close"></i></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -239,9 +242,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="x_title">
                     <h2>My Weapons</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      <li><a class="collapse-link"><i class="fasfa-chevron-up"></i></a>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      <li><a class="close-link"><i class="fasfa-close"></i></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -269,9 +272,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <div class="x_title">
                               <h2>New 911 Call</h2>
                               <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                 <li><a class="collapse-link"><i class="fasfa-chevron-up"></i></a>
                                  </li>
-                                 <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                 <li><a class="close-link"><i class="fasfa-close"></i></a>
                                  </li>
                               </ul>
                               <div class="clearfix"></div>
@@ -297,7 +300,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                  </div>
                                  <!-- ./ form-group row -->
                                  <div class="form-group row">
-                                    <label class="col-md-2 control-label"><span>Description <a data-toggle="modal" href="#911CallHelpModal"><i class="fa fa-question-circle"></i></a></span></label>
+                                    <label class="col-md-2 control-label"><span>Description <a data-toggle="modal" href="#911CallHelpModal"><i class="fasfa-question-circle"></i></a></span></label>
                                     <div class="col-md-10">
                                        <textarea id="911_description" name="911_description" class="form-control" style="resize:none;" rows="4"></textarea>
                                     </div>
@@ -325,7 +328,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             <!-- footer content -->
             <footer>
                <div class="pull-right">
-                  <?php echo COMMUNITY_NAME;?> CAD System
+                  <?php echo COMMUNITY_NAME;?> CAD System | <?php pageLoadTime(); ?>
                </div>
                <div class="clearfix"></div>
             </footer>
@@ -458,9 +461,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="x_title">
                     <h2>NCIC Warrants</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      <li><a class="collapse-link"><i class="fasfa-chevron-up"></i></a>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      <li><a class="close-link"><i class="fasfa-close"></i></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -486,7 +489,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       </div>
       <!-- ./ modal-dialog modal-lg -->
     </div>
-	  
+
     <div class="modal fade" id="IdentityModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -504,7 +507,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Name</label>
                 <div class="col-lg-10">
 					<input name="civNameReq" class="form-control" id="civNameReq" value="<?php echo $civName;?>" required/>
-					<span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+					<span class="fasfa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -513,7 +516,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Date of Birth</label>
                 <div class="col-lg-10">
 					<input type="text" name="civDobReq" class="form-control" id="datepicker" maxlength="10" value="<?php echo $civDob;?>" required/>
-					<span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
+					<span class="fasfa-calendar form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -522,7 +525,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Address</label>
                 <div class="col-lg-10">
 					<input type="text" name="civAddressReq" class="form-control" id="civAddressReq" value="<?php echo $civAddr;?>" required/>
-					<span class="fa fa-location-arrow form-control-feedback right" aria-hidden="true"></span>
+					<span class="fasfa-location-arrow form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -556,6 +559,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">License Status</label>
                   <div class="col-lg-10">
                     <select name="civDL" class="form-control selectpicker" id="civDL" title="Select a license status" required>
+                <option value="Unobtained"> Unobtained </option>
                 <option value="Valid"> Valid </option>
                 <option value="Suspended"> Suspended </option>
                 <option value="Expired"> Expired </option>
@@ -657,7 +661,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Name</label>
                 <div class="col-lg-10">
           <input name="civNameReq" class="form-control" id="civNameReq" value="<?php echo $civName;?>" required/>
-          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+          <span class="fasfa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -666,7 +670,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Date of Birth</label>
                 <div class="col-lg-10">
           <input type="text" name="civDobReq" class="form-control" id="datepicker2" maxlength="10" value="<?php echo $civDob;?>" required/>
-          <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
+          <span class="fasfa-calendar form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -675,7 +679,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Address</label>
                 <div class="col-lg-10">
           <input type="text" name="civAddressReq" class="form-control" id="civAddressReq" value="<?php echo $civAddr;?>" required/>
-          <span class="fa fa-location-arrow form-control-feedback right" aria-hidden="true"></span>
+          <span class="fasfa-location-arrow form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -709,6 +713,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">License Status</label>
                   <div class="col-lg-10">
                     <select name="civDL" class="form-control selectpicker civDL_picker" id="civDL" title="Select a license status" required>
+                <option value="Unobtained"> Unobtained </option>
                 <option value="Valid"> Valid </option>
                 <option value="Suspended"> Suspended </option>
                 <option value="Expired"> Expired </option>
@@ -794,7 +799,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     </div>
   </div>
     <!-- ./ modal fade bs-example-modal-lg -->
-	  
+
     <div class="modal fade" id="createPlateModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -1076,56 +1081,57 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="col-lg-10">
                   <select class="form-control veh_reg_state_option" name="veh_reg_state" required>
           <option value"">  </option>
-          <option value"Alabama"> Alabama </option>
-          <option value"Alaska"> Alaska </option>
-          <option value"Arizona"> Arizona </option>
-          <option value"Arkansas"> Arkansas </option>
-          <option value"California"> California </option>
-          <option value"Colorado"> Colorado </option>
-          <option value"Connecticut"> Connecticut </option>
-          <option value"Delaware"> Delaware </option>
-          <option value"Florida"> Florida </option>
-          <option value"Georgia"> Georgia </option>
-          <option value"Hawaii"> Hawaii </option>
-          <option value"Idaho"> Idaho </option>
-          <option value"Illinois"> Illinois </option>
-          <option value"Indiana"> Indiana </option>
-          <option value"Iowa"> Iowa </option>
-          <option value"Kansas"> Kansas </option>
-          <option value"Kentucky"> Kentucky </option>
-          <option value"Louisiana"> Louisiana </option>
-          <option value"Maine"> Maine </option>
-          <option value"Maryland"> Maryland </option>
-          <option value"Massachusetts"> Massachusetts </option>
-          <option value"Michigan"> Michigan </option>
-          <option value"Minnesota"> Minnesota </option>
-          <option value"Mississippi"> Mississippi </option>
-          <option value"Missouri"> Missouri </option>
-          <option value"Montana"> Montana </option>
-          <option value"Nebraska"> Nebraska </option>
-          <option value"Nevada"> Nevada </option>
-          <option value"New Hampshire"> New Hampshire </option>
-          <option value"New Jersey"> New Jersey </option>
-          <option value"New Mexico"> New Mexico </option>
-          <option value"New York"> New York </option>
-          <option value"North Carolina"> North Carolina </option>
-          <option value"North Dakota"> North Dakota </option>
-          <option value"Ohio"> Ohio </option>
-          <option value"Oklahoma"> Oklahoma </option>
-          <option value"Oregon"> Oregon </option>
-          <option value"Pennsylvania"> Pennsylvania </option>
-          <option value"Rhode Island"> Rhode Island </option>
-          <option value"South Carolina"> South Carolina </option>
-          <option value"South Dakota"> South Dakota </option>
-          <option value"Tennessee"> Tennessee </option>
-          <option value"Texas"> Texas </option>
-          <option value"Utah"> Utah </option>
-          <option value"Vermont"> Vermont </option>
-          <option value"Virginia"> Virginia </option>
-          <option value"Washington"> Washington </option>
-          <option value"West Virginia"> West Virginia </option>
-          <option value"Wisconsin"> Wisconsin </option>
-          <option value"Wyoming"> Wyoming </option>
+				  <option value"Alabama"> Alabama </option>
+				  <option value"Alaska"> Alaska </option>
+				  <option value"Arizona"> Arizona </option>
+				  <option value"Arkansas"> Arkansas </option>
+				  <option value"California"> California </option>
+				  <option value"Colorado"> Colorado </option>
+				  <option value"Connecticut"> Connecticut </option>
+				  <option value"Delaware"> Delaware </option>
+				  <option value"Florida"> Florida </option>
+				  <option value"Georgia"> Georgia </option>
+				  <option value"Hawaii"> Hawaii </option>
+				  <option value"Idaho"> Idaho </option>
+				  <option value"Illinois"> Illinois </option>
+				  <option value"Indiana"> Indiana </option>
+				  <option value"Iowa"> Iowa </option>
+				  <option value"Kansas"> Kansas </option>
+				  <option value"Kentucky"> Kentucky </option>
+				  <option value"Louisiana"> Louisiana </option>
+				  <option value"Maine"> Maine </option>
+				  <option value"Maryland"> Maryland </option>
+				  <option value"Massachusetts"> Massachusetts </option>
+				  <option value"Michigan"> Michigan </option>
+				  <option value"Minnesota"> Minnesota </option>
+				  <option value"Mississippi"> Mississippi </option>
+				  <option value"Missouri"> Missouri </option>
+				  <option value"Montana"> Montana </option>
+				  <option value"Nebraska"> Nebraska </option>
+				  <option value"Nevada"> Nevada </option>
+				  <option value"New Hampshire"> New Hampshire </option>
+				  <option value"New Jersey"> New Jersey </option>
+				  <option value"New Mexico"> New Mexico </option>
+				  <option value"New York"> New York </option>
+				  <option value"North Carolina"> North Carolina </option>
+				  <option value"North Dakota"> North Dakota </option>
+				  <option value"Ohio"> Ohio </option>
+				  <option value"Oklahoma"> Oklahoma </option>
+				  <option value"Oregon"> Oregon </option>
+				  <option value"Pennsylvania"> Pennsylvania </option>
+				  <option value"Rhode Island"> Rhode Island </option>
+				  <option value"San Andreas"> San Andreas </option>
+				  <option value"South Carolina"> South Carolina </option>
+				  <option value"South Dakota"> South Dakota </option>
+				  <option value"Tennessee"> Tennessee </option>
+				  <option value"Texas"> Texas </option>
+				  <option value"Utah"> Utah </option>
+				  <option value"Vermont"> Vermont </option>
+				  <option value"Virginia"> Virginia </option>
+				  <option value"Washington"> Washington </option>
+				  <option value"West Virginia"> West Virginia </option>
+				  <option value"Wisconsin"> Wisconsin </option>
+				  <option value"Wyoming"> Wyoming </option>
           </select>
           </div>
                 <!-- ./ col-sm-9 -->
@@ -1197,7 +1203,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <!-- ./ modal-dialog modal-lg -->
     </div>
     <!-- ./ modal fade bs-example-modal-lg -->
-	  
+
       <!-- 911 Call Help Modal -->
       <div class="modal fade" id="911CallHelpModal" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog modal-lg">
@@ -1298,7 +1304,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           cache: false
           })
           .done(function(data){
-            $('#IdentityEditModal #civNameReq').val(data.first_name+' '+data.last_name);
+            $('#IdentityEditModal #civNameReq').val(data.name);
             $('#IdentityEditModal #datepicker2').datepicker({dateFormat: 'yy-mm-dd'}).datepicker('setDate', new Date(data.dob));
             $('#IdentityEditModal #civAddressReq').val(data.address);
             $('.selectpicker3').selectpicker('val', data.gender);
@@ -1310,7 +1316,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			$('.civDec_picker').selectpicker('val', data.deceased);
             $('#IdentityEditModal .Editdataid').val(data.id);
           });
-          
+
       })
       /* Edit Plate */
       $(document).on('click', '#edit_plateBtn', function(e){

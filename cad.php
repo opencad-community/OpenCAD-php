@@ -40,12 +40,18 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     {
       die("You do not have permission to be here. Request access to dispatch through your administration.");
     }
-    
+
     $citationMessage = "";
     if(isset($_SESSION['citationMessage']))
     {
         $citationMessage = $_SESSION['citationMessage'];
         unset($_SESSION['citationMessage']);
+    }
+    $arrestMessage = "";
+    if(isset($_SESSION['arrestMessage']))
+    {
+        $arrestMessage = $_SESSION['arrestMessage'];
+        unset($_SESSION['arrestMessage']);
     }
     $warningMessage = "";
     if(isset($_SESSION['warningMessage']))
@@ -68,6 +74,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         unset($_SESSION['boloMessage']);
     }
 
+
 ?>
 
 <!DOCTYPE html>
@@ -79,7 +86,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             <div class="col-md-3 left_col">
                <div class="left_col scroll-view">
                   <div class="navbar nav_title" style="border: 0;">
-                     <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo COMMUNITY_NAME;?> Dispatch</span></a>
+                     <a href="javascript:void(0)" class="site_title"><i class="fas fa-broadcast-tower"></i> <span> Communications</span></a>
                   </div>
                   <div class="clearfix"></div>
                   <!-- menu profile quick info -->
@@ -101,33 +108,40 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <h3>General</h3>
                         <ul class="nav side-menu">
                            <li class="active">
-                              <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                              <a><i class="fas fa-home"></i> Home <span class="fas fa-chevron-down"></span></a>
                               <ul class="nav child_menu" style="display: block;">
                                  <li class="current-page"><a href="javascript:void(0)">Dashboard</a></li>
                               </ul>
                            </li>
                            <li>
-                              <a><i class="fa fa-clock-o"></i> Stopwatch <span class="fa fa-chevron-down"></span></a>
+                              <a><i class="fas fa-stopwatch"></i> Stopwatch <span class="fas fa-chevron-down"></span></a>
                               <ul class="nav child_menu">
                                  <li><a href="https://www.timeanddate.com/stopwatch/" target="_blank">Stopwatch</a></li>
                               </ul>
                            </li>
                            <li>
-                              <a><i class="fa fa-book"></i> Warnings <span class="fa fa-chevron-down"></span></a>
+                              <a><i class="fas fa-book"></i> Warnings <span class="fas fa-chevron-down"></span></a>
                               <ul class="nav child_menu">
                                  <li><a type="button" data-toggle="modal" data-target="#createWarning" > Create Warning</a></li>
                                  <li><a type="button" data-toggle="modal" data-target="#viewWarning" > View Warnings</a></li>
                               </ul>
                            </li>
                            <li>
-                              <a><i class="fa fa-book"></i> Citations <span class="fa fa-chevron-down"></span></a>
+                              <a><i class="fas fa-book"></i> Citations <span class="fas fa-chevron-down"></span></a>
                               <ul class="nav child_menu">
                                  <li><a type="button" data-toggle="modal" data-target="#createCitation" > Create Citation</a></li>
                                  <li><a type="button" data-toggle="modal" data-target="#viewCitation" > View Citations</a></li>
                               </ul>
                            </li>
                            <li>
-                              <a><i class="fa fa-warning"></i> Warrants <span class="fa fa-chevron-down"></span></a>
+                              <a><i class="fas fa-book"></i> Arrest Report <span class="fas fa-chevron-down"></span></a>
+                              <ul class="nav child_menu">
+                                 <li><a type="button" data-toggle="modal" data-target="#createArrest" > Create Arrest Report</a></li>
+                                 <li><a type="button" data-toggle="modal" data-target="#viewArrest" > View Arrests</a></li>
+                              </ul>
+                           </li>
+                           <li>
+                              <a><i class="fas fa-book"></i> Warrants <span class="fas fa-chevron-down"></span></a>
                               <ul class="nav child_menu">
                                  <li><a type="button" data-toggle="modal" data-target="#createWarrant" > Create Warrants</a></li>
                                  <li><a type="button" data-toggle="modal" data-target="#viewWarrant" > View Warrants</a></li>
@@ -145,15 +159,21 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <a data-toggle="tooltip" data-placement="top">
                         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                         </a>-->
-                     <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
-                     <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-                     </a>
-                     <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
-                     <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
-                     </a>
-                     <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
-                     <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                     </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
+                        <span class="fas fa-clipboard-list" aria-hidden="true"></span>
+                        </a>
+                        <a id="changeCallsign" class="btn-link" name="changeCallsign" data-toggle="modal" data-target="#callsign">
+                          <span class="glyphicon glyphicon-text-background" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
+                        <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
+                        <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Need Help?" href="https://guides.opencad.io/">
+                        <span class="fas fa-info-circle" aria-hidden="true"></span>
+                        </a>
                   </div>
                   <!-- /menu footer buttons -->
                </div>
@@ -163,17 +183,17 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                <div class="nav_menu">
                   <nav>
                      <div class="nav toggle">
-                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        <a id="menu_toggle"><i class="fas fa-bars"></i></a>
                      </div>
                      <ul class="nav navbar-nav navbar-right">
                         <li class="">
                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                           <img src="<?php echo get_avatar() ?>" alt=""><?php $_SESSION['name']; ?>
-                           <span class=" fa fa-angle-down"></span>
+                           <img src="<?php echo get_avatar() ?>" alt=""> <?php echo $name; ?>
+                           <span class=" fas fa-angle-down"></span>
                            </a>
                            <ul class="dropdown-menu dropdown-usermenu pull-right">
-                              <li><a href="<?php echo BASE_URL; ?>/profile.php">My Profile</a></li>
-                              <li><a href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                              <li><a href="<?php echo BASE_URL; ?>/profile.php"><i class="fas fa-user pull-right"></i> My Profile</a></li>
+                              <li><a href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
                            </ul>
                         </li>
                      </ul>
@@ -192,7 +212,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <?php echo $warrantMessage;?>
 						<?php echo $warningMessage;?>
                      </div>
-                     <!-- ./ title_left -->
+						<button class="btn btn-primary pull-right" name="aop" data-toggle="modal" data-target="#aop" id="getAOP"></button>
                   </div>
                   <!-- ./ page-title -->
                   <?php /* hiding for now
@@ -203,8 +223,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <div class="x_title">
                              <h2>Command Line Interface</h2>
                              <ul class="nav navbar-right panel_toolbox">
-                               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-                               <li><a data-toggle="modal" href="#quickGuide"><i class="fa fa-question-circle"></i></a></li>
+                               <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
+                               <li><a data-toggle="modal" href="#quickGuide"><i class="fas fa-question-circle"></i></a></li>
                              </ul>
                              <div class="clearfix"></div>
                            </div>
@@ -236,7 +256,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <div class="x_title">
                               <h2>Active Calls</h2>
                               <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                 <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
                               </ul>
                               <div class="clearfix"></div>
                            </div>
@@ -253,6 +273,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                               <button class="btn btn-primary" name="new_call_btn" data-toggle="modal" data-target="#newCall">New Call</button>
                               <button class="btn btn-danger pull-right" onClick="priorityTone('single')" value="0" id="priorityTone">10-3 Tone</button>
                               <button class="btn btn-danger pull-right" onClick="priorityTone('recurring')" value="0" id="recurringTone">Priority Tone</button>
+                              <button class="btn btn-danger pull-right" onClick="priorityTone('panic')" value="0" id="panicTone">Panic Button</button>
                            </div>
                         </div>
                         <!-- ./ x_panel -->
@@ -266,7 +287,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <div class="x_title">
                               <h2>Active BOLOs</h2>
                               <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                 <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
                               </ul>
                               <div class="clearfix"></div>
                            </div>
@@ -302,7 +323,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <div class="x_title">
                               <h2>Active Dispatchers</h2>
                               <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                 <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
                               </ul>
                               <div class="clearfix"></div>
                            </div>
@@ -320,7 +341,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <div class="x_title">
                               <h2>Available Units</h2>
                               <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                 <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
                               </ul>
                               <div class="clearfix"></div>
                            </div>
@@ -338,7 +359,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <div class="x_title">
                               <h2>Unavailable Units</h2>
                               <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                 <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
                               </ul>
                               <div class="clearfix"></div>
                            </div>
@@ -361,14 +382,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <div class="x_title">
                               <h2>NCIC Name Lookup</h2>
                               <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                 <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
                               </ul>
                               <div class="clearfix"></div>
                            </div>
                            <!-- ./ x_title -->
                            <div class="x_content">
                               <div class="input-group">
-                                 <input type="text" name="ncic_name" class="form-control" id="ncic_name" placeholder="John Doe"/>
+                                 <input id="ncic_name" type="text" class="form-control" placeholder="John Doe" name="ncic_name"/>
                                  <span class="input-group-btn">
                                  <button type="button" class="btn btn-primary" name="ncic_name_btn" id="ncic_name_btn">Send</button>
                                  </span>
@@ -389,7 +410,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <div class="x_title">
                               <h2>NCIC Plate Lookup</h2>
                               <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                 <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
                               </ul>
                               <div class="clearfix"></div>
                            </div>
@@ -417,7 +438,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <div class="x_title">
                               <h2>NCIC Weapon Lookup</h2>
                               <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                 <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
                               </ul>
                               <div class="clearfix"></div>
                            </div>
@@ -519,6 +540,101 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          <!-- ./ modal-dialog modal-lg -->
       </div>
       <!-- ./ modal fade bs-example-modal-lg -->
+      <div class="modal fade" id="rms" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
+                  </button>
+            <h4 class="modal-title" id="myModalLabel">Warning Viewer</h4>
+          </div>
+          <!-- ./ modal-header -->
+          <div class="modal-body">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel" id="citation_panel">
+                  <div class="x_title">
+                    <h2>RMS Warnings</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fas fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php rms_warnings();?>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <div class="x_panel" id="citation_panel">
+                  <div class="x_title">
+                    <h2>RMS Citations</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fas fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php rms_citations();?>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <div class="x_panel" id="citation_panel">
+                  <div class="x_title">
+                    <h2>RMS Arrests</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fas fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php rms_arrests();?>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <div class="x_panel" id="citation_panel">
+                  <div class="x_title">
+                    <h2>RMS Warrants</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fas fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php rms_warrants();?>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <!-- ./ x_panel -->
+              </div>
+              <!-- ./ form-group -->
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
       <!-- Assign User to Call Modal -->
       <div class="modal fade" id="assign" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog modal-lg">
@@ -556,6 +672,43 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          <!-- ./ modal-dialog modal-lg -->
       </div>
       <!-- ./ modal fade bs-example-modal-lg -->
+	<!-- AOP Modal -->
+    <div class="modal fade" id="aop" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Set AOP</h4>
+          </div>
+          <!-- ./ modal-header -->
+		  <div class="modal-body">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/dispatchActions.php" method="post">
+                <div class="form-group row">
+                </div>
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">AOP</label>
+                <div class="col-lg-10">
+					<input name="aop" class="form-control" id="aop" placeholder="Set AOP"/>
+					<span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+          <div class="modal-footer">
+                <input name="change_aop" type="submit" class="btn btn-primary" value="Send" />
+               <button type="reset" class="btn btn-default" value="Reset">Reset</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+	</div>
+    <!-- ./ modal fade bs-example-modal-lg -->
       <!-- New Call Modal -->
       <div class="modal fade" id="newCall" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog modal-lg">
@@ -637,7 +790,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">First Name</label>
                 <div class="col-lg-10">
 					<input name="first_name" class="form-control" id="first_name" placeholder="First Name of the BOLOed subject."/>
-					<span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+					<span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -646,7 +799,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Last Name</label>
                 <div class="col-lg-10">
 					<input name="last_name" class="form-control" id="last_name" placeholder="Last Name of the BOLOed subject."/>
-					<span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+					<span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -666,7 +819,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Physical Description</label>
                 <div class="col-lg-10">
 					<input name="physical_description" class="form-control" id="physical_description" placeholder="Physical description of the BOLOed subject."/>
-					<span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+					<span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -675,7 +828,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Reason Wanted</label>
                 <div class="col-lg-10">
 					<textarea name="reason_wanted" class="form-control" style="text-transform:uppercase" rows="5" id="reason_wanted" placeholder="Wanted reason of the BOLOed subject." required> </textarea>
-					<span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+					<span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -684,7 +837,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Last Seen</label>
                 <div class="col-lg-10">
 					<input name="last_seen" class="form-control" id="last_seen" placeholder="Last observed location of the BOLOed subject."/>
-					<span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+					<span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -721,7 +874,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">First Name</label>
                 <div class="col-lg-10">
           <input name="first_name" class="form-control" id="first_name" placeholder="First Name of the BOLOed subject."/>
-          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+          <span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -730,7 +883,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Last Name</label>
                 <div class="col-lg-10">
           <input name="last_name" class="form-control" id="last_name" placeholder="Last Name of the BOLOed subject."/>
-          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+          <span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -750,7 +903,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Physical Description</label>
                 <div class="col-lg-10">
           <input name="physical_description" class="form-control" id="physical_description" placeholder="Physical description of the BOLOed subject."/>
-          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+          <span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -759,7 +912,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Reason Wanted</label>
                 <div class="col-lg-10">
           <textarea name="reason_wanted" class="form-control" style="text-transform:uppercase" rows="5" id="reason_wanted" placeholder="Wanted reason of the BOLOed subject." required> </textarea>
-          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+          <span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -768,7 +921,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Last Seen</label>
                 <div class="col-lg-10">
           <input name="last_seen" class="form-control" id="last_seen" placeholder="Last observed location of the BOLOed subject."/>
-          <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+          <span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -804,15 +957,16 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="form-group row">
                         <label class="col-lg-2 control-label">Vehicle Make</label>
                         <div class="col-lg-10">
-                           <select class="form-control selectpicker" data-live-search="true" name="vehicle_make" title="Vehicle Make" required>
+                           <select class="form-control selectpicker" data-live-search="true" name="vehicle_make" title="Vehicle Make">
                               <?php getVehicleMakes();?>
                            </select>
                         </div>
+				</div>
               <!-- ./ form-group -->
                 <div class="form-group row">
                         <label class="col-lg-2 control-label">Vehicle Model</label>
                         <div class="col-lg-10">
-                           <select class="form-control selectpicker" data-live-search="true" name="vehicle_model" title="Vehicle Model" required>
+                           <select class="form-control selectpicker" data-live-search="true" name="vehicle_model" title="Vehicle Model">
                               <?php getVehicleModels();?>
                            </select>
                         </div>
@@ -842,7 +996,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <!-- ./ col-sm-9 -->
                      </div>
                 <!-- ./ col-sm-9 -->
-              </div>
               <!-- ./ form-group -->
                      <div class="form-group row">
                         <label class="col-lg-2 control-label">Reason Wanted</label>
@@ -859,7 +1012,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         </div>
                         <!-- ./ col-sm-9 -->
                      </div>
-              <!-- ./ form-group -->
+			</div>
           <div class="modal-footer">
               <input name="create_vehiclebolo" type="submit" class="btn btn-primary" value="Send" />
                <button type="reset" class="btn btn-default" value="Reset">Reset</button>
@@ -1057,7 +1210,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	  </div>
 	  </div>
       <!-- ./ modal fade bs-example-modal-lg -->
-      
+
       <!-- New Vehicle BOLO Modal -->
       <div class="modal fade" id="createVehicleBOLO" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog modal-lg">
@@ -1137,9 +1290,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <!-- ./ modal-dialog modal-lg -->
 
       </div>
-	   
+
        <!-- Edit Vehicle BOLO Modal -->
-      
+
       <!-- Create Citation Modal -->
       <div class="modal fade" id="createCitation" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog modal-lg">
@@ -1163,11 +1316,43 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               </div>
               <!-- ./ form-group -->
               <div class="form-group row">
-                <label class="col-lg-2 control-label">Citation Name</label>
+                <label class="col-lg-2 control-label">Citation Name 1</label>
                 <div class="col-lg-10">
-                  <select class="form-control selectpicker" data-live-search="true" name="citation_name" id="citation_name" title="Select Citation" required>
-                    <?php getCitations();?>
-                  </select>
+					<input type="text" name="citation_name_1" id="citation_name_1" size="70" placeholder="Enter a citation" required />
+					<input type="number" name="citation_fine_1" id="citation_fine_1" size="10" placeholder="Enter a fine amount" required />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+			  <p>Optional</p>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Citation Name 2</label>
+                <div class="col-lg-10">
+					<input type="text" name="citation_name_2" id="citation_name_2" size="70" placeholder="Enter a citation"  />
+					<input type="number" name="citation_fine_2" id="citation_fine_2" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Citation Name 3</label>
+                <div class="col-lg-10">
+					<input type="text" name="citation_name_3" id="citation_name_3" size="70" placeholder="Enter a citation"  />
+					<input type="number" name="citation_fine_3" id="citation_fine_3" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Citation Name 4</label>
+                <div class="col-lg-10">
+					<input type="text" name="citation_name_4" id="citation_name_4" size="70" placeholder="Enter a citation"  />
+					<input type="number" name="citation_fine_4" id="citation_fine_4" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Citation Name 5</label>
+                <div class="col-lg-10">
+					<input type="text" name="citation_name_5" id="citation_name_5" size="70" placeholder="Enter a citation"  />
+					<input type="number" name="citation_fine_5" id="citation_fine_5" placeholder="Enter a fine amount"  />
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -1202,9 +1387,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="x_title">
                     <h2>NCIC Citations</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      <li><a class="close-link"><i class="fas fa-close"></i></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -1254,9 +1439,38 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               </div>
               <!-- ./ form-group -->
               <div class="form-group row">
-                <label class="col-lg-2 control-label">Warning Name</label>
+                <label class="col-lg-2 control-label">Warning Name 1</label>
                 <div class="col-lg-10">
-					<input type="text" class="form-control" name="warning_name" id="warning_name" placeholder="Enter a warning" />
+					<input type="text" class="form-control" name="warning_name_1" id="warning_name_1" placeholder="Enter a warning" required />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+			  <p>Optional</p>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Warning Name 2</label>
+                <div class="col-lg-10">
+					<input type="text" class="form-control" name="warning_name_2" id="warning_name_2" placeholder="Enter a warning"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Warning Name 3</label>
+                <div class="col-lg-10">
+					<input type="text" class="form-control" name="warning_name_3" id="warning_name_3" placeholder="Enter a warning"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Warning Name 4</label>
+                <div class="col-lg-10">
+					<input type="text" class="form-control" name="warning_name_4" id="warning_name_4" placeholder="Enter a warning"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Warning Name 5</label>
+                <div class="col-lg-10">
+					<input type="text" class="form-control" name="warning_name_5" id="warning_name_5" placeholder="Enter a warning"  />
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -1265,6 +1479,127 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <!-- ./ modal-body -->
           <div class="modal-footer">
                 <input name="create_warning" type="submit" class="btn btn-primary" value="Create" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
+      <div class="modal fade" id="createArrest" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" id="closecallDetails"><span aria-hidden="true">×</span>
+               </button>
+               <h4 class="modal-title" id="myModalLabel">Arrest Report</h4>
+            </div>
+            <!-- ./ modal-header -->
+          <div class="modal-body">
+            <form role="form" action="<?php echo BASE_URL; ?>/actions/dispatchActions.php" method="post">
+                <div class="form-group row">
+                <label class="col-lg-2 control-label">Civilian Name</label>
+                <div class="col-lg-10">
+                  <select class="form-control selectpicker" name="civilian_names" id="civilian_names" data-live-search="true" required title="Select Civilian">
+                    <?php getCivilianNamesOption();?>
+                  </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Arrest Reason 1</label>
+                <div class="col-lg-10">
+					<input type="text" name="arrest_reason_1" id="arrest_reason_1" size="70" placeholder="Enter a reason for arrest" required />
+					<input type="number" name="arrest_fine_1" id="arrest_fine_1" size="10" placeholder="Enter a fine amount" />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+			  <p>Optional</p>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Arrest Reason 2</label>
+                <div class="col-lg-10">
+					<input type="text" name="arrest_reason_2" id="arrest_reason_2" size="70" placeholder="Enter a reason for arrest"  />
+					<input type="number" name="arrest_fine_2" id="arrest_fine_2" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Arrest Reason 3</label>
+                <div class="col-lg-10">
+					<input type="text" name="arrest_reason_3" id="arrest_reason_3" size="70" placeholder="Enter a reason for arrest"  />
+					<input type="number" name="arrest_fine_3" id="arrest_fine_3" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Arrest Reason 4</label>
+                <div class="col-lg-10">
+					<input type="text" name="arrest_reason_4" id="arrest_reason_4" size="70" placeholder="Enter a reason for arrest"  />
+					<input type="number" name="arrest_fine_4" id="arrest_fine_4" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Arrest Reason 5</label>
+                <div class="col-lg-10">
+					<input type="text" name="arrest_reason_5" id="arrest_reason_5" size="70" placeholder="Enter a reason for arrest"  />
+					<input type="number" name="arrest_fine_5" id="arrest_fine_5" placeholder="Enter a fine amount"  />
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+                <input name="create_arrest" type="submit" class="btn btn-primary" value="Create" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
+      <div class="modal fade" id="viewArrest" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
+                  </button>
+            <h4 class="modal-title" id="myModalLabel">Arrests Viewer</h4>
+          </div>
+          <!-- ./ modal-header -->
+          <div class="modal-body">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel" id="citation_panel">
+                  <div class="x_title">
+                    <h2>NCIC Arrests</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fas fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- ./ x_title -->
+                  <div class="x_content">
+                     <?php ncic_arrests();?>
+                  </div>
+                  <!-- ./ x_content -->
+                </div>
+                <!-- ./ x_panel -->
+              </div>
+              <!-- ./ form-group -->
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </form>
           </div>
@@ -1291,9 +1626,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="x_title">
                     <h2>NCIC Warnings</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      <li><a class="close-link"><i class="fas fa-close"></i></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -1320,7 +1655,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <!-- ./ modal-dialog modal-lg -->
     </div>
     <!-- ./ modal fade bs-example-modal-lg -->
-	
+
       <!-- Create Warrant Modal -->
       <div class="modal fade" id="createWarrant" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog modal-lg">
@@ -1446,9 +1781,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="x_title">
                     <h2>NCIC Warrants</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      <li><a class="close-link"><i class="fas fa-close"></i></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -1478,11 +1813,91 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <!-- AUDIO TONES -->
       <audio id="recurringToneAudio" src="<?php echo BASE_URL; ?>/sounds/priority.mp3" preload="auto"></audio>
       <audio id="priorityToneAudio" src="<?php echo BASE_URL; ?>/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
+      <audio id="panicToneAudio" src="<?php echo BASE_URL; ?>/sounds/Panic_Button.m4a" preload="auto"></audio>
       <?php include "./oc-includes/jquery-colsolidated.inc.php"; ?>
       <script>
          var vid = document.getElementById("recurringToneAudio");
          vid.volume = 0.3;
       </script>
+</style>
+
+      <script>
+  $(function() {
+    $( "#ncic_name" ).autocomplete({
+      source: "<?php echo BASE_URL; ?>/js/search_name.php"
+    });
+  });
+  </script>
+      <script>
+  $(function() {
+    $( "#ncic_plate" ).autocomplete({
+      source: "<?php echo BASE_URL; ?>/js/search_plate.php"
+    });
+  });
+  </script>
+      <script>
+  $(function() {
+    $( "#ncic_weapon" ).autocomplete({
+      source: "<?php echo BASE_URL; ?>/js/search_name.php"
+    });
+  });
+  </script>
+    <script>
+    $(document).ready(function() {
+        $('#ncic_warnings').DataTable({
+
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#ncic_citations').DataTable({
+
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#ncic_arrests').DataTable({
+
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#ncic_warrants').DataTable({
+
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#rms_warnings').DataTable({
+
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#rms_citations').DataTable({
+
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#rms_arrests').DataTable({
+
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#rms_warrants').DataTable({
+
+        });
+    });
+    </script>
       <script>
          $(document).ready(function() {
              $(function() {
@@ -1496,6 +1911,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
              checkTones();
              cadGetPersonBOLOS();
              cadGetVehicleBOLOS();
+             getAOP();
 
          });
       </script>
@@ -1655,6 +2071,38 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      lengthMenu: [[4, -1], [4, "All"]]
                 });*/
                    setTimeout(getDispatchers, 5000);
+
+
+                 },
+                 error : function(XMLHttpRequest, textStatus, errorThrown)
+                 {
+                   console.log("Error");
+                 }
+
+               });
+         }
+
+
+      </script>
+      <script>
+         function getAOP() {
+           $.ajax({
+                 type: "GET",
+                 url: "<?php echo BASE_URL; ?>/actions/api.php",
+                 data: {
+                     getAOP: 'yes'
+                 },
+                 success: function(response)
+                 {
+                   $('#getAOP').html(response);
+
+                   // SG - Removed until node/real-time data setup
+                   /*$('#activeUsers').DataTable({
+                     searching: false,
+                     scrollY: "200px",
+                     lengthMenu: [[4, -1], [4, "All"]]
+                });*/
+                   setTimeout(getAOP, 5000);
 
 
                  },

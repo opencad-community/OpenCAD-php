@@ -35,17 +35,23 @@ function checkIfHeadAdmin()
     $user_id = $_SESSION['id'];
     $department_id = '8'; // Table departments department_name = head administrators
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $sql = 'SELECT * from user_departments WHERE user_id = "'.$user_id.'" AND department_id = "'.$department_id.'"';
+    $stmt = $pdo->prepare("SELECT * from user_departments WHERE user_id = ? AND department_id = ?");
+    $result = $stmt->execute(array($user_id, $department_id));
 
-    $result = mysqli_query($link, $sql);
+    if (!$result)
+    {
+        die($stmt->errorInfo());
+    }
+    $pdo = null;
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
     if ($num_rows == 0)
     {

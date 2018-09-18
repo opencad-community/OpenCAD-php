@@ -217,6 +217,20 @@ $('#ncic_name_btn').on('click', function(e) {
             }
             }
 			
+            if (data['noArrests'] == "true")
+            {
+            var arrestText = "&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: green\">NO ARRESTS</span><br/>";
+            }
+            else
+            {
+            var arrestText = "";
+            arrestText += "    Count: "+data.arrest_reason.length+"<br/>";
+            for (i=0; i<data.arrest_reason.length; i++)
+            {
+                arrestText += "&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #F78F2B\">"+data.arrest_reason[i]+"</span><br/>";
+            }
+            }
+			
             if (data['noWarnings'] == "true")
             {
             var warningText = "&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: green\">NO WARNINGS</span>";
@@ -261,14 +275,14 @@ $('#ncic_name_btn').on('click', function(e) {
             deceased_text = "<span style=\"color: red;\">"+data['deceased']+"</span>";
             }
 
-            $('#ncic_name_return').append("Name: "+data['first_name']+" "+data['last_name']+"<br/>DOB: "+data['dob']+"<br/>Age: "+data['age']+"<br/>Sex: "+data['sex']
+            $('#ncic_name_return').append("Name: "+data['name']+"<br/>DOB: "+data['dob']+"<br/>Age: "+data['age']+"<br/>Sex: "+data['sex']
             +"<br/>Race: "+data['race']+"<br/>Hair Color: "+data['hair_color']
             +"<br/>Build: "+data['build']
             +"<br/>Address: "+data['address']
             +"<br/>DL Status: "+dl_status_text
 			+"<br/>Weapon Permit: "+weapon_permit_text
 			+"<br/>Deceased: "+deceased_text
-            +"<br/><br/>Warrants: <br/>"+warrantText+"<br/>Citations:<br/>"+citationText+"<br/>Warnings:<br/>"+warningText);
+			+"<br/><br/>Warnings:<br/>"+warningText+"<br/><br/>Citations:<br/>"+citationText+"<br/>Arrests:<br/>"+arrestText+"<br/>Warrants:<br/>"+warrantText);
 
             $("#ncic_name_return").attr("tabindex",-1).focus();
         }
@@ -819,6 +833,24 @@ function priorityTone(type)
             priorityButton.text("10-3 Tone");
         }
     }
+    else if (type == "panic")
+    {
+        var recurringButton = $('#panicTone');
+        var value = recurringButton.val();
+
+        if (value == "0")
+        {
+            recurringButton.val("1");
+            recurringButton.text("Panic Button - ACTIVE");
+            sendTone("panic", "start");
+        }
+        else if (value == "1")
+        {
+            sendTone("panic", "stop");
+            recurringButton.val("0");
+            recurringButton.text("Panic Button");
+        }
+    }
     else if (type == "recurring")
     {
         var recurringButton = $('#recurringTone');
@@ -941,6 +973,28 @@ function checkTones()
                 document.cookie = "priority=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
                 $('#priorityTone').val('0');
                 $('#priorityTone').text("10-3 Tone");
+
+            }
+			
+			if (data['panic'] == "ACTIVE")
+            {
+                var tag = $('#panicToneAudio')[0];
+                if (document.cookie.indexOf('panic=') == '-1'){
+                    document.cookie = "panic=played;";
+                    tag.play();
+
+                    $('#panicTone').val('1');
+                    $('#panicTone').text("Panic Button - ACTIVE");
+                } else {
+                    //Do nothing
+                }
+            }
+            else if (data['panic'] == "INACTIVE")
+            {
+                // Make sure the played cookie is unset
+                document.cookie = "panic=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+                $('#panicTone').val('0');
+                $('#panicTone').text("Panic Button");
 
             }
 

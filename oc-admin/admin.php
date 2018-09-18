@@ -28,16 +28,24 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     }
 
 
-    if(isset($_SESSION['admin']))
+    if ( $_SESSION['admin_privilege'] == 2)
     {
-      if ($_SESSION['admin'] == 'YES')
+      if ($_SESSION['admin_privilege'] == 'Administrator')
       {
           //Do nothing
+      }
+    }
+    else if ($_SESSION['admin_privilege'] == 1)
+    {
+      if ($_SESSION['admin_privilege'] == 'Moderator')
+      {
+          // Do Nothing
       }
     }
     else
     {
       die("You do not have permission to be here. This has been recorded");
+
     }
 
 require_once(__DIR__ . '/../oc-config.php');
@@ -64,7 +72,7 @@ require_once(__DIR__ . '/../oc-functions.php');
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo COMMUNITY_NAME;?> Admin</span></a>
+              <a href="javascript:void(0)" class="site_title"><i class="fas fa-lock"></i> <span>Administrator</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -88,20 +96,17 @@ require_once(__DIR__ . '/../oc-functions.php');
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <!--<a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>-->
               <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
-                <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+              <span class="fas fa-clipboard-list" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="/actions/logout.php">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
+              <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
+              <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Need Help?" href="https://guides.opencad.io/">
+              <span class="fas fa-info-circle" aria-hidden="true"></span>
               </a>
             </div>
             <!-- /menu footer buttons -->
@@ -120,11 +125,11 @@ require_once(__DIR__ . '/../oc-functions.php');
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     <img src="<?php echo get_avatar() ?>" alt=""><?php echo $name;?>
-                    <span class=" fa fa-angle-down"></span>
+                    <span class="fas fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="<?php echo BASE_URL; ?>/profile.php">My Profile</a></li>
-                    <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>/profile.php"><i class="fas fa-user pull-right"></i>My Profile</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
@@ -251,5 +256,6 @@ require_once(__DIR__ . '/../oc-functions.php');
 
 		});
 		</script>
+    <script type="text/javascript" src="https://jira.opencad.io/s/a0c4d8ca8eced10a4b49aaf45ec76490-T/-f9bgig/77001/9e193173deda371ba40b4eda00f7488e/2.0.24/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=ede74ac1"></script>
   </body>
 </html>

@@ -26,6 +26,26 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       $name = $_SESSION['name'];
     }
 
+    if ( $_SESSION['admin_privilege'] == 2)
+    {
+      if ($_SESSION['admin_privilege'] == 'Administrator')
+      {
+          //Do nothing
+      }
+    }
+    else if ($_SESSION['admin_privilege'] == 1)
+    {
+      if ($_SESSION['admin_privilege'] == 'Moderator')
+      {
+          // Do Nothing
+      }
+    }
+    else
+    {
+      die("You do not have permission to be here. This has been recorded");
+
+    }
+
     require_once(__DIR__ . '/../oc-config.php');
     require_once(__DIR__ . '/../oc-functions.php');
     include(__DIR__ . '/../actions/adminActions.php');
@@ -48,7 +68,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo COMMUNITY_NAME;?> Admin</span></a>
+              <a href="javascript:void(0)" class="site_title"><i class="fas fa-lock"></i> <span>Administrator</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -72,17 +92,17 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
               <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
-                <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+              <span class="fas fa-clipboard-list" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="/actions/logout.php">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
+              <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
+              <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Need Help?" href="https://guides.opencad.io/">
+              <span class="fas fa-info-circle" aria-hidden="true"></span>
               </a>
             </div>
             <!-- /menu footer buttons -->
@@ -94,19 +114,18 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <div class="nav_menu">
             <nav>
               <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                <a id="menu_toggle"><i class="fas fa-bars"></i></a>
               </div>
 
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     <img src="<?php echo get_avatar() ?>" alt=""><?php echo $name;?>
-                    <span class=" fa fa-angle-down"></span>
+                    <span class="fas fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="../profile.php">My Profile</a></li>
-                    <li><a href="https://github.com/ossified/openCad/issues">Help</a></li>
-                    <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>/profile.php"><i class="fas fa-user pull-right"></i>My Profile</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
@@ -134,9 +153,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="x_title">
                     <h2>At A Glance</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      <li><a class="close-link"><i class="fas fa-close"></i></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -145,53 +164,43 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="x_content">
                       <div class="row tile_count">
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
-                          <div class="count"><?php echo getUserCount();?></div>
-                        </div>
-                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> Admins</span>
-                          <div class="count"><?php echo getGroupCount("0");?></div>
-                        </div>
-                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> Communications</span>
+                          <span class="count_top"><i class="fas fa-user"></i> Communications</span>
                           <div class="count"><?php echo getGroupCount("1");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> EMS</span>
+                          <span class="count_top"><i class="fas fa-user"></i> State</span>
                           <div class="count"><?php echo getGroupCount("2");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> Fire</span>
+                          <span class="count_top"><i class="fas fa-user"></i> Highway Patrol</span>
                           <div class="count"><?php echo getGroupCount("3");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> Highway Patrol</span>
+                          <span class="count_top"><i class="fas fa-user"></i> Sheriff</span>
                           <div class="count"><?php echo getGroupCount("4");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> Police</span>
+                          <span class="count_top"><i class="fas fa-user"></i> Police</span>
                           <div class="count"><?php echo getGroupCount("5");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> Sheriff</span>
+                          <span class="count_top"><i class="fas fa-user"></i> Fire</span>
                           <div class="count"><?php echo getGroupCount("6");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> State Police</span>
-                          <div class="count"><?php echo getGroupCount("9");?></div>
+                          <span class="count_top"><i class="fas fa-user"></i> EMS</span>
+                          <div class="count"><?php echo getGroupCount("7");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> Civilian</span>
-                          <div class="count"><?php echo getGroupCount("7");?></div>
+                          <span class="count_top"><i class="fas fa-user"></i> Civilian</span>
+                          <div class="count"><?php echo getGroupCount("8");?></div>
                         </div>
                         <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                       </div>
@@ -212,9 +221,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="x_title">
                     <h2>Account Management</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      <li><a class="close-link"><i class="fas fa-close"></i></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -258,6 +267,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
             </button>
             <h4 class="modal-title" id="myModalLabel">Edit User</h4>
+            <div class="clearifx">
+            <div class="speparator">
+              <h5><strong>ALWAYS</strong> select proper user role before saving.</h5>
+            </div>
           </div>
           <!-- ./ modal-header -->
           <div class="modal-body">
@@ -266,7 +279,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-md-3 control-label">Name</label>
                 <div class="col-md-9">
                   <input name="userName" class="form-control" id="userName" />
-                  <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                  <span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -275,7 +288,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-md-3 control-label">Email</label>
                 <div class="col-md-9">
                   <input type="email" name="userEmail" class="form-control" id="userEmail" />
-                  <span class="fa fa-envelope form-control-feedback right" aria-hidden="true"></span>
+                  <span class="fas fa-envelope form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -284,7 +297,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-md-3 control-label">Identifier</label>
                 <div class="col-md-9">
                   <input type="text" name="userIdentifier" class="form-control" id="userIdentifier" />
-                  <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                  <span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -299,12 +312,22 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <!-- ./ col-sm-9 -->
               </div>
               <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-md-3 control-label">User Role</label>
+                <div class="col-md-9">
+                  <select name="userRole" class="selectpicker form-control" id="userRole">
+                      <?php getRole() ?>
+                  </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
           </div>
           <!-- ./ modal-body -->
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			<input type="hidden" name="userID" id="userID">
-            <input type="submit" name="editUserAccount" class="btn btn-primary" value="Edit User"/>
+            <input type="submit" name="editUserAccount" class="btn btn-primary" value="Update User"/>
           </div>
           <!-- ./ modal-footer -->
           </form>
@@ -369,7 +392,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             $('input[name="userName"]').val(data['name']);
             $('input[name="userEmail"]').val(data['email']);
             $('input[name="userIdentifier"]').val(data['identifier']);
-			
+
 			$('input[name="userID"]').val(data['userId']);
 
             for (var i=0; i<data['department'].length; i++)
@@ -377,8 +400,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               $('select[name="userGroups"] option[value="'+data['department'][i]+'"]').val(1);
               //console.log(option);
             }
+            for (var i=0; i<data['role'].length; i++)
+            {
+              $('select[name="userRole"] option[value="'+data['role'][i]+'"]').val(1);
+              //console.log(option);
+            }
 
             $('select[name="userGroups"]').selectpicker('refresh');
+            $('select[name="userRole"]').selectpicker('refresh');
 
 
           },
@@ -386,8 +415,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           error:function(exception){alert('Exeption:'+exception);}
         });
     });
-	
-	
+
+
 	$(".delete_group").click(function(){
 	var dept_id=$(this).attr("data-dept-id");
 	var user_id=$(this).attr("data-user-id");
@@ -401,12 +430,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			success: function(result)
 			{
 				 //obj = jQuery.parseJSON(result);
-				
+
 					$("#show_group").html(result);
 					window.location.href= '<?php echo BASE_URL; ?>/oc-admin/userManagement.php';
-				
+
 			}
-			
+
 			});
 		}
 	});
@@ -414,5 +443,16 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     <!-- Custom Theme Scripts -->
     <script src="<?php echo BASE_URL; ?>/js/custom.js"></script>
+    <script>
+    $(document).ready(function() {
+
+      $('#pendingUsers').DataTable({
+        paging: false,
+        searching: false
+      });
+
+    });
+    </script>
+    <script type="text/javascript" src="https://jira.opencad.io/s/a0c4d8ca8eced10a4b49aaf45ec76490-T/-f9bgig/77001/9e193173deda371ba40b4eda00f7488e/2.0.24/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=ede74ac1"></script>
   </body>
 </html>

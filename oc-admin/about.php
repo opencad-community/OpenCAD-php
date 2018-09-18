@@ -28,16 +28,24 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     }
 
 
-    if(isset($_SESSION['admin']))
+    if ( $_SESSION['admin_privilege'] == 2)
     {
-      if ($_SESSION['admin'] == 'YES')
+      if ($_SESSION['admin_privilege'] == 'Administrator')
       {
           //Do nothing
+      }
+    }
+    else if ($_SESSION['admin_privilege'] == 1)
+    {
+      if ($_SESSION['admin_privilege'] == 'Moderator')
+      {
+          // Do Nothing
       }
     }
     else
     {
       die("You do not have permission to be here. This has been recorded");
+
     }
 
 require_once(__DIR__ . '/../oc-config.php');
@@ -63,7 +71,7 @@ require_once(__DIR__ . '/../oc-config.php');
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="javascript:void(0)" class="site_title"><i class="fa fa-tachometer"></i> <span><?php echo COMMUNITY_NAME;?> Admin</span></a>
+              <a href="javascript:void(0)" class="site_title"><i class="fas fa-lock"></i> <span>Administrator</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -87,20 +95,17 @@ require_once(__DIR__ . '/../oc-config.php');
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <!--<a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>-->
               <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
-                <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+              <span class="fas fa-clipboard-list" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="/actions/logout.php">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
+              <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
+              <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Need Help?" href="https://guides.opencad.io/">
+              <span class="fas fa-info-circle" aria-hidden="true"></span>
               </a>
             </div>
             <!-- /menu footer buttons -->
@@ -112,18 +117,18 @@ require_once(__DIR__ . '/../oc-config.php');
           <div class="nav_menu">
             <nav>
               <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                <a id="menu_toggle"><i class="fas fa-bars"></i></a>
               </div>
 
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     <img src="<?php echo get_avatar() ?>" alt=""><?php echo $name;?>
-                    <span class=" fa fa-angle-down"></span>
+                    <span class="fas fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="<?php echo BASE_URL; ?>/profile.php">My Profile</a></li>
-                    <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>/profile.php"><i class="fas fa-user pull-right"></i>My Profile</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
@@ -152,10 +157,23 @@ require_once(__DIR__ . '/../oc-config.php');
                     <div style="text-align:center;">
                       <img src="<?php echo BASE_URL; ?>/images/logo.png" width="239px" height="104px" alt="The Official OpenCAD project logo, Three tails colors red, blue, and red, swoop down from top above the O in Open and finish just below the C in CAD. Stacked words, Open in a bold red font face, and CAD in a bold blue font face."/> <img src="<?php echo BASE_URL; ?>/images/gplv3-127x51.png" height="128px" width="251px"  />
                     </div>
+                    <div class="row tile_count">
+                        <h2>About Your Environment</h2>
+                        <div class="input-group">
+                           PHP Version:<input type="text" class="form-control" readonly="readonly" placeholder="<?php echo phpversion(); ?>" />
+                           <p><em>Note:</em> The active version of PHP.</p>
+                        </div>
+                      <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
+                        <div class="input-group">
+                           PHP Version:<input type="text" class="form-control" readonly="readonly" placeholder="<?php echo getMySQLVersion(); ?>" />
+                           <p><em>Note:</em> The active version of MySQL.</p>
+                        </div>
+                    </div>
+                    <!-- ./ row tile_count -->
                       <div class="row tile_count">
                           <h2>About Your Application</h2>
                           <div class="input-group">
-                             OpenCAD Version:<input type="text" class="form-control" readonly="readonly" placeholder="API KEY HERE" />
+                             OpenCAD Version:<input type="text" class="form-control" readonly="readonly" placeholder="<?php echo getOpenCADVersion(); ?>" />
                              <p><em>Note:</em> If the limit of ten (10) requests per one (1) minute the API key will be blacklisted and support will <em>not</em> remove the block.</p>
                           </div>
                           <div class="input-group">
@@ -173,18 +191,9 @@ require_once(__DIR__ . '/../oc-config.php');
                       <!-- ./ row tile_count -->
                       <h2>About OpenCAD</h2>
                       <p>OpenCAD is an opensource project licensed under GNU GPL v3. The original code and concept by <a href="https://github.com/ossified" title="a link to the original developer's GitHub.">Shane Gill</a>. This project is maintained Stormlight Tech.</p>
-                      <h3>Project Maintainers</h3>
-                        <ul>
-                          <li><em><a href="https://keybase.io/jrharper">Justin Harper</a></em> — <i>Co-Revitalizer, Project Manager</i></li>
-                          <li><em><a href="https://keybase.io/phillf">Phill Fernandes</a></em> — <i>Co-Revitalizer, Developer</i></li>
-                        </ul>
-                      <h3>Project Staff</h3>
-                      <ul>
-                        <li><em><a href="https://keybase.io/murfasa">Murfasa Curry</a></em> — <i>Documentation Manager, Developer</i></li>
-                        <li><em>Justin Farmer</em> — <i>Test Engineer</i></li>
-                        <li><em><a href="https://keybase.io/Cambridgeport90">Katherine Moss</a></em> — <i>Accessibility Manager, Developer</i></li>
-                        <li><em><a href="https://keybase.io/termanator1128">Brennen Stapleton</a></em> — <i>Co-Revitalizer, Developer</i></li>
-                      </ul>
+                      <h3>Got Feedback?</h3>
+                      <p>The OpenCAD team wants to know what you think. Please send us your feedback today!</p>
+                      <a href="#" id="getFeedbackJIRA">Send Feedback</a>
                   </div>
                   <!-- ./ x_content -->
                 </div>
@@ -211,15 +220,15 @@ require_once(__DIR__ . '/../oc-config.php');
 
     <?php include "../oc-includes/jquery-colsolidated.inc.php"; ?>
 
-    <script>
-		$(document).ready(function() {
+    <script type="text/javascript" src="https://jira.opencad.io/s/a0c4d8ca8eced10a4b49aaf45ec76490-T/-f9bgig/77001/9e193173deda371ba40b4eda00f7488e/2.0.24/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=296607a1"></script>
 
-			$('#pendingUsers').DataTable({
-        paging: false,
-        searching: false
-			});
-
-		});
-		</script>
+        <script type="text/javascript">window.ATL_JQ_PAGE_PROPS =  {
+    	"triggerFunction": function(showCollectorDialog) {
+    		//Requires that jQuery is available!
+    		jQuery("#getFeedbackJIRA").click(function(e) {
+    			e.preventDefault();
+    			showCollectorDialog();
+    		});
+    	}};</script>
   </body>
 </html>

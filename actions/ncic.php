@@ -12,45 +12,53 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
-
 require_once(__DIR__ . "/../oc-config.php");
 
 /*
     Returns information on name run through NCIC.
     TODO: Add a check here to check the admin panel to determine if Randomized names are allowed
 */
+/**
+ * Patch notes:
+ * Adding the `else` to make a `else if` prevents the execution
+ * of multiple functions at the same time by the same client
+ *
+ * Running multiple functions at the same time doesnt seem to
+ * be a needed feature.
+ */
 if (isset($_POST['ncic_name'])){
     name();
-}
-if (isset($_POST['ncic_plate'])){
+}else if (isset($_POST['ncic_plate'])){
     plate();
-}
-if (isset($_POST['ncic_weapon'])){
+}else if (isset($_POST['ncic_weapon'])){
     weapon();
 }
+
 function name()
 {
-    $name = $_POST['ncic_name'];
+    $name = htmlspecialchars($_POST['ncic_name']);
 
 
     if(strpos($name, ' ') !== false) {
-        $name_arr = explode(" ", $name);
-        $first_name = $name_arr[0];
-        $last_name = $name_arr[1];
 
-        $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-        if (!$link) {
-            die('Could not connect: ' .mysql_error());
+        try{
+            $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+        } catch(PDOException $ex)
+        {
+            die('Could not connect: ' . $ex);
         }
 
-        $sql = "SELECT id, first_name, last_name, dob, address, gender, race, dl_status, hair_color, build, weapon_permit, deceased, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS age FROM ncic_names WHERE first_name = \"$first_name\" and last_name = \"$last_name\"";
+        $stmt = $pdo->prepare("SELECT id, name, dob, address, gender, race, dl_status, hair_color, build, weapon_permit, deceased, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS age FROM ncic_names WHERE name = ?");
+        $resStatus = $stmt->execute(array($name));
+        $result = $stmt;
 
-        $result=mysqli_query($link, $sql);
+        if (!$resStatus)
+        {
+            die($stmt->errorInfo());
+        }
 
         $encode = array();
-
-        $num_rows = $result->num_rows;
+        $num_rows = $result->rowCount();
         if($num_rows == 0)
         {
             $encode["noResult"] = "true";
@@ -58,37 +66,33 @@ function name()
         else
         {
 
-            while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+            foreach($result as $row)
             {
                 $userId = $row[0];
                 $encode["userId"] = $row[0];
-                $encode["first_name"] = $row[1];
-                $encode["last_name"] = $row[2];
-                $encode["dob"] = $row[3];
-                $encode["address"] = $row[4];
-                $encode["sex"] = $row[5];
-                $encode["race"] = $row[6];
-                $encode["dl_status"] = $row[7];
-                $encode["hair_color"] = $row[8];
-                $encode["build"] = $row[9];
-                $encode["age"] = $row[12];
-				$encode["weapon_permit"] = $row[10];
-				$encode["deceased"] = $row[11];
-            }
-            mysqli_close($link);
-
-            /* Check for Warrants */
-            $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-            if (!$link) {
-                die('Could not connect: ' .mysql_error());
+                $encode["name"] = $row[1];
+                $encode["dob"] = $row[2];
+                $encode["address"] = $row[3];
+                $encode["sex"] = $row[4];
+                $encode["race"] = $row[5];
+                $encode["dl_status"] = $row[6];
+                $encode["hair_color"] = $row[7];
+                $encode["build"] = $row[8];
+                $encode["age"] = $row[11];
+				$encode["weapon_permit"] = $row[9];
+				$encode["deceased"] = $row[10];
             }
 
-            $sql = "SELECT id, name_id, warrant_name FROM ncic_warrants WHERE name_id = \"$userId\"";
+            $stmt = $pdo->prepare("SELECT id, name_id, warrant_name FROM ncic_warrants WHERE name_id = ?");
+            $resStatus = $stmt->execute(array($userId));
+            $result = $stmt;
 
-            $result=mysqli_query($link, $sql);
+            if (!$resStatus)
+            {
+                die($stmt->errorInfo());
+            }
 
-            $num_rows = $result->num_rows;
+            $num_rows = $result->rowCount();
             if($num_rows == 0)
             {
                 $encode["noWarrants"] = "true";
@@ -96,28 +100,51 @@ function name()
             else
             {
                 $warrantIndex = 0;
-                while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+                foreach($result as $row)
                 {
                     $encode["warrantId"][$warrantIndex] = $row[0];
                     $encode["warrant_name"][$warrantIndex] = $row[2];
 
                     $warrantIndex++;
                 }
-                mysqli_close($link);
             }
 
-            /* Check for Citations */
-            $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+            $stmt = $pdo->prepare("SELECT id, name_id, arrest_reason FROM ncic_arrests WHERE name_id = ?");
+            $resStatus = $stmt->execute(array($userId));
+            $result = $stmt;
 
-            if (!$link) {
-                die('Could not connect: ' .mysql_error());
+            if (!$resStatus)
+            {
+                die($stmt->errorInfo());
             }
 
-            $sql = "SELECT id, name_id, citation_name FROM ncic_citations WHERE name_id = \"$userId\"";
+            $num_rows = $result->rowCount();
+            if($num_rows == 0)
+            {
+                $encode["noArrests"] = "true";
+            }
+            else
+            {
+                $arrestIndex = 0;
+                foreach($result as $row)
+                {
+                    $encode["arrestId"][$arrestIndex] = $row[0];
+                    $encode["arrest_reason"][$arrestIndex] = $row[2];
 
-            $result=mysqli_query($link, $sql);
+                    $arrestIndex++;
+                }
+            }
 
-            $num_rows = $result->num_rows;
+            $stmt = $pdo->prepare("SELECT id, name_id, citation_name FROM ncic_citations WHERE name_id = ?");
+            $resStatus = $stmt->execute(array($userId));
+            $result = $stmt;
+
+            if (!$resStatus)
+            {
+                die($stmt->errorInfo());
+            }
+
+            $num_rows = $result->rowCount();
             if($num_rows == 0)
             {
                 $encode["noCitations"] = "true";
@@ -125,28 +152,25 @@ function name()
             else
             {
                 $citationIndex = 0;
-                while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+                foreach($result as $row)
                 {
                     $encode["citationId"][$citationIndex] = $row[0];
                     $encode["citation_name"][$citationIndex] = $row[2];
 
                     $citationIndex++;
                 }
-                mysqli_close($link);
             }
 			
-            /* Check for Warnings */
-            $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+            $stmt = $pdo->prepare("SELECT id, name_id, warning_name FROM ncic_warnings WHERE name_id = ?");
+            $resStatus = $stmt->execute(array($userId));
+            $result = $stmt;
 
-            if (!$link) {
-                die('Could not connect: ' .mysql_error());
+            if (!$resStatus)
+            {
+                die($stmt->errorInfo());
             }
 
-            $sql = "SELECT id, name_id, warning_name FROM ncic_warnings WHERE name_id = \"$userId\"";
-
-            $result=mysqli_query($link, $sql);
-
-            $num_rows = $result->num_rows;
+            $num_rows = $result->rowCount();
             if($num_rows == 0)
             {
                 $encode["noWarnings"] = "true";
@@ -154,21 +178,17 @@ function name()
             else
             {
                 $warningIndex = 0;
-                while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+                foreach($result as $row)
                 {
                     $encode["warningId"][$warningIndex] = $row[0];
                     $encode["warning_name"][$warningIndex] = $row[2];
 
                     $warningIndex++;
                 }
-                mysqli_close($link);
             }
-
         }
-
         echo json_encode($encode);
-
-
+        $pdo = null;
     } else {
         $encode = array();
         $encode["noResult"] = "true";
@@ -178,46 +198,48 @@ function name()
 
 function plate()
 {
-    $plate = $_POST['ncic_plate'];
+    $plate = htmlspecialchars($_POST['ncic_plate']);
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        die('Could not connect: ' . $ex);
     }
 
-    $sql = "SELECT ncic_plates.*, ncic_names.first_name, ncic_names.last_name FROM ncic_plates INNER JOIN ncic_names ON ncic_names.id=ncic_plates.name_id WHERE veh_plate = \"$plate\"";
+    $stmt = $pdo->prepare("SELECT ncic_plates.*, ncic_names.name FROM ncic_plates INNER JOIN ncic_names ON ncic_names.id=ncic_plates.name_id WHERE veh_plate = ?");
+    $resStatus = $stmt->execute(array($plate));
+    $result = $stmt;
 
-    $result=mysqli_query($link, $sql);
+    if (!$resStatus)
+    {
+        die($stmt->errorInfo());
+    }
+    $pdo = null;
 
     $encode = array();
-
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
     if($num_rows == 0)
     {
         $encode["noResult"] = "true";
     }
     else
     {
-        $result=mysqli_query($link, $sql);
-
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        foreach($result as $row)
         {
-            $owner = $row[12]." ".$row[13];
 
             $encode["plate"] = $row[2];
             $encode["veh_make"] = $row[3];
             $encode["veh_model"] = $row[4];
-            $encode["veh_pcolor"] = $row[6];
+            $encode["veh_pcolor"] = $row[5];
             $encode["veh_scolor"] = $row[6];
-            $encode["veh_ro"] = $owner;
+            $encode["veh_ro"] = $row[12];
             $encode["veh_insurance"] = $row[7];
             $encode["flags"] = $row[8];
             $encode["veh_reg_state"] = $row[9];
             $encode["notes"] = $row[10];
 
         }
-        mysqli_close($link);
     }
 
     echo json_encode($encode);
@@ -230,56 +252,54 @@ function firearm()
 
 function weapon()
 {
-    $name = $_POST['ncic_weapon'];
+    $name = htmlspecialchars($_POST['ncic_weapon']);
 
 
     if(strpos($name, ' ') !== false) {
-        $name_arr = explode(" ", $name);
-        $first_name = $name_arr[0];
-        $last_name = $name_arr[1];
 
-        $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-        if (!$link) {
-            die('Could not connect: ' .mysql_error());
+        try{
+            $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+        } catch(PDOException $ex)
+        {
+            die('Could not connect: ' . $ex);
         }
+    
+        $stmt = $pdo->prepare("SELECT id, name, weapon_permit FROM ncic_names WHERE name = ?");
+        $resStatus = $stmt->execute(array($name));
+        $result = $stmt;
 
-        $sql = "SELECT id, first_name, last_name, weapon_permit FROM ncic_names WHERE first_name = \"$first_name\" and last_name = \"$last_name\"";
-
-        $result=mysqli_query($link, $sql);
+        if (!$resStatus)
+        {
+            die($stmt->errorInfo());
+        }
 
         $encode = array();
 
-        $num_rows = $result->num_rows;
+        $num_rows = $result->rowCount();
         if($num_rows == 0)
         {
             $encode["noResult"] = "true";
         }
         else
         {
-
-            while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+            foreach($result as $row)
             {
                 $userId = $row[0];
                 $encode["userId"] = $row[0];
                 $encode["first_name"] = $row[1];
-                $encode["last_name"] = $row[2];
-				$encode["weapon_permit"] = $row[3];
-            }
-            mysqli_close($link);
-
-            /* Check for Warrants */
-            $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-            if (!$link) {
-                die('Could not connect: ' .mysql_error());
+				$encode["weapon_permit"] = $row[2];
             }
 
-            $sql = "SELECT id, name_id, weapon_type, weapon_name FROM ncic_weapons WHERE name_id = \"$userId\"";
+            $stmt = $pdo->prepare("SELECT id, name_id, weapon_type, weapon_name FROM ncic_weapons WHERE name_id = ?");
+            $resStatus = $stmt->execute(array($name));
+            $result = $stmt;
 
-            $result=mysqli_query($link, $sql);
+            if (!$resStatus)
+            {
+                die($stmt->errorInfo());
+            }
 
-            $num_rows = $result->num_rows;
+            $num_rows = $result->rowCount();
             if($num_rows == 0)
             {
                 $encode["noWeapons"] = "true";
@@ -287,20 +307,17 @@ function weapon()
             else
             {
                 $warrantIndex = 0;
-                while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+                foreach($result as $row)
                 {
                     $encode["weaponId"][$warrantIndex] = $row[0];
                     $encode["weapon_name"][$warrantIndex] = "$row[2] | $row[3]";
 
                     $warrantIndex++;
                 }
-                mysqli_close($link);
             }
 		}
-
         echo json_encode($encode);
-
-
+        $pdo = null;
     } else {
         $encode = array();
         $encode["noResult"] = "true";
