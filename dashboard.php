@@ -72,47 +72,47 @@ foreach($result as $row)
 {
     if ($row[1] == "1")
     {
-        $_SESSION['dispatch'] = 'YES';
+        $_SESSION['activeDepartment'] = 'dispatch';
         $dispatchButton = "<a href=\"".BASE_URL."/cad.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Dispatch</a>";
     }
     else if ($row[1] == "7")
     {
-        $_SESSION['ems'] = 'YES';
+        $_SESSION['activeDepartment'] = 'ems';
         $emsButton = "<a href=\"".BASE_URL."/mdt.php?dep=ems\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">EMS</a>";
     }
     else if ($row[1] == "6")
     {
-        $_SESSION['fire'] = 'YES';
+        $_SESSION['activeDepartment'] = 'fire';
         $fireButton = "<a href=\"".BASE_URL."/mdt.php?dep=fire\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Fire</a>";
     }
     else if ($row[1] == "3")
     {
-        $_SESSION['highway'] = 'YES';
+        $_SESSION['activeDepartment'] = 'highway';
         $highwayButton = "<a href=\"".BASE_URL."/mdt.php?dep=highway\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Highway Patrol</a>";
     }
     else if ($row[1] == "5")
     {
-        $_SESSION['police'] = 'YES';
+        $_SESSION['activeDepartment'] = 'police';
         $policeButton = "<a href=\"".BASE_URL."/mdt.php?dep=police\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Police Department</a>";
     }
     else if ($row[1] == "4")
     {
-        $_SESSION['sheriff'] = 'YES';
+        $_SESSION['activeDepartment'] = 'sheriff';
         $sheriffButton = "<a href=\"".BASE_URL."/mdt.php?dep=sheriff\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Sheriff's Office</a>";
     }
     else if ($row[1] == "2")
     {
-        $_SESSION['state'] = 'YES';
+        $_SESSION['activeDepartment'] = 'state';
         $stateButton = "<a href=\"".BASE_URL."/mdt.php?dep=state\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">State Police</a>";
     }
     else if ($row[1] == "8")
     {
-        $_SESSION['civillian'] = 'YES';
+        $_SESSION['activeDepartment'] = 'civillian';
         $civilianButton = "<a href=\"".BASE_URL."/civilian.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Civilian</a>";
     }
     else if ($row[1] == "9")
     {
-            $_SESSION['roadsideAssist'] = 'YES';
+            $_SESSION['activeDepartment'] = 'roadsideAssist';
             $roadsideAssistButton = "<a href=\"".BASE_URL."/mdt.php?dep=roadsideAssist\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Roadside Assistance</a>";
     }
 }
