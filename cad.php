@@ -28,12 +28,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       $name = $_SESSION['name'];
     }
 
-    if(isset($_SESSION['dispatch']))
+    if(isset($_SESSION['activeDepartment']))
     {
 
-      if ($_SESSION['dispatch'] == 'YES')
+      if ($_SESSION['activeDepartment'] == 'dispatch')
       {
-    setDispatcher("2");
+        setDispatcher("2");
       }
     }
     else

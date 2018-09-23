@@ -27,11 +27,12 @@ if(!empty($_POST))
     }
 
     $stmt = $pdo->prepare("SELECT id, name, password, email, identifier, admin_privilege, password_reset, approved, suspend_reason FROM users WHERE email = ?");
-    $stmt->execute(array($email));
+    $resStatus = $stmt->execute(array($email));
     $result = $stmt->fetch();
 
-    if (!$result)
+    if (!$resStatus)
     {
+        print_r($stmt->errorInfo());
         die($stmt->errorInfo());
     }
     $pdo = null;
