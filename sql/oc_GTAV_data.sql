@@ -264,7 +264,8 @@ INSERT INTO `departments` (`department_id`, `department_name`, `department_short
 (5, 'Police', 'SAPD', 'San Andreas Police Department', 0),
 (6, 'Fire', 'SAFD', 'San Andreas Fire Department', 0),
 (7, 'EMS', 'SAEMS', 'San Andreas Emergency Services', 0),
-(8, 'Civilian', 'SACS', 'San Andreas Civilian Services', 0);
+(8, 'Civilian', 'SACS', 'San Andreas Civilian Services', 0),
+(9, 'Roadside Assist', 'SATR', 'San Andreas Tow and Recovery', 0);
 
 --
 -- Dumping data for table `genders`
