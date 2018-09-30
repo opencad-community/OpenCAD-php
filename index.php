@@ -133,6 +133,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <option value="highway">Highway Patrol</option>
                            <option value="police">Police</option>
                            <option value="sheriff">Sheriff</option>
+                           <option value="rodesideassist">Roadside Assist</option>
                         </select>
                      </div>
                      <div class="form-group">

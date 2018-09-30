@@ -557,9 +557,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
            </div>
            <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
 
-         <?php } else {}
-
-          if ( FIRE_NCIC_PLATE === true xor EMS_NCIC_PLATE === true xor ROADSIDE_NCIC_PLATE === true ) { ?>
+         <?php } else if ( FIRE_NCIC_PLATE === true xor EMS_NCIC_PLATE === true xor ROADSIDE_NCIC_PLATE === true ) { ?>
                  <div id="ncic" class="row">
                     <div class="col-md-4 col-sm-4 col-xs-4">
                        <div class="x_panel">
