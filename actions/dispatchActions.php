@@ -1265,6 +1265,13 @@ function changeaop()
     {
         die($stmt->errorInfo());
     }
+
+    if($stmt->rowCount() == 0)
+    {
+        $stmt = $pdo->prepare("INSERT INTO aop VALUES (?)");
+        $result = $stmt->execute(array(htmlspecialchars($_POST['aop'])));
+    }
+
     $pdo = null;
 
     header("Location:".BASE_URL."/cad.php");
