@@ -95,6 +95,8 @@ function register()
             {$division = "7";}
         elseif($division == "civilian")
             {$division = "8";}
+        elseif($division == "rodesideassist")
+            {$division = "9";}
 
         $stmt = $pdo->prepare("INSERT INTO user_departments_temp (user_id, department_id) SELECT id , ? FROM users WHERE email = ?");
         $result = $stmt->execute(array($division, $email));

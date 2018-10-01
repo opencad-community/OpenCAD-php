@@ -524,8 +524,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      </div>
                <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
             </div>
-          <?php } else if ( FIRE_NCIC_NAME == true xor EMS_NCIC_NAME == true xor ROADSIDE_NCIC_NAME == true ) { ?>
-
+		  <?php } if ($_GET['dep'] == "fire" || $_GET['dep'] == "ems" || $_GET['dep'] == "roadsideAssist") {
+                          if ( FIRE_NCIC_NAME xor EMS_NCIC_NAME xor ROADSIDE_NCIC_NAME ) { ?>
             <div class="clearfix"></div>
           <div id="ncic" class="row">
            <div class="col-md-4 col-sm-4 col-xs-4">
@@ -556,11 +556,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <!-- ./ x_panel -->
            </div>
            <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
-
-         <?php } else {}
-
-          if ( FIRE_NCIC_PLATE === true xor EMS_NCIC_PLATE === true xor ROADSIDE_NCIC_PLATE === true ) { ?>
-                 <div id="ncic" class="row">
+		  <?php } if ( FIRE_NCIC_PLATE xor EMS_NCIC_PLATE xor ROADSIDE_NCIC_PLATE ) { ?>
+		<div id="ncic" class="row">
                     <div class="col-md-4 col-sm-4 col-xs-4">
                        <div class="x_panel">
                           <div class="x_title">
@@ -588,7 +585,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                        <!-- ./ x_panel -->
                     </div>
                     <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
-                  <?php } else {} ?>
+                  <?php }} ?>
            </div>
       <!-- "" -->
     </div>
