@@ -18,6 +18,9 @@ CREATE TABLE `aop` (
   `aop` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
+INSERT INTO `aop` (`aop`) VALUES
+('INIT AOP');
+
 --
 -- Table structure for table `bolos_persons`
 --
