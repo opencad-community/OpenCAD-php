@@ -35,7 +35,7 @@ define('COMMUNITY_NAME', 'My Community');
 define('DB_NAME', 'DatabaseName');
 define('DB_USER', 'DatabaseUser');
 define('DB_PASSWORD', 'DatabasePassword');
-define('DB_HOST', '127.0.0.1');
+define('DB_HOST', 'localhost');
 
 /**#@+
  * Base URL Settings
@@ -125,6 +125,17 @@ define('NONCE_SALT',       'put your unique phrase here');
   **/
 define('POLICE_NCIC', false);
 
+/**#@+
+ * POLICE_CALL_SELFASSIGN
+ * 
+ * Enables or disables the Self Assign functionality on the MDT console for Police.
+ * If 'true', then it enables the self assign function , if 'false', then the self assign function will be disabled.
+ * These settings will likely be moved to a *_options table in a future version
+ * 
+ * since OpenCAD Version 0.2.6
+ **/
+define('POLICE_CALL_SELFASSIGN', true);
+
 
 /**#@+
  * OpenCAD Feature Settings - Fire
@@ -191,6 +202,17 @@ define('POLICE_NCIC', false);
 	**/
  define('FIRE_NCIC_PLATE', false);
 
+ /**#@+
+ * FIRE_CALL_SELFASSIGN
+ * 
+ * Enables or disables the Self Assign functionality on the MDT console for the Fire Department.
+ * If 'true', then it enables the self assign function , if 'false', then the self assign function will be disabled.
+ * These settings will likely be moved to a *_options table in a future version
+ * 
+ * since OpenCAD Version 0.2.6
+ **/
+define('FIRE_CALL_SELFASSIGN', true);
+
 /**#@+
   * OpenCAD Feature Settings - EMS
   *
@@ -252,6 +274,18 @@ define('POLICE_NCIC', false);
 	 **/
 	define('EMS_NCIC_PLATE', false);
 
+  /**#@+
+ * EMS_CALL_SELFASSIGN
+ * 
+ * Enables or disables the Self Assign functionality on the MDT console for EMS.
+ * If 'true', then it enables the self assign function , if 'false', then the self assign function will be disabled.
+ * These settings will likely be moved to a *_options table in a future version
+ * 
+ * since OpenCAD Version 0.2.6
+ **/
+define('EMS_CALL_SELFASSIGN', true);
+
+
 /**#@+
 	 * OpenCAD Feature Settings - Roadside Assistance / Tow
 	 *
@@ -310,6 +344,17 @@ define('ROADSIDE_NCIC_NAME', false);
  * @since OpenCAD version 0.2.3
  **/
 define('ROADSIDE_NCIC_PLATE', false);
+
+/**#@+
+ * ROADSIDE_CALL_SELFASSIGN
+ * 
+ * Enables or disables the Self Assign functionality on the MDT console for Roadside Assistance.
+ * If 'true', then it enables the self assign function , if 'false', then the self assign function will be disabled.
+ * These settings will likely be moved to a *_options table in a future version
+ * 
+ * since OpenCAD Version 0.2.6
+ **/
+define('ROADSIDE_CALL_SELFASSIGN', true);
 
 /**#@+
  * OpenCAD Feature Settings - Civilian
