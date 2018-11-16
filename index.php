@@ -103,6 +103,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <br />
                         <div>
                            <h1><i class="fas fa-users"></i> <?php echo COMMUNITY_NAME?> CAD System</h1>
+                           <h2> OpenCAD Version <?php getOpenCADVersion();?> </h2>
                         </div>
                      </div>
 					 <?php } ?>
@@ -158,6 +159,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <br />
                         <div>
                            <h1><i class="fas fa-users"></i> <?php echo COMMUNITY_NAME ?> CAD System</h1>
+                           <h2> OpenCAD Version <?php getOpenCADVersion();?> </h2>
                         </div>
                      </div>
                   </form>
@@ -199,6 +201,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <br />
                         <div>
                            <h1><i class="fas fa-users"></i> <?php echo COMMUNITY_NAME ?> CAD System</h1>
+                           <h2> OpenCAD Version <?php getOpenCADVersion();?> </h2>
                         </div>
                      </div>
                   </form>
@@ -217,6 +220,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                           <div class="clearfix"></div>
                           <div>
                              <h1><i class="fas fa-users"></i> <?php echo COMMUNITY_NAME ?> CAD System</h1>
+                             <h2> OpenCAD Version <?php getOpenCADVersion();?> </h2>
                           </div>
                        </div>
               </div>
