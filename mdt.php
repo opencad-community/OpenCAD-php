@@ -57,7 +57,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     {
         $activeDepartment = "Fire";
         $activeBadge="fire";
-        $_SESSION['activeDepartment'] = 'Fire';
+        $_SESSION['activeDepartment'] = 'fire';
     }
     else if ( $_GET['dep'] == "ems" || $_SESSION['activeDepartment'] == "ems" )
     {
@@ -143,7 +143,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <!-- ./ menu_section -->
                   </div>
                   <!-- /sidebar menu -->
-                  <div id="firstResponse" class="dynamic-content main_menu_side hidden-print main_menu">
+                  <div id="firstResponder" class="dynamic-content main_menu_side hidden-print main_menu">
                      <div class="menu_section">
                         <h3>General</h3>
                         <ul class="nav side-menu">
@@ -1232,7 +1232,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			$('#ncic').show();
       }
       else if (dynamicContent == 'fire' ||  dynamicContent == 'ems') {
-      $('#firstResponse').show();
+      $('#firstResponder').show();
     }
     else if (dynamicContent == 'roadsideAssist') {
       $('#roadsideAssist').show();
