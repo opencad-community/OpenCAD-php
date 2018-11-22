@@ -143,6 +143,18 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <!-- ./ menu_section -->
                   </div>
                   <!-- /sidebar menu -->
+                  <div id="firstResponse" class="dynamic-content main_menu_side hidden-print main_menu">
+                     <div class="menu_section">
+                        <h3>General</h3>
+                        <ul class="nav side-menu">
+                           <li class="active">
+                              <a><i class="fas fa-home"></i> Home <span class="fas fa-chevron-down"></span></a>
+                           </li>
+                        </ul>
+                     </div>
+                     <!-- ./ menu_section -->
+                  </div>
+                  <!-- /sidebar menu -->
                   <div id="roadsideAssist" class="dynamic-content main_menu_side hidden-print main_menu">
                      <div class="menu_section">
                         <h3>General</h3>
@@ -1218,7 +1230,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		if (dynamicContent == 'police' || dynamicContent == 'highway' || dynamicContent == 'state' || dynamicContent == 'sheriff') {
 			$('#lawenforcement').show();
 			$('#ncic').show();
-		}
+      }
+      else if (dynamicContent == 'fire' ||  dynamicContent == 'ems') {
+      $('#firstResponse').show();
+    }
     else if (dynamicContent == 'roadsideAssist') {
       $('#roadsideAssist').show();
     }
