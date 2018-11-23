@@ -13,7 +13,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 
 require("./oc-config.php");
-
+require("./actions/api.php");
 include("./actions/profileActions.php");
 
     session_start();
@@ -43,7 +43,7 @@ include("./actions/profileActions.php");
         $changePassword = '<div class="alert alert-success"><span>Password successfully updated.</span></div>';
         unset($_SESSION['changePassword']);
     }
-
+    setDispatcher("1");
 ?>
 
 <!DOCTYPE html>
