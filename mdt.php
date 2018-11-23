@@ -57,7 +57,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     {
         $activeDepartment = "Fire";
         $activeBadge="fire";
-        $_SESSION['activeDepartment'] = 'Fire';
+        $_SESSION['activeDepartment'] = 'fire';
     }
     else if ( $_GET['dep'] == "ems" || $_SESSION['activeDepartment'] == "ems" )
     {
@@ -138,6 +138,18 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                  <a type="button" data-toggle="modal" data-target="#createArrest" ><i class="fas fa-ban"></i> Create Arrest Report</a
                            </li>
 
+                        </ul>
+                     </div>
+                     <!-- ./ menu_section -->
+                  </div>
+                  <!-- /sidebar menu -->
+                  <div id="firstResponder" class="dynamic-content main_menu_side hidden-print main_menu">
+                     <div class="menu_section">
+                        <h3>General</h3>
+                        <ul class="nav side-menu">
+                           <li class="active">
+                              <a><i class="fas fa-home"></i> Home <span class="fas fa-chevron-down"></span></a>
+                           </li>
                         </ul>
                      </div>
                      <!-- ./ menu_section -->
@@ -1218,7 +1230,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		if (dynamicContent == 'police' || dynamicContent == 'highway' || dynamicContent == 'state' || dynamicContent == 'sheriff') {
 			$('#lawenforcement').show();
 			$('#ncic').show();
-		}
+      }
+      else if (dynamicContent == 'fire' ||  dynamicContent == 'ems') {
+      $('#firstResponder').show();
+    }
     else if (dynamicContent == 'roadsideAssist') {
       $('#roadsideAssist').show();
     }
