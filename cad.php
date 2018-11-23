@@ -162,9 +162,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
                         <span class="fas fa-clipboard-list" aria-hidden="true"></span>
                         </a>
-                        <a id="changeCallsign" class="btn-link" name="changeCallsign" data-toggle="modal" data-target="#callsign">
-                          <span class="glyphicon glyphicon-text-background" aria-hidden="true"></span>
-                        </a>
                         <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
                         <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
                         </a>
