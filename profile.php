@@ -43,7 +43,7 @@ include("./actions/profileActions.php");
         $changePassword = '<div class="alert alert-success"><span>Password successfully updated.</span></div>';
         unset($_SESSION['changePassword']);
     }
-
+    setDispatcher("1");
 ?>
 
 <!DOCTYPE html>
