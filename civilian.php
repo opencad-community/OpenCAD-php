@@ -114,7 +114,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						    <?php } else { ?>
 							<?php }
 							?>
-                          <li><a type="button" data-toggle="modal" data-target="#newCall" >Place 911 Call</a></li>
+                          <li><a type="button" data-toggle="modal" data-target="#newCall" >Create a Call</a></li>
                           <li><a type="button" data-toggle="modal" data-target="#IdentityModal" >Add New Identity</a></li>
                           <li><a type="button" data-toggle="modal" data-target="#createPlateModal" >Add New Plate</a></li>
                           <li><a type="button" data-toggle="modal" data-target="#createWeaponModal" >Add New Weapon</a></li>
@@ -276,14 +276,15 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          </div>
       </div>
       <!-- modals -->
-      <!-- Create Warrant Modal -->
+
+      <!-- Create 911 Call Modal -->
       <div class="modal fade" id="newCall" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog modal-lg">
             <div class="modal-content">
                <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
                   </button>
-            <h4 class="modal-title" id="myModalLabel">Place New 911 Call</h4>
+            <h4 class="modal-title" id="myModalLabel">Create Call</h4>
           </div>
           <!-- ./ modal-header -->
           <div class="modal-body">
