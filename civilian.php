@@ -118,11 +118,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						    <?php } else { ?>
 							<?php }
 							?>
-                          <li>
-                            <a type="button" data-toggle="modal" data-target="#newCall" >
-                              Place 911 Call
-                            </a>
-                          </li>
+                          <li><a type="button" data-toggle="modal" data-target="#newCall" >Place 911 Call</a></li>
+                          <li><a type="button" data-toggle="modal" data-target="#IdentityModal" >Add New Identity</a></li>
+                          <li><a type="button" data-toggle="modal" data-target="#createPlateModal" >Add New Plate</a></li>
+                          <li><a type="button" data-toggle="modal" data-target="#createWeaponModal" >Add New Weapon</a></li>
                         </ul>
                      </div>
                      <!-- ./ menu_section -->
@@ -206,9 +205,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                               <?php ncicGetNames();?>
                            </div>
                            <!-- ./ x_content -->
-						   <div class="x_footer">
-							<button class="btn btn-primary" name="submitIdentity_btn" type="submit" data-toggle="modal" data-target="#IdentityModal">New Identity</button>
-                        </div>
                         <!-- ./ x_panel -->
                      </div>
 					</div>
@@ -233,10 +229,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <?php ncicGetPlates();?>
                   </div>
                   <!-- ./ x_content -->
-                  <div class="x_footer">
-                    <button class="btn btn-primary" name="create_plate_btn" type="submit" data-toggle="modal" data-target="#createPlateModal">Create Plate</button>
-                  </div>
-                  <!-- ./ x_footer -->
                 </div>
                 <!-- ./ x_panel -->
               </div>
@@ -262,10 +254,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <?php ncicGetWeapons();?>
                   </div>
                   <!-- ./ x_content -->
-                  <div class="x_footer">
-                    <button class="btn btn-primary" name="create_weapon_btn" type="submit" data-toggle="modal" data-target="#createWeaponModal">Create Weapon</button>
-                  </div>
-                  <!-- ./ x_footer -->
                 </div>
                 <!-- ./ x_panel -->
               </div>
