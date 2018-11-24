@@ -12,13 +12,9 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
     session_start();
-
     require("./oc-config.php");
-
     include("./actions/civActions.php");
-
-	include("./actions/api.php");
-
+	  include("./actions/api.php");
 
     // TODO: Verify user has permission to be on this page
 
@@ -287,7 +283,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
                   </button>
-            <h4 class="modal-title" id="myModalLabel">Warrant Creator</h4>
+            <h4 class="modal-title" id="myModalLabel">Place New 911 Call</h4>
           </div>
           <!-- ./ modal-header -->
           <div class="modal-body">

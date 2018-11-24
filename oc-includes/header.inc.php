@@ -21,7 +21,7 @@ if(basename($_SERVER['PHP_SELF']) == 'admin.php') {
   $pageName = "Mobile Data Terminal (MDT)";
   $currentPage = 'class="acitve"';
 } else  if(basename($_SERVER['PHP_SELF']) == 'civilian.php') {
-  $pageName = "Civillian Central";
+  $pageName = "Civillian Console";
   $currentPage = 'class="acitve"';
 } else  if(basename($_SERVER['PHP_SELF']) == 'dashboard.php') {
   $pageName = "OpenCAD Dashboard";
