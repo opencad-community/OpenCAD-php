@@ -118,6 +118,11 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						    <?php } else { ?>
 							<?php }
 							?>
+                          <li>
+                            <a type="button" data-toggle="modal" data-target="#newCall" >
+                              Place 911 Call
+                            </a>
+                          </li>
                         </ul>
                      </div>
                      <!-- ./ menu_section -->
@@ -175,7 +180,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                <div class="">
                   <div class="page-title">
                      <div class="title_left">
-                        <h3>CAD Civilian</h3>
+                        <h3>Civilian Console</h3>
+                        <p>(Not <?php echo $name;?>?, <a href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">Log Out</a>)
+                        <?php echo $good911;?>
                      </div>
                   </div>
                   <div class="clearfix"></div>
@@ -267,22 +274,36 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             <!-- ./ row -->
                   <!-- ./ row -->
                      <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
-                     <div class="col-md-6 col-sm-6 col-xs-6">
-                        <div class="x_panel" id="911_panel">
-                           <div class="x_title">
-                              <h2>New 911 Call</h2>
-                              <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fasfa-chevron-up"></i></a>
-                                 </li>
-                                 <li><a class="close-link"><i class="fasfa-close"></i></a>
-                                 </li>
-                              </ul>
-                              <div class="clearfix"></div>
-                           </div>
-                           <!-- ./ x_title -->
-                           <div class="x_content">
-                              <?php echo $good911;?>
-                              <form id="new_911" method="post" action="<?php echo BASE_URL; ?>/actions/civActions.php">
+
+                  </div>
+                  <!-- ./ row -->
+               </div>
+               <!-- "" -->
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+               <div class="pull-right">
+                  <?php echo COMMUNITY_NAME;?> CAD System | <?php pageLoadTime(); ?>
+               </div>
+               <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+         </div>
+      </div>
+      <!-- modals -->
+      <!-- Create Warrant Modal -->
+      <div class="modal fade" id="newCall" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
+                  </button>
+            <h4 class="modal-title" id="myModalLabel">Warrant Creator</h4>
+          </div>
+          <!-- ./ modal-header -->
+          <div class="modal-body">
+          <form id="new_911" method="post" action="<?php echo BASE_URL; ?>/actions/civActions.php">
                                  <div class="form-group row">
                                     <label class="col-md-2 control-label">Caller Name</label>
                                     <div class="col-md-10">
@@ -308,34 +329,19 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                  </div>
                                  <!-- ./ form-group row -->
                            </div>
-                           <!-- ./ x_content -->
-                           <div class="x_footer">
-                           <button type="reset" class="btn btn-default" value="Reset">Reset</button>
-                           <input type="submit" class="btn btn-primary" name="new_911" value="Submit 911 Call"/>
-                           </div>
-                           <!-- ./ x_footer -->
-                           </form>
-                        </div>
-                        <!-- ./ x_panel -->
-                     </div>
-                     <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
-                  </div>
-                  <!-- ./ row -->
-               </div>
-               <!-- "" -->
-            </div>
-            <!-- /page content -->
-            <!-- footer content -->
-            <footer>
-               <div class="pull-right">
-                  <?php echo COMMUNITY_NAME;?> CAD System | <?php pageLoadTime(); ?>
-               </div>
-               <div class="clearfix"></div>
-            </footer>
-            <!-- /footer content -->
-         </div>
+                          <!-- ./ modal-body -->
+          <div class="modal-footer">
+          <input type="submit" class="btn btn-primary" name="new_911" value="Submit 911 Call"/>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
       </div>
-      <!-- modals -->
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+
       <!-- Create Warrant Modal -->
       <div class="modal fade" id="createWarrant" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog modal-lg">
