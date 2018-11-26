@@ -114,9 +114,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						    <?php } else { ?>
 							<?php }
 							?>
-                          <li><a type="button" data-toggle="modal" data-target="#newCall" >Create a Call</a></li>
-                          <li><a type="button" data-toggle="modal" data-target="#IdentityModal" >Add New Identity</a></li>
-                          <li><a type="button" data-toggle="modal" data-target="#createPlateModal" >Add New Plate</a></li>
+                          <li><a type="button" data-toggle="modal" data-target="#newCall" > <i class="fas fa-phone"></i> Create a Call</a></li>
+                          <li><a type="button" data-toggle="modal" data-target="#IdentityModal"><i class="fas fa-user-alt"></i> Add New Identity</a></li>
+                          <li><a type="button" data-toggle="modal" data-target="#createPlateModal" > <i class="fas fa-car"></i> Add New Plate</a></li>
                           <li><a type="button" data-toggle="modal" data-target="#createWeaponModal" >Add New Weapon</a></li>
                         </ul>
                      </div>
@@ -1157,7 +1157,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
             </button>
-            <h4 class="modal-title" id="myModalLabel">Add Plate to Database</h4>
+            <h4 class="modal-title" id="myModalLabel">Add Weapon to Database</h4>
           </div>
           <!-- ./ modal-header -->
 		  <div class="modal-body">
