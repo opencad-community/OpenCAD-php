@@ -57,7 +57,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     {
         $activeDepartment = "Fire";
         $activeBadge="fire";
-        $_SESSION['activeDepartment'] = 'Fire';
+        $_SESSION['activeDepartment'] = 'fire';
     }
     else if ( $_GET['dep'] == "ems" || $_SESSION['activeDepartment'] == "ems" )
     {
@@ -143,6 +143,18 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <!-- ./ menu_section -->
                   </div>
                   <!-- /sidebar menu -->
+                  <div id="firstResponder" class="dynamic-content main_menu_side hidden-print main_menu">
+                     <div class="menu_section">
+                        <h3>General</h3>
+                        <ul class="nav side-menu">
+                           <li class="active">
+                              <a><i class="fas fa-home"></i> Home <span class="fas fa-chevron-down"></span></a>
+                           </li>
+                        </ul>
+                     </div>
+                     <!-- ./ menu_section -->
+                  </div>
+                  <!-- /sidebar menu -->
                   <div id="roadsideAssist" class="dynamic-content main_menu_side hidden-print main_menu">
                      <div class="menu_section">
                         <h3>General</h3>
@@ -156,7 +168,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   </div>
                   <!-- /sidebar menu -->
                   <!-- /menu footer buttons -->
-                  <div class="sidebar-footer hidden-small">
+                  <div class="sidebar-footer hidden-small" style="background:#172d44">
                      <!--  —— Left in for user settings. To be introduced later. Probably after RC1. ——
                         <a data-toggle="tooltip" data-placement="top">
                           <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
@@ -170,11 +182,11 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
                      <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
                      </a>
-                     <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
-                     <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
-                     </a>
                      <a data-toggle="tooltip" data-placement="top" title="Need Help?" href="https://guides.opencad.io/">
                      <span class="fas fa-info-circle" aria-hidden="true"></span>
+                     </a>
+                     <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
+                     <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
                      </a>
                   </div>
                   <!-- /menu footer buttons -->
@@ -1218,7 +1230,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		if (dynamicContent == 'police' || dynamicContent == 'highway' || dynamicContent == 'state' || dynamicContent == 'sheriff') {
 			$('#lawenforcement').show();
 			$('#ncic').show();
-		}
+      }
+      else if (dynamicContent == 'fire' ||  dynamicContent == 'ems') {
+      $('#firstResponder').show();
+    }
     else if (dynamicContent == 'roadsideAssist') {
       $('#roadsideAssist').show();
     }

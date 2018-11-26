@@ -114,9 +114,15 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						    <?php } else { ?>
 							<?php }
 							?>
+<<<<<<< HEAD
                           <li><a type="button" data-toggle="modal" data-target="#newCall" > <i class="fas fa-phone"></i> Create a Call</a></li>
                           <li><a type="button" data-toggle="modal" data-target="#IdentityModal"><i class="fas fa-user-alt"></i> Add New Identity</a></li>
                           <li><a type="button" data-toggle="modal" data-target="#createPlateModal" > <i class="fas fa-car"></i> Add New Plate</a></li>
+=======
+                          <li><a type="button" data-toggle="modal" data-target="#newCall" >Create a Call</a></li>
+                          <li><a type="button" data-toggle="modal" data-target="#IdentityModal" >Add New Identity</a></li>
+                          <li><a type="button" data-toggle="modal" data-target="#createPlateModal" >Add New Plate</a></li>
+>>>>>>> f8f0d60096796de3a8e21e68642ba5e37a4a0515
                           <li><a type="button" data-toggle="modal" data-target="#createWeaponModal" >Add New Weapon</a></li>
                         </ul>
                      </div>

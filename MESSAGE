@@ -1,1 +1,5 @@
-* OCPHP-216 Moved reset-password to modal dialog.
+* OCPHP-455 Tweaked Add New Weapon modal to show correct title.
+* OCPHP-450 Added icons to Civilian Console actions.
+  * OCPHP-451 Added "fas fa-phone" for Create Call.
+  * OCPHP-453 Added "fas fa-car" for Create Vehicle.
+  * OCPHP-454 Added "fas fa-user-alt" for Create Identity.
