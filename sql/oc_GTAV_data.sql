@@ -265,7 +265,7 @@ INSERT INTO `departments` (`department_id`, `department_name`, `department_short
 (6, 'Fire', 'SAFD', 'San Andreas Fire Department', 0),
 (7, 'EMS', 'SAEMS', 'San Andreas Emergency Services', 0),
 (8, 'Civilian', 'SACS', 'San Andreas Civilian Services', 0),
-(9, 'Roadside Assist', 'SARA', 'San Andreas Roadside Assistance', 0);
+(9, 'Roadside Assistance', 'SARA', 'San Andreas Roadside Assistance', 0);
 
 --
 -- Dumping data for table `genders`
@@ -1044,7 +1044,7 @@ INSERT INTO `weapons` (`id`, `weapon_type`, `weapon_name`) VALUES
 (23, 'Assault-Rifles', 'Special-Carbine'),
 (24, 'Assault-Rifles', 'Bullpup-Rifle'),
 (25, 'Sniper-Rifles', 'Sniper-Rifle'),
-(26, 'Sniper-Rifles', 'Heave-Sniper'),
+(26, 'Sniper-Rifles', 'Heavy-Sniper'),
 (27, 'Sniper-Rifles', 'Marksman-Rifle'),
 (28, 'Heavy', 'RPG'),
 (29, 'Heavy', 'Minigun'),

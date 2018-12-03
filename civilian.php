@@ -12,13 +12,9 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
     session_start();
-
     require("./oc-config.php");
-
     include("./actions/civActions.php");
-
-	include("./actions/api.php");
-
+	  include("./actions/api.php");
 
     // TODO: Verify user has permission to be on this page
 
@@ -118,6 +114,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						    <?php } else { ?>
 							<?php }
 							?>
+                          <li><a type="button" data-toggle="modal" data-target="#newCall" > <i class="fas fa-phone"></i> Create a Call</a></li>
+                          <li><a type="button" data-toggle="modal" data-target="#IdentityModal"><i class="fas fa-user-alt"></i> Add New Identity</a></li>
+                          <li><a type="button" data-toggle="modal" data-target="#createPlateModal" > <i class="fas fa-car"></i> Add New Plate</a></li>
+                          <li><a type="button" data-toggle="modal" data-target="#createWeaponModal" >Add New Weapon</a></li>
                         </ul>
                      </div>
                      <!-- ./ menu_section -->
@@ -136,11 +136,11 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
                         <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
                         </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
-                        <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
-                        </a>
                         <a data-toggle="tooltip" data-placement="top" title="Need Help?" href="https://guides.opencad.io/">
                         <span class="fas fa-info-circle" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
+                        <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
                         </a>
                   </div>
                   <!-- /menu footer buttons -->
@@ -175,7 +175,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                <div class="">
                   <div class="page-title">
                      <div class="title_left">
-                        <h3>CAD Civilian</h3>
+                        <h3>Civilian Console</h3>
+                        <p>(Not <?php echo $name;?>?, <a href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">Log Out</a>)
+                        <?php echo $good911;?>
                      </div>
                   </div>
                   <div class="clearfix"></div>
@@ -199,9 +201,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                               <?php ncicGetNames();?>
                            </div>
                            <!-- ./ x_content -->
-						   <div class="x_footer">
-							<button class="btn btn-primary" name="submitIdentity_btn" type="submit" data-toggle="modal" data-target="#IdentityModal">New Identity</button>
-                        </div>
                         <!-- ./ x_panel -->
                      </div>
 					</div>
@@ -226,10 +225,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <?php ncicGetPlates();?>
                   </div>
                   <!-- ./ x_content -->
-                  <div class="x_footer">
-                    <button class="btn btn-primary" name="create_plate_btn" type="submit" data-toggle="modal" data-target="#createPlateModal">Create Plate</button>
-                  </div>
-                  <!-- ./ x_footer -->
                 </div>
                 <!-- ./ x_panel -->
               </div>
@@ -255,10 +250,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <?php ncicGetWeapons();?>
                   </div>
                   <!-- ./ x_content -->
-                  <div class="x_footer">
-                    <button class="btn btn-primary" name="create_weapon_btn" type="submit" data-toggle="modal" data-target="#createWeaponModal">Create Weapon</button>
-                  </div>
-                  <!-- ./ x_footer -->
                 </div>
                 <!-- ./ x_panel -->
               </div>
@@ -267,22 +258,37 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             <!-- ./ row -->
                   <!-- ./ row -->
                      <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
-                     <div class="col-md-6 col-sm-6 col-xs-6">
-                        <div class="x_panel" id="911_panel">
-                           <div class="x_title">
-                              <h2>New 911 Call</h2>
-                              <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fasfa-chevron-up"></i></a>
-                                 </li>
-                                 <li><a class="close-link"><i class="fasfa-close"></i></a>
-                                 </li>
-                              </ul>
-                              <div class="clearfix"></div>
-                           </div>
-                           <!-- ./ x_title -->
-                           <div class="x_content">
-                              <?php echo $good911;?>
-                              <form id="new_911" method="post" action="<?php echo BASE_URL; ?>/actions/civActions.php">
+
+                  </div>
+                  <!-- ./ row -->
+               </div>
+               <!-- "" -->
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+               <div class="pull-right">
+                  <?php echo COMMUNITY_NAME;?> CAD System | <?php pageLoadTime(); ?>
+               </div>
+               <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+         </div>
+      </div>
+      <!-- modals -->
+
+      <!-- Create 911 Call Modal -->
+      <div class="modal fade" id="newCall" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
+                  </button>
+            <h4 class="modal-title" id="myModalLabel">Create Call</h4>
+          </div>
+          <!-- ./ modal-header -->
+          <div class="modal-body">
+          <form id="new_911" method="post" action="<?php echo BASE_URL; ?>/actions/civActions.php">
                                  <div class="form-group row">
                                     <label class="col-md-2 control-label">Caller Name</label>
                                     <div class="col-md-10">
@@ -308,34 +314,19 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                  </div>
                                  <!-- ./ form-group row -->
                            </div>
-                           <!-- ./ x_content -->
-                           <div class="x_footer">
-                           <button type="reset" class="btn btn-default" value="Reset">Reset</button>
-                           <input type="submit" class="btn btn-primary" name="new_911" value="Submit 911 Call"/>
-                           </div>
-                           <!-- ./ x_footer -->
-                           </form>
-                        </div>
-                        <!-- ./ x_panel -->
-                     </div>
-                     <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
-                  </div>
-                  <!-- ./ row -->
-               </div>
-               <!-- "" -->
-            </div>
-            <!-- /page content -->
-            <!-- footer content -->
-            <footer>
-               <div class="pull-right">
-                  <?php echo COMMUNITY_NAME;?> CAD System | <?php pageLoadTime(); ?>
-               </div>
-               <div class="clearfix"></div>
-            </footer>
-            <!-- /footer content -->
-         </div>
+                          <!-- ./ modal-body -->
+          <div class="modal-footer">
+          <input type="submit" class="btn btn-primary" name="new_911" value="Submit 911 Call"/>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+          <!-- ./ modal-footer -->
+        </div>
+        <!-- ./ modal-content -->
       </div>
-      <!-- modals -->
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+
       <!-- Create Warrant Modal -->
       <div class="modal fade" id="createWarrant" tabindex="-1" role="dialog" aria-hidden="true">
          <div class="modal-dialog modal-lg">
@@ -574,7 +565,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				<select name="civHairReq" class="form-control selectpicker" id="civHairReq" title="Select a hair color" required>
 					<option val="bld">Bald</option>
 					<option val="blk">Black</option>
-					<option val="bln">Blond or Strawberry</option>
+					<option val="bln">Blonde</option>
 					<option val="blu">Blue</option>
 					<option val="bro">Brown</option>
 					<option val="gry">Gray or Partially Gray</option>
@@ -584,6 +575,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 					<option val="ple">Purple</option>
 					<option val="red">Red or Auburn</option>
 					<option val="sdy">Sandy</option>
+          <option val="stw">Strawberry</option>
 					<option val="whi">White</option>
 					</select>
                 </div>
@@ -612,6 +604,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 					<select name="civWepStat" class="form-control selectpicker" id="civWepStat" title="Select a status" required>
 						<option val="Obtained">Obtained</option>
 						<option val="Unobtained">Unobtained</option>
+            <option val="Expired">Expired</option>
 						</select>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -728,7 +721,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         <select name="civHairReq" class="form-control selectpicker civHairReq_picker" id="civHairReq" title="Select a hair color" required>
           <option val="bld">Bald</option>
           <option val="blk">Black</option>
-          <option val="bln">Blond or Strawberry</option>
+          <option val="bln">Blonde</option>
           <option val="blu">Blue</option>
           <option val="bro">Brown</option>
           <option val="gry">Gray or Partially Gray</option>
@@ -738,6 +731,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <option val="ple">Purple</option>
           <option val="red">Red or Auburn</option>
           <option val="sdy">Sandy</option>
+          <option val="stw">Strawberry</option>
           <option val="whi">White</option>
           </select>
                 </div>
@@ -872,6 +866,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <option value="">  </option>
                 <option value="Valid"> Valid </option>
                 <option value="Expired"> Expired </option>
+                <option value="Invalid">Invalid</option>
                 </select>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -886,6 +881,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <option value="Stolen"> Stolen </option>
                 <option value="Wanted"> Wanted </option>
                 <option value="Suspended Registration"> Suspended Registration </option>
+                <option value="No Insurance"> No Insurance </option>
                 </select>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -1161,7 +1157,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
             </button>
-            <h4 class="modal-title" id="myModalLabel">Add Plate to Database</h4>
+            <h4 class="modal-title" id="myModalLabel">Add Weapon to Database</h4>
           </div>
           <!-- ./ modal-header -->
 		  <div class="modal-body">

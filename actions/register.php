@@ -89,8 +89,10 @@ function register()
             {$division = "6";}
         elseif($division == "ems")
             {$division = "7";}
-        elseif($division == "civillian")
+        elseif($division == "civilian")
             {$division = "8";}
+        elseif($division == "roadsideAssist")
+            {$division = "9";}
         $query = "INSERT INTO user_departments_temp (user_id, department_id)
               SELECT id , ?
               FROM users
