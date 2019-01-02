@@ -743,7 +743,8 @@ function ncic_warrants()
     }
 	$sql = 'SELECT ncic_names.id from ncic_names where submittedById = "' . $uid . '"';
 
-	$results=mysqli_query($link, $sql);
+    $results=mysqli_query($link, $sql);
+    $nameid = "";
 	while($row = mysqli_fetch_array($results, MYSQLI_BOTH))
     {
         $nameid = ''.$row[0].'';
