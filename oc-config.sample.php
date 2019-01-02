@@ -545,11 +545,7 @@ define('USE_GRAVATAR', true);
   * it is also used in creating cookie 'aljksdz7' which stors the API-Key
   * and the session id of the loged in user.
   *
-  * This value should be change to something else.
-  *
-  * This key can be anything accept empty and should be longer that 32 characters.
-  *
-  * To enable/disable the use of the api security, set ENABLE_API_SECURITY to true/false.
+  * This setting should always be enabled.
   * 
   * @since 0.2.6
 	* (Imported from ATVG-CAD 1.3.0.0)
