@@ -315,10 +315,6 @@ function getDepartments()
 
 function getRole()
 {
-  $userID 		= !empty($_POST['userID']) ? $_POST['userID'] : '';
-  $userId = htmlspecialchars($_POST['userId']);
-
-  echo $_POST['userId'];
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
     $site = BASE_URL;
     if (!$link)
