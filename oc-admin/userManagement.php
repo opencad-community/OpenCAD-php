@@ -326,7 +326,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <!-- ./ modal-body -->
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			<input type="hidden" name="userID" id="userID">
+			      <input type="hidden" name="userID" id="userID">
             <input type="submit" name="editUserAccount" class="btn btn-primary" value="Update User"/>
           </div>
           <!-- ./ modal-footer -->

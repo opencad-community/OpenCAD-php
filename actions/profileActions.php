@@ -13,6 +13,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
 require_once(__DIR__ . "/../oc-config.php");
+include_once(__DIR__ . "/../plugins/api_auth.php");
 
 //Handle requests
 if (isset($_POST['update_profile_btn']))
@@ -120,11 +121,11 @@ function changePassword()
   $hashed_password = password_hash($newpassword, PASSWORD_DEFAULT);
   mysqli_query($link,"UPDATE `users` SET `password` = '$hashed_password' WHERE `id` = '$id'") or die(mysqli_error($link));
 
-  $_SESSION['changePassword'] = '<div class="alert alert-success"><span>Password successfully updated.</span></div>';
+  $_SESSION['profileUpdate'] = '<div class="alert alert-success"><span>Password successfully updated.</span></div>';
 
   sleep(1); //Seconds to wait
-  echo $_SESSION['changePassword'];
-  header("Location: ".BASE_URL."/profile.php?changePassword=true");
+  echo $_SESSION['profileUpdate'];
+  header("Location: ".BASE_URL."/profile.php");
 }
 
 function getRanks()

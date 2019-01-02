@@ -15,6 +15,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 */
 
 require_once(__DIR__ . "/../oc-config.php");
+include_once(__DIR__ . "/../plugins/api_auth.php");
 
 if (isset($_GET['a'])){
     getActiveCalls();
@@ -72,6 +73,25 @@ if (isset($_POST['quickStatus']))
 if (isset($_GET['getAOP']))
 {
     getAOP();
+}
+if (isset($_GET['newApiKey']))
+{
+    $myRank = $_SESSION['admin_privilege'];
+
+    if($myRank == 2){
+        getApiKey(true);
+        session_start();
+        session_unset();
+        session_destroy();
+        if(ENABLE_API_SECURITY === true)
+            setcookie('aljksdz7', null, -1, "/");
+
+        header("Location: ".BASE_URL."/index.php?loggedOut=true");
+        exit();
+    }else{
+        header("Location: ".BASE_URL."/oc-admin/about.php'");
+        die();
+    }
 }
 
 function quickStatus()
