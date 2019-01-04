@@ -104,7 +104,7 @@ function getMyRank()
 
 function changePassword()
 {
-
+  session_start();
   error_reporting(E_ALL);
   ini_set('display_errors', 1);
 
@@ -114,13 +114,8 @@ function changePassword()
   if (!$link) {
     die('Could not connect: ' .mysql_error());
   }
-
-  // Get users
-  $query = mysqli_query($link, "SELECT * FROM `users`") or die(mysqli_error($link));
-
-  $row = mysqli_fetch_array($query);
-  $id = $row['id'];
-  $password = $row['password'];
+  
+  $id = $_SESSION['id'];
   $newpassword = htmlspecialchars($_POST['password']);
   $hashed_password = password_hash($newpassword, PASSWORD_DEFAULT);
   mysqli_query($link,"UPDATE `users` SET `password` = '$hashed_password' WHERE `id` = '$id'") or die(mysqli_error($link));
