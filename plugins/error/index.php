@@ -1,9 +1,27 @@
 <?php
+    /**
+     * Open source CAD system for RolePlaying Communities.
+     * Copyright (C) 2018-2019 Thomas Obernosterer
+     * 
+     * This program is free software: you can redistribute it and/or modify
+     *  it under the terms of the GNU General Public License as published by
+     *  the Free Software Foundation, either version 3 of the License, or
+     *  (at your option) any later version.
+     * 
+     * This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
+     * 
+     * 
+     * File origin: ATVG-CAD v1.3.0.0 by ATVG-Studios
+    **/
+
     session_start();
     $error = "We could not identify the error, please retry your last action.";
     if(!empty($_SESSION['error']))
     {
-        $error = htmlspecialchars($_SESSION['error']);
+        if(is_array($_SESSION['error']))
+            $error = print_r($_SESSION['error'], true);
+        else
+            $error = htmlspecialchars($_SESSION['error']);
     }
 
     $error_blob = "none";

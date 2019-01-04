@@ -92,6 +92,10 @@ function getMyRank()
 
     $result=mysqli_query($link, $query);
 
+    if(!$result){
+        die('A error occured: ' .mysqli_error($link));
+    }
+
 	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
 	{
 		echo $row[0];

@@ -33,8 +33,8 @@ include("./actions/profileActions.php");
     $profileUpdate = "";
     if (isset($_SESSION['profileUpdate']))
     {
-        $profileUpdate = $_SESSION['profileUpdate'];
-        unset($_SESSION['profileUpdate']);
+      $profileUpdate = $_SESSION['profileUpdate'];
+      unset($_SESSION['profileUpdate']);
     }
     
     setDispatcher("1");
