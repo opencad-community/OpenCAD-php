@@ -165,8 +165,8 @@ require_once(__DIR__ . '/../oc-config.php');
                         </div>
                       <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                         <div class="input-group">
-                           PHP Version:<input type="text" class="form-control" readonly="readonly" placeholder="<?php echo getMySQLVersion(); ?>" />
-                           <p><em>Note:</em> The active version of MySQL.</p>
+                           Database Server Version:<input type="text" class="form-control" readonly="readonly" placeholder="<?php echo getMySQLVersion(); ?>" />
+                           <p><em>Note:</em> The version of database server which you are using.</p>
                         </div>
                     </div>
                     <!-- ./ row tile_count -->
