@@ -33,16 +33,10 @@ include("./actions/profileActions.php");
     $profileUpdate = "";
     if (isset($_SESSION['profileUpdate']))
     {
-        $profileUpdate = $_SESSION['profileUpdate'];
-        unset($_SESSION['profileUpdate']);
+      $profileUpdate = $_SESSION['profileUpdate'];
+      unset($_SESSION['profileUpdate']);
     }
-
-
-    if (isset($_GET['changePassword']))
-    {
-        $changePassword = '<div class="alert alert-success"><span>Password successfully updated.</span></div>';
-        unset($_SESSION['changePassword']);
-    }
+    
     setDispatcher("1");
 ?>
 
@@ -165,7 +159,7 @@ include("./actions/profileActions.php");
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
-                  <?php echo $profileUpdate, $changePassword;?>
+                  <?php echo $profileUpdate ?>
                   <form action="<?php echo BASE_URL; ?>/actions/profileActions.php" method="post" class="form-horizontal">
                   <fieldset>
                     <div class="form-group">

@@ -25,6 +25,11 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     // TODO: Verify user has permission to be on this page
 
+    // HACK
+    $civName = "";
+    $civDob  = "";
+    $civAddr = "";
+
     if (empty($_SESSION['logged_in']))
     {
         header('Location: ../index.php');

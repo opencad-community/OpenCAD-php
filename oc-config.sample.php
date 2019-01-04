@@ -536,6 +536,22 @@ define('DEMO_MODE', false);
 
 define('USE_GRAVATAR', true);
 
+
+
+/**#@+
+  * API Security
+  *
+  * The API-Key is used to authenticate requests from logedout users,
+  * it is also used in creating cookie 'aljksdz7' which stors the API-Key
+  * and the session id of the loged in user.
+  *
+  * This setting should always be enabled.
+  * 
+  * @since 0.2.6
+	* (Imported from ATVG-CAD 1.3.0.0)
+  **/
+  define('ENABLE_API_SECURITY', true);
+
 /** That's all, stop editing! Happy roleplaying. **/
 /**    Absolute path to the OpenCAD directory.   **/
 if ( !defined('ABSPATH') )

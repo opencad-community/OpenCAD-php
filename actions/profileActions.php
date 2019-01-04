@@ -13,6 +13,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
 require_once(__DIR__ . "/../oc-config.php");
+include_once(__DIR__ . "/../plugins/api_auth.php");
 
 //Handle requests
 if (isset($_POST['update_profile_btn']))
@@ -91,6 +92,10 @@ function getMyRank()
 
     $result=mysqli_query($link, $query);
 
+    if(!$result){
+        die('A error occured: ' .mysqli_error($link));
+    }
+
 	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
 	{
 		echo $row[0];
@@ -99,7 +104,7 @@ function getMyRank()
 
 function changePassword()
 {
-
+  session_start();
   error_reporting(E_ALL);
   ini_set('display_errors', 1);
 
@@ -109,22 +114,17 @@ function changePassword()
   if (!$link) {
     die('Could not connect: ' .mysql_error());
   }
-
-  // Get users
-  $query = mysqli_query($link, "SELECT * FROM `users`") or die(mysqli_error($link));
-
-  $row = mysqli_fetch_array($query);
-  $id = $row['id'];
-  $password = $row['password'];
+  
+  $id = $_SESSION['id'];
   $newpassword = htmlspecialchars($_POST['password']);
   $hashed_password = password_hash($newpassword, PASSWORD_DEFAULT);
   mysqli_query($link,"UPDATE `users` SET `password` = '$hashed_password' WHERE `id` = '$id'") or die(mysqli_error($link));
 
-  $_SESSION['changePassword'] = '<div class="alert alert-success"><span>Password successfully updated.</span></div>';
+  $_SESSION['profileUpdate'] = '<div class="alert alert-success"><span>Password successfully updated.</span></div>';
 
   sleep(1); //Seconds to wait
-  echo $_SESSION['changePassword'];
-  header("Location: ".BASE_URL."/profile.php?changePassword=true");
+  echo $_SESSION['profileUpdate'];
+  header("Location: ".BASE_URL."/profile.php");
 }
 
 function getRanks()

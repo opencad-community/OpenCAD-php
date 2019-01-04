@@ -14,6 +14,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 
 require_once(__DIR__ . "/../oc-config.php");
+include_once(__DIR__ . "/../plugins/api_auth.php");
 
 /*
     Returns information on name run through NCIC.

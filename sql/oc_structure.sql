@@ -419,9 +419,13 @@ CREATE TABLE `weapons` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Indexes for dumped tables
+-- Table structure for table `config`
 --
 
+CREATE TABLE `config` (
+  `key` varchar(80) NOT NULL,
+  `value` varchar(80)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for table `active_users`

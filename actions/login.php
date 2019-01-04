@@ -88,6 +88,8 @@ require_once(__DIR__ . "/../oc-config.php");
         $_SESSION['identifier'] = $identifier;
         $_SESSION['callsign'] = $identifier; //Set callsign to default to identifier until the unit changes it
         $_SESSION['admin_privilege'] = $admin_privilege; //Set callsign to default to identifier until the unit changes it
+        if(ENABLE_API_SECURITY === true)
+            setcookie("aljksdz7", hash('md5', session_id().getApiKey()), time() + (86400 * 7), "/");
         header("Location:".BASE_URL."/dashboard.php");
     }
 

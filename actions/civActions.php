@@ -13,6 +13,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
 include_once(__DIR__ . "/../oc-config.php");
+include_once(__DIR__ . "/../plugins/api_auth.php");
 
 /* Handle POST requests */
 if (isset($_POST['delete_name'])){
@@ -742,11 +743,12 @@ function ncic_warrants()
     }
 	$sql = 'SELECT ncic_names.id from ncic_names where submittedById = "' . $uid . '"';
 
-	$results=mysqli_query($link, $sql);
+    $results=mysqli_query($link, $sql);
+    $nameid = "";
 	while($row = mysqli_fetch_array($results, MYSQLI_BOTH))
-        {
-            $nameid = ''.$row[0].'';
-		}
+    {
+        $nameid = ''.$row[0].'';
+    }
 
     $query = 'SELECT ncic_warrants.*, ncic_names.name FROM ncic_warrants INNER JOIN ncic_names ON ncic_names.id=ncic_warrants.name_id WHERE name_id = "' . $nameid . '"';
 
