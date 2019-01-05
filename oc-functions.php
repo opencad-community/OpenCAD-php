@@ -29,6 +29,16 @@ if (version_compare(PHP_VERSION, '5.5', '<' )) {
 	require_once(ABSPATH . 'vendors/password_compat/password.php');
 }
 
+if(!file_exists(getcwd().'/.htaccess') && is_writable(getcwd())){
+	
+	$root = str_replace($_SERVER['DOCUMENT_ROOT'], '', getcwd())."/plugins/error/static";
+
+	$htaccess = "ErrorDocument 404 $root/404.php".PHP_EOL
+				."ErrorDocument 401 $root/401.php";
+
+	file_put_contents(getcwd().'/.htaccess', $htaccess);
+}
+
 /**#@+
  * function get_avatar()
  * Function fetches user's gravatar based on their profile email, if one

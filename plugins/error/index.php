@@ -15,23 +15,35 @@
     **/
 
     session_start();
+    $error_title = "We are sorry! It looks as a error had occurred.";
+    if(!empty($_SESSION['error_title']))
+    {
+        $error_title = htmlspecialchars($_SESSION['error_title']);
+    }
+
     $error = "We could not identify the error, please retry your last action.";
     if(!empty($_SESSION['error']))
     {
-        if(is_array($_SESSION['error']))
+        if(!is_string($_SESSION['error']))
             $error = print_r($_SESSION['error'], true);
         else
             $error = htmlspecialchars($_SESSION['error']);
     }
 
-    $error_blob = "none";
+    $error_blob = null;
     if(!empty($_SESSION['error_blob'])){
         $error_blob = htmlspecialchars($_SESSION['error_blob']);
     }
 
     /** Search for specific keywords */
-    if(strpos($error, "No address associated with hostname") !== false){
+
+    define('DBE_UNKNOWN_HOST', "No address associated with hostname");
+    define('DBE_ACCESS_DENIED', "Access denied for user");
+
+    if(strpos($error, DBE_UNKNOWN_HOST) !== false){
         $error = "The database server is not reachable, please check the database address in the configuration and try your last action again.";
+    }else if(strpos($error, DBE_ACCESS_DENIED) !== false){
+        $error = "The configuration file 'oc-config', does not contain proper configuration of the Database Details. Please check your configuration.";
     }
 ?>
 <!DOCTYPE html>
@@ -67,16 +79,18 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel" id="codeList">
                                 <div class="x_title">
-                                    <h2>We are sorry! It looks as a error had occurred.</h2>
+                                    <h2><?php echo $error_title; ?></h2>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
                                     Description: <?php echo $error; ?>
                                 </div>
+                                <?php if(!empty($error_blob)) { ?> 
                                 <div class="x_content">
                                     PHP Exception: <?php echo $error_blob; ?>
                                 </div>
                                 <br><br>
+                                <?php } ?>
                                 <div class="x_content">
                                     If this error persists, please open up a <a href="https://jira.opencad.io/secure/CreateIssue!default.jspa">ticket</a>.
                                 </div>
