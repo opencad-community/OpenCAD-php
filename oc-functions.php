@@ -20,8 +20,11 @@ if(!file_exists(getcwd().'/.htaccess') && is_writable(getcwd())){
 	
 	$root = str_replace($_SERVER['DOCUMENT_ROOT'], '', getcwd())."/plugins/error/static";
 
-	$htaccess = "ErrorDocument 404 $root/404.php".PHP_EOL
-				."ErrorDocument 401 $root/401.php";
+	$htaccess = "ErrorDocument 403 $root/403.php".PHP_EOL
+				."ErrorDocument 404 $root/404.php".PHP_EOL
+				."ErrorDocument 418 $root/418.php".PHP_EOL
+				."ErrorDocument 502 $root/502.php".PHP_EOL
+				."ErrorDocument 503 $root/503.php";
 
 	file_put_contents(getcwd().'/.htaccess', $htaccess);
 }
