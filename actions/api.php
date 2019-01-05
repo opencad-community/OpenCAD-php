@@ -89,7 +89,7 @@ if (isset($_GET['newApiKey']))
         header("Location: ".BASE_URL."/index.php?loggedOut=true");
         exit();
     }else{
-        header("Location: ".BASE_URL."/oc-admin/about.php'");
+        header("Location: ".BASE_URL."/plugins/error/static/418.php");
         die();
     }
 }
