@@ -11,6 +11,18 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
+/**#@* 
+ * if{} Damned if I know
+ * 
+ * Fails if less than PHP version 7.1.
+ * 
+ **/
+
+ if(version_compare(PHP_VERSION, '7.1', '<')) {
+	$_SESSION['error'] = "Incompatable PHP Version. Please use PHP 7.1 or newer.";
+	header('Location: '.BASE_URL.'/plugins/error/index.php');
+ }
+
 /** Provides support for enviorments running PHP < 5.5 */
 if (version_compare(PHP_VERSION, '5.5', '<' )) {
 	require_once(ABSPATH . 'vendors/password_compat/password.php');
