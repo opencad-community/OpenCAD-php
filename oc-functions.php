@@ -19,6 +19,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
  **/
 
  if(version_compare(PHP_VERSION, '7.1', '<')) {
+	session_start();
 	$_SESSION['error'] = "Incompatable PHP Version. Please use PHP 7.1 or newer.";
 	header('Location: '.BASE_URL.'/plugins/error/index.php');
  }
