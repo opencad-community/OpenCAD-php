@@ -20,8 +20,10 @@ if(!file_exists(getcwd().'/.htaccess') && is_writable(getcwd())){
 	
 	$root = str_replace($_SERVER['DOCUMENT_ROOT'], '', getcwd())."/plugins/error/static";
 
-	$htaccess = "ErrorDocument 404 $root/404.php".PHP_EOL
-				."ErrorDocument 401 $root/401.php";
+	$htaccess =	"### Begin ATVG ErrorPages ###".PHP_EOL
+				."ErrorDocument 404 $root/404.php".PHP_EOL
+				."ErrorDocument 401 $root/401.php".PHP_EOL
+				."### End ATVG ErrorPages ###;
 
 	file_put_contents(getcwd().'/.htaccess', $htaccess);
 }
