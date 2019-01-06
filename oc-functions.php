@@ -11,12 +11,7 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
-/**#@* 
- * if{} Damned if I know
- * 
- * Fails if less than PHP version 7.1.
- * 
- **/
+
 
  if(version_compare(PHP_VERSION, '7.1', '<')) {
 	session_start();
@@ -43,17 +38,6 @@ if(!file_exists(getcwd().'/.htaccess') && is_writable(getcwd())){
 				."### End ATVG ErrorPages ###";
 
 	file_put_contents(getcwd().'/.htaccess', $htaccess);
-}
-
-
-if(file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
-	if(file_exists(getcwd().'../.cpanel')){
-		session_start();
-		$_SESSION['error_title'] = "Configuration Required!";
-		$_SESSION['error'] = "OpenCAD has detected it installed on a cPanel server. Please see the install guide: https://guides.opencad.io/alldoc/installation-guides/specialized-installation-guides/install-guide-cpanel";
-		header('Location: '.BASE_URL.'/plugins/error/index.php');
-	}
-	shell_exec("cp oc-config.sample.php oc-config.php");
 }
 
 /**#@+
