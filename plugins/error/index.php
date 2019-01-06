@@ -3,7 +3,7 @@
      * Open source CAD system for RolePlaying Communities.
      * Copyright (C) 2018-2019 Thomas Obernosterer
      * 
-     * This program is free software: you can redistribute it and/or modify
+     *  This program is free software: you can redistribute it and/or modify
      *  it under the terms of the GNU General Public License as published by
      *  the Free Software Foundation, either version 3 of the License, or
      *  (at your option) any later version.
@@ -50,7 +50,7 @@
 <html lang="en">
 
 <head>
-    <?php include_once("../../oc-config.php"); ?>
+    <?php $_NOLOAD['oc-functions'] = 'true'; include_once("../../oc-config.php"); ?>
     <link rel="icon" href="<?php echo BASE_URL; ?>/images/favicon.ico" />
     <link href="<?php echo BASE_URL; ?>/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
