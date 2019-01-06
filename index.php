@@ -16,9 +16,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     $testing = false; //If set to true, will default some data for you
 
-
-
     session_start();
+    $_SESSION['root_path'] = getcwd();
     $registerError = "";
     $registerSuccess = "";
     $loginMessage = "";
