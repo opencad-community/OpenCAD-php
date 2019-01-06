@@ -13,6 +13,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
 require_once(__DIR__ . "/../oc-config.php");
+include_once(__DIR__ . "/../plugins/api_auth.php");
 
 //Handle requests
 if (isset($_POST['update_profile_btn']))
@@ -23,6 +24,10 @@ if (isset($_GET['getMyRank']))
 {
 	getMyRank();
 }
+if (isset($_POST['changePassword']))
+{
+  changePassword();
+}
 
 
 
@@ -30,9 +35,9 @@ function updateProfile()
 {
     session_start();
     $id = $_SESSION['id'];
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $identifier = $_POST['identifier'];
+    $name = htmlspecialchars($_POST['name']);
+    $email = htmlspecialchars($_POST['email']);
+    $identifier = htmlspecialchars($_POST['identifier']);
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -87,10 +92,39 @@ function getMyRank()
 
     $result=mysqli_query($link, $query);
 
+    if(!$result){
+        die('A error occured: ' .mysqli_error($link));
+    }
+
 	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
 	{
 		echo $row[0];
 	}
+}
+
+function changePassword()
+{
+  session_start();
+  error_reporting(E_ALL);
+  ini_set('display_errors', 1);
+
+  // Connect to database
+  $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+  if (!$link) {
+    die('Could not connect: ' .mysql_error());
+  }
+  
+  $id = $_SESSION['id'];
+  $newpassword = htmlspecialchars($_POST['password']);
+  $hashed_password = password_hash($newpassword, PASSWORD_DEFAULT);
+  mysqli_query($link,"UPDATE `users` SET `password` = '$hashed_password' WHERE `id` = '$id'") or die(mysqli_error($link));
+
+  $_SESSION['profileUpdate'] = '<div class="alert alert-success"><span>Password successfully updated.</span></div>';
+
+  sleep(1); //Seconds to wait
+  echo $_SESSION['profileUpdate'];
+  header("Location: ".BASE_URL."/profile.php");
 }
 
 function getRanks()

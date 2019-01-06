@@ -11,6 +11,7 @@
  */
 
 require_once(__DIR__ . "/../oc-config.php");
+include_once(__DIR__ . "/../plugins/api_auth.php");
 
 /*
 This file handles all actions for admin.php script
@@ -182,7 +183,7 @@ function delete_user()
         die('Could not connect: ' . mysql_error());
     }
 
-    $uid = $_POST['uid'];
+    $uid = htmlspecialchars($_POST['uid']);
     echo $uid;
 
     $query = "DELETE FROM users WHERE id = ?";
@@ -314,10 +315,6 @@ function getDepartments()
 
 function getRole()
 {
-  $userID 		= !empty($_POST['userID']) ? $_POST['userID'] : '';
-  $userId = $_POST['userId'];
-
-  echo $_POST['userId'];
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
     $site = BASE_URL;
     if (!$link)
@@ -330,7 +327,7 @@ function getRole()
     $result = mysqli_query($link, $sql);
     echo '
             <option value="0">User</option>
-            <option value="1" disabled>Moderator</option>
+            <option value="1">Moderator</option>
             <option value="2">Administrator</option>
             ';
 }
@@ -369,16 +366,29 @@ function getUserGroupsApproved($uid)
 
     $result1 = mysqli_query($link, $sql);
 
+    if ( DEMO_MODE == false ) {
     while ($row1 = mysqli_fetch_array($result1, MYSQLI_BOTH))
     {
-        echo $row1[0] . "&nbsp;<i class='fa fa-remove delete_group' style='font-size:16px;color:red;' data-dept-id=".$row1[1]." data-user-id=".$uid."></i>
-<br/>";
+        if ( ( MODERATOR_REMOVE_GROUP == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
+        {
+        echo $row1[0] . "&nbsp;<i class='fas fa-user-times delete_group' style='font-size:16px;color:red;' data-dept-id=".$row1[1]." data-user-id=".$uid."></i><br/>";
+      } else {
+        echo $row1[0] . "&nbsp;<br/>";
+      }
+
     }
+  } else {
+    while ($row1 = mysqli_fetch_array($result1, MYSQLI_BOTH))
+    {
+        echo $row1[0] . "<br/>";
+    }
+
+  }
 }
 
 function approveUser()
 {
-    $uid = $_POST['uid'];
+    $uid = htmlspecialchars($_POST['uid']);
     $site = BASE_URL;
     /* If a user has been approved, the following needs to be done:
     1. Insert user's groups from temp table to regular table
@@ -466,7 +476,7 @@ function rejectUser()
     1. Delete user's group's from user_departments_temp table
     2. Delete user's profile from users table
     */
-    $uid = $_POST['uid'];
+    $uid = htmlspecialchars($_POST['uid']);
 
     /* Delete groups from temp table */
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -595,22 +605,71 @@ function getUsers()
             <td id="show_group">';
 
         getUserGroupsApproved($row[0]);
-
+        if ( DEMO_MODE == false) {
         echo ' </td>
             <td>
-                <form action="'.$site.'/actions/adminActions.php" method="post">
-                <button name="editUser" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editUserModal" class="btn btn-xs btn-link">Edit</button>
-                <input name="deleteUser" type="submit" class="btn btn-xs btn-link" onclick="deleteUser(' . $row[0] . ')" value="Delete" />
-                ';
-        if ($row[4] == '2')
+                <form action="'.$site.'/actions/adminActions.php" method="post">';
+
+                if ( ( MODERATOR_EDIT_USER == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
+                {
+                 echo '<button name="editUser" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editUserModal" class="btn btn-xs btn-link" >Edit</button>';
+                } else {
+                echo '<button name="editUser" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editUserModal" class="btn btn-xs btn-link" disabled >Edit</button>';
+                }
+
+                if ( ( MODERATOR_DELETE_USER == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
+                {
+                echo '<input name="deleteUser" type="submit" class="btn btn-xs btn-link" onclick="deleteUser(' . $row[0] . ')" value="Delete" />';
+              } else {
+                echo '<input name="deleteUser" type="submit" class="btn btn-xs btn-link" onclick="deleteUser(' . $row[0] . ')" value="Delete" disabled />';
+              }
+
+        if ($row[5] == '2')
         {
+          if ( ( MODERATOR_REACTIVATE_USER == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
+          {
             echo '<input name="reactivateUser" type="submit" class="btn btn-xs btn-link" value="Reactivate" />';
+          } else {
+              echo '<input name="reactivateUser" type="submit" class="btn btn-xs btn-link" value="Reactivate" disabled />';
+          }
+
         }
         else
         {
+          if ( ( MODERATOR_SUSPEND_WITHOUT_REASON == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
+          {
             echo '<input name="suspendUser" type="submit" class="btn btn-xs btn-link" value="Suspend without Reason" />';
+          } else {
+            echo '<input name="suspendUser" type="submit" class="btn btn-xs btn-link" value="Suspend without Reason" disabled />';
+          }
+          if ( ( MODERATOR_SUSPEND_WITH_REASON == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
+          {
             echo '<input name="suspendUserWithReason" type="submit" class="btn btn-xs btn-link" method="post" value="Suspend With Reason: " /><input type="text" method="post" placeholder="Reason Here" name="suspend_reason" id="suspend_reason">';
+          } else {
+            echo '<input name="suspendUserWithReason" type="submit" class="btn btn-xs btn-link" method="post" value="Suspend With Reason: " disabled /><input type="text" method="post" placeholder="Reason Here" name="suspend_reason" id="suspend_reason" readonly>';
+          }
         }
+      } else {
+        echo ' </td>
+            <td>
+                <form action="'.$site.'/actions/adminActions.php" method="post">
+                <button name="editUser" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editUserModal" class="btn btn-xs btn-link" disabled >Edit</button>
+                <input name="deleteUser" type="submit" class="btn btn-xs btn-link" onclick="deleteUser(' . $row[0] . ')" value="Delete" disabled />
+                ';
+        if ($row[5] == '2')
+        {
+            echo '<input name="reactivateUser" type="submit" class="btn btn-xs btn-link" value="Reactivate"  disabled/>';
+        }
+        else
+        {
+            echo '<input name="suspendUser" type="submit" class="btn btn-xs btn-link" value="Suspend without Reason" disabled />';
+            echo '<input name="suspendUserWithReason" type="submit" class="btn btn-xs btn-link" method="post" value="Suspend With Reason: " disabled  /><input type="text" method="post" placeholder="Reason Here" name="suspend_reason" id="suspend_reason" readonly>';
+
+        }
+
+
+
+      }
         echo '
 
                 <input name="uid" type="hidden" value=' . $row[0] . ' />
@@ -631,7 +690,7 @@ function getUsers()
 // TODO: Add reason, duration
 function suspendUser()
 {
-    $uid = $_POST['uid'];
+    $uid = htmlspecialchars($_POST['uid']);
     $site = BASE_URL;
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -671,10 +730,10 @@ function suspendUser()
 
 function suspendUserWithReason()
 {
-    $uid = $_POST['uid'];
+    $uid = htmlspecialchars($_POST['uid']);
     $site = BASE_URL;
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    $suspend_reason = $_POST['suspend_reason'];
+    $suspend_reason = htmlspecialchars($_POST['suspend_reason']);
 
     if (!$link)
     {
@@ -722,7 +781,7 @@ function suspendUserWithReason()
 
 function reactivateUser()
 {
-    $uid = $_POST['uid'];
+    $uid = htmlspecialchars($_POST['uid']);
     $site = BASE_URL;
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -760,7 +819,7 @@ function reactivateUser()
 
 function getUserDetails()
 {
-    $userId = $_POST['userId'];
+    $userId = htmlspecialchars($_POST['userId']);
     $site = BASE_URL;
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -969,7 +1028,7 @@ function delete_callhistory()
         die('Could not connect: ' . mysql_error());
     }
 
-    $callid = $_POST['call_id'];
+    $callid = htmlspecialchars($_POST['call_id']);
     echo $callid;
 
     $query = "DELETE FROM call_history WHERE call_id = ?";

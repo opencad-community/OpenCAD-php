@@ -16,13 +16,16 @@ require_once(__DIR__ . "/../oc-config.php");
 
     if(!empty($_POST))
     {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+        $email = htmlspecialchars($_POST['email']);
+        $password = htmlspecialchars($_POST['password']);
 
         $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
         if (!$link) {
-            die('Please fix your database credentials. ' .mysql_error());
+            $_SESSION['error'] = "Please fix your database credentials.";
+			error_log(print_r(mysqli_error(), true));
+			header('Location: '.BASE_URL.'/plugins/error/index.php');
+			die();
         }
 
         $query = "SELECT id, name, password, email, identifier, admin_privilege, password_reset, approved, suspend_reason FROM users WHERE email = ?";
@@ -88,6 +91,8 @@ require_once(__DIR__ . "/../oc-config.php");
         $_SESSION['identifier'] = $identifier;
         $_SESSION['callsign'] = $identifier; //Set callsign to default to identifier until the unit changes it
         $_SESSION['admin_privilege'] = $admin_privilege; //Set callsign to default to identifier until the unit changes it
+        if(ENABLE_API_SECURITY === true)
+            setcookie("aljksdz7", hash('md5', session_id().getApiKey()), time() + (86400 * 7), "/");
         header("Location:".BASE_URL."/dashboard.php");
     }
 

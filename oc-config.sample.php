@@ -1,32 +1,41 @@
 <?php
 
 /**#@+
-  *Application Settings
+  * Application Settings
   *
-  * This section includes settings for Database connectivity, base url, email config, and
+  * This section includes settings for Database connectivity, base url, email config, and more.
   * These settings are MANDATORY. If they are not configured properly OpenCAD will not function correctly.
-  *
+  * When you save this file, rename it to 'oc-config.php', as it will not work as it is.
   * When editing configuration constants be sure to only edit the contents of the second set of quotes in each.
   * @since 1.0a RC2
   **/
 
 /**#@+
- *Community Name
+ * Community Name
  *
- * Set your communities name by changing 'My Community'
+ * This is where you will change the community name to suit your Community.
+ * Only change the variable named 'My Community'
+ *
  * @since 1.0a RC1
- */
+ **/
 define('COMMUNITY_NAME', 'My Community');
 
 /**#@+
+ *
  * Database connection variables
+ * These are viable to the CAD system, and must be correct.
+ * DB_NAME will typically have a subdirectory, such as 'OpenCAD_(database name)'
+ * DB_USER is sometimes different, it can have a subdirectory and sometimes it doesn't. An example would be 'opencad_(username)'
+ * DB_PASSWORD will be your password that you created with the user. This has no subdirectory.
+ * DB_HOST can vary, it can be localhost or '127.0.0.1', if these do not work then please contact our support desk.
  *
  * @since 1.0a RC1
- */
-define('DB_NAME', 'openCAD');
-define('DB_USER', 'root');
-define('DB_PASSWORD', '');
-define('DB_HOST', '127.0.0.1');
+ *
+ **/
+define('DB_NAME', 'DatabaseName');
+define('DB_USER', 'DatabaseUser');
+define('DB_PASSWORD', 'DatabasePassword');
+define('DB_HOST', 'localhost');
 
 /**#@+
  * Base URL Settings
@@ -37,24 +46,24 @@ define('DB_HOST', '127.0.0.1');
  *             Valid Examples include:
  *             //example.com - Root domain, no subdirectory
  *             //subdomain.example.com - subdomain, no subdirectory
- *             //subdomain.example.comsubdir - subdomain with subdirectory
+ *             //subdomain.example.com/subdir - subdomain with subdirectory
  *             //example.com/subdir - root domain with subdirectory
  *
- *             The OpenCAD teams does not reccomend including the trailing / on any of the above examples.
+ *             The OpenCAD team does not recommend including the trailing / on any of the above examples.
  *             It won't necessarily break anything but just makes reference look strange having
  *             two slashed when it isn't needed.
  *
  * @since 1.0a RC1
- */
+ **/
 define('BASE_URL', '//example.com');
 
 /**#@+
- *To & From emails for system generated emails
+ * To & From emails for system generated emails
  * To be used in a later version for notificaton emails
  *
  * @since 1.0a RC2
  *
- */
+ **/
 define('CAD_FROM_EMAIL', 'cad@community.com');
 define('CAD_FROM_NAME', COMMUNITY_NAME.' CAD');
 define('CAD_TO_EMAIL', 'admins@community.com');
@@ -71,6 +80,7 @@ define('CAD_TO_NAME', COMMUNITY_NAME.' Administrators');
  *
  * @since 1.0a RC2
  *
+ * These do nothing so far, we are working on this.
  **/
 define('AUTH_KEY',         'put your unique phrase here');
 define('SECURE_AUTH_KEY',  'put your unique phrase here');
@@ -98,22 +108,33 @@ define('NONCE_SALT',       'put your unique phrase here');
  *
  * These setting will likely be moved to an *_options table in a future version.
  *
- * @since OpenCAD 0.2.4
+ * @since OpenCAD 0.2.3
  **/
 
  /**#@+
   * POLICE_NCIC
   *
-  * Shows/Hides NCIC functionality on MDT console.
+  * Shows or hides NCIC functionality on MDT console.
   * If 'true' then LEO will be able to use NCIC functions without the need for
-  * a dispatcher, else if 'flase' then LEO will require the presence of
-  * dispatcher to use NCIC funcationality.
+  * a dispatcher, else if 'false' then LEO will require the presence of
+  * dispatcher to use the NCIC function.
 	*
   * These settings will likely be moved to an *_options table in a future version.
   *
-  * @sicne OpenCAD 1804
+  * @since OpenCAD 1804
   **/
 define('POLICE_NCIC', false);
+
+/**#@+
+ * POLICE_CALL_SELFASSIGN
+ * 
+ * Enables or disables the Self Assign functionality on the MDT console for Police.
+ * If 'true', then it enables the self assign function , if 'false', then the self assign function will be disabled.
+ * These settings will likely be moved to a *_options table in a future version
+ * 
+ * since OpenCAD Version 0.2.6
+ **/
+define('POLICE_CALL_SELFASSIGN', true);
 
 
 /**#@+
@@ -123,19 +144,19 @@ define('POLICE_NCIC', false);
  *
  * These setting will likely be moved to an *_options table in a future version.
  *
- * @since OpenCAD 0.2.4
+ * @since OpenCAD version 0.2.3
  **/
 
  /**#@+
 	* FIRE_PANIC
 	*
-	* Shows/Hides Panic functionality on MDT console for Fire
+	* Shows or hides Panic functionality on MDT console for Fire
 	* If 'true' then Fire personnel will be able to use the Panic button,
 	* else if 'false' then Fire personnel will not be able to use the Panic button.
 	*
 	* These settings will likely be moved to an *_options table in a future version.
 	*
-	* @sicne OpenCAD 0.2.4
+	* @since OpenCAD version 0.2.3
 	**/
   define('FIRE_PANIC', false);
 
@@ -143,163 +164,197 @@ define('POLICE_NCIC', false);
  /**#@+
 	* FIRE_BOLO
 	*
-	* Shows/Hides Panic functionality on MDT console for Fire
+	* Shows or Hides BOLO functionality on MDT console for Fire
 	* If 'true' then Fire personnel will be able to view the BOLO board,
-	* else if 'false' then Fire personnel will not be able to view the BOLO board
+	* if 'false' then Fire personnel will not be able to view the BOLO board
 	*.
 	* These settings will likely be moved to an *_options table in a future version.
 	*
-	* @sicne OpenCAD 0.2.4
+	* @since OpenCAD version 0.2.3
 	**/
  define('FIRE_BOLO', false);
 
- /**#@+
+/**#@+
   * FIRE_NCIC_NAME
   *
-  * Shows/Hides Panic functionality on MDT console for Fire
+  * Shows or hides NCIC name functionality on MDT console for Fire
   * If 'true' then Fire personnel will be able to use the NCIC name name lookup,
   * else if 'false' then Fire personnel will not be able to use
 	* NCIC name lookup.
 	*
   * These settings will likely be moved to an *_options table in a future version.
   *
-  * @sicne OpenCAD 0.2.4
+  * @since OpenCAD version 0.2.3
   **/
  define('FIRE_NCIC_NAME', false);
 
- /**#@+
+/**#@+
 	* FIRE_NCIC_PLATE
 	*
-	* Shows/Hides Panic functionality on MDT console for Fire
+	* Shows or hides NCIC plate functionality on MDT console for Fire
 	* If 'true' then Fire personnel will be able to use the NCIC plate lookup
-	* function, else if 'false' then Fire personnel will not be
-	* able to use the NICI plate lookup function.
+	* function, if 'false' then Fire personnel will not be
+	* able to use the NCIC plate look-up function.
 	*
 	* These settings will likely be moved to an *_options table in a future version.
 	*
-	* @sicne OpenCAD 0.2.4
+	* @since OpenCAD version 0.2.3
 	**/
  define('FIRE_NCIC_PLATE', false);
 
  /**#@+
+ * FIRE_CALL_SELFASSIGN
+ * 
+ * Enables or disables the Self Assign functionality on the MDT console for the Fire Department.
+ * If 'true', then it enables the self assign function , if 'false', then the self assign function will be disabled.
+ * These settings will likely be moved to a *_options table in a future version
+ * 
+ * since OpenCAD Version 0.2.6
+ **/
+define('FIRE_CALL_SELFASSIGN', true);
+
+/**#@+
   * OpenCAD Feature Settings - EMS
   *
   * This section controls settings for OpenCAD's core features for EMS
 	*
   * These setting will likely be moved to an *_options table in a future version.
   *
-  * @since OpenCAD 0.2.4
+  * @since OpenCAD version 0.2.3
   **/
 
-	/**#@+
+/**#@+
 	 * EMS_PANIC
 	 *
-	 * Shows/Hides Panic functionality on MDT console for EMS
+	 * Shows or hides Panic functionality on MDT console for EMS
 	 * If 'true' then EMS personnel will be able to use the Panic button,
 	 * else if 'false' then EMS personnel will not be able to use the Panic button.
 	 * These settings will likely be moved to an *_options table in a future version.
 	 *
-	 * @sicne OpenCAD 0.2.4
+	 * @since OpenCAD version 0.2.3
 	 **/
 	define('EMS_PANIC', false);
 
-	/**#@+
+/**#@+
 	 * EMS_BOLO
 	 *
-	 * Shows/Hides Panic functionality on MDT console for EMS
+	 * Shows or hides BOLO functionality on MDT console for EMS
 	 * If 'true' then EMS personnel will be able to view the BOLO board.
 	 * else if 'false' then EMS personnel will not be able to view the BOLO board.
 	 * These settings will likely be moved to an *_options table in a future version.
 	 *
-	 * @sicne OpenCAD 0.2.4
+	 * @since OpenCAD version 0.2.3
 	 **/
 	define('EMS_BOLO', false);
 
 
-	/**#@+
+/**#@+
 	 * EMS_NCIC_NAME
 	 *
-	 * Shows/Hides Panic functionality on MDT console for EMS
+	 * Shows or hides NCIC name functionality on MDT console for EMS
 	 * If 'true' then EMS personnel will be able to use the NCIC name lookup
 	 * funcion, else if 'false' then EMS personnel will not be
 	 * to use the NCIC name lookup function.
 	 *
 	 * These settings will likely be moved to an *_options table in a future version.
 	 *
-	 * @sicne OpenCAD 0.2.4
+	 * @since OpenCAD version 0.2.3
 	 **/
 	define('EMS_NCIC_NAME', false);
 
-	/**#@+
+/**#@+
 	 * EMS_NCIC_PLATE
 	 *
-	 * Shows/Hides Panic functionality on MDT console for EMS
-	 * If 'true' then EMS personnel will be able to use the Panic button,
-	 * else if 'false' then EMS personnel will not be able to use the Panic button.
+	 * Shows or hides NCIC plate functionality on MDT console for EMS
+	 * If 'true' then EMS personnel will be able to use the NCIC plate function,
+	 * else if 'false' then EMS personnel will not be able to use the NCIC plate function.
 	 * These settings will likely be moved to an *_options table in a future version.
 	 *
-	 * @sicne OpenCAD 0.2.4
+	 * @since OpenCAD version 0.2.3
 	 **/
 	define('EMS_NCIC_PLATE', false);
 
-	/**#@+
-	 * OpenCAD Feature Settings - Roadside Assistance
+  /**#@+
+ * EMS_CALL_SELFASSIGN
+ * 
+ * Enables or disables the Self Assign functionality on the MDT console for EMS.
+ * If 'true', then it enables the self assign function , if 'false', then the self assign function will be disabled.
+ * These settings will likely be moved to a *_options table in a future version
+ * 
+ * since OpenCAD Version 0.2.6
+ **/
+define('EMS_CALL_SELFASSIGN', true);
+
+
+/**#@+
+	 * OpenCAD Feature Settings - Roadside Assistance / Tow
 	 *
 	 * This section controls settings for OpenCAD's core features for Roadside Assistance
 	 * These setting will likely be moved to an *_options table in a future version.
 	 *
-	 * @since OpenCAD 0.2.4
+	 * @since OpenCAD version 0.2.3
 	 **/
 
 /**#@+
  * ROADSIDE_PANIC
  *
- * Shows/Hides Panic functionality on MDT console for Roadside Assistance
- * If 'true' then RAO will be able to use the Panic button,
- * else if 'false' then RAO will not be able to use the Panic button.
+ * Shows or hides the Panic functionality on MDT console for Roadside Assistance
+ * If 'true' then Roadside Assistance Operator will be able to use the Panic button,
+ * else if 'false' then the roadside assistance operator will not be able to use the Panic button.
  * These settings will likely be moved to an *_options table in a future version.
  *
- * @sicne OpenCAD 0.2.4
+ * @since OpenCAD version 0.2.3
  **/
 define('ROADSIDE_PANIC', false);
 
 /**#@+
  * ROADSIDE_BOLO
  *
- * Shows/Hides BOLO functionality on MDT console for Roadside Assistance
- * If 'true' then RAO will be able to use the Panic button,
- * else if 'false' then RAO will not be able to use the Panic button.
+ * Shows or hides the BOLO functionality on MDT console for Roadside Assistance
+ * If 'true' then a Roadside Assitance Operator will be able to use the BOLO function,
+ * if 'false' then the Roadside Assistance Operator will not be able to use the BOLO function.
  * These settings will likely be moved to an *_options table in a future version.
  *
- * @sicne OpenCAD 0.2.4
+ * @since OpenCAD version 0.2.3
  **/
 define('ROADSIDE_BOLO', false);
 
 /**#@+
  * ROADSIDE_NCIC_NAME
  *
- * Shows/Hides NCIC functionality on MDT console for Roadside Assistance
- * If 'true' then RAO will be able to use NCIC plate query without the need for
- * a dispatcher, else if 'false' then RAO will require the presence of
- * dispatcher to use NCIC plate query funcationality.
+ * Shows or hides NCIC Name functionality on MDT console for Roadside Assistance
+ * If 'true' then the Roadside Assistance Operator will be able to use NCIC name query without the need for
+ * a dispatcher, if 'false' then the Roadside Assistance Operator will require the presence of
+ * dispatcher to use NCIC name query functions.
  * These settings will likely be moved to an *_options table in a future version.
  *
- * @sicne OpenCAD 0.2.4
+ * @since OpenCAD version 0.2.3
  **/
 define('ROADSIDE_NCIC_NAME', false);
 
 /**#@+
  * ROADSIDE_NCIC_PLATE
  *
- * Shows/Hides NCIC functionality on MDT console for Roadside Assistance
- * If 'true' then RAO will be able to use NCIC plate query without the need for
- * a dispatcher, else if 'false' then RAO will require the presence of
+ * Shows or hides NCIC Plate functionality on MDT console for Roadside Assistance
+ * If 'true' then Roadside Assistance Operators will be able to use NCIC plate query without the need for
+ * a dispatcher, else if 'false' then the Roadside Assistance Operators will require the presence of
  * dispatcher to use NCIC plate query funcationality.
  * These settings will likely be moved to an *_options table in a future version.
  *
- * @sicne OpenCAD 0.2.4
+ * @since OpenCAD version 0.2.3
  **/
 define('ROADSIDE_NCIC_PLATE', false);
+
+/**#@+
+ * ROADSIDE_CALL_SELFASSIGN
+ * 
+ * Enables or disables the Self Assign functionality on the MDT console for Roadside Assistance.
+ * If 'true', then it enables the self assign function , if 'false', then the self assign function will be disabled.
+ * These settings will likely be moved to a *_options table in a future version
+ * 
+ * since OpenCAD Version 0.2.6
+ **/
+define('ROADSIDE_CALL_SELFASSIGN', true);
 
 /**#@+
  * OpenCAD Feature Settings - Civilian
@@ -314,12 +369,12 @@ define('ROADSIDE_NCIC_PLATE', false);
 /**#@+
  * CIV_WARRANT
  *
- * Allow/Disallow Civiliians from managing their warrants. If set to 'true'
+ * Allow/Disallow Civilians from managing their warrants. If set to 'true'
  * then Civs will be able to delete warrants from their profile, else if set
  * to 'false' then Civs will not have the ability to remove warrants.
  * These settings will likely be moved to an *_options table in a future version.
  *
- * @since  OpenCAD 1803
+ * @since OpenCAD 1803
  **/
 define('CIV_WARRANT', false);
 
@@ -335,17 +390,138 @@ define('CIV_WARRANT', false);
  * Administrator approval.
  * These settings will likely be moved to an *_options table in a future version.
  *
- * @since  OpenCAD 1803
+ * @since OpenCAD 1803
  **/
 define('CIV_REG', false);
+
+/**#@+
+  * Administrative Settings
+	*
+  * These setting will likely be moved to an *_options table in a future version.
+  *
+  * @since  OpenCAD 0.2.3
+  **/
+
+/**#@+
+  * Moderator Settings - Approve User
+  *
+  * If 'true' then Moderators will be able to approve new user requests
+  * else, if 'false' then Moderators will not be able to approve new
+  * user requests.
+  *
+  * These setting will likely be moved to an *_options table in a future version.
+  *
+  * @since OpenCAD version 0.2.3
+  **/
+define('MODERATOR_APPROVE_USER', true);
+
+/**#@+
+  * Moderator Settings - Edit User
+  *
+  * If 'true' then Moderators will be able to edit users,
+  * if 'false' then Moderators will not be able to edit users.
+  *
+  * These setting will likely be moved to an *_options table in a future version.
+  *
+  * @since OpenCAD version 0.2.3
+  **/
+define('MODERATOR_EDIT_USER', true);
+
+/**#@+
+  * Moderator Settings - Suspend With Reason
+  *
+  * If 'true' then Moderators will be able Suspend users with a reason,
+  *if 'false' Moderators will not be able to do so.
+  *
+  * These setting will likely be moved to an *_options table in a future version.
+  *
+  * @since OpenCAD version 0.2.3
+  **/
+define('MODERATOR_SUSPEND_WITH_REASON', true);
+
+/**#@+
+  * Moderator Settings - Approve User
+  *
+  * If 'true' then Moderators will be able Suspend users without a reason,
+  * if 'false' Moderators will not be able to do so.
+  *
+  * These setting will likely be moved to an *_options table in a future version.
+  *
+  * @since OpenCAD version 0.2.3
+  **/
+define('MODERATOR_SUSPEND_WITHOUT_REASON', true);
+
+/**#@+
+  * Moderator Settings - Reactivate User
+  *
+  * If 'true' then Moderators will be able to ractvate users else,
+  * if 'false' Moderators will not be able to reactivate users.
+  *
+  * These setting will likely be moved to an *_options table in a future version.
+  *
+  * @since OpenCAD version 0.2.3
+  **/
+define('MODERATOR_REACTIVATE_USER', true);
+
+/**#@+
+  * Moderator Settings - Remove Group
+  *
+  * If 'true' then Moderators will be able to ractvate users else,
+  * if 'false' Moderators will not be able to reactivate users.
+  *
+  * These setting will likely be moved to an *_options table in a future version.
+  *
+  * @since OpenCAD version 0.2.3
+  **/
+define('MODERATOR_REMOVE_GROUP', true);
+
+/**#@+
+  * Moderator Settings - Delete User
+  *
+  * If 'true' then Moderators will be able to delete users,
+  * if 'false' Moderators will not be able to delete users.
+  *
+  * These setting will likely be moved to an *_options table in a future version.
+  *
+  * @since OpenCAD version 0.2.3
+  **/
+define('MODERATOR_DELETE_USER', true);
+
+/**#@+
+  * Moderator Settings - NCIC Editor
+  *
+  * If 'true' then Moderators will be able to access the NCIC editor,
+  * if 'false' Moderators will not be able to access the NCCIC editor.
+  *
+  * These setting will likely be moved to an *_options table in a future version.
+  *
+  * @since OpenCAD version 0.2.3
+  **/
+define('MODERATOR_NCIC_EDITOR', true);
 
 /**#@+
   * Extra Settings
 	*
   * These setting will likely be moved to an *_options table in a future version.
   *
-  * @since  1.0a RC2
+  * @since OpenCAD version 0.2.3
   **/
+
+/**#@+
+  * Demo Mode
+  *
+  * If 'true' then various user management features of OpenCAD will be
+  * locked down, else if 'false' then OpenCAD's full functionality
+  * will be available to use.
+  *
+  * it will use the default generic avatar image included with OpenCAD .
+  *
+  * These setting will likely be moved to an *_options table in a future version.
+  *
+  * @since OpenCAD version 0.2.3
+  **/
+define('DEMO_MODE', false);
+
 
 /**#@+
   * Gravatar Fetch
@@ -357,12 +533,36 @@ define('CIV_REG', false);
 	*
   * @since 1.0a RC1
   **/
+
 define('USE_GRAVATAR', true);
+
+
+
+/**#@+
+  * API Security
+  *
+  * The API-Key is used to authenticate requests from logedout users,
+  * it is also used in creating cookie 'aljksdz7' which stors the API-Key
+  * and the session id of the loged in user.
+  *
+  * This setting should always be enabled.
+  * 
+  * @since 0.2.6
+	* (Imported from ATVG-CAD 1.3.0.0)
+  **/
+  define('ENABLE_API_SECURITY', true);
 
 /** That's all, stop editing! Happy roleplaying. **/
 /**    Absolute path to the OpenCAD directory.   **/
 if ( !defined('ABSPATH') )
 	define('ABSPATH', dirname(__FILE__) . '/');
 
-include ABSPATH . "oc-functions.php";
+if(isset($_NOLOAD)){
+  if($_NOLOAD['oc-functions'] == 'true'){}
+  else{
+    include ABSPATH . "oc-functions.php";
+  }
+}
+else
+  include ABSPATH . "oc-functions.php";
 ?>

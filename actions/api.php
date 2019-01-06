@@ -15,6 +15,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 */
 
 require_once(__DIR__ . "/../oc-config.php");
+include_once(__DIR__ . "/../plugins/api_auth.php");
 
 if (isset($_GET['a'])){
     getActiveCalls();
@@ -69,11 +70,34 @@ if (isset($_POST['quickStatus']))
 {
     quickStatus();
 }
+if (isset($_GET['getAOP']))
+{
+    getAOP();
+}
+if (isset($_GET['newApiKey']))
+{
+    $myRank = $_SESSION['admin_privilege'];
+
+    if($myRank == 2){
+        getApiKey(true);
+        session_start();
+        session_unset();
+        session_destroy();
+        if(ENABLE_API_SECURITY === true)
+            setcookie('aljksdz7', null, -1, "/");
+
+        header("Location: ".BASE_URL."/index.php?loggedOut=true");
+        exit();
+    }else{
+        header("Location: ".BASE_URL."/plugins/error/static/418.php");
+        die();
+    }
+}
 
 function quickStatus()
 {
-    $event = $_POST['event'];
-    $callId = $_POST['callId'];
+    $event = htmlspecialchars($_POST['event']);
+    $callId = htmlspecialchars($_POST['callId']);
     session_start();
     $callsign = $_SESSION['callsign'];
 
@@ -272,8 +296,8 @@ function checkTones()
 
 function setTone()
 {
-    $tone = $_POST['tone'];
-    $action = $_POST['action'];
+    $tone = htmlspecialchars($_POST['tone']);
+    $action = htmlspecialchars($_POST['action']);
 
     $status;
     switch ($action)
@@ -323,7 +347,7 @@ function setTone()
 
 function logoutUser()
 {
-    $identifier = $_POST['unit'];
+    $identifier = htmlspecialchars($_POST['unit']);
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -357,8 +381,8 @@ function changeStatus()
 
     //var_dump($_POST);
 
-    $unit = $_POST['unit'];
-    $status = $_POST['status'];
+    $unit = htmlspecialchars($_POST['unit']);
+    $status = htmlspecialchars($_POST['status']);
     $statusId;
     $statusDet;
     $onCall = false;
@@ -575,6 +599,36 @@ function setDispatcher($dep)
         die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
     }
 
+}
+
+function getAOP()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    if (!$link) {
+        die('Could not connect: ' .mysql_error());
+    }
+
+    $sql = "SELECT * from aop";
+
+    $result = mysqli_query($link, $sql);
+
+    $num_rows = $result->num_rows;
+
+    if($num_rows == 0)
+    {
+        echo "NO AOP SET";
+    }
+    else
+    {
+
+        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        {
+            echo 'AOP: '.$row[0].' ';
+        }
+
+    mysqli_close($link);
+}
 }
 
 function getDispatchers()

@@ -13,6 +13,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
 include_once(__DIR__ . "/../oc-config.php");
+include_once(__DIR__ . "/../plugins/api_auth.php");
 
 /* Handle POST requests */
 if (isset($_POST['delete_name'])){
@@ -58,7 +59,7 @@ if (isset($_POST['create_warrant'])){
 function getCivilianNamesOwn()
 {
     $uid = $_SESSION['id'];
-	
+
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
 	if (!$link) {
@@ -160,7 +161,7 @@ function ncicGetPlates()
     if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
-    
+
 
     $query = 'SELECT ncic_plates.*, ncic_names.name FROM ncic_plates INNER JOIN ncic_names ON ncic_names.id=ncic_plates.name_id WHERE ncic_plates.user_id = "' . $uid . '"';
 
@@ -233,7 +234,7 @@ function delete_name()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $uid = $_POST['uid'];
+    $uid = htmlspecialchars($_POST['uid']);
 
     $query = "DELETE FROM ncic_names WHERE id = ?";
 
@@ -264,7 +265,7 @@ function delete_plate()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $vehid = $_POST['vehid'];
+    $vehid = htmlspecialchars($_POST['vehid']);
 
     $query = "DELETE FROM ncic_plates WHERE id = ?";
 
@@ -291,10 +292,10 @@ function create_name()
 {
     session_start();
 
-    $fullName = $_POST['civNameReq'];
+    $fullName = htmlspecialchars($_POST['civNameReq']);
     $firstName = explode(" ", $fullName) [0];
     $lastName = explode(" ", $fullName) [1];
-    
+
     //Set first name to all lowercase
     $firstName = strtolower($firstName);
     //Remove all special characters
@@ -308,7 +309,7 @@ function create_name()
     $lastName = preg_replace('/[^A-Za-z0-9\-]/', '', $lastName);
     //Set first letter to uppercase
     $lastName = ucfirst($lastName);
-	
+
 	$name = $firstName . ' ' . $lastName;
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -338,15 +339,15 @@ function create_name()
     $submitttedById = $_SESSION['id'];
     //Submission Data
     $name;
-    $dob = $_POST['civDobReq'];
-    $address = $_POST['civAddressReq'];
-    $sex = $_POST['civSexReq'];
-    $race = $_POST['civRaceReq'];
-	$dlstatus = $_POST['civDL'];
-    $hair = $_POST['civHairReq'];
-    $build = $_POST['civBuildReq'];
-	$weapon = $_POST['civWepStat'];
-	$deceased = $_POST['civDec'];
+    $dob = htmlspecialchars($_POST['civDobReq']);
+    $address = htmlspecialchars($_POST['civAddressReq']);
+    $sex = htmlspecialchars($_POST['civSexReq']);
+    $race = htmlspecialchars($_POST['civRaceReq']);
+	$dlstatus = htmlspecialchars($_POST['civDL']);
+    $hair = htmlspecialchars($_POST['civHairReq']);
+    $build = htmlspecialchars($_POST['civBuildReq']);
+	$weapon = htmlspecialchars($_POST['civWepStat']);
+	$deceased = htmlspecialchars($_POST['civDec']);
 
     $query = "INSERT INTO ncic_names (submittedByName, submittedById, name, dob, address, gender, race, dl_status, hair_color, build, weapon_permit, deceased)
     VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -368,7 +369,7 @@ function create_name()
 
     }
 
-    $_SESSION['identityMessage'] = '<div class="alert alert-success"><span>Successfully create an identity</span></div>';
+    $_SESSION['identityMessage'] = '<div class="alert alert-success"><span>Successfully created your identity!</span></div>';
 
     sleep(1);
     header("Location:".BASE_URL."/civilian.php#name_panel");
@@ -378,9 +379,9 @@ function create_name()
 function create_plate()
 {
 	session_start();
-	
-	$plate = $_POST['veh_plate'];
-	
+
+	$plate = htmlspecialchars($_POST['veh_plate']);
+
     //Remove all spaces from plate
     $plate = str_replace(' ', '', $plate);
     //Set plate to all uppercase
@@ -389,24 +390,24 @@ function create_plate()
     $plate = str_replace('-', '', $plate);
     //Remove all special characters
     $plate = preg_replace('/[^A-Za-z0-9\-]/', '', $plate);
-	
-    $vehicle = $_POST['veh_make_model'];
+
+    $vehicle = htmlspecialchars($_POST['veh_make_model']);
     $veh_make = explode(" ", $vehicle) [0];
     $veh_model = explode(" ", $vehicle) [1];
-	
+
     $uid = $_SESSION['id'];
 
     $submittedById = $_SESSION['id'];
-    $userId = $_POST['civilian_names'];
+    $userId = htmlspecialchars($_POST['civilian_names']);
     $veh_plate = $plate;
     $veh_make;
     $veh_model;
-    $veh_pcolor = $_POST['veh_pcolor'];
-    $veh_scolor = $_POST['veh_scolor'];
-    $veh_insurance = $_POST['veh_insurance'];
-    $flags = $_POST['flags'];
-    $veh_reg_state = $_POST['veh_reg_state'];
-    $notes = $_POST['notes'];
+    $veh_pcolor = htmlspecialchars($_POST['veh_pcolor']);
+    $veh_scolor = htmlspecialchars($_POST['veh_scolor']);
+    $veh_insurance = htmlspecialchars($_POST['veh_insurance']);
+    $flags = htmlspecialchars($_POST['flags']);
+    $veh_reg_state = htmlspecialchars($_POST['veh_reg_state']);
+    $notes = htmlspecialchars($_POST['notes']);
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -445,7 +446,7 @@ function create911Call()
 	if (!$link) {
 		die('Could not connect: ' .mysql_error());
 	}
-	
+
 	$sql = "SELECT MAX(call_id) AS max FROM call_list";
 	$result=mysqli_query($link, $sql);
 
@@ -453,9 +454,9 @@ function create911Call()
 	{
 		$callid = $r['max'];
 	}
-	
+
 	$callid++;
-	
+
     $sql = "REPLACE INTO call_list (call_id) VALUES (?)";
 
 	try {
@@ -472,9 +473,9 @@ function create911Call()
 		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
 	}
 
-    $caller = $_POST['911_caller'];
-    $location = $_POST['911_location'];
-    $description = $_POST['911_description'];
+    $caller = htmlspecialchars($_POST['911_caller']);
+    $location = htmlspecialchars($_POST['911_location']);
+    $description = htmlspecialchars($_POST['911_description']);
 
     $created = date("Y-m-d H:i:s").': 911 Call Received<br/><br/>Caller Name: '.$caller;
 
@@ -513,10 +514,10 @@ function edit_name()
 {
     session_start();
 
-    $fullName = $_POST['civNameReq'];
+    $fullName = htmlspecialchars($_POST['civNameReq']);
     $firstName = explode(" ", $fullName) [0];
     $lastName = explode(" ", $fullName) [1];
-    
+
     //Set first name to all lowercase
     $firstName = strtolower($firstName);
     //Remove all special characters
@@ -530,7 +531,7 @@ function edit_name()
     $lastName = preg_replace('/[^A-Za-z0-9\-]/', '', $lastName);
     //Set first letter to uppercase
     $lastName = ucfirst($lastName);
-	
+
 	$name = $firstName . ' ' . $lastName;
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -560,16 +561,16 @@ function edit_name()
     $submitttedById = $_SESSION['id'];
     //Submission Data
     $name;
-    $dob = $_POST['civDobReq'];
-    $address = $_POST['civAddressReq'];
-    $sex = $_POST['civSexReq'];
-    $race = $_POST['civRaceReq'];
-    $dlstatus = $_POST['civDL'];
-    $hair = $_POST['civHairReq'];
-    $build = $_POST['civBuildReq'];
-	$weapon = $_POST['civWepStat'];
-	$deceased = $_POST['civDec'];
-    $editid = $_POST['Edit_id'];
+    $dob = htmlspecialchars($_POST['civDobReq']);
+    $address = htmlspecialchars($_POST['civAddressReq']);
+    $sex = htmlspecialchars($_POST['civSexReq']);
+    $race = htmlspecialchars($_POST['civRaceReq']);
+    $dlstatus = htmlspecialchars($_POST['civDL']);
+    $hair = htmlspecialchars($_POST['civHairReq']);
+    $build = htmlspecialchars($_POST['civBuildReq']);
+	$weapon = htmlspecialchars($_POST['civWepStat']);
+	$deceased = htmlspecialchars($_POST['civDec']);
+    $editid = htmlspecialchars($_POST['Edit_id']);
 
     $query = "UPDATE ncic_names SET name = ?, dob = ?, address = ?, gender = ?, race = ?, dl_status = ?, hair_color = ?, build = ?, weapon_permit = ?, deceased = ? WHERE id = ?";
     try
@@ -589,7 +590,7 @@ function edit_name()
 
     }
 
-    $_SESSION['identityMessage'] = '<div class="alert alert-success"><span>Successfully Update an identity</span></div>';
+    $_SESSION['identityMessage'] = '<div class="alert alert-success"><span>Successfully updated the identity.</span></div>';
 
     sleep(1);
     header("Location:".BASE_URL."/civilian.php#name_panel");
@@ -598,9 +599,9 @@ function edit_name()
 function edit_plate()
 {
     session_start();
-    
-    $plate = $_POST['veh_plate'];
-    
+
+    $plate = htmlspecialchars($_POST['veh_plate']);
+
     //Remove all spaces from plate
     $plate = str_replace(' ', '', $plate);
     //Set plate to all uppercase
@@ -609,25 +610,25 @@ function edit_plate()
     $plate = str_replace('-', '', $plate);
     //Remove all special characters
     $plate = preg_replace('/[^A-Za-z0-9\-]/', '', $plate);
-    
-    $vehicle = $_POST['veh_make_model'];
+
+    $vehicle = htmlspecialchars($_POST['veh_make_model']);
     $veh_make = explode(" ", $vehicle) [0];
     $veh_model = explode(" ", $vehicle) [1];
-    
+
     $uid = $_SESSION['id'];
 
     $submittedById = $_SESSION['id'];
-    $userId = $_POST['civilian_names'];
+    $userId = htmlspecialchars($_POST['civilian_names']);
     $veh_plate = $plate;
     $veh_make;
     $veh_model;
-    $veh_pcolor = $_POST['veh_pcolor'];
-    $veh_scolor = $_POST['veh_scolor'];
-    $veh_insurance = $_POST['veh_insurance'];
-    $flags = $_POST['flags'];
-    $veh_reg_state = $_POST['veh_reg_state'];
-    $notes = $_POST['notes'];
-    $plate_id = $_POST['Edit_plateId'];
+    $veh_pcolor = htmlspecialchars($_POST['veh_pcolor']);
+    $veh_scolor = htmlspecialchars($_POST['veh_scolor']);
+    $veh_insurance = htmlspecialchars($_POST['veh_insurance']);
+    $flags = htmlspecialchars($_POST['flags']);
+    $veh_reg_state = htmlspecialchars($_POST['veh_reg_state']);
+    $notes = htmlspecialchars($_POST['notes']);
+    $plate_id = htmlspecialchars($_POST['Edit_plateId']);
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -635,7 +636,7 @@ function edit_plate()
         die('Could not connect: ' .mysql_error());
     }
 
-    
+
     $sql = "UPDATE ncic_plates SET name_id = ?, veh_plate = ?, veh_make = ?, veh_model = ?, veh_pcolor = ?, veh_scolor = ?, veh_insurance = ?, flags = ?, veh_reg_state = ?, notes = ? WHERE id = ?";
 
     try {
@@ -692,11 +693,11 @@ function editplateid()
 }
 function create_warrant()
 {
-    $userId = $_POST['civilian_names'];
-    $warrant_name = $_POST['warrant_name_sel'];
-    $issuing_agency = $_POST['issuing_agency'];
+    $userId = htmlspecialchars($_POST['civilian_names']);
+    $warrant_name = htmlspecialchars($_POST['warrant_name_sel']);
+    $issuing_agency = htmlspecialchars($_POST['issuing_agency']);
 
-    $warrant_name = $_POST['warrant_name_sel'];
+    $warrant_name = htmlspecialchars($_POST['warrant_name_sel']);
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -734,19 +735,20 @@ function create_warrant()
 function ncic_warrants()
 {
     $uid = $_SESSION['id'];
-	
+
    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
     if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
 	$sql = 'SELECT ncic_names.id from ncic_names where submittedById = "' . $uid . '"';
-	
-	$results=mysqli_query($link, $sql);
+
+    $results=mysqli_query($link, $sql);
+    $nameid = "";
 	while($row = mysqli_fetch_array($results, MYSQLI_BOTH))
-        {
-            $nameid = ''.$row[0].'';
-		}
+    {
+        $nameid = ''.$row[0].'';
+    }
 
     $query = 'SELECT ncic_warrants.*, ncic_names.name FROM ncic_warrants INNER JOIN ncic_names ON ncic_names.id=ncic_warrants.name_id WHERE name_id = "' . $nameid . '"';
 
@@ -823,7 +825,7 @@ function delete_warrant()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $wid = $_POST['wid'];
+    $wid = htmlspecialchars($_POST['wid']);
 
     $query = "DELETE FROM ncic_warrants WHERE id = ?";
 
@@ -849,15 +851,15 @@ function delete_warrant()
 function create_weapon()
 {
 	session_start();
-	
-    $weapon = $_POST['weapon_all'];
+
+    $weapon = htmlspecialchars($_POST['weapon_all']);
     $wea_type = explode(" ", $weapon) [0];
     $wea_name = explode(" ", $weapon) [1];
-	
+
     $uid = $_SESSION['id'];
 
     $submittedById = $_SESSION['id'];
-    $userId = $_POST['civilian_names'];
+    $userId = htmlspecialchars($_POST['civilian_names']);
     $wea_type;
     $wea_name;
 
@@ -956,7 +958,7 @@ function delete_weapon()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $weaid = $_POST['weaid'];
+    $weaid = htmlspecialchars($_POST['weaid']);
 
     $query = "DELETE FROM ncic_weapons WHERE id = ?";
 

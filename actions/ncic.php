@@ -14,6 +14,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 
 require_once(__DIR__ . "/../oc-config.php");
+include_once(__DIR__ . "/../plugins/api_auth.php");
 
 /*
     Returns information on name run through NCIC.
@@ -30,7 +31,7 @@ if (isset($_POST['ncic_weapon'])){
 }
 function name()
 {
-    $name = $_POST['ncic_name'];
+    $name = htmlspecialchars($_POST['ncic_name']);
 
 
     if(strpos($name, ' ') !== false) {
@@ -203,7 +204,7 @@ function name()
 
 function plate()
 {
-    $plate = $_POST['ncic_plate'];
+    $plate = htmlspecialchars($_POST['ncic_plate']);
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -254,7 +255,7 @@ function firearm()
 
 function weapon()
 {
-    $name = $_POST['ncic_weapon'];
+    $name = htmlspecialchars($_POST['ncic_weapon']);
 
 
     if(strpos($name, ' ') !== false) {

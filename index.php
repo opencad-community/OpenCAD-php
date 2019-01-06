@@ -16,9 +16,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     $testing = false; //If set to true, will default some data for you
 
-
-
     session_start();
+    $_SESSION['root_path'] = getcwd();
     $registerError = "";
     $registerSuccess = "";
     $loginMessage = "";
@@ -64,7 +63,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                <?php echo $loginMessage;?>
                <section class="login_content">
                   <form role="form" action="<?php echo BASE_URL; ?>/actions/login.php" method="post">
-                     <h1>Login Form</h1>
+                     <h1>Login</h1>
                      <div>
                         <input class="form-control" placeholder="Email" name="email" type="text" value="<?php if($testing){echo "test@test.test";}?>" required>
                      </div>
@@ -87,7 +86,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="clearfix"></div>
                 <br />
                 <div>
-                   <h1><i class="fa fa-tachometer"></i> <?php echo COMMUNITY_NAME?> CAD System</h1>
+                   <h1><i class="fas fa-users"></i> <?php echo COMMUNITY_NAME?> CAD System</h1>
                    <h2> OpenCAD Version <?php getOpenCADVersion();?> </h2>
                 </div>
              </div>
@@ -102,7 +101,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <div class="clearfix"></div>
                         <br />
                         <div>
-                           <h1><i class="fa fa-tachometer"></i> <?php echo COMMUNITY_NAME?> CAD System</h1>
+                           <h1><i class="fas fa-users"></i> <?php echo COMMUNITY_NAME?> CAD System</h1>
+                           <h2> OpenCAD Version <?php getOpenCADVersion();?> </h2>
                         </div>
                      </div>
 					 <?php } ?>
@@ -115,13 +115,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <form action="<?php echo BASE_URL; ?>/actions/register.php" method="post">
                      <h1>Request Access</h1>
                      <div>
-                        <input class="form-control" placeholder="Name" name="uname" type="text" value="<?php if($testing){echo "Test";}?>" required>
+                        <input class="form-control" placeholder="Name" name="uname" type="text" required>
                      </div>
                      <div>
-                        <input class="form-control" placeholder="Email" name="email" type="email" value="<?php if($testing){echo "test@test.test";}?>" required>
+                        <input class="form-control" placeholder="Email" name="email" type="email" required>
                      </div>
                      <div>
-                        <input class="form-control" placeholder="Identifier (Code Number, Unit ID)" name="identifier" type="text" value="<?php if($testing){echo "1A-1";}?>" required>
+                        <input class="form-control" placeholder="Identifier (Code Number, Unit ID)" name="identifier" type="text" required>
                      </div>
                      <div class="form-group">
                         <label>Division (Can choose more than one via Ctrl + Click)</label>
@@ -130,9 +130,11 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <option value="communications">Communications (Dispatch)</option>
                            <option value="ems">EMS</option>
                            <option value="fire">Fire</option>
-                           <option value="highway" <?php if($testing){echo "selected=\"selected\"";}?>>Highway Patrol</option>
+                           <option value="highway">Highway Patrol</option>
                            <option value="police">Police</option>
                            <option value="sheriff">Sheriff</option>
+                           <option value="state">State</option>
+                           <option value="roadsideAssist">Roadside Assistance</option>
                         </select>
                      </div>
                      <div class="form-group">
@@ -140,7 +142,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      </div>
                      <!-- ./ form-group -->
                      <div class="form-group">
-                        <input class="form-control" placeholder="Confirm Password" name="password1" type="password" value="<?php if($testing){echo "password";}?>" required>
+                        <input class="form-control" placeholder="Confirm Password" name="password1" type="password" required>
                      </div>
                      <!-- ./ form-group -->
                      <div class="clearfix"></div>
@@ -155,7 +157,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <div class="clearfix"></div>
                         <br />
                         <div>
-                           <h1><i class="fa fa-tachometer"></i> <?php echo COMMUNITY_NAME ?> CAD System</h1>
+                           <h1><i class="fas fa-users"></i> <?php echo COMMUNITY_NAME ?> CAD System</h1>
+                           <h2> OpenCAD Version <?php getOpenCADVersion();?> </h2>
                         </div>
                      </div>
                   </form>
@@ -196,7 +199,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <div class="clearfix"></div>
                         <br />
                         <div>
-                           <h1><i class="fa fa-tachometer"></i> <?php echo COMMUNITY_NAME ?> CAD System</h1>
+                           <h1><i class="fas fa-users"></i> <?php echo COMMUNITY_NAME ?> CAD System</h1>
+                           <h2> OpenCAD Version <?php getOpenCADVersion();?> </h2>
                         </div>
                      </div>
                   </form>
@@ -214,7 +218,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                           </p>
                           <div class="clearfix"></div>
                           <div>
-                             <h1><i class="fa fa-tachometer"></i> <?php echo COMMUNITY_NAME ?> CAD System</h1>
+                             <h1><i class="fas fa-users"></i> <?php echo COMMUNITY_NAME ?> CAD System</h1>
+                             <h2> OpenCAD Version <?php getOpenCADVersion();?> </h2>
                           </div>
                        </div>
               </div>
