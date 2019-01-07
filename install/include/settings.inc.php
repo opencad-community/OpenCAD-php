@@ -19,6 +19,8 @@
     //     $arr_active_languages = array()
     $arr_active_languages = array(
         'en'=>array('name'=>'English', 'direction'=>'ltr'),
+        'de'=>array('name'=>'Deutch', 'direction'=>'ltr'),
+        'es'=>array('name'=>'Spanish', 'direction'=>'ltr'),
     );
     
     // *** default template
@@ -31,10 +33,10 @@
     // *** check for PHP minimum version number (true, false) -
     //     checks if a minimum required version of PHP runs on a server
     define('EI_CHECK_PHP_MINIMUM_VERSION', true);
-    define('EI_PHP_MINIMUM_VERSION', '7.0.0');
+    define('EI_PHP_MINIMUM_VERSION', '7.2');
     
     // *** check or not config directory for writability
-    define('EI_CHECK_CONFIG_DIR_WRITABILITY', false);
+    define('EI_CHECK_CONFIG_DIR_WRITABILITY', true);
 
     // *** allows collecting info for magic quotes
     define('EI_CHECK_MAGIC_QUOTES', false);
@@ -60,7 +62,7 @@
     // 3. DATABASE SETTINGS
     // -------------------------------------------------------------------------
     // *** force database creation
-    define('EI_DATABASE_CREATE', false);
+    define('EI_DATABASE_CREATE', true);
 
     // *** define database type
     // *** to check installed drivers use: print_r(PDO::getAvailableDrivers());
@@ -79,17 +81,17 @@
 
     // *** check for database engine minimum version number (true, false) -
     //     checks if a minimum required version of database engine runs on a server
-    define('EI_CHECK_DB_MINIMUM_VERSION', false);
-    define('EI_DB_MINIMUM_VERSION', '4.0.0');    
+    define('EI_CHECK_DB_MINIMUM_VERSION', true);
+    define('EI_DB_MINIMUM_VERSION', '5.5');    
         
     // *** admin username and password (true, false) - get admin username and password
-    define('EI_USE_ADMIN_ACCOUNT', true);        
+    define('EI_USE_ADMIN_ACCOUNT', false);        
     // *** encrypt or not admin password true|false
     define('EI_USE_PASSWORD_ENCRYPTION', true);        
     // *** type of encryption - AES|MD5
     define('EI_PASSWORD_ENCRYPTION_TYPE', 'MD5');        
     // *** password encryption key for AES encryption
-    define('EI_PASSWORD_ENCRYPTION_KEY', 'php_easy_installer');
+    define('EI_PASSWORD_ENCRYPTION_KEY', 'wLpFVfC1an5bdSRI1Cj3JgyP7CZKPeOFmouOf2ocqig6NVfNfpNLDOvVk6QhBAr');
     
     
     // -------------------------------------------------------------------------
@@ -106,10 +108,10 @@
     // *** specifies whether to allow new installation
     define('EI_ALLOW_NEW_INSTALLATION', true);        
     // *** specifies whether to allow update
-    define('EI_ALLOW_UPDATE', true);        
+    define('EI_ALLOW_UPDATE', false);        
     // *** specifies whether to allow un-installation
     define('EI_ALLOW_UN_INSTALLATION', false); 
-    define('DB_PREFIX', '');
+    define('DB_PREFIX', 'oc_');
 
     // *** allows start all over button
     define('EI_ALLOW_START_ALL_OVER', true);
@@ -139,7 +141,7 @@
     // 5. CONFIG TEMPLATE PARAMETERS
     // -------------------------------------------------------------------------
     // *** config file name - config template file name
-    define('EI_CONFIG_FILE_TEMPLATE', 'config.tpl');
+    define('EI_CONFIG_FILE_TEMPLATE', '../oc-config.sample.php');
    
     
     // -------------------------------------------------------------------------
@@ -148,13 +150,13 @@
     // *** application name
     define('EI_APPLICATION_NAME', 'OpenCAD');
     // *** version number of your application 
-    define('EI_APPLICATION_VERSION', 'v0.2.3');
+    define('EI_APPLICATION_VERSION', 'v0.2.6');
     
     // *** default start file name - application start file
     define('EI_APPLICATION_START_FILE', 'index.php');
     
     // *** license agreement page
-    define('EI_LICENSE_AGREEMENT_PAGE', 'install/license/license.txt');    
+    define('EI_LICENSE_AGREEMENT_PAGE', '../license.txt');    
    
     // *** additional text after successful installation
     define('EI_POST_INSTALLATION_TEXT', '');

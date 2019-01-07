@@ -68,7 +68,7 @@
 		$error_mg[] = str_replace('_FILE_DIRECTORY_', $EI_CONFIG_FILE_DIRECTORY, lang_key('alert_directory_not_writable'));
 	}
 	
-	$php_core_index = ((version_compare(phpversion(), '5.3.0', '<'))) ? 'PHP Core' : 'Core';
+	$php_core_index = ((version_compare(phpversion(), '7.2', '<'))) ? 'PHP Core' : 'Core';
 	// [0] requred
 	// [1] title
 	// [2] condition
@@ -87,11 +87,11 @@
 		'divider_php_settings' => array('title'=>lang_key('required_php_settings')),
 		'pdo_support'  => array(false, lang_key('pdo_support'), (isset($phpinfo['PDO']['PDO support']) && $phpinfo['PDO']['PDO support'] == 'enabled'), lang_key('enabled'), lang_key('disabled'), lang_key('error_pdo_support')),
 	);
-	/// $database_system_version = isset($phpinfo['mysql']) ? $phpinfo['mysql']['Client API version'] : "unknown";
+	$database_system_version = isset($phpinfo['mysql']) ? $phpinfo['mysql']['Client API version'] : "unknown";
 
-	//if(EI_CHECK_MBSTRING_SUPPORT){
-	//	$validations['mbstring_support'] = array(false, lang_key('mbstring_support'), function_exists('mb_detect_encoding'), lang_key('enabled'), lang_key('disabled'));
-	//}
+	#if(EI_CHECK_MBSTRING_SUPPORT){
+	#	$validations['mbstring_support'] = array(false, lang_key('mbstring_support'), function_exists('mb_detect_encoding'), lang_key('enabled'), lang_key('disabled'));
+	#}
 	
 	//if(EI_CHECK_MAGIC_QUOTES){
 	//	$validations['divider_magic_quotes'] = array('title'=>'', 'description'=>'');
@@ -125,7 +125,7 @@
 	
 	if(EI_CHECK_DIRECTORIES_AND_FILES){
 		$validations['divider_dirs_and_files'] = array('title'=>lang_key('directories_and_files'), 'description'=>'');
-		$validations['config_file_dir'] = array(true, EI_CONFIG_FILE_DIRECTORY, is_writable(EI_CONFIG_FILE_DIRECTORY), lang_key('writable'), lang_key('no_writable'));		
+		$validations['config_file_dir'] = array(false, EI_CONFIG_FILE_DIRECTORY, is_writable(EI_CONFIG_FILE_DIRECTORY), lang_key('writable'), lang_key('no_writable'));		
 		///$validations['cache_file_dir'] = array(false, '../cache/', is_writable('../cache/'), lang_key('writable'), lang_key('no_writable'));
 	}
 

@@ -18,7 +18,7 @@
  *
  * @since 1.0a RC1
  **/
-define('COMMUNITY_NAME', 'My Community');
+define('COMMUNITY_NAME', <COMMUNITY_NAME>);
 
 /**#@+
  *
@@ -32,10 +32,11 @@ define('COMMUNITY_NAME', 'My Community');
  * @since 1.0a RC1
  *
  **/
-define('DB_NAME', 'DatabaseName');
-define('DB_USER', 'DatabaseUser');
-define('DB_PASSWORD', 'DatabasePassword');
-define('DB_HOST', 'localhost');
+define('DB_HOST', <DB_HOST>);
+define('DB_USER', <DB_USER>);
+define('DB_PASSWORD', <DB_PASSWORD>);
+define('DB_NAME', <DB_NAME>);
+define("DB_PREFIX", <DB_PREFIX);
 
 /**#@+
  * Base URL Settings
@@ -55,7 +56,7 @@ define('DB_HOST', 'localhost');
  *
  * @since 1.0a RC1
  **/
-define('BASE_URL', '//example.com');
+define('BASE_URL', <BASE_URL>);
 
 /**#@+
  * To & From emails for system generated emails
@@ -64,7 +65,7 @@ define('BASE_URL', '//example.com');
  * @since 1.0a RC2
  *
  **/
-define('CAD_FROM_EMAIL', 'cad@community.com');
+define('CAD_FROM_EMAIL', <CAD_FROM_EMAIL>);
 define('CAD_FROM_NAME', COMMUNITY_NAME.' CAD');
 define('CAD_TO_EMAIL', 'admins@community.com');
 define('CAD_TO_NAME', COMMUNITY_NAME.' Administrators');
@@ -123,7 +124,7 @@ define('NONCE_SALT',       'put your unique phrase here');
   *
   * @since OpenCAD 1804
   **/
-define('POLICE_NCIC', false);
+define('POLICE_NCIC', <POLICE_NCIC>);
 
 /**#@+
  * POLICE_CALL_SELFASSIGN
@@ -134,7 +135,7 @@ define('POLICE_NCIC', false);
  * 
  * since OpenCAD Version 0.2.6
  **/
-define('POLICE_CALL_SELFASSIGN', true);
+define('POLICE_CALL_SELFASSIGN', <POLICE_CALL_SELFASSIGN>);
 
 
 /**#@+
@@ -158,7 +159,7 @@ define('POLICE_CALL_SELFASSIGN', true);
 	*
 	* @since OpenCAD version 0.2.3
 	**/
-  define('FIRE_PANIC', false);
+  define('FIRE_PANIC', <FIRE_PANIC>);
 
 
  /**#@+
@@ -172,7 +173,7 @@ define('POLICE_CALL_SELFASSIGN', true);
 	*
 	* @since OpenCAD version 0.2.3
 	**/
- define('FIRE_BOLO', false);
+ define('FIRE_BOLO', <FIRE_BOLO>);
 
 /**#@+
   * FIRE_NCIC_NAME
@@ -186,7 +187,7 @@ define('POLICE_CALL_SELFASSIGN', true);
   *
   * @since OpenCAD version 0.2.3
   **/
- define('FIRE_NCIC_NAME', false);
+ define('FIRE_NCIC_NAME', <FIRE_NCIC_PLATE>);
 
 /**#@+
 	* FIRE_NCIC_PLATE
@@ -200,7 +201,7 @@ define('POLICE_CALL_SELFASSIGN', true);
 	*
 	* @since OpenCAD version 0.2.3
 	**/
- define('FIRE_NCIC_PLATE', false);
+ define('FIRE_NCIC_PLATE', <FIRE_NCIC_PLATE>);
 
  /**#@+
  * FIRE_CALL_SELFASSIGN
@@ -211,7 +212,7 @@ define('POLICE_CALL_SELFASSIGN', true);
  * 
  * since OpenCAD Version 0.2.6
  **/
-define('FIRE_CALL_SELFASSIGN', true);
+define('FIRE_CALL_SELFASSIGN', <FIRE_CALL_SELFASSIGN>);
 
 /**#@+
   * OpenCAD Feature Settings - EMS
@@ -233,7 +234,7 @@ define('FIRE_CALL_SELFASSIGN', true);
 	 *
 	 * @since OpenCAD version 0.2.3
 	 **/
-	define('EMS_PANIC', false);
+	define('EMS_PANIC', <EMS_PANIC>);
 
 /**#@+
 	 * EMS_BOLO
@@ -245,7 +246,7 @@ define('FIRE_CALL_SELFASSIGN', true);
 	 *
 	 * @since OpenCAD version 0.2.3
 	 **/
-	define('EMS_BOLO', false);
+	define('EMS_BOLO', <EMS_BOLO>);
 
 
 /**#@+
@@ -260,7 +261,7 @@ define('FIRE_CALL_SELFASSIGN', true);
 	 *
 	 * @since OpenCAD version 0.2.3
 	 **/
-	define('EMS_NCIC_NAME', false);
+	define('EMS_NCIC_NAME', <EMS_NCIC_NAME>);
 
 /**#@+
 	 * EMS_NCIC_PLATE
@@ -272,7 +273,7 @@ define('FIRE_CALL_SELFASSIGN', true);
 	 *
 	 * @since OpenCAD version 0.2.3
 	 **/
-	define('EMS_NCIC_PLATE', false);
+	define('EMS_NCIC_PLATE', <EMS_NCIC_PLATE>);
 
   /**#@+
  * EMS_CALL_SELFASSIGN
@@ -283,7 +284,7 @@ define('FIRE_CALL_SELFASSIGN', true);
  * 
  * since OpenCAD Version 0.2.6
  **/
-define('EMS_CALL_SELFASSIGN', true);
+define('EMS_CALL_SELFASSIGN', <EMS_CALL_SELFASSIGN>);
 
 
 /**#@+
@@ -305,7 +306,7 @@ define('EMS_CALL_SELFASSIGN', true);
  *
  * @since OpenCAD version 0.2.3
  **/
-define('ROADSIDE_PANIC', false);
+define('ROADSIDE_PANIC', <ROADSIDE_PANIC>);
 
 /**#@+
  * ROADSIDE_BOLO
@@ -317,7 +318,7 @@ define('ROADSIDE_PANIC', false);
  *
  * @since OpenCAD version 0.2.3
  **/
-define('ROADSIDE_BOLO', false);
+define('ROADSIDE_BOLO', <ROADSIDE_BOLO>);
 
 /**#@+
  * ROADSIDE_NCIC_NAME
@@ -330,7 +331,7 @@ define('ROADSIDE_BOLO', false);
  *
  * @since OpenCAD version 0.2.3
  **/
-define('ROADSIDE_NCIC_NAME', false);
+define('ROADSIDE_NCIC_NAME', <ROADSIDE_NCIC_NAME>);
 
 /**#@+
  * ROADSIDE_NCIC_PLATE
@@ -343,7 +344,7 @@ define('ROADSIDE_NCIC_NAME', false);
  *
  * @since OpenCAD version 0.2.3
  **/
-define('ROADSIDE_NCIC_PLATE', false);
+define('ROADSIDE_NCIC_PLATE', <ROADSIDE_NCIC_PLATE>);
 
 /**#@+
  * ROADSIDE_CALL_SELFASSIGN
@@ -354,7 +355,7 @@ define('ROADSIDE_NCIC_PLATE', false);
  * 
  * since OpenCAD Version 0.2.6
  **/
-define('ROADSIDE_CALL_SELFASSIGN', true);
+define('ROADSIDE_CALL_SELFASSIGN', <ROADSIDE_CALL_SELFASSIGN>);
 
 /**#@+
  * OpenCAD Feature Settings - Civilian
@@ -376,7 +377,7 @@ define('ROADSIDE_CALL_SELFASSIGN', true);
  *
  * @since OpenCAD 1803
  **/
-define('CIV_WARRANT', false);
+define('CIV_WARRANT', <CIV_WARRANT>);
 
 /**#@+
  * CIV_REG
@@ -392,7 +393,7 @@ define('CIV_WARRANT', false);
  *
  * @since OpenCAD 1803
  **/
-define('CIV_REG', false);
+define('CIV_REG', <CIV_REG>);
 
 /**#@+
   * Administrative Settings
@@ -413,7 +414,7 @@ define('CIV_REG', false);
   *
   * @since OpenCAD version 0.2.3
   **/
-define('MODERATOR_APPROVE_USER', true);
+define('MODERATOR_APPROVE_USER', <MODERATOR_APPROVE_USER>);
 
 /**#@+
   * Moderator Settings - Edit User
@@ -425,7 +426,7 @@ define('MODERATOR_APPROVE_USER', true);
   *
   * @since OpenCAD version 0.2.3
   **/
-define('MODERATOR_EDIT_USER', true);
+define('MODERATOR_EDIT_USER', <MODERATOR_EDIT_USER>);
 
 /**#@+
   * Moderator Settings - Suspend With Reason
@@ -437,7 +438,7 @@ define('MODERATOR_EDIT_USER', true);
   *
   * @since OpenCAD version 0.2.3
   **/
-define('MODERATOR_SUSPEND_WITH_REASON', true);
+define('MODERATOR_SUSPEND_WITH_REASON', <MODERATOR_SUSPEND_WITH_REASON>);
 
 /**#@+
   * Moderator Settings - Approve User
@@ -449,7 +450,7 @@ define('MODERATOR_SUSPEND_WITH_REASON', true);
   *
   * @since OpenCAD version 0.2.3
   **/
-define('MODERATOR_SUSPEND_WITHOUT_REASON', true);
+define('MODERATOR_SUSPEND_WITHOUT_REASON', <MODERATOR_SUSPEND_WITHOUT_REASON>);
 
 /**#@+
   * Moderator Settings - Reactivate User
@@ -461,7 +462,7 @@ define('MODERATOR_SUSPEND_WITHOUT_REASON', true);
   *
   * @since OpenCAD version 0.2.3
   **/
-define('MODERATOR_REACTIVATE_USER', true);
+define('MODERATOR_REACTIVATE_USER', <MODERATOR_REACTIVATE_USER>);
 
 /**#@+
   * Moderator Settings - Remove Group
@@ -473,7 +474,7 @@ define('MODERATOR_REACTIVATE_USER', true);
   *
   * @since OpenCAD version 0.2.3
   **/
-define('MODERATOR_REMOVE_GROUP', true);
+define('MODERATOR_REMOVE_GROUP', <MODERATOR_REMOVE_GROUP>);
 
 /**#@+
   * Moderator Settings - Delete User
@@ -485,7 +486,7 @@ define('MODERATOR_REMOVE_GROUP', true);
   *
   * @since OpenCAD version 0.2.3
   **/
-define('MODERATOR_DELETE_USER', true);
+define('MODERATOR_DELETE_USER', <MODERATOR_DELETE_USER>;
 
 /**#@+
   * Moderator Settings - NCIC Editor
@@ -497,7 +498,7 @@ define('MODERATOR_DELETE_USER', true);
   *
   * @since OpenCAD version 0.2.3
   **/
-define('MODERATOR_NCIC_EDITOR', true);
+define('MODERATOR_NCIC_EDITOR', <MODERATOR_NCIC_EDITOR>);
 
 /**#@+
   * Extra Settings
@@ -520,7 +521,7 @@ define('MODERATOR_NCIC_EDITOR', true);
   *
   * @since OpenCAD version 0.2.3
   **/
-define('DEMO_MODE', false);
+define('DEMO_MODE', <DEMO_MODE>);
 
 
 /**#@+
@@ -534,7 +535,7 @@ define('DEMO_MODE', false);
   * @since 1.0a RC1
   **/
 
-define('USE_GRAVATAR', true);
+define('USE_GRAVATAR', <USE_GRAVATAR>);
 
 
 
