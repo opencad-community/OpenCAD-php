@@ -22,6 +22,6 @@
 	}else if(file_exists('../language/'.$curr_lang.'/common.inc.php')){
 		include_once('../language/'.$curr_lang.'/common.inc.php');
 	}else{
-		include_once('install/language/en/common.inc.php');    	
+		include_once('../language/en/common.inc.php');    	
 	}	
 

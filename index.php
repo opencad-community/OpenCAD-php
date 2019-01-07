@@ -11,9 +11,9 @@ This program is free software: you can redistribute it and/or modify
 
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
-if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
+if(!file_exists(getcwd().'./oc-config.php') && is_writable(getcwd())){
 	
-	header('Location://'.$_SERVER['SERVER_NAME'].'/install/start.php');
+	header('Location://'.$_SERVER['SERVER_NAME'].'/oc-install/start.php');
 }
 
 

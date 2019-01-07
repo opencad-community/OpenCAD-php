@@ -4,7 +4,7 @@
     // 1. GLOBAL SETTINGS
     // -------------------------------------------------------------------------
     // *** system mode (demo|debug|production)
-    define('EI_MODE', 'debug');
+    define('EI_MODE', 'production');
     
     // *** version number of ApPHP EasyInstaller
     define('EI_VERSION', '3.2.4');
@@ -85,13 +85,13 @@
     define('EI_DB_MINIMUM_VERSION', '5.5');    
         
     // *** admin username and password (true, false) - get admin username and password
-    define('EI_USE_ADMIN_ACCOUNT', false);        
+    define('EI_USE_ADMIN_ACCOUNT', true);        
     // *** encrypt or not admin password true|false
-    define('EI_USE_PASSWORD_ENCRYPTION', true);        
+    define('EI_USE_PASSWORD_ENCRYPTION', false);        
     // *** type of encryption - AES|MD5
     define('EI_PASSWORD_ENCRYPTION_TYPE', 'MD5');        
     // *** password encryption key for AES encryption
-    define('EI_PASSWORD_ENCRYPTION_KEY', 'wLpFVfC1an5bdSRI1Cj3JgyP7CZKPeOFmouOf2ocqig6NVfNfpNLDOvVk6QhBAr');
+    define('EI_PASSWORD_ENCRYPTION_KEY', '');
     
     
     // -------------------------------------------------------------------------
@@ -110,14 +110,14 @@
     // *** specifies whether to allow update
     define('EI_ALLOW_UPDATE', false);        
     // *** specifies whether to allow un-installation
-    define('EI_ALLOW_UN_INSTALLATION', false); 
+    define('EI_ALLOW_UN_INSTALLATION', false);  
     define('DB_PREFIX', 'oc_');
 
     // *** allows start all over button
     define('EI_ALLOW_START_ALL_OVER', true);
     
     // *** sql dump file - file that includes SQL statements for instalation
-    define('EI_SQL_DUMP_FILE_CREATE', 'sql_dump/create.sql');
+    define('EI_SQL_DUMP_FILE_CREATE', '../sql/oc_install.sql');
     define('EI_SQL_DUMP_FILE_UPDATE', 'sql_dump/update.sql');
     define('EI_SQL_DUMP_FILE_UN_INSTALL', 'sql_dump/un-install.sql');
 
