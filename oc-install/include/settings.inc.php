@@ -4,7 +4,7 @@
     // 1. GLOBAL SETTINGS
     // -------------------------------------------------------------------------
     // *** system mode (demo|debug|production)
-    define('EI_MODE', 'production');
+    define('EI_MODE', 'debug');
     
     // *** version number of ApPHP EasyInstaller
     define('EI_VERSION', '3.2.4');
@@ -111,7 +111,6 @@
     define('EI_ALLOW_UPDATE', false);        
     // *** specifies whether to allow un-installation
     define('EI_ALLOW_UN_INSTALLATION', false);  
-    define('DB_PREFIX', 'oc_');
 
     // *** allows start all over button
     define('EI_ALLOW_START_ALL_OVER', true);
