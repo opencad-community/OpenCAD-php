@@ -1,4 +1,14 @@
 <?php
+################################################################################
+##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 #
+## --------------------------------------------------------------------------- #
+##  ApPHP EasyInstaller Free version                                           #
+##  Developed by:  ApPHP <info@apphp.com>                                      #
+##  License:       GNU LGPL v.3                                                #
+##  Site:          https://www.apphp.com/php-easyinstaller/                    #
+##  Copyright:     ApPHP EasyInstaller (c) 2009-2013. All rights reserved.     #
+##                                                                             #
+################################################################################
 
 	session_start();
 	
@@ -13,7 +23,6 @@
 	$program_already_installed = false;
 	$focus_field = 'database_host';
 	$error_msg = '';
-	$database_prefix = true;
 	
 	// handle previous steps
 	// -------------------------------------------------
@@ -31,29 +40,27 @@
 		$database_name 		= isset($_POST['database_name']) ? prepare_input($_POST['database_name']) : '';
 		$database_username	= isset($_POST['database_username']) ? prepare_input($_POST['database_username']) : '';
 		$database_password	= isset($_POST['database_password']) ? prepare_input($_POST['database_password']) : '';
+		$database_prefix	= isset($_POST['database_prefix']) ? prepare_input($_POST['database_prefix']) : '';	
 		$install_type		= isset($_POST['install_type']) ? prepare_input($_POST['install_type']) : 'create';
 		
 		// validation here
 		// -------------------------------------------------
 		if($database_host == ''){
 			$focus_field = 'database_host';
-			$error_msg = lang_key('alert_database_host_empty');	
+			$error_msg = lang_key('alert_db_host_empty');	
 		}else if($database_name == ''){
 			$focus_field = 'database_name';
-			$error_msg = lang_key('alert_database_name_empty');	
+			$error_msg = lang_key('alert_db_name_empty');	
 		}else if($database_username == ''){
 			$focus_field = 'database_username';
-			$error_msg = lang_key('alert_database_usernamename_empty');	
-		}else if($database_password == ''){
-			$focus_field = 'database_password';
-			$error_msg = lang_key('alert_database_password_empty');
-		}else if($database_prefix == ''){
-			$focus_field = 'database_prefix';
-			$error_msg = lang_key('alert_database_prefix_empty');
+			$error_msg = lang_key('alert_db_username_empty');	
+		//}else if($database_password == ''){
+		//	$focus_field = 'database_password';
+		//	$error_msg = lang_key('alert_db_password_empty');
 		}else{
 			
 			if(EI_MODE == 'demo'){
-				if($database_host != 'localhost' || $database_name != 'database_name' || $database_username != 'test' || $database_password != 'test'){
+				if($database_host != 'localhost' || $database_name != 'db_name' || $database_username != 'test' || $database_password != 'test'){
 					$error_msg = lang_key('alert_wrong_testing_parameters');
 				}
 			}else{
@@ -113,7 +120,7 @@
 			else if(EI_ALLOW_UN_INSTALLATION) $install_type = 'un-install';
 		}
 		include_once(EI_CONFIG_FILE_PATH);
-		if(defined('DB_PREFIX')) $database_prefix = '';	
+		if(defined('DB_PREFIX')) $database_prefix = DB_PREFIX;	
 		///header('location: ../'.EI_APPLICATION_START_FILE);
         ///exit;
 	}	
@@ -128,7 +135,7 @@
     <meta name="generator" content="ApPHP EasyInstaller">
 	<title><?php echo lang_key("installation_guide"); ?> | <?php echo lang_key('database_settings'); ?></title>
 
-	<link href="../images/favicon.ico" rel="shortcut icon" />
+	<link href="images/apphp.ico" rel="shortcut icon" />
 	<link rel="stylesheet" type="text/css" href="templates/<?php echo EI_TEMPLATE; ?>/css/styles.css" />
 	<?php
 		if($curr_lang_direction == 'rtl'){
@@ -184,15 +191,15 @@
 						<h4><?php echo lang_key('database_host'); ?></h4>
 						<p><?php echo lang_key('database_host_info'); ?></p>
 					</div>						
-					<div id="notes_database_name" class="notes_container">
+					<div id="notes_db_name" class="notes_container">
 						<h4><?php echo lang_key('database_name'); ?></h4>
 						<p><?php echo lang_key('database_name_info'); ?></p>
 					</div>
-					<div id="notes_database_username" class="notes_container">
+					<div id="notes_db_user" class="notes_container">
 						<h4><?php echo lang_key('database_username'); ?></h4>
 						<p><?php echo lang_key('database_username_info'); ?></p>
 					</div>
-					<div id="notes_database_password" class="notes_container">
+					<div id="notes_db_password" class="notes_container">
 						<h4><?php echo lang_key('database_password'); ?></h4>
 						<p><?php echo lang_key('database_password_info'); ?></p>
 					</div>
@@ -207,25 +214,25 @@
 			<tr>
 				<td nowrap>&nbsp;<?php echo lang_key('database_name'); ?>: <span class="star">*</span></td>
 				<td>
-					<input type="text" class="form_text" name="database_name" id="database_name" size="30" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> value="<?php echo $database_name; ?>" placeholder="<?php if(EI_MODE == 'demo') echo 'demo: database_name'; ?>" onfocus="textboxOnFocus('notes_database_name')" onblur="textboxOnBlur('notes_database_name')" />					
+					<input type="text" class="form_text" name="database_name" id="database_name" size="30" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> value="<?php echo $database_name; ?>" placeholder="<?php if(EI_MODE == 'demo') echo 'demo: db_name'; ?>" onfocus="textboxOnFocus('notes_db_name')" onblur="textboxOnBlur('notes_db_name')" />					
 				</td>
 			</tr>
 			<tr>
 				<td nowrap>&nbsp;<?php echo lang_key('database_username'); ?>: <span class="star">*</span></td>
 				<td>
-					<input type="text" class="form_text" name="database_username" id="database_username" size="30" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> value="<?php echo $database_username; ?>" placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" onfocus="textboxOnFocus('notes_database_username')" onblur="textboxOnBlur('notes_database_username')" />
+					<input type="text" class="form_text" name="database_username" id="database_username" size="30" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> value="<?php echo $database_username; ?>" placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" onfocus="textboxOnFocus('notes_db_user')" onblur="textboxOnBlur('notes_db_user')" />
 				</td>
 			</tr>
 			<tr>
 				<td nowrap>&nbsp;<?php echo lang_key('database_password'); ?>:</td>
 				<td>
-					<input type="password" class="form_text" name="database_password" id="database_password" size="30" value="<?php echo $database_password; ?>" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" onfocus="textboxOnFocus('notes_database_password')" onblur="textboxOnBlur('notes_database_password')" />
+					<input type="password" class="form_text" name="database_password" id="database_password" size="30" value="<?php echo $database_password; ?>" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" onfocus="textboxOnFocus('notes_db_password')" onblur="textboxOnBlur('notes_db_password')" />
 				</td>
 			</tr>
 			<tr>
-				<td nowrap>&nbsp;<?php echo lang_key('database_prefix'); ?>:</td>
+				<td nowrap>&nbsp;<?php echo lang_key('database_prefix'); ?></td>
 				<td>
-					<input type="text" class="form_text" name="database_prefix" id="database_prefix" size="30" value="<?php echo $database_prefix; ?>" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" onfocus="textboxOnFocus('notes_prefix_password')" onblur="textboxOnBlur('notes_prefix_password')" />
+					<input type="text" class="form_text" name="database_prefix" size="12" maxlength="12" value="<?php echo $database_prefix; ?>" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> onfocus="textboxOnFocus('notes_db_prefix')" onblur="textboxOnBlur('notes_db_prefix')" />
 				</td>
 			</tr>
 			<tr>

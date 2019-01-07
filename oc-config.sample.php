@@ -18,7 +18,7 @@
  *
  * @since 1.0a RC1
  **/
-define('COMMUNITY_NAME', <COMMUNITY_NAME>);
+define('COMMUNITY_NAME', '<COMMUNITY_NAME>');
 
 /**#@+
  *
@@ -32,11 +32,11 @@ define('COMMUNITY_NAME', <COMMUNITY_NAME>);
  * @since 1.0a RC1
  *
  **/
-define('DB_HOST', <DB_HOST>);
-define('DB_USER', <DB_USER>);
-define('DB_PASSWORD', <DB_PASSWORD>);
-define('DB_NAME', <DB_NAME>);
-define("DB_PREFIX", <DB_PREFIX);
+define('DB_HOST', '<DB_HOST>');
+define('DB_USER', '<DB_USER>');
+define('DB_PASSWORD', '<DB_PASSWORD>');
+define('DB_NAME', '<DB_NAME>');
+define("DB_PREFIX", '<DB_PREFIX');
 
 /**#@+
  * Base URL Settings
@@ -56,7 +56,7 @@ define("DB_PREFIX", <DB_PREFIX);
  *
  * @since 1.0a RC1
  **/
-define('BASE_URL', <BASE_URL>);
+define('BASE_URL', '<BASE_URL>');
 
 /**#@+
  * To & From emails for system generated emails
@@ -65,7 +65,7 @@ define('BASE_URL', <BASE_URL>);
  * @since 1.0a RC2
  *
  **/
-define('CAD_FROM_EMAIL', <CAD_FROM_EMAIL>);
+define('CAD_FROM_EMAIL', 'admin@cad.com');
 define('CAD_FROM_NAME', COMMUNITY_NAME.' CAD');
 define('CAD_TO_EMAIL', 'admins@community.com');
 define('CAD_TO_NAME', COMMUNITY_NAME.' Administrators');
