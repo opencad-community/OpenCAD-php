@@ -5,3 +5,4 @@ oc-config.php
 *.code-workspace
 .htaccess
 info.php
+.github/
