@@ -13,7 +13,7 @@
 	$program_already_installed = false;
 	$focus_field = 'database_host';
 	$error_msg = '';
-	$database_prefix = '';
+	$database_prefix = true;
 	
 	// handle previous steps
 	// -------------------------------------------------
@@ -44,9 +44,12 @@
 		}else if($database_username == ''){
 			$focus_field = 'database_username';
 			$error_msg = lang_key('alert_database_usernamename_empty');	
-		//}else if($database_password == ''){
-		//	$focus_field = 'database_password';
-		//	$error_msg = lang_key('alert_database_password_empty');
+		}else if($database_password == ''){
+			$focus_field = 'database_password';
+			$error_msg = lang_key('alert_database_password_empty');
+		}else if($database_prefix == ''){
+			$focus_field = 'database_prefix';
+			$error_msg = lang_key('alert_database_prefix_empty');
 		}else{
 			
 			if(EI_MODE == 'demo'){
@@ -97,6 +100,7 @@
 		$database_name 		= isset($_SESSION['database_name']) ? $_SESSION['database_name'] : '';
 		$database_username	= isset($_SESSION['database_username']) ? $_SESSION['database_username'] : '';
 		$database_password	= isset($_SESSION['database_password']) ? $_SESSION['database_password'] : '';
+		$database_prefix	= isset($_SESSION['database_prefix']) ? $_SESSION['database_prefix'] : '';
 		$install_type		= isset($_SESSION['install_type']) ? $_SESSION['install_type'] : 'create';		
 	} 
 
@@ -109,7 +113,7 @@
 			else if(EI_ALLOW_UN_INSTALLATION) $install_type = 'un-install';
 		}
 		include_once(EI_CONFIG_FILE_PATH);
-		if(defined('DB_PREFIX')) $database_prefix = DB_PREFIX;	
+		if(defined('DB_PREFIX')) $database_prefix = '';	
 		///header('location: ../'.EI_APPLICATION_START_FILE);
         ///exit;
 	}	
@@ -216,6 +220,12 @@
 				<td nowrap>&nbsp;<?php echo lang_key('database_password'); ?>:</td>
 				<td>
 					<input type="password" class="form_text" name="database_password" id="database_password" size="30" value="<?php echo $database_password; ?>" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" onfocus="textboxOnFocus('notes_database_password')" onblur="textboxOnBlur('notes_database_password')" />
+				</td>
+			</tr>
+			<tr>
+				<td nowrap>&nbsp;<?php echo lang_key('database_prefix'); ?>:</td>
+				<td>
+					<input type="text" class="form_text" name="database_prefix" id="database_prefix" size="30" value="<?php echo $database_prefix; ?>" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" onfocus="textboxOnFocus('notes_prefix_password')" onblur="textboxOnBlur('notes_prefix_password')" />
 				</td>
 			</tr>
 			<tr>

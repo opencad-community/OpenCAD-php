@@ -152,10 +152,10 @@ $arrLang['writable'] = "writable";
 
 
 $arrLang['COMMUNITY_NAME'] = "Community Name";
-$arrLang['COMMUNITY_NAME_notes'] = "Set your communities name";
+$arrLang['COMMUNITY_NAME_notes'] = "Set your community's name";
 $arrLang['COMMUNITY_NAME_alert'] = "COMMUNITY_NAME cannot be empty! Please re-enter.";
 
-$arrLang['BASE_URL'] = "BASE_URL";
+$arrLang['BASE_URL'] = "Application URL";
 $arrLang['BASE_URL_notes'] = "The URL to your installation of OpenCAD inlcuding, if utilized, it's subdirectory
             Valid Examples include:
             example.com - Root domain, no subdirectory
@@ -214,10 +214,10 @@ $arrLang['ROADSIDE_NCIC_PLATE_notes'] = "Shows/Hides NCIC functionality on MDT c
 
 
 
-$arrLang['CIV_WARRANT'] = "Civ Warrant";
+$arrLang['CIV_WARRANT'] = "Civilian Warrant Creation";
 $arrLang['CIV_WARRANT_notes'] = "Allow/Disallow Civiliians from managing their warrants. If set to 'true' then Civs will be able to delete warrants from their profile, else if set to 'false' then Civs will not have the ability to remove warrants.";
 
-$arrLang['CIV_REG'] = "Civ Registration";
+$arrLang['CIV_REG'] = "Instant Civilian Registration";
 $arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
 
 
