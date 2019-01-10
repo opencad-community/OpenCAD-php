@@ -30,6 +30,7 @@
 		$database_name		 = isset($_SESSION['database_name']) ? prepare_input($_SESSION['database_name']) : '';
 		$database_username	 = isset($_SESSION['database_username']) ? prepare_input($_SESSION['database_username']) : '';
 		$database_password	 = isset($_SESSION['database_password']) ? prepare_input($_SESSION['database_password']) : '';
+		$database_prefix	 = isset($_SESSION['database_prefix']) ? prepare_input($_SESSION['database_prefix']) : '';
 		$install_type		 = isset($_SESSION['install_type']) ? $_SESSION['install_type'] : 'create';
 		
 		$admin_name 	 = isset($_SESSION['admin_name']) ? stripslashes($_SESSION['admin_name']) : '';
@@ -38,11 +39,13 @@
 		$admin_email 		 = isset($_SESSION['admin_email']) ? stripslashes($_SESSION['admin_email']) : '';
 		$password_encryption = isset($_SESSION['password_encryption']) ? $_SESSION['password_encryption'] : EI_PASSWORD_ENCRYPTION_TYPE;
 		
-		$COMMUNITY_NAME = isset($_SESSION['COMMUNITY_NAME']) ? prepare_input($_SESSION['COMMUNITY_NAME']) : '';
+	    $COMMUNITY_NAME = isset($_SESSION['COMMUNITY_NAME']) ? prepare_input($_SESSION['COMMUNITY_NAME']) : '';
 		
 		$BASE_URL = isset($_SESSION['BASE_URL']) ? prepare_input($_SESSION['BASE_URL']) : '';
 		
-		$CAD_FROM_EMAILL = isset($_SESSION['CAD_FROM_EMAIL']) ? prepare_input($_SESSION['CAD_FROM_EMAIL']) : '';
+		$API_SECURITY = isset($_SESSION['API_SECURITY']) ? prepare_input($_SESSION['API_SECURITY']) : '';
+
+		$CAD_FROM_EMAIL = isset($_SESSION['CAD_FROM_EMAIL']) ? prepare_input($_SESSION['CAD_FROM_EMAIL']) : '';
 		$CAD_FROM_NAME = isset($_SESSION['CAD_FROM_NAME']) ? prepare_input($_SESSION['CAD_FROM_NAME']) : '';
 		$CAD_TO_EMAIL = isset($_SESSION['CAD_TO_EMAIL']) ? prepare_input($_SESSION['CAD_TO_EMAIL']) : '';
 		$CAD_TO_NAME = isset($_SESSION['CAD_TO_NAME']) ? prepare_input($_SESSION['CAD_TO_NAME']) : '';
@@ -76,6 +79,17 @@
 		$CIV_WARRANT = isset($_SESSION['CIV_WARRANT']) ? prepare_input($_SESSION['CIV_WARRANT']) : '';
 		$CIV_REG = isset($_SESSION['CIV_REG']) ? prepare_input($_SESSION['CIV_REG']) : '';
 		
+		$MODERATOR_APPROVE_USER = isset($_SESSION['MODERATOR_APPROVE_USER']) ? prepare_input($_SESSION['MODERATOR_APPROVE_USER']) : '';
+		$MODERATOR_EDIT_USER = isset($_SESSTION['MODERATOR_EDIT_USER']) ? prepare_input($_SESSION['MODERATOR_EDIT_USER']) : '';
+		$MODERATOR_SUSPEND_WITH_REASON = isset($_SESSION['MODERATOR_SUSPEND_WITH_REASON']) ? prepare_input($_SESSION['MODERATOR_SUSPEND_WITH_REASON']) : '';
+		$MODERATOR_SUSPEND_WITHOUT_REASON = isset($_SESSION['MODERATOR_SUSPEND_WITHOUT_REASON']) ? prepare_input($_SESSION['MODERATOR_SUSPEND_WITHOUT_REASON']) : '';
+		$MODERATOR_REACTIVATE_USER = isset($_SESSION['MODERATOR_REACTIVATE_USERN']) ? prepare_input($_SESSION['MODERATOR_REACTIVATE_USER']) : '';
+		$MODERATOR_REMOVE_GROUP = isset($_SESSION['MODERATOR_REMOVE_GROUP']) ? prepare_input($_SESSION['MODERATOR_REMOVE_GROUP']) : '';
+		$MODERATOR_DELETE_USER = isset($_SESSION['MODERATOR_DELETE_USER']) ? prepare_input($_SESSION['MODERATOR_DELETE_USER']) : '';
+		$MODERATOR_NCIC_EDITOR = isset($_SESSION['MODERATOR_NCIC_EDITOR']) ? prepare_input($_SESSION['MODERATOR_NCIC_EDITOR']) : '';
+
+		$DEMO_MODE = isset($_SERVER['DEMO_MODE']) ? prepare_input($_SESSION['DEMO_MODE']) : '';
+
 		$USE_GRAVATAR = isset($_SESSION['USE_GRAVATAR']) ? prepare_input($_SESSION['USE_GRAVATAR']) : '';
 		
 		if($install_type == 'update'){
@@ -89,7 +103,8 @@
 		if(empty($database_host)) $error_mg[] = lang_key('alert_database_host_empty');	
 		if(empty($database_name)) $error_mg[] = lang_key('alert_database_name_empty'); 
 		if(empty($database_username)) $error_mg[] = lang_key('alert_database_usernamename_empty'); 	
-		//if (empty($database_password)) $error_mg[] = lang_key('alert_database_password_empty');
+		if (empty($database_password)) $error_mg[] = lang_key('alert_database_password_empty');
+		if (empty($database_prefix)) $error_mg[] = lang_key('alert_database_prefix_empty');
 
 		if(empty($error_mg)){		
 			if(EI_MODE == 'demo'){
@@ -128,9 +143,11 @@
 								$config_file = str_replace('<DB_NAME>', $database_name, $config_file);
 								$config_file = str_replace('<DB_USER>', $database_username, $config_file);
 								$config_file = str_replace('<DB_PASSWORD>', $database_password, $config_file);
+								$config_file = str_replace('<DB_PREFIX>', $database_password, $config_file);
 								
 								$config_file = str_replace('<COMMUNITY_NAME>', $COMMUNITY_NAME, $config_file);
 								$config_file = str_replace('<BASE_URL>', $BASE_URL, $config_file);
+								$config_file = str_replace('<API_SECURITY>', $API_SECURITY, $config_file);
 								
 								$config_file = str_replace('<CAD_FROM_EMAIL>', $CAD_FROM_EMAILL, $config_file);
 								$config_file = str_replace('<CAD_FROM_NAME>', $CAD_FROM_NAME, $config_file);
@@ -165,7 +182,16 @@
 								
 								$config_file = str_replace('<CIV_WARRANT>', $CIV_WARRANT, $config_file);
 								$config_file = str_replace('<CIV_REG>', $CIV_REG, $config_file);
-								
+
+								$config_file = str_replace('<MODERATOR_APPROVE_USER>', $MODERATOR_APPROVE_USER, $config_file);
+								$config_file = str_replace('<MODERATOR_EDIT_USER>', $MODERATOR_EDIT_USER, $config_file);
+								$config_file = str_replace('<MODERATOR_SUSPEND_WITH_REASON>', $MODERATOR_SUSPEND_WITH_REASON, $config_file);
+								$config_file = str_replace('<MODERATOR_WITHOUT_REASON>', $MODERATOR_SUSPEND_WITHOUT_REASON, $config_file);
+								$config_file = str_replace('<MODERATOR_REACTIVATE_USER>', $MODERATOR_REACTIVATE_USER, $config_file);
+								$config_file = str_replace('<MODERATOR_REMOVE_GROUP>', $MODERATOR_REMOVE_GROUP, $config_file);
+								$config_file = str_replace('<MODERATOR_DELETE_USER>', $MODERATOR_DELETE_USER, $config_file);
+
+								$config_file = str_replace('<DEMO_MODE>', $DEMO_MODE, $config_file);
 								$config_file = str_replace('<USE_GRAVATAR>', $USE_GRAVATAR, $config_file);
 								
 								
