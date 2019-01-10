@@ -11,7 +11,9 @@
 ################################################################################
 
 	session_start();
-	
+	echo '<pre>';
+var_dump($_SESSION);
+echo '</pre>';
 	require_once('include/shared.inc.php');    
     require_once('include/settings.inc.php');    
 	require_once('include/database.class.php'); 
@@ -232,7 +234,7 @@
 			<tr>
 				<td nowrap>&nbsp;<?php echo lang_key('database_prefix'); ?></td>
 				<td>
-					<input type="text" class="form_text" name="database_prefix" size="12" maxlength="12" value="<?php echo $database_prefix; ?>" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> onfocus="textboxOnFocus('notes_db_prefix')" onblur="textboxOnBlur('notes_db_prefix')" />
+					<input type="text" class="form_text" name="database_prefix" size="12" maxlength="12" value="<?php echo $database_prefix; ?>" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> onfocus="textboxOnFocus('notes_database_prefix')" onblur="textboxOnBlur('notes_databaseprefix')" />
 				</td>
 			</tr>
 			<tr>

@@ -18,7 +18,7 @@ CREATE TABLE `<DB_PREFIX>aop` (
   `aop` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
-INSERT INTO `aop` (`aop`) VALUES
+INSERT INTO `<DB_PREFIX>aop` (`aop`) VALUES
 ('INIT AOP');
 
 --
@@ -607,4 +607,4 @@ ALTER TABLE `<DB_PREFIX>weapons`
 --
 
 INSERT INTO `<DB_PREFIX>users` (`id`, `name`, `email`, `password`, `identifier`, `admin_privilege`, `supervisor_privilege`, `password_reset`, `approved`, `suspend_reason`, `suspend_duration`) VALUES
-(1, '<NAME>', '<USER_NAME>', '<PASSOWRD>', '<IDENTIFIER>', 2, 1, 0, 1, NULL, NULL);
+(1, 'Default Admin', 'admin@domain.com', '$2y$10$xHvogGcqQs8jhTPbFEDHJO9KWu2FCLgJ5XGxH.hHMA0BY1brgCkSG', '1A-7', 2, 1, 0, 1, NULL, NULL);

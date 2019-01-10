@@ -36,7 +36,7 @@ define('DB_HOST', '<DB_HOST>');
 define('DB_USER', '<DB_USER>');
 define('DB_PASSWORD', '<DB_PASSWORD>');
 define('DB_NAME', '<DB_NAME>');
-define("OC_DB_PREFIX", '<DB_PREFIX>');
+define("DB_PREFIX", '<DB_PREFIX>');
 
 /**#@+
  * Base URL Settings
@@ -57,6 +57,20 @@ define("OC_DB_PREFIX", '<DB_PREFIX>');
  * @since 1.0a RC1
  **/
 define('BASE_URL', '<BASE_URL>');
+
+/**#@+
+  * API Security
+  *
+  * The API-Key is used to authenticate requests from logedout users,
+  * it is also used in creating cookie 'aljksdz7' which stors the API-Key
+  * and the session id of the loged in user.
+  *
+  * This setting should always be enabled.
+  * 
+  * @since 0.2.6
+	* (Imported from ATVG-CAD 1.3.0.0)
+  **/
+  define('ENABLE_API_SECURITY', true);
 
 /**#@+
  * To & From emails for system generated emails
@@ -536,22 +550,6 @@ define('DEMO_MODE', <DEMO_MODE>);
   **/
 
 define('USE_GRAVATAR', <USE_GRAVATAR>);
-
-
-
-/**#@+
-  * API Security
-  *
-  * The API-Key is used to authenticate requests from logedout users,
-  * it is also used in creating cookie 'aljksdz7' which stors the API-Key
-  * and the session id of the loged in user.
-  *
-  * This setting should always be enabled.
-  * 
-  * @since 0.2.6
-	* (Imported from ATVG-CAD 1.3.0.0)
-  **/
-  define('ENABLE_API_SECURITY', true);
 
 /** That's all, stop editing! Happy roleplaying. **/
 /**    Absolute path to the OpenCAD directory.   **/

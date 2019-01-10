@@ -85,7 +85,7 @@
     define('EI_DB_MINIMUM_VERSION', '5.5');    
         
     // *** admin username and password (true, false) - get admin username and password
-    define('EI_USE_ADMIN_ACCOUNT', true);        
+    define('EI_USE_ADMIN_ACCOUNT', false);        
     // *** encrypt or not admin password true|false
     define('EI_USE_PASSWORD_ENCRYPTION', false);        
     // *** type of encryption - AES|MD5

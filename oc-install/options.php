@@ -1,7 +1,7 @@
 <?php
 
 	session_start();
-	
+
 	require_once('include/shared.inc.php');    
     require_once('include/settings.inc.php');    
 	require_once('include/functions.inc.php');
@@ -25,95 +25,13 @@
 	// -------------------------------------------------
 	if($task == 'send'){
 
-		$COMMUNITY_NAME = isset($_POST['COMMUNITY_NAME']) ? prepare_input($_POST['COMMUNITY_NAME']) : '';
-		
-		$BASE_URL = isset($_POST['BASE_URL']) ? prepare_input($_POST['BASE_URL']) : '';
-		
-		$CAD_FROM_EMAILL = isset($_POST['CAD_FROM_EMAIL']) ? prepare_input($_POST['CAD_FROM_EMAIL']) : '';
-		$CAD_FROM_NAME = isset($_POST['CAD_FROM_NAME']) ? prepare_input($_POST['CAD_FROM_NAME']) : '';
-		$CAD_TO_EMAIL = isset($_POST['CAD_TO_EMAIL']) ? prepare_input($_POST['CAD_TO_EMAIL']) : '';
-		$CAD_TO_NAME = isset($_POST['CAD_TO_NAME']) ? prepare_input($_POST['CAD_TO_NAME']) : '';
-		
-		$AUTH_KEY = isset($_POST['AUTH_KEY']) ? prepare_input($_POST['AUTH_KEY']) : '';
-		$SECURE_AUTH_KEY = isset($_POST['SECURE_AUTH_KEY']) ? prepare_input($_POST['SECURE_AUTH_KEY']) : '';
-		$LOGGED_IN_KEY = isset($_POST['LOGGED_IN_KEY']) ? prepare_input($_POST['LOGGED_IN_KEY']) : '';
-		$NONCE_KEY = isset($_POST['NONCE_KEY']) ? prepare_input($_POST['NONCE_KEY']) : '';
-		$AUTH_SALT = isset($_POST['AUTH_SALT']) ? prepare_input($_POST['AUTH_SALT']) : '';
-		$SECURE_AUTH_SALT = isset($_POST['SECURE_AUTH_SALT']) ? prepare_input($_POST['SECURE_AUTH_SALT']) : '';
-		$LOGGED_IN_SALT = isset($_POST['LOGGED_IN_SALT']) ? prepare_input($_POST['LOGGED_IN_SALT']) : '';
-		$NONCE_SALT = isset($_POST['NONCE_SALT']) ? prepare_input($_POST['NONCE_SALT']) : '';
-		
-		$POLICE_NCIC = isset($_POST['POLICE_NCIC']) ? prepare_input($_POST['POLICE_NCIC']) : '';
-		
-		$FIRE_PANIC = isset($_POST['FIRE_PANIC']) ? prepare_input($_POST['FIRE_PANIC']) : '';
-		$FIRE_BOLO = isset($_POST['FIRE_BOLO']) ? prepare_input($_POST['FIRE_BOLO']) : '';
-		$FIRE_NCIC_NAME = isset($_POST['FIRE_NCIC_NAME']) ? prepare_input($_POST['FIRE_NCIC_NAME']) : '';
-		$FIRE_NCIC_PLATE = isset($_POST['FIRE_NCIC_PLATE']) ? prepare_input($_POST['FIRE_NCIC_PLATE']) : '';
-		
-		$EMS_PANIC = isset($_POST['EMS_PANIC']) ? prepare_input($_POST['EMS_PANIC']) : '';
-		$EMS_BOLO = isset($_POST['EMS_BOLO']) ? prepare_input($_POST['EMS_BOLO']) : '';
-		$EMS_NCIC_NAME = isset($_POST['EMS_NCIC_NAME']) ? prepare_input($_POST['EMS_NCIC_NAME']) : '';
-		$EMS_NCIC_PLATE = isset($_POST['EMS_NCIC_PLATE']) ? prepare_input($_POST['EMS_NCIC_PLATE']) : '';
-		
-		$ROADSIDE_PANIC = isset($_POST['ROADSIDE_PANIC']) ? prepare_input($_POST['ROADSIDE_PANIC']) : '';
-		$ROADSIDE_BOLO = isset($_POST['ROADSIDE_BOLO']) ? prepare_input($_POST['ROADSIDE_BOLO']) : '';
-		$ROADSIDE_NCIC_NAME = isset($_POST['ROADSIDE_NCIC_NAME']) ? prepare_input($_POST['ROADSIDE_NCIC_NAME']) : '';
-		$ROADSIDE_NCIC_PLATE = isset($_POST['ROADSIDE_NCIC_PLATE']) ? prepare_input($_POST['ROADSIDE_NCIC_PLATE']) : '';
-		
-		$CIV_WARRANT = isset($_POST['CIV_WARRANT']) ? prepare_input($_POST['CIV_WARRANT']) : '';
-		$CIV_REG = isset($_POST['CIV_REG']) ? prepare_input($_POST['CIV_REG']) : '';
-		
-		$USE_GRAVATAR = isset($_POST['USE_GRAVATAR']) ? prepare_input($_POST['USE_GRAVATAR']) : '';
-		
-				$_SESSION['COMMUNITY_NAME'] = $COMMUNITY_NAME;
-				$_SESSION['BASE_URL'] = $BASE_URL;
-				
-				$_SESSION['CAD_FROM_EMAIL'] = $CAD_FROM_EMAILL;
-				$_SESSION['CAD_FROM_NAME'] = $CAD_FROM_NAME;			
-				$_SESSION['CAD_TO_EMAIL'] = $CAD_TO_EMAIL;			
-				$_SESSION['CAD_TO_NAME'] = $CAD_TO_NAME;
-				
-				$_SESSION['AUTH_KEY'] = $AUTH_KEY;			
-				$_SESSION['SECURE_AUTH_KEY'] = $SECURE_AUTH_KEY;			
-				$_SESSION['LOGGED_IN_KEY'] = $LOGGED_IN_KEY;			
-				$_SESSION['NONCE_KEY'] = $NONCE_KEY;			
-				$_SESSION['AUTH_SALT'] = $AUTH_SALT;			
-				$_SESSION['SECURE_AUTH_SALT'] = $SECURE_AUTH_SALT;			
-				$_SESSION['LOGGED_IN_SALT'] = $LOGGED_IN_SALT;			
-				$_SESSION['NONCE_SALT'] = $NONCE_SALT;	
-				
-				$_SESSION['POLICE_NCIC'] = $POLICE_NCIC;
-				
-				$_SESSION['FIRE_PANIC'] = $FIRE_PANIC;		
-				$_SESSION['FIRE_BOLO'] = $FIRE_BOLO;		
-				$_SESSION['FIRE_NCIC_NAME'] = $FIRE_NCIC_NAME;		
-				$_SESSION['FIRE_NCIC_PLATE'] = $FIRE_NCIC_PLATE;
-				
-				$_SESSION['EMS_PANIC'] = $EMS_PANIC;		
-				$_SESSION['EMS_BOLO'] = $EMS_BOLO;		
-				$_SESSION['EMS_NCIC_NAME'] = $EMS_NCIC_NAME;		
-				$_SESSION['EMS_NCIC_PLATE'] = $EMS_NCIC_PLATE;
-				
-				$_SESSION['ROADSIDE_PANIC'] = $ROADSIDE_PANIC;		
-				$_SESSION['ROADSIDE_BOLO'] = $ROADSIDE_BOLO;		
-				$_SESSION['ROADSIDE_NCIC_NAME'] = $ROADSIDE_NCIC_NAME;		
-				$_SESSION['ROADSIDE_NCIC_PLATE'] = $ROADSIDE_NCIC_PLATE;
-				
-				$_SESSION['CIV_WARRANT'] = $CIV_WARRANT;		
-				$_SESSION['CIV_REG'] = $CIV_REG;	
-				
-				$_SESSION['USE_GRAVATAR'] = $USE_GRAVATAR;		
-
-				$_SESSION['passed_step'] = 5;
-				header('location: ready_to_install.php');
-				exit;
-
-	}else{
-	    		$COMMUNITY_NAME = isset($_SESSION['COMMUNITY_NAME']) ? prepare_input($_SESSION['COMMUNITY_NAME']) : '';
+		$COMMUNITY_NAME = isset($_SESSION['COMMUNITY_NAME']) ? prepare_input($_SESSION['COMMUNITY_NAME']) : '';
 		
 		$BASE_URL = isset($_SESSION['BASE_URL']) ? prepare_input($_SESSION['BASE_URL']) : '';
 		
-		$CAD_FROM_EMAILL = isset($_SESSION['CAD_FROM_EMAIL']) ? prepare_input($_SESSION['CAD_FROM_EMAIL']) : '';
+		$API_SECURITY = isset($_SESSION['API_SECURITY']) ? prepare_input($_SESSION['API_SECURITY']) : '';
+
+		$CAD_FROM_EMAIL = isset($_SESSION['CAD_FROM_EMAIL']) ? prepare_input($_SESSION['CAD_FROM_EMAIL']) : '';
 		$CAD_FROM_NAME = isset($_SESSION['CAD_FROM_NAME']) ? prepare_input($_SESSION['CAD_FROM_NAME']) : '';
 		$CAD_TO_EMAIL = isset($_SESSION['CAD_TO_EMAIL']) ? prepare_input($_SESSION['CAD_TO_EMAIL']) : '';
 		$CAD_TO_NAME = isset($_SESSION['CAD_TO_NAME']) ? prepare_input($_SESSION['CAD_TO_NAME']) : '';
@@ -147,7 +65,126 @@
 		$CIV_WARRANT = isset($_SESSION['CIV_WARRANT']) ? prepare_input($_SESSION['CIV_WARRANT']) : '';
 		$CIV_REG = isset($_SESSION['CIV_REG']) ? prepare_input($_SESSION['CIV_REG']) : '';
 		
+		$MODERATOR_APPROVE_USER = isset($_SESSION['MODERATOR_APPROVE_USER']) ? prepare_input($_SESSION['MODERATOR_APPROVE_USER']) : '';
+		$MODERATOR_EDIT_USER = isset($_SESSION['MODERATOR_EDIT_USER']) ? prepare_input($_SESSION['MODERATOR_EDIT_USER']) : '';
+		$MODERATOR_SUSPEND_WITH_REASON = isset($_SESSION['MODERATOR_SUSPEND_WITH_REASON']) ? prepare_input($_SESSION['MODERATOR_SUSPEND_WITH_REASON']) : '';
+		$MODERATOR_SUSPEND_WITHOUT_REASON = isset($_SESSION['MODERATOR_SUSPEND_WITHOUT_REASON']) ? prepare_input($_SESSION['MODERATOR_SUSPEND_WITHOUT_REASON']) : '';
+		$MODERATOR_REACTIVATE_USER = isset($_SESSION['MODERATOR_REACTIVATE_USERN']) ? prepare_input($_SESSION['MODERATOR_REACTIVATE_USER']) : '';
+		$MODERATOR_REMOVE_GROUP = isset($_SESSION['MODERATOR_REMOVE_GROUP']) ? prepare_input($_SESSION['MODERATOR_REMOVE_GROUP']) : '';
+		$MODERATOR_DELETE_USER = isset($_SESSION['MODERATOR_DELETE_USER']) ? prepare_input($_SESSION['MODERATOR_DELETE_USER']) : '';
+		$MODERATOR_NCIC_EDITOR = isset($_SESSION['MODERATOR_NCIC_EDITOR']) ? prepare_input($_SESSION['MODERATOR_NCIC_EDITOR']) : '';
+
+		$DEMO_MODE = isset($_SERVER['DEMO_MODE']) ? prepare_input(['DEMO_MODE']) : '';
+
 		$USE_GRAVATAR = isset($_SESSION['USE_GRAVATAR']) ? prepare_input($_SESSION['USE_GRAVATAR']) : '';
+		
+		$_SESSION['COMMUNITY_NAME'] = $COMMUNITY_NAME;
+		$_SESSION['BASE_URL'] = $BASE_URL;
+		$_SESSION['API_SECURITY'] = $API_SECURITY;
+		
+		$_SESSION['CAD_FROM_EMAIL'] = $CAD_FROM_EMAILL;
+		$_SESSION['CAD_FROM_NAME'] = $CAD_FROM_NAME;			
+		$_SESSION['CAD_TO_EMAIL'] = $CAD_TO_EMAIL;			
+		$_SESSION['CAD_TO_NAME'] = $CAD_TO_NAME;
+		
+		$_SESSION['AUTH_KEY'] = $AUTH_KEY;			
+		$_SESSION['SECURE_AUTH_KEY'] = $SECURE_AUTH_KEY;			
+		$_SESSION['LOGGED_IN_KEY'] = $LOGGED_IN_KEY;			
+		$_SESSION['NONCE_KEY'] = $NONCE_KEY;			
+		$_SESSION['AUTH_SALT'] = $AUTH_SALT;			
+		$_SESSION['SECURE_AUTH_SALT'] = $SECURE_AUTH_SALT;			
+		$_SESSION['LOGGED_IN_SALT'] = $LOGGED_IN_SALT;			
+		$_SESSION['NONCE_SALT'] = $NONCE_SALT;	
+		
+		$_SESSION['POLICE_NCIC'] = $POLICE_NCIC;
+		
+		$_SESSION['FIRE_PANIC'] = $FIRE_PANIC;		
+		$_SESSION['FIRE_BOLO'] = $FIRE_BOLO;		
+		$_SESSION['FIRE_NCIC_NAME'] = $FIRE_NCIC_NAME;		
+		$_SESSION['FIRE_NCIC_PLATE'] = $FIRE_NCIC_PLATE;
+		
+		$_SESSION['EMS_PANIC'] = $EMS_PANIC;		
+		$_SESSION['EMS_BOLO'] = $EMS_BOLO;		
+		$_SESSION['EMS_NCIC_NAME'] = $EMS_NCIC_NAME;		
+		$_SESSION['EMS_NCIC_PLATE'] = $EMS_NCIC_PLATE;
+		
+		$_SESSION['ROADSIDE_PANIC'] = $ROADSIDE_PANIC;		
+		$_SESSION['ROADSIDE_BOLO'] = $ROADSIDE_BOLO;		
+		$_SESSION['ROADSIDE_NCIC_NAME'] = $ROADSIDE_NCIC_NAME;		
+		$_SESSION['ROADSIDE_NCIC_PLATE'] = $ROADSIDE_NCIC_PLATE;
+		
+		$_SESSION['CIV_WARRANT'] = $CIV_WARRANT;		
+		$_SESSION['CIV_REG'] = $CIV_REG;
+		
+		$_SESSION['MODERATOR_APPROVE_USER'] = $MODERATOR_APPROVE_USER;
+		$_SESSION['MODERATOR_EDIT_USER'] = $MODERATOR_EDIT_USER;
+		$_SESSION['MODERATOR_SUSPEND_WITH_REASON'] = $MODERATOR_SUSPEND_WITH_REASON;
+		$_SESSION['MODERATOR_SUSPEND_WITHOUT_REASON'] = $MODERATOR_SUSPEND_WITHOUT_REASON;
+		$_SESSION['MODERATOR_REMOVE_GROUP'] = $MODERATOR_REMOVE_GROUP;
+		$_SESSION['MODERATOR_DELETE_USER'] = $MODERATOR_DELETE_USER;
+		$_SESSION['MODERATOR_NCIC_EDIDOTR'] = $MODERATOR_NCIC_EDITOR;
+		
+		$_SESSION['DEMO_MODE'] = $DEMO_MODE;
+		$_SESSION['USE_GRAVATAR'] = $USE_GRAVATAR;		
+
+		$_SESSION['passed_step'] = 5;
+		header('location: ready_to_install.php');
+		exit;
+
+	}else{
+	    $COMMUNITY_NAME = isset($_SESSION['COMMUNITY_NAME']) ? prepare_input($_SESSION['COMMUNITY_NAME']) : '';
+		
+		$BASE_URL = isset($_SESSION['BASE_URL']) ? prepare_input($_SESSION['BASE_URL']) : '';
+		
+		$API_SECURITY = isset($_SESSION['API_SECURITY']) ? prepare_input($_SESSION['API_SECURITY']) : '';
+
+		$CAD_FROM_EMAIL = isset($_SESSION['CAD_FROM_EMAIL']) ? prepare_input($_SESSION['CAD_FROM_EMAIL']) : '';
+		$CAD_FROM_NAME = isset($_SESSION['CAD_FROM_NAME']) ? prepare_input($_SESSION['CAD_FROM_NAME']) : '';
+		$CAD_TO_EMAIL = isset($_SESSION['CAD_TO_EMAIL']) ? prepare_input($_SESSION['CAD_TO_EMAIL']) : '';
+		$CAD_TO_NAME = isset($_SESSION['CAD_TO_NAME']) ? prepare_input($_SESSION['CAD_TO_NAME']) : '';
+		
+		$AUTH_KEY = isset($_SESSION['AUTH_KEY']) ? prepare_input($_SESSION['AUTH_KEY']) : '';
+		$SECURE_AUTH_KEY = isset($_SESSION['SECURE_AUTH_KEY']) ? prepare_input($_SESSION['SECURE_AUTH_KEY']) : '';
+		$LOGGED_IN_KEY = isset($_SESSION['LOGGED_IN_KEY']) ? prepare_input($_SESSION['LOGGED_IN_KEY']) : '';
+		$NONCE_KEY = isset($_SESSION['NONCE_KEY']) ? prepare_input($_SESSION['NONCE_KEY']) : '';
+		$AUTH_SALT = isset($_SESSION['AUTH_SALT']) ? prepare_input($_SESSION['AUTH_SALT']) : '';
+		$SECURE_AUTH_SALT = isset($_SESSION['SECURE_AUTH_SALT']) ? prepare_input($_SESSION['SECURE_AUTH_SALT']) : '';
+		$LOGGED_IN_SALT = isset($_SESSION['LOGGED_IN_SALT']) ? prepare_input($_SESSION['LOGGED_IN_SALT']) : '';
+		$NONCE_SALT = isset($_SESSION['NONCE_SALT']) ? prepare_input($_SESSION['NONCE_SALT']) : '';
+		
+		$POLICE_NCIC = isset($_SESSION['POLICE_NCIC']) ? prepare_input($_SESSION['POLICE_NCIC']) : '';
+		
+		$FIRE_PANIC = isset($_SESSION['FIRE_PANIC']) ? prepare_input($_SESSION['FIRE_PANIC']) : '';
+		$FIRE_BOLO = isset($_SESSION['FIRE_BOLO']) ? prepare_input($_SESSION['FIRE_BOLO']) : '';
+		$FIRE_NCIC_NAME = isset($_SESSION['FIRE_NCIC_NAME']) ? prepare_input($_SESSION['FIRE_NCIC_NAME']) : '';
+		$FIRE_NCIC_PLATE = isset($_SESSION['FIRE_NCIC_PLATE']) ? prepare_input($_SESSION['FIRE_NCIC_PLATE']) : '';
+		
+		$EMS_PANIC = isset($_SESSION['EMS_PANIC']) ? prepare_input($_SESSION['EMS_PANIC']) : '';
+		$EMS_BOLO = isset($_SESSION['EMS_BOLO']) ? prepare_input($_SESSION['EMS_BOLO']) : '';
+		$EMS_NCIC_NAME = isset($_SESSION['EMS_NCIC_NAME']) ? prepare_input($_SESSION['EMS_NCIC_NAME']) : '';
+		$EMS_NCIC_PLATE = isset($_SESSION['EMS_NCIC_PLATE']) ? prepare_input($_SESSION['EMS_NCIC_PLATE']) : '';
+		
+		$ROADSIDE_PANIC = isset($_SESSION['ROADSIDE_PANIC']) ? prepare_input($_SESSION['ROADSIDE_PANIC']) : '';
+		$ROADSIDE_BOLO = isset($_SESSION['ROADSIDE_BOLO']) ? prepare_input($_SESSION['ROADSIDE_BOLO']) : '';
+		$ROADSIDE_NCIC_NAME = isset($_SESSION['ROADSIDE_NCIC_NAME']) ? prepare_input($_SESSION['ROADSIDE_NCIC_NAME']) : '';
+		$ROADSIDE_NCIC_PLATE = isset($_SESSION['ROADSIDE_NCIC_PLATE']) ? prepare_input($_SESSION['ROADSIDE_NCIC_PLATE']) : '';
+		
+		$CIV_WARRANT = isset($_SESSION['CIV_WARRANT']) ? prepare_input($_SESSION['CIV_WARRANT']) : '';
+		$CIV_REG = isset($_SESSION['CIV_REG']) ? prepare_input($_SESSION['CIV_REG']) : '';
+		
+		$MODERATOR_APPROVE_USER = isset($_SESSION['MODERATOR_APPROVE_USER']) ? prepare_input($_SESSION['MODERATOR_APPROVE_USER']) : '';
+		$MODERATOR_EDIT_USER = isset($_SESSTION['MODERATOR_EDIT_USER']) ? prepare_input($_SESSION['MODERATOR_EDIT_USER']) : '';
+		$MODERATOR_SUSPEND_WITH_REASON = isset($_SESSION['MODERATOR_SUSPEND_WITH_REASON']) ? prepare_input($_SESSION['MODERATOR_SUSPEND_WITH_REASON']) : '';
+		$MODERATOR_SUSPEND_WITHOUT_REASON = isset($_SESSION['MODERATOR_SUSPEND_WITHOUT_REASON']) ? prepare_input($_SESSION['MODERATOR_SUSPEND_WITHOUT_REASON']) : '';
+		$MODERATOR_REACTIVATE_USER = isset($_SESSION['MODERATOR_REACTIVATE_USERN']) ? prepare_input($_SESSION['MODERATOR_REACTIVATE_USER']) : '';
+		$MODERATOR_REMOVE_GROUP = isset($_SESSION['MODERATOR_REMOVE_GROUP']) ? prepare_input($_SESSION['MODERATOR_REMOVE_GROUP']) : '';
+		$MODERATOR_DELETE_USER = isset($_SESSION['MODERATOR_DELETE_USER']) ? prepare_input($_SESSION['MODERATOR_DELETE_USER']) : '';
+		$MODERATOR_NCIC_EDITOR = isset($_SESSION['MODERATOR_NCIC_EDITOR']) ? prepare_input($_SESSION['MODERATOR_NCIC_EDITOR']) : '';
+
+		$DEMO_MODE = isset($_SERVER['DEMO_MODE']) ? prepare_input($_SESSION['DEMO_MODE']) : '';
+
+		$USE_GRAVATAR = isset($_SESSION['USE_GRAVATAR']) ? prepare_input($_SESSION['USE_GRAVATAR']) : '';
+
 	}
 ?>	
 
@@ -220,6 +257,10 @@
 					<div id="BASE_URL_notes" class="notes_container">
 						<h4><?php echo lang_key('BASE_URL'); ?></h4>
 						<p><?php echo lang_key('BASE_URL_notes'); ?></p>
+					</div>
+					<div id="API_SECURITY_notes" class="notes_container">
+						<h4><?php echo lang_key('API_SECURITY_URL'); ?></h4>
+						<p><?php echo lang_key('API_SECURITY_notes'); ?></p>
 					</div>
 					
 					<div id="FIRE_PANIC_notes" class="notes_container">
