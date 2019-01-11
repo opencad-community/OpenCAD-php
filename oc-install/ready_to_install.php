@@ -12,7 +12,7 @@
 	
 	// handle previous steps
 	// -------------------------------------------------
-	if($passed_step >= 5){
+	if($passed_step >= 9){
 		// OK
 	}else{
 		header('location: start.php');
@@ -22,7 +22,7 @@
 	// handle form submission
 	// -------------------------------------------------
 	if($task == 'send'){
-		$_SESSION['passed_step'] = 6;
+		$_SESSION['passed_step'] = 10;
 		header('location: complete_installation.php');
 		exit;
 	}
@@ -62,10 +62,10 @@
 	
 	<div id="content">
 		<?php
-			draw_side_navigation(6);		
+			draw_side_navigation(10);		
 		?>
 		<div class="central-part">
-			<h2><?php echo lang_key('step_6_of'); ?> - <?php echo lang_key('ready_to_install'); ?></h2>
+			<h2><?php echo lang_key('step_10_of'); ?> - <?php echo lang_key('ready_to_install'); ?></h2>
 			<h3><?php echo lang_key('we_are_ready_to_installation'); ?></h3>			
 		
 			<p><?php echo lang_key('we_are_ready_to_installation_text'); ?></p>			
@@ -80,7 +80,7 @@
 			<tr><td colspan="2" nowrap height="20px">&nbsp;</td></tr>
 			<tr>
 				<td colspan="2">
-					<a href="options.php" class="form_button" /><?php echo lang_key('back'); ?></a>
+					<a href="extra_settings.php" class="form_button" /><?php echo lang_key('back'); ?></a>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="submit" class="form_button" value="<?php echo lang_key('continue'); ?>" />
 				</td>

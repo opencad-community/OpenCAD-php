@@ -130,9 +130,14 @@ function draw_side_navigation($step = 1, $draw = true)
 		'2'=>array('url'=>'server_requirements.php', 'text'=>lang_key('server_requirements')),
 		'3'=>array('url'=>'database_settings.php', 'text'=>lang_key('database_settings')),
 		'4'=>array('url'=>'administrator_account.php', 'text'=>lang_key('administrator_account')),
-        '5'=>array('url'=>'options.php', 'text'=>lang_key('options_page')),
-		'6'=>array('url'=>'ready_to_install.php', 'text'=>lang_key('ready_to_install')),
-		'7'=>array('url'=>'complete_installation.php', 'text'=>lang_key('completed'))
+		'5'=>array('url'=>'core_configuration.php', 'text'=>lang_key('core_configuration')),
+		'6'=>array('url'=>'department_configuration.php', 'text'=>lang_key('department_configuration')),
+		'7'=>array('url'=>'civilian_configuration.php', 'text'=>lang_key('civilian_configuration')),
+		'8'=>array('url'=>'administrative_settings.php', 'text'=>lang_key('administrative_configuration')),
+        '9'=>array('url'=>'options.php', 'text'=>lang_key('options_page')),
+		'10'=>array('url'=>'extra_settings.php', 'text'=>lang_key('extra_settings')),
+		'11'=>array('url'=>'ready_to_install.php', 'text'=>lang_key('ready_to_install')),
+		'12'=>array('url'=>'complete_installation.php', 'text'=>lang_key('installation_complete'))
 	);
 	
 	$output  = '<div class="left-part">';

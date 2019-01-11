@@ -12,7 +12,7 @@
 
 	// handle previous steps
 	// -------------------------------------------------
-	if($passed_step >= 6){
+	if($passed_step >= 11){
 		// OK
 	}else{
 		header('location: start.php');
@@ -249,11 +249,11 @@
 	
 	<div id="content">
 		<?php
-			draw_side_navigation(7);		
+			draw_side_navigation(11);		
 		?>
 
 		<div class="central-part">
-			<h2><?php echo lang_key('step_7_of'); ?>
+			<h2><?php echo lang_key('step_11_of'); ?>
 			<?php if(!$completed){ ?>
 				- <?php echo lang_key('database_import_error'); ?>
 			<?php }else{ ?>

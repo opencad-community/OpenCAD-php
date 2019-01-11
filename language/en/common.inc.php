@@ -128,13 +128,17 @@ $arrLang['smtp_port'] = "SMTP Port";
 $arrLang['start'] = "Start";
 $arrLang['start_all_over'] = "Start All Over";
 $arrLang['start_all_over_text'] = "If you want to remove this installation for some reason, you can force the Installer to remove current configuration and start all over again. <br><b>WARNING</b>: You have to undo the database installation manually to remove all changes that were done.";
-$arrLang['step_1_of'] = "Step 1 of 7";
-$arrLang['step_2_of'] = "Step 2 of 7";
-$arrLang['step_3_of'] = "Step 3 of 7";
-$arrLang['step_4_of'] = "Step 4 of 7";
-$arrLang['step_5_of'] = "Step 5 of 7";
-$arrLang['step_6_of'] = "Step 6 of 7";
-$arrLang['step_7_of'] = "Step 7 of 7";
+$arrLang['step_1_of'] = "Step 1 of 11";
+$arrLang['step_2_of'] = "Step 2 of 11";
+$arrLang['step_3_of'] = "Step 3 of 11";
+$arrLang['step_4_of'] = "Step 4 of 11";
+$arrLang['step_5_of'] = "Step 5 of 11";
+$arrLang['step_6_of'] = "Step 6 of 11";
+$arrLang['step_7_of'] = "Step 7 of 11";
+$arrLang['step_8_of'] = "Step 8 of 11";
+$arrLang['step_9_of'] = "Step 9 of 11";
+$arrLang['step_10_of'] = "Step 10 of 11";
+$arrLang['step_11_of'] = "Step 11 of 11";
 $arrLang['sub_title_message'] = "This wizard will guide you through the whole installation process";
 $arrLang['system'] = "System";
 $arrLang['system_architecture'] = "System Architecture";
@@ -224,11 +228,5 @@ $arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. 
 
 $arrLang['USE_GRAVATAR'] = "Gravatar";
 $arrLang['USE_GRAVATAR_notes'] = "OpenCAD will dynamically retrieve your avatar from {@link Gravatar http://en.gravatar.com/} if you have an account. Otherwise it will use the default generic avatar image included with OpenCAD .";
-
-
-
-
-
-
 
 ?>

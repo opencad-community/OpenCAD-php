@@ -44,7 +44,7 @@
 			$_SESSION['password_encryption'] = '';
 			
 			$_SESSION['passed_step'] = 4;
-			header('location: options.php');
+			header('location: core_configuration.php');
 			exit;
 		}
 
@@ -84,7 +84,7 @@
 				$_SESSION['password_encryption'] = $password_encryption;				
 
 				$_SESSION['passed_step'] = 4;
-				header('location: options.php');
+				header('location: core_configuration.php');
 				exit;
 			}
 		}

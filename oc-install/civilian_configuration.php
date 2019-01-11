@@ -14,7 +14,7 @@
 	
 	// handle previous steps
 	// -------------------------------------------------
-	if($passed_step >= 4){
+	if($passed_step >= 6){
 		// OK
 	}else{
 		header('location: start.php');
@@ -127,8 +127,8 @@
 		$_SESSION['DEMO_MODE'] = $DEMO_MODE;
 		$_SESSION['USE_GRAVATAR'] = $USE_GRAVATAR;		
 
-		$_SESSION['passed_step'] = 5;
-		header('location: ready_to_install.php');
+		$_SESSION['passed_step'] = 7;
+		header('location: administrative_configuration.php');
 		exit;
 
 	}else{
@@ -221,13 +221,13 @@
 	
 	<div id="content">
 		<?php
-			draw_side_navigation(5);		
+			draw_side_navigation(7);		
 		?>
 		<div class="central-part">
-			<h2><?php echo lang_key('step_5_of'); ?> - System Settings</h2>
-			<h3><?php echo lang_key('admin_access_data'); ?></h3>
+			<h2><?php echo lang_key('step_7_of'); ?> - Civilian Settings</h2>
+			<h3><?php echo lang_key('civilian_configuration'); ?></h3>
 
-			<form action="options.php" method="post">
+			<form action="civilian_configuration.php" method="post">
 			<input type="hidden" name="task" value="send" />
 			<input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>" />
 			
@@ -243,8 +243,11 @@
 			</tr>
 			<tr><td nowrap height="10px" colspan="3"></td></tr>
 			<tr>
-				<td width="250px">&nbsp;<?php echo lang_key('COMMUNITY_NAME'); ?>&nbsp;<span class="star">*</span></td>
-				<td><input name="COMMUNITY_NAME" id="COMMUNITY_NAME" class="form_text" size="28" maxlength="22" value="<?php echo $COMMUNITY_NAME; ?>" onfocus="textboxOnFocus('COMMUNITY_NAME_notes')" onblur="textboxOnBlur('COMMUNITY_NAME_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+				<td width="250px">&nbsp;<?php echo lang_key('ROADSIDE_PANIC'); ?>&nbsp;</td>
+				<td>
+					<input type="radio" name="ROADSIDE_PANIC" id="ROADSIDE_PANIC" <?php echo ($ROADSIDE_PANIC=='true')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_PANIC_notes')" onblur="textboxOnBlur('ROADSIDE_PANIC_notes')" value="true" />True
+					<input type="radio" name="ROADSIDE_PANIC" id="ROADSIDE_PANIC" <?php echo ($ROADSIDE_PANIC=='false')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_PANIC_notes')" checked onblur="textboxOnBlur('ROADSIDE_PANIC_notes')" value="false" />False
+				</td>
 				<td rowspan="6" valign="top">					
 					<div id="POLICE_NCIC_notes" class="notes_container">
 						<h4><?php echo lang_key('POLICE_NCIC'); ?></h4>
@@ -333,64 +336,6 @@
 				</td>
 			</tr>
 			<tr>
-				<td>&nbsp;<?php echo lang_key('BASE_URL'); ?>&nbsp;<span class="star">*</span></td>
-				<td><input name="BASE_URL" id="BASE_URL" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('BASE_URL_notes')" onblur="textboxOnBlur('BASE_URL_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
-			</tr>
-			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>
-			<tr>
-				<td>&nbsp;<?php echo lang_key('POLICE_NCIC'); ?>&nbsp;</td>
-				<td><input type="radio" name="POLICE_NCIC" id="POLICE_NCIC" <?php echo ($POLICE_NCIC=='true')?'checked':'' ?> onfocus="textboxOnFocus('POLICE_NCIC_notes')" onblur="textboxOnBlur('POLICE_NCIC_notes')" value="true" />True
-				<input type="radio" name="POLICE_NCIC" id="POLICE_NCIC" <?php echo ($POLICE_NCIC=='false')?'checked':'' ?> onfocus="textboxOnFocus('POLICE_NCIC_notes')" checked onblur="textboxOnBlur('POLICE_NCIC_notes')" value="false" />False</td>
-			</tr>
-			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>
-			<tr>
-				<td>&nbsp;<?php echo lang_key('FIRE_PANIC'); ?>&nbsp;</td>
-				<td><input type="radio" name="FIRE_PANIC" id="FIRE_PANIC" <?php echo ($FIRE_PANIC=='true')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_PANIC_notes')" onblur="textboxOnBlur('FIRE_PANIC_notes')" value="true" />True
-				<input type="radio" name="FIRE_PANIC" id="FIRE_PANIC" <?php echo ($FIRE_PANIC=='false')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_PANIC_notes')" checked onblur="textboxOnBlur('FIRE_PANIC_notes')" value="false" />False</td>
-			</tr>
-			<tr>
-				<td>&nbsp;<?php echo lang_key('FIRE_BOLO'); ?>&nbsp;</td>
-				<td><input type="radio" name="FIRE_BOLO" id="FIRE_BOLO" <?php echo ($FIRE_BOLO=='true')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_BOLO_notes')" onblur="textboxOnBlur('FIRE_BOLO_notes')" value="true" />True
-				<input type="radio" name="FIRE_BOLO" id="FIRE_BOLO" <?php echo ($FIRE_BOLO=='false')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_BOLO_notes')" checked onblur="textboxOnBlur('FIRE_BOLO_notes')" value="false" />False</td>
-			</tr>
-			<tr>
-				<td>&nbsp;<?php echo lang_key('FIRE_NCIC_NAME'); ?>&nbsp;</td>
-				<td><input type="radio" name="FIRE_NCIC_NAME" id="FIRE_NCIC_NAME" <?php echo ($FIRE_NCIC_NAME=='true')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_NCIC_NAME_notes')" onblur="textboxOnBlur('FIRE_NCIC_NAME_notes')" value="true" />True
-				<input type="radio" name="FIRE_NCIC_NAME" id="FIRE_NCIC_NAME" <?php echo ($FIRE_NCIC_NAME=='false')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_NCIC_NAME_notes')" checked onblur="textboxOnBlur('FIRE_NCIC_NAME_notes')" value="false" />False</td>
-			</tr>
-			<tr>
-				<td>&nbsp;<?php echo lang_key('FIRE_NCIC_PLATE'); ?>&nbsp;</td>
-				<td><input type="radio" name="FIRE_NCIC_PLATE" id="FIRE_NCIC_PLATE" <?php echo ($FIRE_NCIC_PLATE=='true')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_NCIC_PLATE_notes')" onblur="textboxOnBlur('FIRE_NCIC_PLATE_notes')" value="true" />True
-				<input type="radio" name="FIRE_NCIC_PLATE" id="FIRE_NCIC_PLATE" <?php echo ($FIRE_NCIC_PLATE=='false')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_NCIC_PLATE_notes')" checked onblur="textboxOnBlur('FIRE_NCIC_PLATE_notes')" value="false" />False</td>
-			</tr>
-			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>
-			<tr>
-				<td>&nbsp;<?php echo lang_key('EMS_PANIC'); ?>&nbsp;</td>
-				<td><input type="radio" name="EMS_PANIC" id="EMS_PANIC" <?php echo ($EMS_PANIC=='true')?'checked':'' ?> onfocus="textboxOnFocus('EMS_PANIC_notes')" onblur="textboxOnBlur('EMS_PANIC_notes')" value="true" />True
-				<input type="radio" name="EMS_PANIC" id="EMS_PANIC" <?php echo ($EMS_PANIC=='false')?'checked':'' ?> onfocus="textboxOnFocus('EMS_PANIC_notes')" checked onblur="textboxOnBlur('EMS_PANIC_notes')" value="false" />False</td>
-			</tr>
-			<tr>
-				<td>&nbsp;<?php echo lang_key('EMS_BOLO'); ?>&nbsp;</td>
-				<td><input type="radio" name="EMS_BOLO" id="EMS_BOLO" <?php echo ($EMS_BOLO=='true')?'checked':'' ?> onfocus="textboxOnFocus('EMS_BOLO_notes')" onblur="textboxOnBlur('EMS_BOLO_notes')" value="true" />True
-				<input type="radio" name="EMS_BOLO" id="EMS_BOLO" <?php echo ($EMS_BOLO=='false')?'checked':'' ?> onfocus="textboxOnFocus('EMS_BOLO_notes')" checked onblur="textboxOnBlur('EMS_BOLO_notes')" value="false" />False</td>
-			</tr>
-			<tr>
-				<td>&nbsp;<?php echo lang_key('EMS_NCIC_NAME'); ?>&nbsp;</td>
-				<td><input type="radio" name="EMS_NCIC_NAME" id="EMS_NCIC_NAME" <?php echo ($EMS_NCIC_NAME=='true')?'checked':'' ?> onfocus="textboxOnFocus('EMS_NCIC_NAME_notes')" onblur="textboxOnBlur('EMS_NCIC_NAME_notes')" value="true" />True
-				<input type="radio" name="EMS_NCIC_NAME" id="EMS_NCIC_NAME" <?php echo ($EMS_NCIC_NAME=='false')?'checked':'' ?> onfocus="textboxOnFocus('EMS_NCIC_NAME_notes')" checked onblur="textboxOnBlur('EMS_NCIC_NAME_notes')" value="false" />False</td>
-			</tr>
-			<tr>
-				<td>&nbsp;<?php echo lang_key('EMS_NCIC_PLATE'); ?>&nbsp;</td>
-				<td><input type="radio" name="EMS_NCIC_PLATE" id="EMS_NCIC_PLATE" <?php echo ($EMS_NCIC_PLATE=='true')?'checked':'' ?> onfocus="textboxOnFocus('EMS_NCIC_PLATE_notes')" onblur="textboxOnBlur('EMS_NCIC_PLATE_notes')" value="true" />True
-				<input type="radio" name="EMS_NCIC_PLATE" id="EMS_NCIC_PLATE" <?php echo ($EMS_NCIC_PLATE=='false')?'checked':'' ?> onfocus="textboxOnFocus('EMS_NCIC_PLATE_notes')" checked onblur="textboxOnBlur('EMS_NCIC_PLATE_notes')" value="false" />False</td>
-			</tr>
-			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>
-			<tr>
-				<td>&nbsp;<?php echo lang_key('ROADSIDE_PANIC'); ?>&nbsp;</td>
-				<td><input type="radio" name="ROADSIDE_PANIC" id="ROADSIDE_PANIC" <?php echo ($ROADSIDE_PANIC=='true')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_PANIC_notes')" onblur="textboxOnBlur('ROADSIDE_PANIC_notes')" value="true" />True
-				<input type="radio" name="ROADSIDE_PANIC" id="ROADSIDE_PANIC" <?php echo ($ROADSIDE_PANIC=='false')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_PANIC_notes')" checked onblur="textboxOnBlur('ROADSIDE_PANIC_notes')" value="false" />False</td>
-			</tr>
-			<tr>
 				<td>&nbsp;<?php echo lang_key('ROADSIDE_BOLO'); ?>&nbsp;</td>
 				<td><input type="radio" name="ROADSIDE_BOLO" id="ROADSIDE_BOLO" <?php echo ($ROADSIDE_BOLO=='true')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_BOLO_notes')" onblur="textboxOnBlur('ROADSIDE_BOLO_notes')" value="true" />True
 				<input type="radio" name="ROADSIDE_BOLO" id="ROADSIDE_BOLO" <?php echo ($ROADSIDE_BOLO=='false')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_BOLO_notes')" checked onblur="textboxOnBlur('ROADSIDE_BOLO_notes')" value="false" />False</td>
@@ -416,18 +361,9 @@
 				<td><input type="radio" name="CIV_REG" id="CIV_REG" <?php echo ($CIV_REG=='true')?'checked':'' ?> onfocus="textboxOnFocus('CIV_REG_notes')" onblur="textboxOnBlur('CIV_REG_notes')" value="true" />True
 				<input type="radio" name="CIV_REG" id="CIV_REG" <?php echo ($CIV_REG=='false')?'checked':'' ?> onfocus="textboxOnFocus('CIV_REG_notes')" checked onblur="textboxOnBlur('CIV_REG_notes')" value="false" />False</td>
 			</tr>
-			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>
-			<tr>
-				<td>&nbsp;<?php echo lang_key('USE_GRAVATAR'); ?>&nbsp;</td>
-				<td><input type="radio" name="USE_GRAVATAR" id="USE_GRAVATAR" <?php echo ($USE_GRAVATAR=='true')?'checked':'' ?> onfocus="textboxOnFocus('USE_GRAVATAR_notes')" checked onblur="textboxOnBlur('USE_GRAVATAR_notes')" value="true" />True
-				<input type="radio" name="USE_GRAVATAR" id="USE_GRAVATAR" <?php echo ($USE_GRAVATAR=='false')?'checked':'' ?> onfocus="textboxOnFocus('USE_GRAVATAR_notes')"  onblur="textboxOnBlur('USE_GRAVATAR_notes')" value="false" />False</td>
-			</tr>
-			
-			
-			<tr><td colspan="2" nowrap height="50px">&nbsp;</td></tr>
 			<tr>
 				<td colspan="2">
-					<a href="administrator_account.php" class="form_button" /><?php echo lang_key('back'); ?></a>
+					<a href="department_configuration.php" class="form_button" /><?php echo lang_key('back'); ?></a>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="submit" class="form_button" value="<?php echo lang_key('continue'); ?>" />
 				</td>
