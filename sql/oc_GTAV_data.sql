@@ -825,7 +825,7 @@ INSERT INTO `vehicles` (`id`, `Make`, `Model`) VALUES
   (260, 'Imponte', 'Deluxo'),
   (261, 'Imponte', 'Duke O Death'),
   (262, 'Imponte', 'Dukes'),
-  (263, 'Imponte', 'Nightshade')<
+  (263, 'Imponte', 'Nightshade'),
   (264, 'Imponte', 'Phoenix'),
   (265, 'Imponte', 'Ruiner'),
   (266, 'Imponte', 'Ruiner 2000'),
