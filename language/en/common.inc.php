@@ -227,7 +227,12 @@ $arrLang['ROADSIDE_NCIC_NAME_notes'] = "Shows/Hides NCIC functionality on MDT co
 
 $arrLang['ROADSIDE_NCIC_PLATE'] = "Roadside NCIC Plate";
 $arrLang['ROADSIDE_NCIC_PLATE_notes'] = "Shows/Hides NCIC functionality on MDT console for Roadside Assistance. If 'true' then RAO will be able to use NCIC plate query without the need for a dispatcher, else if 'false' then RAO will require the presence of dispatcher to use NCIC plate query funcationality.";
-//** End    Roadside Assistance Strings **//
+
+$arrLang['ROADSIDE_CALL_SELFASSIGN'] = "Roadside Call Self Assign";
+$arrLang['ROADSIDE_cALL_SELFASSIGN`_notes'] = "Shows/Hides NCIC functionality on MDT console for Roadside Assistance. If 'true' then RAO will be able to use NCIC plate query without the need for a dispatcher, else if 'false' then RAO will require the presence of dispatcher to use NCIC plate query funcationality.";
+
+
+//** End Roadside Assistance Strings **//
 
 //** Begin Civilian Strings **//
 $arrLang['CIV_WARRANT'] = "Civilian Warrant Creation";
