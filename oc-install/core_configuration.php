@@ -2,6 +2,9 @@
 
 	session_start();
 
+	echo '<pre>';
+var_dump($_SESSION);
+echo '</pre>';
 	require_once('include/shared.inc.php');    
     require_once('include/settings.inc.php');    
 	require_once('include/functions.inc.php');
@@ -25,25 +28,25 @@
 	// -------------------------------------------------
 	if($task == 'send'){
 
-		$COMMUNITY_NAME = isset($_SESSION['COMMUNITY_NAME']) ? prepare_input($_SESSION['COMMUNITY_NAME']) : '';
+		$COMMUNITY_NAME = isset($_POST['COMMUNITY_NAME']) ? prepare_input($_POST['COMMUNITY_NAME']) : '';
 		
-		$BASE_URL = isset($_SESSION['BASE_URL']) ? prepare_input($_SESSION['BASE_URL']) : '';
+		$BASE_URL = isset($_POST['BASE_URL']) ? prepare_input($_POST['BASE_URL']) : '';
 		
-		$API_SECURITY = isset($_SESSION['API_SECURITY']) ? prepare_input($_SESSION['API_SECURITY']) : '';
+		$API_SECURITY = isset($_POST['API_SECURITY']) ? prepare_input($_POST['API_SECURITY']) : '';
 
-		$CAD_FROM_EMAIL = isset($_SESSION['CAD_FROM_EMAIL']) ? prepare_input($_SESSION['CAD_FROM_EMAIL']) : '';
-		$CAD_FROM_NAME = isset($_SESSION['CAD_FROM_NAME']) ? prepare_input($_SESSION['CAD_FROM_NAME']) : '';
-		$CAD_TO_EMAIL = isset($_SESSION['CAD_TO_EMAIL']) ? prepare_input($_SESSION['CAD_TO_EMAIL']) : '';
-		$CAD_TO_NAME = isset($_SESSION['CAD_TO_NAME']) ? prepare_input($_SESSION['CAD_TO_NAME']) : '';
+		$CAD_FROM_EMAIL = isset($_POST['CAD_FROM_EMAIL']) ? prepare_input($_POST['CAD_FROM_EMAIL']) : '';
+		$CAD_FROM_NAME = isset($_POST['CAD_FROM_NAME']) ? prepare_input($_POST['CAD_FROM_NAME']) : '';
+		$CAD_TO_EMAIL = isset($_POST['CAD_TO_EMAIL']) ? prepare_input($_POST['CAD_TO_EMAIL']) : '';
+		$CAD_TO_NAME = isset($_POST['CAD_TO_NAME']) ? prepare_input($_POST['CAD_TO_NAME']) : '';
 		
-		$AUTH_KEY = isset($_SESSION['AUTH_KEY']) ? prepare_input($_SESSION['AUTH_KEY']) : '';
-		$SECURE_AUTH_KEY = isset($_SESSION['SECURE_AUTH_KEY']) ? prepare_input($_SESSION['SECURE_AUTH_KEY']) : '';
-		$LOGGED_IN_KEY = isset($_SESSION['LOGGED_IN_KEY']) ? prepare_input($_SESSION['LOGGED_IN_KEY']) : '';
-		$NONCE_KEY = isset($_SESSION['NONCE_KEY']) ? prepare_input($_SESSION['NONCE_KEY']) : '';
-		$AUTH_SALT = isset($_SESSION['AUTH_SALT']) ? prepare_input($_SESSION['AUTH_SALT']) : '';
-		$SECURE_AUTH_SALT = isset($_SESSION['SECURE_AUTH_SALT']) ? prepare_input($_SESSION['SECURE_AUTH_SALT']) : '';
-		$LOGGED_IN_SALT = isset($_SESSION['LOGGED_IN_SALT']) ? prepare_input($_SESSION['LOGGED_IN_SALT']) : '';
-		$NONCE_SALT = isset($_SESSION['NONCE_SALT']) ? prepare_input($_SESSION['NONCE_SALT']) : '';
+		$AUTH_KEY = isset($_POST['AUTH_KEY']) ? prepare_input($_POST['AUTH_KEY']) : '';
+		$SECURE_AUTH_KEY = isset($_POST['SECURE_AUTH_KEY']) ? prepare_input($_POST['SECURE_AUTH_KEY']) : '';
+		$LOGGED_IN_KEY = isset($_POST['LOGGED_IN_KEY']) ? prepare_input($_POST['LOGGED_IN_KEY']) : '';
+		$NONCE_KEY = isset($_POST['NONCE_KEY']) ? prepare_input($_POST['NONCE_KEY']) : '';
+		$AUTH_SALT = isset($_POST['AUTH_SALT']) ? prepare_input($_POST['AUTH_SALT']) : '';
+		$SECURE_AUTH_SALT = isset($_POST['SECURE_AUTH_SALT']) ? prepare_input($_POST['SECURE_AUTH_SALT']) : '';
+		$LOGGED_IN_SALT = isset($_POST['LOGGED_IN_SALT']) ? prepare_input($_POST['LOGGED_IN_SALT']) : '';
+		$NONCE_SALT = isset($_POST['NONCE_SALT']) ? prepare_input($_POST['NONCE_SALT']) : '';
 		
 		$_SESSION['COMMUNITY_NAME'] = $COMMUNITY_NAME;
 		$_SESSION['BASE_URL'] = $BASE_URL;
@@ -68,25 +71,25 @@
 		exit;
 
 	}else{
-	    $COMMUNITY_NAME = isset($_SESSION['COMMUNITY_NAME']) ? prepare_input($_SESSION['COMMUNITY_NAME']) : '';
+	    $COMMUNITY_NAME = isset($_POST['COMMUNITY_NAME']) ? prepare_input($_POST['COMMUNITY_NAME']) : '';
 		
-		$BASE_URL = isset($_SESSION['BASE_URL']) ? prepare_input($_SESSION['BASE_URL']) : '';
+		$BASE_URL = isset($_POST['BASE_URL']) ? prepare_input($_POST['BASE_URL']) : '';
 		
-		$API_SECURITY = isset($_SESSION['API_SECURITY']) ? prepare_input($_SESSION['API_SECURITY']) : '';
+		$API_SECURITY = isset($_POST['API_SECURITY']) ? prepare_input($_POST['API_SECURITY']) : '';
 
-		$CAD_FROM_EMAIL = isset($_SESSION['CAD_FROM_EMAIL']) ? prepare_input($_SESSION['CAD_FROM_EMAIL']) : '';
-		$CAD_FROM_NAME = isset($_SESSION['CAD_FROM_NAME']) ? prepare_input($_SESSION['CAD_FROM_NAME']) : '';
-		$CAD_TO_EMAIL = isset($_SESSION['CAD_TO_EMAIL']) ? prepare_input($_SESSION['CAD_TO_EMAIL']) : '';
-		$CAD_TO_NAME = isset($_SESSION['CAD_TO_NAME']) ? prepare_input($_SESSION['CAD_TO_NAME']) : '';
+		$CAD_FROM_EMAIL = isset($_POST['CAD_FROM_EMAIL']) ? prepare_input($_POST['CAD_FROM_EMAIL']) : '';
+		$CAD_FROM_NAME = isset($_POST['CAD_FROM_NAME']) ? prepare_input($_POST['CAD_FROM_NAME']) : '';
+		$CAD_TO_EMAIL = isset($_POST['CAD_TO_EMAIL']) ? prepare_input($_POST['CAD_TO_EMAIL']) : '';
+		$CAD_TO_NAME = isset($_POST['CAD_TO_NAME']) ? prepare_input($_POST['CAD_TO_NAME']) : '';
 		
-		$AUTH_KEY = isset($_SESSION['AUTH_KEY']) ? prepare_input($_SESSION['AUTH_KEY']) : '';
-		$SECURE_AUTH_KEY = isset($_SESSION['SECURE_AUTH_KEY']) ? prepare_input($_SESSION['SECURE_AUTH_KEY']) : '';
-		$LOGGED_IN_KEY = isset($_SESSION['LOGGED_IN_KEY']) ? prepare_input($_SESSION['LOGGED_IN_KEY']) : '';
-		$NONCE_KEY = isset($_SESSION['NONCE_KEY']) ? prepare_input($_SESSION['NONCE_KEY']) : '';
-		$AUTH_SALT = isset($_SESSION['AUTH_SALT']) ? prepare_input($_SESSION['AUTH_SALT']) : '';
-		$SECURE_AUTH_SALT = isset($_SESSION['SECURE_AUTH_SALT']) ? prepare_input($_SESSION['SECURE_AUTH_SALT']) : '';
-		$LOGGED_IN_SALT = isset($_SESSION['LOGGED_IN_SALT']) ? prepare_input($_SESSION['LOGGED_IN_SALT']) : '';
-		$NONCE_SALT = isset($_SESSION['NONCE_SALT']) ? prepare_input($_SESSION['NONCE_SALT']) : '';
+		$AUTH_KEY = isset($_POST['AUTH_KEY']) ? prepare_input($_POST['AUTH_KEY']) : '';
+		$SECURE_AUTH_KEY = isset($_POST['SECURE_AUTH_KEY']) ? prepare_input($_POST['SECURE_AUTH_KEY']) : '';
+		$LOGGED_IN_KEY = isset($_POST['LOGGED_IN_KEY']) ? prepare_input($_POST['LOGGED_IN_KEY']) : '';
+		$NONCE_KEY = isset($_POST['NONCE_KEY']) ? prepare_input($_POST['NONCE_KEY']) : '';
+		$AUTH_SALT = isset($_POST['AUTH_SALT']) ? prepare_input($_POST['AUTH_SALT']) : '';
+		$SECURE_AUTH_SALT = isset($_POST['SECURE_AUTH_SALT']) ? prepare_input($_POST['SECURE_AUTH_SALT']) : '';
+		$LOGGED_IN_SALT = isset($_POST['LOGGED_IN_SALT']) ? prepare_input($_POST['LOGGED_IN_SALT']) : '';
+		$NONCE_SALT = isset($_POST['NONCE_SALT']) ? prepare_input($_POST['NONCE_SALT']) : '';
 
 	}
 ?>	
@@ -147,7 +150,7 @@
 			<tr><td nowrap height="10px" colspan="3"></td></tr>
 			<tr>
 				<td width="250px">&nbsp;<?php echo lang_key('COMMUNITY_NAME'); ?>&nbsp;<span class="star">*</span></td>
-				<td><input name="COMMUNITY_NAME" id="COMMUNITY_NAME" class="form_text" size="28" maxlength="22" value="<?php echo $COMMUNITY_NAME; ?>" onfocus="textboxOnFocus('COMMUNITY_NAME_notes')" onblur="textboxOnBlur('COMMUNITY_NAME_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+				<td><input name="COMMUNITY_NAME" id="COMMUNITY_NAME" value="My Community" class="form_text" size="28" maxlength="22" value="<?php echo $COMMUNITY_NAME; ?>" onfocus="textboxOnFocus('COMMUNITY_NAME_notes')" onblur="textboxOnBlur('COMMUNITY_NAME_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 				<td rowspan="6" valign="top">					
 					<div id="API_SECURITY_notes" class="notes_container">
 						<h4><?php echo lang_key('API_SECURITY'); ?></h4>
@@ -172,12 +175,12 @@
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('BASE_URL'); ?>&nbsp;<span class="star">*</span></td>
-				<td><input name="BASE_URL" id="BASE_URL" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('BASE_URL_notes')" onblur="textboxOnBlur('BASE_URL_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+				<td><input name="BASE_URL" id="BASE_URL" value="//cad.mycommunity.com/" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('BASE_URL_notes')" onblur="textboxOnBlur('BASE_URL_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('API_SECURITY'); ?>&nbsp;</td>
-				<td><input type="radio" name="API_SECURITY" id="API_SECURITY" <?php echo ($API_SECURITY=='true')?'checked':'' ?> onfocus="textboxOnFocus('POLICE_NCIC_notes')" onblur="textboxOnBlur('POLICE_NCIC_notes')" value="true" />True
-				<input type="radio" name="API_SECURITY" id="API_SECURITY" <?php echo ($API_SECURITY=='false')?'checked':'' ?> onfocus="textboxOnFocus('POLICE_NCIC_notes')" checked onblur="textboxOnBlur('POLICE_NCIC_notes')" value="false" />False</td>
+				<td><input type="radio" name="API_SECURITY" id="API_SECURITY" <?php echo ($API_SECURITY=='true')?'checked':'' ?> onfocus="textboxOnFocus('POLICE_NCIC_notes')" checked onblur="textboxOnBlur('POLICE_NCIC_notes')" value="true" />True
+				<input type="radio" name="API_SECURITY" id="API_SECURITY" <?php echo ($API_SECURITY=='false')?'checked':'' ?> onfocus="textboxOnFocus('POLICE_NCIC_notes')" onblur="textboxOnBlur('POLICE_NCIC_notes')" value="false" />False</td>
 			</tr>
 			<tr><td colspan="2" nowrap height="50px">&nbsp;</td></tr>
 			<tr>
