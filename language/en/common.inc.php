@@ -73,8 +73,8 @@ $arrLang['database_prefix'] = "Database Prefix (optional)";
 $arrLang['database_prefix_info'] = "Database prefix. Used to set the unique prefix for database tables and prevent one type of data from interfering with another. An example of database prefix is 'abc_'.";
 $arrLang['database_settings'] = "Database Settings";
 $arrLang['directories_and_files'] = "Directories and Files";
-$arrLang['disabled'] = "disabled";
-$arrLang['enabled'] = "enabled";
+$arrLang['disabled'] = "Disabled";
+$arrLang['enabled'] = "Enabled";
 $arrLang['error'] = "Error";
 $arrLang['extensions'] = "Extensions";
 $arrLang['getting_system_info'] = "Getting System Info";
@@ -105,7 +105,7 @@ $arrLang['not_installed'] = "not installed";
 $arrLang['off'] = "Off";
 $arrLang['ok'] = "OK";
 $arrLang['on'] = "On";
-$arrLang['passed'] = "passed";
+$arrLang['passed'] = "Passed";
 $arrLang['password_encryption'] = "Password Encryption";
 $arrLang['perform_manual_installation'] = "Perform a <b>Manual</b> Installation";
 $arrLang['pdo_support'] = "PDO Support";
@@ -152,12 +152,19 @@ $arrLang['updating_completed'] = "Updating Completed!";
 $arrLang['virtual_directory_support'] = "Virtual Directory Support";
 $arrLang['we_are_ready_to_installation'] = "We are ready now to proceed with installation";
 $arrLang['we_are_ready_to_installation_text'] = "At this step setup wizard will attempt to create all required database tables and populate them with data. <br>If something goes wrong, go back to the Database Settings step and make sure every information you've entered is correct.";
-$arrLang['writable'] = "writable";
+$arrLang['writable'] = "Writable";
 
+$arrLang['core_configuration'] = "Core Configuration";
+$arrLang['department_configuration'] = 'Department Configuration';
+$arrLang['civilian_configuration'] = 'Civilian Configuration'; 
+$arrLang['administrative_configuration'] = 'Administrative Configuratiion';
+$arrLang['extra_settings'] = 'Extra Settings';
+$arrLang[''] = '';
 
+//** Begin Core Configuration Strings **//
 $arrLang['COMMUNITY_NAME'] = "Community Name";
 $arrLang['COMMUNITY_NAME_notes'] = "Set your community's name";
-$arrLang['COMMUNITY_NAME_alert'] = "COMMUNITY_NAME cannot be empty! Please re-enter.";
+$arrLang['COMMUNITY_NAME_alert'] = "Community Name cannot be empty! Please re-enter.";
 
 $arrLang['BASE_URL'] = "Application URL";
 $arrLang['BASE_URL_notes'] = "The URL to your installation of OpenCAD inlcuding, if utilized, it's subdirectory
@@ -171,11 +178,16 @@ $arrLang['BASE_URL_notes'] = "The URL to your installation of OpenCAD inlcuding,
 $arrLang['BASE_URL_alert'] = "BASE_URL cannot be empty! Please re-enter.";
 
 
+$arrLang['API_SECURITY'] = 'API Security';
+$arrLang['API_SECURITY_notes'] = 'The API Key is used to authenticate requests from logedout users, it is also used in creating cookie \'aljksdz7\' which stores the API-Key and the session id of the loged in user.';
+//** End Core Configuration Strings **//
+
+//** Begin Police Strings **//
 $arrLang['POLICE_NCIC'] = "Police NCIC";
 $arrLang['POLICE_NCIC_notes'] = "Shows/Hides NCIC functionality on MDT console. If 'true' then LEO will be able to use NCIC functions without the need for a dispatcher, else if 'flase' then LEO will require the presence of dispatcher to use NCIC funcationality.";
+//** End Police Strings **//
 
-
-
+//**  Begin Fire Strings **//
 $arrLang['FIRE_PANIC'] = "Fire Panic";
 $arrLang['FIRE_PANIC_notes'] = "Shows/Hides Panic functionality on MDT console for Fire. If 'true' then Fire personnel will be able to use the Panic button, else if 'false' then Fire personnel will not be able to use the Panic button.";
 
@@ -187,23 +199,23 @@ $arrLang['FIRE_NCIC_NAME_notes'] = "Shows/Hides Panic functionality on MDT conso
 
 $arrLang['FIRE_NCIC_PLATE'] = "Fire NCIC Plate";
 $arrLang['FIRE_NCIC_PLATE_notes'] = "Shows/Hides Panic functionality on MDT console for Fire. If 'true' then Fire personnel will be able to use the NCIC plate lookup function, else if 'false' then Fire personnel will not be able to use the NICI plate lookup function.";
+//**  End Fire Strings **//
 
-
-
+//** Begin EMS Strings **//
 $arrLang['EMS_PANIC'] = "EMS Panic";
-$arrLang['EMS_PANIC_notes'] = "Shows/Hides Panic functionality on MDT console for EMS. If 'true' then EMS personnel will be able to use the Panic button, else if 'false' then EMS personnel will not be able to use the Panic button. These settings will likely be moved to an *_options table in a future version.";
+$arrLang['EMS_PANIC_notes'] = "Shows/Hides Panic functionality on MDT console for EMS. If 'true' then Fire personnel will be able to use the Panic button, else if 'false' then EMS personnel will not be able to use the Panic button.";
 
 $arrLang['EMS_BOLO'] = "EMS BOLO";
-$arrLang['EMS_BOLO_notes'] = "Shows/Hides Panic functionality on MDT console for EMS. If 'true' then EMS personnel will be able to view the BOLO board, else if 'false' then EMS personnel will not be able to view the BOLO board. These settings will likely be moved to an *_options table in a future version.";
+$arrLang['EMS_BOLO_notes'] = "Shows/Hides Panic functionality on MDT console for EMS. If 'true' then Fire personnel will be able to view the BOLO board, else if 'false' then EMS personnel will not be able to view the BOLO board";
 
 $arrLang['EMS_NCIC_NAME'] = "EMS NCIC Name";
-$arrLang['EMS_NCIC_NAME_notes'] = "Shows/Hides Panic functionality on MDT console for EMS. If 'true' then EMS personnel will be able to use the NCIC name lookup funcion, else if 'false' then EMS personnel will not be to use the NCIC name lookup function.";
+$arrLang['EMS_NCIC_NAME_notes'] = "Shows/Hides Panic functionality on MDT console for EMS. If 'true' then Fire personnel will be able to use the NCIC name name lookup, else if 'false' then EMS personnel will not be able to use NCIC name lookup";
 
 $arrLang['EMS_NCIC_PLATE'] = "EMS NCIC Plate";
-$arrLang['EMS_NCIC_PLATE_notes'] = "Shows/Hides Panic functionality on MDT console for EMS. If 'true' then EMS personnel will be able to use the Panic button, else if 'false' then EMS personnel will not be able to use the Panic button. These settings will likely be moved to an *_options table in a future version.";
+$arrLang['EMS_NCIC_PLATE_notes'] = "Shows/Hides Panic functionality on MDT console for EMS. If 'true' then Fire personnel will be able to use the NCIC plate lookup function, else if 'false' then EMS personnel will not be able to use the NCIC plate lookup function.";
+//** End EMS Strings **//
 
-
-
+//** Begin Roadside Assistance Strings **//
 $arrLang['ROADSIDE_PANIC'] = "Roadside Panic";
 $arrLang['ROADSIDE_PANIC_notes'] = "Shows/Hides Panic functionality on MDT console for Roadside Assistance. If 'true' then RAO will be able to use the Panic button, else if 'false' then RAO will not be able to use the Panic button.";
 
@@ -215,18 +227,22 @@ $arrLang['ROADSIDE_NCIC_NAME_notes'] = "Shows/Hides NCIC functionality on MDT co
 
 $arrLang['ROADSIDE_NCIC_PLATE'] = "Roadside NCIC Plate";
 $arrLang['ROADSIDE_NCIC_PLATE_notes'] = "Shows/Hides NCIC functionality on MDT console for Roadside Assistance. If 'true' then RAO will be able to use NCIC plate query without the need for a dispatcher, else if 'false' then RAO will require the presence of dispatcher to use NCIC plate query funcationality.";
+//** End    Roadside Assistance Strings **//
 
-
-
+//** Begin Civilian Strings **//
 $arrLang['CIV_WARRANT'] = "Civilian Warrant Creation";
 $arrLang['CIV_WARRANT_notes'] = "Allow/Disallow Civiliians from managing their warrants. If set to 'true' then Civs will be able to delete warrants from their profile, else if set to 'false' then Civs will not have the ability to remove warrants.";
 
 $arrLang['CIV_REG'] = "Instant Civilian Registration";
 $arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+//** End Civilian Strings **//
 
-
+//** Begin Extra Settings Strings **//
+$arrLang['DEMO_MODE'] = "Demo Mode";
+$arrLang['DEMO_MODE_notes'] = "'true' then various user management features of OpenCAD will be locked down, else if 'false' then OpenCAD's full functionality* will be available to use.";
 
 $arrLang['USE_GRAVATAR'] = "Gravatar";
 $arrLang['USE_GRAVATAR_notes'] = "OpenCAD will dynamically retrieve your avatar from {@link Gravatar http://en.gravatar.com/} if you have an account. Otherwise it will use the default generic avatar image included with OpenCAD .";
+//** End Extra Settings Strings **//
 
 ?>
