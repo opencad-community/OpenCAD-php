@@ -1,7 +1,9 @@
 <?php
 
 	session_start();
-
+	echo '<pre>';
+	var_dump($_SESSION);
+	echo '</pre>'; 
 	require_once('include/shared.inc.php');    
     require_once('include/settings.inc.php');    
 	require_once('include/functions.inc.php');
@@ -25,17 +27,17 @@
 	// -------------------------------------------------
 	if($task == 'send'){
 		
-		$POLICE_NCIC = isset($_SESSION['POLICE_NCIC']) ? prepare_input($_SESSION['POLICE_NCIC']) : '';
+		$POLICE_NCIC = isset($_POST['POLICE_NCIC']) ? prepare_input($_POST['POLICE_NCIC']) : '';
 		
-		$FIRE_PANIC = isset($_SESSION['FIRE_PANIC']) ? prepare_input($_SESSION['FIRE_PANIC']) : '';
-		$FIRE_BOLO = isset($_SESSION['FIRE_BOLO']) ? prepare_input($_SESSION['FIRE_BOLO']) : '';
-		$FIRE_NCIC_NAME = isset($_SESSION['FIRE_NCIC_NAME']) ? prepare_input($_SESSION['FIRE_NCIC_NAME']) : '';
-		$FIRE_NCIC_PLATE = isset($_SESSION['FIRE_NCIC_PLATE']) ? prepare_input($_SESSION['FIRE_NCIC_PLATE']) : '';
+		$FIRE_PANIC = isset($_POST['FIRE_PANIC']) ? prepare_input($_POST['FIRE_PANIC']) : '';
+		$FIRE_BOLO = isset($_POST['FIRE_BOLO']) ? prepare_input($_POST['FIRE_BOLO']) : '';
+		$FIRE_NCIC_NAME = isset($_POST['FIRE_NCIC_NAME']) ? prepare_input($_POST['FIRE_NCIC_NAME']) : '';
+		$FIRE_NCIC_PLATE = isset($_POST['FIRE_NCIC_PLATE']) ? prepare_input($_POST['FIRE_NCIC_PLATE']) : '';
 		
-		$EMS_PANIC = isset($_SESSION['EMS_PANIC']) ? prepare_input($_SESSION['EMS_PANIC']) : '';
-		$EMS_BOLO = isset($_SESSION['EMS_BOLO']) ? prepare_input($_SESSION['EMS_BOLO']) : '';
-		$EMS_NCIC_NAME = isset($_SESSION['EMS_NCIC_NAME']) ? prepare_input($_SESSION['EMS_NCIC_NAME']) : '';
-		$EMS_NCIC_PLATE = isset($_SESSION['EMS_NCIC_PLATE']) ? prepare_input($_SESSION['EMS_NCIC_PLATE']) : '';
+		$EMS_PANIC = isset($_POST['EMS_PANIC']) ? prepare_input($_POST['EMS_PANIC']) : '';
+		$EMS_BOLO = isset($_POST['EMS_BOLO']) ? prepare_input($_POST['EMS_BOLO']) : '';
+		$EMS_NCIC_NAME = isset($_POST['EMS_NCIC_NAME']) ? prepare_input($_POST['EMS_NCIC_NAME']) : '';
+		$EMS_NCIC_PLATE = isset($_POST['EMS_NCIC_PLATE']) ? prepare_input($_POST['EMS_NCIC_PLATE']) : '';
 		
 		$_SESSION['POLICE_NCIC'] = $POLICE_NCIC;
 		
@@ -55,18 +57,17 @@
 
 	}else{
 
+		$POLICE_NCIC = isset($_POST['POLICE_NCIC']) ? prepare_input($_POST['POLICE_NCIC']) : '';
 		
-		$POLICE_NCIC = isset($_SESSION['POLICE_NCIC']) ? prepare_input($_SESSION['POLICE_NCIC']) : '';
+		$FIRE_PANIC = isset($_POST['FIRE_PANIC']) ? prepare_input($_POST['FIRE_PANIC']) : '';
+		$FIRE_BOLO = isset($_POST['FIRE_BOLO']) ? prepare_input($_POST['FIRE_BOLO']) : '';
+		$FIRE_NCIC_NAME = isset($_POST['FIRE_NCIC_NAME']) ? prepare_input($_POST['FIRE_NCIC_NAME']) : '';
+		$FIRE_NCIC_PLATE = isset($_POST['FIRE_NCIC_PLATE']) ? prepare_input($_POST['FIRE_NCIC_PLATE']) : '';
 		
-		$FIRE_PANIC = isset($_SESSION['FIRE_PANIC']) ? prepare_input($_SESSION['FIRE_PANIC']) : '';
-		$FIRE_BOLO = isset($_SESSION['FIRE_BOLO']) ? prepare_input($_SESSION['FIRE_BOLO']) : '';
-		$FIRE_NCIC_NAME = isset($_SESSION['FIRE_NCIC_NAME']) ? prepare_input($_SESSION['FIRE_NCIC_NAME']) : '';
-		$FIRE_NCIC_PLATE = isset($_SESSION['FIRE_NCIC_PLATE']) ? prepare_input($_SESSION['FIRE_NCIC_PLATE']) : '';
-		
-		$EMS_PANIC = isset($_SESSION['EMS_PANIC']) ? prepare_input($_SESSION['EMS_PANIC']) : '';
-		$EMS_BOLO = isset($_SESSION['EMS_BOLO']) ? prepare_input($_SESSION['EMS_BOLO']) : '';
-		$EMS_NCIC_NAME = isset($_SESSION['EMS_NCIC_NAME']) ? prepare_input($_SESSION['EMS_NCIC_NAME']) : '';
-		$EMS_NCIC_PLATE = isset($_SESSION['EMS_NCIC_PLATE']) ? prepare_input($_SESSION['EMS_NCIC_PLATE']) : '';
+		$EMS_PANIC = isset($_POST['EMS_PANIC']) ? prepare_input($_POST['EMS_PANIC']) : '';
+		$EMS_BOLO = isset($_POST['EMS_BOLO']) ? prepare_input($_POST['EMS_BOLO']) : '';
+		$EMS_NCIC_NAME = isset($_POST['EMS_NCIC_NAME']) ? prepare_input($_POST['EMS_NCIC_NAME']) : '';
+		$EMS_NCIC_PLATE = isset($_POST['EMS_NCIC_PLATE']) ? prepare_input($_POST['EMS_NCIC_PLATE']) : '';
 
 	}
 ?>	
@@ -127,8 +128,8 @@
 			<tr><td nowrap height="10px" colspan="3"></td></tr>
 			<tr>
 				<td width="250px">&nbsp;<?php echo lang_key('POLICE_NCIC'); ?>&nbsp;</td>
-				<td><input type="radio" name="POLICE_NCIC" id="POLICE_NCIC" <?php echo ($POLICE_NCIC=='true')?'checked':'' ?> onfocus="textboxOnFocus('POLICE_NCIC_notes')" onblur="textboxOnBlur('POLICE_NCIC_notes')" value="true" />True
-				<input type="radio" name="POLICE_NCIC" id="POLICE_NCIC" <?php echo ($POLICE_NCIC=='false')?'checked':'' ?> onfocus="textboxOnFocus('POLICE_NCIC_notes')" checked onblur="textboxOnBlur('POLICE_NCIC_notes')" value="false" />False</td>
+				<td><input type="radio" name="POLICE_NCIC" id="POLICE_NCIC" <?php echo ($POLICE_NCIC=='true')?'checked':'' ?> onfocus="textboxOnFocus('POLICE_NCIC_notes')" checked onblur="textboxOnBlur('POLICE_NCIC_notes')" value="true" />True
+				<input type="radio" name="POLICE_NCIC" id="POLICE_NCIC" <?php echo ($POLICE_NCIC=='false')?'checked':'' ?> onfocus="textboxOnFocus('POLICE_NCIC_notes')"  onblur="textboxOnBlur('POLICE_NCIC_notes')" value="false" />False</td>
 				<td rowspan="6" valign="top">					
 					<div id="POLICE_NCIC_notes" class="notes_container">
 						<h4><?php echo lang_key('POLICE_NCIC'); ?></h4>
@@ -175,44 +176,44 @@
 			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('FIRE_PANIC'); ?>&nbsp;</td>
-				<td><input type="radio" name="FIRE_PANIC" id="FIRE_PANIC" <?php echo ($FIRE_PANIC=='true')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_PANIC_notes')" onblur="textboxOnBlur('FIRE_PANIC_notes')" value="true" />True
-				<input type="radio" name="FIRE_PANIC" id="FIRE_PANIC" <?php echo ($FIRE_PANIC=='false')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_PANIC_notes')" checked onblur="textboxOnBlur('FIRE_PANIC_notes')" value="false" />False</td>
+				<td><input type="radio" name="FIRE_PANIC" id="FIRE_PANIC" <?php echo ($FIRE_PANIC=='true')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_PANIC_notes')" checked onblur="textboxOnBlur('FIRE_PANIC_notes')" value="true" />True
+				<input type="radio" name="FIRE_PANIC" id="FIRE_PANIC" <?php echo ($FIRE_PANIC=='false')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_PANIC_notes')" onblur="textboxOnBlur('FIRE_PANIC_notes')" value="false" />False</td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('FIRE_BOLO'); ?>&nbsp;</td>
-				<td><input type="radio" name="FIRE_BOLO" id="FIRE_BOLO" <?php echo ($FIRE_BOLO=='true')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_BOLO_notes')" onblur="textboxOnBlur('FIRE_BOLO_notes')" value="true" />True
-				<input type="radio" name="FIRE_BOLO" id="FIRE_BOLO" <?php echo ($FIRE_BOLO=='false')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_BOLO_notes')" checked onblur="textboxOnBlur('FIRE_BOLO_notes')" value="false" />False</td>
+				<td><input type="radio" name="FIRE_BOLO" id="FIRE_BOLO" <?php echo ($FIRE_BOLO=='true')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_BOLO_notes')" checked onblur="textboxOnBlur('FIRE_BOLO_notes')" value="true" />True
+				<input type="radio" name="FIRE_BOLO" id="FIRE_BOLO" <?php echo ($FIRE_BOLO=='false')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_BOLO_notes')" onblur="textboxOnBlur('FIRE_BOLO_notes')" value="false" />False</td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('FIRE_NCIC_NAME'); ?>&nbsp;</td>
-				<td><input type="radio" name="FIRE_NCIC_NAME" id="FIRE_NCIC_NAME" <?php echo ($FIRE_NCIC_NAME=='true')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_NCIC_NAME_notes')" onblur="textboxOnBlur('FIRE_NCIC_NAME_notes')" value="true" />True
-				<input type="radio" name="FIRE_NCIC_NAME" id="FIRE_NCIC_NAME" <?php echo ($FIRE_NCIC_NAME=='false')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_NCIC_NAME_notes')" checked onblur="textboxOnBlur('FIRE_NCIC_NAME_notes')" value="false" />False</td>
+				<td><input type="radio" name="FIRE_NCIC_NAME" id="FIRE_NCIC_NAME" <?php echo ($FIRE_NCIC_NAME=='true')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_NCIC_NAME_notes')" checked onblur="textboxOnBlur('FIRE_NCIC_NAME_notes')" value="true" />True
+				<input type="radio" name="FIRE_NCIC_NAME" id="FIRE_NCIC_NAME" <?php echo ($FIRE_NCIC_NAME=='false')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_NCIC_NAME_notes')" onblur="textboxOnBlur('FIRE_NCIC_NAME_notes')" value="false" />False</td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('FIRE_NCIC_PLATE'); ?>&nbsp;</td>
-				<td><input type="radio" name="FIRE_NCIC_PLATE" id="FIRE_NCIC_PLATE" <?php echo ($FIRE_NCIC_PLATE=='true')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_NCIC_PLATE_notes')" onblur="textboxOnBlur('FIRE_NCIC_PLATE_notes')" value="true" />True
-				<input type="radio" name="FIRE_NCIC_PLATE" id="FIRE_NCIC_PLATE" <?php echo ($FIRE_NCIC_PLATE=='false')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_NCIC_PLATE_notes')" checked onblur="textboxOnBlur('FIRE_NCIC_PLATE_notes')" value="false" />False</td>
+				<td><input type="radio" name="FIRE_NCIC_PLATE" id="FIRE_NCIC_PLATE" <?php echo ($FIRE_NCIC_PLATE=='true')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_NCIC_PLATE_notes')" checked onblur="textboxOnBlur('FIRE_NCIC_PLATE_notes')" value="true" />True
+				<input type="radio" name="FIRE_NCIC_PLATE" id="FIRE_NCIC_PLATE" <?php echo ($FIRE_NCIC_PLATE=='false')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_NCIC_PLATE_notes')" onblur="textboxOnBlur('FIRE_NCIC_PLATE_notes')" value="false" />False</td>
 			</tr>
 			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('EMS_PANIC'); ?>&nbsp;</td>
-				<td><input type="radio" name="EMS_PANIC" id="EMS_PANIC" <?php echo ($EMS_PANIC=='true')?'checked':'' ?> onfocus="textboxOnFocus('EMS_PANIC_notes')" onblur="textboxOnBlur('EMS_PANIC_notes')" value="true" />True
-				<input type="radio" name="EMS_PANIC" id="EMS_PANIC" <?php echo ($EMS_PANIC=='false')?'checked':'' ?> onfocus="textboxOnFocus('EMS_PANIC_notes')" checked onblur="textboxOnBlur('EMS_PANIC_notes')" value="false" />False</td>
+				<td><input type="radio" name="EMS_PANIC" id="EMS_PANIC" <?php echo ($EMS_PANIC=='true')?'checked':'' ?> onfocus="textboxOnFocus('EMS_PANIC_notes')" checked onblur="textboxOnBlur('EMS_PANIC_notes')" value="true" />True
+				<input type="radio" name="EMS_PANIC" id="EMS_PANIC" <?php echo ($EMS_PANIC=='false')?'checked':'' ?> onfocus="textboxOnFocus('EMS_PANIC_notes')" onblur="textboxOnBlur('EMS_PANIC_notes')" value="false" />False</td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('EMS_BOLO'); ?>&nbsp;</td>
-				<td><input type="radio" name="EMS_BOLO" id="EMS_BOLO" <?php echo ($EMS_BOLO=='true')?'checked':'' ?> onfocus="textboxOnFocus('EMS_BOLO_notes')" onblur="textboxOnBlur('EMS_BOLO_notes')" value="true" />True
-				<input type="radio" name="EMS_BOLO" id="EMS_BOLO" <?php echo ($EMS_BOLO=='false')?'checked':'' ?> onfocus="textboxOnFocus('EMS_BOLO_notes')" checked onblur="textboxOnBlur('EMS_BOLO_notes')" value="false" />False</td>
+				<td><input type="radio" name="EMS_BOLO" id="EMS_BOLO" <?php echo ($EMS_BOLO=='true')?'checked':'' ?> onfocus="textboxOnFocus('EMS_BOLO_notes')" checked onblur="textboxOnBlur('EMS_BOLO_notes')" value="true" />True
+				<input type="radio" name="EMS_BOLO" id="EMS_BOLO" <?php echo ($EMS_BOLO=='false')?'checked':'' ?> onfocus="textboxOnFocus('EMS_BOLO_notes')" onblur="textboxOnBlur('EMS_BOLO_notes')" value="false" />False</td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('EMS_NCIC_NAME'); ?>&nbsp;</td>
-				<td><input type="radio" name="EMS_NCIC_NAME" id="EMS_NCIC_NAME" <?php echo ($EMS_NCIC_NAME=='true')?'checked':'' ?> onfocus="textboxOnFocus('EMS_NCIC_NAME_notes')" onblur="textboxOnBlur('EMS_NCIC_NAME_notes')" value="true" />True
-				<input type="radio" name="EMS_NCIC_NAME" id="EMS_NCIC_NAME" <?php echo ($EMS_NCIC_NAME=='false')?'checked':'' ?> onfocus="textboxOnFocus('EMS_NCIC_NAME_notes')" checked onblur="textboxOnBlur('EMS_NCIC_NAME_notes')" value="false" />False</td>
+				<td><input type="radio" name="EMS_NCIC_NAME" id="EMS_NCIC_NAME" <?php echo ($EMS_NCIC_NAME=='true')?'checked':'' ?> onfocus="textboxOnFocus('EMS_NCIC_NAME_notes')" checked onblur="textboxOnBlur('EMS_NCIC_NAME_notes')" value="true" />True
+				<input type="radio" name="EMS_NCIC_NAME" id="EMS_NCIC_NAME" <?php echo ($EMS_NCIC_NAME=='false')?'checked':'' ?> onfocus="textboxOnFocus('EMS_NCIC_NAME_notes')" onblur="textboxOnBlur('EMS_NCIC_NAME_notes')" value="false" />False</td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('EMS_NCIC_PLATE'); ?>&nbsp;</td>
-				<td><input type="radio" name="EMS_NCIC_PLATE" id="EMS_NCIC_PLATE" <?php echo ($EMS_NCIC_PLATE=='true')?'checked':'' ?> onfocus="textboxOnFocus('EMS_NCIC_PLATE_notes')" onblur="textboxOnBlur('EMS_NCIC_PLATE_notes')" value="true" />True
-				<input type="radio" name="EMS_NCIC_PLATE" id="EMS_NCIC_PLATE" <?php echo ($EMS_NCIC_PLATE=='false')?'checked':'' ?> onfocus="textboxOnFocus('EMS_NCIC_PLATE_notes')" checked onblur="textboxOnBlur('EMS_NCIC_PLATE_notes')" value="false" />False</td>
+				<td><input type="radio" name="EMS_NCIC_PLATE" id="EMS_NCIC_PLATE" <?php echo ($EMS_NCIC_PLATE=='true')?'checked':'' ?> onfocus="textboxOnFocus('EMS_NCIC_PLATE_notes')" checked onblur="textboxOnBlur('EMS_NCIC_PLATE_notes')" value="true" />True
+				<input type="radio" name="EMS_NCIC_PLATE" id="EMS_NCIC_PLATE" <?php echo ($EMS_NCIC_PLATE=='false')?'checked':'' ?> onfocus="textboxOnFocus('EMS_NCIC_PLATE_notes')" onblur="textboxOnBlur('EMS_NCIC_PLATE_notes')" value="false" />False</td>
 			</tr>				
 			<tr><td colspan="2" nowrap height="50px">&nbsp;</td></tr>
 			<tr>
