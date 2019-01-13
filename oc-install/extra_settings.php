@@ -25,7 +25,8 @@
 	// -------------------------------------------------
 	if($task == 'send'){
 
-		$USE_GRAVATAR = isset($_SESSION['USE_GRAVATAR']) ? prepare_input($_SESSION['USE_GRAVATAR']) : '';
+		$DEMO_MODE = isset($_POST['DEMO_MODE']) ? prepare_input($_POST['DEMO_MODE']) : '';
+		$USE_GRAVATAR = isset($_POST['USE_GRAVATAR']) ? prepare_input($_POST['USE_GRAVATAR']) : '';
 		
 		$_SESSION['DEMO_MODE'] = $DEMO_MODE;
 		$_SESSION['USE_GRAVATAR'] = $USE_GRAVATAR;		
@@ -36,8 +37,8 @@
 
 	}else{
 
-		$DEMO_MODE = isset($_SERVER['DEMO_MODE']) ? prepare_input($_SESSION['DEMO_MODE']) : '';
-		$USE_GRAVATAR = isset($_SESSION['USE_GRAVATAR']) ? prepare_input($_SESSION['USE_GRAVATAR']) : '';
+		$DEMO_MODE = isset($_POST['DEMO_MODE']) ? prepare_input($_POST['DEMO_MODE']) : '';
+		$USE_GRAVATAR = isset($_POST['USE_GRAVATAR']) ? prepare_input($_POST['USE_GRAVATAR']) : '';
 
 	}
 ?>	
@@ -99,8 +100,8 @@
 			<tr>
 			<td>&nbsp;<?php echo lang_key('DEMO_MODE'); ?>&nbsp;</td>
 				<td>
-					<input type="radio" name="DEMO_MODE" id="DEMO_MODE" <?php echo ($DEMO_MODE=='true')?'checked':'' ?> onfocus="textboxOnFocus('DEMO_MODE_notes')" checked onblur="textboxOnBlur('DEMO_MODE_GRAVATAR_notes')" value="true" />True
-					<input type="radio" name="DEMO_MODE" id="DEMO_MODE" <?php echo ($DEMO_MODER=='false')?'checked':'' ?> onfocus="textboxOnFocus('DEMO_MODE_notes')"  onblur="textboxOnBlur('DEMO_MODE_notes')" value="false" />False
+					<input type="radio" name="DEMO_MODE" id="DEMO_MODE" <?php echo ($DEMO_MODE=='true')?'checked':'' ?> onfocus="textboxOnFocus('DEMO_MODE_notes')" onblur="textboxOnBlur('DEMO_MODE_GRAVATAR_notes')" value="true" />True
+					<input type="radio" name="DEMO_MODE" id="DEMO_MODE" <?php echo ($DEMO_MODER=='false')?'checked':'' ?> onfocus="textboxOnFocus('DEMO_MODE_notes')" checked  onblur="textboxOnBlur('DEMO_MODE_notes')" value="false" />False
 				</td>
 				<td rowspan="6" valign="top">					
 					<div id="DEMO_MODE_notes" class="notes_container">

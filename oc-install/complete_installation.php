@@ -12,7 +12,7 @@
 
 	// handle previous steps
 	// -------------------------------------------------
-	if($passed_step >= 11){
+	if($passed_step >= 10){
 		// OK
 	}else{
 		header('location: start.php');
@@ -46,9 +46,7 @@
 		$API_SECURITY = isset($_SESSION['API_SECURITY']) ? prepare_input($_SESSION['API_SECURITY']) : '';
 
 		$CAD_FROM_EMAIL = isset($_SESSION['CAD_FROM_EMAIL']) ? prepare_input($_SESSION['CAD_FROM_EMAIL']) : '';
-		$CAD_FROM_NAME = isset($_SESSION['CAD_FROM_NAME']) ? prepare_input($_SESSION['CAD_FROM_NAME']) : '';
 		$CAD_TO_EMAIL = isset($_SESSION['CAD_TO_EMAIL']) ? prepare_input($_SESSION['CAD_TO_EMAIL']) : '';
-		$CAD_TO_NAME = isset($_SESSION['CAD_TO_NAME']) ? prepare_input($_SESSION['CAD_TO_NAME']) : '';
 		
 		$AUTH_KEY = isset($_SESSION['AUTH_KEY']) ? prepare_input($_SESSION['AUTH_KEY']) : '';
 		$SECURE_AUTH_KEY = isset($_SESSION['SECURE_AUTH_KEY']) ? prepare_input($_SESSION['SECURE_AUTH_KEY']) : '';
@@ -150,9 +148,7 @@
 								$config_file = str_replace('<API_SECURITY>', $API_SECURITY, $config_file);
 								
 								$config_file = str_replace('<CAD_FROM_EMAIL>', $CAD_FROM_EMAILL, $config_file);
-								$config_file = str_replace('<CAD_FROM_NAME>', $CAD_FROM_NAME, $config_file);
 								$config_file = str_replace('<CAD_TO_EMAIL>', $CAD_TO_EMAIL, $config_file);
-								$config_file = str_replace('<CAD_TO_NAME>', $CAD_TO_NAME, $config_file);
 								
 								$config_file = str_replace('<AUTH_KEY>', $AUTH_KEY, $config_file);
 								$config_file = str_replace('<SECURE_AUTH_KEY>', $SECURE_AUTH_KEY, $config_file);
@@ -193,7 +189,6 @@
 
 								$config_file = str_replace('<DEMO_MODE>', $DEMO_MODE, $config_file);
 								$config_file = str_replace('<USE_GRAVATAR>', $USE_GRAVATAR, $config_file);
-								
 								
 								chmod(EI_CONFIG_FILE_PATH, 0777);
 								$f = fopen(EI_CONFIG_FILE_PATH, 'w+');
