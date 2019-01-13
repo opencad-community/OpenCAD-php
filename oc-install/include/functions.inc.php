@@ -134,10 +134,9 @@ function draw_side_navigation($step = 1, $draw = true)
 		'6'=>array('url'=>'department_configuration.php', 'text'=>lang_key('department_configuration')),
 		'7'=>array('url'=>'civilian_configuration.php', 'text'=>lang_key('civilian_configuration')),
 		'8'=>array('url'=>'administrative_settings.php', 'text'=>lang_key('administrative_configuration')),
-        '9'=>array('url'=>'options.php', 'text'=>lang_key('options_page')),
-		'10'=>array('url'=>'extra_settings.php', 'text'=>lang_key('extra_settings')),
-		'11'=>array('url'=>'ready_to_install.php', 'text'=>lang_key('ready_to_install')),
-		'12'=>array('url'=>'complete_installation.php', 'text'=>lang_key('installation_complete'))
+		'9'=>array('url'=>'extra_settings.php', 'text'=>lang_key('extra_settings')),
+		'10'=>array('url'=>'ready_to_install.php', 'text'=>lang_key('ready_to_install')),
+		'11'=>array('url'=>'complete_installation.php', 'text'=>lang_key('installation_complete'))
 	);
 	
 	$output  = '<div class="left-part">';
@@ -160,6 +159,16 @@ function draw_side_navigation($step = 1, $draw = true)
 	$output .= '</div>';
 	
 	if($draw) echo $output;	
-	else return $output;	
+	else return $output;
+}
+
+function random_str($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#')
+{
+    $pieces = [];
+    $max = mb_strlen($keyspace, '8bit') - 1;
+    for ($i = 0; $i < $length; ++$i) {
+        $pieces []= $keyspace[random_int(0, $max)];
+    }
+    return implode('', $pieces);
 }
 

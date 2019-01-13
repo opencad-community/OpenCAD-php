@@ -70,7 +70,7 @@ define('BASE_URL', '<BASE_URL>');
   * @since 0.2.6
 	* (Imported from ATVG-CAD 1.3.0.0)
   **/
-  define('ENABLE_API_SECURITY', true);
+  define('ENABLE_API_SECURITY', <API_SECURITY>);
 
 /**#@+
  * To & From emails for system generated emails
@@ -79,9 +79,9 @@ define('BASE_URL', '<BASE_URL>');
  * @since 1.0a RC2
  *
  **/
-define('CAD_FROM_EMAIL', 'admin@cad.com');
+define('CAD_FROM_EMAIL', '<CAD_FROM_EMAIL>');
 define('CAD_FROM_NAME', COMMUNITY_NAME.' CAD');
-define('CAD_TO_EMAIL', 'admins@community.com');
+define('CAD_TO_EMAIL', '<CAD_TO_EMAIL>');
 define('CAD_TO_NAME', COMMUNITY_NAME.' Administrators');
 
 /**#@+

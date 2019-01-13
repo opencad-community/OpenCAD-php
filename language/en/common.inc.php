@@ -85,7 +85,7 @@ $arrLang['failed'] = "failed";
 $arrLang['folder_paths'] = "Folder Paths";
 $arrLang['follow_the_wizard'] = "Follow the <b>Wizard</b> to install your program";
 $arrLang['installed'] = "installed";
-$arrLang['installation_completed'] = "Installation Completed!";
+$arrLang['installation_complete'] = "Installation Completed!";
 $arrLang['installation_guide'] = "Installation Guide";
 $arrLang['installation_type'] = "Installation Type";
 $arrLang['language'] = "Language";
@@ -159,7 +159,6 @@ $arrLang['department_configuration'] = 'Department Configuration';
 $arrLang['civilian_configuration'] = 'Civilian Configuration'; 
 $arrLang['administrative_configuration'] = 'Administrative Configuratiion';
 $arrLang['extra_settings'] = 'Extra Settings';
-$arrLang[''] = '';
 
 //** Begin Core Configuration Strings **//
 $arrLang['COMMUNITY_NAME'] = "Community Name";
@@ -230,8 +229,6 @@ $arrLang['ROADSIDE_NCIC_PLATE_notes'] = "Shows/Hides NCIC functionality on MDT c
 
 $arrLang['ROADSIDE_CALL_SELFASSIGN'] = "Roadside Call Self Assign";
 $arrLang['ROADSIDE_cALL_SELFASSIGN`_notes'] = "Shows/Hides NCIC functionality on MDT console for Roadside Assistance. If 'true' then RAO will be able to use NCIC plate query without the need for a dispatcher, else if 'false' then RAO will require the presence of dispatcher to use NCIC plate query funcationality.";
-
-
 //** End Roadside Assistance Strings **//
 
 //** Begin Civilian Strings **//
@@ -241,6 +238,32 @@ $arrLang['CIV_WARRANT_notes'] = "Allow/Disallow Civiliians from managing their w
 $arrLang['CIV_REG'] = "Instant Civilian Registration";
 $arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
 //** End Civilian Strings **//
+
+//** Begin Administrative Strings**//
+$arrLang['MODERATOR_APPROVE_USER'] = "Moderator Approve User";
+$arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+
+$arrLang['MODERATOR_EDIT_USER'] = "Moderator Edit User";
+$arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+
+$arrLang['MODERATOR_DELETE_USER'] = "Moderator Delete User";
+$arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+
+$arrLang['MODERATOR_SUSPEND_WITHOUT_REASON'] = "Moderator Suspend without Reason";
+$arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+
+$arrLang['MODERATOR_SUSPEND_WITH_REASON'] = "Moderator Suspend with Reason";
+$arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+
+$arrLang['MODERATOR_REACTIVATE_USER'] = "Moderator Reactivate User";
+$arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+
+$arrLang['MODERATOR_REMOVE_GROUP'] = "Moderator Remove Group";
+$arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+
+$arrLang['MODERATOR_NCIC_EDITOR'] = "Moderator NCIC Editor";
+$arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+//** End Administrative Strings**//
 
 //** Begin Extra Settings Strings **//
 $arrLang['DEMO_MODE'] = "Demo Mode";

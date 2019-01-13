@@ -25,165 +25,32 @@
 	// -------------------------------------------------
 	if($task == 'send'){
 
-		$COMMUNITY_NAME = isset($_SESSION['COMMUNITY_NAME']) ? prepare_input($_SESSION['COMMUNITY_NAME']) : '';
-		
-		$BASE_URL = isset($_SESSION['BASE_URL']) ? prepare_input($_SESSION['BASE_URL']) : '';
-		
-		$API_SECURITY = isset($_SESSION['API_SECURITY']) ? prepare_input($_SESSION['API_SECURITY']) : '';
+		$ROADSIDE_BOLO = isset($_POST['ROADSIDE_BOLO']) ? prepare_input($_POST['ROADSIDE_BOLO']) : '';
+        $ROADSIDE_NCIC_NAME = isset($_POST['ROADSIDE_NCIC_NAME']) ? prepare_input($_POST['ROADSIDE_NCIC_NAME']) : '';
+        $ROADSIDE_NCIC_PLATE = isset($_POST['ROADSIDE_NCIC_PLATE']) ? prepare_input($_POST['ROADSIDE_NCIC_PLATE']) : '';
+        $ROADSIDE_CALL_SELFASSIGN = isset($_POST['ROADSIDE_CALL_SELFASSIGN']) ? prepare_input($_POST['ROADSIDE_CALL_SELFASSIGN']) : '';
 
-		$CAD_FROM_EMAIL = isset($_SESSION['CAD_FROM_EMAIL']) ? prepare_input($_SESSION['CAD_FROM_EMAIL']) : '';
-		$CAD_FROM_NAME = isset($_SESSION['CAD_FROM_NAME']) ? prepare_input($_SESSION['CAD_FROM_NAME']) : '';
-		$CAD_TO_EMAIL = isset($_SESSION['CAD_TO_EMAIL']) ? prepare_input($_SESSION['CAD_TO_EMAIL']) : '';
-		$CAD_TO_NAME = isset($_SESSION['CAD_TO_NAME']) ? prepare_input($_SESSION['CAD_TO_NAME']) : '';
+        $CIV_REG = isset($_POST['CIV_REG']) ? prepare_input($_POST['CIV_REG']) : '';
 		
-		$AUTH_KEY = isset($_SESSION['AUTH_KEY']) ? prepare_input($_SESSION['AUTH_KEY']) : '';
-		$SECURE_AUTH_KEY = isset($_SESSION['SECURE_AUTH_KEY']) ? prepare_input($_SESSION['SECURE_AUTH_KEY']) : '';
-		$LOGGED_IN_KEY = isset($_SESSION['LOGGED_IN_KEY']) ? prepare_input($_SESSION['LOGGED_IN_KEY']) : '';
-		$NONCE_KEY = isset($_SESSION['NONCE_KEY']) ? prepare_input($_SESSION['NONCE_KEY']) : '';
-		$AUTH_SALT = isset($_SESSION['AUTH_SALT']) ? prepare_input($_SESSION['AUTH_SALT']) : '';
-		$SECURE_AUTH_SALT = isset($_SESSION['SECURE_AUTH_SALT']) ? prepare_input($_SESSION['SECURE_AUTH_SALT']) : '';
-		$LOGGED_IN_SALT = isset($_SESSION['LOGGED_IN_SALT']) ? prepare_input($_SESSION['LOGGED_IN_SALT']) : '';
-		$NONCE_SALT = isset($_SESSION['NONCE_SALT']) ? prepare_input($_SESSION['NONCE_SALT']) : '';
+		$_SESSION['ROADSIDE_BOLO'] = $ROADSIDE_BOLO;
+		$_SESSION['ROADSIDE_NCIC_NAME'] = $ROADSIDE_NCIC_NAME;			
+		$_SESSION['ROADSIDE_NCIC_PLATE'] = $ROADSIDE_NCIC_PLATE;			
+		$_SESSION['ROADSIDE_CALL_SELFASSIGN'] = $ROADSIDE_CALL_SELFASSIGN;
 		
-		$POLICE_NCIC = isset($_SESSION['POLICE_NCIC']) ? prepare_input($_SESSION['POLICE_NCIC']) : '';
-		
-		$FIRE_PANIC = isset($_SESSION['FIRE_PANIC']) ? prepare_input($_SESSION['FIRE_PANIC']) : '';
-		$FIRE_BOLO = isset($_SESSION['FIRE_BOLO']) ? prepare_input($_SESSION['FIRE_BOLO']) : '';
-		$FIRE_NCIC_NAME = isset($_SESSION['FIRE_NCIC_NAME']) ? prepare_input($_SESSION['FIRE_NCIC_NAME']) : '';
-		$FIRE_NCIC_PLATE = isset($_SESSION['FIRE_NCIC_PLATE']) ? prepare_input($_SESSION['FIRE_NCIC_PLATE']) : '';
-		
-		$EMS_PANIC = isset($_SESSION['EMS_PANIC']) ? prepare_input($_SESSION['EMS_PANIC']) : '';
-		$EMS_BOLO = isset($_SESSION['EMS_BOLO']) ? prepare_input($_SESSION['EMS_BOLO']) : '';
-		$EMS_NCIC_NAME = isset($_SESSION['EMS_NCIC_NAME']) ? prepare_input($_SESSION['EMS_NCIC_NAME']) : '';
-		$EMS_NCIC_PLATE = isset($_SESSION['EMS_NCIC_PLATE']) ? prepare_input($_SESSION['EMS_NCIC_PLATE']) : '';
-		
-		$ROADSIDE_PANIC = isset($_SESSION['ROADSIDE_PANIC']) ? prepare_input($_SESSION['ROADSIDE_PANIC']) : '';
-		$ROADSIDE_BOLO = isset($_SESSION['ROADSIDE_BOLO']) ? prepare_input($_SESSION['ROADSIDE_BOLO']) : '';
-		$ROADSIDE_NCIC_NAME = isset($_SESSION['ROADSIDE_NCIC_NAME']) ? prepare_input($_SESSION['ROADSIDE_NCIC_NAME']) : '';
-		$ROADSIDE_NCIC_PLATE = isset($_SESSION['ROADSIDE_NCIC_PLATE']) ? prepare_input($_SESSION['ROADSIDE_NCIC_PLATE']) : '';
-		
-		$CIV_WARRANT = isset($_SESSION['CIV_WARRANT']) ? prepare_input($_SESSION['CIV_WARRANT']) : '';
-		$CIV_REG = isset($_SESSION['CIV_REG']) ? prepare_input($_SESSION['CIV_REG']) : '';
-		
-		$MODERATOR_APPROVE_USER = isset($_SESSION['MODERATOR_APPROVE_USER']) ? prepare_input($_SESSION['MODERATOR_APPROVE_USER']) : '';
-		$MODERATOR_EDIT_USER = isset($_SESSION['MODERATOR_EDIT_USER']) ? prepare_input($_SESSION['MODERATOR_EDIT_USER']) : '';
-		$MODERATOR_SUSPEND_WITH_REASON = isset($_SESSION['MODERATOR_SUSPEND_WITH_REASON']) ? prepare_input($_SESSION['MODERATOR_SUSPEND_WITH_REASON']) : '';
-		$MODERATOR_SUSPEND_WITHOUT_REASON = isset($_SESSION['MODERATOR_SUSPEND_WITHOUT_REASON']) ? prepare_input($_SESSION['MODERATOR_SUSPEND_WITHOUT_REASON']) : '';
-		$MODERATOR_REACTIVATE_USER = isset($_SESSION['MODERATOR_REACTIVATE_USERN']) ? prepare_input($_SESSION['MODERATOR_REACTIVATE_USER']) : '';
-		$MODERATOR_REMOVE_GROUP = isset($_SESSION['MODERATOR_REMOVE_GROUP']) ? prepare_input($_SESSION['MODERATOR_REMOVE_GROUP']) : '';
-		$MODERATOR_DELETE_USER = isset($_SESSION['MODERATOR_DELETE_USER']) ? prepare_input($_SESSION['MODERATOR_DELETE_USER']) : '';
-		$MODERATOR_NCIC_EDITOR = isset($_SESSION['MODERATOR_NCIC_EDITOR']) ? prepare_input($_SESSION['MODERATOR_NCIC_EDITOR']) : '';
-
-		$DEMO_MODE = isset($_SERVER['DEMO_MODE']) ? prepare_input(['DEMO_MODE']) : '';
-
-		$USE_GRAVATAR = isset($_SESSION['USE_GRAVATAR']) ? prepare_input($_SESSION['USE_GRAVATAR']) : '';
-		
-		$_SESSION['COMMUNITY_NAME'] = $COMMUNITY_NAME;
-		$_SESSION['BASE_URL'] = $BASE_URL;
-		$_SESSION['API_SECURITY'] = $API_SECURITY;
-		
-		$_SESSION['CAD_FROM_EMAIL'] = $CAD_FROM_EMAILL;
-		$_SESSION['CAD_FROM_NAME'] = $CAD_FROM_NAME;			
-		$_SESSION['CAD_TO_EMAIL'] = $CAD_TO_EMAIL;			
-		$_SESSION['CAD_TO_NAME'] = $CAD_TO_NAME;
-		
-		$_SESSION['AUTH_KEY'] = $AUTH_KEY;			
-		$_SESSION['SECURE_AUTH_KEY'] = $SECURE_AUTH_KEY;			
-		$_SESSION['LOGGED_IN_KEY'] = $LOGGED_IN_KEY;			
-		$_SESSION['NONCE_KEY'] = $NONCE_KEY;			
-		$_SESSION['AUTH_SALT'] = $AUTH_SALT;			
-		$_SESSION['SECURE_AUTH_SALT'] = $SECURE_AUTH_SALT;			
-		$_SESSION['LOGGED_IN_SALT'] = $LOGGED_IN_SALT;			
-		$_SESSION['NONCE_SALT'] = $NONCE_SALT;	
-		
-		$_SESSION['POLICE_NCIC'] = $POLICE_NCIC;
-		
-		$_SESSION['FIRE_PANIC'] = $FIRE_PANIC;		
-		$_SESSION['FIRE_BOLO'] = $FIRE_BOLO;		
-		$_SESSION['FIRE_NCIC_NAME'] = $FIRE_NCIC_NAME;		
-		$_SESSION['FIRE_NCIC_PLATE'] = $FIRE_NCIC_PLATE;
-		
-		$_SESSION['EMS_PANIC'] = $EMS_PANIC;		
-		$_SESSION['EMS_BOLO'] = $EMS_BOLO;		
-		$_SESSION['EMS_NCIC_NAME'] = $EMS_NCIC_NAME;		
-		$_SESSION['EMS_NCIC_PLATE'] = $EMS_NCIC_PLATE;
-		
-		$_SESSION['ROADSIDE_PANIC'] = $ROADSIDE_PANIC;		
-		$_SESSION['ROADSIDE_BOLO'] = $ROADSIDE_BOLO;		
-		$_SESSION['ROADSIDE_NCIC_NAME'] = $ROADSIDE_NCIC_NAME;		
-		$_SESSION['ROADSIDE_NCIC_PLATE'] = $ROADSIDE_NCIC_PLATE;
-		
-		$_SESSION['CIV_WARRANT'] = $CIV_WARRANT;		
 		$_SESSION['CIV_REG'] = $CIV_REG;
-		
-		$_SESSION['MODERATOR_APPROVE_USER'] = $MODERATOR_APPROVE_USER;
-		$_SESSION['MODERATOR_EDIT_USER'] = $MODERATOR_EDIT_USER;
-		$_SESSION['MODERATOR_SUSPEND_WITH_REASON'] = $MODERATOR_SUSPEND_WITH_REASON;
-		$_SESSION['MODERATOR_SUSPEND_WITHOUT_REASON'] = $MODERATOR_SUSPEND_WITHOUT_REASON;
-		$_SESSION['MODERATOR_REMOVE_GROUP'] = $MODERATOR_REMOVE_GROUP;
-		$_SESSION['MODERATOR_DELETE_USER'] = $MODERATOR_DELETE_USER;
-		$_SESSION['MODERATOR_NCIC_EDIDOTR'] = $MODERATOR_NCIC_EDITOR;
-		
-		$_SESSION['DEMO_MODE'] = $DEMO_MODE;
-		$_SESSION['USE_GRAVATAR'] = $USE_GRAVATAR;		
 
 		$_SESSION['passed_step'] = 7;
 		header('location: administrative_configuration.php');
 		exit;
 
 	}else{
-	    $COMMUNITY_NAME = isset($_SESSION['COMMUNITY_NAME']) ? prepare_input($_SESSION['COMMUNITY_NAME']) : '';
-		
-		$BASE_URL = isset($_SESSION['BASE_URL']) ? prepare_input($_SESSION['BASE_URL']) : '';
-		
-		$API_SECURITY = isset($_SESSION['API_SECURITY']) ? prepare_input($_SESSION['API_SECURITY']) : '';
 
-		$CAD_FROM_EMAIL = isset($_SESSION['CAD_FROM_EMAIL']) ? prepare_input($_SESSION['CAD_FROM_EMAIL']) : '';
-		$CAD_FROM_NAME = isset($_SESSION['CAD_FROM_NAME']) ? prepare_input($_SESSION['CAD_FROM_NAME']) : '';
-		$CAD_TO_EMAIL = isset($_SESSION['CAD_TO_EMAIL']) ? prepare_input($_SESSION['CAD_TO_EMAIL']) : '';
-		$CAD_TO_NAME = isset($_SESSION['CAD_TO_NAME']) ? prepare_input($_SESSION['CAD_TO_NAME']) : '';
-		
-		$AUTH_KEY = isset($_SESSION['AUTH_KEY']) ? prepare_input($_SESSION['AUTH_KEY']) : '';
-		$SECURE_AUTH_KEY = isset($_SESSION['SECURE_AUTH_KEY']) ? prepare_input($_SESSION['SECURE_AUTH_KEY']) : '';
-		$LOGGED_IN_KEY = isset($_SESSION['LOGGED_IN_KEY']) ? prepare_input($_SESSION['LOGGED_IN_KEY']) : '';
-		$NONCE_KEY = isset($_SESSION['NONCE_KEY']) ? prepare_input($_SESSION['NONCE_KEY']) : '';
-		$AUTH_SALT = isset($_SESSION['AUTH_SALT']) ? prepare_input($_SESSION['AUTH_SALT']) : '';
-		$SECURE_AUTH_SALT = isset($_SESSION['SECURE_AUTH_SALT']) ? prepare_input($_SESSION['SECURE_AUTH_SALT']) : '';
-		$LOGGED_IN_SALT = isset($_SESSION['LOGGED_IN_SALT']) ? prepare_input($_SESSION['LOGGED_IN_SALT']) : '';
-		$NONCE_SALT = isset($_SESSION['NONCE_SALT']) ? prepare_input($_SESSION['NONCE_SALT']) : '';
-		
-		$POLICE_NCIC = isset($_SESSION['POLICE_NCIC']) ? prepare_input($_SESSION['POLICE_NCIC']) : '';
-		
-		$FIRE_PANIC = isset($_SESSION['FIRE_PANIC']) ? prepare_input($_SESSION['FIRE_PANIC']) : '';
-		$FIRE_BOLO = isset($_SESSION['FIRE_BOLO']) ? prepare_input($_SESSION['FIRE_BOLO']) : '';
-		$FIRE_NCIC_NAME = isset($_SESSION['FIRE_NCIC_NAME']) ? prepare_input($_SESSION['FIRE_NCIC_NAME']) : '';
-		$FIRE_NCIC_PLATE = isset($_SESSION['FIRE_NCIC_PLATE']) ? prepare_input($_SESSION['FIRE_NCIC_PLATE']) : '';
-		
-		$EMS_PANIC = isset($_SESSION['EMS_PANIC']) ? prepare_input($_SESSION['EMS_PANIC']) : '';
-		$EMS_BOLO = isset($_SESSION['EMS_BOLO']) ? prepare_input($_SESSION['EMS_BOLO']) : '';
-		$EMS_NCIC_NAME = isset($_SESSION['EMS_NCIC_NAME']) ? prepare_input($_SESSION['EMS_NCIC_NAME']) : '';
-		$EMS_NCIC_PLATE = isset($_SESSION['EMS_NCIC_PLATE']) ? prepare_input($_SESSION['EMS_NCIC_PLATE']) : '';
-		
-		$ROADSIDE_PANIC = isset($_SESSION['ROADSIDE_PANIC']) ? prepare_input($_SESSION['ROADSIDE_PANIC']) : '';
-		$ROADSIDE_BOLO = isset($_SESSION['ROADSIDE_BOLO']) ? prepare_input($_SESSION['ROADSIDE_BOLO']) : '';
-		$ROADSIDE_NCIC_NAME = isset($_SESSION['ROADSIDE_NCIC_NAME']) ? prepare_input($_SESSION['ROADSIDE_NCIC_NAME']) : '';
-		$ROADSIDE_NCIC_PLATE = isset($_SESSION['ROADSIDE_NCIC_PLATE']) ? prepare_input($_SESSION['ROADSIDE_NCIC_PLATE']) : '';
-		
-		$CIV_WARRANT = isset($_SESSION['CIV_WARRANT']) ? prepare_input($_SESSION['CIV_WARRANT']) : '';
-		$CIV_REG = isset($_SESSION['CIV_REG']) ? prepare_input($_SESSION['CIV_REG']) : '';
-		
-		$MODERATOR_APPROVE_USER = isset($_SESSION['MODERATOR_APPROVE_USER']) ? prepare_input($_SESSION['MODERATOR_APPROVE_USER']) : '';
-		$MODERATOR_EDIT_USER = isset($_SESSTION['MODERATOR_EDIT_USER']) ? prepare_input($_SESSION['MODERATOR_EDIT_USER']) : '';
-		$MODERATOR_SUSPEND_WITH_REASON = isset($_SESSION['MODERATOR_SUSPEND_WITH_REASON']) ? prepare_input($_SESSION['MODERATOR_SUSPEND_WITH_REASON']) : '';
-		$MODERATOR_SUSPEND_WITHOUT_REASON = isset($_SESSION['MODERATOR_SUSPEND_WITHOUT_REASON']) ? prepare_input($_SESSION['MODERATOR_SUSPEND_WITHOUT_REASON']) : '';
-		$MODERATOR_REACTIVATE_USER = isset($_SESSION['MODERATOR_REACTIVATE_USERN']) ? prepare_input($_SESSION['MODERATOR_REACTIVATE_USER']) : '';
-		$MODERATOR_REMOVE_GROUP = isset($_SESSION['MODERATOR_REMOVE_GROUP']) ? prepare_input($_SESSION['MODERATOR_REMOVE_GROUP']) : '';
-		$MODERATOR_DELETE_USER = isset($_SESSION['MODERATOR_DELETE_USER']) ? prepare_input($_SESSION['MODERATOR_DELETE_USER']) : '';
-		$MODERATOR_NCIC_EDITOR = isset($_SESSION['MODERATOR_NCIC_EDITOR']) ? prepare_input($_SESSION['MODERATOR_NCIC_EDITOR']) : '';
+		$ROADSIDE_BOLO = isset($_POST['ROADSIDE_BOLO']) ? prepare_input($_POST['ROADSIDE_BOLO']) : '';
+        $ROADSIDE_NCIC_NAME = isset($_POST['ROADSIDE_NCIC_NAME']) ? prepare_input($_POST['ROADSIDE_NCIC_NAME']) : '';
+        $ROADSIDE_NCIC_PLATE = isset($_POST['ROADSIDE_NCIC_PLATE']) ? prepare_input($_POST['ROADSIDE_NCIC_PLATE']) : '';
+        $ROADSIDE_CALL_SELFASSIGN = isset($_POST['ROADSIDE_CALL_SELFASSIGN']) ? prepare_input($_POST['ROADSIDE_CALL_SELFASSIGN']) : '';
 
-		$DEMO_MODE = isset($_SERVER['DEMO_MODE']) ? prepare_input($_SESSION['DEMO_MODE']) : '';
-
-		$USE_GRAVATAR = isset($_SESSION['USE_GRAVATAR']) ? prepare_input($_SESSION['USE_GRAVATAR']) : '';
+        $CIV_REG = isset($_POST['CIV_REG']) ? prepare_input($_POST['CIV_REG']) : '';
 
 	}
 ?>	
@@ -245,8 +112,8 @@
 			<tr>
 				<td width="250px">&nbsp;<?php echo lang_key('ROADSIDE_PANIC'); ?>&nbsp;</td>
 				<td>
-					<input type="radio" name="ROADSIDE_PANIC" id="ROADSIDE_PANIC" <?php echo ($ROADSIDE_PANIC=='true')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_PANIC_notes')" onblur="textboxOnBlur('ROADSIDE_PANIC_notes')" value="true" />True
-					<input type="radio" name="ROADSIDE_PANIC" id="ROADSIDE_PANIC" <?php echo ($ROADSIDE_PANIC=='false')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_PANIC_notes')" checked onblur="textboxOnBlur('ROADSIDE_PANIC_notes')" value="false" />False
+					<input type="radio" name="ROADSIDE_PANIC" id="ROADSIDE_PANIC" <?php echo ($ROADSIDE_PANIC=='true')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_PANIC_notes')" checked onblur="textboxOnBlur('ROADSIDE_PANIC_notes')" value="true" />True
+					<input type="radio" name="ROADSIDE_PANIC" id="ROADSIDE_PANIC" <?php echo ($ROADSIDE_PANIC=='false')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_PANIC_notes')" onblur="textboxOnBlur('ROADSIDE_PANIC_notes')" value="false" />False
 				</td>
 				<td rowspan="6" valign="top">					
 					<div id="POLICE_NCIC_notes" class="notes_container">
@@ -270,66 +137,6 @@
 						<h4><?php echo lang_key('FIRE_PANIC'); ?></h4>
 						<p><?php echo lang_key('FIRE_PANIC_notes'); ?></p>
 					</div>
-					<div id="FIRE_NCIC_NAME_notes" class="notes_container">
-						<h4><?php echo lang_key('FIRE_NCIC_NAME'); ?></h4>
-						<p><?php echo lang_key('FIRE_NCIC_NAME_notes'); ?></p>
-					</div>
-					<div id="FIRE_BOLO_notes" class="notes_container">
-						<h4><?php echo lang_key('FIRE_BOLO'); ?></h4>
-						<p><?php echo lang_key('FIRE_BOLO_notes'); ?></p>
-					</div>
-					<div id="FIRE_NCIC_PLATE_notes" class="notes_container">
-						<h4><?php echo lang_key('FIRE_NCIC_PLATE'); ?></h4>
-						<p><?php echo lang_key('FIRE_NCIC_PLATE_notes'); ?></p>
-					</div>
-					
-					<div id="EMS_PANIC_notes" class="notes_container">
-						<h4><?php echo lang_key('EMS_PANIC'); ?></h4>
-						<p><?php echo lang_key('EMS_PANIC_notes'); ?></p>
-					</div>
-					<div id="EMS_BOLO_notes" class="notes_container">
-						<h4><?php echo lang_key('EMS_BOLO'); ?></h4>
-						<p><?php echo lang_key('EMS_BOLO_notes'); ?></p>
-					</div>
-					<div id="EMS_NCIC_NAME_notes" class="notes_container">
-						<h4><?php echo lang_key('EMS_NCIC_NAME'); ?></h4>
-						<p><?php echo lang_key('EMS_NCIC_NAME_notes'); ?></p>
-					</div>
-					<div id="EMS_NCIC_PLATE_notes" class="notes_container">
-						<h4><?php echo lang_key('EMS_NCIC_PLATE'); ?></h4>
-						<p><?php echo lang_key('EMS_NCIC_PLATE_notes'); ?></p>
-					</div>
-					
-					<div id="ROADSIDE_PANIC_notes" class="notes_container">
-						<h4><?php echo lang_key('ROADSIDE_PANIC'); ?></h4>
-						<p><?php echo lang_key('ROADSIDE_PANIC_notes'); ?></p>
-					</div>
-					<div id="ROADSIDE_BOLO_notes" class="notes_container">
-						<h4><?php echo lang_key('ROADSIDE_BOLO'); ?></h4>
-						<p><?php echo lang_key('ROADSIDE_BOLO_notes'); ?></p>
-					</div>
-					<div id="ROADSIDE_NCIC_NAME_notes" class="notes_container">
-						<h4><?php echo lang_key('ROADSIDE_NCIC_NAME'); ?></h4>
-						<p><?php echo lang_key('ROADSIDE_NCIC_NAME_notes'); ?></p>
-					</div>
-					<div id="ROADSIDE_NCIC_PLATE_notes" class="notes_container">
-						<h4><?php echo lang_key('ROADSIDE_NCIC_PLATE'); ?></h4>
-						<p><?php echo lang_key('ROADSIDE_NCIC_PLATE_notes'); ?></p>
-					</div>
-					
-					<div id="CIV_WARRANT_notes" class="notes_container">
-						<h4><?php echo lang_key('CIV_WARRANT'); ?></h4>
-						<p><?php echo lang_key('CIV_WARRANT_notes'); ?></p>
-					</div>
-					<div id="CIV_REG_notes" class="notes_container">
-						<h4><?php echo lang_key('CIV_REG'); ?></h4>
-						<p><?php echo lang_key('CIV_REG_notes'); ?></p>
-					</div>
-					
-					<div id="USE_GRAVATAR_notes" class="notes_container">
-						<h4><?php echo lang_key('USE_GRAVATAR'); ?></h4>
-						<p><?php echo lang_key('USE_GRAVATAR_notes'); ?></p>
-					</div>
 					
 					<img class="loading_img" src="images/ajax_loading.gif" alt="<?php echo lang_key('loading'); ?>..." />
 					<div id="notes_message" class="notes_container"></div>					
@@ -337,30 +144,31 @@
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('ROADSIDE_BOLO'); ?>&nbsp;</td>
-				<td><input type="radio" name="ROADSIDE_BOLO" id="ROADSIDE_BOLO" <?php echo ($ROADSIDE_BOLO=='true')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_BOLO_notes')" onblur="textboxOnBlur('ROADSIDE_BOLO_notes')" value="true" />True
-				<input type="radio" name="ROADSIDE_BOLO" id="ROADSIDE_BOLO" <?php echo ($ROADSIDE_BOLO=='false')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_BOLO_notes')" checked onblur="textboxOnBlur('ROADSIDE_BOLO_notes')" value="false" />False</td>
+				<td><input type="radio" name="ROADSIDE_BOLO" id="ROADSIDE_BOLO" <?php echo ($ROADSIDE_BOLO=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('ROADSIDE_BOLO_notes')" onblur="textboxOnBlur('ROADSIDE_BOLO_notes')" value="true" />True
+				<input type="radio" name="ROADSIDE_BOLO" id="ROADSIDE_BOLO" <?php echo ($ROADSIDE_BOLO=='false')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_BOLO_notes')" onblur="textboxOnBlur('ROADSIDE_BOLO_notes')" value="false" />False</td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('ROADSIDE_NCIC_NAME'); ?>&nbsp;</td>
-				<td><input type="radio" name="ROADSIDE_NCIC_NAME" id="ROADSIDE_NCIC_NAME" <?php echo ($ROADSIDE_NCIC_NAME=='true')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_NCIC_NAME_notes')" onblur="textboxOnBlur('ROADSIDE_NCIC_NAME_notes')" value="true" />True
-				<input type="radio" name="ROADSIDE_NCIC_NAME" id="ROADSIDE_NCIC_NAME" <?php echo ($ROADSIDE_NCIC_NAME=='false')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_NCIC_NAME_notes')" checked onblur="textboxOnBlur('ROADSIDE_NCIC_NAME_notes')" value="false" />False</td>
+				<td><input type="radio" name="ROADSIDE_NCIC_NAME" id="ROADSIDE_NCIC_NAME" <?php echo ($ROADSIDE_NCIC_NAME=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('ROADSIDE_NCIC_NAME_notes')" onblur="textboxOnBlur('ROADSIDE_NCIC_NAME_notes')" value="true" />True
+				<input type="radio" name="ROADSIDE_NCIC_NAME" id="ROADSIDE_NCIC_NAME" <?php echo ($ROADSIDE_NCIC_NAME=='false')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_NCIC_NAME_notes')" onblur="textboxOnBlur('ROADSIDE_NCIC_NAME_notes')" value="false" />False</td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('ROADSIDE_NCIC_PLATE'); ?>&nbsp;</td>
-				<td><input type="radio" name="ROADSIDE_NCIC_PLATE" id="ROADSIDE_NCIC_PLATE" <?php echo ($ROADSIDE_NCIC_PLATE=='true')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_NCIC_PLATE_notes')" onblur="textboxOnBlur('ROADSIDE_NCIC_PLATE_notes')" value="true" />True
-				<input type="radio" name="ROADSIDE_NCIC_PLATE" id="ROADSIDE_NCIC_PLATE" <?php echo ($ROADSIDE_NCIC_PLATE=='false')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_NCIC_PLATE_notes')" checked onblur="textboxOnBlur('ROADSIDE_NCIC_PLATE_notes')" value="false" />False</td>
+				<td><input type="radio" name="ROADSIDE_NCIC_PLATE" id="ROADSIDE_NCIC_PLATE" <?php echo ($ROADSIDE_NCIC_PLATE=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('ROADSIDE_NCIC_PLATE_notes')" onblur="textboxOnBlur('ROADSIDE_NCIC_PLATE_notes')" value="true" />True
+				<input type="radio" name="ROADSIDE_NCIC_PLATE" id="ROADSIDE_NCIC_PLATE" <?php echo ($ROADSIDE_NCIC_PLATE=='false')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_NCIC_PLATE_notes')" onblur="textboxOnBlur('ROADSIDE_NCIC_PLATE_notes')" value="false" />False</td>
+			</tr>
+			<tr>
+				<td>&nbsp;<?php echo lang_key('ROADSIDE_CALL_SELFASSIGN'); ?>&nbsp;</td>
+				<td><input type="radio" name="ROADSIDE_CALL_SELFASSIGN" id="ROADSIDE_CALL_SELFASSIGN" <?php echo ($ROADSIDE_CALL_SELFASSIGN=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('ROADSIDE_CALL_SELFASSIGN_notes')" onblur="textboxOnBlur('ROADSIDE_CALL_SELFASSIGN_notes')" value="true" />True
+				<input type="radio" name="ROADSIDE_CALL_SELFASSIGN" id="ROADSIDE_CALL_SELFASSIGN" <?php echo ($ROADSIDE_CALL_SELFASSIGN=='false')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_CALL_SELFASSIGN_notes')" onblur="textboxOnBlur('ROADSIDE_CALL_SELFASSIGN_notes')" value="false" />False</td>
 			</tr>
 			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>
 			<tr>
-				<td>&nbsp;<?php echo lang_key('CIV_WARRANT'); ?>&nbsp;</td>
-				<td><input type="radio" name="CIV_WARRANT" id="CIV_WARRANT" <?php echo ($CIV_WARRANT=='true')?'checked':'' ?> onfocus="textboxOnFocus('CIV_WARRANT_notes')" onblur="textboxOnBlur('CIV_WARRANT_notes')" value="true" />True
-				<input type="radio" name="CIV_WARRANT" id="CIV_WARRANT" <?php echo ($CIV_WARRANT=='false')?'checked':'' ?> onfocus="textboxOnFocus('CIV_WARRANT_notes')" checked onblur="textboxOnBlur('CIV_WARRANT_notes')" value="false" />False</td>
-			</tr>
-			<tr>
 				<td>&nbsp;<?php echo lang_key('CIV_REG'); ?>&nbsp;</td>
-				<td><input type="radio" name="CIV_REG" id="CIV_REG" <?php echo ($CIV_REG=='true')?'checked':'' ?> onfocus="textboxOnFocus('CIV_REG_notes')" onblur="textboxOnBlur('CIV_REG_notes')" value="true" />True
-				<input type="radio" name="CIV_REG" id="CIV_REG" <?php echo ($CIV_REG=='false')?'checked':'' ?> onfocus="textboxOnFocus('CIV_REG_notes')" checked onblur="textboxOnBlur('CIV_REG_notes')" value="false" />False</td>
+				<td><input type="radio" name="CIV_REG" id="CIV_REG" <?php echo ($CIV_REG=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('CIV_REG_notes')" onblur="textboxOnBlur('CIV_REG_notes')" value="true" />True
+				<input type="radio" name="CIV_REG" id="CIV_REG" <?php echo ($CIV_REG=='false')?'checked':'' ?> onfocus="textboxOnFocus('CIV_REG_notes')" onblur="textboxOnBlur('CIV_REG_notes')" value="false" />False</td>
 			</tr>
+			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>
 			<tr>
 				<td colspan="2">
 					<a href="department_configuration.php" class="form_button" /><?php echo lang_key('back'); ?></a>
