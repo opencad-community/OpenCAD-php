@@ -91,7 +91,7 @@
 	}else{
 		$admin_email = isset($_SESSION['admin_email']) ? $_SESSION['admin_email'] : '';
 		$admin_name = isset($_SESSION['admin_name']) ? $_SESSION['admin_name'] : '';
-		$admin_identifier = isset($_SESSION['admin_identifier']) ? $_SESSION[admin_identifier] : '';
+		$admin_identifier = isset($_SESSION['admin_identifier']) ? $_SESSION['admin_identifier'] : '';
 		$admin_password = isset($_SESSION['admin_password']) ? $_SESSION['admin_password'] : '';
 		$password_encryption = isset($_SESSION['password_encryption']) ? $_SESSION['password_encryption'] : EI_PASSWORD_ENCRYPTION_TYPE;
 		$install_type = isset($_SESSION['install_type']) ? $_SESSION['install_type'] : '';

@@ -127,8 +127,8 @@
 			<tr>
 				<td width="250px">&nbsp;<?php echo lang_key('MODERATOR_APPROVE_USER'); ?>&nbsp;</td>
 				<td>
-					<input type="radio" name="MODERATOR_APPROVE_USER" id="MODERATOR_APPROVE_USER" <?php echo ($ROADSIDE_PANIC=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_APPROVE_USER_notes')" checked onblur="textboxOnBlur('MODERATOR_APPROVE_USER_notes')" value="true" />True
-					<input type="radio" name="MODERATOR_APPROVE_USERC" id="MODERATOR_APPROVE_USERC" <?php echo ($ROADSIDE_PANIC=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_APPROVE_USER_notes')" onblur="textboxOnBlur('MODERATOR_APPROVE_USER_notes')" value="false" />False
+					<input type="radio" name="MODERATOR_APPROVE_USER" id="MODERATOR_APPROVE_USER" <?php echo ($MODERATOR_APPROVE_USER=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_APPROVE_USER_notes')" checked onblur="textboxOnBlur('MODERATOR_APPROVE_USER_notes')" value="true" />True
+					<input type="radio" name="MODERATOR_APPROVE_USER" id="MODERATOR_APPROVE_USER" <?php echo ($MODERATOR_APPROVE_USER=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_APPROVE_USER_notes')" onblur="textboxOnBlur('MODERATOR_APPROVE_USER_notes')" value="false" />False
 				</td>
 				<td rowspan="6" valign="top">					
 					<div id="POLICE_NCIC_notes" class="notes_container">

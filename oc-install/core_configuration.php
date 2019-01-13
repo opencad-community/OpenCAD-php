@@ -45,7 +45,7 @@
 		$_SESSION['BASE_URL'] = $BASE_URL;
 		$_SESSION['API_SECURITY'] = $API_SECURITY;
 		
-		$_SESSION['CAD_FROM_EMAIL'] = $CAD_FROM_EMAILL;	
+		$_SESSION['CAD_FROM_EMAIL'] = $CAD_FROM_EMAIL;	
 		$_SESSION['CAD_TO_EMAIL'] = $CAD_TO_EMAIL;			
 		
 		$_SESSION['AUTH_KEY'] = $AUTH_KEY;			
@@ -168,13 +168,13 @@
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('API_SECURITY'); ?>&nbsp;</td>
-				<td><input type="radio" name="API_SECURITY" id="API_SECURITY" <?php echo ($API_SECURITY=='true')?'checked':'' ?> onfocus="textboxOnFocus('POLICE_NCIC_notes')" onblur="textboxOnBlur('POLICE_NCIC_notes')" value="true" />True
-				<input type="radio" name="API_SECURITY" id="API_SECURITY" <?php echo ($API_SECURITY=='false')?'checked':'' ?> onfocus="textboxOnFocus('POLICE_NCIC_notes')" onblur="textboxOnBlur('POLICE_NCIC_notes')" value="false" />False</td>
+				<td><input type="radio" name="API_SECURITY" id="API_SECURITY" <?php echo ($API_SECURITY=='true')?'checked':'' ?> onfocus="textboxOnFocus('API_SECURITY_notes')" checked onblur="textboxOnBlur('API_SECURITY_notes')" value="true" />True
+				<input type="radio" name="API_SECURITY" id="API_SECURITY" <?php echo ($API_SECURITY=='false')?'checked':'' ?> onfocus="textboxOnFocus('API_SECURITY_notes')" onblur="textboxOnBlur('API_SECURITY_notes')" value="false" />False</td>
 			</tr>
 			<tr><td colspan="2" nowrap height="50px">&nbsp;</td></tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('CAD_FROM_EMAIL'); ?>&nbsp;<span class="star">*</span></td>
-				<td><input name="CAD_FROM_EMAIL" id="CAD_FROM_EMAIL" value="cad@example.com" class="form_text" size="28" maxlength="255" onfocus="textboxOnFocus('CAD_FROM_EMAIL_notes')" onblur="textboxOnBlur('CAD_FROM_MAIL_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+				<td><input name="CAD_FROM_EMAIL" id="CAD_FROM_EMAIL" value="cad@example.com" class="form_text" size="28" maxlength="255" onfocus="textboxOnFocus('CAD_FROM_EMAIL_notes')" onblur="textboxOnBlur('CAD_FROM_EMAIL_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('CAD_TO_EMAIL'); ?>&nbsp;<span class="star">*</span></td>
@@ -187,7 +187,7 @@
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('SECURE_AUTH_KEY'); ?>&nbsp;<span class="star">*</span></td>
-				<td><input name="SECURE_AUTH_KEY" id="SECURE_AUTH_KEY" value="<?php echo random_str(64); ?>/" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('SECURE_AUTH_KEY_notes')" onblur="textboxOnBlur('SECURE_AUTH_KEY_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+				<td><input name="SECURE_AUTH_KEY" id="SECURE_AUTH_KEY" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('SECURE_AUTH_KEY_notes')" onblur="textboxOnBlur('SECURE_AUTH_KEY_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('LOGGED_IN_KEY'); ?>&nbsp;<span class="star">*</span></td>

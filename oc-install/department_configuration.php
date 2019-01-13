@@ -1,7 +1,9 @@
 <?php
 
 	session_start();
-
+	echo '<pre>';
+	var_dump($_SESSION);
+	echo '</pre>';
 	require_once('include/shared.inc.php');    
     require_once('include/settings.inc.php');    
 	require_once('include/functions.inc.php');
