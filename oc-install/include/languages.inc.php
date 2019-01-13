@@ -17,8 +17,8 @@
 	
 	if(file_exists('install/language/'.$curr_lang.'/common.inc.php')){
 		include_once('install/language/'.$curr_lang.'/common.inc.php');
-	}else if(file_exists('language/'.$curr_lang.'/common.inc.php')){
-		include_once('language/'.$curr_lang.'/common.inc.php');
+	}else if(file_exists('../language/'.$curr_lang.'/common.inc.php')){
+		include_once('../language/'.$curr_lang.'/common.inc.php');
 	}else if(file_exists('../language/'.$curr_lang.'/common.inc.php')){
 		include_once('../language/'.$curr_lang.'/common.inc.php');
 	}else{

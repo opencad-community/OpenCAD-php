@@ -100,8 +100,8 @@
 			<tr>
 			<td>&nbsp;<?php echo lang_key('DEMO_MODE'); ?>&nbsp;</td>
 				<td>
-					<input type="radio" name="DEMO_MODE" id="DEMO_MODE" <?php echo ($DEMO_MODE=='true')?'checked':'' ?> onfocus="textboxOnFocus('DEMO_MODE_notes')" onblur="textboxOnBlur('DEMO_MODE_GRAVATAR_notes')" value="true" />True
-					<input type="radio" name="DEMO_MODE" id="DEMO_MODE" <?php echo ($DEMO_MODER=='false')?'checked':'' ?> onfocus="textboxOnFocus('DEMO_MODE_notes')" checked  onblur="textboxOnBlur('DEMO_MODE_notes')" value="false" />False
+					<input type="radio" name="DEMO_MODE" id="DEMO_MODE" <?php echo ($DEMO_MODE=='true')?'checked':'' ?> onfocus="textboxOnFocus('DEMO_MODE_notes')" onblur="textboxOnBlur('DEMO_MODE_notes')" value="true" />True
+					<input type="radio" name="DEMO_MODE" id="DEMO_MODE" <?php echo ($DEMO_MODE=='false')?'checked':'' ?> onfocus="textboxOnFocus('DEMO_MODE_notes')" checked  onblur="textboxOnBlur('DEMO_MODE_notes')" value="false" />False
 				</td>
 				<td rowspan="6" valign="top">					
 					<div id="DEMO_MODE_notes" class="notes_container">

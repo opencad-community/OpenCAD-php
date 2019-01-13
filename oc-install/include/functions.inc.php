@@ -84,7 +84,7 @@ function lang_key($key){
  *	Remove bad chars from input
  *	  	@param $str_words - input
  **/
-function prepare_input($str_words, $escape = false, $level = 'high')
+function prepare_input($str_words, $escape = false, $level = 'low')
 {
 	$found = false;
 	$str_words = htmlentities(strip_tags($str_words));

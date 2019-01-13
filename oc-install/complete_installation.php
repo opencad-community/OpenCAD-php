@@ -1,7 +1,9 @@
 <?php
 
 	session_start();
-	
+	echo '<pre>';
+var_dump($_SESSION);
+echo '</pre>';
 	require_once('include/shared.inc.php');    
     require_once('include/settings.inc.php');
 	require_once('include/database.class.php'); 
@@ -102,7 +104,7 @@
 		if(empty($database_name)) $error_mg[] = lang_key('alert_database_name_empty'); 
 		if(empty($database_username)) $error_mg[] = lang_key('alert_database_usernamename_empty'); 	
 		if (empty($database_password)) $error_mg[] = lang_key('alert_database_password_empty');
-		if (empty($database_prefix)) $error_mg[] = lang_key('alert_database_prefix_empty');
+		//if (empty($database_prefix)) $error_mg[] = lang_key('alert_database_prefix_empty');
 
 		if(empty($error_mg)){		
 			if(EI_MODE == 'demo'){
@@ -141,7 +143,7 @@
 								$config_file = str_replace('<DB_NAME>', $database_name, $config_file);
 								$config_file = str_replace('<DB_USER>', $database_username, $config_file);
 								$config_file = str_replace('<DB_PASSWORD>', $database_password, $config_file);
-								$config_file = str_replace('<DB_PREFIX>', $database_password, $config_file);
+								$config_file = str_replace('<DB_PREFIX>', $database_prefix, $config_file);
 								
 								$config_file = str_replace('<COMMUNITY_NAME>', $COMMUNITY_NAME, $config_file);
 								$config_file = str_replace('<BASE_URL>', $BASE_URL, $config_file);

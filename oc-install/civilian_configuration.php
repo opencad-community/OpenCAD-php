@@ -25,6 +25,7 @@
 	// -------------------------------------------------
 	if($task == 'send'){
 
+		$ROADSIDE_PANIC = isset($_POST['ROADSIDE_PANIC']) ? prepare_input($_POST['ROADSIDE_PANIC']) : '';
 		$ROADSIDE_BOLO = isset($_POST['ROADSIDE_BOLO']) ? prepare_input($_POST['ROADSIDE_BOLO']) : '';
         $ROADSIDE_NCIC_NAME = isset($_POST['ROADSIDE_NCIC_NAME']) ? prepare_input($_POST['ROADSIDE_NCIC_NAME']) : '';
         $ROADSIDE_NCIC_PLATE = isset($_POST['ROADSIDE_NCIC_PLATE']) ? prepare_input($_POST['ROADSIDE_NCIC_PLATE']) : '';
@@ -32,6 +33,7 @@
 
         $CIV_REG = isset($_POST['CIV_REG']) ? prepare_input($_POST['CIV_REG']) : '';
 		
+		$_SESSION['ROADSIDE_BOLO'] = $ROADSIDE_PANIC;
 		$_SESSION['ROADSIDE_BOLO'] = $ROADSIDE_BOLO;
 		$_SESSION['ROADSIDE_NCIC_NAME'] = $ROADSIDE_NCIC_NAME;			
 		$_SESSION['ROADSIDE_NCIC_PLATE'] = $ROADSIDE_NCIC_PLATE;			
@@ -45,6 +47,7 @@
 
 	}else{
 
+		$ROADSIDE_PANIC = isset($_POST['ROADSIDE_PANIC']) ? prepare_input($_POST['ROADSIDE_PANIC']) : '';
 		$ROADSIDE_BOLO = isset($_POST['ROADSIDE_BOLO']) ? prepare_input($_POST['ROADSIDE_BOLO']) : '';
         $ROADSIDE_NCIC_NAME = isset($_POST['ROADSIDE_NCIC_NAME']) ? prepare_input($_POST['ROADSIDE_NCIC_NAME']) : '';
         $ROADSIDE_NCIC_PLATE = isset($_POST['ROADSIDE_NCIC_PLATE']) ? prepare_input($_POST['ROADSIDE_NCIC_PLATE']) : '';
