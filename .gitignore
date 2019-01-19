@@ -6,3 +6,4 @@ oc-config.php
 .htaccess
 info.php
 .github/
+*.bak*

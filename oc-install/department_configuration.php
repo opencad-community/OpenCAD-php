@@ -1,9 +1,7 @@
 <?php
 
 	session_start();
-	echo '<pre>';
-	var_dump($_SESSION);
-	echo '</pre>';
+
 	require_once('include/shared.inc.php');    
     require_once('include/settings.inc.php');    
 	require_once('include/functions.inc.php');
@@ -28,11 +26,13 @@
 	if($task == 'send'){
 		
 		$POLICE_NCIC = isset($_POST['POLICE_NCIC']) ? prepare_input($_POST['POLICE_NCIC']) : '';
+		$POLICE_CALL_SELFASSIGN = isset($_POST['POLICE_CALL_SELFASSIGN']) ? prepare_input($_POST['POLICE_CALL_SELFASSIGN']) : '';
 		
 		$FIRE_PANIC = isset($_POST['FIRE_PANIC']) ? prepare_input($_POST['FIRE_PANIC']) : '';
 		$FIRE_BOLO = isset($_POST['FIRE_BOLO']) ? prepare_input($_POST['FIRE_BOLO']) : '';
 		$FIRE_NCIC_NAME = isset($_POST['FIRE_NCIC_NAME']) ? prepare_input($_POST['FIRE_NCIC_NAME']) : '';
 		$FIRE_NCIC_PLATE = isset($_POST['FIRE_NCIC_PLATE']) ? prepare_input($_POST['FIRE_NCIC_PLATE']) : '';
+		$FIRE_CALL_SELFASSIGN = isset($_POST['FIRE_CALL_SELFASSIGN']) ? prepare_input($_POST['FIRE_CALL_SELFASSIGN']) : '';
 		
 		$EMS_PANIC = isset($_POST['EMS_PANIC']) ? prepare_input($_POST['EMS_PANIC']) : '';
 		$EMS_BOLO = isset($_POST['EMS_BOLO']) ? prepare_input($_POST['EMS_BOLO']) : '';
@@ -40,11 +40,13 @@
 		$EMS_NCIC_PLATE = isset($_POST['EMS_NCIC_PLATE']) ? prepare_input($_POST['EMS_NCIC_PLATE']) : '';
 		
 		$_SESSION['POLICE_NCIC'] = $POLICE_NCIC;
+		$_SESSION['POLICE_CALL_SELFASSIGN'] = $POLICE_CALL_SELFASSIGN;
 		
 		$_SESSION['FIRE_PANIC'] = $FIRE_PANIC;		
 		$_SESSION['FIRE_BOLO'] = $FIRE_BOLO;		
 		$_SESSION['FIRE_NCIC_NAME'] = $FIRE_NCIC_NAME;		
 		$_SESSION['FIRE_NCIC_PLATE'] = $FIRE_NCIC_PLATE;
+		$_SESSION['FIRE_CALL_SELFASSIGN'] = $FIRE_CALL_SELFASSIGN;
 		
 		$_SESSION['EMS_PANIC'] = $EMS_PANIC;		
 		$_SESSION['EMS_BOLO'] = $EMS_BOLO;		
@@ -58,11 +60,13 @@
 	}else{
 
 		$POLICE_NCIC = isset($_POST['POLICE_NCIC']) ? prepare_input($_POST['POLICE_NCIC']) : '';
+		$POLICE_CALL_SELFASSIGN = isset($_POST['POLICE_CALL_SELFASSIGN']) ? prepare_input($_POST['POLICE_CALL_SELFASSIGN']) : '';
 		
 		$FIRE_PANIC = isset($_POST['FIRE_PANIC']) ? prepare_input($_POST['FIRE_PANIC']) : '';
 		$FIRE_BOLO = isset($_POST['FIRE_BOLO']) ? prepare_input($_POST['FIRE_BOLO']) : '';
 		$FIRE_NCIC_NAME = isset($_POST['FIRE_NCIC_NAME']) ? prepare_input($_POST['FIRE_NCIC_NAME']) : '';
 		$FIRE_NCIC_PLATE = isset($_POST['FIRE_NCIC_PLATE']) ? prepare_input($_POST['FIRE_NCIC_PLATE']) : '';
+		$FIRE_CALL_SELFASSIGN = isset($_POST['FIRE_CALL_SELFASSIGN']) ? prepare_input($_POST['FIRE_CALL_SELFASSIGN']) : '';
 		
 		$EMS_PANIC = isset($_POST['EMS_PANIC']) ? prepare_input($_POST['EMS_PANIC']) : '';
 		$EMS_BOLO = isset($_POST['EMS_BOLO']) ? prepare_input($_POST['EMS_BOLO']) : '';
@@ -134,6 +138,10 @@
 					<div id="POLICE_NCIC_notes" class="notes_container">
 						<h4><?php echo lang_key('POLICE_NCIC'); ?></h4>
 						<p><?php echo lang_key('POLICE_NCIC_notes'); ?></p>
+					</div>
+					<div id="POLICE_CALL_SELFASSIGN_notes" class="notes_container">
+						<h4><?php echo lang_key('POLICE_CALL_SELFASSIGN'); ?></h4>
+						<p><?php echo lang_key('POLICE_CALL_SELFASSIGN_notes'); ?></p>
 					</div>					
 					<div id="FIRE_PANIC_notes" class="notes_container">
 						<h4><?php echo lang_key('FIRE_PANIC'); ?></h4>
@@ -150,6 +158,10 @@
 					<div id="FIRE_NCIC_PLATE_notes" class="notes_container">
 						<h4><?php echo lang_key('FIRE_NCIC_PLATE'); ?></h4>
 						<p><?php echo lang_key('FIRE_NCIC_PLATE_notes'); ?></p>
+					</div>
+					<div id="FIRE_CALL_SELFASSIGN_notes" class="notes_container">
+						<h4><?php echo lang_key('FIRE_CALL_SELFASSIGN'); ?></h4>
+						<p><?php echo lang_key('FIRE_CALL_SELFASSIGN_notes'); ?></p>
 					</div>
 					
 					<div id="EMS_PANIC_notes" class="notes_container">
@@ -173,6 +185,11 @@
 					<div id="notes_message" class="notes_container"></div>					
 				</td>
 			</tr>
+			<tr>
+				<td>&nbsp;<?php echo lang_key('POLICE_CALL_SELFASSIGN'); ?>&nbsp;</td>
+				<td><input type="radio" name="POLICE_CALL_SELFASSIGN" id="POLICE_CALL_SELFASSIGN" <?php echo ($POLICE_CALL_SELFASSIGN=='true')?'checked':'' ?> onfocus="textboxOnFocus('POLICE_CALL_SELFASSIGN_notes')" checked onblur="textboxOnBlur('POLICE_CALL_SELFASSIGN_notes')" value="true" />True
+				<input type="radio" name="POLICE_CALL_SELFASSIGN" id="POLICE_CALL_SELFASSIGN" <?php echo ($POLICE_CALL_SELFASSIGN=='false')?'checked':'' ?> onfocus="textboxOnFocus('POLICE_CALL_SELFASSIGN_notes')" onblur="textboxOnBlur('POLICE_CALL_SELFASSIGN_notes')" value="false" />False</td>
+			</tr>
 			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('FIRE_PANIC'); ?>&nbsp;</td>
@@ -193,6 +210,13 @@
 				<td>&nbsp;<?php echo lang_key('FIRE_NCIC_PLATE'); ?>&nbsp;</td>
 				<td><input type="radio" name="FIRE_NCIC_PLATE" id="FIRE_NCIC_PLATE" <?php echo ($FIRE_NCIC_PLATE=='true')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_NCIC_PLATE_notes')" checked onblur="textboxOnBlur('FIRE_NCIC_PLATE_notes')" value="true" />True
 				<input type="radio" name="FIRE_NCIC_PLATE" id="FIRE_NCIC_PLATE" <?php echo ($FIRE_NCIC_PLATE=='false')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_NCIC_PLATE_notes')" onblur="textboxOnBlur('FIRE_NCIC_PLATE_notes')" value="false" />False</td>
+			</tr>
+			<tr>
+				<td>&nbsp;<?php echo lang_key('FIRE_CALL_SELFASSIGN'); ?>&nbsp;</td>
+				<td>
+					<input type="radio" name="FIRE_CALL_SELFASSIGN" id="FIRE_CALL_SELFASSIGN" <?php echo ($FIRE_CALL_SELFASSIGN=='true')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_CALL_SELFASSIGN_notes')" checked onblur="textboxOnBlur('FIRE_CALL_SELFASSIGN_notes')" value="true" />True
+					<input type="radio" name="FIRE_CALL_SELFASSIGN" id="FIRE_CALL_SELFASSIGN" <?php echo ($FIRE_CALL_SELFASSIGN=='false')?'checked':'' ?> onfocus="textboxOnFocus('FIRE_CALL_SELFASSIGN_notes')" onblur="textboxOnBlur('FIRE_CALL_SELFASSIGN_notes')" value="false" />False
+				</td>
 			</tr>
 			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>
 			<tr>

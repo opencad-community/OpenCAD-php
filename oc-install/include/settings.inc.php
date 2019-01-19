@@ -4,7 +4,7 @@
     // 1. GLOBAL SETTINGS
     // -------------------------------------------------------------------------
     // *** system mode (demo|debug|production)
-    define('EI_MODE', 'production');
+    define('EI_MODE', 'debug');
     
     // *** version number of ApPHP EasyInstaller
     define('EI_VERSION', '3.2.4');
@@ -62,7 +62,7 @@
     // 3. DATABASE SETTINGS
     // -------------------------------------------------------------------------
     // *** force database creation
-    define('EI_DATABASE_CREATE', true);
+    define('EI_DATABASE_CREATE', false);
 
     // *** define database type
     // *** to check installed drivers use: print_r(PDO::getAvailableDrivers());
@@ -113,12 +113,12 @@
     define('EI_ALLOW_UN_INSTALLATION', false);  
 
     // *** allows start all over button
-    define('EI_ALLOW_START_ALL_OVER', true);
+    define('EI_ALLOW_START_ALL_OVER', false);
     
     // *** sql dump file - file that includes SQL statements for instalation
     define('EI_SQL_DUMP_FILE_CREATE', '../sql/oc_install.sql');
     define('EI_SQL_DUMP_FILE_UPDATE', 'sql_dump/update.sql');
-    define('EI_SQL_DUMP_FILE_UN_INSTALL', 'sql_dump/un-install.sql');
+    define('EI_SQL_DUMP_FILE_UN_INSTALL', '../sql/oc_uninstall.sql');
 
     // *** defines using of utf-8 encoding and collation for SQL dump file
     define('EI_USE_ENCODING', true);
