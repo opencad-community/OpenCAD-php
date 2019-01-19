@@ -1,9 +1,7 @@
 <?php
 
 	session_start();
-	echo '<pre>';
-var_dump($_SESSION);
-echo '</pre>';
+
 	require_once('include/shared.inc.php');    
     require_once('include/settings.inc.php');
 	require_once('include/database.class.php'); 
@@ -26,7 +24,7 @@ echo '</pre>';
 	$completed = false;
 	$error_mg  = array();
 		
-	if($passed_step == 6){
+	if($passed_step == 10){
 		
 		$database_host		 = isset($_SESSION['database_host']) ? prepare_input($_SESSION['database_host']) : '';
 		$database_name		 = isset($_SESSION['database_name']) ? prepare_input($_SESSION['database_name']) : '';
@@ -60,11 +58,13 @@ echo '</pre>';
 		$NONCE_SALT = isset($_SESSION['NONCE_SALT']) ? prepare_input($_SESSION['NONCE_SALT']) : '';
 		
 		$POLICE_NCIC = isset($_SESSION['POLICE_NCIC']) ? prepare_input($_SESSION['POLICE_NCIC']) : '';
-		
+		$POLICE_CALL_SELFASSIGN = isset($_SESSION['POLICE_CALL_SELFASSIGN']) ? prepare_input($_SESSION['POLICE_CALL_SELFASSIGN']) : '';
+
 		$FIRE_PANIC = isset($_SESSION['FIRE_PANIC']) ? prepare_input($_SESSION['FIRE_PANIC']) : '';
 		$FIRE_BOLO = isset($_SESSION['FIRE_BOLO']) ? prepare_input($_SESSION['FIRE_BOLO']) : '';
 		$FIRE_NCIC_NAME = isset($_SESSION['FIRE_NCIC_NAME']) ? prepare_input($_SESSION['FIRE_NCIC_NAME']) : '';
 		$FIRE_NCIC_PLATE = isset($_SESSION['FIRE_NCIC_PLATE']) ? prepare_input($_SESSION['FIRE_NCIC_PLATE']) : '';
+		$FIRE_CALL_SELFASSIGN = isset($_SESSION['FIRE_CALL_SELFASSIGN']) ? prepare_input($_SESSION['FIRE_CALL_SELFASSIGN']) : '';
 		
 		$EMS_PANIC = isset($_SESSION['EMS_PANIC']) ? prepare_input($_SESSION['EMS_PANIC']) : '';
 		$EMS_BOLO = isset($_SESSION['EMS_BOLO']) ? prepare_input($_SESSION['EMS_BOLO']) : '';
@@ -104,7 +104,7 @@ echo '</pre>';
 		if(empty($database_name)) $error_mg[] = lang_key('alert_database_name_empty'); 
 		if(empty($database_username)) $error_mg[] = lang_key('alert_database_usernamename_empty'); 	
 		if (empty($database_password)) $error_mg[] = lang_key('alert_database_password_empty');
-		//if (empty($database_prefix)) $error_mg[] = lang_key('alert_database_prefix_empty');
+		if (empty($database_prefix)) $error_mg[] = lang_key('alert_database_prefix_empty');
 
 		if(empty($error_mg)){		
 			if(EI_MODE == 'demo'){
@@ -149,7 +149,7 @@ echo '</pre>';
 								$config_file = str_replace('<BASE_URL>', $BASE_URL, $config_file);
 								$config_file = str_replace('<API_SECURITY>', $API_SECURITY, $config_file);
 								
-								$config_file = str_replace('<CAD_FROM_EMAIL>', $CAD_FROM_EMAILL, $config_file);
+								$config_file = str_replace('<CAD_FROM_EMAIL>', $CAD_FROM_EMAIL, $config_file);
 								$config_file = str_replace('<CAD_TO_EMAIL>', $CAD_TO_EMAIL, $config_file);
 								
 								$config_file = str_replace('<AUTH_KEY>', $AUTH_KEY, $config_file);
@@ -162,11 +162,13 @@ echo '</pre>';
 								$config_file = str_replace('<NONCE_SALT>', $NONCE_SALT, $config_file);
 								
 								$config_file = str_replace('<POLICE_NCIC>', $POLICE_NCIC, $config_file);
+								$config_file = str_replace('<POLICE_CALL_SELFASSIGN>', $POLICE_CALL_SELFASSIGN, $config_file);
 								
 								$config_file = str_replace('<FIRE_PANIC>', $FIRE_PANIC, $config_file);
 								$config_file = str_replace('<FIRE_BOLO>', $FIRE_BOLO, $config_file);
 								$config_file = str_replace('<FIRE_NCIC_NAME>', $FIRE_NCIC_NAME, $config_file);
 								$config_file = str_replace('<FIRE_NCIC_PLATE>', $FIRE_NCIC_PLATE, $config_file);
+								$config_file = str_replace('<FIRE_CALL_SELFASSIGN>', $FIRE_CALL_SELFASSIGN, $config_file);
 								
 								$config_file = str_replace('<EMS_PANIC>', $EMS_PANIC, $config_file);
 								$config_file = str_replace('<EMS_BOLO>', $EMS_BOLO, $config_file);
