@@ -45,7 +45,7 @@ function updateProfile()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $query = "UPDATE users SET name = ?, email = ?, identifier = ? WHERE ID = ?";
+    $query = "UPDATE ".DB_PREFIX."users SET name = ?, email = ?, identifier = ? WHERE ID = ?";
 
 	try {
 		$stmt = mysqli_prepare($link, $query);
@@ -88,7 +88,7 @@ function getMyRank()
     }
 
     //Get all ranks
-    $query = "SELECT ranks.rank_name FROM ranks_users INNER JOIN ranks ON ranks.rank_id=ranks_users.rank_id WHERE ranks_users.user_id = '$id';";
+    $query = "SELECT ".DB_PREFIX."ranks.rank_name FROM ".DB_PREFIX."".DB_PREFIX."ranks_users INNER JOIN ".DB_PREFIX."ranks ON ".DB_PREFIX."ranks.rank_id=".DB_PREFIX."ranks_users.rank_id WHERE ".DB_PREFIX."ranks_users.user_id = '$id';";
 
     $result=mysqli_query($link, $query);
 
@@ -118,7 +118,7 @@ function changePassword()
   $id = $_SESSION['id'];
   $newpassword = htmlspecialchars($_POST['password']);
   $hashed_password = password_hash($newpassword, PASSWORD_DEFAULT);
-  mysqli_query($link,"UPDATE `users` SET `password` = '$hashed_password' WHERE `id` = '$id'") or die(mysqli_error($link));
+  mysqli_query($link,"UPDATE ".DB_PREFIX."`users` SET `password` = '$hashed_password' WHERE `id` = '$id'") or die(mysqli_error($link));
 
   $_SESSION['profileUpdate'] = '<div class="alert alert-success"><span>Password successfully updated.</span></div>';
 
@@ -136,7 +136,7 @@ function getRanks()
     }
 
     //Get all ranks
-    $query = "SELECT * FROM ranks";
+    $query = "SELECT * FROM ".DB_PREFIX."ranks";
 
     $result=mysqli_query($link, $query);
 

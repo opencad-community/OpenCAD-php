@@ -47,7 +47,7 @@ function register()
     //Establish database connection
 
     //Check to see if the email has already been used
-    $query = "SELECT email from users where email = \"".$email."\"";
+    $query = "SELECT email from ".DB_PREFIX."users where email = \"".$email."\"";
     $result = mysqli_query($link, $query);
     $num_rows = $result->num_rows;
     if ($num_rows>0)
@@ -58,7 +58,7 @@ function register()
         header("Location:".BASE_URL."/index.php#signup");
         exit();
     }
-    $query = "INSERT INTO users (name, email, password, identifier) VALUES (?, ?, ?, ?)";
+    $query = "INSERT INTO ".DB_PREFIX."users (name, email, password, identifier) VALUES (?, ?, ?, ?)";
     try {
         $stmt = mysqli_prepare($link, $query);
         mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $password, $identifier);
@@ -116,6 +116,7 @@ function register()
     sleep(1);
     header("Location:".BASE_URL."/index.php#signup");
 }
+
 function civreg()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -138,7 +139,7 @@ function civreg()
     //Establish database connection
 
     //Check to see if the email has already been used
-    $query = "SELECT email from users where email = \"".$email."\"";
+    $query = "SELECT email from ".DB_PREFIX."users where email = \"".$email."\"";
     $result = mysqli_query($link, $query);
     $num_rows = $result->num_rows;
     if ($num_rows>0)
@@ -149,7 +150,7 @@ function civreg()
         header("Location:".BASE_URL."/index.php#civreg");
         exit();
     }
-    $query = 'INSERT INTO users (name, email, password, identifier, approved) VALUES (?, ?, ?, ?, "1")';
+    $query = 'INSERT INTO '.DB_PREFIX.'users (name, email, password, identifier, approved) VALUES (?, ?, ?, ?, "1")';
     try {
         $stmt = mysqli_prepare($link, $query);
         mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $password, $identifier);
@@ -162,7 +163,7 @@ function civreg()
     {
         die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
     }
-	$query = 'INSERT INTO user_departments (user_id, department_id)
+	$query = 'INSERT INTO '.DB_PREFIX.'user_departments (user_id, department_id)
 		SELECT id , ?
 		FROM users
 		WHERE email = ?';

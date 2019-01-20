@@ -28,7 +28,7 @@ require_once(__DIR__ . "/../oc-config.php");
 			die();
         }
 
-        $query = "SELECT id, name, password, email, identifier, admin_privilege, password_reset, approved, suspend_reason FROM users WHERE email = ?";
+        $query = "SELECT id, name, password, email, identifier, admin_privilege, password_reset, approved, suspend_reason FROM ".DB_PREFIX."users WHERE email = ?";
 
         try {
             $stmt = mysqli_prepare($link, $query);
