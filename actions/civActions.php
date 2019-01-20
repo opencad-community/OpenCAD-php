@@ -66,7 +66,7 @@ function getCivilianNamesOwn()
 		die('Could not connect: ' .mysql_error());
 	}
 
-	$sql = 'SELECT ncic_names.id, ncic_names.name FROM ncic_names where ncic_names.submittedByID = "' . $uid . '"';
+	$sql = 'SELECT '.DB_PREFIX.'ncic_names.id, '.DB_PREFIX.'ncic_names.name FROM '.DB_PREFIX.'ncic_names where '.DB_PREFIX.'ncic_names.submittedByID = "' . $uid . '"';
 
 	$result=mysqli_query($link, $sql);
 
@@ -163,7 +163,7 @@ function ncicGetPlates()
     }
 
 
-    $query = 'SELECT ncic_plates.*, ncic_names.name FROM ncic_plates INNER JOIN ncic_names ON ncic_names.id=ncic_plates.name_id WHERE ncic_plates.user_id = "' . $uid . '"';
+    $query = 'SELECT '.DB_PREFIX.'ncic_plates.*, '.DB_PREFIX.'ncic_names.name FROM '.DB_PREFIX.'ncic_plates INNER JOIN '.DB_PREFIX.'ncic_names ON '.DB_PREFIX.'ncic_names.id='.DB_PREFIX.'ncic_plates.name_id WHERE '.DB_PREFIX.'ncic_plates.user_id = "' . $uid . '"';
 
     $result=mysqli_query($link, $query);
 
@@ -236,7 +236,7 @@ function delete_name()
 
     $uid = htmlspecialchars($_POST['uid']);
 
-    $query = "DELETE FROM ncic_names WHERE id = ?";
+    $query = "DELETE FROM ".DB_PREFIX."ncic_names WHERE id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $query);
@@ -267,7 +267,7 @@ function delete_plate()
 
     $vehid = htmlspecialchars($_POST['vehid']);
 
-    $query = "DELETE FROM ncic_plates WHERE id = ?";
+    $query = "DELETE FROM".DB_CONFIG." ncic_plates WHERE id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $query);
@@ -319,7 +319,7 @@ function create_name()
         die('Could not connect: ' . mysql_error());
     }
 
-    $query = 'SELECT name FROM ncic_names WHERE name = "' . $name . '" ';
+    $query = 'SELECT name FROM '.DB_PREFIX.'ncic_names WHERE name = "' . $name . '" ';
 
     $result = mysqli_query($link, $query);
 
@@ -349,7 +349,7 @@ function create_name()
 	$weapon = htmlspecialchars($_POST['civWepStat']);
 	$deceased = htmlspecialchars($_POST['civDec']);
 
-    $query = "INSERT INTO ncic_names (submittedByName, submittedById, name, dob, address, gender, race, dl_status, hair_color, build, weapon_permit, deceased)
+    $query = "INSERT INTO ".DB_PREFIX."ncic_names (submittedByName, submittedById, name, dob, address, gender, race, dl_status, hair_color, build, weapon_permit, deceased)
     VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
     try
@@ -415,7 +415,7 @@ function create_plate()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $sql = "INSERT INTO ncic_plates (name_id, veh_plate, veh_make, veh_model, veh_pcolor, veh_scolor, veh_insurance, flags, veh_reg_state, notes, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO ".DB_PREFIX."ncic_plates (name_id, veh_plate, veh_make, veh_model, veh_pcolor, veh_scolor, veh_insurance, flags, veh_reg_state, notes, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 
 	try {
@@ -447,7 +447,7 @@ function create911Call()
 		die('Could not connect: ' .mysql_error());
 	}
 
-	$sql = "SELECT MAX(call_id) AS max FROM call_list";
+	$sql = "SELECT MAX(call_id) AS max FROM ".DB_PREFIX."call_list";
 	$result=mysqli_query($link, $sql);
 
 	while($r=mysqli_fetch_array($result))
@@ -457,7 +457,7 @@ function create911Call()
 
 	$callid++;
 
-    $sql = "REPLACE INTO call_list (call_id) VALUES (?)";
+    $sql = "REPLACE INTO ".DB_PREFIX."call_list (call_id) VALUES (?)";
 
 	try {
 		$stmt = mysqli_prepare($link, $sql);
@@ -487,7 +487,7 @@ function create911Call()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "INSERT IGNORE INTO calls (call_id, call_type, call_street1, call_narrative) VALUES (?, '911', ?, ?)";
+    $sql = "INSERT IGNORE INTO ".DB_PREFIX."calls (call_id, call_type, call_street1, call_narrative) VALUES (?, '911', ?, ?)";
 
     try {
         $stmt = mysqli_prepare($link, $sql);
@@ -541,7 +541,7 @@ function edit_name()
         die('Could not connect: ' . mysql_error());
     }
 
-    $query = 'SELECT first_name FROM ncic_names WHERE first_name = "' . $name . '"';
+    $query = 'SELECT first_name FROM '.DB_PREFIX.'ncic_names WHERE first_name = "' . $name . '"';
 
     $result = mysqli_query($link, $query);
 
@@ -572,7 +572,7 @@ function edit_name()
 	$deceased = htmlspecialchars($_POST['civDec']);
     $editid = htmlspecialchars($_POST['Edit_id']);
 
-    $query = "UPDATE ncic_names SET name = ?, dob = ?, address = ?, gender = ?, race = ?, dl_status = ?, hair_color = ?, build = ?, weapon_permit = ?, deceased = ? WHERE id = ?";
+    $query = "UPDATE ".DB_PREFIX."ncic_names SET name = ?, dob = ?, address = ?, gender = ?, race = ?, dl_status = ?, hair_color = ?, build = ?, weapon_permit = ?, deceased = ? WHERE id = ?";
     try
     {
         $stmt = mysqli_prepare($link, $query);
@@ -637,7 +637,7 @@ function edit_plate()
     }
 
 
-    $sql = "UPDATE ncic_plates SET name_id = ?, veh_plate = ?, veh_make = ?, veh_model = ?, veh_pcolor = ?, veh_scolor = ?, veh_insurance = ?, flags = ?, veh_reg_state = ?, notes = ? WHERE id = ?";
+    $sql = "UPDATE ".DB_PREFIX."ncic_plates SET name_id = ?, veh_plate = ?, veh_make = ?, veh_model = ?, veh_pcolor = ?, veh_scolor = ?, veh_insurance = ?, flags = ?, veh_reg_state = ?, notes = ? WHERE id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $sql);
@@ -667,7 +667,7 @@ function editnameid()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT ncic_names.* FROM ncic_names WHERE id=".$_POST['editid'];
+    $query = "SELECT ncic_names.* FROM ".DB_PREFIX."ncic_names WHERE id=".$_POST['editid'];
     $resultset = mysqli_query($link, $query) or die("database error:". mysqli_error($link));
     $data = array();
     while( $rows = mysqli_fetch_assoc($resultset) ) {
@@ -683,7 +683,7 @@ function editplateid()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT ncic_plates.* FROM ncic_plates WHERE id=".$_POST['edit_plateid'];
+    $query = "SELECT ".DB_PREFIX."ncic_plates.* FROM ".DB_PREFIX."ncic_plates WHERE id=".$_POST['edit_plateid'];
     $resultset = mysqli_query($link, $query) or die("database error:". mysqli_error($link));
     $plates = array();
     while( $rows = mysqli_fetch_assoc($resultset) ) {
@@ -741,7 +741,7 @@ function ncic_warrants()
     if (!$link) {
         die('Could not connect: ' .mysql_error());
     }
-	$sql = 'SELECT ncic_names.id from ncic_names where submittedById = "' . $uid . '"';
+	$sql = 'SELECT '.DB_PREFIX.'ncic_names.id from '.DB_PREFIX.'ncic_names where submittedById = "' . $uid . '"';
 
     $results=mysqli_query($link, $sql);
     $nameid = "";
@@ -750,7 +750,7 @@ function ncic_warrants()
         $nameid = ''.$row[0].'';
     }
 
-    $query = 'SELECT ncic_warrants.*, ncic_names.name FROM ncic_warrants INNER JOIN ncic_names ON ncic_names.id=ncic_warrants.name_id WHERE name_id = "' . $nameid . '"';
+    $query = 'SELECT '.DB_PREFIX.'ncic_warrants.*, '.DB_PREFIX.'ncic_names.name FROM '.DB_PREFIX.'ncic_warrants INNER JOIN '.DB_PREFIX.'ncic_names ON '.DB_PREFIX.'ncic_names.id='.DB_PREFIX.'ncic_warrants.name_id WHERE name_id = "' . $nameid . '"';
 
     $result=mysqli_query($link, $query);
 
@@ -869,7 +869,7 @@ function create_weapon()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $sql = "INSERT INTO ncic_weapons (name_id, weapon_type, weapon_name, user_id) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO ".DB_PREFIX."ncic_weapons (name_id, weapon_type, weapon_name, user_id) VALUES (?, ?, ?, ?)";
 
 
 	try {
@@ -902,7 +902,7 @@ function ncicGetWeapons()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = 'SELECT ncic_weapons.*, ncic_names.name FROM ncic_weapons INNER JOIN ncic_names ON ncic_names.id=ncic_weapons.name_id WHERE ncic_weapons.user_id = "' . $uid . '"';
+    $query = 'SELECT '.DB_PREFIX.'ncic_weapons.*, '.DB_PREFIX.'ncic_names.name FROM '.DB_PREFIX.'ncic_weapons INNER JOIN '.DB_PREFIX.'ncic_names ON '.DB_PREFIX.'ncic_names.id='.DB_PREFIX.'ncic_weapons.name_id WHERE '.DB_PREFIX.'ncic_weapons.user_id = "' . $uid . '"';
 
     $result=mysqli_query($link, $query);
 
@@ -960,7 +960,7 @@ function delete_weapon()
 
     $weaid = htmlspecialchars($_POST['weaid']);
 
-    $query = "DELETE FROM ncic_weapons WHERE id = ?";
+    $query = "DELETE FROM ".DB_PREFIX."ncic_weapons WHERE id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $query);

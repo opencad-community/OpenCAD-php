@@ -42,7 +42,7 @@ function name()
             die('Could not connect: ' .mysql_error());
         }
 
-        $sql = "SELECT id, name, dob, address, gender, race, dl_status, hair_color, build, weapon_permit, deceased, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS age FROM ncic_names WHERE name = \"$name\"";
+        $sql = "SELECT id, name, dob, address, gender, race, dl_status, hair_color, build, weapon_permit, deceased, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS age FROM ".DB_PREFIX."ncic_names WHERE name = \"$name\"";
 
         $result=mysqli_query($link, $sql);
 
@@ -81,7 +81,7 @@ function name()
                 die('Could not connect: ' .mysql_error());
             }
 
-            $sql = "SELECT id, name_id, warrant_name FROM ncic_warrants WHERE name_id = \"$userId\"";
+            $sql = "SELECT id, name_id, warrant_name FROM ".DB_PREFIX."ncic_warrants WHERE name_id = \"$userId\"";
 
             $result=mysqli_query($link, $sql);
 
@@ -110,7 +110,7 @@ function name()
                 die('Could not connect: ' .mysql_error());
             }
 
-            $sql = "SELECT id, name_id, arrest_reason FROM ncic_arrests WHERE name_id = \"$userId\"";
+            $sql = "SELECT id, name_id, arrest_reason FROM ".DB_PREFIX."ncic_arrests WHERE name_id = \"$userId\"";
 
             $result=mysqli_query($link, $sql);
 
@@ -139,7 +139,7 @@ function name()
                 die('Could not connect: ' .mysql_error());
             }
 
-            $sql = "SELECT id, name_id, citation_name FROM ncic_citations WHERE name_id = \"$userId\"";
+            $sql = "SELECT id, name_id, citation_name FROM ".DB_PREFIX."ncic_citations WHERE name_id = \"$userId\"";
 
             $result=mysqli_query($link, $sql);
 
@@ -168,7 +168,7 @@ function name()
                 die('Could not connect: ' .mysql_error());
             }
 
-            $sql = "SELECT id, name_id, warning_name FROM ncic_warnings WHERE name_id = \"$userId\"";
+            $sql = "SELECT id, name_id, warning_name FROM ".DB_PREFIX."ncic_warnings WHERE name_id = \"$userId\"";
 
             $result=mysqli_query($link, $sql);
 
@@ -212,7 +212,7 @@ function plate()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "SELECT ncic_plates.*, ncic_names.name FROM ncic_plates INNER JOIN ncic_names ON ncic_names.id=ncic_plates.name_id WHERE veh_plate = \"$plate\"";
+    $sql = "SELECT ".DB_PREFIX."ncic_plates.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_plates INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_plates.name_id WHERE veh_plate = \"$plate\"";
 
     $result=mysqli_query($link, $sql);
 
@@ -296,7 +296,7 @@ function weapon()
                 die('Could not connect: ' .mysql_error());
             }
 
-            $sql = "SELECT id, name_id, weapon_type, weapon_name FROM ncic_weapons WHERE name_id = \"$userId\"";
+            $sql = "SELECT id, name_id, weapon_type, weapon_name FROM ".DB_PREFIX."ncic_weapons WHERE name_id = \"$userId\"";
 
             $result=mysqli_query($link, $sql);
 

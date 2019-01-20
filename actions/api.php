@@ -117,7 +117,7 @@ function quickStatus()
             $narrativeAdd = date("Y-m-d H:i:s").': '.$callsign.': En-Route<br/>';
 
 
-            $sql = "UPDATE calls SET call_narrative = concat(call_narrative, ?) WHERE call_id = ?";
+            $sql = "UPDATE ".DB_PREFIX."calls SET call_narrative = concat(".DB_PREFIX."call_narrative, ?) WHERE call_id = ?";
 
             try {
                 $stmt = mysqli_prepare($link, $sql);
@@ -154,7 +154,7 @@ function getMyCall()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = 'SELECT active_users.* from `active_users` WHERE active_users.id = "' . $uid . '" AND active_users.status = "0" AND active_users.status_detail = "3"';
+    $sql = 'SELECT active_users.* from '.DB_PREFIX.'`active_users` WHERE '.DB_PREFIX.'active_users.id = "' . $uid . '" AND '.DB_PREFIX.'active_users.status = "0" AND  '.DB_PREFIX.'active_users.status_detail = "3"';
 
     $result = mysqli_query($link, $sql);
 
@@ -167,7 +167,7 @@ function getMyCall()
     else
     {
         //Figure out what call the user is on
-        $sql = 'SELECT call_id from calls_users WHERE id = "' . $uid . '"';
+        $sql = 'SELECT call_id from '.DB_PREFIX.'calls_users WHERE id = "' . $uid . '"';
 
         $result = mysqli_query($link, $sql);
 
@@ -177,7 +177,7 @@ function getMyCall()
         }
 
         //Get call details
-        $sql = 'SELECT * from calls WHERE call_id = "' . $call_id . '"';
+        $sql = 'SELECT * from '.DB_PREFIX.'calls WHERE call_id = "' . $call_id . '"';
 
         $result = mysqli_query($link, $sql);
 
@@ -271,7 +271,7 @@ function checkTones()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "SELECT * from tones";
+    $sql = "SELECT * from ".DB_PREFIX."tones";
 
     $result=mysqli_query($link, $sql);
 
@@ -316,7 +316,7 @@ function setTone()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "UPDATE tones SET active = ? WHERE name = ?";
+    $sql = "UPDATE ".DB_PREFIX."tones SET active = ? WHERE name = ?";
 
     try {
         $stmt = mysqli_prepare($link, $sql);
@@ -355,7 +355,7 @@ function logoutUser()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "DELETE FROM active_users WHERE identifier = ?";
+    $sql = "DELETE FROM ".DB_PREFIX."active_users WHERE identifier = ?";
 
     try {
         $stmt = mysqli_prepare($link, $sql);
@@ -462,7 +462,7 @@ function changeStatus()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "UPDATE active_users SET status = ?, status_detail = ? WHERE identifier = ?";
+    $sql = "UPDATE ".DB_PREFIX."active_users SET status = ?, status_detail = ? WHERE identifier = ?";
 
     try {
         $stmt = mysqli_prepare($link, $sql);
@@ -482,7 +482,7 @@ function changeStatus()
     {
         //echo $unit;
         //Figure out what call they're on
-        $sql = "SELECT call_id FROM calls_users WHERE identifier = \"$unit\"";
+        $sql = "SELECT call_id FROM ".DB_PREFIX."calls_users WHERE identifier = \"$unit\"";
 
         $result=mysqli_query($link, $sql);
 
@@ -492,7 +492,7 @@ function changeStatus()
         }
 
         //Get their callsign for the narrative
-        $sql = "SELECT callsign FROM active_users WHERE identifier = \"$unit\"";
+        $sql = "SELECT callsign FROM ".DB_PREFIX."active_users WHERE identifier = \"$unit\"";
 
         $result=mysqli_query($link, $sql);
 
@@ -504,7 +504,7 @@ function changeStatus()
         //Update the call_narrative to say they were cleared
         $narrativeAdd = date("Y-m-d H:i:s").': Unit Cleared: '.$callsign.'<br/>';
 
-        $sql = "UPDATE calls SET call_narrative = concat(call_narrative, ?) WHERE call_id = ?";
+        $sql = "UPDATE ".DB_PREFIX."calls SET call_narrative = concat(call_narrative, ?) WHERE call_id = ?";
 
         try {
             $stmt = mysqli_prepare($link, $sql);
@@ -522,7 +522,7 @@ function changeStatus()
 
 
        //Remove them from the call
-       $sql = "DELETE FROM calls_users WHERE identifier = ?";
+       $sql = "DELETE FROM ".DB_PREFIX."calls_users WHERE identifier = ?";
 
         try {
             $stmt = mysqli_prepare($link, $sql);
@@ -554,7 +554,7 @@ function deleteDispatcher()
     $identifier = $_SESSION['identifier'];
 
 
-mysqli_query($link,"DELETE FROM dispatchers WHERE identifier='".$identifier."'");
+mysqli_query($link,"DELETE FROM ".DB_PREFIX."dispatchers WHERE identifier='".$identifier."'");
 mysqli_close($link);
 
 }
@@ -724,7 +724,7 @@ function setUnitActive($dep)
             break;
     }
 
-    $sql = "REPLACE INTO active_users (identifier, callsign, status, status_detail, id) VALUES (?, ?, ?, '6', ?)";
+    $sql = "REPLACE INTO ".DB_PREFIX."active_users (identifier, callsign, status, status_detail, id) VALUES (?, ?, ?, '6', ?)";
 
 
     try {
@@ -751,7 +751,7 @@ function getAvailableUnits()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "SELECT * from active_users WHERE status = '1'";
+    $sql = "SELECT * from ".DB_PREFIX."active_users WHERE status = '1'";
 
     $result = mysqli_query($link, $sql);
 
@@ -890,7 +890,7 @@ function getIndividualStatus($callsign)
         $statusDetail = $row[0];
     }
 
-    $sql = "SELECT status_text FROM statuses WHERE status_id = \"$statusDetail\"";
+    $sql = "SELECT status_text FROM ".DB_PREFIX."statuses WHERE status_id = \"$statusDetail\"";
 
     $result=mysqli_query($link, $sql);
 
@@ -910,7 +910,7 @@ function getIncidentType()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "SELECT code_name FROM incident_type";
+    $sql = "SELECT code_name FROM ".DB_PREFIX."incident_type";
 
     $result=mysqli_query($link, $sql);
 
@@ -929,7 +929,7 @@ function getStreet()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "SELECT name FROM streets";
+    $sql = "SELECT name FROM ".DB_PREFIX."streets";
 
     $result=mysqli_query($link, $sql);
 
@@ -947,7 +947,7 @@ function getActiveUnits()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT callsign FROM active_users WHERE status = '1'";
+    $query = "SELECT callsign FROM ".DB_PREFIX."active_users WHERE status = '1'";
 
     $result=mysqli_query($link, $query);
 
@@ -968,7 +968,7 @@ function getActiveUnitsModal()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT callsign, identifier FROM active_users WHERE status = '1'";
+    $query = "SELECT callsign, identifier FROM ".DB_PREFIX."active_users WHERE status = '1'";
 
     $result=mysqli_query($link, $query);
 
@@ -989,7 +989,7 @@ function getActiveCalls()
         die('Could not connect: ' .mysql_error());
     }
 
-      $sql = "SELECT * from calls";
+      $sql = "SELECT * from ".DB_PREFIX."calls";
 
     $result = mysqli_query($link, $sql);
 
@@ -1082,7 +1082,7 @@ function getActivePersonBOLO()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "SELECT * from bolos_persons";
+    $sql = "SELECT * from ".DB_PREFIX."bolos_persons";
 
     $result = mysqli_query($link, $sql);
 
@@ -1175,7 +1175,7 @@ function getUnitsOnCall($callId)
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql1 = "SELECT * FROM calls_users WHERE call_id = \"$callId\"";
+    $sql1 = "SELECT * FROM ".DB_PREFIX."calls_users WHERE call_id = \"$callId\"";
 
     $result1=mysqli_query($link, $sql1);
 
@@ -1212,7 +1212,7 @@ function getCallDetails()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "SELECT * FROM calls WHERE call_id = \"$callId\"";
+    $sql = "SELECT * FROM ".DB_PREFIX."calls WHERE call_id = \"$callId\"";
 
     $result=mysqli_query($link, $sql);
 
@@ -1240,7 +1240,7 @@ function getCivilianNamesOption()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "SELECT id, name FROM ncic_names";
+    $sql = "SELECT id, name FROM ".DB_PREFIX."ncic_names";
 
     $result=mysqli_query($link, $sql);
 
@@ -1258,7 +1258,7 @@ function getCitations()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "SELECT citation_name FROM citations";
+    $sql = "SELECT citation_name FROM ".DB_PREFIX."citations";
 
     $result=mysqli_query($link, $sql);
 
@@ -1283,7 +1283,7 @@ function getVehicleMakes()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT DISTINCT vehicles.Make FROM vehicles";
+    $query = "SELECT DISTINCT vehicles.Make FROM ".DB_PREFIX."vehicles";
 
     $result=mysqli_query($link, $query);
 
@@ -1311,7 +1311,7 @@ function getVehicleModels()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT DISTINCT vehicles.Model FROM vehicles";
+    $query = "SELECT DISTINCT vehicles.Model FROM ".DB_PREFIX."vehicles";
 
     $result=mysqli_query($link, $query);
 
@@ -1338,7 +1338,7 @@ function getVehicle()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT * FROM vehicles";
+    $query = "SELECT * FROM ".DB_PREFIX."vehicles";
 
     $result=mysqli_query($link, $query);
 
@@ -1366,7 +1366,7 @@ function getGenders()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT DISTINCT genders.genders FROM genders";
+    $query = "SELECT DISTINCT genders.genders FROM ".DB_PREFIX."genders";
 
     $result=mysqli_query($link, $query);
 
@@ -1393,7 +1393,7 @@ function getColors()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT color_group, color_name FROM colors";
+    $query = "SELECT color_group, color_name FROM ".DB_PREFIX."colors";
 
     $result=mysqli_query($link, $query);
 
@@ -1414,7 +1414,7 @@ function getCivilianNames()
 		die('Could not connect: ' .mysql_error());
 	}
 
-	$sql = "SELECT ncic_names.id, ncic_names.name FROM ncic_names";
+	$sql = "SELECT ncic_names.id, ncic_names.name FROM ".DB_PREFIX."ncic_names";
 
 	$result=mysqli_query($link, $sql);
 
@@ -1462,7 +1462,7 @@ function callCheck()
 		die('Could not connect: ' .mysql_error());
 	}
 
-	$sql = 'SELECT * FROM calls_users WHERE id = "'.$uid.'"';
+	$sql = 'SELECT * FROM '.DB_PREFIX.'calls_users WHERE id = "'.$uid.'"';
 
 	$result=mysqli_query($link, $sql);
 
@@ -1471,7 +1471,7 @@ function callCheck()
 	if($num_rows == 0)
 	{
 
-		$sql = "REPLACE INTO active_users (identifier, callsign, status, status_detail, id) VALUES (?, ?, '0', '6', ?)";
+		$sql = "REPLACE INTO ".DB_PREFIX."active_users (identifier, callsign, status, status_detail, id) VALUES (?, ?, '0', '6', ?)";
 
 
     try {
@@ -1491,7 +1491,7 @@ function callCheck()
 	else
 	{
 
-		$sql = "REPLACE INTO active_users (identifier, callsign, status, status_detail, id) VALUES (?, ?, '0', '3', ?)";
+		$sql = "REPLACE INTO ".DB_PREFIX."active_users (identifier, callsign, status, status_detail, id) VALUES (?, ?, '0', '3', ?)";
 
 
     try {
@@ -1520,7 +1520,7 @@ function getWeapons()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT * FROM weapons";
+    $query = "SELECT * FROM ".DB_PREFIX."weapons";
 
     $result=mysqli_query($link, $query);
 
@@ -1540,7 +1540,7 @@ function rms_warnings()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT ncic_names.name, ncic_warnings.id, ncic_warnings.warning_name, ncic_warnings.issued_date, ncic_warnings.issued_by FROM ncic_warnings INNER JOIN ncic_names ON ncic_warnings.name_id=ncic_names.id WHERE ncic_warnings.status = '1'";
+    $query = "SELECT ".DB_PREFIX."ncic_names.name, ".DB_PREFIX."ncic_warnings.id, ".DB_PREFIX."ncic_warnings.warning_name, ".DB_PREFIX."ncic_warnings.issued_date, ".DB_PREFIX."ncic_warnings.issued_by FROM ".DB_PREFIX."ncic_warnings INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_warnings.name_id=".DB_PREFIX."ncic_names.id WHERE ".DB_PREFIX."ncic_warnings.status = '1'";
 
     $result=mysqli_query($link, $query);
 
@@ -1591,7 +1591,7 @@ function rms_citations()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT ncic_names.name, ncic_citations.id, ncic_citations.citation_name, ncic_citations.citation_fine, ncic_citations.issued_date, ncic_citations.issued_by FROM ncic_citations INNER JOIN ncic_names ON ncic_citations.name_id=ncic_names.id WHERE ncic_citations.status = '1'";
+    $query = "SELECT ".DB_PREFIX."ncic_names.name, ".DB_PREFIX."ncic_citations.id, ".DB_PREFIX."ncic_citations.citation_name, ".DB_PREFIX."ncic_citations.citation_fine, ".DB_PREFIX."ncic_citations.issued_date, ".DB_PREFIX."ncic_citations.issued_by FROM ".DB_PREFIX."ncic_citations INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_citations.name_id=".DB_PREFIX."ncic_names.id WHERE ".DB_PREFIX."ncic_citations.status = '1'";
 
     $result=mysqli_query($link, $query);
 
@@ -1644,7 +1644,7 @@ function rms_arrests()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT ncic_names.name, ncic_arrests.id, ncic_arrests.arrest_reason, ncic_arrests.arrest_fine, ncic_arrests.issued_date, ncic_arrests.issued_by FROM ncic_arrests INNER JOIN ncic_names ON ncic_arrests.name_id=ncic_names.id";
+    $query = "SELECT ".DB_PREFIX."ncic_names.name, ".DB_PREFIX."ncic_arrests.id, ".DB_PREFIX."ncic_arrests.arrest_reason, ".DB_PREFIX."ncic_arrests.arrest_fine, ".DB_PREFIX."ncic_arrests.issued_date, ".DB_PREFIX."ncic_arrests.issued_by FROM ".DB_PREFIX."ncic_arrests INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_arrests.name_id=".DB_PREFIX."ncic_names.id";
 
     $result=mysqli_query($link, $query);
 
@@ -1697,7 +1697,7 @@ function rms_warrants()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT ncic_warrants.*, ncic_names.name FROM ncic_warrants INNER JOIN ncic_names ON ncic_names.id=ncic_warrants.name_id";
+    $query = "SELECT ".DB_PREFIX."ncic_warrants.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_warrants INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_warrants.name_id";
 
     $result=mysqli_query($link, $query);
 

@@ -75,7 +75,7 @@ function rejectRequest()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "DELETE FROM identity_requests WHERE req_id = ?";
+    $query = "DELETE FROM ".DB_PREFIX."identity_requests WHERE req_id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $query);
@@ -163,7 +163,7 @@ function ncicGetNames()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT * FROM ncic_names";
+    $query = "SELECT * FROM ".DB_PREFIX."ncic_names";
 
     $result=mysqli_query($link, $query);
 
@@ -235,7 +235,7 @@ function ncicGetPlates()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT ncic_plates.*, ncic_names.name FROM ncic_plates INNER JOIN ncic_names ON ncic_names.id=ncic_plates.name_id";
+    $query = "SELECT ".DB_PREFIX."ncic_plates.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_plates INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_plates.name_id";
 
     $result=mysqli_query($link, $query);
 
@@ -304,7 +304,7 @@ function ncicGetWeapons()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = 'SELECT ncic_weapons.*, ncic_names.name FROM ncic_weapons INNER JOIN ncic_names ON ncic_names.id=ncic_weapons.name_id';
+    $query = 'SELECT '.DB_PREFIX.'ncic_weapons.*, '.DB_PREFIX.'ncic_names.name FROM '.DB_PREFIX.'ncic_weapons INNER JOIN '.DB_PREFIX.'ncic_names ON '.DB_PREFIX.'ncic_names.id='.DB_PREFIX.'ncic_weapons.name_id';
 
     $result=mysqli_query($link, $query);
 
@@ -352,6 +352,7 @@ function ncicGetWeapons()
         ';
     }
 }
+
 function delete_weapon()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -362,7 +363,7 @@ function delete_weapon()
 
     $weaid = htmlspecialchars($_POST['weaid']);
 
-    $query = "DELETE FROM ncic_weapons WHERE id = ?";
+    $query = "DELETE FROM ".DB_PREFIX."ncic_weapons WHERE id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $query);
@@ -382,6 +383,7 @@ function delete_weapon()
     $_SESSION['weaponMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian weapon</span></div>';
     header("Location: ".BASE_URL."/oc-admin/ncicAdmin.php");
 }
+
 function delete_citation()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -392,7 +394,7 @@ function delete_citation()
 
     $cid = htmlspecialchars($_POST['cid']);
 
-    $query = "DELETE FROM ncic_citations WHERE id = ?";
+    $query = "DELETE FROM ".DB_PREFIX."ncic_citations WHERE id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $query);
@@ -412,6 +414,7 @@ function delete_citation()
     $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully removed citation</span></div>';
     header("Location: ".BASE_URL."/oc-admin/ncicAdmin.php");
 }
+
 function delete_arrest()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -422,7 +425,7 @@ function delete_arrest()
 
     $aid = htmlspecialchars($_POST['aid']);
 
-    $query = "DELETE FROM ncic_arrests WHERE id = ?";
+    $query = "DELETE FROM ".DB_PREFIX."ncic_arrests WHERE id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $query);
@@ -453,7 +456,7 @@ function delete_warning()
 
     $wgid = htmlspecialchars($_POST['wgid']);
 
-    $query = "DELETE FROM ncic_warnings WHERE id = ?";
+    $query = "DELETE FROM ".DB_PREFIX."ncic_warnings WHERE id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $query);
@@ -484,7 +487,7 @@ function delete_warrant()
 
     $wid = htmlspecialchars($_POST['wid']);
 
-    $query = "DELETE FROM ncic_warrants WHERE id = ?";
+    $query = "DELETE FROM ".DB_PREFIX."ncic_warrants WHERE id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $query);
@@ -504,6 +507,7 @@ function delete_warrant()
     $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully removed warrant</span></div>';
     header("Location: ".BASE_URL."/oc-admin/ncicAdmin.php");
 }
+
 function ncic_arrests()
 {
    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -512,7 +516,7 @@ function ncic_arrests()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT ncic_arrests.*, ncic_names.name FROM ncic_arrests INNER JOIN ncic_names ON ncic_names.id=ncic_arrests.name_id";
+    $query = "SELECT ".DB_PREFIX."ncic_arrests.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_arrests INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_arrests.name_id";
 
     $result=mysqli_query($link, $query);
 
@@ -564,6 +568,7 @@ function ncic_arrests()
         ';
     }
 }
+
 function ncic_warrants()
 {
    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -572,7 +577,7 @@ function ncic_warrants()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT ncic_warrants.*, ncic_names.name FROM ncic_warrants INNER JOIN ncic_names ON ncic_names.id=ncic_warrants.name_id";
+    $query = "SELECT ".DB_PREFIX."ncic_warrants.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_warrants INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_warrants.name_id";
 
     $result=mysqli_query($link, $query);
 
@@ -636,6 +641,7 @@ function ncic_warrants()
         ';
     }
 }
+
 function ncic_citations()
 {
    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -644,7 +650,7 @@ function ncic_citations()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT ncic_citations.*, ncic_names.name FROM ncic_citations INNER JOIN ncic_names ON ncic_names.id=ncic_citations.name_id";
+    $query = "SELECT ".DB_PREFIX."ncic_citations.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_citations INNER JOIN ".DB_PREFIX."ncic_names ON ncic_names.id=".DB_PREFIX."ncic_citations.name_id";
 
     $result=mysqli_query($link, $query);
 
@@ -704,7 +710,7 @@ function ncic_warnings()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT ncic_warnings.*, ncic_names.name FROM ncic_warnings INNER JOIN ncic_names ON ncic_names.id=ncic_warnings.name_id";
+    $query = "SELECT ".DB_PREFIX."ncic_warnings.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_warnings INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_warnings.name_id";
 
     $result=mysqli_query($link, $query);
 
@@ -763,7 +769,7 @@ function getUserList()
 		die('Could not connect: ' .mysql_error());
 	}
 
-	$sql = "SELECT users.id, users.name FROM users";
+	$sql = "SELECT users.id, users.name FROM ".DB_PREFIX."users";
 
 	$result=mysqli_query($link, $sql);
 
@@ -785,7 +791,7 @@ function delete_name()
 
     $uid = htmlspecialchars($_POST['uid']);
 
-    $query = "DELETE FROM ncic_names WHERE id = ?";
+    $query = "DELETE FROM ".DB_PREFIX."ncic_names WHERE id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $query);
@@ -816,7 +822,7 @@ function delete_plate()
 
     $vehid = htmlspecialchars($_POST['vehid']);
 
-    $query = "DELETE FROM ncic_plates WHERE id = ?";
+    $query = "DELETE FROM ".DB_PREFIX."ncic_plates WHERE id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $query);
@@ -836,6 +842,7 @@ function delete_plate()
     $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian plate</span></div>';
     header("Location: ".BASE_URL."/oc-admin/ncicAdmin.php#plate_panel");
 }
+
 function edit_name()
 {
     session_start();
@@ -867,7 +874,7 @@ function edit_name()
         die('Could not connect: ' . mysql_error());
     }
 
-    $query = 'SELECT first_name FROM ncic_names WHERE first_name = "' . $name . '"';
+    $query = 'SELECT first_name FROM '.DB_PREFIX.'ncic_names WHERE first_name = "' . $name . '"';
 
     $result = mysqli_query($link, $query);
 
@@ -898,7 +905,7 @@ function edit_name()
 	$deceased = htmlspecialchars($_POST['civDec']);
     $editid = htmlspecialchars($_POST['Edit_id']);
 
-    $query = "UPDATE ncic_names SET name = ?, dob = ?, address = ?, gender = ?, race = ?, dl_status = ?, hair_color = ?, build = ?, weapon_permit = ?, deceased = ? WHERE id = ?";
+    $query = "UPDATE ".DB_PREFIX."ncic_names SET name = ?, dob = ?, address = ?, gender = ?, race = ?, dl_status = ?, hair_color = ?, build = ?, weapon_permit = ?, deceased = ? WHERE id = ?";
     try
     {
         $stmt = mysqli_prepare($link, $query);
@@ -922,6 +929,7 @@ function edit_name()
     header("Location:".BASE_URL."/oc-admin/ncicAdmin.php#name_panel");
 
 }
+
 function edit_plate()
 {
     session_start();
@@ -963,7 +971,7 @@ function edit_plate()
     }
 
     
-    $sql = "UPDATE ncic_plates SET name_id = ?, veh_plate = ?, veh_make = ?, veh_model = ?, veh_pcolor = ?, veh_scolor = ?, veh_insurance = ?, flags = ?, veh_reg_state = ?, notes = ? WHERE id = ?";
+    $sql = "UPDATE ".DB_PREFIX."ncic_plates SET name_id = ?, veh_plate = ?, veh_make = ?, veh_model = ?, veh_pcolor = ?, veh_scolor = ?, veh_insurance = ?, flags = ?, veh_reg_state = ?, notes = ? WHERE id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $sql);
@@ -985,6 +993,7 @@ function edit_plate()
 
     header("Location:".BASE_URL."/oc-admin/ncicAdmin.php#plate_panel");
 }
+
 function editnameid()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -993,7 +1002,7 @@ function editnameid()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT ncic_names.* FROM ncic_names WHERE id=".$_POST['editid'];
+    $query = "SELECT ".DB_PREFIX."ncic_names.* FROM ncic_names WHERE id=".$_POST['editid'];
     $resultset = mysqli_query($link, $query) or die("database error:". mysqli_error($link));
     $data = array();
     while( $rows = mysqli_fetch_assoc($resultset) ) {
@@ -1001,6 +1010,7 @@ function editnameid()
     }
     echo json_encode($data);
 }
+
 function editplateid()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -1009,7 +1019,7 @@ function editplateid()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT ncic_plates.* FROM ncic_plates WHERE id=".$_POST['edit_plateid'];
+    $query = "SELECT ".DB_PREFIX."ncic_plates.* FROM ".DB_PREFIX."ncic_plates WHERE id=".$_POST['edit_plateid'];
     $resultset = mysqli_query($link, $query) or die("database error:". mysqli_error($link));
     $plates = array();
     while( $rows = mysqli_fetch_assoc($resultset) ) {

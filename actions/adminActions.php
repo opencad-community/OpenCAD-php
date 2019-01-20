@@ -77,7 +77,7 @@ function deleteGroupItem()
 		{
 		die('Could not connect: ' . mysql_error());
 		}
-	$sql = "DELETE FROM user_departments WHERE user_id = $user_id AND department_id = $dept_id";
+	$sql = "DELETE FROM ".DB_PREFIX."user_departments WHERE user_id = $user_id AND department_id = $dept_id";
 
 	if (mysqli_query($link, $sql)) {
 
@@ -108,11 +108,11 @@ function editUserAccount()
 	{
 		foreach($userGroups as $key=>$val)
 		{
-			$sql1 = "INSERT INTO user_departments (user_id, department_id) VALUES ('$userID', '$val')";
+			$sql1 = "INSERT INTO ".DB_PREFIX."user_departments (user_id, department_id) VALUES ('$userID', '$val')";
 			mysqli_query($link, $sql1);
 		}
 	}
-	$sql = "UPDATE users SET name = '$userName', email = '$userEmail', identifier = '$userIdentifier', admin_privilege = '$userRole' WHERE id = '$userID'";
+	$sql = "UPDATE ".DB_PREFIX."users SET name = '$userName', email = '$userEmail', identifier = '$userIdentifier', admin_privilege = '$userRole' WHERE id = '$userID'";
 	if (mysqli_query($link, $sql)) {
     header("Location: ".BASE_URL."/oc-admin/userManagement.php");
    } else {
@@ -130,7 +130,7 @@ function getRanks()
         die('Could not connect: ' . mysql_error());
     }
 
-    $query = "SELECT * FROM ranks";
+    $query = "SELECT * FROM ".DB_PREFIX."ranks";
 
     $result = mysqli_query($link, $query);
 
@@ -238,7 +238,7 @@ function getPendingUsers()
         die('Could not connect: ' . mysql_error());
     }
 
-    $query = "SELECT id, name, email, identifier FROM users WHERE approved = '0'";
+    $query = "SELECT id, name, email, identifier FROM ".DB_PREFIX."users WHERE approved = '0'";
 
     $result = mysqli_query($link, $query);
 
@@ -322,7 +322,7 @@ function getRole()
         die('Could not connect: ' . mysql_error());
     }
 
-    $sql = 'SELECT admin_privilege FROM users WHERE id = \'$userID\'';
+    $sql = 'SELECT admin_privilege FROM ".DB_PREFIX."users WHERE id = \'$userID\'';
 
     $result = mysqli_query($link, $sql);
     echo '
@@ -342,7 +342,7 @@ function getUserGroups($uid)
         die('Could not connect: ' . mysql_error());
     }
 
-    $sql = "SELECT departments.department_name FROM user_departments_temp INNER JOIN departments on user_departments_temp.department_id=departments.department_id WHERE user_departments_temp.user_id = \"$uid\"";
+    $sql = "SELECT ".DB_PREFIX."departments.department_name FROM ".DB_PREFIX."user_departments_temp INNER JOIN  ".DB_PREFIX."departments on  ".DB_PREFIX."user_departments_temp.department_id=".DB_PREFIX."departments.department_id WHERE ".DB_PREFIX."user_departments_temp.user_id = \"$uid\"";
 
     $result1 = mysqli_query($link, $sql);
 
@@ -362,7 +362,7 @@ function getUserGroupsApproved($uid)
         die('Could not connect: ' . mysql_error());
     }
 
-    $sql = "SELECT departments.department_name,departments.department_id FROM user_departments INNER JOIN departments on user_departments.department_id=departments.department_id WHERE user_departments.user_id = \"$uid\"";
+    $sql = "SELECT  ".DB_PREFIX."departments.department_name,".DB_PREFIX."departments.department_id FROM  ".DB_PREFIX."user_departments INNER JOIN  ".DB_PREFIX."departments on  ".DB_PREFIX."user_departments.department_id= ".DB_PREFIX."departments.department_id WHERE ".DB_PREFIX."user_departments.user_id = \"$uid\"";
 
     $result1 = mysqli_query($link, $sql);
 
@@ -404,7 +404,7 @@ function approveUser()
     }
 
     //Insert into user_departments
-    $query = "INSERT INTO user_departments SELECT u.* FROM user_departments_temp u WHERE user_id = ?";
+    $query = "INSERT INTO  ".DB_PREFIX."user_departments SELECT u.* FROM  ".DB_PREFIX."user_departments_temp u WHERE user_id = ?";
 
     try
     {
@@ -423,7 +423,7 @@ function approveUser()
     }
 
     /* Delete from user_departments_temp */
-    $query = "DELETE FROM user_departments_temp WHERE user_id = ?";
+    $query = "DELETE FROM  ".DB_PREFIX."user_departments_temp WHERE user_id = ?";
 
     try
     {
@@ -442,7 +442,7 @@ function approveUser()
     }
 
     /* Set user's approved status */
-    $query = "UPDATE users SET approved = '1' WHERE id = ?";
+    $query = "UPDATE  ".DB_PREFIX."users SET approved = '1' WHERE id = ?";
 
     try
     {
@@ -486,7 +486,7 @@ function rejectUser()
         die('Could not connect: ' . mysql_error());
     }
 
-    $query = "DELETE FROM user_departments_temp where user_id = ?";
+    $query = "DELETE FROM  ".DB_PREFIX."user_departments_temp where user_id = ?";
 
     try
     {
@@ -506,7 +506,7 @@ function rejectUser()
 
     /* Delete user from user table */
 
-    $query = "DELETE FROM users where id = ?";
+    $query = "DELETE FROM  ".DB_PREFIX."users where id = ?";
 
     try
     {
@@ -543,7 +543,7 @@ function getGroupCount($gid)
         die('Could not connect: ' . mysql_error());
     }
 
-    $query = "SELECT COUNT(*) from user_departments WHERE department_id = \"$gid\"";
+    $query = "SELECT COUNT(*) from  ".DB_PREFIX."user_departments WHERE department_id = \"$gid\"";
 
     $result = mysqli_query($link, $query);
     $row = mysqli_fetch_array($result, MYSQLI_BOTH);
@@ -563,7 +563,7 @@ function getUsers()
         die('Could not connect: ' . mysql_error());
     }
 
-    $query = "SELECT id, name, email, admin_privilege, identifier, approved FROM users WHERE approved = '1' OR approved = '2'";
+    $query = "SELECT id, name, email, admin_privilege, identifier, approved FROM  ".DB_PREFIX."users WHERE approved = '1' OR approved = '2'";
 
     $result = mysqli_query($link, $query);
 
@@ -699,7 +699,7 @@ function suspendUser()
         die('Could not connect: ' . mysql_error());
     }
 
-    $query = "UPDATE users SET approved = '2' WHERE id = ?";
+    $query = "UPDATE ".DB_PREFIX."users SET approved = '2' WHERE id = ?";
 
     try
     {
@@ -740,8 +740,8 @@ function suspendUserWithReason()
         die('Could not connect: ' . mysql_error());
     }
 
-    $query = "UPDATE users SET approved = '2' WHERE id = ?";
-    $query2 = "UPDATE users SET suspend_reason = ('$suspend_reason') WHERE id = ?";
+    $query = "UPDATE ".DB_PREFIX."users SET approved = '2' WHERE id = ?";
+    $query2 = "UPDATE ".DB_PREFIX."users SET suspend_reason = ('$suspend_reason') WHERE id = ?";
 
     try
     {
@@ -790,7 +790,7 @@ function reactivateUser()
         die('Could not connect: ' . mysql_error());
     }
 
-    $query = "UPDATE users SET approved = '1' WHERE id = ?";
+    $query = "UPDATE ".DB_PREFIX."users SET approved = '1' WHERE id = ?";
 
     try
     {
@@ -828,7 +828,7 @@ function getUserDetails()
         die('Could not connect: ' . mysql_error());
     }
 
-    $sql = "SELECT id, name, email, identifier FROM users WHERE ID = $userId";
+    $sql = "SELECT id, name, email, identifier FROM ".DB_PREFIX."users WHERE ID = $userId";
 
     $result = mysqli_query($link, $sql);
 
@@ -857,7 +857,7 @@ function getUserGroupsEditor($encode, $userId)
         die('Could not connect: ' . mysql_error());
     }
 
-    $sql = "SELECT departments.department_name FROM user_departments INNER JOIN departments on user_departments.department_id=departments.department_id WHERE user_departments.user_id = \"$userId\"";
+    $sql = "SELECT departments.department_name FROM ".DB_PREFIX."user_departments INNER JOIN departments on ".DB_PREFIX."user_departments.department_id=".DB_PREFIX."departments.department_id WHERE ".DB_PREFIX."user_departments.user_id = \"$userId\"";
 
     $result = mysqli_query($link, $sql);
 
