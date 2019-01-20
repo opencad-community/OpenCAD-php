@@ -582,7 +582,7 @@ function setDispatcher($dep)
 
     deleteDispatcher();
 
-    $sql = "INSERT INTO dispatchers (identifier, callsign, status) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO ".DB_PREFIX."dispatchers (identifier, callsign, status) VALUES (?, ?, ?)";
 
 
     try {
@@ -639,7 +639,7 @@ function getDispatchers()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "SELECT * from dispatchers WHERE status = '1'";
+    $sql = "SELECT * from ".DB_PREFIX."dispatchers WHERE status = '1'";
 
     $result = mysqli_query($link, $sql);
 
@@ -686,7 +686,7 @@ function getDispatchersMDT()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "SELECT * from dispatchers WHERE status = '1'";
+    $sql = "SELECT * from ".DB_PREFIX."dispatchers WHERE status = '1'";
 
     $result = mysqli_query($link, $sql);
 
