@@ -1,5 +1,14 @@
 <?php
 
+if ( EI_MODE === "debug" )
+	{
+		echo "<pre>";
+		var_dump($_SESSION);
+		echo "</pre>";
+	}
+
+
+
 /**
  * 	Prepare reading of SQL dump file and executing SQL statements
  * 		@param $sql_dump_file

@@ -119,7 +119,7 @@ function getApiKey($del_key = false)
         die();
     }
 
-    $result = $pdo->query("SELECT value FROM config WHERE `key`='api_key'");
+    $result = $pdo->query("SELECT value FROM ".DB_PREFIX."config WHERE `key`='api_key'");
 
     if (!$result)
     {
@@ -133,7 +133,7 @@ function getApiKey($del_key = false)
 	{
 		error_log("Do delete: $del_key");
 		$key = generateRandomString(64);
-		$result = $pdo->query("UPDATE config SET `value`='$key' WHERE `key`='api_key'");
+		$result = $pdo->query("UPDATE ".DB_PREFIX."config SET `value`='$key' WHERE `key`='api_key'");
 
 		if (!$result)
 		{
@@ -149,7 +149,7 @@ function getApiKey($del_key = false)
 		return $key;
 	}else{
 		$key = generateRandomString(64);
-		$result = $pdo->query("INSERT INTO config VALUES ('api_key', '$key')");
+		$result = $pdo->query("INSERT INTO ".DB_PREFIX."config VALUES ('api_key', '$key')");
 
 		if (!$result)
 		{
