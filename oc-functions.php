@@ -11,9 +11,15 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
+if (version_compare(PHP_VERSION, '7.1', '<')) {
+	session_start();
+	$_SESSION['error_title'] = "Incompatable PHP Version";
+	$_SESSION['error'] = "An incompatable version  of PHP is active. OpenCAD requires PHP 7.1 at minimum, the current recommended version is 7.2. Currently PHP ".phpversion()." is active, please contact your server administrator.";
+	header('Location: '.BASE_URL.'/plugins/error/index.php');
+}
+
 if ( OC_DEBUG == "true" )
 	{	
-		session_start();
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ERROR | E_WARNING);
@@ -21,18 +27,10 @@ if ( OC_DEBUG == "true" )
 		var_dump($_SESSION);
 		echo "</pre>";
 	} else {
-		session_start();
 		ini_set('display_errors', 0);
 		ini_set('display_startup_errors', 0);
 		error_reporting(E_ERROR);
 	}
-
-if (version_compare(PHP_VERSION, '7.1', '<')) {
-	session_start();
-	$_SESSION['error_title'] = "Incompatable PHP Version";
-	$_SESSION['error'] = "An incompatable version  of PHP is active. OpenCAD requires PHP 7.1 at minimum, the current recommended version is 7.2. Currently PHP ".phpversion()." is active, please contact your server administrator.";
-	header('Location: '.BASE_URL.'/plugins/error/index.php');
-}
 
 if(!file_exists(getcwd().'/.htaccess') && is_writable(getcwd())){
 	
