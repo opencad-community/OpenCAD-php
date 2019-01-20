@@ -70,25 +70,27 @@
 		$EMS_BOLO = isset($_SESSION['EMS_BOLO']) ? prepare_input($_SESSION['EMS_BOLO']) : '';
 		$EMS_NCIC_NAME = isset($_SESSION['EMS_NCIC_NAME']) ? prepare_input($_SESSION['EMS_NCIC_NAME']) : '';
 		$EMS_NCIC_PLATE = isset($_SESSION['EMS_NCIC_PLATE']) ? prepare_input($_SESSION['EMS_NCIC_PLATE']) : '';
+		$EMS_CALL_SELFASSIGN = isset($_SESSION['EMS_CALL_SELFASSIGN']) ? prepare_input($_SESSION['EMS_CALL_SELFASSIGN']) : '';
 		
 		$ROADSIDE_PANIC = isset($_SESSION['ROADSIDE_PANIC']) ? prepare_input($_SESSION['ROADSIDE_PANIC']) : '';
 		$ROADSIDE_BOLO = isset($_SESSION['ROADSIDE_BOLO']) ? prepare_input($_SESSION['ROADSIDE_BOLO']) : '';
 		$ROADSIDE_NCIC_NAME = isset($_SESSION['ROADSIDE_NCIC_NAME']) ? prepare_input($_SESSION['ROADSIDE_NCIC_NAME']) : '';
 		$ROADSIDE_NCIC_PLATE = isset($_SESSION['ROADSIDE_NCIC_PLATE']) ? prepare_input($_SESSION['ROADSIDE_NCIC_PLATE']) : '';
+		$ROADSIDE_CALL_SELFASSIGN = isset($_SESSION['ROADSIDE_CALL_SELFASSIGN']) ? prepare_input($_SESSION['ROADSIDE_CALL_SELFASSIGN']) : '';
 		
 		$CIV_WARRANT = isset($_SESSION['CIV_WARRANT']) ? prepare_input($_SESSION['CIV_WARRANT']) : '';
 		$CIV_REG = isset($_SESSION['CIV_REG']) ? prepare_input($_SESSION['CIV_REG']) : '';
 		
 		$MODERATOR_APPROVE_USER = isset($_SESSION['MODERATOR_APPROVE_USER']) ? prepare_input($_SESSION['MODERATOR_APPROVE_USER']) : '';
-		$MODERATOR_EDIT_USER = isset($_SESSTION['MODERATOR_EDIT_USER']) ? prepare_input($_SESSION['MODERATOR_EDIT_USER']) : '';
+		$MODERATOR_EDIT_USER = isset($_SESSION['MODERATOR_EDIT_USER']) ? prepare_input($_SESSION['MODERATOR_EDIT_USER']) : '';
 		$MODERATOR_SUSPEND_WITH_REASON = isset($_SESSION['MODERATOR_SUSPEND_WITH_REASON']) ? prepare_input($_SESSION['MODERATOR_SUSPEND_WITH_REASON']) : '';
 		$MODERATOR_SUSPEND_WITHOUT_REASON = isset($_SESSION['MODERATOR_SUSPEND_WITHOUT_REASON']) ? prepare_input($_SESSION['MODERATOR_SUSPEND_WITHOUT_REASON']) : '';
-		$MODERATOR_REACTIVATE_USER = isset($_SESSION['MODERATOR_REACTIVATE_USERN']) ? prepare_input($_SESSION['MODERATOR_REACTIVATE_USER']) : '';
+		$MODERATOR_REACTIVATE_USER = isset($_SESSION['MODERATOR_REACTIVATE_USER']) ? prepare_input($_SESSION['MODERATOR_REACTIVATE_USER']) : '';
 		$MODERATOR_REMOVE_GROUP = isset($_SESSION['MODERATOR_REMOVE_GROUP']) ? prepare_input($_SESSION['MODERATOR_REMOVE_GROUP']) : '';
 		$MODERATOR_DELETE_USER = isset($_SESSION['MODERATOR_DELETE_USER']) ? prepare_input($_SESSION['MODERATOR_DELETE_USER']) : '';
 		$MODERATOR_NCIC_EDITOR = isset($_SESSION['MODERATOR_NCIC_EDITOR']) ? prepare_input($_SESSION['MODERATOR_NCIC_EDITOR']) : '';
 
-		$DEMO_MODE = isset($_SERVER['DEMO_MODE']) ? prepare_input($_SESSION['DEMO_MODE']) : '';
+		$DEMO_MODE = isset($_SESSION['DEMO_MODE']) ? prepare_input($_SESSION['DEMO_MODE']) : '';
 
 		$USE_GRAVATAR = isset($_SESSION['USE_GRAVATAR']) ? prepare_input($_SESSION['USE_GRAVATAR']) : '';
 		
@@ -174,11 +176,13 @@
 								$config_file = str_replace('<EMS_BOLO>', $EMS_BOLO, $config_file);
 								$config_file = str_replace('<EMS_NCIC_NAME>', $EMS_NCIC_NAME, $config_file);
 								$config_file = str_replace('<EMS_NCIC_PLATE>', $EMS_NCIC_PLATE, $config_file);
+								$config_file = str_replace('<EMS_CALL_SELFASSIGN>', $EMS_NCIC_PLATE, $config_file);
 								
 								$config_file = str_replace('<ROADSIDE_PANIC>', $ROADSIDE_PANIC, $config_file);
 								$config_file = str_replace('<ROADSIDE_BOLO>', $ROADSIDE_BOLO, $config_file);
 								$config_file = str_replace('<ROADSIDE_NCIC_NAME>', $ROADSIDE_NCIC_NAME, $config_file);
 								$config_file = str_replace('<ROADSIDE_NCIC_PLATE>', $ROADSIDE_NCIC_PLATE, $config_file);
+								$config_file = str_replace('<ROADSIDE_CALL_SELFASSIGN>', $ROADSIDE_CALL_SELFASSIGN, $config_file);
 								
 								$config_file = str_replace('<CIV_WARRANT>', $CIV_WARRANT, $config_file);
 								$config_file = str_replace('<CIV_REG>', $CIV_REG, $config_file);
@@ -186,10 +190,11 @@
 								$config_file = str_replace('<MODERATOR_APPROVE_USER>', $MODERATOR_APPROVE_USER, $config_file);
 								$config_file = str_replace('<MODERATOR_EDIT_USER>', $MODERATOR_EDIT_USER, $config_file);
 								$config_file = str_replace('<MODERATOR_SUSPEND_WITH_REASON>', $MODERATOR_SUSPEND_WITH_REASON, $config_file);
-								$config_file = str_replace('<MODERATOR_WITHOUT_REASON>', $MODERATOR_SUSPEND_WITHOUT_REASON, $config_file);
+								$config_file = str_replace('<MODERATOR_SUSPEND_WITHOUT_REASON>', $MODERATOR_SUSPEND_WITHOUT_REASON, $config_file);
 								$config_file = str_replace('<MODERATOR_REACTIVATE_USER>', $MODERATOR_REACTIVATE_USER, $config_file);
 								$config_file = str_replace('<MODERATOR_REMOVE_GROUP>', $MODERATOR_REMOVE_GROUP, $config_file);
 								$config_file = str_replace('<MODERATOR_DELETE_USER>', $MODERATOR_DELETE_USER, $config_file);
+								$config_file = str_replace('<MODERATOR_NCIC_EDITOR>', $MODERATOR_NCIC_EDITOR, $config_file);
 
 								$config_file = str_replace('<DEMO_MODE>', $DEMO_MODE, $config_file);
 								$config_file = str_replace('<USE_GRAVATAR>', $USE_GRAVATAR, $config_file);

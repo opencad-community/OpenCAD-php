@@ -379,7 +379,7 @@ CREATE TABLE `<DB_PREFIX>users` (
 --
 
 INSERT INTO `<DB_PREFIX>users` (`id`, `name`, `email`, `password`, `identifier`, `admin_privilege`, `supervisor_privilege`, `password_reset`, `approved`, `suspend_reason`, `suspend_duration`) VALUES
-(1, 'Default Admin', '<USER_NAME>', 'password', '1A-1', 2, 1, 0, 1, NULL, NULL);
+(1, '<NAME>', '<EMAIL>', '<PASSWORD>', '1A-1', 2, 1, 0, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -428,9 +428,17 @@ CREATE TABLE `<DB_PREFIX>weapons` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Indexes for dumped tables
+-- Table structure for table `config`
 --
 
+CREATE TABLE `<DB_PREFIX>config` (
+  `key` varchar(80) NOT NULL,
+  `value` varchar(80)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Indexes for dumped tables
+--
 
 --
 -- Indexes for table `active_users`

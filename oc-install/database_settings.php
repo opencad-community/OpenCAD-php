@@ -231,13 +231,12 @@
 			<tr>
 				<td nowrap>&nbsp;<?php echo lang_key('database_prefix'); ?></td>
 				<td>
-					<input type="text" class="form_text" name="database_prefix" size="12" maxlength="12" value="<?php echo $database_prefix; ?>" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> onfocus="textboxOnFocus('notes_database_prefix')" onblur="textboxOnBlur('notes_databaseprefix')" />
+					<input type="text" class="form_text" name="database_prefix" size="30" maxlength="12" value="<?php echo $database_prefix; ?>" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> onfocus="textboxOnFocus('notes_database_prefix')" onblur="textboxOnBlur('notes_databaseprefix')" />
 				</td>
 			</tr>
 			<tr>
-				<td nowrap>&nbsp;<?php echo lang_key('installation_type'); ?></td>
 				<td>
-					<?php if(EI_ALLOW_NEW_INSTALLATION && !$program_already_installed) { ?><input type="radio" name="install_type" id="rb_create" value="create" <?php echo ($install_type == 'create') ? 'checked="checked"' : ''; ?> onclick="installTypeOnClick(this.value)" /> <label for="rb_create"><?php echo lang_key('new'); ?></label> <?php } ?>
+					<?php if(EI_ALLOW_NEW_INSTALLATION && !$program_already_installed) { ?><input type="hidden" name="install_type" id="rb_create" value="create" <?php echo ($install_type == 'create') ? 'checked="checked"' : ''; ?> onclick="installTypeOnClick(this.value)" /> <?php } ?>
 					<?php if(EI_ALLOW_UPDATE) { ?><input type="radio" name="install_type" id="rb_update" value="update" <?php echo (!$program_already_installed) ? 'disabled="disabled"' : ''; ?> <?php echo ($install_type == 'update') ? 'checked="checked"' : ''; ?> onclick="installTypeOnClick(this.value)" /> <label for="rb_update"><?php echo lang_key('update'); ?></label> <?php } ?>
 					<?php if(EI_ALLOW_UN_INSTALLATION) { ?><input type="radio" name="install_type" id="rb_uninstall" value="un-install" <?php echo (!$program_already_installed) ? 'disabled="disabled"' : ''; ?> <?php echo ($install_type == 'un-install') ? 'checked="checked"' : ''; ?> onclick="installTypeOnClick(this.value)" /> <label for="rb_uninstall"><?php echo lang_key('uninstall'); ?></label> <?php } ?>						
 				</td>

@@ -31,14 +31,16 @@
         $ROADSIDE_NCIC_PLATE = isset($_POST['ROADSIDE_NCIC_PLATE']) ? prepare_input($_POST['ROADSIDE_NCIC_PLATE']) : '';
         $ROADSIDE_CALL_SELFASSIGN = isset($_POST['ROADSIDE_CALL_SELFASSIGN']) ? prepare_input($_POST['ROADSIDE_CALL_SELFASSIGN']) : '';
 
+		$CIV_WARRANT = isset($_POST['CIV_WARRANT']) ? prepare_input($_POST['CIV_WARRANT']) : '';
         $CIV_REG = isset($_POST['CIV_REG']) ? prepare_input($_POST['CIV_REG']) : '';
 		
-		$_SESSION['ROADSIDE_BOLO'] = $ROADSIDE_PANIC;
+		$_SESSION['ROADSIDE_PANIC'] = $ROADSIDE_PANIC;
 		$_SESSION['ROADSIDE_BOLO'] = $ROADSIDE_BOLO;
 		$_SESSION['ROADSIDE_NCIC_NAME'] = $ROADSIDE_NCIC_NAME;			
 		$_SESSION['ROADSIDE_NCIC_PLATE'] = $ROADSIDE_NCIC_PLATE;			
 		$_SESSION['ROADSIDE_CALL_SELFASSIGN'] = $ROADSIDE_CALL_SELFASSIGN;
 		
+		$_SESSION['CIV_WARRANT'] = $CIV_WARRANT;
 		$_SESSION['CIV_REG'] = $CIV_REG;
 
 		$_SESSION['passed_step'] = 7;
@@ -53,6 +55,7 @@
         $ROADSIDE_NCIC_PLATE = isset($_POST['ROADSIDE_NCIC_PLATE']) ? prepare_input($_POST['ROADSIDE_NCIC_PLATE']) : '';
         $ROADSIDE_CALL_SELFASSIGN = isset($_POST['ROADSIDE_CALL_SELFASSIGN']) ? prepare_input($_POST['ROADSIDE_CALL_SELFASSIGN']) : '';
 
+		$CIV_WARRANT = isset($_POST['CIV_WARRANT']) ? prepare_input($_POST['CIV_WARRANT']) : '';
         $CIV_REG = isset($_POST['CIV_REG']) ? prepare_input($_POST['CIV_REG']) : '';
 
 	}
@@ -147,25 +150,40 @@
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('ROADSIDE_BOLO'); ?>&nbsp;</td>
-				<td><input type="radio" name="ROADSIDE_BOLO" id="ROADSIDE_BOLO" <?php echo ($ROADSIDE_BOLO=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('ROADSIDE_BOLO_notes')" onblur="textboxOnBlur('ROADSIDE_BOLO_notes')" value="true" />True
-				<input type="radio" name="ROADSIDE_BOLO" id="ROADSIDE_BOLO" <?php echo ($ROADSIDE_BOLO=='false')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_BOLO_notes')" onblur="textboxOnBlur('ROADSIDE_BOLO_notes')" value="false" />False</td>
+				<td>
+					<input type="radio" name="ROADSIDE_BOLO" id="ROADSIDE_BOLO" <?php echo ($ROADSIDE_BOLO=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('ROADSIDE_BOLO_notes')" onblur="textboxOnBlur('ROADSIDE_BOLO_notes')" value="true" />True
+					<input type="radio" name="ROADSIDE_BOLO" id="ROADSIDE_BOLO" <?php echo ($ROADSIDE_BOLO=='false')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_BOLO_notes')" onblur="textboxOnBlur('ROADSIDE_BOLO_notes')" value="false" />False
+				</td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('ROADSIDE_NCIC_NAME'); ?>&nbsp;</td>
-				<td><input type="radio" name="ROADSIDE_NCIC_NAME" id="ROADSIDE_NCIC_NAME" <?php echo ($ROADSIDE_NCIC_NAME=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('ROADSIDE_NCIC_NAME_notes')" onblur="textboxOnBlur('ROADSIDE_NCIC_NAME_notes')" value="true" />True
-				<input type="radio" name="ROADSIDE_NCIC_NAME" id="ROADSIDE_NCIC_NAME" <?php echo ($ROADSIDE_NCIC_NAME=='false')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_NCIC_NAME_notes')" onblur="textboxOnBlur('ROADSIDE_NCIC_NAME_notes')" value="false" />False</td>
+				<td>
+					<input type="radio" name="ROADSIDE_NCIC_NAME" id="ROADSIDE_NCIC_NAME" <?php echo ($ROADSIDE_NCIC_NAME=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('ROADSIDE_NCIC_NAME_notes')" onblur="textboxOnBlur('ROADSIDE_NCIC_NAME_notes')" value="true" />True
+					<input type="radio" name="ROADSIDE_NCIC_NAME" id="ROADSIDE_NCIC_NAME" <?php echo ($ROADSIDE_NCIC_NAME=='false')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_NCIC_NAME_notes')" onblur="textboxOnBlur('ROADSIDE_NCIC_NAME_notes')" value="false" />False
+				</td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('ROADSIDE_NCIC_PLATE'); ?>&nbsp;</td>
-				<td><input type="radio" name="ROADSIDE_NCIC_PLATE" id="ROADSIDE_NCIC_PLATE" <?php echo ($ROADSIDE_NCIC_PLATE=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('ROADSIDE_NCIC_PLATE_notes')" onblur="textboxOnBlur('ROADSIDE_NCIC_PLATE_notes')" value="true" />True
-				<input type="radio" name="ROADSIDE_NCIC_PLATE" id="ROADSIDE_NCIC_PLATE" <?php echo ($ROADSIDE_NCIC_PLATE=='false')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_NCIC_PLATE_notes')" onblur="textboxOnBlur('ROADSIDE_NCIC_PLATE_notes')" value="false" />False</td>
+				<td>
+					<input type="radio" name="ROADSIDE_NCIC_PLATE" id="ROADSIDE_NCIC_PLATE" <?php echo ($ROADSIDE_NCIC_PLATE=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('ROADSIDE_NCIC_PLATE_notes')" onblur="textboxOnBlur('ROADSIDE_NCIC_PLATE_notes')" value="true" />True
+					<input type="radio" name="ROADSIDE_NCIC_PLATE" id="ROADSIDE_NCIC_PLATE" <?php echo ($ROADSIDE_NCIC_PLATE=='false')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_NCIC_PLATE_notes')" onblur="textboxOnBlur('ROADSIDE_NCIC_PLATE_notes')" value="false" />False
+				</td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('ROADSIDE_CALL_SELFASSIGN'); ?>&nbsp;</td>
-				<td><input type="radio" name="ROADSIDE_CALL_SELFASSIGN" id="ROADSIDE_CALL_SELFASSIGN" <?php echo ($ROADSIDE_CALL_SELFASSIGN=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('ROADSIDE_CALL_SELFASSIGN_notes')" onblur="textboxOnBlur('ROADSIDE_CALL_SELFASSIGN_notes')" value="true" />True
-				<input type="radio" name="ROADSIDE_CALL_SELFASSIGN" id="ROADSIDE_CALL_SELFASSIGN" <?php echo ($ROADSIDE_CALL_SELFASSIGN=='false')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_CALL_SELFASSIGN_notes')" onblur="textboxOnBlur('ROADSIDE_CALL_SELFASSIGN_notes')" value="false" />False</td>
+				<td>
+					<input type="radio" name="ROADSIDE_CALL_SELFASSIGN" id="ROADSIDE_CALL_SELFASSIGN" <?php echo ($ROADSIDE_CALL_SELFASSIGN=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('ROADSIDE_CALL_SELFASSIGN_notes')" onblur="textboxOnBlur('ROADSIDE_CALL_SELFASSIGN_notes')" value="true" />True
+					<input type="radio" name="ROADSIDE_CALL_SELFASSIGN" id="ROADSIDE_CALL_SELFASSIGN" <?php echo ($ROADSIDE_CALL_SELFASSIGN=='false')?'checked':'' ?> onfocus="textboxOnFocus('ROADSIDE_CALL_SELFASSIGN_notes')" onblur="textboxOnBlur('ROADSIDE_CALL_SELFASSIGN_notes')" value="false" />False
+				</td>
 			</tr>
 			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>
+			<tr>
+				<td>&nbsp;<?php echo lang_key('CIV_WARRANT'); ?>&nbsp;</td>
+					<td>
+						<input type="radio" name="CIV_WARRANT" id="CIV_WARRANT" <?php echo ($CIV_WARRANT=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('CIV_WARRANT_notes')" onblur="textboxOnBlur('CIV_WARRANT_notes')" value="true" />True
+						<input type="radio" name="CIV_WARRANT" id="CIV_WARRANT" <?php echo ($CIV_WARRANT=='false')?'checked':'' ?> onfocus="textboxOnFocus('CIV_WARRANT_notes')" onblur="textboxOnBlur('CIV_WARRANT_notes')" value="false" />False
+					</td>
+			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('CIV_REG'); ?>&nbsp;</td>
 				<td><input type="radio" name="CIV_REG" id="CIV_REG" <?php echo ($CIV_REG=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('CIV_REG_notes')" onblur="textboxOnBlur('CIV_REG_notes')" value="true" />True

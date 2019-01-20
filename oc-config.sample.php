@@ -500,7 +500,7 @@ define('MODERATOR_REMOVE_GROUP', <MODERATOR_REMOVE_GROUP>);
   *
   * @since OpenCAD version 0.2.3
   **/
-define('MODERATOR_DELETE_USER', <MODERATOR_DELETE_USER>;
+define('MODERATOR_DELETE_USER', <MODERATOR_DELETE_USER>);
 
 /**#@+
   * Moderator Settings - NCIC Editor
