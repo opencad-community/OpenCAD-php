@@ -184,7 +184,6 @@ function delete_user()
     }
 
     $uid = htmlspecialchars($_POST['uid']);
-    echo $uid;
 
     $query = "DELETE FROM ".DB_PREFIX."users WHERE id = ?";
 

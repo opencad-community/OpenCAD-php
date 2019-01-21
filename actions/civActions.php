@@ -56,6 +56,10 @@ if (isset($_POST['delete_warrant'])){
 if (isset($_POST['create_warrant'])){
     create_warrant();
 }
+if (isset($_POST['getNumberOfProfiles'])){
+    getNumberOfProfiles();
+}
+
 function getCivilianNamesOwn()
 {
     $uid = $_SESSION['id'];
@@ -66,7 +70,7 @@ function getCivilianNamesOwn()
 		die('Could not connect: ' .mysql_error());
 	}
 
-	$sql = 'SELECT '.DB_PREFIX.'ncic_names.id, '.DB_PREFIX.'ncic_names.name FROM '.DB_PREFIX.'ncic_names where '.DB_PREFIX.'ncic_names.submittedByID = "' . $uid . '"';
+	$sql = "SELECT ".DB_PREFIX."ncic_names.id, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_names where ".DB_PREFIX."ncic_names.submittedByID = " . $uid ;
 
 	$result=mysqli_query($link, $sql);
 
@@ -87,7 +91,7 @@ function ncicGetNames()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = 'SELECT ncic_names.* FROM `ncic_names` WHERE ncic_names.submittedById = "' . $uid . '"';
+    $query = "SELECT ".DB_PREFIX."ncic_names.* FROM ".DB_PREFIX."ncic_names WHERE ".DB_PREFIX."ncic_names.submittedById = " . $uid;
 
     $result=mysqli_query($link, $query);
 
@@ -667,7 +671,7 @@ function editnameid()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT ncic_names.* FROM ".DB_PREFIX."ncic_names WHERE id=".$_POST['editid'];
+    $query = "SELECT ".DB_PREFIX."ncic_names.* FROM ".DB_PREFIX."ncic_names WHERE id=".$_POST['editid'];
     $resultset = mysqli_query($link, $query) or die("database error:". mysqli_error($link));
     $data = array();
     while( $rows = mysqli_fetch_assoc($resultset) ) {
@@ -980,4 +984,5 @@ function delete_weapon()
     $_SESSION['weaponMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian weapon</span></div>';
     header("Location: ".BASE_URL."/civilian.php");
 }
+
 ?>

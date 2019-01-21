@@ -1366,7 +1366,7 @@ function getGenders()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT DISTINCT genders.genders FROM ".DB_PREFIX."genders";
+    $query = "SELECT DISTINCT ".DB_PREFIX."genders.genders FROM ".DB_PREFIX."genders";
 
     $result=mysqli_query($link, $query);
 
@@ -1393,7 +1393,7 @@ function getColors()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT color_group, color_name FROM ".DB_PREFIX."colors";
+    $query = "SELECT ".DB_PREFIX."color_group, color_name FROM ".DB_PREFIX."colors";
 
     $result=mysqli_query($link, $query);
 
