@@ -186,7 +186,7 @@ function delete_user()
     $uid = htmlspecialchars($_POST['uid']);
     echo $uid;
 
-    $query = "DELETE FROM users WHERE id = ?";
+    $query = "DELETE FROM ".DB_PREFIX."users WHERE id = ?";
 
     try
     {
@@ -219,7 +219,7 @@ function getUserCount()
         die('Could not connect: ' . mysql_error());
     }
 
-    $query = "SELECT COUNT(*) from users";
+    $query = "SELECT COUNT(*) from ".DB_PREFIX."users";
 
     $result = mysqli_query($link, $query);
     $row = mysqli_fetch_array($result, MYSQLI_BOTH);
@@ -303,7 +303,7 @@ function getDepartments()
         die('Could not connect: ' . mysql_error());
     }
 
-    $sql = 'SELECT * from departments';
+    $sql = 'SELECT * from '.DB_PREFIX.'departments';
 
     $result = mysqli_query($link, $sql);
 
@@ -962,7 +962,7 @@ function getCallHistory()
         die('Could not connect: ' . mysql_error());
     }
 
-    $query = "SELECT * FROM call_history";
+    $query = "SELECT * FROM ".DB_PREFIX."call_history";
 
     $result = mysqli_query($link, $query);
 
@@ -1031,7 +1031,7 @@ function delete_callhistory()
     $callid = htmlspecialchars($_POST['call_id']);
     echo $callid;
 
-    $query = "DELETE FROM call_history WHERE call_id = ?";
+    $query = "DELETE FROM ".DB_PREFIX."call_history WHERE call_id = ?";
 
     try
     {
