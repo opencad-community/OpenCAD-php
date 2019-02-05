@@ -2494,7 +2494,7 @@ INSERT INTO
   (213, 'Gallivanter', 'Baller II'),
   (214, 'Gallivanter', 'Baller LE'),
   (215, 'Gallivanter', 'Baller LE Armored'),
-  (216, 'Gallivanter', 'Baller LE LWB'),
+  (216, 'Gallivanter', 'Baller LE LWB'),w
   (217, 'Gallivanter', 'Baller LE LWB Armored'),
   (218, 'Grotti', 'Bestia GTS'),
   (219, 'Grotti', 'Brioso RA'),
