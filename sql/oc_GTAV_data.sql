@@ -272,8 +272,8 @@ INSERT INTO `departments` (`department_id`, `department_name`, `department_short
 --
 
 INSERT INTO `genders` (`id`, `genders`) VALUES
-(0, 'Male'),
-(1, 'Female');
+(1, 'Male'),
+(2, 'Female');
 
 --
 -- Dumping data for table `incident_type`
@@ -2269,9 +2269,9 @@ INSERT INTO `streets` (`id`, `name`, `county`) VALUES
 --
 
 INSERT INTO `tones` (`id`, `name`, `active`) VALUES
-(0, 'priority', '0'),
-(1, 'recurring', '0'),
-(2, 'panic', '0');
+(2, 'priority', '0'),
+(2, 'recurring', '0'),
+(3, 'panic', '0');
 
 --
 -- Dumping data for table `vehicles`

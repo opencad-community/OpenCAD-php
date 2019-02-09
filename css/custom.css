@@ -3557,7 +3557,7 @@ form:after {
     padding: 25px 0 0;
     position: relative;
     text-align: center;
-    text-shadow: 0 1px 0 #fff;
+    font-weight: bold !important;
     min-width: 280px
 }
 .login_content a,
