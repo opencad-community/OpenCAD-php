@@ -20,7 +20,7 @@ $arrLang['alert_admin_name_empty'] = "Admin username cannot be empty! Please re-
 $arrLang['alert_admin_identifier_empty'] = "Identifier cannot be empty! Please re-enter.";
 $arrLang['alert_admin_password_empty'] = "Admin password cannot be empty! Please re-enter.";
 $arrLang['alert_wrong_testing_parameters'] = "Testing parameters are wrong! Please enter valid parameters.";
-$arrLang['alert_remove_files'] = "For security reasons, please remove <b>start.php</b> file and <b>install/</b> folder from your server!";
+$arrLang['alert_remove_files'] = "For security reasons, please remove the <b>oc-install/</b> folder from your server!";
 $arrLang['alert_wrong_parameter_passed'] = "Wrong parameter passed! Please back to the previous step and try again.";
 
 $arrLang['error_asp_tags'] = "This installation requires <b>ASP tags</b> settings turned ON.";
