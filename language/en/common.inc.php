@@ -39,7 +39,7 @@ $arrLang['admin_email'] = "Admin Email";
 $arrLang['admin_email_info'] = "Admin Email that be used to login with.";
 $arrLang['admin_login'] = "Admin Name";
 $arrLang['admin_login_info'] = "Your name that is on the account. Note: Can be changed later";
-$arrLang['admin_identifier'] = "identifier";
+$arrLang['admin_identifier'] = "Identifier";
 $arrLang['admin_identifier_info'] = "Your identifier. IE: 1D-01 Note:Depends on your community";
 $arrLang['admin_password'] = "Admin Password";
 $arrLang['admin_password_info'] = "We recommend that your password is not a word you can find in the dictionary, includes both capital and lower case letters, and contains at least one special character (1-9, !, *, _, etc.).";
@@ -69,7 +69,7 @@ $arrLang['database_username'] = "Database Username";
 $arrLang['database_username_info'] = "Database username. The username used to connect to the database server. An example of username is 'test_123'.";
 $arrLang['database_password'] = "Database Password";
 $arrLang['database_password_info'] = "Database password. The password is used together with the username, which forms the database user account.";
-$arrLang['database_prefix'] = "Database Prefix (optional)";
+$arrLang['database_prefix'] = "Database Prefix";
 $arrLang['database_prefix_info'] = "Database prefix. Used to set the unique prefix for database tables and prevent one type of data from interfering with another. An example of database prefix is 'abc_'.";
 $arrLang['database_settings'] = "Database Settings";
 $arrLang['directories_and_files'] = "Directories and Files";
@@ -179,6 +179,28 @@ $arrLang['BASE_URL_alert'] = "BASE_URL cannot be empty! Please re-enter.";
 
 $arrLang['API_SECURITY'] = 'API Security';
 $arrLang['API_SECURITY_notes'] = 'The API Key is used to authenticate requests from logedout users, it is also used in creating cookie \'aljksdz7\' which stores the API-Key and the session id of the loged in user.';
+
+$arrLang['CAD_FROM_EMAIL'] = 'CAD From Email';
+$arrLang['CAD_FROM_EMAIL_notes'] = 'The email which notications from you CAD should appear to come from.
+
+Example: cad@community.com
+';
+
+$arrLang['CAD_TO_EMAIL'] = 'CAD To Email';
+$arrLang['CAD_TO_EMAIL_notes'] = 'The email which notications from you CAD should appear to come from.
+
+Example: cad@community.com
+';
+
+$arrLang['AUTH_KEY'] = 'Authentication Key';
+$arrLang['AUTH_SALT'] = 'Authentication Salt';
+$arrLang['SECURE_AUTH_KEY'] = 'Secure Authentication Key';
+$arrLang['SECURE_AUTH_SALT'] = 'Secure Authentication Salt';
+$arrLang['LOGGED_IN_KEY'] = 'Logged-In Key';
+$arrLang['LOGGED_IN_SALT'] = 'Logged-In Salt';
+$arrLang['NONCE_KEY'] = 'Nonce Key';
+$arrLang['NONCE_SALT'] = 'Nonce Salt';
+
 //** End Core Configuration Strings **//
 
 //** Begin Police Strings **//

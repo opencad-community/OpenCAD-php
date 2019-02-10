@@ -152,7 +152,7 @@
     define('EI_APPLICATION_VERSION', '0.2.6');
     
     // *** default start file name - application start file
-    define('EI_APPLICATION_START_FILE', '../                                                        index.php');
+    define('EI_APPLICATION_START_FILE', '../index.php');
     
     // *** license agreement page
     define('EI_LICENSE_AGREEMENT_PAGE', '../license.txt');    
