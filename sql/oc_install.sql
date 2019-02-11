@@ -448,8 +448,7 @@ CREATE TABLE `<DB_PREFIX>config` (
 -- Indexes for table `active_users`
 --
 ALTER TABLE `<DB_PREFIX>active_users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `identifier` (`identifier`) USING BTREE;
+  ADD UNIQUE KEY `identifier` (`identifier`) USING BTREE,
 
 
 --
