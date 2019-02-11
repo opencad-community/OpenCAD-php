@@ -107,6 +107,7 @@ function getStatus()
 
     $sql = "SELECT status_text FROM ".DB_PREFIX."statuses WHERE status_id = \"$statusDetail\"";
 
+	$statusText = "";
     $result=mysqli_query($link, $sql);
 
     while($row = mysqli_fetch_array($result, MYSQLI_BOTH))

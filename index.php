@@ -34,21 +34,24 @@ if(!file_exists(getcwd().'./oc-config.php') && is_writable(getcwd())){
     }
     if (isset($_GET['loggedOut']))
     {
-        $loginMessage = '<div class="alert alert-success" style="text-align: center; font-weight:normal;" ><span>You\'ve successfully been logged out</span></div>';
+      $loginMessage = '<div class="alert alert-success" style="text-align: center;" ><span>You\'ve successfully been logged out</span></div>';
+   }
+   if(isset($_SESSION['register_error']))
+   {
     }
     if(isset($_SESSION['register_error']))
     {
-        $registerError = '<div class="alert alert-danger" style="text-align: center; font-weight:normal;"><span>'.$_SESSION['register_error'].'</span></div>';
+      $registerError = '<div class="alert alert-danger" style="text-align: center;"><span>'.$_SESSION['register_error'].'</span></div>';
         unset($_SESSION['register_error']);
     }
     if(isset($_SESSION['register_success']))
     {
-        $registerError = '<div class="alert alert-success" style="text-align: center; font-weight:normal;"><span>'.$_SESSION['register_success'].'</span></div>';
+      $registerError = '<div class="alert alert-success" style="text-align: center;"><span>'.$_SESSION['register_success'].'</span></div>';
         unset($_SESSION['register_success']);
     }
     if(isset($_SESSION['loginMessageDanger']))
     {
-        $loginMessage = '<div class="alert alert-danger" style="text-align: center; font-weight:normal;"><span>'.$_SESSION['loginMessageDanger'].'</span></div>';
+      $loginMessage = '<div class="alert alert-danger" style="text-align: center;"><span>'.$_SESSION['loginMessageDanger'].'</span></div>';
         unset($_SESSION['loginMessageDanger']);
     }
 

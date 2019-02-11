@@ -2,13 +2,21 @@
 -- Table structure for table `active_users`
 --
 
+<<<<<<< HEAD:sql/oc_install.sql
 CREATE TABLE `<DB_PREFIX>active_users` (
   `identifier` varchar(255) NOT NULL,
   `callsign` varchar(255) NOT NULL COMMENT 'Unit Callsign',
+=======
+CREATE TABLE `active_users` (
+  `identifier` varchar(255) UNIQUE KEY NOT NULL,
+  `callsign` varchar(255) UNIQUE KEY NOT NULL COMMENT 'Unit Callsign',
+>>>>>>> 666a015450611eb30243b38f3941acd4a7998447:sql/oc_structure.sql
   `status` int(11) NOT NULL COMMENT 'Unit status, 0=busy/unavailable, 1=available, 2=dispatcher',
   `status_detail` int(11) NOT NULL COMMENT 'Paired to Statuses table',
-  `id` int(11) NOT NULL
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `aop`
@@ -18,15 +26,24 @@ CREATE TABLE `<DB_PREFIX>aop` (
   `aop` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
+<<<<<<< HEAD:sql/oc_install.sql
 INSERT INTO `<DB_PREFIX>aop` (`aop`) VALUES
 ('INIT AOP');
+=======
+-- --------------------------------------------------------
+>>>>>>> 666a015450611eb30243b38f3941acd4a7998447:sql/oc_structure.sql
 
 --
 -- Table structure for table `bolos_persons`
 --
 
+<<<<<<< HEAD:sql/oc_install.sql
 CREATE TABLE `<DB_PREFIX>bolos_persons` (
   `id` int(11) NOT NULL,
+=======
+CREATE TABLE `bolos_persons` (
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+>>>>>>> 666a015450611eb30243b38f3941acd4a7998447:sql/oc_structure.sql
   `first_name` varchar(255) NOT NULL COMMENT 'First name of BOLO suspect.',
   `last_name` varchar(255) NOT NULL COMMENT 'Last name of BOLO suspect.',
   `gender` varchar(255) NOT NULL COMMENT 'Gender of BOLO suspect.',
@@ -35,12 +52,19 @@ CREATE TABLE `<DB_PREFIX>bolos_persons` (
   `last_seen` varchar(255) NOT NULL COMMENT 'Last observed location of BOLO suspect.'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
+-- --------------------------------------------------------
+
 --
 -- Table structure for table `bolos_vehicles`
 --
 
+<<<<<<< HEAD:sql/oc_install.sql
 CREATE TABLE `<DB_PREFIX>bolos_vehicles` (
   `id` int(11) NOT NULL,
+=======
+CREATE TABLE `bolos_vehicles` (
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+>>>>>>> 666a015450611eb30243b38f3941acd4a7998447:sql/oc_structure.sql
   `vehicle_make` varchar(255) NOT NULL COMMENT 'Make of BOLO vehicle.',
   `vehicle_model` varchar(255) NOT NULL COMMENT 'Model of BOLO vehicle.',
   `vehicle_plate` varchar(255) NOT NULL COMMENT 'License of BOLO vehicle.',
@@ -56,8 +80,13 @@ CREATE TABLE `<DB_PREFIX>bolos_vehicles` (
 -- Table structure for table `calls`
 --
 
+<<<<<<< HEAD:sql/oc_install.sql
 CREATE TABLE `<DB_PREFIX>calls` (
   `call_id` int(11) NOT NULL,
+=======
+CREATE TABLE `calls` (
+  `call_id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+>>>>>>> 666a015450611eb30243b38f3941acd4a7998447:sql/oc_structure.sql
   `call_type` text NOT NULL,
   `call_primary` text,
   `call_street1` text NOT NULL,
@@ -76,7 +105,7 @@ CREATE TABLE `<DB_PREFIX>calls_users` (
   `call_id` int(11) NOT NULL,
   `identifier` varchar(255) NOT NULL,
   `callsign` varchar(255) NOT NULL,
-  `id` int(11) NOT NULL
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
@@ -101,8 +130,13 @@ CREATE TABLE `<DB_PREFIX>call_history` (
 -- Table structure for table `call_list`
 --
 
+<<<<<<< HEAD:sql/oc_install.sql
 CREATE TABLE `<DB_PREFIX>call_list` (
   `call_id` int(11) NOT NULL
+=======
+CREATE TABLE `call_list` (
+  `call_id` int(11) UNIQUE KEY NOT NULL
+>>>>>>> 666a015450611eb30243b38f3941acd4a7998447:sql/oc_structure.sql
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
@@ -111,8 +145,13 @@ CREATE TABLE `<DB_PREFIX>call_list` (
 -- Table structure for table `citations`
 --
 
+<<<<<<< HEAD:sql/oc_install.sql
 CREATE TABLE `<DB_PREFIX>citations` (
   `id` int(11) NOT NULL,
+=======
+CREATE TABLE `citations` (
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+>>>>>>> 666a015450611eb30243b38f3941acd4a7998447:sql/oc_structure.sql
   `citation_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
@@ -133,8 +172,13 @@ CREATE TABLE `<DB_PREFIX>civilian_names` (
 -- Table structure for table `colors`
 --
 
+<<<<<<< HEAD:sql/oc_install.sql
 CREATE TABLE `<DB_PREFIX>colors` (
   `id` int(11) NOT NULL,
+=======
+CREATE TABLE `colors` (
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+>>>>>>> 666a015450611eb30243b38f3941acd4a7998447:sql/oc_structure.sql
   `color_group` varchar(255) DEFAULT NULL,
   `color_name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
@@ -145,10 +189,15 @@ CREATE TABLE `<DB_PREFIX>colors` (
 -- Table structure for table `departments`
 --
 
+<<<<<<< HEAD:sql/oc_install.sql
 CREATE TABLE `<DB_PREFIX>departments` (
   `department_id` int(11) NOT NULL,
+=======
+CREATE TABLE `departments` (
+  `department_id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+>>>>>>> 666a015450611eb30243b38f3941acd4a7998447:sql/oc_structure.sql
   `department_name` varchar(255) DEFAULT NULL COMMENT 'The functional name of the department. (eg. Police, Fire, EMS)',
-  `department_short_name` varchar(10) NOT NULL COMMENT 'The name of the department. (eg. Los Angeles Police Department, Blaine County Sheriffs'' Office',
+  `department_short_name` varchar(10) NOT NULL COMMENT 'The name of the department. (eg. Los Angeles Police Department, Blaine County Sheriffs` Office',
   `department_long_name` varchar(255) NOT NULL COMMENT 'The acronym of the department name. (eg. BCSO, LAPD, LAFD)',
   `allow_department` int(11) NOT NULL COMMENT 'If 0 then department is disabled, if 1 then department is enabled.'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
@@ -159,8 +208,13 @@ CREATE TABLE `<DB_PREFIX>departments` (
 -- Table structure for table `dispatchers`
 --
 
+<<<<<<< HEAD:sql/oc_install.sql
 CREATE TABLE `<DB_PREFIX>dispatchers` (
   `identifier` varchar(255) NOT NULL,
+=======
+CREATE TABLE `dispatchers` (
+  `identifier` varchar(255) UNIQUE KEY NOT NULL,
+>>>>>>> 666a015450611eb30243b38f3941acd4a7998447:sql/oc_structure.sql
   `callsign` varchar(255) NOT NULL COMMENT 'Unit Callsign',
   `status` int(11) NOT NULL COMMENT 'Unit status, 0=offline, 1=online'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
@@ -171,8 +225,13 @@ CREATE TABLE `<DB_PREFIX>dispatchers` (
 -- Table structure for table `genders`
 --
 
+<<<<<<< HEAD:sql/oc_install.sql
 CREATE TABLE `<DB_PREFIX>genders` (
   `id` int(11) NOT NULL,
+=======
+CREATE TABLE `genders` (
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+>>>>>>> 666a015450611eb30243b38f3941acd4a7998447:sql/oc_structure.sql
   `genders` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
@@ -193,8 +252,13 @@ CREATE TABLE `<DB_PREFIX>incident_type` (
 -- Table structure for table `ncic_arrests`
 --
 
+<<<<<<< HEAD:sql/oc_install.sql
 CREATE TABLE `<DB_PREFIX>ncic_arrests` (
   `id` int(11) NOT NULL,
+=======
+CREATE TABLE `ncic_arrests` (
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+>>>>>>> 666a015450611eb30243b38f3941acd4a7998447:sql/oc_structure.sql
   `name_id` int(11) NOT NULL COMMENT 'Paired to ID of ncic_names table',
   `arrest_reason` varchar(255) NOT NULL,
   `arrest_fine` int(11) NOT NULL,
@@ -208,8 +272,13 @@ CREATE TABLE `<DB_PREFIX>ncic_arrests` (
 -- Table structure for table `ncic_citations`
 --
 
+<<<<<<< HEAD:sql/oc_install.sql
 CREATE TABLE `<DB_PREFIX>ncic_citations` (
   `id` int(11) NOT NULL,
+=======
+CREATE TABLE `ncic_citations` (
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+>>>>>>> 666a015450611eb30243b38f3941acd4a7998447:sql/oc_structure.sql
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '0 = Pending, 1 = Approved/Active',
   `name_id` int(11) NOT NULL COMMENT 'Paired to ID of ncic_names table',
   `citation_name` varchar(255) NOT NULL,
@@ -224,8 +293,13 @@ CREATE TABLE `<DB_PREFIX>ncic_citations` (
 -- Table structure for table `ncic_names`
 --
 
+<<<<<<< HEAD:sql/oc_install.sql
 CREATE TABLE `<DB_PREFIX>ncic_names` (
   `id` int(11) NOT NULL,
+=======
+CREATE TABLE `ncic_names` (
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+>>>>>>> 666a015450611eb30243b38f3941acd4a7998447:sql/oc_structure.sql
   `submittedByName` varchar(255) NOT NULL,
   `submittedById` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -246,8 +320,13 @@ CREATE TABLE `<DB_PREFIX>ncic_names` (
 -- Table structure for table `ncic_plates`
 --
 
+<<<<<<< HEAD:sql/oc_install.sql
 CREATE TABLE `<DB_PREFIX>ncic_plates` (
   `id` int(11) NOT NULL,
+=======
+CREATE TABLE `ncic_plates` (
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+>>>>>>> 666a015450611eb30243b38f3941acd4a7998447:sql/oc_structure.sql
   `name_id` int(11) NOT NULL COMMENT 'Links to ncic_names db for driver information',
   `veh_plate` text NOT NULL,
   `veh_make` text NOT NULL,
@@ -267,8 +346,13 @@ CREATE TABLE `<DB_PREFIX>ncic_plates` (
 -- Table structure for table `ncic_warnings`
 --
 
+<<<<<<< HEAD:sql/oc_install.sql
 CREATE TABLE `<DB_PREFIX>ncic_warnings` (
   `id` int(11) NOT NULL,
+=======
+CREATE TABLE `ncic_warnings` (
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+>>>>>>> 666a015450611eb30243b38f3941acd4a7998447:sql/oc_structure.sql
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '0 = Pending, 1 = Approved/Active',
   `name_id` int(11) NOT NULL COMMENT 'Paired to ID of ncic_names table',
   `warning_name` varchar(255) NOT NULL,
@@ -282,8 +366,13 @@ CREATE TABLE `<DB_PREFIX>ncic_warnings` (
 -- Table structure for table `ncic_warrants`
 --
 
+<<<<<<< HEAD:sql/oc_install.sql
 CREATE TABLE `<DB_PREFIX>ncic_warrants` (
   `id` int(11) NOT NULL,
+=======
+CREATE TABLE `ncic_warrants` (
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+>>>>>>> 666a015450611eb30243b38f3941acd4a7998447:sql/oc_structure.sql
   `expiration_date` date DEFAULT NULL,
   `warrant_name` varchar(255) NOT NULL,
   `issuing_agency` varchar(255) NOT NULL,
@@ -298,8 +387,13 @@ CREATE TABLE `<DB_PREFIX>ncic_warrants` (
 -- Table structure for table `ncic_weapons`
 --
 
+<<<<<<< HEAD:sql/oc_install.sql
 CREATE TABLE `<DB_PREFIX>ncic_weapons` (
   `id` int(11) NOT NULL,
+=======
+CREATE TABLE `ncic_weapons` (
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+>>>>>>> 666a015450611eb30243b38f3941acd4a7998447:sql/oc_structure.sql
   `name_id` int(11) NOT NULL COMMENT 'Links to ncic_names db for driver information',
   `weapon_type` varchar(255) NOT NULL,
   `weapon_name` varchar(255) NOT NULL,
@@ -309,6 +403,7 @@ CREATE TABLE `<DB_PREFIX>ncic_weapons` (
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD:sql/oc_install.sql
 -- Table structure for table `permissions`
 --
 
@@ -325,6 +420,13 @@ CREATE TABLE `<DB_PREFIX>permissions` (
 
 CREATE TABLE `<DB_PREFIX>statuses` (
   `status_id` int(11) NOT NULL,
+=======
+-- Table structure for table `statuses`
+--
+
+CREATE TABLE `statuses` (
+  `status_id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+>>>>>>> 666a015450611eb30243b38f3941acd4a7998447:sql/oc_structure.sql
   `status_text` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
@@ -334,8 +436,13 @@ CREATE TABLE `<DB_PREFIX>statuses` (
 -- Table structure for table `streets`
 --
 
+<<<<<<< HEAD:sql/oc_install.sql
 CREATE TABLE `<DB_PREFIX>streets` (
   `id` int(11) NOT NULL COMMENT 'Primary key for each street',
+=======
+CREATE TABLE `streets` (
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT COMMENT 'Primary key for each street',
+>>>>>>> 666a015450611eb30243b38f3941acd4a7998447:sql/oc_structure.sql
   `name` text NOT NULL COMMENT 'Street name',
   `county` text NOT NULL COMMENT 'County name'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
@@ -346,8 +453,13 @@ CREATE TABLE `<DB_PREFIX>streets` (
 -- Table structure for table `tones`
 --
 
+<<<<<<< HEAD:sql/oc_install.sql
 CREATE TABLE `<DB_PREFIX>tones` (
   `id` int(11) NOT NULL,
+=======
+CREATE TABLE `tones` (
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+>>>>>>> 666a015450611eb30243b38f3941acd4a7998447:sql/oc_structure.sql
   `name` varchar(255) NOT NULL,
   `active` set('0','1') NOT NULL DEFAULT '0' COMMENT '0 = inactive, 1 = active'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tones table. DO NOT ADD ROWS TO THIS TABLE' ROW_FORMAT=COMPACT;
@@ -358,8 +470,13 @@ CREATE TABLE `<DB_PREFIX>tones` (
 -- Table structure for table `users`
 --
 
+<<<<<<< HEAD:sql/oc_install.sql
 CREATE TABLE `<DB_PREFIX>users` (
   `id` int(11) NOT NULL,
+=======
+CREATE TABLE `users` (
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+>>>>>>> 666a015450611eb30243b38f3941acd4a7998447:sql/oc_structure.sql
   `name` text NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` text,
@@ -409,8 +526,13 @@ CREATE TABLE `<DB_PREFIX>user_departments_temp` (
 -- Table structure for table `vehicles`
 --
 
+<<<<<<< HEAD:sql/oc_install.sql
 CREATE TABLE `<DB_PREFIX>vehicles` (
   `id` int(11) NOT NULL,
+=======
+CREATE TABLE `vehicles` (
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+>>>>>>> 666a015450611eb30243b38f3941acd4a7998447:sql/oc_structure.sql
   `Make` varchar(100) NOT NULL,
   `Model` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -421,8 +543,13 @@ CREATE TABLE `<DB_PREFIX>vehicles` (
 -- Table structure for table `weapons`
 --
 
+<<<<<<< HEAD:sql/oc_install.sql
 CREATE TABLE `<DB_PREFIX>weapons` (
   `id` int(11) NOT NULL,
+=======
+CREATE TABLE `weapons` (
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+>>>>>>> 666a015450611eb30243b38f3941acd4a7998447:sql/oc_structure.sql
   `weapon_type` varchar(255) NOT NULL,
   `weapon_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -435,6 +562,7 @@ CREATE TABLE `<DB_PREFIX>config` (
   `key` varchar(80) NOT NULL,
   `value` varchar(80)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+<<<<<<< HEAD:sql/oc_install.sql
 
 --
 -- Indexes for dumped tables
@@ -614,3 +742,6 @@ ALTER TABLE `<DB_PREFIX>vehicles`
 --
 ALTER TABLE `<DB_PREFIX>weapons`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+=======
+COMMIT;
+>>>>>>> 666a015450611eb30243b38f3941acd4a7998447:sql/oc_structure.sql
