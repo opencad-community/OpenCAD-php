@@ -2269,7 +2269,7 @@ INSERT INTO `streets` (`id`, `name`, `county`) VALUES
 --
 
 INSERT INTO `tones` (`id`, `name`, `active`) VALUES
-(2, 'priority', '0'),
+(1, 'priority', '0'),
 (2, 'recurring', '0'),
 (3, 'panic', '0');
 
