@@ -29,7 +29,6 @@ if(!file_exists(getcwd().'/.htaccess') && is_writable(getcwd())){
 	$htaccess =	"### Begin ATVG ErrorPages ###".PHP_EOL
 				."ErrorDocument 403 $root/403.php".PHP_EOL
 				."ErrorDocument 404 $root/404.php".PHP_EOL
-				."ErrorDocument 418 $root/418.php".PHP_EOL
 				."ErrorDocument 502 $root/502.php".PHP_EOL
 				."ErrorDocument 503 $root/503.php".PHP_EOL
 				."### End ATVG ErrorPages ###";
