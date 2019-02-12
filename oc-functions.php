@@ -11,16 +11,26 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
-if(version_compare(PHP_VERSION, '7.1', '<')) {
+if (version_compare(PHP_VERSION, '7.1', '<')) {
 	session_start();
 	$_SESSION['error_title'] = "Incompatable PHP Version";
 	$_SESSION['error'] = "An incompatable version  of PHP is active. OpenCAD requires PHP 7.1 at minimum, the current recommended version is 7.2. Currently PHP ".phpversion()." is active, please contact your server administrator.";
 	header('Location: '.BASE_URL.'/plugins/error/index.php');
 }
-/** Provides support for enviorments running PHP < 5.5 */
-if (version_compare(PHP_VERSION, '5.5', '<' )) {
-	require_once(ABSPATH . 'vendors/password_compat/password.php');
-}
+
+if ( OC_DEBUG == "true" )
+	{	
+		ini_set('display_errors', 1);
+		ini_set('display_startup_errors', 1);
+		error_reporting(E_ERROR | E_WARNING);
+		echo "<pre>";
+		var_dump($_SESSION);
+		echo "</pre>";
+	} else {
+		ini_set('display_errors', 0);
+		ini_set('display_startup_errors', 0);
+		error_reporting(E_ERROR);
+	}
 
 if(!file_exists(getcwd().'/.htaccess') && is_writable(getcwd())){
 	
@@ -118,7 +128,7 @@ function getApiKey($del_key = false)
         die();
     }
 
-    $result = $pdo->query("SELECT value FROM config WHERE `key`='api_key'");
+    $result = $pdo->query("SELECT value FROM ".DB_PREFIX."config WHERE `key`='api_key'");
 
     if (!$result)
     {
@@ -132,7 +142,7 @@ function getApiKey($del_key = false)
 	{
 		error_log("Do delete: $del_key");
 		$key = generateRandomString(64);
-		$result = $pdo->query("UPDATE config SET `value`='$key' WHERE `key`='api_key'");
+		$result = $pdo->query("UPDATE ".DB_PREFIX."config SET `value`='$key' WHERE `key`='api_key'");
 
 		if (!$result)
 		{
@@ -148,7 +158,7 @@ function getApiKey($del_key = false)
 		return $key;
 	}else{
 		$key = generateRandomString(64);
-		$result = $pdo->query("INSERT INTO config VALUES ('api_key', '$key')");
+		$result = $pdo->query("INSERT INTO ".DB_PREFIX."config VALUES ('api_key', '$key')");
 
 		if (!$result)
 		{

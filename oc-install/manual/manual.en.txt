@@ -1,0 +1,58 @@
+<a name="top"></a>
+<h2>Installation of Your Program v1.0 (example)</h2>  
+<table border=0 width="100%">
+<tbody>
+<tr>
+	<td>
+		<ul>
+			<li><a href="#Step_1._Uncompressing_downloaded_file."><span>Step 1. Uncompressing downloaded file.</span></a> 
+			<li><a href="#Step_2._Uploading_files."><span>Step 2. Uploading files.</span></a> 
+			<li><a href="#Step_3._Creating_database."><span>Step 3. Creating database.</span></a>                        
+			<li><a href="#Step_4._Settings_and_access_rights."><span>Step 4. Settings and access rights.</span></a>                        
+			<li><a href="#Step_5._Running_example_file."><span>Step 5. Running example file.</span></a>
+		</ul>
+	</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>(for version X.0.0 or above) </p>
+<p>A new installation of Your Program is a very straight forward process: </p>
+
+<div style="float:right;">[<a href="#top">top</a>]</div>
+<a name="Step_1._Uncompressing_downloaded_file."></a>
+<h3><b>Step 1. Uncompressing downloaded file.</b></h3>
+<hr>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pretium vulputate diam et hendrerit. Duis libero felis, luctus et facilisis at, placerat non leo. Maecenas viverra, justo eu laoreet tristique, sem purus elementum mi, vel viverra nisl sem sed diam. Aenean eu augue justo, at viverra diam. In id lacus quis orci aliquam tristique. Mauris consequat erat congue neque gravida malesuada.</p>
+<p><br /></p>
+
+<div style="float:right;">[<a href="#top">top</a>]</div>
+<a name="Step_2._Uploading_files."></a>
+<h3><b>Step 2. Uploading files.</b></h3>
+<hr>
+<p>Nam sit amet quam nisl, quis pretium libero. Etiam tincidunt libero ut lectus condimentum tristique. Pellentesque risus risus, consequat vel dapibus at, ultricies sed quam. Integer laoreet dignissim sapien pretium tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ultricies massa ac erat hendrerit sed volutpat metus volutpat. Nam sed gravida nulla. Sed augue leo, iaculis quis dapibus sagittis, ultricies lobortis massa.</p>
+<p><br /></p>
+
+<div style="float:right;">[<a href="#top">top</a>]</div>
+<a name="Step_3._Creating_database."></a>
+<h3><b>Step 3. Creating database.</b></h3>
+<hr>
+<p>Nunc vehicula convallis velit, eu feugiat metus sodales sit amet. Suspendisse luctus erat ut lacus elementum vehicula blandit dui malesuada. Vestibulum vitae pretium odio. Proin turpis turpis, gravida at hendrerit quis, congue id massa. Maecenas eu ipsum sapien. Mauris id mauris velit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<p><br /></p>
+
+<div style="float:right;">[<a href="#top">top</a>]</div>
+<a name="Step_4._Settings_and_access_rights."></a>
+<h3><b>Step 4. Settings and access rights.</b></h3>
+<hr>
+<p>Ut interdum ante a erat dictum ultrices. Maecenas nec nibh sit amet dolor ullamcorper elementum id sodales nunc. Vestibulum feugiat, elit sed interdum rhoncus, lectus felis varius purus, id fermentum mi odio et elit. Vivamus ut erat dolor, et imperdiet tellus.</p>
+<p><br /></p>
+
+<div style="float:right;">[<a href="#top">top</a>]</div>
+<a name="Step_5._Running_example_file."></a>
+<h3><b>Step 5. Running example file.</b></h3>
+<hr>
+<p>Aenean dapibus, odio et vehicula blandit, nunc sapien rhoncus neque, at accumsan nunc nunc a libero. Cras nec risus elit. Phasellus rutrum, ligula lobortis mattis scelerisque, enim eros dictum leo, ut lobortis metus nibh et dolor. Duis scelerisque ultricies lacus non congue.</p>
+<p><br /></p>
+
+Congratulations, you now have Your Program vX.X.X. Installed!					

@@ -101,7 +101,7 @@ if (isset($_GET['term'])) {
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT * from streets WHERE name LIKE \"%$term%\"";
+    $query = "SELECT * from ".DB_PREFIX."streets WHERE name LIKE \"%$term%\"";
 
     $result=mysqli_query($link, $query);
 
@@ -138,7 +138,7 @@ function addNarrative()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "UPDATE calls SET call_narrative = concat(call_narrative, ?) WHERE call_id = ?";
+    $sql = "UPDATE ".DB_PREFIX."calls SET call_narrative = concat(call_narrative, ?) WHERE call_id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $sql);
@@ -181,7 +181,7 @@ function assignUnit()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "SELECT callsign, id FROM active_users WHERE identifier = \"$unit\"";
+    $sql = "SELECT callsign, id FROM ".DB_PREFIX."active_users WHERE identifier = \"$unit\"";
 
     $result=mysqli_query($link, $sql);
 
@@ -191,7 +191,7 @@ function assignUnit()
 		$id = $row[1];
 	}
 
-    $sql = "INSERT INTO calls_users (call_id, identifier, callsign, id) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO ".DB_PREFIX."calls_users (call_id, identifier, callsign, id) VALUES (?, ?, ?, ?)";
 
     try {
         $stmt = mysqli_prepare($link, $sql);
@@ -208,7 +208,7 @@ function assignUnit()
     }
 
     //Now we need to modify the assigned user's status
-    $sql = "UPDATE active_users SET status = '0', status_detail = '3' WHERE active_users.callsign = ?";
+    $sql = "UPDATE ".DB_PREFIX."active_users SET status = '0', status_detail = '3' WHERE ".DB_PREFIX."active_users.callsign = ?";
 
     try {
         $stmt = mysqli_prepare($link, $sql);
@@ -227,7 +227,7 @@ function assignUnit()
     //Now we'll add data to the call log for unit history
     $narrativeAdd = date("Y-m-d H:i:s").': Dispatched: '.$callsign.'<br/>';
 
-    $sql = "UPDATE calls SET call_narrative = concat(call_narrative, ?) WHERE call_id = ?";
+    $sql = "UPDATE ".DB_PREFIX."calls SET call_narrative = concat(call_narrative, ?) WHERE call_id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $sql);
@@ -257,7 +257,7 @@ function storeCall()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "INSERT INTO call_history SELECT calls.* FROM calls WHERE call_id = ?";
+    $query = "INSERT INTO ".DB_PREFIX."call_history SELECT ".DB_PREFIX."calls.* FROM calls WHERE call_id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $query);
@@ -305,7 +305,7 @@ function clearCall()
     }
 
     //Get units that were on the call
-    $query = "SELECT identifier FROM calls_users WHERE call_id = \"$callId\"";
+    $query = "SELECT identifier FROM ".DB_PREFIX."calls_users WHERE call_id = \"$callId\"";
 
     $result=mysqli_query($link, $query);
 
@@ -325,7 +325,7 @@ function clearUnitFromCall($callId, $unit)
     }
 
     //First delete from calls list
-    $query = "DELETE FROM calls_users WHERE call_id = ? AND identifier = ?";
+    $query = "DELETE FROM ".DB_PREFIX."calls_users WHERE call_id = ? AND identifier = ?";
 
     try {
         $stmt = mysqli_prepare($link, $query);
@@ -353,7 +353,7 @@ function freeUnitStatus($unit)
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "UPDATE active_users SET status = '1', status_detail = '1' WHERE active_users.identifier = ?";
+    $sql = "UPDATE ".DB_PREFIX."active_users SET status = '1', status_detail = '1' WHERE ".DB_PREFIX."active_users.identifier = ?";
 
     try {
         $stmt = mysqli_prepare($link, $sql);
@@ -378,7 +378,7 @@ function newCall()
 		die('Could not connect: ' .mysql_error());
 	}
 	
-	$sql = "SELECT MAX(call_id) AS max FROM call_list";
+	$sql = "SELECT MAX(call_id) AS max FROM ".DB_PREFIX."call_list";
 	$result=mysqli_query($link, $sql);
 
 	while($r=mysqli_fetch_array($result))
@@ -388,7 +388,7 @@ function newCall()
 	
 	$callid++;
 	
-    $sql = "REPLACE INTO call_list (call_id) VALUES (?)";
+    $sql = "REPLACE INTO ".DB_PREFIX."call_list (call_id) VALUES (?)";
 
 	try {
 		$stmt = mysqli_prepare($link, $sql);
@@ -428,7 +428,7 @@ function newCall()
         $narrative = $created.date("Y-m-d H:i:s").': '.$narrative.'<br/>';
     }
 
-    $sql = "INSERT INTO calls (call_id, call_type, call_street1, call_street2, call_street3, call_narrative) VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO ".DB_PREFIX."calls (call_id, call_type, call_street1, call_street2, call_street3, call_narrative) VALUES (?, ?, ?, ?, ?, ?)";
 
 	try {
 		$stmt = mysqli_prepare($link, $sql);
@@ -469,7 +469,7 @@ function cadGetVehicleBOLOS()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT bolos_vehicles.* FROM bolos_vehicles";
+    $query = "SELECT bolos_vehicles.* FROM ".DB_PREFIX."bolos_vehicles";
 
     $result=mysqli_query($link, $query);
 
@@ -544,7 +544,7 @@ function cadGetPersonBOLOS()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT bolos_persons.* FROM bolos_persons";
+    $query = "SELECT bolos_persons.* FROM ".DB_PREFIX."bolos_persons";
 
     $result=mysqli_query($link, $query);
 
@@ -624,7 +624,7 @@ function create_citation()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $sql = "INSERT INTO ncic_citations (name_id, citation_name, citation_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
+    $sql = "INSERT INTO ".DB_PREFIX."ncic_citations (name_id, citation_name, citation_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
 
 
 	try {
@@ -648,7 +648,7 @@ function create_citation()
 		die('Could not connect: ' .mysql_error());
 	}
 	
-	    $sql = "INSERT INTO ncic_citations (name_id, citation_name, citation_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
+	    $sql = "INSERT INTO ".DB_PREFIX."ncic_citations (name_id, citation_name, citation_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
 
 
 	try {
@@ -673,7 +673,7 @@ function create_citation()
 		die('Could not connect: ' .mysql_error());
 	}
 	
-    $sql = "INSERT INTO ncic_citations (name_id, citation_name, citation_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
+    $sql = "INSERT INTO ".DB_PREFIX."ncic_citations (name_id, citation_name, citation_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
 
 
 	try {
@@ -698,7 +698,7 @@ function create_citation()
 		die('Could not connect: ' .mysql_error());
 	}
 	
-	    $sql = "INSERT INTO ncic_citations (name_id, citation_name, citation_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
+	    $sql = "INSERT INTO ".DB_PREFIX."ncic_citations (name_id, citation_name, citation_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
 
 
 	try {
@@ -722,7 +722,7 @@ function create_citation()
 	if (!$link) {
 		die('Could not connect: ' .mysql_error());
 	}
-	    $sql = "INSERT INTO ncic_citations (name_id, citation_name, citation_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
+	    $sql = "INSERT INTO ".DB_PREFIX."ncic_citations (name_id, citation_name, citation_fine, issued_by, status, issued_date) VALUES (?, ?, ?, ?, '1', ?)";
 
 
 	try {
@@ -764,7 +764,7 @@ function create_warning()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $sql = "INSERT INTO ncic_warnings (name_id, warning_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)";
+    $sql = "INSERT INTO ".DB_PREFIX."ncic_warnings (name_id, warning_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)";
 
 
 	try {
@@ -789,7 +789,7 @@ function create_warning()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $sql = "INSERT INTO ncic_warnings (name_id, warning_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)";
+    $sql = "INSERT INTO ".DB_PREFIX."ncic_warnings (name_id, warning_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)";
 
 
 	try {
@@ -815,7 +815,7 @@ function create_warning()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $sql = "INSERT INTO ncic_warnings (name_id, warning_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)";
+    $sql = "INSERT INTO ".DB_PREFIX."ncic_warnings (name_id, warning_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)";
 
 
 	try {
@@ -841,7 +841,7 @@ function create_warning()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $sql = "INSERT INTO ncic_warnings (name_id, warning_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)";
+    $sql = "INSERT INTO ".DB_PREFIX."ncic_warnings (name_id, warning_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)";
 
 
 	try {
@@ -867,7 +867,7 @@ function create_warning()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $sql = "INSERT INTO ncic_warnings (name_id, warning_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)";
+    $sql = "INSERT INTO ".DB_PREFIX."ncic_warnings (name_id, warning_name, issued_by, status, issued_date) VALUES (?, ?, ?, '1', ?)";
 
 
 	try {
@@ -910,8 +910,7 @@ function create_warrant()
 
     $expire = date('Y-m-d',strtotime('+1 day',strtotime($date)));
 
-    $sql = "INSERT INTO ncic_warrants (name_id, expiration_date, warrant_name, issuing_agency, status, issued_date) SELECT ?, ?, ?, ?, ?, ?";
-
+    $sql = "INSERT INTO ".DB_PREFIX."ncic_waant_name, issuing_agency, status, issued_date) SELECT ?, ?, ?, ?, ?, ?";
 
 	try {
 		$stmt = mysqli_prepare($link, $sql);
@@ -945,7 +944,7 @@ function delete_citation()
 
     $cid = htmlspecialchars($_POST['cid']);
 
-    $query = "DELETE FROM ncic_citations WHERE id = ?";
+    $query = "DELETE FROM ".DB_PREFIX."ncic_citations WHERE id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $query);
@@ -975,7 +974,7 @@ function delete_arrest()
 
     $aid = htmlspecialchars($_POST['aid']);
 
-    $query = "DELETE FROM ncic_arrests WHERE id = ?";
+    $query = "DELETE FROM ".DB_PREFIX."ncic_arrests WHERE id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $query);
@@ -1006,7 +1005,7 @@ function delete_warning()
 
     $wgid = htmlspecialchars($_POST['wgid']);
 
-    $query = "DELETE FROM ncic_warnings WHERE id = ?";
+    $query = "DELETE FROM ".DB_PREFIX."ncic_warnings WHERE id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $query);
@@ -1037,7 +1036,7 @@ function delete_warrant()
 
     $wid = htmlspecialchars($_POST['wid']);
 
-    $query = "DELETE FROM ncic_warrants WHERE id = ?";
+    $query = "DELETE FROM ".DB_PREFIX."ncic_warrants WHERE id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $query);
@@ -1057,6 +1056,7 @@ function delete_warrant()
     $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully removed warrant</span></div>';
     header("Location: ".BASE_URL."/cad.php");
 }
+
 function ncic_arrests()
 {
    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -1065,7 +1065,7 @@ function ncic_arrests()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT ncic_arrests.*, ncic_names.name FROM ncic_arrests INNER JOIN ncic_names ON ncic_names.id=ncic_arrests.name_id";
+    $query = "SELECT ".DB_PREFIX."ncic_arrests.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_arrests INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_arrests.name_id";
 
     $result=mysqli_query($link, $query);
 
@@ -1125,7 +1125,7 @@ function ncic_warrants()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT ncic_warrants.*, ncic_names.name FROM ncic_warrants INNER JOIN ncic_names ON ncic_names.id=ncic_warrants.name_id";
+    $query = "SELECT ".DB_PREFIX."ncic_warrants.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_warrants INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_warrants.name_id";
 
     $result=mysqli_query($link, $query);
 
@@ -1189,6 +1189,7 @@ function ncic_warrants()
         ';
     }
 }
+
 function ncic_citations()
 {
    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -1197,7 +1198,7 @@ function ncic_citations()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT ncic_citations.*, ncic_names.name FROM ncic_citations INNER JOIN ncic_names ON ncic_names.id=ncic_citations.name_id";
+    $query = "SELECT ".DB_PREFIX."ncic_citations.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_citations INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_citations.name_id";
 
     $result=mysqli_query($link, $query);
 
@@ -1249,6 +1250,7 @@ function ncic_citations()
         ';
     }
 }
+
 function ncic_warnings()
 {
    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -1257,7 +1259,7 @@ function ncic_warnings()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT ncic_warnings.*, ncic_names.name FROM ncic_warnings INNER JOIN ncic_names ON ncic_names.id=ncic_warnings.name_id";
+    $query = "SELECT ".DB_PREFIX."ncic_warnings.*, ".DB_PREFIX."".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."".DB_PREFIX."ncic_warnings INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_warnings.name_id";
 
     $result=mysqli_query($link, $query);
 
@@ -1307,6 +1309,7 @@ function ncic_warnings()
         ';
     }
 }
+
 function create_personbolo()
 {
     $first_name = htmlspecialchars($_POST['first_name']);
@@ -1322,7 +1325,7 @@ function create_personbolo()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $sql = "INSERT INTO bolos_persons (first_name, last_name, gender, physical_description, reason_wanted, last_seen) SELECT ?, ?, ?, ?, ?, ?";
+    $sql = "INSERT INTO ".DB_PREFIX."bolos_persons (first_name, last_name, gender, physical_description, reason_wanted, last_seen) SELECT ?, ?, ?, ?, ?, ?";
 
 
 	try {
@@ -1362,7 +1365,7 @@ function create_vehiclebolo()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $sql = "INSERT INTO bolos_vehicles (vehicle_make, vehicle_model, vehicle_plate, primary_color, secondary_color, reason_wanted, last_seen) SELECT ?, ?, ?, ?, ?, ?, ?";
+    $sql = "INSERT INTO ".DB_PREFIX."bolos_vehicles (vehicle_make, vehicle_model, vehicle_plate, primary_color, secondary_color, reason_wanted, last_seen) SELECT ?, ?, ?, ?, ?, ?, ?";
 
 
 	try {
@@ -1396,7 +1399,7 @@ function delete_personbolo()
 
     $pbid = htmlspecialchars($_POST['pbid']);
 
-    $query = "DELETE FROM bolos_persons WHERE id = ?";
+    $query = "DELETE FROM ".DB_PREFIX."bolos_persons WHERE id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $query);
@@ -1428,7 +1431,7 @@ function delete_vehiclebolo()
 
     $vbid = htmlspecialchars($_POST['vbid']);
 
-    $query = "DELETE FROM bolos_vehicles WHERE id = ?";
+    $query = "DELETE FROM ".DB_PREFIX."bolos_vehicles WHERE id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $query);
@@ -1456,7 +1459,7 @@ function cadGetPersonBOLOSid()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT bolos_persons.* FROM bolos_persons WHERE id=".$_POST['bolos_personid'];
+    $query = "SELECT ".DB_PREFIX."bolos_persons.* FROM ".DB_PREFIX."bolos_persons WHERE id=".$_POST['bolos_personid'];
     $resultset = mysqli_query($link, $query) or die("database error:". mysqli_error($link));
     $person = array();
     while( $rows = mysqli_fetch_assoc($resultset) ) {
@@ -1464,6 +1467,7 @@ function cadGetPersonBOLOSid()
     }
     echo json_encode($person);
 }
+
 function cadGetVehicleBOLOSid()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -1472,7 +1476,7 @@ function cadGetVehicleBOLOSid()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT bolos_vehicles.* FROM bolos_vehicles WHERE id=".$_POST['bolos_vehicleid'];
+    $query = "SELECT ".DB_PREFIX."bolos_vehicles.* FROM ".DB_PREFIX."bolos_vehicles WHERE id=".$_POST['bolos_vehicleid'];
     $resultset = mysqli_query($link, $query) or die("database error:". mysqli_error($link));
     $vehicle = array();
     while( $rows = mysqli_fetch_assoc($resultset) ) {
@@ -1480,6 +1484,7 @@ function cadGetVehicleBOLOSid()
     }
     echo json_encode($vehicle);
 }
+
 function changeaop(){
     $aop = htmlspecialchars($_POST['aop']);
 
@@ -1489,7 +1494,7 @@ function changeaop(){
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "UPDATE aop SET aop = ?";
+    $sql = "UPDATE ".DB_PREFIX."aop SET aop = ?";
 
     try {
         $stmt = mysqli_prepare($link, $sql);
@@ -1522,7 +1527,7 @@ function editPersonBOLOS(){
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "UPDATE bolos_persons SET first_name = ?, last_name = ?, gender = ?, physical_description = ?, reason_wanted = ?, last_seen = ? WHERE id = ?";
+    $sql = "UPDATE ".DB_PREFIX."bolos_persons SET first_name = ?, last_name = ?, gender = ?, physical_description = ?, reason_wanted = ?, last_seen = ? WHERE id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $sql);
@@ -1544,6 +1549,7 @@ function editPersonBOLOS(){
 
     header("Location:".BASE_URL."/cad.php");
 }
+
 function edit_vehiclebolo()
 {
     $vehicle_make = htmlspecialchars($_POST['vehicle_make']);
@@ -1560,7 +1566,7 @@ function edit_vehiclebolo()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "UPDATE bolos_vehicles SET vehicle_make = ?, vehicle_model = ?, vehicle_plate = ?, primary_color = ?, secondary_color = ?, reason_wanted = ?, last_seen = ? WHERE id = ?";
+    $sql = "UPDATE ".DB_PREFIX."bolos_vehicles SET vehicle_make = ?, vehicle_model = ?, vehicle_plate = ?, primary_color = ?, secondary_color = ?, reason_wanted = ?, last_seen = ? WHERE id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $sql);
@@ -1582,6 +1588,7 @@ function edit_vehiclebolo()
 
     header("Location:".BASE_URL."/cad.php");
 }
+
 function create_arrest()
 {
     $userId = htmlspecialchars($_POST['civilian_names']);
@@ -1605,7 +1612,7 @@ function create_arrest()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $sql = "INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, issued_date) VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO ".DB_PREFIX."ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, issued_date) VALUES (?, ?, ?, ?, ?)";
 
 
 	try {
@@ -1629,7 +1636,7 @@ function create_arrest()
 		die('Could not connect: ' .mysql_error());
 	}
 	
-	    $sql = "INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, issued_date) VALUES (?, ?, ?, ?, ?)";
+	    $sql = "INSERT INTO ".DB_PREFIX."ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, issued_date) VALUES (?, ?, ?, ?, ?)";
 
 
 	try {
@@ -1654,7 +1661,7 @@ function create_arrest()
 		die('Could not connect: ' .mysql_error());
 	}
 	
-    $sql = "INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, issued_date) VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO ".DB_PREFIX."ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, issued_date) VALUES (?, ?, ?, ?, ?)";
 
 
 	try {
@@ -1679,7 +1686,7 @@ function create_arrest()
 		die('Could not connect: ' .mysql_error());
 	}
 	
-	    $sql = "INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, issued_date) VALUES (?, ?, ?, ?, ?)";
+	    $sql = "INSERT INTO ".DB_PREFIX."ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, issued_date) VALUES (?, ?, ?, ?, ?)";
 
 
 	try {
@@ -1703,7 +1710,7 @@ function create_arrest()
 	if (!$link) {
 		die('Could not connect: ' .mysql_error());
 	}
-	    $sql = "INSERT INTO ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, issued_date) VALUES (?, ?, ?, ?, ?)";
+	    $sql = "INSERT INTO ".DB_PREFIX."ncic_arrests (name_id, arrest_reason, arrest_fine, issued_by, issued_date) VALUES (?, ?, ?, ?, ?)";
 
 
 	try {

@@ -30,7 +30,7 @@ function logoutResponder()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $sql = "DELETE FROM active_users WHERE identifier = ?";
+    $sql = "DELETE FROM ".DB_PREFIX."active_users WHERE identifier = ?";
 
     try {
         $stmt = mysqli_prepare($link, $sql);

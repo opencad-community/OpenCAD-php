@@ -1,0 +1,50 @@
+################################################################################
+##  ApPHP EasyInstaller X-White Template                                       #
+##  -------------------------------------------------------------------------- #
+##  Developed by: ApPHP <info@apphp.com>                                       #
+##  Version:      1.0.1                                                        #
+##  License:      ApPHP Template License v.1                                   #
+##  Site:         http://www.apphp.com/php-easyinstaller/                      #
+##  Copyright:    ApPHP EasyInstaller Templates (c) 2013. All rights reserved. #
+##                                                                             #
+################################################################################
+
+Thank you for using ApPHP.com software!
+--------------------------------------------------------------------------------
+
+Software requirements: ApPHP EasyInstaller v3.2.0 or later version.
+
+A new installation of the template for ApPHP EasyInstaller is a very straight
+forward process:
+
+Step 1. Uncompressing downloaded file.
+-------------------------------------
+   Uncompress the ApPHP EasyInstaller Template archive. The archive will create
+   a directory called "PHPEI_TPL_xxx".
+
+
+Step 2. Uploading files.
+-------------------------------------
+   Upload content of this folder (all files and directories it includes) to the
+   directory called "install/templates/" in your easy installer site directory using FTP.
+   
+   Pay attention to DON'T use the capital letters in the name of the folder (for Linux users).
+
+   public_html/install/templates/
+   or
+   public_html/{easy-installer directory}/install/templates/
+   
+
+Step 3. Selecting the new template for your site.
+-------------------------------------
+   Now you can select this template for your easy installer. To do this, open
+   install/include/settings.inc.php file, find there following line of the code
+   
+   define('EI_TEMPLATE', 'default');
+   and replace it with 
+   define('EI_TEMPLATE', 'x-white');
+   
+   Save changes in this file.
+
+
+Congratulations, you now have ApPHP EasyInstaller X-White template installed!
