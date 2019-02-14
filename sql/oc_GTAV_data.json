@@ -1,6 +1,6 @@
 [
 {"type":"header","version":"4.8.5","comment":"Export to JSON plugin for PHPMyAdmin"},
-{"action":"insert","type":"table","name":"colors","rows":
+{"action":"insert","name":"colors","rows":
 [
 {"id":"1","color_group":"Chrome","color_name":"Chrome"},
 {"id":"2","color_group":"Classic","color_name":"Black"},
@@ -252,7 +252,7 @@
 {"id":"248","color_group":"Pearlescent","color_name":"Frost White"}
 ]
 }
-,{"action":"insert","type":"table","name":"departments","rows":
+,{"action":"insert","name":"departments","rows":
 [
 {"department_id":"1","department_name":"Communications","department_short_name":"SAECOMM","department_long_name":"San Andreas Emergency Communications","allow_department":"0"},
 {"department_id":"2","department_name":"State","department_short_name":"SASP","department_long_name":"San Andreas State Police","allow_department":"0"},
