@@ -1,6 +1,5 @@
 [
-{"type":"header","version":"4.8.5","comment":"Export to JSON plugin for PHPMyAdmin"},
-{"action":"insert","name":"colors","rows":
+{"action":"insert","table":"colors","rows":
 [
 {"id":"1","color_group":"Chrome","color_name":"Chrome"},
 {"id":"2","color_group":"Classic","color_name":"Black"},
@@ -252,7 +251,7 @@
 {"id":"248","color_group":"Pearlescent","color_name":"Frost White"}
 ]
 }
-,{"action":"insert","name":"departments","rows":
+,{"action":"insert","table":"departments","rows":
 [
 {"department_id":"1","department_name":"Communications","department_short_name":"SAECOMM","department_long_name":"San Andreas Emergency Communications","allow_department":"0"},
 {"department_id":"2","department_name":"State","department_short_name":"SASP","department_long_name":"San Andreas State Police","allow_department":"0"},
@@ -265,7 +264,7 @@
 {"department_id":"9","department_name":"Roadside Assistance","department_short_name":"SARA","department_long_name":"San Andreas Roadside Assistance","allow_department":"0"}
 ]
 }
-,{"type":"table","name":"incident_type","rows":
+,{"action":"insert","table":"incident_type","rows":
 [
 {"code_id":"68","code_name":"Armed Robbery"},
 {"code_id":"25","code_name":"Domestic Dispute"},
@@ -283,7 +282,7 @@
 {"code_id":"200","code_name":"Tow & Recovery"}
 ]
 }
-,{"type":"table","name":"streets","rows":
+,{"action":"insert","table":"streets","rows":
 [
 {"id":"1","name":"Abattoir Avenue","county":"Los Santos County"},
 {"id":"2","name":"Abe Milton Parkway","county":"Los Santos County"},
@@ -521,21 +520,7 @@
 {"id":"234","name":"Route 68","county":"State"}
 ]
 }
-,{"type":"table","name":"tones","rows":
-[
-{"id":"0","name":"priority","active":"0"},
-{"id":"1","name":"recurring","active":"0"},
-{"id":"2","name":"panic","active":"0"}
-]
-}
-,{"type":"table","name":"user_departments","rows":
-[
-{"user_id":"6","department_id":"8"},
-{"user_id":"1","department_id":"5"},
-{"user_id":"2","department_id":"1"}
-]
-}
-,{"type":"table","name":"weapons","rows":
+,{"action":"insert","table":"weapons","rows":
 [
 {"id":"1","weapon_type":"Pistols","weapon_name":"Pistol"},
 {"id":"2","weapon_type":"Pistols","weapon_name":"Combat-Pistol"},
