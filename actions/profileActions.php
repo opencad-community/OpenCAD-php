@@ -38,6 +38,8 @@ function updateProfile()
     $name = htmlspecialchars($_POST['name']);
     $email = htmlspecialchars($_POST['email']);
     $identifier = htmlspecialchars($_POST['identifier']);
+    $admin_privilege = htmlspecialchars($_POST['admin_privilege']);
+    $supervisor_privilege = htmlspecialchars($_POST['supervisor_privilege']);
 
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -45,11 +47,11 @@ function updateProfile()
 		die('Could not connect: ' .mysql_error());
 	}
 
-    $query = "UPDATE ".DB_PREFIX."users SET name = ?, email = ?, identifier = ? WHERE ID = ?";
+    $query = "UPDATE ".DB_PREFIX."users SET name = ?, email = ?, identifier = ?, supervisor_privilege = ?, admin_privilege = ? WHERE ID = ?";
 
 	try {
 		$stmt = mysqli_prepare($link, $query);
-		mysqli_stmt_bind_param($stmt, "sssi", $name, $email, $identifier, $id);
+		mysqli_stmt_bind_param($stmt, "sssiii", $name, $email, $identifier, $supervisor_privilege   , $admin_privilege, $id);
 		$result = mysqli_stmt_execute($stmt);
 
 		if ($result == FALSE) {
