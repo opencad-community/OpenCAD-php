@@ -325,9 +325,9 @@ function getRole()
 
     $result = mysqli_query($link, $sql);
     echo '
-            <option value="0">User</option>
-            <option value="1">Moderator</option>
-            <option value="2">Administrator</option>
+            <option value="1">User</option>
+            <option value="2">Moderator</option>
+            <option value="3">Administrator</option>
             ';
 }
 
@@ -368,7 +368,7 @@ function getUserGroupsApproved($uid)
     if ( DEMO_MODE == false ) {
     while ($row1 = mysqli_fetch_array($result1, MYSQLI_BOTH))
     {
-        if ( ( MODERATOR_REMOVE_GROUP == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
+        if ( ( MODERATOR_REMOVE_GROUP == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
         {
         echo $row1[0] . "&nbsp;<i class='fas fa-user-times delete_group' style='font-size:16px;color:red;' data-dept-id=".$row1[1]." data-user-id=".$uid."></i><br/>";
       } else {
@@ -584,11 +584,11 @@ function getUsers()
     while ($row = mysqli_fetch_array($result, MYSQLI_BOTH))
     {
 
-        if ( $row[3] == 1 )
+        if ( $row[3] == 2 )
         {
           $roleIs = "Moderator";
         }
-        else if ( $row[3] == 2 )
+        else if ( $row[3] == 3 )
         {
           $roleIs = "Administrator";
         }
@@ -609,14 +609,14 @@ function getUsers()
             <td>
                 <form action="'.$site.'/actions/adminActions.php" method="post">';
 
-                if ( ( MODERATOR_EDIT_USER == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
+                if ( ( MODERATOR_EDIT_USER == true && $_SESSION['admin_privilege'] == 2 )  || ( $_SESSION['admin_privilege'] == 3 ) )
                 {
                  echo '<button name="editUser" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editUserModal" class="btn btn-xs btn-link" >Edit</button>';
                 } else {
                 echo '<button name="editUser" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editUserModal" class="btn btn-xs btn-link" disabled >Edit</button>';
                 }
 
-                if ( ( MODERATOR_DELETE_USER == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
+                if ( ( MODERATOR_DELETE_USER == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
                 {
                 echo '<input name="deleteUser" type="submit" class="btn btn-xs btn-link" onclick="deleteUser(' . $row[0] . ')" value="Delete" />';
               } else {
@@ -625,7 +625,7 @@ function getUsers()
 
         if ($row[5] == '2')
         {
-          if ( ( MODERATOR_REACTIVATE_USER == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
+          if ( ( MODERATOR_REACTIVATE_USER == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
           {
             echo '<input name="reactivateUser" type="submit" class="btn btn-xs btn-link" value="Reactivate" />';
           } else {
@@ -635,13 +635,13 @@ function getUsers()
         }
         else
         {
-          if ( ( MODERATOR_SUSPEND_WITHOUT_REASON == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
+          if ( ( MODERATOR_SUSPEND_WITHOUT_REASON == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
           {
             echo '<input name="suspendUser" type="submit" class="btn btn-xs btn-link" value="Suspend without Reason" />';
           } else {
             echo '<input name="suspendUser" type="submit" class="btn btn-xs btn-link" value="Suspend without Reason" disabled />';
           }
-          if ( ( MODERATOR_SUSPEND_WITH_REASON == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
+          if ( ( MODERATOR_SUSPEND_WITH_REASON == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
           {
             echo '<input name="suspendUserWithReason" type="submit" class="btn btn-xs btn-link" method="post" value="Suspend With Reason: " /><input type="text" method="post" placeholder="Reason Here" name="suspend_reason" id="suspend_reason">';
           } else {
