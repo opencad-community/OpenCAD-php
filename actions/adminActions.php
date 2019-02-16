@@ -88,39 +88,46 @@ function deleteGroupItem()
       echo "Error updating record: " . mysqli_error($link);
    }
 }
+
 function editUserAccount()
 {
 	$userName 		= !empty($_POST['userName']) ? $_POST['userName'] : '';
 	$userEmail 		= !empty($_POST['userEmail']) ? $_POST['userEmail'] : '';
-
 	$userID 		= !empty($_POST['userID']) ? $_POST['userID'] : '';
 	$userIdentifier = !empty($_POST['userIdentifier']) ? $_POST['userIdentifier'] : '';
 	$userGroups 	= !empty($_POST['userGroups']) ? $_POST['userGroups'] : '';
-  $userRole     = !empty($_POST['userRole']) ? $_POST['userRole'] : '';
+    $userRole       = !empty($_POST['userRole']) ? $_POST['userRole'] : '';
+    $myRank         = $_SESSION['admin_privilege'];
+    $hisRank        = _getRole($userID);
 
-		$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-		$site = BASE_URL;
-		if (!$link)
-		{
-		die('Could not connect: ' . mysql_error());
-		}
-	if(!empty($userGroups))
+    if($myRank <= $hisRank && $myRank == 2) {
+        $_SESSION['accessMessage'] = '<div class="alert alert-error"><span>Permission Denied: You can not edit an account with a higher security leven than yours.</span></div>';
+        sleep(1);
+        header("Location:".BASE_URL."/oc-admin/userManagement.php");
+        die();
+    }
+	$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	$site = BASE_URL;
+	if (!$link)
 	{
-		foreach($userGroups as $key=>$val)
-		{
-			$sql1 = "INSERT INTO ".DB_PREFIX."user_departments (user_id, department_id) VALUES ('$userID', '$val')";
+		die('Could not connect: ' . mysql_error());
+	}
+    
+    if(!empty($userGroups))	{
+		foreach($userGroups as $key=>$val) {
+            $sql1 = "INSERT INTO ".DB_PREFIX."user_departments (user_id, department_id) VALUES ('$userID', '$val')";
 			mysqli_query($link, $sql1);
 		}
 	}
 	$sql = "UPDATE ".DB_PREFIX."users SET name = '$userName', email = '$userEmail', identifier = '$userIdentifier', admin_privilege = '$userRole' WHERE id = '$userID'";
-	if (mysqli_query($link, $sql)) {
-    header("Location: ".BASE_URL."/oc-admin/userManagement.php");
-   } else {
-      echo "Error updating record: " . mysqli_error($link);
-   }
-
-
+    
+    if (mysqli_query($link, $sql)) {
+        header("Location: ".BASE_URL."/oc-admin/userManagement.php");
+    } else {
+        echo "Error updating record: " . mysqli_error($link);
+    }
 }
+
 function getRanks()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -1051,5 +1058,20 @@ function delete_callhistory()
     session_start();
     $_SESSION['historyMessage'] = '<div class="alert alert-success"><span>Successfully removed archived call</span></div>';
     header("Location: ".BASE_URL."/oc-admin/callhistory.php#history_panel");
+}
+
+function _getRole($id)
+{
+    $userID = $id;
+
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+    $query = "SELECT admin_privilege FROM ".DB_PREFIX."users WHERE id = ?";
+
+    $stmt = mysqli_prepare($link, $query);
+    mysqli_stmt_bind_param($stmt, "i", $userID);
+    $result = mysqli_stmt_execute($stmt);
+
+    return $result;
 }
 ?>
