@@ -166,7 +166,7 @@ require_once(__DIR__ . '/../oc-config.php');
                       <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                         <div class="input-group">
                            Database Engine:<input type="text" class="form-control" readonly="readonly" placeholder="<?php echo getMySQLVersion(); ?>" />
-                           <p><em>Note:</em> Information about the currently deployed database engine.</p>
+                           <p><em>Note:</em> The database engine which is currently deployed on the server.</p>
                         </div>
                     </div>
                     <!-- ./ row tile_count -->

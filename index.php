@@ -23,6 +23,15 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
     $testing = false; //If set to true, will default some data for you
 
     session_start();
+    if(file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
+      $_SESSION['error_title'] = "Configuration Required!";
+      if(file_exists(getcwd().'../.cpanel')){
+         session_start();
+         $_SESSION['error'] = "OpenCAD has detected it installed on a cPanel server. Please see the install guide: https://guides.opencad.io/alldoc/installation-guides/specialized-installation-guides/install-guide-cpanel";
+         header('Location: '.BASE_URL.'/plugins/error/index.php');
+      }
+      shell_exec("cp oc-config.sample.php oc-config.php");
+   }
     $_SESSION['root_path'] = getcwd();
     $registerError = "";
     $registerSuccess = "";
