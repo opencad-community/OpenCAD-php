@@ -609,7 +609,7 @@ function getAOP()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "SELECT * from aop";
+    $sql = "SELECT * from ".DB_PREFIX."aop";
 
     $result = mysqli_query($link, $sql);
 
@@ -1381,7 +1381,7 @@ function getGenders()
 /**#@+
  * function getColors()
  *
- * Querys database to retrieve genders.
+ * Querys database to retrieve colors.
  *
  * @since 1.0a RC2
  */
@@ -1393,7 +1393,7 @@ function getColors()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "SELECT ".DB_PREFIX."color_group, color_name FROM ".DB_PREFIX."colors";
+    $query = "SELECT color_group, color_name FROM ".DB_PREFIX."colors";
 
     $result=mysqli_query($link, $query);
 
