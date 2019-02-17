@@ -288,7 +288,7 @@ function clearCall()
     }
 
     //First delete from calls list
-    $query = "DELETE FROM calls WHERE call_id = ?";
+    $query = "DELETE FROM ".DB_PREFIX."calls WHERE call_id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $query);
