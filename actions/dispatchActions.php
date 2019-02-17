@@ -257,7 +257,7 @@ function storeCall()
         die('Could not connect: ' .mysql_error());
     }
 
-    $query = "INSERT INTO ".DB_PREFIX."call_history SELECT ".DB_PREFIX."calls.* FROM calls WHERE call_id = ?";
+    $query = "INSERT INTO ".DB_PREFIX."call_history SELECT ".DB_PREFIX."calls.* FROM ".DB_PREFIX."calls WHERE call_id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $query);
@@ -288,7 +288,7 @@ function clearCall()
     }
 
     //First delete from calls list
-    $query = "DELETE FROM calls WHERE call_id = ?";
+    $query = "DELETE FROM ".DB_PREFIX."calls WHERE call_id = ?";
 
     try {
         $stmt = mysqli_prepare($link, $query);
