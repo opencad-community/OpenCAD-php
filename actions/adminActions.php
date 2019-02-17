@@ -101,7 +101,7 @@ function editUserAccount()
     $hisRank        = _getRole($userID);
 
     if($myRank <= $hisRank && $myRank == 2) {
-        $_SESSION['accessMessage'] = '<div class="alert alert-error"><span>Permission Denied: You can not edit an account with a higher security leven than yours.</span></div>';
+        $_SESSION['accessMessage'] = '<div class="alert alert-error"><span>Permission Denied: You can not edit an account with a higher security level than yours.</span></div>';
         sleep(1);
         header("Location:".BASE_URL."/oc-admin/userManagement.php");
         die();
