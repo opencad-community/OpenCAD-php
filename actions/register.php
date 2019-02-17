@@ -75,27 +75,27 @@ function register()
     /*This is really inefficient. There should be a better way*/
     foreach($divisions as $division)
     {
-        if($division == "communications")
+        if($division == "department1")
         {$division = "1";}
-        elseif($division == "state")
+        elseif($division == "department2")
             {$division = "2";}
-        elseif($division == "highway")
+        elseif($division == "department3")
             {$division = "3";}
-        elseif($division == "sheriff")
+        elseif($division == "department4")
             {$division = "4";}
-        elseif($division == "police")
+        elseif($division == "department5")
             {$division = "5";}
-        elseif($division == "fire")
+        elseif($division == "department6")
             {$division = "6";}
-        elseif($division == "ems")
+        elseif($division == "department7")
             {$division = "7";}
-        elseif($division == "civilian")
+        elseif($division == "department8")
             {$division = "8";}
-        elseif($division == "roadsideAssist")
+        elseif($division == "department9")
             {$division = "9";}
-        $query = "INSERT INTO user_departments_temp (user_id, department_id)
+        $query = "INSERT INTO ".DB_PREFIX."user_departments_temp (user_id, department_id)
               SELECT id , ?
-              FROM users
+              FROM  ".DB_PREFIX."users
               WHERE email = ?";
         try {
             $stmt = mysqli_prepare($link, $query);
@@ -165,7 +165,7 @@ function civreg()
     }
 	$query = 'INSERT INTO '.DB_PREFIX.'user_departments (user_id, department_id)
 		SELECT id , ?
-		FROM users
+		FROM '.DB_PREFIX.'users
 		WHERE email = ?';
 		$civ = "8";
 	try {
@@ -186,4 +186,24 @@ function civreg()
     sleep(1);
     header("Location:".BASE_URL."/index.php#civreg");
 }
+
+function getDepartments()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    
+    if (!$link)
+    {
+        die('Could not connect: ' . mysql_error());
+    }
+
+    $sql = 'SELECT * from '.DB_PREFIX.'departments';
+
+    $result = mysqli_query($link, $sql);
+
+    while ($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    {
+            echo '<option value="' . $row[0] . '">' . $row[1] . '</option>';
+    }
+}
+
 ?>

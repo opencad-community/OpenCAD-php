@@ -28,14 +28,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     }
 
 
-    if ( $_SESSION['admin_privilege'] == 2)
+    if ( $_SESSION['admin_privilege'] == 3)
     {
       if ($_SESSION['admin_privilege'] == 'Administrator')
       {
           //Do nothing
       }
     }
-    else if ($_SESSION['admin_privilege'] == 1)
+    else if ($_SESSION['admin_privilege'] == 2)
     {
       if ($_SESSION['admin_privilege'] == 'Moderator')
       {
