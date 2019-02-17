@@ -609,7 +609,7 @@ function getAOP()
         die('Could not connect: ' .mysql_error());
     }
 
-    $sql = "SELECT * from aop";
+    $sql = "SELECT * from ".DB_PREFIX."aop";
 
     $result = mysqli_query($link, $sql);
 
