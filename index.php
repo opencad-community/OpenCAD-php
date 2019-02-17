@@ -18,6 +18,7 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
 }
 
     require_once(__DIR__ . "/oc-config.php");
+    require_once(__DIR__ . "/actions/register.php");
 
     $testing = false; //If set to true, will default some data for you
 
@@ -132,20 +133,6 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
                         <input class="form-control" placeholder="Identifier (Code Number, Unit ID)" name="identifier" type="text" required>
                      </div>
                      <div class="form-group">
-                        <label>Division (Can choose more than one via Ctrl + Click)</label>
-                        <select class="form-control" id="division" name="division[]" multiple="multiple" size="6" required>
-                           <option value="civilian">Civilian</option>
-                           <option value="communications">Communications (Dispatch)</option>
-                           <option value="ems">EMS</option>
-                           <option value="fire">Fire</option>
-                           <option value="highway">Highway Patrol</option>
-                           <option value="police">Police</option>
-                           <option value="sheriff">Sheriff</option>
-                           <option value="state">State</option>
-                           <option value="roadsideAssist">Roadside Assistance</option>
-                        </select>
-                     </div>
-                     <div class="form-group">
                         <input class="form-control" placeholder="Password" name="password" type="password" value="<?php if($testing){echo "password";}?>" required>
                      </div>
                      <!-- ./ form-group -->
@@ -153,6 +140,12 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
                         <input class="form-control" placeholder="Confirm Password" name="password1" type="password" required>
                      </div>
                      <!-- ./ form-group -->
+                     <div class="form-group">
+                        <label>Division (Select all that apply)</label>
+                        <select class="selectpicker form-control" id="division" name="division[]" multiple="multiple" size="6" required>
+                           <?php getDepartments(); ?>
+                        </select>
+                     </div>
                      <div class="clearfix"></div>
                      <div>
                         <input name="register" type="submit" class="btn btn-default btn-sm pull-right" value="Request Access" />
