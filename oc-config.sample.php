@@ -540,6 +540,18 @@ define('MODERATOR_DELETE_USER', <MODERATOR_DELETE_USER>);
 define('MODERATOR_NCIC_EDITOR', <MODERATOR_NCIC_EDITOR>);
 
 /**#@+
+  * MODERATOR_DATA_MANAGER
+  *
+  * If 'true' then Moderators will be able to access the Game Data Manager,
+  * else if 'false' then Moderators will not be able to access the Gam Data Manager.
+  *
+  * These settings will likely be moved to an *_options table in a future version.
+  *
+  * @since OpenCAD version 0.2.3
+  **/
+  define('MODERATOR_DATA_MANAGER', <MODERATOR_DATA_MANAGER>);
+
+/**#@+
   * Extra Settings
 	*
   * These settings will likely be moved to an *_options table in a future version.

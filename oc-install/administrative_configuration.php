@@ -37,6 +37,8 @@
 
 		$MODERATOR_NCIC_EDITOR = isset($_POST['MODERATOR_NCIC_EDITOR']) ? prepare_input($_POST['MODERATOR_NCIC_EDITOR']) : '';
 		
+		$MODERATOR_GAME_MANAGER = isset($_POST['MODERATOR_GAME_MANAGER']) ? prepare_input($_POST['MODERATOR_GAME_MANAGER']) : '';
+		
 		$_SESSION['MODERATOR_APPROVE_USER'] = $MODERATOR_APPROVE_USER;
 		$_SESSION['MODERATOR_EDIT_USER'] = $MODERATOR_EDIT_USER;			
 		$_SESSION['MODERATOR_DELETE_USER'] = $MODERATOR_DELETE_USER;
@@ -48,6 +50,8 @@
 		$_SESSION['MODERATOR_REMOVE_GROUP'] = $MODERATOR_REMOVE_GROUP;
 
 		$_SESSION['MODERATOR_NCIC_EDITOR'] = $MODERATOR_NCIC_EDITOR;
+
+		$_SESSION['MODERATOR_DATA_MANAGER'] = $MODERATOR_DATA_MANAGER;
 
 		$_SESSION['passed_step'] = 8;
 		header('location: extra_settings.php');
@@ -66,6 +70,8 @@
 		$MODERATOR_REMOVE_GROUP = isset($_POST['MODERATOR_REMOVE_GROUP']) ? prepare_input($_POST['MODERATOR_REMOVE_GROUP']) : '';
 
 		$MODERATOR_NCIC_EDITOR = isset($_POST['MODERATOR_NCIC_EDITOR']) ? prepare_input($_POST['MODERATOR_NCIC_EDITOR']) : '';
+
+		$MODERATOR_GAME_MANAGER = isset($_POST['MODERATOR_GAME_MANAGER']) ? prepare_input($_POST['MODERATOR_GAME_MANAGER']) : '';
 
 	}
 ?>	
@@ -194,6 +200,12 @@
 				<td>&nbsp;<?php echo lang_key('MODERATOR_NCIC_EDITOR'); ?>&nbsp;</td>
 				<td><input type="radio" name="MODERATOR_NCIC_EDITOR" id="MODERATOR_NCIC_EDITOR" <?php echo ($MODERATOR_NCIC_EDITOR=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_NCIC_EDITOR_notes')" onblur="textboxOnBlur('MODERATOR_NCIC_EDITOR_notes')" value="true" />True
 				<input type="radio" name="MODERATOR_NCIC_EDITOR" id="MODERATOR_NCIC_EDITOR" <?php echo ($MODERATOR_NCIC_EDITOR=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_NCIC_EDITOR_notes')" onblur="textboxOnBlur('MODERATOR_NCIC_EDITOR_notes')" value="false" />False</td>
+			</tr>
+			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>
+			<tr>
+				<td>&nbsp;<?php echo lang_key('MODERATOR_DATA_MANAGER'); ?>&nbsp;</td>
+				<td><input type="radio" name="MODERATOR_DATA_MANAGER" id="MODERATOR_DATA_MANAGER" <?php echo ($MODERATOR_DATA_MANAGER=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_DATA_MANAGER_notes')" onblur="textboxOnBlur('MODERATOR_DATA_MANAGER_notes')" value="true" />True
+				<input type="radio" name="MODERATOR_DATA_MANAGER" id="MODERATOR_DATA_MANAGER" <?php echo ($MODERATOR_DATA_MANAGER=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_DATA_MANAGER_notes')" onblur="textboxOnBlur('MODERATOR_DATA_MANAGER_notes')" value="false" />False</td>
 			</tr>
 			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>
 			<tr>

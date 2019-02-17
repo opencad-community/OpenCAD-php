@@ -10,6 +10,17 @@
         <li <?php if ( $pageName == "NCIC Editor") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/ncicAdmin.php"><i class="fas fa-database"></i> NCIC Editor</a></li>
       <?php  } else { }?>
 
+      <?php if ( ( MODERATOR_DATA_MANAGER == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+        { ?>
+      <li>
+          <a><i class="fas fa-book"></i> Game Data Manager <span class="fas fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+              <li><a type="button" data-toggle="modal" data-target="#createWarrant" > Data Management</a></li>
+              <li><a type="button" data-toggle="modal" data-target="#viewWarrant" > View Warrants</a></li>
+          </ul>
+        </li>
+        <?php } else {} ?>
+
         <li <?php if ( $pageName == "About OpenCAD") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/about.php"><i class="fas fa-info-circle"></i> About OpenCAD</a></li>
       </li>
     </ul>
