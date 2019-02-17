@@ -676,7 +676,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
             </button>
-            <h4 class="modal-title" id="myModalLabel">Set Aera Of Patrol (AOP)</h4>
+            <h4 class="modal-title" id="myModalLabel">Set Area Of Patrol (AOP)</h4>
           </div>
           <!-- ./ modal-header -->
 		  <div class="modal-body">
