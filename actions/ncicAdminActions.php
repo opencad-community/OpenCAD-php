@@ -13,7 +13,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
 require_once(__DIR__ . "/../oc-config.php");
-include(__DIR__ . '/api.php');
+include(__DIR__ . '/generalActions.php');
 
 /* Handle POST requests */
 if (isset($_POST['delete_citation'])){

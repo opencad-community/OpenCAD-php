@@ -13,7 +13,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
 include("./oc-config.php");
-require("./actions/api.php");
+require("./actions/generalActions.php");
 
 if (empty($_SESSION['logged_in']))
 {
