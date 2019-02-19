@@ -300,25 +300,6 @@ function getPendingUsers()
     }
 }
 
-function getDepartments()
-{
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    $site = BASE_URL;
-    if (!$link)
-    {
-        die('Could not connect: ' . mysql_error());
-    }
-
-    $sql = 'SELECT * from '.DB_PREFIX.'departments';
-
-    $result = mysqli_query($link, $sql);
-
-    while ($row = mysqli_fetch_array($result, MYSQLI_BOTH))
-    {
-            echo '<option value="' . $row[0] . '">' . $row[1] . '</option>';
-    }
-}
-
 function getRole()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);

@@ -20,59 +20,63 @@ include_once(__DIR__ . "/../plugins/api_auth.php");
 if (isset($_GET['a'])){
     getActiveCalls();
 }
-if (isset($_GET['getCalls'])){
+else if (isset($_GET['getCalls'])){
     getActiveCalls();
 }
-if (isset($_GET['getMyCall'])){
+else if (isset($_GET['getMyCall'])){
     getMyCall();
 }
-if (isset($_GET['getCallDetails'])){
+else if (isset($_GET['getCallDetails'])){
     getCallDetails();
 }
-if (isset($_GET['getAvailableUnits'])){
+else if (isset($_GET['getAvailableUnits'])){
     getAvailableUnits();
 }
-if (isset($_GET['getUnAvailableUnits'])){
+else if (isset($_GET['getUnAvailableUnits'])){
     getUnAvailableUnits();
 }
-if (isset($_POST['changeStatus'])){
+else if (isset($_POST['changeStatus'])){
     changeStatus();
 }
-if (isset($_GET['getActiveUnits']))
+else if (isset($_GET['getActiveUnits']))
 {
     getActiveUnits();
 }
-if (isset($_GET['getActiveUnitsModal']))
+else if (isset($_GET['getActiveUnitsModal']))
 {
     getActiveUnitsModal();
 }
-if (isset($_POST['logoutUser']))
+else if (isset($_POST['logoutUser']))
 {
     logoutUser();
 }
-if (isset($_POST['setTone']))
+else if (isset($_POST['setTone']))
 {
     setTone();
 }
-if (isset($_GET['checkTones']))
+else if (isset($_GET['checkTones']))
 {
     checkTones();
 }
-if (isset($_GET['getDispatchers']))
+else if (isset($_GET['getDispatchers']))
 {
     getDispatchers();
 }
-if (isset($_GET['getDispatchersMDT']))
+else if (isset($_GET['getDispatchersMDT']))
 {
     getDispatchersMDT();
 }
-if (isset($_POST['quickStatus']))
+else if (isset($_POST['quickStatus']))
 {
     quickStatus();
 }
-if (isset($_GET['getAOP']))
+else if (isset($_GET['getAOP']))
 {
     getAOP();
+}
+else if (isset($_GET['getDepartments']))
+{
+    getDepartments();
 }
 if (isset($_GET['newApiKey']))
 {
@@ -91,6 +95,25 @@ if (isset($_GET['newApiKey']))
     }else{
         header("Location: ".BASE_URL."/plugins/error/static/418.php");
         die();
+    }
+}
+
+function getDepartments()
+{
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    $site = BASE_URL;
+    if (!$link)
+    {
+        die('Could not connect: ' . mysql_error());
+    }
+
+    $sql = 'SELECT * from '.DB_PREFIX.'departments';
+
+    $result = mysqli_query($link, $sql);
+
+    while ($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    {
+            echo '<option value="' . $row[0] . '">' . $row[1] . '</option>';
     }
 }
 
