@@ -14,12 +14,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     session_start();
     require("./oc-config.php");
     include("./actions/civActions.php");
-<<<<<<< Updated upstream
-	  include("./actions/api.php");
-
-=======
     include("./actions/generalActions.php");
->>>>>>> Stashed changes
     // TODO: Verify user has permission to be on this page
 
     if (empty($_SESSION['logged_in']))
