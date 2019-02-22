@@ -15,25 +15,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
     
    header('Location://'.$_SERVER['SERVER_NAME'].'/oc-install/start.php');
-}
-
+} else {}
+   session_start();
     require_once(__DIR__ . "/oc-config.php");
     require_once(__DIR__ . "/actions/register.php");
     require_once(__DIR__ . "/actions/generalActions.php");
 
     $testing = false; //If set to true, will default some data for you
-
-    session_start();
-    if(file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
-      $_SESSION['error_title'] = "Configuration Required!";
-      if(file_exists(getcwd().'../.cpanel')){
-         session_start();
-         $_SESSION['error'] = "OpenCAD has detected it installed on a cPanel server. Please see the install guide: https://guides.opencad.io/alldoc/installation-guides/specialized-installation-guides/install-guide-cpanel";
-         header('Location: '.BASE_URL.'/plugins/error/index.php');
-      }
-      shell_exec("cp oc-config.sample.php oc-config.php");
-   }
-    $_SESSION['root_path'] = getcwd();
+    
     $registerError = "";
     $registerSuccess = "";
     $loginMessage = "";
@@ -153,7 +142,7 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
                      <div class="form-group">
                         <label>Division (Select all that apply)</label>
                         <select class="form-control selectpicker" id="division" name="division[]" multiple="multiple" size="6" required>
-                           <?php getDepartments(); ?>
+                         <?php getDepartments(); ?>
                         </select>
                      </div>
                      <div class="clearfix"></div>
