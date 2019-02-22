@@ -15,5 +15,5 @@ function getDepartments()
         header('Location: '.BASE_URL.'/plugins/error/index.php');
         die();
     }
-
+}
     ?>
