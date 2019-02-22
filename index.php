@@ -22,7 +22,9 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
     require_once(__DIR__ . "/actions/generalActions.php");
 
     $testing = false; //If set to true, will default some data for you
-    
+
+    session_start();
+    $_SESSION['root_path'] = getcwd();
     $registerError = "";
     $registerSuccess = "";
     $loginMessage = "";
