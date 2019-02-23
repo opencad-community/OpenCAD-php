@@ -199,7 +199,7 @@ function assignUnit()
         die();
     }
 
-    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."active_users SET status = '0', status_detail = '3' WHERE active_users.callsign = ?");
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."active_users SET status = '0', status_detail = '3' WHERE ".DB_PREFIX."active_users.callsign = ?");
     $result = $stmt->execute(array($callsign));
 
     if (!$result)
@@ -1297,7 +1297,7 @@ function delete_personbolo()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM bolos_persons WHERE id = ?");
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."bolos_persons WHERE id = ?");
     $result = $stmt->execute(array($pbid));
 
     if (!$result)

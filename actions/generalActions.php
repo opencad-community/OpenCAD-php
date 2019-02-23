@@ -1445,7 +1445,7 @@ function getVehicleMakes()
         die();
     }
 
-    $result = $pdo->query("SELECT DISTINCT vehicles.Make FROM ".DB_PREFIX."vehicles");
+    $result = $pdo->query("SELECT DISTINCT ".DB_PREFIX."vehicles.Make FROM ".DB_PREFIX."vehicles");
 
     if (!$result)
     {
@@ -1482,7 +1482,7 @@ function getVehicleModels()
         die();
     }
 
-    $result = $pdo->query("SELECT DISTINCT vehicles.Model FROM ".DB_PREFIX."vehicles");
+    $result = $pdo->query("SELECT DISTINCT ".DB_PREFIX."vehicles.Model FROM ".DB_PREFIX."vehicles");
 
     if (!$result)
     {
@@ -1623,7 +1623,7 @@ function getCivilianNames()
         die();
     }
 
-    $result = $pdo->query("SELECT ncic_names.id, ncic_names.name FROM ".DB_PREFIX."ncic_names");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_names.id, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_names");
 
     if (!$result)
     {
@@ -1671,7 +1671,7 @@ function callCheck()
 
 	if($num_rows == 0)
 	{
-        $stmt = $pdo->prepare("REPLACE INTO active_users (identifier, callsign, status, status_detail, id) VALUES (?, ?, '0', '6', ?)");
+        $stmt = $pdo->prepare("REPLACE INTO ".DB_PREFIX."active_users (identifier, callsign, status, status_detail, id) VALUES (?, ?, '0', '6', ?)");
         $result = $stmt->execute(array($identifier, $identifier, $uid));
 
         if (!$result)
@@ -1683,7 +1683,7 @@ function callCheck()
     }
 	else
 	{
-        $stmt = $pdo->prepare("REPLACE INTO active_users (identifier, callsign, status, status_detail, id) VALUES (?, ?, '0', '3', ?)");
+        $stmt = $pdo->prepare("REPLACE INTO ".DB_PREFIX."active_users (identifier, callsign, status, status_detail, id) VALUES (?, ?, '0', '3', ?)");
         $result = $stmt->execute(array($identifier, $identifier, $uid));
 
         if (!$result)
