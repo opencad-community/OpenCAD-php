@@ -108,6 +108,9 @@
 		$database_password	= isset($_SESSION['database_password']) ? $_SESSION['database_password'] : '';
 		$database_prefix	= isset($_SESSION['database_prefix']) ? $_SESSION['database_prefix'] : '';
 		$install_type		= isset($_SESSION['install_type']) ? $_SESSION['install_type'] : 'create';		
+		if(file_exists(".dbname")){ $database_name     = file_get_contents(".dbname"); unlink(".dbname"); }
+        	if(file_exists(".dbuser")){ $database_username = file_get_contents(".dbuser"); unlink(".dbuser"); }
+        	if(file_exists(".dbpass")){ $database_password = file_get_contents(".dbpass"); unlink(".dbpass"); }
 	} 
 
 	// handle previous installation
