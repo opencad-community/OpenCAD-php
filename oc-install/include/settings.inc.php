@@ -19,8 +19,15 @@
     //     $arr_active_languages = array()
     $arr_active_languages = array(
         'en'=>array('name'=>'English', 'direction'=>'ltr'),
-        'de'=>array('name'=>'Deutch', 'direction'=>'ltr'),
+        'nl'=>array('name'=>'Dutch', 'direction'=>'ltr'),
         'es'=>array('name'=>'Spanish', 'direction'=>'ltr'),
+        'de'=>array('name'=>'German', 'direction'=>'ltr'),
+        'fr'=>array('name'=>'French', 'direction'=>'ltr'),
+        'cs'=>array('name'=>'Czech', 'direction'=>'ltr'),
+        'cn'=>array('name'=>'Chinese, Simplified', 'direction'=>'ltr'),
+        'it'=>array('name'=>'Italian', 'direction'=>'ltr'),
+        'pt'=>array('name'=>'Portuguese', 'direction'=>'ltr'),
+        'ru'=>array('name'=>'Russian', 'direction'=>'ltr'),
     );
     
     // *** default template
