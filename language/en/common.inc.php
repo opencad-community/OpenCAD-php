@@ -295,4 +295,37 @@ $arrLang['USE_GRAVATAR'] = "Gravatar";
 $arrLang['USE_GRAVATAR_notes'] = "OpenCAD will dynamically retrieve your avatar from {@link Gravatar http://en.gravatar.com/} if you have an account. Otherwise it will use the default generic avatar image included with OpenCAD .";
 //** End Extra Settings Strings **//
 
+//** Begin Common Global Strings **/
+$arrLang['WELCOME'] = "Welcome";
+$arrLang["GENERAL"] = "General";
+$arrLang["CAD_SYSTEM"] = "CAD System";
+$arrLang["EDIT"] = "Edit";
+$arrLang["DELETE"] = "Delete";
+$arrLang["NAME"] = "Name";
+$arrLang["EMAIL"] = "E-Mail";
+$arrLang["ROLE"] = "Role";
+$arrLang["IDENTIFIER"] = "Identifier";
+$arrLang["GROUPS"] = "Groups";
+$arrLang["ACTIONS"] = "Actions";
+$arrLang["NEXT"] = "Next";
+$arrLang["PREVIOUS"] = "Previous";
+$arrLang["SEARCH"] =  "Search";
+$arrLang["DASHBOARD"] =  "Dashboard";
+$arrLang["LOGOUT"] =  "Logout";
+$arrLang["NEED_HELP"] =  "Need Help?";
+$arrLang["FULLSCREEN"] =  "Fullscreen";
+//** End Common Global Strings */
+
+//** Begin Administrator/Moderator Console Strings  **/
+$arrLang["CAD_ADMINISTRATION"] = "CAD Administration";
+$arrLang["STATISTICS_AT_A_GLANCE"] = "Statistics at a glance";
+$arrLang["TOTAL_USERS"] = "Total Users";
+$arrLang["ACEESS_REQUESTS"] = "Access Requests";
+$arrLang["THERE_ARE_CURRENTLY_NO_ACCESS_REQUESTS"] = "There are currently no access requests.";
+$arrLang["CAD_USER_MANAGEMENT"] = "CAD User Management";
+$arrLang["ACCOUNT_MANAGEMENT"] = "Account Management";
+$arrLang["SUSPEND_WITH_REASON"] = "Suspend With Reason";
+$arrLang["SUSPEND_WITHOUT_REASON"] = "Suspend Without Reason";
+//** End Administrator/Moderator Console Strings  **/
+
 ?>
