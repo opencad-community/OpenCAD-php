@@ -1315,8 +1315,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Citation Name 1</label>
                 <div class="col-lg-10">
-					<input type="text" name="citation_name_1" id="citation_name_1" size="70" placeholder="Enter a citation" required />
-					<input type="number" name="citation_fine_1" id="citation_fine_1" size="10" placeholder="Enter a fine amount" required />
+					<input class="form-control" type="text" name="citation_name_1" id="citation_name_1" size="70" placeholder="Enter a citation" required />
+					<input class="form-control" type="number" name="citation_fine_1" id="citation_fine_1" size="10" placeholder="Enter a fine amount" required />
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -1324,32 +1324,32 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Citation Name 2</label>
                 <div class="col-lg-10">
-					<input type="text" name="citation_name_2" id="citation_name_2" size="70" placeholder="Enter a citation"  />
-					<input type="number" name="citation_fine_2" id="citation_fine_2" placeholder="Enter a fine amount"  />
+					<input class="form-control" type="text" name="citation_name_2" id="citation_name_2" size="70" placeholder="Enter a citation"  />
+					<input class="form-control" type="number" name="citation_fine_2" id="citation_fine_2" placeholder="Enter a fine amount"  />
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Citation Name 3</label>
                 <div class="col-lg-10">
-					<input type="text" name="citation_name_3" id="citation_name_3" size="70" placeholder="Enter a citation"  />
-					<input type="number" name="citation_fine_3" id="citation_fine_3" placeholder="Enter a fine amount"  />
+					<input class="form-control" type="text" name="citation_name_3" id="citation_name_3" size="70" placeholder="Enter a citation"  />
+					<input class="form-control" type="number" name="citation_fine_3" id="citation_fine_3" placeholder="Enter a fine amount"  />
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Citation Name 4</label>
                 <div class="col-lg-10">
-					<input type="text" name="citation_name_4" id="citation_name_4" size="70" placeholder="Enter a citation"  />
-					<input type="number" name="citation_fine_4" id="citation_fine_4" placeholder="Enter a fine amount"  />
+					<input class="form-control" type="text" name="citation_name_4" id="citation_name_4" size="70" placeholder="Enter a citation"  />
+					<input class="form-control" type="number" name="citation_fine_4" id="citation_fine_4" placeholder="Enter a fine amount"  />
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Citation Name 5</label>
                 <div class="col-lg-10">
-					<input type="text" name="citation_name_5" id="citation_name_5" size="70" placeholder="Enter a citation"  />
-					<input type="number" name="citation_fine_5" id="citation_fine_5" placeholder="Enter a fine amount"  />
+					<input class="form-control" type="text" name="citation_name_5" id="citation_name_5" size="70" placeholder="Enter a citation"  />
+					<input class="form-control" type="number" name="citation_fine_5" id="citation_fine_5" placeholder="Enter a fine amount"  />
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
