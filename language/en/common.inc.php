@@ -314,6 +314,21 @@ $arrLang["DASHBOARD"] =  "Dashboard";
 $arrLang["LOGOUT"] =  "Logout";
 $arrLang["NEED_HELP"] =  "Need Help?";
 $arrLang["FULLSCREEN"] =  "Fullscreen";
+$arrLang["DOB"] = "DOB";
+$arrLang["ADDRESS"] = "Address";
+$arrLang["GENDER"] = "Gender";
+$arrLang["RACE"] = "Race";
+$arrLang["DL_STATUS"] = "DL Status";
+$arrLang["HAIR_COLOR"] = "Hair Color";
+$arrLang["BUILD"] = "Build";
+$arrLang["WEAPON_STATUS"] = "Weapon Status";
+$arrLang["WEAPON_NAME"] = "Weapon Name";
+$arrLang["WEAPON_TYPE"] ="Weapon Type";
+$arrLang["WEAPON_NOTES"] ="Weapon Notes";
+$arrLang["DECEASED"] = "Deceased";
+$arrLang["REG_PLATE"] = "Reg. Plate";
+$arrLang["VEHICLE_NOTES"] = "Vehicle Notes";
+$arrLang["NOT_YOU"] = "Not You?";
 //** End Common Global Strings */
 
 //** Begin Administrator/Moderator Console Strings  **/
@@ -326,6 +341,40 @@ $arrLang["CAD_USER_MANAGEMENT"] = "CAD User Management";
 $arrLang["ACCOUNT_MANAGEMENT"] = "Account Management";
 $arrLang["SUSPEND_WITH_REASON"] = "Suspend With Reason";
 $arrLang["SUSPEND_WITHOUT_REASON"] = "Suspend Without Reason";
+$arrLang["NCIC_EDITOR"] = "NCIC Editor";
+$arrLang["NCIC_NAMES_DB"] = "No results found in the NCIC Names database.";
+$arrLang["NCIC_NAMES_DB_none"] = "NCIC Names Database";
+$arrLang["NCIC_VEHICLES_DB"] = "NCIC Vehicles Database";
+$arrLang["NCIC_VEHICLES_DB_none"] = "No results found in the NCIC Vehicles database.";
+$arrLang["NCIC_WEAPONS_DB"] = "NCIC Weapons Database";
+$arrLang["NCIC_WEAPONS_DB_none"] = "No results found in the NCIC Weapons database.";
+$arrLang["NCIC_WARNINGS_DB"] = "NCIC Warnings Database";
+$arrLang["NCIC_WARNINGS_DB_none"] = "No results found in the NCIC Weapons database.";
+$arrLang["NCIC_CITATIONS_DB"] = "NCIC Citations Database.";
+$arrLang["NCIC_CITATIONS_DB_none"] = "No results found in the NCIC Citations database.";
+$arrLang["NCIC_ARRESTS_DB"] = "NCIC Arrests Database";
+$arrLang["NCIC_ARRESTS_DB_none"] = "No results found in the NCIC Arrests database.";
+$arrLang["NCIC_WARRANTS_DB"] = "NCIC Warrants Database";
+$arrLang["NCIC_WARRANTS_DB_none"] = "No results found in the NCIC Warrants database";
 //** End Administrator/Moderator Console Strings  **/
+
+//** Begin Civillian Console Strings **/
+$arrLang["CIVILLIAN_CONSOLE"] = "Civillian Console";
+$arrLang["MY_IDENTITIES"] = "My Identities";
+$arrLang["MY_IDENTITIES_none"] = "No results found in the the identities database.";
+$arrLang["MY_VEHICLES"] = "My Vehicles";
+$arrLang["MY_VEHICLES_none"] = "No results found in the vehicles database.";
+$arrLang["MY_WEAPONS"] = "My Weapons";
+$arrLang["MY_WEAPONS_none"] = "No results found in the weapons database.";
+$arrLang["MY_WARRANTS"] = "My Warrants";
+$arrLang["MY_WARRANTS_none"] = "No results found in the warrants database.";
+$arrLang["CREATE_A_CALL"] = "Create A Call";
+$arrLang["ADD_NEW_IDENTITY"] = "Add New Identity";
+$arrLang["Add_ADD_NEW_PLATE"] = "Add New Plate";
+$arrLang["ADD_NEW_WEAPON"] = "Add New Weapon";
+$arrLang["CIVILLIAN_DASHBOARD"] = "Civillian Dashboard";
+$arrLang["VIEW_WARRANTS"] = "View Warrans";
+$arrLang["CREATE_WARRANT"] = "Create Warrant";
+//** End Civillian Console Strings **/
 
 ?>
