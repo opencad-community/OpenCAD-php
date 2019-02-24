@@ -329,6 +329,13 @@ $arrLang["DECEASED"] = "Deceased";
 $arrLang["REG_PLATE"] = "Reg. Plate";
 $arrLang["VEHICLE_NOTES"] = "Vehicle Notes";
 $arrLang["NOT_YOU"] = "Not You?";
+$arrLang["ACTIVE_CALLS"] = "Active Calls";
+$arrLang["ACTIVE_BOLOS"] = "Active BOLOs";
+$arrLang["NCIC_NAME_LOOKUP"] = "NCIC Name Lookup";
+$arrLang["NCIC_PLATE_LOOKUP"] = "NCIC Plate Lookup";
+$arrLang["NCIC_WEAPON_LOOKUP"] = "NCIC Weapon Lookup";
+$arrLang["SEND"] = "Send";
+$arrLang["MY_PROFILE"] = "My Profile";
 //** End Common Global Strings */
 
 //** Begin Administrator/Moderator Console Strings  **/
@@ -375,6 +382,39 @@ $arrLang["ADD_NEW_WEAPON"] = "Add New Weapon";
 $arrLang["CIVILLIAN_DASHBOARD"] = "Civillian Dashboard";
 $arrLang["VIEW_WARRANTS"] = "View Warrans";
 $arrLang["CREATE_WARRANT"] = "Create Warrant";
+$arrLang["UPDATE"] = "Update";
 //** End Civillian Console Strings **/
 
-?>
+//** Begin CAD Console Strings **/
+$arrLang["CAD_CONSOLE"] = "CAD Console";
+$arrLang["ACTIVE_DISPATCHERS"] = "Active Dispatchers";
+$arrLang["ACTIVE_DISPATCHERS_none"] = "No dispatchers currently available.";
+$arrLang["AVAILABLE_UNITS"] = "Available Units";
+$arrLang["UNAVAILABLE_UNITS"] = "Unavailable Units";
+$arrLang["NEW_PERSONS_BOLO"] = "New Persons BOLO";
+$arrLang["NEW_VEHICLE_BOLO"] = "New Vehicle BOLO";
+$arrLang["NEW_CALL"] = "New Call";
+$arrLang["PANIC_BUTTON"] = "Panic Button";
+$arrLang["PRIORITY_TONE"] = "PRIORITY_TONE";
+$arrLang["STOP_BORADCASTING_BUTTON"] = "10-3 Tone";
+$arrLang["STOPWATCH"] = "Stopwatch";
+$arrLang["WARNINGS"] = "Warnings";
+$arrLang["CITATIONS"] = "Citations";
+$arrLang["ARREST_REPORT"] = "Arrest REPORT";
+$arrLang["WARRANTS"] = "Warrants";
+//** End CAD Console Strings *//
+
+//** Begin MDT Console Strings **/
+$arrLang["MDT_CONSOLE"] = "MDT Console";
+$arrLang["MY_STATUS"] = "My Status";
+$arrLang["MY_CALL"] ="My Call";
+$arrLang["VIEW_PERSONS_BOLOS"] = "View Persons BOLOs";
+$arrLang["VIEW_VEHICLE_BOLOS"] = "View Vehicle BOLOs";
+//** End MDT Console Strings *//
+
+//** Begin Profile Console Strings **/
+$arrLang["PASSWORD"] = "Password";
+$arrLang["CHANGE_PASSWORD"] = "Change Password";
+$arrLang["MY_PRFILE"] ="My Profile";
+//** End Profile Console Strings *//
+?>  

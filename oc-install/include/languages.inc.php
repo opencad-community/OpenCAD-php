@@ -15,13 +15,13 @@
 		$curr_lang_direction = EI_DEFAULT_LANGUAGE_DIRECTION;
 	}
 	
-	if(file_exists('install/language/'.$curr_lang.'/common.inc.php')){
-		include_once('install/language/'.$curr_lang.'/common.inc.php');
-	}else if(file_exists('../language/'.$curr_lang.'/common.inc.php')){
-		include_once('../language/'.$curr_lang.'/common.inc.php');
-	}else if(file_exists('../language/'.$curr_lang.'/common.inc.php')){
-		include_once('../language/'.$curr_lang.'/common.inc.php');
+	if(file_exists('install/language/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
+		include_once('install/language/'.$curr_lang.'/'.$curr_lang.'.inc.php');
+	}else if(file_exists('../language/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
+		include_once('../language/'.$curr_lang.'/'.$curr_lang.'.inc.php');
+	}else if(file_exists('../language/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
+		include_once('../language/'.$curr_lang.'/'.$curr_lang.'.inc.php');
 	}else{
-		include_once('../language/en/common.inc.php');    	
+		include_once('../language/en/en.inc.php');    	
 	}	
 
