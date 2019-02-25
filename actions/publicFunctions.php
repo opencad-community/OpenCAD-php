@@ -15,5 +15,19 @@ function getDepartments()
         header('Location: '.BASE_URL.'/plugins/error/index.php');
         die();
     }
+
+    $result = $pdo->query("SELECT * from ".DB_PREFIX."departments");
+    if (!$result)
+    {
+        $_SESSION['error'] = $pdo->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    foreach ($result as $row)
+    {
+            echo '<option value="' . $row[0] . '">' . $row[1] . '</option>';
+    }
+    $pdo = null;
+
 }
     ?>
