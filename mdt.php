@@ -28,9 +28,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     include("./actions/generalActions.php");
     include("./actions/responderActions.php");
     unset($_SESSION['activeDepartment']);
-    if(empty($_SESSION['activeDepartment']) | !!empty($_SESSION['activeDepartment'])){
-      $_SESSION['activeDepartment'] ==  "";
-    }
     if ( $_GET['dep'] == "state" || $_SESSION['activeDepartment'] == "state" )
     {
         $activeDepartment = "State";
