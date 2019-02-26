@@ -53,7 +53,7 @@ function register()
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."email from users where email = ?");
+    $stmt = $pdo->prepare("SELECT email from ".DB_PREFIX."users where email = ?");
     $resStatus = $stmt->execute(array($email));
     $result = $stmt;
 
