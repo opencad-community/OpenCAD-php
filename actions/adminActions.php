@@ -492,7 +492,7 @@ function approveUser()
         die();
     }
 
-    $stmt = $pdo->prepare("UPDATE users SET approved = '1' WHERE id = ?");
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."users SET approved = '1' WHERE id = ?");
     $result = $stmt->execute(array($uid));
 
     if (!$result)
@@ -534,7 +534,7 @@ function rejectUser()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM users where id = ?");
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."users where id = ?");
     $result = $stmt->execute(array($uid));
 
     if (!$result)
