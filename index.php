@@ -16,9 +16,9 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
     
    header('Location://'.$_SERVER['SERVER_NAME'].'/oc-install/start.php');
 }
-
     require_once(__DIR__ . "/oc-config.php");
     require_once(__DIR__ . "/actions/register.php");
+    require_once(__DIR__ . "/actions/publicFunctions.php");
 
     $testing = false; //If set to true, will default some data for you
 
@@ -142,8 +142,8 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
                      <!-- ./ form-group -->
                      <div class="form-group">
                         <label>Division (Select all that apply)</label>
-                        <select class="selectpicker form-control" id="division" name="division[]" multiple="multiple" size="6" required>
-                           <?php getDepartments(); ?>
+                        <select class="form-control selectpicker" id="division" name="division[]" multiple="multiple" size="6" required>
+                         <?php getDepartments(); ?>
                         </select>
                      </div>
                      <div class="clearfix"></div>
