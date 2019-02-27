@@ -49,6 +49,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     require_once(__DIR__ . '/../oc-config.php');
     require_once(__DIR__ . '/../oc-functions.php');
     include(__DIR__ . '/../actions/adminActions.php');
+    include('../actions/publicFunctions.php');
 
     $accessMessage = "";
     if(isset($_SESSION['accessMessage']))

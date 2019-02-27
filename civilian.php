@@ -15,6 +15,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     require("./oc-config.php");
     include("./actions/civActions.php");
     include("./actions/generalActions.php");
+    include("./actions/publicFunctions.php");
     // TODO: Verify user has permission to be on this page
 
     if (empty($_SESSION['logged_in']))
@@ -414,7 +415,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="col-lg-10">
                   <select class="form-control selectpicker" name="issuing_agency" id="issuing_agency" data-live-search="true" required>
                     <option> </option>
-                    <?php getAgencies();?>
+                    <?php getDepartments();?>
                   </select>
                 </div>
                 <!-- ./ col-sm-9 -->

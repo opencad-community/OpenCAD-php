@@ -45,6 +45,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     include(__DIR__ . '/../actions/adminActions.php');
     include(__DIR__ . '/../actions/ncicAdminActions.php');
+    include("../actions/publicFunctions.php");
 
 
 
