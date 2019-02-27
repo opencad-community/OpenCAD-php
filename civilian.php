@@ -110,13 +110,26 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                  <li><a type="button" data-toggle="modal" data-target="#viewWarrant" > View Warrants</a></li>
                               </ul>
                            </li>
-						    <?php } else { ?>
-							<?php }
-							?>
-                          <li><a type="button" data-toggle="modal" data-target="#newCall" > <i class="fas fa-phone"></i> Create a Call</a></li>
-                          <li><a type="button" data-toggle="modal" data-target="#IdentityModal"><i class="fas fa-user-alt"></i> Add New Identity</a></li>
-                          <li><a type="button" data-toggle="modal" data-target="#createPlateModal" > <i class="fas fa-car"></i> Add New Plate</a></li>
-                          <li><a type="button" data-toggle="modal" data-target="#createWeaponModal" >Add New Weapon</a></li>
+			<?php } else { ?>
+			<?php } ?>
+                         <li><a type="button" data-toggle="modal" data-target="#newCall" > <i class="fas fa-phone"></i> Create a Call</a></li>
+			 <?php
+				if ( CIV_LIMIT_MAX == 0 ) {
+					echo '<li><a type="button" data-toggle="modal" data-target="#IdentityModal"><i class="fas fa-user-alt"></i> Add New Identity</a></li>';
+				} else if ( CIV_LIMIT_MAX > getNumberOfProfiles() ) {
+					echo '<li><a type="button" data-toggle="modal" data-target="#IdentityModal"><i class="fas fa-user-alt"></i> Add New Identity</a></li>';
+				} else {/* Do Nothing. */}
+				if ( CIV_LIMIT_MAX_VEHICLES == 0 ) {
+					echo '<li><a type="button" data-toggle="modal" data-target="#createPlateModal"> <i class="fas fa-car"></i> Add New Plate</a></li>';
+				} else if ( CIV_LIMIT_MAX_VEHICLES > getNumberOfVehicles() ) {
+					echo '<li><a type="button" data-toggle="modal" data-target="#createPlateModal"> <i class="fas fa-car"></i> Add New Plate</a></li>';
+				} else {/* Do Nothing. */}
+				if ( CIV_LIMIT_MAX_WEAPONS == 0 ) {
+					echo '<li><a type="button" data-toggle="modal" data-target="#createWeaponModal">Add New Weapon</a></li>';
+				} else if ( CIV_LIMIT_MAX_WEAPONS > getNumberOfWeapons() ) {
+					echo '<li><a type="button" data-toggle="modal" data-target="#createWeaponModal">Add New Weapon</a></li>';
+				} else {/* Do Nothing. */}
+			?>
                         </ul>
                      </div>
                      <!-- ./ menu_section -->
