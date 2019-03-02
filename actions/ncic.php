@@ -224,7 +224,7 @@ function plate()
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ncic_plates.*,".DB_PREFIX." ncic_names.name FROM ".DB_PREFIX."ncic_plates INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_plates.name_id WHERE veh_plate = ?");
+    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ncic_plates.*,".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_plates INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_plates.name_id WHERE veh_plate = ?");
     $resStatus = $stmt->execute(array($plate));
     $result = $stmt;
 

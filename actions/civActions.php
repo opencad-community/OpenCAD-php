@@ -801,7 +801,7 @@ function ncic_warrants()
         $nameid = ''.$row[0].'';
     }
 
-    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ncic_warrants.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_warrants INNER JOIN".DB_PREFIX." ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_warrants.name_id WHERE name_id = ?");
+    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ncic_warrants.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_warrants INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_warrants.name_id WHERE name_id = ?");
     $resStatus = $stmt->execute(array($nameid));
     $result = $stmt;
 
