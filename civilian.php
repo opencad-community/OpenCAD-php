@@ -414,7 +414,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Issuing Agency</label>
                 <div class="col-lg-10">
                   <select class="form-control selectpicker" name="issuing_agency" id="issuing_agency" data-live-search="true" required>
-                    <option> </option>
                     <?php getDepartments();?>
                   </select>
                 </div>
