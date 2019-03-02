@@ -131,7 +131,7 @@ function addNarrative()
         die();
     }
 
-    $stmt = $pdo->prepare("UPDATE calls SET ".DB_PREFIX."call_narrative = concat(call_narrative, ?) WHERE call_id = ?");
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."calls SET call_narrative = concat(call_narrative, ?) WHERE call_id = ?");
     $result = $stmt->execute(array($narrativeAdd, $callId));
 
     if (!$result)
