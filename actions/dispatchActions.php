@@ -1415,7 +1415,7 @@ function changeaop()
         die();
     }
 
-    $stmt = $pdo->prepare("UPDATE aop SET ".DB_PREFIX." aop = ?");
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."aop SET aop = ?");
     $result = $stmt->execute(array(htmlspecialchars($_POST['aop'])));
 
     if (!$result)
