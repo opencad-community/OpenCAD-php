@@ -932,7 +932,7 @@ function create_weapon()
         die();
     }
 
-    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_weapons (name_id, weapon_type, weapon_name, user_id, notes) VALUES (?, ?, ?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_weapons (name_id, weapon_type, weapon_name, user_id, notes) VALUES (?, ?, ?, ?, ?)");
     $result = $stmt->execute(array($userId, $wea_type, $wea_name, $submittedById, $notes));
 
     if (!$result)
