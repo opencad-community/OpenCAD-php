@@ -166,7 +166,7 @@ require_once(__DIR__ . '/../oc-config.php');
                       <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
                         <div class="input-group">
                            Database Engine:<input type="text" class="form-control" readonly="readonly" placeholder="<?php echo getMySQLVersion(); ?>" />
-                           <p><em>Note:</em> Information about the currently deployed database engine.</p>
+                           <p><em>Note:</em> The database engine which is currently deployed on the server.</p>
                         </div>
                     </div>
                     <!-- ./ row tile_count -->
@@ -187,7 +187,7 @@ require_once(__DIR__ . '/../oc-config.php');
                               <p>
                                 <em>Note:</em> Used to encrypt cookie 'aljksdz7' and authenticate request to the api if the requestor is not logged in.
                               </p>
-                              <a style="margin-left:10px" class="btn btn-primary" href="<?php echo BASE_URL; ?>/actions/api.php?newApiKey=1">Generate</a>
+                              <a style="margin-left:10px" class="btn btn-primary" href="<?php echo BASE_URL; ?>/actions/generalActions.php?newApiKey=1">Generate</a>
                             </div>
                           </div>
                         </div>

@@ -14,8 +14,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     session_start();
     require("./oc-config.php");
     include("./actions/civActions.php");
-	  include("./actions/api.php");
-
+    include("./actions/generalActions.php");
+    include("./actions/publicFunctions.php");
     // TODO: Verify user has permission to be on this page
 
     if (empty($_SESSION['logged_in']))
@@ -111,13 +111,26 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                  <li><a type="button" data-toggle="modal" data-target="#viewWarrant" > View Warrants</a></li>
                               </ul>
                            </li>
-						    <?php } else { ?>
-							<?php }
-							?>
-                          <li><a type="button" data-toggle="modal" data-target="#newCall" > <i class="fas fa-phone"></i> Create a Call</a></li>
-                          <li><a type="button" data-toggle="modal" data-target="#IdentityModal"><i class="fas fa-user-alt"></i> Add New Identity</a></li>
-                          <li><a type="button" data-toggle="modal" data-target="#createPlateModal" > <i class="fas fa-car"></i> Add New Plate</a></li>
-                          <li><a type="button" data-toggle="modal" data-target="#createWeaponModal" >Add New Weapon</a></li>
+			<?php } else { ?>
+			<?php } ?>
+                         <li><a type="button" data-toggle="modal" data-target="#newCall" > <i class="fas fa-phone"></i> Create a Call</a></li>
+			 <?php
+				if ( CIV_LIMIT_MAX == 0 ) {
+					echo '<li><a type="button" data-toggle="modal" data-target="#IdentityModal"><i class="fas fa-user-alt"></i> Add New Identity</a></li>';
+				} else if ( CIV_LIMIT_MAX > getNumberOfProfiles() ) {
+					echo '<li><a type="button" data-toggle="modal" data-target="#IdentityModal"><i class="fas fa-user-alt"></i> Add New Identity</a></li>';
+				} else {/* Do Nothing. */}
+				if ( CIV_LIMIT_MAX_VEHICLES == 0 ) {
+					echo '<li><a type="button" data-toggle="modal" data-target="#createPlateModal"> <i class="fas fa-car"></i> Add New Plate</a></li>';
+				} else if ( CIV_LIMIT_MAX_VEHICLES > getNumberOfVehicles() ) {
+					echo '<li><a type="button" data-toggle="modal" data-target="#createPlateModal"> <i class="fas fa-car"></i> Add New Plate</a></li>';
+				} else {/* Do Nothing. */}
+				if ( CIV_LIMIT_MAX_WEAPONS == 0 ) {
+					echo '<li><a type="button" data-toggle="modal" data-target="#createWeaponModal">Add New Weapon</a></li>';
+				} else if ( CIV_LIMIT_MAX_WEAPONS > getNumberOfWeapons() ) {
+					echo '<li><a type="button" data-toggle="modal" data-target="#createWeaponModal">Add New Weapon</a></li>';
+				} else {/* Do Nothing. */}
+			?>
                         </ul>
                      </div>
                      <!-- ./ menu_section -->
@@ -414,8 +427,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Issuing Agency</label>
                 <div class="col-lg-10">
                   <select class="form-control selectpicker" name="issuing_agency" id="issuing_agency" data-live-search="true" required>
-                    <option> </option>
-                    <?php getAgencies();?>
+                    <?php getDepartments();?>
                   </select>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -899,58 +911,58 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Vehicle's Registered State</label>
                 <div class="col-lg-10">
                   <select class="form-control" name="veh_reg_state" required>
-				  <option value"">  </option>
-				  <option value"Alabama"> Alabama </option>
-				  <option value"Alaska"> Alaska </option>
-				  <option value"Arizona"> Arizona </option>
-				  <option value"Arkansas"> Arkansas </option>
-				  <option value"California"> California </option>
-				  <option value"Colorado"> Colorado </option>
-				  <option value"Connecticut"> Connecticut </option>
-				  <option value"Delaware"> Delaware </option>
-				  <option value"Florida"> Florida </option>
-				  <option value"Georgia"> Georgia </option>
-				  <option value"Hawaii"> Hawaii </option>
-				  <option value"Idaho"> Idaho </option>
-				  <option value"Illinois"> Illinois </option>
-				  <option value"Indiana"> Indiana </option>
-				  <option value"Iowa"> Iowa </option>
-				  <option value"Kansas"> Kansas </option>
-				  <option value"Kentucky"> Kentucky </option>
-				  <option value"Louisiana"> Louisiana </option>
-				  <option value"Maine"> Maine </option>
-				  <option value"Maryland"> Maryland </option>
-				  <option value"Massachusetts"> Massachusetts </option>
-				  <option value"Michigan"> Michigan </option>
-				  <option value"Minnesota"> Minnesota </option>
-				  <option value"Mississippi"> Mississippi </option>
-				  <option value"Missouri"> Missouri </option>
-				  <option value"Montana"> Montana </option>
-				  <option value"Nebraska"> Nebraska </option>
-				  <option value"Nevada"> Nevada </option>
-				  <option value"New Hampshire"> New Hampshire </option>
-				  <option value"New Jersey"> New Jersey </option>
-				  <option value"New Mexico"> New Mexico </option>
-				  <option value"New York"> New York </option>
-				  <option value"North Carolina"> North Carolina </option>
-				  <option value"North Dakota"> North Dakota </option>
-				  <option value"Ohio"> Ohio </option>
-				  <option value"Oklahoma"> Oklahoma </option>
-				  <option value"Oregon"> Oregon </option>
-				  <option value"Pennsylvania"> Pennsylvania </option>
-				  <option value"Rhode Island"> Rhode Island </option>
-				  <option value"San Andreas"> San Andreas </option>
-				  <option value"South Carolina"> South Carolina </option>
-				  <option value"South Dakota"> South Dakota </option>
-				  <option value"Tennessee"> Tennessee </option>
-				  <option value"Texas"> Texas </option>
-				  <option value"Utah"> Utah </option>
-				  <option value"Vermont"> Vermont </option>
-				  <option value"Virginia"> Virginia </option>
-				  <option value"Washington"> Washington </option>
-				  <option value"West Virginia"> West Virginia </option>
-				  <option value"Wisconsin"> Wisconsin </option>
-				  <option value"Wyoming"> Wyoming </option>
+				  <option value="">  </option>
+				  <option value="Alabama"> Alabama </option>
+				  <option value="Alaska"> Alaska </option>
+				  <option value="Arizona"> Arizona </option>
+				  <option value="Arkansas"> Arkansas </option>
+				  <option value="California"> California </option>
+				  <option value="Colorado"> Colorado </option>
+				  <option value="Connecticut"> Connecticut </option>
+				  <option value="Delaware"> Delaware </option>
+				  <option value="Florida"> Florida </option>
+				  <option value="Georgia"> Georgia </option>
+				  <option value="Hawaii"> Hawaii </option>
+				  <option value="Idaho"> Idaho </option>
+				  <option value="Illinois"> Illinois </option>
+				  <option value="Indiana"> Indiana </option>
+				  <option value="Iowa"> Iowa </option>
+				  <option value="Kansas"> Kansas </option>
+				  <option value="Kentucky"> Kentucky </option>
+				  <option value="Louisiana"> Louisiana </option>
+				  <option value="Maine"> Maine </option>
+				  <option value="Maryland"> Maryland </option>
+				  <option value="Massachusetts"> Massachusetts </option>
+				  <option value="Michigan"> Michigan </option>
+				  <option value="Minnesota"> Minnesota </option>
+				  <option value="Mississippi"> Mississippi </option>
+				  <option value="Missouri"> Missouri </option>
+				  <option value="Montana"> Montana </option>
+				  <option value="Nebraska"> Nebraska </option>
+				  <option value="Nevada"> Nevada </option>
+				  <option value="New Hampshire"> New Hampshire </option>
+				  <option value="New Jersey"> New Jersey </option>
+				  <option value="New Mexico"> New Mexico </option>
+				  <option value="New York"> New York </option>
+				  <option value="North Carolina"> North Carolina </option>
+				  <option value="North Dakota"> North Dakota </option>
+				  <option value="Ohio"> Ohio </option>
+				  <option value="Oklahoma"> Oklahoma </option>
+				  <option value="Oregon"> Oregon </option>
+				  <option value="Pennsylvania"> Pennsylvania </option>
+				  <option value="Rhode Island"> Rhode Island </option>
+				  <option value="San Andreas"> San Andreas </option>
+				  <option value="South Carolina"> South Carolina </option>
+				  <option value="South Dakota"> South Dakota </option>
+				  <option value="Tennessee"> Tennessee </option>
+				  <option value="Texas"> Texas </option>
+				  <option value="Utah"> Utah </option>
+				  <option value="Vermont"> Vermont </option>
+				  <option value="Virginia"> Virginia </option>
+				  <option value="Washington"> Washington </option>
+				  <option value="West Virginia"> West Virginia </option>
+				  <option value="Wisconsin"> Wisconsin </option>
+				  <option value="Wyoming"> Wyoming </option>
 				  </select>
 				  </div>
                 <!-- ./ col-sm-9 -->
@@ -1076,58 +1088,58 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Vehicle's Registered State</label>
                 <div class="col-lg-10">
                   <select class="form-control veh_reg_state_option" name="veh_reg_state" required>
-          <option value"">  </option>
-				  <option value"Alabama"> Alabama </option>
-				  <option value"Alaska"> Alaska </option>
-				  <option value"Arizona"> Arizona </option>
-				  <option value"Arkansas"> Arkansas </option>
-				  <option value"California"> California </option>
-				  <option value"Colorado"> Colorado </option>
-				  <option value"Connecticut"> Connecticut </option>
-				  <option value"Delaware"> Delaware </option>
-				  <option value"Florida"> Florida </option>
-				  <option value"Georgia"> Georgia </option>
-				  <option value"Hawaii"> Hawaii </option>
-				  <option value"Idaho"> Idaho </option>
-				  <option value"Illinois"> Illinois </option>
-				  <option value"Indiana"> Indiana </option>
-				  <option value"Iowa"> Iowa </option>
-				  <option value"Kansas"> Kansas </option>
-				  <option value"Kentucky"> Kentucky </option>
-				  <option value"Louisiana"> Louisiana </option>
-				  <option value"Maine"> Maine </option>
-				  <option value"Maryland"> Maryland </option>
-				  <option value"Massachusetts"> Massachusetts </option>
-				  <option value"Michigan"> Michigan </option>
-				  <option value"Minnesota"> Minnesota </option>
-				  <option value"Mississippi"> Mississippi </option>
-				  <option value"Missouri"> Missouri </option>
-				  <option value"Montana"> Montana </option>
-				  <option value"Nebraska"> Nebraska </option>
-				  <option value"Nevada"> Nevada </option>
-				  <option value"New Hampshire"> New Hampshire </option>
-				  <option value"New Jersey"> New Jersey </option>
-				  <option value"New Mexico"> New Mexico </option>
-				  <option value"New York"> New York </option>
-				  <option value"North Carolina"> North Carolina </option>
-				  <option value"North Dakota"> North Dakota </option>
-				  <option value"Ohio"> Ohio </option>
-				  <option value"Oklahoma"> Oklahoma </option>
-				  <option value"Oregon"> Oregon </option>
-				  <option value"Pennsylvania"> Pennsylvania </option>
-				  <option value"Rhode Island"> Rhode Island </option>
-				  <option value"San Andreas"> San Andreas </option>
-				  <option value"South Carolina"> South Carolina </option>
-				  <option value"South Dakota"> South Dakota </option>
-				  <option value"Tennessee"> Tennessee </option>
-				  <option value"Texas"> Texas </option>
-				  <option value"Utah"> Utah </option>
-				  <option value"Vermont"> Vermont </option>
-				  <option value"Virginia"> Virginia </option>
-				  <option value"Washington"> Washington </option>
-				  <option value"West Virginia"> West Virginia </option>
-				  <option value"Wisconsin"> Wisconsin </option>
-				  <option value"Wyoming"> Wyoming </option>
+          <option value="">  </option>
+				  <option value="Alabama"> Alabama </option>
+				  <option value="Alaska"> Alaska </option>
+				  <option value="Arizona"> Arizona </option>
+				  <option value="Arkansas"> Arkansas </option>
+				  <option value="California"> California </option>
+				  <option value="Colorado"> Colorado </option>
+				  <option value="Connecticut"> Connecticut </option>
+				  <option value="Delaware"> Delaware </option>
+				  <option value="Florida"> Florida </option>
+				  <option value="Georgia"> Georgia </option>
+				  <option value="Hawaii"> Hawaii </option>
+				  <option value="Idaho"> Idaho </option>
+				  <option value="Illinois"> Illinois </option>
+				  <option value="Indiana"> Indiana </option>
+				  <option value="Iowa"> Iowa </option>
+				  <option value="Kansas"> Kansas </option>
+				  <option value="Kentucky"> Kentucky </option>
+				  <option value="Louisiana"> Louisiana </option>
+				  <option value="Maine"> Maine </option>
+				  <option value="Maryland"> Maryland </option>
+				  <option value="Massachusetts"> Massachusetts </option>
+				  <option value="Michigan"> Michigan </option>
+				  <option value="Minnesota"> Minnesota </option>
+				  <option value="Mississippi"> Mississippi </option>
+				  <option value="Missouri"> Missouri </option>
+				  <option value="Montana"> Montana </option>
+				  <option value="Nebraska"> Nebraska </option>
+				  <option value="Nevada"> Nevada </option>
+				  <option value="New Hampshire"> New Hampshire </option>
+				  <option value="New Jersey"> New Jersey </option>
+				  <option value="New Mexico"> New Mexico </option>
+				  <option value="New York"> New York </option>
+				  <option value="North Carolina"> North Carolina </option>
+				  <option value="North Dakota"> North Dakota </option>
+				  <option value="Ohio"> Ohio </option>
+				  <option value="Oklahoma"> Oklahoma </option>
+				  <option value="Oregon"> Oregon </option>
+				  <option value="Pennsylvania"> Pennsylvania </option>
+				  <option value="Rhode Island"> Rhode Island </option>
+				  <option value="San Andreas"> San Andreas </option>
+				  <option value="South Carolina"> South Carolina </option>
+				  <option value="South Dakota"> South Dakota </option>
+				  <option value="Tennessee"> Tennessee </option>
+				  <option value="Texas"> Texas </option>
+				  <option value="Utah"> Utah </option>
+				  <option value="Vermont"> Vermont </option>
+				  <option value="Virginia"> Virginia </option>
+				  <option value="Washington"> Washington </option>
+				  <option value="West Virginia"> West Virginia </option>
+				  <option value="Wisconsin"> Wisconsin </option>
+				  <option value="Wyoming"> Wyoming </option>
           </select>
           </div>
                 <!-- ./ col-sm-9 -->

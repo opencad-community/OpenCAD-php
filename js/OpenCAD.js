@@ -508,7 +508,7 @@ $(function() {
 function getActiveDispatchers() {
 $.ajax({
         type: "GET",
-        url: hdir + "actions/api.php",
+        url: hdir + "actions/generalActions.php",
         data: {
             getDispatchers: 'yes'
         },
@@ -535,7 +535,7 @@ $.ajax({
 function getUnAvailableUnits() {
 $.ajax({
         type: "GET",
-        url: hdir + "actions/api.php",
+        url: hdir + "actions/generalActions.php",
         data: {
             getUnAvailableUnits: 'yes'
         },
@@ -568,7 +568,7 @@ $('#newCall').on('show.bs.modal', function(e) {
     $.ajax({
         cache: false,
         type: 'GET',
-        url: hdir + 'actions/api.php',
+        url: hdir + 'actions/generalActions.php',
         data: {'getActiveUnits': 'yes'},
         success: function(result)
         {
@@ -622,7 +622,7 @@ $('#assign').on('show.bs.modal', function(e) {
     $.ajax({
         cache: false,
         type: 'GET',
-        url: hdir + 'actions/api.php',
+        url: hdir + 'actions/generalActions.php',
         data: {'getActiveUnitsModal': 'yes'},
         success: function(result)
         {
@@ -654,7 +654,7 @@ $('#callDetails').on('show.bs.modal', function(e) {
     $.ajax({
         cache: false,
         type: 'GET',
-        url: hdir + 'actions/api.php',
+        url: hdir + 'actions/generalActions.php',
         data: {'getCallDetails': 'yes',
                 'callId' : callId},
         success: function(result)
@@ -768,7 +768,7 @@ function getCalls() {
 
     $.ajax({
         type: "GET",
-        url: hdir + "actions/api.php",
+        url: hdir + "actions/generalActions.php",
         data: {
             getCalls: 'yes',
             type: file
@@ -793,7 +793,7 @@ function getMyCall() {
 
     $.ajax({
         type: "GET",
-        url: hdir + "actions/api.php",
+        url: hdir + "actions/generalActions.php",
         data: {
             getMyCall: 'yes',
             type: file
@@ -874,7 +874,7 @@ function priorityTone(type)
  {
     $.ajax({
         type: "POST",
-        url: hdir + "actions/api.php",
+        url: hdir + "actions/generalActions.php",
         data: {
             setTone: 'yes',
             tone: name,
@@ -918,7 +918,7 @@ function checkTones()
 {
     $.ajax({
         type: "GET",
-        url: hdir + "actions/api.php",
+        url: hdir + "actions/generalActions.php",
         data: {
             checkTones: 'yes'
         },
@@ -1023,7 +1023,7 @@ function responderChangeStatus(element)
 
     $.ajax({
         type: "POST",
-        url: hdir +"actions/api.php",
+        url: hdir +"actions/generalActions.php",
         data: {
             changeStatus: 'yes',
             unit: unit,
