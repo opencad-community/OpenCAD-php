@@ -432,7 +432,7 @@ define('CIV_WARRANT', <CIV_WARRANT>);
 define('CIV_REG', <CIV_REG>);
 
 /**#@+
- * CIV_LIMIT_MAX default mode '0'
+ * CIV_LIMIT_MAX_IDENTITIES default mode '0'
  *
  * Toggle limiting maximum number of civilian identities
  * If CIV_LIMIT_MAX is '0' then civilian will be able to create unlimited identites.
@@ -444,7 +444,7 @@ define('CIV_REG', <CIV_REG>);
  * @since OpenCAD 0.2.6
  * @from ATVG-CAD 1.3.2.0
  **/
-define('CIV_LIMIT_MAX', <CIV_LIMIT_MAX>);
+define('CIV_LIMIT_MAX_IDENTITIES', <CIV_LIMIT_MAX_IDENTITIES>);
 
 /**#@+
   * CIV_LIMIT_MAX_VEHICLES
