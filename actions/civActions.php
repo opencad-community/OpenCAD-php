@@ -932,7 +932,7 @@ function create_weapon()
         die();
     }
 
-    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_weapons (name_id, weapon_type, weapon_name, user_id, notes) VALUES (?, ?, ?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_weapons (name_id, weapon_type, weapon_name, user_id, notes) VALUES (?, ?, ?, ?, ?)");
     $result = $stmt->execute(array($userId, $wea_type, $wea_name, $submittedById, $notes));
 
     if (!$result)
@@ -990,6 +990,7 @@ function ncicGetWeapons()
                 <th>Name</th>
                 <th>Weapon Type</th>
                 <th>Weapon Name</th>
+                <th>Weapon Notes</th>
                 <th>Actions</th>
                 </tr>
             </thead>
@@ -1000,9 +1001,10 @@ function ncicGetWeapons()
         {
             echo '
             <tr>
-                <td>'.$row[5].'</td>
+                <td>'.$row[6].'</td>
                 <td>'.$row[2].'</td>
                 <td>'.$row[3].'</td>
+                <td>'.$row[5].'</td>
                 <td>
                     <form action="".BASE_URL."/actions/civActions.php" method="post">
                     <input name="delete_weapon" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
