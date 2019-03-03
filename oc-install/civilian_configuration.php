@@ -34,9 +34,9 @@
 		$CIV_WARRANT = isset($_POST['CIV_WARRANT']) ? prepare_input($_POST['CIV_WARRANT']) : '';
 		$CIV_REG = isset($_POST['CIV_REG']) ? prepare_input($_POST['CIV_REG']) : '';
 		$CIV_REG = isset($_POST['CIV_REG']) ? prepare_input($_POST['CIV_REG']) : '';
-		$CIV_MAX_LIMIT = isset($_POST['CIV_LIMIT_				MAX_LIMIT']) ? prepare_input($_POST['CIV_MAX_LIMIT']) : '';
-		$CIV_MAX_VEHICLES = isset($_POST['CIV_LIMIT_MAX_VEHICLES']) ? prepare_input($_POST['CIV_MAX_VEHICLES']) : '';
-		$CIV_MAX_WEAPONS = isset($_POST['CIV_LIMIT_MAX_WEAPONS']) ? prepare_input($_POST['CIV_MAX_WEAPONS']) : '';
+		$CIV_LIMIT_MAX_IDENTITIES = isset($_POST['CIV_LIMIT_MAX_IDENTITIES']) ? prepare_input($_POST['CIV_LIMIT_MAX_IDENTITIES']) : '';
+		$CIV_LIMIT_MAX_VEHICLES = isset($_POST['CIV_LIMIT_MAX_VEHICLES']) ? prepare_input($_POST['CIV_LIMIT_MAX_VEHICLES']) : '';
+		$CIV_LIMIT_MAX_WEAPONS = isset($_POST['CIV_LIMIT_MAX_WEAPONS']) ? prepare_input($_POST['CIV_LIMIT_MAX_WEAPONS']) : '';
 		
 		$_SESSION['ROADSIDE_PANIC'] = $ROADSIDE_PANIC;
 		$_SESSION['ROADSIDE_BOLO'] = $ROADSIDE_BOLO;
