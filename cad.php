@@ -14,6 +14,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     include("./oc-config.php");
     include("./actions/generalActions.php");
     include("./actions/dispatchActions.php");
+    include("./actions/publicFunctions.php");
     session_start();
 
     // TODO: Verify user has permission to be on this page
@@ -1741,7 +1742,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="col-lg-10">
                   <select class="form-control selectpicker" name="issuing_agency" id="issuing_agency" data-live-search="true" required>
                     <option> </option>
-                    <?php getAgencies();?>
+                    <?php getDepartments();?>
                   </select>
                 </div>
                 <!-- ./ col-sm-9 -->

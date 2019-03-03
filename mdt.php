@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 /**
 Open source CAD system for RolePlaying Communities.
@@ -25,6 +25,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       $name = $_SESSION['name'];
     }
 
+    include_once "oc-config.php";
     include("./actions/generalActions.php");
     include("./actions/responderActions.php");
     unset($_SESSION['activeDepartment']);
@@ -134,7 +135,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                  <a type="button" data-toggle="modal" data-target="#createCitation" ><i class="fas fa-ticket-alt"></i> Create Citation</a>
                            </li>
                            <li>
-                                 <a type="button" data-toggle="modal" data-target="#createArrest" ><i class="fas fa-ban"></i> Create Arrest Report</a
+                                 <a type="button" data-toggle="modal" data-target="#createArrest" ><i class="fas fa-ban"></i> Create Arrest Report</a>
                            </li>
 
                         </ul>
@@ -537,7 +538,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      </div>
                <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
             </div>
-          <?php } else if ( FIRE_NCIC_NAME == true xor EMS_NCIC_NAME == true xor ROADSIDE_NCIC_NAME == true ) { ?>
+          <?php } if ( $activeBadge != "gavel" && FIRE_NCIC_NAME == true xor EMS_NCIC_NAME == true xor ROADSIDE_NCIC_NAME == true ) { ?>
 
             <div class="clearfix"></div>
           <div id="ncic" class="row">
@@ -572,7 +573,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
          <?php } else {}
 
-          if ( FIRE_NCIC_PLATE === true xor EMS_NCIC_PLATE === true xor ROADSIDE_NCIC_PLATE === true ) { ?>
+          if ( $activeBadge != "gavel" && FIRE_NCIC_PLATE === true xor EMS_NCIC_PLATE === true xor ROADSIDE_NCIC_PLATE === true ) { ?>
                  <div id="ncic" class="row">
                     <div class="col-md-4 col-sm-4 col-xs-4">
                        <div class="x_panel">
