@@ -241,7 +241,7 @@ function storeCall()
         die();
     }
 
-    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."call_history SELECT calls.* FROM calls WHERE call_id = ?");
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."call_history SELECT ".DB_PREFIX."calls.* FROM ".DB_PREFIX."calls WHERE call_id = ?");
     $result = $stmt->execute(array($callId));
 
     if (!$result)

@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 /**
 Open source CAD system for RolePlaying Communities.

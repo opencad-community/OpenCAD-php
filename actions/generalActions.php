@@ -945,7 +945,7 @@ function getIndividualStatus($callsign)
         $statusDetail = $row[0];
     }
 
-    $stmt = $pdo->prepare("SELECT status_text FROM statuses WHERE status_id = ?");
+    $stmt = $pdo->prepare("SELECT status_text FROM ".DB_PREFIX."statuses WHERE status_id = ?");
     $resStatus = $stmt->execute(array($statusDetail));
     $result = $stmt;
 
