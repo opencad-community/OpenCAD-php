@@ -11,7 +11,6 @@
  */
 
 require_once(__DIR__ . "/../oc-config.php");
-
 include_once(__DIR__ . "/../plugins/api_auth.php");
 
 /*

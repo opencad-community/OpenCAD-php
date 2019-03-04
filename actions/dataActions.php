@@ -26,6 +26,12 @@ This file handles all actions for admin.php script
  * Running multiple functions at the same time doesnt seem to
  * be a needed feature.
  */
+
+if (isset($_POST['resetData']))
+{
+    resetData();
+}  
+
 if (isset($_POST['editStreet']))
 {
     editStreet();
@@ -51,9 +57,9 @@ if (isset($_POST['editStreet']))
 {
     getVehicles();
 } else if (isset($_POST['getWeapons']))
-{
+{   
     getWeapons();
-}
+} 
 
 /* FUNCTIONS */
 function deleteGroupItem()
@@ -466,5 +472,36 @@ function getStreetNames()
         </tbody>
         </table>
     ';
+}
+
+function resetData()
+{
+	$dataType 		= !empty($_GET['dataType']) ? $_GET['dataType'] : '';
+
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $stmt = $pdo->prepare("TRUNCATE TABLE ".DB_PREFIX."?");
+    $result = $stmt->execute(array($dataType));
+    
+    if (!$result)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $pdo = null;
+
+    session_start();
+    $_SESSION['userMessage'] = '<div class="alert alert-success"><span>Successfully reset the '.strtoupper($dataType).' table.</span></div>';
+    header("Location: ".BASE_URL."/oc-admin/admin.php");
 }
 ?>
