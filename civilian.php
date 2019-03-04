@@ -115,9 +115,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			<?php } ?>
                          <li><a type="button" data-toggle="modal" data-target="#newCall" > <i class="fas fa-phone"></i> Create a Call</a></li>
 			 <?php
-				if ( CIV_LIMIT_MAX == 0 ) {
+				if ( CIV_LIMIT_MAX_IDENTITIES == 0 ) {
 					echo '<li><a type="button" data-toggle="modal" data-target="#IdentityModal"><i class="fas fa-user-alt"></i> Add New Identity</a></li>';
-				} else if ( CIV_LIMIT_MAX > getNumberOfProfiles() ) {
+				} else if ( CIV_LIMIT_MAX_IDENTITIES > getNumberOfProfiles() ) {
 					echo '<li><a type="button" data-toggle="modal" data-target="#IdentityModal"><i class="fas fa-user-alt"></i> Add New Identity</a></li>';
 				} else {/* Do Nothing. */}
 				if ( CIV_LIMIT_MAX_VEHICLES == 0 ) {
