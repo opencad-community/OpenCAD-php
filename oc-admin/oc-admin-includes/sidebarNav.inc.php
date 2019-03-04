@@ -13,10 +13,12 @@
       <?php if ( ( MODERATOR_DATA_MANAGER == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
         { ?>
       <li>
-          <a><i class="fas fa-book"></i> Game Data Manager <span class="fas fa-chevron-down"></span></a>
+          <a><i class="fas fa-table"></i> Game Data Manager <span class="fas fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-              <li><a type="button" data-toggle="modal" data-target="#createWarrant" > Data Management</a></li>
-              <li><a type="button" data-toggle="modal" data-target="#viewWarrant" > View Warrants</a></li>
+            <li <?php if ( $pageName == "Street Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/dataManagement/streetManagement.php"><i class="fas fa-road"></i> Street Manager</a></li>
+            <li <?php if ( $pageName == "Vehicles Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/dataManagement/weaponManagement.php"><i class="fas fa-motorcycle"></i> Vehicle Manager</a></li>
+            <li <?php if ( $pageName == "Weapon Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/dataManagement/weaponManagement.php"><i class="fas fa-shield-alt"></i> Weapon Manager</a></li>
+            <li><a type="button" data-toggle="modal" data-target="#dataManager"> <i class="fas fa-database"></i> Import/Export/Reset</a></li>
           </ul>
         </li>
         <?php } else {} ?>
