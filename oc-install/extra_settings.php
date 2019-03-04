@@ -9,7 +9,7 @@
 
 	$task = isset($_POST['task']) ? prepare_input($_POST['task']) : '';
 	$passed_step = isset($_SESSION['passed_step']) ? (int)$_SESSION['passed_step'] : 0;
-	$focus_field = 'COMMUNITY_NAME';
+	$focus_field = 'DEMO_MODE';
 	$error_msg = '';
 	
 	// handle previous steps
@@ -126,8 +126,6 @@
 					<input type="radio" name="USE_GRAVATAR" id="USE_GRAVATAR" <?php echo ($USE_GRAVATAR=='false')?'checked':'' ?> onfocus="textboxOnFocus('USE_GRAVATAR_notes')"  onblur="textboxOnBlur('USE_GRAVATAR_notes')" value="false" />False
 				</td>
 			</tr>
-			
-			
 			<tr><td colspan="2" nowrap height="50px">&nbsp;</td></tr>
 			<tr>
 				<td colspan="2">

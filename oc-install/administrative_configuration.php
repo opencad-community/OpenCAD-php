@@ -9,7 +9,7 @@
 
 	$task = isset($_POST['task']) ? prepare_input($_POST['task']) : '';
 	$passed_step = isset($_SESSION['passed_step']) ? (int)$_SESSION['passed_step'] : 0;
-	$focus_field = 'COMMUNITY_NAME';
+	$focus_field = 'MODERATOR_APPROVE_USER';
 	$error_msg = '';
 	
 	// handle previous steps
@@ -137,26 +137,33 @@
 					<input type="radio" name="MODERATOR_APPROVE_USER" id="MODERATOR_APPROVE_USER" <?php echo ($MODERATOR_APPROVE_USER=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_APPROVE_USER_notes')" onblur="textboxOnBlur('MODERATOR_APPROVE_USER_notes')" value="false" />False
 				</td>
 				<td rowspan="6" valign="top">					
-					<div id="POLICE_NCIC_notes" class="notes_container">
-						<h4><?php echo lang_key('POLICE_NCIC'); ?></h4>
-						<p><?php echo lang_key('POLICE_NCIC_notes'); ?></p>
+					<div id="MODERATOR_APPROVE_USER_notes" class="notes_container">
+						<h4><?php echo lang_key('MODERATOR_APPROVE_USER'); ?></h4>
+						<p><?php echo lang_key('MODERATOR_APPROVE_USER_notes'); ?></p>
 					</div>
-					<div id="COMMUNITY_NAME_notes" class="notes_container">
-						<h4><?php echo lang_key('COMMUNITY_NAME'); ?></h4>
-						<p><?php echo lang_key('COMMUNITY_NAME_notes'); ?></p>
+					<div id="MODERATOR_EDIT_USER_notes" class="notes_container">
+						<h4><?php echo lang_key('MODERATOR_EDIT_USER'); ?></h4>
+						<p><?php echo lang_key('MODERATOR_EDIT_USER_notes'); ?></p>
 					</div>
-					<div id="BASE_URL_notes" class="notes_container">
-						<h4><?php echo lang_key('BASE_URL'); ?></h4>
-						<p><?php echo lang_key('BASE_URL_notes'); ?></p>
+					<div id="MODERATOR_SUSPEND_WITH_REASON_notes" class="notes_container">
+						<h4><?php echo lang_key('MODERATOR_SUSPEND_WITH_REASON_URL'); ?></h4>
+						<p><?php echo lang_key('MODERATOR_SUSPEND_WITH_REASON_notes'); ?></p>
 					</div>
-					<div id="API_SECURITY_notes" class="notes_container">
-						<h4><?php echo lang_key('API_SECURITY_URL'); ?></h4>
-						<p><?php echo lang_key('API_SECURITY_notes'); ?></p>
+					<div id="MODERATOR_SUSPEND_WITHOUT_REASON_notes" class="notes_container">
+						<h4><?php echo lang_key('MODERATOR_SUSPEND_WITHOUT_REASON'); ?></h4>
+						<p><?php echo lang_key('MODERATOR_SUSPEND_WITHOUT_REASON_notes'); ?></p>
 					</div>
-					
-					<div id="FIRE_PANIC_notes" class="notes_container">
-						<h4><?php echo lang_key('FIRE_PANIC'); ?></h4>
-						<p><?php echo lang_key('FIRE_PANIC_notes'); ?></p>
+					<div id="MODERATOR_REACTIVATE_USER_notes" class="notes_container">
+						<h4><?php echo lang_key('MODERATOR_REACTIVATE_USER'); ?></h4>
+						<p><?php echo lang_key('MODERATOR_REACTIVATE_USER_notes'); ?></p>
+					</div>
+					<div id="MODERATOR_REMOVE_GROUP_notes" class="notes_container">
+						<h4><?php echo lang_key('MODERATOR_REMOVE_GROUP'); ?></h4>
+						<p><?php echo lang_key('MODERATOR_REMOVE_GROUP_notes'); ?></p>
+					</div>
+					<div id="MODERATOR_NCIC_EDITOR_notes" class="notes_container">
+						<h4><?php echo lang_key('MODERATOR_NCIC_EDITOR'); ?></h4>
+						<p><?php echo lang_key('MODERATOR_NCIC_EDITOR_notes'); ?></p>
 					</div>
 					
 					<img class="loading_img" src="images/ajax_loading.gif" alt="<?php echo lang_key('loading'); ?>..." />

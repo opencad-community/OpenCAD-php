@@ -9,7 +9,7 @@
 
 	$task = isset($_POST['task']) ? prepare_input($_POST['task']) : '';
 	$passed_step = isset($_SESSION['passed_step']) ? (int)$_SESSION['passed_step'] : 0;
-	$focus_field = 'COMMUNITY_NAME';
+	$focus_field = 'POLICE_NCIC';
 	$error_msg = '';
 	
 	// handle previous steps
