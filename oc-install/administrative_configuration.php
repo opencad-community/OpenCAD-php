@@ -205,7 +205,7 @@
 			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>
 			<tr>
 				<td colspan="2">
-					<a href="department_configuration.php" class="form_button" /><?php echo lang_key('back'); ?></a>
+					<a href="civilian_configuration.php" class="form_button" /><?php echo lang_key('back'); ?></a>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="submit" class="form_button" value="<?php echo lang_key('continue'); ?>" />
 				</td>
