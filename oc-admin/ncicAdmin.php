@@ -938,7 +938,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     </div>
     <!-- ./ modal fade bs-example-modal-lg -->
 
-    <?php include "../oc-includes/jquery-colsolidated.inc.php"; ?>
+    <?php 
+    include (__DIR__ . "../oc-admin-includes/modals.inc.php");
+    include (__DIR__ . "../../oc-includes/jquery-colsolidated.inc.php"); ?>
     <script>
 		$(document).ready(function() {
 
@@ -1024,7 +1026,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
   </script>
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>jQuery UI Datepicker - Default functionality</title>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script>

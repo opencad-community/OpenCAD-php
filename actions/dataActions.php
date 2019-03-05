@@ -476,7 +476,7 @@ function getStreetNames()
 
 function resetData()
 {
-	$dataType 		= !empty($_GET['dataType']) ? $_GET['dataType'] : '';
+	$dataType 		= !empty($_POST['dataType']) ? $_POST['dataType'] : '';
 
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -488,8 +488,8 @@ function resetData()
         die();
     }
 
-    $stmt = $pdo->prepare("TRUNCATE TABLE ".DB_PREFIX."?");
-    $result = $stmt->execute(array($dataType));
+    $stmt = $pdo->prepare("TRUNCATE TABLE ".DB_PREFIX.$dataType);
+    $result = $stmt->execute();
     
     if (!$result)
     {
@@ -501,7 +501,7 @@ function resetData()
     $pdo = null;
 
     session_start();
-    $_SESSION['userMessage'] = '<div class="alert alert-success"><span>Successfully reset the '.strtoupper($dataType).' table.</span></div>';
-    header("Location: ".BASE_URL."/oc-admin/admin.php");
+    $_SESSION['adminMessage'] = '<div class="alert alert-success"><span>Successfully reset the '.strtoupper($dataType).' table.</span></div>';
+    header("Location: ".BASE_URL."/oc-admin/admin.php#dataManager");
 }
 ?>

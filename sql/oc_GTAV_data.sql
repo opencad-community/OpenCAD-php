@@ -2,7 +2,7 @@
 -- Dumping data for table `colors`
 --
 
-INSERT INTO `colors` (`id`, `color_group`, `color_name`) VALUES
+INSERT INTO `ympq_colors` (`id`, `color_group`, `color_name`) VALUES
 (1, 'Chrome', 'Chrome'),
 (2, 'Classic', 'Black'),
 (3, 'Classic', 'Carbon Black'),
@@ -256,7 +256,7 @@ INSERT INTO `colors` (`id`, `color_group`, `color_name`) VALUES
 -- Dumping data for table `departments`
 --
 
-INSERT INTO `departments` (`department_id`, `department_name`, `department_short_name`, `department_long_name`, `allow_department`) VALUES
+INSERT INTO `ympq_departments` (`department_id`, `department_name`, `department_short_name`, `department_long_name`, `allow_department`) VALUES
 (1, 'Communications', 'SAECOMM', 'San Andreas Emergency Communications', 0),
 (2, 'State', 'SASP', 'San Andreas State Police', 0),
 (3, 'Highway', 'SAHP', 'San Andreas Highway Patrol', 0),
@@ -271,7 +271,7 @@ INSERT INTO `departments` (`department_id`, `department_name`, `department_short
 -- Dumping data for table `genders`
 --
 
-INSERT INTO `genders` (`id`, `genders`) VALUES
+INSERT INTO `ympq_genders` (`id`, `genders`) VALUES
 (1, 'Male'),
 (2, 'Female');
 
@@ -279,7 +279,7 @@ INSERT INTO `genders` (`id`, `genders`) VALUES
 -- Dumping data for table `incident_type`
 --
 
-INSERT INTO `incident_type` (`code_id`, `code_name`) VALUES
+INSERT INTO `ympq_incident_type` (`code_id`, `code_name`) VALUES
 ('68', 'Armed Robbery'),
 ('25', 'Domestic Dispute'),
 ('10', 'Fight in Progress'),
@@ -299,7 +299,7 @@ INSERT INTO `incident_type` (`code_id`, `code_name`) VALUES
 -- Dumping data for table `statuses`
 --
 
-INSERT INTO `statuses` (`status_id`, `status_text`) VALUES
+INSERT INTO `ympq_statuses` (`status_id`, `status_text`) VALUES
 (1, '10-8 | Available'),
 (2, '10-6 | Busy'),
 (3, '10-7 | Unavailable | On Call'),
@@ -313,7 +313,7 @@ INSERT INTO `statuses` (`status_id`, `status_text`) VALUES
 -- Dumping data for table `streets`
 --
 
-INSERT INTO `streets` (`id`, `name`, `county`) VALUES
+INSERT INTO `ympq_streets` (`id`, `name`, `county`) VALUES
 	(1, 'Abattoir Avenue', 'Los Santos County'),
 	(2, 'Abe Milton Parkway', 'Los Santos County'),
 	(3, 'Ace Jones Drive', 'Los Santos County'),
@@ -2268,7 +2268,7 @@ INSERT INTO `streets` (`id`, `name`, `county`) VALUES
 -- Dumping data for table `tones`
 --
 
-INSERT INTO `tones` (`id`, `name`, `active`) VALUES
+INSERT INTO `ympq_tones` (`id`, `name`, `active`) VALUES
 (1, 'priority', '0'),
 (2, 'recurring', '0'),
 (3, 'panic', '0');
@@ -2277,7 +2277,7 @@ INSERT INTO `tones` (`id`, `name`, `active`) VALUES
 -- Dumping data for table `vehicles`
 --
 
-INSERT INTO `vehicles` (`id`, `Make`, `Model`) VALUES
+INSERT INTO `ympq_vehicles` (`id`, `Make`, `Model`) VALUES
   (1, 'Albany', 'Alpha'),
   (2, 'Albany', 'Buccaneer'),
   (3, 'Albany', 'Buccaneer Custom'),
@@ -2781,7 +2781,7 @@ INSERT INTO `vehicles` (`id`, `Make`, `Model`) VALUES
 -- Dumping data for table `weapons`
 --
 
-INSERT INTO `weapons` (`id`, `weapon_type`, `weapon_name`) VALUES
+INSERT INTO `ympq_weapons` (`id`, `weapon_type`, `weapon_name`) VALUES
 (1, 'Vom Feuer', 'Advanced Rifle'),
 (2, 'Shrewsbury', 'Assault Rifle'),
 (3, 'Shrewsbury', 'Assault Rifle MKII'),

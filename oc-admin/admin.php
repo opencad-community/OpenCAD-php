@@ -59,6 +59,12 @@ require_once(__DIR__ . '/../oc-functions.php');
         $accessMessage = $_SESSION['accessMessage'];
         unset($_SESSION['accessMessage']);
     }
+    $adminMessage = "";
+    if(isset($_SESSION['adminMessage']))
+    {
+        $adminMessage = $_SESSION['adminMessage'];
+        unset($_SESSION['adminMessage']);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -146,6 +152,7 @@ require_once(__DIR__ . '/../oc-functions.php');
             <div class="page-title">
               <div class="title_left">
                 <h3>CAD Administration</h3>
+                
               </div>
 
               <?php /* HIUE SEARCH FUNCTION FOR NOW
@@ -182,6 +189,7 @@ require_once(__DIR__ . '/../oc-functions.php');
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
+                    <?php echo $adminMessage;?>
                       <div class="row tile_count">
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                           <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
@@ -244,7 +252,9 @@ require_once(__DIR__ . '/../oc-functions.php');
       </div>
     </div>
 
-    <?php include "../oc-includes/jquery-colsolidated.inc.php"; ?>
+    <?php 
+    include (__DIR__ . "../oc-admin-includes/modals.inc.php");
+    include (__DIR__ . "../../oc-includes/jquery-colsolidated.inc.php"); ?>
 
     <script>
 		$(document).ready(function() {

@@ -46,10 +46,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     }
 
-    require_once(__DIR__ . '/../oc-config.php');
-    require_once(__DIR__ . '/../oc-functions.php');
-    include(__DIR__ . '/../actions/adminActions.php');
-    include('../actions/publicFunctions.php');
+    require_once(__DIR__.'../../../oc-config.php');
+    require_once(__DIR__.'../../../oc-functions.php');
+    include(__DIR__ .'../../../actions/adminActions.php');    
 
     $accessMessage = "";
     if(isset($_SESSION['accessMessage']))
@@ -61,7 +60,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 <!DOCTYPE html>
 <html lang="en">
-<?php include "../oc-includes/header.inc.php"; ?>
+<?php include (__DIR__ ."../../../oc-includes/header.inc.php"); ?>
 
   <body class="nav-md">
     <div class="container body">
@@ -89,7 +88,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
             <br />
 
-            <?php include "oc-admin-includes/sidebarNav.inc.php"; ?>
+            <?php include __DIR__."../../oc-admin-includes/sidebarNav.inc.php"; ?>
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
