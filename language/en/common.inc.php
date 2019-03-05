@@ -37,7 +37,7 @@ $arrLang['admin_access_data'] = "Admin Access Info";
 $arrLang['admin_access_data_descr'] = "(you need this to enter the protected admin area)";
 $arrLang['admin_email'] = "Admin Email";
 $arrLang['admin_email_info'] = "Admin Email that be used to login with.";
-$arrLang['admin_login'] = "Admin Name";
+$arrLang['admin_name'] = "Admin Name";
 $arrLang['admin_login_info'] = "Your name that is on the account. Note: Can be changed later";
 $arrLang['admin_identifier'] = "Identifier";
 $arrLang['admin_identifier_info'] = "Your identifier. IE: 1D-01 Note:Depends on your community";
@@ -259,6 +259,35 @@ $arrLang['CIV_WARRANT_notes'] = "Allow/Disallow Civiliians from managing their w
 
 $arrLang['CIV_REG'] = "Instant Civilian Registration";
 $arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+
+$arrLang['CIV_LIMIT_MAX_IDENTITIES'] = "Civilian Limit Max Identities";
+$arrLang['CIV_LIMIT_MAX_IDENTIES_notes'] = "CIV_LIMIT_MAX_IDENTITIES default mode '0'
+
+Toggle limiting maximum number of civilian identities If CIV_LIMIT_MAX is '0' then civilian will be able to create unlimited identites.
+Otherwise, if CIV_LIMIT_MAX is a value other than '0' then it will cap the maximum number of possible identites to that value.
+  
+These settings will likely be moved to an *_options table in a future version.";
+
+$arrLang['CIV_LIMIT_MAX_VEHICLES'] = "CIVilian Limit Maximum Vehicles";
+$arrLang['CIV_LIMIT_MAX_VEHICLES_notes'] = "CIV_LIMIT_MAX_VEHICLES
+ 
+CIV_LIMIT_MAX_VEHICLES default mode '0'
+
+Toggle limiting maximum number of civilian vehicles If CIV_LIMIT_MAX_VEHICLES is '0' then civilian will be able to create unlimited vehicles.
+Otherwise, if CIV_LIMIT_MAX_VEHICLES is a value other than '0' then it will cap the maximum number of possible vehicles to that value
+  
+These settings will likely be moved to an *_options table in a future version.";
+
+$arrLang['CIV_LIMIT_MAX_WEAPONS'] = "Civilian Limit Max Weapons";
+$arrLang['CIV_LIMIT_MAX_WAPONS_notes'] = "CIV_LIMIT_MAX_WEAPONS
+
+CIV_LIMIT_MAX_WEAPONS default mode '0'
+
+Toggle limiting maximum number of civilian weapons.
+If CIV_LIMIT_MAX_WEAPONS is '0' then civilian will be able to create unlimited weapons.
+Otherwise, if CIV_LIMIT_MAX_WEAPONS is a value other than '0' then it will cap the maximum number of possible weapons to that value.
+  
+These settings will likely be moved to an *_options table in a future version.";
 //** End Civilian Strings **//
 
 //** Begin Administrative Strings**//
