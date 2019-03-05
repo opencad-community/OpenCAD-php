@@ -32,7 +32,11 @@
         $ROADSIDE_CALL_SELFASSIGN = isset($_POST['ROADSIDE_CALL_SELFASSIGN']) ? prepare_input($_POST['ROADSIDE_CALL_SELFASSIGN']) : '';
 
 		$CIV_WARRANT = isset($_POST['CIV_WARRANT']) ? prepare_input($_POST['CIV_WARRANT']) : '';
-        $CIV_REG = isset($_POST['CIV_REG']) ? prepare_input($_POST['CIV_REG']) : '';
+		$CIV_REG = isset($_POST['CIV_REG']) ? prepare_input($_POST['CIV_REG']) : '';
+		$CIV_REG = isset($_POST['CIV_REG']) ? prepare_input($_POST['CIV_REG']) : '';
+		$CIV_LIMIT_MAX_IDENTITIES = isset($_POST['CIV_LIMIT_MAX_IDENTITIES']) ? prepare_input($_POST['CIV_LIMIT_MAX_IDENTITIES']) : '';
+		$CIV_LIMIT_MAX_VEHICLES = isset($_POST['CIV_LIMIT_MAX_VEHICLES']) ? prepare_input($_POST['CIV_LIMIT_MAX_VEHICLES']) : '';
+		$CIV_LIMIT_MAX_WEAPONS = isset($_POST['CIV_LIMIT_MAX_WEAPONS']) ? prepare_input($_POST['CIV_LIMIT_MAX_WEAPONS']) : '';
 		
 		$_SESSION['ROADSIDE_PANIC'] = $ROADSIDE_PANIC;
 		$_SESSION['ROADSIDE_BOLO'] = $ROADSIDE_BOLO;
@@ -42,6 +46,9 @@
 		
 		$_SESSION['CIV_WARRANT'] = $CIV_WARRANT;
 		$_SESSION['CIV_REG'] = $CIV_REG;
+		$_SESSION['CIV_LIMIT_MAX_IDENTITIES'] = $CIV_LIMIT_MAX_IDENTITIES;
+		$_SESSION['CIV_LIMIT_MAX_VEHICLES'] = $CIV_LIMIT_MAX_VEHICLES;
+		$_SESSION['CIV_LIMIT_MAX_WEAPONS'] = $CIV_LIMIT_MAX_WEAPONS;
 
 		$_SESSION['passed_step'] = 7;
 		header('location: administrative_configuration.php');
@@ -56,7 +63,10 @@
         $ROADSIDE_CALL_SELFASSIGN = isset($_POST['ROADSIDE_CALL_SELFASSIGN']) ? prepare_input($_POST['ROADSIDE_CALL_SELFASSIGN']) : '';
 
 		$CIV_WARRANT = isset($_POST['CIV_WARRANT']) ? prepare_input($_POST['CIV_WARRANT']) : '';
-        $CIV_REG = isset($_POST['CIV_REG']) ? prepare_input($_POST['CIV_REG']) : '';
+		$CIV_REG = isset($_POST['CIV_REG']) ? prepare_input($_POST['CIV_REG']) : '';
+		$CIV_LIMIT_MAX_IDENTITIES = isset($_POST['CIV_LIMIT_MAX_IDENTITIES']) ? prepare_input($_POST['CIV_LIMIT_MAX_IDENTITIES']) : '';
+		$CIV_LIMIT_MAX_VEHICLES = isset($_POST['CIV_LIMIT_MAX_VEHICLES']) ? prepare_input($_POST['CIV_LIMIT_MAX_VEHICLES']) : '';
+		$CIV_LIMIT_MAX_WEAPONS = isset($_POST['CIV_LIMIT_MAX_WEAPONS']) ? prepare_input($_POST['CIV_LIMIT_MAX_WEAPONS']) : '';
 
 	}
 ?>	
@@ -188,6 +198,18 @@
 				<td>&nbsp;<?php echo lang_key('CIV_REG'); ?>&nbsp;</td>
 				<td><input type="radio" name="CIV_REG" id="CIV_REG" <?php echo ($CIV_REG=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('CIV_REG_notes')" onblur="textboxOnBlur('CIV_REG_notes')" value="true" />True
 				<input type="radio" name="CIV_REG" id="CIV_REG" <?php echo ($CIV_REG=='false')?'checked':'' ?> onfocus="textboxOnFocus('CIV_REG_notes')" onblur="textboxOnBlur('CIV_REG_notes')" value="false" />False</td>
+			</tr>
+			<tr>
+				<td>&nbsp;<?php echo lang_key('CIV_LIMIT_MAX_IDENTITIES'); ?>&nbsp;</td>
+				<td><input name="CIV_LIMIT_MAX_IDENTITIES" id="CIV_LIMIT_MAX_IDENTITIES" value="0" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('CIV_LIMIT_MAX_VEHICLES_notes')" onblur="textboxOnBlur('CIV_LIMIT_MAX_IDENTITIES_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+			</tr>
+			<tr>
+				<td>&nbsp;<?php echo lang_key('CIV_LIMIT_MAX_VEHICLES'); ?>&nbsp;</td>
+				<td><input name="CIV_LIMIT_MAX_VEHICLES" id="CIV_LIMIT_MAX_VEHICLES" value="0" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('CIV_LIMIT_MAX_VEHICLES_notes')" onblur="textboxOnBlur('CIV_LIMIT_MAX_VEHICLES_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+			</tr>
+			<tr>
+				<td>&nbsp;<?php echo lang_key('CIV_LIMIT_MAX_WEAPONS'); ?>&nbsp;</td>
+				<td><input name="CIV_LIMIT_MAX_WEAPONS" id="CIV_LIMIT_MAX_WEAPONS" value="0" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('CIV_LIMIT_MAX_WEAPONS_notes')" onblur="textboxOnBlur('CIV_LIMIT_MAX_VEHICLES_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
 			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>
 			<tr>
