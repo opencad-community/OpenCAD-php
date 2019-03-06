@@ -12,6 +12,31 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
 
+$lang = isset($_REQUEST['lang']) ? prepare_input($_REQUEST['lang']) : '';
+	
+if(!isset($arr_active_languages)) $arr_active_languages = array();
+
+if(!empty($lang) && array_key_exists($lang, $arr_active_languages)){
+	$curr_lang = $_SESSION['curr_lang'] = $lang;
+	$curr_lang_direction = $_SESSION['curr_lang_direction'] = isset($arr_active_languages[$lang]['direction']) ? $arr_active_languages[$lang]['direction'] : EI_DEFAULT_LANGUAGE;
+}else if(isset($_SESSION['curr_lang']) && array_key_exists($_SESSION['curr_lang'], $arr_active_languages)){
+	$curr_lang = $_SESSION['curr_lang'];
+	$curr_lang_direction = isset($_SESSION['curr_lang_direction']) ? $_SESSION['curr_lang_direction'] : EI_DEFAULT_LANGUAGE_DIRECTION;
+}else{
+	$curr_lang = DEFAULT_LANGUAGE;
+	$curr_lang_direction = DEFAULT_LANGUAGE_DIRECTION;
+}
+
+if(file_exists('install/oc-lang/'.$curr_lang.'/common.inc.php')){
+	include_once('install/oc-lang/'.$curr_lang.'/common.inc.php');
+}else if(file_exists('../oc-lang/'.$curr_lang.'/common.inc.php')){
+	include_once('../oc-lang/'.$curr_lang.'/common.inc.php');
+}else if(file_exists('../oc-lang/'.$curr_lang.'/common.inc.php')){
+	include_once('../oc-lang/'.$curr_lang.'/common.inc.php');
+}else{
+	include_once('../oc-lang/en/common.inc.php');    	
+}	
+
 
  if(version_compare(PHP_VERSION, '7.1', '<')) {
 	session_start();
@@ -22,6 +47,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 if ( OC_DEBUG == "true" )
 	{	
+		session_start();
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ERROR | E_WARNING);

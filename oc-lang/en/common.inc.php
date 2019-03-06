@@ -260,7 +260,7 @@ $arrLang['CIV_WARRANT_notes'] = "Allow/Disallow Civiliians from managing their w
 $arrLang['CIV_REG'] = "Instant Civilian Registration";
 $arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
 
-$arrLang['CIV_LIMIT_MAX_IDENTITIES'] = "Civilian Limit Max Identities";
+$arrLang['CIV_LIMIT_MAX_IDENTITIES'] = "Civilian Limit Maximum Identities";
 $arrLang['CIV_LIMIT_MAX_IDENTIES_notes'] = "CIV_LIMIT_MAX_IDENTITIES default mode '0'
 
 Toggle limiting maximum number of civilian identities If CIV_LIMIT_MAX is '0' then civilian will be able to create unlimited identites.
@@ -268,7 +268,7 @@ Otherwise, if CIV_LIMIT_MAX is a value other than '0' then it will cap the maxim
   
 These settings will likely be moved to an *_options table in a future version.";
 
-$arrLang['CIV_LIMIT_MAX_VEHICLES'] = "CIVilian Limit Maximum Vehicles";
+$arrLang['CIV_LIMIT_MAX_VEHICLES'] = "Civilian Limit Maximum Vehicles";
 $arrLang['CIV_LIMIT_MAX_VEHICLES_notes'] = "CIV_LIMIT_MAX_VEHICLES
  
 CIV_LIMIT_MAX_VEHICLES default mode '0'
@@ -278,7 +278,7 @@ Otherwise, if CIV_LIMIT_MAX_VEHICLES is a value other than '0' then it will cap 
   
 These settings will likely be moved to an *_options table in a future version.";
 
-$arrLang['CIV_LIMIT_MAX_WEAPONS'] = "Civilian Limit Max Weapons";
+$arrLang['CIV_LIMIT_MAX_WEAPONS'] = "Civilian Limit Maximum Weapons";
 $arrLang['CIV_LIMIT_MAX_WAPONS_notes'] = "CIV_LIMIT_MAX_WEAPONS
 
 CIV_LIMIT_MAX_WEAPONS default mode '0'
@@ -292,36 +292,58 @@ These settings will likely be moved to an *_options table in a future version.";
 
 //** Begin Administrative Strings**//
 $arrLang['MODERATOR_APPROVE_USER'] = "Moderator Approve User";
-$arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+$arrLang['MODERATOR_APPROVE_USER_notes'] = "* MODERATOR_APPROVE_USER
+
+If 'true' then Moderators will be able to approve new user requests else, if 'false' then Moderators will not be able to approve new user requests.";
 
 $arrLang['MODERATOR_EDIT_USER'] = "Moderator Edit User";
-$arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+$arrLang['MODERATOR_EDIT_USER_notes'] = "  * If 'true' then Moderators will be able to edit users profile, if 'false' then Moderators will not be able to edit users profile.
+ This includes name, email, identifier, and roles. Moderators will be able to add user groups but the removal of them is governed by the MODERATOR_REMOVE_GROUPS setting.";
 
 $arrLang['MODERATOR_DELETE_USER'] = "Moderator Delete User";
-$arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+$arrLang['MODERATOR_DELETE_USER_notes'] = "MODERATOR_DELETE_USER
+
+Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
 
 $arrLang['MODERATOR_SUSPEND_WITHOUT_REASON'] = "Moderator Suspend without Reason";
-$arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+$arrLang['MODERATOR_SUSPEND_WITHOUT_REASON_notes'] = "MODERATOR_SUSPEND_WITHOUT_REASON
+
+If 'true' then Moderators will be able suspend users without a reason, if 'false' Moderators will not be able suspend users without a reason.";
 
 $arrLang['MODERATOR_SUSPEND_WITH_REASON'] = "Moderator Suspend with Reason";
-$arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+$arrLang['MODERATOR_SUSPEND_WITH_REASON_notes'] = "MODERATOR_SUSPEND_WITH_REASON
+
+If 'true' then Moderators will be able Suspend users with a reason, if 'false' Moderators will not be able suspend users wth a reason.";
 
 $arrLang['MODERATOR_REACTIVATE_USER'] = "Moderator Reactivate User";
-$arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+$arrLang['MODERATOR_REACTIVATE_USER_notes'] = "MODERATOR_REACTIVATE_USER
+
+If 'true' then Moderators will be able to ractvate users else, if 'false' Moderators will not be able to reactivate users.";
 
 $arrLang['MODERATOR_REMOVE_GROUP'] = "Moderator Remove Group";
-$arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+$arrLang['MODERATOR_REMOVE_GROUP_notes'] = "MODERATOR_REMOVE_GROUP
+
+If 'true' then Moderators will be able to remove user's groups else, if 'false' Moderators will not be able to remove user's groups.";
 
 $arrLang['MODERATOR_NCIC_EDITOR'] = "Moderator NCIC Editor";
-$arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+$arrLang['MODERATOR_NCIC_EDITOR_notes'] = "MODERATOR_NCIC_EDITOR
+
+If 'true' then Moderators will be able to access the NCIC editor,
+if 'false' Moderators will not be able to access the NCCIC editor.";
 //** End Administrative Strings**//
 
 //** Begin Extra Settings Strings **//
 $arrLang['DEMO_MODE'] = "Demo Mode";
-$arrLang['DEMO_MODE_notes'] = "'true' then various user management features of OpenCAD will be locked down, else if 'false' then OpenCAD's full functionality* will be available to use.";
+$arrLang['DEMO_MODE_notes'] = "DEMO_MODE
+
+If 'true' then various user management features of OpenCAD will be locked down, else if 'false' then OpenCAD's full functionality will be available to use.
+
+It will use the default generic avatar image included with OpenCAD .";
 
 $arrLang['USE_GRAVATAR'] = "Gravatar";
-$arrLang['USE_GRAVATAR_notes'] = "OpenCAD will dynamically retrieve your avatar from {@link Gravatar http://en.gravatar.com/} if you have an account. Otherwise it will use the default generic avatar image included with OpenCAD .";
+$arrLang['USE_GRAVATAR_notes'] = "USE_GRAVATAR
+
+OpenCAD will dynamically retrieve your avatar from {@link Gravatar http://en.gravatar.com/} if you have an account. Otherwise it will use the default generic avatar image included with OpenCAD .";
 //** End Extra Settings Strings **//
 
 ?>
