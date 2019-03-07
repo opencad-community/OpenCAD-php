@@ -80,6 +80,10 @@
 		
 		$CIV_WARRANT = isset($_SESSION['CIV_WARRANT']) ? prepare_input($_SESSION['CIV_WARRANT']) : '';
 		$CIV_REG = isset($_SESSION['CIV_REG']) ? prepare_input($_SESSION['CIV_REG']) : '';
+		$CIV_LIMIT_MAX_IDENTITIES = isset($_SESSION['CIV_LIMIT_MAX_IDENTITIES']) ? prepare_input($_SESSION['CIV_LIMIT_MAX_IDENTITIES']) : '';
+		$CIV_LIMIT_MAX_VEHICLES = isset($_SESSION['CIV_LIMIT_MAX_VEHICLES']) ? prepare_input($_SESSION['CIV_LIMIT_MAX_VEHICLES']) : '';
+		$CIV_LIMIT_MAX_WEAPONS = isset($_SESSION['CIV_LIMIT_MAX_WEAPONS']) ? prepare_input($_SESSION['CIV_LIMIT_MAX_WEAPONS']) : '';
+
 		
 		$MODERATOR_APPROVE_USER = isset($_SESSION['MODERATOR_APPROVE_USER']) ? prepare_input($_SESSION['MODERATOR_APPROVE_USER']) : '';
 		$MODERATOR_EDIT_USER = isset($_SESSION['MODERATOR_EDIT_USER']) ? prepare_input($_SESSION['MODERATOR_EDIT_USER']) : '';
@@ -186,6 +190,9 @@
 								
 								$config_file = str_replace('<CIV_WARRANT>', $CIV_WARRANT, $config_file);
 								$config_file = str_replace('<CIV_REG>', $CIV_REG, $config_file);
+								$config_file = str_replace('<CIV_LIMIT_MAX_IDENTITIES>', $CIV_LIMIT_MAX_IDENTITIES, $config_file);
+								$config_file = str_replace('<CIV_LIMIT_MAX_VEHICLES>', $CIV_LIMIT_MAX_VEHICLES, $config_file);
+								$config_file = str_replace('<CIV_LIMIT_MAX_WEAPONS>', $CIV_LIMIT_MAX_WEAPONS, $config_file);
 
 								$config_file = str_replace('<MODERATOR_APPROVE_USER>', $MODERATOR_APPROVE_USER, $config_file);
 								$config_file = str_replace('<MODERATOR_EDIT_USER>', $MODERATOR_EDIT_USER, $config_file);

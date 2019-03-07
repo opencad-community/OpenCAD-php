@@ -432,6 +432,55 @@ define('CIV_WARRANT', <CIV_WARRANT>);
 define('CIV_REG', <CIV_REG>);
 
 /**#@+
+ * CIV_LIMIT_MAX_IDENTITIES default mode '0'
+ *
+ * Toggle limiting maximum number of civilian identities
+ * If CIV_LIMIT_MAX is '0' then civilian will be able to create unlimited identites.
+ * Otherwise, if CIV_LIMIT_MAX is a value other than '0' then it will cap the maximum
+ * number of possible identites to that value
+ *  
+ * These settings will likely be moved to an *_options table in a future version.
+ *
+ * @since OpenCAD 0.2.6
+ * @from ATVG-CAD 1.3.2.0
+ **/
+define('CIV_LIMIT_MAX_IDENTITIES', '<CIV_LIMIT_MAX_IDENTITIES>');
+
+/**#@+
+  * CIV_LIMIT_MAX_VEHICLES
+ * 
+ * CIV_LIMIT_MAX_VEHICLES default mode '0'
+ *
+ * Toggle limiting maximum number of civilian vehicles
+ * If CIV_LIMIT_MAX_VEHICLES is '0' then civilian will be able to create unlimited vehicles.
+ * Otherwise, if CIV_LIMIT_MAX_VEHICLES is a value other than '0' then it will cap the maximum
+ * number of possible vehicles to that value
+ *  
+ * These settings will likely be moved to an *_options table in a future version.
+ *
+ * @since OpenCAD 0.2.6
+ * @from ATVG-CAD 1.3.2.0
+ **/
+define('CIV_LIMIT_MAX_VEHICLES', '<CIV_LIMIT_MAX_VEHICLES>');
+
+/**#@+
+  * CIV_LIMIT_MAX_WEAPONS
+ * 
+ * CIV_LIMIT_MAX_WEAPONS default mode '0'
+ *
+ * Toggle limiting maximum number of civilian weapons
+ * If CIV_LIMIT_MAX_WEAPONS is '0' then civilian will be able to create unlimited weapons.
+ * Otherwise, if CIV_LIMIT_MAX_WEAPONS is a value other than '0' then it will cap the maximum
+ * number of possible weapons to that value
+ *  
+ * These settings will likely be moved to an *_options table in a future version.
+ *
+ * @since OpenCAD 0.2.6
+ * @from ATVG-CAD 1.3.2.0
+ **/
+define('CIV_LIMIT_MAX_WEAPONS', '<CIV_LIMIT_MAX_WEAPONS>');
+
+/**#@+
   * Administrative Settings
 	*
   * These settings will likely be moved to an *_options table in a future version.

@@ -13,7 +13,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 
 require("./oc-config.php");
-require("./actions/api.php");
+require("./actions/generalActions.php");
 include("./actions/profileActions.php");
 
     session_start();

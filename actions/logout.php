@@ -11,7 +11,6 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
-
 require_once(__DIR__ . "/../oc-config.php");
 
 if (isset($_GET['responder']))
@@ -22,37 +21,33 @@ if (isset($_GET['responder']))
 //Need to make sure they're out of the active_users table
 function logoutResponder()
 {
-    $identifier = $_GET['responder'];
+    $identifier = htmlspecialchars($_GET['responder']);
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-
-    $sql = "DELETE FROM ".DB_PREFIX."active_users WHERE identifier = ?";
-
-    try {
-        $stmt = mysqli_prepare($link, $sql);
-        mysqli_stmt_bind_param($stmt, "s", $identifier);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == FALSE) {
-            die(mysqli_error($link));
-        }
-    }
-    catch (Exception $e)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
     }
 
-    mysqli_close($link);
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."active_users WHERE identifier = ?");
+    $result = $stmt->execute(array($identifier));
+
+    if (!$result)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
 }
 
 session_start();
 session_unset();
 session_destroy();
-
 if(ENABLE_API_SECURITY === true)
     setcookie('aljksdz7', null, -1, "/");
 

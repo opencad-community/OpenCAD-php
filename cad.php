@@ -12,8 +12,9 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
     include("./oc-config.php");
-    include("./actions/api.php");
+    include("./actions/generalActions.php");
     include("./actions/dispatchActions.php");
+    include("./actions/publicFunctions.php");
     session_start();
 
     // TODO: Verify user has permission to be on this page
@@ -1315,8 +1316,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Citation Name 1</label>
                 <div class="col-lg-10">
-					<input type="text" name="citation_name_1" id="citation_name_1" size="70" placeholder="Enter a citation" required />
-					<input type="number" name="citation_fine_1" id="citation_fine_1" size="10" placeholder="Enter a fine amount" required />
+					<input class="form-control" type="text" name="citation_name_1" id="citation_name_1" size="70" placeholder="Enter a citation" required />
+					<input class="form-control" type="number" name="citation_fine_1" id="citation_fine_1" size="10" placeholder="Enter a fine amount" required />
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -1324,32 +1325,32 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Citation Name 2</label>
                 <div class="col-lg-10">
-					<input type="text" name="citation_name_2" id="citation_name_2" size="70" placeholder="Enter a citation"  />
-					<input type="number" name="citation_fine_2" id="citation_fine_2" placeholder="Enter a fine amount"  />
+					<input class="form-control" type="text" name="citation_name_2" id="citation_name_2" size="70" placeholder="Enter a citation"  />
+					<input class="form-control" type="number" name="citation_fine_2" id="citation_fine_2" placeholder="Enter a fine amount"  />
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Citation Name 3</label>
                 <div class="col-lg-10">
-					<input type="text" name="citation_name_3" id="citation_name_3" size="70" placeholder="Enter a citation"  />
-					<input type="number" name="citation_fine_3" id="citation_fine_3" placeholder="Enter a fine amount"  />
+					<input class="form-control" type="text" name="citation_name_3" id="citation_name_3" size="70" placeholder="Enter a citation"  />
+					<input class="form-control" type="number" name="citation_fine_3" id="citation_fine_3" placeholder="Enter a fine amount"  />
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Citation Name 4</label>
                 <div class="col-lg-10">
-					<input type="text" name="citation_name_4" id="citation_name_4" size="70" placeholder="Enter a citation"  />
-					<input type="number" name="citation_fine_4" id="citation_fine_4" placeholder="Enter a fine amount"  />
+					<input class="form-control" type="text" name="citation_name_4" id="citation_name_4" size="70" placeholder="Enter a citation"  />
+					<input class="form-control" type="number" name="citation_fine_4" id="citation_fine_4" placeholder="Enter a fine amount"  />
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Citation Name 5</label>
                 <div class="col-lg-10">
-					<input type="text" name="citation_name_5" id="citation_name_5" size="70" placeholder="Enter a citation"  />
-					<input type="number" name="citation_fine_5" id="citation_fine_5" placeholder="Enter a fine amount"  />
+					<input class="form-control" type="text" name="citation_name_5" id="citation_name_5" size="70" placeholder="Enter a citation"  />
+					<input class="form-control" type="number" name="citation_fine_5" id="citation_fine_5" placeholder="Enter a fine amount"  />
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -1741,7 +1742,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="col-lg-10">
                   <select class="form-control selectpicker" name="issuing_agency" id="issuing_agency" data-live-search="true" required>
                     <option> </option>
-                    <?php getAgencies();?>
+                    <?php getDepartments();?>
                   </select>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -1821,21 +1822,21 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <script>
   $(function() {
     $( "#ncic_name" ).autocomplete({
-      source: "<?php echo BASE_URL; ?>/js/search_name.php"
+      source: "<?php echo BASE_URL; ?>/actions/search_name.php"
     });
   });
   </script>
       <script>
   $(function() {
     $( "#ncic_plate" ).autocomplete({
-      source: "<?php echo BASE_URL; ?>/js/search_plate.php"
+      source: "<?php echo BASE_URL; ?>/actions/search_plate.php"
     });
   });
   </script>
       <script>
   $(function() {
     $( "#ncic_weapon" ).autocomplete({
-      source: "<?php echo BASE_URL; ?>/js/search_name.php"
+      source: "<?php echo BASE_URL; ?>/actions/search_name.php"
     });
   });
   </script>
@@ -1942,7 +1943,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
            $.ajax({
                type: "POST",
-               url: "<?php echo BASE_URL; ?>/actions/api.php",
+               url: "<?php echo BASE_URL; ?>/actions/generalActions.php",
                data: {
                    changeStatus: 'yes',
                    unit: unit,
@@ -1985,7 +1986,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
              $.ajax({
                  type: "POST",
-                 url: "<?php echo BASE_URL; ?>/actions/api.php",
+                 url: "<?php echo BASE_URL; ?>/actions/generalActions.php",
                  data: {
                      logoutUser: 'yes',
                      unit: unit
@@ -2021,7 +2022,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          function getAvailableUnits() {
            $.ajax({
                  type: "GET",
-                 url: "<?php echo BASE_URL; ?>/actions/api.php",
+                 url: "<?php echo BASE_URL; ?>/actions/generalActions.php",
                  data: {
                      getAvailableUnits: 'yes'
                  },
@@ -2053,7 +2054,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          function getDispatchers() {
            $.ajax({
                  type: "GET",
-                 url: "<?php echo BASE_URL; ?>/actions/api.php",
+                 url: "<?php echo BASE_URL; ?>/actions/generalActions.php",
                  data: {
                      getDispatchers: 'yes'
                  },
@@ -2085,7 +2086,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          function getAOP() {
            $.ajax({
                  type: "GET",
-                 url: "<?php echo BASE_URL; ?>/actions/api.php",
+                 url: "<?php echo BASE_URL; ?>/actions/generalActions.php",
                  data: {
                      getAOP: 'yes'
                  },
