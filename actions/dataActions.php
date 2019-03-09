@@ -487,8 +487,46 @@ function resetData()
         header('Location: '.BASE_URL.'/plugins/error/index.php');
         die();
     }
+    if ($_POST ="allData") 
+    {
+        $tables = array(
+                "user_departments",
+                "user_departments_temp",
+                "active_users",
+                "aop",
+                "bolos_persons",
+                "bolos_vehicles",
+                "calls",
+                "calls_users",
+                "call_history",
+                "call_list",
+                "call_citations",
+                "civilian_names",
+                "colors",
+                "departments",
+                "dispatchers",
+                "incident_type",
+                "ncic_arrests",
+                "ncic_citations",
+                "ncic_names",
+                "ncic_plates",
+                "ncic_warnings",
+                "ncic_warrants",
+                "ncic_weapons",
+                "statuses",
+                "streets",
+                "tones",
+                "vehicles",
+                "weapons"
+        );
+        foreach ( $tables as $value ) 
+        {
+            $stmt = $pdo->prepare("TRUNCATE TABLE ".DB_PREFIX.$value);
+        };
+    } else {
+        $stmt = $pdo->prepare("TRUNCATE TABLE ".DB_PREFIX.$dataType);
+    }
 
-    $stmt = $pdo->prepare("TRUNCATE TABLE ".DB_PREFIX.$dataType);
     $result = $stmt->execute();
     
     if (!$result)

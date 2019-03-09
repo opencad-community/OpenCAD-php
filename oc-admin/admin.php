@@ -253,8 +253,8 @@ require_once(__DIR__ . '/../oc-functions.php');
     </div>
 
     <?php 
-    include (__DIR__ . "../oc-admin-includes/modals.inc.php");
-    include (__DIR__ . "../../oc-includes/jquery-colsolidated.inc.php"); ?>
+    include ("/oc-admin-includes/modals.inc.php");
+    include ("../oc-includes/jquery-colsolidated.inc.php"); ?>
 
     <script>
 		$(document).ready(function() {

@@ -91,7 +91,7 @@ require_once(__DIR__ . '/../oc-config.php');
 
             <br />
 
-            <?php include "oc-admin-includes/sidebarNav.inc.php"; ?>
+            <?php include (__DIR__ ."/oc-admin-includes/sidebarNav.inc.php"); ?>
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
@@ -224,8 +224,8 @@ require_once(__DIR__ . '/../oc-config.php');
     </div>
 
     <?php 
-    include (__DIR__ . "../oc-admin-includes/modals.inc.php");
-    include (__DIR__ . "../../oc-includes/jquery-colsolidated.inc.php"); ?>
+    include ("/oc-admin-includes/modals.inc.php");
+    include ("../oc-includes/jquery-colsolidated.inc.php"); ?>
 
     <script type="text/javascript" src="https://jira.opencad.io/s/a0c4d8ca8eced10a4b49aaf45ec76490-T/-f9bgig/77001/9e193173deda371ba40b4eda00f7488e/2.0.24/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=296607a1"></script>
 
