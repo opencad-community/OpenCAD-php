@@ -32,6 +32,18 @@
     <script src="<?php echo BASE_URL; ?>/vendors/pnotify/dist/pnotify.buttons.js"></script>
     <script src="<?php echo BASE_URL; ?>/vendors/pnotify/dist/pnotify.nonblock.js"></script>
 
+
     <!-- Custom Theme Scripts -->
     <script src="<?php echo BASE_URL; ?>/js/custom.js"></script>
     <script src="<?php echo BASE_URL; ?>/js/OpenCAD.js"></script>
+
+    <script>
+    $(document).ready(function() {
+
+      $('#pendingUsers').DataTable({
+        paging: false,
+        searching: false
+      });
+
+    });
+    </script>

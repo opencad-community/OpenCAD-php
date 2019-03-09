@@ -1,11 +1,13 @@
 <?php
-  require_once("../../oc-config.php");
-  include ( "../../actions/ncicAdminActions.php");
-  include ( "../../actions/adminActions.php");
-  include ( "../../actions/publicFunctions.php");
-  include ( "../../actions/ncic.php");
-  include ( "../../actions/generalActions.php");
-  include ( "../../actions/dataActions.php");
+  include_once(__DIR__ . "../../oc-config.php");
+  include( __DIR__ . "/../../actions/ncicAdminActions.php");
+  include( __DIR__ . "../../actions/adminActions.php");
+  include( __DIR__ . "../../actions/publicFunctions.php");
+  include( __DIR__ . "../../actions/ncic.php");
+  include( __DIR__ . "../../actions/generalActions.php");
+  include( __DIR__ . "../../actions/civActions.php");
+  include( __DIR__ . "../../actions/dataActions.php");
+  include_once( __DIR__ . "../../plugins/api_auth.php");
   ?>
 
 <!-- modals -->
@@ -297,7 +299,8 @@
                 <label class="col-lg-2 control-label">Sex</label>
                 <div class="col-lg-10">
           <select name="civSexReq" class="form-control selectpicker selectpicker3" id="civSexReq" title="Select a sex" data-live-search="true" required>
-                    <?php getGenders();?>
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
           </select>
                 </div>
                 <!-- ./ col-sm-9 -->
