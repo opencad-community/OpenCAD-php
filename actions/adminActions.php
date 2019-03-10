@@ -107,12 +107,6 @@ function editUserAccount()
         die();
     }
 
-    if($userRole == 3 && $myRank == 2){
-        $_SESSION['accessMessage'] = '<div class="alert alert-error"><span>Error, you cannot make yourself administrator</span></div>';
-        sleep(1);
-        header("Location:".BASE_URL."/oc-admin/userManagement.php");
-        die();
-    }
 
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);

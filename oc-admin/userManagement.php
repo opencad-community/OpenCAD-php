@@ -49,7 +49,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     require_once(__DIR__ . '/../oc-config.php');
     require_once(__DIR__ . '/../oc-functions.php');
     include(__DIR__ . '/../actions/adminActions.php');
-    include('../actions/publicFunctions.php');
+    include(__DIR__ . '/../actions/publicFunctions.php');
+    include(__DIR__ . '/../actions/generalActions.php');
 
     $accessMessage = "";
     if(isset($_SESSION['accessMessage']))
@@ -259,27 +260,94 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       </div>
     </div>
 
-    <?php 
-    include(__DIR__ . "/oc-admin-includes/modals.inc.php"); ?>
+   <!-- Edit User Modal -->
+   <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Edit User</h4>
+            <div class="clearifx">
+            <div class="speparator">
+              <h5><strong>ALWAYS</strong> select proper user role before saving.</h5>
+            </div>
+          </div>
+          <!-- ./ modal-header -->
+          <div class="modal-body">
+            <form role="form" method="post" action="<?php echo BASE_URL; ?>/actions/adminActions.php" class="form-horizontal" >
+              <div class="form-group row">
+                <label class="col-md-3 control-label">Name</label>
+                <div class="col-md-9">
+                  <input name="userName" class="form-control" id="userName" />
+                  <span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-md-3 control-label">Email</label>
+                <div class="col-md-9">
+                  <input type="email" name="userEmail" class="form-control" id="userEmail" />
+                  <span class="fas fa-envelope form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-md-3 control-label">Identifier</label>
+                <div class="col-md-9">
+                  <input type="text" name="userIdentifier" class="form-control" id="userIdentifier" />
+                  <span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-md-3 control-label">User Groups</label>
+                <div class="col-md-9">
+                  <select name="userGroups[]" class="selectpicker form-control" id="userGroups" multiple>
+                      <?php getDepartments();?>
+                  </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-md-3 control-label">User Role</label>
+                <div class="col-md-9">
+                  <select name="userRole" class="selectpicker form-control" id="userRole">
+                      <?php getRole() ?>
+                  </select>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			      <input type="hidden" name="userID" id="userID">
+            <input type="submit" name="editUserAccount" class="btn btn-primary" value="Update User"/>
+          </div>
+          <!-- ./ modal-footer -->
+          </form>
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
+
     <?php include(__DIR__ . "/../oc-includes/jquery-colsolidated.inc.php"); ?>
+ 
     <script>
+    $(document).ready(function() {
+        $('#allUsers').DataTable;
+        $("#userRole").selectpicker;    });
+
+
     
-    <script>
-    $(document).ready(function() {
-        $('#allUsers').DataTable({
-
-        });
-    });
-    </script>
-
-    $(document).ready(function() {
-        $('#allUsers').DataTable({
-
-        });
-    });
-    </script>
-
-    <script>
     $('#editUserModal').on('show.bs.modal', function(e) {
       var $modal = $(this), userId = e.relatedTarget.id;
 
@@ -291,28 +359,29 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   'userId' : userId},
           success: function(result)
           {
-            console.log(result);
+            //console.log(result);
             data = JSON.parse(result);
-
+            
             $('input[name="userName"]').val(data['name']);
             $('input[name="userEmail"]').val(data['email']);
             $('input[name="userIdentifier"]').val(data['identifier']);
-
-			$('input[name="userID"]').val(data['userId']);
+            $('input[name="userID"]').val(data['userId']);
 
             for (var i=0; i<data['department'].length; i++)
             {
-              $('select[name="userGroups"] option[value="'+data['department'][i]+'"]').val(1);
-              //console.log(option);
-            }
-            for (var i=0; i<data['role'].length; i++)
-            {
-              $('select[name="userRole"] option[value="'+data['role'][i]+'"]').val(1);
-              //console.log(option);
+              //print $('select[name="userGroups"] option[value="'+data['department'][i]+'"]').val(1);
+             // console.log(option);
             }
 
+            $("#userRole").selectpicker();
+            for (var i=0; i<data['role'].length; i++)
+            {
+              $('select[name="userRole"] option[value="'+data['role'][i]+' selected"]').val(1);
+              console.log();
+            }
+            console.log("object: %O", result)
             $('select[name="userGroups"]').selectpicker('refresh');
-            $('select[name="userRole"]').selectpicker('refresh');
+            $('#userRole').selectpicker('refresh');
 
 
           },

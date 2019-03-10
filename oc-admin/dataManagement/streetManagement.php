@@ -48,13 +48,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     require_once(__DIR__.'../../../oc-config.php');
     require_once(__DIR__.'../../../oc-functions.php');
-    include(__DIR__ .'../../../actions/adminActions.php');    
+    include(__DIR__ .'../../../actions/dataActions.php');    
 
-    $accessMessage = "";
-    if(isset($_SESSION['accessMessage']))
+    $successMessage = "";
+    if(isset($_SESSION['successMessage']))
     {
-        $accessMessage = $_SESSION['accessMessage'];
-        unset($_SESSION['accessMessage']);
+        $accessMessage = $_SESSION['successMessage'];
+        unset($_SESSION['successMessage']);
     }
 ?>
 
@@ -141,7 +141,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>CAD User Management</h3>
+                <h3>CAD Data Manager</h3>
               </div>
             </div>
 
@@ -163,46 +163,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <!-- ./ x_title -->
                   <div class="x_content">
                       <div class="row tile_count">
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fas fa-user"></i> Communications</span>
-                          <div class="count"><?php echo getGroupCount("1");?></div>
-                        </div>
-                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fas fa-user"></i> State</span>
-                          <div class="count"><?php echo getGroupCount("2");?></div>
-                        </div>
-                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fas fa-user"></i> Highway Patrol</span>
-                          <div class="count"><?php echo getGroupCount("3");?></div>
-                        </div>
-                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fas fa-user"></i> Sheriff</span>
-                          <div class="count"><?php echo getGroupCount("4");?></div>
-                        </div>
-                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fas fa-user"></i> Police</span>
-                          <div class="count"><?php echo getGroupCount("5");?></div>
-                        </div>
-                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fas fa-user"></i> Fire</span>
-                          <div class="count"><?php echo getGroupCount("6");?></div>
-                        </div>
-                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fas fa-user"></i> EMS</span>
-                          <div class="count"><?php echo getGroupCount("7");?></div>
-                        </div>
-                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fas fa-user"></i> Civilian</span>
-                          <div class="count"><?php echo getGroupCount("8");?></div>
-                        </div>
-                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
+                       
                       </div>
                       <!-- ./ row tile_count -->
                   </div>
@@ -219,7 +180,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Account Management</h2>
+                    <h2>Street Manager</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
                       </li>
@@ -230,8 +191,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
-                      <?php echo $accessMessage;?>
-                      <?php getUsers();?>
+                      <?php echo $successMessage;?>
+                      <?php getStreets();?>
                   </div>
                   <!-- ./ x_content -->
                 </div>
@@ -258,54 +219,81 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       </div>
     </div>
 
+<!-- Edit Street Modal -->
+<div class="modal fade" id="editStreetModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="editStreetModal">Edit Street</h4>
+          </div>
+          <!-- ./ modal-header -->
+          <div class="modal-body">
+            <form role="form" method="post" action="<?php echo BASE_URL; ?>/actions/dataActions.php" class="form-horizontal" >
+              <div class="form-group row">
+                <label class="col-md-3 control-label">Street/Postal Code</label>
+                <div class="col-md-9">
+                  <input type="text" name="name" class="form-control" id="name" required />
+                  <span class="fas fa-road form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-md-3 control-label">County</label>
+                <div class="col-md-9">
+                  <input type="text" name="county" class="form-control" id="county" required />
+                  <span class="fas fa-map form-control-feedback right" aria-hidden="true"></span>
+                </div>
+                <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+          </div>
+          <!-- ./ modal-body -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			      <input type="hidden" name="streetID" id="streetID">
+            <input type="submit" name="editStreet" class="btn btn-primary" value="Edit Street"/>
+          </div>
+          <!-- ./ modal-footer -->
+          </form>
+        </div>
+        <!-- ./ modal-content -->
+      </div>
+      <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
+
     <?php 
-    include (__DIR__ . "../../oc-admin-includes/modals.inc.php");
-    include (__DIR__ . "../../../oc-includes/jquery-colsolidated.inc.php"); ?>
+    include(__DIR__ . "../../../oc-includes/jquery-colsolidated.inc.php"); ?>
 
     <script>
     $(document).ready(function() {
-        $('#allUsers').DataTable({
+        $('#allStreets').DataTable({
 
         });
     });
     </script>
 
     <script>
-    $('#editUserModal').on('show.bs.modal', function(e) {
-      var $modal = $(this), userId = e.relatedTarget.id;
+    $('#editStreetModal').on('show.bs.modal', function(e) {
+      var $modal = $(this), streetID = e.relatedTarget.id;
 
       $.ajax({
           cache: false,
           type: 'POST',
-          url: '<?php echo BASE_URL; ?>/actions/adminActions.php',
-          data: {'getUserDetails': 'yes',
-                  'userId' : userId},
+          url: '<?php echo BASE_URL; ?>/actions/dataActions.php',
+          data: {'getStreetDetails': 'yes',
+                  'streetID' : streetID},
           success: function(result)
           {
             console.log(result);
             data = JSON.parse(result);
 
-            $('input[name="userName"]').val(data['name']);
-            $('input[name="userEmail"]').val(data['email']);
-            $('input[name="userIdentifier"]').val(data['identifier']);
-
-			$('input[name="userID"]').val(data['userId']);
-
-            for (var i=0; i<data['department'].length; i++)
-            {
-              $('select[name="userGroups"] option[value="'+data['department'][i]+'"]').val(1);
-              //console.log(option);
-            }
-            for (var i=0; i<data['role'].length; i++)
-            {
-              $('select[name="userRole"] option[value="'+data['role'][i]+'"]').val(1);
-              //console.log(option);
-            }
-
-            $('select[name="userGroups"]').selectpicker('refresh');
-            $('select[name="userRole"]').selectpicker('refresh');
-
-
+            $('input[name="name"]').val(data['name']);
+            $('input[name="county"]').val(data['county']);
+            $('input[name="streetID"]').val(data['streetID']);
           },
 
           error:function(exception){alert('Exeption:'+exception);}
@@ -321,7 +309,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			$.ajax({
 			cache: false,
 			type: 'GET',
-			url: '<?php echo BASE_URL; ?>/actions/adminActions.php',
+			url: '<?php echo BASE_URL; ?>/actions/dataActions.php',
 			data	: 'dept_id='+dept_id+'&user_id='+user_id,
 			success: function(result)
 			{
@@ -337,18 +325,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	});
     </script>
 
-    <!-- Custom Theme Scripts -->
-    <script src="<?php echo BASE_URL; ?>/js/custom.js"></script>
-    <script>
-    $(document).ready(function() {
-
-      $('#pendingUsers').DataTable({
-        paging: false,
-        searching: false
-      });
-
-    });
-    </script>
     <script type="text/javascript" src="https://jira.opencad.io/s/a0c4d8ca8eced10a4b49aaf45ec76490-T/-f9bgig/77001/9e193173deda371ba40b4eda00f7488e/2.0.24/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=ede74ac1"></script>
   </body>
 </html>
