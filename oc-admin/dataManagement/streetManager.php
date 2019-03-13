@@ -53,7 +53,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     $successMessage = "";
     if(isset($_SESSION['successMessage']))
     {
-        $accessMessage = $_SESSION['successMessage'];
+        $successMessage = $_SESSION['successMessage'];
         unset($_SESSION['successMessage']);
     }
 ?>
@@ -144,9 +144,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <h3>CAD Data Manager</h3>
               </div>
             </div>
-
             <div class="clearfix"></div>
-
+            <!-- going to be utilized in v2 of Street Manager - PJF/10MAR19 
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
@@ -160,21 +159,21 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                     </ul>
                     <div class="clearfix"></div>
                   </div>
-                  <!-- ./ x_title -->
+                  <!-- ./ x_title ->
                   <div class="x_content">
                       <div class="row tile_count">
                        
                       </div>
-                      <!-- ./ row tile_count -->
+                      <!-- ./ row tile_count ->
                   </div>
-                  <!-- ./ x_content -->
+                  <!-- ./ x_content ->
                 </div>
-                <!-- ./ x_panel -->
+                <!-- ./ x_panel ->
               </div>
-              <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
+              <!-- ./ col-md-12 col-sm-12 col-xs-12 --
             </div>
-            <!-- ./ row -->
-
+            <!-- ./ row ->
+             going to be utilized in v2 of Street Manager - PJF/10MAR19 -->
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -270,8 +269,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     <script>
     $(document).ready(function() {
-        $('#allStreets').DataTable({
-
+        $('#allStreets').DataTable({        
         });
     });
     </script>
@@ -299,30 +297,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           error:function(exception){alert('Exeption:'+exception);}
         });
     });
-
-
-	$(".delete_group").click(function(){
-	var dept_id=$(this).attr("data-dept-id");
-	var user_id=$(this).attr("data-user-id");
-	if(confirm("Are you sure to delete the selected Group?"))
-		{
-			$.ajax({
-			cache: false,
-			type: 'GET',
-			url: '<?php echo BASE_URL; ?>/actions/dataActions.php',
-			data	: 'dept_id='+dept_id+'&user_id='+user_id,
-			success: function(result)
-			{
-				 //obj = jQuery.parseJSON(result);
-
-					$("#show_group").html(result);
-					window.location.href= '<?php echo BASE_URL; ?>/oc-admin/userManagement.php';
-
-			}
-
-			});
-		}
-	});
     </script>
 
     <script type="text/javascript" src="https://jira.opencad.io/s/a0c4d8ca8eced10a4b49aaf45ec76490-T/-f9bgig/77001/9e193173deda371ba40b4eda00f7488e/2.0.24/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=ede74ac1"></script>

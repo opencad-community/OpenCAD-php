@@ -719,6 +719,49 @@ function deleteUser(uid) {
     }
 }
 
+
+function deleteStreet(streetID) {
+    var $tr = $(this).closest('tr');
+    var r = confirm("Are you sure you want to delete this streetr? This cannot be undone!");
+    console.log();
+    if (r == true)
+    {
+        
+        $.ajax({
+        type: "POST",
+        url: hdir + "actions/dataActions.php",
+        data: {
+            deleteStreet: 'yes',
+            streetID : streetID
+        },
+        success: function(response)
+        {
+            console.log(response);
+            $tr.find('td').fadeOut(1000,function(){
+                $tr.remove();
+            });
+
+            new PNotify({
+            title: 'Success',
+            text: 'Successfully deleted street',
+            type: 'success',
+            styling: 'bootstrap3'
+            });
+
+            getStreets();
+        },
+        error : function(XMLHttpRequest, textStatus, errorThrown)
+        {
+            console.log("Error");
+        }
+
+        });
+    }
+    else
+    {
+        return; // Do nothing
+    }
+}
 // Clears calls
 function clearCall(btn_id) {
     var $tr = $(this).closest('tr');

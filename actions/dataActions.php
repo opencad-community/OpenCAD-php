@@ -67,7 +67,7 @@ if (isset($_POST['editStreet']))
 /* FUNCTIONS */
 function editStreet()
 {
-	$id		    = !empty($_POST['id']) ? htmlspecialchars($_POST['id']) : '';
+	$id		    = !empty($_POST['streetID']) ? htmlspecialchars($_POST['streetID']) : '';
 	$name 		= !empty($_POST['name']) ? htmlspecialchars($_POST['name']) : '';
 	$county 	= !empty($_POST['county']) ? htmlspecialchars($_POST['county']) : '';
 
@@ -84,14 +84,12 @@ function editStreet()
 
     
     $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."streets SET name = ?, county = ? WHERE id = ?");
-
-    if ($stmt->execute(array($id, $name, $county))) {
+    if ($stmt->execute(array($name, $county, $id))) {
         $pdo = null;
 
         //Let the user know their information was updated
         $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Street updated successfully.</span></div>';
-        error_log();
-        header("Location: ".BASE_URL."/oc-admin/dataManagement/streetManagement.php");
+        header("Location: ".BASE_URL."/oc-admin/dataManagement/streetManager.php");
     } else {
         echo "Error updating record: " . print_r($stmt->errorInfo(), true);
     }
@@ -111,7 +109,7 @@ function editStreet()
 function deleteStreet()
 {
     session_start();
-    $uid = htmlspecialchars($_POST['id']);
+    $id = htmlspecialchars($_POST['streetID']);
 
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -134,8 +132,8 @@ function deleteStreet()
     $pdo = null;
 
     session_start();
-    $_SESSION['userMessage'] = '<div class="alert alert-success"><span>Successfully removed street from database</span></div>';
-    header("Location: ".BASE_URL."/oc-admin/dataManagement/streetManagement.php#user_panel");
+    $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed street from database</span></div>';
+    header("Location: ".BASE_URL."/oc-admin/dataManagement/streetManager.php");
 }
 
 /**#@+
@@ -219,7 +217,7 @@ function getStreets()
                 ';
             }
         
-        echo '<input name="uid" type="hidden" value=' . $row[0] . ' />
+        echo '<input name="streetID" type="hidden" value=' . $row[0] . ' />
             </form>
             </td>
             </tr>
@@ -289,7 +287,7 @@ function getStreetNames()
         die();
     }
 
-    $result = $pdo->query("SELECT id, name, county FROM ".DB_PREFIX."streets");
+    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."streets");
 
     if (!$result)
     {
@@ -326,6 +324,18 @@ function getStreetNames()
     ';
 }
 
+/**#@+
+* function resetData();
+*
+* Accepts "dataType" from "Reset Data" and purges table based on input or  
+* if "allData" is passed then it will purge ALL user game specific data.
+*
+* Thi s function does not purge the users table or reset any administrative
+* permissions.
+* 
+* @since OpenCAD 0.2.6
+*
+**/
 function resetData()
 {
 	$dataType 		= !empty($_POST['dataType']) ? $_POST['dataType'] : '';

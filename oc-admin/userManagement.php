@@ -344,7 +344,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     <script>
     $(document).ready(function() {
         $('#allUsers').DataTable;
-        $("#userRole").selectpicker;    });
+        $("#userRole").selectpicker;    
+      });
 
 
     
