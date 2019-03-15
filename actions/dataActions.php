@@ -53,6 +53,36 @@ else if (isset($_POST['getVehicles']))
     deleteVehicle();
 } 
 
+//** Handle POST requests for Weapons **/
+else if (isset($_POST['getWeapons']))
+{
+    getWeapons();
+} else if (isset($_POST['getWeaponDetails']))
+{
+    getWeaponDetails();
+} else if (isset($_POST['editWeapon']))
+{
+    editWeapon();
+} else if (isset($_POST['deleteWeapon']))
+{
+    deleteWeapon();
+} 
+
+//** Handle POST requests for Incident Types **/
+else if (isset($_POST['getIncidentTypes']))
+{
+    getIncidentTypes();
+} else if (isset($_POST['getIncidentTypeDetails']))
+{
+    getIncidentTypeDetails();
+} else if (isset($_POST['editIncidentType']))
+{
+    editIncidentType();
+} else if (isset($_POST['deleteIncidentType']))
+{
+    deleteIncidentType();
+} 
+
 //** BEGIN Street Manager FUNCTIONS **//
 /**#@+
 * function getStreets()
@@ -263,6 +293,7 @@ function deleteStreet()
 
 //** END Street Manager FUNCTIONS **//
 
+//** BEGIN Vehicle Manager FUNCTIONS **/
 /**#@+
 * function getVehicles()
 * Fetches all vehicles from the streets table with their resepective IDs and
@@ -478,11 +509,219 @@ function deleteVehicle()
     header("Location: ".BASE_URL."/oc-admin/dataManagement/vehicleManager.php");
 }
 
-//** BEGIN Vehicle Manager FUNCTIONS **//
-
-
-
 //** END Vehicle Manager FUNCTIONS **//
+
+
+//** BEGIN Weapon Manager FUNCTIONS **/
+
+/**#@+
+* function getWeapons()
+* Fetches all Weapons from the weapons table with their resepective IDs and
+* types. It then builds the table and includes functions such as Edit and Delete
+* These functions are handled by editWeapon(); and deleteWeapon(); 
+*
+* @since OpenCAD 0.2.6
+*
+**/
+function getWeapons()
+{
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."weapons");
+
+    if (!$result)
+    {
+        $_SESSION['error'] = $pdo->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $num_rows = $result->rowCount();
+    $pdo = null;
+
+
+    if ($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>There are no weapons in the database.</span></div>";
+        
+    } else {
+        echo '
+            <table id="allWeapons" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Weapon Type</th>
+                <th>Weapon Name</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        foreach($result as $row)
+        {
+            echo '
+            <tr>
+                <td>' . $row[1] . '</td>
+                <td>' . $row[2] . '</td>
+                <td>';
+        if ( DEMO_MODE == false) {
+            echo '<form action="'.BASE_URL.'/actions/dataActions.php" method="post">';
+            if ( ( MODERATOR_EDIT_WEAPON == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            {
+                echo '<button name="editWeapon" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWeaponModal" class="btn btn-xs btn-link" >Edit</button>';
+            } else {
+                echo '<button name="editWeapon" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWeaponModal" class="btn btn-xs btn-link" disabled >Edit</button>';
+            }
+
+            if ( ( MODERATOR_DELETE_WEAPON == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            {
+                echo '<input name="deleteWeapon" type="submit" class="btn btn-xs btn-link" onclick="deleteWeapon(' . $row[0] . ')" value="Delete" />';
+            } else {
+                echo '<input name="deleteWeapon" type="submit" class="btn btn-xs btn-link" onclick="deleteWeapon(' . $row[0] . ')" value="Delete" disabled />';
+            }
+        } else {
+            echo ' </td>
+                <td>
+                <form action="'.BASE_URL.'/actions/dataActions.php" method="post">
+                <button name="editWeapon" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWeaponModal" class="btn btn-xs btn-link" disabled >Edit</button>
+                <input name="deleteWeapon" type="submit" class="btn btn-xs btn-link" onclick="deleteWeapon(' . $row[0] . ')" value="Delete" disabled />
+                ';
+            }
+        
+        echo '<input name="WeaponID" type="hidden" value=' . $row[0] . ' />
+            </form>
+            </td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
+
+/**#@+
+* function getWeaponDetails();
+* Fetches details for a given edit modal in Weapon Manager.
+*
+* @since OpenCAD 0.2.6
+*
+**/
+function getWeaponDetails()
+{
+    $weaponID = htmlspecialchars($_POST['weaponID']);
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."weapons WHERE id = ?");
+    $resStatus = $stmt->execute(array($weaponID));
+    $result = $stmt;
+
+    if (!$resStatus)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
+
+    $encode = array();
+    foreach($result as $row)
+    {
+        $encode["weaponID"] = $row[0];
+        $encode["weapon_type"] = $row[1];
+        $encode["weapon_name"] = $row[2];
+    }
+    
+    echo json_encode($encode);
+
+}
+
+function editWeapon()
+{
+	$id	        	    = !empty($_POST['weaponID']) ? htmlspecialchars($_POST['weaponID']) : '';
+	$weapon_type 		= !empty($_POST['weapon_type']) ? htmlspecialchars($_POST['weapon_type']) : '';
+	$weapon_name     	= !empty($_POST['weapon_name']) ? htmlspecialchars($_POST['weapon_name']) : '';
+
+
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."weapons SET weapon_name = ?, weapon_type = ? WHERE id = ?");
+    if ($stmt->execute(array($weapon_name, $weapon_type, $id))) {
+        $pdo = null;
+
+        //Let the user know their information was updated
+        $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Weapon '.$weapon_name.' '.$weapon_type.' edited successfully.</span></div>';
+        header("Location: ".BASE_URL."/oc-admin/dataManagement/weaponManager.php");
+    } else {
+        echo "Error updating record: " . print_r($stmt->errorInfo(), true);
+    }
+    $pdo = null;
+}
+
+/**#@+
+* function deleteWeapon()
+* Delete a given Weapon from the database.
+*
+* @since OpenCAD 0.2.6
+*
+**/
+function deleteWeapon()
+{
+    session_start();
+    $id = htmlspecialchars($_POST['WeaponID']);
+
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."weapons WHERE id = ?");
+    if (!$stmt->execute(array($id)))
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $pdo = null;
+
+    session_start();
+    $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed weapon from database</span></div>';
+    header("Location: ".BASE_URL."/oc-admin/dataManagement/weaponManager.php");
+}
+
+//** END Weapon Manager FUNCTIONS **//
 
 /**#@+
 * function resetData();
