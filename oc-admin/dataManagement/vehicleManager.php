@@ -145,7 +145,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               </div>
             </div>
             <div class="clearfix"></div>
-            <!-- going to be utilized in v2 of Street Manager - PJF/10MAR19 
+            <!-- going to be utilized in v2 of Vehicle Manager - PJF/13MAR19 
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
@@ -179,7 +179,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Street Manager</h2>
+                    <h2>Vehicle Manager</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
                       </li>
@@ -191,7 +191,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <!-- ./ x_title -->
                   <div class="x_content">
                       <?php echo $successMessage;?>
-                      <?php getStreets();?>
+                      <?php getVehicles();?>
                   </div>
                   <!-- ./ x_content -->
                 </div>
@@ -219,31 +219,31 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     </div>
 
 <!-- Edit Street Modal -->
-<div class="modal fade" id="editStreetModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="editVehicleModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-md">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
             </button>
-            <h4 class="modal-title" id="editStreetModal">Edit Street</h4>
+            <h4 class="modal-title" id="editVehicleModal">Edit Vehicle</h4>
           </div>
           <!-- ./ modal-header -->
           <div class="modal-body">
             <form role="form" method="post" action="<?php echo BASE_URL; ?>/actions/dataActions.php" class="form-horizontal" >
               <div class="form-group row">
-                <label class="col-md-3 control-label">Street/Postal Code</label>
+                <label class="col-md-3 control-label">Vehicle Make</label>
                 <div class="col-md-9">
-                  <input type="text" name="name" class="form-control" id="name" required />
-                  <span class="fas fa-road form-control-feedback right" aria-hidden="true"></span>
+                  <input type="text" name="make" class="form-control" id="make" required />
+                  <span class="fas fa-car form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
               <!-- ./ form-group -->
               <div class="form-group row">
-                <label class="col-md-3 control-label">County</label>
+                <label class="col-md-3 control-label">Vehicle Model</label>
                 <div class="col-md-9">
-                  <input type="text" name="county" class="form-control" id="county" required />
-                  <span class="fas fa-map form-control-feedback right" aria-hidden="true"></span>
+                  <input type="text" name="model" class="form-control" id="model" required />
+                  <span class="fas fa-car form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -252,8 +252,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <!-- ./ modal-body -->
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			      <input type="hidden" name="streetID" id="streetID">
-            <input type="submit" name="editStreet" class="btn btn-primary" value="Edit Street"/>
+			      <input type="hidden" name="vehicleID" id="vehicleID">
+            <input type="submit" name="editVehicle" class="btn btn-primary" value="Edit Vehicle"/>
           </div>
           <!-- ./ modal-footer -->
           </form>
@@ -269,29 +269,29 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     <script>
     $(document).ready(function() {
-        $('#allStreets').DataTable({        
+        $('#allVehicles').DataTable({        
         });
     });
     </script>
 
     <script>
-    $('#editStreetModal').on('show.bs.modal', function(e) {
-      var $modal = $(this), streetID = e.relatedTarget.id;
-
+    $('#editVehicleModal').on('show.bs.modal', function(e) {
+      var $modal = $(this), vehicleID = e.relatedTarget.id;
+      console.log();
       $.ajax({
           cache: false,
           type: 'POST',
           url: '<?php echo BASE_URL; ?>/actions/dataActions.php',
-          data: {'getStreetDetails': 'yes',
-                  'streetID' : streetID},
+          data: {'getVehicleDetails': 'yes',
+                  'vehicleID' : vehicleID},
           success: function(result)
           {
             console.log(result);
             data = JSON.parse(result);
 
-            $('input[name="name"]').val(data['name']);
-            $('input[name="county"]').val(data['county']);
-            $('input[name="streetID"]').val(data['streetID']);
+            $('input[name="make"]').val(data['make']);
+            $('input[name="model"]').val(data['model']);
+            $('input[name="vehicleID"]').val(data['vehicleID']);
           },
 
           error:function(exception){alert('Exeption:'+exception);}

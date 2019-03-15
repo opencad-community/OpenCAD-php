@@ -16,8 +16,9 @@
           <a><i class="fas fa-table"></i> Game Data Manager <span class="fas fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li <?php if ( $pageName == "Street Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/dataManagement/streetManager.php"><i class="fas fa-road"></i> Street Manager</a></li>
-            <li <?php if ( $pageName == "Vehicles Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/dataManagement/vehicleManagement.php"><i class="fas fa-motorcycle"></i> Vehicle Manager</a></li>
-            <li <?php if ( $pageName == "Weapon Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/dataManagement/weaponManagement.php"><i class="fas fa-shield-alt"></i> Weapon Manager</a></li>
+            <li <?php if ( $pageName == "Vehicles Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/dataManagement/vehicleManager.php"><i class="fas fa-motorcycle"></i> Vehicle Manager</a></li>
+            <li <?php if ( $pageName == "Weapon Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/dataManagement/weaponManager.php" disabled><i class="fas fa-shield-alt"></i> Weapon Manager</a></li>
+            <li <?php if ( $pageName == "10-Code Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/dataManagement/10CodeManager.php" disabled><i class="fas fa-shield-alt"></i> 10-Code</a></li>
             <li><a type="button" data-toggle="modal" data-target="#dataManager"> <i class="fas fa-database"></i> Import/Export/Reset</a></li>
           </ul>
         </li>

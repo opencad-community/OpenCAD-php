@@ -16,126 +16,44 @@ include_once(__DIR__ . "/../plugins/api_auth.php");
 This file handles all actions for admin.php script
 */
 
-/* Handle POST requests */
-
-/**
- * Patch notes:
- * Adding the `else` to make a `else if` prevents the execution
- * of multiple functions at the same time by the same client
- *
- * Running multiple functions at the same time doesnt seem to
- * be a needed feature.
- */
+/* Handle resetData POST request */
 
 if (isset($_POST['resetData']))
 {
     resetData();
-}  
+}
 
-if (isset($_POST['editStreet']))
-{
-    editStreet();
-} if (isset($_POST['editVehicles']))
-{
-    editVehicle();
-} if (isset($_POST['editVehicle']))
-{
-    deleteStreet();
-} if (isset($_POST['deleteStreet']))
-{
-    deleteStreet();
-} else if (isset($_POST['deleteVehicle']))
-{
-    deleteVehicle();
-} else if (isset($_POST['deleteWeapon']))
-{
-    deleteWeapons();
-} else if (isset($_POST['getStreets']))
+// Handle POST requests for Streets **//
+else if (isset($_POST['getStreets']))
 {
     getStreets();
-} else if (isset($_POST['getVehicles']))
-{
-    getVehicles();
-} else if (isset($_POST['getWeapons']))
-{   
-    getWeapons();
 } else if (isset($_POST['getStreetDetails']))
 {
     getStreetDetails();
-}
-
-/* FUNCTIONS */
-function editStreet()
+} else if (isset($_POST['editStreet']))
 {
-	$id		    = !empty($_POST['streetID']) ? htmlspecialchars($_POST['streetID']) : '';
-	$name 		= !empty($_POST['name']) ? htmlspecialchars($_POST['name']) : '';
-	$county 	= !empty($_POST['county']) ? htmlspecialchars($_POST['county']) : '';
-
-
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-
-    
-    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."streets SET name = ?, county = ? WHERE id = ?");
-    if ($stmt->execute(array($name, $county, $id))) {
-        $pdo = null;
-
-        //Let the user know their information was updated
-        $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Street updated successfully.</span></div>';
-        header("Location: ".BASE_URL."/oc-admin/dataManagement/streetManager.php");
-    } else {
-        echo "Error updating record: " . print_r($stmt->errorInfo(), true);
-    }
-    $pdo = null;
-}
-
-
-
-
-/**#@+
-* function deleteStreet()
-* Delete a given street from the database.
-*
-* @since OpenCAD 0.2.6
-*
-**/
-function deleteStreet()
+    editStreet();
+} else if (isset($_POST['deleteStreet']))
 {
-    session_start();
-    $id = htmlspecialchars($_POST['streetID']);
-
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."streets WHERE id = ?");
-    if (!$stmt->execute(array($id)))
-    {
-        $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-
-    $pdo = null;
-
-    session_start();
-    $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed street from database</span></div>';
-    header("Location: ".BASE_URL."/oc-admin/dataManagement/streetManager.php");
+    deleteStreet();
 }
 
+//** Handle POST requests for Vehicles **/
+else if (isset($_POST['getVehicles']))
+{
+    getVehicles();
+} else if (isset($_POST['getVehicleDetails']))
+{
+    getVehicleDetails();
+} else if (isset($_POST['editVehicle']))
+{
+    editVehicle();
+} else if (isset($_POST['deleteVehicle']))
+{
+    deleteVehicle();
+} 
+
+//** BEGIN Street Manager FUNCTIONS **//
 /**#@+
 * function getStreets()
 * Fetches all streets from the streets table with their resepective IDs and
@@ -275,7 +193,86 @@ function getStreetDetails()
 
 }
 
-function getStreetNames()
+function editStreet()
+{
+	$id		    = !empty($_POST['streetID']) ? htmlspecialchars($_POST['streetID']) : '';
+	$name 		= !empty($_POST['name']) ? htmlspecialchars($_POST['name']) : '';
+	$county 	= !empty($_POST['county']) ? htmlspecialchars($_POST['county']) : '';
+
+
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."streets SET name = ?, county = ? WHERE id = ?");
+    if ($stmt->execute(array($name, $county, $id))) {
+        $pdo = null;
+
+        //Let the user know their information was updated
+        $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Street '.$name.' in '.$county.' edited successfully.</span></div>';
+        header("Location: ".BASE_URL."/oc-admin/dataManagement/streetManager.php");
+    } else {
+        echo "Error updating record: " . print_r($stmt->errorInfo(), true);
+    }
+    $pdo = null;
+}
+
+/**#@+
+* function deleteStreet()
+* Delete a given street from the database.
+*
+* @since OpenCAD 0.2.6
+*
+**/
+function deleteStreet()
+{
+    session_start();
+    $id = htmlspecialchars($_POST['streetID']);
+
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."streets WHERE id = ?");
+    if (!$stmt->execute(array($id)))
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $pdo = null;
+
+    session_start();
+    $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed street from database</span></div>';
+    header("Location: ".BASE_URL."/oc-admin/dataManagement/streetManager.php");
+}
+
+//** END Street Manager FUNCTIONS **//
+
+/**#@+
+* function getVehicles()
+* Fetches all vehicles from the streets table with their resepective IDs and
+* counties. It then build the table and includes functions such as Edit and Delete
+* These functions are handled by editVehcile(); and deleteVehicle(); 
+*
+* @since OpenCAD 0.2.6
+*
+**/
+function getVehicles()
 {
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -287,7 +284,7 @@ function getStreetNames()
         die();
     }
 
-    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."streets");
+    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."vehicles");
 
     if (!$result)
     {
@@ -295,34 +292,197 @@ function getStreetNames()
         header('Location: '.BASE_URL.'/plugins/error/index.php');
         die();
     }
+    $num_rows = $result->rowCount();
     $pdo = null;
 
-    echo '
-        <table id="streets" class="table table-striped table-bordered">
-        <thead>
-            <tr>
-            <th>Name</th>
-            <th>County</th>
-            </tr>
-        </thead>
-        <tbody>
-    ';
 
-    foreach($result as $row)
+    if ($num_rows == 0)
     {
+        echo "<div class=\"alert alert-info\"><span>There are no vehicles in the database.</span></div>";
+        
+    } else {
         echo '
-        <tr>
-            <td>' . $row[0] . '</td>
-            <td>' . $row[1] . '</td>
-        </tr>
+            <table id="allVehicles" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        foreach($result as $row)
+        {
+            echo '
+            <tr>
+                <td>' . $row[1] . '</td>
+                <td>' . $row[2] . '</td>
+                <td>';
+        if ( DEMO_MODE == false) {
+            echo '<form action="'.BASE_URL.'/actions/dataActions.php" method="post">';
+            if ( ( MODERATOR_EDIT_VEHICLE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            {
+                echo '<button name="editVehicle" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editVehicleModal" class="btn btn-xs btn-link" >Edit</button>';
+            } else {
+                echo '<button name="editVehicle" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editVehicleModal" class="btn btn-xs btn-link" disabled >Edit</button>';
+            }
+
+            if ( ( MODERATOR_DELETE_VEHICLE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            {
+                echo '<input name="deleteVehicle" type="submit" class="btn btn-xs btn-link" onclick="deleteVehicle(' . $row[0] . ')" value="Delete" />';
+            } else {
+                echo '<input name="deleteVehicle" type="submit" class="btn btn-xs btn-link" onclick="deleteVehicle(' . $row[0] . ')" value="Delete" disabled />';
+            }
+        } else {
+            echo ' </td>
+                <td>
+                <form action="'.BASE_URL.'/actions/dataActions.php" method="post">
+                <button name="editVehicle" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editVehicle" class="btn btn-xs btn-link" disabled >Edit</button>
+                <input name="deleteVehcile" type="submit" class="btn btn-xs btn-link" onclick="deleteVehicle(' . $row[0] . ')" value="Delete" disabled />
+                ';
+            }
+        
+        echo '<input name="vehicleID" type="hidden" value=' . $row[0] . ' />
+            </form>
+            </td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
         ';
     }
-
-    echo '
-        </tbody>
-        </table>
-    ';
 }
+
+/**#@+
+* function getVehicleDetails();
+* Fetches details for a given edit modal in Vehicle Manager.
+*
+* @since OpenCAD 0.2.6
+*
+**/
+function getVehicleDetails()
+{
+    $vehicleID = htmlspecialchars($_POST['vehicleID']);
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."vehicles WHERE id = ?");
+    $resStatus = $stmt->execute(array($vehicleID));
+    $result = $stmt;
+
+    if (!$resStatus)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
+
+    $encode = array();
+    foreach($result as $row)
+    {
+        $encode["vehicleID"] = $row[0];
+        $encode["make"] = $row[1];
+        $encode["model"] = $row[2];
+    }
+    
+    echo json_encode($encode);
+}
+
+/**#@+
+* function editVehicle()
+* Updates the corresponding record for the given vehicle in the database.
+*
+* @since 0.2.6
+*
+**/
+function editVehicle()
+{
+	$id		    = !empty($_POST['vehicleID']) ? htmlspecialchars($_POST['vehicleID']) : '';
+	$make 		= !empty($_POST['make']) ? htmlspecialchars($_POST['make']) : '';
+	$model   	= !empty($_POST['model']) ? htmlspecialchars($_POST['model']) : '';
+
+
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."vehicles SET make = ?, model = ? WHERE id = ?");
+    if ($stmt->execute(array($make, $model, $id))) {
+        $pdo = null;
+
+        /** Indicate that the vehicle record was updated successfully **/
+        $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Vehicle '.$make.' '.$model.' edited successfully.</span></div>';
+        header("Location: ".BASE_URL."/oc-admin/dataManagement/vehicleManager.php");
+    } else {
+        echo "Error updating record: " . print_r($stmt->errorInfo(), true);
+    }
+    $pdo = null;
+}
+
+/**#@+
+* function deleteVehicle()
+* Delete a given vehicle from the database.
+*
+* @since OpenCAD 0.2.6
+*
+**/
+function deleteVehicle()
+{
+    session_start();
+    $id         = !empty($_POST['make']) ? htmlspecialchars($_POST['vehicleID']) : '';
+    $make 		= !empty($_POST['make']) ? htmlspecialchars($_POST['make']) : '';
+	$model   	= !empty($_POST['model']) ? htmlspecialchars($_POST['model']) : '';
+
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."vehicles WHERE id = ?");
+    if (!$stmt->execute(array($id)))
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $pdo = null;
+
+    session_start();
+    $_SESSION['successMessage'] = "<div class=\"alert alert-success\"><span>Vehicle ".$_POST['make']." ".$_POST['model']." removed successfully.</div>";
+    header("Location: ".BASE_URL."/oc-admin/dataManagement/vehicleManager.php");
+}
+
+//** BEGIN Vehicle Manager FUNCTIONS **//
+
+
+
+//** END Vehicle Manager FUNCTIONS **//
 
 /**#@+
 * function resetData();
