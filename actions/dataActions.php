@@ -867,7 +867,7 @@ function getIncidentTypeDetails()
 function editIncidentType()
 {
 	$id	        	    = !empty($_POST['incidentTypeID']) ? htmlspecialchars($_POST['incidentTypeID']) : '';
-	$incident_code		= !empty($_POST['incident_code']) ? htmlspecialchars($_POST['`incident_code']) : '';
+	$incident_code		= !empty($_POST['incident_code']) ? htmlspecialchars($_POST['incident_code']) : '';
 	$incident_name    	= !empty($_POST['incident_name']) ? htmlspecialchars($_POST['incident_name']) : '';
 
 
