@@ -252,7 +252,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <!-- ./ modal-body -->
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			      <input type="hidden" name="weaponID" id="weaponID">
+			      <input type="hidden" name="weaponID" id="weaponID" aria-hidden="true">
             <input type="submit" name="editWeapon" class="btn btn-primary" value="Edit Street"/>
           </div>
           <!-- ./ modal-footer -->

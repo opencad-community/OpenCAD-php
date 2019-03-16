@@ -252,7 +252,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <!-- ./ modal-body -->
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			      <input type="hidden" name="incidentTypeID" id="incidentTypeID">
+			      <input type="hidden" name="incidentTypeID" id="incidentTypeID" aria-hidden="true">
             <input type="submit" name="editIncidentType" class="btn btn-primary" value="Edit Incident Type"/>
           </div>
           <!-- ./ modal-footer -->
