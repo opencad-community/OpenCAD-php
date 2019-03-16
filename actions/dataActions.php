@@ -723,6 +723,217 @@ function deleteWeapon()
 
 //** END Weapon Manager FUNCTIONS **//
 
+//** BEGIN Incident Type Manager FUNCTIONS **/
+
+/**#@+
+* function getIncidentTypes()
+* Fetches all Incident Types from the incident_types table with their resepective IDs and
+* types. It then builds the table and includes functions such as Edit and Delete
+* These functions are handled by editIncidentType(); and deleteIncidnetTypes(); 
+*
+* @since OpenCAD 0.2.6
+*
+**/
+function getIncidentTypes()
+{
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."incident_type");
+
+    if (!$result)
+    {
+        $_SESSION['error'] = $pdo->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $num_rows = $result->rowCount();
+    $pdo = null;
+
+
+    if ($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>There are no weapons in the database.</span></div>";
+        
+    } else {
+        echo '
+            <table id="allIncidentTypes" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Incident ID</th>
+                <th>Incident Name</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        foreach($result as $row)
+        {
+            echo '
+            <tr>
+                <td>' . $row[1] . '</td>
+                <td>' . $row[2] . '</td>
+                <td>';
+        if ( DEMO_MODE == false) {
+            echo '<form action="'.BASE_URL.'/actions/dataActions.php" method="post">';
+            if ( ( MODERATOR_EDIT_INCIDENTTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            {
+                echo '<button name="editIncidentType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editIncidentTypeModal" class="btn btn-xs btn-link" >Edit</button>';
+            } else {
+                echo '<button name="editIncidentType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editIncidentTypeModal" class="btn btn-xs btn-link" disabled >Edit</button>';
+            }
+
+            if ( ( MODERATOR_DELETE_INCIDENTTPYE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            {
+                echo '<input name="deleteIncidentType" type="submit" class="btn btn-xs btn-link" onclick="deleteIncidentType(' . $row[0] . ')" value="Delete" />';
+            } else {
+                echo '<input name="deleteIncidentType" type="submit" class="btn btn-xs btn-link" onclick="deleteIncidentType(' . $row[0] . ')" value="Delete" disabled />';
+            }
+        } else {
+            echo ' </td>
+                <td>
+                <form action="'.BASE_URL.'/actions/dataActions.php" method="post">
+                <button name="editIncidentType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editIncidentTypeModal" class="btn btn-xs btn-link" disabled >Edit</button>
+                <input name="deleteIncidentType" type="submit" class="btn btn-xs btn-link" onclick="deleteIncidentType(' . $row[0] . ')" value="Delete" disabled />
+                ';
+            }
+        
+        echo '<input name="WeaponID" type="hidden" value=' . $row[0] . ' />
+            </form>
+            </td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
+
+/**#@+
+* function getWeaponDetails();
+* Fetches details for a given edit modal in Weapon Manager.
+*
+* @since OpenCAD 0.2.6
+*
+**/
+function getIncidentTypeDetails()
+{
+    $incidentTypeID = htmlspecialchars($_POST['incidentTypeID']);
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."incident_type WHERE id = ?");
+    $resStatus = $stmt->execute(array($incidentTypeID));
+    $result = $stmt;
+
+    if (!$resStatus)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
+
+    $encode = array();
+    foreach($result as $row)
+    {
+        $encode["incidentTypeID"] = $row[0];
+        $encode["incident_code"] = $row[1];
+        $encode["incident_name"] = $row[2];
+    }
+    
+    echo json_encode($encode);
+
+}
+
+function editIncidentType()
+{
+	$id	        	    = !empty($_POST['incidentTypeID']) ? htmlspecialchars($_POST['incidentTypeID']) : '';
+	$incident_code		= !empty($_POST['incident_code']) ? htmlspecialchars($_POST['`incident_code']) : '';
+	$incident_name    	= !empty($_POST['incident_name']) ? htmlspecialchars($_POST['incident_name']) : '';
+
+
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."incident_type SET code_id = ?, code_name = ? WHERE id = ?");
+    if ($stmt->execute(array($incident_code, $incident_name, $id))) {
+        $pdo = null;
+
+        //Let the user know their information was updated
+        $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Incident '.$incident_code.' – '.$incident_name.' edited successfully.</span></div>';
+        header("Location: ".BASE_URL."/oc-admin/dataManagement/incidentTypeManager.php");
+    } else {
+        echo "Error updating record: " . print_r($stmt->errorInfo(), true);
+    }
+    $pdo = null;
+}
+
+/**#@+
+* function deleteWeapon()
+* Delete a given Weapon from the database.
+*
+* @since OpenCAD 0.2.6
+*
+**/
+function deleteIncidentType()
+{
+    session_start();
+    $id = htmlspecialchars($_POST['IncidentTypeID']);
+
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."incident_type WHERE id = ?");
+    if (!$stmt->execute(array($id)))
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $pdo = null;
+
+    session_start();
+    $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed incident type from database</span></div>';
+    header("Location: ".BASE_URL."/oc-admin/dataManagement/incidentTypeManager.php");
+}
+
+//** END Incident Type Manager FUNCTIONS **//
+
 /**#@+
 * function resetData();
 *
