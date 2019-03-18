@@ -137,7 +137,6 @@ require_once(__DIR__ . '/../oc-functions.php');
                         <div class="nav toggle">
                             <a id="menu_toggle"><i class="fa fa-bars"></i></a>
                         </div>
-
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
@@ -146,13 +145,10 @@ require_once(__DIR__ . '/../oc-functions.php');
                                     <span class="fas fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                    <li><a href="<?php echo BASE_URL; ?>/profile.php"><i
-                                                class="fas fa-user pull-right"></i>My Profile</a></li>
-                                    <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i
-                                                class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
+                                    <li><a href="<?php echo BASE_URL; ?>/profile.php"><i class="fas fa-user pull-right"></i>My Profile</a></li>
+                                    <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
                                 </ul>
                             </li>
-
 
                         </ul>
                     </nav>

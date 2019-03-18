@@ -113,6 +113,21 @@ else if (isset($_POST['getWarrantTypes']))
     deleteWarrantType();
 }
 
+//** Handle POST requests for Citation Type Manager **/
+else if (isset($_POST['getCitationTypes']))
+{
+    getCitationTypes();
+} else if (isset($_POST['getCitationTypeDetails']))
+{
+    getCitationTypeDetails();
+} else if (isset($_POST['editCitationType']))
+{
+    editCitationType();
+} else if (isset($_POST['deleteCitationType']))
+{
+    deleteCitationType();
+}
+
 //** Handle POST requests for Radio Code Manager **/
 else if (isset($_POST['getRadioCodes']))
 {
@@ -941,7 +956,7 @@ function editIncidentType()
 }
 
 /**#@+
-* function deleteWeapon()
+* function deleteIncidentType()
 * Delete a given Weapon from the database.
 *
 * @since OpenCAD 0.2.6
@@ -1075,7 +1090,7 @@ function getWarningTypes()
 
 /**#@+
 * function getWarningDetails();
-* Fetches details for a given edit modal in Weapon Manager.
+* Fetches details for a given edit modal in Warning Types Manager.
 *
 * @since OpenCAD 0.2.6
 *
@@ -1184,6 +1199,211 @@ function deleteWarningType()
 
 //** END Warning Type Manager FUNCTIONS **//
 
+//** BEGIN Warrant Type Manager FUNCTIONS **/
+
+/**#@+
+* function getWarrantTypes()
+* Fetches all Warrant Types from the warrant_types table with their resepective IDs and
+* types. It then builds the table and includes functions such as Edit and Delete
+* These functions are handled by editWarrantType(); and deleteWarrantType(); 
+*
+* @since OpenCAD 0.2.6
+*
+**/
+function getWarrantTypes()
+{
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."warrant_types");
+
+    if (!$result)
+    {
+        $_SESSION['error'] = $pdo->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $num_rows = $result->rowCount();
+    $pdo = null;
+
+    if ($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>There are no weapons in the database.</span></div>";
+        
+    } else {
+        echo '
+            <table id="allWarrantTypes" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Warrant Description</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        foreach($result as $row)
+        {
+            echo '
+            <tr>
+                <td>' . $row[1] . '</td>
+                <td>';
+        if ( DEMO_MODE == false) {
+            echo '<form action="'.BASE_URL.'/actions/dataActions.php" method="post">';
+            if ( ( MODERATOR_EDIT_WARNINGTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            {
+                echo '<button name="editWarrantType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWarrantTypeModal" class="btn btn-xs btn-link" >Edit</button>';
+            } else {
+                echo '<button name="editWarrantType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWarrantypeModal" class="btn btn-xs btn-link" disabled >Edit</button>';
+            }
+
+            if ( ( MODERATOR_DELETE_WARNINGTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            {
+                echo '<input name="deleteWarrantType" type="submit" class="btn btn-xs btn-link" onclick="deleteWarrantType(' . $row[0] . ')" value="Delete" />';
+            } else {
+                echo '<input name="deleteWarrantType" type="submit" class="btn btn-xs btn-link" onclick="deleteWarrantType(' . $row[0] . ')" value="Delete" disabled />';
+            }
+        } else {
+            echo ' </td>
+                <td>
+                <form action="'.BASE_URL.'/actions/dataActions.php" method="post">
+                <button name="editWarrantType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWarrantTypeModal" class="btn btn-xs btn-link" disabled >Edit</button>
+                <input name="deleteWarrantType" type="submit" class="btn btn-xs btn-link" onclick="deleteWarrantType(' . $row[0] . ')" value="Delete" disabled />
+                ';
+            }
+        
+        echo '<input name="warrantTypeID" type="hidden" value=' . $row[0] . ' />
+            </form>
+            </td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
+
+/**#@+
+* function getWarrantDetails();
+* Fetches details for a given edit modal in Warrant Types Manager.
+*
+* @since OpenCAD 0.2.6
+*
+**/
+function getWarrantTypeDetails()
+{
+    $warrantTypeID = htmlspecialchars($_POST['warrantTypeID']);
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."warrant_type WHERE id = ?");
+    $resStatus = $stmt->execute(array($warrantTypeID));
+    $result = $stmt;
+
+    if (!$resStatus)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
+
+    $encode = array();
+    foreach($result as $row)
+    {
+        $encode["warrantTypeID"] = $row[0];
+        $encode["warrant_description"] = $row[1];
+    }
+    
+    echo json_encode($encode);
+
+}
+
+function editWarrantType()
+{
+	$id	        	            = !empty($_POST['warrantTypeID']) ? htmlspecialchars($_POST['warrantTypeID']) : '';
+	$warrant_description		= !empty($_POST['warrant_description']) ? htmlspecialchars($_POST['warrant_description']) : '';
+
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."warrant_type SET warrant_description = ? WHERE id = ?");
+    if ($stmt->execute(array($warrant_description, $id))) {
+        $pdo = null;
+
+        //Let the user know their information was updated
+        $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Incident \"'.$warrant_description.'\" edited successfully.</span></div>';
+        header("Location: ".BASE_URL."/oc-admin/dataManagement/warrantTypeManager.php");
+    } else {
+        echo "Error updating record: " . print_r($stmt->errorInfo(), true);
+    }
+    $pdo = null;
+}
+
+/**#@+
+* function deleteWarrantType()
+* Delete a given Warrant Type from the database.
+*
+* @since OpenCAD 0.2.6
+*
+**/
+function deleteWarrantType()
+{
+    session_start();
+    $id = htmlspecialchars($_POST['warrantTypeID']);
+
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."warrant_type WHERE id = ?");
+    if (!$stmt->execute(array($id)))
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $pdo = null;
+
+    session_start();
+    $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed incident type from database</span></div>';
+    header("Location: ".BASE_URL."/oc-admin/dataManagement/warrantTypeManager.php");
+}
+
+//** END Warrant Type Manager FUNCTIONS **//
+
 /**#@+
 * function resetData();
 *
@@ -1198,10 +1418,10 @@ function deleteWarningType()
 **/
 function resetData()
 {
-	$dataType 		= !empty($_POST['dataType']) ? $_POST['dataType'] : '';
+	$dataType 	=   !empty($_POST['dataType']) ? $_POST['dataType'] : '';
 
     try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+        $pdo    =   new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
     } catch(PDOException $ex)
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
@@ -1242,7 +1462,8 @@ function resetData()
                 "weapons",
                 "radio_cdoes",
                 "warning_types",
-                "warrant_types"
+                "warrant_types",
+                "citation_types"
         );
         foreach ( $tables as $value ) 
         {
