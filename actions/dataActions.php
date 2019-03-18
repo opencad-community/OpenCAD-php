@@ -83,7 +83,7 @@ else if (isset($_POST['getIncidentTypes']))
     deleteIncidentType();
 } 
 
-//** Handle POST requests for Warning Types **/
+//** Handle POST requests for Warning Types Manager **/
 else if (isset($_POST['getWarningTypes']))
 {
     getWarningTypes();
@@ -97,6 +97,36 @@ else if (isset($_POST['getWarningTypes']))
 {
     deleteWarningType();
 } 
+
+//** Handle POST requests for Warrant Types Manager **/
+else if (isset($_POST['getWarrantTypes']))
+{
+    getWarrantTypes();
+} else if (isset($_POST['getWarrantTypeDetails']))
+{
+    getWarrantTypeDetails();
+} else if (isset($_POST['editWarrantType']))
+{
+    editWarrantType();
+} else if (isset($_POST['deleteWarrantType']))
+{
+    deleteWarrantType();
+}
+
+//** Handle POST requests for Radio Code Manager **/
+else if (isset($_POST['getRadioCodes']))
+{
+    getRadioCodes();
+} else if (isset($_POST['getRadioCodeDetails']))
+{
+    getRadioCodeDetails();
+} else if (isset($_POST['editRadioCode']))
+{
+    editRadioCode();
+} else if (isset($_POST['deleteRadioCode']))
+{
+    deleteRadioCode();
+}
 
 //** BEGIN Street Manager FUNCTIONS **//
 /**#@+
@@ -1179,7 +1209,7 @@ function resetData()
         header('Location: '.BASE_URL.'/plugins/error/index.php');
         die();
     }
-    if ($_POST ="allData") 
+    if ($_POST == "allData") 
     {
         $tables = array(
                 "user_departments",
@@ -1209,7 +1239,10 @@ function resetData()
                 "streets",
                 "tones",
                 "vehicles",
-                "weapons"
+                "weapons",
+                "radio_cdoes",
+                "warning_types",
+                "warrant_types"
         );
         foreach ( $tables as $value ) 
         {
@@ -1232,6 +1265,6 @@ function resetData()
 
     session_start();
     $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully reset the '.strtoupper($dataType).' table.</span></div>';
-    header("Location: ".BASE_URL."/oc-admin/admin.php#dataManager");
+    header("Location: ".BASE_URL."/oc-admin/admin.php");
 }
 ?>

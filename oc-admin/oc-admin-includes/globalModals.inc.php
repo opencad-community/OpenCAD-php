@@ -30,29 +30,31 @@
                          <!-- ./ col-sm-9 -->
                      </div>
                      <!-- ./ form-group -->
-
-                     <form role="form" method="post" action="<?php echo BASE_URL; ?>/actions/dataActions.php"
-                         class="form-inline">
+                     <form role="form" method="post" action="<?php echo BASE_URL; ?>/actions/dataActions.php" class="form-inline">
                          <label class="col-md-3 control-label">Reset Data</label>
                          <div class="col">
                              <div class="form-group">
-                                 <select class="form-control selectpicker" id="dataType" name="dataType"
-                                     style="width: 1500px;display:inline-block" style="width:auto;" required>
-                                     <optgroup label=" Environmental Data">
+                                 <select class="form-control selectpicker" id="dataType" name="dataType" style="width: 1500px;display:inline-block" style="width:auto;" required>
+                                    <optgroup label="Environmental Data">
                                          <option value="streets">Streets</option>
                                          <option value="vehicles">Vehicles</option>
                                          <option value="weapons">Weapons</option>
-                                     <optgroup label="Civilian Data">
+                                    <optgroup label="Civilian Data">
                                          <option value="identities">Identities</option>
                                          <option value="registeredPlates">Registered Plates</option>
                                          <option value="registeredWeapons">Registered Weapons</option>
                                          <option value="violationHistory">Warrant/Warning History</option>
-                                         <option value="allData">All Data (Use with CAUTION)</option>
+                                    <optgroup label="LEO Support Data">
+                                        <option value="citation_type">Citation Types</option>
+                                        <option value="radio_codes">Radio Codes</option>
+                                        <option value="warrant_type">Warrant Types</option>
+                                        <option value="warning_type">Warning Types</option>
+                                    <optgroup label="RESET ALL DATA (USE WITH CAUTION)">
+                                        <option value="allData">All Data (Use with CAUTION)</option>
                                  </select>
                              </div>
                              <div class="form-group">
-                                 <button type="submit" value="resetData" class="btn btn-primary btn-sm"
-                                     style="margin-left:0.5px;margin-bottom:0.5px;min-height:30px;">
+                                 <button onclick="return confirm('Are you sure? (This cannot be reversed.)')" type="submit" name="resetData" class="btn btn-primary btn-sm" style="margin-left:0.5px;margin-bottom:0.5px;min-height:30px;">
                                      <i class="fas fa-power-off fa-s right"></i></button>
                              </div>
                      </form>

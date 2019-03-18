@@ -65,6 +65,13 @@ require_once(__DIR__ . '/../oc-functions.php');
         $adminMessage = $_SESSION['adminMessage'];
         unset($_SESSION['adminMessage']);
     }
+
+    $successMessage = "";
+    if(isset($_SESSION['successMessage']))
+    {
+        $successMessage = $_SESSION['successMessage'];
+        unset($_SESSION['successMessage']);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -196,7 +203,7 @@ require_once(__DIR__ . '/../oc-functions.php');
                                 </div>
                                 <!-- ./ x_title -->
                                 <div class="x_content">
-                                    <?php echo $adminMessage;?>
+                                    <?php echo $adminMessage; echo $successMessage; ?>
                                     <div class="row tile_count">
                                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                                             <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
