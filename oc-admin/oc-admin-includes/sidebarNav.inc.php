@@ -15,11 +15,12 @@
       <li>
           <a><i class="fas fa-table"></i> Game Data Manager <span class="fas fa-chevron-down"></span></a>
           <ul class="nav child_menu">
+            <li <?php if ( $pageName == "Citation Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/dataManagement/citationManager.php" disabled><i class="fas fa-exclamation-triangle"></i> Citation Manager</a></li>
+            <li <?php if ( $pageName == "Incident Types Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/dataManagement/incidentTypeManager.php" disabled><i class="fas fa-shield-alt"></i> Incdient Types Manager</a></li>
             <li <?php if ( $pageName == "Street Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/dataManagement/streetManager.php"><i class="fas fa-road"></i> Street Manager</a></li>
             <li <?php if ( $pageName == "Vehicles Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/dataManagement/vehicleManager.php"><i class="fas fa-motorcycle"></i> Vehicle Manager</a></li>
-            <li <?php if ( $pageName == "Weapon Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/dataManagement/weaponManager.php" disabled><i class="fas fa-shield-alt"></i> Weapon Manager</a></li>
-            <li <?php if ( $pageName == "Incident Types Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/dataManagement/incidentTypeManager.php" disabled><i class="fas fa-shield-alt"></i> Incdient Types</a></li>
             <li <?php if ( $pageName == "Warning Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/dataManagement/warningManager.php" disabled><i class="fas fa-exclamation-triangle"></i> Warning Manager</a></li>
+            <li <?php if ( $pageName == "Weapon Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/dataManagement/weaponManager.php" disabled><i class="fas fa-shield-alt"></i> Weapon Manager</a></li>
             <li><a type="button" data-toggle="modal" data-target="#dataManager"> <i class="fas fa-database"></i> Import/Export/Reset</a></li>
           </ul>
         </li>
