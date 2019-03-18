@@ -51,7 +51,7 @@ else if (isset($_POST['getVehicles']))
 } else if (isset($_POST['deleteVehicle']))
 {
     deleteVehicle();
-} 
+}
 
 //** Handle POST requests for Weapons **/
 else if (isset($_POST['getWeapons']))
@@ -81,6 +81,21 @@ else if (isset($_POST['getIncidentTypes']))
 } else if (isset($_POST['deleteIncidentType']))
 {
     deleteIncidentType();
+} 
+
+//** Handle POST requests for Warning Types **/
+else if (isset($_POST['getWarningTypes']))
+{
+    getWarningTypes();
+} else if (isset($_POST['getWarningTypeDetails']))
+{
+    getWarningTypeDetails();
+} else if (isset($_POST['editWarningType']))
+{
+    editWarningType();
+} else if (isset($_POST['deleteWarningType']))
+{
+    deleteWarningType();
 } 
 
 //** BEGIN Street Manager FUNCTIONS **//
@@ -933,6 +948,211 @@ function deleteIncidentType()
 }
 
 //** END Incident Type Manager FUNCTIONS **//
+
+//** BEGIN Warning Manager FUNCTIONS **/
+
+/**#@+
+* function getWarningTypes()
+* Fetches all Warning Types from the warning_types table with their resepective IDs and
+* types. It then builds the table and includes functions such as Edit and Delete
+* These functions are handled by editWarningType(); and deleteWarningTypes(); 
+*
+* @since OpenCAD 0.2.6
+*
+**/
+function getWarningTypes()
+{
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."warning_type");
+
+    if (!$result)
+    {
+        $_SESSION['error'] = $pdo->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $num_rows = $result->rowCount();
+    $pdo = null;
+
+    if ($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>There are no weapons in the database.</span></div>";
+        
+    } else {
+        echo '
+            <table id="allWarningTypes" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Warning Description</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        foreach($result as $row)
+        {
+            echo '
+            <tr>
+                <td>' . $row[1] . '</td>
+                <td>';
+        if ( DEMO_MODE == false) {
+            echo '<form action="'.BASE_URL.'/actions/dataActions.php" method="post">';
+            if ( ( MODERATOR_EDIT_WARNINGTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            {
+                echo '<button name="editWarningType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWarningTypeModal" class="btn btn-xs btn-link" >Edit</button>';
+            } else {
+                echo '<button name="editWarningType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWarningypeModal" class="btn btn-xs btn-link" disabled >Edit</button>';
+            }
+
+            if ( ( MODERATOR_DELETE_WARNINGTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            {
+                echo '<input name="deleteWarningType" type="submit" class="btn btn-xs btn-link" onclick="deleteWarningType(' . $row[0] . ')" value="Delete" />';
+            } else {
+                echo '<input name="deleteWarningType" type="submit" class="btn btn-xs btn-link" onclick="deleteWarningType(' . $row[0] . ')" value="Delete" disabled />';
+            }
+        } else {
+            echo ' </td>
+                <td>
+                <form action="'.BASE_URL.'/actions/dataActions.php" method="post">
+                <button name="editWarningType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWarningTypeModal" class="btn btn-xs btn-link" disabled >Edit</button>
+                <input name="deleteWarningType" type="submit" class="btn btn-xs btn-link" onclick="deleteWarningType(' . $row[0] . ')" value="Delete" disabled />
+                ';
+            }
+        
+        echo '<input name="warningTypeID" type="hidden" value=' . $row[0] . ' />
+            </form>
+            </td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
+
+/**#@+
+* function getWarningDetails();
+* Fetches details for a given edit modal in Weapon Manager.
+*
+* @since OpenCAD 0.2.6
+*
+**/
+function getWarningTypeDetails()
+{
+    $warningTypeID = htmlspecialchars($_POST['warningTypeID']);
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."warning_type WHERE id = ?");
+    $resStatus = $stmt->execute(array($warningTypeID));
+    $result = $stmt;
+
+    if (!$resStatus)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
+
+    $encode = array();
+    foreach($result as $row)
+    {
+        $encode["warningTypeID"] = $row[0];
+        $encode["warning_description"] = $row[1];
+    }
+    
+    echo json_encode($encode);
+
+}
+
+function editWarningType()
+{
+	$id	        	            = !empty($_POST['warningTypeID']) ? htmlspecialchars($_POST['warningTypeID']) : '';
+	$warning_description		= !empty($_POST['warning_description']) ? htmlspecialchars($_POST['warning_description']) : '';
+
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."warning_type SET warning_description = ? WHERE id = ?");
+    if ($stmt->execute(array($warning_description, $id))) {
+        $pdo = null;
+
+        //Let the user know their information was updated
+        $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Incident \"'.$warning_description.'\" edited successfully.</span></div>';
+        header("Location: ".BASE_URL."/oc-admin/dataManagement/warningTypeManager.php");
+    } else {
+        echo "Error updating record: " . print_r($stmt->errorInfo(), true);
+    }
+    $pdo = null;
+}
+
+/**#@+
+* function deleteWarningType()
+* Delete a given Warning Type from the database.
+*
+* @since OpenCAD 0.2.6
+*
+**/
+function deleteWarningType()
+{
+    session_start();
+    $id = htmlspecialchars($_POST['warningTypeID']);
+
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."warning_type WHERE id = ?");
+    if (!$stmt->execute(array($id)))
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $pdo = null;
+
+    session_start();
+    $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed incident type from database</span></div>';
+    header("Location: ".BASE_URL."/oc-admin/dataManagement/warningTypeManager.php");
+}
+
+//** END Warning Type Manager FUNCTIONS **//
 
 /**#@+
 * function resetData();
