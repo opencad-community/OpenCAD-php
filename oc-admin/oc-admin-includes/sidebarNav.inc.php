@@ -21,6 +21,7 @@
             <li <?php if ( $pageName == "Vehicles Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/dataManagement/vehicleManager.php"><i class="fas fa-motorcycle"></i> Vehicle Manager</a></li>
             <li <?php if ( $pageName == "Warning Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/dataManagement/warningManager.php" disabled><i class="fas fa-exclamation-triangle"></i> Warning Manager</a></li>
             <li <?php if ( $pageName == "Weapon Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/dataManagement/weaponManager.php" disabled><i class="fas fa-shield-alt"></i> Weapon Manager</a></li>
+            <li <?php if ( $pageName == "Radio Code Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/dataManagement/radioCodeManager.php" disabled><i class="fas fa-shield-alt"></i> Radio Code Manager</a></li>
             <li><a type="button" data-toggle="modal" data-target="#dataManager"> <i class="fas fa-database"></i> Import/Export/Reset</a></li>
           </ul>
         </li>
