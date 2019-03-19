@@ -274,7 +274,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel">Edit User</h4>
+                    <h4 class="modal-title" id="editUserModal">Edit User</h4>
                     <div class="clearifx">
                         <div class="speparator">
                             <h5><strong>ALWAYS</strong> select proper user role before saving.</h5>
@@ -347,10 +347,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             <!-- ./ modal-dialog modal-lg -->
         </div>
         <!-- ./ modal fade bs-example-modal-lg -->
+        </div>
+        
 
         <?php
-    include (__DIR__ . "/oc-admin-includes/globalModals.inc.php");
-    include (__DIR__ . "/../oc-includes/jquery-colsolidated.inc.php"); ?>
+    include(__DIR__ . "./oc-admin-includes/globalModals.inc.php");
+    include(__DIR__ . "/../oc-includes/jquery-colsolidated.inc.php"); ?>
 
         <script>
         $(document).ready(function() {
