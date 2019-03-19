@@ -1404,6 +1404,216 @@ function deleteWarrantType()
 
 //** END Warrant Type Manager FUNCTIONS **//
 
+//** BEGIN Radio Codes Manager FUNCTIONS **/
+
+/**#@+
+* function getRadioCodes()
+* Fetches all Warrant Types from the warrant_types table with their resepective IDs and
+* types. It then builds the table and includes functions such as Edit and Delete
+* These functions are handled by editRadioCode(); and deleteRadioCode(); 
+*
+* @since OpenCAD 0.2.6
+*
+**/
+function getRadioCodes()
+{
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."radio_codes");
+
+    if (!$result)
+    {
+        $_SESSION['error'] = $pdo->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $num_rows = $result->rowCount();
+    $pdo = null;
+
+    if ($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>There are no weapons in the database.</span></div>";
+        
+    } else {
+        echo '
+            <table id="allRadioCodes" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Code</th>
+                <th>Code Description</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        foreach($result as $row)
+        {
+            echo '
+            <tr>
+                <td>' . $row[1] . '</td>
+                <td>' . $row[2] . '</td>
+                <td>';
+        if ( DEMO_MODE == false) {
+            echo '<form action="'.BASE_URL.'/actions/dataActions.php" method="post">';
+            if ( ( MODERATOR_EDIT_WARNINGTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            {
+                echo '<button name="editRadioCode" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editRadioCodeModal" class="btn btn-xs btn-link" >Edit</button>';
+            } else {
+                echo '<button name="editRadioCode" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editRadioCodeModal" class="btn btn-xs btn-link" disabled >Edit</button>';
+            }
+
+            if ( ( MODERATOR_DELETE_WARNINGTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            {
+                echo '<input name="deleteRadioCode" type="submit" class="btn btn-xs btn-link" onclick="deleteRadioCode(' . $row[0] . ')" value="Delete" />';
+            } else {
+                echo '<input name="deleteRadioCode" type="submit" class="btn btn-xs btn-link" onclick="deleteRadioCode(' . $row[0] . ')" value="Delete" disabled />';
+            }
+        } else {
+            echo ' </td>
+                <td>
+                <form action="'.BASE_URL.'/actions/dataActions.php" method="post">
+                <button name="editRadioCode" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editRadioCodeModal" class="btn btn-xs btn-link" disabled >Edit</button>
+                <input name="deleteRadioCode" type="submit" class="btn btn-xs btn-link" onclick="deleteRadioCode(' . $row[0] . ')" value="Delete" disabled />
+                ';
+            }
+        
+        echo '<input name="warrantTypeID" type="hidden" value=' . $row[0] . ' />
+            </form>
+            </td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
+
+/**#@+
+* function getWarrantDetails();
+* Fetches details for a given edit modal in Warrant Types Manager.
+*
+* @since OpenCAD 0.2.6
+*
+**/
+function getRadioCodeDetails()
+{
+    $id = htmlspecialchars($_POST['id']);
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."radio_codes WHERE id = ?");
+    $resStatus = $stmt->execute(array($id));
+    $result = $stmt;
+
+    if (!$resStatus)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
+
+    $encode = array();
+    foreach($result as $row)
+    {
+        $encode["id"] = $row[0];
+        $encode["code"] = $row[1];
+        $encode["code_description"] = $row[2];
+    }
+    
+    echo json_encode($encode);
+
+}
+
+function editRadioCode()
+{
+    $id	        	        = !empty($_POST['id']) ? htmlspecialchars($_POST['id']) : '';
+    $code		            = !empty($_POST['code']) ? htmlspecialchars($_POST['code']) : '';
+    $code_description		= !empty($_POST['code_description']) ? htmlspecialchars($_POST['code_description']) : '';
+    $OnCall		            = !empty($_POST['OnCall']) ? htmlspecialchars($_POST['OnCall']) : '';
+
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."radio_codes SET code_description = ?, code = ? WHERE id = ?");
+    if ($stmt->execute(array($code_description, $code, $id))) {
+        $pdo = null;
+
+        //Let the user know their information was updated
+        $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Code '.$code.' – '.$code_description.'  edited successfully.</span></div>';
+        header("Location: ".BASE_URL."/oc-admin/dataManagement/radioCodesManager.php");
+    } else {
+        echo "Error updating record: " . print_r($stmt->errorInfo(), true);
+    }
+    $pdo = null;
+}
+
+/**#@+
+* function deleteRadioCode()
+* Delete a given Warrant Type from the database.
+*
+* @since OpenCAD 0.2.6
+*
+**/
+function deleteRadioCode()
+{
+    session_start();
+    $id = htmlspecialchars($_POST['warrantTypeID']);
+
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."radio_codes WHERE id = ?");
+    if (!$stmt->execute(array($id)))
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $pdo = null;
+
+    session_start();
+    $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed incident type from database</span></div>';
+    header("Location: ".BASE_URL."/oc-admin/dataManagement/warrantTypeManager.php");
+}
+
+//** END Radio Codes Manager FUNCTIONS **//
+
 /**#@+
 * function resetData();
 *
