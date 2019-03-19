@@ -241,8 +241,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Warning Description</label>
                             <div class="col-md-9">
-                                <input type="text" name="warning_description" class="form-control"
-                                    id="warning_description" />
+                                <input type="text" name="warning_description" class="form-control" id="warning_description" />
                                 <span class="fas fa-exclamation-triangle form-control-feedback right"
                                     aria-hidden="true"></span> </div>
                             <!-- ./ col-sm-9 -->
