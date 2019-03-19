@@ -1017,7 +1017,7 @@ function getWarningTypes()
         die();
     }
 
-    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."warning_type");
+    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."warning_types");
 
     if (!$result)
     {
@@ -1108,7 +1108,7 @@ function getWarningTypeDetails()
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."warning_type WHERE id = ?");
+    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."warning_types WHERE id = ?");
     $resStatus = $stmt->execute(array($warningTypeID));
     $result = $stmt;
 
@@ -1147,12 +1147,12 @@ function editWarningType()
     }
 
     
-    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."warning_type SET warning_description = ? WHERE id = ?");
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."warning_types SET warning_description = ? WHERE id = ?");
     if ($stmt->execute(array($warning_description, $id))) {
         $pdo = null;
 
         //Let the user know their information was updated
-        $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Incident \"'.$warning_description.'\" edited successfully.</span></div>';
+        $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Incident edited successfully.</span></div>';
         header("Location: ".BASE_URL."/oc-admin/dataManagement/warningTypeManager.php");
     } else {
         echo "Error updating record: " . print_r($stmt->errorInfo(), true);
@@ -1182,7 +1182,7 @@ function deleteWarningType()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."warning_type WHERE id = ?");
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."warning_types WHERE id = ?");
     if (!$stmt->execute(array($id)))
     {
         $_SESSION['error'] = $stmt->errorInfo();
