@@ -22,7 +22,7 @@
             <li <?php if ( $pageName == "Warning Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/dataManagement/warningTypeManager.php" disabled><i class="fas fa-exclamation-triangle"></i> Warning Manager</a></li>
             <li <?php if ( $pageName == "Warrant Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/dataManagement/warrantTypeManager.php" disabled><i class="fas fa-exclamation-triangle"></i> Warrant Manager</a></li>
             <li <?php if ( $pageName == "Weapon Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/dataManagement/weaponManager.php" disabled><i class="fas fa-shield-alt"></i> Weapon Manager</a></li>
-            <li <?php if ( $pageName == "Radio Code Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/dataManagement/radioCodeManager.php" disabled><i class="fas fa-shield-alt"></i> Radio Code Manager</a></li>
+            <li <?php if ( $pageName == "Radio Code Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/dataManagement/radioCodesManager.php" disabled><i class="fas fa-shield-alt"></i> Radio Code Manager</a></li>
             <li><a type="button" data-toggle="modal" data-target="#dataManager"> <i class="fas fa-database"></i> Import/Export/Reset</a></li>
           </ul>
         </li>
