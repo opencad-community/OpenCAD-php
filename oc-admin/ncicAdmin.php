@@ -23,7 +23,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     session_start();
 
-    // TODO: Verify user has permission to be on this page
+permissionDenied();
 
     // HACK
     $civName = "";
@@ -42,12 +42,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     require_once(__DIR__ . '/../oc-config.php');
     require_once(__DIR__ . '/../oc-functions.php');
-
     include(__DIR__ . './../actions/adminActions.php');
     include(__DIR__ . './../actions/ncicAdminActions.php');
     include("../actions/publicFunctions.php");
-
-
 
     if ( $_SESSION['admin_privilege'] == 3)
     {
@@ -65,7 +62,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     }
     else
     {
-      die("You do not have permission to be here. This has been recorded");
+      permissionDenied();
     }
 
 

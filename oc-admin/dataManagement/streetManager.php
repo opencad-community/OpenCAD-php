@@ -13,8 +13,9 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
     session_start();
-
-    // TODO: Verify user has permission to be on this page
+    require_once(__DIR__.'../../../oc-config.php');
+    require_once(__DIR__.'../../../oc-functions.php');
+    include(__DIR__ .'../../../actions/dataActions.php');
 
     if (empty($_SESSION['logged_in']))
     {
@@ -33,7 +34,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           //Do nothing
       }
     }
-    else if ($_SESSION['admin_privilege'] == 2)
+    else if ($_SESSION['admin_privilege'] == 2 && MODERAOTR_DATAMAN_STREETS == true)
     {
       if ($_SESSION['admin_privilege'] == 'Moderator')
       {
@@ -42,13 +43,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     }
     else
     {
-      die("You do not have permission to be here. This has been recorded");
-
-    }
-
-    require_once(__DIR__.'../../../oc-config.php');
-    require_once(__DIR__.'../../../oc-functions.php');
-    include(__DIR__ .'../../../actions/dataActions.php');    
+      permissionDenied();
+    }    
 
     $successMessage = "";
     if(isset($_SESSION['successMessage']))

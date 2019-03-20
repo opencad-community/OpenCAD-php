@@ -39,7 +39,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     }
     else
     {
-      die("You do not have permission to be here. Request access to dispatch through your administration.");
+      permissionDenied();
     }
 
     $citationMessage = "";
@@ -74,8 +74,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         $boloMessage = $_SESSION['boloMessage'];
         unset($_SESSION['boloMessage']);
     }
-
-
 ?>
 
 <!DOCTYPE html>

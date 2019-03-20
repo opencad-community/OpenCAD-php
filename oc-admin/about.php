@@ -15,7 +15,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     session_start();
 
-    // TODO: Verify user has permission to be on this page
+    require_once(__DIR__ . '/../oc-config.php');
+    require_once(__DIR__ . '/../oc-functions.php');
+    include("../actions/adminActions.php");
 
     if (empty($_SESSION['logged_in']))
     {
@@ -44,13 +46,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     }
     else
     {
-      die("You do not have permission to be here. This has been recorded");
-
+      permissionDenied();
     }
-
-require_once(__DIR__ . '/../oc-config.php');
-
-    include("../actions/adminActions.php");
 
     $accessMessage = "";
     if(isset($_SESSION['accessMessage']))

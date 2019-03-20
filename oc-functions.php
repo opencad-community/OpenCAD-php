@@ -206,4 +206,19 @@ function getOpenCADVersion()
 	echo '0.2.6';
 }
 
+/**#@+
+* function function()
+* Description of function
+*
+* @since version
+*
+**/
+function permissionDenied()
+{
+	$_SESSION['error_title'] = "Permission Denied";
+	$_SESSION['error'] = "Sorry, you don't have permission to access thia page.";
+	header('Location: '.BASE_URL.'/plugins/error/index.php');
+	die();
+}
+
 ?>

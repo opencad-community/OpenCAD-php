@@ -18,7 +18,7 @@ include("./actions/profileActions.php");
 
     session_start();
 
-    // TODO: Verify user has permission to be on this page
+permissionDenied();
 
     if (empty($_SESSION['logged_in']))
     {
