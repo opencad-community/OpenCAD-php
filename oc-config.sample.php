@@ -596,7 +596,7 @@ define('MODERATOR_NCIC_EDITOR', <MODERATOR_NCIC_EDITOR>);
   *
   * These settings will likely be moved to an *_options table in a future version.
   *
-  * @since OpenCAD version 0.2.3
+  * @since OpenCAD version 0.2.6
   **/
   define('MODERATOR_DATA_MANAGER', <MODERATOR_DATA_MANAGER>);
 
