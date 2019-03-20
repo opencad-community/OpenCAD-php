@@ -143,6 +143,217 @@ else if (isset($_POST['getRadioCodes']))
     deleteRadioCode();
 }
 
+
+//** BEGIN Citation Types Manager FUNCTIONS **/
+
+/**#@+
+* function getRadioCodes()
+* Fetches all Warrant Types from the warrant_types table with their resepective IDs and
+* types. It then builds the table and includes functions such as Edit and Delete
+* These functions are handled by editRadioCode(); and deleteRadioCode(); 
+*
+* @since OpenCAD 0.2.6
+*
+**/
+function getCitationTypes()
+{
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."citation_types");
+
+    if (!$result)
+    {
+        $_SESSION['error'] = $pdo->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $num_rows = $result->rowCount();
+    $pdo = null;
+
+    if ($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>There are no weapons in the database.</span></div>";
+        
+    } else {
+        echo '
+            <table id="allCitationTypes" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                <th>Citation Description</th>
+                <th>Citation Fine (Recommended)</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+        ';
+
+        foreach($result as $row)
+        {
+            echo '
+            <tr>
+                <td>' . $row[1] . '</td>
+                <td>' . $row[2] . '</td>
+                <td>';
+        if ( DEMO_MODE == false) {
+            echo '<form action="'.BASE_URL.'/actions/dataActions.php" method="post">';
+            if ( ( MODERATOR_EDIT_WARNINGTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            {
+                echo '<button name="editRadioCode" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editRadioCodeModal" class="btn btn-xs btn-link" >Edit</button>';
+            } else {
+                echo '<button name="editRadioCode" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editRadioCodeModal" class="btn btn-xs btn-link" disabled >Edit</button>';
+            }
+
+            if ( ( MODERATOR_DELETE_WARNINGTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            {
+                echo '<input name="deleteRadioCode" type="submit" class="btn btn-xs btn-link" onclick="deleteRadioCode(' . $row[0] . ')" value="Delete" />';
+            } else {
+                echo '<input name="deleteRadioCode" type="submit" class="btn btn-xs btn-link" onclick="deleteRadioCode(' . $row[0] . ')" value="Delete" disabled />';
+            }
+        } else {
+            echo ' </td>
+                <td>
+                <form action="'.BASE_URL.'/actions/dataActions.php" method="post">
+                <button name="editRadioCode" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editRadioCodeModal" class="btn btn-xs btn-link" disabled >Edit</button>
+                <input name="deleteRadioCode" type="submit" class="btn btn-xs btn-link" onclick="deleteRadioCode(' . $row[0] . ')" value="Delete" disabled />
+                ';
+            }
+        
+        echo '<input name="warrantTypeID" type="hidden" value=' . $row[0] . ' />
+            </form>
+            </td>
+            </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
+
+/**#@+
+* function getWarrantDetails();
+* Fetches details for a given edit modal in Warrant Types Manager.
+*
+* @since OpenCAD 0.2.6
+*
+**/
+function getCitationTypeDetails()
+{
+    $id = htmlspecialchars($_POST['id']);
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."citation_types WHERE id = ?");
+    $resStatus = $stmt->execute(array($id));
+    $result = $stmt;
+
+    if (!$resStatus)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
+
+    $encode = array();
+    foreach($result as $row)
+    {
+        $encode["id"] = $row[0];
+        $encode["citation_description"] = $row[1];
+        $encode["citation_fine"] = $row[2];
+    }
+    
+    echo json_encode($encode);
+
+}
+
+function editCitationType()
+{
+    $id	        	                = !empty($_POST['id']) ? htmlspecialchars($_POST['id']) : '';
+    $citation_description           = !empty($_POST['code']) ? htmlspecialchars($_POST['code']) : '';
+    $citation_fine  		        = !empty($_POST['code_description']) ? htmlspecialchars($_POST['code_description']) : '';
+
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."citation_types SET citation_description = ?, citation_fine = ? WHERE id = ?");
+    if ($stmt->execute(array($citation_description, $citation_fine, $id))) {
+        $pdo = null;
+
+        //Let the user know their information was updated
+        $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Citation '.$citation.' with a recommended fine of '.$code_fine.'  edited successfully.</span></div>';
+        header("Location: ".BASE_URL."/oc-admin/dataManagement/citationTypesManager.php");
+    } else {
+        echo "Error updating record: " . print_r($stmt->errorInfo(), true);
+    }
+    $pdo = null;
+}
+
+/**#@+
+* function deleteRadioCode()
+* Delete a given Warrant Type from the database.
+*
+* @since OpenCAD 0.2.6
+*
+**/
+function deleteCitationType()
+{
+    session_start();
+    $id = htmlspecialchars($_POST['citationTypeID']);
+
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."citation_types WHERE id = ?");
+    if (!$stmt->execute(array($id)))
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $pdo = null;
+
+    session_start();
+    $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed incident type from database</span></div>';
+    header("Location: ".BASE_URL."/oc-admin/dataManagement/citationTypesManager.php");
+}
+
+//** END Radio Codes Manager FUNCTIONS **//
+
+
 //** BEGIN Street Manager FUNCTIONS **//
 /**#@+
 * function getStreets()
@@ -1407,7 +1618,7 @@ function deleteWarrantType()
 //** BEGIN Radio Codes Manager FUNCTIONS **/
 
 /**#@+
-* function getRadioCodes()
+* function getCitationTypes()
 * Fetches all Warrant Types from the warrant_types table with their resepective IDs and
 * types. It then builds the table and includes functions such as Edit and Delete
 * These functions are handled by editRadioCode(); and deleteRadioCode(); 
@@ -1444,7 +1655,7 @@ function getRadioCodes()
         
     } else {
         echo '
-            <table id="allRadioCodes" class="table table-striped table-bordered">
+            <table id="allCitationTypes" class="table table-striped table-bordered">
             <thead>
                 <tr>
                 <th>Code</th>
@@ -1620,7 +1831,7 @@ function deleteRadioCode()
 * Accepts "dataType" from "Reset Data" and purges table based on input or  
 * if "allData" is passed then it will purge ALL user game specific data.
 *
-* Thi s function does not purge the users table or reset any administrative
+* This s function does not purge the users table or reset any administrative
 * permissions.
 * 
 * @since OpenCAD 0.2.6
