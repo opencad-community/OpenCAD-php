@@ -681,6 +681,16 @@ define('MODERATOR_NCIC_EDITOR', <MODERATOR_NCIC_EDITOR>);
   define('MODERATOR_DATAMAN_RADIOCODES', <MODERATOR_DATAMAN_RADIOCODES>);
 
 /**#@+
+  * MODERATOR_DATAMAN_IMPEXPRES
+   * If 'true' then Moderators will have access to the Radio Import/Export/Reset module of the Game Data Manager,
+  * else if 'false' then Moderators will be denied access.
+  *
+  * @since 0.2.6
+  *
+  **/
+  define('MODERATOR_DATAMAN_IMPEXPRES', <MODERATOR_DATAMAN_IMPRXPRES>);
+
+/**#@+
   * Extra Settings
 	*
   * These settings will likely be moved to an *_options table in a future version.

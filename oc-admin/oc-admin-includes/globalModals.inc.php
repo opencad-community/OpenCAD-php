@@ -1,3 +1,6 @@
+
+<?php if ( ( MODERATOR_DATAMAN_IMPEXPRES == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+{ ?>
  <!-- Data Manager Modal -->
  <div class="modal fade" id="dataManager" tabindex="-1" role="dialog" aria-hidden="true">
      <div class="modal-dialog modal-md">
@@ -74,3 +77,4 @@
  <!-- ./ modal-dialog modal-lg -->
  </div>
  <!-- ./ modal fade bs-example-modal-lg -->
+<?php } else {} ?>
