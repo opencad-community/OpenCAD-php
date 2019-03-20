@@ -307,6 +307,7 @@ CREATE TABLE `<DB_PREFIX>ncic_weapons` (
   `name_id` int(11) NOT NULL COMMENT 'Links to ncic_names db for driver information',
   `weapon_type` varchar(255) NOT NULL,
   `weapon_name` varchar(255) NOT NULL,
+  `weapon_notes` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
