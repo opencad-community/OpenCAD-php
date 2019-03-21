@@ -153,11 +153,18 @@
 						<h4><?php echo lang_key('BASE_URL'); ?></h4>
 						<p><?php echo lang_key('BASE_URL_notes'); ?></p>
 					</div>
-					<div id="API_SECURITY_notes" class="notes_container">
-						<h4><?php echo lang_key('API_SECURITY_URL'); ?></h4>
-						<p><?php echo lang_key('API_SECURITY_notes'); ?></p>
+					<div id="CAD_FROM_EMAIL_notes" class="notes_container">
+						<h4><?php echo lang_key('CAD_FROM_EMAIL_URL'); ?></h4>
+						<p><?php echo lang_key('CAD_FROM_EMAIL_notes'); ?></p>
 					</div>
-					
+					<div id="CAD_TO_EMAIL_notes" class="notes_container">
+						<h4><?php echo lang_key('CAD_TO_EMAIL_URL'); ?></h4>
+						<p><?php echo lang_key('CAD_TO_EMAIL_notes'); ?></p>
+					</div>
+					<div id="SECURITY_KEYS_notes" class="notes_container">
+						<h4><?php echo lang_key('SECURITY_KEYS_URL'); ?></h4>
+						<p><?php echo lang_key('SECURITY_KEYS_notes'); ?></p>
+					</div>
 					<img class="loading_img" src="images/ajax_loading.gif" alt="<?php echo lang_key('loading'); ?>..." />
 					<div id="notes_message" class="notes_container"></div>					
 				</td>
@@ -183,35 +190,35 @@
 			<tr><td colspan="2" nowrap height="50px">&nbsp;</td></tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('AUTH_KEY'); ?>&nbsp;<span class="star">*</span></td>
-				<td><input name="AUTH_KEY" id="AUTH_KEY" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="255" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('AUTH_KEY_notes')" onblur="textboxOnBlur('AUTH_KEY_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+				<td><input name="AUTH_KEY" id="AUTH_KEY" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="255" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('AUTH_KEY_notes')" onblur="textboxOnBlur('SECURITY_KEYS_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('SECURE_AUTH_KEY'); ?>&nbsp;<span class="star">*</span></td>
-				<td><input name="SECURE_AUTH_KEY" id="SECURE_AUTH_KEY" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('SECURE_AUTH_KEY_notes')" onblur="textboxOnBlur('SECURE_AUTH_KEY_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+				<td><input name="SECURE_AUTH_KEY" id="SECURE_AUTH_KEY" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('SECURE_AUTH_KEY_notes')" onblur="textboxOnBlur('SECURITY_KEYS_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('LOGGED_IN_KEY'); ?>&nbsp;<span class="star">*</span></td>
-				<td><input name="LOGGED_IN_KEY" id="LOGGED_IN_KEY" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('LOGGED_IN_KEY_notes')" onblur="textboxOnBlur('LOGGED_IN_KEY_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+				<td><input name="LOGGED_IN_KEY" id="LOGGED_IN_KEY" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('LOGGED_IN_KEY_notes')" onblur="textboxOnBlur('SECURITY_KEYS_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('NONCE_KEY'); ?>&nbsp;<span class="star">*</span></td>
-				<td><input name="NONCE_KEY" id="NONCE_KEY" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('NONCE_KEY_notes')" onblur="textboxOnBlur('NONCE_KEY_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+				<td><input name="NONCE_KEY" id="NONCE_KEY" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('NONCE_KEY_notes')" onblur="textboxOnBlur('SECURITY_KEYS_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('AUTH_SALT'); ?>&nbsp;<span class="star">*</span></td>
-				<td><input name="AUTH_SALT" id="AUTH_SALT" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('AUTH_SALT_notes')" onblur="textboxOnBlur('AUTH_SALT_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+				<td><input name="AUTH_SALT" id="AUTH_SALT" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('AUTH_SALT_notes')" onblur="textboxOnBlur('SECURITY_KEYS_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('SECURE_AUTH_SALT'); ?>&nbsp;<span class="star">*</span></td>
-				<td><input name="SECURE_AUTH_SALT" id="SECURE_AUTH_SALT" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('SECURE_AUTH_SALTL_notes')" onblur="textboxOnBlur('SECURE_AUTH_SALT_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+				<td><input name="SECURE_AUTH_SALT" id="SECURE_AUTH_SALT" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('SECURE_AUTH_SALTL_notes')" onblur="textboxOnBlur('SECURITY_KEYST_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('LOGGED_IN_SALT'); ?>&nbsp;<span class="star">*</span></td>
-				<td><input name="LOGGED_IN_SALT" id="LOGGED_IN_SALT" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('LOGGED_IN_SALT_notes')" onblur="textboxOnBlur('LOGGED_IN_SALT_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+				<td><input name="LOGGED_IN_SALT" id="LOGGED_IN_SALT" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('LOGGED_IN_SALT_notes')" onblur="textboxOnBlur('SECURITY_KEYS_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('NONCE_SALT'); ?>&nbsp;<span class="star">*</span></td>
-				<td><input name="NONCE_SALT" id="NONCE_SALT" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('NONCE_SALT_notes')" onblur="textboxOnBlur('NONCE_SALT_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+				<td><input name="NONCE_SALT" id="NONCE_SALT" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('NONCE_SALT_notes')" onblur="textboxOnBlur('SECURITY_KEYS_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
 			<tr>
 				<td colspan="2">
