@@ -920,7 +920,7 @@ function create_weapon()
     $userId = htmlspecialchars($_POST['civilian_names']);
     $wea_type;
     $wea_name;
-    $notes = htmlspecialchars($_POST['notes']);
+    $notes = htmlspecialchars($_POST['weapon_notes']);
 
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -932,7 +932,7 @@ function create_weapon()
         die();
     }
 
-    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_weapons (name_id, weapon_type, weapon_name, user_id, notes) VALUES (?, ?, ?, ?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_weapons (name_id, weapon_type, weapon_name, user_id, weapon_notes) VALUES (?, ?, ?, ?, ?)");
     $result = $stmt->execute(array($userId, $wea_type, $wea_name, $submittedById, $notes));
 
     if (!$result)
@@ -1004,7 +1004,7 @@ function ncicGetWeapons()
                 <td>'.$row[6].'</td>
                 <td>'.$row[2].'</td>
                 <td>'.$row[3].'</td>
-                <td>'.$row[5].'</td>
+                <td>'.$row[4].'</td>
                 <td>
                     <form action="".BASE_URL."/actions/civActions.php" method="post">
                     <input name="delete_weapon" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
