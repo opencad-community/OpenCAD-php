@@ -1031,7 +1031,7 @@ function getIncidentTypes()
 
     if ($num_rows == 0)
     {
-        echo "<div class=\"alert alert-info\"><span>There are no weapons in the database.</span></div>";
+        echo "<div class=\"alert alert-info\"><span>There are no incident types in the database.</span></div>";
         
     } else {
         echo '
@@ -1241,7 +1241,7 @@ function getWarningTypes()
 
     if ($num_rows == 0)
     {
-        echo "<div class=\"alert alert-info\"><span>There are no weapons in the database.</span></div>";
+        echo "<div class=\"alert alert-info\"><span>There are no warning types in the database.</span></div>";
         
     } else {
         echo '
@@ -1446,7 +1446,7 @@ function getWarrantTypes()
 
     if ($num_rows == 0)
     {
-        echo "<div class=\"alert alert-info\"><span>There are no weapons in the database.</span></div>";
+        echo "<div class=\"alert alert-info\"><span>There are no warrant types in the database.</span></div>";
         
     } else {
         echo '
@@ -1651,7 +1651,7 @@ function getRadioCodes()
 
     if ($num_rows == 0)
     {
-        echo "<div class=\"alert alert-info\"><span>There are no weapons in the database.</span></div>";
+        echo "<div class=\"alert alert-info\"><span>There are no radio codes in the database.</span></div>";
         
     } else {
         echo '
