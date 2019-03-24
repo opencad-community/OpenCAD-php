@@ -286,9 +286,9 @@ function getCitationTypeDetails()
 
 function editCitationType()
 {
-    $id	        	                = !empty($_POST['id']) ? htmlspecialchars($_POST['id']) : '';
-    $citation_description           = !empty($_POST['citation_description']) ? htmlspecialchars($_POST['code']) : '';
-    $citation_fine  		        = !empty($_POST['citation_fine']) ? htmlspecialchars($_POST['code_description']) : '';
+    $id	        	                = !empty($_POST['citationTypeID']) ? htmlspecialchars($_POST['citationTypeID']) : '';
+    $citation_description           = !empty($_POST['citation_description']) ? htmlspecialchars($_POST['citation_description']) : '';
+    $citation_fine  		        = !empty($_POST['citation_fine']) ? htmlspecialchars($_POST['code_fine']) : '';
 
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -301,13 +301,13 @@ function editCitationType()
     }
 
     
-    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."citation_types SET citation_description = ?, citation_fine = ? WHERE id = ?");
+     $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."citation_types SET citation_description = ?, citation_fine = ? WHERE id = ?");
     if ($stmt->execute(array($citation_description, $citation_fine, $id))) {
         $pdo = null;
 
         //Let the user know their information was updated
         $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Citation '.$citation.' with a recommended fine of '.$code_fine.'  edited successfully.</span></div>';
-        header("Location: ".BASE_URL."/oc-admin/dataManagement/citationTypesManager.php");
+        header("Location: ".BASE_URL."/oc-admin/dataManagement/citationTypeManager.php");
     } else {
         echo "Error updating record: " . print_r($stmt->errorInfo(), true);
     }
