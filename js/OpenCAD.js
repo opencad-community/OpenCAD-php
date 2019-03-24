@@ -340,7 +340,7 @@ $('#ncic_weapon_btn').on('click', function(e) {
             }
 
 
-            $('#ncic_weapon_return').append("Name: "+data['first_name']+" "+data['last_name']+"<br/>Weapon Permit: "+weapon_permit_text
+            $('#ncic_weapon_return').append("Name: "+data['first_name']+"<br/>Weapon Permit: "+weapon_permit_text
             +"<br/><br/>Weapons: <br/>"+weaponText);
 
             $("#ncic_weapon_return").attr("tabindex",-1).focus();
