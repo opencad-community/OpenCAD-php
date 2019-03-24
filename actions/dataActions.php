@@ -180,7 +180,7 @@ function getCitationTypes()
 
     if ($num_rows == 0)
     {
-        echo "<div class=\"alert alert-info\"><span>There are no weapons in the database.</span></div>";
+        echo "<div class=\"alert alert-info\"><span>There are no citation types in the database.</span></div>";
         
     } else {
         echo '
@@ -206,23 +206,23 @@ function getCitationTypes()
             echo '<form action="'.BASE_URL.'/actions/dataActions.php" method="post">';
             if ( ( MODERATOR_EDIT_WARNINGTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
             {
-                echo '<button name="editRadioCode" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editRadioCodeModal" class="btn btn-xs btn-link" >Edit</button>';
+                echo '<button name="editCitationType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editCitationTypeModal" class="btn btn-xs btn-link" >Edit</button>';
             } else {
-                echo '<button name="editRadioCode" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editRadioCodeModal" class="btn btn-xs btn-link" disabled >Edit</button>';
+                echo '<button name="editCitationType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editCitationTypeModal" class="btn btn-xs btn-link" disabled >Edit</button>';
             }
 
             if ( ( MODERATOR_DELETE_WARNINGTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
             {
-                echo '<input name="deleteRadioCode" type="submit" class="btn btn-xs btn-link" onclick="deleteRadioCode(' . $row[0] . ')" value="Delete" />';
+                echo '<input name="deleteCitationTypeCode" type="submit" class="btn btn-xs btn-link" onclick="deleteCitationTypeCode(' . $row[0] . ')" value="Delete" />';
             } else {
-                echo '<input name="deleteRadioCode" type="submit" class="btn btn-xs btn-link" onclick="deleteRadioCode(' . $row[0] . ')" value="Delete" disabled />';
+                echo '<input name="deleteCitationTypeCode" type="submit" class="btn btn-xs btn-link" onclick="deleteCitationTypeCode(' . $row[0] . ')" value="Delete" disabled />';
             }
         } else {
             echo ' </td>
                 <td>
                 <form action="'.BASE_URL.'/actions/dataActions.php" method="post">
-                <button name="editRadioCode" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editRadioCodeModal" class="btn btn-xs btn-link" disabled >Edit</button>
-                <input name="deleteRadioCode" type="submit" class="btn btn-xs btn-link" onclick="deleteRadioCode(' . $row[0] . ')" value="Delete" disabled />
+                <button name="editCitationType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editCitationTypeModal" class="btn btn-xs btn-link" disabled >Edit</button>
+                <input name="deleteCitationType" type="submit" class="btn btn-xs btn-link" onclick="deleteCitationTypeCode(' . $row[0] . ')" value="Delete" disabled />
                 ';
             }
         
@@ -287,8 +287,8 @@ function getCitationTypeDetails()
 function editCitationType()
 {
     $id	        	                = !empty($_POST['id']) ? htmlspecialchars($_POST['id']) : '';
-    $citation_description           = !empty($_POST['code']) ? htmlspecialchars($_POST['code']) : '';
-    $citation_fine  		        = !empty($_POST['code_description']) ? htmlspecialchars($_POST['code_description']) : '';
+    $citation_description           = !empty($_POST['citation_description']) ? htmlspecialchars($_POST['code']) : '';
+    $citation_fine  		        = !empty($_POST['citation_fine']) ? htmlspecialchars($_POST['code_description']) : '';
 
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -1655,7 +1655,7 @@ function getRadioCodes()
         
     } else {
         echo '
-            <table id="allCitationTypes" class="table table-striped table-bordered">
+            <table id="allRadioCodes" class="table table-striped table-bordered">
             <thead>
                 <tr>
                 <th>Code</th>
