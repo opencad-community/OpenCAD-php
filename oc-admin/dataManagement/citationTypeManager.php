@@ -237,7 +237,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Citation Description</label>
                             <div class="col-md-9">
-                                <input type="text" name="citation_description" class="form-control" id="citation_description" required />
+                                <input data-lpignore='true' type="text" name="citation_description" class="form-control" id="citation_description" required />
                                 <span class="fas fa-road form-control-feedback right" aria-hidden="true"></span>
                             </div>
                             <!-- ./ col-sm-9 -->
@@ -246,7 +246,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Citation Fine (Reccomended)</label>
                             <div class="col-md-9">
-                                <input type="text" name="citation_fine" class="form-control" id="citation_fine"/>
+                                <input data-lpignore='true' type="text" name="citation_fine" class="form-control" id="citation_fine"/>
                                 <span class="fas fa-map form-control-feedback right" aria-hidden="true"></span>
                             </div>
                             <!-- ./ col-sm-9 -->
@@ -256,8 +256,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <!-- ./ modal-body -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <input type="hidden" name="citationTypeID" id="citationTypeID" aria-hidden="true">
-                    <input type="submit" name="editCitationTpye" class="btn btn-primary" value="Edit Citation Type" />
+                    <input type="hidden" name="id" id="id" aria-hidden="true">
+                    <input type="submit" name="editCitationType" class="btn btn-primary" value="Edit Citation Type" />
                 </div>
                 <!-- ./ modal-footer -->
                 </form>
@@ -283,7 +283,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     <script>
     $('#editCitationTypeModal').on('show.bs.modal', function(e) {
         var $modal = $(this),
-            citationTypeID = e.relatedTarget.id;
+            id= e.relatedTarget.id;
 
         $.ajax({
             cache: false,
@@ -291,7 +291,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             url: '<?php echo BASE_URL; ?>/actions/dataActions.php',
             data: {
                 'getCitationTypeDetails': 'yes',
-                'id': citationTypeID
+                'id': id
             },
             success: function(result) {
                 console.log(result);
@@ -299,7 +299,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
                 $('input[name="citation_fine"]').val(data['citation_fine']);
                 $('input[name="citation_description"]').val(data['citation_description']);
-                $('input[name="citationTypeID"]').val(data['citationTypeID']);
+                $('input[name="id"]').val(data['id']);
             },
 
             error: function(exception) {

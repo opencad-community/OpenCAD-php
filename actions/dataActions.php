@@ -213,9 +213,9 @@ function getCitationTypes()
 
             if ( ( MODERATOR_DELETE_WARNINGTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
             {
-                echo '<input name="deleteCitationTypeCode" type="submit" class="btn btn-xs btn-link" onclick="deleteCitationTypeCode(' . $row[0] . ')" value="Delete" />';
+                echo '<input name="deleteCitationType" type="submit" class="btn btn-xs btn-link" onclick="deleteCitationType(' . $row[0] . ')" value="Delete" />';
             } else {
-                echo '<input name="deleteCitationTypeCode" type="submit" class="btn btn-xs btn-link" onclick="deleteCitationTypeCode(' . $row[0] . ')" value="Delete" disabled />';
+                echo '<input name="deleteCitationType" type="submit" class="btn btn-xs btn-link" onclick="deleteCitationType(' . $row[0] . ')" value="Delete" disabled />';
             }
         } else {
             echo ' </td>
@@ -286,9 +286,9 @@ function getCitationTypeDetails()
 
 function editCitationType()
 {
-    $id	        	                = !empty($_POST['citationTypeID']) ? htmlspecialchars($_POST['citationTypeID']) : '';
+    $id	        	                = !empty($_POST['id']) ? htmlspecialchars($_POST['id']) : '';
     $citation_description           = !empty($_POST['citation_description']) ? htmlspecialchars($_POST['citation_description']) : '';
-    $citation_fine  		        = !empty($_POST['citation_fine']) ? htmlspecialchars($_POST['code_fine']) : '';
+    $citation_fine  		        = !empty($_POST['citation_fine']) ? htmlspecialchars($_POST['citation_fine']) : '';
 
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -301,7 +301,7 @@ function editCitationType()
     }
 
     
-     $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."citation_types SET citation_description = ?, citation_fine = ? WHERE id = ?");
+     $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."citation_types SET	citation_description = ?, citation_fine = ? WHERE id = ?");
     if ($stmt->execute(array($citation_description, $citation_fine, $id))) {
         $pdo = null;
 
@@ -348,7 +348,7 @@ function deleteCitationType()
 
     session_start();
     $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed incident type from database</span></div>';
-    header("Location: ".BASE_URL."/oc-admin/dataManagement/citationTypesManager.php");
+    header("Location: ".BASE_URL."/oc-admin/dataManagement/citationTypeManager.php");
 }
 
 //** END Radio Codes Manager FUNCTIONS **//
