@@ -437,6 +437,15 @@ CREATE TABLE `<DB_PREFIX>users` (
 -- --------------------------------------------------------
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `<DB_PREFIX>users` (`id`, `name`, `email`, `password`, `identifier`, `admin_privilege`, `supervisor_privilege`, `password_reset`, `approved`, `suspend_reason`, `suspend_duration`) VALUES
+(1, '<NAME>', '<EMAIL>', '<PASSWORD>', '1A-1', 3, 1, 0, 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `<DB_PREFIX>user_departments`
 --
 
