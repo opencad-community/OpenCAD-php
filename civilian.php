@@ -1197,6 +1197,11 @@ permissionDenied();
                 </div>
                 <!-- ./ col-sm-9 -->
               </div>
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">Notes</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" name="weapon_notes" />
+                </div>
           </div>
           <!-- ./ modal-body -->
           <div class="modal-footer">
