@@ -1,5 +1,25 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.5
+-- https://www.phpmyadmin.net/
 --
--- Table structure for table `active_users`
+-- Host: localhost
+-- Generation Time: Mar 24, 2019 at 07:58 PM
+-- Server version: 10.3.11-MariaDB-log
+-- PHP Version: 7.3.2
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+--
+-- Database: `opencad`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `<DB_PREFIX>active_users`
 --
 
 CREATE TABLE `<DB_PREFIX>active_users` (
@@ -7,24 +27,23 @@ CREATE TABLE `<DB_PREFIX>active_users` (
   `callsign` varchar(255) NOT NULL COMMENT 'Unit Callsign',
   `status` int(11) NOT NULL COMMENT 'Unit status, 0=busy/unavailable, 1=available, 2=dispatcher',
   `status_detail` int(11) NOT NULL COMMENT 'Paired to Statuses table',
-  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT
+  `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `aop`
+-- Table structure for table `<DB_PREFIX>aop`
 --
 
 CREATE TABLE `<DB_PREFIX>aop` (
   `aop` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
-INSERT INTO `<DB_PREFIX>aop` (`aop`) VALUES
-('INIT AOP');
+-- --------------------------------------------------------
 
 --
--- Table structure for table `bolos_persons`
+-- Table structure for table `<DB_PREFIX>bolos_persons`
 --
 
 CREATE TABLE `<DB_PREFIX>bolos_persons` (
@@ -40,7 +59,7 @@ CREATE TABLE `<DB_PREFIX>bolos_persons` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bolos_vehicles`
+-- Table structure for table `<DB_PREFIX>bolos_vehicles`
 --
 
 CREATE TABLE `<DB_PREFIX>bolos_vehicles` (
@@ -57,52 +76,52 @@ CREATE TABLE `<DB_PREFIX>bolos_vehicles` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `calls`
+-- Table structure for table `<DB_PREFIX>calls`
 --
 
 CREATE TABLE `<DB_PREFIX>calls` (
   `call_id` int(11) NOT NULL,
   `call_type` text NOT NULL,
-  `call_primary` text,
+  `call_primary` text DEFAULT NULL,
   `call_street1` text NOT NULL,
-  `call_street2` text,
-  `call_street3` text,
+  `call_street2` text DEFAULT NULL,
+  `call_street3` text DEFAULT NULL,
   `call_narrative` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `calls_users`
+-- Table structure for table `<DB_PREFIX>calls_users`
 --
 
 CREATE TABLE `<DB_PREFIX>calls_users` (
   `call_id` int(11) NOT NULL,
   `identifier` varchar(255) NOT NULL,
   `callsign` varchar(255) NOT NULL,
-  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT
+  `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `call_history`
+-- Table structure for table `<DB_PREFIX>call_history`
 --
 
 CREATE TABLE `<DB_PREFIX>call_history` (
   `call_id` int(11) NOT NULL,
   `call_type` text NOT NULL,
-  `call_primary` text,
+  `call_primary` text DEFAULT NULL,
   `call_street1` text NOT NULL,
-  `call_street2` text,
-  `call_street3` text,
+  `call_street2` text DEFAULT NULL,
+  `call_street3` text DEFAULT NULL,
   `call_narrative` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `call_list`
+-- Table structure for table `<DB_PREFIX>call_list`
 --
 
 CREATE TABLE `<DB_PREFIX>call_list` (
@@ -112,18 +131,19 @@ CREATE TABLE `<DB_PREFIX>call_list` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `citations`
+-- Table structure for table `<DB_PREFIX>citation_types`
 --
 
-CREATE TABLE `<DB_PREFIX>citations` (
+CREATE TABLE `<DB_PREFIX>citation_types` (
   `id` int(11) NOT NULL,
-  `citation_name` varchar(255) NOT NULL
+  `citation_description` varchar(255) NOT NULL,
+  `citation_fine` decimal(6,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `civilian_names`
+-- Table structure for table `<DB_PREFIX>civilian_names`
 --
 
 CREATE TABLE `<DB_PREFIX>civilian_names` (
@@ -134,7 +154,19 @@ CREATE TABLE `<DB_PREFIX>civilian_names` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `colors`
+-- Table structure for table `<DB_PREFIX>codes`
+--
+
+CREATE TABLE `<DB_PREFIX>codes` (
+  `id` int(11) NOT NULL COMMENT 'id of 10-code',
+  `10code_name` int(11) NOT NULL,
+  `10code_desc` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `<DB_PREFIX>colors`
 --
 
 CREATE TABLE `<DB_PREFIX>colors` (
@@ -146,7 +178,18 @@ CREATE TABLE `<DB_PREFIX>colors` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `departments`
+-- Table structure for table `<DB_PREFIX>config`
+--
+
+CREATE TABLE `<DB_PREFIX>config` (
+  `key` varchar(80) NOT NULL,
+  `value` varchar(80) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `<DB_PREFIX>departments`
 --
 
 CREATE TABLE `<DB_PREFIX>departments` (
@@ -160,7 +203,7 @@ CREATE TABLE `<DB_PREFIX>departments` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dispatchers`
+-- Table structure for table `<DB_PREFIX>dispatchers`
 --
 
 CREATE TABLE `<DB_PREFIX>dispatchers` (
@@ -172,7 +215,7 @@ CREATE TABLE `<DB_PREFIX>dispatchers` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `genders`
+-- Table structure for table `<DB_PREFIX>genders`
 --
 
 CREATE TABLE `<DB_PREFIX>genders` (
@@ -183,10 +226,11 @@ CREATE TABLE `<DB_PREFIX>genders` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `incident_type`
+-- Table structure for table `<DB_PREFIX>incident_type`
 --
 
 CREATE TABLE `<DB_PREFIX>incident_type` (
+  `id` int(11) NOT NULL,
   `code_id` varchar(255) NOT NULL DEFAULT '',
   `code_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -194,7 +238,7 @@ CREATE TABLE `<DB_PREFIX>incident_type` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ncic_arrests`
+-- Table structure for table `<DB_PREFIX>ncic_arrests`
 --
 
 CREATE TABLE `<DB_PREFIX>ncic_arrests` (
@@ -209,12 +253,12 @@ CREATE TABLE `<DB_PREFIX>ncic_arrests` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ncic_citations`
+-- Table structure for table `<DB_PREFIX>ncic_citations`
 --
 
 CREATE TABLE `<DB_PREFIX>ncic_citations` (
   `id` int(11) NOT NULL,
-  `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '0 = Pending, 1 = Approved/Active',
+  `status` tinyint(2) NOT NULL DEFAULT 0 COMMENT '0 = Pending, 1 = Approved/Active',
   `name_id` int(11) NOT NULL COMMENT 'Paired to ID of ncic_names table',
   `citation_name` varchar(255) NOT NULL,
   `citation_fine` int(11) NOT NULL,
@@ -225,7 +269,7 @@ CREATE TABLE `<DB_PREFIX>ncic_citations` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ncic_names`
+-- Table structure for table `<DB_PREFIX>ncic_names`
 --
 
 CREATE TABLE `<DB_PREFIX>ncic_names` (
@@ -247,7 +291,7 @@ CREATE TABLE `<DB_PREFIX>ncic_names` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ncic_plates`
+-- Table structure for table `<DB_PREFIX>ncic_plates`
 --
 
 CREATE TABLE `<DB_PREFIX>ncic_plates` (
@@ -261,19 +305,19 @@ CREATE TABLE `<DB_PREFIX>ncic_plates` (
   `veh_insurance` set('VALID','EXPIRED') NOT NULL DEFAULT 'VALID',
   `flags` set('NONE','STOLEN','WANTED','SUSPENDED REGISTRATION','UC FLAG','HPIU FLAG') NOT NULL DEFAULT 'NONE',
   `veh_reg_state` text NOT NULL,
-  `notes` text COMMENT 'Any special flags visible to dispatchers',
+  `notes` text DEFAULT NULL COMMENT 'Any special flags visible to dispatchers',
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ncic_warnings`
+-- Table structure for table `<DB_PREFIX>ncic_warnings`
 --
 
 CREATE TABLE `<DB_PREFIX>ncic_warnings` (
   `id` int(11) NOT NULL,
-  `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '0 = Pending, 1 = Approved/Active',
+  `status` tinyint(2) NOT NULL DEFAULT 0 COMMENT '0 = Pending, 1 = Approved/Active',
   `name_id` int(11) NOT NULL COMMENT 'Paired to ID of ncic_names table',
   `warning_name` varchar(255) NOT NULL,
   `issued_date` date DEFAULT NULL,
@@ -283,7 +327,7 @@ CREATE TABLE `<DB_PREFIX>ncic_warnings` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ncic_warrants`
+-- Table structure for table `<DB_PREFIX>ncic_warrants`
 --
 
 CREATE TABLE `<DB_PREFIX>ncic_warrants` (
@@ -299,7 +343,7 @@ CREATE TABLE `<DB_PREFIX>ncic_warrants` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ncic_weapons`
+-- Table structure for table `<DB_PREFIX>ncic_weapons`
 --
 
 CREATE TABLE `<DB_PREFIX>ncic_weapons` (
@@ -307,13 +351,14 @@ CREATE TABLE `<DB_PREFIX>ncic_weapons` (
   `name_id` int(11) NOT NULL COMMENT 'Links to ncic_names db for driver information',
   `weapon_type` varchar(255) NOT NULL,
   `weapon_name` varchar(255) NOT NULL,
-  `user_id` int(11) NOT NULL
+  `user_id` int(11) NOT NULL,
+  `notes` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `permissions`
+-- Table structure for table `<DB_PREFIX>permissions`
 --
 
 CREATE TABLE `<DB_PREFIX>permissions` (
@@ -324,7 +369,20 @@ CREATE TABLE `<DB_PREFIX>permissions` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `statuses`
+-- Table structure for table `<DB_PREFIX>radio_codes`
+--
+
+CREATE TABLE `<DB_PREFIX>radio_codes` (
+  `id` int(11) NOT NULL,
+  `code` varchar(10) NOT NULL,
+  `code_description` varchar(255) NOT NULL,
+  `onCall` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `<DB_PREFIX>statuses`
 --
 
 CREATE TABLE `<DB_PREFIX>statuses` (
@@ -335,7 +393,7 @@ CREATE TABLE `<DB_PREFIX>statuses` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `streets`
+-- Table structure for table `<DB_PREFIX>streets`
 --
 
 CREATE TABLE `<DB_PREFIX>streets` (
@@ -347,7 +405,7 @@ CREATE TABLE `<DB_PREFIX>streets` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tones`
+-- Table structure for table `<DB_PREFIX>tones`
 --
 
 CREATE TABLE `<DB_PREFIX>tones` (
@@ -359,36 +417,27 @@ CREATE TABLE `<DB_PREFIX>tones` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Table structure for table `<DB_PREFIX>users`
 --
 
 CREATE TABLE `<DB_PREFIX>users` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `email` varchar(255) NOT NULL,
-  `password` text,
+  `password` text DEFAULT NULL,
   `identifier` varchar(255) DEFAULT NULL,
-  `admin_privilege` int(1) NOT NULL DEFAULT '1' COMMENT 'If 1 then user does not possess any administrative permissions, else if 2 then user possess Moderator privileges, else if 3 then user possess Administrator privileges.',
-  `supervisor_privilege` int(1) NOT NULL DEFAULT '1' COMMENT 'If 1 then user does not possess any supervisor privileges, else 2 then user possess supervisor privileges.',
-  `password_reset` int(1) NOT NULL DEFAULT '0' COMMENT '1 means password reset required. 0 means it''s not.',
-  `approved` int(1) NOT NULL DEFAULT '0' COMMENT 'Three main statuses: 0 means pending approval. 1 means has access. 2 means suspended',
-  `suspend_reason` tinytext COMMENT 'Stores the reason why a user is Suspended',
+  `admin_privilege` int(1) NOT NULL DEFAULT 1 COMMENT 'If 1 then user does not possess any administrative permissions, else if 2 then user possess Moderator privileges, else if 3 then user possess Administrator privileges.',
+  `supervisor_privilege` int(1) NOT NULL DEFAULT 1 COMMENT 'If 1 then user does not possess any supervisor privileges, else 2 then user possess supervisor privileges.',
+  `password_reset` int(1) NOT NULL DEFAULT 0 COMMENT '1 means password reset required. 0 means it''s not.',
+  `approved` int(1) NOT NULL DEFAULT 0 COMMENT 'Three main statuses: 0 means pending approval. 1 means has access. 2 means suspended',
+  `suspend_reason` tinytext DEFAULT NULL COMMENT 'Stores the reason why a user is Suspended',
   `suspend_duration` date DEFAULT NULL COMMENT 'Stores the duration a user is Suspended for'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='User table' ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
 --
--- Dumping data for table `users`
---
-
-INSERT INTO `<DB_PREFIX>users` (`id`, `name`, `email`, `password`, `identifier`, `admin_privilege`, `supervisor_privilege`, `password_reset`, `approved`, `suspend_reason`, `suspend_duration`) VALUES
-(1, '<NAME>', '<EMAIL>', '<PASSWORD>', '1A-1', 3, 1, 0, 1, NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_departments`
+-- Table structure for table `<DB_PREFIX>user_departments`
 --
 
 CREATE TABLE `<DB_PREFIX>user_departments` (
@@ -399,7 +448,7 @@ CREATE TABLE `<DB_PREFIX>user_departments` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_departments_temp`
+-- Table structure for table `<DB_PREFIX>user_departments_temp`
 --
 
 CREATE TABLE `<DB_PREFIX>user_departments_temp` (
@@ -410,7 +459,7 @@ CREATE TABLE `<DB_PREFIX>user_departments_temp` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vehicles`
+-- Table structure for table `<DB_PREFIX>vehicles`
 --
 
 CREATE TABLE `<DB_PREFIX>vehicles` (
@@ -422,7 +471,29 @@ CREATE TABLE `<DB_PREFIX>vehicles` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `weapons`
+-- Table structure for table `<DB_PREFIX>warning_types`
+--
+
+CREATE TABLE `<DB_PREFIX>warning_types` (
+  `id` int(11) NOT NULL,
+  `warning_description` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `<DB_PREFIX>warrant_types`
+--
+
+CREATE TABLE `<DB_PREFIX>warrant_types` (
+  `id` int(11) NOT NULL,
+  `warrant_description` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `<DB_PREFIX>weapons`
 --
 
 CREATE TABLE `<DB_PREFIX>weapons` (
@@ -432,106 +503,139 @@ CREATE TABLE `<DB_PREFIX>weapons` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Table structure for table `config`
---
-
-CREATE TABLE `<DB_PREFIX>config` (
-  `key` varchar(80) NOT NULL,
-  `value` varchar(80)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `active_users`
+-- Indexes for table `<DB_PREFIX>active_users`
 --
 ALTER TABLE `<DB_PREFIX>active_users`
+  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `identifier` (`identifier`) USING BTREE;
 
-
 --
--- Indexes for table `bolos_persons`
+-- Indexes for table `<DB_PREFIX>bolos_persons`
 --
 ALTER TABLE `<DB_PREFIX>bolos_persons`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Indexes for table `bolos_vehicles`
+-- Indexes for table `<DB_PREFIX>bolos_vehicles`
 --
 ALTER TABLE `<DB_PREFIX>bolos_vehicles`
   ADD PRIMARY KEY (`id`);
 
-
-  --
-  -- Indexes for table `dispatchers`
-  --
-  ALTER TABLE `<DB_PREFIX>dispatchers`
-    ADD UNIQUE KEY `identifier` (`identifier`);
+--
+-- Indexes for table `<DB_PREFIX>calls_users`
+--
+ALTER TABLE `<DB_PREFIX>calls_users`
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ncic_arrests`
+-- Indexes for table `<DB_PREFIX>citation_types`
+--
+ALTER TABLE `<DB_PREFIX>citation_types`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `<DB_PREFIX>codes`
+--
+ALTER TABLE `<DB_PREFIX>codes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `<DB_PREFIX>dispatchers`
+--
+ALTER TABLE `<DB_PREFIX>dispatchers`
+  ADD UNIQUE KEY `identifier` (`identifier`);
+
+--
+-- Indexes for table `<DB_PREFIX>incident_type`
+--
+ALTER TABLE `<DB_PREFIX>incident_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `<DB_PREFIX>ncic_arrests`
 --
 ALTER TABLE `<DB_PREFIX>ncic_arrests`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ncic_citations`
+-- Indexes for table `<DB_PREFIX>ncic_citations`
 --
 ALTER TABLE `<DB_PREFIX>ncic_citations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ncic_names`
+-- Indexes for table `<DB_PREFIX>ncic_names`
 --
 ALTER TABLE `<DB_PREFIX>ncic_names`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ncic_plates`
+-- Indexes for table `<DB_PREFIX>ncic_plates`
 --
 ALTER TABLE `<DB_PREFIX>ncic_plates`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ncic_warnings`
+-- Indexes for table `<DB_PREFIX>ncic_warnings`
 --
 ALTER TABLE `<DB_PREFIX>ncic_warnings`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ncic_warrants`
+-- Indexes for table `<DB_PREFIX>ncic_warrants`
 --
 ALTER TABLE `<DB_PREFIX>ncic_warrants`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ncic_weapons`
+-- Indexes for table `<DB_PREFIX>ncic_weapons`
 --
 ALTER TABLE `<DB_PREFIX>ncic_weapons`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `streets`
+-- Indexes for table `<DB_PREFIX>radio_codes`
+--
+ALTER TABLE `<DB_PREFIX>radio_codes`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `code` (`code`);
+
+--
+-- Indexes for table `<DB_PREFIX>streets`
 --
 ALTER TABLE `<DB_PREFIX>streets`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Indexes for table `<DB_PREFIX>users`
 --
 ALTER TABLE `<DB_PREFIX>users`
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- Indexes for table `vehicles`
+-- Indexes for table `<DB_PREFIX>vehicles`
 --
 ALTER TABLE `<DB_PREFIX>vehicles`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `weapons`
+-- Indexes for table `<DB_PREFIX>warning_types`
+--
+ALTER TABLE `<DB_PREFIX>warning_types`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `<DB_PREFIX>warrant_types`
+--
+ALTER TABLE `<DB_PREFIX>warrant_types`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `<DB_PREFIX>weapons`
 --
 ALTER TABLE `<DB_PREFIX>weapons`
   ADD PRIMARY KEY (`id`);
@@ -541,79 +645,128 @@ ALTER TABLE `<DB_PREFIX>weapons`
 --
 
 --
--- AUTO_INCREMENT for table `bolos_persons`
+-- AUTO_INCREMENT for table `<DB_PREFIX>active_users`
 --
-ALTER TABLE `<DB_PREFIX>bolos_persons`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `<DB_PREFIX>active_users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `bolos_vehicles`
+-- AUTO_INCREMENT for table `<DB_PREFIX>bolos_persons`
+--
+ALTER TABLE `<DB_PREFIX>bolos_persons`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `<DB_PREFIX>bolos_vehicles`
 --
 ALTER TABLE `<DB_PREFIX>bolos_vehicles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `ncic_arrests`
+-- AUTO_INCREMENT for table `<DB_PREFIX>calls_users`
+--
+ALTER TABLE `<DB_PREFIX>calls_users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `<DB_PREFIX>citation_types`
+--
+ALTER TABLE `<DB_PREFIX>citation_types`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `<DB_PREFIX>codes`
+--
+ALTER TABLE `<DB_PREFIX>codes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id of 10-code';
+
+--
+-- AUTO_INCREMENT for table `<DB_PREFIX>incident_type`
+--
+ALTER TABLE `<DB_PREFIX>incident_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `<DB_PREFIX>ncic_arrests`
 --
 ALTER TABLE `<DB_PREFIX>ncic_arrests`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `ncic_citations`
+-- AUTO_INCREMENT for table `<DB_PREFIX>ncic_citations`
 --
 ALTER TABLE `<DB_PREFIX>ncic_citations`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `ncic_names`
+-- AUTO_INCREMENT for table `<DB_PREFIX>ncic_names`
 --
 ALTER TABLE `<DB_PREFIX>ncic_names`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `ncic_plates`
+-- AUTO_INCREMENT for table `<DB_PREFIX>ncic_plates`
 --
 ALTER TABLE `<DB_PREFIX>ncic_plates`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `ncic_warnings`
+-- AUTO_INCREMENT for table `<DB_PREFIX>ncic_warnings`
 --
 ALTER TABLE `<DB_PREFIX>ncic_warnings`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `ncic_warrants`
+-- AUTO_INCREMENT for table `<DB_PREFIX>ncic_warrants`
 --
 ALTER TABLE `<DB_PREFIX>ncic_warrants`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `ncic_weapons`
+-- AUTO_INCREMENT for table `<DB_PREFIX>ncic_weapons`
 --
 ALTER TABLE `<DB_PREFIX>ncic_weapons`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `streets`
+-- AUTO_INCREMENT for table `<DB_PREFIX>radio_codes`
+--
+ALTER TABLE `<DB_PREFIX>radio_codes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `<DB_PREFIX>streets`
 --
 ALTER TABLE `<DB_PREFIX>streets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key for each street', AUTO_INCREMENT=235;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key for each street';
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT for table `<DB_PREFIX>users`
 --
 ALTER TABLE `<DB_PREFIX>users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `vehicles`
+-- AUTO_INCREMENT for table `<DB_PREFIX>vehicles`
 --
 ALTER TABLE `<DB_PREFIX>vehicles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=503;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `weapons`
+-- AUTO_INCREMENT for table `<DB_PREFIX>warning_types`
+--
+ALTER TABLE `<DB_PREFIX>warning_types`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `<DB_PREFIX>warrant_types`
+--
+ALTER TABLE `<DB_PREFIX>warrant_types`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `<DB_PREFIX>weapons`
 --
 ALTER TABLE `<DB_PREFIX>weapons`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
