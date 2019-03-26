@@ -274,8 +274,11 @@ INSERT INTO `departments` (`department_id`, `department_name`, `department_short
 INSERT INTO `genders` (`id`, `genders`) VALUES
 (1, 'Male'),
 (2, 'Female'),
-(3, 'Transgender'),
-(4, 'Other');
+(3, 'Transgender Man'),
+(4, 'Transgender Woman'),
+(5, 'Intersex'),
+(6, 'Other');
+
 
 --
 -- Dumping data for table `incident_type`
