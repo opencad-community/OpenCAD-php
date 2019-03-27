@@ -147,10 +147,10 @@ else if (isset($_POST['getRadioCodes']))
 //** BEGIN Citation Types Manager FUNCTIONS **/
 
 /**#@+
-* function getRadioCodes()
+* function getCitationTypes()
 * Fetches all Warrant Types from the warrant_types table with their resepective IDs and
 * types. It then builds the table and includes functions such as Edit and Delete
-* These functions are handled by editRadioCode(); and deleteRadioCode(); 
+* These functions are handled by editCitationTypes(); and deleteCitationTypes(); 
 *
 * @since OpenCAD 0.2.6
 *
@@ -241,7 +241,7 @@ function getCitationTypes()
 }
 
 /**#@+
-* function getWarrantDetails();
+* function getCitationTypeDetails();
 * Fetches details for a given edit modal in Warrant Types Manager.
 *
 * @since OpenCAD 0.2.6
@@ -315,7 +315,7 @@ function editCitationType()
 }
 
 /**#@+
-* function deleteRadioCode()
+* function deleteCitationType()
 * Delete a given Warrant Type from the database.
 *
 * @since OpenCAD 0.2.6
@@ -1092,7 +1092,7 @@ function getIncidentTypes()
 }
 
 /**#@+
-* function getWeaponDetails();
+* function getIncidentTypeDetails();
 * Fetches details for a given edit modal in Weapon Manager.
 *
 * @since OpenCAD 0.2.6
@@ -1505,7 +1505,7 @@ function getWarrantTypes()
 }
 
 /**#@+
-* function getWarrantDetails();
+* function getWarrantTypeDetails();
 * Fetches details for a given edit modal in Warrant Types Manager.
 *
 * @since OpenCAD 0.2.6
@@ -1618,7 +1618,7 @@ function deleteWarrantType()
 //** BEGIN Radio Codes Manager FUNCTIONS **/
 
 /**#@+
-* function getCitationTypes()
+* function getRadioCodes()
 * Fetches all Warrant Types from the warrant_types table with their resepective IDs and
 * types. It then builds the table and includes functions such as Edit and Delete
 * These functions are handled by editRadioCode(); and deleteRadioCode(); 
@@ -1712,7 +1712,7 @@ function getRadioCodes()
 }
 
 /**#@+
-* function getWarrantDetails();
+* function getRadioCodeDetails();
 * Fetches details for a given edit modal in Warrant Types Manager.
 *
 * @since OpenCAD 0.2.6
