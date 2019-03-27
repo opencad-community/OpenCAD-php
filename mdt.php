@@ -14,8 +14,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 
     session_start();
-permissionDenied();
-
     if (empty($_SESSION['logged_in']))
     {
         header('Location: /index.php');

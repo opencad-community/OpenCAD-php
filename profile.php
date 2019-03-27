@@ -17,9 +17,6 @@ require("./actions/generalActions.php");
 include("./actions/profileActions.php");
 
     session_start();
-
-permissionDenied();
-
     if (empty($_SESSION['logged_in']))
     {
         header('Location: ./index.php');

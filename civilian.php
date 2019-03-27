@@ -16,7 +16,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     include("./actions/civActions.php");
     include("./actions/generalActions.php");
     include("./actions/publicFunctions.php");
-permissionDenied();
 
     if (empty($_SESSION['logged_in']))
     {
