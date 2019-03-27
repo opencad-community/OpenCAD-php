@@ -1468,14 +1468,14 @@ function getWarrantTypes()
                 <td>';
         if ( DEMO_MODE == false) {
             echo '<form action="'.BASE_URL.'/actions/dataActions.php" method="post">';
-            if ( ( MODERATOR_EDIT_WARNINGTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            if ( ( MODERATOR_EDIT_WARRANTTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
             {
                 echo '<button name="editWarrantType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWarrantTypeModal" class="btn btn-xs btn-link" >Edit</button>';
             } else {
                 echo '<button name="editWarrantType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWarrantypeModal" class="btn btn-xs btn-link" disabled >Edit</button>';
             }
 
-            if ( ( MODERATOR_DELETE_WARNINGTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            if ( ( MODERATOR_DELETE_WARRANTTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
             {
                 echo '<input name="deleteWarrantType" type="submit" class="btn btn-xs btn-link" onclick="deleteWarrantType(' . $row[0] . ')" value="Delete" />';
             } else {
@@ -1524,7 +1524,7 @@ function getWarrantTypeDetails()
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."warrant_type WHERE id = ?");
+    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."warrant_types WHERE id = ?");
     $resStatus = $stmt->execute(array($warrantTypeID));
     $result = $stmt;
 
@@ -1563,12 +1563,12 @@ function editWarrantType()
     }
 
     
-    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."warrant_type SET warrant_description = ? WHERE id = ?");
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."warrant_types SET warrant_description = ? WHERE id = ?");
     if ($stmt->execute(array($warrant_description, $id))) {
         $pdo = null;
 
         //Let the user know their information was updated
-        $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Incident \"'.$warrant_description.'\" edited successfully.</span></div>';
+        $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Warrant type "'.$warrant_description.'" edited successfully.</span></div>';
         header("Location: ".BASE_URL."/oc-admin/dataManagement/warrantTypeManager.php");
     } else {
         echo "Error updating record: " . print_r($stmt->errorInfo(), true);
@@ -1598,7 +1598,7 @@ function deleteWarrantType()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."warrant_type WHERE id = ?");
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."warrant_types WHERE id = ?");
     if (!$stmt->execute(array($id)))
     {
         $_SESSION['error'] = $stmt->errorInfo();
@@ -1609,7 +1609,7 @@ function deleteWarrantType()
     $pdo = null;
 
     session_start();
-    $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed incident type from database</span></div>';
+    $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed warrant type from database</span></div>';
     header("Location: ".BASE_URL."/oc-admin/dataManagement/warrantTypeManager.php");
 }
 

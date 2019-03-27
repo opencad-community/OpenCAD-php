@@ -237,8 +237,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Warrant Description</label>
                             <div class="col-md-9">
-                                <input type="text" name="warning_description" class="form-control"
-                                    id="warning_description" />
+                                <input type="text" name="warrant_description" class="form-control"
+                                    id="warrant_description" />
                                 <span class="fas fa-exclamation-triangle form-control-feedback right"
                                     aria-hidden="true"></span> </div>
                             <!-- ./ col-sm-9 -->
@@ -248,7 +248,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <!-- ./ modal-body -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <input type="hidden" name="warningTypeID" id="warningTypeID" aria-hidden="true">
+                    <input type="hidden" name="warrantTypeID" id="warrantTypeID" aria-hidden="true">
                     <input type="submit" name="editWarrantType" class="btn btn-primary" value="Edit Warrant Type" />
                 </div>
                 <!-- ./ modal-footer -->
@@ -266,14 +266,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     <script>
     $(document).ready(function() {
-        $('#allStreets').DataTable({});
+        $('#allWarrantTypes').DataTable({});
     });
     </script>
 
     <script>
     $('#editWarrantTypeModal').on('show.bs.modal', function(e) {
         var $modal = $(this),
-            warningTypeID = e.relatedTarget.id;
+            warrantTypeID = e.relatedTarget.id;
 
         $.ajax({
             cache: false,
@@ -281,14 +281,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             url: '<?php echo BASE_URL; ?>/actions/dataActions.php',
             data: {
                 'getWarrantTypeDetails': 'yes',
-                'warningTypeID': warningTypeID
+                'warrantTypeID': warrantTypeID
             },
             success: function(result) {
                 console.log(result);
                 data = JSON.parse(result);
 
-                $('input[name="warning_description"]').val(data['warning_description']);
-                $('input[name="warningTypeID"]').val(data['warningTypeID']);
+                $('input[name="warrant_description"]').val(data['warrant_description']);
+                $('input[name="warrantTypeID"]').val(data['warrantTypeID']);
             },
 
             error: function(exception) {
