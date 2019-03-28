@@ -219,7 +219,7 @@
 				<td><input type="radio" name="MODERATOR_REACTIVATE_USER" id="MODERATOR_REACTIVATE_USER" <?php echo ($MODERATOR_SUSPEND_WITHOUT_REASON=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_REACTIVATE_USER_WITHOUT_REASON_notes')" onblur="textboxOnBlur('MODERATOR_REACTIVATE_USER_notes')" value="true" />True
 				<input type="radio" name="MODERATOR_REACTIVATE_USER" id="MODERATOR_REACTIVATE_USER" <?php echo ($MODERATOR_SUSPEND_WITHOUT_REASON=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_REACTIVATE_USER_notes')" onblur="textboxOnBlur('MODERATOR_REACTIVATE_USER_notes')" value="false" />False</td>
 			</tr>
-			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>
+			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>	
 			<tr>
 			<td>&nbsp;<?php echo lang_key('MODERATOR_REMOVE_GROUP'); ?>&nbsp;</td>
 				<td><input type="radio" name="MODERATOR_REMOVE_GROUP" id="MODERATOR_REMOVE_GROUP" <?php echo ($MODERATOR_NCIC_EDITOR=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_REMOVE_GROUP_notes')" checked onblur="textboxOnBlur('MODERATOR_REMOVE_GROUP_notes')" value="true" />True
@@ -230,6 +230,11 @@
 				<td>&nbsp;<?php echo lang_key('MODERATOR_NCIC_EDITOR'); ?>&nbsp;</td>
 				<td><input type="radio" name="MODERATOR_NCIC_EDITOR" id="MODERATOR_NCIC_EDITOR" <?php echo ($MODERATOR_NCIC_EDITOR=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_NCIC_EDITOR_notes')" onblur="textboxOnBlur('MODERATOR_NCIC_EDITOR_notes')" value="true" />True
 				<input type="radio" name="MODERATOR_NCIC_EDITOR" id="MODERATOR_NCIC_EDITOR" <?php echo ($MODERATOR_NCIC_EDITOR=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_NCIC_EDITOR_notes')" onblur="textboxOnBlur('MODERATOR_NCIC_EDITOR_notes')" value="false" />False</td>
+			</tr>
+			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>
+			<td>&nbsp;<?php echo lang_key('MODERATOR_REMOVE_GROUP'); ?>&nbsp;</td>
+				<td><input type="radio" name="MODERATOR_REMOVE_GROUP" id="MODERATOR_REMOVE_GROUP" <?php echo ($MODERATOR_NCIC_EDITOR=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_REMOVE_GROUP_notes')" checked onblur="textboxOnBlur('MODERATOR_REMOVE_GROUP_notes')" value="true" />True
+				<input type="radio" name="MODERATOR_REMOVE_GROUP" id="MODERATOR_REMOVE_GROUP" <?php echo ($MODERATOR_NCIC_EDITOR=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_REMOVE_GROUP_notes')" onblur="textboxOnBlur('MODERATOR_REMOVE_GROUP_notes')" value="false" />False</td>
 			</tr>
 			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>
 			<tr>
