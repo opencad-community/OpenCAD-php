@@ -211,6 +211,15 @@
 								$config_file = str_replace('<MODERATOR_REMOVE_GROUP>', $MODERATOR_REMOVE_GROUP, $config_file);
 								$config_file = str_replace('<MODERATOR_DELETE_USER>', $MODERATOR_DELETE_USER, $config_file);
 								$config_file = str_replace('<MODERATOR_NCIC_EDITOR>', $MODERATOR_NCIC_EDITOR, $config_file);
+								$config_file = str_replace('<MODERATOR_DATA_MANAGER>', $MODERATOR_DATA_MANAGER, $config_file);
+								$config_file = str_replace('<MODERATOR_DATAMAN_CITATIONTYPES>', $MODERATOR_DATAMAN_CITATIONTYPES, $config_file);
+								$config_file = str_replace('<MODERATOR_DATAMAN_INCIDENTTYPES>', $MODERATOR_DATAMAN_INCIDENTTYPES, $config_file);
+								$config_file = str_replace('<MODERATOR_DATAMAN_RADIOCODES>', $MODERATOR_DATAMAN_RADIOCODES, $config_file);
+								$config_file = str_replace('<MODERATOR_DATAMAN_STREETS>', $MODERATOR_DATAMAN_STREETS, $config_file);
+								$config_file = str_replace('<MODERATOR_DATAMAN_VEHICLES>', $MODERATOR_DATAMAN_VEHICLES, $config_file);
+								$config_file = str_replace('<MODERATOR_DATAMAN_WARNINGTYPES>', $MODERATOR_DATAMAN_WARNINGTYPES, $config_file);								
+								$config_file = str_replace('<MODERATOR_DATAMAN_WARRANTTYPES>', $MODERATOR_DATAMAN_WARRANTTYPES, $config_file);
+								$config_file = str_replace('<MODERATOR_DATAMAN_WEAPONS>', $MODERATOR_DATAMAN_WEAPONS, $config_file);
 
 								$config_file = str_replace('<DEMO_MODE>', $DEMO_MODE, $config_file);
 								$config_file = str_replace('<USE_GRAVATAR>', $USE_GRAVATAR, $config_file);
