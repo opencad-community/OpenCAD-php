@@ -1017,7 +1017,7 @@ function getIncidentTypes()
         die();
     }
 
-    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."incident_type");
+    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."incident_types");
 
     if (!$result)
     {
@@ -1111,7 +1111,7 @@ function getIncidentTypeDetails()
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."incident_type WHERE id = ?");
+    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."incident_types WHERE id = ?");
     $resStatus = $stmt->execute(array($incidentTypeID));
     $result = $stmt;
 
@@ -1153,7 +1153,7 @@ function editIncidentType()
     }
 
     
-    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."incident_type SET code_id = ?, code_name = ? WHERE id = ?");
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."incident_types SET code_id = ?, code_name = ? WHERE id = ?");
     if ($stmt->execute(array($incident_code, $incident_name, $id))) {
         $pdo = null;
 
@@ -1188,7 +1188,7 @@ function deleteIncidentType()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."incident_type WHERE id = ?");
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."incident_types WHERE id = ?");
     if (!$stmt->execute(array($id)))
     {
         $_SESSION['error'] = $stmt->errorInfo();
@@ -1868,7 +1868,7 @@ function resetData()
                 "colors",
                 "departments",
                 "dispatchers",
-                "incident_type",
+                "incident_types",
                 "ncic_arrests",
                 "ncic_citations",
                 "ncic_names",
