@@ -240,7 +240,7 @@ CREATE TABLE `<DB_PREFIX>radio_codes` (
 CREATE TABLE `<DB_PREFIX>statuses` (
   `status_id` int(11) NOT NULL,
   `status_text` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMA  T=COMPACT;
 
 
 CREATE TABLE `<DB_PREFIX>streets` (
@@ -314,3 +314,6 @@ CREATE TABLE `<DB_PREFIX>weapons` (
   `weapon_name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+INSERT INTO `<DB_PREFIX>users` (`id`, `name`, `email`, `password`, `identifier`, `admin_privilege`, `supervisor_privilege`, `password_reset`, `approved`, `suspend_reason`, `suspend_duration`) VALUES
+(1, '<NAME>', '<EMAIL>', '<PASSWORD>', '1A-1', 3, 1, 0, 1, NULL, NULL);
