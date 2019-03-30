@@ -258,8 +258,9 @@ CREATE TABLE `<DB_PREFIX>ncic_plates` (
   `veh_model` text NOT NULL,
   `veh_pcolor` text NOT NULL,
   `veh_scolor` text NOT NULL,
-  `veh_insurance` set('VALID','EXPIRED') NOT NULL DEFAULT 'VALID',
-  `flags` set('NONE','STOLEN','WANTED','SUSPENDED REGISTRATION','UC FLAG','HPIU FLAG') NOT NULL DEFAULT 'NONE',
+  `veh_insurance type`set('CTP','Third Party','Comprehensive') NOT NULL DEFAULT 'CTP',
+  `veh_insurance` set('VALID','EXPIRED','CANCELED','SUSPENDED') NOT NULL DEFAULT 'VALID',
+  `flags` set('NONE','STOLEN','WANTED','SUSPENDED REGISTRATION','CANCELED REGISTRATION','EXPIRED REGISTRATION','INSURANCE FLAG','UC FLAG','HPIU FLAG') NOT NULL DEFAULT 'NONE',
   `veh_reg_state` text NOT NULL,
   `notes` text COMMENT 'Any special flags visible to dispatchers',
   `user_id` int(11) NOT NULL
