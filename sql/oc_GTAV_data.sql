@@ -2875,3 +2875,13 @@ INSERT INTO `weapons` (`id`, `weapon_type`, `weapon_name`) VALUES
 (86, 'Throwable', 'Proximity Mine'),
 (87, 'Throwable', 'Snowball'),
 (88, 'Throwable', 'Pipe Bomb');
+
+INSERT INTO `radio_codes` (`id`, `code`, `code_description`, `onCall`) VALUES
+(1, '10-8',			'Available', 2),
+(2, '10-6',			'Busy', 1),
+(3, '10-7C',		'Unavailable | On Call', 1),
+(4, '10-5',			'Meal Break', 1),
+(5, 'Signal 11',	'Traffic Stop', 1),
+(6, '10-7U',		'Unavailable', 1),
+(7, '10-23',		'Arrived on Scene', 1),
+(8, '10-65',		'Transporting Prisoner', 1);
