@@ -240,7 +240,7 @@ CREATE TABLE `<DB_PREFIX>radio_codes` (
 CREATE TABLE `<DB_PREFIX>statuses` (
   `status_id` int(11) NOT NULL,
   `status_text` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMA  T=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
 CREATE TABLE `<DB_PREFIX>streets` (
