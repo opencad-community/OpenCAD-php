@@ -268,19 +268,6 @@ INSERT INTO `departments` (`department_id`, `department_name`, `department_short
 (9, 'Roadside Assistance', 'SARA', 'San Andreas Roadside Assistance', 0);
 
 --
--- Dumping data for table `genders`
---
-
-INSERT INTO `genders` (`id`, `genders`) VALUES
-(1, 'Male'),
-(2, 'Female'),
-(3, 'Transgender Man'),
-(4, 'Transgender Woman'),
-(5, 'Intersex'),
-(6, 'Other');
-
-
---
 -- Dumping data for table `incident_type`
 --
 
