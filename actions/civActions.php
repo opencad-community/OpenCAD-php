@@ -131,6 +131,9 @@ function ncicGetNames()
                 <th>Gender</th>
                 <th>Race</th>
                 <th>DL Status</th>
+                <th>DL Type</th>
+                <th>DL Class</th>
+                <th>DL Issuer</th>
                 <th>Hair Color</th>
                 <th>Build</th>
 				<th>Weapon Status</th>
@@ -154,7 +157,10 @@ function ncicGetNames()
                 <td>'.$row[9].'</td>
                 <td>'.$row[10].'</td>
                 <td>'.$row[11].'</td>
-				<td>'.$row[12].'</td>
+                <td>'.$row[12].'</td>
+                <td>'.$row[13].'</td>
+                <td>'.$row[14].'</td>
+                <td>'.$row[15].'</td>
                 <td>
                     <button name="edit_name" data-toggle="modal" data-target="#IdentityEditModal" id="edit_nameBtn" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
                     <form action="".BASE_URL."/actions/civActions.php" method="post">
