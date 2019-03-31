@@ -561,17 +561,44 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">License Status</label>
                   <div class="col-lg-10">
-                    <select name="civDL" class="form-control selectpicker" id="civDL" title="Select a license status" required>
-                <option value="Unobtained"> Unobtained </option>
-                <option value="Valid"> Valid </option>
-                <option value="Suspended"> Suspended </option>
-                <option value="Expired"> Expired </option>
-                </select>
-                </div>
-                <!-- ./ col-sm-9 -->
+                    <select name="civDLStatus" class="form-control selectpicker" id="civDLStatus" title="Select a license status" required>
+                      <?php getLicenseStatuses(); ?>
+                    </select>
+                  </div>
+                 <!-- ./ col-sm-9 -->
               </div>
               <!-- ./ form-group -->
               <div class="form-group row">
+                <label class="col-lg-2 control-label">License Types</label>
+                  <div class="col-lg-10">
+                    <select name="civDLType" class="form-control selectpicker" id="civDLType" title="Select a license type" required>
+                      <?php getLicenseTypes(); ?>
+                    </select>
+                  </div>
+                 <!-- ./ col-sm-9 -->
+                 </div>
+              <!-- ./ form-group -->
+                 <div class="form-group row">
+                <label class="col-lg-2 control-label">License Class</label>
+                  <div class="col-lg-10">
+                    <select name="civDLClass" class="form-control selectpicker" id="civDLClass" title="Select a license class" multiple="multiple" required>
+                      <?php getLicenseClasses(); ?>
+                    </select>
+                  </div>
+                 <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+              <div class="form-group row">
+                <label class="col-lg-2 control-label">License Issuer</label>
+                  <div class="col-lg-10">
+                    <select name="civDLIssuer" class="form-control selectpicker" id="civDLClass" title="Select a license issuer" required>
+                      <?php getLicenseIssuers(); ?>
+                    </select>
+                  </div>
+                 <!-- ./ col-sm-9 -->
+              </div>
+              <!-- ./ form-group -->
+          <div class="form-group row">
 				<label class="col-lg-2 control-label">Hair Color</label>
 				<div class="col-lg-10">
 				<select name="civHairReq" class="form-control selectpicker" id="civHairReq" title="Select a hair color" required>
@@ -694,12 +721,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">License Status</label>
                   <div class="col-lg-10">
                     <select name="civDL" class="form-control selectpicker civDL_picker" id="civDL" title="Select a license status" required>
-                <option value="Unobtained"> Unobtained </option>
-                <option value="Valid"> Valid </option>
-                <option value="Suspended"> Suspended </option>
-                <option value="Expired"> Expired </option>
-                </select>
-                </div>
+                      <?php getLicenseStatuses(); ?>
+                    </select>
+                  </div>
                 <!-- ./ col-sm-9 -->
               </div>
               <!-- ./ form-group -->
