@@ -15,6 +15,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     include("./actions/generalActions.php");
     include("./actions/dispatchActions.php");
     include("./actions/publicFunctions.php");
+    include("./actions/dataActions.php");
     session_start();
 
     // TODO: Verify user has permission to be on this page
@@ -723,7 +724,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <label class="col-lg-2 control-label">Incident Type</label>
                         <div class="col-lg-10">
                            <select class="form-control selectpicker" data-live-search="true" name="call_type" title="Incident Type" required>
-                              <?php getIncidentType();?>
+                              <?php getIncidentTypes();?>
                            </select>
                         </div>
                         <!-- ./ col-sm-9 -->

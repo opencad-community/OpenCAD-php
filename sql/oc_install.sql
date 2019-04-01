@@ -167,7 +167,7 @@ CREATE TABLE IF NOT EXISTS `<db_prefix>ncic_names` (
   `gender` set('Male','Female','Transgender Man','Transgender Woman','Intersex','Other') NOT NULL DEFAULT 'NONE',
   `race` text NOT NULL,
   `dl_status` set('Unobtained','Valid','Suspended','Canceled','Expired') NOT NULL DEFAULT 'Unobtained',
-  `dl_type` set('Learners','Provisional','Open, Identification Only') NOT NULL DEFAULT 'NONE',
+  `dl_type` set('Not Issued', 'Learners','Provisional','Open, Identification Only') NOT NULL DEFAULT 'NONE',
   `dl_class` set('Car','Light Rig','Heavy Rig','Boat','Motorbike','Military') NOT NULL DEFAULT 'NONE',
   `dl_Issued_by` set('Government','Military') NOT NULL DEFAULT 'NONE',
   `hair_color` text NOT NULL,

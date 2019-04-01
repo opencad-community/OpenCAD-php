@@ -246,13 +246,23 @@ $('#ncic_name_btn').on('click', function(e) {
             }
 
             var dl_status_text = "";
-            if (data['dl_status'] == "Valid")
+            if (data['dl_status'] == "None")
             {
-                dl_status_text = "<span style=\"color: green;\">Valid</span>";
+                dl_status_text = "<span style=\"color: red;\">None</span>";
             }
             else
             {
-            dl_status_text = "<span style=\"color: red;\">"+data['dl_status']+"</span>";
+            dl_status_text = "<span style=\"color: green;\">"+data['dl_status']+"</span>";
+            }
+
+            var dl_type_text = "";
+            if (data['dl_type'] == "Not Issued")
+            {
+                dl_type_text = "";
+            }
+            else
+            {
+            dl_type_text = "<span style=\"color: green;\">"+data['dl_type']+"</span>";
             }
 			
             var weapon_permit_text = "";
@@ -280,6 +290,7 @@ $('#ncic_name_btn').on('click', function(e) {
             +"<br/>Build: "+data['build']
             +"<br/>Address: "+data['address']
             +"<br/>DL Status: "+dl_status_text
+            +"<br/>DL Type:"+dl_type_text
 			+"<br/>Weapon Permit: "+weapon_permit_text
 			+"<br/>Deceased: "+deceased_text
 			+"<br/><br/>Warnings:<br/>"+warningText+"<br/><br/>Citations:<br/>"+citationText+"<br/>Arrests:<br/>"+arrestText+"<br/>Warrants:<br/>"+warrantText);
