@@ -95,6 +95,15 @@
 		$MODERATOR_NCIC_EDITOR = isset($_SESSION['MODERATOR_NCIC_EDITOR']) ? prepare_input($_SESSION['MODERATOR_NCIC_EDITOR']) : '';
 		$MODERATOR_DATA_MANAGER = isset($_SESSION['MODERATOR_DATA_MANAGER']) ? prepare_input($_SESSION['MODERATOR_DATA_MANAGER']) : '';
 
+		$MODERATOR_DATAMAN_CITATIONTYPES = isset($_POST['MODERATOR_DATAMAN_CITATIONTYPES']) ? prepare_input($_POST['MODERATOR_DATAMAN_CITATIONTYPES']) : '';
+		$MODERATOR_DATAMAN_INCIDENTTYPES = isset($_POST['MODERATOR_DATAMAN_INCIDENTTYPES']) ? prepare_input($_POST['MODERATOR_DATAMAN_INCIDENTTYPES']) : '';
+		$MODERATOR_DATAMAN_RADIOCODES = isset($_POST['MODERATOR_DATAMAN_RADIOCODES']) ? prepare_input($_POST['MODERATOR_DATAMAN_RADIOCODES']) : '';
+		$MODERATOR_DATAMAN_STREETS = isset($_POST['MODERATOR_DATAMAN_STREETS']) ? prepare_input($_POST['MODERATOR_DATAMAN_STREETS']) : '';		
+		$MODERATOR_DATAMAN_VEHICLES = isset($_POST['MODERATOR_DATAMAN_VEHICLES']) ? prepare_input($_POST['MODERATOR_DATAMAN_VEHICLES']) : '';
+		$MODERATOR_DATAMAN_WARNINGTYPES = isset($_POST['MODERATOR_DATAMAN_WARNINGTYPES']) ? prepare_input($_POST['MODERATOR_DATAMAN_WARNINGTYPES']) : '';	
+		$MODERATOR_DATAMAN_WARRANTTYPES = isset($_POST['MODERATOR_DATAMAN_WARRANTTYPES']) ? prepare_input($_POST['MODERATOR_DATAMAN_WARRANTTYPES']) : '';
+		$MODERATOR_DATAMAN_WEAPONS = isset($_POST['MODERATOR_DATAMAN_WEAPONS']) ? prepare_input($_POST['MODERATOR_DATAMAN_WEAPONS']) : '';
+
 		$DEMO_MODE = isset($_SESSION['DEMO_MODE']) ? prepare_input($_SESSION['DEMO_MODE']) : '';
 
 		$USE_GRAVATAR = isset($_SESSION['USE_GRAVATAR']) ? prepare_input($_SESSION['USE_GRAVATAR']) : '';
@@ -204,6 +213,14 @@
 								$config_file = str_replace('<MODERATOR_DELETE_USER>', $MODERATOR_DELETE_USER, $config_file);
 								$config_file = str_replace('<MODERATOR_NCIC_EDITOR>', $MODERATOR_NCIC_EDITOR, $config_file);
 								$config_file = str_replace('<MODERATOR_DATA_MANAGER>', $MODERATOR_DATA_MANAGER, $config_file);
+								$config_file = str_replace('<MODERATOR_DATAMAN_CITATIONTYPES>', $MODERATOR_DATAMAN_CITATIONTYPES, $config_file);
+								$config_file = str_replace('<MODERATOR_DATAMAN_INCIDENTTYPES>', $MODERATOR_DATAMAN_INCIDENTTYPES, $config_file);
+								$config_file = str_replace('<MODERATOR_DATAMAN_RADIOCODES>', $MODERATOR_DATAMAN_RADIOCODES, $config_file);
+								$config_file = str_replace('<MODERATOR_DATAMAN_STREETS>', $MODERATOR_DATAMAN_STREETS, $config_file);
+								$config_file = str_replace('<MODERATOR_DATAMAN_VEHICLES>', $MODERATOR_DATAMAN_VEHICLES, $config_file);
+								$config_file = str_replace('<MODERATOR_DATAMAN_WARNINGTYPES>', $MODERATOR_DATAMAN_WARNINGTYPES, $config_file);								
+								$config_file = str_replace('<MODERATOR_DATAMAN_WARRANTTYPES>', $MODERATOR_DATAMAN_WARRANTTYPES, $config_file);
+								$config_file = str_replace('<MODERATOR_DATAMAN_WEAPONS>', $MODERATOR_DATAMAN_WEAPONS, $config_file);
 
 								$config_file = str_replace('<DEMO_MODE>', $DEMO_MODE, $config_file);
 								$config_file = str_replace('<USE_GRAVATAR>', $USE_GRAVATAR, $config_file);
