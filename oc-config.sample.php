@@ -589,6 +589,108 @@ define('MODERATOR_DELETE_USER', <MODERATOR_DELETE_USER>);
 define('MODERATOR_NCIC_EDITOR', <MODERATOR_NCIC_EDITOR>);
 
 /**#@+
+  * MODERATOR_DATA_MANAGER
+  *
+  * If 'true' then Moderators will be able to access the Game Data Manager,
+  * else if 'false' then Moderators will not be able to access the Gam Data Manager.
+  *
+  * These settings will likely be moved to an *_options table in a future version.
+  *
+  * @since OpenCAD version 0.2.6
+  **/
+  define('MODERATOR_DATA_MANAGER', <MODERATOR_DATA_MANAGER>);
+
+  /**#@+
+  * MODERATOR_DATAMAN_STREETS
+  * If 'true' then Moderators will have access to the Streets Manager module of the Game Data Manager,
+  * else if 'false' then Moderators will be denied access.
+  *
+  * @since 0.2.6
+  *
+  **/
+  define('MODERATOR_DATAMAN_STREETS', <MODERATOR_DATAMAN_STREETS>);
+
+/**#@+
+  * MODERATOR_DATAMAN_VEHICLES
+  * If 'true' then Moderators will have access to the Vehiciels Manager module of the Game Data Manager,
+  * else if 'false' then Moderators will be denied access.
+  *
+  * @since 0.2.6
+  *
+  **/
+  define('MODERATOR_DATAMAN_VEHICLES', <MODERATOR_DATAMAN_VEHICLES>);
+
+  /**#@+
+  * MODERATOR_DATAMAN_WEAPONS
+  * If 'true' then Moderators will have access to the Weapoons Manager module of the Game Data Manager,
+  * else if 'false' then Moderators will be denied access.
+  *
+  * @since 0.2.6
+  *
+  **/
+  define('MODERATOR_DATAMAN_WEAPONS', <MODERATOR_DATAMAN_WEAPONS>);
+
+  /**#@+
+  * MODERATOR_DATAMAN_INCIDENTTYPES
+  * If 'true' then Moderators will have access to the Incident Types Manager module of the Game Data Manager,
+  * else if 'false' then Moderators will be denied access.
+  *
+  * @since 0.2.6
+  *
+  **/
+  define('MODERATOR_DATAMAN_INCIDENTTYPES', <MODERATOR_DATAMAN_INCIDENTTYPES>);
+
+  /**#@+
+  * MODERATOR_DATAMAN_WARNINGTYPES
+  * If 'true' then Moderators will have access to the Warning Types Manager module of the Game Data Manager,
+  * else if 'false' then Moderators will be denied access.
+  *
+  * @since 0.2.6
+  *
+  **/
+  define('MODERATOR_DATAMAN_WARNINGTYPES', <MODERATOR_DATAMAN_WARNINGTYPES>);
+
+/**#@+
+  * MODERATOR_DATAMAN_WARRANTTYPES
+  * If 'true' then Moderators will have access to the Warrant Types Manager module of the Game Data Manager,
+  * else if 'false' then Moderators will be denied access.
+  *
+  * @since 0.2.6
+  *
+  **/
+  define('MODERATOR_DATAMAN_WARRANTTYPES', <MODERATOR_DATAMAN_WARRANTTYPES>);
+
+/**#@+
+  * MODERATOR_DATAMAN_CITATIONTYPES
+  * If 'true' then Moderators will have access to the Citation Types Manager module of the Game Data Manager,
+  * else if 'false' then Moderators will be denied access.
+  *
+  * @since 0.2.6
+  *
+  **/
+  define('MODERATOR_DATAMAN_CITATIONTYPES', <MODERATOR_DATAMAN_CITATIONTYPES>);
+
+/**#@+
+  * MODERATOR_DATAMAN_RADIOCODES
+  * If 'true' then Moderators will have access to the Radio Codes Manager module of the Game Data Manager,
+  * else if 'false' then Moderators will be denied access.
+  *
+  * @since 0.2.6
+  *
+  **/
+  define('MODERATOR_DATAMAN_RADIOCODES', <MODERATOR_DATAMAN_RADIOCODES>);
+
+/**#@+
+  * MODERATOR_DATAMAN_IMPEXPRES
+   * If 'true' then Moderators will have access to the Radio Import/Export/Reset module of the Game Data Manager,
+  * else if 'false' then Moderators will be denied access.
+  *
+  * @since 0.2.6
+  *
+  **/
+  define('MODERATOR_DATAMAN_IMPEXPRES', <MODERATOR_DATAMAN_IMPRXPRES>);
+
+/**#@+
   * Extra Settings
 	*
   * These settings will likely be moved to an *_options table in a future version.

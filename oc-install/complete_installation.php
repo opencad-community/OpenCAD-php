@@ -93,6 +93,7 @@
 		$MODERATOR_REMOVE_GROUP = isset($_SESSION['MODERATOR_REMOVE_GROUP']) ? prepare_input($_SESSION['MODERATOR_REMOVE_GROUP']) : '';
 		$MODERATOR_DELETE_USER = isset($_SESSION['MODERATOR_DELETE_USER']) ? prepare_input($_SESSION['MODERATOR_DELETE_USER']) : '';
 		$MODERATOR_NCIC_EDITOR = isset($_SESSION['MODERATOR_NCIC_EDITOR']) ? prepare_input($_SESSION['MODERATOR_NCIC_EDITOR']) : '';
+		$MODERATOR_DATA_MANAGER = isset($_SESSION['MODERATOR_DATA_MANAGER']) ? prepare_input($_SESSION['MODERATOR_DATA_MANAGER']) : '';
 
 		$DEMO_MODE = isset($_SESSION['DEMO_MODE']) ? prepare_input($_SESSION['DEMO_MODE']) : '';
 
@@ -202,6 +203,7 @@
 								$config_file = str_replace('<MODERATOR_REMOVE_GROUP>', $MODERATOR_REMOVE_GROUP, $config_file);
 								$config_file = str_replace('<MODERATOR_DELETE_USER>', $MODERATOR_DELETE_USER, $config_file);
 								$config_file = str_replace('<MODERATOR_NCIC_EDITOR>', $MODERATOR_NCIC_EDITOR, $config_file);
+								$config_file = str_replace('<MODERATOR_DATA_MANAGER>', $MODERATOR_DATA_MANAGER, $config_file);
 
 								$config_file = str_replace('<DEMO_MODE>', $DEMO_MODE, $config_file);
 								$config_file = str_replace('<USE_GRAVATAR>', $USE_GRAVATAR, $config_file);

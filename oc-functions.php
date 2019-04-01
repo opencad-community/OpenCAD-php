@@ -51,8 +51,9 @@ if ( OC_DEBUG == "true" )
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ERROR | E_WARNING);
+		error_log();
 		echo "<pre>";
-		var_dump($_SESSION);
+		print_r($_SESSION);
 		echo "</pre>";
 	} else {
 		ini_set('display_errors', 0);
@@ -229,6 +230,21 @@ function generateRandomString($length = 10) {
 function getOpenCADVersion()
 {
 	echo '0.2.6';
+}
+
+/**#@+
+* function function()
+* Description of function
+*
+* @since version
+*
+**/
+function permissionDenied()
+{
+	$_SESSION['error_title'] = "Permission Denied";
+	$_SESSION['error'] = "Sorry, you don't have permission to access thia page.";
+	header('Location: '.BASE_URL.'/plugins/error/index.php');
+	die();
 }
 
 ?>

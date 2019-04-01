@@ -35,6 +35,136 @@ function toggleFullScreen() {
     }
 }
 
+
+function deleteUser(uid) {
+    var $tr = $(this).closest('tr');
+    var r = confirm("Are you sure you want to delete this user? This cannot be undone!");
+
+    if (r == true)
+    {
+        $.ajax({
+        type: "POST",
+        url: hdir + "actions/dispatchActions.php",
+        data: {
+            deleteUser: 'yes',
+            uid: uid
+        },
+        success: function(response)
+        {
+            console.log(response);
+            $tr.find('td').fadeOut(1000,function(){
+                $tr.remove();
+            });
+
+            new PNotify({
+            title: 'Success',
+            text: 'Successfully deleted user',
+            type: 'success',
+            styling: 'bootstrap3'
+            });
+
+            getCalls();
+        },
+        error : function(XMLHttpRequest, textStatus, errorThrown)
+        {
+            console.log("Error");
+        }
+
+        });
+    }
+    else
+    {
+        return; // Do nothing
+    }
+}
+
+
+function deleteStreet(streetID) {
+    var $tr = $(this).closest('tr');
+    var r = confirm("Are you sure you want to delete this street? This cannot be undone!");
+    console.log();
+    if (r == true)
+    {
+        
+        $.ajax({
+        type: "POST",
+        url: hdir + "actions/dataActions.php",
+        data: {
+            deleteStreet: 'yes',
+            streetID : streetID
+        },
+        success: function(response)
+        {
+            console.log(response);
+            $tr.find('td').fadeOut(1000,function(){
+                $tr.remove();
+            });
+
+            new PNotify({
+            title: 'Success',
+            text: 'Successfully deleted street',
+            type: 'success',
+            styling: 'bootstrap3'
+            });
+
+            getStreets();
+        },
+        error : function(XMLHttpRequest, textStatus, errorThrown)
+        {
+            console.log("Error");
+        }
+
+        });
+    }
+    else
+    {
+        return; // Do nothing
+    }
+}
+
+function deleteVehicle(vehicleID) {
+    var $tr = $(this).closest('tr');
+    var r = confirm("Are you sure you want to delete this vehicle?\n\nThis cannot be undone!");
+    console.log();
+    if (r == true)
+    {
+        
+        $.ajax({
+        type: "POST",
+        url: hdir + "actions/dataActions.php",
+        data: {
+            deleteVehicle: 'yes',
+            vehicleID : vehicleID
+        },
+        success: function(response)
+        {
+            console.log(response);
+            $tr.find('td').fadeOut(1000,function(){
+                $tr.remove();
+            });
+
+            new PNotify({
+            title: 'Success',
+            text: 'Vehicle successfully removed.',
+            type: 'success',
+            styling: 'bootstrap3'
+            });
+
+            getVehicles();
+        },
+        error : function(XMLHttpRequest, textStatus, errorThrown)
+        {
+            console.log("Error");
+        }
+
+        });
+    }
+    else
+    {
+        return; // Do nothing
+    }
+}
+
 // When the user presses enter in ncic_name it does a search
 $("#ncic_name").keyup(function(event){
     if(event.keyCode == 13){
@@ -687,48 +817,6 @@ $('#callDetails').on('show.bs.modal', function(e) {
         error:function(exception){alert('Exeption:'+exception);}
     });
 });
-
-function deleteUser(uid) {
-    var $tr = $(this).closest('tr');
-    var r = confirm("Are you sure you want to delete this user? This cannot be undone!");
-
-    if (r == true)
-    {
-        $.ajax({
-        type: "POST",
-        url: hdir + "actions/dispatchActions.php",
-        data: {
-            deleteUser: 'yes',
-            uid: uid
-        },
-        success: function(response)
-        {
-            console.log(response);
-            $tr.find('td').fadeOut(1000,function(){
-                $tr.remove();
-            });
-
-            new PNotify({
-            title: 'Success',
-            text: 'Successfully deleted user',
-            type: 'success',
-            styling: 'bootstrap3'
-            });
-
-            getCalls();
-        },
-        error : function(XMLHttpRequest, textStatus, errorThrown)
-        {
-            console.log("Error");
-        }
-
-        });
-    }
-    else
-    {
-        return; // Do nothing
-    }
-}
 
 // Clears calls
 function clearCall(btn_id) {

@@ -1,4 +1,4 @@
--- Adminer 4.7.2-dev MySQL dump
+-- Last updated for OpenCAD 0.2.6
 
 SET NAMES utf8;
 SET time_zone = '+00:00';
@@ -80,9 +80,11 @@ CREATE TABLE IF NOT EXISTS `<db_prefix>call_list` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>citations` (
-  `id` int(11) NOT NULL,
-  `citation_name` varchar(255) NOT NULL
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>citation_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `citation_description` varchar(255) NOT NULL,
+  `citation_fine` decimal(19,2) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
@@ -102,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `<db_prefix>colors` (
 CREATE TABLE IF NOT EXISTS `<db_prefix>config` (
   `key` varchar(80) NOT NULL,
   `value` varchar(80) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
 CREATE TABLE IF NOT EXISTS `<db_prefix>departments` (
@@ -128,13 +130,15 @@ CREATE TABLE IF NOT EXISTS `<db_prefix>genders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>incident_type` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>incident_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `code_id` varchar(255) NOT NULL DEFAULT '',
-  `code_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `code_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>ncic_arrests` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncic_arrests` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name_id` int(11) NOT NULL COMMENT 'Paired to ID of ncic_names table',
   `arrest_reason` varchar(255) NOT NULL,
@@ -142,10 +146,10 @@ CREATE TABLE IF NOT EXISTS `<db_prefix>ncic_arrests` (
   `issued_date` date DEFAULT NULL,
   `issued_by` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>ncic_citations` (
+CREATE TABLE `<DB_PREFIX>ncic_citations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `status` tinyint(2) NOT NULL DEFAULT 0 COMMENT '0 = Pending, 1 = Approved/Active',
   `name_id` int(11) NOT NULL COMMENT 'Paired to ID of ncic_names table',
@@ -154,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `<db_prefix>ncic_citations` (
   `issued_date` date DEFAULT NULL,
   `issued_by` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
 CREATE TABLE IF NOT EXISTS `<db_prefix>ncic_names` (
@@ -206,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `<db_prefix>ncic_warnings` (
   `issued_date` date DEFAULT NULL,
   `issued_by` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
 CREATE TABLE IF NOT EXISTS `<db_prefix>ncic_warrants` (
@@ -218,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `<db_prefix>ncic_warrants` (
   `issued_date` date DEFAULT NULL,
   `status` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
 CREATE TABLE IF NOT EXISTS `<db_prefix>ncic_weapons` (
@@ -226,19 +230,23 @@ CREATE TABLE IF NOT EXISTS `<db_prefix>ncic_weapons` (
   `name_id` int(11) NOT NULL COMMENT 'Links to ncic_names db for driver information',
   `weapon_type` varchar(255) NOT NULL,
   `weapon_name` varchar(255) NOT NULL,
-  `weapon_notes` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `notes` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>permissions` (
-  `perm_id` int(11) NOT NULL,
-  `perm_desc` varchar(50) NOT NULL
+CREATE TABLE `<DB_PREFIX>radio_codes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(10) NOT NULL,
+  `code_description` varchar(255) NOT NULL,
+  `onCall` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>statuses` (
+CREATE TABLE `<DB_PREFIX>statuses` (
   `status_id` int(11) NOT NULL,
   `status_text` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
@@ -252,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `<db_prefix>streets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>tones` (
+CREATE TABLE `<DB_PREFIX>tones` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `active` set('0','1') NOT NULL DEFAULT '0' COMMENT '0 = inactive, 1 = active'
@@ -292,15 +300,29 @@ CREATE TABLE IF NOT EXISTS `<db_prefix>vehicles` (
   `Make` varchar(100) NOT NULL,
   `Model` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>weapons` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>warning_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `warning_description` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>warrant_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `warrant_description` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>weapons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `weapon_type` varchar(255) NOT NULL,
   `weapon_name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 INSERT INTO `<DB_PREFIX>users` (`id`, `name`, `email`, `password`, `identifier`, `admin_privilege`, `supervisor_privilege`, `password_reset`, `approved`, `suspend_reason`, `suspend_duration`) VALUES
 (1, '<NAME>', '<EMAIL>', '<PASSWORD>', '1A-1', 3, 1, 0, 1, NULL, NULL);

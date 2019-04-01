@@ -14,8 +14,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 
     session_start();
-    // TODO: Verify user has permission to be on this page
-
     if (empty($_SESSION['logged_in']))
     {
         header('Location: /index.php');
@@ -25,7 +23,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       $name = $_SESSION['name'];
     }
 
-    include_once "oc-config.php";
+    include_once("oc-config.php");
     include("./actions/generalActions.php");
     include("./actions/responderActions.php");
     unset($_SESSION['activeDepartment']);
