@@ -35,13 +35,13 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>warrant_types`(
     PRIMARY KEY(`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = latin1; 
 
-ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY `dl_type`
-  set('Not Issued','Learners','Provisional','Open','Identification Only') NOT NULL AFTER `dl_status`;
+ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `dl_type`
+set('Not Issued','Learners','Provisional','Open','Identification Only') NOT NULL AFTER `dl_status`;
 
-ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY `dl_class`
+ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `dl_class`
   set('Car','Light Rig','Heavy Rig','Boat','Motorbike','Military') NOT NULL AFTER `dl_type`;
 
-ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY `dl_issuer`
+ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `dl_issuer`
   set('Government','Military') NOT NULL AFTER `dl_class`;
 
 DROP TABLE IF EXISTS
