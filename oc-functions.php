@@ -242,7 +242,7 @@ function getOpenCADVersion()
 function permissionDenied()
 {
 	$_SESSION['error_title'] = "Permission Denied";
-	$_SESSION['error'] = "Sorry, you don't have permission to access thia page.";
+	$_SESSION['error'] = "Sorry, you don't have permission to access this page.";
 	header('Location: '.BASE_URL.'/plugins/error/index.php');
 	die();
 }

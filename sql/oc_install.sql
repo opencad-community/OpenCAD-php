@@ -3,7 +3,7 @@
 SET NAMES utf8;
 SET time_zone = '+00:00';
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>active_users` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>active_users` (
   `identifier` varchar(255) NOT NULL,
   `callsign` varchar(255) NOT NULL COMMENT 'Unit Callsign',
   `status` int(11) NOT NULL COMMENT 'Unit status, 0=busy/unavailable, 1=available, 2=dispatcher',
@@ -14,12 +14,12 @@ CREATE TABLE IF NOT EXISTS `<db_prefix>active_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>aop` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>aop` (
   `aop` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>bolos_persons` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>bolos_persons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(255) NOT NULL COMMENT 'First name of BOLO suspect.',
   `last_name` varchar(255) NOT NULL COMMENT 'Last name of BOLO suspect.',
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `<db_prefix>bolos_persons` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>bolos_vehicles` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>bolos_vehicles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `vehicle_make` varchar(255) NOT NULL COMMENT 'Make of BOLO vehicle.',
   `vehicle_model` varchar(255) NOT NULL COMMENT 'Model of BOLO vehicle.',
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `<db_prefix>bolos_vehicles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>calls` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>calls` (
   `call_id` int(11) NOT NULL,
   `call_type` text NOT NULL,
   `call_primary` text DEFAULT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `<db_prefix>calls` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>calls_users` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>calls_users` (
   `call_id` int(11) NOT NULL,
   `identifier` varchar(255) NOT NULL,
   `callsign` varchar(255) NOT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `<db_prefix>calls_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>call_history` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>call_history` (
   `call_id` int(11) NOT NULL,
   `call_type` text NOT NULL,
   `call_primary` text DEFAULT NULL,
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `<db_prefix>call_history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>call_list` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>call_list` (
   `call_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
@@ -88,26 +88,26 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>citation_types` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>civilian_names` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>civilian_names` (
   `user_id` int(11) NOT NULL COMMENT 'Links to users table',
   `names_id` int(11) NOT NULL COMMENT 'Links to names table'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>colors` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>colors` (
   `id` int(11) NOT NULL,
   `color_group` varchar(255) DEFAULT NULL,
   `color_name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>config` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>config` (
   `key` varchar(80) NOT NULL,
   `value` varchar(80) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>departments` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>departments` (
   `department_id` int(11) NOT NULL,
   `department_name` varchar(255) DEFAULT NULL COMMENT 'The functional name of the department. (eg. Police, Fire, EMS)',
   `department_short_name` varchar(10) NOT NULL COMMENT 'The name of the department. (eg. Los Angeles Police Department, Blaine County Sheriffs` Office',
@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `<db_prefix>departments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>dispatchers` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>dispatchers` (
   `identifier` varchar(255) NOT NULL,
   `callsign` varchar(255) NOT NULL COMMENT 'Unit Callsign',
   `status` int(11) NOT NULL COMMENT 'Unit status, 0=offline, 1=online',
@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS `<db_prefix>dispatchers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>genders` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>genders` (
   `id` int(11) NOT NULL,
   `genders` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
@@ -161,7 +161,7 @@ CREATE TABLE `<DB_PREFIX>ncic_citations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>ncic_names` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncic_names` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `submittedByName` varchar(255) NOT NULL,
   `submittedById` varchar(255) NOT NULL,
@@ -169,13 +169,13 @@ CREATE TABLE IF NOT EXISTS `<db_prefix>ncic_names` (
   `dob` date NOT NULL COMMENT 'Date of birth',
   `address` text NOT NULL,
   `gender` set('Male','Female','Transgender Man','Transgender Woman','Intersex','Other') NOT NULL DEFAULT 'NONE',
-  `race` text NOT NULL,
+  `race` set('indian','asian','black','hispanic','caucasian','Pacific Islander','African') NOT NULL DEFAULT 'NONE',,
   `dl_status` set('Unobtained','Valid','Suspended','Canceled','Expired') NOT NULL DEFAULT 'Unobtained',
   `dl_type` set('Not Issued', 'Learners','Provisional','Open, Identification Only') NOT NULL DEFAULT 'NONE',
   `dl_class` set('Car','Light Rig','Heavy Rig','Boat','Motorbike','Military') NOT NULL DEFAULT 'NONE',
   `dl_Issued_by` set('Government','Military') NOT NULL DEFAULT 'NONE',
-  `hair_color` text NOT NULL,
-  `build` text NOT NULL,
+  `hair_color` set('Bald','Black','Blonde','Blue','Brown','Gray','Green','Orange','Pink','Purple','Red','Auburn','Sandy','Strawberry','White','Partially Gray') NOT NULL DEFAULT 'NONE',
+  `build` set('Average','Fit','Muscular','Overweight','Skinny','Thin') NOT NULL DEFAULT 'NONE',
   `weapon_permit` set('Unobtained','Vaild','Suspended','Expired','Canceled') NOT NULL DEFAULT 'Unobtained',
   `weapon_permit_type` set('Small Arms','Specialised Weapon','Automatic Weapon','Semi-Automatic','Military Grade') NOT NULL DEFAULT 'NONE',
   `weapon_permit_Issued_by` set('Ammu-Nation','Government','Military') NOT NULL DEFAULT 'NONE',
@@ -184,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `<db_prefix>ncic_names` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>ncic_plates` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncic_plates` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name_id` int(11) NOT NULL COMMENT 'Links to ncic_names db for driver information',
   `veh_plate` text NOT NULL,
@@ -202,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `<db_prefix>ncic_plates` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>ncic_warnings` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncic_warnings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `status` tinyint(2) NOT NULL DEFAULT 0 COMMENT '0 = Pending, 1 = Approved/Active',
   `name_id` int(11) NOT NULL COMMENT 'Paired to ID of ncic_names table',
@@ -213,7 +213,7 @@ CREATE TABLE IF NOT EXISTS `<db_prefix>ncic_warnings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>ncic_warrants` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncic_warrants` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `expiration_date` date DEFAULT NULL,
   `warrant_name` varchar(255) NOT NULL,
@@ -225,7 +225,7 @@ CREATE TABLE IF NOT EXISTS `<db_prefix>ncic_warrants` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>ncic_weapons` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncic_weapons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name_id` int(11) NOT NULL COMMENT 'Links to ncic_names db for driver information',
   `weapon_type` varchar(255) NOT NULL,
@@ -252,7 +252,7 @@ CREATE TABLE `<DB_PREFIX>statuses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>streets` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>streets` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key for each street',
   `name` text NOT NULL COMMENT 'Street name',
   `county` text NOT NULL COMMENT 'County name',
@@ -267,7 +267,7 @@ CREATE TABLE `<DB_PREFIX>tones` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT COMMENT='Tones table. DO NOT ADD ROWS TO THIS TABLE';
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>users` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -283,19 +283,19 @@ CREATE TABLE IF NOT EXISTS `<db_prefix>users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT COMMENT='User table';
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>user_departments` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>user_departments` (
   `user_id` int(11) NOT NULL,
   `department_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>user_departments_temp` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>user_departments_temp` (
   `user_id` int(11) NOT NULL,
   `department_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT COMMENT='Temporary table - stores user departments for non-approved users';
 
 
-CREATE TABLE IF NOT EXISTS `<db_prefix>vehicles` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>vehicles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Make` varchar(100) NOT NULL,
   `Model` varchar(100) NOT NULL,
