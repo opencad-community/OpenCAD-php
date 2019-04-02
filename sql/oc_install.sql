@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>genders` (
 
 CREATE TABLE IF NOT EXISTS `<DB_PREFIX>incident_types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `code_id` varchar(255) NOT NULL DEFAULT '',
+  `code_id` varchar(255) DEFAULT '',
   `code_name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
@@ -151,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncic_arrests` (
 
 CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncic_citations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `status` tinyint(2) NOT NULL DEFAULT 0 COMMENT '0 = Pending, 1 = Approved/Active',
+  `status` tinyint(2) DEFAULT 0 COMMENT '0 = Pending, 1 = Approved/Active',
   `name_id` int(11) NOT NULL COMMENT 'Paired to ID of ncic_names table',
   `citation_name` varchar(255) NOT NULL,
   `citation_fine` int(11) NOT NULL,
@@ -166,22 +166,22 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncic_names` (
   `submittedByName` varchar(255) NOT NULL,
   `submittedById` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `dob` date NOT NULL COMMENT 'Date of birth',
-  `address` text NOT NULL,
-  `gender` set('Male','Female','Transgender Man','Transgender Woman','Intersex','Other','Unknown') NOT NULL DEFAULT 'Unknown',
-  `race` set('Indian','Asian','Black','Hispanic','Caucasian','Pacific Islander','African','Unknown') NOT NULL DEFAULT 'Unknown',
-  `dl_status` set('Unobtained','Valid','Suspended','Canceled','Expired') NOT NULL DEFAULT 'Unobtained',
-  `dl_type` set('Not Issued', 'Learners','Provisional','Open, Identification Only','Unknown') NOT NULL DEFAULT 'Unknown',
-  `dl_class` set('Car','Light Rig','Heavy Rig','Boat','Motorbike','Military','Unknown') NOT NULL DEFAULT 'Unknown',
-  `dl_Issued_by` set('Government','Military','Unknown') NOT NULL DEFAULT 'Unknown',
-  `hair_color` set('Bald','Black','Blonde','Blue','Brown','Gray','Green','Orange','Pink','Purple','Red','Auburn','Sandy','Strawberry','White','Partially Gray','Unknown') NOT NULL DEFAULT 'Unknown',
-  `build` set('Average','Fit','Muscular','Overweight','Skinny','Thin', 'Unknown') NOT NULL DEFAULT 'Unknown',
-  `weapon_permit` set('Unobtained','Vaild','Suspended','Expired','Canceled') NOT NULL DEFAULT 'Unobtained',
-  `weapon_permit_type` set('Small Arms','Specialised Weapon','Automatic Weapon','Semi-Automatic','Military Grade', 'Unkown') NOT NULL DEFAULT 'Unknown',
-  `weapon_permit_Issued_by` set('Ammu-Nation','Government','Military', 'Unknown') NOT NULL DEFAULT 'Unknown',
-  `blood_type` set('A+','O+','B+','AB+','A-','O-','B-','AB-', 'Unknown') NOT NULL DEFAULT 'Unknown',
-  `organ_donor` set('NO','YES') NOT NULL DEFAULT 'NO',
-  `deceased` set('NO','YES') NOT NULL DEFAULT 'NO',
+  `dob` date COMMENT 'Date of birth',
+  `address` text,
+  `gender` set('Male','Female','Transgender Man','Transgender Woman','Intersex','Other','Unknown') DEFAULT 'Unknown',
+  `race` set('Indian','Asian','Black or African American','Hispanic','Caucasian','Pacific Islander','Unknown') DEFAULT 'Unknown'
+  `dl_status` set('Unobtained','Valid','Suspended','Canceled','Expired') DEFAULT 'Unobtained',
+  `dl_type` set('Not Issued', 'Learners','Provisional','Open','Identification Only','Unknown') DEFAULT 'Unknown',
+  `dl_class` set('Car','Light Rig','Heavy Rig','Boat','Motorbike','Military','Unknown') DEFAULT 'Unknown',
+  `dl_Issued_by` set('Government','Military','Unknown') DEFAULT 'Unknown',
+  `hair_color` set('Bald','Black','Blonde','Blue','Brown','Gray','Green','Orange','Pink','Purple','Red','Auburn','Sandy','Strawberry','White','Partially Gray','Unknown') DEFAULT 'Unknown',
+  `build` set('Average','Fit','Muscular','Overweight','Skinny','Thin','Unknown') DEFAULT 'Unknown',
+  `weapon_permit` set('Unobtained','Vaild','Suspended','Expired','Canceled') DEFAULT 'Unobtained',
+  `weapon_permit_type` set('Small Arms','Specialised Weapon','Automatic Weapon','Semi-Automatic','Military Grade', 'Unkown') DEFAULT 'Unknown',
+  `weapon_permit_Issued_by` set('Ammu-Nation','Government','Military', 'Unknown') DEFAULT 'Unknown',
+  `blood_type` set('A+','O+','B+','AB+','A-','O-','B-','AB-','Unknown') DEFAULT 'Unknown',
+  `organ_donor` set('NO','YES') DEFAULT 'NO',
+  `deceased` set('NO','YES') DEFAULT 'NO',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
@@ -194,10 +194,10 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncic_plates` (
   `veh_model` text NOT NULL,
   `veh_pcolor` text NOT NULL,
   `veh_scolor` text NOT NULL,
-  `veh_insurance` set('VALID','EXPIRED','CANCELED','SUSPENDED', 'Unknown') NOT NULL DEFAULT 'Unknown',
-  `veh_insurance type` set('CTP','Third Party','Comprehensive', 'Unknown') NOT NULL DEFAULT 'Unknown',
-  `flags` set('STOLEN','WANTED','SUSPENDED REGISTRATION','CANCELED REGISTRATION','EXPIRED REGISTRATION','INSURANCE FLAG','DL FLAG', 'Unknown') NOT NULL DEFAULT 'Unknown',
-  `veh_reg_state` set('Los Santos','Blaine County','San Andreas', 'Unknown') NOT NULL DEFAULT 'Unknown',
+  `veh_insurance` set('VALID','EXPIRED','CANCELED','SUSPENDED', 'Unknown') DEFAULT 'Unknown',
+  `veh_insurance type` set('CTP','Third Party','Comprehensive', 'Unknown') DEFAULT 'Unknown',
+  `flags` set('STOLEN','WANTED','SUSPENDED REGISTRATION','CANCELED REGISTRATION','EXPIRED REGISTRATION','INSURANCE FLAG','DL FLAG', 'Unknown') DEFAULT 'Unknown',
+  `veh_reg_state` set('Los Santos','Blaine County','San Andreas', 'Unknown') DEFAULT 'Unknown',
   `notes` text DEFAULT NULL COMMENT 'Any special flags visible to dispatchers',
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
@@ -206,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncic_plates` (
 
 CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncic_warnings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `status` tinyint(2) NOT NULL DEFAULT 0 COMMENT '0 = Pending, 1 = Approved/Active',
+  `status` tinyint(2) DEFAULT 0 COMMENT '0 = Pending, 1 = Approved/Active',
   `name_id` int(11) NOT NULL COMMENT 'Paired to ID of ncic_names table',
   `warning_name` varchar(255) NOT NULL,
   `issued_date` date DEFAULT NULL,
@@ -265,7 +265,7 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>streets` (
 CREATE TABLE IF NOT EXISTS `<DB_PREFIX>tones` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `active` set('0','1') NOT NULL DEFAULT '0' COMMENT '0 = inactive, 1 = active'
+  `active` set('0','1') DEFAULT '0' COMMENT '0 = inactive, 1 = active'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT COMMENT='Tones table. DO NOT ADD ROWS TO THIS TABLE';
 
 
@@ -275,10 +275,10 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>users` (
   `email` varchar(255) NOT NULL,
   `password` text DEFAULT NULL,
   `identifier` varchar(255) DEFAULT NULL,
-  `admin_privilege` int(1) NOT NULL DEFAULT 1 COMMENT 'If 1 then user does not possess any administrative permissions, else if 2 then user possess Moderator privileges, else if 3 then user possess Administrator privileges.',
-  `supervisor_privilege` int(1) NOT NULL DEFAULT 1 COMMENT 'If 1 then user does not possess any supervisor privileges, else 2 then user possess supervisor privileges.',
-  `password_reset` int(1) NOT NULL DEFAULT 0 COMMENT '1 means password reset required. 0 means it''s not.',
-  `approved` int(1) NOT NULL DEFAULT 0 COMMENT 'Three main statuses: 0 means pending approval. 1 means has access. 2 means suspended',
+  `admin_privilege` int(1) DEFAULT 1 COMMENT 'If 1 then user does not possess any administrative permissions, else if 2 then user possess Moderator privileges, else if 3 then user possess Administrator privileges.',
+  `supervisor_privilege` int(1) DEFAULT 1 COMMENT 'If 1 then user does not possess any supervisor privileges, else 2 then user possess supervisor privileges.',
+  `password_reset` int(1) DEFAULT 0 COMMENT '1 means password reset required. 0 means it''s not.',
+  `approved` int(1) DEFAULT 0 COMMENT 'Three main statuses: 0 means pending approval. 1 means has access. 2 means suspended',
   `suspend_reason` tinytext DEFAULT NULL COMMENT 'Stores the reason why a user is Suspended',
   `suspend_duration` date DEFAULT NULL COMMENT 'Stores the duration a user is Suspended for',
   UNIQUE KEY `id` (`id`)
