@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncic_arrests` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE `<DB_PREFIX>ncic_citations` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncic_citations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `status` tinyint(2) NOT NULL DEFAULT 0 COMMENT '0 = Pending, 1 = Approved/Active',
   `name_id` int(11) NOT NULL COMMENT 'Paired to ID of ncic_names table',
@@ -168,17 +168,17 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncic_names` (
   `name` varchar(255) NOT NULL,
   `dob` date NOT NULL COMMENT 'Date of birth',
   `address` text NOT NULL,
-  `gender` set('Male','Female','Transgender Man','Transgender Woman','Intersex','Other') NOT NULL DEFAULT 'NONE',
-  `race` set('indian','asian','black','hispanic','caucasian','Pacific Islander','African') NOT NULL DEFAULT 'NONE',,
+  `gender` set('Male','Female','Transgender Man','Transgender Woman','Intersex','Other','Unknown') NOT NULL DEFAULT 'Unknown',
+  `race` set('Indian','Asian','Black','Hispanic','Caucasian','Pacific Islander','African','Uknown') NOT NULL DEFAULT 'Unknown',
   `dl_status` set('Unobtained','Valid','Suspended','Canceled','Expired') NOT NULL DEFAULT 'Unobtained',
-  `dl_type` set('Not Issued', 'Learners','Provisional','Open, Identification Only') NOT NULL DEFAULT 'NONE',
-  `dl_class` set('Car','Light Rig','Heavy Rig','Boat','Motorbike','Military') NOT NULL DEFAULT 'NONE',
-  `dl_Issued_by` set('Government','Military') NOT NULL DEFAULT 'NONE',
-  `hair_color` set('Bald','Black','Blonde','Blue','Brown','Gray','Green','Orange','Pink','Purple','Red','Auburn','Sandy','Strawberry','White','Partially Gray') NOT NULL DEFAULT 'NONE',
+  `dl_type` set('Not Issued', 'Learners','Provisional','Open, Identification Only','Unknown') NOT NULL DEFAULT 'Unknown',
+  `dl_class` set('Car','Light Rig','Heavy Rig','Boat','Motorbike','Military','Unknown') NOT NULL DEFAULT 'Unknown',
+  `dl_Issued_by` set('Government','Military','Uknown') NOT NULL DEFAULT 'Uknown',
+  `hair_color` set('Bald','Black','Blonde','Blue','Brown','Gray','Green','Orange','Pink','Purple','Red','Auburn','Sandy','Strawberry','White','Partially Gray','Unknown') NOT NULL DEFAULT 'Uknown',
   `build` set('Average','Fit','Muscular','Overweight','Skinny','Thin') NOT NULL DEFAULT 'NONE',
   `weapon_permit` set('Unobtained','Vaild','Suspended','Expired','Canceled') NOT NULL DEFAULT 'Unobtained',
-  `weapon_permit_type` set('Small Arms','Specialised Weapon','Automatic Weapon','Semi-Automatic','Military Grade') NOT NULL DEFAULT 'NONE',
-  `weapon_permit_Issued_by` set('Ammu-Nation','Government','Military') NOT NULL DEFAULT 'NONE',
+  `weapon_permit_type` set('Small Arms','Specialised Weapon','Automatic Weapon','Semi-Automatic','Military Grade','Uknown') NOT NULL DEFAULT 'Uknown',
+  `weapon_permit_Issued_by` set('Ammu-Nation','Government','Military','Uknown') NOT NULL DEFAULT 'Uknown',
   `deceased` set('NO','YES') NOT NULL DEFAULT 'NO',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
@@ -236,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncic_weapons` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE `<DB_PREFIX>radio_codes` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>radio_codes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(10) NOT NULL,
   `code_description` varchar(255) NOT NULL,
@@ -246,7 +246,7 @@ CREATE TABLE `<DB_PREFIX>radio_codes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE `<DB_PREFIX>statuses` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>statuses` (
   `status_id` int(11) NOT NULL,
   `status_text` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
@@ -260,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>streets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE `<DB_PREFIX>tones` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>tones` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `active` set('0','1') NOT NULL DEFAULT '0' COMMENT '0 = inactive, 1 = active'
