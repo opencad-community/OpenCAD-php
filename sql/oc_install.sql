@@ -179,6 +179,8 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncic_names` (
   `weapon_permit` set('Unobtained','Vaild','Suspended','Expired','Canceled') NOT NULL DEFAULT 'Unobtained',
   `weapon_permit_type` set('Small Arms','Specialised Weapon','Automatic Weapon','Semi-Automatic','Military Grade') NOT NULL DEFAULT 'NONE',
   `weapon_permit_Issued_by` set('Ammu-Nation','Government','Military') NOT NULL DEFAULT 'NONE',
+  `Blood_type` set('A+','O+','B+','AB+','A-','O-','B-','AB-') NOT NULL DEFAULT 'NONE',
+  `Organ_Doner` set('NO','YES') NOT NULL DEFAULT 'NO',
   `deceased` set('NO','YES') NOT NULL DEFAULT 'NO',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
@@ -194,7 +196,7 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncic_plates` (
   `veh_scolor` text NOT NULL,
   `veh_insurance` set('VALID','EXPIRED','CANCELED','SUSPENDED') NOT NULL DEFAULT 'NONE',
   `veh_insurance type` set('CTP','Third Party','Comprehensive') NOT NULL DEFAULT 'NONE',
-  `flags` set('STOLEN','WANTED','SUSPENDED REGISTRATION','CANCELED REGISTRATION','EXPIRED REGISTRATION','INSURANCE FLAG','DL FLAG','UC FLAG','HPIU FLAG') NOT NULL DEFAULT 'NONE',
+  `flags` set('STOLEN','WANTED','SUSPENDED REGISTRATION','CANCELED REGISTRATION','EXPIRED REGISTRATION','INSURANCE FLAG','DL FLAG') NOT NULL DEFAULT 'NONE',
   `veh_reg_state` set('Los Santos','Blaine County','San Andreas') NOT NULL DEFAULT 'NONE',
   `notes` text DEFAULT NULL COMMENT 'Any special flags visible to dispatchers',
   `user_id` int(11) NOT NULL,

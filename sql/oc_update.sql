@@ -54,10 +54,16 @@ set('Not Issued','Learners','Provisional','Open','Identification Only') NOT NULL
   set('Ammu-Nation','Government','Military') NOT NULL AFTER `weapon_permit_type`;
 
   ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `deceased`
-  set('NO','YES') NOT NULL AFTER `weapon_permit_Issued_by`;
+  set('NO','YES') NOT NULL AFTER `Organ_Doner`;
 
   ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `race`
   set('indian','asian','black','hispanic','caucasian','Pacific Islander','African') NOT NULL AFTER `gender`;
+
+  ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `Blood_type`
+  set('A+','O+','B+','AB+','A-','O-','B-','AB-') NOT NULL AFTER `weapon_permit_Issued_by`;
+
+  ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `Organ_Doner`
+  set('NO','YES') NOT NULL AFTER `Blood_type`;
 
   ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `build`
   set('Average','Fit','Muscular','Overweight','Skinny','Thin') NOT NULL AFTER `hair_color`;
