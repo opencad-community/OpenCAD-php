@@ -49,7 +49,7 @@
     define('EI_CHECK_MAGIC_QUOTES', false);
     
     // *** allows collecting info for mbstring support
-    define('EI_CHECK_MBSTRING_SUPPORT', false);
+    define('EI_CHECK_MBSTRING_SUPPORT', true);
 
     // *** allows collecting info for email settings
     define('EI_CHECK_MAIL_SETTINGS', false);
