@@ -115,16 +115,16 @@
     // *** specifies whether to allow new installation
     define('EI_ALLOW_NEW_INSTALLATION', true);        
     // *** specifies whether to allow update
-    define('EI_ALLOW_UPDATE', false);        
+    define('EI_ALLOW_UPDATE', true);        
     // *** specifies whether to allow un-installation
     define('EI_ALLOW_UN_INSTALLATION', false);  
 
     // *** allows start all over button
-    define('EI_ALLOW_START_ALL_OVER', false);
+    define('EI_ALLOW_START_ALL_OVER', true);
     
     // *** sql dump file - file that includes SQL statements for instalation
     define('EI_SQL_DUMP_FILE_CREATE', '../sql/oc_install.sql');
-    define('EI_SQL_DUMP_FILE_UPDATE', 'sql_dump/update.sql');
+    define('EI_SQL_DUMP_FILE_UPDATE', '../sql/oc_update.sql');
     define('EI_SQL_DUMP_FILE_UN_INSTALL', '../sql/oc_uninstall.sql');
 
     // *** defines using of utf-8 encoding and collation for SQL dump file
