@@ -197,7 +197,7 @@ function getLicenseIssuers()
         die();
     }
 
-    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_names LIKE 'dl_issuer'";
+    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_names LIKE 'dl_issued_by'";
     $stmt = $pdo->prepare( $query );
     if (!$stmt)
     {

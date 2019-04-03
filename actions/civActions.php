@@ -104,7 +104,6 @@ function ncicGetNames()
     $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ncic_names.* FROM ".DB_PREFIX."ncic_names WHERE ".DB_PREFIX."ncic_names.submittedById = ?");
     $resStatus = $stmt->execute(array($uid));
     $result = $stmt;
-
     if (!$resStatus)
     {
         $_SESSION['error'] = $stmt->errorInfo();
@@ -114,7 +113,7 @@ function ncicGetNames()
     $pdo = null;
 
     $num_rows = $result->rowCount();
-
+    print_r($result);
     if($num_rows == 0)
     {
         echo "<div class=\"alert alert-info\"><span>You currently have no identities</span></div>";
@@ -130,14 +129,7 @@ function ncicGetNames()
                 <th>Address</th>
                 <th>Gender</th>
                 <th>Race</th>
-                <th>DL Status</th>
-                <th>DL Type</th>
-                <th>DL Class</th>
-                <th>DL Issuer</th>
-                <th>Hair Color</th>
-                <th>Build</th>
-				<th>Weapon Status</th>
-				<th>Deceased</th>
+                <th>Driver\'s License</th>
                 <th>Actions</th>
                 </tr>
             </thead>
@@ -153,14 +145,7 @@ function ncicGetNames()
                 <td>'.$row[5].'</td>
                 <td>'.$row[6].'</td>
                 <td>'.$row[7].'</td>
-                <td>'.$row[8].'</td>
-                <td>'.$row[9].'</td>
-                <td>'.$row[10].'</td>
-                <td>'.$row[11].'</td>
-                <td>'.$row[12].'</td>
-                <td>'.$row[13].'</td>
-                <td>'.$row[14].'</td>
-                <td>'.$row[15].'</td>
+                <td>'.$row[9].' / '.$row[8].'</td>
                 <td>
                     <button name="edit_name" data-toggle="modal" data-target="#IdentityEditModal" id="edit_nameBtn" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
                     <form action="".BASE_URL."/actions/civActions.php" method="post">
@@ -389,15 +374,18 @@ function create_name()
     $address = htmlspecialchars($_POST['civAddressReq']);
     $sex = htmlspecialchars($_POST['civSexReq']);
     $race = htmlspecialchars($_POST['civRaceReq']);
-	$dlstatus = htmlspecialchars($_POST['civDL']);
+    $dlstatus = htmlspecialchars($_POST['civDLStatus']);
+    $dltype = htmlspecialchars($_POST['civDLType']);
+    $dlclass = htmlspecialchars($_POST['civDLClass']);
+    $dlissuer = htmlspecialchars($_POST['civDLIssuer']);
     $hair = htmlspecialchars($_POST['civHairReq']);
     $build = htmlspecialchars($_POST['civBuildReq']);
 	$weapon = htmlspecialchars($_POST['civWepStat']);
 	$deceased = htmlspecialchars($_POST['civDec']);
 
-    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_names (submittedByName, submittedById, name, dob, address, gender, race, dl_status, hair_color, build, weapon_permit, deceased)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
-    $result = $stmt->execute(array($submittedByName, $submitttedById, $name, $dob, $address, $sex, $race, $dlstatus, $hair, $build, $weapon, $deceased));
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_names (submittedByName, submittedById, name, dob, address, gender, race, dl_status, dl_type, dl_class, dl_issued_by, hair_color, build, weapon_permit, deceased)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    $result = $stmt->execute(array($submittedByName, $submitttedById, $name, $dob, $address, $sex, $race, $dlstatus, $dltype, $dlclass, $dlissuer , $hair, $build, $weapon, $deceased));
 
     if (!$result)
     {
