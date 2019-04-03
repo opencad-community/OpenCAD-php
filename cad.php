@@ -1943,7 +1943,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
            $.ajax({
                type: "POST",
-               url: "<?php echo BASE_URL; ?>/actions/api.php",
+               url: "<?php echo BASE_URL; ?>/actions/generalActions.php",
                data: {
                    changeStatus: 'yes',
                    unit: unit,
@@ -1986,7 +1986,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
              $.ajax({
                  type: "POST",
-                 url: "<?php echo BASE_URL; ?>/actions/api.php",
+                 url: "<?php echo BASE_URL; ?>/actions/generalActions.php",
                  data: {
                      logoutUser: 'yes',
                      unit: unit
@@ -2022,7 +2022,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          function getAvailableUnits() {
            $.ajax({
                  type: "GET",
-                 url: "<?php echo BASE_URL; ?>/actions/api.php",
+                 url: "<?php echo BASE_URL; ?>/actions/generalActions.php",
                  data: {
                      getAvailableUnits: 'yes'
                  },
@@ -2054,7 +2054,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          function getDispatchers() {
            $.ajax({
                  type: "GET",
-                 url: "<?php echo BASE_URL; ?>/actions/api.php",
+                 url: "<?php echo BASE_URL; ?>/actions/generalActions.php",
                  data: {
                      getDispatchers: 'yes'
                  },

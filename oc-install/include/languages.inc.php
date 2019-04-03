@@ -15,13 +15,13 @@
 		$curr_lang_direction = EI_DEFAULT_LANGUAGE_DIRECTION;
 	}
 	
-	if(file_exists('install/oc-lang/'.$curr_lang.'/common.inc.php')){
-		include_once('install/oc-lang/'.$curr_lang.'/common.inc.php');
-	}else if(file_exists('../oc-lang/'.$curr_lang.'/common.inc.php')){
-		include_once('../oc-lang/'.$curr_lang.'/common.inc.php');
-	}else if(file_exists('../oc-lang/'.$curr_lang.'/common.inc.php')){
-		include_once('../oc-lang/'.$curr_lang.'/common.inc.php');
+	if(file_exists('install/oc-lang/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
+		include_once('install/oc-lang/'.$curr_lang.'/'.$curr_lang.'.inc.php');
+	}else if(file_exists('../oc-lang/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
+		include_once('../oc-lang/'.$curr_lang.'/'.$curr_lang.'.inc.php');
+	}else if(file_exists('../oc-lang/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
+		include_once('../oc-lang/'.$curr_lang.'/'.$curr_lang.'.inc.php');
 	}else{
-		include_once('../oc-lang/en/common.inc.php');    	
+		include_once('../oc-lang/en/en.inc.php');    	
 	}	
 
