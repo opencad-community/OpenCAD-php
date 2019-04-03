@@ -169,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncic_names` (
   `dob` date COMMENT 'Date of birth',
   `address` text,
   `gender` set('Male','Female','Transgender Man','Transgender Woman','Intersex','Other','Unknown') DEFAULT 'Unknown',
-  `race` set('Indian','Asian','Black or African American','Hispanic','Caucasian','Pacific Islander','Unknown') DEFAULT 'Unknown'
+  `race` set('Indian','Asian','Black or African American','Hispanic','Caucasian','Pacific Islander','Unknown') DEFAULT 'Unknown', 
   `dl_status` set('Unobtained','Valid','Suspended','Canceled','Expired') DEFAULT 'Unobtained',
   `dl_type` set('Not Issued', 'Learners','Provisional','Open','Identification Only','Unknown') DEFAULT 'Unknown',
   `dl_class` set('Car','Light Rig','Heavy Rig','Boat','Motorbike','Military','Unknown') DEFAULT 'Unknown',
@@ -177,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncic_names` (
   `hair_color` set('Bald','Black','Blonde','Blue','Brown','Gray','Green','Orange','Pink','Purple','Red','Auburn','Sandy','Strawberry','White','Partially Gray','Unknown') DEFAULT 'Unknown',
   `build` set('Average','Fit','Muscular','Overweight','Skinny','Thin','Unknown') DEFAULT 'Unknown',
   `weapon_permit` set('Unobtained','Vaild','Suspended','Expired','Canceled') DEFAULT 'Unobtained',
-  `weapon_permit_type` set('Small Arms','Specialised Weapon','Automatic Weapon','Semi-Automatic','Military Grade', 'Unkown') DEFAULT 'Unknown',
+  `weapon_permit_type` set('Small Arms','Specialised Weapon','Automatic Weapon','Semi-Automatic','Military Grade', 'Unknown') DEFAULT 'Unknown',
   `weapon_permit_Issued_by` set('Ammu-Nation','Government','Military', 'Unknown') DEFAULT 'Unknown',
   `blood_type` set('A+','O+','B+','AB+','A-','O-','B-','AB-','Unknown') DEFAULT 'Unknown',
   `organ_donor` set('NO','YES') DEFAULT 'NO',
