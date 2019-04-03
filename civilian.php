@@ -914,28 +914,17 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							</div>
 							<!-- ./ form-group -->
 							<div class="form-group row">
-								<label class="col-lg-2 control-label">Insurance Status</label>
-								<div class="col-lg-10">
-									<select class="form-control" name="veh_insurance" required>
-										<option value=""> </option>
-										<option value="Valid"> Valid </option>
-										<option value="Expired"> Expired </option>
-										<option value="Invalid">Invalid</option>
-									</select>
-								</div>
-								<!-- ./ col-sm-9 -->
-							</div>
-							<!-- ./ form-group -->
-							<div class="form-group row">
 								<label class="col-lg-2 control-label">Vehicle Flags</label>
 								<div class="col-lg-10">
 									<select class="form-control" name="flags" required>
-										<option value=""> </option>
-										<option value="None"> None </option>
-										<option value="Stolen"> Stolen </option>
-										<option value="Wanted"> Wanted </option>
-										<option value="Suspended Registration"> Suspended Registration </option>
-										<option value="No Insurance"> No Insurance </option>
+										<option value="STOLEN"> STOLEN </option>
+										<option value="WANTED"> WANTED </option>
+										<option value="SUSPENDED REGISTRATION"> SUSPENDED REGISTRATION </option>
+										<option value="CANCELED REGISTRATION"> CANCELED REGISTRATION </option>
+										<option value="EXPIRED REGISTRATION"> EXPIRED REGISTRATION </option>
+										<option value="INSURANCE FLAG"> INSURANCE FLAG </option>
+										<option value="DRIVER FLAG"> DRIVER FLAG </option>
+										<option value="NO INSURANCE"> No Insurance </option>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->

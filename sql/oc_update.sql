@@ -49,19 +49,19 @@ ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `weapon_permit`
 set('Unobtained','Vaild','Suspended','Expired','Canceled')  AFTER `build`;
 
 ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `weapon_permit_type`
-set('Small Arms','Specialised Weapon','Automatic Weapon','Semi-Automatic','Military Grade','Unknown') DEFAULT 'Unknown' AFTER `weapon_permit`;
+set('Small Arms','Specialised Weapon','Automatic Weapon','Semi-Automatic','Military Grade')  AFTER `weapon_permit`;
 
 ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `weapon_permit_Issued_by`
-set('Ammu-Nation','Government','Military','Unknown') DEFAULT 'Unknown' AFTER `weapon_permit_type`;
+set('Ammu-Nation','Government','Military') AFTER `weapon_permit_type`;
 
 ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `deceased`
 set('NO','YES') DEFAULT 'NO' AFTER `organ_donor`;
 
 ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `race`
-set('Indian','Asian','Black or African American','Hispanic','Caucasian','Pacific Islander','Unknown') DEFAULT 'Unknown' AFTER `gender`;
+set('Indian','Asian','Black or African American','Hispanic','Caucasian','Pacific Islander')  AFTER `gender`;
 
 ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `blood_type`
-set('A+','O+','B+','AB+','A-','O-','B-','AB-','Unknown') DEFAULT 'Unknown' AFTER `weapon_permit_issued_by`;
+set('A+','O+','B+','AB+','A-','O-','B-','AB-') AFTER `weapon_permit_issued_by`;
 
 ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `organ_donor`
 set('NO','YES')  DEFAULT 'NO' AFTER `blood_type`;
@@ -73,16 +73,16 @@ ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `hair_color`
 set('Bald','Black','Blonde','Blue','Brown','Gray','Green','Orange','Pink','Purple','Red','Auburn','Sandy','Strawberry','White','Partially Gray') AFTER `dl_Issued_by`;
 
 ALTER TABLE `<DB_PREFIX>ncic_plates` MODIFY IF EXISTS `veh_insurance`
-set('VALID','EXPIRED','CANCELED','SUSPENDED','Unknown') DEFAULT 'Unknown' AFTER `veh_scolor`;
+set('VALID','EXPIRED','CANCELED','SUSPENDED')  AFTER `veh_scolor`;
 
 ALTER TABLE `<DB_PREFIX>ncic_plates` MODIFY IF EXISTS `veh_insurance type`
-set('CTP','Third Party','Comprehensive','Unknown') DEFAULT 'Unknown' AFTER `veh_insurance`;
+set('CTP','Third Party','Comprehensive')  AFTER `veh_insurance`;
 
 ALTER TABLE `<DB_PREFIX>ncic_plates` MODIFY IF EXISTS `flags`
-set('STOLEN','WANTED','SUSPENDED REGISTRATION','CANCELED REGISTRATION','EXPIRED REGISTRATION','INSURANCE FLAG','DL FLAG') AFTER `veh_insurance type`;
+set('STOLEN','WANTED','SUSPENDED REGISTRATION','CANCELED REGISTRATION','EXPIRED REGISTRATION','INSURANCE FLAG','DRIVER FLAG','NO INSURANCE') AFTER `veh_insurance type`;
 
 ALTER TABLE `<DB_PREFIX>ncic_plates` MODIFY IF EXISTS `veh_reg_state`
-set('Los Santos','Blaine County','San Andreas','Unknown') DEFAULT 'Unknown' AFTER `flags`;
+set('Los Santos','Blaine County','San Andreas')  AFTER `flags`;
 
 DROP TABLE IF EXISTS
     `<DB_PREFIX>permissions`;
