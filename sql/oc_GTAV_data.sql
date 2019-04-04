@@ -268,10 +268,10 @@ INSERT INTO `departments` (`department_id`, `department_name`, `department_short
 (9, 'Roadside Assistance', 'SARA', 'San Andreas Roadside Assistance', 0);
 
 --
--- Dumping data for table `incident_type`
+-- Dumping data for table `incident_types`
 --
 
-INSERT INTO `incident_type` (`code_id`, `code_name`) VALUES
+INSERT INTO `incident_types` (`code_id`, `code_name`) VALUES
 ('68', 'Armed Robbery'),
 ('25', 'Domestic Dispute'),
 ('10', 'Fight in Progress'),
