@@ -440,7 +440,7 @@ function getDepartments()
             if ( ( MODERATOR_DATAMAN_DEPARTMENTS== true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
             {
                 echo '<button name="editDepartment" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editDepartmentModal" class="btn btn-xs btn-link">Edit</button>';
-                echo '<input name="deleteDepartment" action="submit" class="btn btn-xs btn-link" onclick="deleteDepartment(' . $row[0] . ')" value="Delete" />';
+                echo '<input name="deleteDepartment" type="submit" class="btn btn-xs btn-link" onclick="deleteDepartment(' . $row[0] . ')" value="Delete" />';
             } else {
                 echo '<button name="editDepartment" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editDepartmentModal" class="btn btn-xs btn-link" disabled >Edit</button>';
                 echo '<input name="deleteDepartment" action="submit" class="btn btn-xs btn-link" onclick="deleteDepartment(' . $row[0] . ')" value="Delete" />';
@@ -581,7 +581,7 @@ function deleteDepartment()
 
     session_start();
     $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed incident  from database</span></div>';
-    header("Location: ".BASE_URL."/oc-admin/dataManagement/DepartmentManager.php");
+    header("Location: ".BASE_URL."/oc-admin/dataManagement/departmentsManager.php");
 }
 
 //** END Departments Manager FUNCTIONS **//
