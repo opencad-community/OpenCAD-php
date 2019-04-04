@@ -259,16 +259,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                             <!-- ./ col-sm-9 -->
                         </div>
                         <!-- ./ form-group -->
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">Enable Department?</label>
-                            <div class="col-md-9">
-                                <input type="radio" name="ENABLE_DEPARTMENT" id="ENABLE_DEPARTMENT" <?php echo ($MODERATOR_SUSPEND_WITHOUT_REASON=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('ENABLE_DEPARTMENT_WITHOUT_REASON_notes')" onblur="textboxOnBlur('ENABLE_DEPARTMENT_notes')" value="2" /> True
-				                <input type="radio" name="ENABLE_DEPARTMENT" id="ENABLE_DEPARTMENT" <?php echo ($MODERATOR_SUSPEND_WITHOUT_REASON=='false')?'checked':'' ?> onfocus="textboxOnFocus('ENABLE_DEPARTMENT_notes')" onblur="textboxOnBlur('ENABLE_DEPARTMENT_notes')" value="1" /> False
-                                <span class="fas fa-road form-control-feedback right" aria-hidden="true"></span>
-                            </div>
-                            <!-- ./ col-sm-9 -->
-                        </div>
-                        <!-- ./ form-group -->
                 </div>
                 <!-- ./ modal-body -->
                 <div class="modal-footer">

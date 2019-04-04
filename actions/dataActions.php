@@ -413,7 +413,6 @@ function getDepartments()
                     <th>Department</th>
                     <th>Department Short Name</th>
                     <th>Department Long Name</th>
-                    <th>Department Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -423,7 +422,7 @@ function getDepartments()
         foreach($result as $row)
         {
 
-            if($row[4] == 1) {
+            if($row[4] = 1) {
                 $deptStatus = "<span style=\"color:red;\">Disabled (1)</span>";
             } else {
                 $deptStatus = "<span style=\"color:green; font-weight:bold;\">Enabled (2)</span>";
@@ -434,7 +433,6 @@ function getDepartments()
                 <td>' . $row[1] . '</td>
                 <td>' . $row[2] . '</td>
                 <td>' . $row[3] . '</td>
-                <td>' . $deptStatus . '</td>
 
                 <td>';
         if ( DEMO_MODE == false) {
