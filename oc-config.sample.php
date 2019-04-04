@@ -22,6 +22,20 @@
 define('COMMUNITY_NAME', '<COMMUNITY_NAME>');
 
 /**#@+
+ * Language Settings
+ *
+ * These options assert the default language and wiriting direction for the application.
+ * These may be overidden by options in a users profile (Feature in a later version.)
+ * 
+ * @default DEFAULT_LANGUAGE 'en'
+ * @default DEFAULT_LANGUAGE_DIRECTION 'ltr'
+ *
+ * @since 0.2.6
+ **/
+define('DEFAULT_LANGUAGE', 'en');
+define('DEFAULT_LANGUAGE_DIRECTION', 'ltr');
+
+/**#@+
  *
  * Database connection variables
  * These are viable to the CAD system, and must be correct.
@@ -698,7 +712,7 @@ define('MODERATOR_NCIC_EDITOR', <MODERATOR_NCIC_EDITOR>);
   * @since OpenCAD version 0.2.6
   *
   **/
-  define('MODERATOR_DATAMAN_IMPEXPRES', <MODERATOR_DATAMAN_IMPRXPRESET>);
+  define('MODERATOR_DATAMAN_IMPEXPRES', <MODERATOR_DATAMAN_IMPEXPRESET>);
 
 /**#@+
   * Extra Settings

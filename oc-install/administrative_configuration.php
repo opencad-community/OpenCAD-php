@@ -35,8 +35,9 @@
 
 		$MODERATOR_REMOVE_GROUP = isset($_POST['MODERATOR_REMOVE_GROUP']) ? prepare_input($_POST['MODERATOR_REMOVE_GROUP']) : '';
 
-		$MODERATOR_NCIC_EDITOR = isset($_POST['MODERATOR_NCIC_EDITOR']) ? prepare_input($_POST['MODERATOR_NCIC_EDITOR']) : '';
-		
+		$MODERATOR_NCIC_EDITOR 				= isset($_POST['MODERATOR_NCIC_EDITOR']) ? prepare_input($_POST['MODERATOR_NCIC_EDITOR']) : '';
+
+		$MODERATOR_DATA_MANAGER = isset($_POST['MODERATOR_DATA_MANAGER']) ? prepare_input($_POST['MODERATOR_DATA_MANAGER']) : '';
 		$MODERATOR_DATAMAN_CITATIONTYPES = isset($_POST['MODERATOR_DATAMAN_CITATIONTYPES']) ? prepare_input($_POST['MODERATOR_DATAMAN_CITATIONTYPES']) : '';
 		$MODERATOR_DATAMAN_DEPARTMENTS = isset($_POST['MODERATOR_DATAMAN_DEPARTMENTS']) ? prepare_input($_POST['MODERATOR_DATAMAN_DEPARTMENTS']) : '';
 		$MODERATOR_DATAMAN_INCIDENTTYPES = isset($_POST['MODERATOR_DATAMAN_INCIDENTTYPES']) ? prepare_input($_POST['MODERATOR_DATAMAN_INCIDENTTYPES']) : '';
@@ -61,7 +62,6 @@
 		$_SESSION['MODERATOR_NCIC_EDITOR'] = $MODERATOR_NCIC_EDITOR;
 
 		$_SESSION['MODERATOR_DATA_MANAGER'] = $MODERATOR_DATA_MANAGER;
-
 		$_SESSION['MODERATOR_DATAMAN_CITATIONTYPES'] = $MODERATOR_DATAMAN_CITATIONTYPES;
 		$_SESSION['MODERATOR_DATAMAN_DEPARTMENTS'] = $MODERATOR_DATAMAN_DEPARTMENTS;
 		$_SESSION['MODERATOR_DATAMAN_INCIDENTTYPES'] = $MODERATOR_DATAMAN_INCIDENTTYPES;
@@ -115,7 +115,6 @@
 		$_SESSION['MODERATOR_NCIC_EDITOR'] = $MODERATOR_NCIC_EDITOR;
 
 		$_SESSION['MODERATOR_DATA_MANAGER'] = $MODERATOR_DATA_MANAGER;
-
 		$_SESSION['MODERATOR_DATAMAN_CITATIONTYPES'] = $MODERATOR_DATAMAN_CITATIONTYPES;
 		$_SESSION['MODERATOR_DATAMAN_DEPARTMENTS'] = $MODERATOR_DATAMAN_DEPARTMENTS;
 		$_SESSION['MODERATOR_DATAMAN_INCIDENTTYPES'] = $MODERATOR_DATAMAN_INCIDENTTYPES;
@@ -288,9 +287,9 @@
 				<input type="radio" name="MODERATOR_DATAMAN_RADIOCODES" id="MODERATOR_DATAMAN_RADIOCODES" <?php echo ($MODERATOR_DATAMAN_RADIOCODES=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_DATAMAN_RADIOCODES_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_RADIOCODES_notes')" value="false" />False</td>
 			</tr>
 			<tr>
-				<td>&nbsp;<?php echo lang_key('MODERATOR_DATAMAN_RADIOCODES'); ?>&nbsp;</td>
-				<td><input type="radio" name="MODERATOR_DATAMAN_RADIOCODES" id="MODERATOR_DATAMAN_RADIOCODES" <?php echo ($MODERATOR_DATAMAN_RADIOCODES=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_DATAMAN_RADIOCODES_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_RADIOCODES_notes')" value="true" />True
-				<input type="radio" name="MODERATOR_DATAMAN_RADIOCODES" id="MODERATOR_DATAMAN_RADIOCODES" <?php echo ($MODERATOR_DATAMAN_RADIOCODES=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_DATAMAN_RADIOCODES_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_RADIOCODES_notes')" value="false" />False</td>
+				<td>&nbsp;<?php echo lang_key('MODERATOR_DATAMAN_STREETS'); ?>&nbsp;</td>
+				<td><input type="radio" name="MODERATOR_DATAMAN_STREETS" id="MODERATOR_DATAMAN_STREETS" <?php echo ($MODERATOR_DATAMAN_STREETS=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_DATAMAN_STREETS_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_STREETS_notes')" value="true" />True
+				<input type="radio" name="MODERATOR_DATAMAN_STREETS" id="MODERATOR_DATAMAN_STREETS" <?php echo ($MODERATOR_DATAMAN_STREETS=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_DATAMAN_STREETS_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_STREETS_notes')" value="false" />False</td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('MODERATOR_DATAMAN_VEHICLES'); ?>&nbsp;</td>
@@ -314,8 +313,8 @@
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('MODERATOR_DATAMAN_IMPEXPRESET'); ?>&nbsp;</td>
-				<td><input type="radio" name="'MODERATOR_DATAMAN_IMPEXPRESET" id="'MODERATOR_DATAMAN_IMPEXPRESET" <?php echo ($'MODERATOR_DATAMAN_IMPEXPRESET=='true')?'checked':'' ?> checked onfocus="textboxOnFocus(''MODERATOR_DATAMAN_IMPEXPRESET_notes')" onblur="textboxOnBlur(''MODERATOR_DATAMAN_IMPEXPRESET_notes')" value="true" />True
-				<input type="radio" name="'MODERATOR_DATAMAN_IMPEXPRESET" id="'MODERATOR_DATAMAN_IMPEXPRESET" <?php echo ($'MODERATOR_DATAMAN_IMPEXPRESET=='false')?'checked':'' ?> onfocus="textboxOnFocus(''MODERATOR_DATAMAN_IMPEXPRESET_notes')" onblur="textboxOnBlur(''MODERATOR_DATAMAN_IMPEXPRESET_notes')" value="false" />False</td>
+				<td><input type="radio" name="MODERATOR_DATAMAN_IMPEXPRESET" id="MODERATOR_DATAMAN_IMPEXPRESET" <?php echo ($MODERATOR_DATAMAN_IMPEXPRESET=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_DATAMAN_IMPEXPRESET_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_IMPEXPRESET_notes')" value="true" />True
+				<input type="radio" name="MODERATOR_DATAMAN_IMPEXPRESET" id="MODERATOR_DATAMAN_IMPEXPRESET" <?php echo ($MODERATOR_DATAMAN_IMPEXPRESET=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_DATAMAN_IMPEXPRESET_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_IMPEXPRESET_notes')" value="false" />False</td>
 			</tr>
 			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>
 			<tr>

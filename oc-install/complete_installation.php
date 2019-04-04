@@ -26,88 +26,88 @@
 		
 	if($passed_step == 10){
 		
-		$database_host		 = isset($_SESSION['database_host']) ? prepare_input($_SESSION['database_host']) : '';
-		$database_name		 = isset($_SESSION['database_name']) ? prepare_input($_SESSION['database_name']) : '';
-		$database_username	 = isset($_SESSION['database_username']) ? prepare_input($_SESSION['database_username']) : '';
-		$database_password	 = isset($_SESSION['database_password']) ? prepare_input($_SESSION['database_password']) : '';
-		$database_prefix	 = isset($_SESSION['database_prefix']) ? prepare_input($_SESSION['database_prefix']) : '';
-		$install_type		 = isset($_SESSION['install_type']) ? $_SESSION['install_type'] : 'create';
+		$database_host						= isset($_SESSION['database_host']) ? prepare_input($_SESSION['database_host']) : '';
+		$database_name						= isset($_SESSION['database_name']) ? prepare_input($_SESSION['database_name']) : '';
+		$database_username					= isset($_SESSION['database_username']) ? prepare_input($_SESSION['database_username']) : '';
+		$database_password					= isset($_SESSION['database_password']) ? prepare_input($_SESSION['database_password']) : '';
+		$database_prefix					= isset($_SESSION['database_prefix']) ? prepare_input($_SESSION['database_prefix']) : '';
+		$install_type						= isset($_SESSION['install_type']) ? $_SESSION['install_type'] : 'create';
 		
-		$admin_name 	 = isset($_SESSION['admin_name']) ? stripslashes($_SESSION['admin_name']) : '';
-		$admin_identifier 	 = isset($_SESSION['admin_identifier']) ? stripslashes($_SESSION['admin_identifier']) : '';
-		$admin_password 	 = isset($_SESSION['admin_password']) ? stripslashes($_SESSION['admin_password']) : '';
-		$admin_email 		 = isset($_SESSION['admin_email']) ? stripslashes($_SESSION['admin_email']) : '';
-		$password_encryption = isset($_SESSION['password_encryption']) ? $_SESSION['password_encryption'] : EI_PASSWORD_ENCRYPTION_TYPE;
+		$admin_name							= isset($_SESSION['admin_name']) ? stripslashes($_SESSION['admin_name']) : '';
+		$admin_identifier					= isset($_SESSION['admin_identifier']) ? stripslashes($_SESSION['admin_identifier']) : '';
+		$admin_password						= isset($_SESSION['admin_password']) ? stripslashes($_SESSION['admin_password']) : '';
+		$admin_email 						= isset($_SESSION['admin_email']) ? stripslashes($_SESSION['admin_email']) : '';
+		$password_encryption 				= isset($_SESSION['password_encryption']) ? $_SESSION['password_encryption'] : EI_PASSWORD_ENCRYPTION_TYPE;
 		
-	    $COMMUNITY_NAME = isset($_SESSION['COMMUNITY_NAME']) ? prepare_input($_SESSION['COMMUNITY_NAME']) : '';
+	    $COMMUNITY_NAME						= isset($_SESSION['COMMUNITY_NAME']) ? prepare_input($_SESSION['COMMUNITY_NAME']) : '';
 		
-		$BASE_URL = isset($_SESSION['BASE_URL']) ? prepare_input($_SESSION['BASE_URL']) : '';
+		$BASE_URL							= isset($_SESSION['BASE_URL']) ? prepare_input($_SESSION['BASE_URL']) : '';
 		
-		$API_SECURITY = isset($_SESSION['API_SECURITY']) ? prepare_input($_SESSION['API_SECURITY']) : '';
+		$API_SECURITY						= isset($_SESSION['API_SECURITY']) ? prepare_input($_SESSION['API_SECURITY']) : '';
 
-		$CAD_FROM_EMAIL = isset($_SESSION['CAD_FROM_EMAIL']) ? prepare_input($_SESSION['CAD_FROM_EMAIL']) : '';
-		$CAD_TO_EMAIL = isset($_SESSION['CAD_TO_EMAIL']) ? prepare_input($_SESSION['CAD_TO_EMAIL']) : '';
+		$CAD_FROM_EMAIL						= isset($_SESSION['CAD_FROM_EMAIL']) ? prepare_input($_SESSION['CAD_FROM_EMAIL']) : '';
+		$CAD_TO_EMAIL						= isset($_SESSION['CAD_TO_EMAIL']) ? prepare_input($_SESSION['CAD_TO_EMAIL']) : '';
 		
-		$AUTH_KEY = isset($_SESSION['AUTH_KEY']) ? prepare_input($_SESSION['AUTH_KEY']) : '';
-		$SECURE_AUTH_KEY = isset($_SESSION['SECURE_AUTH_KEY']) ? prepare_input($_SESSION['SECURE_AUTH_KEY']) : '';
-		$LOGGED_IN_KEY = isset($_SESSION['LOGGED_IN_KEY']) ? prepare_input($_SESSION['LOGGED_IN_KEY']) : '';
-		$NONCE_KEY = isset($_SESSION['NONCE_KEY']) ? prepare_input($_SESSION['NONCE_KEY']) : '';
-		$AUTH_SALT = isset($_SESSION['AUTH_SALT']) ? prepare_input($_SESSION['AUTH_SALT']) : '';
-		$SECURE_AUTH_SALT = isset($_SESSION['SECURE_AUTH_SALT']) ? prepare_input($_SESSION['SECURE_AUTH_SALT']) : '';
-		$LOGGED_IN_SALT = isset($_SESSION['LOGGED_IN_SALT']) ? prepare_input($_SESSION['LOGGED_IN_SALT']) : '';
-		$NONCE_SALT = isset($_SESSION['NONCE_SALT']) ? prepare_input($_SESSION['NONCE_SALT']) : '';
+		$AUTH_KEY							= isset($_SESSION['AUTH_KEY']) ? prepare_input($_SESSION['AUTH_KEY']) : '';
+		$SECURE_AUTH_KEY					= isset($_SESSION['SECURE_AUTH_KEY']) ? prepare_input($_SESSION['SECURE_AUTH_KEY']) : '';
+		$LOGGED_IN_KEY						= isset($_SESSION['LOGGED_IN_KEY']) ? prepare_input($_SESSION['LOGGED_IN_KEY']) : '';
+		$NONCE_KEY							= isset($_SESSION['NONCE_KEY']) ? prepare_input($_SESSION['NONCE_KEY']) : '';
+		$AUTH_SALT							= isset($_SESSION['AUTH_SALT']) ? prepare_input($_SESSION['AUTH_SALT']) : '';
+		$SECURE_AUTH_SALT					= isset($_SESSION['SECURE_AUTH_SALT']) ? prepare_input($_SESSION['SECURE_AUTH_SALT']) : '';
+		$LOGGED_IN_SALT						= isset($_SESSION['LOGGED_IN_SALT']) ? prepare_input($_SESSION['LOGGED_IN_SALT']) : '';
+		$NONCE_SALT							= isset($_SESSION['NONCE_SALT']) ? prepare_input($_SESSION['NONCE_SALT']) : '';
 		
-		$POLICE_NCIC = isset($_SESSION['POLICE_NCIC']) ? prepare_input($_SESSION['POLICE_NCIC']) : '';
-		$POLICE_CALL_SELFASSIGN = isset($_SESSION['POLICE_CALL_SELFASSIGN']) ? prepare_input($_SESSION['POLICE_CALL_SELFASSIGN']) : '';
+		$POLICE_NCIC						= isset($_SESSION['POLICE_NCIC']) ? prepare_input($_SESSION['POLICE_NCIC']) : '';
+		$POLICE_CALL_SELFASSIGN				= isset($_SESSION['POLICE_CALL_SELFASSIGN']) ? prepare_input($_SESSION['POLICE_CALL_SELFASSIGN']) : '';
 
-		$FIRE_PANIC = isset($_SESSION['FIRE_PANIC']) ? prepare_input($_SESSION['FIRE_PANIC']) : '';
-		$FIRE_BOLO = isset($_SESSION['FIRE_BOLO']) ? prepare_input($_SESSION['FIRE_BOLO']) : '';
-		$FIRE_NCIC_NAME = isset($_SESSION['FIRE_NCIC_NAME']) ? prepare_input($_SESSION['FIRE_NCIC_NAME']) : '';
-		$FIRE_NCIC_PLATE = isset($_SESSION['FIRE_NCIC_PLATE']) ? prepare_input($_SESSION['FIRE_NCIC_PLATE']) : '';
-		$FIRE_CALL_SELFASSIGN = isset($_SESSION['FIRE_CALL_SELFASSIGN']) ? prepare_input($_SESSION['FIRE_CALL_SELFASSIGN']) : '';
+		$FIRE_PANIC							= isset($_SESSION['FIRE_PANIC']) ? prepare_input($_SESSION['FIRE_PANIC']) : '';
+		$FIRE_BOLO							= isset($_SESSION['FIRE_BOLO']) ? prepare_input($_SESSION['FIRE_BOLO']) : '';
+		$FIRE_NCIC_NAME						= isset($_SESSION['FIRE_NCIC_NAME']) ? prepare_input($_SESSION['FIRE_NCIC_NAME']) : '';
+		$FIRE_NCIC_PLATE					= isset($_SESSION['FIRE_NCIC_PLATE']) ? prepare_input($_SESSION['FIRE_NCIC_PLATE']) : '';
+		$FIRE_CALL_SELFASSIGN				= isset($_SESSION['FIRE_CALL_SELFASSIGN']) ? prepare_input($_SESSION['FIRE_CALL_SELFASSIGN']) : '';
 		
-		$EMS_PANIC = isset($_SESSION['EMS_PANIC']) ? prepare_input($_SESSION['EMS_PANIC']) : '';
-		$EMS_BOLO = isset($_SESSION['EMS_BOLO']) ? prepare_input($_SESSION['EMS_BOLO']) : '';
-		$EMS_NCIC_NAME = isset($_SESSION['EMS_NCIC_NAME']) ? prepare_input($_SESSION['EMS_NCIC_NAME']) : '';
-		$EMS_NCIC_PLATE = isset($_SESSION['EMS_NCIC_PLATE']) ? prepare_input($_SESSION['EMS_NCIC_PLATE']) : '';
-		$EMS_CALL_SELFASSIGN = isset($_SESSION['EMS_CALL_SELFASSIGN']) ? prepare_input($_SESSION['EMS_CALL_SELFASSIGN']) : '';
+		$EMS_PANIC							= isset($_SESSION['EMS_PANIC']) ? prepare_input($_SESSION['EMS_PANIC']) : '';
+		$EMS_BOLO							= isset($_SESSION['EMS_BOLO']) ? prepare_input($_SESSION['EMS_BOLO']) : '';
+		$EMS_NCIC_NAME						= isset($_SESSION['EMS_NCIC_NAME']) ? prepare_input($_SESSION['EMS_NCIC_NAME']) : '';
+		$EMS_NCIC_PLATE						= isset($_SESSION['EMS_NCIC_PLATE']) ? prepare_input($_SESSION['EMS_NCIC_PLATE']) : '';
+		$EMS_CALL_SELFASSIGN				= isset($_SESSION['EMS_CALL_SELFASSIGN']) ? prepare_input($_SESSION['EMS_CALL_SELFASSIGN']) : '';
 		
-		$ROADSIDE_PANIC = isset($_SESSION['ROADSIDE_PANIC']) ? prepare_input($_SESSION['ROADSIDE_PANIC']) : '';
-		$ROADSIDE_BOLO = isset($_SESSION['ROADSIDE_BOLO']) ? prepare_input($_SESSION['ROADSIDE_BOLO']) : '';
-		$ROADSIDE_NCIC_NAME = isset($_SESSION['ROADSIDE_NCIC_NAME']) ? prepare_input($_SESSION['ROADSIDE_NCIC_NAME']) : '';
-		$ROADSIDE_NCIC_PLATE = isset($_SESSION['ROADSIDE_NCIC_PLATE']) ? prepare_input($_SESSION['ROADSIDE_NCIC_PLATE']) : '';
-		$ROADSIDE_CALL_SELFASSIGN = isset($_SESSION['ROADSIDE_CALL_SELFASSIGN']) ? prepare_input($_SESSION['ROADSIDE_CALL_SELFASSIGN']) : '';
+		$ROADSIDE_PANIC						= isset($_SESSION['ROADSIDE_PANIC']) ? prepare_input($_SESSION['ROADSIDE_PANIC']) : '';
+		$ROADSIDE_BOLO						= isset($_SESSION['ROADSIDE_BOLO']) ? prepare_input($_SESSION['ROADSIDE_BOLO']) : '';
+		$ROADSIDE_NCIC_NAME					= isset($_SESSION['ROADSIDE_NCIC_NAME']) ? prepare_input($_SESSION['ROADSIDE_NCIC_NAME']) : '';
+		$ROADSIDE_NCIC_PLATE				= isset($_SESSION['ROADSIDE_NCIC_PLATE']) ? prepare_input($_SESSION['ROADSIDE_NCIC_PLATE']) : '';
+		$ROADSIDE_CALL_SELFASSIGN			= isset($_SESSION['ROADSIDE_CALL_SELFASSIGN']) ? prepare_input($_SESSION['ROADSIDE_CALL_SELFASSIGN']) : '';
 		
-		$CIV_WARRANT = isset($_SESSION['CIV_WARRANT']) ? prepare_input($_SESSION['CIV_WARRANT']) : '';
-		$CIV_REG = isset($_SESSION['CIV_REG']) ? prepare_input($_SESSION['CIV_REG']) : '';
-		$CIV_LIMIT_MAX_IDENTITIES = isset($_SESSION['CIV_LIMIT_MAX_IDENTITIES']) ? prepare_input($_SESSION['CIV_LIMIT_MAX_IDENTITIES']) : '';
-		$CIV_LIMIT_MAX_VEHICLES = isset($_SESSION['CIV_LIMIT_MAX_VEHICLES']) ? prepare_input($_SESSION['CIV_LIMIT_MAX_VEHICLES']) : '';
-		$CIV_LIMIT_MAX_WEAPONS = isset($_SESSION['CIV_LIMIT_MAX_WEAPONS']) ? prepare_input($_SESSION['CIV_LIMIT_MAX_WEAPONS']) : '';
+		$CIV_WARRANT						= isset($_SESSION['CIV_WARRANT']) ? prepare_input($_SESSION['CIV_WARRANT']) : '';
+		$CIV_REG							= isset($_SESSION['CIV_REG']) ? prepare_input($_SESSION['CIV_REG']) : '';
+		$CIV_LIMIT_MAX_IDENTITIES			= isset($_SESSION['CIV_LIMIT_MAX_IDENTITIES']) ? prepare_input($_SESSION['CIV_LIMIT_MAX_IDENTITIES']) : '';
+		$CIV_LIMIT_MAX_VEHICLES				= isset($_SESSION['CIV_LIMIT_MAX_VEHICLES']) ? prepare_input($_SESSION['CIV_LIMIT_MAX_VEHICLES']) : '';
+		$CIV_LIMIT_MAX_WEAPONS				= isset($_SESSION['CIV_LIMIT_MAX_WEAPONS']) ? prepare_input($_SESSION['CIV_LIMIT_MAX_WEAPONS']) : '';
 
-		$MODERATOR_APPROVE_USER = isset($_SESSION['MODERATOR_APPROVE_USER']) ? prepare_input($_SESSION['MODERATOR_APPROVE_USER']) : '';
-		$MODERATOR_EDIT_USER = isset($_SESSION['MODERATOR_EDIT_USER']) ? prepare_input($_SESSION['MODERATOR_EDIT_USER']) : '';
-		$MODERATOR_SUSPEND_WITH_REASON = isset($_SESSION['MODERATOR_SUSPEND_WITH_REASON']) ? prepare_input($_SESSION['MODERATOR_SUSPEND_WITH_REASON']) : '';
-		$MODERATOR_SUSPEND_WITHOUT_REASON = isset($_SESSION['MODERATOR_SUSPEND_WITHOUT_REASON']) ? prepare_input($_SESSION['MODERATOR_SUSPEND_WITHOUT_REASON']) : '';
-		$MODERATOR_REACTIVATE_USER = isset($_SESSION['MODERATOR_REACTIVATE_USER']) ? prepare_input($_SESSION['MODERATOR_REACTIVATE_USER']) : '';
-		$MODERATOR_REMOVE_GROUP = isset($_SESSION['MODERATOR_REMOVE_GROUP']) ? prepare_input($_SESSION['MODERATOR_REMOVE_GROUP']) : '';
-		$MODERATOR_DELETE_USER = isset($_SESSION['MODERATOR_DELETE_USER']) ? prepare_input($_SESSION['MODERATOR_DELETE_USER']) : '';
-		$MODERATOR_NCIC_EDITOR = isset($_SESSION['MODERATOR_NCIC_EDITOR']) ? prepare_input($_SESSION['MODERATOR_NCIC_EDITOR']) : '';
+		$MODERATOR_APPROVE_USER				= isset($_SESSION['MODERATOR_APPROVE_USER']) ? prepare_input($_SESSION['MODERATOR_APPROVE_USER']) : '';
+		$MODERATOR_EDIT_USER				= isset($_SESSION['MODERATOR_EDIT_USER']) ? prepare_input($_SESSION['MODERATOR_EDIT_USER']) : '';
+		$MODERATOR_SUSPEND_WITH_REASON		= isset($_SESSION['MODERATOR_SUSPEND_WITH_REASON']) ? prepare_input($_SESSION['MODERATOR_SUSPEND_WITH_REASON']) : '';
+		$MODERATOR_SUSPEND_WITHOUT_REASON	= isset($_SESSION['MODERATOR_SUSPEND_WITHOUT_REASON']) ? prepare_input($_SESSION['MODERATOR_SUSPEND_WITHOUT_REASON']) : '';
+	$MODERATOR_REACTIVATE_USER				= isset($_SESSION['MODERATOR_REACTIVATE_USER']) ? prepare_input($_SESSION['MODERATOR_REACTIVATE_USER']) : '';
+		$MODERATOR_REMOVE_GROUP 			= isset($_SESSION['MODERATOR_REMOVE_GROUP']) ? prepare_input($_SESSION['MODERATOR_REMOVE_GROUP']) : '';
+		$MODERATOR_DELETE_USER 				= isset($_SESSION['MODERATOR_DELETE_USER']) ? prepare_input($_SESSION['MODERATOR_DELETE_USER']) : '';
+		$MODERATOR_NCIC_EDITOR 				= isset($_SESSION['MODERATOR_NCIC_EDITOR']) ? prepare_input($_SESSION['MODERATOR_NCIC_EDITOR']) : '';
 		
-		$MODERATOR_DATA_MANAGER = isset($_SESSION['MODERATOR_DATA_MANAGER']) ? prepare_input($_SESSION['MODERATOR_DATA_MANAGER']) : '';
-		$MODERATOR_DATAMAN_CITATIONTYPES = isset($_POST['MODERATOR_DATAMAN_CITATIONTYPES']) ? prepare_input($_POST['MODERATOR_DATAMAN_CITATIONTYPES']) : '';
-		$MODERATOR_DATAMAN_DEPARTMENTS = isset($_POST['MODERATOR_DATAMAN_DEPARTMENTS']) ? prepare_input($_POST['MODERATOR_DATAMAN_DEPARTMENTS']) : '';
-		$MODERATOR_DATAMAN_INCIDENTTYPES = isset($_POST['MODERATOR_DATAMAN_INCIDENTTYPES']) ? prepare_input($_POST['MODERATOR_DATAMAN_INCIDENTTYPES']) : '';
-		$MODERATOR_DATAMAN_RADIOCODES = isset($_POST['MODERATOR_DATAMAN_RADIOCODES']) ? prepare_input($_POST['MODERATOR_DATAMAN_RADIOCODES']) : '';
-		$MODERATOR_DATAMAN_STREETS = isset($_POST['MODERATOR_DATAMAN_STREETS']) ? prepare_input($_POST['MODERATOR_DATAMAN_STREETS']) : '';		
-		$MODERATOR_DATAMAN_VEHICLES = isset($_POST['MODERATOR_DATAMAN_VEHICLES']) ? prepare_input($_POST['MODERATOR_DATAMAN_VEHICLES']) : '';
-		$MODERATOR_DATAMAN_WARNINGTYPES = isset($_POST['MODERATOR_DATAMAN_WARNINGTYPES']) ? prepare_input($_POST['MODERATOR_DATAMAN_WARNINGTYPES']) : '';	
-		$MODERATOR_DATAMAN_WARRANTTYPES = isset($_POST['MODERATOR_DATAMAN_WARRANTTYPES']) ? prepare_input($_POST['MODERATOR_DATAMAN_WARRANTTYPES']) : '';
-		$MODERATOR_DATAMAN_WEAPONS = isset($_POST['MODERATOR_DATAMAN_WEAPONS']) ? prepare_input($_POST['MODERATOR_DATAMAN_WEAPONS']) : '';
-		$MODERATOR_DATAMAN_IMPEXPRESET = isset($_POST['MODERATOR_DATAMAN_IMPEXPRESET']) ? prepare_input($_POST['MODERATOR_DATAMAN_IMPEXPRESET']) : '';
+		$MODERATOR_DATA_MANAGER				= isset($_SESSION['MODERATOR_DATA_MANAGER']) ? prepare_input($_SESSION['MODERATOR_DATA_MANAGER']) : '';
+		$MODERATOR_DATAMAN_CITATIONTYPES	= isset($_SESSION['MODERATOR_DATAMAN_CITATIONTYPES']) ? prepare_input($_SESSION['MODERATOR_DATAMAN_CITATIONTYPES']) : '';
+		$MODERATOR_DATAMAN_DEPARTMENTS		= isset($_SESSION['MODERATOR_DATAMAN_DEPARTMENTS']) ? prepare_input($_SESSION['MODERATOR_DATAMAN_DEPARTMENTS']) : '';
+		$MODERATOR_DATAMAN_INCIDENTTYPES	= isset($_SESSION['MODERATOR_DATAMAN_INCIDENTTYPES']) ? prepare_input($_SESSION['MODERATOR_DATAMAN_INCIDENTTYPES']) : '';
+		$MODERATOR_DATAMAN_RADIOCODES		= isset($_SESSION['MODERATOR_DATAMAN_RADIOCODES']) ? prepare_input($_SESSION['MODERATOR_DATAMAN_RADIOCODES']) : '';
+		$MODERATOR_DATAMAN_STREETS			= isset($_SESSION['MODERATOR_DATAMAN_STREETS']) ? prepare_input($_SESSION['MODERATOR_DATAMAN_STREETS']) : '';		
+		$MODERATOR_DATAMAN_VEHICLES			= isset($_SESSION['MODERATOR_DATAMAN_VEHICLES']) ? prepare_input($_SESSION['MODERATOR_DATAMAN_VEHICLES']) : '';
+		$MODERATOR_DATAMAN_WARNINGTYPES		= isset($_SESSION['MODERATOR_DATAMAN_WARNINGTYPES']) ? prepare_input($_SESSION['MODERATOR_DATAMAN_WARNINGTYPES']) : '';	
+		$MODERATOR_DATAMAN_WARRANTTYPES		= isset($_SESSION['MODERATOR_DATAMAN_WARRANTTYPES']) ? prepare_input($_SESSION['MODERATOR_DATAMAN_WARRANTTYPES']) : '';
+		$MODERATOR_DATAMAN_WEAPONS			= isset($_SESSION['MODERATOR_DATAMAN_WEAPONS']) ? prepare_input($_SESSION['MODERATOR_DATAMAN_WEAPONS']) : '';
+		$MODERATOR_DATAMAN_IMPEXPRESET		= isset($_SESSION['MODERATOR_DATAMAN_IMPEXPRESET']) ? prepare_input($_SESSION['MODERATOR_DATAMAN_IMPEXPRESET']) : '';
 
-		$DEMO_MODE = isset($_SESSION['DEMO_MODE']) ? prepare_input($_SESSION['DEMO_MODE']) : '';
+		$DEMO_MODE							= isset($_SESSION['DEMO_MODE']) ? prepare_input($_SESSION['DEMO_MODE']) : '';
 
-		$USE_GRAVATAR = isset($_SESSION['USE_GRAVATAR']) ? prepare_input($_SESSION['USE_GRAVATAR']) : '';
+		$USE_GRAVATAR						= isset($_SESSION['USE_GRAVATAR']) ? prepare_input($_SESSION['USE_GRAVATAR']) : '';
 		
 		if($install_type == 'update'){
 			$sql_dump_file = EI_SQL_DUMP_FILE_UPDATE;
@@ -162,6 +162,9 @@
 								$config_file = str_replace('<DB_PASSWORD>', $database_password, $config_file);
 								$config_file = str_replace('<DB_PREFIX>', $database_prefix, $config_file);
 								
+								$config_file = str_replace('<DEFAULT_LANGUAGE>', $DEFAULT_LANUGAGE, $config_file);
+								$config_file = str_replace('<DEFAULT_LANUGAGE_DIRECTION>', $DEFAULT_LANUGAGE_DIRECTION, $config_file);
+
 								$config_file = str_replace('<COMMUNITY_NAME>', $COMMUNITY_NAME, $config_file);
 								$config_file = str_replace('<BASE_URL>', $BASE_URL, $config_file);
 								$config_file = str_replace('<API_SECURITY>', $API_SECURITY, $config_file);
