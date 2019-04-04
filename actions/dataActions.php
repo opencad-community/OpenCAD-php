@@ -34,7 +34,7 @@ if (isset($_POST['getCitationTypes']))
 //** Handle POST requests for Departments Manager **/
 else if (isset($_POST['getDepartments']))
 {
-    getDepartment();
+    getDepartments();
 } else if (isset($_POST['getDepartmentDetails']))
 {
     getDepartmentDetails();
@@ -390,7 +390,7 @@ function getDepartments()
         die();
     }
 
-    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."Departments");
+    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."departments");
 
     if (!$result)
     {
@@ -403,16 +403,17 @@ function getDepartments()
 
     if ($num_rows == 0)
     {
-        echo "<div class=\"alert alert-info\"><span>There are no Department s in the database.</span></div>";
+        echo "<div class=\"alert alert-info\"><span>There are no Departments in the database.</span></div>";
         
     } else {
         echo '
             <table id="allDepartments" class="table table-striped table-bordered">
             <thead>
                 <tr>                
-                    <th>Department Name</th>
+                    <th>Department</th>
                     <th>Department Short Name</th>
-                    <th>Department Acronym</th>
+                    <th>Department Long Name</th>
+                    <th>Department Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -421,33 +422,37 @@ function getDepartments()
 
         foreach($result as $row)
         {
+
+            if($row[4] == 1) {
+                $deptStatus = "<span style=\"color:red;\">Disabled (1)</span>";
+            } else {
+                $deptStatus = "<span style=\"color:green; font-weight:bold;\">Enabled (2)</span>";
+            }
+
             echo '
             <tr>
-                <td>' . $row[3] . '</td>
                 <td>' . $row[1] . '</td>
                 <td>' . $row[2] . '</td>
+                <td>' . $row[3] . '</td>
+                <td>' . $deptStatus . '</td>
+
                 <td>';
         if ( DEMO_MODE == false) {
             echo '<form action="'.BASE_URL.'/actions/dataActions.php" method="post">';
-            if ( ( MODERATOR_EDIT_WARNING == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            if ( ( MODERATOR_DATAMAN_DEPARTMENTS== true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
             {
-                echo '<button name="editDepartment" ="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editDepartmentModal" class="btn btn-xs btn-link" >Edit</button>';
+                echo '<button name="editDepartment" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editDepartmentModal" class="btn btn-xs btn-link">Edit</button>';
+                echo '<input name="deleteDepartment" action="submit" class="btn btn-xs btn-link" onclick="deleteDepartment(' . $row[0] . ')" value="Delete" />';
             } else {
-                echo '<button name="editDepartment" ="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editDepartmentModal" class="btn btn-xs btn-link" disabled >Edit</button>';
-            }
-
-            if ( ( MODERATOR_DELETE_WARNING == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
-            {
-                echo '<input name="deleteDepartment" ="submit" class="btn btn-xs btn-link" onclick="deleteDepartment(' . $row[0] . ')" value="Delete" />';
-            } else {
-                echo '<input name="deleteDepartment" ="submit" class="btn btn-xs btn-link" onclick="deleteDepartment(' . $row[0] . ')" value="Delete" disabled />';
+                echo '<button name="editDepartment" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editDepartmentModal" class="btn btn-xs btn-link" disabled >Edit</button>';
+                echo '<input name="deleteDepartment" action="submit" class="btn btn-xs btn-link" onclick="deleteDepartment(' . $row[0] . ')" value="Delete" />';
             }
         } else {
             echo ' </td>
                 <td>
                 <form action="'.BASE_URL.'/actions/dataActions.php" method="post">
-                <button name="editDepartment" ="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editDepartmentModal" class="btn btn-xs btn-link" disabled >Edit</button>
-                <input name="deleteDepartment" ="submit" class="btn btn-xs btn-link" onclick="deleteDepartment(' . $row[0] . ')" value="Delete" disabled />
+                <button name="editDepartment" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editDepartmentModal" class="btn btn-xs btn-link" disabled >Edit</button>
+                <input name="deleteDepartment" action="submit" class="btn btn-xs btn-link" onclick="deleteDepartment(' . $row[0] . ')" value="Delete" disabled />
                 ';
             }
         
@@ -474,7 +479,7 @@ function getDepartments()
 **/
 function getDepartmentDetails()
 {
-    $id = htmlspecialchars($_POST['id']);
+    $departmentID = htmlspecialchars($_POST['departmentID']);
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
     } catch(PDOException $ex)
@@ -485,8 +490,8 @@ function getDepartmentDetails()
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."Department_s WHERE id = ?");
-    $resStatus = $stmt->execute(array($id));
+    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."departments WHERE department_id = ?");
+    $resStatus = $stmt->execute(array($departmentID));
     $result = $stmt;
 
     if (!$resStatus)
@@ -500,9 +505,12 @@ function getDepartmentDetails()
     $encode = array();
     foreach($result as $row)
     {
-        $encode["id"] = $row[0];
-        $encode["Department_description"] = $row[1];
-        $encode["Department_fine"] = $row[2];
+        $encode["departmentID"] = $row[0];
+        $encode["department_name"] = $row[1];
+        $encode["department_short_name"] = $row[2];
+        $encode["department_long_name"] = $row[3];
+        $encode["allow_department"] = $row[4];
+
     }
     
     echo json_encode($encode);
@@ -511,9 +519,11 @@ function getDepartmentDetails()
 
 function editDepartment()
 {
-    $id	        	                = !empty($_POST['id']) ? htmlspecialchars($_POST['id']) : '';
-    $Department_description           = !empty($_POST['Department_description']) ? htmlspecialchars($_POST['Department_description']) : '';
-    $Department_fine  		        = !empty($_POST['Department_fine']) ? htmlspecialchars($_POST['Department_fine']) : '';
+    $departmentID					= !empty($_POST['departmentID']) ? htmlspecialchars($_POST['departmentID']) : '';
+    $department_name				= !empty($_POST['department_name']) ? htmlspecialchars($_POST['department_name']) : '';
+    $department_short_name			= !empty($_POST['department_short_name']) ? htmlspecialchars($_POST['department_short_name']) : '';
+	$department_long_name			= !empty($_POST['department_long_name']) ? htmlspecialchars($_POST['department_long_name']) : '';
+	$allow_department				= !empty($_POST['allow_department']) ? htmlspecialchars($_POST['allow_department']) : '';
 
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -526,13 +536,13 @@ function editDepartment()
     }
 
     
-     $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."Department_s SET	Department_description = ?, Department_fine = ? WHERE id = ?");
-    if ($stmt->execute(array($Department_description, $Department_fine, $id))) {
+     $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."departments SET	department_name = ?, department_short_name = ?, department_long_name = ?, allow_department = ? WHERE department_id = ?");
+    if ($stmt->execute(array($department_name, $department_short_name, $department_long_name, $allow_department, $departmentID))) {
         $pdo = null;
 
         //Let the user know their information was updated
-        $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Department '.$Department.' with a recommended fine of '.$code_fine.'  edited successfully.</span></div>';
-        header("Location: ".BASE_URL."/oc-admin/dataManagement/DepartmentManager.php");
+        $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Department '.$department_long_name.' ('.$department_short_name.')  was  edited successfully.</span></div>';
+        header("Location: ".BASE_URL."/oc-admin/dataManagement/departmentsManager.php");
     } else {
         echo "Error updating record: " . print_r($stmt->errorInfo(), true);
     }
@@ -549,7 +559,7 @@ function editDepartment()
 function deleteDepartment()
 {
     session_start();
-    $id = htmlspecialchars($_POST['DepartmentID']);
+    $departmentID = htmlspecialchars($_POST['departmentID']);
 
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -561,8 +571,8 @@ function deleteDepartment()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."Department_s WHERE id = ?");
-    if (!$stmt->execute(array($id)))
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."departments WHERE department_id = ?");
+    if (!$stmt->execute(array($departmentID)))
     {
         $_SESSION['error'] = $stmt->errorInfo();
         header('Location: '.BASE_URL.'/plugins/error/index.php');

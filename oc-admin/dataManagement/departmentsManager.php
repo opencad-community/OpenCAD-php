@@ -222,32 +222,49 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     </div>
 
     <!-- Edit Street Modal -->
-    <div class="modal fade" id="editCitationTypeModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="editDepartmentModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                    </button>
-                    <h4 class="modal-title" id="editCitationTypeModal">Edit Citation Type</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="editDepartmentModal">Edit Department</h4>
                 </div>
                 <!-- ./ modal-header -->
                 <div class="modal-body">
-                    <form role="form" method="post" action="<?php echo BASE_URL; ?>/actions/dataActions.php"
-                        class="form-horizontal">
+                    <form role="form" method="post" action="<?php echo BASE_URL; ?>/actions/dataActions.php" class="form-horizontal">
                         <div class="form-group row">
-                            <label class="col-md-3 control-label">Citation Description</label>
+                            <label class="col-md-3 control-label">Department Name</label>
                             <div class="col-md-9">
-                                <input data-lpignore='true' type="text" name="citation_description" class="form-control" id="citation_description" required />
+                                <input data-lpignore='true' type="text" name="department_name" class="form-control" id="department_name" required />
                                 <span class="fas fa-road form-control-feedback right" aria-hidden="true"></span>
                             </div>
                             <!-- ./ col-sm-9 -->
                         </div>
                         <!-- ./ form-group -->
                         <div class="form-group row">
-                            <label class="col-md-3 control-label">Citation Fine (Reccomended)</label>
+                            <label class="col-md-3 control-label">Department Short Name</label>
                             <div class="col-md-9">
-                                <input data-lpignore='true' type="text" name="citation_fine" class="form-control" id="citation_fine"/>
+                                <input data-lpignore='true' type="text" name="department_short_name" class="form-control" id="department_short_name" required/>
                                 <span class="fas fa-map form-control-feedback right" aria-hidden="true"></span>
+                            </div>
+                            <!-- ./ col-sm-9 -->
+                        </div>
+                        <!-- ./ form-group -->
+                         <div class="form-group row">
+                            <label class="col-md-3 control-label">Description Long Name</label>
+                            <div class="col-md-9">
+                                <input data-lpignore='true' type="text" name="department_long_name" class="form-control" id="department_long_name" required />
+                                <span class="fas fa-road form-control-feedback right" aria-hidden="true"></span>
+                            </div>
+                            <!-- ./ col-sm-9 -->
+                        </div>
+                        <!-- ./ form-group -->
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">Enable Department?</label>
+                            <div class="col-md-9">
+                                <input type="radio" name="ENABLE_DEPARTMENT" id="ENABLE_DEPARTMENT" <?php echo ($MODERATOR_SUSPEND_WITHOUT_REASON=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('ENABLE_DEPARTMENT_WITHOUT_REASON_notes')" onblur="textboxOnBlur('ENABLE_DEPARTMENT_notes')" value="2" /> True
+				                <input type="radio" name="ENABLE_DEPARTMENT" id="ENABLE_DEPARTMENT" <?php echo ($MODERATOR_SUSPEND_WITHOUT_REASON=='false')?'checked':'' ?> onfocus="textboxOnFocus('ENABLE_DEPARTMENT_notes')" onblur="textboxOnBlur('ENABLE_DEPARTMENT_notes')" value="1" /> False
+                                <span class="fas fa-road form-control-feedback right" aria-hidden="true"></span>
                             </div>
                             <!-- ./ col-sm-9 -->
                         </div>
@@ -256,8 +273,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <!-- ./ modal-body -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <input type="hidden" name="id" id="id" aria-hidden="true">
-                    <input type="submit" name="editCitationType" class="btn btn-primary" value="Edit Citation Type" />
+                    <input type="hidden" name="departmentID" id="departmentID" aria-hidden="true">
+                    <input type="submit" name="editDepartment" class="btn btn-primary" value="Edit Department" />
                 </div>
                 <!-- ./ modal-footer -->
                 </form>
@@ -276,30 +293,32 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     <script>
     $(document).ready(function() {
-        $('#allCitationTpyes').DataTable({});
+        $('#allDepartments').DataTable({});
     });
     </script>
 
     <script>
-    $('#editCitationTypeModal').on('show.bs.modal', function(e) {
+    $('#editDepartmentModal').on('show.bs.modal', function(e) {
         var $modal = $(this),
-            id= e.relatedTarget.id;
+            departmentID = e.relatedTarget.id;
 
         $.ajax({
             cache: false,
             type: 'POST',
             url: '<?php echo BASE_URL; ?>/actions/dataActions.php',
             data: {
-                'getCitationTypeDetails': 'yes',
-                'id': id
+                'getDepartmentDetails': 'yes',
+                'departmentID': departmentID
             },
             success: function(result) {
                 console.log(result);
                 data = JSON.parse(result);
 
-                $('input[name="citation_fine"]').val(data['citation_fine']);
-                $('input[name="citation_description"]').val(data['citation_description']);
-                $('input[name="id"]').val(data['id']);
+                $('input[name="department_name"]').val(data['department_name']);
+                $('input[name="department_short_name"]').val(data['department_short_name']);
+                $('input[name="department_long_name"]').val(data['department_long_name']);
+                $('input[name="allow_department"]').val(data['allow_department']);
+                $('input[name="departmentID"]').val(data['departmentID']);
             },
 
             error: function(exception) {
