@@ -534,8 +534,8 @@ function editDepartment()
     }
 
     
-     $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."departments SET	department_name = ?, department_short_name = ?, department_long_name = ?, allow_department = ? WHERE department_id = ?");
-    if ($stmt->execute(array($department_name, $department_short_name, $department_long_name, $allow_department, $departmentID))) {
+     $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."departments SET	department_name = ?, department_short_name = ?, department_long_name = ? WHERE department_id = ?");
+    if ($stmt->execute(array($department_name, $department_short_name, $department_long_name, $departmentID))) {
         $pdo = null;
 
         //Let the user know their information was updated
