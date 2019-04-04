@@ -443,14 +443,14 @@ function getDepartments()
                 echo '<input name="deleteDepartment" type="submit" class="btn btn-xs btn-link" onclick="deleteDepartment(' . $row[0] . ')" value="Delete" />';
             } else {
                 echo '<button name="editDepartment" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editDepartmentModal" class="btn btn-xs btn-link" disabled >Edit</button>';
-                echo '<input name="deleteDepartment" action="submit" class="btn btn-xs btn-link" onclick="deleteDepartment(' . $row[0] . ')" value="Delete" />';
+                echo '<input name="deleteDepartment" type"submit" class="btn btn-xs btn-link" onclick="deleteDepartment(' . $row[0] . ')" value="Delete" />';
             }
         } else {
             echo ' </td>
                 <td>
                 <form action="'.BASE_URL.'/actions/dataActions.php" method="post">
                 <button name="editDepartment" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editDepartmentModal" class="btn btn-xs btn-link" disabled >Edit</button>
-                <input name="deleteDepartment" action="submit" class="btn btn-xs btn-link" onclick="deleteDepartment(' . $row[0] . ')" value="Delete" disabled />
+                <input name="deleteDepartment" type="submit" class="btn btn-xs btn-link" onclick="deleteDepartment(' . $row[0] . ')" value="Delete" disabled />
                 ';
             }
         
