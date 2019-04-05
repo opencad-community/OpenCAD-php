@@ -19,8 +19,15 @@
     //     $arr_active_languages = array()
     $arr_active_languages = array(
         'en'=>array('name'=>'English', 'direction'=>'ltr'),
-        'de'=>array('name'=>'Deutch', 'direction'=>'ltr'),
+        'nl'=>array('name'=>'Dutch', 'direction'=>'ltr'),
         'es'=>array('name'=>'Spanish', 'direction'=>'ltr'),
+        'de'=>array('name'=>'German', 'direction'=>'ltr'),
+        'fr'=>array('name'=>'French', 'direction'=>'ltr'),
+        'cs'=>array('name'=>'Czech', 'direction'=>'ltr'),
+        'cn'=>array('name'=>'Chinese, Simplified', 'direction'=>'ltr'),
+        'it'=>array('name'=>'Italian', 'direction'=>'ltr'),
+        'pt'=>array('name'=>'Portuguese', 'direction'=>'ltr'),
+        'ru'=>array('name'=>'Russian', 'direction'=>'ltr'),
     );
     
     // *** default template
@@ -42,7 +49,7 @@
     define('EI_CHECK_MAGIC_QUOTES', false);
     
     // *** allows collecting info for mbstring support
-    define('EI_CHECK_MBSTRING_SUPPORT', false);
+    define('EI_CHECK_MBSTRING_SUPPORT', true);
 
     // *** allows collecting info for email settings
     define('EI_CHECK_MAIL_SETTINGS', false);
@@ -108,16 +115,16 @@
     // *** specifies whether to allow new installation
     define('EI_ALLOW_NEW_INSTALLATION', true);        
     // *** specifies whether to allow update
-    define('EI_ALLOW_UPDATE', false);        
+    define('EI_ALLOW_UPDATE', true);        
     // *** specifies whether to allow un-installation
     define('EI_ALLOW_UN_INSTALLATION', false);  
 
     // *** allows start all over button
-    define('EI_ALLOW_START_ALL_OVER', false);
+    define('EI_ALLOW_START_ALL_OVER', true);
     
     // *** sql dump file - file that includes SQL statements for instalation
     define('EI_SQL_DUMP_FILE_CREATE', '../sql/oc_install.sql');
-    define('EI_SQL_DUMP_FILE_UPDATE', 'sql_dump/update.sql');
+    define('EI_SQL_DUMP_FILE_UPDATE', '../sql/oc_update.sql');
     define('EI_SQL_DUMP_FILE_UN_INSTALL', '../sql/oc_uninstall.sql');
 
     // *** defines using of utf-8 encoding and collation for SQL dump file

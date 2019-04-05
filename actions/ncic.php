@@ -82,11 +82,14 @@ function name()
                 $encode["sex"] = $row[4];
                 $encode["race"] = $row[5];
                 $encode["dl_status"] = $row[6];
-                $encode["hair_color"] = $row[7];
-                $encode["build"] = $row[8];
-                $encode["age"] = $row[11];
-				$encode["weapon_permit"] = $row[9];
-				$encode["deceased"] = $row[10];
+                $encode["dl_type"] = $row[7];
+                $encode["dl_class"] = $row[8];
+                $encode["dl_issuer"] = $row[9];
+                $encode["hair_color"] = $row[10];
+                $encode["build"] = $row[11];
+                $encode["age"] = $row[12];
+				$encode["weapon_permit"] = $row[13];
+				$encode["deceased"] = $row[14];
             }
 
             $stmt = $pdo->prepare("SELECT id, name_id, warrant_name FROM ".DB_PREFIX."ncic_warrants WHERE name_id = ?");

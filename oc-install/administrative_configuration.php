@@ -35,8 +35,20 @@
 
 		$MODERATOR_REMOVE_GROUP = isset($_POST['MODERATOR_REMOVE_GROUP']) ? prepare_input($_POST['MODERATOR_REMOVE_GROUP']) : '';
 
-		$MODERATOR_NCIC_EDITOR = isset($_POST['MODERATOR_NCIC_EDITOR']) ? prepare_input($_POST['MODERATOR_NCIC_EDITOR']) : '';
-		
+		$MODERATOR_NCIC_EDITOR 				= isset($_POST['MODERATOR_NCIC_EDITOR']) ? prepare_input($_POST['MODERATOR_NCIC_EDITOR']) : '';
+
+		$MODERATOR_DATA_MANAGER = isset($_POST['MODERATOR_DATA_MANAGER']) ? prepare_input($_POST['MODERATOR_DATA_MANAGER']) : '';
+		$MODERATOR_DATAMAN_CITATIONTYPES = isset($_POST['MODERATOR_DATAMAN_CITATIONTYPES']) ? prepare_input($_POST['MODERATOR_DATAMAN_CITATIONTYPES']) : '';
+		$MODERATOR_DATAMAN_DEPARTMENTS = isset($_POST['MODERATOR_DATAMAN_DEPARTMENTS']) ? prepare_input($_POST['MODERATOR_DATAMAN_DEPARTMENTS']) : '';
+		$MODERATOR_DATAMAN_INCIDENTTYPES = isset($_POST['MODERATOR_DATAMAN_INCIDENTTYPES']) ? prepare_input($_POST['MODERATOR_DATAMAN_INCIDENTTYPES']) : '';
+		$MODERATOR_DATAMAN_RADIOCODES = isset($_POST['MODERATOR_DATAMAN_RADIOCODES']) ? prepare_input($_POST['MODERATOR_DATAMAN_RADIOCODES']) : '';
+		$MODERATOR_DATAMAN_STREETS = isset($_POST['MODERATOR_DATAMAN_STREETS']) ? prepare_input($_POST['MODERATOR_DATAMAN_STREETS']) : '';		
+		$MODERATOR_DATAMAN_VEHICLES = isset($_POST['MODERATOR_DATAMAN_VEHICLES']) ? prepare_input($_POST['MODERATOR_DATAMAN_VEHICLES']) : '';
+		$MODERATOR_DATAMAN_WARNINGTYPES = isset($_POST['MODERATOR_DATAMAN_WARNINGTYPES']) ? prepare_input($_POST['MODERATOR_DATAMAN_WARNINGTYPES']) : '';	
+		$MODERATOR_DATAMAN_WARRANTTYPES = isset($_POST['MODERATOR_DATAMAN_WARRANTTYPES']) ? prepare_input($_POST['MODERATOR_DATAMAN_WARRANTTYPES']) : '';
+		$MODERATOR_DATAMAN_WEAPONS = isset($_POST['MODERATOR_DATAMAN_WEAPONS']) ? prepare_input($_POST['MODERATOR_DATAMAN_WEAPONS']) : '';
+		$MODERATOR_DATAMAN_IMPEXPRESET = isset($_POST['MODERATOR_DATAMAN_IMPEXPRESET']) ? prepare_input($_POST['MODERATOR_DATAMAN_IMPEXPRESET']) : '';
+
 		$_SESSION['MODERATOR_APPROVE_USER'] = $MODERATOR_APPROVE_USER;
 		$_SESSION['MODERATOR_EDIT_USER'] = $MODERATOR_EDIT_USER;			
 		$_SESSION['MODERATOR_DELETE_USER'] = $MODERATOR_DELETE_USER;
@@ -48,6 +60,18 @@
 		$_SESSION['MODERATOR_REMOVE_GROUP'] = $MODERATOR_REMOVE_GROUP;
 
 		$_SESSION['MODERATOR_NCIC_EDITOR'] = $MODERATOR_NCIC_EDITOR;
+
+		$_SESSION['MODERATOR_DATA_MANAGER'] = $MODERATOR_DATA_MANAGER;
+		$_SESSION['MODERATOR_DATAMAN_CITATIONTYPES'] = $MODERATOR_DATAMAN_CITATIONTYPES;
+		$_SESSION['MODERATOR_DATAMAN_DEPARTMENTS'] = $MODERATOR_DATAMAN_DEPARTMENTS;
+		$_SESSION['MODERATOR_DATAMAN_INCIDENTTYPES'] = $MODERATOR_DATAMAN_INCIDENTTYPES;
+		$_SESSION['MODERATOR_DATAMAN_RADIOCODES'] = $MODERATOR_DATAMAN_RADIOCODES;
+		$_SESSION['MODERATOR_DATAMAN_STREETS'] = $MODERATOR_DATAMAN_STREETS;
+		$_SESSION['MODERATOR_DATAMAN_VEHICLES'] = $MODERATOR_DATAMAN_VEHICLES;
+		$_SESSION['MODERATOR_DATAMAN_WARNINGTYPES'] = $MODERATOR_DATAMAN_WARNINGTYPES;
+		$_SESSION['MODERATOR_DATAMAN_WARRANTTYPES'] = $MODERATOR_DATAMAN_WARRANTTYPES;
+		$_SESSION['MODERATOR_DATAMAN_WEAPONS'] = $MODERATOR_DATAMAN_WEAPONS;
+		$_SESSION['MODERATOR_DATAMAN_IMPEXPRESET'] = $MODERATOR_DATAMAN_IMPEXPRESET;
 
 		$_SESSION['passed_step'] = 8;
 		header('location: extra_settings.php');
@@ -61,12 +85,46 @@
 		
         $MODERATOR_SUSPEND_WITH_REASON = isset($_POST['MODERATOR_SUSPEND_WITH_REASON']) ? prepare_input($_POST['MODERATOR_SUSPEND_WITH_REASON']) : '';
 		$MODERATOR_SUSPEND_WITHOUT_REASON = isset($_POST['MODERATOR_SUSPEND_WITHOUT_REASON']) ? prepare_input($_POST['MODERATOR_SUSPEND_WITHOUT_REASON']) : '';
-		$MODERATOR_REACTIAVATE_USER = isset($_POST['MODERATOR_REACTIAVATE_USER']) ? prepare_input($_POST['MODERATOR_REACTIAVATE_USER']) : '';
+		$MODERATOR_REACTIVATE_USER = isset($_POST['MODERATOR_REACTIVATE_USER']) ? prepare_input($_POST['MODERATOR_REACTIVATE_USER']) : '';
 
 		$MODERATOR_REMOVE_GROUP = isset($_POST['MODERATOR_REMOVE_GROUP']) ? prepare_input($_POST['MODERATOR_REMOVE_GROUP']) : '';
 
 		$MODERATOR_NCIC_EDITOR = isset($_POST['MODERATOR_NCIC_EDITOR']) ? prepare_input($_POST['MODERATOR_NCIC_EDITOR']) : '';
+		
+		$MODERATOR_DATAMAN_CITATIONTYPES = isset($_POST['MODERATOR_DATAMAN_CITATIONTYPES']) ? prepare_input($_POST['MODERATOR_DATAMAN_CITATIONTYPES']) : '';
+		$MODERATOR_DATAMAN_DEPARTMENTS = isset($_POST['MODERATOR_DATAMAN_DEPARTMENTS']) ? prepare_input($_POST['MODERATOR_DATAMAN_DEPARTMENTS']) : '';
+		$MODERATOR_DATAMAN_INCIDENTTYPES = isset($_POST['MODERATOR_DATAMAN_INCIDENTTYPES']) ? prepare_input($_POST['MODERATOR_DATAMAN_INCIDENTTYPES']) : '';
+		$MODERATOR_DATAMAN_RADIOCODES = isset($_POST['MODERATOR_DATAMAN_RADIOCODES']) ? prepare_input($_POST['MODERATOR_DATAMAN_RADIOCODES']) : '';
+		$MODERATOR_DATAMAN_STREETS = isset($_POST['MODERATOR_DATAMAN_STREETS']) ? prepare_input($_POST['MODERATOR_DATAMAN_STREETS']) : '';		
+		$MODERATOR_DATAMAN_VEHICLES = isset($_POST['MODERATOR_DATAMAN_VEHICLES']) ? prepare_input($_POST['MODERATOR_DATAMAN_VEHICLES']) : '';
+		$MODERATOR_DATAMAN_WARNINGTYPES = isset($_POST['MODERATOR_DATAMAN_WARNINGTYPES']) ? prepare_input($_POST['MODERATOR_DATAMAN_WARNINGTYPES']) : '';	
+		$MODERATOR_DATAMAN_WARRANTTYPES = isset($_POST['MODERATOR_DATAMAN_WARRANTTYPES']) ? prepare_input($_POST['MODERATOR_DATAMAN_WARRANTTYPES']) : '';
+		$MODERATOR_DATAMAN_WEAPONS = isset($_POST['MODERATOR_DATAMAN_WEAPONS']) ? prepare_input($_POST['MODERATOR_DATAMAN_WEAPONS']) : '';
+		$MODERATOR_DATAMAN_IMPEXPRESET = isset($_POST['MODERATOR_DATAMAN_IMPEXPRESET']) ? prepare_input($_POST['MODERATOR_DATAMAN_IMPEXPRESET']) : '';
 
+		$_SESSION['MODERATOR_APPROVE_USER'] = $MODERATOR_APPROVE_USER;
+		$_SESSION['MODERATOR_EDIT_USER'] = $MODERATOR_EDIT_USER;			
+		$_SESSION['MODERATOR_DELETE_USER'] = $MODERATOR_DELETE_USER;
+
+		$_SESSION['MODERATOR_SUSPEND_WITH_REASON'] = $MODERATOR_SUSPEND_WITH_REASON;
+		$_SESSION['MODERATOR_SUSPEND_WITHOUT_REASON'] = $MODERATOR_SUSPEND_WITHOUT_REASON;
+		$_SESSION['MODERATOR_REACTIVATE_USER'] = $MODERATOR_REACTIVATE_USER;
+
+		$_SESSION['MODERATOR_REMOVE_GROUP'] = $MODERATOR_REMOVE_GROUP;
+
+		$_SESSION['MODERATOR_NCIC_EDITOR'] = $MODERATOR_NCIC_EDITOR;
+
+		$_SESSION['MODERATOR_DATA_MANAGER'] = $MODERATOR_DATA_MANAGER;
+		$_SESSION['MODERATOR_DATAMAN_CITATIONTYPES'] = $MODERATOR_DATAMAN_CITATIONTYPES;
+		$_SESSION['MODERATOR_DATAMAN_DEPARTMENTS'] = $MODERATOR_DATAMAN_DEPARTMENTS;
+		$_SESSION['MODERATOR_DATAMAN_INCIDENTTYPES'] = $MODERATOR_DATAMAN_INCIDENTTYPES;
+		$_SESSION['MODERATOR_DATAMAN_RADIOCODES'] = $MODERATOR_DATAMAN_RADIOCODES;
+		$_SESSION['MODERATOR_DATAMAN_STREETS'] = $MODERATOR_DATAMAN_STREETS;
+		$_SESSION['MODERATOR_DATAMAN_VEHICLES'] = $MODERATOR_DATAMAN_VEHICLES;
+		$_SESSION['MODERATOR_DATAMAN_WARNINGTYPES'] = $MODERATOR_DATAMAN_WARNINGTYPES;
+		$_SESSION['MODERATOR_DATAMAN_WARRANTTYPES'] = $MODERATOR_DATAMAN_WARRANTTYPES;
+		$_SESSION['MODERATOR_DATAMAN_WEAPONS'] = $MODERATOR_DATAMAN_WEAPONS;
+		$_SESSION['MODERATOR_DATAMAN_IMPEXPRESET'] = $MODERATOR_DATAMAN_IMPEXPRESET;
 	}
 ?>	
 
@@ -190,7 +248,7 @@
 				<td><input type="radio" name="MODERATOR_REACTIVATE_USER" id="MODERATOR_REACTIVATE_USER" <?php echo ($MODERATOR_SUSPEND_WITHOUT_REASON=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_REACTIVATE_USER_WITHOUT_REASON_notes')" onblur="textboxOnBlur('MODERATOR_REACTIVATE_USER_notes')" value="true" />True
 				<input type="radio" name="MODERATOR_REACTIVATE_USER" id="MODERATOR_REACTIVATE_USER" <?php echo ($MODERATOR_SUSPEND_WITHOUT_REASON=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_REACTIVATE_USER_notes')" onblur="textboxOnBlur('MODERATOR_REACTIVATE_USER_notes')" value="false" />False</td>
 			</tr>
-			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>
+			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>	
 			<tr>
 			<td>&nbsp;<?php echo lang_key('MODERATOR_REMOVE_GROUP'); ?>&nbsp;</td>
 				<td><input type="radio" name="MODERATOR_REMOVE_GROUP" id="MODERATOR_REMOVE_GROUP" <?php echo ($MODERATOR_NCIC_EDITOR=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_REMOVE_GROUP_notes')" checked onblur="textboxOnBlur('MODERATOR_REMOVE_GROUP_notes')" value="true" />True
@@ -204,12 +262,68 @@
 			</tr>
 			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>
 			<tr>
+				<td>&nbsp;<?php echo lang_key('MODERATOR_DATA_MANAGER'); ?>&nbsp;</td>
+				<td><input type="radio" name="MODERATOR_DATA_MANAGER" id="MODERATOR_DATA_MANAGER" <?php echo ($MODERATOR_DATA_MANAGER=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_DATA_MANAGER_notes')" onblur="textboxOnBlur('MODERATOR_DATA_MANAGER_notes')" value="true" />True
+				<input type="radio" name="MODERATOR_DATA_MANAGER" id="MODERATOR_DATA_MANAGER" <?php echo ($MODERATOR_DATA_MANAGER=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_DATA_MANAGER_notes')" onblur="textboxOnBlur('MODERATOR_DATA_MANAGER_notes')" value="false" />False</td>
+			</tr>
+			<tr>
+				<td>&nbsp;<?php echo lang_key('MODERATOR_DATAMAN_CITATIONTYPES'); ?>&nbsp;</td>
+				<td><input type="radio" name="MODERATOR_DATAMAN_CITATIONTYPES" id="MODERATOR_DATAMAN_CITATIONTYPES" <?php echo ($MODERATOR_DATAMAN_CITATIONTYPES=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_DATAMAN_CITATIONTYPES_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_CITATIONTYPES_notes')" value="true" />True
+				<input type="radio" name="MODERATOR_DATAMAN_CITATIONTYPES" id="MODERATOR_DATAMAN_CITATIONTYPES" <?php echo ($MODERATOR_DATAMAN_CITATIONTYPES=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_DATAMAN_CITATIONTYPES_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_CITATIONTYPES_notes')" value="false" />False</td>
+			</tr>
+			<tr>
+				<td>&nbsp;<?php echo lang_key('MODERATOR_DATAMAN_DEPARTMENTS'); ?>&nbsp;</td>
+				<td><input type="radio" name="MODERATOR_DATAMAN_DEPARTMENTS" id="MODERATOR_DATAMAN_DEPARTMENTS" <?php echo ($MODERATOR_DATAMAN_DEPARTMENTS=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_DATAMAN_DEPARTMENTS_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_DEPARTMENTS_notes')" value="true" />True
+				<input type="radio" name="MODERATOR_DATAMAN_DEPARTMENTS" id="MODERATOR_DATAMAN_DEPARTMENTS" <?php echo ($MODERATOR_DATAMAN_DEPARTMENTS=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_DATAMAN_DEPARTMENTS_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_DEPARTMENTS_notes')" value="false" />False</td>
+			</tr>
+			<tr>
+				<td>&nbsp;<?php echo lang_key('MODERATOR_DATAMAN_INCIDENTTYPES'); ?>&nbsp;</td>
+				<td><input type="radio" name="MODERATOR_DATAMAN_INCIDENTTYPES" id="MODERATOR_DATAMAN_INCIDENTTYPES" <?php echo ($MODERATOR_DATAMAN_INCIDENTTYPES=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_DATAMAN_INCIDENTTYPES_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_INCIDENTTYPES_notes')" value="true" />True
+				<input type="radio" name="MODERATOR_DATAMAN_INCIDENTTYPES" id="MODERATOR_DATAMAN_INCIDENTTYPES" <?php echo ($MODERATOR_DATAMAN_INCIDENTTYPES=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_DATAMAN_INCIDENTTYPES_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_INCIDENTTYPES_notes')" value="false" />False</td>
+			</tr>
+			<tr>
+				<td>&nbsp;<?php echo lang_key('MODERATOR_DATAMAN_RADIOCODES'); ?>&nbsp;</td>
+				<td><input type="radio" name="MODERATOR_DATAMAN_RADIOCODES" id="MODERATOR_DATAMAN_RADIOCODES" <?php echo ($MODERATOR_DATAMAN_RADIOCODES=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_DATAMAN_RADIOCODES_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_RADIOCODES_notes')" value="true" />True
+				<input type="radio" name="MODERATOR_DATAMAN_RADIOCODES" id="MODERATOR_DATAMAN_RADIOCODES" <?php echo ($MODERATOR_DATAMAN_RADIOCODES=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_DATAMAN_RADIOCODES_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_RADIOCODES_notes')" value="false" />False</td>
+			</tr>
+			<tr>
+				<td>&nbsp;<?php echo lang_key('MODERATOR_DATAMAN_STREETS'); ?>&nbsp;</td>
+				<td><input type="radio" name="MODERATOR_DATAMAN_STREETS" id="MODERATOR_DATAMAN_STREETS" <?php echo ($MODERATOR_DATAMAN_STREETS=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_DATAMAN_STREETS_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_STREETS_notes')" value="true" />True
+				<input type="radio" name="MODERATOR_DATAMAN_STREETS" id="MODERATOR_DATAMAN_STREETS" <?php echo ($MODERATOR_DATAMAN_STREETS=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_DATAMAN_STREETS_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_STREETS_notes')" value="false" />False</td>
+			</tr>
+			<tr>
+				<td>&nbsp;<?php echo lang_key('MODERATOR_DATAMAN_VEHICLES'); ?>&nbsp;</td>
+				<td><input type="radio" name="MODERATOR_DATAMAN_VEHICLES" id="MODERATOR_DATAMAN_VEHICLES" <?php echo ($MODERATOR_DATAMAN_VEHICLES=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_DATAMAN_VEHICLES_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_VEHICLES_notes')" value="true" />True
+				<input type="radio" name="MODERATOR_DATAMAN_VEHICLES" id="MODERATOR_DATAMAN_VEHICLES" <?php echo ($MODERATOR_DATAMAN_VEHICLES=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_DATAMAN_VEHICLES_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_VEHICLES_notes')" value="false" />False</td>
+			</tr>
+			<tr>
+				<td>&nbsp;<?php echo lang_key('MODERATOR_DATAMAN_WARNINGTYPES'); ?>&nbsp;</td>
+				<td><input type="radio" name="MODERATOR_DATAMAN_WARNINGTYPES" id="MODERATOR_DATAMAN_WARNINGTYPES" <?php echo ($MODERATOR_DATAMAN_WARNINGTYPES=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_DATAMAN_WARNINGTYPES_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_WARNINGTYPES_notes')" value="true" />True
+				<input type="radio" name="MODERATOR_DATAMAN_WARNINGTYPES" id="MODERATOR_DATAMAN_WARNINGTYPES" <?php echo ($MODERATOR_DATAMAN_WARNINGTYPES=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_DATAMAN_WARNINGTYPES_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_WARNINGTYPES_notes')" value="false" />False</td>
+			</tr>
+			<tr>
+				<td>&nbsp;<?php echo lang_key('MODERATOR_DATAMAN_WARRANTTYPES'); ?>&nbsp;</td>
+				<td><input type="radio" name="MODERATOR_DATAMAN_WARRANTTYPES" id="MODERATOR_DATAMAN_WARRANTTYPES" <?php echo ($MODERATOR_DATAMAN_WARRANTTYPES=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_DATAMAN_WARRANTTYPES_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_WARRANTTYPES_notes')" value="true" />True
+				<input type="radio" name="MODERATOR_DATAMAN_WARRANTTYPES" id="MODERATOR_DATAMAN_WARRANTTYPES" <?php echo ($MODERATOR_DATAMAN_WARRANTTYPES=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_DATAMAN_WARRANTTYPES_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_WARRANTTYPES_notes')" value="false" />False</td>
+			</tr>
+			<tr>
+				<td>&nbsp;<?php echo lang_key('MODERATOR_DATAMAN_WEAPONS'); ?>&nbsp;</td>
+				<td><input type="radio" name="MODERATOR_DATAMAN_WEAPONS" id="MODERATOR_DATAMAN_WEAPONS" <?php echo ($MODERATOR_DATAMAN_WEAPONS=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_DATAMAN_WEAPONS_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_WEAPONS_notes')" value="true" />True
+				<input type="radio" name="MODERATOR_DATAMAN_WEAPONS" id="MODERATOR_DATAMAN_WEAPONS" <?php echo ($MODERATOR_DATAMAN_WEAPONS=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_DATAMAN_WEAPONS_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_WEAPONS_notes')" value="false" />False</td>
+			</tr>
+			<tr>
+				<td>&nbsp;<?php echo lang_key('MODERATOR_DATAMAN_IMPEXPRESET'); ?>&nbsp;</td>
+				<td><input type="radio" name="MODERATOR_DATAMAN_IMPEXPRESET" id="MODERATOR_DATAMAN_IMPEXPRESET" <?php echo ($MODERATOR_DATAMAN_IMPEXPRESET=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_DATAMAN_IMPEXPRESET_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_IMPEXPRESET_notes')" value="true" />True
+				<input type="radio" name="MODERATOR_DATAMAN_IMPEXPRESET" id="MODERATOR_DATAMAN_IMPEXPRESET" <?php echo ($MODERATOR_DATAMAN_IMPEXPRESET=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_DATAMAN_IMPEXPRESET_notes')" onblur="textboxOnBlur('MODERATOR_DATAMAN_IMPEXPRESET_notes')" value="false" />False</td>
+			</tr>
+			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>
+			<tr>
 				<td colspan="2">
 					<a href="civilian_configuration.php" class="form_button" /><?php echo lang_key('back'); ?></a>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="submit" class="form_button" value="<?php echo lang_key('continue'); ?>" />
 				</td>
-			</tr>                        
+			</tr>
 			</table>
 			</form>                        
 		</div>

@@ -12,11 +12,10 @@ This program is free software: you can redistribute it and/or modify
 
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
-
     session_start();
-
-    require_once(__DIR__ . '/../oc-config.php');
-    require_once(__DIR__ . '/../oc-functions.php');
+    require_once(__DIR__.'../../../oc-config.php');
+    require_once(__DIR__.'../../../oc-functions.php');
+    include(__DIR__ .'../../../actions/dataActions.php');
 
     if (empty($_SESSION['logged_in']))
     {
@@ -28,7 +27,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       $name = $_SESSION['name'];
     }
 
-
     if ( $_SESSION['admin_privilege'] == 3)
     {
       if ($_SESSION['admin_privilege'] == 'Administrator')
@@ -36,7 +34,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           //Do nothing
       }
     }
-    else if ($_SESSION['admin_privilege'] == 2)
+    else if ($_SESSION['admin_privilege'] == 2 && MODERAOTR_DATAMAN_STREETS == true)
     {
       if ($_SESSION['admin_privilege'] == 'Moderator')
       {
@@ -45,25 +43,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     }
     else
     {
-        permissionDenied();
-    }
-
-
-
-    include("../actions/adminActions.php");
-
-    $accessMessage = "";
-    if(isset($_SESSION['accessMessage']))
-    {
-        $accessMessage = $_SESSION['accessMessage'];
-        unset($_SESSION['accessMessage']);
-    }
-    $adminMessage = "";
-    if(isset($_SESSION['adminMessage']))
-    {
-        $adminMessage = $_SESSION['adminMessage'];
-        unset($_SESSION['adminMessage']);
-    }
+      permissionDenied();
+    }    
 
     $successMessage = "";
     if(isset($_SESSION['successMessage']))
@@ -75,8 +56,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 <!DOCTYPE html>
 <html lang="en">
-
-<?php include "../oc-includes/header.inc.php"; ?>
+<?php include (__DIR__ ."../../../oc-includes/header.inc.php"); ?>
 
 <body class="nav-md">
     <div class="container body">
@@ -105,7 +85,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
                     <br />
 
-                    <?php include "oc-admin-includes/sidebarNav.inc.php"; ?>
+                    <?php include __DIR__."../../oc-admin-includes/sidebarNav.inc.php"; ?>
 
                     <!-- /menu footer buttons -->
                     <div class="sidebar-footer hidden-small">
@@ -134,8 +114,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="nav_menu">
                     <nav>
                         <div class="nav toggle">
-                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                            <a id="menu_toggle"><i class="fas fa-bars"></i></a>
                         </div>
+
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
@@ -144,10 +125,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                     <span class="fas fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                    <li><a href="<?php echo BASE_URL; ?>/profile.php"><i class="fas fa-user pull-right"></i>My Profile</a></li>
-                                    <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
+                                    <li><a href="<?php echo BASE_URL; ?>/profile.php"><i
+                                                class="fas fa-user pull-right"></i>My Profile</a></li>
+                                    <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i
+                                                class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
                                 </ul>
                             </li>
+
 
                         </ul>
                     </nav>
@@ -160,81 +144,57 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>CAD Administration</h3>
-
+                            <h3>CAD Data Manager</h3>
                         </div>
-
-                        <?php /* HIUE SEARCH FUNCTION FOR NOW
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- going to be utilized in v2 of Street Manager - PJF/10MAR19 
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>At A Glance</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fas fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
                   </div>
-                  <!-- ./ input-group -->
+                  <!-- ./ x_title ->
+                  <div class="x_content">
+                      <div class="row tile_count">
+                       
+                      </div>
+                      <!-- ./ row tile_count ->
+                  </div>
+                  <!-- ./ x_content ->
                 </div>
-                <!-- ./ col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search -->
+                <!-- ./ x_panel ->
               </div>
-              <!-- ./ title_right -->
-              */?>
-                    </div>
-
+              <!-- ./ col-md-12 col-sm-12 col-xs-12 --
+            </div>
+            <!-- ./ row ->
+             going to be utilized in v2 of Street Manager - PJF/10MAR19 -->
                     <div class="clearfix"></div>
-
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Statistics at a glance</h2>
+                                    <h2>Citation Types Manager</h2>
                                     <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
                                         </li>
-                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                        <li><a class="close-link"><i class="fas fa-close"></i></a>
                                         </li>
                                     </ul>
                                     <div class="clearfix"></div>
                                 </div>
                                 <!-- ./ x_title -->
                                 <div class="x_content">
-                                    <?php echo $adminMessage; echo $successMessage; ?>
-                                    <div class="row tile_count">
-                                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                                            <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
-                                            <div class="count"><?php echo getUserCount();?></div>
-                                        </div>
-                                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
-                                    </div>
-                                    <!-- ./ row tile_count -->
-                                </div>
-                                <!-- ./ x_content -->
-                            </div>
-                            <!-- ./ x_panel -->
-                        </div>
-                        <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
-                    </div>
-                    <!-- ./ row -->
-
-                    <div class="clearfix"></div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>Access Requests</h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                        </li>
-                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <!-- ./ x_title -->
-                                <div class="x_content">
-                                    <?php echo $accessMessage;?>
-
-                                    <?php getPendingUsers();?>
+                                    <?php echo $successMessage;?>
+                                    <?php getCitationTypes();?>
                                 </div>
                                 <!-- ./ x_content -->
                             </div>
@@ -261,9 +221,93 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         </div>
     </div>
 
-    <?php
-    include (__DIR__ . "/oc-admin-includes/globalModals.inc.php");
-    include (__DIR__ . "/../oc-includes/jquery-colsolidated.inc.php"); ?>
+    <!-- Edit Street Modal -->
+    <div class="modal fade" id="editCitationTypeModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="editCitationTypeModal">Edit Citation Type</h4>
+                </div>
+                <!-- ./ modal-header -->
+                <div class="modal-body">
+                    <form role="form" method="post" action="<?php echo BASE_URL; ?>/actions/dataActions.php"
+                        class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">Citation Description</label>
+                            <div class="col-md-9">
+                                <input data-lpignore='true' type="text" name="citation_description" class="form-control" id="citation_description" required />
+                                <span class="fas fa-road form-control-feedback right" aria-hidden="true"></span>
+                            </div>
+                            <!-- ./ col-sm-9 -->
+                        </div>
+                        <!-- ./ form-group -->
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">Citation Fine (Reccomended)</label>
+                            <div class="col-md-9">
+                                <input data-lpignore='true' type="text" name="citation_fine" class="form-control" id="citation_fine"/>
+                                <span class="fas fa-map form-control-feedback right" aria-hidden="true"></span>
+                            </div>
+                            <!-- ./ col-sm-9 -->
+                        </div>
+                        <!-- ./ form-group -->
+                </div>
+                <!-- ./ modal-body -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="hidden" name="id" id="id" aria-hidden="true">
+                    <input type="submit" name="editCitationType" class="btn btn-primary" value="Edit Citation Type" />
+                </div>
+                <!-- ./ modal-footer -->
+                </form>
+            </div>
+            <!-- ./ modal-content -->
+        </div>
+        <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
+
+
+
+    <?php 
+	include(__DIR__ . "/../oc-admin-includes/globalModals.inc.php"); 
+	include(__DIR__ . "../../../oc-includes/jquery-colsolidated.inc.php");?>
+
+    <script>
+    $(document).ready(function() {
+        $('#allCitationTpyes').DataTable({});
+    });
+    </script>
+
+    <script>
+    $('#editCitationTypeModal').on('show.bs.modal', function(e) {
+        var $modal = $(this),
+            id= e.relatedTarget.id;
+
+        $.ajax({
+            cache: false,
+            type: 'POST',
+            url: '<?php echo BASE_URL; ?>/actions/dataActions.php',
+            data: {
+                'getCitationTypeDetails': 'yes',
+                'id': id
+            },
+            success: function(result) {
+                console.log(result);
+                data = JSON.parse(result);
+
+                $('input[name="citation_fine"]').val(data['citation_fine']);
+                $('input[name="citation_description"]').val(data['citation_description']);
+                $('input[name="id"]').val(data['id']);
+            },
+
+            error: function(exception) {
+                alert('Exeption:' + exception);
+            }
+        });
+    })
+    </script>
 
     <script type="text/javascript"
         src="https://jira.opencad.io/s/a0c4d8ca8eced10a4b49aaf45ec76490-T/-f9bgig/77001/9e193173deda371ba40b4eda00f7488e/2.0.24/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=ede74ac1">

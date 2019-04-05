@@ -27,14 +27,14 @@ if(!empty($lang) && array_key_exists($lang, $arr_active_languages)){
 	$curr_lang_direction = DEFAULT_LANGUAGE_DIRECTION;
 }
 
-if(file_exists('install/oc-lang/'.$curr_lang.'/common.inc.php')){
-	include_once('install/oc-lang/'.$curr_lang.'/common.inc.php');
+if(file_exists('/oc-lang/'.$curr_lang.'/common.inc.php')){
+	include_once('/oc-lang/'.$curr_lang.'/common.inc.php');
 }else if(file_exists('../oc-lang/'.$curr_lang.'/common.inc.php')){
 	include_once('../oc-lang/'.$curr_lang.'/common.inc.php');
-}else if(file_exists('../oc-lang/'.$curr_lang.'/common.inc.php')){
-	include_once('../oc-lang/'.$curr_lang.'/common.inc.php');
+}else if(file_exists('../../oc-lang/'.$curr_lang.'/common.inc.php')){
+	include_once('../../oc-lang/'.$curr_lang.'/common.inc.php');
 }else{
-	include_once('../oc-lang/en/common.inc.php');    	
+	include_once('./oc-lang/en/common.inc.php');    	
 }	
 
 
@@ -51,8 +51,9 @@ if ( OC_DEBUG == "true" )
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ERROR | E_WARNING);
+		error_log();
 		echo "<pre>";
-		var_dump($_SESSION);
+		print_r($_SESSION);
 		echo "</pre>";
 	} else {
 		ini_set('display_errors', 0);
@@ -229,6 +230,21 @@ function generateRandomString($length = 10) {
 function getOpenCADVersion()
 {
 	echo '0.2.6';
+}
+
+/**#@+
+* function function()
+* Description of function
+*
+* @since version
+*
+**/
+function permissionDenied()
+{
+	$_SESSION['error_title'] = "Permission Denied";
+	$_SESSION['error'] = "Sorry, you don't have permission to access this page.";
+	header('Location: '.BASE_URL.'/plugins/error/index.php');
+	die();
 }
 
 ?>
