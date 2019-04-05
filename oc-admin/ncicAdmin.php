@@ -23,8 +23,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     session_start();
 
-permissionDenied();
-
     // HACK
     $civName = "";
     $civDob  = "";
