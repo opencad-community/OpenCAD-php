@@ -7,3 +7,4 @@ oc-config.php
 info.php
 .github/
 *.bak*
+.vscode

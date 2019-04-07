@@ -693,9 +693,9 @@ function editnameid()
         header('Location: '.BASE_URL.'/plugins/error/index.php');
         die();
     }
-    $pdo = null;
 
-    $data = $stmt->fetch(PDO::FETCH_NUM);
+    header("Content-Type: application/json");
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
     echo json_encode($data);
 }
 
