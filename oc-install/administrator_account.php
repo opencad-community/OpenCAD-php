@@ -179,16 +179,16 @@
 				</td>
 			</tr>
 			<tr>
-				<td>&nbsp;<?php echo lang_key('admin_email'); ?>&nbsp;</td>
-				<td><input name="admin_email" id="admin_email" class="form_text" size="28" maxlength="125" value="<?php echo $admin_email; ?>" onfocus="textboxOnFocus('notes_admin_email')" onblur="textboxOnBlur('notes_admin_email')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> /></td>
+				<td>&nbsp;<?php echo lang_key('admin_email'); ?>&nbsp;<span class="star">*</span></td>
+				<td><input name="admin_email" id="admin_email" class="form_text" size="28" maxlength="125" value="<?php echo $admin_email; ?>" onfocus="textboxOnFocus('notes_admin_email')" onblur="textboxOnBlur('notes_admin_email')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> required /></td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('admin_password'); ?>&nbsp;<span class="star">*</span></td>
-				<td><input name="admin_password" id="admin_password" class="form_text" type="password" size="28" maxlength="22" value="<?php echo $admin_password; ?>" onfocus="textboxOnFocus('notes_admin_password')" onblur="textboxOnBlur('notes_admin_password')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+				<td><input name="admin_password" id="admin_password" class="form_text" type="password" size="28" maxlength="22" value="<?php echo $admin_password; ?>" onfocus="textboxOnFocus('notes_admin_password')" onblur="textboxOnBlur('notes_admin_password')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" required /></td>
 			</tr>
 			<tr>
 			    <td width="250px">&nbsp;<?php echo lang_key('admin_identifier'); ?>&nbsp;<span class="star">*</span></td>
-				<td><input name="admin_identifier" id="admin_identifier" class="form_text" size="28" maxlength="22" value="<?php echo $admin_identifier; ?>" onfocus="textboxOnFocus('admin_identifier_notes')" onblur="textboxOnBlur('admin_identifier_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+				<td><input name="admin_identifier" id="admin_identifier" class="form_text" size="28" maxlength="22" value="<?php echo $admin_identifier; ?>" onfocus="textboxOnFocus('admin_identifier_notes')" onblur="textboxOnBlur('admin_identifier_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" required /></td>
 			</tr>
 			<?php }else{ ?>
 				<tr><td colspan="2"><?php echo lang_key('administrator_account_skipping'); ?></td></tr>			
