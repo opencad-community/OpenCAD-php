@@ -7,3 +7,5 @@ oc-config.php
 info.php
 .github/
 *.bak*
+.travis.yml
+.crowdin.yml
