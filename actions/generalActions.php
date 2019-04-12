@@ -1543,7 +1543,7 @@ function getVehicle()
  * Querys database to retrieve genders.
  *
  * @since 1.0a RC2
- */
+ *
 function getGenders()
 {
     try{

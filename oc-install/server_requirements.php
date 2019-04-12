@@ -16,7 +16,7 @@
 	// -------------------------------------------------
     if(file_exists(EI_CONFIG_FILE_PATH)){ 
 		$program_already_installed = true;
-		header('location: '.EI_APPLICATION_START_FILE);
+		//header('location: '.EI_APPLICATION_START_FILE);
         ///exit;
 	}
 	

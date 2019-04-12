@@ -214,12 +214,6 @@
 				</td>
 			</tr>
 			<tr>
-				<td nowrap>&nbsp;<?php echo lang_key('database_name'); ?>: <span class="star">*</span></td>
-				<td>
-					<input type="text" class="form_text" name="database_name" id="database_name" size="30" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> value="<?php echo $database_name; ?>" placeholder="<?php if(EI_MODE == 'demo') echo 'demo: db_name'; ?>" onfocus="textboxOnFocus('notes_db_name')" onblur="textboxOnBlur('notes_db_name')" />					
-				</td>
-			</tr>
-			<tr>
 				<td nowrap>&nbsp;<?php echo lang_key('database_username'); ?>: <span class="star">*</span></td>
 				<td>
 					<input type="text" class="form_text" name="database_username" id="database_username" size="30" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> value="<?php echo $database_username; ?>" placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" onfocus="textboxOnFocus('notes_db_user')" onblur="textboxOnBlur('notes_db_user')" />
@@ -229,6 +223,12 @@
 				<td nowrap>&nbsp;<?php echo lang_key('database_password'); ?>:</td>
 				<td>
 					<input type="password" class="form_text" name="database_password" id="database_password" size="30" value="<?php echo $database_password; ?>" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" onfocus="textboxOnFocus('notes_db_password')" onblur="textboxOnBlur('notes_db_password')" />
+				</td>
+			</tr>
+			<tr>
+				<td nowrap>&nbsp;<?php echo lang_key('database_name'); ?>: <span class="star">*</span></td>
+				<td>
+					<input type="text" class="form_text" name="database_name" id="database_name" size="30" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> value="<?php echo $database_name; ?>" placeholder="<?php if(EI_MODE == 'demo') echo 'demo: db_name'; ?>" onfocus="textboxOnFocus('notes_db_name')" onblur="textboxOnBlur('notes_db_name')" />					
 				</td>
 			</tr>
 			<tr>

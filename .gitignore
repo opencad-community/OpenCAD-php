@@ -7,5 +7,9 @@ oc-config.php
 info.php
 .github/
 *.bak*
+<<<<<<< HEAD
 .travis.yml
 .crowdin.yml
+=======
+.vscode
+>>>>>>> 14cd5deb264f1703ba70d821459efd2c18bc2631

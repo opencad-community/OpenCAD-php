@@ -1,8 +1,4 @@
 <?php
-//------------------------------------------------------------------------------ 
-//*** English (en)
-//------------------------------------------------------------------------------ 
-
 $arrLang = array();
 
 $arrLang['alert_admin_email_wrong'] = "Admin email has wrong format! Please re-enter.";
@@ -33,15 +29,17 @@ $arrLang['error_sql_executing'] = "SQL execution error! Please Turn debug mode O
 $arrLang['error_server_requirements'] = "This installation requires _SETTINGS_NAME_ settings turned on/installed.";
 $arrLang['error_vd_support'] = "This installation requires Virtual Directory support turned ON.";
 
-$arrLang['admin_access_data'] = "Admin Access Info";
+$arrLang['admin_access_data'] = "Administrator Account Info";
 $arrLang['admin_access_data_descr'] = "(you need this to enter the protected admin area)";
-$arrLang['admin_email'] = "Admin Email";
-$arrLang['admin_email_info'] = "Admin Email that be used to login with.";
-$arrLang['admin_login'] = "Admin Name";
-$arrLang['admin_login_info'] = "Your name that is on the account. Note: Can be changed later";
+$arrLang['admin_email'] = "Email";
+$arrLang['admin_email_info'] = "The administrator email which will be used to login to this accout.
+
+More Administrator accounts can be provisioned later in the Administrator Console User Management";
+$arrLang['admin_name'] = "Name";
+$arrLang['admin_login_info'] = "Your name as per your communities policies and procedures. This can be adjusted later if needed.";
 $arrLang['admin_identifier'] = "Identifier";
-$arrLang['admin_identifier_info'] = "Your identifier. IE: 1D-01 Note:Depends on your community";
-$arrLang['admin_password'] = "Admin Password";
+$arrLang['admin_identifier_info'] = "Your identifier. IE: 1D-01 Note. Depends on your community";
+$arrLang['admin_password'] = "Password";
 $arrLang['admin_password_info'] = "We recommend that your password is not a word you can find in the dictionary, includes both capital and lower case letters, and contains at least one special character (1-9, !, *, _, etc.).";
 $arrLang['administrator_account'] = "Administrator Account";
 $arrLang['options_page'] = "System Settings";
