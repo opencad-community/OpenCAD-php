@@ -38,7 +38,7 @@ More Administrator accounts can be provisioned later in the Administrator Consol
 $arrLang['admin_name'] = "Name";
 $arrLang['admin_login_info'] = "Your name as per your communities policies and procedures. This can be adjusted later if needed.";
 $arrLang['admin_identifier'] = "Identifier";
-$arrLang['admin_identifier_info'] = "Your identifier. IE: 1D-01 Note. Depends on your community";
+$arrLang['admin_identifier_info'] = "Your identifier. (Example: 1D-01) [Note. Depends on your community]";
 $arrLang['admin_password'] = "Password";
 $arrLang['admin_password_info'] = "We recommend that your password is not a word you can find in the dictionary, includes both capital and lower case letters, and contains at least one special character (1-9, !, *, _, etc.).";
 $arrLang['administrator_account'] = "Administrator Account";
@@ -58,7 +58,7 @@ $arrLang['continue'] = "Continue";
 $arrLang['continue_installation'] = "Continue Installation";
 $arrLang['database_extension'] = "Database Extension";
 $arrLang['database_host'] = "Database Host";
-$arrLang['database_host_info'] = "Hostname or IP-address of the database server. The database server can be in the form of a hostname (and/or port address), such as db1.myserver.com, or localhost:5432, or as an IP-address, such as 192.168.0.1";
+$arrLang['database_host_info'] = "Hostname or IP-address of the database server. The database server can be in the form of a hostname (and/or port address), such as db1.myserver.com, or localhost:5432, or as an IP-address, such as 192.168.0.1.";
 $arrLang['database_import'] = "Database Import";
 $arrLang['database_import_error'] = "Database Import (error)";
 $arrLang['database_name'] = "Database Name";
@@ -154,7 +154,7 @@ $arrLang['writable'] = "Writable";
 
 $arrLang['core_configuration'] = "Core Configuration";
 $arrLang['department_configuration'] = 'Department Configuration';
-$arrLang['civilian_configuration'] = 'Civilian Configuration'; 
+$arrLang['civilian_configuration'] = 'Civilian Configuration';
 $arrLang['administrative_configuration'] = 'Administrative Configuratiion';
 $arrLang['extra_settings'] = 'Extra Settings';
 
@@ -198,12 +198,13 @@ $arrLang['LOGGED_IN_KEY'] = 'Logged-In Key';
 $arrLang['LOGGED_IN_SALT'] = 'Logged-In Salt';
 $arrLang['NONCE_KEY'] = 'Nonce Key';
 $arrLang['NONCE_SALT'] = 'Nonce Salt';
+$arrLang['SECURITY_KEYS_notes'] = "These keys are generated during the installation of OpenCAD. They ensure security of things such as sessions and password. {@link https://seckey.opencad.io/}";
 
 //** End Core Configuration Strings **//
 
 //** Begin Police Strings **//
 $arrLang['POLICE_NCIC'] = "Police NCIC";
-$arrLang['POLICE_NCIC_notes'] = "Shows/Hides NCIC functionality on MDT console. If 'true' then LEO will be able to use NCIC functions without the need for a dispatcher, else if 'flase' then LEO will require the presence of dispatcher to use NCIC funcationality.";
+$arrLang['POLICE_NCIC_notes'] = "Shows/Hides NCIC functionality on MDT console for LEO. If 'true' then LEO will be able to use NCIC functions without the need for a dispatcher, else if 'flase' then LEO will require the presence of dispatcher to use NCIC funcationality.";
 //** End Police Strings **//
 
 //**  Begin Fire Strings **//
@@ -225,13 +226,13 @@ $arrLang['EMS_PANIC'] = "EMS Panic";
 $arrLang['EMS_PANIC_notes'] = "Shows/Hides Panic functionality on MDT console for EMS. If 'true' then Fire personnel will be able to use the Panic button, else if 'false' then EMS personnel will not be able to use the Panic button.";
 
 $arrLang['EMS_BOLO'] = "EMS BOLO";
-$arrLang['EMS_BOLO_notes'] = "Shows/Hides Panic functionality on MDT console for EMS. If 'true' then Fire personnel will be able to view the BOLO board, else if 'false' then EMS personnel will not be able to view the BOLO board";
+$arrLang['EMS_BOLO_notes'] = "Shows/Hides panic functionality on MDT console for EMS. If 'true' then Fire personnel will be able to view the BOLO board, else if 'false' then EMS personnel will not be able to view the BOLO board";
 
 $arrLang['EMS_NCIC_NAME'] = "EMS NCIC Name";
-$arrLang['EMS_NCIC_NAME_notes'] = "Shows/Hides Panic functionality on MDT console for EMS. If 'true' then Fire personnel will be able to use the NCIC name name lookup, else if 'false' then EMS personnel will not be able to use NCIC name lookup";
+$arrLang['EMS_NCIC_NAME_notes'] = "Shows/Hides NCIC panme lookup functionality on MDT console for EMS. If 'true' then Fire personnel will be able to use the NCIC name name lookup, else if 'false' then EMS personnel will not be able to use NCIC name lookup";
 
 $arrLang['EMS_NCIC_PLATE'] = "EMS NCIC Plate";
-$arrLang['EMS_NCIC_PLATE_notes'] = "Shows/Hides Panic functionality on MDT console for EMS. If 'true' then Fire personnel will be able to use the NCIC plate lookup function, else if 'false' then EMS personnel will not be able to use the NCIC plate lookup function.";
+$arrLang['EMS_NCIC_PLATE_notes'] = "Shows/Hides NCIC plate lookup functionality on MDT console for EMS. If 'true' then Fire personnel will be able to use the NCIC plate lookup function, else if 'false' then EMS personnel will not be able to use the NCIC plate lookup function.";
 //** End EMS Strings **//
 
 //** Begin Roadside Assistance Strings **//
@@ -248,46 +249,88 @@ $arrLang['ROADSIDE_NCIC_PLATE'] = "Roadside NCIC Plate";
 $arrLang['ROADSIDE_NCIC_PLATE_notes'] = "Shows/Hides NCIC functionality on MDT console for Roadside Assistance. If 'true' then RAO will be able to use NCIC plate query without the need for a dispatcher, else if 'false' then RAO will require the presence of dispatcher to use NCIC plate query funcationality.";
 
 $arrLang['ROADSIDE_CALL_SELFASSIGN'] = "Roadside Call Self Assign";
-$arrLang['ROADSIDE_cALL_SELFASSIGN`_notes'] = "Shows/Hides NCIC functionality on MDT console for Roadside Assistance. If 'true' then RAO will be able to use NCIC plate query without the need for a dispatcher, else if 'false' then RAO will require the presence of dispatcher to use NCIC plate query funcationality.";
+$arrLang['ROADSIDE_cALL_SELFASSIGN`_notes'] = "Shows/Hides call self-assign functionality on MDT console for Roadside Assistance. If 'true' then RAO will be able to use NCIC plate query without the need for a dispatcher, else if 'false' then RAO will require the presence of dispatcher to have calls assigned.";
 //** End Roadside Assistance Strings **//
 
 //** Begin Civilian Strings **//
 $arrLang['CIV_WARRANT'] = "Civilian Warrant Creation";
-$arrLang['CIV_WARRANT_notes'] = "Allow/Disallow Civiliians from managing their warrants. If set to 'true' then Civs will be able to delete warrants from their profile, else if set to 'false' then Civs will not have the ability to remove warrants.";
+$arrLang['CIV_WARRANT_notes'] = "* Allow/Disallow Civilians from managing their warrants. If set to 'true' then Civs will be able to delete warrants from their profile, else if set to 'false' then Civs will not have the ability to remove warrants. These settings will likely be moved to an *_options table in a future version.";
 
 $arrLang['CIV_REG'] = "Instant Civilian Registration";
 $arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+
+$arrLang['CIV_LIMIT_MAX_IDENTITIES'] = "Civilian Maximum Identities";
+$arrLang['CIV_LIMIT_MAX_IDENTITIES_notes'] = "Toggle limiting maximum number of civilian identities. If CIV_LIMIT_MAX is '0' then civilians will be able to create unlimited identites. Otherwise, if CIV_LIMIT_MAX is a value other than '0' then it will cap the maximum number of possible identites to that value.";
+
+$arrLang['CIV_LIMIT_MAX_VEHICLES'] = "Civilian Maximum Vehicles";
+$arrLang['CIV_LIMIT_MAX_VEHICLES_notes'] = "Toggle limiting maximum number of civilian vehicles If CIV_LIMIT_MAX_VEHICLES is '0' then civilian will be able to create unlimited vehicles. Otherwise, if CIV_LIMIT_MAX_VEHICLES is a value other than '0' then it will cap the maximum number of possible vehicles to that value";
+
+$arrLang['CIV_LIMIT_MAX_WEAPONS'] = "Civilian Maximum Weapons";
+$arrLang['CIV_LIMIT_MAX_WEAPONS_notes'] = "Toggle limiting maximum number of civilian weapons If CIV_LIMIT_MAX_WEAPONS is '0' then civilian will be able to create unlimited weapons. Otherwise, if CIV_LIMIT_MAX_WEAPONS is a value other than '0' then it will cap the maximum number of possible weapons to that value";
 //** End Civilian Strings **//
 
 //** Begin Administrative Strings**//
 $arrLang['MODERATOR_APPROVE_USER'] = "Moderator Approve User";
-$arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+$arrLang['MODERATOR_APPROVE_USER_notes'] = "If 'true' then Moderators will be able to approve new user requests else, if 'false' then Moderators will not be able to approve new user requests.";
 
 $arrLang['MODERATOR_EDIT_USER'] = "Moderator Edit User";
-$arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+$arrLang['MODERATOR_EDIT_USER_notes'] = "If 'true' then Moderators will be able to edit users profile, if 'false' then Moderators will not be able to edit users profile. This includes name, email, identifier, and roles. Moderators will be able to add user groups but the removal of them is governed by the MODERATOR_REMOVE_GROUPS setting.";
 
 $arrLang['MODERATOR_DELETE_USER'] = "Moderator Delete User";
-$arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+$arrLang['MODERATOR_DELETE_notes'] = "If 'true' then Moderators will be able to delete users, if 'false' Moderators will not be able to delete users.";
 
 $arrLang['MODERATOR_SUSPEND_WITHOUT_REASON'] = "Moderator Suspend without Reason";
-$arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+$arrLang['MODERATOR_SUSPEND_WITHOUT_REASON_notes'] = "If 'true' then Moderators will be able suspend users without a reason, if 'false' Moderators will not be able suspend users without a reason.";
 
 $arrLang['MODERATOR_SUSPEND_WITH_REASON'] = "Moderator Suspend with Reason";
-$arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+$arrLang['MODERATOR_SUSPEND_WITH_REASON_notes'] = "If 'true' then Moderators will be able Suspend users with a reason, if 'false' Moderators will not be able suspend users wth a reason.";
 
 $arrLang['MODERATOR_REACTIVATE_USER'] = "Moderator Reactivate User";
-$arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+$arrLang['MODERATOR_REACTIVATE_USER_notes'] = "If 'true' then Moderators will be able to ractvate users else, if 'false' Moderators will not be able to reactivate users.";
 
 $arrLang['MODERATOR_REMOVE_GROUP'] = "Moderator Remove Group";
-$arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+$arrLang['MODERATOR_REMOVE_GROUP_notes'] = "If 'true' then Moderators will be able to remove user's groups else, if 'false' Moderators will not be able to remove user's groups.";
 
 $arrLang['MODERATOR_NCIC_EDITOR'] = "Moderator NCIC Editor";
-$arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+$arrLang['MODERATOR_NCIC_EDITOR_notes'] = "If 'true' then Moderators will be able to access the NCIC editor, if 'false' Moderators will not be able to access the NCCIC editor.";
+
+$arrLang['MODERATOR_DATA_MANAGER'] = "Moderator Data Manager";
+$arrLang['MODERATOR_DATA_MANAGER_notes'] = "If 'true' then Moderators will be able to access the Game Data Manager, else if 'false' then Moderators will not be able to access the Gam Data Manager.";
+
+$arrLang['MODERATOR_DATAMAN_CITATIONTYPES'] = "Moderator Citation Types Editor";
+$arrLang['MODERATOR_DATAMAN_CITATIONTYPES_notes'] = "  * If 'true' then Moderators will have access to the Citation Types Manager module of the Game Data Manager, else if 'false' then Moderators will be denied access.";
+
+$arrLang['MODERATOR_DATAMAN_DEPARTMENTS'] = "Moderator Departments Editor";
+$arrLang['MODERATOR_DATAMAN_DEPARTMENTS_notes'] = "  * If 'true' then Moderators will have access to the Departments Manager module of the Game Data Manager, else if 'false' then Moderators will be denied access.";
+
+$arrLang['MODERATOR_DATAMAN_INCIDENTTYPES'] = "Moderator Incident Types Editor";
+$arrLang['MODERATOR_DATAMAN_INCIDENTTYPES_notes'] = "  * If 'true' then Moderators will have access to the Incident Types Manager module of the Game Data Manager, else if 'false' then Moderators will be denied access.";
+
+$arrLang['MODERATOR_DATAMAN_RADIOCODES'] = "Moderator Radio Codes Editor";
+$arrLang['MODERATOR_DATAMAN_RADIOCODES_notes'] = "  * If 'true' then Moderators will have access to the Radio Codes Manager module of the Game Data Manager, else if 'false' then Moderators will be denied access.";
+
+$arrLang['MODERATOR_DATAMAN_STREETS'] = "Moderator Streets Editor";
+$arrLang['MODERATOR_DATAMAN_STREETS_notes'] = "  * If 'true' then Moderators will have access to the Streets Manager module of the Game Data Manager, else if 'false' then Moderators will be denied access.";
+
+$arrLang['MODERATOR_DATAMAN_VECHILES'] = "Moderator Vehicles Editor";
+$arrLang['MODERATOR_DATAMAN_VEHICLES_notes'] = "  * If 'true' then Moderators will have access to the Vehicles Manager module of the Game Data Manager, else if 'false' then Moderators will be denied access.";
+
+$arrLang['MODERATOR_DATAMAN_WARNINGTYPES'] = "Moderator Warning Types Editor";
+$arrLang['MODERATOR_DATAMAN_WARNINGTYPES_notes'] = "  * If 'true' then Moderators will have access to the Warning Types Manager module of the Game Data Manager, else if 'false' then Moderators will be denied access.";
+
+$arrLang['MODERATOR_DATAMAN_WARRANTTYPES'] = "Moderator Warrant Types Editor";
+$arrLang['MODERATOR_DATAMAN_WARRANTTYPES_notes'] = "  * If 'true' then Moderators will have access to the Warrant Types Manager module of the Game Data Manager, else if 'false' then Moderators will be denied access.";
+
+$arrLang['MODERATOR_DATAMAN_WEAPONS'] = "Moderator Weapons Editor";
+$arrLang['MODERATOR_DATAMAN_WEAPONS_notes'] = "  * If 'true' then Moderators will have access to the Weapons Manager module of the Game Data Manager, else if 'false' then Moderators will be denied access.";
+
+$arrLang['MODERATOR_DATAMAN_IMPEXPRESET'] = "Moderator Import/Export/Reset";
+$arrLang['MODERATOR_DATAMAN_IMPEXPRESET_notes'] = "If 'true' then Moderators will have access to the Import/Export/Reset module of the Game Data Manager, else if 'false' then Moderators will be denied access.";
 //** End Administrative Strings**//
 
 //** Begin Extra Settings Strings **//
 $arrLang['DEMO_MODE'] = "Demo Mode";
-$arrLang['DEMO_MODE_notes'] = "'true' then various user management features of OpenCAD will be locked down, else if 'false' then OpenCAD's full functionality* will be available to use.";
+$arrLang['DEMO_MODE_notes'] = "If 'true' then various user management features of OpenCAD will be locked down, else if 'false' then OpenCAD's full functionality* will be available to use.";
 
 $arrLang['USE_GRAVATAR'] = "Gravatar";
 $arrLang['USE_GRAVATAR_notes'] = "OpenCAD will dynamically retrieve your avatar from {@link Gravatar http://en.gravatar.com/} if you have an account. Otherwise it will use the default generic avatar image included with OpenCAD .";
@@ -393,12 +436,12 @@ $arrLang["NEW_PERSONS_BOLO"] = "New Persons BOLO";
 $arrLang["NEW_VEHICLE_BOLO"] = "New Vehicle BOLO";
 $arrLang["NEW_CALL"] = "New Call";
 $arrLang["PANIC_BUTTON"] = "Panic Button";
-$arrLang["PRIORITY_TONE"] = "PRIORITY_TONE";
+$arrLang["PRIORITY_TONE"] = "Priority Tone";
 $arrLang["STOP_BORADCASTING_BUTTON"] = "10-3 Tone";
 $arrLang["STOPWATCH"] = "Stopwatch";
 $arrLang["WARNINGS"] = "Warnings";
 $arrLang["CITATIONS"] = "Citations";
-$arrLang["ARREST_REPORT"] = "Arrest REPORT";
+$arrLang["ARREST_REPORT"] = "Arrest Report";
 $arrLang["WARRANTS"] = "Warrants";
 //** End CAD Console Strings *//
 
@@ -415,4 +458,4 @@ $arrLang["PASSWORD"] = "Password";
 $arrLang["CHANGE_PASSWORD"] = "Change Password";
 $arrLang["MY_PRFILE"] ="My Profile";
 //** End Profile Console Strings *//
-?>  
+?>
