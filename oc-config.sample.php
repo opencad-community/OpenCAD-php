@@ -32,8 +32,8 @@ define('COMMUNITY_NAME', '<COMMUNITY_NAME>');
  *
  * @since 0.2.6
  **/
-define('DEFAULT_LANGUAGE', 'en');
-define('DEFAULT_LANGUAGE_DIRECTION', 'ltr');
+define('DEFAULT_LANGUAGE', '<DEFAULT_LANGUAGE>');
+define('DEFAULT_LANGUAGE_DIRECTION', '<DEFAULT_LANGUAGE_DIRECTION>');
 
 /**#@+
  *
@@ -534,7 +534,7 @@ define('MODERATOR_EDIT_USER', <MODERATOR_EDIT_USER>);
   * MODERATOR_SUSPEND_WITH_REASON
   *
   * If 'true' then Moderators will be able Suspend users with a reason,
-  *if 'false' Moderators will not be able suspend users wth a reason.
+  * if 'false' Moderators will not be able suspend users wth a reason.
   *
   * These settings will likely be moved to an *_options table in a future version.
   *
