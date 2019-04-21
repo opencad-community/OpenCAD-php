@@ -205,81 +205,81 @@ $arrLang['POLICE_NCIC_notes'] = "Shows/Hides NCIC functionality on MDT console. 
 
 //**  Begin Fire Strings **//
 $arrLang['FIRE_PANIC'] = "Fire Panic";
-$arrLang['FIRE_PANIC_notes'] = "Shows/Hides Panic functionality on MDT console for Fire. If 'true' then Fire personnel will be able to use the Panic button, else if 'false' then Fire personnel will not be able to use the Panic button.";
+$arrLang['FIRE_PANIC_notes'] = "If 'true' then Fire personnel will be able to use the Panic button, else if 'false' then Fire personnel will not be able to use the Panic button.";
 
 $arrLang['FIRE_BOLO'] = "Fire BOLO";
-$arrLang['FIRE_BOLO_notes'] = "Shows/Hides Panic functionality on MDT console for Fire. If 'true' then Fire personnel will be able to view the BOLO board, else if 'false' then Fire personnel will not be able to view the BOLO board";
+$arrLang['FIRE_BOLO_notes'] = "If 'true' then Fire personnel will be able to view the BOLO board, else if 'false' then Fire personnel will not be able to view the BOLO board";
 
 $arrLang['FIRE_NCIC_NAME'] = "Fire NCIC Name";
-$arrLang['FIRE_NCIC_NAME_notes'] = "Shows/Hides Panic functionality on MDT console for Fire. If 'true' then Fire personnel will be able to use the NCIC name name lookup, else if 'false' then Fire personnel will not be able to use NCIC name lookup";
+$arrLang['FIRE_NCIC_NAME_notes'] = "If 'true' then Fire personnel will be able to use the NCIC name lookup, else if 'false' then Fire personnel will not be able to use NCIC name lookup";
 
 $arrLang['FIRE_NCIC_PLATE'] = "Fire NCIC Plate";
-$arrLang['FIRE_NCIC_PLATE_notes'] = "Shows/Hides Panic functionality on MDT console for Fire. If 'true' then Fire personnel will be able to use the NCIC plate lookup function, else if 'false' then Fire personnel will not be able to use the NICI plate lookup function.";
+$arrLang['FIRE_NCIC_PLATE_notes'] = "If 'true' then Fire personnel will be able to use the NCIC plate lookup function, else if 'false' then Fire personnel will not be able to use the NICI plate lookup function.";
 //**  End Fire Strings **//
 
 //** Begin EMS Strings **//
 $arrLang['EMS_PANIC'] = "EMS Panic";
-$arrLang['EMS_PANIC_notes'] = "Shows/Hides Panic functionality on MDT console for EMS. If 'true' then Fire personnel will be able to use the Panic button, else if 'false' then EMS personnel will not be able to use the Panic button.";
+$arrLang['EMS_PANIC_notes'] = "If 'true' then Fire personnel will be able to use the Panic button, else if 'false' then EMS personnel will not be able to use the Panic button.";
 
 $arrLang['EMS_BOLO'] = "EMS BOLO";
-$arrLang['EMS_BOLO_notes'] = "Shows/Hides Panic functionality on MDT console for EMS. If 'true' then Fire personnel will be able to view the BOLO board, else if 'false' then EMS personnel will not be able to view the BOLO board";
+$arrLang['EMS_BOLO_notes'] = "If 'true' then Fire personnel will be able to view the BOLO board, else if 'false' then EMS personnel will not be able to view the BOLO board";
 
 $arrLang['EMS_NCIC_NAME'] = "EMS NCIC Name";
-$arrLang['EMS_NCIC_NAME_notes'] = "Shows/Hides Panic functionality on MDT console for EMS. If 'true' then Fire personnel will be able to use the NCIC name name lookup, else if 'false' then EMS personnel will not be able to use NCIC name lookup";
+$arrLang['EMS_NCIC_NAME_notes'] = "If 'true' then Fire personnel will be able to use the NCIC name lookup, else if 'false' then EMS personnel will not be able to use NCIC name lookup";
 
 $arrLang['EMS_NCIC_PLATE'] = "EMS NCIC Plate";
-$arrLang['EMS_NCIC_PLATE_notes'] = "Shows/Hides Panic functionality on MDT console for EMS. If 'true' then Fire personnel will be able to use the NCIC plate lookup function, else if 'false' then EMS personnel will not be able to use the NCIC plate lookup function.";
+$arrLang['EMS_NCIC_PLATE_notes'] = "If 'true' then Fire personnel will be able to use the NCIC plate lookup function, else if 'false' then EMS personnel will not be able to use the NCIC plate lookup function.";
 //** End EMS Strings **//
 
 //** Begin Roadside Assistance Strings **//
 $arrLang['ROADSIDE_PANIC'] = "Roadside Panic";
-$arrLang['ROADSIDE_PANIC_notes'] = "Shows/Hides Panic functionality on MDT console for Roadside Assistance. If 'true' then RAO will be able to use the Panic button, else if 'false' then RAO will not be able to use the Panic button.";
+$arrLang['ROADSIDE_PANIC_notes'] = "If 'true' then RAO will be able to use the Panic button, else if 'false' then RAO will not be able to use the Panic button.";
 
 $arrLang['ROADSIDE_BOLO'] = "Roadside BOLO";
-$arrLang['ROADSIDE_BOLO_notes'] = "Shows/Hides BOLO functionality on MDT console for Roadside Assistance. If 'true' then RAO will be able to use the Panic button, else if 'false' then RAO will not be able to use the Panic button.";
+$arrLang['ROADSIDE_BOLO_notes'] = "If 'true' then RAO will be able to use the Panic button, else if 'false' then RAO will not be able to use the Panic button.";
 
 $arrLang['ROADSIDE_NCIC_NAME'] = "Roadside NCIC Name";
-$arrLang['ROADSIDE_NCIC_NAME_notes'] = "Shows/Hides NCIC functionality on MDT console for Roadside Assistance. If 'true' then RAO will be able to use NCIC plate query without the need for a dispatcher, else if 'false' then RAO will require the presence of dispatcher to use NCIC plate query funcationality.";
+$arrLang['ROADSIDE_NCIC_NAME_notes'] = "If 'true' then RAO will be able to use NCIC plate query without the need for a dispatcher, else if 'false' then RAO will require the presence of dispatcher to use NCIC plate query funcationality.";
 
 $arrLang['ROADSIDE_NCIC_PLATE'] = "Roadside NCIC Plate";
-$arrLang['ROADSIDE_NCIC_PLATE_notes'] = "Shows/Hides NCIC functionality on MDT console for Roadside Assistance. If 'true' then RAO will be able to use NCIC plate query without the need for a dispatcher, else if 'false' then RAO will require the presence of dispatcher to use NCIC plate query funcationality.";
+$arrLang['ROADSIDE_NCIC_PLATE_notes'] = "If 'true' then RAO will be able to use NCIC plate query without the need for a dispatcher, else if 'false' then RAO will require the presence of dispatcher to use NCIC plate query funcationality.";
 
 $arrLang['ROADSIDE_CALL_SELFASSIGN'] = "Roadside Call Self Assign";
-$arrLang['ROADSIDE_CALL_SELFASSIGN`_notes'] = "Shows/Hides NCIC functionality on MDT console for Roadside Assistance. If 'true' then RAO will be able to use NCIC plate query without the need for a dispatcher, else if 'false' then RAO will require the presence of dispatcher to use NCIC plate query funcationality.";
+$arrLang['ROADSIDE_CALL_SELFASSIGN_notes'] = "If 'true' then RAO will be able to use NCIC plate query without the need for a dispatcher, else if 'false' then RAO will require the presence of dispatcher to use NCIC plate query funcationality.";
 //** End Roadside Assistance Strings **//
 
 //** Begin Civilian Strings **//
 $arrLang['CIV_WARRANT'] = "Civilian Warrant Creation";
-$arrLang['CIV_WARRANT_notes'] = "Allow/Disallow Civiliians from managing their warrants. If set to 'true' then Civs will be able to delete warrants from their profile, else if set to 'false' then Civs will not have the ability to remove warrants.";
+$arrLang['CIV_WARRANT_notes'] = "If set to 'true' then Civs will be able to delete warrants from their profile, else if set to 'false' then Civs will not have the ability to remove warrants.";
 
 $arrLang['CIV_REG'] = "Instant Civilian Registration";
-$arrLang['CIV_REG_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+$arrLang['CIV_REG_notes'] = "If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
 
 $arrLang['CIV_LIMIT_MAX_IDENTITIES'] = "Civilian Maximum Identities";
-$arrLang['CIV_LIMIT_MAX_IDENTITIES_notes'] = "Toggle limiting maximum number of civilian identities. If CIV_LIMIT_MAX is '0' then civilians will be able to create unlimited identites. Otherwise, if CIV_LIMIT_MAX is a value other than '0' then it will cap the maximum number of possible identites to that value.";
+$arrLang['CIV_LIMIT_MAX_IDENTITIES_notes'] = "If CIV_LIMIT_MAX is '0' then civilians will be able to create unlimited identites. Otherwise, if CIV_LIMIT_MAX is a value other than '0' then it will cap the maximum number of possible identites to that value.";
 
 $arrLang['CIV_LIMIT_MAX_VEHICLES'] = "Civilian Maximum Vehicles";
-$arrLang['CIV_LIMIT_MAX_VEHICLES_notes'] = "Toggle limiting maximum number of civilian vehicles If CIV_LIMIT_MAX_VEHICLES is '0' then civilian will be able to create unlimited vehicles. Otherwise, if CIV_LIMIT_MAX_VEHICLES is a value other than '0' then it will cap the maximum number of possible vehicles to that value";
+$arrLang['CIV_LIMIT_MAX_VEHICLES_notes'] = "If CIV_LIMIT_MAX_VEHICLES is '0' then civilian will be able to create unlimited vehicles. Otherwise, if CIV_LIMIT_MAX_VEHICLES is a value other than '0' then it will cap the maximum number of possible vehicles to that value";
 
 $arrLang['CIV_LIMIT_MAX_WEAPONS'] = "Civilian Maximum Weapons";
-$arrLang['CIV_LIMIT_MAX_WEAPONS_notes'] = "Toggle limiting maximum number of civilian weapons If CIV_LIMIT_MAX_WEAPONS is '0' then civilian will be able to create unlimited weapons. Otherwise, if CIV_LIMIT_MAX_WEAPONS is a value other than '0' then it will cap the maximum number of possible weapons to that value";
+$arrLang['CIV_LIMIT_MAX_WEAPONS_notes'] = "If CIV_LIMIT_MAX_WEAPONS is '0' then civilian will be able to create unlimited weapons. Otherwise, if CIV_LIMIT_MAX_WEAPONS is a value other than '0' then it will cap the maximum number of possible weapons to that value";
 //** End Civilian Strings **//
 
 //** Begin Administrative Strings**//
 $arrLang['MODERATOR_APPROVE_USER'] = "Moderator Approve User";
-$arrLang['MODERATOR_APPROVE_USER_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+$arrLang['MODERATOR_APPROVE_USER_notes'] = "If 'true' then Moderators will be able to approve new user requests, else, if 'false' then Moderators will not be able to approve new user requests.";
 
 $arrLang['MODERATOR_EDIT_USER'] = "Moderator Edit User";
 $arrLang['MODERATOR_EDIT_USER_notes'] = "If 'true' then Moderators will be able to edit users profile, if 'false' then Moderators will not be able to edit users profile. This includes name, email, identifier, and roles. Moderators will be able to add user groups but the removal of them is governed by the MODERATOR_REMOVE_GROUPS setting.";
 
 $arrLang['MODERATOR_DELETE_USER'] = "Moderator Delete User";
-$arrLang['MODERATOR_DELETE_USER_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+$arrLang['MODERATOR_DELETE_USER_notes'] = "If 'true' then Moderators will be able to delete users, else if 'false' Moderators will not be able to delete users.";
 
 $arrLang['MODERATOR_SUSPEND_WITHOUT_REASON'] = "Moderator Suspend without Reason";
-$arrLang['MODERATOR_SUSPEND_WITHOUT_REASON_notes'] = "Allow/Disallow direct registration for Civillians. If set to 'true' then civillians will not require admin approval, esle if set to 'false' then Civillian registartion will require Admin approval. Allow/Disallow immediate regitration for civilians. If 'true' then civilian registartion will require Administrator approval else if 'false' then civilian registrations will NOT require Administrator approval.";
+$arrLang['MODERATOR_SUSPEND_WITHOUT_REASON_notes'] = "If 'true' then Moderators will be able suspend users without a reason, else if 'false' Moderators will not be able suspend users without a reason.";
 
 $arrLang['MODERATOR_SUSPEND_WITH_REASON'] = "Moderator Suspend with Reason";
-$arrLang['MODERATOR_SUSPEND_WITH_REASON_notes'] = "If 'true' then Moderators will be able suspend users without a reason, if 'false' Moderators will not be able suspend users without a reason.";
+$arrLang['MODERATOR_SUSPEND_WITH_REASON_notes'] = "If 'true' then Moderators will be able suspend users with a reason, if 'false' Moderators will not be able suspend users with a reason.";
 
 $arrLang['MODERATOR_REACTIVATE_USER'] = "Moderator Reactivate User";
 $arrLang['MODERATOR_REACTIVATE_USER_notes'] = "If 'true' then Moderators will be able to ractvate users else, if 'false' Moderators will not be able to reactivate users.";
@@ -454,4 +454,4 @@ $arrLang["PASSWORD"] = "Password";
 $arrLang["CHANGE_PASSWORD"] = "Change Password";
 $arrLang["MY_PRFILE"] ="My Profile";
 //** End Profile Console Strings *//
-?>  
+?>
