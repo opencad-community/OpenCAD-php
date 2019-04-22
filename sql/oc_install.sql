@@ -327,4 +327,4 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>weapons` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 INSERT INTO `<DB_PREFIX>users` (`id`, `name`, `email`, `password`, `identifier`, `admin_privilege`, `supervisor_privilege`, `password_reset`, `approved`, `suspend_reason`, `suspend_duration`) VALUES
-(1, '<NAME>', '<EMAIL>', '<PASSWORD>', '1A-1', 3, 1, 0, 1, NULL, NULL);
+(1, '<NAME>', '<EMAIL>', '<PASSWORD>', '<IDENTIFIER>', 3, 1, 0, 1, NULL, NULL);

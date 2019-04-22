@@ -81,7 +81,7 @@ if (isset($_GET['getCalls'])){
         header("Location: ".BASE_URL."/index.php?loggedOut=true");
         exit();
     }else{
-        header("Location: ".BASE_URL."/oc-admin/about.php'");
+        header("Location: ".BASE_URL."/oc-admin/about.php");
         die();
     }
 }
