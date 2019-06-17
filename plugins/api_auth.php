@@ -17,7 +17,7 @@
 if(ENABLE_API_SECURITY === true)
 {
     session_start();
-    if(hash('md5', session_id().getApiKey()) !== $_COOKIE['aljksdz7'])
+    if(hash('md5', session_id().getApiKey()) !== $_COOKIE[''.SESSION_KEY.''])
     {
         $headers = $_SERVER['PHP_AUTH_DIGEST'];
         if(isset($headers['Authorization']))

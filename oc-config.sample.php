@@ -87,7 +87,7 @@ define('BASE_URL', '<BASE_URL>');
   * (Imported from ATVG-CAD 1.3.0.0)
   *
   **/
-  define('ENABLE_API_SECURITY', <API_SECURITY>);
+  define('ENABLE_API_SECURITY', true);
 
 /**#@+
  * To & From emails for system generated emails
@@ -122,7 +122,7 @@ define('AUTH_SALT',        '<AUTH_KEY>');
 define('SECURE_AUTH_SALT', '<SECURE_AUTH_SALT>');
 define('LOGGED_IN_SALT',   '<LOGGED_IN_SALT>');
 define('NONCE_SALT',       '<NONCE_SALT>');
-define('COOKIE_NAME', '<COOKIE_NAME>');
+define('SESSION_KEY', '<SESSION_KEY>');
 
 /**#@+
   * Feature Settings

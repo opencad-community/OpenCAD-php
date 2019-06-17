@@ -40,6 +40,7 @@
 		$SECURE_AUTH_SALT = isset($_POST['SECURE_AUTH_SALT']) ? prepare_input($_POST['SECURE_AUTH_SALT']) : '';
 		$LOGGED_IN_SALT = isset($_POST['LOGGED_IN_SALT']) ? prepare_input($_POST['LOGGED_IN_SALT']) : '';
 		$NONCE_SALT = isset($_POST['NONCE_SALT']) ? prepare_input($_POST['NONCE_SALT']) : '';
+		$SESSION_KEY = isset($_POST['SESSION_KEY']) ? prepare_input($_POST['SESSION_KEY']) : '';
 		
 		$_SESSION['COMMUNITY_NAME'] = $COMMUNITY_NAME;
 		$_SESSION['BASE_URL'] = $BASE_URL;
@@ -56,6 +57,7 @@
 		$_SESSION['SECURE_AUTH_SALT'] = $SECURE_AUTH_SALT;			
 		$_SESSION['LOGGED_IN_SALT'] = $LOGGED_IN_SALT;			
 		$_SESSION['NONCE_SALT'] = $NONCE_SALT;		
+		$_SESSION['SESSION_KEY'] = $SESSION_KEY;		
 
 		$_SESSION['passed_step'] = 5;
 		header('location: department_configuration.php');
@@ -79,6 +81,7 @@
 		$SECURE_AUTH_SALT = isset($_POST['SECURE_AUTH_SALT']) ? prepare_input($_POST['SECURE_AUTH_SALT']) : '';
 		$LOGGED_IN_SALT = isset($_POST['LOGGED_IN_SALT']) ? prepare_input($_POST['LOGGED_IN_SALT']) : '';
 		$NONCE_SALT = isset($_POST['NONCE_SALT']) ? prepare_input($_POST['NONCE_SALT']) : '';
+		$SESSION_KEY = isset($_POST['SESSION_KEY']) ? prepare_input($_POST['SESSION_KEY']) : '';
 
 	}
 ?>	
@@ -173,11 +176,6 @@
 				<td>&nbsp;<?php echo lang_key('BASE_URL'); ?>&nbsp;<span class="star">*</span></td>
 				<td><input name="BASE_URL" id="BASE_URL" value="//cad.mycommunity.com/" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('BASE_URL_notes')" onblur="textboxOnBlur('BASE_URL_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
-			<tr>
-				<td>&nbsp;<?php echo lang_key('API_SECURITY'); ?>&nbsp;</td>
-				<td><input type="radio" name="API_SECURITY" id="API_SECURITY" <?php echo ($API_SECURITY=='true')?'checked':'' ?> onfocus="textboxOnFocus('API_SECURITY_notes')" checked onblur="textboxOnBlur('API_SECURITY_notes')" value="true" />True
-				<input type="radio" name="API_SECURITY" id="API_SECURITY" <?php echo ($API_SECURITY=='false')?'checked':'' ?> onfocus="textboxOnFocus('API_SECURITY_notes')" onblur="textboxOnBlur('API_SECURITY_notes')" value="false" />False</td>
-			</tr>
 			<tr><td colspan="2" nowrap height="50px">&nbsp;</td></tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('CAD_FROM_EMAIL'); ?>&nbsp;<span class="star">*</span></td>
@@ -219,6 +217,10 @@
 			<tr>
 				<td>&nbsp;<?php echo lang_key('NONCE_SALT'); ?>&nbsp;<span class="star">*</span></td>
 				<td><input name="NONCE_SALT" id="NONCE_SALT" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('NONCE_SALT_notes')" onblur="textboxOnBlur('SECURITY_KEYS_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+			</tr>
+			<tr>
+				<td>&nbsp;<?php echo lang_key('SESSION_KEY'); ?>&nbsp;<span class="star">*</span></td>
+				<td><input name="SESSION_KEY" id="SESSION_KEY" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('NONCE_SALT_notes')" onblur="textboxOnBlur('SECURITY_KEYS_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
 			<tr>
 				<td colspan="2">
