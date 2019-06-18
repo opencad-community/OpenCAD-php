@@ -234,7 +234,7 @@
 			<tr>
 				<td nowrap>&nbsp;<?php echo lang_key('database_prefix'); ?></td>
 				<td>
-			<input type="text" class="form_text" name="database_prefix" size="30" maxlength="12" <?php if(!empty($database_prefix)){?>value="<?php echo $database_prefix; ?>"<?php } else { ?>value=<?php echo random_str(4); ?>_<?php }?> <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> onfocus="textboxOnFocus('notes_database_prefix')" onblur="textboxOnBlur('notes_databaseprefix')" />
+			<input type="text" class="form_text" name="database_prefix" size="30" maxlength="12" <?php if(!empty($database_prefix)){?>value="<?php echo $database_prefix; ?>"<?php } else { ?>value=<?php echo generateRandomString(6); ?>_<?php }?> <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> onfocus="textboxOnFocus('notes_database_prefix')" onblur="textboxOnBlur('notes_databaseprefix')" />
 				</td>
 			</tr>
 			<tr>
