@@ -229,7 +229,7 @@ function generateRandomString($length = 10) {
 	**/
 function getOpenCADVersion()
 {
-	echo '0.2.6';
+	echo '0.3.0';
 }
 
 /**#@+
