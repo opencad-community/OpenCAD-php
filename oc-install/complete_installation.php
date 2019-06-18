@@ -42,6 +42,8 @@
 	    $COMMUNITY_NAME						= isset($_SESSION['COMMUNITY_NAME']) ? prepare_input($_SESSION['COMMUNITY_NAME']) : '';
 		
 		$BASE_URL							= isset($_SESSION['BASE_URL']) ? prepare_input($_SESSION['BASE_URL']) : '';
+		
+		$API_SECURITY						= isset($_SESSION['API_SECURITY']) ? prepare_input($_SESSION['API_SECURITY']) : '';
 
 		$CAD_FROM_EMAIL						= isset($_SESSION['CAD_FROM_EMAIL']) ? prepare_input($_SESSION['CAD_FROM_EMAIL']) : '';
 		$CAD_TO_EMAIL						= isset($_SESSION['CAD_TO_EMAIL']) ? prepare_input($_SESSION['CAD_TO_EMAIL']) : '';
@@ -54,7 +56,6 @@
 		$SECURE_AUTH_SALT					= isset($_SESSION['SECURE_AUTH_SALT']) ? prepare_input($_SESSION['SECURE_AUTH_SALT']) : '';
 		$LOGGED_IN_SALT						= isset($_SESSION['LOGGED_IN_SALT']) ? prepare_input($_SESSION['LOGGED_IN_SALT']) : '';
 		$NONCE_SALT							= isset($_SESSION['NONCE_SALT']) ? prepare_input($_SESSION['NONCE_SALT']) : '';
-		$SESSION_KEY						= isset($_SESSION['SESSION_KEY']) ? prepare_input($_SESSION['SESSION_KEY']) : '';
 		
 		$POLICE_NCIC						= isset($_SESSION['POLICE_NCIC']) ? prepare_input($_SESSION['POLICE_NCIC']) : '';
 		$POLICE_CALL_SELFASSIGN				= isset($_SESSION['POLICE_CALL_SELFASSIGN']) ? prepare_input($_SESSION['POLICE_CALL_SELFASSIGN']) : '';
@@ -166,6 +167,7 @@
 
 								$config_file = str_replace('<COMMUNITY_NAME>', $COMMUNITY_NAME, $config_file);
 								$config_file = str_replace('<BASE_URL>', $BASE_URL, $config_file);
+								$config_file = str_replace('<API_SECURITY>', $API_SECURITY, $config_file);
 								
 								$config_file = str_replace('<CAD_FROM_EMAIL>', $CAD_FROM_EMAIL, $config_file);
 								$config_file = str_replace('<CAD_TO_EMAIL>', $CAD_TO_EMAIL, $config_file);
@@ -178,7 +180,6 @@
 								$config_file = str_replace('<SECURE_AUTH_SALT>', $SECURE_AUTH_SALT, $config_file);
 								$config_file = str_replace('<LOGGED_IN_SALT>', $LOGGED_IN_SALT, $config_file);
 								$config_file = str_replace('<NONCE_SALT>', $NONCE_SALT, $config_file);
-								$config_file = str_replace('<SESSION_KEY>', $SESSION_KEY, $config_file);
 								
 								$config_file = str_replace('<POLICE_NCIC>', $POLICE_NCIC, $config_file);
 								$config_file = str_replace('<POLICE_CALL_SELFASSIGN>', $POLICE_CALL_SELFASSIGN, $config_file);

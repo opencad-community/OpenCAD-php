@@ -76,7 +76,7 @@ if (isset($_GET['getCalls'])){
         session_unset();
         session_destroy();
         if(ENABLE_API_SECURITY === true)
-            setcookie(''.SESSION_KEY.'', null, -1, "/");
+            setcookie('aljksdz7', null, -1, "/");
 
         header("Location: ".BASE_URL."/index.php?loggedOut=true");
         exit();
