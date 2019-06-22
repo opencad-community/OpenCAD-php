@@ -143,7 +143,7 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
                      <div class="form-group">
                         <label>Division (Select all that apply)</label>
                         <select class="form-control selectpicker" id="division" name="division[]" multiple="multiple" size="6" required>
-                         <?php getDepartments(); ?>
+                         <?php getAgencies(); ?>
                         </select>
                      </div>
                      <div class="clearfix"></div>

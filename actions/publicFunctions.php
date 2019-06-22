@@ -1,7 +1,7 @@
 <?php
-if (isset($_GET['getDepartments']))
+if (isset($_GET['getAgencies']))
 {
-    getDepartments();
+    getAgencies();
 }
 else if (isset($_GET['getLicenseStatuses']))
 {
@@ -24,7 +24,7 @@ else if (isset($_GET['getGenders']))
     getGenders();
 }
 
-function getDepartments()
+function getAgencies()
 {
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -50,6 +50,31 @@ function getDepartments()
     $pdo = null;
 }
 
+function getAgenciesWarrants()
+{
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $result = $pdo->query("SELECT * from ".DB_PREFIX."departments ".WHERE." department_id != 1 AND department_id != 7 AND department_id != 8 AND department_id != 9");
+    if (!$result)
+    {
+        $_SESSION['error'] = $pdo->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    foreach ($result as $row)
+    {
+            echo '<option value="' . $row[0] . '">' . $row[1] . '</option>';
+    }
+    $pdo = null;
+}
 /**#@+
 * function getLicenseStatuses()
 * Get list of possible license statuses from status() of the 'dl_status' column of the ncic_names table.
