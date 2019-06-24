@@ -1,0 +1,24 @@
+HTML          { direction:rtl; }
+H1, H2        { margin-left:0px; margin-right:2px; }
+
+DIV#main H1                { background:url('../images/wizard.png') #eeeeee no-repeat center right; }
+DIV#main H2.sub-title      { margin:-22px 60px 12px 0px; }
+
+DIV#content .left-part     { width:19%; float:right;  }
+DIV#content .central-part  { width:79%; float:left; padding-bottom: 50px;}
+
+UL.left-menu               { border-right:0px; border-left:1px solid #dedede; margin-left:0px; margin-right:35px; }
+
+DIV#divManually            { text-align:right; }
+DIV#divManually DIV.content{ padding-right:0px; padding-left:10px; }
+
+DIV.notes_container H4     { margin:3px 0px 3px 1px; padding:3px 20px 3px 3px; background:#fffff1 url('../images/help_icon.png') no-repeat right top; }
+DIV#notes_message H4       { margin:3px 0px 3px 1px; padding:3px 20px 3px 3px; }
+DIV#notes_message H4.success { margin:3px 0px 3px 1px; padding:3px 20px 3px 3px; }
+
+SPAN.passed                { background:url('../images/passed.png') no-repeat right center; padding:2px 20px 0px 0px; margin-left:10px; margin-right:0px; } 
+SPAN.failed                { background:url('../images/failed.png') no-repeat right center; padding:2px 20px 0px 0px; margin-left:10px; margin-right:0px; } 
+
+.alert                    { margin-right:0px; margin-left:20px; }
+
+

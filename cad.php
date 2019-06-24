@@ -12,8 +12,10 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
     include("./oc-config.php");
-    include("./actions/api.php");
+    include("./actions/generalActions.php");
+    include("./actions/publicFunctions.php");
     include("./actions/dispatchActions.php");
+    include("/actions/dataActions.php");
     session_start();
 
     // TODO: Verify user has permission to be on this page
@@ -722,7 +724,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <label class="col-lg-2 control-label">Incident Type</label>
                         <div class="col-lg-10">
                            <select class="form-control selectpicker" data-live-search="true" name="call_type" title="Incident Type" required>
-                              <?php getIncidentType();?>
+                              <?php //getIncidentTypes();?>
                            </select>
                         </div>
                         <!-- ./ col-sm-9 -->
@@ -1740,8 +1742,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Issuing Agency</label>
                 <div class="col-lg-10">
                   <select class="form-control selectpicker" name="issuing_agency" id="issuing_agency" data-live-search="true" required>
-                    <option> </option>
-                    <?php getAgencies();?>
+                    <?php getAgenciesWarrants();?>
                   </select>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -1821,21 +1822,21 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <script>
   $(function() {
     $( "#ncic_name" ).autocomplete({
-      source: "<?php echo BASE_URL; ?>/js/search_name.php"
+      source: "<?php echo BASE_URL; ?>/actions/search_name.php"
     });
   });
   </script>
       <script>
   $(function() {
     $( "#ncic_plate" ).autocomplete({
-      source: "<?php echo BASE_URL; ?>/js/search_plate.php"
+      source: "<?php echo BASE_URL; ?>/actions/search_plate.php"
     });
   });
   </script>
       <script>
   $(function() {
     $( "#ncic_weapon" ).autocomplete({
-      source: "<?php echo BASE_URL; ?>/js/search_name.php"
+      source: "<?php echo BASE_URL; ?>/actions/search_name.php"
     });
   });
   </script>
@@ -1942,7 +1943,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
            $.ajax({
                type: "POST",
-               url: "<?php echo BASE_URL; ?>/actions/api.php",
+               url: "<?php echo BASE_URL; ?>/actions/generalActions.php",
                data: {
                    changeStatus: 'yes',
                    unit: unit,
@@ -1985,7 +1986,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
              $.ajax({
                  type: "POST",
-                 url: "<?php echo BASE_URL; ?>/actions/api.php",
+                 url: "<?php echo BASE_URL; ?>/actions/generalActions.php",
                  data: {
                      logoutUser: 'yes',
                      unit: unit
@@ -2021,7 +2022,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          function getAvailableUnits() {
            $.ajax({
                  type: "GET",
-                 url: "<?php echo BASE_URL; ?>/actions/api.php",
+                 url: "<?php echo BASE_URL; ?>/actions/generalActions.php",
                  data: {
                      getAvailableUnits: 'yes'
                  },
@@ -2053,7 +2054,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          function getDispatchers() {
            $.ajax({
                  type: "GET",
-                 url: "<?php echo BASE_URL; ?>/actions/api.php",
+                 url: "<?php echo BASE_URL; ?>/actions/generalActions.php",
                  data: {
                      getDispatchers: 'yes'
                  },
@@ -2085,7 +2086,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          function getAOP() {
            $.ajax({
                  type: "GET",
-                 url: "<?php echo BASE_URL; ?>/actions/api.php",
+                 url: "<?php echo BASE_URL; ?>/actions/generalActions.php",
                  data: {
                      getAOP: 'yes'
                  },

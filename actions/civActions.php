@@ -14,84 +14,106 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 include_once(__DIR__ . "/../oc-config.php");
 
+include_once(__DIR__ . "/../plugins/api_auth.php");
+
 /* Handle POST requests */
+/**
+ * Patch notes:
+ * Adding the `else` to make a `else if` prevents the execution
+ * of multiple functions at the same time by the same client
+ *
+ * Running multiple functions at the same time doesnt seem to
+ * be a needed feature.
+ */
 if (isset($_POST['delete_name'])){
     delete_name();
-}
-if (isset($_POST['delete_plate'])){
+}else if (isset($_POST['delete_plate'])){
     delete_plate();
-}
-if (isset($_POST['delete_weapon'])){
+}else if (isset($_POST['delete_weapon'])){
     delete_weapon();
-}
-if (isset($_POST['create_name'])){
+}else if (isset($_POST['create_name'])){
     create_name();
-}
-if (isset($_POST['create_plate'])){
+}else if (isset($_POST['create_plate'])){
     create_plate();
-}
-if (isset($_POST['create_weapon'])){
+}else if (isset($_POST['create_weapon'])){
     create_weapon();
-}
-if (isset($_POST['new_911']))
-{
+}else if (isset($_POST['new_911'])){
     create911Call();
-}
-if (isset($_POST['edit_name'])){
+}else if (isset($_POST['edit_name'])){
     edit_name();
-}
-if (isset($_POST['edit_plate'])){
+}else if (isset($_POST['edit_plate'])){
     edit_plate();
-}
-if (isset($_POST['editid'])){
+}else if (isset($_POST['editid'])){
     editnameid();
-}
-if (isset($_POST['edit_plateid'])){
+}else if (isset($_POST['edit_plateid'])){
     editplateid();
-}
-if (isset($_POST['delete_warrant'])){
+}else if (isset($_POST['delete_warrant'])){
     delete_warrant();
-}
-if (isset($_POST['create_warrant'])){
+}else if (isset($_POST['create_warrant'])){
     create_warrant();
+}else if (isset($_POST['getNumberOfProfiles'])){
+    getNumberOfProfiles();
 }
+
 function getCivilianNamesOwn()
 {
     $uid = $_SESSION['id'];
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ncic_names.id, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_names where ".DB_PREFIX."ncic_names.submittedByID = ?");
+    $resStatus = $stmt->execute(array($uid));
+    $result = $stmt;
 
-	$sql = 'SELECT ncic_names.id, ncic_names.name FROM ncic_names where ncic_names.submittedByID = "' . $uid . '"';
+    if (!$resStatus)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
 
-	$result=mysqli_query($link, $sql);
-
-	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+	foreach($result as $row)
 	{
 		echo "<option value=\"$row[0]\">$row[1]</option>";
 	}
-	mysqli_close($link);
 }
 
 function ncicGetNames()
 {
     $uid = $_SESSION['id'];
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
     }
 
-    $query = 'SELECT ncic_names.* FROM `ncic_names` WHERE ncic_names.submittedById = "' . $uid . '"';
+    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ncic_names.* FROM ".DB_PREFIX."ncic_names WHERE ".DB_PREFIX."ncic_names.submittedById = ?");
+    $resStatus = $stmt->execute(array($uid));
+    $result = $stmt;
+    if (!$resStatus)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
 
-    $result=mysqli_query($link, $query);
-
-    $num_rows = $result->num_rows;
-
+    $num_rows = $result->rowCount();
+    print_r($result);
     if($num_rows == 0)
     {
         echo "<div class=\"alert alert-info\"><span>You currently have no identities</span></div>";
@@ -107,18 +129,14 @@ function ncicGetNames()
                 <th>Address</th>
                 <th>Gender</th>
                 <th>Race</th>
-                <th>DL Status</th>
-                <th>Hair Color</th>
-                <th>Build</th>
-				<th>Weapon Status</th>
-				<th>Deceased</th>
+                <th>Driver\'s License</th>
                 <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
         ';
 
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        foreach($result as $row)
         {
             echo '
             <tr>
@@ -127,11 +145,7 @@ function ncicGetNames()
                 <td>'.$row[5].'</td>
                 <td>'.$row[6].'</td>
                 <td>'.$row[7].'</td>
-                <td>'.$row[8].'</td>
-                <td>'.$row[9].'</td>
-                <td>'.$row[10].'</td>
-                <td>'.$row[11].'</td>
-				<td>'.$row[12].'</td>
+                <td>'.$row[9].' / '.$row[8].'</td>
                 <td>
                     <button name="edit_name" data-toggle="modal" data-target="#IdentityEditModal" id="edit_nameBtn" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
                     <form action="".BASE_URL."/actions/civActions.php" method="post">
@@ -152,21 +166,31 @@ function ncicGetNames()
 
 function ncicGetPlates()
 {
-
     $uid = $_SESSION['id'];
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
     }
 
+    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ncic_plates.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_plates INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_plates.name_id WHERE ".DB_PREFIX."ncic_plates.user_id = ?");
+    $resStatus = $stmt->execute(array($uid));
+    $result = $stmt;
 
-    $query = 'SELECT ncic_plates.*, ncic_names.name FROM ncic_plates INNER JOIN ncic_names ON ncic_names.id=ncic_plates.name_id WHERE ncic_plates.user_id = "' . $uid . '"';
+    if (!$resStatus)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
 
-    $result=mysqli_query($link, $query);
-
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
     if($num_rows == 0)
     {
@@ -193,7 +217,7 @@ function ncicGetPlates()
             <tbody>
         ';
 
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        foreach($result as $row)
         {
 
             echo '
@@ -227,29 +251,28 @@ function ncicGetPlates()
 
 function delete_name()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-
     $uid = htmlspecialchars($_POST['uid']);
 
-    $query = "DELETE FROM ncic_names WHERE id = ?";
-
-    try {
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "i", $uid);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == FALSE) {
-            die(mysqli_error($link));
-        }
-    }
-    catch (Exception $e)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die("Failed to run query: " . $e->getMessage());
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
     }
+
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncic_names WHERE id = ?");
+    $result = $stmt->execute(array($uid));
+
+    if (!$result)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
 
     session_start();
     $_SESSION['nameMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian name</span></div>';
@@ -258,29 +281,28 @@ function delete_name()
 
 function delete_plate()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-
     $vehid = htmlspecialchars($_POST['vehid']);
 
-    $query = "DELETE FROM ncic_plates WHERE id = ?";
-
-    try {
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "i", $vehid);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == FALSE) {
-            die(mysqli_error($link));
-        }
-    }
-    catch (Exception $e)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die("Failed to run query: " . $e->getMessage());
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
     }
+
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncic_plates WHERE id = ?");
+    $result = $stmt->execute(array($vehid));
+
+    if (!$result)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
 
     session_start();
     $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian plate</span></div>';
@@ -311,18 +333,28 @@ function create_name()
 
 	$name = $firstName . ' ' . $lastName;
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die('Could not connect: ' . mysql_error());
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
     }
 
-    $query = 'SELECT name FROM ncic_names WHERE name = "' . $name . '" ';
+    $stmt = $pdo->prepare("SELECT name FROM ".DB_PREFIX."ncic_names WHERE name = ?");
+    $resStatus = $stmt->execute(array($name));
+    $result = $stmt;
 
-    $result = mysqli_query($link, $query);
+    if (!$resStatus)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
     if (!$num_rows == 0)
     {
@@ -342,37 +374,31 @@ function create_name()
     $address = htmlspecialchars($_POST['civAddressReq']);
     $sex = htmlspecialchars($_POST['civSexReq']);
     $race = htmlspecialchars($_POST['civRaceReq']);
-	$dlstatus = htmlspecialchars($_POST['civDL']);
+    $dlstatus = htmlspecialchars($_POST['civDLStatus']);
+    $dltype = htmlspecialchars($_POST['civDLType']);
+    $dlclass = htmlspecialchars($_POST['civDLClass']);
+    $dlissuer = htmlspecialchars($_POST['civDLIssuer']);
     $hair = htmlspecialchars($_POST['civHairReq']);
     $build = htmlspecialchars($_POST['civBuildReq']);
 	$weapon = htmlspecialchars($_POST['civWepStat']);
 	$deceased = htmlspecialchars($_POST['civDec']);
 
-    $query = "INSERT INTO ncic_names (submittedByName, submittedById, name, dob, address, gender, race, dl_status, hair_color, build, weapon_permit, deceased)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_names (submittedByName, submittedById, name, dob, address, gender, race, dl_status, dl_type, dl_class, dl_issued_by, hair_color, build, weapon_permit, deceased)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    $result = $stmt->execute(array($submittedByName, $submitttedById, $name, $dob, $address, $sex, $race, $dlstatus, $dltype, $dlclass, $dlissuer , $hair, $build, $weapon, $deceased));
 
-    try
+    if (!$result)
     {
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "ssssssssssss", $submittedByName, $submitttedById, $name, $dob, $address, $sex, $race, $dlstatus, $hair, $build, $weapon, $deceased);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == false)
-        {
-            die(mysqli_error($link));
-        }
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
     }
-    catch(Exception $e)
-    {
-        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-
-    }
+    $pdo = null;
 
     $_SESSION['identityMessage'] = '<div class="alert alert-success"><span>Successfully created your identity!</span></div>';
 
     sleep(1);
     header("Location:".BASE_URL."/civilian.php#name_panel");
-
 }
 
 function create_plate()
@@ -408,29 +434,26 @@ function create_plate()
     $veh_reg_state = htmlspecialchars($_POST['veh_reg_state']);
     $notes = htmlspecialchars($_POST['notes']);
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_plates (name_id, veh_plate, veh_make, veh_model, veh_pcolor, veh_scolor, veh_insurance, flags, veh_reg_state, notes, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $result = $stmt->execute(array($userId, $veh_plate, $veh_make, $veh_model, $veh_pcolor, $veh_scolor, $veh_insurance, $flags, $veh_reg_state, $notes, $submittedById));
 
-    $sql = "INSERT INTO ncic_plates (name_id, veh_plate, veh_make, veh_model, veh_pcolor, veh_scolor, veh_insurance, flags, veh_reg_state, notes, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "issssssssss", $userId, $veh_plate, $veh_make, $veh_model, $veh_pcolor, $veh_scolor, $veh_insurance, $flags, $veh_reg_state, $notes, $submittedById);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
-		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
+    if (!$result)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
 
     session_start();
     $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully added plate to the database</span></div>';
@@ -440,37 +463,37 @@ function create_plate()
 
 function create911Call()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    $result = $pdo->query("SELECT MAX(call_id) AS max FROM ".DB_PREFIX."call_list");
 
-	$sql = "SELECT MAX(call_id) AS max FROM call_list";
-	$result=mysqli_query($link, $sql);
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
 
-	while($r=mysqli_fetch_array($result))
+	foreach($result as $row)
 	{
-		$callid = $r['max'];
+		$callid = $row['max'];
 	}
 
 	$callid++;
 
-    $sql = "REPLACE INTO call_list (call_id) VALUES (?)";
+	$stmt = $pdo->prepare("REPLACE INTO ".DB_PREFIX."call_list (call_id) VALUES (?)");
+    $result = $stmt->execute(array($callid));
 
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "s", $callid);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
-		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
+    if (!$result)
+    {
+        die($pdo->errorInfo());
+    }
 
     $caller = htmlspecialchars($_POST['911_caller']);
     $location = htmlspecialchars($_POST['911_location']);
@@ -480,27 +503,16 @@ function create911Call()
 
     $call_narrative = $created.'<br/>Caller States: '.$description.'<br/>';
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    $stmt = $pdo->prepare("INSERT IGNORE INTO ".DB_PREFIX."calls (call_id, call_type, call_street1, call_narrative) VALUES (?, '911', ?, ?)");
+    $result = $stmt->execute(array($callid, $location, $call_narrative));
 
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
-    }
-
-    $sql = "INSERT IGNORE INTO calls (call_id, call_type, call_street1, call_narrative) VALUES (?, '911', ?, ?)";
-
-    try {
-        $stmt = mysqli_prepare($link, $sql);
-        mysqli_stmt_bind_param($stmt, "sss", $callid, $location, $call_narrative);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == FALSE) {
-            die(mysqli_error($link));
-        }
-    }
-    catch (Exception $e)
+    if (!$result)
     {
-        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
     }
+    $pdo = null;
 
     session_start();
     $_SESSION['good911'] = '<div class="alert alert-success"><span>Successfully created 911 call</span></div>';
@@ -509,6 +521,7 @@ function create911Call()
     header("Location:".BASE_URL."/civilian.php#911_panel");
 
 }
+
 function edit_name()
 {
     session_start();
@@ -533,18 +546,27 @@ function edit_name()
 
 	$name = $firstName . ' ' . $lastName;
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die('Could not connect: ' . mysql_error());
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
     }
 
-    $query = 'SELECT first_name FROM ncic_names WHERE first_name = "' . $name . '"';
+    $stmt = $pdo->prepare("SELECT first_name FROM ".DB_PREFIX."ncic_names WHERE first_name = ?");
+    $result = $stmt->execute(array($name));
 
-    $result = mysqli_query($link, $query);
+    if (!$result)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
 
-    $num_rows = $result->num_rows;
+    $num_rows = $stmt->rowCount();
 
     if (!$num_rows == 0)
     {
@@ -571,23 +593,16 @@ function edit_name()
 	$deceased = htmlspecialchars($_POST['civDec']);
     $editid = htmlspecialchars($_POST['Edit_id']);
 
-    $query = "UPDATE ncic_names SET name = ?, dob = ?, address = ?, gender = ?, race = ?, dl_status = ?, hair_color = ?, build = ?, weapon_permit = ?, deceased = ? WHERE id = ?";
-    try
-    {
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "sssssssssss", $name, $dob, $address, $sex, $race, $dlstatus, $hair, $build, $weapon, $deceased, $editid);
-        $result = mysqli_stmt_execute($stmt);
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."ncic_names SET name = ?, dob = ?, address = ?, gender = ?, race = ?, dl_status = ?, hair_color = ?, build = ?, weapon_permit = ?, deceased = ? WHERE id = ?");
+    $result = $stmt->execute(array($name, $dob, $address, $sex, $race, $dlstatus, $hair, $build, $weapon, $deceased, $editid));
 
-        if ($result == false)
-        {
-            die(mysqli_error($link));
-        }
-    }
-    catch(Exception $e)
+    if (!$result)
     {
-        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
     }
+    $pdo = null;
 
     $_SESSION['identityMessage'] = '<div class="alert alert-success"><span>Successfully updated the identity.</span></div>';
 
@@ -595,6 +610,7 @@ function edit_name()
     header("Location:".BASE_URL."/civilian.php#name_panel");
 
 }
+
 function edit_plate()
 {
     session_start();
@@ -629,130 +645,168 @@ function edit_plate()
     $notes = htmlspecialchars($_POST['notes']);
     $plate_id = htmlspecialchars($_POST['Edit_plateId']);
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
-    }
-
-
-    $sql = "UPDATE ncic_plates SET name_id = ?, veh_plate = ?, veh_make = ?, veh_model = ?, veh_pcolor = ?, veh_scolor = ?, veh_insurance = ?, flags = ?, veh_reg_state = ?, notes = ? WHERE id = ?";
-
-    try {
-        $stmt = mysqli_prepare($link, $sql);
-        mysqli_stmt_bind_param($stmt, "issssssssss", $userId, $veh_plate, $veh_make, $veh_model, $veh_pcolor, $veh_scolor, $veh_insurance, $flags, $veh_reg_state, $notes, $plate_id);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == FALSE) {
-            die(mysqli_error($link));
-        }
-    }
-    catch (Exception $e)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
     }
-    mysqli_close($link);
+
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."ncic_plates SET name_id = ?, veh_plate = ?, veh_make = ?, veh_model = ?, veh_pcolor = ?, veh_scolor = ?, veh_insurance = ?, flags = ?, veh_reg_state = ?, notes = ? WHERE id = ?");
+    $result = $stmt->execute(array($userId, $veh_plate, $veh_make, $veh_model, $veh_pcolor, $veh_scolor, $veh_insurance, $flags, $veh_reg_state, $notes, $plate_id));
+
+    if (!$result)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
 
     session_start();
     $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully Updated plate to the database</span></div>';
 
     header("Location:".BASE_URL."/civilian.php#plate_panel");
 }
+
 function editnameid()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
     }
 
-    $query = "SELECT ncic_names.* FROM ncic_names WHERE id=".$_POST['editid'];
-    $resultset = mysqli_query($link, $query) or die("database error:". mysqli_error($link));
-    $data = array();
-    while( $rows = mysqli_fetch_assoc($resultset) ) {
-    $data = $rows;
+    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ncic_names.* FROM ".DB_PREFIX."ncic_names WHERE id = ?");
+    $result = $stmt->execute(array(htmlspecialchars($_POST['editid'])));
+
+    if (!$result)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
     }
+
+    header("Content-Type: application/json");
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
     echo json_encode($data);
 }
+
 function editplateid()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
     }
 
-    $query = "SELECT ncic_plates.* FROM ncic_plates WHERE id=".$_POST['edit_plateid'];
-    $resultset = mysqli_query($link, $query) or die("database error:". mysqli_error($link));
-    $plates = array();
-    while( $rows = mysqli_fetch_assoc($resultset) ) {
-    $plates = $rows;
+    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ncic_plates.* FROM ".DB_PREFIX."ncic_plates WHERE id = ?");
+    $result = $stmt->execute(array(htmlspecialchars($_POST['edit_plateid'])));
+
+    if (!$result)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
     }
-    echo json_encode($plates);
+    $pdo = null;
+
+    $data = $stmt->fetch(PDO::FETCH_NUM);
+    echo json_encode($data);
 }
+
 function create_warrant()
 {
     $userId = htmlspecialchars($_POST['civilian_names']);
     $warrant_name = htmlspecialchars($_POST['warrant_name_sel']);
     $issuing_agency = htmlspecialchars($_POST['issuing_agency']);
-
     $warrant_name = htmlspecialchars($_POST['warrant_name_sel']);
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
 	$status = 'Active';
 	$date = date('Y-m-d');
 
     $expire = date('Y-m-d',strtotime('+1 day',strtotime($date)));
 
-    $sql = "INSERT INTO ncic_warrants (name_id, expiration_date, warrant_name, issuing_agency, status, issued_date) SELECT ?, ?, ?, ?, ?, ?";
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
 
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_warrants (name_id, expiration_date, warrant_name, issuing_agency, status, issued_date) SELECT ?, ?, ?, ?, ?, ?");
+    $result = $stmt->execute(array($userId, $expire, $warrant_name, $issuing_agency, $status, $date));
 
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "isssss", $userId, $expire, $warrant_name, $issuing_agency, $status, $date);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
-		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
+    if (!$result)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
 
     session_start();
     $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully created warrant</span></div>';
 
     header("Location:".BASE_URL."/civilian.php");
 }
+
 function ncic_warrants()
 {
     $uid = $_SESSION['id'];
 
-   $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
     }
-	$sql = 'SELECT ncic_names.id from ncic_names where submittedById = "' . $uid . '"';
 
-	$results=mysqli_query($link, $sql);
-	while($row = mysqli_fetch_array($results, MYSQLI_BOTH))
-        {
-            $nameid = ''.$row[0].'';
-		}
+    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ncic_names.id from ".DB_PREFIX."ncic_names where submittedById = ?");
+    $resStatus = $stmt->execute(array($uid));
+    $result = $stmt;
 
-    $query = 'SELECT ncic_warrants.*, ncic_names.name FROM ncic_warrants INNER JOIN ncic_names ON ncic_names.id=ncic_warrants.name_id WHERE name_id = "' . $nameid . '"';
+    if (!$resStatus)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
 
-    $result=mysqli_query($link, $query);
+	foreach($result as $row)
+    {
+        $nameid = ''.$row[0].'';
+    }
 
-    $num_rows = $result->num_rows;
+    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ncic_warrants.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_warrants INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_warrants.name_id WHERE name_id = ?");
+    $resStatus = $stmt->execute(array($nameid));
+    $result = $stmt;
+
+    if (!$resStatus)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $num_rows = $result->rowCount();
 
     if($num_rows == 0)
     {
@@ -777,7 +831,7 @@ function ncic_warrants()
             <tbody>
         ';
 
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        foreach($result as $row)
         {
             echo '
             <tr>
@@ -814,32 +868,32 @@ function ncic_warrants()
             </table>
         ';
     }
+    $pdo = null;
 }
+
 function delete_warrant()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-
     $wid = htmlspecialchars($_POST['wid']);
-
-    $query = "DELETE FROM ncic_warrants WHERE id = ?";
-
-    try {
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "i", $wid);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == FALSE) {
-            die(mysqli_error($link));
-        }
-    }
-    catch (Exception $e)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die("Failed to run query: " . $e->getMessage());
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
     }
+
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncic_warrants WHERE id = ?");
+    $result = $stmt->execute(array($wid));
+
+    if (!$result)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
 
     session_start();
     $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully removed warrant</span></div>';
@@ -860,51 +914,62 @@ function create_weapon()
     $userId = htmlspecialchars($_POST['civilian_names']);
     $wea_type;
     $wea_name;
+    $notes = htmlspecialchars($_POST['weapon_notes']);
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_weapons (name_id, weapon_type, weapon_name, user_id, weapon_notes) VALUES (?, ?, ?, ?, ?)");
+    $result = $stmt->execute(array($userId, $wea_type, $wea_name, $submittedById, $notes));
 
-    $sql = "INSERT INTO ncic_weapons (name_id, weapon_type, weapon_name, user_id) VALUES (?, ?, ?, ?)";
-
-
-	try {
-		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, "isss", $userId, $wea_type, $wea_name, $submittedById);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-			die(mysqli_error($link));
-		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage()); //TODO: A function to send me an email when this occurs should be made
-	}
-	mysqli_close($link);
+    if (!$result)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
 
     session_start();
     $_SESSION['weaponMessage'] = '<div class="alert alert-success"><span>Successfully added a weapon to the database</span></div>';
 
     header("Location:".BASE_URL."/civilian.php#weapon_panel");
 }
+
 function ncicGetWeapons()
 {
     $uid = $_SESSION['id'];
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
     }
 
-    $query = 'SELECT ncic_weapons.*, ncic_names.name FROM ncic_weapons INNER JOIN ncic_names ON ncic_names.id=ncic_weapons.name_id WHERE ncic_weapons.user_id = "' . $uid . '"';
+    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ncic_weapons.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_weapons INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_weapons.name_id WHERE ".DB_PREFIX."ncic_weapons.user_id = ?");
+    $resStatus = $stmt->execute(array($uid));
+    $result = $stmt;
 
-    $result=mysqli_query($link, $query);
+    if (!$resStatus)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
 
-    $num_rows = $result->num_rows;
+    $num_rows = $result->rowCount();
 
     if($num_rows == 0)
     {
@@ -919,19 +984,21 @@ function ncicGetWeapons()
                 <th>Name</th>
                 <th>Weapon Type</th>
                 <th>Weapon Name</th>
+                <th>Weapon Notes</th>
                 <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
         ';
 
-        while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+        foreach($result as $row)
         {
             echo '
             <tr>
-                <td>'.$row[5].'</td>
+                <td>'.$row[6].'</td>
                 <td>'.$row[2].'</td>
                 <td>'.$row[3].'</td>
+                <td>'.$row[4].'</td>
                 <td>
                     <form action="".BASE_URL."/actions/civActions.php" method="post">
                     <input name="delete_weapon" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
@@ -948,34 +1015,130 @@ function ncicGetWeapons()
         ';
     }
 }
+
 function delete_weapon()
 {
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
-
     $weaid = htmlspecialchars($_POST['weaid']);
 
-    $query = "DELETE FROM ncic_weapons WHERE id = ?";
-
-    try {
-        $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "i", $weaid);
-        $result = mysqli_stmt_execute($stmt);
-
-        if ($result == FALSE) {
-            die(mysqli_error($link));
-        }
-    }
-    catch (Exception $e)
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
     {
-        die("Failed to run query: " . $e->getMessage());
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
     }
+
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncic_weapons WHERE id = ?");
+    $result = $stmt->execute(array($weaid));
+
+    if (!$result)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
 
     session_start();
     $_SESSION['weaponMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian weapon</span></div>';
     header("Location: ".BASE_URL."/civilian.php");
+}
+
+function getNumberOfProfiles()
+{
+    session_start();
+    $id = $_SESSION['id'];
+
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        error_log(print_r($stmt->errorInfo(), true));
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $stmt = $pdo->prepare("SELECT COUNT(name) FROM ".DB_PREFIX."ncic_names WHERE submittedById=?");
+    $result = $stmt->execute(array($id));
+
+    if (!$result)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        error_log(print_r($stmt->errorInfo(), true));
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
+
+    $count = $stmt->fetch();
+    return $count[0];
+}
+
+function getNumberOfVehicles()
+{
+    session_start();
+    $id = $_SESSION['id'];
+
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        error_log(print_r($stmt->errorInfo(), true));
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $stmt = $pdo->prepare("SELECT COUNT(name_id) FROM ".DB_PREFIX."ncic_plates WHERE user_id=?");
+    $result = $stmt->execute(array($id));
+
+    if (!$result)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        error_log(print_r($stmt->errorInfo(), true));
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
+
+    $count = $stmt->fetch();
+    return $count[0];
+}
+
+function getNumberOfWeapons()
+{
+    session_start();
+    $id = $_SESSION['id'];
+
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        error_log(print_r($stmt->errorInfo(), true));
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $stmt = $pdo->prepare("SELECT COUNT(name_id) FROM ".DB_PREFIX."ncic_weapons WHERE user_id=?");
+    $result = $stmt->execute(array($id));
+
+    if (!$result)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        error_log(print_r($stmt->errorInfo(), true));
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
+
+    $count = $stmt->fetch();
+    return $count[0];
 }
 ?>

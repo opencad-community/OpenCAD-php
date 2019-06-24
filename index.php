@@ -12,13 +12,18 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
+if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
+    
+   header('Location://'.$_SERVER['SERVER_NAME'].'/oc-install/start.php');
+}
     require_once(__DIR__ . "/oc-config.php");
+    require_once(__DIR__ . "/actions/register.php");
+    require_once(__DIR__ . "/actions/publicFunctions.php");
 
     $testing = false; //If set to true, will default some data for you
 
-
-
     session_start();
+    $_SESSION['root_path'] = getcwd();
     $registerError = "";
     $registerSuccess = "";
     $loginMessage = "";
@@ -30,21 +35,24 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     }
     if (isset($_GET['loggedOut']))
     {
-        $loginMessage = '<div class="alert alert-success" style="text-align: center; font-weight:normal;" ><span>You\'ve successfully been logged out</span></div>';
+      $loginMessage = '<div class="alert alert-success" style="text-align: center;" ><span>You\'ve successfully been logged out</span></div>';
+   }
+   if(isset($_SESSION['register_error']))
+   {
     }
     if(isset($_SESSION['register_error']))
     {
-        $registerError = '<div class="alert alert-danger" style="text-align: center; font-weight:normal;"><span>'.$_SESSION['register_error'].'</span></div>';
+      $registerError = '<div class="alert alert-danger" style="text-align: center;"><span>'.$_SESSION['register_error'].'</span></div>';
         unset($_SESSION['register_error']);
     }
     if(isset($_SESSION['register_success']))
     {
-        $registerError = '<div class="alert alert-success" style="text-align: center; font-weight:normal;"><span>'.$_SESSION['register_success'].'</span></div>';
+      $registerError = '<div class="alert alert-success" style="text-align: center;"><span>'.$_SESSION['register_success'].'</span></div>';
         unset($_SESSION['register_success']);
     }
     if(isset($_SESSION['loginMessageDanger']))
     {
-        $loginMessage = '<div class="alert alert-danger" style="text-align: center; font-weight:normal;"><span>'.$_SESSION['loginMessageDanger'].'</span></div>';
+      $loginMessage = '<div class="alert alert-danger" style="text-align: center;"><span>'.$_SESSION['loginMessageDanger'].'</span></div>';
         unset($_SESSION['loginMessageDanger']);
     }
 
@@ -125,20 +133,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <input class="form-control" placeholder="Identifier (Code Number, Unit ID)" name="identifier" type="text" required>
                      </div>
                      <div class="form-group">
-                        <label>Division (Can choose more than one via Ctrl + Click)</label>
-                        <select class="form-control" id="division" name="division[]" multiple="multiple" size="6" required>
-                           <option value="civilian">Civilian</option>
-                           <option value="communications">Communications (Dispatch)</option>
-                           <option value="ems">EMS</option>
-                           <option value="fire">Fire</option>
-                           <option value="highway">Highway Patrol</option>
-                           <option value="police">Police</option>
-                           <option value="sheriff">Sheriff</option>
-                           <option value="state">State</option>
-                           <option value="roadsideAssist">Roadside Assistance</option>
-                        </select>
-                     </div>
-                     <div class="form-group">
                         <input class="form-control" placeholder="Password" name="password" type="password" value="<?php if($testing){echo "password";}?>" required>
                      </div>
                      <!-- ./ form-group -->
@@ -146,6 +140,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <input class="form-control" placeholder="Confirm Password" name="password1" type="password" required>
                      </div>
                      <!-- ./ form-group -->
+                     <div class="form-group">
+                        <label>Division (Select all that apply)</label>
+                        <select class="form-control selectpicker" id="division" name="division[]" multiple="multiple" size="6" required>
+                         <?php getAgencies(); ?>
+                        </select>
+                     </div>
                      <div class="clearfix"></div>
                      <div>
                         <input name="register" type="submit" class="btn btn-default btn-sm pull-right" value="Request Access" />

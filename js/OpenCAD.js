@@ -35,6 +35,136 @@ function toggleFullScreen() {
     }
 }
 
+
+function deleteUser(uid) {
+    var $tr = $(this).closest('tr');
+    var r = confirm("Are you sure you want to delete this user? This cannot be undone!");
+
+    if (r == true)
+    {
+        $.ajax({
+        type: "POST",
+        url: hdir + "actions/dispatchActions.php",
+        data: {
+            deleteUser: 'yes',
+            uid: uid
+        },
+        success: function(response)
+        {
+            console.log(response);
+            $tr.find('td').fadeOut(1000,function(){
+                $tr.remove();
+            });
+
+            new PNotify({
+            title: 'Success',
+            text: 'Successfully deleted user',
+            type: 'success',
+            styling: 'bootstrap3'
+            });
+
+            getCalls();
+        },
+        error : function(XMLHttpRequest, textStatus, errorThrown)
+        {
+            console.log("Error");
+        }
+
+        });
+    }
+    else
+    {
+        return; // Do nothing
+    }
+}
+
+
+function deleteStreet(streetID) {
+    var $tr = $(this).closest('tr');
+    var r = confirm("Are you sure you want to delete this street? This cannot be undone!");
+    console.log();
+    if (r == true)
+    {
+        
+        $.ajax({
+        type: "POST",
+        url: hdir + "actions/dataActions.php",
+        data: {
+            deleteStreet: 'yes',
+            streetID : streetID
+        },
+        success: function(response)
+        {
+            console.log(response);
+            $tr.find('td').fadeOut(1000,function(){
+                $tr.remove();
+            });
+
+            new PNotify({
+            title: 'Success',
+            text: 'Successfully deleted street',
+            type: 'success',
+            styling: 'bootstrap3'
+            });
+
+            getStreets();
+        },
+        error : function(XMLHttpRequest, textStatus, errorThrown)
+        {
+            console.log("Error");
+        }
+
+        });
+    }
+    else
+    {
+        return; // Do nothing
+    }
+}
+
+function deleteVehicle(vehicleID) {
+    var $tr = $(this).closest('tr');
+    var r = confirm("Are you sure you want to delete this vehicle?\n\nThis cannot be undone!");
+    console.log();
+    if (r == true)
+    {
+        
+        $.ajax({
+        type: "POST",
+        url: hdir + "actions/dataActions.php",
+        data: {
+            deleteVehicle: 'yes',
+            vehicleID : vehicleID
+        },
+        success: function(response)
+        {
+            console.log(response);
+            $tr.find('td').fadeOut(1000,function(){
+                $tr.remove();
+            });
+
+            new PNotify({
+            title: 'Success',
+            text: 'Vehicle successfully removed.',
+            type: 'success',
+            styling: 'bootstrap3'
+            });
+
+            getVehicles();
+        },
+        error : function(XMLHttpRequest, textStatus, errorThrown)
+        {
+            console.log("Error");
+        }
+
+        });
+    }
+    else
+    {
+        return; // Do nothing
+    }
+}
+
 // When the user presses enter in ncic_name it does a search
 $("#ncic_name").keyup(function(event){
     if(event.keyCode == 13){
@@ -246,13 +376,23 @@ $('#ncic_name_btn').on('click', function(e) {
             }
 
             var dl_status_text = "";
-            if (data['dl_status'] == "Valid")
+            if (data['dl_status'] == "None")
             {
-                dl_status_text = "<span style=\"color: green;\">Valid</span>";
+                dl_status_text = "<span style=\"color: red;\">None</span>";
             }
             else
             {
-            dl_status_text = "<span style=\"color: red;\">"+data['dl_status']+"</span>";
+            dl_status_text = "<span style=\"color: green;\">"+data['dl_status']+"</span>";
+            }
+
+            var dl_type_text = "";
+            if (data['dl_type'] == "Not Issued")
+            {
+                dl_type_text = "";
+            }
+            else
+            {
+            dl_type_text = "<span style=\"color: green;\">"+data['dl_type']+"</span>";
             }
 			
             var weapon_permit_text = "";
@@ -280,6 +420,7 @@ $('#ncic_name_btn').on('click', function(e) {
             +"<br/>Build: "+data['build']
             +"<br/>Address: "+data['address']
             +"<br/>DL Status: "+dl_status_text
+            +"<br/>DL Type:"+dl_type_text
 			+"<br/>Weapon Permit: "+weapon_permit_text
 			+"<br/>Deceased: "+deceased_text
 			+"<br/><br/>Warnings:<br/>"+warningText+"<br/><br/>Citations:<br/>"+citationText+"<br/>Arrests:<br/>"+arrestText+"<br/>Warrants:<br/>"+warrantText);
@@ -340,7 +481,7 @@ $('#ncic_weapon_btn').on('click', function(e) {
             }
 
 
-            $('#ncic_weapon_return').append("Name: "+data['first_name']+" "+data['last_name']+"<br/>Weapon Permit: "+weapon_permit_text
+            $('#ncic_weapon_return').append("Name: "+data['first_name']+"<br/>Weapon Permit: "+weapon_permit_text
             +"<br/><br/>Weapons: <br/>"+weaponText);
 
             $("#ncic_weapon_return").attr("tabindex",-1).focus();
@@ -508,7 +649,7 @@ $(function() {
 function getActiveDispatchers() {
 $.ajax({
         type: "GET",
-        url: hdir + "actions/api.php",
+        url: hdir + "actions/generalActions.php",
         data: {
             getDispatchers: 'yes'
         },
@@ -535,7 +676,7 @@ $.ajax({
 function getUnAvailableUnits() {
 $.ajax({
         type: "GET",
-        url: hdir + "actions/api.php",
+        url: hdir + "actions/generalActions.php",
         data: {
             getUnAvailableUnits: 'yes'
         },
@@ -568,7 +709,7 @@ $('#newCall').on('show.bs.modal', function(e) {
     $.ajax({
         cache: false,
         type: 'GET',
-        url: hdir + 'actions/api.php',
+        url: hdir + 'actions/generalActions.php',
         data: {'getActiveUnits': 'yes'},
         success: function(result)
         {
@@ -622,7 +763,7 @@ $('#assign').on('show.bs.modal', function(e) {
     $.ajax({
         cache: false,
         type: 'GET',
-        url: hdir + 'actions/api.php',
+        url: hdir + 'actions/generalActions.php',
         data: {'getActiveUnitsModal': 'yes'},
         success: function(result)
         {
@@ -654,7 +795,7 @@ $('#callDetails').on('show.bs.modal', function(e) {
     $.ajax({
         cache: false,
         type: 'GET',
-        url: hdir + 'actions/api.php',
+        url: hdir + 'actions/generalActions.php',
         data: {'getCallDetails': 'yes',
                 'callId' : callId},
         success: function(result)
@@ -676,48 +817,6 @@ $('#callDetails').on('show.bs.modal', function(e) {
         error:function(exception){alert('Exeption:'+exception);}
     });
 });
-
-function deleteUser(uid) {
-    var $tr = $(this).closest('tr');
-    var r = confirm("Are you sure you want to delete this user? This cannot be undone!");
-
-    if (r == true)
-    {
-        $.ajax({
-        type: "POST",
-        url: hdir + "actions/dispatchActions.php",
-        data: {
-            deleteUser: 'yes',
-            uid: uid
-        },
-        success: function(response)
-        {
-            console.log(response);
-            $tr.find('td').fadeOut(1000,function(){
-                $tr.remove();
-            });
-
-            new PNotify({
-            title: 'Success',
-            text: 'Successfully deleted user',
-            type: 'success',
-            styling: 'bootstrap3'
-            });
-
-            getCalls();
-        },
-        error : function(XMLHttpRequest, textStatus, errorThrown)
-        {
-            console.log("Error");
-        }
-
-        });
-    }
-    else
-    {
-        return; // Do nothing
-    }
-}
 
 // Clears calls
 function clearCall(btn_id) {
@@ -768,7 +867,7 @@ function getCalls() {
 
     $.ajax({
         type: "GET",
-        url: hdir + "actions/api.php",
+        url: hdir + "actions/generalActions.php",
         data: {
             getCalls: 'yes',
             type: file
@@ -793,7 +892,7 @@ function getMyCall() {
 
     $.ajax({
         type: "GET",
-        url: hdir + "actions/api.php",
+        url: hdir + "actions/generalActions.php",
         data: {
             getMyCall: 'yes',
             type: file
@@ -874,7 +973,7 @@ function priorityTone(type)
  {
     $.ajax({
         type: "POST",
-        url: hdir + "actions/api.php",
+        url: hdir + "actions/generalActions.php",
         data: {
             setTone: 'yes',
             tone: name,
@@ -918,7 +1017,7 @@ function checkTones()
 {
     $.ajax({
         type: "GET",
-        url: hdir + "actions/api.php",
+        url: hdir + "actions/generalActions.php",
         data: {
             checkTones: 'yes'
         },
@@ -1023,7 +1122,7 @@ function responderChangeStatus(element)
 
     $.ajax({
         type: "POST",
-        url: hdir +"actions/api.php",
+        url: hdir +"actions/generalActions.php",
         data: {
             changeStatus: 'yes',
             unit: unit,

@@ -13,8 +13,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
 include("./oc-config.php");
-require("./actions/api.php");
-session_start();
+require("./actions/generalActions.php");
 
 if (empty($_SESSION['logged_in']))
 {
@@ -23,9 +22,6 @@ if (empty($_SESSION['logged_in']))
 }
     setDispatcher("1");
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
@@ -34,8 +30,8 @@ if (!$link) {
 }
 
 $id = $_SESSION['id'];
-$sql = "SELECT * from user_departments WHERE user_id = \"$id\"";
-$getAdminPriv = "SELECT `admin_privilege` from users WHERE id = \"$id\"";
+$sql = "SELECT * from ".DB_PREFIX."user_departments WHERE user_id = \"$id\"";
+$getAdminPriv = "SELECT `admin_privilege` from ".DB_PREFIX."users WHERE id = \"$id\"";
 
 $result=mysqli_query($link, $sql);
 $adminPriv=mysqli_query($link, $getAdminPriv);
@@ -108,11 +104,11 @@ if($adminRows < 2)
 {
 	while($adminRow = mysqli_fetch_array($adminPriv, MYSQLI_BOTH))
 	{
-		if ($adminRow[0] == "2")
+		if ($adminRow[0] == "3")
 		{
 			$adminButton = "<a href=\"".BASE_URL."/oc-admin/admin.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Admin</a>";
 		}
-		if ($adminRow[0] == "1")
+		if ($adminRow[0] == "2")
 		{
 			$adminButton = "<a href=\"".BASE_URL."/oc-admin/admin.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Moderator</a>";
 		}

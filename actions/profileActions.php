@@ -14,6 +14,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 require_once(__DIR__ . "/../oc-config.php");
 
+include_once(__DIR__ . "/../plugins/api_auth.php");
+
 //Handle requests
 if (isset($_POST['update_profile_btn']))
 {
@@ -28,8 +30,6 @@ if (isset($_POST['changePassword']))
   changePassword();
 }
 
-
-
 function updateProfile()
 {
     session_start();
@@ -38,32 +38,26 @@ function updateProfile()
     $email = htmlspecialchars($_POST['email']);
     $identifier = htmlspecialchars($_POST['identifier']);
 
-    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
 
-	if (!$link) {
-		die('Could not connect: ' .mysql_error());
-	}
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."users SET name = ?, email = ?, identifier = ? WHERE ID = ?");
+    $result = $stmt->execute(array($name, $email, $identifier, $id));
 
-    $query = "UPDATE users SET name = ?, email = ?, identifier = ? WHERE ID = ?";
-
-	try {
-		$stmt = mysqli_prepare($link, $query);
-		mysqli_stmt_bind_param($stmt, "sssi", $name, $email, $identifier, $id);
-		$result = mysqli_stmt_execute($stmt);
-
-		if ($result == FALSE) {
-            if (mysqli_errno($link) == 1062) {
-                $_SESSION['profileUpdate'] = '<div class="alert alert-danger"><span>Update unsuccessful. Emails and Identifiers must be unique.</span></div>';
-                sleep(1); //Seconds to wait
-	            header("Location: ".BASE_URL."/profile.php");
-            }
-			die(mysqli_error($link));
-		}
-	}
-	catch (Exception $e)
-	{
-		die("Failed to run query: " . $e->getMessage());
-	}
+    if (!$result)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
 
     //Reset the session variables so on refresh the fields are populated correctly
 	$_SESSION['email'] = $email;
@@ -79,19 +73,30 @@ function updateProfile()
 
 function getMyRank()
 {
-	$id = $_GET['unit'];
-	$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    $id = $_GET['unit'];
+    
+	try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error_blob'] = $ex;
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
     }
 
-    //Get all ranks
-    $query = "SELECT ranks.rank_name FROM ranks_users INNER JOIN ranks ON ranks.rank_id=ranks_users.rank_id WHERE ranks_users.user_id = '$id';";
+    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ranks.rank_name FROM ".DB_PREFIX."ranks_users INNER JOIN ".DB_PREFIX."ranks ON ".DB_PREFIX."ranks.rank_id=".DB_PREFIX."ranks_users.rank_id WHERE ".DB_PREFIX."ranks_users.user_id = ?");
+    $result = $stmt->execute(array($id));
 
-    $result=mysqli_query($link, $query);
+    if (!$result)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
 
-	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+	foreach($result as $row)
 	{
 		echo $row[0];
 	}
@@ -99,48 +104,64 @@ function getMyRank()
 
 function changePassword()
 {
+    session_start();
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
 
-  error_reporting(E_ALL);
-  ini_set('display_errors', 1);
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
 
-  // Connect to database
-  $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    $id = $_SESSION['id'];
+    $newpassword = htmlspecialchars($_POST['password']);
+    $hashed_password = password_hash($newpassword, PASSWORD_DEFAULT);
 
-  if (!$link) {
-    die('Could not connect: ' .mysql_error());
-  }
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."users SET password = ? WHERE id = ?");
+    $result = $stmt->execute(array($hashed_password, $id));
 
-  // Get users
-  $query = mysqli_query($link, "SELECT * FROM `users`") or die(mysqli_error($link));
+    if (!$result)
+    {
+        $_SESSION['error'] = $pdo->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
 
-  $row = mysqli_fetch_array($query);
-  $id = $row['id'];
-  $password = $row['password'];
-  $newpassword = htmlspecialchars($_POST['password']);
-  $hashed_password = password_hash($newpassword, PASSWORD_DEFAULT);
-  mysqli_query($link,"UPDATE `users` SET `password` = '$hashed_password' WHERE `id` = '$id'") or die(mysqli_error($link));
+    $_SESSION['profileUpdate'] = '<div class="alert alert-success"><span>Password successfully updated.</span></div>';
 
-  $_SESSION['changePassword'] = '<div class="alert alert-success"><span>Password successfully updated.</span></div>';
-
-  sleep(1); //Seconds to wait
-  echo $_SESSION['changePassword'];
-  header("Location: ".BASE_URL."/profile.php?changePassword=true");
+    $pdo = null;
+    sleep(1); //Seconds to wait
+    echo $_SESSION['profileUpdate'];
+    header("Location: ".BASE_URL."/profile.php");
 }
 
 function getRanks()
 {
-	$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-    if (!$link) {
-        die('Could not connect: ' .mysql_error());
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
     }
 
-    //Get all ranks
-    $query = "SELECT * FROM ranks";
+    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."ranks");
 
-    $result=mysqli_query($link, $query);
+    if (!$result)
+    {
+        $_SESSION['error'] = $pdo->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
 
-	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+	foreach($result as $row)
 	{
 		if ($row[2] == "1")
 		{
@@ -152,4 +173,3 @@ function getRanks()
 		}
 	}
 }
-?>
