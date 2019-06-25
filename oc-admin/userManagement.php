@@ -313,7 +313,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                 <div class="col-md-9">
                                     <select name="userGroups[]" class="selectpicker form-control" id="userGroups"
                                         multiple>
-                                        <?php getDepartments();?>
+                                        <?php getAgencies();?>
                                     </select>
                                 </div>
                                 <!-- ./ col-sm-9 -->

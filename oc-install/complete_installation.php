@@ -232,7 +232,7 @@
 								$config_file = str_replace('<DEMO_MODE>', $DEMO_MODE, $config_file);
 								$config_file = str_replace('<USE_GRAVATAR>', $USE_GRAVATAR, $config_file);
 								
-								chmod(EI_CONFIG_FILE_PATH, 0777);
+								chmod(EI_CONFIG_FILE_PATH, 0600);
 								$f = fopen(EI_CONFIG_FILE_PATH, 'w+');
 								if(!fwrite($f, $config_file) > 0){
 									$error_mg[] = str_replace('_CONFIG_FILE_PATH_', EI_CONFIG_FILE_PATH, lang_key('error_can_not_open_config_file')); 

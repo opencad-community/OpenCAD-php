@@ -11,12 +11,13 @@ This program is free software: you can redistribute it and/or modify
 
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
+
+    session_start();
     include("./oc-config.php");
     include("./actions/generalActions.php");
     include("./actions/publicFunctions.php");
     include("./actions/dispatchActions.php");
-    include("/actions/dataActions.php");
-    session_start();
+    include("./actions/dataActions.php");
 
     // TODO: Verify user has permission to be on this page
 
@@ -724,7 +725,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <label class="col-lg-2 control-label">Incident Type</label>
                         <div class="col-lg-10">
                            <select class="form-control selectpicker" data-live-search="true" name="call_type" title="Incident Type" required>
-                              <?php //getIncidentTypes();?>
+                              <?php getIncidentTypes();?>
                            </select>
                         </div>
                         <!-- ./ col-sm-9 -->
@@ -1723,7 +1724,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                       <option value="FTA: Speeding">FTA: Speeding</option>
                       <option value="FTA: Reckless Driving">FTA: Reckless Driving</option>
                       <option value="FTA: Obstruction of Justice">FTA: Obstruction of Justice</option>
-                      <option value="FTA: Verbal Abuse">FTA: Verbal Abuse</option>
+                      <option valu e="FTA: Verbal Abuse">FTA: Verbal Abuse</option>
                       <option value="FTA: Bribery">FTA: Bribery</option>
                       <option value="FTA: Disorderly Conduct">FTA: Disorderly Conduct</option>
                       <option value="FTA: Drug Posession">FTA: Drug Posession</option>
@@ -1742,7 +1743,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Issuing Agency</label>
                 <div class="col-lg-10">
                   <select class="form-control selectpicker" name="issuing_agency" id="issuing_agency" data-live-search="true" required>
-                    <?php //getAgencies();?>
+                    <?php getAgenciesWarrants();?>
                   </select>
                 </div>
                 <!-- ./ col-sm-9 -->

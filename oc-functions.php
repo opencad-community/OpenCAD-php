@@ -27,14 +27,14 @@ if(!empty($lang) && array_key_exists($lang, $arr_active_languages)){
 	$curr_lang_direction = DEFAULT_LANGUAGE_DIRECTION;
 }
 
-if(file_exists('/oc-lang/'.$curr_lang.'/common.inc.php')){
-	include_once('/oc-lang/'.$curr_lang.'/common.inc.php');
-}else if(file_exists('../oc-lang/'.$curr_lang.'/common.inc.php')){
-	include_once('../oc-lang/'.$curr_lang.'/common.inc.php');
-}else if(file_exists('../../oc-lang/'.$curr_lang.'/common.inc.php')){
-	include_once('../../oc-lang/'.$curr_lang.'/common.inc.php');
+if(file_exists('/oc-lang/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
+	include_once('/oc-lang/'.$curr_lang.'/'.$curr_lang.'.inc.php');
+}else if(file_exists('../oc-lang/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
+	include_once('../oc-lang/'.$curr_lang.'/'.$curr_lang.'.inc.php');
+}else if(file_exists('../../oc-lang/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
+	include_once('../../oc-lang/'.$curr_lang.'/'.$curr_lang.'.inc.php');
 }else{
-	include_once('./oc-lang/en/common.inc.php');    	
+	include_once('./oc-lang/en/en.inc.php');    	
 }	
 
 
@@ -229,7 +229,7 @@ function generateRandomString($length = 10) {
 	**/
 function getOpenCADVersion()
 {
-	echo '0.2.6';
+	echo '0.3.0';
 }
 
 /**#@+

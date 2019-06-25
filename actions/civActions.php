@@ -113,7 +113,6 @@ function ncicGetNames()
     $pdo = null;
 
     $num_rows = $result->rowCount();
-    print_r($result);
     if($num_rows == 0)
     {
         echo "<div class=\"alert alert-info\"><span>You currently have no identities</span></div>";
