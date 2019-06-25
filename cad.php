@@ -724,7 +724,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <label class="col-lg-2 control-label">Incident Type</label>
                         <div class="col-lg-10">
                            <select class="form-control selectpicker" data-live-search="true" name="call_type" title="Incident Type" required>
-                              <?php //getIncidentTypes();?>
+                              <?php getIncidentTypes();?>
                            </select>
                         </div>
                         <!-- ./ col-sm-9 -->
@@ -1723,7 +1723,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                       <option value="FTA: Speeding">FTA: Speeding</option>
                       <option value="FTA: Reckless Driving">FTA: Reckless Driving</option>
                       <option value="FTA: Obstruction of Justice">FTA: Obstruction of Justice</option>
-                      <option value="FTA: Verbal Abuse">FTA: Verbal Abuse</option>
+                      <option valu e="FTA: Verbal Abuse">FTA: Verbal Abuse</option>
                       <option value="FTA: Bribery">FTA: Bribery</option>
                       <option value="FTA: Disorderly Conduct">FTA: Disorderly Conduct</option>
                       <option value="FTA: Drug Posession">FTA: Drug Posession</option>
