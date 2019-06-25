@@ -11,12 +11,13 @@ This program is free software: you can redistribute it and/or modify
 
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
+
+    session_start();
     include("./oc-config.php");
     include("./actions/generalActions.php");
     include("./actions/publicFunctions.php");
     include("./actions/dispatchActions.php");
-    include("/actions/dataActions.php");
-    session_start();
+    include("./actions/dataActions.php");
 
     // TODO: Verify user has permission to be on this page
 
