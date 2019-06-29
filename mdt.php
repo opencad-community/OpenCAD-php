@@ -1,4 +1,4 @@
- <?php
+<?php
 
 /**
 Open source CAD system for RolePlaying Communities.
@@ -12,8 +12,14 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
+ s   session_start();
+    include_once(__DIR__."/oc-config.php");
+    include_once(__DIR__."/oc-functions.php");
+    include(__DIR__."/actions/generalActions.php");
+    include(__DIR__."/actions/responderActions.php");
+    include(__DIR__."/plugins/api_auth.php");
 
-    session_start();
+
     if (empty($_SESSION['logged_in']))
     {
         header('Location: /index.php');
@@ -22,10 +28,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     {
       $name = $_SESSION['name'];
     }
-
-    include_once("oc-config.php");
-    include("./actions/generalActions.php");
-    include("./actions/responderActions.php");
     unset($_SESSION['activeDepartment']);
     if ( $_GET['dep'] == "state" || $_SESSION['activeDepartment'] == "state" )
     {

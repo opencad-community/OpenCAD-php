@@ -8,16 +8,16 @@ This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation, either version 3 of the License, or
  (at your option) any later version.
-
+I will                  qwe   qer   qwr      r  rr
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
     session_start();
-    include("./oc-config.php");
-    include("./actions/generalActions.php");
-    include("./actions/publicFunctions.php");
-    include("./actions/dispatchActions.php");
-    include("./actions/dataActions.php");
+    include_once(__DIR__."/oc-config.php");
+    include_once(__DIR__."/oc-functions.php");
+    include(__DIR__."/actions/generalActions.php");
+    include(__DIR__."/actions/dispatchActions.php");
+    include(__DIR__."/plugins/api_auth.php");
 
     // TODO: Verify user has permission to be on this page
 
