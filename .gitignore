@@ -11,3 +11,4 @@ info.php
 .crowdin.yml
 .vscode
 .MESSAGE
+patch.diff
