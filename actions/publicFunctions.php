@@ -23,6 +23,12 @@ else if (isset($_GET['getGenders']))
 {
     getGenders();
 }
+else if (isset($_GET['getRaces']))
+{
+    getRaces();
+}
+
+
 
 function getAgencies()
 {
@@ -316,6 +322,51 @@ function getIncidentTypes()
             echo '<option value="' . $row[0] . '">'. $row[1] .' '.$row[2] . '</option>';
     }
     $pdo = null;
+}
+
+/**#@+
+* function getLicenseStatuses()
+* Get list of possible license statuses from status() of the 'dl_status' column of the ncic_names table.
+*
+* @since 0.3.0
+*
+**/
+function getRaces()
+{
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_names LIKE `race`";
+    $stmt = $pdo->prepare( $query );
+    if (!$stmt)
+    {
+        $_SESSION['error'] = $pdo->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $result = $stmt -> execute();
+    if ($result)
+    {
+        $row = $stmt -> fetch(PDO::FETCH_ASSOC);
+        $races = implode($row);
+        
+        // Remove "set(" at start and ");" at end.
+        $races  = substr($races,14,strlen($races)-18);
+        $races = preg_split("/','/",$races);
+    
+        foreach ($races as $key=>$value) 
+        {
+            echo "<option name = '$value' value = '$value'>$value</option>\n";
+        };
+    }
 }
 
 ?>
