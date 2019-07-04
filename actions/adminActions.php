@@ -8,10 +8,21 @@
  (at your option) any later version.
  This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
  *
+ * @package OpenCAD
+ * 
  */
 
-require_once(__DIR__ . "/../oc-config.php");
+
+require_once(__DIR__  . "/../oc-config.php");
+include_once(__DIR__ . "/../oc-functions.php");
 include_once(__DIR__ . "/../plugins/api_auth.php");
+
+if (getcwd() == dirname(__FILE__)) {
+    $_SESSION['error'] = "Access Denied";
+    $_SESSION['error_blob'] = "Direct access to this file is forbidden for security reasons.";
+    header('Location: '.BASE_URL.'/plugins/error/index.php');
+    die();
+}
 
 /*
 This file handles all actions for admin.php script

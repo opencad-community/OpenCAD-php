@@ -15,6 +15,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 require_once(__DIR__ . "/../oc-config.php");
 include(__DIR__ . '/generalActions.php');
 
+if (getcwd() == dirname(__FILE__)) {
+    $_SESSION['error'] = "Access Denied";
+    $_SESSION['error_blob'] = "Direct access to this file is forbidden for security reasons.";
+    header('Location: '.BASE_URL.'/plugins/error/index.php');
+    die();
+}
+
 /* Handle POST requests */
 /**
  * Patch notes:
