@@ -1,5 +1,5 @@
 # Ignore config file
-oc-config.php
+oc-config.php*
 /phpmyadmin
 *.swp
 *.code-workspace

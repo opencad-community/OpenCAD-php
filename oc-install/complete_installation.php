@@ -45,6 +45,9 @@
 		
 		$API_SECURITY						= isset($_SESSION['API_SECURITY']) ? prepare_input($_SESSION['API_SECURITY']) : '';
 
+		$DEFAULT_LANGUAGE						= isset($_SESSION['curr_lang']) ? prepare_input($_SESSION['curr_lang']) : '';
+		$DEFAULT_LANGUAGE_DIRECTION				= isset($_SESSION['curr_lang_direction']) ? prepare_input($_SESSION['curr_lang_direction']) : '';
+
 		$CAD_FROM_EMAIL						= isset($_SESSION['CAD_FROM_EMAIL']) ? prepare_input($_SESSION['CAD_FROM_EMAIL']) : '';
 		$CAD_TO_EMAIL						= isset($_SESSION['CAD_TO_EMAIL']) ? prepare_input($_SESSION['CAD_TO_EMAIL']) : '';
 		
@@ -88,7 +91,7 @@
 		$MODERATOR_EDIT_USER				= isset($_SESSION['MODERATOR_EDIT_USER']) ? prepare_input($_SESSION['MODERATOR_EDIT_USER']) : '';
 		$MODERATOR_SUSPEND_WITH_REASON		= isset($_SESSION['MODERATOR_SUSPEND_WITH_REASON']) ? prepare_input($_SESSION['MODERATOR_SUSPEND_WITH_REASON']) : '';
 		$MODERATOR_SUSPEND_WITHOUT_REASON	= isset($_SESSION['MODERATOR_SUSPEND_WITHOUT_REASON']) ? prepare_input($_SESSION['MODERATOR_SUSPEND_WITHOUT_REASON']) : '';
-	$MODERATOR_REACTIVATE_USER				= isset($_SESSION['MODERATOR_REACTIVATE_USER']) ? prepare_input($_SESSION['MODERATOR_REACTIVATE_USER']) : '';
+		$MODERATOR_REACTIVATE_USER				= isset($_SESSION['MODERATOR_REACTIVATE_USER']) ? prepare_input($_SESSION['MODERATOR_REACTIVATE_USER']) : '';
 		$MODERATOR_REMOVE_GROUP 			= isset($_SESSION['MODERATOR_REMOVE_GROUP']) ? prepare_input($_SESSION['MODERATOR_REMOVE_GROUP']) : '';
 		$MODERATOR_DELETE_USER 				= isset($_SESSION['MODERATOR_DELETE_USER']) ? prepare_input($_SESSION['MODERATOR_DELETE_USER']) : '';
 		$MODERATOR_NCIC_EDITOR 				= isset($_SESSION['MODERATOR_NCIC_EDITOR']) ? prepare_input($_SESSION['MODERATOR_NCIC_EDITOR']) : '';
@@ -162,8 +165,8 @@
 								$config_file = str_replace('<DB_PASSWORD>', $database_password, $config_file);
 								$config_file = str_replace('<DB_PREFIX>', $database_prefix, $config_file);
 								
-								$config_file = str_replace('<DEFAULT_LANGUAGE>', $DEFAULT_LANUGAGE, $config_file);
-								$config_file = str_replace('<DEFAULT_LANUGAGE_DIRECTION>', $DEFAULT_LANUGAGE_DIRECTION, $config_file);
+								$config_file = str_replace('<DEFAULT_LANGUAGE>', $DEFAULT_LANGUAGE, $config_file);
+								$config_file = str_replace('<DEFAULT_LANGUAGE_DIRECTION>', $DEFAULT_LANGUAGE_DIRECTION, $config_file);
 
 								$config_file = str_replace('<COMMUNITY_NAME>', $COMMUNITY_NAME, $config_file);
 								$config_file = str_replace('<BASE_URL>', $BASE_URL, $config_file);

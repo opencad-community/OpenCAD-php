@@ -91,6 +91,8 @@
 
 		$MODERATOR_NCIC_EDITOR = isset($_POST['MODERATOR_NCIC_EDITOR']) ? prepare_input($_POST['MODERATOR_NCIC_EDITOR']) : '';
 		
+		$MODERATOR_DATA_MANAGER = isset($_POST['MODERATOR_DATA_MANAGER']) ? prepare_input($_POST['MODERATOR_DATA_MANAGER']) : '';
+		$MODERATOR_DATAMAN_CITATIONTYPES = isset($_POST['MODERATOR_DATAMAN_CITATIONTYPES']) ? prepare_input($_POST['MODERATOR_DATAMAN_CITATIONTYPES']) : '';
 		$MODERATOR_DATAMAN_CITATIONTYPES = isset($_POST['MODERATOR_DATAMAN_CITATIONTYPES']) ? prepare_input($_POST['MODERATOR_DATAMAN_CITATIONTYPES']) : '';
 		$MODERATOR_DATAMAN_DEPARTMENTS = isset($_POST['MODERATOR_DATAMAN_DEPARTMENTS']) ? prepare_input($_POST['MODERATOR_DATAMAN_DEPARTMENTS']) : '';
 		$MODERATOR_DATAMAN_INCIDENTTYPES = isset($_POST['MODERATOR_DATAMAN_INCIDENTTYPES']) ? prepare_input($_POST['MODERATOR_DATAMAN_INCIDENTTYPES']) : '';
@@ -216,6 +218,10 @@
 					<div id="MODERATOR_NCIC_EDITOR_notes" class="notes_container">
 						<h4><?php echo lang_key('MODERATOR_NCIC_EDITOR'); ?></h4>
 						<p><?php echo lang_key('MODERATOR_NCIC_EDITOR_notes'); ?></p>
+					</div>
+					<div id="MODERATOR_DATA_MANAGER_notes" class="notes_container">
+						<h4><?php echo lang_key('MODERATOR_DATA_MANAGER'); ?></h4>
+						<p><?php echo lang_key('MODERATOR_DATA_MANAGER_notes'); ?></p>
 					</div>
 					
 					<img class="loading_img" src="images/ajax_loading.gif" alt="<?php echo lang_key('loading'); ?>..." />

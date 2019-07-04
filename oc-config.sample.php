@@ -32,8 +32,8 @@ define('COMMUNITY_NAME', '<COMMUNITY_NAME>');
  *
  * @since 0.2.6
  **/
-define('DEFAULT_LANGUAGE', 'en');
-define('DEFAULT_LANGUAGE_DIRECTION', 'ltr');
+define('DEFAULT_LANGUAGE', '<DEFAULT_LANGUAGE>');
+define('DEFAULT_LANGUAGE_DIRECTION', '<DEFAULT_LANGUAGE_DIRECTION>');
 
 /**#@+
  *

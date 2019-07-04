@@ -35,6 +35,7 @@
 	// handle form submission
 	// -------------------------------------------------
 	if($task == 'send'){
+
 		$_SESSION['passed_step'] = 1;
 		$_SESSION['installation_type'] = $installation_type;
 		header('location: server_requirements.php');
