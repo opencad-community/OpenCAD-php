@@ -4,7 +4,7 @@
     // 1. GLOBAL SETTINGS
     // -------------------------------------------------------------------------
     // *** system mode (demo|debug|production)
-    define('EI_MODE', 'debug');
+    define('EI_MODE', 'production');
     
     // *** version number of ApPHP EasyInstaller
     define('EI_VERSION', '3.2.4');
@@ -56,14 +56,13 @@
 
     // *** allows collecting info for specified extensions
     define('EI_CHECK_EXTENSIONS', false);
-
+    
     // *** allows collecting info for specified modes
     define('EI_CHECK_MODES', true);
     
     // *** allows collecting info for writability of specified directories and files
     define('EI_CHECK_DIRECTORIES_AND_FILES', true);
     
-   
     
     // -------------------------------------------------------------------------
     // 3. DATABASE SETTINGS

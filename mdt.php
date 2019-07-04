@@ -138,7 +138,7 @@ callCheck();
                         <a type="button" data-toggle="modal" data-target="#createArrest" ><i class="fas fa-ban"></i> Create Arrest Report</a>
                   </li>
                   <li>
-                        <a type="button" data-toggle="modal" data-target="#btn-codeReference" id="btn-codeReference"><i class="fas fa-ban"></i> Radio Code Reference</a>
+                        <a type="button" id="btn-codeReference"><i class="fas fa-ban"></i> Radio Code Reference</a>
                   </li>
 
                </ul>
@@ -1629,6 +1629,23 @@ function getMyCallDetails()
 {
    console.log("Got here");
 }
-</script>
+
+   $(document).ready(function () {
+		jsPanel.create(
+         {
+			theme: 'dark',
+			headerTitle: 'Radio Code Reference',
+         position: 'center-top 0 0',
+         headerControls: 'hide',
+         contentOverflow: 'hidden',
+			contentSize: {
+				width: 780,
+				height: 528
+			},
+         content: '<iframe src="./codeReference.php" scrolling="no" style="width:100%; height:530px;"></iframe>'
+		});
+   });
+
+   </script>
 </body>
 </html>
