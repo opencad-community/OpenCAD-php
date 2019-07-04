@@ -137,6 +137,9 @@ callCheck();
                   <li>
                         <a type="button" data-toggle="modal" data-target="#createArrest" ><i class="fas fa-ban"></i> Create Arrest Report</a>
                   </li>
+                  <li>
+                        <a type="button" data-toggle="modal" data-target="#btn-codeReference" id="btn-codeReference"><i class="fas fa-ban"></i> Radio Code Reference</a>
+                  </li>
 
                </ul>
             </div>

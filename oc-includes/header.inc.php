@@ -62,6 +62,9 @@ if(basename($_SERVER['PHP_SELF']) == 'admin.php') {
   <link href="<?php echo BASE_URL; ?>/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
   <!-- Custom Theme Style -->
   <link href="<?php echo BASE_URL; ?>/css/custom.css" rel="stylesheet">
+  
+  <!-- jsPanel CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/jspanel4@4.6.0/dist/jspanel.css" rel="stylesheet">
 
   <style>
   #buttonGroup {

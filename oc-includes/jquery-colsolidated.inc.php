@@ -19,6 +19,15 @@
     <script src="<?php echo BASE_URL; ?>/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="<?php echo BASE_URL; ?>/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
     <script src="<?php echo BASE_URL; ?>/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <!-- jsPanel JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.6.0/dist/jspanel.js"></script>
+    <!-- optional jsPanel extensions -->
+<script src="https://cdn.jsdelivr.net/npm/jspanel4@4.6.0/dist/extensions/modal/jspanel.modal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspanel4@4.6.0/dist/extensions/tooltip/jspanel.tooltip.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspanel4@4.6.0/dist/extensions/hint/jspanel.hint.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspanel4@4.6.0/dist/extensions/layout/jspanel.layout.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspanel4@4.6.0/dist/extensions/contextmenu/jspanel.contextmenu.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspanel4@4.6.0/dist/extensions/dock/jspanel.dock.js"></script>
 
     <!-- Bootstrap Select -->
     <!-- Latest compiled and minified JavaScript -->
@@ -36,3 +45,20 @@
     <!-- Custom Theme Scripts -->
     <script src="<?php echo BASE_URL; ?>/js/custom.js"></script>
     <script src="<?php echo BASE_URL; ?>/js/OpenCAD.js"></script>
+    
+    <script>
+        $('#btn-codeReference').click(function(e){
+    jsPanel.create({
+        theme:       'dark',
+        headerTitle: 'Radio Code Reference',
+        position:    'center-top 0 58',
+        contentSize: {
+        width:  500,
+        height: 500
+    },
+    content: '<iframe src="<?php echo BASE_URL; ?>/codeReference.php" style="width: 100%; height: 100%;"></iframe>',
+
+});
+        });
+    </script>
+
