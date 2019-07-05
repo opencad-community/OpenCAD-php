@@ -3,13 +3,13 @@
         include(__DIR__ . "./actions/publicFunctions.php");
 
 ?>
-
-
+<head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
+</head>
 <div id="core-refConent">
 <nav class="nav nav-tabs nav-justified">
-  <a class="nav-item nav-link active" data-toggle="tab" href="#home">Statuses</a>
+  <a class="nav-item nav-link" data-toggle="tab" href="#home">Statuses</a>
   <a class="nav-item nav-link" data-toggle="tab" href="#menu1">Incidents</a>
 </nav>
 
@@ -17,21 +17,21 @@
   <div id="home" class="tab-pane fade show active">
     <h3>Status Codes</h3>
     <table class="table table-dark" id="tbl_codeReference_status">
-  <thead>
-    <tr>
-      <th scope="col">Code</th>
-      <th scope="col">Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php getData($table = "statuses", $column1 = "0", $column12 = "1"); ?>
-  </tbody>
-</table>
+      <thead>
+        <tr>
+          <th scope="col">Code</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php getData($table = "statuses", $column1 = "0", $column12 = "1"); ?>
+      </tbody>
+    </table>
   </div>
   <div id="menu1" class="tab-pane fade">
     <h3>Incidents</h3>
         <table class="table table-dark" id="tbl_codeReference_incident">
-        <thead>
+        <thead style="display: inline-block; width: 100%; height: 20px;">
             <tr>
                 <th scope="col">Code</th>
                 <th scope="col">Incident</th>
@@ -43,6 +43,10 @@
         </table>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="

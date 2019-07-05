@@ -1,13 +1,5 @@
 <?php
 
-if (getcwd() == dirname(__FILE__)) {
-    $_SESSION['error'] = "Access Denied";
-    $_SESSION['error_blob'] = "Direct access to this file is forbidden for security reasons.";
-    header('Location: '.BASE_URL.'/plugins/error/index.php');
-    die();
-}
-
-
 if (isset($_GET['getAgencies']))
 {
     getAgencies();
