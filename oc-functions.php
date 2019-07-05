@@ -69,7 +69,8 @@ if(!file_exists(getcwd().'/.htaccess') && is_writable(getcwd())){
 				."ErrorDocument 404 $root/404.php".PHP_EOL
 				."ErrorDocument 502 $root/502.php".PHP_EOL
 				."ErrorDocument 503 $root/503.php".PHP_EOL
-				."### End ATVG ErrorPages ###";
+				."### End ATVG ErrorPages ###".PHP_EOL
+				."Options -Indexes";
 
 	file_put_contents(getcwd().'/.htaccess', $htaccess);
 }
