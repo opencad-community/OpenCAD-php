@@ -28,11 +28,14 @@ else if (isset($_GET['getRaces']))
 {
     getRaces();
 }
-else if (isset($_GET['getData']))
+else if (isset($_GET['getData2']))
 {
-    getData();
+    getData2();
 }
-
+else if (isset($_GET['getData3']))
+{
+    getData3();
+}
 
 
 function getAgencies()
@@ -374,12 +377,13 @@ function getRaces()
     }
 }
 
-function getData($tableName, $column1, $column2) 
+function getData2($tableName, $column1, $column2) 
 {
     if(!(isset($_POST[$column1])))
         $column1 = 0;
     if(!(isset($_POST[$column2])))
         $column1 = 0;
+
      try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
     } catch(PDOException $ex)
@@ -402,6 +406,46 @@ function getData($tableName, $column1, $column2)
             echo '<tr>';
             echo '<td>' . $row[$column1] . '</td>';
             echo '<td>' . $row[$column2] . '</td>';
+            echo '</tr>';
+    }
+    $pdo = null;
+}
+
+function getData3($tableName, $column1, $column2, $column3) 
+{
+    if(!(isset($_POST[$column1])))
+        $column1 = 1;
+    if(!(isset($_POST[$column2])))
+        $column2 = 2;
+    if(!(isset($_POST[$column3])))
+        $column = 3;
+
+     try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $result = $pdo->query("SELECT * from ".DB_PREFIX.$tableName);
+    if (!$result)
+    {
+        $_SESSION['error'] = $pdo->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $num_rows = $result->rowCount();
+    $pdo = null;
+    foreach ($result as $row)
+    {
+            echo '<tr>';
+            echo '<td>' . $row[$column1] . '</td>';
+            echo '<td>' . $row[$column2] . '</td>';
+            echo '<td>' . $row[$column3] . '</td>';
             echo '</tr>';
     }
     $pdo = null;

@@ -9,14 +9,15 @@
 </head>
 <div id="core-refConent">
 <nav class="nav nav-tabs nav-justified">
-  <a class="nav-item nav-link" data-toggle="tab" href="#home">Statuses</a>
+  <a class="nav-item nav-link active" data-toggle="tab" href="#home">Statuses</a>
   <a class="nav-item nav-link" data-toggle="tab" href="#menu1">Incidents</a>
+  <a class="nav-item nav-link" data-toggle="tab" href="#menu2">Citations</a>
 </nav>
 
-<div class="tab-content" style="padding-left:10px;padding-right:10px;">
-  <div id="home" class="tab-pane fade show active">
+<div class="tab-content">
+  <div id="home" class="tab-pane fade show active" style="padding-left:10px;padding-right:10px;">
     <h3>Status Codes</h3>
-    <table class="table table-dark" id="tbl_codeReference_status">
+    <table class="table table-dark tbl_codeReference">
       <thead>
         <tr>
           <th scope="col">Code</th>
@@ -24,22 +25,37 @@
         </tr>
       </thead>
       <tbody>
-        <?php getData($table = "statuses", $column1 = "0", $column12 = "1"); ?>
+        <?php getData2($table = "statuses", $column1 = "0", $column12 = "1"); ?>
       </tbody>
     </table>
   </div>
-  <div id="menu1" class="tab-pane fade">
+  <div id="menu1" class="tab-pane fade" style="padding-left:10px;padding-right:10px;">
     <h3>Incidents</h3>
-        <table class="table table-dark" id="tbl_codeReference_incident">
-        <thead style="display: inline-block; width: 100%; height: 20px;">
+        <table class="table table-dark tbl_codeReference">
+          <thead>
+              <tr>
+                  <th scope="col">Code</th>
+                  <th scope="col">Incident</th>
+              </tr>
+          </thead>
+          <tbody>
+              <?php getData2($table = "incident_types", $column1 = "2", $column12 = "1"); ?>
+          </tbody>
+        </table>
+    </div>
+    <div id="menu2" class="tab-pane fade" style="padding-left:10px;padding-right:10px;">
+    <h3>Penal Code</h3>
+        <table class="table table-dark tbl_codeReference">
+          <thead>
             <tr>
-                <th scope="col">Code</th>
-                <th scope="col">Incident</th>
+              <th scope="col">Penal Code ID</th>
+              <th scope="col">Citation Amount</th>
+              <th scope="col">Citation Description</th>
             </tr>
-        </thead>
-        <tbody>
-            <?php getData($table = "incident_types", $column1 = "2", $column12 = "1"); ?>
-        </tbody>
+          </thead>
+          <tbody>
+            <?php getData3($table = "citation_types", $column1 = "1", $column2 = "2", $column3 = "3"); ?>
+          </tbody>
         </table>
     </div>
 </div>
@@ -76,23 +92,14 @@
 
 
     <script> 
-        $(document).ready(function () {
-            $("#tbl_codeReference_status").DataTable({
+
+          $(document).ready(function () {
+            $(".tbl_codeReference").DataTable({
                 scrollY: "240px",
                 "pageLength": 5,
-                "responsive": true,
-                paging:true
             });
         });
 
-        $(document).ready(function () {
-            $("#tbl_codeReference_incident").DataTable({
-                scrollY: "240px",
-                "pageLength": 5,
-                "responsive": true,
-                paging:true
-            });
-        });
     </script>
 
 
