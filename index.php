@@ -19,6 +19,7 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
     require_once(__DIR__ . "/oc-config.php");
     require_once(__DIR__ . "/actions/register.php");
     require_once(__DIR__ . "/actions/publicFunctions.php");
+    require_once(__DIR__ . "/oc-includes/version.php");
 
     $testing = false; //If set to true, will default some data for you
 
@@ -96,7 +97,7 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
                 <br />
                 <div>
                    <h1><i class="fas fa-users"></i> <?php echo COMMUNITY_NAME?> CAD System</h1>
-                   <h2> OpenCAD Version <?php getOpenCADVersion();?> </h2>
+                   <h2> OpenCAD Version <?php echo $oc_version; ?> </h2>
                 </div>
              </div>
 					 <?php } else { ?>
@@ -111,7 +112,7 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
                         <br />
                         <div>
                            <h1><i class="fas fa-users"></i> <?php echo COMMUNITY_NAME?> CAD System</h1>
-                           <h2> OpenCAD Version <?php getOpenCADVersion();?> </h2>
+                           <h2> OpenCAD Version <?php echo $oc_version;?> </h2>
                         </div>
                      </div>
 					 <?php } ?>
@@ -159,7 +160,7 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
                         <br />
                         <div>
                            <h1><i class="fas fa-users"></i> <?php echo COMMUNITY_NAME ?> CAD System</h1>
-                           <h2> OpenCAD Version <?php getOpenCADVersion();?> </h2>
+                           <h2> OpenCAD Version <?php echo $oc_version; ?> </h2>
                         </div>
                      </div>
                   </form>
@@ -201,7 +202,7 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
                         <br />
                         <div>
                            <h1><i class="fas fa-users"></i> <?php echo COMMUNITY_NAME ?> CAD System</h1>
-                           <h2> OpenCAD Version <?php getOpenCADVersion();?> </h2>
+                           <h2> OpenCAD Version <?php echo $oc_version; ?> </h2>
                         </div>
                      </div>
                   </form>
@@ -220,7 +221,7 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
                           <div class="clearfix"></div>
                           <div>
                              <h1><i class="fas fa-users"></i> <?php echo COMMUNITY_NAME ?> CAD System</h1>
-                             <h2> OpenCAD Version <?php getOpenCADVersion();?> </h2>
+                             <h2> OpenCAD Version <?php echo $oc_version; ?> </h2>
                           </div>
                        </div>
               </div>

@@ -16,11 +16,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     include_once(__DIR__."/oc-functions.php");
     include(__DIR__."/actions/civActions.php");
     include(__DIR__."/actions/publicFunctions.php");
-    include(__DIR__."/actions/generalActions.php");
-    /*include("./actions/civActions.php");
-    include_once(__DIR__."/oc-functions.php");
-    include("./actions/generalActions.php");
-    include("./actions/publicFunctions.php");*/
+	include(__DIR__."/actions/generalActions.php");
 
     if (empty($_SESSION['logged_in']))
     {

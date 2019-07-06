@@ -11,14 +11,14 @@
 /**
  * The OpenCAD version string
  *
- * @global string $wp_version
+ * @global string $oc_version
  */
 $oc_version = '0.3.1';
 
 /**
  * Holds the OpenCAD DB revision, increments when changes are made to the OpenCAD DB schema.
  *
- * @global int $wp_db_version
+ * @global int $oc_db_version
  */
 $oc_db_version = 44719;
 

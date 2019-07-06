@@ -14,10 +14,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
     session_start();
-
     require_once(__DIR__ . '/../oc-config.php');
     require_once(__DIR__ . '/../oc-functions.php');
-    include("../actions/adminActions.php");
+    require_once(__DIR__ . "/../oc-includes/version.php");
+    include(__DIR__ . "/../actions/adminActions.php");
 
     if (empty($_SESSION['logged_in']))
     {
@@ -184,7 +184,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                         <h2>About Your Application</h2>
                                         <div class="input-group">
                                             OpenCAD Version:<input type="text" class="form-control" readonly="readonly"
-                                                placeholder="<?php echo getOpenCADVersion(); ?>" />
+                                                placeholder="<?php echo $oc_version ?>" />
                                             <p><em>Note:</em> If the limit of ten (10) requests per one (1) minute the
                                                 API key will be blacklisted and support will <em>not</em> remove the
                                                 block.</p>

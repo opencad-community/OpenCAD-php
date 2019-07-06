@@ -36,6 +36,11 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>warrant_types` (
     PRIMARY KEY(`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = latin1;
 
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>config` (
+  `key` varchar(80) NOT NULL,
+  `value` varchar(80) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
 ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `dl_type`
 set('Not Issued','Learners','Provisional','Open','Identification Only')  DEFAULT 'Not Issued' AFTER `dl_status`;
 
