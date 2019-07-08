@@ -51,7 +51,7 @@ set('Unobtained','Vaild','Suspended','Expired','Canceled')  AFTER `build`;
 ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `weapon_permit_type`
 set('Small Arms','Specialised Weapon','Automatic Weapon','Semi-Automatic','Military Grade')  AFTER `weapon_permit`;
 
-ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `weapon_permit_Issued_by`
+ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `weapon_permit_issuer`
 set('Ammu-Nation','Government','Military') AFTER `weapon_permit_type`;
 
 ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `deceased`
@@ -61,7 +61,7 @@ ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `race`
 set('Indian','Asian','Black or African American','Hispanic','Caucasian','Pacific Islander')  AFTER `gender`;
 
 ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `blood_type`
-set('A+','O+','B+','AB+','A-','O-','B-','AB-') AFTER `weapon_permit_issued_by`;
+set('A+','O+','B+','AB+','A-','O-','B-','AB-') AFTER `weapon_permit_issuer`;
 
 ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `organ_donor`
 set('NO','YES')  DEFAULT 'NO' AFTER `blood_type`;
@@ -70,7 +70,7 @@ ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `build`
 set('Average','Fit','Muscular','Overweight','Skinny','Thin') AFTER `hair_color`;
 
 ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `hair_color`
-set('Bald','Black','Blonde','Blue','Brown','Gray','Green','Orange','Pink','Purple','Red','Auburn','Sandy','Strawberry','White','Partially Gray') AFTER `dl_Issued_by`;
+set('Bald','Black','Blonde','Blue','Brown','Gray','Green','Orange','Pink','Purple','Red','Auburn','Sandy','Strawberry','White','Partially Gray') AFTER `dl_issuer`;
 
 ALTER TABLE `<DB_PREFIX>ncic_plates` MODIFY IF EXISTS `veh_insurance`
 set('VALID','EXPIRED','CANCELED','SUSPENDED')  AFTER `veh_scolor`;
