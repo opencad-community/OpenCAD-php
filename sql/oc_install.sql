@@ -173,7 +173,7 @@ CREATE TABLE IF NOT EXISTS `dbrest_ncic_names` (
   `dl_status` set('Unobtained','Valid','Suspended','Canceled','Expired') DEFAULT 'Unobtained',
   `dl_type` set('Not Issued', 'Learners','Provisional','Open','Identification Only'),
   `dl_class` set('Car','Light Rig','Heavy Rig','Boat','Motorbike','Military'),
-  `dl_Issued_by` set('Government','Military'),
+  `dl_issuer` set('Government','Military'),
   `hair_color` set('Bald','Black','Blonde','Blue','Brown','Gray','Green','Orange','Pink','Purple','Red','Auburn','Sandy','Strawberry','White','Partially Gray'),
   `build` set('Average','Fit','Muscular','Overweight','Skinny','Thin'),
   `weapon_permit` set('Unobtained','Vaild','Suspended','Expired','Canceled') DEFAULT 'Unobtained',

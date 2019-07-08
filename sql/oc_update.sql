@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>warrant_types` (
     PRIMARY KEY(`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = latin1;
 
-ALTER TABLE `<DB_PREFIX>ncic_names` CHANGE `dl_issued_by` `dl_issuer` set('Government', 'Military') COLLATE 'latin1_swedish_ci' NULL AFTER `dl_class`;
+ALTER TABLE `<DB_PREFIX>ncic_names` CHANGE `dl_issuer` `dl_issuer` set('Government', 'Military') COLLATE 'latin1_swedish_ci' NULL AFTER `dl_class`;
 
 
 ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `dl_type`
