@@ -36,6 +36,9 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>warrant_types` (
     PRIMARY KEY(`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = latin1;
 
+ALTER TABLE `<DB_PREFIX>ncic_names` CHANGE `dl_issued_by` `dl_issuer` set('Government', 'Military') COLLATE 'latin1_swedish_ci' NULL AFTER `dl_class`;
+
+
 ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `dl_type`
 set('Not Issued','Learners','Provisional','Open','Identification Only')  DEFAULT 'Not Issued' AFTER `dl_status`;
 
@@ -58,7 +61,7 @@ ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `deceased`
 set('NO','YES') DEFAULT 'NO' AFTER `organ_donor`;
 
 ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `race`
-set('Indian','Asian','Black or African American','Hispanic','Caucasian','Pacific Islander')  AFTER `gender`;
+set('Indian','Asian','Black or African American','Hispanic','Caucasian','Pacific Islander, White')  AFTER `gender`;
 
 ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `blood_type`
 set('A+','O+','B+','AB+','A-','O-','B-','AB-') AFTER `weapon_permit_issuer`;
