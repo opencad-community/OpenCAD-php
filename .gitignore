@@ -1,4 +1,4 @@
-# Ignore config file
+# Ignore these files
 oc-config.php*
 /phpmyadmin
 *.swp
@@ -12,3 +12,7 @@ info.php
 .vscode
 .MESSAGE
 patch.diff
+oc-lang/*
+
+# Include these exceptions
+!oc-lang/index.php
