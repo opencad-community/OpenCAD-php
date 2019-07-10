@@ -381,7 +381,7 @@ function create_name()
 	$weapon = htmlspecialchars($_POST['civWepStat']);
 	$deceased = htmlspecialchars($_POST['civDec']);
 
-    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_names (submittedByName, submittedById, name, dob, address, gender, race, dl_status, dl_type, dl_class, dl_issued_by, hair_color, build, weapon_permit, deceased)
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_names (submittedByName, submittedById, name, dob, address, gender, race, dl_status, dl_type, dl_class, dl_issuer, hair_color, build, weapon_permit, deceased)
     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
     $result = $stmt->execute(array($submittedByName, $submitttedById, $name, $dob, $address, $sex, $race, $dlstatus, $dltype, $dlclass, $dlissuer , $hair, $build, $weapon, $deceased));
 
