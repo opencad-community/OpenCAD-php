@@ -592,7 +592,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 										<option val="black">Black or African American</option>
 										<option val="hispanic">Hispanic</option>
 										<option val="hawaiian">Native Hawaiian or Other Pacific Islander</option>
-										option val="white">White</option>
+										<option val="white">White</option>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
