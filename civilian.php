@@ -586,13 +586,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<label class="col-lg-2 control-label">Race</label>
 								<div class="col-lg-10">
 									<select name="civRaceReq" class="form-control selectpicker" id="civRaceReq"
-										title="Select a race or ethnicity" required>
-										<option val="indian">American Indian or Alaskan Native</option>
-										<option val="asian">Asian</option>
-										<option val="black">Black or African American</option>
-										<option val="hispanic">Hispanic</option>
-										<option val="hawaiian">Native Hawaiian or Other Pacific Islander</option>
-										option val="white">White</option>
+										title="Select a race or ethnicity" data-live-search="true" required>
+										<?php getRaces(); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -755,14 +750,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Race</label>
 								<div class="col-lg-10">
-									<select name="civRaceReq" class="form-control selectpicker civRaceReq_picker"
-										id="civRaceReq" title="Select a race or ethnicity" required>
-										<option val="indian">American Indian or Alaskan Native</option>
-										<option val="asian">Asian</option>
-										<option val="black">Black or African American</option>
-										<option val="hispanic">Hispanic</option>
-										<option val="hawaiian">Native Hawaiian or Other Pacific Islander</option>
-										<option val="white">White</option>
+									<select name="civRaceReq" class="form-control selectpicker" id="civRaceReq"
+										title="Select a race or ethnicity" data-live-search="true" required>
+										<?php getRaces(); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
