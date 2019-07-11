@@ -127,6 +127,7 @@ function editUserAccount()
         die();
     }
 
+   
 	if(!empty($userGroups))
 	{
 		foreach($userGroups as $key=>$val)
@@ -446,11 +447,10 @@ function getUserGroupsApproved($uid)
     if ( DEMO_MODE == false ) {
         foreach($stmt as $row)
         {
-            if ( ( MODERATOR_REMOVE_GROUP == true && $_SESSION['admin_privilege'] == 1 ) || ( $_SESSION['admin_privilege'] == 2 ) )
+            if ( ( MODERATOR_REMOVE_GROUP == true ) )
             {
-                echo $row[0] . "&nbsp;<i class='fas fa-user-times delete_group' style='font-size:16px;color:red;' data-dept-id=".$row[1]." data-user-id=".$uid."></i><br/>";
-            } else {
-                echo $row[0] . "&nbsp;<br/>";
+                echo "&nbsp;<i class='fas fa-user-times delete_group' style='font-size:16px;color:red;' data-dept-id=".$row[1]." data-user-id=".$uid."></i>" . $row[0] . "<br/>";
+            } else { 
             }
         }
     } else {

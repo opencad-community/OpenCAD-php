@@ -124,7 +124,7 @@ function getLicenseStatuses()
         $dl_statuses = implode($row);
         
         // Remove "set(" at start and ");" at end.
-        $dl_statuses  = substr($dl_statuses,14,strlen($dl_statuses)-18);
+        $dl_statuses  = substr($dl_statuses,14,strlen($dl_statuses)-29);
         $dl_statuses = preg_split("/','/",$dl_statuses);
     
         foreach ($dl_statuses as $key=>$value) 
@@ -167,8 +167,10 @@ function getLicenseTypes()
     {
         $row = $stmt -> fetch(PDO::FETCH_ASSOC);
         $dl_types = implode($row);
+
         // Remove "set(" at start and ");" at end.
-        $dl_types  = substr($dl_types,12,strlen($dl_types)-16);
+        $dl_types  = substr($dl_types,12,strlen($dl_types)-27);
+        //echo $dl_types;
         $dl_types = preg_split("/','/",$dl_types);
 
         foreach ($dl_types as $key=>$value)
@@ -206,7 +208,7 @@ function getLicenseClasses()
         $dl_classes = implode($row);
 
         // Remove "set(" at start and ");" at end.
-        $dl_classes  = substr($dl_classes,13,strlen($dl_classes)-17);
+        $dl_classes  = substr($dl_classes,13,strlen($dl_classes)-18);
         //echo $dl_classes;
         $dl_classes = preg_split("/','/",$dl_classes);
 
@@ -236,7 +238,7 @@ function getLicenseIssuers()
         die();
     }
 
-    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_names LIKE 'dl_issued_by'";
+    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_names LIKE 'dl_issuer'";
     $stmt = $pdo->prepare( $query );
     if (!$stmt)
     {
@@ -251,7 +253,7 @@ function getLicenseIssuers()
         $row = $stmt -> fetch(PDO::FETCH_ASSOC);
         $dl_issuers = implode($row);
         // Remove "set(" at start and ");" at end.
-        $dl_issuers  = substr($dl_issuers,14,strlen($dl_issuers)-17);
+        $dl_issuers  = substr($dl_issuers,14,strlen($dl_issuers)-19);
         $dl_issuers = preg_split("/','/",$dl_issuers);
 
         foreach ($dl_issuers as $key=>$value)
@@ -296,7 +298,7 @@ function getGenders()
         $genders = implode($row);
     
         // Remove "set(" at start and ");" at end.
-        $genders  = substr($genders,11,strlen($genders)-15);
+        $genders  = substr($genders,11,strlen($genders)-16);
         $genders = preg_split("/','/",$genders);
     
         foreach ($genders as $key=>$value)
@@ -325,9 +327,13 @@ function getIncidentTypes()
         header('Location: '.BASE_URL.'/plugins/error/index.php');
         die();
     }
+
+    $races  = substr($races,14,strlen($races)-18);
+    $races = preg_split("/','/",$races);
+
     foreach ($result as $row)
     {
-            echo '<option value="' . $row[0] . '">'. $row[1] .' '.$row[2] . '</option>';
+            echo '<option value="' . $row[0] . '">'. $row[1] .' '.$row[2] . '</option>\n';
     }
     $pdo = null;
 }
@@ -351,7 +357,7 @@ function getRaces()
         die();
     }
 
-    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_names LIKE `race`";
+    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_names LIKE 'race'";
     $stmt = $pdo->prepare( $query );
     if (!$stmt)
     {
@@ -361,16 +367,16 @@ function getRaces()
     }
 
     $result = $stmt -> execute();
-    if ($result)
+    if ($result) 
     {
         $row = $stmt -> fetch(PDO::FETCH_ASSOC);
-        $races = implode($row);
-        
-        // Remove "set(" at start and ");" at end.
-        $races  = substr($races,14,strlen($races)-18);
-        $races = preg_split("/','/",$races);
+        $genders = implode($row);
     
-        foreach ($races as $key=>$value) 
+        // Remove "set(" at start and ");" at end.
+        $genders  = substr($genders,9,strlen($genders)-14);
+        $genders = preg_split("/','/",$genders);
+    
+        foreach ($genders as $key=>$value)
         {
             echo "<option name = '$value' value = '$value'>$value</option>\n";
         };
