@@ -13,7 +13,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
 require_once(__DIR__ . "/../oc-config.php");
+<<<<<<< Updated upstream
 include_once(__DIR__ . "/../plugins/api_auth.php");
+=======
+
+include_once(__DIR__ . "/../oc-content/plugins/api_auth.php");
+>>>>>>> Stashed changes
 
 //Handle requests
 if (isset($_POST['update_profile_btn']))
@@ -43,7 +48,7 @@ function updateProfile()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -53,7 +58,7 @@ function updateProfile()
     if (!$result)
     {
         $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -80,7 +85,7 @@ function getMyRank()
     {
         $_SESSION['error_blob'] = $ex;
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -90,7 +95,7 @@ function getMyRank()
     if (!$result)
     {
         $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -112,7 +117,7 @@ function changePassword()
     } catch(PDOException $ex)
     {
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -126,7 +131,7 @@ function changePassword()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -146,7 +151,7 @@ function getRanks()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -155,7 +160,7 @@ function getRanks()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;

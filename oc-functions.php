@@ -27,14 +27,14 @@ if(!empty($lang) && array_key_exists($lang, $arr_active_languages)){
 	$curr_lang_direction = DEFAULT_LANGUAGE_DIRECTION;
 }
 
-if(file_exists('/oc-lang/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
-	include_once('/oc-lang/'.$curr_lang.'/'.$curr_lang.'.inc.php');
-}else if(file_exists('../oc-lang/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
-	include_once('../oc-lang/'.$curr_lang.'/'.$curr_lang.'.inc.php');
-}else if(file_exists('../../oc-lang/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
-	include_once('../../oc-lang/'.$curr_lang.'/'.$curr_lang.'.inc.php');
+if(file_exists('/oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
+	include_once('/oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php');
+}else if(file_exists('../oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
+	include_once('../oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php');
+}else if(file_exists('../../oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
+	include_once('../../oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php');
 }else{
-	include_once('./oc-lang/en/en.inc.php');    	
+	include_once('./oc-content/languages/en/en.inc.php');    	
 }	
 
 
@@ -42,7 +42,7 @@ if(file_exists('/oc-lang/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
 	session_start();
 	$_SESSION['error_title'] = "Incompatable PHP Version";
 	$_SESSION['error'] = "An incompatable version  of PHP is active. OpenCAD requires PHP 7.1 at minimum, the current recommended version is 7.2. Currently PHP ".phpversion()." is active, please contact your server administrator.";
-	header('Location: '.BASE_URL.'/plugins/error/index.php');
+	header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
 }
 
 if ( OC_DEBUG == "true" )
@@ -62,7 +62,7 @@ if ( OC_DEBUG == "true" )
 
 if(!file_exists(getcwd().'/.htaccess') && is_writable(getcwd())){
 	
-	$root = str_replace($_SERVER['DOCUMENT_ROOT'], '', getcwd())."/plugins/error/static";
+	$root = str_replace($_SERVER['DOCUMENT_ROOT'], '', getcwd())."/oc-content/plugins/error/static";
 
 	$htaccess =	"### Begin ATVG ErrorPages ###".PHP_EOL
 				."ErrorDocument 403 $root/403.php".PHP_EOL
@@ -153,7 +153,7 @@ function getApiKey($del_key = false)
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -163,7 +163,7 @@ function getApiKey($del_key = false)
     {
 		$_SESSION['error'] = $pdo->errorInfo();
 		error_log(print_r($pdo->errorInfo(), true));
-		header('Location: '.BASE_URL.'/plugins/error/index.php');
+		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
 		die();
     }
 
@@ -177,7 +177,7 @@ function getApiKey($del_key = false)
 		{
 			$_SESSION['error'] = $pdo->errorInfo();
 			error_log(print_r($pdo->errorInfo(), true));
-			header('Location: '.BASE_URL.'/plugins/error/index.php');
+			header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
 			die();
 		}
 
@@ -193,7 +193,7 @@ function getApiKey($del_key = false)
 		{
 			$_SESSION['error'] = $pdo->errorInfo();
 			error_log(print_r($pdo->errorInfo(), true));
-			header('Location: '.BASE_URL.'/plugins/error/index.php');
+			header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
 			die();
 		}
 
@@ -243,7 +243,7 @@ function permissionDenied()
 {
 	$_SESSION['error_title'] = "Permission Denied";
 	$_SESSION['error'] = "Sorry, you don't have permission to access this page.";
-	header('Location: '.BASE_URL.'/plugins/error/index.php');
+	header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
 	die();
 }
 

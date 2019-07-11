@@ -46,7 +46,7 @@ function getAgencies()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -54,7 +54,7 @@ function getAgencies()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
     foreach ($result as $row)
@@ -72,7 +72,7 @@ function getAgenciesWarrants()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -80,7 +80,7 @@ function getAgenciesWarrants()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
     foreach ($result as $row)
@@ -104,7 +104,7 @@ function getLicenseStatuses()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -113,7 +113,7 @@ function getLicenseStatuses()
     if (!$stmt)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -149,7 +149,7 @@ function getLicenseTypes()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -158,7 +158,7 @@ function getLicenseTypes()
     if (!$stmt)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -188,7 +188,7 @@ function getLicenseClasses()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -197,7 +197,7 @@ function getLicenseClasses()
     if (!$stmt)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -234,7 +234,7 @@ function getLicenseIssuers()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -243,7 +243,7 @@ function getLicenseIssuers()
     if (!$stmt)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -278,7 +278,7 @@ function getGenders()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -287,7 +287,7 @@ function getGenders()
     if (!$stmt)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -316,7 +316,7 @@ function getIncidentTypes()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -324,7 +324,7 @@ function getIncidentTypes()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -353,7 +353,7 @@ function getRaces()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -362,7 +362,7 @@ function getRaces()
     if (!$stmt)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
 

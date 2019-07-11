@@ -18,7 +18,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     include(__DIR__."/actions/generalActions.php");
     include(__DIR__."/actions/publicFunctions.php");
     include(__DIR__."/actions/dispatchActions.php");
-    include(__DIR__."/plugins/api_auth.php");
+    include(__DIR__."/oc-content/plugins/api_auth.php");
 
     // TODO: Verify user has permission to be on this page
 
