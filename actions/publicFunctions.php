@@ -357,7 +357,7 @@ function getRaces()
         die();
     }
 
-    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_names LIKE `race`";
+    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_names LIKE 'race'";
     $stmt = $pdo->prepare( $query );
     if (!$stmt)
     {
@@ -367,16 +367,16 @@ function getRaces()
     }
 
     $result = $stmt -> execute();
-    if ($result)
+    if ($result) 
     {
         $row = $stmt -> fetch(PDO::FETCH_ASSOC);
-        $races = implode($row);
-        
-        // Remove "set(" at start and ");" at end.
-        $races  = substr($races,14,strlen($races)-18);
-        $races = preg_split("/','/",$races);
+        $genders = implode($row);
     
-        foreach ($races as $key=>$value) 
+        // Remove "set(" at start and ");" at end.
+        $genders  = substr($genders,9,strlen($genders)-14);
+        $genders = preg_split("/','/",$genders);
+    
+        foreach ($genders as $key=>$value)
         {
             echo "<option name = '$value' value = '$value'>$value</option>\n";
         };
