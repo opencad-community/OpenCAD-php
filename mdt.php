@@ -176,7 +176,7 @@ callCheck();
                <a data-toggle="tooltip" data-placement="top">
                   <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                </a>-->
-            <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/dashboard.php">
+            <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
             <span class="fas fa-clipboard-list" aria-hidden="true"></span>
             </a>
             <a id="changeCallsign" class="btn-link" name="changeCallsign" data-toggle="modal" data-target="#callsign">
