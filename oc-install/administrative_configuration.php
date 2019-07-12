@@ -217,6 +217,10 @@
 						<h4><?php echo lang_key('MODERATOR_NCIC_EDITOR'); ?></h4>
 						<p><?php echo lang_key('MODERATOR_NCIC_EDITOR_notes'); ?></p>
 					</div>
+					<div id="MODERATOR_DATA_MANAGER_notes" class="notes_container">
+						<h4><?php echo lang_key('MODERATOR_DATA_MANAGER'); ?></h4>
+						<p><?php echo lang_key('MODERATOR_DATA_MANAGER_notes'); ?></p>
+					</div>
 					
 					<img class="loading_img" src="images/ajax_loading.gif" alt="<?php echo lang_key('loading'); ?>..." />
 					<div id="notes_message" class="notes_container"></div>					
