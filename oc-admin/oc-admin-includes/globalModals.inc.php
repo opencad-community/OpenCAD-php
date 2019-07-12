@@ -15,7 +15,7 @@
                      <div class="form-group row">
                          <label class="col-md-3 control-label">Import</label>
                          <div class="col-md-9">
-                             <form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/adminActions.php"
+                             <form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/adminActions.php"
                                  class="form-horizontal">
                                  <input name="userName" class="form-control" id="userName" />
                                  <span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
@@ -33,7 +33,7 @@
                          <!-- ./ col-sm-9 -->
                      </div>
                      <!-- ./ form-group -->
-                     <form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/dataActions.php" class="form-inline">
+                     <form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/dataActions.php" class="form-inline">
                          <label class="col-md-3 control-label">Reset Data</label>
                          <div class="col">
                              <div class="form-group">

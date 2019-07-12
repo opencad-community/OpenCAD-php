@@ -336,7 +336,7 @@ function getPendingUsers()
 
             echo ' </td>
                 <td>
-                    <form action="'.BASE_URL.'/actions/adminActions.php" method="post">
+                    <form action="'.BASE_URL.'/oc-includes/adminActions.php" method="post">
                     <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Approve" />
                     <input name="rejectUser" type="submit" class="btn btn-xs btn-link" value="Reject" />
                     <input name="uid" type="hidden" value=' . $row[0] . ' />
@@ -645,7 +645,7 @@ function getUsers()
         getUserGroupsApproved($row[0]);
         echo '</td><td>';
     if ( DEMO_MODE == false) {
-        echo '<form action="'.BASE_URL.'/actions/adminActions.php" method="post">';
+        echo '<form action="'.BASE_URL.'/oc-includes/adminActions.php" method="post">';
         if ( ( MODERATOR_EDIT_USER == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
         {
             echo '<button name="editUser" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editUserModal" class="btn btn-xs btn-link" >Edit</button>';
@@ -687,7 +687,7 @@ function getUsers()
     } else {
         echo ' </td>
             <td>
-            <form action="'.BASE_URL.'/actions/adminActions.php" method="post">
+            <form action="'.BASE_URL.'/oc-includes/adminActions.php" method="post">
             <button name="editUser" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editUserModal" class="btn btn-xs btn-link" disabled >Edit</button>
             <input name="deleteUser" type="submit" class="btn btn-xs btn-link" onclick="deleteUser(' . $row[0] . ')" value="Delete" disabled />
             ';
@@ -1028,7 +1028,7 @@ function getCallHistory()
             <td>' . $row[5] . '</td>
             <td>' . $row[6] . '</td>
             <td>
-                <form action="'.BASE_URL.'/actions/adminActions.php" method="post">
+                <form action="'.BASE_URL.'/oc-includes/adminActions.php" method="post">
                 <input name="delete_callhistory" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
                 <input name="call_id" type="hidden" value=' . $row[0] . ' />
                 </form>

@@ -718,7 +718,7 @@ callCheck();
    </div>
    <!-- ./ modal-header -->
    <div class="modal-body">
-   <form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/responderActions.php" method="post">
+   <form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/responderActions.php" method="post">
          <div class="form-group row">
          <label class="col-lg-2 control-label">Civilian Name</label>
          <div class="col-lg-10">
@@ -891,7 +891,7 @@ callCheck();
    </div>
    <!-- ./ modal-header -->
    <div class="modal-body">
-   <form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/responderActions.php" method="post">
+   <form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/responderActions.php" method="post">
          <div class="form-group row">
          <label class="col-lg-2 control-label">Civilian Name</label>
          <div class="col-lg-10">
@@ -969,7 +969,7 @@ callCheck();
    </div>
    <!-- ./ modal-header -->
    <div class="modal-body">
-   <form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/responderActions.php" method="post">
+   <form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/responderActions.php" method="post">
          <div class="form-group row">
          <label class="col-lg-2 control-label">Civilian Name</label>
          <div class="col-lg-10">
@@ -1132,7 +1132,7 @@ callCheck();
    </div>
    <!-- ./ modal-header -->
    <div class="modal-body">
-   <form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/responderActions.php" method="post">
+   <form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/responderActions.php" method="post">
          <div class="form-group row">
          <label class="col-lg-2 control-label">Civilian Name</label>
          <div class="col-lg-10">
@@ -1292,7 +1292,7 @@ $(document).ready(function() {
 
       $.ajax({
             type: "POST",
-            url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/generalActions.php",
+            url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/generalActions.php",
             data: {
                quickStatus: 'yes',
                event: 'enroute',
@@ -1360,7 +1360,7 @@ priorityNotification = new PNotify({
 function getAOP() {
    $.ajax({
          type: "GET",
-         url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/generalActions.php",
+         url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/generalActions.php",
          data: {
             getAOP: 'yes'
          },
@@ -1392,7 +1392,7 @@ function getAOP() {
 function getCalls() {
       $.ajax({
             type: "GET",
-            url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/generalActions.php",
+            url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/generalActions.php",
             data: {
                getCalls: 'yes',
                responder: 'yes'
@@ -1415,7 +1415,7 @@ function getCalls() {
 function getMyCall() {
       $.ajax({
             type: "GET",
-            url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/generalActions.php",
+            url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/generalActions.php",
             data: {
                getMyCall: 'yes',
                responder: 'yes'
@@ -1438,7 +1438,7 @@ function getMyCall() {
 function mdtGetVehicleBOLOS() {
       $.ajax({
             type: "GET",
-            url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/responderActions.php",
+            url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/responderActions.php",
             data: {
                mdtGetVehicleBOLOS: 'yes',
                responder: 'yes'
@@ -1461,7 +1461,7 @@ function mdtGetVehicleBOLOS() {
 function mdtGetPersonBOLOS() {
       $.ajax({
             type: "GET",
-            url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/responderActions.php",
+            url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/responderActions.php",
             data: {
                mdtGetPersonBOLOS: 'yes',
                responder: 'yes'
@@ -1492,7 +1492,7 @@ $(function() {
 
          $.ajax({
             type: "POST",
-            url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/responderActions.php",
+            url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/responderActions.php",
             data: {
                updateCallsign: 'yes',
                details: $("#"+this.id).serialize()
@@ -1564,7 +1564,7 @@ $(function() {
 function getStatus() {
 $.ajax({
       type: "GET",
-      url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/responderActions.php",
+      url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/responderActions.php",
       data: {
          getStatus: 'yes'
       },

@@ -146,7 +146,7 @@ function ncicGetNames()
                 <td>'.$row[9].' / '.$row[8].'</td>
                 <td>
                     <button name="edit_name" data-toggle="modal" data-target="#IdentityEditModal" id="edit_nameBtn" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
-                    <form action="".BASE_URL."/actions/civActions.php" method="post">
+                    <form action="".BASE_URL."/oc-includes/civActions.php" method="post">
                     <input name="delete_name" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
                     <input name="uid" type="hidden" value='.$row[0].' />
                     </form>
@@ -231,7 +231,7 @@ function ncicGetPlates()
                 <td>'.$row[10].'</td>
                 <td>
                     <button name="edit_plate" data-toggle="modal" data-target="#editPlateModal" id="edit_plateBtn" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
-                    <form action="".BASE_URL."/actions/civActions.php" method="post">
+                    <form action="".BASE_URL."/oc-includes/civActions.php" method="post">
                     <input name="delete_plate" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete" enabled/>
                     <input name="vehid" type="hidden" value='.$row[0].' />
                     </form>
@@ -841,7 +841,7 @@ function ncic_warrants()
                 <td>'.$row[1].'</td>
                 <td>'.$row[3].'</td>
                 <td>
-                    <form action="".BASE_URL."/actions/civActions.php" method="post">
+                    <form action="".BASE_URL."/oc-includes/civActions.php" method="post">
                     <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
                     ';
                         if ($row[6] == "Active")
@@ -998,7 +998,7 @@ function ncicGetWeapons()
                 <td>'.$row[3].'</td>
                 <td>'.$row[4].'</td>
                 <td>
-                    <form action="".BASE_URL."/actions/civActions.php" method="post">
+                    <form action="".BASE_URL."/oc-includes/civActions.php" method="post">
                     <input name="delete_weapon" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
                     <input name="weaid" type="hidden" value='.$row[0].' />
                     </form>

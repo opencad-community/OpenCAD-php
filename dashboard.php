@@ -14,7 +14,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 session_start();
 include("./oc-config.php");
-require("/oc-includes/generalActions.php");
+require(__DIR__."/oc-includes/generalActions.php");
 
 if (empty($_SESSION['logged_in']))
 {

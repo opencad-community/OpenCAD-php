@@ -490,7 +490,7 @@ function cadGetVehicleBOLOS()
                 <td>'.$row[7].'</td>
                 <td>
                     <button name="edit_vehiclebolo" data-toggle="modal" data-target="#editVehicleBOLO" id="edit_vehiclebolo" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
-					<form action="".BASE_URL."/actions/dispatchActions.php" method="post">
+					<form action="".BASE_URL."/oc-includes/dispatchActions.php" method="post">
                     <input name="delete_vehiclebolo" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
                     <input name="vbid" type="hidden" value='.$row[0].' />
                     </form>
@@ -573,7 +573,7 @@ function cadGetPersonBOLOS()
                 <td>'.$row[6].'</td>
                 <td>
                     <button name="edit_personbolo" data-toggle="modal" data-target="#editPersonboloModal" id="edit_personbolo" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
-                    <form action="".BASE_URL."/actions/dispatchActions.php" method="post">
+                    <form action="".BASE_URL."/oc-includes/dispatchActions.php" method="post">
                     <input name="delete_personbolo" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
                     <input name="pbid" type="hidden" value='.$row[0].' />
                     </form>
@@ -972,7 +972,7 @@ function ncic_arrests()
                 <td>'.$row[4].'</td>
                 <td>'.$row[5].'</td>
                 <td>
-                    <form action="".BASE_URL."/actions/dispatchActions.php" method="post">
+                    <form action="".BASE_URL."/oc-includes/dispatchActions.php" method="post">
                     <input name="delete_arrest" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Remove"/>
                     <input name="aid" type="hidden" value='.$row[0].' />
                     </form>
@@ -1045,7 +1045,7 @@ function ncic_warrants()
                 <td>'.$row[1].'</td>
                 <td>'.$row[3].'</td>
                 <td>
-                    <form action="".BASE_URL."/actions/dispatchActions.php" method="post">
+                    <form action="".BASE_URL."/oc-includes/dispatchActions.php" method="post">
                     ';
                         if ($row[6] == "Active")
                         {
@@ -1126,7 +1126,7 @@ function ncic_citations()
                 <td>'.$row[5].'</td>
                 <td>'.$row[6].'</td>
                 <td>
-                    <form action="".BASE_URL."/actions/dispatchActions.php" method="post">
+                    <form action="".BASE_URL."/oc-includes/dispatchActions.php" method="post">
                     <input name="delete_citation" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Remove"/>
                     <input name="cid" type="hidden" value='.$row[0].' />
                     </form>
@@ -1195,7 +1195,7 @@ function ncic_warnings()
                 <td>'.$row[4].'</td>
                 <td>'.$row[5].'</td>
                 <td>
-                    <form action="".BASE_URL."/actions/dispatchActions.php" method="post">
+                    <form action="".BASE_URL."/oc-includes/dispatchActions.php" method="post">
                     <input name="delete_warning" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Remove"/>
                     <input name="wgid" type="hidden" value='.$row[0].' />
                     </form>

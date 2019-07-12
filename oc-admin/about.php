@@ -17,7 +17,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     require_once(__DIR__ . '/../oc-config.php');
     require_once(__DIR__ . '/../oc-functions.php');
     require_once(__DIR__ . "/../oc-includes/version.php");
-    include(__DIR__ . "/./oc-includes/adminActions.php");
+    include(__DIR__ . "/../oc-includes/adminActions.php");
 
     if (empty($_SESSION['logged_in']))
     {
@@ -206,7 +206,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                                     request to the api if the requestor is not logged in.
                                                 </p>
                                                 <a style="margin-left:10px" class="btn btn-primary"
-                                                    href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/generalActions.php?newApiKey=1">Generate</a>
+                                                    href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/generalActions.php?newApiKey=1">Generate</a>
                                             </div>
                                         </div>
                                     </div>

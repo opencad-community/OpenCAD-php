@@ -42,7 +42,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     require_once(__DIR__ . '/../oc-functions.php');
     include(__DIR__ . '././oc-includes/adminActions.php');
     include(__DIR__ . '././oc-includes/ncicAdminActions.php');
-    include("./oc-includes/publicFunctions.php");
+    include(__DIR__."/../oc-includes/publicFunctions.php");
 
     if ( $_SESSION['admin_privilege'] == 3)
     {
@@ -444,7 +444,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             var edit_id = $(this).data('id');
             console.log();
             $.ajax({
-                    url: '<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/ncicAdminActions.php',
+                    url: '<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/ncicAdminActions.php',
                     type: 'POST',
                     data: 'editid=' + edit_id,
                     dataType: 'json',
@@ -472,7 +472,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             e.preventDefault();
             var edit_id = $(this).data('id');
             $.ajax({
-                    url: '<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/ncicAdminActions.php',
+                    url: '<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/ncicAdminActions.php',
                     type: 'POST',
                     data: 'edit_plateid=' + edit_id,
                     dataType: 'json',

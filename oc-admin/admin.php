@@ -17,6 +17,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     require_once(__DIR__ . '/../oc-config.php');
     require_once(__DIR__ . '/../oc-functions.php');
+    include(__DIR__."/../oc-includes/adminActions.php");
 
     if (empty($_SESSION['logged_in']))
     {
@@ -47,10 +48,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     {
         permissionDenied();
     }
-
-
-
-    include("./oc-includes/adminActions.php");
 
     $accessMessage = "";
     if(isset($_SESSION['accessMessage']))

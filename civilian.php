@@ -319,7 +319,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form id="new_911" method="post" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/civActions.php">
+						<form id="new_911" method="post" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/civActions.php">
 							<div class="form-group row">
 								<label class="col-md-2 control-label">Caller Name</label>
 								<div class="col-md-10">
@@ -375,7 +375,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/civActions.php" method="post">
+						<form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/civActions.php" method="post">
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Civilian Name</label>
 								<div class="col-lg-10">
@@ -533,7 +533,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/civActions.php" method="post">
+						<form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/civActions.php" method="post">
 							<div class="form-group row">
 							</div>
 							<div class="form-group row">
@@ -697,7 +697,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/civActions.php"
+						<form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/civActions.php"
 							class="editname_modalform" method="post">
 							<div class="form-group row">
 							</div>
@@ -845,7 +845,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/civActions.php" method="post">
+						<form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/civActions.php" method="post">
 							<div class="form-group row">
 							</div>
 							<div class="form-group row">
@@ -956,7 +956,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/civActions.php" method="post">
+						<form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/civActions.php" method="post">
 							<div class="form-group row">
 							</div>
 							<div class="form-group row">
@@ -1139,7 +1139,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/civActions.php" method="post">
+						<form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/civActions.php" method="post">
 							<div class="form-group row">
 							</div>
 							<div class="form-group row">
@@ -1287,7 +1287,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				var edit_id = $(this).data('id');
 				console.log(edit_id);
 				$.ajax({
-						url: '<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/civActions.php',
+						url: '<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/civActions.php',
 						type: 'POST',
 						data: 'editid=' + edit_id,
 						dataType: 'json',
@@ -1315,7 +1315,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				e.preventDefault();
 				var edit_id = $(this).data('id');
 				$.ajax({
-						url: '<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/civActions.php',
+						url: '<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/civActions.php',
 						type: 'POST',
 						data: 'edit_plateid=' + edit_id,
 						dataType: 'json',

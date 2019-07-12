@@ -232,7 +232,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 </div>
                 <!-- ./ modal-header -->
                 <div class="modal-body">
-                    <form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/dataActions.php"
+                    <form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/dataActions.php"
                         class="form-horizontal">
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Citation Description</label>
@@ -288,7 +288,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         $.ajax({
             cache: false,
             type: 'POST',
-            url: '<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/dataActions.php',
+            url: '<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/dataActions.php',
             data: {
                 'getCitationTypeDetails': 'yes',
                 'id': id

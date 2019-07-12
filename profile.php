@@ -13,8 +13,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 
 require("./oc-config.php");
-require("/oc-includes/generalActions.php");
-include("/oc-includes/profileActions.php");
+require(__DIR__."./oc-includes/generalActions.php");
+include(__DIR__."./oc-includes/profileActions.php");
 
     session_start();
     if (empty($_SESSION['logged_in']))
@@ -157,7 +157,7 @@ include("/oc-includes/profileActions.php");
                   <!-- ./ x_title -->
                   <div class="x_content">
                   <?php echo $profileUpdate ?>
-                  <form action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/profileActions.php" method="post" class="form-horizontal">
+                  <form action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/profileActions.php" method="post" class="form-horizontal">
                   <fieldset>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Name:</label>
@@ -237,7 +237,7 @@ include("/oc-includes/profileActions.php");
         </div>
         <!-- ./ modal-header -->
         <div class="modal-body">
-          <form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/profileActions.php" method="post">
+          <form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/profileActions.php" method="post">
             <div class="form-group row">
               <label class="col-lg-2 control-label">Password</label>
               <div class="col-lg-10">

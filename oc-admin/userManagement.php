@@ -16,9 +16,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     require_once(__DIR__ . '/../oc-config.php');
     require_once(__DIR__ . '/../oc-functions.php');
-    include(__DIR__ . '/./oc-includes/adminActions.php');
-    include(__DIR__ . '/./oc-includes/publicFunctions.php');
-    include(__DIR__ . '/./oc-includes/generalActions.php');
+    include(__DIR__ . '/../oc-includes/adminActions.php');
+    include(__DIR__ . '/../oc-includes/publicFunctions.php');
+    include(__DIR__ . '/../oc-includes/generalActions.php');
 
     if (empty($_SESSION['logged_in']))
     {
@@ -279,7 +279,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                     </div>
                     <!-- ./ modal-header -->
                     <div class="modal-body">
-                        <form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/adminActions.php"
+                        <form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/adminActions.php"
                             class="form-horizontal">
                             <div class="form-group row">
                                 <label class="col-md-3 control-label">Name</label>
@@ -363,7 +363,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             $.ajax({
                 cache: false,
                 type: 'POST',
-                url: '<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/adminActions.php',
+                url: '<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/adminActions.php',
                 data: {
                     'getUserDetails': 'yes',
                     'userId': userId
@@ -409,7 +409,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 $.ajax({
                     cache: false,
                     type: 'GET',
-                    url: '<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/adminActions.php',
+                    url: '<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/adminActions.php',
                     data: 'dept_id=' + dept_id + '&user_id=' + user_id,
                     success: function(result) {
                         //obj = jQuery.parseJSON(result);

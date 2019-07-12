@@ -217,7 +217,7 @@ function getCitationTypes()
                 <td>' . $row[2] . '</td>
                 <td>';
         if ( DEMO_MODE == false) {
-            echo '<form action="'.BASE_URL.'/actions/dataActions.php" method="post">';
+            echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
             if ( ( MODERATOR_EDIT_WARNINGTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
             {
                 echo '<button name="editCitationType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editCitationTypeModal" class="btn btn-xs btn-link" >Edit</button>';
@@ -234,7 +234,7 @@ function getCitationTypes()
         } else {
             echo ' </td>
                 <td>
-                <form action="'.BASE_URL.'/actions/dataActions.php" method="post">
+                <form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">
                 <button name="editCitationType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editCitationTypeModal" class="btn btn-xs btn-link" disabled >Edit</button>
                 <input name="deleteCitationType" type="submit" class="btn btn-xs btn-link" onclick="deleteCitationTypeCode(' . $row[0] . ')" value="Delete" disabled />
                 ';
@@ -436,7 +436,7 @@ function getDepartments()
 
                 <td>';
         if ( DEMO_MODE == false) {
-            echo '<form action="'.BASE_URL.'/actions/dataActions.php" method="post">';
+            echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
             if ( ( MODERATOR_DATAMAN_DEPARTMENTS== true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
             {
                 echo '<button name="editDepartment" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editDepartmentModal" class="btn btn-xs btn-link">Edit</button>';
@@ -448,7 +448,7 @@ function getDepartments()
         } else {
             echo ' </td>
                 <td>
-                <form action="'.BASE_URL.'/actions/dataActions.php" method="post">
+                <form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">
                 <button name="editDepartment" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editDepartmentModal" class="btn btn-xs btn-link" disabled >Edit</button>
                 <input name="deleteDepartment" type="submit" class="btn btn-xs btn-link" onclick="deleteDepartment(' . $row[0] . ')" value="Delete" disabled />
                 ';
@@ -646,7 +646,7 @@ function getIncidentTypes()
                 <td>' . $row[2] . '</td>
                 <td>';
         if ( DEMO_MODE == false) {
-            echo '<form action="'.BASE_URL.'/actions/dataActions.php" method="post">';
+            echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
             if ( ( MODERATOR_EDIT_INCIDENTTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
             {
                 echo '<button name="editIncidentType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editIncidentTypeModal" class="btn btn-xs btn-link" >Edit</button>';
@@ -663,7 +663,7 @@ function getIncidentTypes()
         } else {
             echo ' </td>
                 <td>
-                <form action="'.BASE_URL.'/actions/dataActions.php" method="post">
+                <form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">
                 <button name="editIncidentType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editIncidentTypeModal" class="btn btn-xs btn-link" disabled >Edit</button>
                 <input name="deleteIncidentType" type="submit" class="btn btn-xs btn-link" onclick="deleteIncidentType(' . $row[0] . ')" value="Delete" disabled />
                 ';
@@ -856,7 +856,7 @@ function getRadioCodes()
                 <td>' . $row[2] . '</td>
                 <td>';
         if ( DEMO_MODE == false) {
-            echo '<form action="'.BASE_URL.'/actions/dataActions.php" method="post">';
+            echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
             if ( ( MODERATOR_EDIT_WARNINGTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
             {
                 echo '<button name="editRadioCode" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editRadioCodeModal" class="btn btn-xs btn-link" >Edit</button>';
@@ -873,7 +873,7 @@ function getRadioCodes()
         } else {
             echo ' </td>
                 <td>
-                <form action="'.BASE_URL.'/actions/dataActions.php" method="post">
+                <form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">
                 <button name="editRadioCode" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editRadioCodeModal" class="btn btn-xs btn-link" disabled >Edit</button>
                 <input name="deleteRadioCode" type="submit" class="btn btn-xs btn-link" onclick="deleteRadioCode(' . $row[0] . ')" value="Delete" disabled />
                 ';
@@ -1066,7 +1066,7 @@ function getStreets()
                 <td>' . $row[2] . '</td>
                 <td>';
         if ( DEMO_MODE == false) {
-            echo '<form action="'.BASE_URL.'/actions/dataActions.php" method="post">';
+            echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
             if ( ( MODERATOR_EDIT_STREET == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
             {
                 echo '<button name="editStreet" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editStreetModal" class="btn btn-xs btn-link" >Edit</button>';
@@ -1083,7 +1083,7 @@ function getStreets()
         } else {
             echo ' </td>
                 <td>
-                <form action="'.BASE_URL.'/actions/dataActions.php" method="post">
+                <form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">
                 <button name="editStreet" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editStreetModal" class="btn btn-xs btn-link" disabled >Edit</button>
                 <input name="deleteStreet" type="submit" class="btn btn-xs btn-link" onclick="deleteStreet(' . $row[0] . ')" value="Delete" disabled />
                 ';
@@ -1276,7 +1276,7 @@ function getVehicles()
                 <td>' . $row[2] . '</td>
                 <td>';
         if ( DEMO_MODE == false) {
-            echo '<form action="'.BASE_URL.'/actions/dataActions.php" method="post">';
+            echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
             if ( ( MODERATOR_EDIT_VEHICLE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
             {
                 echo '<button name="editVehicle" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editVehicleModal" class="btn btn-xs btn-link" >Edit</button>';
@@ -1293,7 +1293,7 @@ function getVehicles()
         } else {
             echo ' </td>
                 <td>
-                <form action="'.BASE_URL.'/actions/dataActions.php" method="post">
+                <form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">
                 <button name="editVehicle" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editVehicle" class="btn btn-xs btn-link" disabled >Edit</button>
                 <input name="deleteVehcile" type="submit" class="btn btn-xs btn-link" onclick="deleteVehicle(' . $row[0] . ')" value="Delete" disabled />
                 ';
@@ -1492,7 +1492,7 @@ function getWarningTypes()
                 <td>' . $row[1] . '</td>
                 <td>';
         if ( DEMO_MODE == false) {
-            echo '<form action="'.BASE_URL.'/actions/dataActions.php" method="post">';
+            echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
             if ( ( MODERATOR_EDIT_WARNINGTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
             {
                 echo '<button name="editWarningType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWarningTypeModal" class="btn btn-xs btn-link" >Edit</button>';
@@ -1509,7 +1509,7 @@ function getWarningTypes()
         } else {
             echo ' </td>
                 <td>
-                <form action="'.BASE_URL.'/actions/dataActions.php" method="post">
+                <form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">
                 <button name="editWarningType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWarningTypeModal" class="btn btn-xs btn-link" disabled >Edit</button>
                 <input name="deleteWarningType" type="submit" class="btn btn-xs btn-link" onclick="deleteWarningType(' . $row[0] . ')" value="Delete" disabled />
                 ';
@@ -1697,7 +1697,7 @@ function getWarrantTypes()
                 <td>' . $row[1] . '</td>
                 <td>';
         if ( DEMO_MODE == false) {
-            echo '<form action="'.BASE_URL.'/actions/dataActions.php" method="post">';
+            echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
             if ( ( MODERATOR_EDIT_WARRANTTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
             {
                 echo '<button name="editWarrantType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWarrantTypeModal" class="btn btn-xs btn-link" >Edit</button>';
@@ -1714,7 +1714,7 @@ function getWarrantTypes()
         } else {
             echo ' </td>
                 <td>
-                <form action="'.BASE_URL.'/actions/dataActions.php" method="post">
+                <form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">
                 <button name="editWarrantType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWarrantTypeModal" class="btn btn-xs btn-link" disabled >Edit</button>
                 <input name="deleteWarrantType" type="submit" class="btn btn-xs btn-link" onclick="deleteWarrantType(' . $row[0] . ')" value="Delete" disabled />
                 ';
@@ -1905,7 +1905,7 @@ function getWeapons()
                 <td>' . $row[2] . '</td>
                 <td>';
         if ( DEMO_MODE == false) {
-            echo '<form action="'.BASE_URL.'/actions/dataActions.php" method="post">';
+            echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
             if ( ( MODERATOR_EDIT_WEAPON == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
             {
                 echo '<button name="editWeapon" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWeaponModal" class="btn btn-xs btn-link" >Edit</button>';
@@ -1922,7 +1922,7 @@ function getWeapons()
         } else {
             echo ' </td>
                 <td>
-                <form action="'.BASE_URL.'/actions/dataActions.php" method="post">
+                <form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">
                 <button name="editWeapon" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWeaponModal" class="btn btn-xs btn-link" disabled >Edit</button>
                 <input name="deleteWeapon" type="submit" class="btn btn-xs btn-link" onclick="deleteWeapon(' . $row[0] . ')" value="Delete" disabled />
                 ';
