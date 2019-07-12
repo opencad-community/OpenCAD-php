@@ -100,7 +100,7 @@ permissionDenied();
             <a data-toggle="tooltip" data-placement="top" title="Need Help?" href="https://guides.opencad.io/">
             <span class="fas fa-info-circle" aria-hidden="true"></span>
             </a>
-            <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
+            <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/oc-includes/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
             <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
             </a>
             </div>
@@ -124,7 +124,7 @@ permissionDenied();
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="../profile.php"><i class="fas fa-user pull-right"></i>My Profile</a></li>
-                    <li><a href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/logout.php"><i class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>/oc-includes/logout.php"><i class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
