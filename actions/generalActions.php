@@ -16,7 +16,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 require_once(__DIR__ . "/../oc-config.php");
 require_once(__DIR__ . "/../oc-functions.php");
-include_once(__DIR__ . "/../oc-content/plugins/api_auth.php");
+include_once(__DIR__ . "/../oc-content/oc-content/plugins/api_auth.php");
 
 /**
  * Patch notes:
@@ -103,7 +103,7 @@ function quickStatus()
             {
                 $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
                 $_SESSION['error_blob'] = $ex;
-                header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+                header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
                 die();
             }
 
@@ -113,7 +113,7 @@ function quickStatus()
             if (!$result)
             {
                 $_SESSION['error'] = $stmt->errorInfo();
-                header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+                header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
                 die();
             }
             $pdo = null;
@@ -139,7 +139,7 @@ function getMyCall()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -149,7 +149,7 @@ function getMyCall()
     if (!$result)
     {
         $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -171,7 +171,7 @@ function getMyCall()
         if (!$resStatus)
         {
             $_SESSION['error'] = $stmt->errorInfo();
-            header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+            header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
             die();
         }
 
@@ -187,7 +187,7 @@ function getMyCall()
         if (!$resStatus)
         {
             $_SESSION['error'] = $stmt->errorInfo();
-            header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+            header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
             die();
         }
 
@@ -280,7 +280,7 @@ function checkTones()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -289,7 +289,7 @@ function checkTones()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -332,7 +332,7 @@ function setTone()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -342,7 +342,7 @@ function setTone()
     if (!$result)
     {
         $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -367,7 +367,7 @@ function logoutUser()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -377,7 +377,7 @@ function logoutUser()
     if (!$result)
     {
         $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -468,7 +468,7 @@ function changeStatus()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -478,7 +478,7 @@ function changeStatus()
     if (!$result)
     {
         $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -491,7 +491,7 @@ function changeStatus()
         if (!$resStatus)
         {
             $_SESSION['error'] = $stmt->errorInfo();
-            header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+            header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
             die();
         }
 
@@ -508,7 +508,7 @@ function changeStatus()
         if (!$resStatus)
         {
             $_SESSION['error'] = $stmt->errorInfo();
-            header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+            header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
             die();
         }
 
@@ -526,7 +526,7 @@ function changeStatus()
         if (!$result)
         {
             $_SESSION['error'] = $stmt->errorInfo();
-            header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+            header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
             die();
         }
 
@@ -536,7 +536,7 @@ function changeStatus()
         if (!$result)
         {
             $_SESSION['error'] = $stmt->errorInfo();
-            header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+            header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
             die();
         }
     }
@@ -553,7 +553,7 @@ function deleteDispatcher()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -563,7 +563,7 @@ function deleteDispatcher()
     if (!$result)
     {
         $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -590,7 +590,7 @@ function setDispatcher($dep)
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -600,7 +600,7 @@ function setDispatcher($dep)
     if (!$result)
     {
         $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -614,7 +614,7 @@ function getAOP()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -623,7 +623,7 @@ function getAOP()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -651,7 +651,7 @@ function getDispatchers()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -660,7 +660,7 @@ function getDispatchers()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -707,7 +707,7 @@ function getDispatchersMDT()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -716,7 +716,7 @@ function getDispatchersMDT()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -754,7 +754,7 @@ function setUnitActive($dep)
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -764,7 +764,7 @@ function setUnitActive($dep)
     if (!$result)
     {
         $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -778,7 +778,7 @@ function getAvailableUnits()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -787,7 +787,7 @@ function getAvailableUnits()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -850,7 +850,7 @@ function getUnAvailableUnits()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -859,7 +859,7 @@ function getUnAvailableUnits()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -923,7 +923,7 @@ function getIndividualStatus($callsign)
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -934,7 +934,7 @@ function getIndividualStatus($callsign)
     if (!$resStatus)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -951,7 +951,7 @@ function getIndividualStatus($callsign)
     if (!$resStatus)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -973,7 +973,7 @@ function getIncidentType()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -982,7 +982,7 @@ function getIncidentType()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -1002,7 +1002,7 @@ function getStreet()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -1011,7 +1011,7 @@ function getStreet()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -1030,7 +1030,7 @@ function getActiveUnits()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -1039,7 +1039,7 @@ function getActiveUnits()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -1061,7 +1061,7 @@ function getActiveUnitsModal()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -1070,7 +1070,7 @@ function getActiveUnitsModal()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -1092,7 +1092,7 @@ function getActiveCalls()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -1101,7 +1101,7 @@ function getActiveCalls()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -1193,7 +1193,7 @@ function getActivePersonBOLO()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -1202,7 +1202,7 @@ function getActivePersonBOLO()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -1294,7 +1294,7 @@ function getUnitsOnCall($callId)
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -1305,7 +1305,7 @@ function getUnitsOnCall($callId)
     if (!$resStatus)
     {
         $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -1338,7 +1338,7 @@ function getCallDetails()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -1349,7 +1349,7 @@ function getCallDetails()
     if (!$resStatus)
     {
         $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -1377,7 +1377,7 @@ function getCivilianNamesOption()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -1386,7 +1386,7 @@ function getCivilianNamesOption()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -1405,7 +1405,7 @@ function getCitations()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -1414,7 +1414,7 @@ function getCitations()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -1440,7 +1440,7 @@ function getVehicleMakes()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -1449,7 +1449,7 @@ function getVehicleMakes()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -1477,7 +1477,7 @@ function getVehicleModels()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -1486,7 +1486,7 @@ function getVehicleModels()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -1514,7 +1514,7 @@ function getVehicle()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -1523,7 +1523,7 @@ function getVehicle()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -1551,7 +1551,7 @@ function getGenders()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -1560,7 +1560,7 @@ function getGenders()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -1588,7 +1588,7 @@ function getColors()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -1597,7 +1597,7 @@ function getColors()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -1618,7 +1618,7 @@ function getCivilianNames()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -1627,7 +1627,7 @@ function getCivilianNames()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -1651,7 +1651,7 @@ function callCheck()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -1662,7 +1662,7 @@ function callCheck()
     if (!$resStatus)
     {
         $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -1676,7 +1676,7 @@ function callCheck()
         if (!$result)
         {
             $_SESSION['error'] = $stmt->errorInfo();
-            header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+            header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
             die();
         }
     }
@@ -1688,7 +1688,7 @@ function callCheck()
         if (!$result)
         {
             $_SESSION['error'] = $stmt->errorInfo();
-            header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+            header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
             die();
         }
 	}
@@ -1704,7 +1704,7 @@ function getWeapons()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -1713,7 +1713,7 @@ function getWeapons()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -1734,7 +1734,7 @@ function rms_warnings()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -1743,7 +1743,7 @@ function rms_warnings()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -1796,7 +1796,7 @@ function rms_citations()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -1805,7 +1805,7 @@ function rms_citations()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -1860,7 +1860,7 @@ function rms_arrests()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -1869,7 +1869,7 @@ function rms_arrests()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -1924,7 +1924,7 @@ function rms_warrants()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -1933,7 +1933,7 @@ function rms_warrants()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;

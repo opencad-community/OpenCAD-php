@@ -14,10 +14,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 require_once(__DIR__ . "/../oc-config.php");
 <<<<<<< Updated upstream
-include_once(__DIR__ . "/../plugins/api_auth.php");
+include_once(__DIR__ . "/../oc-content/plugins/api_auth.php");
 =======
 
-include_once(__DIR__ . "/../oc-content/plugins/api_auth.php");
+include_once(__DIR__ . "/../oc-content/oc-content/plugins/api_auth.php");
 >>>>>>> Stashed changes
 
 /* Handle POST requests */
@@ -68,7 +68,7 @@ function updateCallsign()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -78,7 +78,7 @@ function updateCallsign()
     if (!$result)
     {
         $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 	$pdo = null;
@@ -98,7 +98,7 @@ function getStatus()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -109,7 +109,7 @@ function getStatus()
     if (!$resStatus)
     {
         $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -126,7 +126,7 @@ function getStatus()
     if (!$resStatus)
     {
         $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -157,7 +157,7 @@ function mdtGetVehicleBOLOS()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -166,7 +166,7 @@ function mdtGetVehicleBOLOS()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 	$pdo = null;
@@ -234,7 +234,7 @@ function mdtGetPersonBOLOS()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -243,7 +243,7 @@ function mdtGetPersonBOLOS()
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 	$pdo = null;
@@ -315,7 +315,7 @@ function create_citation()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -325,7 +325,7 @@ function create_citation()
     if (!$result)
     {
         $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -336,7 +336,7 @@ function create_citation()
 		if (!$result)
 		{
 			$_SESSION['error'] = $stmt->errorInfo();
-            header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+            header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
             die();
 		}
 	}
@@ -347,7 +347,7 @@ function create_citation()
 		if (!$result)
 		{
 			$_SESSION['error'] = $stmt->errorInfo();
-            header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+            header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
             die();
 		}
 	}
@@ -358,7 +358,7 @@ function create_citation()
 		if (!$result)
 		{
 			$_SESSION['error'] = $stmt->errorInfo();
-            header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+            header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
             die();
 		}
 	}
@@ -369,7 +369,7 @@ function create_citation()
 		if (!$result)
 		{
 			$_SESSION['error'] = $stmt->errorInfo();
-            header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+            header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
             die();
 		}
 	}
@@ -397,7 +397,7 @@ function create_warning()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -407,7 +407,7 @@ function create_warning()
     if (!$result)
     {
         $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -418,7 +418,7 @@ function create_warning()
 		if (!$result)
 		{
 			$_SESSION['error'] = $stmt->errorInfo();
-            header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+            header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
             die();
 		}
 	}
@@ -430,7 +430,7 @@ function create_warning()
 		if (!$result)
 		{
 			$_SESSION['error'] = $stmt->errorInfo();
-            header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+            header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
             die();
 		}
 	}
@@ -442,7 +442,7 @@ function create_warning()
 		if (!$result)
 		{
 			$_SESSION['error'] = $stmt->errorInfo();
-            header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+            header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
             die();
 		}
 	}
@@ -454,7 +454,7 @@ function create_warning()
 		if (!$result)
 		{
 			$_SESSION['error'] = $stmt->errorInfo();
-            header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+            header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
             die();
 		}
 	}
@@ -487,7 +487,7 @@ function create_arrest()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -497,7 +497,7 @@ function create_arrest()
 	if (!$result)
 	{
 		$_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
 	}
 
@@ -508,7 +508,7 @@ function create_arrest()
 		if (!$result)
 		{
 			$_SESSION['error'] = $stmt->errorInfo();
-            header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+            header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
             die();
 		}
 	}
@@ -519,7 +519,7 @@ function create_arrest()
 		if (!$result)
 		{
 			$_SESSION['error'] = $stmt->errorInfo();
-            header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+            header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
             die();
 		}
 	}
@@ -530,7 +530,7 @@ function create_arrest()
 		if (!$result)
 		{
 			$_SESSION['error'] = $stmt->errorInfo();
-            header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+            header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
             die();
 		}
 	}
@@ -541,7 +541,7 @@ function create_arrest()
 		if (!$result)
 		{
 			$_SESSION['error'] = $stmt->errorInfo();
-            header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+            header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
             die();
 		}
 	}

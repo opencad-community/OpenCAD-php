@@ -29,7 +29,7 @@ function logoutResponder()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -39,7 +39,7 @@ function logoutResponder()
     if (!$result)
     {
         $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;

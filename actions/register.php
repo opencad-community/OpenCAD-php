@@ -49,7 +49,7 @@ function register()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -60,7 +60,7 @@ function register()
     if (!$resStatus)
     {
         $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -80,7 +80,7 @@ function register()
     if (!$result)
     {
         $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     /*Add user to departments they requested, temporary table */
@@ -95,7 +95,7 @@ function register()
         if (!$result)
         {
             $_SESSION['error'] = $stmt->errorInfo();
-            header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+            header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
             die();
         }
     }
@@ -131,7 +131,7 @@ function civreg()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -142,7 +142,7 @@ function civreg()
     if (!$resStatus)
     {
         $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
     $num_rows = $result->rowCount();
@@ -162,7 +162,7 @@ function civreg()
     if (!$result)
     {
         $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -173,7 +173,7 @@ function civreg()
     if (!$result)
     {
         $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/oc-content/plugins/error/index.php');
         die();
     }
 

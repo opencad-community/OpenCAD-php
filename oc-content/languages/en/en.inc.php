@@ -198,6 +198,9 @@ $arrLang['SESSION_KEY'] = 'Session Key';
 
 //** End Core Configuration Strings **//
 
+//** Begin Login Strings **//
+//** End Login Strings **//
+
 //** Begin Police Strings **//
 $arrLang['POLICE_NCIC'] = "Police NCIC";
 $arrLang['POLICE_NCIC_notes'] = "Shows/Hides NCIC functionality on MDT console. If 'true' then LEO will be able to use NCIC functions without the need for a dispatcher, else if 'flase' then LEO will require the presence of dispatcher to use NCIC funcationality.";

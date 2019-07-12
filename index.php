@@ -13,7 +13,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
 if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
-    
    header('Location://'.$_SERVER['SERVER_NAME'].'/oc-install/start.php');
 }
     require_once(__DIR__ . "/oc-config.php");
@@ -32,31 +31,29 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
     if ( (isset($_SESSION['logged_in'])) == "YES" )
     {
       header ('Location: ./dashboard.php');
-;      //echo $_SESSION['name']." is logged in!";
     }
-    if (isset($_GET['loggedOut']))
+    else if (isset($_GET['loggedOut']))
     {
       $loginMessage = '<div class="alert alert-success" style="text-align: center;" ><span>You\'ve successfully been logged out</span></div>';
    }
-   if(isset($_SESSION['register_error']))
+   else if(isset($_SESSION['register_error']))
    {
     }
-    if(isset($_SESSION['register_error']))
+    else if(isset($_SESSION['register_error']))
     {
       $registerError = '<div class="alert alert-danger" style="text-align: center;"><span>'.$_SESSION['register_error'].'</span></div>';
         unset($_SESSION['register_error']);
     }
-    if(isset($_SESSION['register_success']))
+    else if(isset($_SESSION['register_success']))
     {
       $registerError = '<div class="alert alert-success" style="text-align: center;"><span>'.$_SESSION['register_success'].'</span></div>';
         unset($_SESSION['register_success']);
     }
-    if(isset($_SESSION['loginMessageDanger']))
+    else if(isset($_SESSION['loginMessageDanger']))
     {
       $loginMessage = '<div class="alert alert-danger" style="text-align: center;"><span>'.$_SESSION['loginMessageDanger'].'</span></div>';
         unset($_SESSION['loginMessageDanger']);
     }
-
 
 ?>
 
