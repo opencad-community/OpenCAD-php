@@ -17,7 +17,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     require_once(__DIR__ . '/../oc-config.php');
     require_once(__DIR__ . '/../oc-functions.php');
     require_once(__DIR__ . "/../oc-includes/version.php");
-    include(__DIR__ . "/../actions/adminActions.php");
+    include(__DIR__ . "/./oc-includes/adminActions.php");
 
     if (empty($_SESSION['logged_in']))
     {
@@ -94,7 +94,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                     <!-- /menu footer buttons -->
                     <div class="sidebar-footer hidden-small">
                         <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard"
-                            href="<?php echo BASE_URL; ?>/dashboard.php">
+                            href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/dashboard.php">
                             <span class="fas fa-clipboard-list" aria-hidden="true"></span>
                         </a>
                         <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
@@ -105,7 +105,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                             <span class="fas fa-info-circle" aria-hidden="true"></span>
                         </a>
                         <a data-toggle="tooltip" data-placement="top" title="Logout"
-                            href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
+                            href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
                             <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
                         </a>
                     </div>
@@ -129,9 +129,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                     <span class="fas fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                    <li><a href="<?php echo BASE_URL; ?>/profile.php"><i
+                                    <li><a href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/profile.php"><i
                                                 class="fas fa-user pull-right"></i>My Profile</a></li>
-                                    <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i
+                                    <li><a href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/logout.php"><i
                                                 class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
                                 </ul>
                             </li>
@@ -159,9 +159,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                             <div class="x_panel">
                                 <div class="x_content">
                                     <div style="text-align:center;">
-                                        <img src="<?php echo BASE_URL; ?>/images/logo.png" width="239px" height="104px"
+                                        <img src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/logo.png" width="239px" height="104px"
                                             alt="The Official OpenCAD project logo, Three tails colors red, blue, and red, swoop down from top above the O in Open and finish just below the C in CAD. Stacked words, Open in a bold red font face, and CAD in a bold blue font face." />
-                                        <img src="<?php echo BASE_URL; ?>/images/gplv3-127x51.png" height="128px"
+                                        <img src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/gplv3-127x51.png" height="128px"
                                             width="251px" />
                                     </div>
                                     <div class="row tile_count">
@@ -206,7 +206,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                                     request to the api if the requestor is not logged in.
                                                 </p>
                                                 <a style="margin-left:10px" class="btn btn-primary"
-                                                    href="<?php echo BASE_URL; ?>/actions/generalActions.php?newApiKey=1">Generate</a>
+                                                    href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/generalActions.php?newApiKey=1">Generate</a>
                                             </div>
                                         </div>
                                     </div>

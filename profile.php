@@ -13,8 +13,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 
 require("./oc-config.php");
-require("./actions/generalActions.php");
-include("./actions/profileActions.php");
+require("/oc-includes/generalActions.php");
+include("/oc-includes/profileActions.php");
 
     session_start();
     if (empty($_SESSION['logged_in']))
@@ -85,7 +85,7 @@ include("./actions/profileActions.php");
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
+              <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/dashboard.php">
               <span class="fas fa-clipboard-list" aria-hidden="true"></span>
               </a>
               <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
@@ -94,7 +94,7 @@ include("./actions/profileActions.php");
               <a data-toggle="tooltip" data-placement="top" title="Need Help?" href="https://guides.opencad.io/">
               <span class="fas fa-info-circle" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
               <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
               </a>
             </div>
@@ -117,8 +117,8 @@ include("./actions/profileActions.php");
                     <span class="fas fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="<?php echo BASE_URL; ?>/profile.php"><i class="fas fa-user pull-right"></i> My Profile</a></li>
-                    <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/profile.php"><i class="fas fa-user pull-right"></i> My Profile</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/logout.php"><i class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
@@ -157,7 +157,7 @@ include("./actions/profileActions.php");
                   <!-- ./ x_title -->
                   <div class="x_content">
                   <?php echo $profileUpdate ?>
-                  <form action="<?php echo BASE_URL; ?>/actions/profileActions.php" method="post" class="form-horizontal">
+                  <form action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/profileActions.php" method="post" class="form-horizontal">
                   <fieldset>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Name:</label>
@@ -237,7 +237,7 @@ include("./actions/profileActions.php");
         </div>
         <!-- ./ modal-header -->
         <div class="modal-body">
-          <form role="form" action="<?php echo BASE_URL; ?>/actions/profileActions.php" method="post">
+          <form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/profileActions.php" method="post">
             <div class="form-group row">
               <label class="col-lg-2 control-label">Password</label>
               <div class="col-lg-10">

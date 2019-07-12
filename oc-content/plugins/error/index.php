@@ -51,18 +51,18 @@
 
 <head>
     <?php $_NOLOAD['oc-functions'] = 'true'; include_once("../../oc-config.php"); ?>
-    <link rel="icon" href="<?php echo BASE_URL; ?>/images/favicon.ico" />
-    <link href="<?php echo BASE_URL; ?>/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/favicon.ico" />
+    <link href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
         crossorigin="anonymous">
-    <link href="<?php echo BASE_URL; ?>/vendors/nprogress/nprogress.css" rel="stylesheet">
-    <link href="<?php echo BASE_URL; ?>/vendors/animate.css/animate.min.css" rel="stylesheet">
-    <link href="<?php echo BASE_URL; ?>/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo BASE_URL; ?>/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo BASE_URL; ?>/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo BASE_URL; ?>/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo BASE_URL; ?>/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo BASE_URL; ?>/css/custom.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/animate.css/animate.min.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/css/custom.css" rel="stylesheet">
     <style>
         .wrapper{
             overflow:hidden;

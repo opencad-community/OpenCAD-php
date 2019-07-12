@@ -69,7 +69,7 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
             <div class="animate form login_form civ_login">
                <?php echo $loginMessage;?>
                <section class="login_content">
-                  <form role="form" action="<?php echo BASE_URL; ?>/actions/login.php" method="post">
+                  <form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/login.php" method="post">
                      <h1>Login</h1>
                      <div>
                         <input class="form-control" placeholder="Email" name="email" type="text" value="<?php if($testing){echo "test@test.test";}?>" required>
@@ -119,7 +119,7 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
             <div id="register" class="animate form registration_form">
                <section class="login_content">
                   <?php echo $registerError, $registerSuccess;?>
-                  <form action="<?php echo BASE_URL; ?>/actions/register.php" method="post">
+                  <form action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/register.php" method="post">
                      <h1>Request Access</h1>
                      <div>
                         <input class="form-control" placeholder="Name" name="uname" type="text" required>
@@ -167,7 +167,7 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
             <div id="civ" class="animate form civilian_form">
                <section class="login_content">
                   <?php echo $registerError, $registerSuccess;?>
-                  <form action="<?php echo BASE_URL; ?>/actions/register.php" method="post">
+                  <form action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/register.php" method="post">
                      <h1>Civilian Registration</h1>
                      <div>
                         <input class="form-control" placeholder="Name" name="uname" type="text" value="<?php if($testing){echo "Test";}?>" required>

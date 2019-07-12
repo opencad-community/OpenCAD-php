@@ -1,6 +1,6 @@
 <?php
         include_once(__DIR__ . "./oc-config.php");
-        include(__DIR__ . "./actions/publicFunctions.php");
+        include(__DIR__ . "/oc-includes/publicFunctions.php");
 
 ?>
 <head>

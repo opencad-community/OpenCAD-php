@@ -14,9 +14,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     session_start();
     include_once(__DIR__."/oc-config.php");
     include_once(__DIR__."/oc-functions.php");
-    include(__DIR__."/actions/civActions.php");
-    include(__DIR__."/actions/publicFunctions.php");
-	include(__DIR__."/actions/generalActions.php");
+    include(__DIR__."/oc-includes/civActions.php");
+    include(__DIR__."/oc-includes/publicFunctions.php");
+	include(__DIR__."/oc-includes/generalActions.php");
 
     if (empty($_SESSION['logged_in']))
     {
@@ -151,7 +151,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                         </a>-->
 							<a data-toggle="tooltip" data-placement="top" title="Go to Dashboard"
-								href="<?php echo BASE_URL; ?>/dashboard.php">
+								href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/dashboard.php">
 								<span class="fas fa-clipboard-list" aria-hidden="true"></span>
 							</a>
 							<a data-toggle="tooltip" data-placement="top" title="FullScreen"
@@ -163,7 +163,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<span class="fas fa-info-circle" aria-hidden="true"></span>
 							</a>
 							<a data-toggle="tooltip" data-placement="top" title="Logout"
-								href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
+								href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
 								<span class="fas fa-sign-out-alt" aria-hidden="true"></span>
 							</a>
 						</div>
@@ -185,10 +185,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 										<span class=" fa fa-angle-down"></span>
 									</a>
 									<ul class="dropdown-menu dropdown-usermenu pull-right">
-										<li><a href="<?php echo BASE_URL; ?>/profile.php"><i
+										<li><a href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/profile.php"><i
 													class="fas fa-user pull-right"></i> My Profile</a></li>
 										<li><a
-												href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i
+												href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i
 													class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
 										<span class="glyphicon glyphicon-log">
 									</ul>
@@ -205,7 +205,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="title_left">
 								<h3>Civilian Console</h3>
 								<p>(Not <?php echo $name;?>?, <a
-										href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">Log
+										href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">Log
 										Out</a>)
 									<?php echo $good911;?>
 							</div>
@@ -319,7 +319,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form id="new_911" method="post" action="<?php echo BASE_URL; ?>/actions/civActions.php">
+						<form id="new_911" method="post" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/civActions.php">
 							<div class="form-group row">
 								<label class="col-md-2 control-label">Caller Name</label>
 								<div class="col-md-10">
@@ -375,7 +375,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form role="form" action="<?php echo BASE_URL; ?>/actions/civActions.php" method="post">
+						<form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/civActions.php" method="post">
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Civilian Name</label>
 								<div class="col-lg-10">
@@ -533,7 +533,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form role="form" action="<?php echo BASE_URL; ?>/actions/civActions.php" method="post">
+						<form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/civActions.php" method="post">
 							<div class="form-group row">
 							</div>
 							<div class="form-group row">
@@ -697,7 +697,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form role="form" action="<?php echo BASE_URL; ?>/actions/civActions.php"
+						<form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/civActions.php"
 							class="editname_modalform" method="post">
 							<div class="form-group row">
 							</div>
@@ -845,7 +845,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form role="form" action="<?php echo BASE_URL; ?>/actions/civActions.php" method="post">
+						<form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/civActions.php" method="post">
 							<div class="form-group row">
 							</div>
 							<div class="form-group row">
@@ -956,7 +956,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form role="form" action="<?php echo BASE_URL; ?>/actions/civActions.php" method="post">
+						<form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/civActions.php" method="post">
 							<div class="form-group row">
 							</div>
 							<div class="form-group row">
@@ -1139,7 +1139,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form role="form" action="<?php echo BASE_URL; ?>/actions/civActions.php" method="post">
+						<form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/civActions.php" method="post">
 							<div class="form-group row">
 							</div>
 							<div class="form-group row">
@@ -1238,7 +1238,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			$.ajax({
 				cache: false,
 				type: 'GET',
-				url: './actions/civActions.php',
+				url: '/oc-includes/civActions.php',
 				data: {
 					'getCivilianDetails': 'yes',
 					'name_id': civId
@@ -1287,7 +1287,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				var edit_id = $(this).data('id');
 				console.log(edit_id);
 				$.ajax({
-						url: '<?php echo BASE_URL; ?>/actions/civActions.php',
+						url: '<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/civActions.php',
 						type: 'POST',
 						data: 'editid=' + edit_id,
 						dataType: 'json',
@@ -1315,7 +1315,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				e.preventDefault();
 				var edit_id = $(this).data('id');
 				$.ajax({
-						url: '<?php echo BASE_URL; ?>/actions/civActions.php',
+						url: '<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/civActions.php',
 						type: 'POST',
 						data: 'edit_plateid=' + edit_id,
 						dataType: 'json',

@@ -50,7 +50,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 
 
-    include("../actions/adminActions.php");
+    include("./oc-includes/adminActions.php");
 
     $accessMessage = "";
     if(isset($_SESSION['accessMessage']))
@@ -110,7 +110,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                     <!-- /menu footer buttons -->
                     <div class="sidebar-footer hidden-small">
                         <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard"
-                            href="<?php echo BASE_URL; ?>/dashboard.php">
+                            href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/dashboard.php">
                             <span class="fas fa-clipboard-list" aria-hidden="true"></span>
                         </a>
                         <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
@@ -121,7 +121,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                             <span class="fas fa-info-circle" aria-hidden="true"></span>
                         </a>
                         <a data-toggle="tooltip" data-placement="top" title="Logout"
-                            href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
+                            href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
                             <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
                         </a>
                     </div>
@@ -144,8 +144,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                     <span class="fas fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                    <li><a href="<?php echo BASE_URL; ?>/profile.php"><i class="fas fa-user pull-right"></i>My Profile</a></li>
-                                    <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
+                                    <li><a href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/profile.php"><i class="fas fa-user pull-right"></i>My Profile</a></li>
+                                    <li><a href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/logout.php"><i class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
                                 </ul>
                             </li>
 

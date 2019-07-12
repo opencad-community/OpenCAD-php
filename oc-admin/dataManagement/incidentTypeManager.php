@@ -16,7 +16,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     require_once(__DIR__.'../../../oc-config.php');
     require_once(__DIR__.'../../../oc-functions.php');
-    include(__DIR__ .'../../../actions/dataActions.php');
+    include(__DIR__ .'../.././oc-includes/dataActions.php');
 
     if (empty($_SESSION['logged_in']))
     {
@@ -92,7 +92,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                     <!-- /menu footer buttons -->
                     <div class="sidebar-footer hidden-small">
                         <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard"
-                            href="<?php echo BASE_URL; ?>/dashboard.php">
+                            href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/dashboard.php">
                             <span class="fas fa-clipboard-list" aria-hidden="true"></span>
                         </a>
                         <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
@@ -103,7 +103,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                             <span class="fas fa-info-circle" aria-hidden="true"></span>
                         </a>
                         <a data-toggle="tooltip" data-placement="top" title="Logout"
-                            href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
+                            href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
                             <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
                         </a>
                     </div>
@@ -127,9 +127,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                     <span class="fas fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                    <li><a href="<?php echo BASE_URL; ?>/profile.php"><i
+                                    <li><a href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/profile.php"><i
                                                 class="fas fa-user pull-right"></i>My Profile</a></li>
-                                    <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i
+                                    <li><a href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/logout.php"><i
                                                 class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
                                 </ul>
                             </li>
@@ -234,7 +234,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 </div>
                 <!-- ./ modal-header -->
                 <div class="modal-body">
-                    <form role="form" method="post" action="<?php echo BASE_URL; ?>/actions/dataActions.php"
+                    <form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/dataActions.php"
                         class="form-horizontal">
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Incident Code</label>
@@ -290,7 +290,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         $.ajax({
             cache: false,
             type: 'POST',
-            url: '<?php echo BASE_URL; ?>/actions/dataActions.php',
+            url: '<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/dataActions.php',
             data: {
                 'getIncidentTypeDetails': 'yes',
                 'incidentTypeID': incidentTypeID

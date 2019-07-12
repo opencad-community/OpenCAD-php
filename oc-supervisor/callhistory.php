@@ -48,7 +48,7 @@ permissionDenied();
 
     require_once(__DIR__ . '/../oc-config.php');
     require_once(__DIR__ . '/../oc-functions.php');
-    include(__DIR__ . '/../actions/adminActions.php');
+    include(__DIR__ . '/./oc-includes/adminActions.php');
 
     $historyMessage = "";
     if(isset($_SESSION['historyMessage']))
@@ -91,7 +91,7 @@ permissionDenied();
             <?php include "oc-admin-includes/sidebarNav.inc.php"; ?>
 
             <!-- /menu footer buttons -->
-            <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
+            <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/dashboard.php">
             <span class="fas fa-clipboard-list" aria-hidden="true"></span>
             </a>
             <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
@@ -100,7 +100,7 @@ permissionDenied();
             <a data-toggle="tooltip" data-placement="top" title="Need Help?" href="https://guides.opencad.io/">
             <span class="fas fa-info-circle" aria-hidden="true"></span>
             </a>
-            <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
+            <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
             <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
             </a>
             </div>
@@ -124,7 +124,7 @@ permissionDenied();
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="../profile.php"><i class="fas fa-user pull-right"></i>My Profile</a></li>
-                    <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/logout.php"><i class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 

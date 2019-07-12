@@ -1,12 +1,12 @@
     <!-- jQuery -->
-    <script src="<?php echo BASE_URL; ?>/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/jquery/dist/jquery.min.js"></script>
     
     <!-- Bootstrap -->
-    <script src="<?php echo BASE_URL; ?>/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
-    <script src="<?php echo BASE_URL; ?>/vendors/fastclick/lib/fastclick.js"></script>
+    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
-    <script src="<?php echo BASE_URL; ?>/vendors/nprogress/nprogress.js"></script>
+    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/nprogress/nprogress.js"></script>
  
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
@@ -51,11 +51,11 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
     <!-- PNotify -->
-    <script src="<?php echo BASE_URL; ?>/vendors/pnotify/dist/pnotify.js"></script>
-    <script src="<?php echo BASE_URL; ?>/vendors/pnotify/dist/pnotify.buttons.js"></script>
-    <script src="<?php echo BASE_URL; ?>/vendors/pnotify/dist/pnotify.nonblock.js"></script>
+    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/pnotify/dist/pnotify.js"></script>
+    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/pnotify/dist/pnotify.nonblock.js"></script>
 
 
     <!-- Custom Theme Scripts -->
-    <script src="<?php echo BASE_URL; ?>/js/custom.js"></script>
-    <script src="<?php echo BASE_URL; ?>/js/OpenCAD.js"></script>
+    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/js/custom.js"></script>
+    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/js/OpenCAD.js"></script>

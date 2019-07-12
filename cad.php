@@ -15,10 +15,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     session_start();
     include_once(__DIR__."/oc-config.php");
     include_once(__DIR__."/oc-functions.php");
-    include(__DIR__."/actions/generalActions.php");
-    include(__DIR__."/actions/publicFunctions.php");
-    include(__DIR__."/actions/dispatchActions.php");
-    include(__DIR__."/oc-content/oc-content/plugins/api_auth.php");
+    include(__DIR__."/oc-includes/generalActions.php");
+    include(__DIR__."/oc-includes/publicFunctions.php");
+    include(__DIR__."/oc-includes/dispatchActions.php");
+    include(__DIR__."/oc-content/plugins/api_auth.php");
 
     // TODO: Verify user has permission to be on this page
 
@@ -163,7 +163,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <a data-toggle="tooltip" data-placement="top">
                         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                         </a>-->
-                        <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
+                        <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/dashboard.php">
                         <span class="fas fa-clipboard-list" aria-hidden="true"></span>
                         </a>
                         <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
@@ -172,7 +172,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <a data-toggle="tooltip" data-placement="top" title="Need Help?" href="https://guides.opencad.io/">
                         <span class="fas fa-info-circle" aria-hidden="true"></span>
                         </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
                         <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
                         </a>
                   </div>
@@ -193,8 +193,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <span class=" fas fa-angle-down"></span>
                            </a>
                            <ul class="dropdown-menu dropdown-usermenu pull-right">
-                              <li><a href="<?php echo BASE_URL; ?>/profile.php"><i class="fas fa-user pull-right"></i> My Profile</a></li>
-                              <li><a href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
+                              <li><a href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/profile.php"><i class="fas fa-user pull-right"></i> My Profile</a></li>
+                              <li><a href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
                            </ul>
                         </li>
                      </ul>
@@ -208,7 +208,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="page-title">
                      <div class="title_left">
                         <h3>CAD Console</h3>
-                        <p>(Not <?php echo $name;?>?, <a href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">Log Out</a>)
+                        <p>(Not <?php echo $name;?>?, <a href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">Log Out</a>)
                         <?php echo $citationMessage;?>
                         <?php echo $warrantMessage;?>
 						<?php echo $warningMessage;?>
@@ -684,7 +684,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           </div>
           <!-- ./ modal-header -->
 		  <div class="modal-body">
-            <form role="form" action="<?php echo BASE_URL; ?>/actions/dispatchActions.php" method="post">
+            <form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/dispatchActions.php" method="post">
                 <div class="form-group row">
                 </div>
                 <div class="form-group row">
@@ -784,7 +784,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           </div>
           <!-- ./ modal-header -->
 		  <div class="modal-body">
-            <form role="form" action="<?php echo BASE_URL; ?>/actions/dispatchActions.php" method="post">
+            <form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/dispatchActions.php" method="post">
                 <div class="form-group row">
                 </div>
                 <div class="form-group row">
@@ -868,7 +868,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           </div>
           <!-- ./ modal-header -->
       <div class="modal-body">
-            <form role="form" action="<?php echo BASE_URL; ?>/actions/dispatchActions.php" method="post">
+            <form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/dispatchActions.php" method="post">
                 <div class="form-group row">
                 </div>
                 <div class="form-group row">
@@ -952,7 +952,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           </div>
           <!-- ./ modal-header -->
 		  <div class="modal-body">
-            <form role="form" action="<?php echo BASE_URL; ?>/actions/dispatchActions.php" method="post">
+            <form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/dispatchActions.php" method="post">
                 <div class="form-group row">
                 </div>
                 <div class="form-group row">
@@ -1039,7 +1039,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           </div>
           <!-- ./ modal-header -->
       <div class="modal-body">
-            <form role="form" action="<?php echo BASE_URL; ?>/actions/dispatchActions.php" method="post">
+            <form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/dispatchActions.php" method="post">
                 <div class="form-group row">
                 </div>
                 <div class="form-group row">
@@ -1305,7 +1305,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           </div>
           <!-- ./ modal-header -->
           <div class="modal-body">
-            <form role="form" action="<?php echo BASE_URL; ?>/actions/dispatchActions.php" method="post">
+            <form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/dispatchActions.php" method="post">
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">Civilian Name</label>
                 <div class="col-lg-10">
@@ -1428,7 +1428,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           </div>
           <!-- ./ modal-header -->
           <div class="modal-body">
-            <form role="form" action="<?php echo BASE_URL; ?>/actions/dispatchActions.php" method="post">
+            <form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/dispatchActions.php" method="post">
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">Civilian Name</label>
                 <div class="col-lg-10">
@@ -1500,7 +1500,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             </div>
             <!-- ./ modal-header -->
           <div class="modal-body">
-            <form role="form" action="<?php echo BASE_URL; ?>/actions/dispatchActions.php" method="post">
+            <form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/dispatchActions.php" method="post">
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">Civilian Name</label>
                 <div class="col-lg-10">
@@ -1668,7 +1668,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           </div>
           <!-- ./ modal-header -->
           <div class="modal-body">
-            <form role="form" action="<?php echo BASE_URL; ?>/actions/dispatchActions.php" method="post">
+            <form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/dispatchActions.php" method="post">
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">Civilian Name</label>
                 <div class="col-lg-10">
@@ -1811,9 +1811,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     </div>
     <!-- ./ modal fade bs-example-modal-lg -->
       <!-- AUDIO TONES -->
-      <audio id="recurringToneAudio" src="<?php echo BASE_URL; ?>/sounds/priority.mp3" preload="auto"></audio>
-      <audio id="priorityToneAudio" src="<?php echo BASE_URL; ?>/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
-      <audio id="panicToneAudio" src="<?php echo BASE_URL; ?>/sounds/Panic_Button.m4a" preload="auto"></audio>
+      <audio id="recurringToneAudio" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-content/sounds/priority.mp3" preload="auto"></audio>
+      <audio id="priorityToneAudio" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-content/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
+      <audio id="panicToneAudio" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-content/sounds/Panic_Button.m4a" preload="auto"></audio>
       <?php include "./oc-includes/jquery-colsolidated.inc.php"; ?>
       <script>
          var vid = document.getElementById("recurringToneAudio");
@@ -1824,21 +1824,21 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <script>
   $(function() {
     $( "#ncic_name" ).autocomplete({
-      source: "<?php echo BASE_URL; ?>/actions/search_name.php"
+      source: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/search_name.php"
     });
   });
   </script>
       <script>
   $(function() {
     $( "#ncic_plate" ).autocomplete({
-      source: "<?php echo BASE_URL; ?>/actions/search_plate.php"
+      source: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/search_plate.php"
     });
   });
   </script>
       <script>
   $(function() {
     $( "#ncic_weapon" ).autocomplete({
-      source: "<?php echo BASE_URL; ?>/actions/search_name.php"
+      source: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/search_name.php"
     });
   });
   </script>
@@ -1945,7 +1945,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
            $.ajax({
                type: "POST",
-               url: "<?php echo BASE_URL; ?>/actions/generalActions.php",
+               url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/generalActions.php",
                data: {
                    changeStatus: 'yes',
                    unit: unit,
@@ -1988,7 +1988,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
              $.ajax({
                  type: "POST",
-                 url: "<?php echo BASE_URL; ?>/actions/generalActions.php",
+                 url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/generalActions.php",
                  data: {
                      logoutUser: 'yes',
                      unit: unit
@@ -2024,7 +2024,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          function getAvailableUnits() {
            $.ajax({
                  type: "GET",
-                 url: "<?php echo BASE_URL; ?>/actions/generalActions.php",
+                 url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/generalActions.php",
                  data: {
                      getAvailableUnits: 'yes'
                  },
@@ -2056,7 +2056,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          function getDispatchers() {
            $.ajax({
                  type: "GET",
-                 url: "<?php echo BASE_URL; ?>/actions/generalActions.php",
+                 url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/generalActions.php",
                  data: {
                      getDispatchers: 'yes'
                  },
@@ -2088,7 +2088,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          function getAOP() {
            $.ajax({
                  type: "GET",
-                 url: "<?php echo BASE_URL; ?>/actions/generalActions.php",
+                 url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/generalActions.php",
                  data: {
                      getAOP: 'yes'
                  },
@@ -2120,7 +2120,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          function cadGetPersonBOLOS() {
            $.ajax({
                  type: "GET",
-                 url: "<?php echo BASE_URL; ?>/actions/dispatchActions.php",
+                 url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/dispatchActions.php",
                  data: {
                      cadGetPersonBOLOS: 'yes'
                  },
@@ -2152,7 +2152,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          function cadGetVehicleBOLOS() {
            $.ajax({
                  type: "GET",
-                 url: "<?php echo BASE_URL; ?>/actions/dispatchActions.php",
+                 url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/dispatchActions.php",
                  data: {
                      cadGetVehicleBOLOS: 'yes'
                  },
@@ -2186,7 +2186,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 e.preventDefault();
                 var edit_id = $(this).data('id');
                 $.ajax({
-                  url: '<?php echo BASE_URL; ?>/actions/dispatchActions.php',
+                  url: '<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/dispatchActions.php',
                   type: 'POST',
                   data: 'bolos_personid='+edit_id,
                   dataType: 'json',
@@ -2206,7 +2206,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 e.preventDefault();
                 var edit_id = $(this).data('id');
                 $.ajax({
-                  url: '<?php echo BASE_URL; ?>/actions/dispatchActions.php',
+                  url: '<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/actions/dispatchActions.php',
                   type: 'POST',
                   data: 'bolos_vehicleid='+edit_id,
                   dataType: 'json',
