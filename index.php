@@ -59,7 +59,7 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
 
 <!DOCTYPE html>
 <html lang="en">
-   <?php include "./oc-includes/header.inc.php"; ?>
+   <?php include(__DIR__."./oc-includes/header.inc.php"); ?>
    <body class="login">
       <div>
          <a class="hiddenanchor" id="signup"></a>
