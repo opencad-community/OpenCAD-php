@@ -43,10 +43,10 @@ ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `dl_type`
 set('Not Issued','Learners','Provisional','Open','Identification Only')  DEFAULT 'Not Issued' AFTER `dl_status`;
 
 ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `dl_class`
-set('Car','Light Rig','Heavy Rig','Boat','Motorbike','Military')  AFTER `dl_type`;
+set('Not Applicable', 'Car','Light Rig','Heavy Rig','Boat','Motorbike','Military') DEFAULT 'Not Applicable' AFTER `dl_type`;
 
 ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `dl_issuer`
-set('Government','Military')  AFTER `dl_class`;
+set('Not Applicable', 'Government','Military') DEFAULT 'Not Applicable' AFTER `dl_class`;
 
 ALTER TABLE `<DB_PREFIX>ncic_names` MODIFY IF EXISTS `weapon_permit`
 set('Unobtained','Vaild','Suspended','Expired','Canceled')  AFTER `build`;

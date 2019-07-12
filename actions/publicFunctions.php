@@ -200,7 +200,7 @@ function getLicenseClasses()
         $dl_classes = implode($row);
 
         // Remove "set(" at start and ");" at end.
-        $dl_classes  = substr($dl_classes,13,strlen($dl_classes)-18);
+        $dl_classes  = substr($dl_classes,13,strlen($dl_classes)-32);
         //echo $dl_classes;
         $dl_classes = preg_split("/','/",$dl_classes);
 
@@ -245,7 +245,7 @@ function getLicenseIssuers()
         $row = $stmt -> fetch(PDO::FETCH_ASSOC);
         $dl_issuers = implode($row);
         // Remove "set(" at start and ");" at end.
-        $dl_issuers  = substr($dl_issuers,14,strlen($dl_issuers)-19);
+        $dl_issuers  = substr($dl_issuers,14,strlen($dl_issuers)-33);
         $dl_issuers = preg_split("/','/",$dl_issuers);
 
         foreach ($dl_issuers as $key=>$value)
