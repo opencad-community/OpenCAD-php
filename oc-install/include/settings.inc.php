@@ -114,7 +114,7 @@
     // *** specifies whether to allow new installation
     define('EI_ALLOW_NEW_INSTALLATION', true);        
     // *** specifies whether to allow update
-    define('EI_ALLOW_UPDATE', true);        
+    define('EI_ALLOW_UPDATE', false);        
     // *** specifies whether to allow un-installation
     define('EI_ALLOW_UN_INSTALLATION', false);  
 

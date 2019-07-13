@@ -15,6 +15,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
    header('Location://'.$_SERVER['SERVER_NAME'].'/oc-install/start.php');
 }
+
+if(file_exists(getcwd().'/oc-content') && is_writable(getcwd())){
+} else {
+      echo "Please chmod() the oc-content directory to 0775, recursively.<br />";
+   echo "<a href=//".$_SERVER['SERVER_NAME'].">Refresh OpenCAD Login</a>";
+   die();
+}
     require_once(__DIR__ . "/oc-config.php");
     require_once(__DIR__ . "/oc-includes/register.php");
     require_once(__DIR__ . "/oc-includes/publicFunctions.php");
