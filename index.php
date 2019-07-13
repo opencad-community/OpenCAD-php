@@ -18,7 +18,7 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
 
 if(file_exists(getcwd().'/oc-content') && is_writable(getcwd())){
 } else {
-      echo "Please chmod() the oc-content directory to 0775, recursively.<br />";
+   echo "Please chmod() the oc-content directory to 0775, recursively.<br />";
    echo "<a href=//".$_SERVER['SERVER_NAME'].">Refresh OpenCAD Login</a>";
    die();
 }
