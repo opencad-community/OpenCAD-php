@@ -172,8 +172,8 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncic_names` (
   `race` set('Indian','Asian','Black or African American','Hispanic','Caucasian','Pacific Islander'), 
   `dl_status` set('Unobtained','Valid','Suspended','Canceled','Expired') DEFAULT 'Unobtained',
   `dl_type` set('Not Issued', 'Learners','Provisional','Open','Identification Only'),
-  `dl_class` set('Car','Light Rig','Heavy Rig','Boat','Motorbike','Military'),
-  `dl_issuer` set('Government','Military'),
+  `dl_class` set('Not Applicable', 'Car','Light Rig','Heavy Rig','Boat','Motorbike','Military' DEFAULT 'Not Applicable'),
+  `dl_issuer` set('Not Applicable', 'Government','Military' DEFAULT 'Not Applicable'),
   `hair_color` set('Bald','Black','Blonde','Blue','Brown','Gray','Green','Orange','Pink','Purple','Red','Auburn','Sandy','Strawberry','White','Partially Gray'),
   `build` set('Average','Fit','Muscular','Overweight','Skinny','Thin'),
   `weapon_permit` set('Unobtained','Vaild','Suspended','Expired','Canceled') DEFAULT 'Unobtained',
@@ -233,7 +233,7 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncic_weapons` (
   `weapon_type` varchar(255) NOT NULL,
   `weapon_name` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `notes` varchar(255) NOT NULL,
+  `weapon_notes` varchar(2048) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
