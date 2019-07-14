@@ -22,46 +22,53 @@ if(file_exists(getcwd().'/oc-content') && is_writable(getcwd())){
    echo "<a href=//".$_SERVER['SERVER_NAME'].">Refresh OpenCAD Login</a>";
    die();
 }
-    require_once(__DIR__ . "/oc-config.php");
-    require_once(__DIR__ . "/oc-includes/register.php");
-    require_once(__DIR__ . "/oc-includes/publicFunctions.php");
-    require_once(__DIR__ . "/oc-includes/version.php");
 
-    $testing = false; //If set to true, will default some data for you
+if (file_exists(getcwd().'/oc-install') && is_writable(getcwd())){
+   echo "Please remove <strong>oc-install</strong> befroe continuing.<br />";
+   echo "<a href=//".$_SERVER['SERVER_NAME'].">Refresh OpenCAD Login</a>";
+   die();
+} else {
+}
 
-    session_start();
-    $_SESSION['root_path'] = getcwd();
-    $registerError = "";
-    $registerSuccess = "";
-    $loginMessage = "";
+   require_once(__DIR__ . "/oc-config.php");
+   require_once(__DIR__ . "/oc-includes/register.php");
+   require_once(__DIR__ . "/oc-includes/publicFunctions.php");
+   require_once(__DIR__ . "/oc-includes/version.php");
 
-    if ( (isset($_SESSION['logged_in'])) == "YES" )
-    {
+   $testing = false; //If set to true, will default some data for you
+
+   session_start();
+   $_SESSION['root_path'] = getcwd();
+   $registerError = "";
+   $registerSuccess = "";
+   $loginMessage = "";
+
+   if ( (isset($_SESSION['logged_in'])) == "YES" )
+   {
       header ('Location: ./dashboard.php');
-    }
-    else if (isset($_GET['loggedOut']))
-    {
+   }
+   else if (isset($_GET['loggedOut']))
+   {
       $loginMessage = '<div class="alert alert-success" style="text-align: center;" ><span>You\'ve successfully been logged out</span></div>';
    }
    else if(isset($_SESSION['register_error']))
    {
-    }
-    else if(isset($_SESSION['register_error']))
-    {
+   }
+   else if(isset($_SESSION['register_error']))
+   {
       $registerError = '<div class="alert alert-danger" style="text-align: center;"><span>'.$_SESSION['register_error'].'</span></div>';
-        unset($_SESSION['register_error']);
-    }
-    else if(isset($_SESSION['register_success']))
-    {
+      unset($_SESSION['register_error']);
+   }
+   else if(isset($_SESSION['register_success']))
+   {
       $registerError = '<div class="alert alert-success" style="text-align: center;"><span>'.$_SESSION['register_success'].'</span></div>';
-        unset($_SESSION['register_success']);
-    }
-    else if(isset($_SESSION['loginMessageDanger']))
-    {
+      unset($_SESSION['register_success']);
+   }
+   else if(isset($_SESSION['loginMessageDanger']))
+   {
       $loginMessage = '<div class="alert alert-danger" style="text-align: center;"><span>'.$_SESSION['loginMessageDanger'].'</span></div>';
-        unset($_SESSION['loginMessageDanger']);
-    }
-
+      unset($_SESSION['loginMessageDanger']);
+   }
 ?>
 
 <!DOCTYPE html>
