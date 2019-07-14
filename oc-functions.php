@@ -12,6 +12,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
 
+if (file_exists(getcwd().'/oc-install') && is_writable(getcwd())){
+   echo "Please remove <strong>oc-install</strong> from the server befroe continuing.<br />";
+   echo "<a href=//".$_SERVER['SERVER_NAME'].">Refresh OpenCAD Login</a>";
+   die();
+} else {
+}
+
 $lang = isset($_REQUEST['lang']) ? prepare_input($_REQUEST['lang']) : '';
 	
 if(!isset($arr_active_languages)) $arr_active_languages = array();

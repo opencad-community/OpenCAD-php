@@ -23,15 +23,9 @@ if(file_exists(getcwd().'/oc-content') && is_writable(getcwd())){
    die();
 }
 
-if (file_exists(getcwd().'/oc-install') && is_writable(getcwd())){
-   echo "Please remove <strong>oc-install</strong> befroe continuing.<br />";
-   echo "<a href=//".$_SERVER['SERVER_NAME'].">Refresh OpenCAD Login</a>";
-   die();
-} else {
-}
-
    require_once( "./oc-config.php");
    require_once( ABSPATH . "/oc-settings.php" );
+   include(ABSPATH . OCINC . "/oc-functions.php");
    require_once( ABSPATH . OCINC . "/publicFunctions.php");
    require_once( ABSPATH . OCINC . "/register.php");
 
