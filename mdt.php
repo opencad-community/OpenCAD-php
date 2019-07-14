@@ -14,8 +14,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 session_start();
 include_once("./oc-config.php");
+include_once(ABSPATH . "/oc-functions.php");
 include(ABSPATH . "/oc-settings.php");
-include_once(ABSPATH . OCINC . "/oc-functions.php");
 include(ABSPATH . OCINC . "/generalActions.php");
 include(ABSPATH . OCINC . "/responderActions.php");
 include(OC_CONTENT_DIR . "/plugins/api_auth.php");
