@@ -255,7 +255,7 @@ function plate()
             $encode["veh_model"] = $row[4];
             $encode["veh_pcolor"] = $row[5];
             $encode["veh_scolor"] = $row[6];
-            $encode["veh_ro"] = $row[12];
+            $encode["veh_ro"] = $row[13];
             $encode["veh_insurance"] = $row[7];
             $encode["flags"] = $row[8];
             $encode["veh_reg_state"] = $row[9];
