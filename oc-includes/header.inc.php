@@ -47,6 +47,7 @@ if(basename($_SERVER['PHP_SELF']) == 'admin.php') {
 
   <!-- Bootstrap -->
   <link href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
   <!--<link href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">-->

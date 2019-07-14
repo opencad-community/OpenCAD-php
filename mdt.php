@@ -13,11 +13,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
 session_start();
-include_once(__DIR__."/oc-config.php");
-include_once(__DIR__."/oc-functions.php");
-include(__DIR__."/oc-includes/generalActions.php");
-include(__DIR__."/oc-includes/responderActions.php");
-include(__DIR__."/oc-content/plugins/api_auth.php");
+include_once("./oc-config.php");
+include(ABSPATH . "/oc-settings.php");
+include_once(ABSPATH . OCINC . "/oc-functions.php");
+include(ABSPATH . OCINC . "/generalActions.php");
+include(ABSPATH . OCINC . "/responderActions.php");
+include(OC_CONTENT_DIR . "/plugins/api_auth.php");
 
 
 if (empty($_SESSION['logged_in']))
@@ -1195,9 +1196,9 @@ callCheck();
 </div>
 <!-- ./ modal fade bs-example-modal-lg -->
 <!-- AUDIO TONES -->
-<audio id="recurringToneAudio" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-content/sounds/priority.mp3" preload="auto"></audio>
-<audio id="priorityToneAudio" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-content/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
-<audio id="panicToneAudio" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-content/sounds/Panic_Button.m4a" preload="auto"></audio>
+<audio id="recurringToneAudio" src="<?php echo BASE_URL; ?>/oc-content/sounds/priority.mp3" preload="auto"></audio>
+<audio id="priorityToneAudio" src="<?php echo BASE_URL; ?>/oc-content/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
+<audio id="panicToneAudio" src="<?php echo BASE_URL; ?>/oc-content/sounds/Panic_Button.m4a" preload="auto"></audio>
 <script>
 var vid = document.getElementById("recurringToneAudio");
 vid.volume = 0.3;
@@ -1292,7 +1293,7 @@ $(document).ready(function() {
 
       $.ajax({
             type: "POST",
-            url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/generalActions.php",
+            url: "<?php echo BASE_URL .'/'. OCINC; ?>/generalActions.php",
             data: {
                quickStatus: 'yes',
                event: 'enroute',
@@ -1322,21 +1323,21 @@ $(document).ready(function() {
 <script>
 $(function() {
 $( "#ncic_name" ).autocomplete({
-source: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/js/search_name.php"
+source: "<?php echo BASE_URL .'/'. OCINC; ?>/js/search_name.php"
 });
 });
 </script>
 <script>
 $(function() {
 $( "#ncic_plate" ).autocomplete({
-source: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/js/search_plate.php"
+source: "<?php echo BASE_URL .'/'. OCINC; ?>/js/search_plate.php"
 });
 });
 </script>
 <script>
 $(function() {
 $( "#ncic_weapon" ).autocomplete({
-source: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/js/search_name.php"
+source: "<?php echo BASE_URL .'/'. OCINC; ?>/js/search_name.php"
 });
 });
 </script>
@@ -1360,7 +1361,7 @@ priorityNotification = new PNotify({
 function getAOP() {
    $.ajax({
          type: "GET",
-         url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/generalActions.php",
+         url: "<?php echo BASE_URL . '/' . OCINC ?>/generalActions.php",
          data: {
             getAOP: 'yes'
          },
@@ -1392,7 +1393,7 @@ function getAOP() {
 function getCalls() {
       $.ajax({
             type: "GET",
-            url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/generalActions.php",
+            url: "<?php echo BASE_URL .'/'. OCINC; ?>/generalActions.php",
             data: {
                getCalls: 'yes',
                responder: 'yes'
@@ -1415,7 +1416,7 @@ function getCalls() {
 function getMyCall() {
       $.ajax({
             type: "GET",
-            url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/generalActions.php",
+            url: "<?php echo BASE_URL .'/'. OCINC; ?>/generalActions.php",
             data: {
                getMyCall: 'yes',
                responder: 'yes'
@@ -1438,7 +1439,7 @@ function getMyCall() {
 function mdtGetVehicleBOLOS() {
       $.ajax({
             type: "GET",
-            url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/responderActions.php",
+            url: "<?php echo BASE_URL .'/'. OCINC; ?>/responderActions.php",
             data: {
                mdtGetVehicleBOLOS: 'yes',
                responder: 'yes'
@@ -1461,7 +1462,7 @@ function mdtGetVehicleBOLOS() {
 function mdtGetPersonBOLOS() {
       $.ajax({
             type: "GET",
-            url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/responderActions.php",
+            url: "<?php echo BASE_URL .'/'. OCINC; ?>/responderActions.php",
             data: {
                mdtGetPersonBOLOS: 'yes',
                responder: 'yes'
@@ -1492,7 +1493,7 @@ $(function() {
 
          $.ajax({
             type: "POST",
-            url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/responderActions.php",
+            url: "<?php echo BASE_URL .'/'. OCINC; ?>/responderActions.php",
             data: {
                updateCallsign: 'yes',
                details: $("#"+this.id).serialize()
@@ -1564,7 +1565,7 @@ $(function() {
 function getStatus() {
 $.ajax({
       type: "GET",
-      url: "<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/responderActions.php",
+      url: "<?php echo BASE_URL .'/'. OCINC; ?>/responderActions.php",
       data: {
          getStatus: 'yes'
       },
@@ -1602,7 +1603,7 @@ $.ajax({
          else if (response.match("^<br>"))
          {
             console.log("LOGGED OUT");
-            window.location.href = '<?php echo BASE_URL; ?>/oc-includes/logout.php';
+            window.location.href = '<?php echo BASE_URL .'/'. OCINC; ?>/logout.php';
          }
          else
          {
@@ -1629,7 +1630,13 @@ function getMyCallDetails()
 {
    console.log("Got here");
 }
+</script>
 
+   <?php 
+   /* To-Do: Transition to when BS5 is complete. */
+   // $codes = file_get_contents( ABSPATH . '/oc-content/plugins/radioCodeReference/index.php'); echo $codes ?>
+
+    <script>  
    $(document).ready(function () {
 		jsPanel.create(
          {
@@ -1642,10 +1649,9 @@ function getMyCallDetails()
 				width: 780,
 				height: 528
 			},
-         content: '<iframe src="./codeReference.php" scrolling="no" style="width:100%; height:530px;"></iframe>'
+         content: '<iframe src="<?php echo BASE_URL ?>/oc-content/plugins/radioCodeReference/index.php" scrolling="no" style="width:100%; height:530px;"></iframe>'
 		});
    });
-
-   </script>
+</script>
 </body>
 </html>
