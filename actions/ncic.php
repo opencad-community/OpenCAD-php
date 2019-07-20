@@ -86,7 +86,7 @@ function name()
                 $encode["dl_type"] = $row[12];
                 $encode["dl_class"] = $row[8];
                 $encode["dl_issuer"] = $row[9];
-                $encode["hair_color"] = $row[10];
+                $encode["hair_color"] = $row[7];
                 $encode["build"] = $row[8];
 				$encode["weapon_permit"] = $row[9];
 				$encode["deceased"] = $row[10];
