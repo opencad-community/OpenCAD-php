@@ -415,7 +415,7 @@ $('#ncic_name_btn').on('click', function(e) {
             deceased_text = "<span style=\"color: red;\">"+data['deceased']+"</span>";
             }
 
-            $('#ncic_name_return').append("Name: "+data['name']+"<br/>DOB: "+data['dob']+"<br/>Age: "+data['age']+"<br/>Sex: "+data['sex']
+            $('#ncic_name_return').append("Name: "+data['name']+"<br/>DOB: "+data['dob']+"<br/>Sex: "+data['sex']
             +"<br/>Race: "+data['race']+"<br/>Hair Color: "+data['hair_color']
             +"<br/>Build: "+data['build']
             +"<br/>Address: "+data['address']

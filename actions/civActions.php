@@ -997,7 +997,7 @@ function ncicGetWeapons()
                 <td>'.$row[6].'</td>
                 <td>'.$row[2].'</td>
                 <td>'.$row[3].'</td>
-                <td>'.$row[4].'</td>
+                <td>'.$row[5].'</td>
                 <td>
                     <form action="".BASE_URL."/actions/civActions.php" method="post">
                     <input name="delete_weapon" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
