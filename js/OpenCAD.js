@@ -420,7 +420,7 @@ $('#ncic_name_btn').on('click', function(e) {
             +"<br/>Build: "+data['build']
             +"<br/>Address: "+data['address']
             +"<br/>DL Status: "+dl_status_text
-            +"<br/>DL Type:"+dl_type_text
+            +"<br/>DL Type: "+dl_type_text
 			+"<br/>Weapon Permit: "+weapon_permit_text
 			+"<br/>Deceased: "+deceased_text
 			+"<br/><br/>Warnings:<br/>"+warningText+"<br/><br/>Citations:<br/>"+citationText+"<br/>Arrests:<br/>"+arrestText+"<br/>Warrants:<br/>"+warrantText);

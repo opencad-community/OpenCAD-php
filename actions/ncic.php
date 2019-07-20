@@ -52,7 +52,7 @@ function name()
             die();
         }
 
-        $stmt = $pdo->prepare("SELECT id, name, dob, address, gender, race, dl_status, hair_color, build, weapon_permit, deceased, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS age FROM ".DB_PREFIX."ncic_names WHERE name = ?");
+        $stmt = $pdo->prepare("SELECT id, name, dob, address, gender, race, dl_status, hair_color, build, weapon_permit, deceased, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS age, dl_type FROM ".DB_PREFIX."ncic_names WHERE name = ?");
         $resStatus = $stmt->execute(array($name));
         $result = $stmt;
 
@@ -83,7 +83,7 @@ function name()
                 $encode["sex"] = $row[4];
                 $encode["race"] = $row[5];
                 $encode["dl_status"] = $row[6];
-                $encode["dl_type"] = $row[7];
+                $encode["dl_type"] = $row[12];
                 $encode["dl_class"] = $row[8];
                 $encode["dl_issuer"] = $row[9];
                 $encode["hair_color"] = $row[10];
