@@ -196,9 +196,9 @@ function ncicGetNames()
                 <th>Address</th>
                 <th>Gender</th>
                 <th>Race</th>
-                <th>DL Status</th>
-                <th>Hair Color</th>
                 <th>Build</th>
+                <th>Hair Color</th>
+                <th>DL Status</th>
 				<th>Weapon Status</th>
 				<th>Deceased</th>
                 <th>Actions</th>
@@ -216,11 +216,11 @@ function ncicGetNames()
                 <td>'.$row[5].'</td>
                 <td>'.$row[6].'</td>
                 <td>'.$row[7].'</td>
-                <td>'.$row[8].'</td>
-                <td>'.$row[9].'</td>
-                <td>'.$row[10].'</td>
-                <td>'.$row[11].'</td>
-				<td>'.$row[12].'</td>
+                <td>'.$row[13].'</td>
+                <td>'.$row[12].'</td>
+                <td>'.$row[8].' / '.$row[9].'</td> // DL Status
+                <td>'.$row[14].' / '.$row[16].'</td> // Weapon License Status
+				<td>'.$row[19].'</td>
                 <td>
                     <button name="edit_name" data-toggle="modal" data-target="#IdentityEditModal" id="edit_nameBtn" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
                     <form action="".BASE_URL."/actions/ncicAdminActions.php" method="post">

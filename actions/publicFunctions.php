@@ -331,8 +331,8 @@ function getIncidentTypes()
 }
 
 /**#@+
-* function getLicenseStatuses()
-* Get list of possible license statuses from status() of the 'dl_status' column of the ncic_names table.
+* function getRaces()
+* Get list of possible Races from the  'race' column of the ncic_names table.
 *
 * @since 0.3.0
 *
