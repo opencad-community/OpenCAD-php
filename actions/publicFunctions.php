@@ -161,7 +161,7 @@ function getLicenseTypes()
         $dl_types = implode($row);
 
         // Remove "set(" at start and ");" at end.
-        $dl_types  = substr($dl_types,12,strlen($dl_types)-27);
+        $dl_types  = substr($dl_types,12,strlen($dl_types)-22);
         //echo $dl_types;
         $dl_types = preg_split("/','/",$dl_types);
 
