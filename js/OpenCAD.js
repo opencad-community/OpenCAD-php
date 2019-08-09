@@ -683,14 +683,6 @@ $.ajax({
         success: function(response)
         {
         $('#unAvailableUnits').html(response);
-
-        // SG - Removed until the node/real time services come available. having datatables messes things up.
-        /*$('#unAvailableUnitsTable').DataTable({
-            searching: false,
-            scrollY: "200px",
-            lengthMenu: [[4, -1], [4, "All"]]
-                });
-        */
         setTimeout(getUnAvailableUnits, 5000);
 
         },
@@ -739,7 +731,6 @@ $('#newCall').on('show.bs.modal', function(e) {
     });
 });
 
-//Disables enter key in the call narrative textarea
 $('#narrative').keypress(function(event) {
     if (event.keyCode == 13) {
         event.preventDefault();

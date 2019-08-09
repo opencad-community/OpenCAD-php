@@ -438,6 +438,10 @@ function changeStatus()
             $statusDet = '7';
             $onCall = true;
             break;
+        case "10-65":
+            $statusId = '8';
+            $statusDet = '8';
+            break;
         case "10-8":
             $statusId = '1';
             $statusDet = '1';
