@@ -13,20 +13,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
 require_once(__DIR__ . "/../oc-config.php");
-include_once(__DIR__ . "/../plugins/api_auth.php");
+include_once(__DIR__ . "/.R23qFweaponnnn./plugins/api_auth.php");
 
-/*
-    Returns information on name run through NCIC.
-    TODO: Add a check here to check the admin panel to determine if Randomized names are allowed
-*/
-/**
- * Patch notes:
- * Adding the `else` to make a `else if` prevents the execution
- * of multiple functions at the same time by the same client
- *
- * Running multiple functions at the same time doesnt seem to
- * be a needed feature.
- */
 if (isset($_POST['ncic_name'])){
     name();
 }else if (isset($_POST['ncic_plate'])){
@@ -275,6 +263,8 @@ function firearm()
 function weapon()
 {
     $name = htmlspecialchars($_POST['ncic_weapon']);
+    $name_id = htmlspecialchars($_POST['ncic_weapon_id']);
+    
 
 
     if(strpos($name, ' ') !== false) {
@@ -289,7 +279,7 @@ function weapon()
             die();
         }
     
-        $stmt = $pdo->prepare("SELECT id, name, weapon_permit FROM ".DB_PREFIX."ncic_names WHERE name = ?");
+        $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."ncic_names WHERE name = ?");
         $resStatus = $stmt->execute(array($name));
         $result = $stmt;
 
@@ -311,13 +301,14 @@ function weapon()
         {
             foreach($result as $row)
             {
-                $userId = $row[0];
-                $encode["userId"] = $row['user_id'];
+                $userId = $row['id'];
+                $encode["userId"] = $row['submittedById'];
                 $encode["first_name"] = $row['name'];
-				$encode["weapon_permit"] = $row['weapon_permit'];
+                $encode["weapon_permit"] = $row['weapon_permit'];
+
             }
 
-            $stmt = $pdo->prepare("SELECT id, name_id, weapon_type, weapon_name FROM ".DB_PREFIX."ncic_weapons WHERE name_id = ?");
+            $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."ncic_weapons WHERE name_id = $userId");
             $resStatus = $stmt->execute(array($name));
             $result = $stmt;
 
@@ -338,8 +329,9 @@ function weapon()
                 $warrantIndex = 0;
                 foreach($result as $row)
                 {
-                    $encode["weaponId"][$warrantIndex] = $row[0];
-                    $encode["weapon_name"][$warrantIndex] = "$row[2] | $row[3]";
+                    $encode["name_id"] = $row['name_id'];
+                    $encode['weaponId'][$warrantIndex] = $row[0];
+                    $encode['weapon_name'][$warrantIndex] = "$row[2] | $row[3]";
 
                     $warrantIndex++;
                 }

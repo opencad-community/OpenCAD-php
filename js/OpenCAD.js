@@ -443,7 +443,8 @@ $('#ncic_weapon_btn').on('click', function(e) {
         type: 'POST',
         url: hdir + "/actions/ncic.php",
         data: {'ncicWeapon': 'yes',
-                'ncic_weapon' : name},
+                'ncic_weapon' : name,
+                'ncic_weapon_id' : name_id},
 
         success: function(result)
         {
