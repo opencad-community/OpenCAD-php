@@ -76,10 +76,10 @@ ALTER TABLE `<DB_PREFIX>ncic_names` CHANGE `hair_color`
 set('Bald','Black','Blonde','Blue','Brown','Gray','Green','Orange','Pink','Purple','Red','Auburn','Sandy','Strawberry','White','Partially Gray') AFTER `dl_issuer`;
 
 ALTER TABLE `<DB_PREFIX>ncic_plates` CHANGE `veh_insurance`
-set('VALID','EXPIRED','CANCELED','SUSPENDED')  AFTER `veh_scolor`;
+set('VALID','EXPIRED','CANCELED','SUSPENDED', 'Unknown') DEFAULT 'VALID' AFTER `veh_scolor`;
 
 ALTER TABLE `<DB_PREFIX>ncic_plates` CHANGE `veh_insurance type`
-set('CTP','Third Party','Comprehensive')  AFTER `veh_insurance`;
+set('CTP','Third Party','Comprehensive') DEFAULT 'CTP' AFTER `veh_insurance`;
 
 ALTER TABLE `<DB_PREFIX>ncic_plates` CHANGE `flags`
 set('NONE','STOLEN','WANTED','SUSPENDED REGISTRATION','CANCELED REGISTRATION','EXPIRED REGISTRATION','INSURANCE FLAG','DRIVER FLAG','NO INSURANCE') AFTER `veh_insurance type`;
