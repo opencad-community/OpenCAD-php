@@ -436,8 +436,6 @@ function create_plate()
     $veh_model;
     $veh_pcolor = htmlspecialchars($_POST['veh_pcolor']);
     $veh_scolor = htmlspecialchars($_POST['veh_scolor']);
-    $veh_insurance = htmlspecialchars($_POST['veh_insurance']);
-    $flags = htmlspecialchars($_POST['flags']);
     $veh_reg_state = htmlspecialchars($_POST['veh_reg_state']);
     $notes = htmlspecialchars($_POST['notes']);
 
@@ -451,8 +449,8 @@ function create_plate()
         die();
     }
 
-    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_plates (name_id, veh_plate, veh_make, veh_model, veh_pcolor, veh_scolor, veh_insurance, flags, veh_reg_state, notes, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $result = $stmt->execute(array($userId, $veh_plate, $veh_make, $veh_model, $veh_pcolor, $veh_scolor, $veh_insurance, $flags, $veh_reg_state, $notes, $submittedById));
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_plates (name_id, veh_plate, veh_make, veh_model, veh_pcolor, veh_scolor, veh_reg_state, notes, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $result = $stmt->execute(array($userId, $veh_plate, $veh_make, $veh_model, $veh_pcolor, $veh_scolor, $veh_reg_state, $notes, $submittedById));
 
     if (!$result)
     {
@@ -646,8 +644,6 @@ function edit_plate()
     $veh_model;
     $veh_pcolor = htmlspecialchars($_POST['veh_pcolor']);
     $veh_scolor = htmlspecialchars($_POST['veh_scolor']);
-    $veh_insurance = htmlspecialchars($_POST['veh_insurance']);
-    $flags = htmlspecialchars($_POST['flags']);
     $veh_reg_state = htmlspecialchars($_POST['veh_reg_state']);
     $notes = htmlspecialchars($_POST['notes']);
     $plate_id = htmlspecialchars($_POST['Edit_plateId']);
@@ -662,8 +658,8 @@ function edit_plate()
         die();
     }
 
-    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."ncic_plates SET name_id = ?, veh_plate = ?, veh_make = ?, veh_model = ?, veh_pcolor = ?, veh_scolor = ?, veh_insurance = ?, flags = ?, veh_reg_state = ?, notes = ? WHERE id = ?");
-    $result = $stmt->execute(array($userId, $veh_plate, $veh_make, $veh_model, $veh_pcolor, $veh_scolor, $veh_insurance, $flags, $veh_reg_state, $notes, $plate_id));
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."ncic_plates SET name_id = ?, veh_plate = ?, veh_make = ?, veh_model = ?, veh_pcolor = ?, veh_scolor = ?, veh_reg_state = ?, notes = ? WHERE id = ?");
+    $result = $stmt->execute(array($userId, $veh_plate, $veh_make, $veh_model, $veh_pcolor, $veh_scolor, $veh_reg_state, $notes, $plate_id));
 
     if (!$result)
     {
