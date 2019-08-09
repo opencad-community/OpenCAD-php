@@ -912,6 +912,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<label class="col-lg-2 control-label">Vehicle Flags</label>
 								<div class="col-lg-10">
 									<select class="form-control" name="flags" required>
+										<option value="NONE"> NO FLAGS </option>
 										<option value="STOLEN"> STOLEN </option>
 										<option value="WANTED"> WANTED </option>
 										<option value="SUSPENDED REGISTRATION"> SUSPENDED REGISTRATION </option>

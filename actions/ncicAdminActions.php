@@ -58,105 +58,6 @@ if (isset($_POST['delete_citation'])){
     editplateid();
 }
 
-function rejectRequest()
-{
-    $req_id = htmlspecialchars($_POST['id']);
-
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-
-    $stmt = $pdo->prepare("DELETE FROM identity_requests WHERE req_id = ?");
-    $result = $stmt->execute(array($req_id));
-
-    if (!$result)
-    {
-        $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-    $pdo = null;
-
-    session_start();
-    $_SESSION['identityRequestMessage'] = '<div class="alert alert-success"><span>Successfully rejected request</span></div>';
-    header("Location: ".BASE_URL."/oc-admin/ncicAdmin.php");
-}
-
-function getIdentityRequests()
-{
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-
-    $result = $pdo->query("SELECT req_id, submittedByName, submitted_on FROM ".DB_PREFIX."identity_requests");
-
-    if (!$result)
-    {
-        $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-    $pdo = null;
-
-    $num_rows = $result->rowCount();
-
-    if($num_rows == 0)
-    {
-        echo "<div class=\"alert alert-info\"><span>There are no identity requests</span></div>";
-    }
-    else
-    {
-        echo '
-            <table id="identityRequests" class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                <th>Request ID</th>
-                <th>Submitted By</th>
-                <th>Submitted On</th>
-                <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-        ';
-
-        foreach($result as $row)
-        {
-            echo '
-            <tr>
-                <td>'.$row[0].'</td>
-                <td>'.$row[1].'</td>
-                <td>'.$row[2].'</td>
-                <td>
-                    <form action="".BASE_URL."/actions/ncicAdminActions.php" method="post">
-                    <button name="viewRequestDetails" data-toggle="modal" data-target="#requestDetails" class="btn btn-xs btn-link" type="button">Details</button>
-                    <input name="reject_identity_request" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Quick Reject"/>
-                    <input name="accept_identity_request" type="submit" class="btn btn-xs btn-link" style="color: green;" value="Quick Accept"/>
-                    <input name="id" type="hidden" value='.$row[0].' />
-                    </form>
-                </td>
-            </tr>
-            ';
-        }
-
-        echo '
-            </tbody>
-            </table>
-        ';
-    }
-}
-
 function ncicGetNames()
 {
     try{
@@ -211,16 +112,16 @@ function ncicGetNames()
         {
             echo '
             <tr>
-                <td>'.$row[3].'</td>
-                <td>'.$row[4].'</td>
-                <td>'.$row[5].'</td>
-                <td>'.$row[6].'</td>
-                <td>'.$row[7].'</td>
-                <td>'.$row[8].'</td>
-                <td>'.$row[9].'</td>
-                <td>'.$row[10].'</td>
-                <td>'.$row[11].'</td>
-				<td>'.$row[12].'</td>
+                <td>'.$row['name'].'</td>
+                <td>'.$row['dob'].'</td>
+                <td>'.$row['address'].'</td>
+                <td>'.$row['gender'].'</td>
+                <td>'.$row['race'].'</td>
+                <td>'.$row['dl_status'].'</td>
+                <td>'.$row['hair_color'].'</td>
+                <td>'.$row['build'].'</td>
+                <td>'.$row['weapon_permit'].'</td>
+				<td>'.$row['deceased'].'</td>
                 <td>
                     <button name="edit_name" data-toggle="modal" data-target="#IdentityEditModal" id="edit_nameBtn" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
                     <form action="".BASE_URL."/actions/ncicAdminActions.php" method="post">
@@ -292,15 +193,15 @@ function ncicGetPlates()
         {
             echo '
             <tr>
-                <td>'.$row[12].'</td>
-                <td>'.$row[2].'</td>
-                <td>'.$row[9].'</td>
-                <td>'.$row[3].'</td>
-                <td>'.$row[4].'</td>
-                <td>'.$row[5].'/'.$row[6].'</td>
-                <td>'.$row[7].'</td>
-                <td>'.$row[8].'</td>
-                <td>'.$row[10].'</td>
+                <td>'.$row['name'].'</td>
+                <td>'.$row['veh_plate'].'</td>
+                <td>'.$row['veh_reg_state'].'</td>
+                <td>'.$row['veh_make'].'</td>
+                <td>'.$row['veh_model'].'</td>
+                <td>'.$row['veh_pcolor'].'/'.$row['veh_scolor'].'</td>
+                <td>'.$row['veh_insurance'].' / '.$row['veh_insurance type'].'</td>
+                <td>'.$row['flags'].'</td>
+                <td>'.$row['notes'].'</td>
                 <td>
                     <form action="".BASE_URL."/actions/ncicAdminActions.php" method="post">
                     <button name="edit_plate" data-toggle="modal" data-target="#editPlateModal" id="edit_plateBtn" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
@@ -366,9 +267,9 @@ function ncicGetWeapons()
         {
             echo '
             <tr>
-                <td>'.$row[5].'</td>
-                <td>'.$row[2].'</td>
-                <td>'.$row[3].'</td>
+                <td>'.$row['name'].'</td>
+                <td>'.$row['weapon_type'].'</td>
+                <td>'.$row['weapon_name'].'</td>
                 <td>
                     <form action="".BASE_URL."/actions/ncicAdminActions.php" method="post">
                     <input name="delete_weapon" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
@@ -572,9 +473,10 @@ function ncic_arrests()
                 <tr>
                 <th>Name</th>
                 <th>Arrest Reason</th>
-                <th>Arrest Amount</th>
+                <th>Arrest Fine</th>
                 <th>Issued On</th>
                 <th>Issued By</th>
+                <th>Issuing Agency</th>
                 <th>Actions</th>
                 </tr>
             </thead>
@@ -585,11 +487,12 @@ function ncic_arrests()
         {
             echo '
             <tr>
-                <td>'.$row[7].'</td>
-                <td>'.$row[3].'</td>
-                <td>'.$row[4].'</td>
-                <td>'.$row[5].'</td>
-                <td>'.$row[6].'</td>
+                <td>'.$row['name'].'</td>
+                <td>'.$row['arrest_reason'].'</td>
+                <td>'.$row['arrest_fine'].'</td>
+                <td>'.$row['issued_date'].'</td>
+                <td>'.$row['issued_by'].'</td>
+                <td>'.$row['issued_by_agency'].'</td>
                 <td>
                     <form action="".BASE_URL."/actions/ncicAdminActions.php" method="post">
                     <input name="delete_arrest" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Remove"/>
@@ -657,12 +560,12 @@ function ncic_warrants()
         {
             echo '
             <tr>
-                <td>'.$row[6].'</td>
-                <td>'.$row[7].'</td>
-                <td>'.$row[2].'</td>
-                <td>'.$row[5].'</td>
-                <td>'.$row[1].'</td>
-                <td>'.$row[3].'</td>
+                <td>'.$row['status'].'</td>
+                <td>'.$row['name'].'</td>
+                <td>'.$row['warrant_name'].'</td>
+                <td>'.$row['issued_date'].'</td>
+                <td>'.$row['expiration_date'].'</td>
+                <td>'.$row['issuing_agency'].'</td>
                 <td>
                     <form action="".BASE_URL."/actions/ncicAdminActions.php" method="post">
                     ';
@@ -726,9 +629,10 @@ function ncic_citations()
                 <tr>
                 <th>Name</th>
                 <th>Citation Name</th>
-                <th>Citation Amount</th>
+                <th>Citation Fine</th>
                 <th>Issued On</th>
                 <th>Issued By</th>
+                <th>Issuing Agency</th>
                 <th>Actions</th>
                 </tr>
             </thead>
@@ -739,11 +643,12 @@ function ncic_citations()
         {
             echo '
             <tr>
-                <td>'.$row[7].'</td>
-                <td>'.$row[3].'</td>
-                <td>'.$row[4].'</td>
-                <td>'.$row[5].'</td>
-                <td>'.$row[6].'</td>
+                <td>'.$row['name'].'</td>
+                <td>'.$row['citation_name'].'</td>
+                <td>'.$row['citation_fine'].'</td>
+                <td>'.$row['issued_date'].'</td>
+                <td>'.$row['issued_by'].'</td>
+                <td>'.$row['issued_by_agency'].'</td>
                 <td>
                     <form action="".BASE_URL."/actions/ncicAdminActions.php" method="post">
                     <input name="delete_citation" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Remove"/>
@@ -799,6 +704,7 @@ function ncic_warnings()
                 <th>Warning Name</th>
                 <th>Issued On</th>
                 <th>Issued By</th>
+                <th>Issuing Agency</th>
                 <th>Actions</th>
                 </tr>
             </thead>
@@ -809,10 +715,11 @@ function ncic_warnings()
         {
             echo '
             <tr>
-                <td>'.$row[6].'</td>
-                <td>'.$row[3].'</td>
-                <td>'.$row[4].'</td>
-                <td>'.$row[5].'</td>
+                <td>'.$row['name'].'</td>
+                <td>'.$row['warning_name'].'</td>
+                <td>'.$row['issued_date'].'</td>
+                <td>'.$row['issued_by'].'</td>
+                <td>'.$row['issued_by_agency'].'</td>
                 <td>
                     <form action="".BASE_URL."/actions/ncicAdminActions.php" method="post">
                     <input name="delete_warning" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Remove"/>

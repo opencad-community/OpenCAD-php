@@ -196,7 +196,7 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncic_plates` (
   `veh_scolor` text NOT NULL,
   `veh_insurance` set('VALID','EXPIRED','CANCELED','SUSPENDED', 'Unknown') DEFAULT 'Unknown',
   `veh_insurance type` set('CTP','Third Party','Comprehensive', 'Unknown') DEFAULT 'Unknown',
-  `flags` set('STOLEN','WANTED','SUSPENDED REGISTRATION','CANCELED REGISTRATION','EXPIRED REGISTRATION','INSURANCE FLAG','DRIVER FLAG','NO INSURANCE'),
+  `flags` set('NONE','STOLEN','WANTED','SUSPENDED REGISTRATION','CANCELED REGISTRATION','EXPIRED REGISTRATION','INSURANCE FLAG','DRIVER FLAG','NO INSURANCE'),
   `veh_reg_state` set('Los Santos','Blaine County','San Andreas', 'Unknown') DEFAULT 'Unknown',
   `notes` text DEFAULT NULL COMMENT 'Any special flags visible to dispatchers',
   `user_id` int(11) NOT NULL,
