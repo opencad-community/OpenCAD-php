@@ -197,8 +197,8 @@ function name()
                 $warningIndex = 0;
                 foreach($result as $row)
                 {
-                    $encode["warningId"][$warningIndex] = $row[0];
-                    $encode["warning_name"][$warningIndex] = $row[2];
+                    $encode["warningId"][$warningIndex] = $row['id'];
+                    $encode["warning_name"][$warningIndex] = $row['warning_name'];
 
                     $warningIndex++;
                 }
@@ -250,16 +250,16 @@ function plate()
         foreach($result as $row)
         {
 
-            $encode["plate"] = $row[2];
-            $encode["veh_make"] = $row[3];
-            $encode["veh_model"] = $row[4];
-            $encode["veh_pcolor"] = $row[5];
-            $encode["veh_scolor"] = $row[6];
-            $encode["veh_ro"] = $row[12];
-            $encode["veh_insurance"] = $row[7];
-            $encode["flags"] = $row[8];
-            $encode["veh_reg_state"] = $row[9];
-            $encode["notes"] = $row[10];
+            $encode["plate"] = $row['veh_plate'];
+            $encode["veh_make"] = $row['veh_make'];
+            $encode["veh_model"] = $row['veh_model'];
+            $encode["veh_pcolor"] = $row['veh_pcolor'];
+            $encode["veh_scolor"] = $row['veh_scolor'];
+            $encode["veh_ro"] = $row['name'];
+            $encode["veh_insurance"] = $row['veh_insurance'];
+            $encode["flags"] = $row['flags'];
+            $encode["veh_reg_state"] = $row['veh_reg_state'];
+            $encode["notes"] = $row['notes'];
 
         }
     }
@@ -312,9 +312,9 @@ function weapon()
             foreach($result as $row)
             {
                 $userId = $row[0];
-                $encode["userId"] = $row[0];
-                $encode["first_name"] = $row[1];
-				$encode["weapon_permit"] = $row[2];
+                $encode["userId"] = $row['user_id'];
+                $encode["first_name"] = $row['name'];
+				$encode["weapon_permit"] = $row['weapon_permit'];
             }
 
             $stmt = $pdo->prepare("SELECT id, name_id, weapon_type, weapon_name FROM ".DB_PREFIX."ncic_weapons WHERE name_id = ?");
