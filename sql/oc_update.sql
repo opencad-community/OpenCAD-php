@@ -82,7 +82,7 @@ ALTER TABLE `<DB_PREFIX>ncic_plates` CHANGE `veh_insurance type`
 set('CTP','Third Party','Comprehensive')  AFTER `veh_insurance`;
 
 ALTER TABLE `<DB_PREFIX>ncic_plates` CHANGE `flags`
-set('STOLEN','WANTED','SUSPENDED REGISTRATION','CANCELED REGISTRATION','EXPIRED REGISTRATION','INSURANCE FLAG','DRIVER FLAG','NO INSURANCE') AFTER `veh_insurance type`;
+set('NONE','STOLEN','WANTED','SUSPENDED REGISTRATION','CANCELED REGISTRATION','EXPIRED REGISTRATION','INSURANCE FLAG','DRIVER FLAG','NO INSURANCE') AFTER `veh_insurance type`;
 
 ALTER TABLE `<DB_PREFIX>ncic_plates` CHANGE `veh_reg_state`
 set('Los Santos','Blaine County','San Andreas')  AFTER `flags`;
