@@ -145,67 +145,6 @@ function editUserAccount()
     $pdo = null;
 }
 
-function getRanks()
-{
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-
-    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."ranks");
-    if (!$result)
-    {
-        $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-
-    echo '
-        <table id="ranks" class="table table-striped table-bordered">
-        <thead>
-            <tr>
-            <th>Rank ID</th>
-            <th>Rank Name</th>
-            <th>User Can Choose <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="This indicates whether or not regular users may select this rank for themselves"></i></th>
-            </tr>
-        </thead>
-        <tbody>
-    ';
-
-    foreach($result as $row)
-    {
-        echo '
-        <tr>
-            <td>' . $row[0] . '</td>
-            <td>' . $row[1] . '</td>';
-
-        switch ($row[2])
-        {
-            case "1":
-                echo "<td>True</td>";
-            break;
-            case "0":
-                echo "<td>False</td>";
-            break;
-        }
-
-        echo '
-        </tr>
-        ';
-    }
-
-    echo '
-        </tbody>
-        </table>
-    ';
-    $pdo = null;
-}
-
 function delete_user()
 {
     session_start();
@@ -632,10 +571,10 @@ function getUsers()
         }
         echo '
         <tr>
-            <td>' . $row[1] . '</td>
-            <td>' . $row[2] . '</td>
+            <td>' . $row['name'] . '</td>
+            <td>' . $row['email'] . '</td>
             <td>' . $roleIs . '</td>
-            <td>' . $row[4] . '</td>
+            <td>' . $row['identifier'] . '</td>
             <td id="show_group">';
 
         getUserGroupsApproved($row[0]);
@@ -869,11 +808,11 @@ function getUserDetails()
     $encode = array();
     foreach($result as $row)
     {
-        $encode["userId"] = $row[0];
-        $encode["name"] = $row[1];
-        $encode["email"] = $row[2];
-        $encode["identifier"] = $row[3];
-        $encode["role"] = $row[4];
+        $encode["userId"] = $row['id'];
+        $encode["name"] = $row['name'];
+        $encode["email"] = $row['email'];
+        $encode["identifier"] = $row['identifier'];
+        $encode["role"] = $row['admin_privilege'];
     }
 
     //Pass the array and userID to getUserGroupsEditor which will return it
@@ -1016,13 +955,13 @@ function getCallHistory()
         {
             echo '
         <tr>
-            <td>' . $row[0] . '</td>
-            <td>' . $row[1] . '</td>
-            <td>' . $row[2] . '</td>
-            <td>' . $row[3] . '</td>
-            <td>' . $row[4] . '</td>
-            <td>' . $row[5] . '</td>
-            <td>' . $row[6] . '</td>
+            <td>' . $row['call_id'] . '</td>
+            <td>' . $row['call_type'] . '</td>
+            <td>' . $row['call_primary'] . '</td>
+            <td>' . $row['call_street1'] . '</td>
+            <td>' . $row['call_street2'] . '</td>
+            <td>' . $row['call_street3'] . '</td>
+            <td>' . $row['call_narrative'] . '</td>
             <td>
                 <form action="'.BASE_URL.'/actions/adminActions.php" method="post">
                 <input name="delete_callhistory" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>

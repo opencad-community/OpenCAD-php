@@ -318,17 +318,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                 </div>
                                 <!-- ./ col-sm-9 -->
                             </div>
-                            <!-- ./ form-group -->
-                            <div class="form-group row">
-                                <label class="col-md-3 control-label">User Role</label>
-                                <div class="col-md-9">
-                                    <select name="userRole" class="selectpicker form-control" id="userRole">
-                                        <?php getRole() ?>
-                                    </select>
-                                </div>
-                                <!-- ./ col-sm-9 -->
-                            </div>
-                            <!-- ./ form-group -->
+                            <!-- ./ form-group -->                                               
                     </div>
                     <!-- ./ modal-body -->
                     <div class="modal-footer">
