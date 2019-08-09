@@ -161,7 +161,7 @@ function getLicenseTypes()
         $dl_types = implode($row);
 
         // Remove "set(" at start and ");" at end.
-        $dl_types  = substr($dl_types,12,strlen($dl_types)-27);
+        $dl_types  = substr($dl_types,12,strlen($dl_types)-22);
         //echo $dl_types;
         $dl_types = preg_split("/','/",$dl_types);
 
@@ -331,8 +331,8 @@ function getIncidentTypes()
 }
 
 /**#@+
-* function getLicenseStatuses()
-* Get list of possible license statuses from status() of the 'dl_status' column of the ncic_names table.
+* function getRaces()
+* Get list of possible Races from the  'race' column of the ncic_names table.
 *
 * @since 0.3.0
 *

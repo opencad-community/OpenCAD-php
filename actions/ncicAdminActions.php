@@ -97,9 +97,9 @@ function ncicGetNames()
                 <th>Address</th>
                 <th>Gender</th>
                 <th>Race</th>
-                <th>DL Status</th>
-                <th>Hair Color</th>
                 <th>Build</th>
+                <th>Hair Color</th>
+                <th>DL Status</th>
 				<th>Weapon Status</th>
 				<th>Deceased</th>
                 <th>Actions</th>

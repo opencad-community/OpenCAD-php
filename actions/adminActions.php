@@ -100,7 +100,7 @@ function editUserAccount()
     $myRank = $_SESSION['admin_privilege'];
     $hisRank = _getRole($userID);
 
-    if($myRank <= $hisRank && $myRank == 2){
+    if($myRank >= $hisRank && $myRank == 2){
         $_SESSION['accessMessage'] = '<div class="alert alert-error"><span>Error, you cannot edit this user account</span></div>';
         sleep(1);
         header("Location:".BASE_URL."/oc-admin/userManagement.php");
