@@ -13,7 +13,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
 require_once(__DIR__ . "/../oc-config.php");
-include_once(__DIR__ . "/.R23qFweaponnnn./plugins/api_auth.php");
+include_once(__DIR__ . "/plugins/api_auth.php");
 
 if (isset($_POST['ncic_name'])){
     name();
