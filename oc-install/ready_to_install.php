@@ -15,8 +15,8 @@
 	if($passed_step >= 9){
 		// OK
 	}else{
-		header('location: start.php');
-		exit;				
+		//die();
+		header('location: start.php');	
 	}
 
 	// handle form submission

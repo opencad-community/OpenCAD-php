@@ -92,8 +92,12 @@
 
 				// skip administrator settings				
 				if($install_type == 'un-install'){
-					$_SESSION['passed_step'] = 4;
-					header('location: ready_to_install.php');					
+					$_SESSION['passed_step'] = 2;
+					header('location: ready_to_install.php');
+				}
+				else if($install_type == 'update'){
+					$_SESSION['passed_step'] = 9;
+					header('location: ready_to_install.php');								
 				}else{
 					$_SESSION['passed_step'] = 3;
 					header('location: administrator_account.php');

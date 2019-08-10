@@ -4,7 +4,7 @@
     // 1. GLOBAL SETTINGS
     // -------------------------------------------------------------------------
     // *** system mode (demo|debug|production)
-    define('EI_MODE', 'production');
+    define('EI_MODE', 'debug');
     
     // *** version number of ApPHP EasyInstaller
     define('EI_VERSION', '3.2.4');
@@ -156,7 +156,7 @@
     // *** application name
     define('EI_APPLICATION_NAME', 'OpenCAD');
     // *** version number of your application 
-    define('EI_APPLICATION_VERSION', '0.3.0 Hotfix 11 (commit 15799da203d)');
+    define('EI_APPLICATION_VERSION', '0.3.0 Hotfix 12 (commit 9ad28a3c87a)');
     
     // *** default start file name - application start file
     define('EI_APPLICATION_START_FILE', '../index.php');
