@@ -15,18 +15,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 require_once(__DIR__ . "/../oc-config.php");
 include_once(__DIR__ . "/../oc-content/plugins/api_auth.php");
 
-/*
-    Returns information on name run through NCIC.
-    TODO: Add a check here to check the admin panel to determine if Randomized names are allowed
-*/
-/**
- * Patch notes:
- * Adding the `else` to make a `else if` prevents the execution
- * of multiple functions at the same time by the same client
- *
- * Running multiple functions at the same time doesnt seem to
- * be a needed feature.
- */
 if (isset($_POST['ncic_name'])){
     name();
 }else if (isset($_POST['ncic_plate'])){
@@ -52,7 +40,7 @@ function name()
             die();
         }
 
-        $stmt = $pdo->prepare("SELECT id, name, dob, address, gender, race, dl_status, hair_color, build, weapon_permit, deceased, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS age FROM ".DB_PREFIX."ncic_names WHERE name = ?");
+        $stmt = $pdo->prepare("SELECT id, name, dob, address, gender, race, dl_status, hair_color, build, weapon_permit, deceased, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS age, dl_type FROM ".DB_PREFIX."ncic_names WHERE name = ?");
         $resStatus = $stmt->execute(array($name));
         $result = $stmt;
 
@@ -78,18 +66,18 @@ function name()
                 $encode["userId"] = $row[0];
                 $encode["name"] = $row[1];
                 $encode["dob"] = $row[2];
+                $encode["age"] = $row[11];
                 $encode["address"] = $row[3];
                 $encode["sex"] = $row[4];
                 $encode["race"] = $row[5];
                 $encode["dl_status"] = $row[6];
-                $encode["dl_type"] = $row[7];
+                $encode["dl_type"] = $row[12];
                 $encode["dl_class"] = $row[8];
                 $encode["dl_issuer"] = $row[9];
-                $encode["hair_color"] = $row[10];
-                $encode["build"] = $row[11];
-                $encode["age"] = $row[12];
-				$encode["weapon_permit"] = $row[13];
-				$encode["deceased"] = $row[14];
+                $encode["hair_color"] = $row[7];
+                $encode["build"] = $row[8];
+				$encode["weapon_permit"] = $row[9];
+				$encode["deceased"] = $row[10];
             }
 
             $stmt = $pdo->prepare("SELECT id, name_id, warrant_name FROM ".DB_PREFIX."ncic_warrants WHERE name_id = ?");
@@ -197,8 +185,8 @@ function name()
                 $warningIndex = 0;
                 foreach($result as $row)
                 {
-                    $encode["warningId"][$warningIndex] = $row[0];
-                    $encode["warning_name"][$warningIndex] = $row[2];
+                    $encode["warningId"][$warningIndex] = $row['id'];
+                    $encode["warning_name"][$warningIndex] = $row['warning_name'];
 
                     $warningIndex++;
                 }
@@ -250,6 +238,7 @@ function plate()
         foreach($result as $row)
         {
 
+<<<<<<< HEAD
             $encode["plate"] = $row[2];
             $encode["veh_make"] = $row[3];
             $encode["veh_model"] = $row[4];
@@ -260,6 +249,18 @@ function plate()
             $encode["flags"] = $row[8];
             $encode["veh_reg_state"] = $row[9];
             $encode["notes"] = $row[10];
+=======
+            $encode["plate"] = $row['veh_plate'];
+            $encode["veh_make"] = $row['veh_make'];
+            $encode["veh_model"] = $row['veh_model'];
+            $encode["veh_pcolor"] = $row['veh_pcolor'];
+            $encode["veh_scolor"] = $row['veh_scolor'];
+            $encode["veh_ro"] = $row['name'];
+            $encode["veh_insurance"] = $row['veh_insurance'];
+            $encode["flags"] = $row['flags'];
+            $encode["veh_reg_state"] = $row['veh_reg_state'];
+            $encode["notes"] = $row['notes'];
+>>>>>>> release/canary
 
         }
     }
@@ -275,6 +276,8 @@ function firearm()
 function weapon()
 {
     $name = htmlspecialchars($_POST['ncic_weapon']);
+    $name_id = htmlspecialchars($_POST['ncic_weapon_id']);
+    
 
 
     if(strpos($name, ' ') !== false) {
@@ -289,7 +292,7 @@ function weapon()
             die();
         }
     
-        $stmt = $pdo->prepare("SELECT id, name, weapon_permit FROM ".DB_PREFIX."ncic_names WHERE name = ?");
+        $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."ncic_names WHERE name = ?");
         $resStatus = $stmt->execute(array($name));
         $result = $stmt;
 
@@ -311,13 +314,14 @@ function weapon()
         {
             foreach($result as $row)
             {
-                $userId = $row[0];
-                $encode["userId"] = $row[0];
-                $encode["first_name"] = $row[1];
-				$encode["weapon_permit"] = $row[2];
+                $userId = $row['id'];
+                $encode["userId"] = $row['submittedById'];
+                $encode["first_name"] = $row['name'];
+                $encode["weapon_permit"] = $row['weapon_permit'];
+
             }
 
-            $stmt = $pdo->prepare("SELECT id, name_id, weapon_type, weapon_name FROM ".DB_PREFIX."ncic_weapons WHERE name_id = ?");
+            $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."ncic_weapons WHERE name_id = $userId");
             $resStatus = $stmt->execute(array($name));
             $result = $stmt;
 
@@ -338,8 +342,9 @@ function weapon()
                 $warrantIndex = 0;
                 foreach($result as $row)
                 {
-                    $encode["weaponId"][$warrantIndex] = $row[0];
-                    $encode["weapon_name"][$warrantIndex] = "$row[2] | $row[3]";
+                    $encode["name_id"] = $row['name_id'];
+                    $encode['weaponId'][$warrantIndex] = $row[0];
+                    $encode['weapon_name'][$warrantIndex] = "$row[2] | $row[3]";
 
                     $warrantIndex++;
                 }

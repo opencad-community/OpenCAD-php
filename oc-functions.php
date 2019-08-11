@@ -240,7 +240,7 @@ function generateRandomString($length = 10) {
 	**/
 function getOpenCADVersion()
 {
-	echo '0.3.0 Hotfix 8 (commit bf9ba370821)';
+	echo '0.3.0 Hotfix 12 (commit 9ad28a3c87a)';
 }
 
 /**#@+
@@ -257,5 +257,50 @@ function permissionDenied()
 	header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
 	die();
 }
+
+function regWebhook() {
+$identifier = $_SESSION['identifier'];
+$hookObject = json_encode([
+    "content" => "@here",
+
+    "username" => "OpenCAD",
+
+    "embeds" => [
+
+        [
+
+            "title" => "New Sign Up",
+
+            "type" => "rich",
+
+            "description" => "A new user requires approval on OpenCAD - Identifier: $identifier",
+
+            "color" => hexdec( "FF0000" ),
+
+            "footer" => [
+                "text" => "OpenCAD",
+            ],
+        ]
+    ]
+
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+
+$ch = curl_init();
+
+curl_setopt_array( $ch, [
+    CURLOPT_URL => WEBHOOK_URL,
+    CURLOPT_POST => true,
+    CURLOPT_POSTFIELDS => $hookObject,
+    CURLOPT_HTTPHEADER => [
+        "Length" => strlen( $hookObject ),
+        "Content-Type" => "application/json"
+    ]
+]);
+
+$response = curl_exec( $ch );
+curl_close( $ch );
+    
+}
+
 
 ?>

@@ -20,6 +20,7 @@
  * @since 1.0a RC1
  **/
 define('COMMUNITY_NAME', '<COMMUNITY_NAME>');
+define('WEBHOOK_URL', '<WEBHOOK_URL>');
 
 /**#@+
  * Language Settings

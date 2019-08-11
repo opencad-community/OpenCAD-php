@@ -318,17 +318,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                 </div>
                                 <!-- ./ col-sm-9 -->
                             </div>
-                            <!-- ./ form-group -->
-                            <div class="form-group row">
-                                <label class="col-md-3 control-label">User Role</label>
-                                <div class="col-md-9">
-                                    <select name="userRole" class="selectpicker form-control" id="userRole">
-                                        <?php getRole() ?>
-                                    </select>
-                                </div>
-                                <!-- ./ col-sm-9 -->
-                            </div>
-                            <!-- ./ form-group -->
+                            <!-- ./ form-group -->                                               
                     </div>
                     <!-- ./ modal-body -->
                     <div class="modal-footer">
@@ -345,6 +335,88 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         </div>
         <!-- ./ modal fade bs-example-modal-lg -->
         </div>
+
+    <!-- Change User Role Modal -->
+    <div class="modal fade" id="editUserRoleModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="editUserRoleModal">Change User Role</h4>
+                    <!-- ./ modal-header -->
+                    <div class="modal-body">
+                        <form role="form" method="post" action="<?php echo BASE_URL; ?>/actions/adminActions.php"
+                            class="form-horizontal">
+                            <!-- ./ form-group -->
+                            <div class="form-group row">
+                                <label class="col-md-3 control-label">User Role</label>
+                                <div class="col-md-9">
+                                    <select name="userRole" class="selectpicker form-control" id="userRole">
+                                        <?php getRole();?>
+                                    </select>
+                                </div>
+                                <!-- ./ col-sm-9 -->
+                            </div>
+                            <!-- ./ form-group -->                                               
+                    </div>
+                    <!-- ./ modal-body -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="hidden" name="userID" id="userID">
+                        <input type="submit" name="editUserAccountRole" class="btn btn-primary" value="Update Role" />
+                    </div>
+                    <!-- ./ modal-footer -->
+                    </form>
+                </div>
+                <!-- ./ modal-content -->
+            </div>
+            <!-- ./ modal-dialog modal-lg -->
+        </div>
+        <!-- ./ modal fade bs-example-modal-lg -->
+        </div>
+
+        <!-- Change Password -->
+    <div class="modal fade" id="changeUserPassword" tabindex="-1" role="dialog" aria-hidden="true">
+       <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" id="closeChangePassword"><span aria-hidden="true">×</span>
+                </button>
+          <h4 class="modal-title" id="myModalLabel">Change Password</h4>
+        </div>
+        <!-- ./ modal-header -->
+        <div class="modal-body">
+          <form role="form" action="<?php echo BASE_URL; ?>/actions/adminActions.php" method="post">
+            <div class="form-group row">
+              <label class="col-lg-2 control-label">Password</label>
+              <div class="col-lg-10">
+        <input class="form-control" type="password" name="password" id="password" size="30" maxlength="255" placeholder="Enter your new password..." value="" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?> />
+              </div>
+              <!-- ./ col-sm-9 -->
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-2 control-label">Confirm Password</label>
+              <div class="col-lg-10">
+        <input class="form-control" type="password" name="confirm_password" size="30" id="confirm_password" maxlength="255" placeholder="Retype your new password..." value="" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?> />
+              </div>
+              <!-- ./ col-sm-9 -->
+            </div>
+        </div>
+        <!-- ./ modal-body -->
+        <div class="modal-footer">
+            <input type="hidden" name="userID" id="userID">
+            <input type="submit" name="changeUserPassword" id="changeUserPassword" class="btn btn-primary" value="Change Password" />
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </form>
+        </div>
+        <!-- ./ modal-footer -->
+      </div>
+      <!-- ./ modal-content -->
+    </div>
+    <!-- ./ modal-dialog modal-lg -->
+  </div>
+  <!-- ./ modal fade bs-example-modal-lg -->
         
 
         <?php
@@ -400,6 +472,32 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 }
             });
         });
+
+         $('#editUserRoleModal').on('show.bs.modal', function(e) {
+            var $modal = $(this),
+                userId = e.relatedTarget.id;
+
+            $.ajax({
+                cache: false,
+                type: 'POST',
+                url: '<?php echo BASE_URL; ?>/actions/adminActions.php',
+                data: {
+                    'getUserID': 'yes',
+                    'userId': userId
+                },
+                success: function(result) {
+                    //console.log(result);
+                    data = JSON.parse(result);
+                    $('input[name="userID"]').val(data['userId']);
+
+                },
+
+                error: function(exception) {
+                    alert('Exeption:' + exception);
+                }
+            });
+        });
+
 
 
         $(".delete_group").click(function() {

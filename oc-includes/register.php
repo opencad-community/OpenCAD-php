@@ -103,6 +103,7 @@ function register()
     $pdo = null;
     session_start();
     $_SESSION['register_success'] = "Successfully requested access. Please wait for an administrator to approve your request.";
+    regWebhook();	
     sleep(1);
     header("Location:".BASE_URL."/index.php#signup");
 }

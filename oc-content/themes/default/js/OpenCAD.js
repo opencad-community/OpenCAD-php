@@ -413,12 +413,12 @@ $('#ncic_name_btn').on('click', function(e) {
             deceased_text = "<span style=\"color: red;\">"+data['deceased']+"</span>";
             }
 
-            $('#ncic_name_return').append("Name: "+data['name']+"<br/>DOB: "+data['dob']+"<br/>Age: "+data['age']+"<br/>Sex: "+data['sex']
+            $('#ncic_name_return').append("Name: "+data['name']+"<br/>DOB: "+data['dob']+"<br/>Sex: "+data['sex']
             +"<br/>Race: "+data['race']+"<br/>Hair Color: "+data['hair_color']
             +"<br/>Build: "+data['build']
             +"<br/>Address: "+data['address']
             +"<br/>DL Status: "+dl_status_text
-            +"<br/>DL Type:"+dl_type_text
+            +"<br/>DL Type: "+dl_type_text
 			+"<br/>Weapon Permit: "+weapon_permit_text
 			+"<br/>Deceased: "+deceased_text
 			+"<br/><br/>Warnings:<br/>"+warningText+"<br/><br/>Citations:<br/>"+citationText+"<br/>Arrests:<br/>"+arrestText+"<br/>Warrants:<br/>"+warrantText);
@@ -681,14 +681,6 @@ $.ajax({
         success: function(response)
         {
         $('#unAvailableUnits').html(response);
-
-        // SG - Removed until the node/real time services come available. having datatables messes things up.
-        /*$('#unAvailableUnitsTable').DataTable({
-            searching: false,
-            scrollY: "200px",
-            lengthMenu: [[4, -1], [4, "All"]]
-                });
-        */
         setTimeout(getUnAvailableUnits, 5000);
 
         },
@@ -737,7 +729,6 @@ $('#newCall').on('show.bs.modal', function(e) {
     });
 });
 
-//Disables enter key in the call narrative textarea
 $('#narrative').keypress(function(event) {
     if (event.keyCode == 13) {
         event.preventDefault();
