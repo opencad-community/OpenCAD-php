@@ -438,6 +438,10 @@ function changeStatus()
             $statusDet = '7';
             $onCall = true;
             break;
+        case "10-65":
+            $statusId = '8';
+            $statusDet = '8';
+            break;
         case "10-8":
             $statusId = '1';
             $statusDet = '1';
@@ -1722,7 +1726,7 @@ function getWeapons()
 
     foreach($result as $row)
     {
-        echo '<option value="'.$row[1].' '.$row[2].'">'.$row[1].'-'.$row[2].'</option>';
+        echo '<option value="'.$row[1].' '.$row[2].'">'.$row[1].'&#8212;'.$row[2].'</option>';
     }
 }
 

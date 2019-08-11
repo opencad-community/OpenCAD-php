@@ -40,7 +40,11 @@ if (isset($_GET['dept_id']) && isset($_GET['user_id']))
 }else if (isset($_POST['editUserAccount']))
 {
     editUserAccount();
-}else if (isset($_POST['rejectUser']))
+}
+else if (isset($_POST['editUserAccountRole']))
+{
+    editUserAccountRole();
+} else if (isset($_POST['rejectUser']))
 {
     rejectUser();
 }else if (isset($_POST['suspendUser']))
@@ -58,9 +62,16 @@ if (isset($_GET['dept_id']) && isset($_GET['user_id']))
 }else if (isset($_POST['getUserDetails']))
 {
     getUserDetails();
+} else if (isset($_POST['getUserID']))
+{
+    getUserID();
 }else if (isset($_POST['delete_callhistory']))
 {
     delete_callhistory();
+}
+else if (isset($_POST['changeUserPassword']))
+{
+    changeUserPassword();
 }
 
 /* FUNCTIONS */
@@ -104,7 +115,7 @@ function editUserAccount()
     $myRank = $_SESSION['admin_privilege'];
     $hisRank = _getRole($userID);
 
-    if($myRank <= $hisRank && $myRank == 2){
+    if($myRank >= $hisRank && $myRank == 2){
         $_SESSION['accessMessage'] = '<div class="alert alert-error"><span>Error, you cannot edit this user account</span></div>';
         sleep(1);
         header("Location:".BASE_URL."/oc-admin/userManagement.php");
@@ -137,9 +148,9 @@ function editUserAccount()
             $stmt->execute(array($userID, $val));
 		}
 	}
-    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."users SET name = ?, email = ?, identifier = ?, admin_privilege = ? WHERE id = ?");
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."users SET name = ?, email = ?, identifier = ? WHERE id = ?");
 
-    if ($stmt->execute(array($userName, $userEmail, $userIdentifier, $userRole, $userID))) {
+    if ($stmt->execute(array($userName, $userEmail, $userIdentifier, $userID))) {
         $pdo = null;
         header("Location: ".BASE_URL."/oc-admin/userManagement.php");
     } else {
@@ -149,8 +160,28 @@ function editUserAccount()
     $pdo = null;
 }
 
-function getRanks()
+function editUserAccountRole()
 {
+	$userID 		= !empty($_POST['userID']) ? htmlspecialchars($_POST['userID']) : '';
+    $userRole 		= !empty($_POST['userRole']) ? htmlspecialchars($_POST['userRole']) : '';
+
+    session_start();
+    $myRank = $_SESSION['admin_privilege'];
+    $hisRank = _getRole($userID);
+
+    if($myRank >= $hisRank && $myRank == 2){
+        $_SESSION['accessMessage'] = '<div class="alert alert-error"><span>Error, you cannot edit this user account</span></div>';
+        sleep(1);
+        header("Location:".BASE_URL."/oc-admin/userManagement.php");
+        die();
+    }
+
+    if($userRole == 3 && $myRank == 2){
+        $_SESSION['accessMessage'] = '<div class="alert alert-error"><span>Error, you cannot make yourself administrator</span></div>';
+        sleep(1);
+        header("Location:".BASE_URL."/oc-admin/userManagement.php");
+        die();
+    }
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
     } catch(PDOException $ex)
@@ -160,53 +191,17 @@ function getRanks()
         header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
-
-    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."ranks");
-    if (!$result)
-    {
-        $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
+ 
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."users SET admin_privilege = ? WHERE id = ?");
+    
+    if ($stmt->execute(array($userRole, $userID))) {
+        $pdo = null;
+        header("Location: ".BASE_URL."/oc-admin/userManagement.php");
+    } else {
+        echo $userRole."<br><br>";
+        echo "Error updating record: " . print_r($stmt->errorInfo(), true);
+        print_r($_POST);
     }
-
-    echo '
-        <table id="ranks" class="table table-striped table-bordered">
-        <thead>
-            <tr>
-            <th>Rank ID</th>
-            <th>Rank Name</th>
-            <th>User Can Choose <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="This indicates whether or not regular users may select this rank for themselves"></i></th>
-            </tr>
-        </thead>
-        <tbody>
-    ';
-
-    foreach($result as $row)
-    {
-        echo '
-        <tr>
-            <td>' . $row[0] . '</td>
-            <td>' . $row[1] . '</td>';
-
-        switch ($row[2])
-        {
-            case "1":
-                echo "<td>True</td>";
-            break;
-            case "0":
-                echo "<td>False</td>";
-            break;
-        }
-
-        echo '
-        </tr>
-        ';
-    }
-
-    echo '
-        </tbody>
-        </table>
-    ';
     $pdo = null;
 }
 
@@ -636,10 +631,10 @@ function getUsers()
         }
         echo '
         <tr>
-            <td>' . $row[1] . '</td>
-            <td>' . $row[2] . '</td>
+            <td>' . $row['name'] . '</td>
+            <td>' . $row['email'] . '</td>
             <td>' . $roleIs . '</td>
-            <td>' . $row[4] . '</td>
+            <td>' . $row['identifier'] . '</td>
             <td id="show_group">';
 
         getUserGroupsApproved($row[0]);
@@ -649,10 +644,13 @@ function getUsers()
         if ( ( MODERATOR_EDIT_USER == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
         {
             echo '<button name="editUser" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editUserModal" class="btn btn-xs btn-link" >Edit</button>';
+            echo '<button name="changeUserPassword" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#changeUserPassword" class="btn btn-xs btn-link" >Change Password</button>';
+            echo '<button name="editUserRole" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editUserRoleModal" class="btn btn-xs btn-link" >Change Role</button>';
         } else {
             echo '<button name="editUser" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editUserModal" class="btn btn-xs btn-link" disabled >Edit</button>';
+            echo '<button name="changeUserPassword" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#changeUserPassword" class="btn btn-xs btn-link" disabled >Change Password</button>';
+            echo '<button name="editUserRole" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editUserRoleModal" class="btn btn-xs btn-link" disabled >Change Role</button>';
         }
-
         if ( ( MODERATOR_DELETE_USER == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
         {
             echo '<input name="deleteUser" type="submit" class="btn btn-xs btn-link" onclick="deleteUser(' . $row[0] . ')" value="Delete" />';
@@ -873,15 +871,48 @@ function getUserDetails()
     $encode = array();
     foreach($result as $row)
     {
-        $encode["userId"] = $row[0];
-        $encode["name"] = $row[1];
-        $encode["email"] = $row[2];
-        $encode["identifier"] = $row[3];
-        $encode["role"] = $row[4];
+        $encode["userId"] = $row['id'];
+        $encode["name"] = $row['name'];
+        $encode["email"] = $row['email'];
+        $encode["identifier"] = $row['identifier'];
+        $encode["role"] = $row['admin_privilege'];
     }
 
     //Pass the array and userID to getUserGroupsEditor which will return it
     getUserGroupsEditor($encode, $userId);
+}
+
+function getUserID()
+{
+    $userId = htmlspecialchars($_POST['userId']);
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $stmt = $pdo->prepare("SELECT id FROM ".DB_PREFIX."users WHERE ID = ?");
+    $resStatus = $stmt->execute(array($userId));
+    $result = $stmt;
+
+    if (!$resStatus)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+    $pdo = null;
+
+    $encode = array();
+    foreach($result as $row)
+    {
+        $encode["userId"] = $row['id'];    }
+
+    echo json_encode($encode);
 }
 
 function getUserGroupsEditor($encode, $userId)
@@ -1020,13 +1051,13 @@ function getCallHistory()
         {
             echo '
         <tr>
-            <td>' . $row[0] . '</td>
-            <td>' . $row[1] . '</td>
-            <td>' . $row[2] . '</td>
-            <td>' . $row[3] . '</td>
-            <td>' . $row[4] . '</td>
-            <td>' . $row[5] . '</td>
-            <td>' . $row[6] . '</td>
+            <td>' . $row['call_id'] . '</td>
+            <td>' . $row['call_type'] . '</td>
+            <td>' . $row['call_primary'] . '</td>
+            <td>' . $row['call_street1'] . '</td>
+            <td>' . $row['call_street2'] . '</td>
+            <td>' . $row['call_street3'] . '</td>
+            <td>' . $row['call_narrative'] . '</td>
             <td>
                 <form action="'.BASE_URL.'/oc-includes/adminActions.php" method="post">
                 <input name="delete_callhistory" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
@@ -1072,5 +1103,47 @@ function delete_callhistory()
     session_start();
     $_SESSION['historyMessage'] = '<div class="alert alert-success"><span>Successfully removed archived call</span></div>';
     header("Location: ".BASE_URL."/oc-admin/callhistory.php#history_panel");
+}
+
+function changeUserPassword()
+{
+    session_start();
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    $userID 		= !empty($_POST['userID']) ? htmlspecialchars($_POST['userID']) : '';
+
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $id = $_SESSION['id'];
+    $newpassword = htmlspecialchars($_POST['password']);
+    $hashed_password = password_hash($newpassword, PASSWORD_DEFAULT);
+
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."users SET password = ? WHERE id = ?");
+    $result = $stmt->execute(array($hashed_password, $userID));
+
+    if (!$result)
+    {
+        $_SESSION['error'] = $pdo->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $_SESSION['profileUpdate'] = '<div class="alert alert-success"><span>Password changed successfully</span></div>';
+
+    $pdo = null;
+
+    sleep(1);
+    header("Location:".BASE_URL."/oc-admin/userManagement.php");
+    sleep(1);
+    //Seconds to wait
+    /*echo $_SESSION['profileUpdate'];
+    header("Location: ".BASE_URL."/profile.php");*/
 }
 ?>

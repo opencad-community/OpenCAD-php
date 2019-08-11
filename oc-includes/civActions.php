@@ -127,7 +127,11 @@ function ncicGetNames()
                 <th>Address</th>
                 <th>Gender</th>
                 <th>Race</th>
-                <th>Driver\'s License</th>
+                <th>Drivers License</th>
+                <th>Hair Color</th>
+                <th>Build</th>
+				<th>Weapon Status</th>
+				<th>Deceased</th>
                 <th>Actions</th>
                 </tr>
             </thead>
@@ -138,12 +142,16 @@ function ncicGetNames()
         {
             echo '
             <tr>
-                <td>'.$row[3].'</td>
-                <td>'.$row[4].'</td>
-                <td>'.$row[5].'</td>
-                <td>'.$row[6].'</td>
-                <td>'.$row[7].'</td>
-                <td>'.$row[9].' / '.$row[8].'</td>
+                <td>'.$row['name'].'</td>
+                <td>'.$row['dob'].'</td>
+                <td>'.$row['address'].'</td>
+                <td>'.$row['gender'].'</td>
+                <td>'.$row['race'].'</td>
+                <td>'.$row['dl_type']. ' / '.$row['dl_status'].'</td>
+                <td>'.$row['hair_color'].'</td>
+                <td>'.$row['build'].'</td>
+                <td>'.$row['weapon_permit'].'</td>
+                <td>'.$row['deceased'].'</td>
                 <td>
                     <button name="edit_name" data-toggle="modal" data-target="#IdentityEditModal" id="edit_nameBtn" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
                     <form action="".BASE_URL."/oc-includes/civActions.php" method="post">
@@ -220,15 +228,15 @@ function ncicGetPlates()
 
             echo '
             <tr>
-                <td>'.$row[12].'</td>
-                <td>'.$row[2].'</td>
-                <td>'.$row[9].'</td>
-                <td>'.$row[3].'</td>
-                <td>'.$row[4].'</td>
-                <td>'.$row[5].'/'.$row[6].'</td>
-                <td>'.$row[7].'</td>
-                <td>'.$row[8].'</td>
-                <td>'.$row[10].'</td>
+                <td>'.$row['name'].'</td>
+                <td>'.$row['veh_plate'].'</td>
+                <td>'.$row['veh_reg_state'].'</td>
+                <td>'.$row['veh_make'].'</td>
+                <td>'.$row['veh_model'].'</td>
+                <td>'.$row['veh_pcolor'].'/'.$row['veh_scolor'].'</td>
+                <td>'.$row['veh_insurance'].' / '.$row['veh_insurance type'].'</td>
+                <td>'.$row['flags'].'</td>
+                <td>'.$row['notes'].'</td>
                 <td>
                     <button name="edit_plate" data-toggle="modal" data-target="#editPlateModal" id="edit_plateBtn" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
                     <form action="".BASE_URL."/oc-includes/civActions.php" method="post">
@@ -427,8 +435,6 @@ function create_plate()
     $veh_model;
     $veh_pcolor = htmlspecialchars($_POST['veh_pcolor']);
     $veh_scolor = htmlspecialchars($_POST['veh_scolor']);
-    $veh_insurance = htmlspecialchars($_POST['veh_insurance']);
-    $flags = htmlspecialchars($_POST['flags']);
     $veh_reg_state = htmlspecialchars($_POST['veh_reg_state']);
     $notes = htmlspecialchars($_POST['notes']);
 
@@ -442,8 +448,8 @@ function create_plate()
         die();
     }
 
-    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_plates (name_id, veh_plate, veh_make, veh_model, veh_pcolor, veh_scolor, veh_insurance, flags, veh_reg_state, notes, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $result = $stmt->execute(array($userId, $veh_plate, $veh_make, $veh_model, $veh_pcolor, $veh_scolor, $veh_insurance, $flags, $veh_reg_state, $notes, $submittedById));
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_plates (name_id, veh_plate, veh_make, veh_model, veh_pcolor, veh_scolor, veh_reg_state, notes, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $result = $stmt->execute(array($userId, $veh_plate, $veh_make, $veh_model, $veh_pcolor, $veh_scolor, $veh_reg_state, $notes, $submittedById));
 
     if (!$result)
     {
@@ -554,7 +560,7 @@ function edit_name()
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT first_name FROM ".DB_PREFIX."ncic_names WHERE first_name = ?");
+    $stmt = $pdo->prepare("SELECT name FROM ".DB_PREFIX."ncic_names WHERE name = ?");
     $result = $stmt->execute(array($name));
 
     if (!$result)
@@ -637,8 +643,6 @@ function edit_plate()
     $veh_model;
     $veh_pcolor = htmlspecialchars($_POST['veh_pcolor']);
     $veh_scolor = htmlspecialchars($_POST['veh_scolor']);
-    $veh_insurance = htmlspecialchars($_POST['veh_insurance']);
-    $flags = htmlspecialchars($_POST['flags']);
     $veh_reg_state = htmlspecialchars($_POST['veh_reg_state']);
     $notes = htmlspecialchars($_POST['notes']);
     $plate_id = htmlspecialchars($_POST['Edit_plateId']);
@@ -653,8 +657,8 @@ function edit_plate()
         die();
     }
 
-    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."ncic_plates SET name_id = ?, veh_plate = ?, veh_make = ?, veh_model = ?, veh_pcolor = ?, veh_scolor = ?, veh_insurance = ?, flags = ?, veh_reg_state = ?, notes = ? WHERE id = ?");
-    $result = $stmt->execute(array($userId, $veh_plate, $veh_make, $veh_model, $veh_pcolor, $veh_scolor, $veh_insurance, $flags, $veh_reg_state, $notes, $plate_id));
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."ncic_plates SET name_id = ?, veh_plate = ?, veh_make = ?, veh_model = ?, veh_pcolor = ?, veh_scolor = ?, veh_reg_state = ?, notes = ? WHERE id = ?");
+    $result = $stmt->execute(array($userId, $veh_plate, $veh_make, $veh_model, $veh_pcolor, $veh_scolor, $veh_reg_state, $notes, $plate_id));
 
     if (!$result)
     {
@@ -817,8 +821,7 @@ function ncic_warrants()
             <thead>
                 <tr>
                 <th>Status</th>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Name</th>
                 <th>Warrant Name</th>
                 <th>Issued On</th>
                 <th>Expires On</th>
@@ -833,13 +836,12 @@ function ncic_warrants()
         {
             echo '
             <tr>
-                <td>'.$row[6].'</td>
-                <td>'.$row[7].'</td>
-                <td>'.$row[8].'</td>
-                <td>'.$row[2].'</td>
-                <td>'.$row[5].'</td>
-                <td>'.$row[1].'</td>
-                <td>'.$row[3].'</td>
+                <td>'.$row['status'].'</td>
+                <td>'.$row['name'].'</td>
+                <td>'.$row['warrant_name'].'</td>
+                <td>'.$row['issued_date'].'</td>
+                <td>'.$row['expiration_date'].'</td>
+                <td>'.$row['issuing_agency'].'</td>
                 <td>
                     <form action="".BASE_URL."/oc-includes/civActions.php" method="post">
                     <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
@@ -903,8 +905,8 @@ function create_weapon()
 	session_start();
 
     $weapon = htmlspecialchars($_POST['weapon_all']);
-    $wea_type = explode(" ", $weapon) [0];
-    $wea_name = explode(" ", $weapon) [1];
+    $wea_type = explode("&#8212;", $weapon) [0];
+    $wea_name = explode("&#8212;", $weapon) [0];
 
     $uid = $_SESSION['id'];
 
@@ -993,10 +995,10 @@ function ncicGetWeapons()
         {
             echo '
             <tr>
-                <td>'.$row[6].'</td>
-                <td>'.$row[2].'</td>
-                <td>'.$row[3].'</td>
-                <td>'.$row[4].'</td>
+            <td>'.$row['name'].'</td>
+            <td>'.$row['weapon_type'].'</td>
+            <td>'.$row['weapon_name'].'</td>
+            <td>'.$row['weapon_notes'].'</td>
                 <td>
                     <form action="".BASE_URL."/oc-includes/civActions.php" method="post">
                     <input name="delete_weapon" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>

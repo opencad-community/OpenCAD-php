@@ -903,24 +903,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								</div>
 								<!-- ./ col-sm-9 -->
 							</div>
-							<!-- ./ form-group -->
-							<div class="form-group row">
-								<label class="col-lg-2 control-label">Vehicle Flags</label>
-								<div class="col-lg-10">
-									<select class="form-control" name="flags" required>
-										<option value="STOLEN"> STOLEN </option>
-										<option value="WANTED"> WANTED </option>
-										<option value="SUSPENDED REGISTRATION"> SUSPENDED REGISTRATION </option>
-										<option value="CANCELED REGISTRATION"> CANCELED REGISTRATION </option>
-										<option value="EXPIRED REGISTRATION"> EXPIRED REGISTRATION </option>
-										<option value="INSURANCE FLAG"> INSURANCE FLAG </option>
-										<option value="DRIVER FLAG"> DRIVER FLAG </option>
-										<option value="NO INSURANCE"> No Insurance </option>
-									</select>
-								</div>
-								<!-- ./ col-sm-9 -->
-							</div>
-							<!-- ./ form-group -->
+							<!-- ./ form-group -->				
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Notes</label>
 								<div class="col-lg-10">
@@ -1023,20 +1006,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 										<option value=""> </option>
 										<option value="VALID"> Valid </option>
 										<option value="EXPIRED"> Expired </option>
-									</select>
-								</div>
-								<!-- ./ col-sm-9 -->
-							</div>
-							<!-- ./ form-group -->
-							<div class="form-group row">
-								<label class="col-lg-2 control-label">Vehicle Flags</label>
-								<div class="col-lg-10">
-									<select class="form-control flags_option" name="flags" required>
-										<option value=""> </option>
-										<option value="NONE"> None </option>
-										<option value="STOLEN"> Stolen </option>
-										<option value="WANTED"> Wanted </option>
-										<option value="SUSPENDED REGISTRATION"> Suspended Registration </option>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -1329,7 +1298,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						$('.veh_pcolor_picker').selectpicker('val', data.veh_pcolor);
 						$('.veh_scolor_picker').selectpicker('val', data.veh_scolor);
 						$('#insurance_edit').val(data.veh_insurance);
-						$('.flags_option').val(data.flags);
 						$('.notes').val(data.notes);
 						$('.veh_reg_state_option').val(data.veh_reg_state);
 						$('.editplateid').val(data.id);

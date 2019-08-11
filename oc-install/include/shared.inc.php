@@ -23,7 +23,7 @@ if(isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
 // *** check and set token
 $_SESSION['token'] = md5(uniqid(rand(), true));
 
-function generateRandomString($length = 10) {
+function generateRandomString2($length = 10) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
     $randomString = '';

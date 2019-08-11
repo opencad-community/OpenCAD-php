@@ -296,11 +296,11 @@ callCheck();
                            <div class="col-md-10 col-sm-10 col-xs-10">
                               <select name="statusSelect" class="form-control selectpicker <?php echo $_SESSION['identifier'];?>" id="statusSelect" onChange="responderChangeStatus(this);" title="Select a Status">
                                  <option value="10-6">10-6/Busy</option>
-                        <option value="10-5">10-5/Meal Break</option>
-                        <option value="10-7">10-7/Unavailable</option>
-                        <option value="10-8">10-8/Available</option>
-                        <option value="10-23">10-23/Arrived on Scene</option>
-                        <option value="10-65">10-65/Transporting Prisoner</option>
+                                 <option value="10-5">10-5/Meal Break</option>
+                                 <option value="10-7">10-7/Unavailable</option>
+                                 <option value="10-8">10-8/Available</option>
+                                 <option value="10-23">10-23/Arrived on Scene</option>
+                                 <option value="10-65">10-65/Transporting Prisoner</option>
                                  <option value="sig11">Signal 11</option>
                               </select>
                            </div>
