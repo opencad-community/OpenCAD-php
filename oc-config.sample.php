@@ -20,7 +20,6 @@
  * @since 1.0a RC1
  **/
 define('COMMUNITY_NAME', '<COMMUNITY_NAME>');
-define('WEBHOOK_URL', '<WEBHOOK_URL>');
 
 /**#@+
  * Language Settings
@@ -31,7 +30,7 @@ define('WEBHOOK_URL', '<WEBHOOK_URL>');
  * @default DEFAULT_LANGUAGE 'en'
  * @default DEFAULT_LANGUAGE_DIRECTION 'ltr'
  *
- * @since 0.2.6
+ * @since 0.3.0
  **/
 define('DEFAULT_LANGUAGE', '<DEFAULT_LANGUAGE>');
 define('DEFAULT_LANGUAGE_DIRECTION', '<DEFAULT_LANGUAGE_DIRECTION>');
@@ -84,7 +83,7 @@ define('BASE_URL', '<BASE_URL>');
   *
   * This setting should always be enabled.
   * 
-  * @since OpenCAD version 0.2.6
+  * @since OpenCAD version 0.3.0
   * (Imported from ATVG-CAD 1.3.0.0)
   *
   **/
@@ -170,7 +169,7 @@ define('POLICE_NCIC', <POLICE_NCIC>);
  * 
  * These settings will likely be moved to a *_options table in a future version
  * 
- * since OpenCAD Version OpenCAD version 0.2.6
+ * since OpenCAD Version OpenCAD version 0.3.0
  * 
  **/
 define('POLICE_CALL_SELFASSIGN', <POLICE_CALL_SELFASSIGN>);
@@ -252,7 +251,7 @@ define('POLICE_CALL_SELFASSIGN', <POLICE_CALL_SELFASSIGN>);
  * 
  * These settings will likely be moved to a *_options table in a future version
  * 
- * since OpenCAD Version OpenCAD version 0.2.6
+ * since OpenCAD Version OpenCAD version 0.3.0
  **/
 define('FIRE_CALL_SELFASSIGN', <FIRE_CALL_SELFASSIGN>);
 
@@ -328,7 +327,7 @@ define('FIRE_CALL_SELFASSIGN', <FIRE_CALL_SELFASSIGN>);
  * 
  * These settings will likely be moved to a *_options table in a future version
  * 
- * since OpenCAD Version OpenCAD version 0.2.6
+ * since OpenCAD Version OpenCAD version 0.3.0
  **/
 define('EMS_CALL_SELFASSIGN', <EMS_CALL_SELFASSIGN>);
 
@@ -404,7 +403,7 @@ define('ROADSIDE_NCIC_PLATE', <ROADSIDE_NCIC_PLATE>);
  * 
  * These settings will likely be moved to a *_options table in a future version
  * 
- * since OpenCAD Version OpenCAD version 0.2.6
+ * since OpenCAD Version OpenCAD version 0.3.0
  **/
 define('ROADSIDE_CALL_SELFASSIGN', <ROADSIDE_CALL_SELFASSIGN>);
 
@@ -456,7 +455,7 @@ define('CIV_REG', <CIV_REG>);
  *  
  * These settings will likely be moved to an *_options table in a future version.
  *
- * @since OpenCAD OpenCAD version 0.2.6
+ * @since OpenCAD version 0.3.0
  * @from ATVG-CAD 1.3.2.0
  **/
 define('CIV_LIMIT_MAX_IDENTITIES', '<CIV_LIMIT_MAX_IDENTITIES>');
@@ -473,7 +472,7 @@ define('CIV_LIMIT_MAX_IDENTITIES', '<CIV_LIMIT_MAX_IDENTITIES>');
  *  
  * These settings will likely be moved to an *_options table in a future version.
  *
- * @since OpenCAD OpenCAD version 0.2.6
+ * @since OpenCAD version 0.3.0
  * @from ATVG-CAD 1.3.2.0
  **/
 define('CIV_LIMIT_MAX_VEHICLES', '<CIV_LIMIT_MAX_VEHICLES>');
@@ -490,7 +489,7 @@ define('CIV_LIMIT_MAX_VEHICLES', '<CIV_LIMIT_MAX_VEHICLES>');
  *  
  * These settings will likely be moved to an *_options table in a future version.
  *
- * @since OpenCAD OpenCAD version 0.2.6
+ * @since OpenCAD version 0.3.0
  * @from ATVG-CAD 1.3.2.0
  **/
 define('CIV_LIMIT_MAX_WEAPONS', '<CIV_LIMIT_MAX_WEAPONS>');
@@ -611,7 +610,7 @@ define('MODERATOR_NCIC_EDITOR', <MODERATOR_NCIC_EDITOR>);
   *
   * These settings will likely be moved to an *_options table in a future version.
   *
-  * @since OpenCAD version OpenCAD version 0.2.6
+  * @since OpenCAD version OpenCAD version 0.3.0
   **/
   define('MODERATOR_DATA_MANAGER', <MODERATOR_DATA_MANAGER>);
 
@@ -620,7 +619,7 @@ define('MODERATOR_NCIC_EDITOR', <MODERATOR_NCIC_EDITOR>);
   * If 'true' then Moderators will have access to the Citation Types Manager module of the Game Data Manager,
   * else if 'false' then Moderators will be denied access.
   *
-  * @since OpenCAD version 0.2.6
+  * @since OpenCAD version 0.3.0
   *
   **/
   define('MODERATOR_DATAMAN_CITATIONTYPES', <MODERATOR_DATAMAN_CITATIONTYPES>);
@@ -630,7 +629,7 @@ define('MODERATOR_NCIC_EDITOR', <MODERATOR_NCIC_EDITOR>);
   * If 'true' then Moderators will have access to the Departments Manager module of the Game Data Manager,
   * else if 'false' then Moderators will be denied access.
   *
-  * @since OpenCAD version 0.2.6
+  * @since OpenCAD version 0.3.0
   *
   **/
   define('MODERATOR_DATAMAN_DEPARTMENTS', <MODERATOR_DATAMAN_DEPARTMENTS>);
@@ -640,7 +639,7 @@ define('MODERATOR_NCIC_EDITOR', <MODERATOR_NCIC_EDITOR>);
   * If 'true' then Moderators will have access to the Incident Types Manager module of the Game Data Manager,
   * else if 'false' then Moderators will be denied access.
   *
-  * @since OpenCAD version 0.2.6
+  * @since OpenCAD version 0.3.0
   *
   **/
   define('MODERATOR_DATAMAN_INCIDENTTYPES', <MODERATOR_DATAMAN_INCIDENTTYPES>);
@@ -650,7 +649,7 @@ define('MODERATOR_NCIC_EDITOR', <MODERATOR_NCIC_EDITOR>);
   * If 'true' then Moderators will have access to the Radio Codes Manager module of the Game Data Manager,
   * else if 'false' then Moderators will be denied access.
   *
-  * @since OpenCAD version 0.2.6
+  * @since OpenCAD version 0.3.0
   *
   **/
   define('MODERATOR_DATAMAN_RADIOCODES', <MODERATOR_DATAMAN_RADIOCODES>);
@@ -660,7 +659,7 @@ define('MODERATOR_NCIC_EDITOR', <MODERATOR_NCIC_EDITOR>);
   * If 'true' then Moderators will have access to the Streets Manager module of the Game Data Manager,
   * else if 'false' then Moderators will be denied access.
   *
-  * @since OpenCAD version 0.2.6
+  * @since OpenCAD version 0.3.0
   *
   **/
   define('MODERATOR_DATAMAN_STREETS', <MODERATOR_DATAMAN_STREETS>);
@@ -670,7 +669,7 @@ define('MODERATOR_NCIC_EDITOR', <MODERATOR_NCIC_EDITOR>);
   * If 'true' then Moderators will have access to the Vehiciels Manager module of the Game Data Manager,
   * else if 'false' then Moderators will be denied access.
   *
-  * @since OpenCAD version 0.2.6
+  * @since OpenCAD version 0.3.0
   *
   **/
   define('MODERATOR_DATAMAN_VEHICLES', <MODERATOR_DATAMAN_VEHICLES>);
@@ -680,7 +679,7 @@ define('MODERATOR_NCIC_EDITOR', <MODERATOR_NCIC_EDITOR>);
   * If 'true' then Moderators will have access to the Warning Types Manager module of the Game Data Manager,
   * else if 'false' then Moderators will be denied access.
   *
-  * @since OpenCAD version 0.2.6
+  * @since OpenCAD version 0.3.0
   *
   **/
   define('MODERATOR_DATAMAN_WARNINGTYPES', <MODERATOR_DATAMAN_WARNINGTYPES>);
@@ -690,7 +689,7 @@ define('MODERATOR_NCIC_EDITOR', <MODERATOR_NCIC_EDITOR>);
   * If 'true' then Moderators will have access to the Warrant Types Manager module of the Game Data Manager,
   * else if 'false' then Moderators will be denied access.
   *
-  * @since OpenCAD version 0.2.6
+  * @since OpenCAD version 0.3.0
   *
   **/
   define('MODERATOR_DATAMAN_WARRANTTYPES', <MODERATOR_DATAMAN_WARRANTTYPES>);
@@ -700,7 +699,7 @@ define('MODERATOR_NCIC_EDITOR', <MODERATOR_NCIC_EDITOR>);
   * If 'true' then Moderators will have access to the Weapoons Manager module of the Game Data Manager,
   * else if 'false' then Moderators will be denied access.
   *
-  * @since OpenCAD version 0.2.6
+  * @since OpenCAD version 0.3.0
   *
   **/
   define('MODERATOR_DATAMAN_WEAPONS', <MODERATOR_DATAMAN_WEAPONS>);
@@ -710,7 +709,7 @@ define('MODERATOR_NCIC_EDITOR', <MODERATOR_NCIC_EDITOR>);
    * If 'true' then Moderators will have access to the Radio Import/Export/Reset module of the Game Data Manager,
   * else if 'false' then Moderators will be denied access.
   *
-  * @since OpenCAD version 0.2.6
+  * @since OpenCAD version 0.3.0
   *
   **/
   define('MODERATOR_DATAMAN_IMPEXPRES', <MODERATOR_DATAMAN_IMPEXPRESET>);
@@ -722,6 +721,16 @@ define('MODERATOR_NCIC_EDITOR', <MODERATOR_NCIC_EDITOR>);
   *
   * @since OpenCAD version 0.2.3
   **/
+
+/**#@+
+* WEBHOOK_URL
+* 
+* If this option configured OpenCAD will post events to the endpoint specified.
+* 
+* @since OpenCAD verstion 0.3.1
+*
+**/
+define('WEBHOOK_URL', '<WEBHOOK_URL>');
 
 /**#@+
   * DEMO_MODE
@@ -761,7 +770,7 @@ define('USE_GRAVATAR', <USE_GRAVATAR>);
   *
   * DEFAULT VALUE: false
 	*
-  * @since OpenCAD OpenCAD version 0.2.6
+  * @since OpenCAD version 0.3.0
   **/
   define('OC_DEBUG', false);
 
