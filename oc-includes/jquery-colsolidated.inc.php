@@ -1,8 +1,9 @@
     <!-- jQuery -->
-    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/jquery/jquery.min.js"></script>
     
     <!-- Bootstrap -->
-    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
     <!-- FastClick -->
     <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
@@ -57,5 +58,5 @@
 
 
     <!-- Custom Theme Scripts -->
-    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/js/custom.js"></script>
-    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/js/OpenCAD.js"></script>
+    <script src="<?php echo BASE_URL; ?>/oc-includes/custom.js"></script>
+    <script src="<?php echo BASE_URL; ?>/oc-includes/OpenCAD.js"></script>
