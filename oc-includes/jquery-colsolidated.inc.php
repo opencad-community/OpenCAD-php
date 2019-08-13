@@ -56,6 +56,10 @@
     <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/pnotify/dist/pnotify.buttons.js"></script>
     <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/pnotify/dist/pnotify.nonblock.js"></script>
 
+    <!-- popper.js -->
+    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/popper/popper.min.js"></script>
+    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/popper/popper-utils.min.js"></script>
+    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/tooltip.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/js/theme.js"></script>
