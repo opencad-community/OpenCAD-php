@@ -98,9 +98,6 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
                     <button type="submit" class="btn btn-primary px-4" type="button">Login</button>
                   </div>
 				  </form>
-                  <div class="col-6 text-right">
-                    <button class="btn btn-link px-0" type="button">Forgot password?</button>
-                  </div>
                 </div>
               </div>
             </div>
@@ -108,8 +105,9 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
               <div class="card-body text-center">
                 <div>
                   <h2>Sign up</h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                  <button class="btn btn-primary active mt-3" type="button">Register Now!</button>
+                  <p>I am a...</p>
+                  <button class="btn btn-primary active mt-3" type="button">First Responder</button><br />
+				  <button class="btn btn-primary active mt-3" type="button">Civilian</button>
                 </div>
               </div>
             </div>
