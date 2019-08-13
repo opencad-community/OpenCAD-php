@@ -18,9 +18,9 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
     
    header('Location://'.$_SERVER['SERVER_NAME'].'/oc-install/start.php');
 } else {}
-    require_once(__DIR__ . "./oc-config.php");
-    require_once(__DIR__ . "/oc-includes/register.php");
-    require_once(__DIR__ . "/oc-includes/publicFunctions.php");
+    require_once("oc-config.php");
+    require_once( ABSPATH . "/oc-includes/register.php");
+    require_once( ABSPATH . "/oc-includes/publicFunctions.php");
 
     $testing = false; //If set to true, will default some data for you
 
