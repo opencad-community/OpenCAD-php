@@ -1,0 +1,7 @@
+{
+  "extends" : "../oc-content/themes/default/js/.jshintrc",
+  "asi"     : false,
+  "browser" : false,
+  "es3"     : false,
+  "node"    : true
+}

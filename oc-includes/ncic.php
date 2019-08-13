@@ -238,6 +238,18 @@ function plate()
         foreach($result as $row)
         {
 
+<<<<<<< HEAD
+            $encode["plate"] = $row[2];
+            $encode["veh_make"] = $row[3];
+            $encode["veh_model"] = $row[4];
+            $encode["veh_pcolor"] = $row[5];
+            $encode["veh_scolor"] = $row[6];
+            $encode["veh_ro"] = $row[13];
+            $encode["veh_insurance"] = $row[7];
+            $encode["flags"] = $row[8];
+            $encode["veh_reg_state"] = $row[9];
+            $encode["notes"] = $row[10];
+=======
             $encode["plate"] = $row['veh_plate'];
             $encode["veh_make"] = $row['veh_make'];
             $encode["veh_model"] = $row['veh_model'];
@@ -248,6 +260,7 @@ function plate()
             $encode["flags"] = $row['flags'];
             $encode["veh_reg_state"] = $row['veh_reg_state'];
             $encode["notes"] = $row['notes'];
+>>>>>>> release/canary
 
         }
     }

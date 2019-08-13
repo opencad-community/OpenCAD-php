@@ -252,30 +252,6 @@ function delete_user()
     header("Location: ".BASE_URL."/oc-admin/userManagement.php#user_panel");
 }
 
-/* Gets the user count. Returns value */
-function getUserCount()
-{
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
-    }
-
-    $result = $pdo->query("SELECT COUNT(*) from ".DB_PREFIX."users")->fetch(PDO::FETCH_NUM);
-    if (!$result)
-    {
-        $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
-    }
-    $pdo = null;
-    return $result[0];
-}
-
 function getPendingUsers()
 {
     try{
@@ -564,6 +540,35 @@ function getGroupCount($gid)
     }
 
     $stmt = $pdo->prepare("SELECT COUNT(*) from ".DB_PREFIX."user_departments WHERE department_id = ?");
+    $stmt->execute(array($gid));
+    $result = $stmt->fetch(PDO::FETCH_NUM);
+
+    if (!$result)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        die();
+    }
+
+    $pdo = null;
+    return $result[0];
+}
+
+
+function getGroupName($gid)
+{
+    $gid = htmlspecialchars($gid);
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        die();
+    }
+
+    $stmt = $pdo->prepare("SELECT department_name from ".DB_PREFIX."departments WHERE department_id = ?");
     $stmt->execute(array($gid));
     $result = $stmt->fetch(PDO::FETCH_NUM);
 

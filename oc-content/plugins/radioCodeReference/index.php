@@ -1,20 +1,35 @@
 <?php
-        include_once(__DIR__ . "./oc-config.php");
-        include(__DIR__ . "/oc-includes/publicFunctions.php");
+/**
+ * @package Radio_Code_Reference
+ * @version 1.0
+ */
+/*
+Plugin Name: Radio Code Reference
+Plugin URI: h
+Description: Radio code reference overlay for OpenCAD Mobile Data Terminal.
+Author: Phill Fernandes
+Version: 1.0
+Author URI:
+*/
+
+include_once( "../../../oc-config.php");
+include_once( ABSPATH . "/oc-settings.php");
+include( ABSPATH .`/`. OCINC . "/publicFunctions.php");
 
 ?>
+
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
 </head>
+
 <div id="core-refConent">
 <nav class="nav nav-tabs nav-justified">
   <a class="nav-item nav-link active" data-toggle="tab" href="#home">Statuses</a>
   <a class="nav-item nav-link" data-toggle="tab" href="#menu1">Incidents</a>
   <a class="nav-item nav-link" data-toggle="tab" href="#menu2">Citations</a>
 </nav>
-
-<div class="tab-content">
+    <div class="tab-content">
   <div id="home" class="tab-pane fade show active" style="padding-left:10px;padding-right:10px;">
     <h3>Status Codes</h3>
     <table class="table table-dark tbl_codeReference">

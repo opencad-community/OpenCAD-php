@@ -15,46 +15,54 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
    header('Location://'.$_SERVER['SERVER_NAME'].'/oc-install/start.php');
 }
-    require_once(__DIR__ . "/oc-config.php");
-    require_once(__DIR__ . "/oc-includes/register.php");
-    require_once(__DIR__ . "/oc-includes/publicFunctions.php");
-    require_once(__DIR__ . "/oc-includes/version.php");
 
-    $testing = false; //If set to true, will default some data for you
+if(file_exists(getcwd().'/oc-content') && is_writable(getcwd())){
+} else {
+   echo "Please chmod() the oc-content directory to 0775, recursively.<br />";
+   echo "<a href=//".$_SERVER['SERVER_NAME'].">Refresh OpenCAD Login</a>";
+   die();
+}
 
-    session_start();
-    $_SESSION['root_path'] = getcwd();
-    $registerError = "";
-    $registerSuccess = "";
-    $loginMessage = "";
+   require_once( "./oc-config.php");
+   require_once( ABSPATH . "/oc-settings.php" );
+   include(ABSPATH . OCINC . "/oc-functions.php");
+   require_once( ABSPATH . OCINC . "/publicFunctions.php");
+   require_once( ABSPATH . OCINC . "/register.php");
 
-    if ( (isset($_SESSION['logged_in'])) == "YES" )
-    {
+   $testing = false; //If set to true, will default some data for you
+
+   session_start();
+   $_SESSION['root_path'] = getcwd();
+   $registerError = "";
+   $registerSuccess = "";
+   $loginMessage = "";
+
+   if ( (isset($_SESSION['logged_in'])) == "YES" )
+   {
       header ('Location: ./dashboard.php');
-    }
-    else if (isset($_GET['loggedOut']))
-    {
+   }
+   else if (isset($_GET['loggedOut']))
+   {
       $loginMessage = '<div class="alert alert-success" style="text-align: center;" ><span>You\'ve successfully been logged out</span></div>';
    }
    else if(isset($_SESSION['register_error']))
    {
-    }
-    else if(isset($_SESSION['register_error']))
-    {
+   }
+   else if(isset($_SESSION['register_error']))
+   {
       $registerError = '<div class="alert alert-danger" style="text-align: center;"><span>'.$_SESSION['register_error'].'</span></div>';
-        unset($_SESSION['register_error']);
-    }
-    else if(isset($_SESSION['register_success']))
-    {
+      unset($_SESSION['register_error']);
+   }
+   else if(isset($_SESSION['register_success']))
+   {
       $registerError = '<div class="alert alert-success" style="text-align: center;"><span>'.$_SESSION['register_success'].'</span></div>';
-        unset($_SESSION['register_success']);
-    }
-    else if(isset($_SESSION['loginMessageDanger']))
-    {
+      unset($_SESSION['register_success']);
+   }
+   else if(isset($_SESSION['loginMessageDanger']))
+   {
       $loginMessage = '<div class="alert alert-danger" style="text-align: center;"><span>'.$_SESSION['loginMessageDanger'].'</span></div>';
-        unset($_SESSION['loginMessageDanger']);
-    }
-
+      unset($_SESSION['loginMessageDanger']);
+   }
 ?>
 
 <!DOCTYPE html>
@@ -69,7 +77,7 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
             <div class="animate form login_form civ_login">
                <?php echo $loginMessage;?>
                <section class="login_content">
-                  <form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/login.php" method="post">
+                  <form role="form" action="<?php echo BASE_URL . '/' . OCINC ?>/login.php" method="post">
                      <h1>Login</h1>
                      <div>
                         <input class="form-control" placeholder="Email" name="email" type="text" value="<?php if($testing){echo "test@test.test";}?>" required>
@@ -119,7 +127,7 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
             <div id="register" class="animate form registration_form">
                <section class="login_content">
                   <?php echo $registerError, $registerSuccess;?>
-                  <form action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/register.php" method="post">
+                  <form action="<?php echo BASE_URL .'/'. OCINC ?>/register.php" method="post">
                      <h1>Request Access</h1>
                      <div>
                         <input class="form-control" placeholder="Name" name="uname" type="text" required>
@@ -167,7 +175,7 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
             <div id="civ" class="animate form civilian_form">
                <section class="login_content">
                   <?php echo $registerError, $registerSuccess;?>
-                  <form action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/register.php" method="post">
+                  <form action="<?php echo BASE_URL .'/'. OCINC ?>/register.php" method="post">
                      <h1>Civilian Registration</h1>
                      <div>
                         <input class="form-control" placeholder="Name" name="uname" type="text" value="<?php if($testing){echo "Test";}?>" required>

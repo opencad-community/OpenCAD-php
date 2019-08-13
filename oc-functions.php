@@ -12,6 +12,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
 
+if (file_exists(getcwd().'/oc-install') && is_writable(getcwd())){
+   echo "Please remove <strong>oc-install</strong> from the server befroe continuing.<br />";
+   echo "<a href=//".$_SERVER['SERVER_NAME'].">Refresh OpenCAD Login</a>";
+   die();
+} else {
+}
+
 $lang = isset($_REQUEST['lang']) ? prepare_input($_REQUEST['lang']) : '';
 	
 if(!isset($arr_active_languages)) $arr_active_languages = array();
@@ -27,14 +34,14 @@ if(!empty($lang) && array_key_exists($lang, $arr_active_languages)){
 	$curr_lang_direction = DEFAULT_LANGUAGE_DIRECTION;
 }
 
-if(file_exists('/oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
-	include_once('/oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php');
-}else if(file_exists('../oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
-	include_once('../oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php');
+if(file_exists(__DIR__.'/oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
+	include_once(__DIR__.'/oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php');
+}else if(file_exists(__DIR__.'../oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
+	include_once(__DIR__.'../oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php');
 }else if(file_exists('../../oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
 	include_once('../../oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php');
 }else{
-	include_once('./oc-content/languages/en/en.inc.php');    	
+	include_once('../../../oc-content/languages/en/en.inc.php');    	
 }	
 
 
