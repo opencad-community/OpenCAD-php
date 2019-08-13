@@ -22,20 +22,6 @@
 define('COMMUNITY_NAME', '<COMMUNITY_NAME>');
 
 /**#@+
- * Language Settings
- *
- * These options assert the default language and wiriting direction for the application.
- * These may be overidden by options in a users profile (Feature in a later version.)
- * 
- * @default DEFAULT_LANGUAGE 'en'
- * @default DEFAULT_LANGUAGE_DIRECTION 'ltr'
- *
- * @since 0.3.0
- **/
-define('DEFAULT_LANGUAGE', '<DEFAULT_LANGUAGE>');
-define('DEFAULT_LANGUAGE_DIRECTION', '<DEFAULT_LANGUAGE_DIRECTION>');
-
-/**#@+
  *
  * Database connection variables
  * These are viable to the CAD system, and must be correct.
@@ -123,6 +109,35 @@ define('SECURE_AUTH_SALT', '<SECURE_AUTH_SALT>');
 define('LOGGED_IN_SALT',   '<LOGGED_IN_SALT>');
 define('NONCE_SALT',       '<NONCE_SALT>');
 define('COOKIE_NAME', '<COOKIE_NAME>');
+
+/**#@+
+ * Language Settings
+ *
+ * These options assert the default language and wiriting direction for the application.
+ * These may be overidden by options in a users profile (Feature in a later version.)
+ * 
+ * @default DEFAULT_LANGUAGE 'en'
+ * @default DEFAULT_LANGUAGE_DIRECTION 'ltr'
+ *
+ * @since 0.3.0
+ **/
+define('DEFAULT_LANGUAGE', '<DEFAULT_LANGUAGE>');
+define('DEFAULT_LANGUAGE_DIRECTION', '<DEFAULT_LANGUAGE_DIRECTION>');
+
+/**#@+
+  * THEME
+  *
+  * Allows the capability of theme switching.
+  *
+  *
+	* These settings will likely be moved to an *_options table in a future version.
+  *
+  * @default THEME default
+  * @since OpenCAD 0.3.1
+  **/
+
+define('THEME', 'default');
+
 
 /**#@+
   * Feature Settings
