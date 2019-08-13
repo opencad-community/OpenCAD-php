@@ -76,15 +76,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 <?php include "../oc-includes/header.inc.php"; ?>
 
 
-<body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
+<body class="app header-fixed">
 
     <header class="app-header navbar">
         <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
         <span class="navbar-toggler-icon"></span>
       </button>
       <a class="navbar-brand" href="#">
-        <img class="navbar-brand-full" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/tail.png" width="30" height="25" alt="CoreUI Logo">
-        <img class="navbar-brand-minimized" src="img/brand/sygnet.svg" width="30" height="30" alt="CoreUI Logo">
+        <img class="navbar-brand-full" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/tail.png" width="30" height="25" alt="OpenCAD Logo">
       </a>
       <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
         <span class="navbar-toggler-icon"></span>
@@ -143,19 +142,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     </header>
 
       <div class="app-body">
-        <div class="sidebar">
-            <nav class="sidebar-nav">
-            <ul class="nav">
-                <li class="nav-item">
-                <a class="nav-link" href="index.html">
-                    <i class="nav-icon icon-speedometer"></i> Dashboard
-                </a>
-                </li>
-            </ul>
-
-            </nav>
-            <button class="sidebar-minimizer brand-minimizer" type="button"></button>
-        </div>
         <main class="main">
         <div class="breadcrumb" />
         <div class="container-fluid">

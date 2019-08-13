@@ -76,15 +76,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 <?php include "../oc-includes/header.inc.php"; ?>
 
 
-<body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
+<body class="app header-fixed">
 
     <header class="app-header navbar">
         <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
-        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></spa
       </button>
       <a class="navbar-brand" href="#">
-        <img class="navbar-brand-full" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/tail.png" width="30" height="25" alt="CoreUI Logo">
-        <img class="navbar-brand-minimized" src="img/brand/sygnet.svg" width="30" height="30" alt="CoreUI Logo">
+        <img class="navbar-brand-full" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/tail.png" width="30" height="25" alt="OpenCAD Logo">
       </a>
       <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
         <span class="navbar-toggler-icon"></span>
@@ -143,32 +142,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     </header>
 
       <div class="app-body">
-        <div class="sidebar">
-            <nav class="sidebar-nav">
-            <ul class="nav">
-                <li class="nav-item">
-                <a class="nav-link" href="index.html">
-                    <i class="nav-icon icon-speedometer"></i> Dashboard
-                </a>
-                </li>
-            </ul>
-                           
-            </nav>
-            <div class="sidebar-footer hidden-small">
-                <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
-                    <span class="fas fa-clipboard-list fa-2x" style="color:white" aria-hidden="true"></span>
-                </a>
-                <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
-                    <span class="glyphicon glyphicon-fullscreen fa-2x" style="color:white" aria-hidden="true"></span>
-                </a>
-                <a data-toggle="tooltip" data-placement="top" title="Need Help?" href="https://guides.opencad.io/">
-                    <span class="fas fa-info-circle fa-2x" style="color:white" aria-hidden="true"></span>
-                </a>
-                <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/oc-includes/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
-                    <span class="fas fa-sign-out-alt fa-2x" style="color:white" aria-hidden="true"></span>
-                </a>
-            </div>
-        </div>
         <main class="main">
         <div class="breadcrumb" />
         <div class="container-fluid">

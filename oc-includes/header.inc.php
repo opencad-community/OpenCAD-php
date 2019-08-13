@@ -122,19 +122,5 @@ animation-delay: 0.5s;
   animation-name: fadeInLeft;
 }
 
-        .night{
-            background: #e6e6e6;
-        }
-        .day{
-            background: white;
-        }
-  </style>
-  <script>
-        function day(){
-            body.className='day';
-        }
-        function night(){
-            body.className='night';
-        }
-    </script>
+</style>
 </head>
