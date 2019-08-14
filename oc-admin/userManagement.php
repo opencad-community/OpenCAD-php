@@ -80,14 +80,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     <header class="app-header navbar">
         <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
-        <span class="navbar-toggler-icon"></spa
+        <span class="navbar-toggler-icon"></span>
       </button>
       <a class="navbar-brand" href="#">
         <img class="navbar-brand-full" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/tail.png" width="30" height="25" alt="OpenCAD Logo">
       </a>
-      <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+
       <?php include "oc-admin-includes/sidebarNav.inc.php"; ?>
 
       <ul class="nav navbar-nav ml-auto">
