@@ -543,15 +543,16 @@ function getGroupCount($gid)
     $stmt->execute(array($gid));
     $result = $stmt->fetch(PDO::FETCH_NUM);
 
-    if (!$result)
+    if (!$result || $result[0] == 0)
     {
-        $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
+        $pdo = null;
+        echo "N/A";
+        
+    } else {
+        $pdo = null;
+        return $result[0];
     }
 
-    $pdo = null;
-    return $result[0];
 }
 
 
@@ -572,15 +573,15 @@ function getGroupName($gid)
     $stmt->execute(array($gid));
     $result = $stmt->fetch(PDO::FETCH_NUM);
 
-    if (!$result)
+        if (!$result || $result[0] == "0")
     {
-        $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
+        $pdo = null;
+        echo "No Department Found";
+        
+    } else {
+        $pdo = null;
+        return $result[0];
     }
-
-    $pdo = null;
-    return $result[0];
 }
 
 /* NOTE: This function will only build table for users with status 1 & 2. Unapproved users will not be included in this list */
