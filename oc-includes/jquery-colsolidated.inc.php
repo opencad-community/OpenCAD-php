@@ -65,3 +65,10 @@
     <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/js/theme.js"></script>
     <script src="<?php echo BASE_URL; ?>/oc-includes/custom.js"></script>
     <script src="<?php echo BASE_URL; ?>/oc-includes/OpenCAD.js"></script>
+
+    <script>
+    $('#ui-view').ajaxLoad();
+    $(document).ajaxComplete(function() {
+      Pace.restart()
+    });
+  </script>
