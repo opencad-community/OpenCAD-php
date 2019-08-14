@@ -135,9 +135,9 @@ function getIdentityRequests()
         {
             echo '
             <tr>
-                <td>'.$row[0].'</td>
-                <td>'.$row[1].'</td>
-                <td>'.$row[2].'</td>
+                <td>'.$row['req_id'].'</td>
+                <td>'.$row['submittedByName'].'</td>
+                <td>'.$row['submitted_on'].'</td>
                 <td>
                     <form action="".BASE_URL."/oc-includes/ncicAdminActions.php" method="post">
                     <button name="viewRequestDetails" data-toggle="modal" data-target="#requestDetails" class="btn btn-xs btn-link" type="button">Details</button>
@@ -169,7 +169,7 @@ function ncicGetNames()
         die();
     }
 
-    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."ncic_names");
+    $result = $pdo->query("SELECT name, dob, address, gender, race, dl_status, hair_color, build, weapon_permit, deceased FROM ".DB_PREFIX."ncic_names");
 
     if (!$result)
     {

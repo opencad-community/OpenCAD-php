@@ -292,7 +292,7 @@ function weapon()
             die();
         }
     
-        $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."ncic_names WHERE name = ?");
+        $stmt = $pdo->prepare("SELECT id, name, name, weapon, permit FROM ".DB_PREFIX."ncic_names WHERE name = ?");
         $resStatus = $stmt->execute(array($name));
         $result = $stmt;
 
@@ -321,7 +321,7 @@ function weapon()
 
             }
 
-            $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."ncic_weapons WHERE name_id = $userId");
+            $stmt = $pdo->prepare("SELECT id, name_id, weapon_type, weapon_name FROM ".DB_PREFIX."ncic_weapons WHERE name_id = $userId");
             $resStatus = $stmt->execute(array($name));
             $result = $stmt;
 
@@ -343,8 +343,8 @@ function weapon()
                 foreach($result as $row)
                 {
                     $encode["name_id"] = $row['name_id'];
-                    $encode['weaponId'][$warrantIndex] = $row[0];
-                    $encode['weapon_name'][$warrantIndex] = "$row[2] | $row[3]";
+                    $encode['weaponId'][$warrantIndex] = $row[id];
+                    $encode['weapon_name'][$warrantIndex] = "$row[weapon_type] | $row[weapon_name]";
 
                     $warrantIndex++;
                 }

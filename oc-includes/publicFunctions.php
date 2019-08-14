@@ -50,7 +50,7 @@ function getAgencies()
         die();
     }
 
-    $result = $pdo->query("SELECT * from ".DB_PREFIX."departments");
+    $result = $pdo->query("SELECT department_id, department_name from ".DB_PREFIX."departments");
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
@@ -59,7 +59,7 @@ function getAgencies()
     }
     foreach ($result as $row)
     {
-            echo '<option value="' . $row[0] . '">' . $row[1] . '</option>';
+            echo '<option value="' . $row['department_id'] . '">' . $row['department_name'] . '</option>';
     }
     $pdo = null;
 }
@@ -76,7 +76,7 @@ function getAgenciesWarrants()
         die();
     }
 
-    $result = $pdo->query("SELECT * from ".DB_PREFIX."departments ".WHERE." department_id != 1 AND department_id != 7 AND department_id != 8 AND department_id != 9");
+    $result = $pdo->query("SELECT department_id, department_name from ".DB_PREFIX."departments ".WHERE." department_id != 1 AND department_id != 7 AND department_id != 8 AND department_id != 9");
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
@@ -85,7 +85,7 @@ function getAgenciesWarrants()
     }
     foreach ($result as $row)
     {
-            echo '<option value="' . $row[0] . '">' . $row[1] . '</option>';
+            echo '<option value="' . $row['department_id'] . '">' . $row['department_name'] . '</option>';
     }
     $pdo = null;
 }
@@ -320,7 +320,7 @@ function getIncidentTypes()
         die();
     }
 
-    $result = $pdo->query("SELECT * from ".DB_PREFIX."incident_types");
+    $result = $pdo->query("SELECT id, code_id, code_name from ".DB_PREFIX."incident_types");
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
@@ -333,7 +333,7 @@ function getIncidentTypes()
 
     foreach ($result as $row)
     {
-            echo '<option value="' . $row[0] . '">'. $row[1] .' '.$row[2] . '</option>\n';
+            echo '<option value="' . $row['id'] . '">'. $row['code_id'] .' &#8212; '.$row['code_name'] . '</option>\n';
     }
     $pdo = null;
 }
@@ -400,7 +400,7 @@ function getData2($tableName, $column1, $column2)
         die();
     }
 
-    $result = $pdo->query("SELECT * from ".DB_PREFIX.$tableName);
+    $result = $pdo->query("SELECT $column1, $column2 from ".DB_PREFIX.$tableName);
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
@@ -436,7 +436,7 @@ function getData3($tableName, $column1, $column2, $column3)
         die();
     }
 
-    $result = $pdo->query("SELECT * from ".DB_PREFIX.$tableName);
+    $result = $pdo->query("SELECT $column1, $column2, $column3 from ".DB_PREFIX.$tableName);
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
