@@ -180,7 +180,7 @@ function getMyCall()
             $call_id = $row[0];
         }
 
-        $stmt = $pdo->prepare("SELECT * from ".DB_PREFIX."calls WHERE call_id = ?");
+        $stmt = $pdo->prepare("SELECT call_id, call_type, call_primary, call_street1, call_street2, call_street3 from ".DB_PREFIX."calls WHERE call_id = ?");
         $resStatus = $stmt->execute(array($uid));
         $result = $stmt;
 
@@ -202,7 +202,7 @@ function getMyCall()
             echo '<table id="activeCalls" class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                    <th>Type</th>
+                    <th>ID</th>
                     <th>Call Type</th>
                     <th>Units</th>
                     <th>Location</th>
@@ -218,39 +218,39 @@ function getMyCall()
             {
                 echo '
                 <tr id="'.$counter.'">
-                    <td>'.$row[0].'</td>';
+                    <td>'.$row["call_id"].'</td>';
 
-                    //Issue #28. Check if $row[1] == bolo. If so, change text color to orange
+                    //Issue #28. Check if $row["call_type"] == bolo. If so, change text color to orange
                     if ($row[1] == "BOLO")
                     {
-                        echo '<td style="color:orange;">'.$row[1].'</td>';
+                        echo '<td style="color:orange;">'.$row["call_type"].'</td>';
                         echo '<td><!--Leave blank--></td>';
                     }
                     else
                     {
-                        echo '<td>'.$row[1].'</td>';
+                        echo '<td>'.$row["call_type"].'</td>';
                         echo '
                             <td>';
-                                getUnitsOnCall($row[0]);
+                                getUnitsOnCall($row["call_id"]);
                             echo '</td>';
                     }
 
 
-                    echo '<td>'.$row[3].'/'.$row[4].'/'.$row[5].'</td>';
+                    echo '<td>'.$row["call_street1"].'/'.$row["call_street2"].'/'.$row["call_street13"].'</td>';
 
                     if (isset($_GET['type']) && $_GET['type'] == "responder")
                     {
                         echo'
                         <td>
-                            <button id="'.$row[0].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
+                            <button id="'.$row["call_id"].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
                         </td>';
                     }
                     else
                     {
                     echo'
                     <td>
-                        <button id="'.$row[0].'" class="btn-link" style="color: red;" value="'.$row[0].'" onclick="clearCall('.$row[0].')">Clear</button>
-                        <button id="'.$row[0].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
+                        <button id="'.$row["call_id"].'" class="btn-link" style="color: red;" value="'.$row[0].'" onclick="clearCall('.$row[0].')">Clear</button>
+                        <button id="'.$row["call_id"].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
                         <input name="uid" name="uid" type="hidden" value="'.$row[0].'"/>
                     </td>';
                     }
@@ -284,7 +284,7 @@ function checkTones()
         die();
     }
 
-    $result = $pdo->query("SELECT * from ".DB_PREFIX."tones");
+    $result = $pdo->query("SELECT tones from ".DB_PREFIX."tones");
 
     if (!$result)
     {
@@ -298,13 +298,13 @@ function checkTones()
     foreach($result as $row)
     {
         // If the tone is set to active
-        if ($row[2] == "1")
+        if ($row["active"] == "1")
         {
-            $encode[$row[1]] = "ACTIVE";
+            $encode[$row["name"]] = "ACTIVE";
         }
-        else if ($row[2] == "0")
+        else if ($row["active"] == "0")
         {
-            $encode[$row[1]] = "INACTIVE";
+            $encode[$row["name"]] = "INACTIVE";
         }
     }
     echo json_encode($encode);
@@ -371,7 +371,7 @@ function logoutUser()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."active_users WHERE identifier = ?");
+    $stmt = $pdo->prepare("DELETE identifier FROM ".DB_PREFIX."active_users WHERE identifier = ?");
     $result = $stmt->execute(array($identifier));
 
     if (!$result)
@@ -502,7 +502,7 @@ function changeStatus()
         $callId = "";
         foreach($result as $row)
         {
-            $callId = $row[0];
+            $callId = $row["call_id"];
         }
 
         $stmt = $pdo->prepare("SELECT callsign FROM ".DB_PREFIX."active_users WHERE identifier = ?");
@@ -518,7 +518,7 @@ function changeStatus()
 
         foreach($result as $row)
         {
-            $callsign = $row[0];
+            $callsign = $row["callsign"];
         }
 
         //Update the call_narrative to say they were cleared
@@ -622,7 +622,7 @@ function getAOP()
         die();
     }
 
-    $result = $pdo->query("SELECT * from ".DB_PREFIX."aop");
+    $result = $pdo->query("SELECT aop from ".DB_PREFIX."aop");
 
     if (!$result)
     {
@@ -642,7 +642,7 @@ function getAOP()
     {
         foreach($result as $row)
         {
-            echo 'AOP: '.$row[0].' ';
+            echo 'AOP: '.$row["aop"].' ';
         }
     }
 }
@@ -659,7 +659,7 @@ function getDispatchers()
         die();
     }
 
-    $result = $pdo->query("SELECT * from ".DB_PREFIX."dispatchers WHERE status = '1'");
+    $result = $pdo->query("SELECT identifier from ".DB_PREFIX."dispatchers WHERE status = '1'");
 
     if (!$result)
     {
@@ -691,7 +691,7 @@ function getDispatchers()
         {
             echo '
             <tr>
-                <td>'.$row[0].'</td>
+                <td>'.$row["identifier"].'</td>
             </tr>
             ';
         }
@@ -786,7 +786,7 @@ function getAvailableUnits()
         die();
     }
 
-    $result = $pdo->query("SELECT * from ".DB_PREFIX."active_users WHERE status = '1'");
+    $result = $pdo->query("SELECT identifier, callsign  from ".DB_PREFIX."active_users WHERE status = '1'");
 
     if (!$result)
     {
@@ -823,8 +823,8 @@ function getAvailableUnits()
         {
             echo '
             <tr>
-                <td>'.$row[0].'</td>
-                <td>'.$row[1].'</td>
+                <td>'.$row["identifier"].'</td>
+                <td>'.$row["callsign"].'</td>
                 <td>
                 <div class="dropdown"><button class="btn btn-link dropdown-toggle nopadding" type="button" data-toggle="dropdown">Status <span class="caret"></span></button><ul class="dropdown-menu">
                     <li><a id="statusMeal'.$counter.'" class="statusMeal '.$row[0].'" onclick="testFunction(this);">10-5/Meal Break</a></li>
@@ -833,7 +833,7 @@ function getAvailableUnits()
                 </ul></div>
 
                 </td>
-                <input name="uid" type="hidden" value='.$row[0].' />
+                <input name="uid" type="hidden" value='.$row["identifier"].' />
             </tr>
             ';
             $counter++;
@@ -858,7 +858,7 @@ function getUnAvailableUnits()
         die();
     }
 
-    $result = $pdo->query("SELECT * from ".DB_PREFIX."active_users WHERE status = '0'");
+    $result = $pdo->query("SELECT identifier, callsign from ".DB_PREFIX."active_users WHERE status = '0'");
 
     if (!$result)
     {
@@ -893,11 +893,11 @@ function getUnAvailableUnits()
         {
             echo '
             <tr>
-                <td>'.$row[0].'</td>
-                <td>'.$row[1].'</td>
+                <td>'.$row["identifier"].'</td>
+                <td>'.$row["callsign"].'</td>
                 <td>';
 
-                    getIndividualStatus($row[1]);
+                    getIndividualStatus($row["callsign"]);
 
                 echo '</td>
 
@@ -945,7 +945,7 @@ function getIndividualStatus($callsign)
     $statusDetail = "";
     foreach($result as $row)
     {
-        $statusDetail = $row[0];
+        $statusDetail = $row["status_detial"];
     }
 
     $stmt = $pdo->prepare("SELECT status_text FROM ".DB_PREFIX."statuses WHERE status_id = ?");
@@ -962,7 +962,7 @@ function getIndividualStatus($callsign)
     $statusText = "";
     foreach($result as $row)
     {
-        $statusText = $row[0];
+        $statusText = $row["status_text"];
     }
 
     $pdo = null;
@@ -993,7 +993,7 @@ function getIncidentType()
 
     foreach($result as $row)
     {
-        echo '<option value="'.$row[0].'">'.$row[0].'</option>';
+        echo '<option value="'.$row["code_name"].'">'.$row["code_name"].'</option>';
     }
 }
 
@@ -1022,7 +1022,7 @@ function getStreet()
 
     foreach($result as $row)
     {
-        echo '<option value="'.$row[0].'">'.$row[0].'</option>';
+        echo '<option value="'.$row["name"].'">'.$row["name"].'</option>';
     }
 }
 
@@ -1051,7 +1051,7 @@ function getActiveUnits()
     $encode = array();
     foreach($result as $row)
     {
-        $encode[$row[0]] = $row[0];
+        $encode[$row["callsign"]] = $row["callsign"];
     }
 
     echo json_encode($encode);
@@ -1082,7 +1082,7 @@ function getActiveUnitsModal()
     $encode = array();
     foreach($result as $row)
     {
-        $encode[$row[1]] = $row[0];
+        $encode[$row["identifier"]] = $row["callsign"];
     }
 
     echo json_encode($encode);
