@@ -266,6 +266,17 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     <?php
     include (__DIR__ . "/oc-admin-includes/globalModals.inc.php");
     include (__DIR__ . "/../oc-includes/jquery-colsolidated.inc.php"); ?>
+
+            <script>
+        $(document).ready(function() {
+
+            $('#pendingUsers').DataTable({
+                paging: true,
+                searching: true
+            });
+
+        });
+        </script>
 </body>
 
             <script type="text/javascript"
