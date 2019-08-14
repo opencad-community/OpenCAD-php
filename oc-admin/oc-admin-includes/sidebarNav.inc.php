@@ -9,6 +9,10 @@
         { ?>
         <li class="nav-item px-3" <?php if ( $pageName == "NCIC Editor") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/ncicAdmin.php"><i class="fas fa-database fa-3px"  role="tab" data-toggle="tab" style="color:black"></i> NCIC Editor</a></li>
       <?php  } else { }?>
-        <li class="nav-item px-3" <?php if ( $pageName == "About OpenCAD") echo $currentPage; ?>><a class= href="<?php echo BASE_URL; ?>/oc-admin/about.php"><i class="fas fa-info-circle fa-3px" style="color:black"></i> About OpenCAD</a></li>
+      <?php if ( ( MODERATOR_DATA_MANAGER == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+        { ?>
+        <li class="nav-item px-3" <?php if ( $pageName == "Data Manager") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/userManagement.php"><i class="fas fa-database fa-3px " style="color:black"></i> Game Data</a></li>
+      <?php  } else { }?>
+        <li class="nav-item px-3" <?php if ( $pageName == "About OpenCAD") echo $currentPage; ?>><a href="<?php echo BASE_URL; ?>/oc-admin/about.php"><i class="fas fa-info-circle fa-3px" style="color:black"></i> About OpenCAD</a></li>
       </li>
     </ul>
