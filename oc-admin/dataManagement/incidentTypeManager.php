@@ -87,7 +87,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
                     <br />
 
-                    <?php include __DIR__."../../oc-admin-includes/sidebarNav.inc.php"; ?>
+                    <?php include __DIR__."../../oc-admin-includes/topbarNav.inc.php"; ?>
 
                     <!-- /menu footer buttons -->
                     <div class="sidebar-footer hidden-small">

@@ -85,7 +85,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <a class="navbar-brand" href="#">
         <img class="navbar-brand-full" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/tail.png" width="30" height="25" alt="OpenCAD Logo">
       </a>
-      <?php include "oc-admin-includes/sidebarNav.inc.php"; ?>
+      <?php include "oc-admin-includes/topbarNav.inc.php"; ?>
 
       <ul class="nav navbar-nav ml-auto">
 
@@ -145,7 +145,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <div class="animated fadeIn">
             <div class="card">
                       <div class="card-header">
-          <i class="fa fa-align-justify"></i> Access Requests</div>
+          <i class="fa fa-align-justify"></i> <?php echo lang_key("ACCESS_REQUESTS"); ?></div>
               <div class="card-body">
                                     <?php echo $accessMessage;?>
                                     <?php getPendingUsers();?>

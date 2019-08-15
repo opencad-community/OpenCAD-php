@@ -85,7 +85,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <a class="navbar-brand" href="#">
         <img class="navbar-brand-full" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/tail.png" width="30" height="25" alt="OpenCAD Logo">
       </a>
-      <?php include "oc-admin-includes/sidebarNav.inc.php"; ?>
+      <?php include "oc-admin-includes/topbarNav.inc.php"; ?>
 
       <ul class="nav navbar-nav ml-auto">
 
@@ -138,58 +138,58 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       </ul>
     </header>
 
-      <div class="app-body">
-        <main class="main">
-        <div class="breadcrumb" />
-        <div class="container-fluid">
-          <div class="animated fadeIn">
-            <div class="card">
-            	<div class="card-header">
-          			<strong>About Your Environment</strong>
-				</div>
-              	<div class="card-body">
-					<div class="form-group">
-						<label for="name">PHP Version</label><input type="text" class="form-control" readonly="readonly" placeholder="<?php echo phpversion(); ?>" />
-						<p><em>Note:</em> The active version of PHP.</p>
-					</div>
-					<div class="form-group">
-						<label for="name">Database Engine</label>
-						<input type="text" class="form-control" readonly="readonly" placeholder="<?php echo getMySQLVersion(); ?>" />
-						<p><em>Note:</em> The database engine which is currently deployed on the server.</p>
-					</div>
-					<div class="form-group">
-						<label for="name">Loaded PHP Modules</label>
-						<input type="text" class="form-control" readonly="readonly" placeholder="<?php print_r(get_loaded_extensions()); ?>" />
-						<p><em>Note:</em> The database engine which is currently deployed on the server.</p>
-					</div>
-                </div>
-                <!-- /.row-->
+    <div class="app-body">
+    <main class="main">
+      <div class="breadcrumb" />
+      <div class="container-fluid">
+        <div class="animated fadeIn">
+          <div class="card">
+            <div class="card-header">
+             <i class="fa fa-align-justify"></i> <strong> <?php echo lang_key("ABOUT_ENVIRONMENT"); ?></strong>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label for="name"><?php echo lang_key("PHP_VERSION"); ?></label><input type="text" class="form-control" readonly="readonly" placeholder="<?php echo phpversion(); ?>" />
+                <?php echo lang_key("PHP_VERSION_notes"); ?>
+              </div>
+              <div class="form-group">
+                <label for="name"><?php echo lang_key("DATABASE_ENGINE"); ?></label>
+                <input type="text" class="form-control" readonly="readonly" placeholder="<?php echo getMySQLVersion(); ?>" />
+                <?php echo lang_key("DATABASE_ENGINE_notes"); ?>
+              </div>
+              <div class="form-group">
+                <label for="name"><?php echo lang_key("LOADED_PHP_MODULES"); ?></label>
+                <input type="text" class="form-control" readonly="readonly" placeholder="<?php print_r(get_loaded_extensions()); ?>" />
+                <?php echo lang_key("LOADED_PHP_MODULES_notes"); ?>
               </div>
             </div>
-            <!-- /.card-->
+            <!-- /.row-->
+            </div>
+          </div>
+          <!-- /.card-->
 
-			            <div class="card">
+			      <div class="card">
             	<div class="card-header">
-          			<strong>About Your Application</strong>
-				</div>
-              	<div class="card-body">
-					<div class="form-group">
-						<label for="name">OpenCAD Version</label><input type="text" class="form-control" readonly="readonly" placeholder="<?php echo getOpenCADVersion(); ?>" />
-						<p><em>Note:</em> The active version of PHP.</p>
-					</div>
-                </div>
-                <!-- /.row-->
+          			<i class="fa fa-align-justify"></i> <strong><?php echo lang_key("ABOUT_ENVIRONMENT"); ?></strong>
+				      </div>
+              <div class="card-body">
+					      <div class="form-group">
+						      <label for="name"><?php echo lang_key("APPLICATION_VERSION"); ?></label><input type="text" class="form-control" readonly="readonly" placeholder="<?php echo getOpenCADVersion(); ?>" />
+						      <?php echo lang_key("APPLICATION_VERSION_notes"); ?>
+					      </div>
               </div>
+                <!-- /.row-->
             </div>
-            <!-- /.card-->
-        </main>
+          </div>
+          <!-- /.card-->
+    </main>
 
         </div>
       </div>
         <footer class="app-footer">
         <div>
-            <a href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/tail.png">CoreUI Pro</a>
-            <span>&copy; 2018 creativeLabs.</span>
+            <a href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/tail.png">OpenCAD</a>
+            <span>Powered by <a href="https://www.opencad.io">OpenCAD</a></span>
         </div>
         <div class="ml-auto">
 

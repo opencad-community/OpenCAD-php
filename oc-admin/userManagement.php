@@ -86,7 +86,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         <img class="navbar-brand-full" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/tail.png" width="30" height="25" alt="OpenCAD Logo">
       </a>
 
-      <?php include "oc-admin-includes/sidebarNav.inc.php"; ?>
+      <?php include "oc-admin-includes/topbarNav.inc.php"; ?>
 
       <ul class="nav navbar-nav ml-auto">
 
@@ -236,7 +236,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             <!-- /.row-->
             <div class="card">
                 <div class="card-header">
-                    <i class="fa fa-align-justify"></i> Striped Table
+                    <i class="fa fa-align-justify"></i> <<?php echo lang_key("USER_MANAGER"); ?>
                 </div>
                 <div class="card-body">
                     <?php echo $accessMessage;?>
