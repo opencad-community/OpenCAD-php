@@ -31,7 +31,7 @@ if (!$link) {
 }
 
 $id = $_SESSION['id'];
-$sql = "SELECT * from ".DB_PREFIX."user_departments WHERE user_id = \"$id\"";
+$sql = "SELECT user_id from ".DB_PREFIX."user_departments WHERE user_id = \"$id\"";
 $getAdminPriv = "SELECT `admin_privilege` from ".DB_PREFIX."users WHERE id = \"$id\"";
 
 $result=mysqli_query($link, $sql);

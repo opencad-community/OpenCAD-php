@@ -137,38 +137,3 @@ function changePassword()
     echo $_SESSION['profileUpdate'];
     header("Location: ".BASE_URL."/profile.php");
 }
-
-function getRanks()
-{
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
-    }
-
-    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."ranks");
-
-    if (!$result)
-    {
-        $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
-    }
-    $pdo = null;
-
-	foreach($result as $row)
-	{
-		if ($row[2] == "1")
-		{
-			echo '<option value="'.$row[1].'">'.$row[1].'</option>';
-		}
-		else if ($row[2] == "0")
-		{
-			echo '<option value="'.$row[1].'" style="background: #969aa3; color: #ffffff;" disabled>'.$row[1].'</option>';
-		}
-	}
-}

@@ -1018,7 +1018,7 @@ function getCallHistory()
         die();
     }
 
-    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."call_history");
+    $result = $pdo->query("SELECT call_id, call_type, call_primary, call_street1 call_street2, call_street3, call_narrative FROM ".DB_PREFIX."call_history");
 
     if (!$result)
     {

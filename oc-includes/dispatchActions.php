@@ -86,7 +86,7 @@ if (isset($_GET['term'])) {
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT * from ".DB_PREFIX."streets WHERE name LIKE ?");
+    $stmt = $pdo->prepare("SELECT name from ".DB_PREFIX."streets WHERE name LIKE ?");
     $result = $stmt->execute(array("%$term%"));
 
     if (!$result)
