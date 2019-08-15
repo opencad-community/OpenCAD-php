@@ -504,7 +504,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								</div>
 								<!-- ./ x_title -->
 								<div class="x_content">
-									<?php ncic_warrants();?>
+									<?php ncicGetWarrants();;?>
 								</div>
 								<!-- ./ x_content -->
 							</div>

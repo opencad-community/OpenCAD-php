@@ -86,7 +86,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <a class="navbar-brand" href="#">
         <img class="navbar-brand-full" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/tail.png" width="30" height="25" alt="OpenCAD Logo">
       </a>
-      <?php include "oc-admin-includes/sidebarNav.inc.php"; ?>
+      <?php include "oc-admin-includes/topbarNav.inc.php"; ?>
 
       <ul class="nav navbar-nav ml-auto">
 
@@ -168,6 +168,28 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 			<div class="card">
 				<div class="card-header">
+				<i class="fa fa-align-justify"></i> <?php echo lang_key("NCIC_WEAPONS_DB"); ?></div>
+				<div class="card-body">
+					<?php echo $accessMessage;?>
+					<?php ncicGetWeapons();?>
+				</div>
+				<!-- /.row-->
+			</div>
+			<!-- /.card-->
+
+			<div class="card">
+				<div class="card-header">
+				<i class="fa fa-align-justify"></i> <?php echo lang_key("NCIC_WARNINGS_DB"); ?></div>
+				<div class="card-body">
+					<?php echo $accessMessage;?>
+					<?php ncicGetWarnings();?>
+				</div>
+				<!-- /.row-->
+			</div>
+			<!-- /.card-->
+
+			<div class="card">
+				<div class="card-header">
 				<i class="fa fa-align-justify"></i> Civilian Weapons</div>
 				<div class="card-body">
 					<?php echo $accessMessage;?>
@@ -177,7 +199,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			</div>
 			<!-- /.card-->
 
-        </main>
+    </main>
 
         </div>
       </div>
