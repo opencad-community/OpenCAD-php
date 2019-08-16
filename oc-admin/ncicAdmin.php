@@ -146,9 +146,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <div class="animated fadeIn">
 			<div class="card">
 				<div class="card-header">
-				<i class="fa fa-align-justify"></i> Civilian Identities</div>
+				<i class="fa fa-align-justify"></i> <?php echo lang_key("NCIC_NAMES_DB"); ?></div>
 				<div class="card-body">
-					<?php echo $accessMessage;?>
+					<?php echo $nameMessage;?>
 					<?php ncicGetNames();?>
 				</div>
 				<!-- /.row-->
@@ -157,9 +157,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 			<div class="card">
 				<div class="card-header">
-				<i class="fa fa-align-justify"></i> Civilian Vehicles</div>
+				<i class="fa fa-align-justify"></i> <?php echo lang_key("NCIC_VEHICLES_DB"); ?></div>
 				<div class="card-body">
-					<?php echo $accessMessage;?>
+					<?php echo $plateMessage;?>
 					<?php ncicGetPlates();?>
 				</div>
 				<!-- /.row-->
@@ -170,7 +170,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				<div class="card-header">
 				<i class="fa fa-align-justify"></i> <?php echo lang_key("NCIC_WEAPONS_DB"); ?></div>
 				<div class="card-body">
-					<?php echo $accessMessage;?>
+					<?php echo $weaponMessage;?>
 					<?php ncicGetWeapons();?>
 				</div>
 				<!-- /.row-->
@@ -181,7 +181,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				<div class="card-header">
 				<i class="fa fa-align-justify"></i> <?php echo lang_key("NCIC_WARNINGS_DB"); ?></div>
 				<div class="card-body">
-					<?php echo $accessMessage;?>
+					<?php echo $warningMessage;?>
 					<?php ncicGetWarnings();?>
 				</div>
 				<!-- /.row-->
@@ -190,10 +190,21 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 			<div class="card">
 				<div class="card-header">
-				<i class="fa fa-align-justify"></i> Civilian Weapons</div>
+				<i class="fa fa-align-justify"></i> <?php echo lang_key("NCIC_WARRANTS_DB"); ?></div>
 				<div class="card-body">
-					<?php echo $accessMessage;?>
-					<?php ncicGetWeapons();?>
+					<?php echo $warrantMessage;?>
+					<?php ncicGetWarrants();?>
+				</div>
+				<!-- /.row-->
+			</div>
+			<!-- /.card-->
+
+			<div class="card">
+				<div class="card-header">
+				<i class="fa fa-align-justify"></i> <?php echo lang_key("NCIC_ARRESTS_DB"); ?></div>
+				<div class="card-body">
+					<?php echo $arrestMessage;?>
+					<?php ncicGetArrests();?>
 				</div>
 				<!-- /.row-->
 			</div>
@@ -217,6 +228,24 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     <?php
     include (__DIR__ . "/oc-admin-includes/globalModals.inc.php");
     include (__DIR__ . "/../oc-includes/jquery-colsolidated.inc.php"); ?>
+
+        <script>
+    $(function() {
+        $("#datepicker").datepicker({
+            dateFormat: 'yy-mm-dd'
+        });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+
+        $('#pendingUsers').DataTable({
+            paging: false,
+            searching: false
+        });
+
+    });
+    </script>
 </body>
 
             <script type="text/javascript"

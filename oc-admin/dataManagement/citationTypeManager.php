@@ -145,7 +145,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <div class="animated fadeIn">
             <div class="card">
                       <div class="card-header">
-          <i class="fa fa-align-justify"></i> Access Requests</div>
+          <i class="fa fa-align-justify"></i> <?php echo lang_key("CITATIONTYPE_MANAGER"); ?></div>
               <div class="card-body">
                                     <?php echo $accessMessage;?>
                                     <?php getCitationTypes();?>

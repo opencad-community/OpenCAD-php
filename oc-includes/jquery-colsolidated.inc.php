@@ -1,6 +1,11 @@
     <!-- jQuery -->
     <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/jquery/dist/jquery.min.js"></script>
     
+    <!-- popper.js -->
+    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/popper/popper.min.js"></script>
+    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/popper/popper-utils.min.js"></script>
+    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/tooltip.js"></script>
+
     <!-- Bootstrap -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
@@ -56,19 +61,8 @@
     <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/pnotify/dist/pnotify.buttons.js"></script>
     <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/pnotify/dist/pnotify.nonblock.js"></script>
 
-    <!-- popper.js -->
-    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/popper/popper.min.js"></script>
-    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/popper/popper-utils.min.js"></script>
-    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/tooltip.js"></script>
-
     <!-- Custom Theme Scripts -->
     <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/js/theme.js"></script>
     <script src="<?php echo BASE_URL; ?>/oc-includes/custom.js"></script>
     <script src="<?php echo BASE_URL; ?>/oc-includes/OpenCAD.js"></script>
 
-    <script>
-    $('#ui-view').ajaxLoad();
-    $(document).ajaxComplete(function() {
-      Pace.restart()
-    });
-  </script>

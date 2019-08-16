@@ -917,7 +917,7 @@ function delete_warrant()
     header("Location: ".BASE_URL."/cad.php");
 }
 
-function ncic_arrests()
+function ncicGetArrests()
 {
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -988,7 +988,7 @@ function ncic_arrests()
     }
 }
 
-function ncic_warrants()
+function ncicGetWarrants();
 {
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -1071,7 +1071,7 @@ function ncic_warrants()
     }
 }
 
-function ncic_citations()
+function ncicGetCitations()
 {
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -1142,7 +1142,7 @@ function ncic_citations()
     }
 }
 
-function ncic_warnings()
+function ncicGetWarnings();
 {
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
