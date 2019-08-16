@@ -415,6 +415,27 @@ $arrLang["LOADED_PHP_MODULES_notes"] = "About Your Environment";
 $arrLang["ABOUT_YOUR_APPLICATION"] = "About Your Environment";
 $arrLang["APPLICATION_VERSION"] = "About Your Environment";
 $arrLang["APPLICATION_VERSION_notes"] = "<em>Note:</em> The active version of PHP.</p>";
+$arrLang["CITATIONTYPE_MANAGER"] = "Citation Type Manager";
+$arrLang["CITATIONTYPE_MANAGER_none"] = "No results found in the <em>Citation Type</em> datbase";
+$arrLang["DEPARTMENT_MANAGER"] = "Department Manager";
+$arrLang["DEPARTMENT_MANAGER_none"] = "No results found in the <em>Department</em> datbase";
+$arrLang["INCIDENTTYPE_MANAGER"] = "Incident Type Manager";
+$arrLang["INCIDENTTYPE_MANAGER_none"] = "No results found in the <em>Incident Type</em> datbase";
+$arrLang["CITATIONTYPE_MANAGER"] = "Citation Type Manager";
+$arrLang["CITATIONTYPE_MANAGER_none"] = "No results found in the <em>Citation Type</em> datbase";
+$arrLang["RADIO_CODE_MANAGER"] = "Radio Code Manager";
+$arrLang["RADIO_CODE_MANAGER_none"] = "No results found in the <em>Radio Code</em> datbase";
+$arrLang["STREET_MANAGER"] = "Street Manager";
+$arrLang["STREET_MANAGER_none"] = "No results found in the <em>Street</em> datbase";
+$arrLang["VEHICLE_MANAGER"] = "Vehicle Manager";
+$arrLang["VEHICLE_MANAGER_none"] = "No results found in the <em>Vehicle</em> datbase";
+$arrLang["WARNINGTYPE_MANAGER"] = "Warning Type Manager";
+$arrLang["WARNINGTYPE_MANAGER_none"] = "No results found in the <em>Warning Type</em> datbase";
+$arrLang["WARRANTTYPE_MANAGER"] = "Warrant Type Manager";
+$arrLang["WARRANTTYPE_MANAGER_none"] = "No results found in the <em>Warrant Type</em> datbase";
+$arrLang["WEAPON_MANAGER"] = "Weapon Manager";
+$arrLang["WEAPON_MANAGER_none"] = "No results found in the <em>weapons</em> datbase";
+$arrLang["ABOUT_OPENCAD"] = "About OpenCAD";
 //** End Administrator/Moderator Console Strings  **/
 
 //** Begin Civillian Console Strings **/
@@ -429,7 +450,7 @@ $arrLang["MY_WARRANTS"] = "My Warrants";
 $arrLang["MY_WARRANTS_none"] = "No results found in the warrants database.";
 $arrLang["CREATE_A_CALL"] = "Create A Call";
 $arrLang["ADD_NEW_IDENTITY"] = "Add New Identity";
-$arrLang["Add_ADD_NEW_PLATE"] = "Add New Plate";
+$arrLang["ADD_NEW_PLATE"] = "Add New Plate";
 $arrLang["ADD_NEW_WEAPON"] = "Add New Weapon";
 $arrLang["CIVILLIAN_DASHBOARD"] = "Civillian Dashboard";
 $arrLang["VIEW_WARRANTS"] = "View Warrans";
