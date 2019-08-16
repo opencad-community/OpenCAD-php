@@ -15,7 +15,7 @@
           <a class="nav-item dropdown-toggle" data-toggle="dropdown" href="#" role="tab" aria-haspopup="true" aria-expanded="false"><i class="fas fa-database" style="color:black"></i> <?php echo lang_key("DATA_MANAGER"); ?></a>
           <div class="dropdown-menu">
             <a class="dropdown-item" href="<?php echo BASE_URL . "/oc-admin/dataManagement/citationTypeManager.php"; ?>"><?php echo lang_key("CITATIONTYPE_MANAGER"); ?></a>
-            <a class="dropdown-item" href="<?php echo BASE_URL . "/oc-admin/dataManagement/departmentManager.php"; ?>"><?php echo lang_key("DEPARTMENT_MANAGER"); ?></a>
+            <a class="dropdown-item" href="<?php echo BASE_URL . "/oc-admin/dataManagement/departmentsManager.php"; ?>"><?php echo lang_key("DEPARTMENT_MANAGER"); ?></a>
             <a class="dropdown-item" href="<?php echo BASE_URL . "/oc-admin/dataManagement/incidentTypeManager.php"; ?>"><?php echo lang_key("INCIDENTTYPE_MANAGER"); ?></a>
             <a class="dropdown-item" href="<?php echo BASE_URL . "/oc-admin/dataManagement/radioCodeManager.php"; ?>"><?php echo lang_key("RADIOCODE_MANAGER"); ?></a>
             <a class="dropdown-item" href="<?php echo BASE_URL . "/oc-admin/dataManagement/streetManager.php"; ?>"><?php echo lang_key("STREET_MANAGER"); ?></a>

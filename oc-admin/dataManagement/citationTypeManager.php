@@ -125,10 +125,92 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     
         </footer>
 
+    <!-- Edit Citation Modal -->
+    <div class="modal fade" id="editCitationTypeModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="editCitationTypeModal">Edit Citation Type</h4>
+                </div>
+                <!-- ./ modal-header -->
+                <div class="modal-body">
+                    <form role="form" method="post" action="<?php echo BASE_URL; ?>/actions/dataActions.php"
+                        class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">Citation Description</label>
+                            <div class="col-md-9">
+                                <input data-lpignore='true' type="text" name="citation_description" class="form-control" id="citation_description" required />
+                                <span class="fas fa-road form-control-feedback right" aria-hidden="true"></span>
+                            </div>
+                            <!-- ./ col-sm-9 -->
+                        </div>
+                        <!-- ./ form-group -->
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">Citation Fine (Reccomended)</label>
+                            <div class="col-md-9">
+                                <input data-lpignore='true' type="text" name="citation_fine" class="form-control" id="citation_fine"/>
+                                <span class="fas fa-map form-control-feedback right" aria-hidden="true"></span>
+                            </div>
+                            <!-- ./ col-sm-9 -->
+                        </div>
+                        <!-- ./ form-group -->
+                </div>
+                <!-- ./ modal-body -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="hidden" name="id" id="id" aria-hidden="true">
+                    <input type="submit" name="editCitationType" class="btn btn-primary" value="Edit Citation Type" />
+                </div>
+                <!-- ./ modal-footer -->
+                </form>
+            </div>
+            <!-- ./ modal-content -->
+        </div>
+        <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
+
     <?php
     include ( ABSPATH . "oc-admin/oc-admin-includes/globalModals.inc.php");
     include ( ABSPATH . "/oc-includes/jquery-colsolidated.inc.php"); ?>
 </body>
+
+    <script>
+    $(document).ready(function() {
+        $('#allCitationTpyes').DataTable({});
+    });
+    </script>
+
+    <script>
+    $('#editCitationTypeModal').on('show.bs.modal', function(e) {
+        var $modal = $(this),
+            id= e.relatedTarget.id;
+
+        $.ajax({
+            cache: false,
+            type: 'POST',
+            url: '<?php echo BASE_URL; ?>/actions/dataActions.php',
+            data: {
+                'getCitationTypeDetails': 'yes',
+                'id': id
+            },
+            success: function(result) {
+                console.log(result);
+                data = JSON.parse(result);
+
+                $('input[name="citation_fine"]').val(data['citation_fine']);
+                $('input[name="citation_description"]').val(data['citation_description']);
+                $('input[name="id"]').val(data['id']);
+            },
+
+            error: function(exception) {
+                alert('Exeption:' + exception);
+            }
+        });
+    })
+    </script>
 
             <script type="text/javascript"
         src="https://jira.opencad.io/s/a0c4d8ca8eced10a4b49aaf45ec76490-T/-f9bgig/77001/9e193173deda371ba40b4eda00f7488e/2.0.24/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=ede74ac1">
