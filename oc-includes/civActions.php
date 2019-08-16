@@ -767,7 +767,7 @@ function create_warrant()
     header("Location:".BASE_URL."/civilian.php");
 }
 
-function ncic_warrants()
+function ncicGetWarrants();
 {
     $uid = $_SESSION['id'];
 

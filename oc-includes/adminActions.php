@@ -421,8 +421,7 @@ function getUserGroupsApproved($uid)
             if ( ( MODERATOR_REMOVE_GROUP == true ) )
             {
                 echo "&nbsp;<i class='fas fa-user-times delete_group' style='font-size:16px;color:red;' data-dept-id=".$row[1]." data-user-id=".$uid."></i>" . $row[0] . "<br/>";
-            } else { 
-            }
+            } else {}
         }
     } else {
         foreach($result as $row)
@@ -718,8 +717,7 @@ function getUsers()
     ';
 }
 
-//Function to suspend a user account
-// TODO: Add reason, duration
+
 function suspendUser()
 {
     session_start();
@@ -760,8 +758,6 @@ function suspendUser()
     sleep(1);
     header("Location:".BASE_URL."/oc-admin/userManagement.php");
 }
-
-/* Function to Suspend a user with a Reason */
 
 function suspendUserWithReason()
 {

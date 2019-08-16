@@ -388,9 +388,8 @@ $arrLang["CAD_USER_MANAGEMENT"] = "CAD User Management";
 $arrLang["ACCOUNT_MANAGEMENT"] = "Account Management";
 $arrLang["SUSPEND_WITH_REASON"] = "Suspend With Reason";
 $arrLang["SUSPEND_WITHOUT_REASON"] = "Suspend Without Reason";
-$arrLang["NCIC_EDITOR"] = "NCIC Editor";
-$arrLang["NCIC_NAMES_DB"] = "No results found in the NCIC Names database.";
-$arrLang["NCIC_NAMES_DB_none"] = "NCIC Names Database";
+$arrLang["NCIC_NAMES_DB"] = "NCIC Names Database"; 
+$arrLang["NCIC_NAMES_DB_none"] = "No results found in the NCIC Names database.";
 $arrLang["NCIC_VEHICLES_DB"] = "NCIC Vehicles Database";
 $arrLang["NCIC_VEHICLES_DB_none"] = "No results found in the NCIC Vehicles database.";
 $arrLang["NCIC_WEAPONS_DB"] = "NCIC Weapons Database";
@@ -403,6 +402,19 @@ $arrLang["NCIC_ARRESTS_DB"] = "NCIC Arrests Database";
 $arrLang["NCIC_ARRESTS_DB_none"] = "No results found in the NCIC Arrests database.";
 $arrLang["NCIC_WARRANTS_DB"] = "NCIC Warrants Database";
 $arrLang["NCIC_WARRANTS_DB_none"] = "No results found in the NCIC Warrants database";
+$arrLang["USER_MANAGER"] = "Users";
+$arrLang["NCIC_EDITOR"] = "NCIC Editor";
+$arrLang["DATA_MANAGER"] = "Data Manager";
+$arrLang["ABOUT_ENVIRONMENT"] = "About Your Environment";
+$arrLang["PHP_VERSION"] = "PHP Version";
+$arrLang["PHP_VERSION_notes"] = "<em>Note:</em> The active version of PHP.</p>";
+$arrLang["DATABASE_ENGINE"] = "About Your Environment";
+$arrLang["ACTIVE_DATABASE_ENGINE_notes"] = "About Your Environment";
+$arrLang["LOADED_PHP_MODULES"] = "About Your Environment";
+$arrLang["LOADED_PHP_MODULES_notes"] = "About Your Environment";
+$arrLang["ABOUT_YOUR_APPLICATION"] = "About Your Environment";
+$arrLang["APPLICATION_VERSION"] = "About Your Environment";
+$arrLang["APPLICATION_VERSION_notes"] = "<em>Note:</em> The active version of PHP.</p>";
 //** End Administrator/Moderator Console Strings  **/
 
 //** Begin Civillian Console Strings **/
