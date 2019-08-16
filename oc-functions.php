@@ -54,7 +54,10 @@ if(file_exists(__DIR__.'/oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.
 
 if ( OC_DEBUG == "true" )
 	{	
-		session_start();
+		if(session_id() == '' || !isset($_SESSION)) {
+    		// session isn't started
+    		session_start();
+		}
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);

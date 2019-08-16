@@ -16,7 +16,10 @@
 
 if(ENABLE_API_SECURITY === true)
 {
+    if(session_id() == '' || !isset($_SESSION)) {
+    // session isn't started
     session_start();
+    }
     if(hash('md5', session_id().getApiKey()) !== $_COOKIE['aljksdz7'])
     {
         $headers = $_SERVER['PHP_AUTH_DIGEST'];

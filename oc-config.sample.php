@@ -184,7 +184,7 @@ define('POLICE_NCIC', <POLICE_NCIC>);
  * 
  * These settings will likely be moved to a *_options table in a future version
  * 
- * since OpenCAD Version OpenCAD version 0.3.0
+ * since OpenCAD version 0.3.0
  * 
  **/
 define('POLICE_CALL_SELFASSIGN', <POLICE_CALL_SELFASSIGN>);
@@ -266,7 +266,7 @@ define('POLICE_CALL_SELFASSIGN', <POLICE_CALL_SELFASSIGN>);
  * 
  * These settings will likely be moved to a *_options table in a future version
  * 
- * since OpenCAD Version OpenCAD version 0.3.0
+ * since OpenCAD version 0.3.0
  **/
 define('FIRE_CALL_SELFASSIGN', <FIRE_CALL_SELFASSIGN>);
 
@@ -342,7 +342,7 @@ define('FIRE_CALL_SELFASSIGN', <FIRE_CALL_SELFASSIGN>);
  * 
  * These settings will likely be moved to a *_options table in a future version
  * 
- * since OpenCAD Version OpenCAD version 0.3.0
+ * since OpenCAD version 0.3.0
  **/
 define('EMS_CALL_SELFASSIGN', <EMS_CALL_SELFASSIGN>);
 
@@ -418,7 +418,7 @@ define('ROADSIDE_NCIC_PLATE', <ROADSIDE_NCIC_PLATE>);
  * 
  * These settings will likely be moved to a *_options table in a future version
  * 
- * since OpenCAD Version OpenCAD version 0.3.0
+ * since OpenCAD version 0.3.0
  **/
 define('ROADSIDE_CALL_SELFASSIGN', <ROADSIDE_CALL_SELFASSIGN>);
 
@@ -618,14 +618,26 @@ define('MODERATOR_DELETE_USER', <MODERATOR_DELETE_USER>);
 define('MODERATOR_NCIC_EDITOR', <MODERATOR_NCIC_EDITOR>);
 
 /**#@+
-  * MODERATOR_DATA_MANAGER
+  * MODERATOR_USER_MANAGER
   *
-  * If 'true' then Moderators will be able to access the Game Data Manager,
-  * else if 'false' then Moderators will not be able to access the Gam Data Manager.
+  * If 'true' then Moderators will be able to access the User Manager,
+  * else if 'false' then Moderators will not be able to access the User Data Manager.
   *
   * These settings will likely be moved to an *_options table in a future version.
   *
-  * @since OpenCAD version OpenCAD version 0.3.0
+  * @since OpenCAD version 0.3.1
+  **/
+  define('MODERATOR_USER_MANAGER', <MODERATOR_USER_MANAGER>);
+
+/**#@+
+  * MODERATOR_DATA_MANAGER
+  *
+  * If 'true' then Moderators will be able to access the Game Data Manager,
+  * else if 'false' then Moderators will not be able to access the Game Data Manager.
+  *
+  * These settings will likely be moved to an *_options table in a future version.
+  *
+  * @since OpenCAD version 0.3.0
   **/
   define('MODERATOR_DATA_MANAGER', <MODERATOR_DATA_MANAGER>);
 
