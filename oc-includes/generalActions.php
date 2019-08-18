@@ -14,9 +14,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     This file handles all actions for admin.php script
 */
 
-require_once(__DIR__ . "/../oc-config.php");
-require_once(__DIR__ . "/../oc-functions.php");
-include_once(__DIR__ . "/../oc-content/plugins/api_auth.php");
+    require_once('../oc-config.php');
+    require_once( ABSPATH . '/oc-functions.php');
+    require_once( ABSPATH . "/oc-content/plugins/api_auth.php");
 
 /**
  * Patch notes:
