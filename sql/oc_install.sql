@@ -180,6 +180,23 @@ CREATE TABLE `<DB_PREFIX>ncic_citations` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
+DROP TABLE IF EXISTS `<DB_PREFIX>ncic_plates`;
+CREATE TABLE `<DB_PREFIX>ncic_plates` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name_id` int(11) NOT NULL COMMENT 'Links to ncic_names db for driver information',
+  `veh_plate` text NOT NULL,
+  `veh_make` text NOT NULL,
+  `veh_model` text NOT NULL,
+  `veh_pcolor` text NOT NULL,
+  `veh_scolor` text NOT NULL,
+  `veh_insurance` set('VALID','EXPIRED','CANCELED','SUSPENDED','Unknown') DEFAULT 'VALID',
+  `veh_insurance type` set('CTP','Third Party','Comprehensive') DEFAULT 'CTP',
+  `flags` set('NONE','STOLEN','WANTED','SUSPENDED REGISTRATION','CANCELED REGISTRATION','EXPIRED REGISTRATION','INSURANCE FLAG','DRIVER FLAG','NO INSURANCE') DEFAULT NULL,
+  `veh_reg_state` set('Los Santos','Blaine County','San Andreas') DEFAULT NULL,
+  `notes` text DEFAULT NULL COMMENT 'Any special flags visible to dispatchers',
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 DROP TABLE IF EXISTS `<DB_PREFIX>ncic_names`;
 CREATE TABLE `<DB_PREFIX>ncic_names` (
@@ -206,26 +223,6 @@ CREATE TABLE `<DB_PREFIX>ncic_names` (
   `deceased` set('NO','YES') DEFAULT 'NO',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
-
-
-DROP TABLE IF EXISTS `<DB_PREFIX>ncic_plates`;
-CREATE TABLE `<DB_PREFIX>ncic_plates` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name_id` int(11) NOT NULL COMMENT 'Links to ncic_names db for driver information',
-  `veh_plate` text NOT NULL,
-  `veh_make` text NOT NULL,
-  `veh_model` text NOT NULL,
-  `veh_pcolor` text NOT NULL,
-  `veh_scolor` text NOT NULL,
-  `veh_insurance` set('VALID','EXPIRED','CANCELED','SUSPENDED','Unknown') DEFAULT 'VALID',
-  `veh_insurance type` set('CTP','Third Party','Comprehensive') DEFAULT 'CTP',
-  `flags` set('NONE','STOLEN','WANTED','SUSPENDED REGISTRATION','CANCELED REGISTRATION','EXPIRED REGISTRATION','INSURANCE FLAG','DRIVER FLAG','NO INSURANCE') DEFAULT NULL,
-  `veh_reg_state` set('Los Santos','Blaine County','San Andreas') DEFAULT NULL,
-  `notes` text DEFAULT NULL COMMENT 'Any special flags visible to dispatchers',
-  `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
-
 
 DROP TABLE IF EXISTS `<DB_PREFIX>ncic_warnings`;
 CREATE TABLE `<DB_PREFIX>ncic_warnings` (
