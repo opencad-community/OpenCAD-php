@@ -156,7 +156,7 @@
     // *** application name
     define('EI_APPLICATION_NAME', 'OpenCAD');
     // *** version number of your application 
-    define('EI_APPLICATION_VERSION', '0.3.0 Hotfix 12 (commit 9ad28a3c87a)');
+    define('EI_APPLICATION_VERSION', '0.3.0 Hotfix 13 (commit be6cc517e43)');
     
     // *** default start file name - application start file
     define('EI_APPLICATION_START_FILE', '../index.php');
