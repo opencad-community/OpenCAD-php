@@ -5,8 +5,8 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
-DROP TABLE IF EXISTS `oc_active_users`;
-CREATE TABLE `oc_active_users` (
+DROP TABLE IF EXISTS `<DB_PREFIX>active_users`;
+CREATE TABLE `<DB_PREFIX>active_users` (
   `identifier` varchar(255) NOT NULL,
   `callsign` varchar(255) NOT NULL COMMENT 'Unit Callsign',
   `status` int(11) NOT NULL COMMENT 'Unit status, 0=busy/unavailable, 1=available, 2=dispatcher',
@@ -17,14 +17,14 @@ CREATE TABLE `oc_active_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_aop`;
-CREATE TABLE `oc_aop` (
+DROP TABLE IF EXISTS `<DB_PREFIX>aop`;
+CREATE TABLE `<DB_PREFIX>aop` (
   `aop` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_bolos_persons`;
-CREATE TABLE `oc_bolos_persons` (
+DROP TABLE IF EXISTS `<DB_PREFIX>bolos_persons`;
+CREATE TABLE `<DB_PREFIX>bolos_persons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(255) NOT NULL COMMENT 'First name of BOLO suspect.',
   `last_name` varchar(255) NOT NULL COMMENT 'Last name of BOLO suspect.',
@@ -36,8 +36,8 @@ CREATE TABLE `oc_bolos_persons` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_bolos_vehicles`;
-CREATE TABLE `oc_bolos_vehicles` (
+DROP TABLE IF EXISTS `<DB_PREFIX>bolos_vehicles`;
+CREATE TABLE `<DB_PREFIX>bolos_vehicles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `vehicle_make` varchar(255) NOT NULL COMMENT 'Make of BOLO vehicle.',
   `vehicle_model` varchar(255) NOT NULL COMMENT 'Model of BOLO vehicle.',
@@ -50,8 +50,8 @@ CREATE TABLE `oc_bolos_vehicles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_calls`;
-CREATE TABLE `oc_calls` (
+DROP TABLE IF EXISTS `<DB_PREFIX>calls`;
+CREATE TABLE `<DB_PREFIX>calls` (
   `call_id` int(11) NOT NULL,
   `call_type` text NOT NULL,
   `call_primary` text DEFAULT NULL,
@@ -62,8 +62,8 @@ CREATE TABLE `oc_calls` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_calls_users`;
-CREATE TABLE `oc_calls_users` (
+DROP TABLE IF EXISTS `<DB_PREFIX>calls_users`;
+CREATE TABLE `<DB_PREFIX>calls_users` (
   `call_id` int(11) NOT NULL,
   `identifier` varchar(255) NOT NULL,
   `callsign` varchar(255) NOT NULL,
@@ -72,8 +72,8 @@ CREATE TABLE `oc_calls_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_call_history`;
-CREATE TABLE `oc_call_history` (
+DROP TABLE IF EXISTS `<DB_PREFIX>call_history`;
+CREATE TABLE `<DB_PREFIX>call_history` (
   `call_id` int(11) NOT NULL,
   `call_type` text NOT NULL,
   `call_primary` text DEFAULT NULL,
@@ -84,14 +84,14 @@ CREATE TABLE `oc_call_history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_call_list`;
-CREATE TABLE `oc_call_list` (
+DROP TABLE IF EXISTS `<DB_PREFIX>call_list`;
+CREATE TABLE `<DB_PREFIX>call_list` (
   `call_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_citation_types`;
-CREATE TABLE `oc_citation_types` (
+DROP TABLE IF EXISTS `<DB_PREFIX>citation_types`;
+CREATE TABLE `<DB_PREFIX>citation_types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `citation_description` varchar(255) NOT NULL,
   `citation_fine` decimal(19,2) NOT NULL,
@@ -99,30 +99,30 @@ CREATE TABLE `oc_citation_types` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_civilian_names`;
-CREATE TABLE `oc_civilian_names` (
+DROP TABLE IF EXISTS `<DB_PREFIX>civilian_names`;
+CREATE TABLE `<DB_PREFIX>civilian_names` (
   `user_id` int(11) NOT NULL COMMENT 'Links to users table',
   `names_id` int(11) NOT NULL COMMENT 'Links to names table'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_colors`;
-CREATE TABLE `oc_colors` (
+DROP TABLE IF EXISTS `<DB_PREFIX>colors`;
+CREATE TABLE `<DB_PREFIX>colors` (
   `id` int(11) NOT NULL,
   `color_group` varchar(255) DEFAULT NULL,
   `color_name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_config`;
-CREATE TABLE `oc_config` (
+DROP TABLE IF EXISTS `<DB_PREFIX>config`;
+CREATE TABLE `<DB_PREFIX>config` (
   `key` varchar(80) NOT NULL,
   `value` varchar(80) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_departments`;
-CREATE TABLE `oc_departments` (
+DROP TABLE IF EXISTS `<DB_PREFIX>departments`;
+CREATE TABLE `<DB_PREFIX>departments` (
   `department_id` int(11) NOT NULL,
   `department_name` varchar(255) DEFAULT NULL COMMENT 'The functional name of the department. (eg. Police, Fire, EMS)',
   `department_short_name` varchar(10) NOT NULL COMMENT 'The name of the department. (eg. Los Angeles Police Department, Blaine County Sheriffs` Office',
@@ -131,8 +131,8 @@ CREATE TABLE `oc_departments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_dispatchers`;
-CREATE TABLE `oc_dispatchers` (
+DROP TABLE IF EXISTS `<DB_PREFIX>dispatchers`;
+CREATE TABLE `<DB_PREFIX>dispatchers` (
   `identifier` varchar(255) NOT NULL,
   `callsign` varchar(255) NOT NULL COMMENT 'Unit Callsign',
   `status` int(11) NOT NULL COMMENT 'Unit status, 0=offline, 1=online',
@@ -140,15 +140,15 @@ CREATE TABLE `oc_dispatchers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_genders`;
-CREATE TABLE `oc_genders` (
+DROP TABLE IF EXISTS `<DB_PREFIX>genders`;
+CREATE TABLE `<DB_PREFIX>genders` (
   `id` int(11) NOT NULL,
   `genders` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_incident_types`;
-CREATE TABLE `oc_incident_types` (
+DROP TABLE IF EXISTS `<DB_PREFIX>incident_types`;
+CREATE TABLE `<DB_PREFIX>incident_types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code_id` varchar(255) DEFAULT '',
   `code_name` varchar(255) NOT NULL,
@@ -156,8 +156,8 @@ CREATE TABLE `oc_incident_types` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_ncic_arrests`;
-CREATE TABLE `oc_ncic_arrests` (
+DROP TABLE IF EXISTS `<DB_PREFIX>ncic_arrests`;
+CREATE TABLE `<DB_PREFIX>ncic_arrests` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name_id` int(11) NOT NULL COMMENT 'Paired to ID of ncic_names table',
   `arrest_reason` varchar(255) NOT NULL,
@@ -168,8 +168,8 @@ CREATE TABLE `oc_ncic_arrests` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_ncic_citations`;
-CREATE TABLE `oc_ncic_citations` (
+DROP TABLE IF EXISTS `<DB_PREFIX>ncic_citations`;
+CREATE TABLE `<DB_PREFIX>ncic_citations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `status` tinyint(2) DEFAULT 0 COMMENT '0 = Pending, 1 = Approved/Active',
   `name_id` int(11) NOT NULL COMMENT 'Paired to ID of ncic_names table',
@@ -181,8 +181,8 @@ CREATE TABLE `oc_ncic_citations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_ncic_names`;
-CREATE TABLE `oc_ncic_names` (
+DROP TABLE IF EXISTS `<DB_PREFIX>ncic_names`;
+CREATE TABLE `<DB_PREFIX>ncic_names` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `submittedByName` varchar(255) NOT NULL,
   `submittedById` varchar(255) NOT NULL,
@@ -208,8 +208,8 @@ CREATE TABLE `oc_ncic_names` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_ncic_plates`;
-CREATE TABLE `oc_ncic_plates` (
+DROP TABLE IF EXISTS `<DB_PREFIX>ncic_plates`;
+CREATE TABLE `<DB_PREFIX>ncic_plates` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name_id` int(11) NOT NULL COMMENT 'Links to ncic_names db for driver information',
   `veh_plate` text NOT NULL,
@@ -227,8 +227,8 @@ CREATE TABLE `oc_ncic_plates` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_ncic_warnings`;
-CREATE TABLE `oc_ncic_warnings` (
+DROP TABLE IF EXISTS `<DB_PREFIX>ncic_warnings`;
+CREATE TABLE `<DB_PREFIX>ncic_warnings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `status` tinyint(2) DEFAULT 0 COMMENT '0 = Pending, 1 = Approved/Active',
   `name_id` int(11) NOT NULL COMMENT 'Paired to ID of ncic_names table',
@@ -239,8 +239,8 @@ CREATE TABLE `oc_ncic_warnings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_ncic_warrants`;
-CREATE TABLE `oc_ncic_warrants` (
+DROP TABLE IF EXISTS `<DB_PREFIX>ncic_warrants`;
+CREATE TABLE `<DB_PREFIX>ncic_warrants` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `expiration_date` date DEFAULT NULL,
   `warrant_name` varchar(255) NOT NULL,
@@ -252,8 +252,8 @@ CREATE TABLE `oc_ncic_warrants` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_ncic_weapons`;
-CREATE TABLE `oc_ncic_weapons` (
+DROP TABLE IF EXISTS `<DB_PREFIX>ncic_weapons`;
+CREATE TABLE `<DB_PREFIX>ncic_weapons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name_id` int(11) NOT NULL COMMENT 'Links to ncic_names db for driver information',
   `weapon_type` varchar(255) NOT NULL,
@@ -264,8 +264,8 @@ CREATE TABLE `oc_ncic_weapons` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_radio_codes`;
-CREATE TABLE `oc_radio_codes` (
+DROP TABLE IF EXISTS `<DB_PREFIX>radio_codes`;
+CREATE TABLE `<DB_PREFIX>radio_codes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(10) NOT NULL,
   `code_description` varchar(255) NOT NULL,
@@ -275,15 +275,15 @@ CREATE TABLE `oc_radio_codes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_statuses`;
-CREATE TABLE `oc_statuses` (
+DROP TABLE IF EXISTS `<DB_PREFIX>statuses`;
+CREATE TABLE `<DB_PREFIX>statuses` (
   `status_id` int(11) NOT NULL,
   `status_text` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_streets`;
-CREATE TABLE `oc_streets` (
+DROP TABLE IF EXISTS `<DB_PREFIX>streets`;
+CREATE TABLE `<DB_PREFIX>streets` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key for each street',
   `name` text NOT NULL COMMENT 'Street name',
   `county` text NOT NULL COMMENT 'County name',
@@ -291,16 +291,16 @@ CREATE TABLE `oc_streets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_tones`;
-CREATE TABLE `oc_tones` (
+DROP TABLE IF EXISTS `<DB_PREFIX>tones`;
+CREATE TABLE `<DB_PREFIX>tones` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `active` set('0','1') DEFAULT '0' COMMENT '0 = inactive, 1 = active'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT COMMENT='Tones table. DO NOT ADD ROWS TO THIS TABLE';
 
 
-DROP TABLE IF EXISTS `oc_users`;
-CREATE TABLE `oc_users` (
+DROP TABLE IF EXISTS `<DB_PREFIX>users`;
+CREATE TABLE `<DB_PREFIX>users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -316,22 +316,22 @@ CREATE TABLE `oc_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT COMMENT='User table';
 
 
-DROP TABLE IF EXISTS `oc_user_departments`;
-CREATE TABLE `oc_user_departments` (
+DROP TABLE IF EXISTS `<DB_PREFIX>user_departments`;
+CREATE TABLE `<DB_PREFIX>user_departments` (
   `user_id` int(11) NOT NULL,
   `department_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_user_departments_temp`;
-CREATE TABLE `oc_user_departments_temp` (
+DROP TABLE IF EXISTS `<DB_PREFIX>user_departments_temp`;
+CREATE TABLE `<DB_PREFIX>user_departments_temp` (
   `user_id` int(11) NOT NULL,
   `department_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT COMMENT='Temporary table - stores user departments for non-approved users';
 
 
-DROP TABLE IF EXISTS `oc_vehicles`;
-CREATE TABLE `oc_vehicles` (
+DROP TABLE IF EXISTS `<DB_PREFIX>vehicles`;
+CREATE TABLE `<DB_PREFIX>vehicles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Make` varchar(100) NOT NULL,
   `Model` varchar(100) NOT NULL,
@@ -339,24 +339,24 @@ CREATE TABLE `oc_vehicles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_warning_types`;
-CREATE TABLE `oc_warning_types` (
+DROP TABLE IF EXISTS `<DB_PREFIX>warning_types`;
+CREATE TABLE `<DB_PREFIX>warning_types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `warning_description` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_warrant_types`;
-CREATE TABLE `oc_warrant_types` (
+DROP TABLE IF EXISTS `<DB_PREFIX>warrant_types`;
+CREATE TABLE `<DB_PREFIX>warrant_types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `warrant_description` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
-DROP TABLE IF EXISTS `oc_weapons`;
-CREATE TABLE `oc_weapons` (
+DROP TABLE IF EXISTS `<DB_PREFIX>weapons`;
+CREATE TABLE `<DB_PREFIX>weapons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `weapon_type` varchar(255) NOT NULL,
   `weapon_name` varchar(255) NOT NULL,
