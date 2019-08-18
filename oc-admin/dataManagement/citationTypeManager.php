@@ -173,11 +173,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     <!-- ./ modal fade bs-example-modal-lg -->
 
     <?php
-    include ( ABSPATH . "oc-admin/oc-admin-includes/globalModals.inc.php");
+    include ( ABSPATH . "/oc-admin/oc-admin-includes/globalModals.inc.php");
     include ( ABSPATH . "/oc-includes/jquery-colsolidated.inc.php"); ?>
-</body>
 
-    <script>
+        <script>
     $(document).ready(function() {
         $('#allCitationTpyes').DataTable({});
     });
@@ -191,7 +190,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         $.ajax({
             cache: false,
             type: 'POST',
-            url: '<?php echo BASE_URL; ?>/actions/dataActions.php',
+            url: '<?php echo BASE_URL; ?>/oc-admin/dataActions.php',
             data: {
                 'getCitationTypeDetails': 'yes',
                 'id': id
@@ -211,6 +210,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         });
     })
     </script>
+</body>
 
             <script type="text/javascript"
         src="https://jira.opencad.io/s/a0c4d8ca8eced10a4b49aaf45ec76490-T/-f9bgig/77001/9e193173deda371ba40b4eda00f7488e/2.0.24/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=ede74ac1">
