@@ -230,7 +230,7 @@ function getLicenseIssuers()
         die();
     }
 
-    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_names LIKE 'dl_issuer'";
+    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_names LIKE 'dl_Issued_by'";
     $stmt = $pdo->prepare( $query );
     if (!$stmt)
     {
@@ -245,7 +245,7 @@ function getLicenseIssuers()
         $row = $stmt -> fetch(PDO::FETCH_ASSOC);
         $dl_issuers = implode($row);
         // Remove "set(" at start and ");" at end.
-        $dl_issuers  = substr($dl_issuers,14,strlen($dl_issuers)-33);
+        $dl_issuers  = substr($dl_issuers,17,strlen($dl_issuers)-36);
         $dl_issuers = preg_split("/','/",$dl_issuers);
 
         foreach ($dl_issuers as $key=>$value)
