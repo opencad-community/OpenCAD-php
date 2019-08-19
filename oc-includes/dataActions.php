@@ -9,8 +9,8 @@
  This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
  **/
 
-    require_once('../oc-config.php');
-    require_once( ABSPATH . '/oc-functions.php');
+    require_once(__DIR__ . "/../oc-config.php");
+    include_once( ABSPATH . "/oc-functions.php");
     require_once( ABSPATH . "/oc-content/plugins/api_auth.php");
 
 /* This file handles all actions for admin.php script */
