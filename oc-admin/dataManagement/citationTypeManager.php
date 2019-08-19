@@ -19,6 +19,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     }
     require_once('../../oc-config.php');
     require_once( ABSPATH . '/oc-functions.php');
+    require_once( ABSPATH . '/oc-settings.php');
     require_once( ABSPATH . "/oc-includes/adminActions.php");
     require_once( ABSPATH . "/oc-includes/dataActions.php");
 
@@ -78,7 +79,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 <head>
 <?php include(ABSPATH . "/oc-includes/header.inc.php"); ?>
 
-
 <body class="app header-fixed">
 
     <header class="app-header navbar">
@@ -126,23 +126,23 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         </footer>
 
     <!-- Edit Citation Modal -->
-    <div class="modal fade" id="editCitationTypeModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal" id="editCitationTypeModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                    </button>
                     <h4 class="modal-title" id="editCitationTypeModal">Edit Citation Type</h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                    </button>
                 </div>
                 <!-- ./ modal-header -->
                 <div class="modal-body">
-                    <form role="form" method="post" action="<?php echo BASE_URL; ?>/actions/dataActions.php"
+                    <form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/dataActions.php"
                         class="form-horizontal">
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Citation Description</label>
                             <div class="col-md-9">
                                 <input data-lpignore='true' type="text" name="citation_description" class="form-control" id="citation_description" required />
-                                <span class="fas fa-road form-control-feedback right" aria-hidden="true"></span>
                             </div>
                             <!-- ./ col-sm-9 -->
                         </div>
@@ -151,7 +151,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                             <label class="col-md-3 control-label">Citation Fine (Reccomended)</label>
                             <div class="col-md-9">
                                 <input data-lpignore='true' type="text" name="citation_fine" class="form-control" id="citation_fine"/>
-                                <span class="fas fa-map form-control-feedback right" aria-hidden="true"></span>
                             </div>
                             <!-- ./ col-sm-9 -->
                         </div>
@@ -190,7 +189,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         $.ajax({
             cache: false,
             type: 'POST',
-            url: '<?php echo BASE_URL; ?>/oc-admin/dataActions.php',
+            url: '<?php echo BASE_URL; ?>/oc-includes/dataActions.php',
             data: {
                 'getCitationTypeDetails': 'yes',
                 'id': id
