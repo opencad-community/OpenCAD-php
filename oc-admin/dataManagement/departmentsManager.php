@@ -17,8 +17,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     // session isn't started
     session_start();
     }
-    require_once('../oc-config.php');
+    require_once('../../oc-config.php');
     require_once( ABSPATH . '/oc-functions.php');
+    require_once( ABSPATH . '/oc-settings.php');
     require_once( ABSPATH . "/oc-includes/adminActions.php");
     require_once( ABSPATH . "/oc-includes/dataActions.php");
 
@@ -88,57 +89,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <a class="navbar-brand" href="#">
         <img class="navbar-brand-full" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/tail.png" width="30" height="25" alt="OpenCAD Logo">
       </a>
-      <?php include "oc-admin-includes/topbarNav.inc.php"; ?>
+      <?php include( ABSPATH . "oc-admin/oc-admin-includes/topbarNav.inc.php"); ?>
 
-      <ul class="nav navbar-nav ml-auto">
-
-        <li class="nav-item dropdown">
-          <a class="nav-link nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-            <img src="<?php echo get_avatar() ?>" alt="..." class="img-avatar">
-          </a>
-          <div class="dropdown-menu dropdown-menu-right">
-            <div class="dropdown-header text-center">
-              <strong>Account</strong>
-            </div>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-bell-o"></i> Updates
-              <span class="badge badge-info">42</span>
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-envelope-o"></i> Messages
-              <span class="badge badge-success">42</span>
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-tasks"></i> Tasks
-              <span class="badge badge-danger">42</span>
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-comments"></i> Comments
-              <span class="badge badge-warning">42</span>
-            </a>
-            <div class="dropdown-header text-center">
-              <strong>Settings</strong>
-            </div>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-user"></i> Profile</a>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-wrench"></i> Settings</a>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-usd"></i> Payments
-              <span class="badge badge-dark">42</span>
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-file"></i> Projects
-              <span class="badge badge-primary">42</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-shield"></i> Lock Account</a>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-lock"></i> Logout</a>
-          </div>
-        </li>
-      </ul>
+      <?php include( ABSPATH . "oc-includes/topProfile.inc.php"); ?>
     </header>
 
       <div class="app-body">
@@ -173,28 +126,63 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     
         </footer>
 
-   <div class="modal" tabindex="-1" role="dialog" id="editDepartmentModal">
-  <div class="modal-dialog" role="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+    <!-- Edit Street Modal -->
+    <div class="modal" id="editDepartmentModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="editDepartmentModal">Edit Department</h4>
+                </div>
+                <!-- ./ modal-header -->
+                <div class="modal-body">
+                    <form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/dataActions.php" class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">Department Name</label>
+                            <div class="col-md-9">
+                                <input data-lpignore='true' type="text" name="department_name" class="form-control" id="department_name" required />
+                                <span class="fas fa-road form-control-feedback right" aria-hidden="true"></span>
+                            </div>
+                            <!-- ./ col-sm-9 -->
+                        </div>
+                        <!-- ./ form-group -->
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">Department Short Name</label>
+                            <div class="col-md-9">
+                                <input data-lpignore='true' type="text" name="department_short_name" class="form-control" id="department_short_name" required/>
+                                <span class="fas fa-map form-control-feedback right" aria-hidden="true"></span>
+                            </div>
+                            <!-- ./ col-sm-9 -->
+                        </div>
+                        <!-- ./ form-group -->
+                         <div class="form-group row">
+                            <label class="col-md-3 control-label">Description Long Name</label>
+                            <div class="col-md-9">
+                                <input data-lpignore='true' type="text" name="department_long_name" class="form-control" id="department_long_name" required />
+                                <span class="fas fa-road form-control-feedback right" aria-hidden="true"></span>
+                            </div>
+                            <!-- ./ col-sm-9 -->
+                        </div>
+                        <!-- ./ form-group -->
+                </div>
+                <!-- ./ modal-body -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="hidden" name="departmentID" id="departmentID" aria-hidden="true">
+                    <input type="submit" name="editDepartment" class="btn btn-primary" value="Edit Department" />
+                </div>
+                <!-- ./ modal-footer -->
+                </form>
+            </div>
+            <!-- ./ modal-content -->
+        </div>
+        <!-- ./ modal-dialog modal-lg -->
     </div>
-  </div>
-</div>
+    <!-- ./ modal fade bs-example-modal-lg -->
+
 
     <?php
-    include ( ABSPATH . "oc-admin/oc-admin-includes/globalModals.inc.php");
+    include ( ABSPATH . "/oc-admin/oc-admin-includes/globalModals.inc.php");
     include ( ABSPATH . "/oc-includes/jquery-colsolidated.inc.php"); ?>
 </body>
 
@@ -216,7 +204,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         $.ajax({
             cache: false,
             type: 'POST',
-            url: '<?php echo BASE_URL; ?>/actions/dataActions.php',
+            url: '<?php echo BASE_URL; ?>/oc-includes/dataActions.php',
             data: {
                 'getDepartmentDetails': 'yes',
                 'departmentID': departmentID
