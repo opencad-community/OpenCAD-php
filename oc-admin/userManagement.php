@@ -13,12 +13,13 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
-    session_start();
-
-    require_once(__DIR__ . '/../oc-config.php');
-    require_once(__DIR__ . '/../oc-functions.php');
-    include(__DIR__."/../oc-includes/adminActions.php");
-
+    if(session_id() == '' || !isset($_SESSION)) {
+      session_start();
+    }
+    require_once('../oc-config.php');
+    require_once( ABSPATH . '/oc-functions.php');
+    require_once( ABSPATH . "/oc-includes/adminActions.php");
+    require_once( ABSPATH . "/oc-includes/publicFunctions.php");
     if (empty($_SESSION['logged_in']))
     {
         header('Location: ../index.php');
@@ -33,16 +34,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     if ( $_SESSION['admin_privilege'] == 3)
     {
       if ($_SESSION['admin_privilege'] == 'Administrator')
-      {
-          //Do nothing
-      }
+      {}
     }
     else if ($_SESSION['admin_privilege'] == 2)
     {
       if ($_SESSION['admin_privilege'] == 'Moderator')
-      {
-          // Do Nothing
-      }
+      {}
     }
     else
     {
@@ -73,70 +70,17 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php include "../oc-includes/header.inc.php"; ?>
-
+<?php include(ABSPATH . "/oc-includes/header.inc.php"); ?>
 
 <body class="app header-fixed">
 
     <header class="app-header navbar">
-        <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
-        <span class="navbar-toggler-icon"></span>
-      </button>
       <a class="navbar-brand" href="#">
         <img class="navbar-brand-full" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/tail.png" width="30" height="25" alt="OpenCAD Logo">
       </a>
+      <?php include( ABSPATH . "oc-admin/oc-admin-includes/topbarNav.inc.php"); ?>
+      <?php include( ABSPATH . "oc-includes/topProfile.inc.php"); ?>
 
-      <?php include "oc-admin-includes/topbarNav.inc.php"; ?>
-
-      <ul class="nav navbar-nav ml-auto">
-
-        <li class="nav-item dropdown">
-          <a class="nav-link nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-            <img src="<?php echo get_avatar() ?>" alt="..." class="img-avatar">
-          </a>
-          <div class="dropdown-menu dropdown-menu-right">
-            <div class="dropdown-header text-center">
-              <strong>Account</strong>
-            </div>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-bell-o"></i> Updates
-              <span class="badge badge-info">42</span>
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-envelope-o"></i> Messages
-              <span class="badge badge-success">42</span>
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-tasks"></i> Tasks
-              <span class="badge badge-danger">42</span>
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-comments"></i> Comments
-              <span class="badge badge-warning">42</span>
-            </a>
-            <div class="dropdown-header text-center">
-              <strong>Settings</strong>
-            </div>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-user"></i> Profile</a>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-wrench"></i> Settings</a>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-usd"></i> Payments
-              <span class="badge badge-dark">42</span>
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-file"></i> Projects
-              <span class="badge badge-primary">42</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-shield"></i> Lock Account</a>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-lock"></i> Logout</a>
-          </div>
-        </li>
-      </ul>
     </header>
 
       <div class="app-body">
@@ -248,6 +192,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
             </div>
             <!-- /.card-->
+
         </main>
 
         </div>
@@ -260,12 +205,164 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         <div class="ml-auto">
 
         </div>
-    
         </footer>
 
-    <?php
-    include (__DIR__ . "/oc-admin-includes/globalModals.inc.php");
-    include (__DIR__ . "/../oc-includes/jquery-colsolidated.inc.php"); ?>
+            <?php
+    include ( ABSPATH . "/oc-admin/oc-admin-includes/globalModals.inc.php");
+    include ( ABSPATH . "/oc-includes/jquery-colsolidated.inc.php"); ?>
+
+
+   <!-- Edit User Modal -->
+    <div class="modal" id="editUserModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                    <!-- ./ modal-header -->
+                    <div class="modal-body">
+                        <form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/adminActions.php" class="form-horizontal">
+                            <div class="form-group row">
+                                <label class="col-md-3 control-label">Name</label>
+                                <div class="col-md-9">
+                                    <input name="name" class="form-control" id="name" />
+                                    <span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
+                                </div>
+                                <!-- ./ col-sm-9 -->
+                            </div>
+                            <!-- ./ form-group -->
+                            <div class="form-group row">
+                                <label class="col-md-3 control-label">Email</label>
+                                <div class="col-md-9">
+                                    <input type="email" name="email" class="form-control" id="Email" />
+                                    <span class="fas fa-envelope form-control-feedback right" aria-hidden="true"></span>
+                                </div>
+                                <!-- ./ col-sm-9 -->
+                            </div>
+                            <!-- ./ form-group -->
+                            <div class="form-group row">
+                                <label class="col-md-3 control-label">Identifier</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="identifier" class="form-control" id="identifier" />
+                                    <span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
+                                </div>
+                                <!-- ./ col-sm-9 -->
+                            </div>
+                            <!-- ./ form-group -->
+                            <div class="form-group row">
+                                <label class="col-md-3 control-label">User Groups</label>
+                                <div class="col-md-9">
+                                    <select name="userGroups[]" class="selectpicker form-control" id="userGroups"
+                                        multiple>
+                                        <?php getAgencies();?>
+                                    </select>
+                                </div>
+                                <!-- ./ col-sm-9 -->
+                            </div>
+                            <!-- ./ form-group -->                                               
+                    </div>
+                    <!-- ./ modal-body -->
+                    <div class="modal-footer">
+                      <input type="hidden" name="userID" id="userID">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <input type="submit" name="editUserAccount" class="btn btn-primary" value="Update User" />
+                    </div>
+                    <!-- ./ modal-footer -->
+                    </form>
+                </div>
+                <!-- ./ modal-content -->
+            </div>
+            <!-- ./ modal-dialog modal-lg -->
+        </div>
+        <!-- ./ modal fade bs-example-modal-lg -->
+
+            <!-- Change User Role Modal -->
+    <div class="modal" id="editUserRoleModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="editUserRoleModal">Change User Role</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                    <!-- ./ modal-header -->
+                    <div class="modal-body">
+                        <form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/adminActions.php"
+                            class="form-horizontal">
+                            <!-- ./ form-group -->
+                            <div class="form-group row">
+                                <label class="col-md-3 control-label">User Role</label>
+                                <div class="col-md-9">
+                                    <select name="userRole" class="selectpicker form-control" id="userRole">
+                                        <?php getRole();?>
+                                    </select>
+                                </div>
+                                <!-- ./ col-sm-9 -->
+                            </div>
+                            <!-- ./ form-group -->                                               
+                    </div>
+                    <!-- ./ modal-body -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="hidden" name="userID" id="userID">
+                        <input type="submit" name="editUserAccountRole" class="btn btn-primary" value="Update Role" />
+                    </div>
+                    <!-- ./ modal-footer -->
+                    </form>
+                </div>
+                <!-- ./ modal-content -->
+            </div>
+            <!-- ./ modal-dialog modal-lg -->
+        </div>
+        <!-- ./ modal fade bs-example-modal-lg -->
+        </div>
+
+        <!-- Change Password -->
+    <div class="modal" id="changeUserPassword" tabindex="-1" role="dialog" aria-hidden="true">
+       <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+             <div class="modal-header">
+                        <h4 class="modal-title" id="changeUserPasswordLabel">Change Password</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+              </div>
+        <!-- ./ modal-header -->
+        <div class="modal-body">
+          <form role="form" action="<?php echo BASE_URL; ?>/oc-includes/adminActions.php" method="post">
+            <div class="form-group row">
+              <label class="col-lg-2 control-label">Password</label>
+              <div class="col-lg-10">
+                <input class="form-control" type="password" name="password" id="password" size="30" maxlength="255" placeholder="Enter your new password..." value="" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?> />
+              </div>
+              <!-- ./ col-sm-9 -->
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-2 control-label">Confirm Password</label>
+              <div class="col-lg-10">
+                <input class="form-control" type="password" name="confirm_password" size="30" id="confirm_password" maxlength="255" placeholder="Retype your new password..." value="" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?> />
+              </div>
+              <!-- ./ col-sm-9 -->
+            </div>
+        </div>
+        <!-- ./ modal-body -->
+        <div class="modal-footer">
+            <input type="hidden" name="userID" id="userID">
+            <input type="submit" name="changeUserPassword" id="changeUserPassword" class="btn btn-primary" value="Change Password" />
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </form>
+        </div>
+        <!-- ./ modal-footer -->
+      </div>
+      <!-- ./ modal-content -->
+    </div>
+    <!-- ./ modal-dialog modal-lg -->
+  </div>
+  <!-- ./ modal fade bs-example-modal-lg -->
 
             <script>
         $(document).ready(function() {
@@ -277,6 +374,96 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
         });
         </script>
+
+        
+        <script>
+        $(document).ready(function() {
+            $('#allUsers').DataTable;
+        });
+
+        $('#editUserModal').on('show.bs.modal', function(e) {
+            var $modal = $(this),
+                userId = e.relatedTarget.id;
+
+            $.ajax({
+                cache: false,
+                type: 'POST',
+                url: '<?php echo BASE_URL; ?>/oc-includes/adminActions.php',
+                data: {
+                    'getUserDetails': 'yes',
+                    'userId': userId
+                },                
+                success: function(result) {
+                    data = JSON.parse(result);
+                    $('input[name="name"]').val(data['name']);
+                    $('input[name="email"]').val(data['email']);
+                    $('input[name="identifier"]').val(data['identifier']);
+                    $('input[name="userId"]').val(data['userId']);
+
+                    $("#userRole").selectpicker();
+                    for (var i = 0; i < data['role'].length; i++) {
+                        $('select[name="userRole"] option[value="' + data['role'][i] +
+                            ' selected"]').val(1);
+                    }
+                    console.log("object: %O", result)
+                    $('#userRole').selectpicker('refresh');
+                },
+
+                error: function(exception) {
+                    alert('Exeption:' + exception);
+                }
+            });
+        });
+
+         $('#editUserRoleModal').on('show.bs.modal', function(e) {
+            var $modal = $(this),
+                userId = e.relatedTarget.id;
+
+            $.ajax({
+                cache: false,
+                type: 'POST',
+                url: '<?php echo BASE_URL; ?>/oc-includes/adminActions.php',
+                data: {
+                    'getUserID': 'yes',
+                    'userId': userId
+                },
+                success: function(result) {
+                    data = JSON.parse(result);
+                    $('input[name="userID"]').val(data['userId']);
+
+                },
+
+                error: function(exception) {
+                    alert('Exeption:' + exception);
+                }
+            });
+        });
+
+
+
+        $(".delete_group").click(function() {
+            var dept_id = $(this).attr("data-dept-id");
+            var user_id = $(this).attr("data-user-id");
+            if (confirm("Are you sure to delete the selected Group?")) {
+                $.ajax({
+                    cache: false,
+                    type: 'GET',
+                    url: '<?php echo BASE_URL; ?>/oc-includes/adminActions.php',
+                    data: 'dept_id=' + dept_id + '&user_id=' + user_id,
+                    success: function(result) {
+                        //obj = jQuery.parseJSON(result);
+
+                        $("#show_group").html(result);
+                        window.location.href =
+                            '<?php echo BASE_URL; ?>/oc-admin/userManagement.php';
+
+                    }
+
+                });
+            }
+        });
+        </script>
+
 </body>
 
             <script type="text/javascript"

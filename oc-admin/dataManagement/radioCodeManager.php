@@ -88,6 +88,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       </a>
       <?php include( ABSPATH . "oc-admin/oc-admin-includes/topbarNav.inc.php"); ?>
       <?php include( ABSPATH . "oc-includes/topProfile.inc.php"); ?>
+
     </header>
 
       <div class="app-body">
@@ -97,10 +98,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <div class="animated fadeIn">
             <div class="card">
                       <div class="card-header">
-          <i class="fa fa-align-justify"></i> <?php echo lang_key("INCIDENTTYPE_MANAGER"); ?></div>
+          <i class="fa fa-align-justify"></i> <?php echo lang_key("RADIOCODE_MANAGER"); ?></div>
               <div class="card-body">
                                     <?php echo $accessMessage;?>
-                                    <?php getIncidentTypes();?>
+                                    <?php getRadioCodes();?>
                 </div>
                 <!-- /.row-->
 
@@ -122,32 +123,34 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     
         </footer>
 
-    <!-- Edit Street Modal -->
-    <div class="modal " id="editIncidentTypeModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Edit Radio Code Modal -->
+    <div class="modal" id="editRadioCodeModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="IncidentTypeModal">Edit Incident Difinition</h4>
+                    <h4 class="modal-title" id="editRadioCodeModal">Edit Radio Codes</h4>
                     <button type="button" class="close" data-dismiss="modal">
-                      <span aria-hidden="true">×</span>
+                      <span aria-hidden="true">×</span></button>
                     </button>
                 </div>
                 <!-- ./ modal-header -->
                 <div class="modal-body">
-                    <form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/dataActions.php"
+                    <form role="form" method="post" action="<?php echo BASE_URL.'/'.OCINC; ?>/dataActions.php"
                         class="form-horizontal">
                         <div class="form-group row">
-                            <label class="col-md-3 control-label">Incident Code</label>
+                            <label class="col-md-3 control-label">Radio Code</label>
                             <div class="col-md-9">
-                                <input type="text" name="incident_code" class="form-control" id="incident_code" required />
+                                <input type="text" name="code" class="form-control" id="code" required />
+                                <span class="fas fa-road form-control-feedback right" aria-hidden="true"></span>
                             </div>
                             <!-- ./ col-sm-9 -->
                         </div>
                         <!-- ./ form-group -->
                         <div class="form-group row">
-                            <label class="col-md-3 control-label">Incident Name</label>
+                            <label class="col-md-3 control-label">Code Description</label>
                             <div class="col-md-9">
-                                <input type="text" name="incident_name" class="form-control" id="incident_name" required />
+                                <input type="text" name="code_description" class="form-control" id="code_description" required />
+                                <span class="fas fa-map form-control-feedback right" aria-hidden="true"></span>
                             </div>
                             <!-- ./ col-sm-9 -->
                         </div>
@@ -156,8 +159,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <!-- ./ modal-body -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <input type="hidden" name="incidentTypeID" id="incidentTypeID" aria-hidden="true">
-                    <input type="submit" name="editIncidentType" class="btn btn-primary" value="Edit Incident Type" />
+                    <input type="hidden" name="id" id="id" aria-hidden="true">
+                    <input type="submit" name="editRadioCode" class="btn btn-primary" value="Edit Radio Code" />
                 </div>
                 <!-- ./ modal-footer -->
                 </form>
@@ -174,28 +177,28 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
         <script>
     $(document).ready(function() {
-        $('#allIncidentTypes').DataTable({});
+        $('#allRadioCodes').DataTable({});
     });
 
-    $('#editIncidentTypeModal').on('show.bs.modal', function(e) {
+    $('#editRadioCodeModal').on('show.bs.modal', function(e) {
         var $modal = $(this),
-            incidentTypeID = e.relatedTarget.id;
+            id = e.relatedTarget.id;
 
         $.ajax({
             cache: false,
             type: 'POST',
-            url: '<?php echo BASE_URL; ?>/oc-includes/dataActions.php',
+            url: '<?php echo BASE_URL; ?>/<?php echo OCINC ?>/dataActions.php',
             data: {
-                'getIncidentTypeDetails': 'yes',
-                'incidentTypeID': incidentTypeID
+                'getRadioCodeDetails': 'yes',
+                'id': id
             },
             success: function(result) {
                 console.log(result);
                 data = JSON.parse(result);
 
-                $('input[name="incident_name"]').val(data['incident_name']);
-                $('input[name="incident_code"]').val(data['incident_code']);
-                $('input[name="incidentTypeID"]').val(data['incidentTypeID']);
+                $('input[name="code"]').val(data['code']);
+                $('input[name="code_description"]').val(data['code_description']);
+                $('input[name="id"]').val(data['id']);
             },
 
             error: function(exception) {

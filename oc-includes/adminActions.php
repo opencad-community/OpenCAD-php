@@ -13,9 +13,9 @@
  */
 
 
-require_once(__DIR__  . "/../oc-config.php");
-include_once(__DIR__ . "/../oc-functions.php");
-include_once(__DIR__ . "/../oc-content/plugins/api_auth.php");
+require_once(__DIR__ . "/../oc-config.php");
+include_once( ABSPATH . "/oc-functions.php");
+include_once( ABSPATH . "/oc-content/plugins/api_auth.php");
 
 /*
 This file handles all actions for admin.php script
@@ -94,7 +94,6 @@ function deleteGroupItem()
 	if ($stmt->execute(array($user_id, $dept_id))) {
 
 		$show_record=getUserGroupsApproved($user_id);
-        //$response = json_encode(array("show_record"=>$show_record));
         echo  $show_record;
     } else {
         echo "Error updating record: " . $stmt->errorInfo();
@@ -858,7 +857,7 @@ function getUserDetails()
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT id, name, email, identifier, admin_privilege FROM ".DB_PREFIX."users WHERE ID = ?");
+    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."users WHERE id = ?");
     $resStatus = $stmt->execute(array($userId));
     $result = $stmt;
 
@@ -881,7 +880,7 @@ function getUserDetails()
     }
 
     //Pass the array and userID to getUserGroupsEditor which will return it
-    getUserGroupsEditor($encode, $userId);
+    echo json_encode($encode);
 }
 
 function getUserID()
@@ -948,7 +947,7 @@ function getUserGroupsEditor($encode, $userId)
         $counter++;
     }
 
-    echo json_encode($encode);
+//    echo json_encode($encode);
 }
 
 
@@ -1110,8 +1109,6 @@ function delete_callhistory()
 function changeUserPassword()
 {
     session_start();
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
     $userID 		= !empty($_POST['userID']) ? htmlspecialchars($_POST['userID']) : '';
 
     try{
@@ -1123,7 +1120,6 @@ function changeUserPassword()
         die();
     }
 
-    $id = $_SESSION['id'];
     $newpassword = htmlspecialchars($_POST['password']);
     $hashed_password = password_hash($newpassword, PASSWORD_DEFAULT);
 

@@ -9,8 +9,9 @@
  This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
  **/
 
-require_once(__DIR__ . "/../oc-config.php");
-include_once(__DIR__ . "/../oc-content/plugins/api_auth.php");
+    require_once(__DIR__ . "/../oc-config.php");
+    include_once( ABSPATH . "/oc-functions.php");
+    require_once( ABSPATH . "/oc-content/plugins/api_auth.php");
 
 /* This file handles all actions for admin.php script */
 
@@ -302,7 +303,7 @@ function editCitationType()
 {
     $id	        	                = !empty($_POST['id']) ? htmlspecialchars($_POST['id']) : '';
     $citation_description           = !empty($_POST['citation_description']) ? htmlspecialchars($_POST['citation_description']) : '';
-    $citation_fine  		        = !empty($_POST['citation_fine']) ? htmlspecialchars($_POST['citation_fine']) : '';
+    $citation_fine  		        = !empty($_POST['citation_fine']) ? $_POST['citation_fine'] : '';
 
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -961,7 +962,7 @@ function editRadioCode()
 
         //Let the user know their information was updated
         $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Code '.$code.' – '.$code_description.'  edited successfully.</span></div>';
-        header("Location: ".BASE_URL."/oc-admin/dataManagement/radioCodesManager.php");
+        header("Location: ".BASE_URL."/oc-admin/dataManagement/radioCodeManager.php");
     } else {
         echo "Error updating record: " . print_r($stmt->errorInfo(), true);
     }
