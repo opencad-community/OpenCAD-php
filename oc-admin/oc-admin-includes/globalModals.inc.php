@@ -20,7 +20,6 @@
                              <form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/adminActions.php"
                                  class="form-horizontal">
                                  <input name="userName" class="form-control" id="userName" />
-                                 <span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                              </form>
                          </div>
                          <!-- ./ col-sm-9 -->
@@ -30,7 +29,6 @@
                          <label class="col-md-3 control-label">Export</label>
                          <div class="col-md-9">
                              <input type="email" name="userEmail" class="form-control" id="userEmail" />
-                             <span class="fas fa-envelope form-control-feedback right" aria-hidden="true"></span>
                          </div>
                          <!-- ./ col-sm-9 -->
                      </div>
