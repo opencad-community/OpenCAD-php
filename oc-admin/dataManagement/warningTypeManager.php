@@ -19,6 +19,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     }
     require_once('../../oc-config.php');
     require_once( ABSPATH . '/oc-functions.php');
+    require_once( ABSPATH . '/oc-settings.php');
     require_once( ABSPATH . "/oc-includes/adminActions.php");
     require_once( ABSPATH . "/oc-includes/dataActions.php");
 
@@ -76,69 +77,18 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php include "../oc-includes/header.inc.php"; ?>
+<?php include(ABSPATH . "/oc-includes/header.inc.php"); ?>
 
 
 <body class="app header-fixed">
 
     <header class="app-header navbar">
-        <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
-        <span class="navbar-toggler-icon"></span>
-      </button>
       <a class="navbar-brand" href="#">
         <img class="navbar-brand-full" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/tail.png" width="30" height="25" alt="OpenCAD Logo">
       </a>
-      <?php include "oc-admin-includes/topbarNav.inc.php"; ?>
+      <?php include( ABSPATH . "oc-admin/oc-admin-includes/topbarNav.inc.php"); ?>
+      <?php include( ABSPATH . "oc-includes/topProfile.inc.php"); ?>
 
-      <ul class="nav navbar-nav ml-auto">
-
-        <li class="nav-item dropdown">
-          <a class="nav-link nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-            <img src="<?php echo get_avatar() ?>" alt="..." class="img-avatar">
-          </a>
-          <div class="dropdown-menu dropdown-menu-right">
-            <div class="dropdown-header text-center">
-              <strong>Account</strong>
-            </div>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-bell-o"></i> Updates
-              <span class="badge badge-info">42</span>
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-envelope-o"></i> Messages
-              <span class="badge badge-success">42</span>
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-tasks"></i> Tasks
-              <span class="badge badge-danger">42</span>
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-comments"></i> Comments
-              <span class="badge badge-warning">42</span>
-            </a>
-            <div class="dropdown-header text-center">
-              <strong>Settings</strong>
-            </div>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-user"></i> Profile</a>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-wrench"></i> Settings</a>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-usd"></i> Payments
-              <span class="badge badge-dark">42</span>
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-file"></i> Projects
-              <span class="badge badge-primary">42</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-shield"></i> Lock Account</a>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-lock"></i> Logout</a>
-                </div>
-            </li>
-        </ul>
     </header>
 
     <div class="app-body">
@@ -162,7 +112,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <!-- /.animated fadeIn -->  
             </div>
             <!-- /.container-fluid -->
-
+</div>
+</div>
         </main>
 
         <footer class="app-footer">
@@ -176,9 +127,79 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
         </footer>
 
+    <!-- Edit Street Modal -->
+    <div class="modal fade" id="editWarningTypeModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="editWarningTypeModal">Edit Warning</h4>
+                </div>
+                <!-- ./ modal-header -->
+                <div class="modal-body">
+                    <form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/dataActions.php"
+                        class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">Warning Description</label>
+                            <div class="col-md-9">
+                                <input type="text" name="warning_description" class="form-control" id="warning_description" />
+                                <span class="fas fa-exclamation-triangle form-control-feedback right"
+                                    aria-hidden="true"></span> </div>
+                            <!-- ./ col-sm-9 -->
+                        </div>
+                        <!-- ./ form-group -->>
+                </div>
+                <!-- ./ modal-body -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="hidden" name="warningTypeID" id="warningTypeID" aria-hidden="true">
+                    <input type="submit" name="editWarningType" class="btn btn-primary" value="Edit Warning Type" />
+                </div>
+                <!-- ./ modal-footer -->
+                </form>
+            </div>
+            <!-- ./ modal-content -->
+        </div>
+        <!-- ./ modal-dialog modal-lg -->
+    </div>
+    <!-- ./ modal fade bs-example-modal-lg -->
+
     <?php
-    include (__DIR__ . "/oc-admin-includes/globalModals.inc.php");
-    include (__DIR__ . "/../oc-includes/jquery-colsolidated.inc.php"); ?>
+    include ( ABSPATH . "/oc-admin/oc-admin-includes/globalModals.inc.php");
+    include ( ABSPATH . "/oc-includes/jquery-colsolidated.inc.php"); ?>
+
+   <script>
+    $(document).ready(function() {
+        $('#allStreets').DataTable({});
+    });
+
+    $('#editWarningTypeModal').on('show.bs.modal', function(e) {
+        var $modal = $(this),
+            warningTypeID = e.relatedTarget.id;
+
+        $.ajax({
+            cache: false,
+            type: 'POST',
+            url: '<?php echo BASE_URL; ?>/oc-includes/dataActions.php',
+            data: {
+                'getWarningTypeDetails': 'yes',
+                'warningTypeID': warningTypeID
+            },
+            success: function(result) {
+                console.log(result);
+                data = JSON.parse(result);
+
+                $('input[name="warning_description"]').val(data['warning_description']);
+                $('input[name="warningTypeID"]').val(data['warningTypeID']);
+            },
+
+            error: function(exception) {
+                alert('Exeption:' + exception);
+            }
+        });
+    })
+    </script>
 </body>
 
             <script type="text/javascript"
