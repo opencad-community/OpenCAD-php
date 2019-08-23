@@ -88,6 +88,8 @@ $arrLang['installation_guide'] = "Installation Guide";
 $arrLang['installation_type'] = "Installation Type";
 $arrLang['language'] = "Language";
 $arrLang['license'] = "License";
+$arrLang['Import'] = "Import";
+$arrLang['Export'] = "Export";
 $arrLang['loading'] = "loading";
 $arrLang['mbstring_support'] = "Multibyte String Support";
 $arrLang['magic_quotes_gpc'] = "Magic Quotes for GPC (Get/Post/Cookie)";
@@ -436,6 +438,25 @@ $arrLang["WARRANTTYPE_MANAGER_none"] = "No results found in the <em>Warrant Type
 $arrLang["WEAPON_MANAGER"] = "Weapon Manager";
 $arrLang["WEAPON_MANAGER_none"] = "No results found in the <em>weapons</em> datbase";
 $arrLang["ABOUT_OPENCAD"] = "About OpenCAD";
+$arrLang["RESET_DATA"] = "Reset Data";
+$arrLang["ENVIRONMENTAL_DATA_OPTGRP"] = "Environmental Data";
+$arrLang["STREETS"] = "Streets";
+$arrLang["VEHICLES"] = "Vehicles";
+$arrLang["WEAPONS"] = "Weapons";
+$arrLang["CIVILIAN_DATA_OPTGRP"] = "Civilian Data";
+$arrLang["IDENTITES"] = "Identites";
+$arrLang["REGISTERED_PLATES"] = "Registered Plates";
+$arrLang["REGISTERED_WEAPONS"] = "Registered Weapons";
+$arrLang["WARRANT_HISTORY"] = "Warrant History";
+$arrLang["WARNING_HISTORY"] = "Warning History";
+$arrLang["LEO_SUPPORT_DATA_OPTGRP"] = "LEO Support Data";
+$arrLang["CITATION_TYPES"] = "Citation Types";
+$arrLang["INCIDENT_TYPES"] = "Incident Types";
+$arrLang["RADIO_CODES"] = "Radio Codes";
+$arrLang["WARRANT_TYPES"] = "Warrant Types";
+$arrLang["WARNING_TYPES"] = "Warning Types";
+$arrLang["RESET_ALL_DATA_OPTGRP"] = "RESET ALL DATA (USE WITH CUATION)";
+$arrLang["RESET_ALL_DATA"] = "All Data (Use with CAUTION)";
 //** End Administrator/Moderator Console Strings  **/
 
 //** Begin Civillian Console Strings **/
