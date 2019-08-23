@@ -1,10 +1,3 @@
--- Adminer 4.7.2-dev MySQL dump
-
-SET NAMES utf8;
-SET time_zone = '+00:00';
-SET foreign_key_checks = 0;
-SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
-
 DROP TABLE IF EXISTS `<DB_PREFIX>active_users`;
 CREATE TABLE `<DB_PREFIX>active_users` (
   `identifier` varchar(255) NOT NULL,
@@ -361,4 +354,5 @@ CREATE TABLE `<DB_PREFIX>weapons` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
--- 2019-08-18 16:20:28
+INSERT INTO `<DB_PREFIX>users` (`id`, `name`, `email`, `password`, `identifier`, `admin_privilege`, `supervisor_privilege`, `password_reset`, `approved`, `suspend_reason`, `suspend_duration`) VALUES
+(1, '<NAME>', '<EMAIL>', '<PASSWORD>', '<IDENTIFIER>', 3, 1, 0, 1, NULL, NULL);
