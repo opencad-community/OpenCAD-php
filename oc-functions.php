@@ -11,6 +11,7 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
+include_once("oc-config.php");
 
 if (file_exists(getcwd().'/oc-install') && is_writable(getcwd())){
    echo "Please remove <strong>oc-install</strong> from the server befroe continuing.<br />";
@@ -34,15 +35,11 @@ if(!empty($lang) && array_key_exists($lang, $arr_active_languages)){
 	$curr_lang_direction = DEFAULT_LANGUAGE_DIRECTION;
 }
 
-if(file_exists(__DIR__.'/oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
-	include_once(__DIR__.'/oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php');
-}else if(file_exists(__DIR__.'../oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
-	include_once(__DIR__.'../oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php');
-}else if(file_exists('../../oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
-	include_once('../../oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php');
+if(file_exists( ABSPATH . '/oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php') ) {
+	include_once( ABSPATH .'/oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php' );
 }else{
-	include_once('../../../oc-content/languages/en/en.inc.php');    	
-}	
+	include_once(ABSPATH . '/oc-content/languages/en/en.inc.php');    	
+}
 
 
  if(version_compare(PHP_VERSION, '7.1', '<')) {
@@ -75,7 +72,6 @@ if(!file_exists(getcwd().'/.htaccess') && is_writable(getcwd())){
 	$root = str_replace($_SERVER['DOCUMENT_ROOT'], '', getcwd())."/oc-content/plugins/error/static";
 
 	$htaccess =	"RewriteEngine on".PHPEOL
-				."#if the request is for existent dirs, forbid the request".PHPEOL
 				."RewriteCond %{REQUEST_FILENAME} -d".PHEOL
 				."RewriteRule ^ - [R=403,L]".PHPEOL
 				."### Begin ATVG ErrorPages ###".PHP_EOL
