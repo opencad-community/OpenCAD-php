@@ -117,10 +117,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         </main>
 
         <footer class="app-footer">
-            <div>
-                <a href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/tail.png">CoreUI Pro</a>
-                <span>&copy; 2018 creativeLabs.</span>
-            </div>
+        <div>
+            <a href="https://opencad.io">OpenCAD</a>
+            <span>&copy; 2017 <?php echo date("Y"); ?>.</span>
+        </div>
             <div class="ml-auto">
 
             </div>

@@ -187,14 +187,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         </div>
       </div>
         <footer class="app-footer">
-        <div>
-            <a href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/tail.png">OpenCAD</a>
-            <span>Powered by <a href="https://www.opencad.io">OpenCAD</a></span>
-        </div>
-        <div class="ml-auto">
+          <div>
+              <a href="https://opencad.io">OpenCAD</a>
+              <span>&copy; 2017 <?php echo date("Y"); ?>.</span>
+          </div>
+          <div class="ml-auto">
 
-        </div>
-    
+          </div>
         </footer>
 
     <?php
