@@ -101,3 +101,7 @@ DROP TABLE IF EXISTS
     `permissions`;
 DROP TABLE IF EXISTS
     `codes`;
+DROP TABLE IF EXISTS
+    `civilian_names`;
+DROP TABLE IF EXISTS
+    `<DB_PREFIX>civilian_names`;
