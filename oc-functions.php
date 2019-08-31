@@ -13,7 +13,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 include_once("oc-config.php");
 
-if (file_exists(getcwd().'/oc-install') && is_writable(getcwd())){
+if (file_exists(getcwd().'/oc-install') && is_writable(getcwd()) && OC_DEVELOP == false ){
    echo "Please remove <strong>oc-install</strong> from the server befroe continuing.<br />";
    echo "<a href=//".$_SERVER['SERVER_NAME'].">Refresh OpenCAD Login</a>";
    die();
@@ -73,7 +73,7 @@ if(!file_exists(getcwd().'/.htaccess') && is_writable(getcwd())){
 
 	$htaccess =	"RewriteEngine on".PHPEOL
 				."RewriteCond %{REQUEST_FILENAME} -d".PHEOL
-				."RewriteRule ^ - [R=403,L]".PHPEOL
+				."RewriteRule ^ - [R=403,L]".PHP_EOL
 				."### Begin ATVG ErrorPages ###".PHP_EOL
 				."ErrorDocument 403 $root/403.php".PHP_EOL
 				."ErrorDocument 404 $root/404.php".PHP_EOL

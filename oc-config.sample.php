@@ -801,6 +801,20 @@ define('USE_GRAVATAR', <USE_GRAVATAR>);
   **/
   define('OC_DEBUG', false);
 
+    /**#@+
+  * OC_DEVELOP  
+  *
+  * If 'true' OpenCAD will ignore check for the presence of the oc-install directory,
+  * Otherwise, if 'false' then OpenCAD will check for the presence of the oc-install directory.
+  * 
+  * ONLY USE IN DEVELOPMENT ENVIRONMENTS. DO NOT ENABLE IN PRODUCTION
+  *
+  * DEFAULT VALUE: false
+	*
+  * @since OpenCAD OpenCAD version 0.3.1
+  **/
+  define('OC_DEVELOP', true);
+
 /** That's all, stop editing! Happy roleplaying. **/
 /**    Absolute path to the OpenCAD directory.   **/
 if ( !defined('ABSPATH') )
