@@ -551,7 +551,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							</div>
 							<!-- ./ form-group -->
 							<div class="form-group row">
-								<label class="col-lg-5 control-label">Date of Birth</label>
+								<label class="col-lg-2 control-label">Date of Birth</label>
 								<div class="col-lg-10">
 									<input type="text" name="civDobReq" class="form-control" id="datepicker"
 										maxlength="10" value="<?php echo $civDob;?>" required />
@@ -588,17 +588,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 									<select name="civRaceReq" class="form-control selectpicker" id="civRaceReq"
 										title="Select a race or ethnicity" data-live-search="true" required>
 										<?php getRaces(); ?>
-									</select>
-								</div>
-								<!-- ./ col-sm-9 -->
-							</div>
-							<!-- ./ form-group -->
-							<div class="form-group row">
-								<label class="col-lg-2 control-label">License Issuer</label>
-								<div class="col-lg-10">
-									<select name="civDLIssuer" class="form-control selectpicker" id="civDLClass"
-										title="Select a license issuer" required>
-										<?php getLicenseIssuers(); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -870,9 +859,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								</div>
 								<!-- ./ col-sm-9 -->
 							</div>
-
 							<!-- ./ form-group -->
-
 					</div>
 					<!-- ./ modal-body -->
 					<div class="modal-footer">
@@ -948,18 +935,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 									<select class="form-control selectpicker veh_scolor" name="veh_scolor"
 										data-live-search="true" required>
 										<?php getColors();?>
-									</select>
-								</div>
-								<!-- ./ col-sm-9 -->
-							</div>
-							<!-- ./ form-group -->
-							<div class="form-group row">
-								<label class="col-lg-2 control-label">Insurance Status</label>
-								<div class="col-lg-10">
-									<select class="form-control veh_insurance_picker" name="veh_insurance"
-										id="insurance_edit" required>
-										<option value="VALID"> Valid </option>
-										<option value="EXPIRED"> Expired </option>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
