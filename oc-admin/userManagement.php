@@ -80,7 +80,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       </a>
       <?php include( ABSPATH . "oc-admin/oc-admin-includes/topbarNav.inc.php"); ?>
       <?php include( ABSPATH . "oc-includes/topProfile.inc.php"); ?>
-
     </header>
 
       <div class="app-body">
