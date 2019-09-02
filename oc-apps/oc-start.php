@@ -16,7 +16,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     // session isn't started
     session_start();
     }
-require_once( "oc-config.php" );
+require_once( "../oc-config.php" );
 require_once( ABSPATH . '/oc-functions.php');
 require_once( ABSPATH . "/oc-includes/generalActions.php" );
 
@@ -127,7 +127,7 @@ mysqli_close($link);
 
 <html lang="en">
    <!DOCTYPE html>
-   <?php include "./oc-includes/header.inc.php"; ?>
+   <?php include_once(ABSPATH."oc-includes/header.inc.php"); ?>
    <body id="body">
       <div id="page-wrapper">
          <div class="container-fluid">

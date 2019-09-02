@@ -12,7 +12,9 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
-require_once(__DIR__ . "/../oc-config.php");
+require_once("../oc-config.php");
+require_once(ABSPATH . "/oc-functions.php");
+require_once(ABSPATH . "/oc-settings.php");
 
 if(!empty($_POST))
 {
@@ -87,7 +89,7 @@ if(!empty($_POST))
     $_SESSION['admin_privilege'] = $result['admin_privilege']; //Set callsign to default to identifier until the unit changes it
     if(ENABLE_API_SECURITY === true)
         setcookie("aljksdz7", hash('md5', session_id().getApiKey()), time() + (86400 * 7), "/");
-    header("Location:".BASE_URL."/dashboard.php");
+    header("Location:".BASE_URL.OCAPPS."/oc-start.php");
 }
 
 ?>
