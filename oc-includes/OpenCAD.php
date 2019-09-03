@@ -1,3 +1,10 @@
+<?php
+    require_once('../oc-config.php');
+    require_once( ABSPATH . '/oc-functions.php');
+    require_once( ABSPATH . '/oc-settings.php');
+    ?>
+
+<script>
 /*!
  * Open source CAD system for RolePlaying Communities.
  * Copyright (C) 2017 Shane Gill
@@ -44,7 +51,7 @@ function deleteUser(uid) {
     {
         $.ajax({
         type: "POST",
-        url: hdir + "actions/dispatchActions.php",
+        url: hdir + "<?php echo ABSPATH . OCINC ?>/dispatchActions.php",
         data: {
             deleteUser: 'yes',
             uid: uid
@@ -88,7 +95,7 @@ function deleteStreet(streetID) {
         
         $.ajax({
         type: "POST",
-        url: hdir + "actions/dataActions.php",
+        url: hdir + "<?php echo ABSPATH . OCINC ?>/dataActions.php",
         data: {
             deleteStreet: 'yes',
             streetID : streetID
@@ -131,7 +138,7 @@ function deleteVehicle(vehicleID) {
         
         $.ajax({
         type: "POST",
-        url: hdir + "actions/dataActions.php",
+        url: hdir + "<?php echo ABSPATH . OCINC ?>/dataActions.php",
         data: {
             deleteVehicle: 'yes',
             vehicleID : vehicleID
@@ -303,8 +310,7 @@ $('#ncic_name_btn').on('click', function(e) {
         cache: false,
         type: 'POST',
         url: hdir + "/actions/ncic.php",
-        data: {'ncicName': 'yes',
-                'ncic_name' : name},
+        data:           'ncic_name' : name},
 
         success: function(result)
         {
@@ -441,7 +447,7 @@ $('#ncic_weapon_btn').on('click', function(e) {
     $.ajax({
         cache: false,
         type: 'POST',
-        url: hdir + "/actions/ncic.php",
+        url: <?php echo ABSPATH . OCINC ?>/ncic.php",
         data: {'ncicWeapon': 'yes',
                 'ncic_weapon' : name},
 
@@ -495,13 +501,13 @@ $('#ncic_weapon_btn').on('click', function(e) {
 
 // Handles autocompletion on the new call form
 $( ".txt-auto" ).autocomplete({
-    source: hdir + "actions/dispatchActions.php",
+    source: "<?php echo ABSPATH . OCINC ?>/dispatchActions.php",
     minLength: 2
 });
 $( ".txt-auto" ).autocomplete( "option", "appendTo", ".newCallForm" );
 
 $( ".txt-auto2" ).autocomplete({
-    source: hdir + "actions/dispatchActions.php",
+    source: "<?php echo ABSPATH . OCINC ?>/dispatchActions.php",
     minLength: 2
 });
 $( ".txt-auto2" ).autocomplete( "option", "appendTo", ".newCallForm" );
@@ -513,7 +519,7 @@ $(function() {
 
         $.ajax({
             type: "POST",
-            url: hdir + "actions/dispatchActions.php",
+            url: <?php echo ABSPATH . OCINC ?>/dispatchActions.php",
             data: {
                 newCall: 'yes',
                 details: $("#"+this.id).serialize()
@@ -557,7 +563,7 @@ $(function() {
 
         $.ajax({
             type: "POST",
-            url: hdir + "actions/dispatchActions.php",
+            url: <?php echo ABSPATH . OCINC ?>/dispatchActions.php",
             data: {
                 addNarrative: 'yes',
                 callId: $('#call_id_det').val(),
@@ -599,7 +605,7 @@ $(function() {
 
         $.ajax({
             type: "POST",
-            url: hdir + "actions/dispatchActions.php",
+            url: "<?php echo ABSPATH . OCINC ?>/dispatchActions.php",
             data: {
                 assignUnit: 'yes',
                 details: $("#"+this.id).serialize(),
@@ -649,7 +655,7 @@ $(function() {
 function getActiveDispatchers() {
 $.ajax({
         type: "GET",
-        url: hdir + "actions/generalActions.php",
+        url: "<?php echo ABSPATH ."/". OCINC ?>/generalActions.php",
         data: {
             getDispatchers: 'yes'
         },
@@ -676,7 +682,7 @@ $.ajax({
 function getUnAvailableUnits() {
 $.ajax({
         type: "GET",
-        url: hdir + "actions/generalActions.php",
+        url: hdir + "<?php ABSPATH . OCINC ?>/generalActions.php") ?>,
         data: {
             getUnAvailableUnits: 'yes'
         },
@@ -684,13 +690,6 @@ $.ajax({
         {
         $('#unAvailableUnits').html(response);
 
-        // SG - Removed until the node/real time services come available. having datatables messes things up.
-        /*$('#unAvailableUnitsTable').DataTable({
-            searching: false,
-            scrollY: "200px",
-            lengthMenu: [[4, -1], [4, "All"]]
-                });
-        */
         setTimeout(getUnAvailableUnits, 5000);
 
         },
@@ -709,7 +708,7 @@ $('#newCall').on('show.bs.modal', function(e) {
     $.ajax({
         cache: false,
         type: 'GET',
-        url: hdir + 'actions/generalActions.php',
+        url: hdir + '<?php echo ABSPATH . OCINC ?>/generalActions.php',
         data: {'getActiveUnits': 'yes'},
         success: function(result)
         {
@@ -763,7 +762,7 @@ $('#assign').on('show.bs.modal', function(e) {
     $.ajax({
         cache: false,
         type: 'GET',
-        url: hdir + 'actions/generalActions.php',
+        url: hdir + '<?php echo ABSPATH . OCINC ?>/generalActions.php',
         data: {'getActiveUnitsModal': 'yes'},
         success: function(result)
         {
@@ -795,7 +794,7 @@ $('#callDetails').on('show.bs.modal', function(e) {
     $.ajax({
         cache: false,
         type: 'GET',
-        url: hdir + 'actions/generalActions.php',
+        url: hdir + '<?php echo ABSPATH . OCINC ?>/generalActions.php',
         data: {'getCallDetails': 'yes',
                 'callId' : callId},
         success: function(result)
@@ -827,7 +826,7 @@ function clearCall(btn_id) {
     {
         $.ajax({
         type: "POST",
-        url: hdir + "actions/dispatchActions.php",
+        url: "<?php echo ABSPATH . OCINC ?>/dispatchActions.php",
         data: {
             clearCall: 'yes',
             callId: btn_id
@@ -867,7 +866,7 @@ function getCalls() {
 
     $.ajax({
         type: "GET",
-        url: hdir + "actions/generalActions.php",
+        url: "<?php echo ABSPATH . OCINC ?>/generalActions.php",
         data: {
             getCalls: 'yes',
             type: file
@@ -892,7 +891,7 @@ function getMyCall() {
 
     $.ajax({
         type: "GET",
-        url: hdir + "actions/generalActions.php",
+        url: "<?php echo ABSPATH . OCINC ?>/generalActions.php",
         data: {
             getMyCall: 'yes',
             type: file
@@ -973,7 +972,7 @@ function priorityTone(type)
  {
     $.ajax({
         type: "POST",
-        url: hdir + "actions/generalActions.php",
+        url: "<?php echo ABSPATH . OCINC ?>/generalActions.php",
         data: {
             setTone: 'yes',
             tone: name,
@@ -1017,7 +1016,7 @@ function checkTones()
 {
     $.ajax({
         type: "GET",
-        url: hdir + "actions/generalActions.php",
+        url: "<?php echo ABSPATH . OCINC ?>/generalActions.php",
         data: {
             checkTones: 'yes'
         },
@@ -1159,7 +1158,7 @@ function getMyRank(id)
 
     $.ajax({
         type: "GET",
-        url: hdir + "actions/profileActions.php",
+        url: "<?php echo ABSPATH . OCINC ?>/profileActions.php",
         data: {
             getMyRank: 'yes',
             unit: id
@@ -1181,3 +1180,4 @@ function getMyRank(id)
         }
     });
 }
+</script>

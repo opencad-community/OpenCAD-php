@@ -116,9 +116,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <!-- ./ x_content -->
                            <div class="card-footer">
                               <button class="btn btn-primary" name="new_call_btn" data-toggle="modal" data-target="#newCall">New Call</button>
-                              <button class="btn btn-danger pull-right" onClick="priorityTone('single')" value="0" id="priorityTone">10-3 Tone</button>
-                              <button class="btn btn-danger pull-right" onClick="priorityTone('recurring')" value="0" id="recurringTone">Priority Tone</button>
-                              <button class="btn btn-danger pull-right" onClick="priorityTone('panic')" value="0" id="panicTone">Panic Button</button>
+                              <button class="btn btn-danger float-right" onClick="priorityTone('single')" value="0" id="priorityTone">10-3 Tone</button>
+                              <button class="btn btn-danger float-right" onClick="priorityTone('recurring')" value="0" id="recurringTone">Priority Tone</button>
+                              <button class="btn btn-danger float-right" onClick="priorityTone('panic')" value="0" id="panicTone">Panic Button</button>
                            </div>
                         </div>
                         <!-- ./ x_panel -->
@@ -136,28 +136,34 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                          <div class="card-conent">
                               <div id="noCallsAlertHolder">
 							  <?php echo $boloMessage;?>
-                           <div class="x_content">
-                              <div id="cadpersonbolo"></div>
+                           <div class="card-content">
+                              <?php cadGetPersonBOLOS(); ?>
                            </div>
-                           <div class="x_content">
-                              <div id="cadvehiclebolo"></div>
+                           <div class="card-content">
+                              <?php cadGetVehicleBOLOS(); ?>
                            </div>
                                  <span id="noCallsAlertSpan"></span>
                               </div>
                               <div id="live_calls"></div>
                            </div>
                            <!-- ./ x_content -->
-<div class="clearfix"></div>
+                                                      <div class="card-footer">
+                              <button class="btn btn-warning" name="new_call_btn" data-toggle="modal" data-target="#newPersonsBOLO">New Persons BOLO</button>
+                              <button class="btn btn-warning" name="new_call_btn" data-toggle="modal" data-target="#newVehicleBOLO">New Vehicle BOLO</button>
+                           </div>
+                        </div>
+                  </div>
+                  <div class="clearfix"></div>
                   <div class="row">
                      <div class="col-md-2 col-sm-2 col-xs-2">
-                        <div class="cardl">
+                        <div class="card">
                            <div class="card-header">
                               <h2>Active Dispatchers</h2>
                               <div class="clearfix"></div>
                            </div>
                            <!-- ./ x_title -->
                            <div class="card-content">
-                              <div id="activeDispatchers"></div>
+                              <?php getDispatchers(); ?>
                            </div>
                            <!-- ./ x_content -->
                         </div>
@@ -172,7 +178,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            </div>
                            <!-- ./ x_title -->
                            <div class="card-contenmt">
-                              <div id="availableUnits"></div>
+                              <?php getAvailableUnits(); ?>
                            </div>
                            <!-- ./ x_content -->
                         </div>
@@ -187,6 +193,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <!-- ./ x_title -->
                            <div class="card-content">
                               <div id="unAvailableUnits">
+                                <?php getUnAvailableUnits(); ?> 
                               </div>
                            </div>
                            <!-- ./ x_content -->
@@ -196,12 +203,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <!-- ./ col-md-5 col-sm-5 col-xs-5 -->
                   </div>
                   <!-- ./ row -->
-
-                           <div class="card-footer">
-                              <button class="btn btn-warning" name="new_call_btn" data-toggle="modal" data-target="#newPersonsBOLO">New Persons BOLO</button>
-                              <button class="btn btn-warning" name="new_call_btn" data-toggle="modal" data-target="#newVehicleBOLO">New Vehicle BOLO</button>
-                           </div>
-                        </div>
                         <!-- ./ x_panel -->
                      </div>
                      <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
@@ -1861,7 +1862,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          function getDispatchers() {
            $.ajax({
                  type: "GET",
-                 url: "<?php echo BASE_URL .'/'. OCINC ?>/generalActions.php",
+                 url: "<?php BASE_URL . OCINC ?>/generalActions.php",
                  data: {
                      getDispatchers: 'yes'
                  },
