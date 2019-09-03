@@ -1,3 +1,6 @@
+<?php require_once( '../oc-config.php');?> 
+      <?php require_once( ABSPATH . '/oc-settings.php');?> 
+      
       <ul class="nav navbar-nav ml-auto">
 
         <li class="nav-item dropdown">
@@ -6,30 +9,17 @@
           </a>
           <div class="dropdown-menu dropdown-menu-right">
             <div class="dropdown-header text-center">
-              <strong>Account</strong>
+              <strong>Applications</strong>
             </div>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-bell-o"></i> Updates
-              <span class="badge badge-info">42</span>
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-envelope-o"></i> Messages
-              <span class="badge badge-success">42</span>
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-tasks"></i> Tasks
-              <span class="badge badge-danger">42</span>
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fa fa-comments"></i> Comments
-              <span class="badge badge-warning">42</span>
+            <a class="dropdown-item" href="<?php echo BASE_URL.OCAPPS ?>/oc-start.php">
+              <i class="fa fa-bell-o"></i> Dashboard
             </a>
             <div class="dropdown-header text-center">
               <strong>Settings</strong>
             </div>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="<?php echo BASE_URL.OCAPPS ?>/oc-profile.php">
               <i class="fa fa-user"></i> Profile</a>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="<?php echo BASE_URL.OCINC ?>/logout.php">
               <i class="fa fa-lock"></i> Logout</a>
           </div>
         </li>
