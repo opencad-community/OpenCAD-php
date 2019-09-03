@@ -18,11 +18,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     }
 require_once( "../oc-config.php" );
 require_once( ABSPATH . '/oc-functions.php');
+require_once( ABSPATH . '/oc-settings.php');
 require_once( ABSPATH . "/oc-includes/generalActions.php" );
 
 if (empty($_SESSION['logged_in']))
 {
-	header('Location: ./index.php');
+	header('Location:'.ABSPATH.'/index.php');
     die("Not logged in");
 }
     setDispatcher("1");
@@ -35,7 +36,7 @@ if (!$link) {
 }
 
 $id = $_SESSION['id'];
-$sql = "SELECT user_id from ".DB_PREFIX."user_departments WHERE user_id = \"$id\"";
+$sql = "SELECT * from ".DB_PREFIX."user_departments WHERE user_id = \"$id\"";
 $getAdminPriv = "SELECT `admin_privilege` from ".DB_PREFIX."users WHERE id = \"$id\"";
 
 $result=mysqli_query($link, $sql);
@@ -61,47 +62,47 @@ $num_rows = $result->num_rows;
         if ($row[1] == "1")
         {
             $_SESSION['dispatch'] = 'YES';
-            $dispatchButton = "<a href=\"".BASE_URL."/cad.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Dispatch</a>";
+            $dispatchButton = "<a href=\"".BASE_URL.OCAPPS."/cad.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Dispatch</a>";
         }
         else if ($row[1] == "7")
         {
             $_SESSION['ems'] = 'YES';
-						$emsButton = "<a href=\"".BASE_URL."/mdt.php?dep=ems\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">EMS</a>";
+						$emsButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=ems\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">EMS</a>";
         }
         else if ($row[1] == "6")
         {
             $_SESSION['fire'] = 'YES';
-						$fireButton = "<a href=\"".BASE_URL."/mdt.php?dep=fire\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Fire</a>";
+						$fireButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=fire\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Fire</a>";
         }
         else if ($row[1] == "3")
         {
             $_SESSION['highway'] = 'YES';
-            $highwayButton = "<a href=\"".BASE_URL."/mdt.php?dep=highway\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Highway Patrol</a>";
+            $highwayButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=highway\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Highway Patrol</a>";
         }
         else if ($row[1] == "5")
         {
             $_SESSION['police'] = 'YES';
-            $policeButton = "<a href=\"".BASE_URL."/mdt.php?dep=police\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Police Department</a>";
+            $policeButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=police\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Police Department</a>";
 				}
         else if ($row[1] == "4")
         {
             $_SESSION['sheriff'] = 'YES';
-            $sheriffButton = "<a href=\"".BASE_URL."/mdt.php?dep=sheriff\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Sheriff's Office</a>";
+            $sheriffButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=sheriff\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Sheriff's Office</a>";
         }
         else if ($row[1] == "2")
         {
             $_SESSION['state'] = 'YES';
-            $stateButton = "<a href=\"".BASE_URL."/mdt.php?dep=state\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">State Police</a>";
+            $stateButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=state\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">State Police</a>";
         }
         else if ($row[1] == "8")
         {
             $_SESSION['civillian'] = 'YES';
-            $civilianButton = "<a href=\"".BASE_URL."/civilian.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Civilian</a>";
+            $civilianButton = "<a href=\"".BASE_URL.OCAPPS."/civilian.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Civilian</a>";
         }
 				else if ($row[1] == "9")
 				{
 						$_SESSION['roadsideAssist'] = 'YES';
-						$roadsideAssistButton = "<a href=\"".BASE_URL."/mdt.php?dep=roadsideAssist\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Roadside Assistance</a>";
+						$roadsideAssistButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=roadsideAssist\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Roadside Assistance</a>";
 				}
 }
 $adminRows = $adminPriv->num_rows;

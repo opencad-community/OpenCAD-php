@@ -19,6 +19,8 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
    header('Location://'.$_SERVER['SERVER_NAME'].'/oc-install/start.php');
 } else {}
     require_once("oc-config.php");
+    require_once( ABSPATH . "/oc-functions.php");
+    require_once( ABSPATH . "/oc-settings.php");
     require_once( ABSPATH . "/oc-includes/register.php");
     require_once( ABSPATH . "/oc-includes/publicFunctions.php");
 
@@ -32,7 +34,7 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
 
     if ( (isset($_SESSION['logged_in'])) == "YES" )
     {
-      header ('Location: ./dashboard.php');
+      header ('Location:'.OCAPPS."/oc-start.php" );
 ;      //echo $_SESSION['name']." is logged in!";
     }
     if (isset($_GET['loggedOut']))
