@@ -87,7 +87,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <a class="navbar-brand" href="#">
         <img class="navbar-brand-full" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/tail.png" width="30" height="25" alt="OpenCAD Logo">
       </a>
-      <?php include( ABSPATH . "oc-admin/oc-admin-includes/topbarNav.inc.php"); ?>
       <?php include( ABSPATH . "oc-includes/topProfile.inc.php"); ?>
     </header>
 
@@ -102,15 +101,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="card-body">
 <div class="row">
                      <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="x_panel">
-                           <div class="x_title">
+                        <div class="card">
+                           <div class="card-header">
                               <h2>Active Calls</h2>
-                              <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
-                              </ul>
                            </div>
                            <!-- ./ x_title -->
-                           <div class="x_content">
+                           <div class="card-content">
                               <div id="noCallsAlertHolder">
                                 <?php getActiveCalls();?>
                                  <span id="noCallsAlertSpan"></span>
@@ -118,7 +114,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                               <div id="live_calls"></div>
                            </div>
                            <!-- ./ x_content -->
-                           <div class="x_footer">
+                           <div class="card-footer">
                               <button class="btn btn-primary" name="new_call_btn" data-toggle="modal" data-target="#newCall">New Call</button>
                               <button class="btn btn-danger pull-right" onClick="priorityTone('single')" value="0" id="priorityTone">10-3 Tone</button>
                               <button class="btn btn-danger pull-right" onClick="priorityTone('recurring')" value="0" id="recurringTone">Priority Tone</button>
@@ -132,15 +128,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   <div class="clearfix"></div>
                   <div class="row">
                      <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="x_panel">
-                           <div class="x_title">
+                        <div class="card">
+                           <div class="card-header">
                               <h2>Active BOLOs</h2>
-                              <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
-                              </ul>
                            </div>
                            <!-- ./ x_title -->
-                                         <div class="x_content">
+                                         <div class="card-conent">
                               <div id="noCallsAlertHolder">
 							  <?php echo $boloMessage;?>
                            <div class="x_content">
@@ -157,16 +150,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 <div class="clearfix"></div>
                   <div class="row">
                      <div class="col-md-2 col-sm-2 col-xs-2">
-                        <div class="x_panel">
-                           <div class="x_title">
+                        <div class="cardl">
+                           <div class="card-header">
                               <h2>Active Dispatchers</h2>
-                              <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
-                              </ul>
                               <div class="clearfix"></div>
                            </div>
                            <!-- ./ x_title -->
-                           <div class="x_content">
+                           <div class="card-content">
                               <div id="activeDispatchers"></div>
                            </div>
                            <!-- ./ x_content -->
@@ -175,16 +165,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <!-- ./ x_panel -->
                      <!-- ./ col-md-2 col-sm-2 col-xs-2 -->
                      <div class="col-md-5 col-sm-5 col-xs-5">
-                        <div class="x_panel">
-                           <div class="x_title">
+                        <div class="card">
+                           <div class="card-header">
                               <h2>Available Units</h2>
-                              <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
-                              </ul>
                               <div class="clearfix"></div>
                            </div>
                            <!-- ./ x_title -->
-                           <div class="x_content">
+                           <div class="card-contenmt">
                               <div id="availableUnits"></div>
                            </div>
                            <!-- ./ x_content -->
@@ -193,16 +180,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      </div>
                      <!-- ./ col-md-5 col-sm-5 col-xs-5 -->
                      <div class="col-md-5 col-sm-5 col-xs-5">
-                        <div class="x_panel">
-                           <div class="x_title">
+                        <div class="card">
+                           <div class="card-header">
                               <h2>Unavailable Units</h2>
-                              <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
-                              </ul>
-                              <div class="clearfix"></div>
                            </div>
                            <!-- ./ x_title -->
-                           <div class="x_content">
+                           <div class="card-content">
                               <div id="unAvailableUnits">
                               </div>
                            </div>
@@ -214,7 +197,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   </div>
                   <!-- ./ row -->
 
-                           <div class="x_footer">
+                           <div class="card-footer">
                               <button class="btn btn-warning" name="new_call_btn" data-toggle="modal" data-target="#newPersonsBOLO">New Persons BOLO</button>
                               <button class="btn btn-warning" name="new_call_btn" data-toggle="modal" data-target="#newVehicleBOLO">New Vehicle BOLO</button>
                            </div>
@@ -228,17 +211,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
                                  <div class="clearfix"></div>
                   <div class="row">
-                     <div class="col-md-3 col-sm-3 col-xs-3">
-                        <div class="x_panel">
-                           <div class="x_title">
+                     <div class="col-md-4 col-sm-4 col-xs-3">
+                        <div class="card">
+                           <div class="card-header">
                               <h2>NCIC Name Lookup</h2>
-                              <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
-                              </ul>
                               <div class="clearfix"></div>
                            </div>
                            <!-- ./ x_title -->
-                           <div class="x_content">
+                           <div class="card-body">
                               <div class="input-group">
                                  <input id="ncic_name" type="text" class="form-control" placeholder="John Doe" name="ncic_name"/>
                                  <span class="input-group-btn">
@@ -256,17 +236,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <!-- ./ x_panel -->
                      </div>
                      <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
-                     <div class="col-md-3 col-sm-3 col-xs-3">
-                        <div class="x_panel">
-                           <div class="x_title">
+                     <div class="col-md-4 col-sm-4 col-xs-3">
+                        <div class="card">
+                           <div class="card-header">
                               <h2>NCIC Plate Lookup</h2>
-                              <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
-                              </ul>
-                              <div class="clearfix"></div>
                            </div>
                            <!-- ./ x_title -->
-                           <div class="x_content">
+                           <div class="card-body">
                               <div class="input-group">
                                  <input type="text" name="ncic_plate" class="form-control" id="ncic_plate" placeholder="License Plate, (ABC123)"/>
                                  <span class="input-group-btn">
@@ -286,11 +262,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <div class="col-md-4 col-sm-6">
                         <div class="card">
                            <div class="card-header">
-                              <h2>NCIC Weapon Lookup</h2>
-                              <ul class="nav navbar-right panel_toolbox">
-                                 <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
-                              </ul>
-                              <div class="clearfix"></div>
+                              <h2>NCIC Plate Lookup</h2>
                            </div>
                            <!-- ./ x_title -->
                            <div class="card-body">
@@ -1873,12 +1845,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                  {
                    $('#availableUnits').html(response);
 
-                   // SG - Removed until node/real-time data setup
-                   /*$('#activeUsers').DataTable({
-                     searching: false,
-                     scrollY: "200px",
-                     lengthMenu: [[4, -1], [4, "All"]]
-                });*/
                    setTimeout(getAvailableUnits, 5000);
 
 
@@ -1903,12 +1869,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                  {
                    $('#activeDispatchers').html(response);
 
-                   // SG - Removed until node/real-time data setup
-                   /*$('#activeUsers').DataTable({
-                     searching: false,
-                     scrollY: "200px",
-                     lengthMenu: [[4, -1], [4, "All"]]
-                });*/
                    setTimeout(getDispatchers, 5000);
 
 
@@ -1933,12 +1893,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                  {
                    $('#getAOP').html(response);
 
-                   // SG - Removed until node/real-time data setup
-                   /*$('#activeUsers').DataTable({
-                     searching: false,
-                     scrollY: "200px",
-                     lengthMenu: [[4, -1], [4, "All"]]
-                });*/
                    setTimeout(getAOP, 5000);
 
 
@@ -1963,12 +1917,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                  {
                    $('#cadpersonbolo').html(response);
 
-                   // SG - Removed until node/real-time data setup
-                   /*$('#activeUsers').DataTable({
-                     searching: false,
-                     scrollY: "200px",
-                     lengthMenu: [[4, -1], [4, "All"]]
-                });*/
                    setTimeout(cadGetPersonBOLOS, 5000);
 
 
@@ -1992,12 +1940,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                  {
                    $('#cadvehiclebolo').html(response);
 
-                   // SG - Removed until node/real-time data setup
-                   /*$('#activeUsers').DataTable({
-                     searching: false,
-                     scrollY: "200px",
-                     lengthMenu: [[4, -1], [4, "All"]]
-                });*/
                    setTimeout(cadGetVehicleBOLOS, 5000);
 
 
