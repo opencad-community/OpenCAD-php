@@ -1,301 +1,163 @@
 <?php
 
 /**
+
 Open source CAD system for RolePlaying Communities.
 Copyright (C) 2017 Shane Gill
 
 This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
-session_start();
-include_once("./oc-config.php");
-include_once(ABSPATH . "/oc-functions.php");
-include(ABSPATH . "/oc-settings.php");
-include(ABSPATH . OCINC . "/generalActions.php");
-include(ABSPATH . OCINC . "/responderActions.php");
-include(OC_CONTENT_DIR . "/plugins/api_auth.php");
+    if(session_id() == '' || !isset($_SESSION)) {
+    session_start();
+    }
+    include_once("../oc-config.php");
+    include_once(ABSPATH . "/oc-functions.php");
+    include_once(ABSPATH . "/oc-settings.php");
+    include_once(ABSPATH . OCINC . "/generalActions.php");
+    include_once( "../" . OCINC . "/publicFunctions.php" );
+    include_once( "../" . OCINC . "/dispatchActions.php" );
+    include_once( "../" . OCCONTENT . "/plugins/api_auth.php" );
+    if (empty($_SESSION['logged_in']))
+    {
+        header('Location: ../index.php');
+        die("Not logged in");
+    }
+    else
+    {
+      $name = $_SESSION['name'];
+    }
 
 
-if (empty($_SESSION['logged_in']))
-{
-header('Location: /index.php');
-}
-else
-{
-$name = $_SESSION['name'];
-}
-unset($_SESSION['activeDepartment']);
-if ( $_GET['dep'] == "state" || $_SESSION['activeDepartment'] == "state" )
-{
-$activeDepartment = "State";
-$activeBadge="gavel";
-$_SESSION['activeDepartment'] = 'state';
-}
-else if ( $_GET['dep'] == "sheriff" || $_SESSION['activeDepartment'] == "sheriff" )
-{
-$activeDepartment = "Sheriff";
-$activeBadge="gavel";
-$_SESSION['activeDepartment'] = 'sheriff';
-}
-else if ( $_GET['dep'] == "highway" || $_SESSION['activeDepartment'] == "highway" )
-{
-$activeDepartment = "Highway Patrol";
-$activeBadge="gavel";
-$_SESSION['activeDepartment'] = 'highway';
-}
-else if ( $_GET['dep'] == "police" || $_SESSION['activeDepartment'] == "police" )
-{
-$activeDepartment = "Police";
-$activeBadge="gavel";
-$_SESSION['activeDepartment'] = 'police';
-}
-else if ( $_GET['dep'] == "fire" || $_SESSION['activeDepartment'] == "fire" )
-{
-$activeDepartment = "Fire";
-$activeBadge="fire";
-$_SESSION['activeDepartment'] = 'fire';
-}
-else if ( $_GET['dep'] == "ems" || $_SESSION['activeDepartment'] == "ems" )
-{
-$activeDepartment = "EMS";
-$activeBadge="ambulance";
-$_SESSION['activeDepartment'] = 'ems';
-}
-else if ( $_GET['dep'] == "roadsideAssist" || $_SESSION['activeDepartment'] == "roadsideAssist" )
-{
-$activeDepartment = "Roadside Assistance";
-$activeBadge="wrench";
-$_SESSION['activeDepartment'] = 'roadsideAssist';
-}
+    if ( $_SESSION['admin_privilege'] == 3)
+    {
+      if ($_SESSION['admin_privilege'] == 'Administrator')
+      {
+          //Do nothing
+      }
+    }
+    else if ($_SESSION['admin_privilege'] == 2)
+    {
+      if ($_SESSION['admin_privilege'] == 'Moderator')
+      {
+          // Do Nothing
+      }
+    }
+    else
+    {
+        permissionDenied();
+    }
 
+    $accessMessage = "";
+    if(isset($_SESSION['accessMessage']))
+    {
+        $accessMessage = $_SESSION['accessMessage'];
+        unset($_SESSION['accessMessage']);
+    }
+    $adminMessage = "";
+    if(isset($_SESSION['adminMessage']))
+    {
+        $adminMessage = $_SESSION['adminMessage'];
+        unset($_SESSION['adminMessage']);
+    }
 
-$citationMessage = "";
-if(isset($_SESSION['citationMessage']))
-{
-$citationMessage = $_SESSION['citationMessage'];
-unset($_SESSION['citationMessage']);
-}
-$arrestMessage = "";
-if(isset($_SESSION['arrestMessage']))
-{
-$arrestMessage = $_SESSION['arrestMessage'];
-unset($_SESSION['arrestMessage']);
-}
-$warningMessage = "";
-if(isset($_SESSION['warningMessage']))
-{
-$warningMessage = $_SESSION['warningMessage'];
-unset($_SESSION['warningMessage']);
-}
-callCheck();
-
+    $successMessage = "";
+    if(isset($_SESSION['successMessage']))
+    {
+        $successMessage = $_SESSION['successMessage'];
+        unset($_SESSION['successMessage']);
+    }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<?php include "./oc-includes/header.inc.php"; ?>
-<body class="nav-md">
-<div class="container body">
-<div class="main_container">
-   <div class="col-md-3 left_col">
-      <div class="left_col scroll-view">
-         <div class="navbar nav_title" style="border: 0;">
-            <a href="javascript:void(0)" class="site_title"><i class="fas fa-<?php echo $activeBadge; ?>"></i> <span><?php echo $activeDepartment; ?></span></a>
-         </div>
-         <div class="clearfix"></div>
-         <!-- menu profile quick info -->
-         <div class="profile clearfix">
-            <div class="profile_pic">
-               <img src="<?php echo get_avatar() ?>" alt="..." class="img-circle profile_img">
-            </div>
-            <div class="profile_info">
-               <span>Welcome,</span>
-               <h2><?php echo $name;?></h2>
-            </div>
-            <div class="clearfix"></div>
-         </div>
-         <!-- /menu profile quick info -->
-         <br />
-         <!-- sidebar menu -->
-         <div id="lawenforcement" class="dynamic-content main_menu_side hidden-print main_menu">
-            <div class="menu_section">
-               <h3>General</h3>
-               <ul class="nav side-menu">
-                  <li class="active">
-                     <a><i class="fas fa-home"></i> Home</span></a>
-                  </li>
-                  <li>
-                        <a type="button" data-toggle="modal" data-target="#createWarning" ><i class="fas fa-exclamation-triangle"></i> Create Warning</a>
-                  </li>
-                  <li>
-                        <a type="button" data-toggle="modal" data-target="#createCitation" ><i class="fas fa-ticket-alt"></i> Create Citation</a>
-                  </li>
-                  <li>
-                        <a type="button" data-toggle="modal" data-target="#createArrest" ><i class="fas fa-ban"></i> Create Arrest Report</a>
-                  </li>
-                  <li>
-                        <a type="button" id="btn-codeReference"><i class="fas fa-ban"></i> Radio Code Reference</a>
-                  </li>
+<head>
+<?php include_once( ABSPATH . "/oc-includes/header.inc.php"); ?>
 
-               </ul>
-            </div>
-            <!-- ./ menu_section -->
-         </div>
-         <!-- /sidebar menu -->
-         <div id="firstResponder" class="dynamic-content main_menu_side hidden-print main_menu">
-            <div class="menu_section">
-               <h3>General</h3>
-               <ul class="nav side-menu">
-                  <li class="active">
-                     <a><i class="fas fa-home"></i> Home <span class="fas fa-chevron-down"></span></a>
-                  </li>
-               </ul>
-            </div>
-            <!-- ./ menu_section -->
-         </div>
-         <!-- /sidebar menu -->
-         <div id="roadsideAssist" class="dynamic-content main_menu_side hidden-print main_menu">
-            <div class="menu_section">
-               <h3>General</h3>
-               <ul class="nav side-menu">
-                  <li class="active">
-                     <a><i class="fas fa-home"></i> Home <span class="fas fa-chevron-down"></span></a>
-                  </li>
-               </ul>
-            </div>
-            <!-- ./ menu_section -->
-         </div>
-         <!-- /sidebar menu -->
-         <!-- /menu footer buttons -->
-         <div class="sidebar-footer hidden-small" style="background:#172d44">
-            <!--  —— Left in for user settings. To be introduced later. Probably after RC1. ——
-               <a data-toggle="tooltip" data-placement="top">
-                  <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-               </a>-->
-            <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
-            <span class="fas fa-clipboard-list" aria-hidden="true"></span>
-            </a>
-            <a id="changeCallsign" class="btn-link" name="changeCallsign" data-toggle="modal" data-target="#callsign">
-               <span class="glyphicon glyphicon-text-background" aria-hidden="true"></span>
-            </a>
-            <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
-            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-            </a>
-            <a data-toggle="tooltip" data-placement="top" title="Need Help?" href="https://guides.opencad.io/">
-            <span class="fas fa-info-circle" aria-hidden="true"></span>
-            </a>
-            <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/oc-includes/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
-            <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
-            </a>
-         </div>
-         <!-- /menu footer buttons -->
-      </div>
-   </div>
-   <!-- top navigation -->
-   <div class="top_nav">
-      <div class="nav_menu">
-         <nav>
-            <div class="nav toggle">
-               <a id="menu_toggle"><i class="fas fa-bars"></i></a>
-            </div>
-            <ul class="nav navbar-nav navbar-right">
-               <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="<?php echo get_avatar() ?>" alt=""> <?php echo $name; ?>
-                  <span class=" fas fa-angle-down"></span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                     <li><a href="<?php echo BASE_URL; ?>/profile.php"><i class="fas fa-user pull-right"></i> My Profile</a></li>
-                     <li><a href="<?php echo BASE_URL; ?>/oc-includes/logout.php?responder=<?php echo $_SESSION['identifier'];?>"><i class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
-                  </ul>
-               </li>
-            </ul>
-         </nav>
-      </div>
-   </div>
-   <!-- /top navigation -->
-   <!-- page content -->
-   <div class="right_col" role="main">
-      <div class="">
-         <div class="page-title">
-            <div class="title_left">
-               <h3>MDT Console</h3>
-               <?php echo $citationMessage;?>
-         <?php echo $arrestMessage;?>
-         <?php echo $warningMessage;?>
-            </div>
-            <div class="x_footer">
-         <button class="btn btn-primary" name="aop" data-target="#aop" id="getAOP" disabled></button>
-               <button class="btn btn-primary pull-right" name="new_call_btn" data-toggle="modal" data-target="#vehicles-bolo-board">View Vehicle BOLOs</button>
-               <button class="btn btn-primary pull-right" name="new_call_btn" data-toggle="modal" data-target="#persons-bolo-board">View Person BOLOs</button>
-               <button class="btn btn-danger pull-right" onClick="priorityTone('panic')" value="0" id="panicTone">Panic Button</button>
-            </div>
-            <!-- ./ title_left -->
-         </div>
-         <!-- ./ page-title -->
-         <div class="clearfix"></div>
-         <div class="row">
-            <!-- ./ x_content -->
-            <div class="col-md-12 col-sm-12 col-xs-12">
-               <div class="x_panel">
-                  <div class="x_title">
-                     <h2>Active Calls</h2>
-                     <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
-                     </ul>
-                     <div class="clearfix"></div>
-                  </div>
-                  <!-- ./ x_title -->
-                  <div class="x_content">
-                     <div id="live_calls">
+
+<body class="app header-fixed">
+
+    <header class="app-header navbar">
+      <a class="navbar-brand" href="#">
+        <img class="navbar-brand-full" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/tail.png" width="30" height="25" alt="OpenCAD Logo">
+      </a>
+      <?php include( ABSPATH . "oc-includes/topProfile.inc.php"); ?>
+    </header>
+
+      <div class="app-body">
+        <main class="main">
+        <div class="breadcrumb" />
+        <div class="container-fluid">
+          <div class="animated fadeIn">
+            <div class="card">
+                      <div class="card-header">
+          <i class="fa fa-align-justify"></i> <?php echo lang_key("ACCESS_REQUESTS"); ?></div>
+              <div class="card-body">
+<div class="row">
+                     <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="card">
+                           <div class="card-header">
+                              <h2>Active Calls</h2>
+                           </div>
+                           <!-- ./ x_title -->
+                           <div class="card-content">
+                              <div id="noCallsAlertHolder">
+                                 <span id="noCallsAlertSpan"></span>
+                              </div>
+                              <div id="live_calls"></div>
+                           </div>
+                           <!-- ./ x_content -->
+                           <div class="card-footer">
+                              <button class="btn btn-primary" name="new_call_btn" data-toggle="modal" data-target="#newCall">New Call</button>
+                              <button class="btn btn-danger float-right" onClick="priorityTone('single')" value="0" id="priorityTone">10-3 Tone</button>
+                              <button class="btn btn-danger float-right" onClick="priorityTone('recurring')" value="0" id="recurringTone">Priority Tone</button>
+                              <button class="btn btn-danger float-right" onClick="priorityTone('panic')" value="0" id="panicTone">Panic Button</button>
+                           </div>
+                        </div>
+                        <!-- ./ card -->
                      </div>
+                     <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
                   </div>
-                  <!-- ./ x_content -->
-               </div>
-               <!-- ./ x_panel -->
-            </div>
-            <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
-         </div>
-         <!-- ./ row -->
-         <div class="clearfix"></div>
-         <div class="row">
-            <div class="col-md-6 col-sm-6 col-xs-6">
-               <div class="x_panel">
-                  <div class="x_title">
-                     <h2>My Status</h2>
-                     <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
-                     </ul>
-                     <div class="clearfix"></div>
-                  </div>
-                  <!-- ./ x_title -->
-                  <div class="x_content">
-                     <form id="myStatusForm">
-                        <!-- ./ form-group -->
-                        <div class="form-group">
-                           <label class="col-md-2 col-sm-2 col-xs-2 control-label">My Callsign</label>
-                           <div class="col-md-10 col-sm-10 col-xs-10">
-                              <input type="text" name="callsign" class="form-control" id="callsign1" value="<?php echo $_SESSION['identifier'];?>" readonly />
+                  <!-- / row -->
+                  
+                  <div class="row justify-content-center">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="card w-1000">
+                           <div class="card-header">
+                              <h2>My Status</h2>
+                              <div class="clearfix"></div>
                            </div>
-                           <!-- ./ col-sm-9 -->
+                           <!-- ./ x_title -->
+                           <div class="card-body">
+                           <form id="myStatusForm">
+                      <div class="row">
+                      <div class="col-sm-12">
+                        <div class="form-group row">
+                          <label class="col-md-2 control-label"for="name">My Callsign</label>
+                          <input  name="callsign" class="col-md-9 form-control" id="callsign1" type="text" value="<?php echo $_SESSION['identifier'];?>" readonly />
                         </div>
-                        <div class="form-group">
-                           <label class="col-md-2 col-sm-2 col-xs-2 control-label">My Status</label>
-                           <div class="col-md-10 col-sm-10 col-xs-10">
-                              <input type="text" name="status" id="status" class="form-control" readonly />
-                           </div>
+                      </div>
+                    </div>
+                    <!-- /.row-->
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="form-group row">
+                          <label class="col-md-2 control-label" for="callsign">My Status</label>
+                          <input type="text" name="status" id="status" class="col-md-9 form-control" readonly />
                         </div>
-
-
-                        <div class="form-group">
-                           <label class="col-md-2 col-sm-2 col-xs-2 control-label">Change Status</label>
-                           <div class="col-md-10 col-sm-10 col-xs-10">
-                              <select name="statusSelect" class="form-control selectpicker <?php echo $_SESSION['identifier'];?>" id="statusSelect" onChange="responderChangeStatus(this);" title="Select a Status">
+                      </div>
+                    </div>
+                    <!-- /.row-->
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="form-group row">
+                          <label class="col-md-2 control-label" for="ccnumber">Status</label>
+                              <select name="statusSelect" class="col-md-9 form-control selectpicker <?php echo $_SESSION['identifier'];?>" id="statusSelect" onChange="responderChangeStatus(this);" title="Select a Status">
                                  <option value="10-6">10-6/Busy</option>
                                  <option value="10-5">10-5/Meal Break</option>
                                  <option value="10-7">10-7/Unavailable</option>
@@ -304,326 +166,129 @@ callCheck();
                                  <option value="10-65">10-65/Transporting Prisoner</option>
                                  <option value="sig11">Signal 11</option>
                               </select>
-                           </div>
-                           <!-- ./ col-sm-9 -->
+                          </select>
                         </div>
-                        <!-- ./ form-group -->
+                      </div>
+                      </form>
+                    </div>
+                    <!-- /.row-->
                      </form>
                   </div>
-               </div>
-               <!-- ./ x_panel -->
-            </div>
-            <div class="col-md-6 col-sm-6 col-xs-6">
-               <div class="x_panel">
-                  <div class="x_title">
-                     <h2>My Call</h2>
-                     <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
-                     </ul>
-                     <div class="clearfix"></div>
-                  </div>
-                  <!-- ./ x_title -->
-                  <div class="x_content">
-                     <div id="mycall">
-                     </div>
-                  </div>
-                  <!-- ./ x_content -->
-               </div>
-               <!-- ./ x_panel -->
-            </div>
-            <!-- ./ col-md-6 col-sm-6 col-xs-6 -->
-            <?php
-               if (isset($_GET['Fire']))
-               {
-                     //End the above row
-                     echo '
-                     </div>
-                     <!-- ./ row -->
-
-                     <div class="row">
-                     <div class="col-md-4 col-sm-4 col-xs-4">
-                        <div class="x_panel">
-                           <div class="x_title">
-                           <h2>Fire PAL</h2>
-                           <ul class="nav navbar-right panel_toolbox">
-                              <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
-                           </ul>
-                           <div class="clearfix"></div>
+                </div>
+              </div>
+              <!-- /.col-->
+              <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="card">
+                           <div class="card-header">
+                              <h2>My Call</h2>
                            </div>
                            <!-- ./ x_title -->
-                           <div class="x_content">
-                           <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScXgKDn0deB7zgnmBvDRJ7KllHLiQdmahvgQbphxZuNhU6h2g/viewform" height="400px" width="100%"></iframe>
+                           <div class="card-content">
+                              <div id="mycall">
+                              </div>
+                           </div>
+                          </div>
+                          <!-- /.col-->
+                  </div>
+                  <!-- ./ row -->
+                     </div>
+                     <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
+
+
+                  <div class="row justify-content-center"">
+                     <div class="col-md-4 col-xs-4">
+                        <div class="card">
+                           <div class="card-header">
+                              <h2>NCIC Name Lookup</h2>
+                              <div class="clearfix"></div>
+                           </div>
+                           <!-- ./ x_title -->
+                           <div class="card-body">
+                              <div class="input-group">
+                                 <input id="ncic_name" type="text" class="form-control" placeholder="John Doe" name="ncic_name"/>
+                                                             <span class="input-group-append">
+                              <button class="btn btn-primary" type="button" name="ncic_name_btn" id="ncic_name_btn">Send</button>
+                            </span>
+                              </div>
+                              <!-- ./ input-group -->
+                              <div name="ncic_name_return" id="ncic_name_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
+                              </div>
+                              <!-- ./ ncic_name_return -->
                            </div>
                            <!-- ./ x_content -->
                         </div>
                         <!-- ./ x_panel -->
                      </div>
                      <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
-                     <div class="col-md-4 col-sm-4 col-xs-4">
-                        <div class="x_panel">
-                           <div class="x_title">
-                           <h2>Incident Report</h2>
-                           <ul class="nav navbar-right panel_toolbox">
-                              <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
-                           </ul>
-                           <div class="clearfix"></div>
+                     <div class="col-md-4 col-xs-4">
+                        <div class="card">
+                           <div class="card-header">
+                              <h2>NCIC Plate Lookup</h2>
                            </div>
                            <!-- ./ x_title -->
-                           <div class="x_content">
-                           <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeusONacJqMrKBoBxzhdn4Q53f7QjPwlDehjCmKPGLQgGVsKg/viewform?c=0&w=1" height="400px" width="100%"></iframe>
+                           <div class="card-body">
+                              <div class="input-group">
+                                 <input type="text" name="ncic_plate" class="form-control" id="ncic_plate" placeholder="License Plate, (ABC123)"/>
+                                 <span class="input-group-append">
+                                 <button type="button" class="btn btn-primary" id="ncic_plate_btn">Send</button>
+                                 </span>
+                              </div>
+                              <!-- ./ input-group -->
+                              <div name="ncic_plate_return" id="ncic_plate_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
+                              </div>
+                              <!-- ./ ncic_plate_return -->
                            </div>
                            <!-- ./ x_content -->
                         </div>
                         <!-- ./ x_panel -->
                      </div>
-                     <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
-                     <div class="col-md-4 col-sm-4 col-xs-4">
-                        <div class="x_panel">
-                           <div class="x_title">
-                           <h2>ePCR</h2>
-                           <ul class="nav navbar-right panel_toolbox">
-                              <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
-                           </ul>
-                           <div class="clearfix"></div>
+                     <!-- ./ col-sm-6 col-md-4 col-xs-4 -->
+                     <div class="col-md-4 col-xs-4">
+                        <div class="card">
+                           <div class="card-header">
+                              <h2>NCIC Weapon Lookup</h2>
                            </div>
                            <!-- ./ x_title -->
-                           <div class="x_content">
-                           <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeD7GBmb70LYfM7PLOOPddnyNrfYoO-m5NQwpTX1bSSn-9olQ/viewform?c=0&w=1" height="400px" width="100%"></iframe>
+                           <div class="card-body">
+                              <div class="input-group">
+                                 <input type="text" name="ncic_weapon" class="form-control" id="ncic_weapon" placeholder="John Doe"/>
+                                 <span class="input-group-append">
+                                 <button type="button" class="btn btn-primary" name="ncic_weapon_btn" id="ncic_weapon_btn">Send</button>
+                                 </span>
+                              </div>
+                              <!-- ./ input-group -->
+                              <div name="ncic_weapon_return" id="ncic_weapon_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
+                              </div>
+                              <!-- ./ ncic_name_return -->
                            </div>
                            <!-- ./ x_content -->
                         </div>
                         <!-- ./ x_panel -->
                      </div>
-                     <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
-                     </div>
-                     <!-- ./ row -->
-                     ';
-               }
-               else
-               {
+               <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
+            </div>
+            <!-- ./ row -->
+              </div>
+            </div>
+            <!-- /.card-->
+        </main>
 
-                  /*
-
-                     SG - Commenting out for now since citation creation isn't going to be a thing for LEOs
-
-                  echo '
-                  <div class="col-md-6 col-sm-6 col-xs-6">
-                  <div class="x_panel">
-                     <div class="x_title">
-                     <h2>Citation Creator</h2>
-                     <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
-                     </ul>
-                     <div class="clearfix"></div>
-                     </div>
-                     <!-- ./ x_title -->
-                     <div class="x_content">
-                     <div class="alert alert-info" style="text-align:center;"><span>Citations need to be approved by staff!</span></div>
-
-                     <form id="newCitationForm">
-                        <div class="row">
-                           <div class="form-group">
-                              <select class="form-control selectpicker civilian" data-live-search="true" name="civilian" id="civilian" title="Select Civilian" disabled>
-                                 <?php getCivilianNamesOption();?>
-            </select>
-         </div>
-         <!-- ./ form-group -->
+        </div>
       </div>
-      <!-- ./ row -->
-      <div class="row">
-         <div class="form-group">
-            <select class="form-control selectpicker citation" data-live-search="true" name="citation[]" id="citation[]" multiple data-max-options="2" title="Select Citations (Limit 2)" disabled>
-            <?php getCitations();?>
-            </select>
-         </div>
-         <!-- ./ form-group -->
-      </div>
-      <!-- ./ row -->
-   </div>
-   <!-- ./ x_content -->
-   <br/>
-   <div class="x_footer">
-      <button type="submit" class="btn btn-primary pull-right" id="newCitationSubmit" disabled>Submit Citation</button>
-   </div>
-   <!-- ./ x_footer -->
-   </form>
-</div>
-<!-- ./ x_panel -->
-</div>
-<!-- ./ col-md-6 col-sm-6 col-xs-6 -->
-'; */
-}
-?>
-<!-- ./ row -->
-<?php  if (POLICE_NCIC == true) { ?>
-            <div id="ncic" class="dynamic-content row">
-               <div class="clearfix"></div>
-            <div class="col-md-4 col-sm-4 col-xs-4">
-               <div class="x_panel">
-                  <div class="x_title">
-                     <h2>NCIC Name Lookup</h2>
-                     <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
-                     </ul>
-                     <div class="clearfix"></div>
-                  </div>
-                  <!-- ./ x_title -->
-                  <div class="x_content">
-                     <div class="input-group">
-                        <input type="text" name="ncic_name" class="form-control" id="ncic_name" placeholder="John Doe"/>
-                        <span class="input-group-btn">
-                        <button type="button" class="btn btn-primary" name="ncic_name_btn" id="ncic_name_btn">Send</button>
-                        </span>
-                     </div>
-                     <!-- ./ input-group -->
-                     <div name="ncic_name_return" id="ncic_name_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
-                        <!--<textarea class="form-control" style="resize:none;" id="ncic_name_return" name="ncic_name_return" readonly="readonly"></textarea> -->
-                     </div>
-                     <!-- ./ ncic_name_return -->
-                  </div>
-                  <!-- ./ x_content -->
-               </div>
-               <!-- ./ x_panel -->
-            </div>
-            <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
-            <div class="col-md-4 col-sm-4 col-xs-4">
-               <div class="x_panel">
-                  <div class="x_title">
-                     <h2>NCIC Plate Lookup</h2>
-                     <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
-                     </ul>
-                     <div class="clearfix"></div>
-                  </div>
-                  <!-- ./ x_title -->
-                  <div class="x_content">
-                     <div class="input-group">
-                        <input type="text" name="ncic_plate" class="form-control" id="ncic_plate" placeholder="License Plate, (ABC123)"/>
-                        <span class="input-group-btn">
-                        <button type="button" class="btn btn-primary" id="ncic_plate_btn">Send</button>
-                        </span>
-                     </div>
-                     <!-- ./ input-group -->
-                     <div name="ncic_plate_return" id="ncic_plate_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
-                     </div>
-                     <!-- ./ ncic_plate_return -->
-                  </div>
-                  <!-- ./ x_content -->
-               </div>
-               <!-- ./ x_panel -->
-            </div>
-            <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
-            <div class="col-md-4 col-sm-4 col-xs-4">
-               <div class="x_panel">
-                  <div class="x_title">
-                     <h2>NCIC Weapon Lookup</h2>
-                     <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
-                     </ul>
-                     <div class="clearfix"></div>
-                  </div>
-                  <!-- ./ x_title -->
-                  <div class="x_content">
-                     <div class="input-group">
-                        <input type="text" name="ncic_weapon" class="form-control" id="ncic_weapon" placeholder="John Doe"/>
-                        <span class="input-group-btn">
-                        <button type="button" class="btn btn-primary" name="ncic_weapon_btn" id="ncic_weapon_btn">Send</button>
-                        </span>
-                     </div>
-                     <!-- ./ input-group -->
-                     <div name="ncic_weapon_return" id="ncic_weapon_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
-                        <!--<textarea class="form-control" style="resize:none;" id="ncic_name_return" name="ncic_name_return" readonly="readonly"></textarea> -->
-                     </div>
-                     <!-- ./ ncic_name_return -->
-                  </div>
-                  <!-- ./ x_content -->
-               </div>
-               <!-- ./ x_panel -->
-            </div>
-      <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
-   </div>
-   <?php } if ( $activeBadge != "gavel" && FIRE_NCIC_NAME == true xor EMS_NCIC_NAME == true xor ROADSIDE_NCIC_NAME == true ) { ?>
 
-   <div class="clearfix"></div>
-   <div id="ncic" class="row">
-   <div class="col-md-4 col-sm-4 col-xs-4">
-      <div class="x_panel">
-         <div class="x_title">
-            <h2>NCIC Name Lookup</h2>
-            <ul class="nav navbar-right panel_toolbox">
-               <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
-            </ul>
-            <div class="clearfix"></div>
-         </div>
-         <!-- ./ x_title -->
-         <div class="x_content">
-            <div class="input-group">
-               <input type="text" name="ncic_name" class="form-control" id="ncic_name" placeholder="John Doe"/>
-               <span class="input-group-btn">
-               <button type="button" class="btn btn-primary" name="ncic_name_btn" id="ncic_name_btn">Send</button>
-               </span>
-            </div>
-            <!-- ./ input-group -->
-            <div name="ncic_name_return" id="ncic_name_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
-               <!--<textarea class="form-control" style="resize:none;" id="ncic_name_return" name="ncic_name_return" readonly="readonly"></textarea> -->
-            </div>
-            <!-- ./ ncic_name_return -->
-         </div>
-         <!-- ./ x_content -->
-      </div>
-      <!-- ./ x_panel -->
-   </div>
-   <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
+      
+        <footer class="app-footer">
+        <div>
+            <a href="https://opencad.io">OpenCAD</a>
+            <span>&copy; 2017 <?php echo date("Y"); ?>.</span>
+        </div>
+        <div class="ml-auto">
 
-<?php } else {}
+        </div>
+    
+        </footer>
 
-   if ( $activeBadge != "gavel" && FIRE_NCIC_PLATE === true xor EMS_NCIC_PLATE === true xor ROADSIDE_NCIC_PLATE === true ) { ?>
-         <div id="ncic" class="row">
-            <div class="col-md-4 col-sm-4 col-xs-4">
-               <div class="x_panel">
-                  <div class="x_title">
-                     <h2>NCIC Plate Lookup</h2>
-                     <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a></li>
-                     </ul>
-                     <div class="clearfix"></div>
-                  </div>
-                  <!-- ./ x_title -->
-                  <div class="x_content">
-                     <div class="input-group">
-                        <input type="text" name="ncic_plate" class="form-control" id="ncic_plate" placeholder="License Plate, (ABC123)"/>
-                        <span class="input-group-btn">
-                        <button type="button" class="btn btn-primary" id="ncic_plate_btn">Send</button>
-                        </span>
-                     </div>
-                     <!-- ./ input-group -->
-                     <div name="ncic_plate_return" id="ncic_plate_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
-                     </div>
-                     <!-- ./ ncic_plate_return -->
-                  </div>
-                  <!-- ./ x_content -->
-               </div>
-               <!-- ./ x_panel -->
-            </div>
-            <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
-         <?php } else {} ?>
-   </div>
-<!-- "" -->
-</div>
-</div>
-</div>
-</div>
-<!-- /page content -->
-<!-- footer content -->
-<footer>
-<div class="pull-right">
-   <?php echo COMMUNITY_NAME?> CAD System
-</div>
-<div class="clearfix"></div>
-</footer>
-<!-- /footer content -->
-</div>
-</div>
+             <!-- modals -->
 <!-- modals -->
 <!-- Callsign Modal -->
 <div class="modal fade" id="callsign" tabindex="-1" role="dialog" aria-hidden="true">
@@ -1195,10 +860,10 @@ callCheck();
 <!-- ./ modal-dialog modal-lg -->
 </div>
 <!-- ./ modal fade bs-example-modal-lg -->
-<!-- AUDIO TONES -->
-<audio id="recurringToneAudio" src="<?php echo BASE_URL; ?>/oc-content/sounds/priority.mp3" preload="auto"></audio>
-<audio id="priorityToneAudio" src="<?php echo BASE_URL; ?>/oc-content/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
-<audio id="panicToneAudio" src="<?php echo BASE_URL; ?>/oc-content/sounds/Panic_Button.m4a" preload="auto"></audio>
+      <!-- AUDIO TONES -->
+      <audio id="recurringToneAudio" src="<?php echo BASE_URL; ?>oc-content/themes/<?php echo THEME; ?>/sounds/priority.mp3" preload="auto"></audio>
+      <audio id="priorityToneAudio" src="<?php echo BASE_URL; ?>oc-content/themes/<?php echo THEME; ?>/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
+      <audio id="panicToneAudio" src="<?php echo BASE_URL; ?>oc-content/themes/<?php echo THEME; ?>/sounds/Panic_Button.m4a" preload="auto"></audio>
 <script>
 var vid = document.getElementById("recurringToneAudio");
 vid.volume = 0.3;
@@ -1206,14 +871,16 @@ vid.volume = 0.3;
 <?php
    if ($_SESSION['activeDepartment'] == 'fire')
    {
-      echo '<audio id="newCallAudio" src="'.BASE_URL.'/oc-content/sounds/Fire_Tones_Aligned.wav" preload="auto"></audio>';
+      echo '<audio id="newCallAudio" src="'.BASE_URL.'/oc-content/themes/'.THEME.'/sounds/Fire_Tones_Aligned.wav" preload="auto"></audio>';
    }
 else
 {
-   echo '<audio id="newCallAudio" src="'.BASE_URL.'/oc-content/sounds/New_Dispatch.mp3"  preload="auto"></audio>';
+   echo '<audio id="newCallAudio" src="'.BASE_URL.'/oc-content/themes/'.THEME.'/sounds/New_Dispatch.mp3"  preload="auto"></audio>';
    }
    ?>
-<?php include "./oc-includes/jquery-colsolidated.inc.php"; ?>
+    <?php    
+    include_once ( ABSPATH . "oc-admin/oc-admin-includes/globalModals.inc.php");
+    include_once ( ABSPATH . "oc-includes/jquery-colsolidated.inc.php"); ?>
 <script type="text/javascript">
 // Parse the URL parameter
 function getParameterByName(name, url) {
@@ -1293,7 +960,7 @@ $(document).ready(function() {
 
       $.ajax({
             type: "POST",
-            url: "<?php echo BASE_URL .'/'. OCINC; ?>/generalActions.php",
+            url: "../<?php echo OCINC ?>/generalActions.php",
             data: {
                quickStatus: 'yes',
                event: 'enroute',
@@ -1323,21 +990,21 @@ $(document).ready(function() {
 <script>
 $(function() {
 $( "#ncic_name" ).autocomplete({
-source: "<?php echo BASE_URL .'/'. OCINC; ?>/js/search_name.php"
+source: "../<?php echo OCINC ?>/js/search_name.php"
 });
 });
 </script>
 <script>
 $(function() {
 $( "#ncic_plate" ).autocomplete({
-source: "<?php echo BASE_URL .'/'. OCINC; ?>/js/search_plate.php"
+source: "../<?php echo OCINC ?>/js/search_plate.php"
 });
 });
 </script>
 <script>
 $(function() {
 $( "#ncic_weapon" ).autocomplete({
-source: "<?php echo BASE_URL .'/'. OCINC; ?>/js/search_name.php"
+source: "../<?php echo OCINC ?>/js/search_name.php"
 });
 });
 </script>
@@ -1361,7 +1028,7 @@ priorityNotification = new PNotify({
 function getAOP() {
    $.ajax({
          type: "GET",
-         url: "<?php echo BASE_URL . '/' . OCINC ?>/generalActions.php",
+         url: "../<?php echo OCINC ?>/generalActions.php",
          data: {
             getAOP: 'yes'
          },
@@ -1393,7 +1060,7 @@ function getAOP() {
 function getCalls() {
       $.ajax({
             type: "GET",
-            url: "<?php echo BASE_URL .'/'. OCINC; ?>/generalActions.php",
+            url: "../<?php echo OCINC ?>/generalActions.php",
             data: {
                getCalls: 'yes',
                responder: 'yes'
@@ -1416,7 +1083,7 @@ function getCalls() {
 function getMyCall() {
       $.ajax({
             type: "GET",
-            url: "<?php echo BASE_URL .'/'. OCINC; ?>/generalActions.php",
+            url: "../<?php echo OCINC ?>/generalActions.php",
             data: {
                getMyCall: 'yes',
                responder: 'yes'
@@ -1439,7 +1106,7 @@ function getMyCall() {
 function mdtGetVehicleBOLOS() {
       $.ajax({
             type: "GET",
-            url: "<?php echo BASE_URL .'/'. OCINC; ?>/responderActions.php",
+            url: "../<?php echo OCINC ?>/responderActions.php",
             data: {
                mdtGetVehicleBOLOS: 'yes',
                responder: 'yes'
@@ -1462,7 +1129,7 @@ function mdtGetVehicleBOLOS() {
 function mdtGetPersonBOLOS() {
       $.ajax({
             type: "GET",
-            url: "<?php echo BASE_URL .'/'. OCINC; ?>/responderActions.php",
+            url: "../<?php echo OCINC ?>/responderActions.php",
             data: {
                mdtGetPersonBOLOS: 'yes',
                responder: 'yes'
@@ -1493,7 +1160,7 @@ $(function() {
 
          $.ajax({
             type: "POST",
-            url: "<?php echo BASE_URL .'/'. OCINC; ?>/responderActions.php",
+            url: "../<?php echo OCINC ?>/responderActions.php",
             data: {
                updateCallsign: 'yes',
                details: $("#"+this.id).serialize()
@@ -1565,7 +1232,7 @@ $(function() {
 function getStatus() {
 $.ajax({
       type: "GET",
-      url: "<?php echo BASE_URL .'/'. OCINC; ?>/responderActions.php",
+      url: "../<?php echo OCINC ?>/responderActions.php",
       data: {
          getStatus: 'yes'
       },
@@ -1642,7 +1309,7 @@ function getMyCallDetails()
          {
 			theme: 'dark',
 			headerTitle: 'Radio Code Reference',
-         position: 'center-top 0 0',
+         position: 'center-bottom 0 0',
          headerControls: 'hide',
          contentOverflow: 'hidden',
 			contentSize: {
@@ -1653,5 +1320,4 @@ function getMyCallDetails()
 		});
    });
 </script>
-</body>
 </html>

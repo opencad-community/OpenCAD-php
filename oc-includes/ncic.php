@@ -12,8 +12,8 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
-require_once(__DIR__ . "/../oc-config.php");
-include_once(__DIR__ . "/../oc-content/plugins/api_auth.php");
+require_once('../oc-config.php' );
+require_once( ABSPATH . "/oc-content/plugins/api_auth.php");
 
 if (isset($_POST['ncic_name'])){
     name();
@@ -40,7 +40,7 @@ function name()
             die();
         }
 
-        $stmt = $pdo->prepare("SELECT id, name, dob, address, gender, race, dl_status, hair_color, build, weapon_permit, deceased, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS age, dl_type FROM ".DB_PREFIX."ncic_names WHERE name = ?");
+        $stmt = $pdo->prepare("SELECT id, name, dob, address, gender, race, dl_Issued_by dl_status, dl_type, hair_color, build, weapon_permit, deceased, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS age FROM ".DB_PREFIX."ncic_names WHERE name = ?");
         $resStatus = $stmt->execute(array($name));
         $result = $stmt;
 
@@ -73,7 +73,7 @@ function name()
                 $encode["dl_status"] = $row[6];
                 $encode["dl_type"] = $row[12];
                 $encode["dl_class"] = $row[8];
-                $encode["dl_issuer"] = $row[9];
+                $encode["dl_Issued_by"] = $row[9];
                 $encode["hair_color"] = $row[7];
                 $encode["build"] = $row[8];
 				$encode["weapon_permit"] = $row[9];
