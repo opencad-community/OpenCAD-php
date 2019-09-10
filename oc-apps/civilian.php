@@ -11,10 +11,12 @@ This program is free software: you can redistribute it and/or modify
 
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
+    if(session_id() == '' || !isset($_SESSION)) {
     session_start();
-    include_once("./oc-config.php");
-	include_once( ABSPATH . "/oc-functions.php");
-	include_once( ABSPATH . "/oc-settings.php");
+    }
+    include_once("../oc-config.php");
+    include_once(ABSPATH . "/oc-functions.php");
+    include_once(ABSPATH . "/oc-settings.php");
     include( ABSPATH . OCINC . "/civActions.php");
     include( ABSPATH . OCINC ."/publicFunctions.php");
 	include( ABSPATH . OCINC ."/generalActions.php");
@@ -70,9 +72,78 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 <!DOCTYPE html>
 <html lang="en">
-	<?php include "./oc-includes/header.inc.php"; ?>
+<head>
+	<?php include_once( ABSPATH . "/oc-includes/header.inc.php"); ?>
 
-	<body class="nav-md">
+	<body class="app header-fixed">
+
+		<header class="app-header navbar">
+			<a class="navbar-brand" href="#">
+				<img class="navbar-brand-full" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/tail.png" width="30" height="25" alt="OpenCAD Logo">
+			</a>
+			<?php 
+				include( ABSPATH . "oc-includes/civNav.inc.php" );
+				include( ABSPATH . "oc-includes/topProfile.inc.php" );
+			?>
+		</header>
+
+	    <div class="app-body">
+        <main class="main">
+        <div class="breadcrumb" />
+        <div class="container-fluid">
+          <div class="animated fadeIn">
+            <div class="card">
+                      <div class="card-header">
+          <i class="fa fa-align-justify"></i> <?php echo lang_key("ACCESS_REQUESTS"); ?></div>
+              <div class="card-body">
+<div class="row">
+                     <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="card">
+                           <div class="card-header">
+                              <h2>Active Calls</h2>
+                           </div>
+                           <!-- ./ x_title -->
+                           <div class="card-content">
+                              <div id="noCallsAlertHolder">
+ 
+                              </div>
+                              <div id="live_calls"></div>
+                           </div>
+                           <!-- ./ x_content -->
+                           <div class="card-footer">
+                              <button class="btn btn-primary" name="new_call_btn" data-toggle="modal" data-target="#newCall">New Call</button>
+                              <button class="btn btn-danger float-right" onClick="priorityTone('single')" value="0" id="priorityTone">10-3 Tone</button>
+                              <button class="btn btn-danger float-right" onClick="priorityTone('recurring')" value="0" id="recurringTone">Priority Tone</button>
+                              <button class="btn btn-danger float-right" onClick="priorityTone('panic')" value="0" id="panicTone">Panic Button</button>
+                           </div>
+                        </div>
+                        <!-- ./ card -->
+                     </div>
+                     <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
+                  </div>
+                  <!-- / row -->
+                  
+                 
+              </div>
+            </div>
+            <!-- /.card-->
+        </main>
+
+        </div>
+      </div>
+
+      
+        <footer class="app-footer">
+        <div>
+            <a href="https://opencad.io">OpenCAD</a>
+            <span>&copy; 2017 <?php echo date("Y"); ?>.</span>
+        </div>
+        <div class="ml-auto">
+
+        </div>
+    
+        </footer>
+
 		<div class="container body">
 			<div class="main_container">
 				<div class="col-md-3 left_col">
@@ -96,53 +167,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						<!-- /menu profile quick info -->
 						<br />
 						<!-- sidebar menu -->
-						<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-							<div class="menu_section">
-								<h3>General</h3>
-								<ul class="nav side-menu">
-									<li class="active">
-										<a><i class="fas fa-home"></i> Home</a>
-										<ul class="nav child_menu" style="display: block;">
-											<li class="current-page"><a href="javascript:void(0)">Civilian Dashboard</a>
-											</li>
-										</ul>
-									</li>
-									<?php
-						   if (CIV_WARRANT === true) { ?> <li>
-										<a><i class="fas fa-warning"></i> Warrants <span
-												class="fas fa-chevron-down"></span></a>
-										<ul class="nav child_menu">
-											<li><a type="button" data-toggle="modal" data-target="#createWarrant">
-													Create Warrants</a></li>
-											<li><a type="button" data-toggle="modal" data-target="#viewWarrant"> View
-													Warrants</a></li>
-										</ul>
-									</li>
-									<?php } else { ?>
-									<?php } ?>
-									<li><a type="button" data-toggle="modal" data-target="#newCall"> <i
-												class="fas fa-phone"></i> Create a Call</a></li>
-									<?php
-				if ( CIV_LIMIT_MAX_IDENTITIES == 0 ) {
-					echo '<li><a type="button" data-toggle="modal" data-target="#IdentityModal"><i class="fas fa-user-alt"></i> Add New Identity</a></li>';
-				} else if ( CIV_LIMIT_MAX_IDENTITIES > getNumberOfProfiles() ) {
-					echo '<li><a type="button" data-toggle="modal" data-target="#IdentityModal"><i class="fas fa-user-alt"></i> Add New Identity</a></li>';
-				} else {/* Do Nothing. */}
-				if ( CIV_LIMIT_MAX_VEHICLES == 0 ) {
-					echo '<li><a type="button" data-toggle="modal" data-target="#createPlateModal"> <i class="fas fa-car"></i> Add New Plate</a></li>';
-				} else if ( CIV_LIMIT_MAX_VEHICLES > getNumberOfVehicles() ) {
-					echo '<li><a type="button" data-toggle="modal" data-target="#createPlateModal"> <i class="fas fa-car"></i> Add New Plate</a></li>';
-				} else {/* Do Nothing. */}
-				if ( CIV_LIMIT_MAX_WEAPONS == 0 ) {
-					echo '<li><a type="button" data-toggle="modal" data-target="#createWeaponModal">Add New Weapon</a></li>';
-				} else if ( CIV_LIMIT_MAX_WEAPONS > getNumberOfWeapons() ) {
-					echo '<li><a type="button" data-toggle="modal" data-target="#createWeaponModal">Add New Weapon</a></li>';
-				} else {/* Do Nothing. */}
-			?>
-								</ul>
-							</div>
-							<!-- ./ menu_section -->
-						</div>
+
 						<!-- /sidebar menu -->
 						<!-- /menu footer buttons -->
 						<div class="sidebar-footer hidden-small">

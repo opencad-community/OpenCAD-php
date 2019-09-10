@@ -291,7 +291,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
              <!-- modals -->
 <!-- modals -->
 <!-- Callsign Modal -->
-<div class="modal fade" id="callsign" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal" id="callsign" tabindex="-1" role="dialog" aria-hidden="true">
 <div class="modal-dialog modal-md">
    <div class="modal-content">
       <div class="modal-header">
@@ -322,9 +322,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 </div>
 <!-- ./ modal-dialog modal-md -->
 </div>
-<!-- ./ modal fade -->
+<!-- ./ modal -->
 <!-- Vehicle BOLO Board Modal -->
-<div class="modal fade" id="vehicles-bolo-board" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal" id="vehicles-bolo-board" tabindex="-1" role="dialog" aria-hidden="true">
 <div class="modal-dialog modal-lg">
    <div class="modal-content">
       <div class="modal-header">
@@ -349,7 +349,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 <!-- ./ modal-dialog modal-md -->
 
 <!-- Person BOLO Board Modal -->
-<div class="modal fade" id="persons-bolo-board" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal" id="persons-bolo-board" tabindex="-1" role="dialog" aria-hidden="true">
 <div class="modal-dialog modal-lg">
    <div class="modal-content">
       <div class="modal-header">
@@ -374,7 +374,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 <!-- ./ modal-dialog modal-md -->
 
 <!-- Call Details Modal -->
-<div class="modal fade" id="createArrest" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal" id="createArrest" tabindex="-1" role="dialog" aria-hidden="true">
 <div class="modal-dialog modal-lg">
 <div class="modal-content">
    <div class="modal-header">
@@ -450,8 +450,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 </div>
 <!-- ./ modal-dialog modal-lg -->
 </div>
-<!-- ./ modal fade bs-example-modal-lg -->
-<div class="modal fade" id="rms" tabindex="-1" role="dialog" aria-hidden="true">
+<!-- ./ modal bs-example-modal-lg -->
+<div class="modal" id="rms" tabindex="-1" role="dialog" aria-hidden="true">
 <div class="modal-dialog modal-lg">
    <div class="modal-content">
       <div class="modal-header">
@@ -545,9 +545,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 </div>
 <!-- ./ modal-dialog modal-lg -->
 </div>
-<!-- ./ modal fade bs-example-modal-lg -->
+<!-- ./ modal bs-example-modal-lg -->
 <!-- Call Details Modal -->
-<div class="modal fade" id="createCitation" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal" id="createCitation" tabindex="-1" role="dialog" aria-hidden="true">
 <div class="modal-dialog modal-lg">
 <div class="modal-content">
    <div class="modal-header">
@@ -623,9 +623,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 </div>
 <!-- ./ modal-dialog modal-lg -->
 </div>
-<!-- ./ modal fade bs-example-modal-lg -->
+<!-- ./ modal bs-example-modal-lg -->
 <!-- Create Warning Modal -->
-<div class="modal fade" id="createWarning" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal" id="createWarning" tabindex="-1" role="dialog" aria-hidden="true">
 <div class="modal-dialog modal-lg">
    <div class="modal-content">
       <div class="modal-header">
@@ -696,9 +696,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 </div>
 <!-- ./ modal-dialog modal-lg -->
 </div>
-<!-- ./ modal fade bs-example-modal-lg -->
+<!-- ./ modal bs-example-modal-lg -->
 <!-- Call Details Modal -->
-<div class="modal fade" id="callDetails" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal" id="callDetails" tabindex="-1" role="dialog" aria-hidden="true">
 <div class="modal-dialog modal-lg">
 <div class="modal-content">
    <div class="modal-header">
@@ -787,8 +787,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 </div>
 <!-- ./ modal-dialog modal-lg -->
 </div>
-<!-- ./ modal fade bs-example-modal-lg -->
-<div class="modal fade" id="rms" tabindex="-1" role="dialog" aria-hidden="true">
+<!-- ./ modal bs-example-modal-lg -->
+<div class="modal" id="rms" tabindex="-1" role="dialog" aria-hidden="true">
 <div class="modal-dialog modal-lg">
    <div class="modal-content">
       <div class="modal-header">
@@ -859,7 +859,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 </div>
 <!-- ./ modal-dialog modal-lg -->
 </div>
-<!-- ./ modal fade bs-example-modal-lg -->
+<!-- ./ modal bs-example-modal-lg -->
       <!-- AUDIO TONES -->
       <audio id="recurringToneAudio" src="<?php echo BASE_URL; ?>oc-content/themes/<?php echo THEME; ?>/sounds/priority.mp3" preload="auto"></audio>
       <audio id="priorityToneAudio" src="<?php echo BASE_URL; ?>oc-content/themes/<?php echo THEME; ?>/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
