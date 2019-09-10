@@ -130,8 +130,6 @@ function ncicGetNames()
                 <th>Drivers License</th>
                 <th>Hair Color</th>
                 <th>Build</th>
-				<th>Weapon Status</th>
-				<th>Deceased</th>
                 <th>Actions</th>
                 </tr>
             </thead>
@@ -150,8 +148,6 @@ function ncicGetNames()
                 <td>'.$row['dl_type']. ' / '.$row['dl_status'].'</td>
                 <td>'.$row['hair_color'].'</td>
                 <td>'.$row['build'].'</td>
-                <td>'.$row['weapon_permit'].'</td>
-                <td>'.$row['deceased'].'</td>
                 <td>
                     <button name="edit_name" data-toggle="modal" data-target="#IdentityEditModal" id="edit_nameBtn" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
                     <form action="".BASE_URL."/oc-includes/civActions.php" method="post">
@@ -215,7 +211,6 @@ function ncicGetPlates()
                 <th>Model</th>
                 <th>Color</th>
                 <th>Ins. Status</th>
-                <th>Flags</th>
                 <th>Notes</th>
                 <th>Actions</th>
                 </tr>
@@ -235,7 +230,6 @@ function ncicGetPlates()
                 <td>'.$row['veh_model'].'</td>
                 <td>'.$row['veh_pcolor'].'/'.$row['veh_scolor'].'</td>
                 <td>'.$row['veh_insurance'].' / '.$row['veh_insurance type'].'</td>
-                <td>'.$row['flags'].'</td>
                 <td>'.$row['notes'].'</td>
                 <td>
                     <button name="edit_plate" data-toggle="modal" data-target="#editPlateModal" id="edit_plateBtn" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
@@ -383,15 +377,15 @@ function create_name()
     $dlstatus = htmlspecialchars($_POST['civDLStatus']);
     $dltype = htmlspecialchars($_POST['civDLType']);
     $dlclass = htmlspecialchars($_POST['civDLClass']);
-    $dlissuer = htmlspecialchars($_POST['civDLIssuer']);
+    $dlIssuedby = htmlspecialchars($_POST['civDLIssuer']);
     $hair = htmlspecialchars($_POST['civHairReq']);
     $build = htmlspecialchars($_POST['civBuildReq']);
 	$weapon = htmlspecialchars($_POST['civWepStat']);
 	$deceased = htmlspecialchars($_POST['civDec']);
 
-    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_names (submittedByName, submittedById, name, dob, address, gender, race, dl_status, dl_type, dl_class, dl_issuer, hair_color, build, weapon_permit, deceased)
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_names (submittedByName, submittedById, name, dob, address, gender, race, dl_status, dl_type, dl_class, dl_Issued_by, hair_color, build, weapon_permit, deceased)
     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-    $result = $stmt->execute(array($submittedByName, $submitttedById, $name, $dob, $address, $sex, $race, $dlstatus, $dltype, $dlclass, $dlissuer , $hair, $build, $weapon, $deceased));
+    $result = $stmt->execute(array($submittedByName, $submitttedById, $name, $dob, $address, $sex, $race, $dlstatus, $dltype, $dlclass, $dlIssuedby , $hair, $build, $weapon, $deceased));
 
     if (!$result)
     {
@@ -926,7 +920,7 @@ function create_weapon()
         die();
     }
 
-    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_weapons (name_id, weapon_type, weapon_name, user_id, weapon_notes) VALUES (?, ?, ?, ?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_weapons (name_id, weapon_type, weapon_name, user_id, notes) VALUES (?, ?, ?, ?, ?)");
     $result = $stmt->execute(array($userId, $wea_type, $wea_name, $submittedById, $notes));
 
     if (!$result)
@@ -998,7 +992,7 @@ function ncicGetWeapons()
             <td>'.$row['name'].'</td>
             <td>'.$row['weapon_type'].'</td>
             <td>'.$row['weapon_name'].'</td>
-            <td>'.$row['weapon_notes'].'</td>
+            <td>'.$row['notes'].'</td>
                 <td>
                     <form action="".BASE_URL."/oc-includes/civActions.php" method="post">
                     <input name="delete_weapon" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>

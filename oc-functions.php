@@ -239,7 +239,7 @@ function generateRandomString($length = 10) {
 	**/
 function getOpenCADVersion()
 {
-	echo '0.3.0 Hotfix 12 (commit 9ad28a3c87a)';
+	echo '0.3.0 Hotfix 13 (commit c2d6b2a1d10)';
 }
 
 /**#@+
