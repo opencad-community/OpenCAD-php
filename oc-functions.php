@@ -12,6 +12,40 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
 include_once("oc-config.php");
+include_once( ABSPATH . "oc-settings.php");
+include_once( ABSPATH . OCINC . "/version.php");
+
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        die();
+    }
+
+    $stmt = $pdo->prepare("SELECT oc_db_version FROM ".DB_PREFIX."config");
+    $dbVersion = $stmt->execute();
+    $dbVersion = $stmt;
+
+    if (!$dbVersion)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        die();
+    }
+	$pdo = null;
+	
+	if ( $dbVersion > $oc_db_version )
+    {
+		  die("Database version mimatch. Please upgrade.");
+	}
+	else{ 
+		// Do Nothing
+	};
+
+
 
 if (file_exists(getcwd().'/oc-install') && is_writable(getcwd()) && OC_DEVELOP == false ){
    echo "Please remove <strong>oc-install</strong> from the server befroe continuing.<br />";
