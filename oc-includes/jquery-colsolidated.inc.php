@@ -1,3 +1,7 @@
+    <?
+    require_once( __DIR__ . '/../oc-config.php');
+    require_once( ABSPATH . '/oc-functions.php');?>
+    
     <!-- jQuery -->
     <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/jquery/dist/jquery.min.js"></script>
     
@@ -63,6 +67,6 @@
 
     <!-- Custom Theme Scripts -->
     <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/js/theme.js"></script>
+    <script src="<?php echo BASE_URL;?>/oc-includes/OpenCAD.js"></script>
     <script src="<?php echo BASE_URL; ?>/oc-includes/custom.js"></script>
-    <script src="<?php echo BASE_URL; ?>/oc-includes/OpenCAD.js"></script>
 

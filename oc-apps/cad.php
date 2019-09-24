@@ -14,16 +14,15 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
     if(session_id() == '' || !isset($_SESSION)) {
-    // session isn't started
     session_start();
     }
-    require_once('../oc-config.php');
-    require_once( ABSPATH . '/oc-functions.php');
-    require_once( ABSPATH . '/oc-settings.php');
-    require_once( ABSPATH . OCINC . "/generalActions.php");
-    require_once( ABSPATH . OCINC . "/publicFunctions.php");
-    require_once( ABSPATH . OCINC . "/dispatchActions.php");
-    require_once( ABSPATH . "/oc-content/plugins/api_auth.php");
+    include_once("../oc-config.php");
+    include_once(ABSPATH . "/oc-functions.php");
+    include_once(ABSPATH . "/oc-settings.php");
+    include_once(ABSPATH . OCINC . "/generalActions.php");
+    include_once( "../" . OCINC . "/publicFunctions.php" );
+    include_once( "../" . OCINC . "/dispatchActions.php" );
+    include_once( "../" . OCCONTENT . "/plugins/api_auth.php" );
     if (empty($_SESSION['logged_in']))
     {
         header('Location: ../index.php');
@@ -78,7 +77,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php include ( ABSPATH . "/oc-includes/header.inc.php"); ?>
+<?php include_once( ABSPATH . "/oc-includes/header.inc.php"); ?>
 
 
 <body class="app header-fixed">
@@ -108,7 +107,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <!-- ./ x_title -->
                            <div class="card-content">
                               <div id="noCallsAlertHolder">
-                                <?php getActiveCalls();?>
                                  <span id="noCallsAlertSpan"></span>
                               </div>
                               <div id="live_calls"></div>
@@ -116,16 +114,15 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <!-- ./ x_content -->
                            <div class="card-footer">
                               <button class="btn btn-primary" name="new_call_btn" data-toggle="modal" data-target="#newCall">New Call</button>
-                              <button class="btn btn-danger pull-right" onClick="priorityTone('single')" value="0" id="priorityTone">10-3 Tone</button>
-                              <button class="btn btn-danger pull-right" onClick="priorityTone('recurring')" value="0" id="recurringTone">Priority Tone</button>
-                              <button class="btn btn-danger pull-right" onClick="priorityTone('panic')" value="0" id="panicTone">Panic Button</button>
+                              <button class="btn btn-danger float-right" onClick="priorityTone('single')" value="0" id="priorityTone">10-3 Tone</button>
+                              <button class="btn btn-danger float-right" onClick="priorityTone('recurring')" value="0" id="recurringTone">Priority Tone</button>
+                              <button class="btn btn-danger float-right" onClick="priorityTone('panic')" value="0" id="panicTone">Panic Button</button>
                            </div>
                         </div>
                         <!-- ./ x_panel -->
                      </div>
                      <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
                   </div>
-                  <div class="clearfix"></div>
                   <div class="row">
                      <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="card">
@@ -136,82 +133,72 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                          <div class="card-conent">
                               <div id="noCallsAlertHolder">
 							  <?php echo $boloMessage;?>
-                           <div class="x_content">
-                              <div id="cadpersonbolo"></div>
+                           <div class="card-content">
+                              <?php cadGetPersonBOLOS(); ?>
                            </div>
-                           <div class="x_content">
-                              <div id="cadvehiclebolo"></div>
+                           <div class="card-content">
+                              <?php cadGetVehicleBOLOS(); ?>
                            </div>
                                  <span id="noCallsAlertSpan"></span>
                               </div>
                               <div id="live_calls"></div>
                            </div>
                            <!-- ./ x_content -->
-<div class="clearfix"></div>
-                  <div class="row">
-                     <div class="col-md-2 col-sm-2 col-xs-2">
-                        <div class="cardl">
+                                                      <div class="card-footer">
+                              <button class="btn btn-warning" name="new_call_btn" data-toggle="modal" data-target="#newPersonsBOLO">New Persons BOLO</button>
+                              <button class="btn btn-warning" name="new_call_btn" data-toggle="modal" data-target="#newVehicleBOLO">New Vehicle BOLO</button>
+                           </div>
+                        </div>
+                  </div>
+                  </div>
+                  <div class="row justify-content-center">
+                <div class="col-md-4 col-xs-4">
+                <div class="card w-1000">
                            <div class="card-header">
                               <h2>Active Dispatchers</h2>
                               <div class="clearfix"></div>
                            </div>
                            <!-- ./ x_title -->
                            <div class="card-content">
-                              <div id="activeDispatchers"></div>
+                              <?php getDispatchers(); ?>
                            </div>
-                           <!-- ./ x_content -->
-                        </div>
-                        </div>
-                        <!-- ./ x_panel -->
-                     <!-- ./ col-md-2 col-sm-2 col-xs-2 -->
-                     <div class="col-md-5 col-sm-5 col-xs-5">
-                        <div class="card">
+                </div>
+              </div>
+              <!-- /.col-->
+              <div class="col-md-4 col-xs-4">
+                <div class="card">
                            <div class="card-header">
                               <h2>Available Units</h2>
                               <div class="clearfix"></div>
                            </div>
                            <!-- ./ x_title -->
                            <div class="card-contenmt">
-                              <div id="availableUnits"></div>
+                              <?php getAvailableUnits(); ?>
                            </div>
-                           <!-- ./ x_content -->
-                        </div>
-                        <!-- ./ x_panel -->
-                     </div>
-                     <!-- ./ col-md-5 col-sm-5 col-xs-5 -->
-                     <div class="col-md-5 col-sm-5 col-xs-5">
-                        <div class="card">
+                </div>
+              </div>
+              <!-- /.col-->
+              <div class="col-md-4 col-xs-4">
+                <div class="card">
                            <div class="card-header">
                               <h2>Unavailable Units</h2>
                            </div>
                            <!-- ./ x_title -->
                            <div class="card-content">
                               <div id="unAvailableUnits">
+                                <?php getUnAvailableUnits(); ?> 
                               </div>
                            </div>
-                           <!-- ./ x_content -->
-                        </div>
-                        <!-- ./ x_panel -->
-                     </div>
-                     <!-- ./ col-md-5 col-sm-5 col-xs-5 -->
+                          </div>
+                          <!-- /.col-->
                   </div>
                   <!-- ./ row -->
-
-                           <div class="card-footer">
-                              <button class="btn btn-warning" name="new_call_btn" data-toggle="modal" data-target="#newPersonsBOLO">New Persons BOLO</button>
-                              <button class="btn btn-warning" name="new_call_btn" data-toggle="modal" data-target="#newVehicleBOLO">New Vehicle BOLO</button>
-                           </div>
-                        </div>
-                        <!-- ./ x_panel -->
                      </div>
                      <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
-                  </div>
-                  <!-- ./ row -->
-                </div>
 
-                                 <div class="clearfix"></div>
-                  <div class="row">
-                     <div class="col-md-4 col-sm-4 col-xs-3">
+
+                  <div class="row justify-content-center"">
+                     <div class="col-md-4 col-xs-4">
                         <div class="card">
                            <div class="card-header">
                               <h2>NCIC Name Lookup</h2>
@@ -221,13 +208,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <div class="card-body">
                               <div class="input-group">
                                  <input id="ncic_name" type="text" class="form-control" placeholder="John Doe" name="ncic_name"/>
-                                 <span class="input-group-btn">
-                                 <button type="button" class="btn btn-primary" name="ncic_name_btn" id="ncic_name_btn">Send</button>
-                                 </span>
+                                                             <span class="input-group-append">
+                              <button class="btn btn-primary" type="button" name="ncic_name_btn" id="ncic_name_btn">Send</button>
+                            </span>
                               </div>
                               <!-- ./ input-group -->
                               <div name="ncic_name_return" id="ncic_name_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
-                                 <!--<textarea class="form-control" style="resize:none;" id="ncic_name_return" name="ncic_name_return" readonly="readonly"></textarea> -->
                               </div>
                               <!-- ./ ncic_name_return -->
                            </div>
@@ -236,7 +222,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <!-- ./ x_panel -->
                      </div>
                      <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
-                     <div class="col-md-4 col-sm-4 col-xs-3">
+                     <div class="col-md-4 col-xs-4">
                         <div class="card">
                            <div class="card-header">
                               <h2>NCIC Plate Lookup</h2>
@@ -245,7 +231,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            <div class="card-body">
                               <div class="input-group">
                                  <input type="text" name="ncic_plate" class="form-control" id="ncic_plate" placeholder="License Plate, (ABC123)"/>
-                                 <span class="input-group-btn">
+                                 <span class="input-group-append">
                                  <button type="button" class="btn btn-primary" id="ncic_plate_btn">Send</button>
                                  </span>
                               </div>
@@ -259,22 +245,21 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <!-- ./ x_panel -->
                      </div>
                      <!-- ./ col-sm-6 col-md-4 col-xs-4 -->
-                     <div class="col-md-4 col-sm-6">
+                     <div class="col-md-4 col-xs-4">
                         <div class="card">
                            <div class="card-header">
-                              <h2>NCIC Plate Lookup</h2>
+                              <h2>NCIC Weapon Lookup</h2>
                            </div>
                            <!-- ./ x_title -->
                            <div class="card-body">
                               <div class="input-group">
                                  <input type="text" name="ncic_weapon" class="form-control" id="ncic_weapon" placeholder="John Doe"/>
-                                 <span class="input-group-btn">
+                                 <span class="input-group-append">
                                  <button type="button" class="btn btn-primary" name="ncic_weapon_btn" id="ncic_weapon_btn">Send</button>
                                  </span>
                               </div>
                               <!-- ./ input-group -->
                               <div name="ncic_weapon_return" id="ncic_weapon_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
-                                 <!--<textarea class="form-control" style="resize:none;" id="ncic_name_return" name="ncic_name_return" readonly="readonly"></textarea> -->
                               </div>
                               <!-- ./ ncic_name_return -->
                            </div>
@@ -285,8 +270,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                <!-- ./ col-md-4 col-sm-4 col-xs-4 -->
             </div>
             <!-- ./ row -->
-                <!-- /.row-->
-
               </div>
             </div>
             <!-- /.card-->
@@ -513,7 +496,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           </div>
           <!-- ./ modal-header -->
 		  <div class="modal-body">
-            <form role="form" action="<?php echo BASE_URL .'/'. OCINC ?>/dispatchActions.php" method="post">
+            <form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post">
                 <div class="form-group row">
                 </div>
                 <div class="form-group row">
@@ -613,7 +596,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           </div>
           <!-- ./ modal-header -->
 		  <div class="modal-body">
-            <form role="form" action="<?php echo BASE_URL .'/'. OCINC ?>/dispatchActions.php" method="post">
+            <form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post">
                 <div class="form-group row">
                 </div>
                 <div class="form-group row">
@@ -697,7 +680,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           </div>
           <!-- ./ modal-header -->
       <div class="modal-body">
-            <form role="form" action="<?php echo BASE_URL .'/'. OCINC ?>/dispatchActions.php" method="post">
+            <form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post">
                 <div class="form-group row">
                 </div>
                 <div class="form-group row">
@@ -781,7 +764,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           </div>
           <!-- ./ modal-header -->
 		  <div class="modal-body">
-            <form role="form" action="<?php echo BASE_URL .'/'. OCINC ?>/dispatchActions.php" method="post">
+            <form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post">
                 <div class="form-group row">
                 </div>
                 <div class="form-group row">
@@ -868,7 +851,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           </div>
           <!-- ./ modal-header -->
       <div class="modal-body">
-            <form role="form" action="<?php echo BASE_URL .'/'. OCINC ?>/dispatchActions.php" method="post">
+            <form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post">
                 <div class="form-group row">
                 </div>
                 <div class="form-group row">
@@ -1134,7 +1117,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           </div>
           <!-- ./ modal-header -->
           <div class="modal-body">
-            <form role="form" action="<?php echo BASE_URL .'/'. OCINC ?>/dispatchActions.php" method="post">
+            <form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post">
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">Civilian Name</label>
                 <div class="col-lg-10">
@@ -1257,7 +1240,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           </div>
           <!-- ./ modal-header -->
           <div class="modal-body">
-            <form role="form" action="<?php echo BASE_URL .'/'. OCINC ?>/dispatchActions.php" method="post">
+            <form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post">
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">Civilian Name</label>
                 <div class="col-lg-10">
@@ -1329,7 +1312,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             </div>
             <!-- ./ modal-header -->
           <div class="modal-body">
-            <form role="form" action="<?php echo BASE_URL .'/'. OCINC ?>/dispatchActions.php" method="post">
+            <form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post">
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">Civilian Name</label>
                 <div class="col-lg-10">
@@ -1497,7 +1480,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           </div>
           <!-- ./ modal-header -->
           <div class="modal-body">
-            <form role="form" action="<?php echo BASE_URL .'/'. OCINC ?>/dispatchActions.php" method="post">
+            <form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post">
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">Civilian Name</label>
                 <div class="col-lg-10">
@@ -1619,7 +1602,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   </div>
                   <!-- ./ x_title -->
                   <div class="x_content">
-                     <?php ncicGetWarrants();;?>
+                     <?php ncicGetWarrants();?>
                   </div>
                   <!-- ./ x_content -->
                 </div>
@@ -1638,14 +1621,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       </div>
       <!-- ./ modal-dialog modal-lg -->
 
-    <?php
-    include ( ABSPATH . "oc-admin/oc-admin-includes/globalModals.inc.php");
-    include ( ABSPATH . "/oc-includes/jquery-colsolidated.inc.php"); ?>
+    <?php    
+    include_once ( ABSPATH . "oc-admin/oc-admin-includes/globalModals.inc.php");
+    include_once ( ABSPATH . "oc-includes/jquery-colsolidated.inc.php"); ?>
 
-<!-- AUDIO TONES -->
-      <audio id="recurringToneAudio" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-content/sounds/priority.mp3" preload="auto"></audio>
-      <audio id="priorityToneAudio" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-content/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
-      <audio id="panicToneAudio" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-content/sounds/Panic_Button.m4a" preload="auto"></audio>
+    <!-- AUDIO TONES -->
+      <audio id="recurringToneAudio" src="<?php echo BASE_URL; ?>oc-content/themes/<?php echo THEME; ?>/sounds/priority.mp3" preload="auto"></audio>
+      <audio id="priorityToneAudio" src="<?php echo BASE_URL; ?>oc-content/themes/<?php echo THEME; ?>/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
+      <audio id="panicToneAudio" src="<?php echo BASE_URL; ?>oc-content/themes/<?php echo THEME; ?>/sounds/Panic_Button.m4a" preload="auto"></audio>
 
           <script>
          var vid = document.getElementById("recurringToneAudio");
@@ -1653,19 +1636,19 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
   $(function() {
     $( "#ncic_name" ).autocomplete({
-      source: "<?php echo BASE_URL .'/'. OCINC ?>/search_name.php"
+      source: "../<?php echo OCINC ?>/search_name.php"
     });
   });
 
   $(function() {
     $( "#ncic_plate" ).autocomplete({
-      source: "<?php echo BASE_URL .'/'. OCINC ?>/search_plate.php"
+      source: "../<?php echo OCINC ?>/search_plate.php"
     });
   });
   
   $(function() {
     $( "#ncic_weapon" ).autocomplete({
-      source: "<?php echo BASE_URL .'/'. OCINC ?>/search_name.php"
+      source: "../<?php echo OCINC ?>/search_name.php"
     });
   });
   
@@ -1760,7 +1743,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
            $.ajax({
                type: "POST",
-               url: "<?php echo BASE_URL .'/'. OCINC ?>/generalActions.php",
+               url: "../<?php echo OCINC ?>/generalActions.php",
                data: {
                    changeStatus: 'yes',
                    unit: unit,
@@ -1802,7 +1785,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
              $.ajax({
                  type: "POST",
-                 url: "<?php echo BASE_URL .'/'. OCINC ?>/generalActions.php",
+                 url: "../<?php echo OCINC ?>/generalActions.php",
                  data: {
                      logoutUser: 'yes',
                      unit: unit
@@ -1837,7 +1820,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          function getAvailableUnits() {
            $.ajax({
                  type: "GET",
-                 url: "<?php echo BASE_URL .'/'. OCINC ?>/generalActions.php",
+                 url: "../<?php echo OCINC ?>/generalActions.php",
                  data: {
                      getAvailableUnits: 'yes'
                  },
@@ -1861,7 +1844,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          function getDispatchers() {
            $.ajax({
                  type: "GET",
-                 url: "<?php echo BASE_URL .'/'. OCINC ?>/generalActions.php",
+                 url: "../<?php echo OCINC ?>/generalActions.php",
                  data: {
                      getDispatchers: 'yes'
                  },
@@ -1885,7 +1868,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          function getAOP() {
            $.ajax({
                  type: "GET",
-                 url: "<?php echo BASE_URL .'/'. OCINC ?>/generalActions.php",
+                 url: "../<?php echo OCINC ?>/generalActions.php",
                  data: {
                      getAOP: 'yes'
                  },
@@ -1909,7 +1892,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          function cadGetPersonBOLOS() {
            $.ajax({
                  type: "GET",
-                 url: "<?php echo BASE_URL .'/'. OCINC ?>/dispatchActions.php",
+                 url: "../<?php echo OCINC ?>/dispatchActions.php",
                  data: {
                      cadGetPersonBOLOS: 'yes'
                  },
@@ -1932,7 +1915,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
          function cadGetVehicleBOLOS() {
            $.ajax({
                  type: "GET",
-                 url: "<?php echo BASE_URL .'/'. OCINC ?>/dispatchActions.php",
+                 url: "../<?php echo OCINC ?>/dispatchActions.php",
                  data: {
                      cadGetVehicleBOLOS: 'yes'
                  },
@@ -1957,7 +1940,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 e.preventDefault();
                 var edit_id = $(this).data('id');
                 $.ajax({
-                  url: '<?php echo BASE_URL .'/'. OCINC ?>/dispatchActions.php',
+                  url: '../<?php echo OCINC ?>/dispatchActions.php',
                   type: 'POST',
                   data: 'bolos_personid='+edit_id,
                   dataType: 'json',
@@ -1977,7 +1960,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 e.preventDefault();
                 var edit_id = $(this).data('id');
                 $.ajax({
-                  url: '<?php echo BASE_URL .'/'. OCINC ?>dispatchActions.php',
+                  url: '../<?php echo OCINC ?>/dispatchActions.php',
                   type: 'POST',
                   data: 'bolos_vehicleid='+edit_id,
                   dataType: 'json',
