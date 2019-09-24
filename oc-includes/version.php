@@ -13,14 +13,14 @@
  *
  * @global string $oc_version
  */
-$oc_version = '0.3.1-canary-b9629734659';
+$oc_version = '1.0';
 
 /**
  * Holds the OpenCAD DB revision, increments when changes are made to the OpenCAD DB schema.
  *
  * @global int $oc_db_version
  */
-$oc_db_version = 44719;
+$oc_db_version = 1000;
 
 /**
  * Holds the required PHP version

@@ -616,50 +616,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							</div>
 							<!-- ./ form-group -->
 							<div class="form-group row">
-								<label class="col-lg-2 control-label">License Status</label>
-								<div class="col-lg-10">
-									<select name="civDLStatus" class="form-control selectpicker" id="civDLStatus"
-										title="Select a license status" required>
-										<?php getLicenseStatuses(); ?>
-									</select>
-								</div>
-								<!-- ./ col-sm-9 -->
-							</div>
-							<!-- ./ form-group -->
-							<div class="form-group row">
-								<label class="col-lg-2 control-label">License Types</label>
-								<div class="col-lg-10">
-									<select name="civDLType" class="form-control selectpicker" id="civDLType"
-										title="Select a license type" required>
-										<?php getLicenseTypes(); ?>
-									</select>
-								</div>
-								<!-- ./ col-sm-9 -->
-							</div>
-							<!-- ./ form-group -->
-							<div class="form-group row">
-								<label class="col-lg-2 control-label">License Class</label>
-								<div class="col-lg-10">
-									<select name="civDLClass" class="form-control selectpicker" id="civDLClass"
-										title="Select a license class" multiple="multiple" required>
-										<?php getLicenseClasses(); ?>
-									</select>
-								</div>
-								<!-- ./ col-sm-9 -->
-							</div>
-							<!-- ./ form-group -->
-							<div class="form-group row">
-								<label class="col-lg-2 control-label">License Issuer</label>
-								<div class="col-lg-10">
-									<select name="civDLIssuer" class="form-control selectpicker" id="civDLClass"
-										title="Select a license issuer" required>
-										<?php getLicenseIssuers(); ?>
-									</select>
-								</div>
-								<!-- ./ col-sm-9 -->
-							</div>
-							<!-- ./ form-group -->
-							<div class="form-group row">
 								<label class="col-lg-2 control-label">Hair Color</label>
 								<div class="col-lg-10">
 									<select name="civHairReq" class="form-control selectpicker" id="civHairReq"
@@ -781,17 +737,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							</div>
 							<!-- ./ form-group -->
 							<div class="form-group row">
-								<label class="col-lg-2 control-label">License Status</label>
-								<div class="col-lg-10">
-									<select name="civDL" class="form-control selectpicker civDL_picker" id="civDL"
-										title="Select a license status" required>
-										<?php getLicenseStatuses(); ?>
-									</select>
-								</div>
-								<!-- ./ col-sm-9 -->
-							</div>
-							<!-- ./ form-group -->
-							<div class="form-group row">
 								<label class="col-lg-2 control-label">Hair Color</label>
 								<div class="col-lg-10">
 									<select name="civHairReq" class="form-control selectpicker civHairReq_picker"
@@ -832,17 +777,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<!-- ./ form-group -->
 
 							</div>
-							<div class="form-group row">
-								<label class="col-lg-2 control-label">Deceased</label>
-								<div class="col-lg-10">
-									<select name="civDec" class="form-control civDec_picker" id="civDec"
-										title="Are you deceased?" required>
-										<option val="Yes">Yes</option>
-										<option val="No">No</option>
-									</select>
-									<!-- ./ col-sm-9 -->
-								</div>
-								<!-- ./ form-group -->
 
 							</div>
 							<!-- ./ modal-body -->
@@ -929,7 +863,17 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								</div>
 								<!-- ./ col-sm-9 -->
 							</div>
-							<!-- ./ form-group -->				
+							<!-- ./ form-group -->
+														<div class="form-group row">
+								<label class="col-lg-2 control-label">Vehicle's Registered State</label>
+								<div class="col-lg-10">
+									<select class="form-control veh_reg_state_option" name="veh_reg_state" required>
+										<?php getStates();?>
+									</select>
+								</div>
+								<!-- ./ col-sm-9 -->
+							</div>
+							<!-- ./ form-group -->
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Notes</label>
 								<div class="col-lg-10">
@@ -937,9 +881,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								</div>
 								<!-- ./ col-sm-9 -->
 							</div>
-
 							<!-- ./ form-group -->
-
 					</div>
 					<!-- ./ modal-body -->
 					<div class="modal-footer">
@@ -961,7 +903,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
 						</button>
-						<h4 class="modal-title" id="myModalLabel">Edit Plate to Database</h4>
+						<h4 class="modal-title" id="myModalLabel">Edit Plate in Database</h4>
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
@@ -973,7 +915,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<div class="col-lg-10">
 									<select class="form-control selectpicker civilian_names_picker"
 										name="civilian_names" id="civilian_names" data-live-search="true" required>
-										<option> </option>
 										<?php getCivilianNamesOwn();?>
 									</select>
 								</div>
@@ -991,9 +932,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Vehicle Make-Model</label>
 								<div class="col-lg-10">
-									<select class="form-control selectpicker veh_makemodelpicker" name="veh_make_model"
+									<select class="form-control selectpicker veh_make_model" name="veh_make_model"
 										id="veh_make_model" data-live-search="true" required>
-										<option> </option>
 										<?php getVehicle();?>
 									</select>
 								</div>
@@ -1003,9 +943,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Vehicle Primary Color</label>
 								<div class="col-lg-10">
-									<select class="form-control selectpicker veh_pcolor_picker" name="veh_pcolor"
+									<select class="form-control selectpicker veh_pcolor" name="veh_pcolor"
 										data-live-search="true" required>
-										<option val=""> </option>
 										<?php getColors();?>
 									</select>
 								</div>
@@ -1015,23 +954,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Vehicle Secondary Color</label>
 								<div class="col-lg-10">
-									<select class="form-control selectpicker veh_scolor_picker" name="veh_scolor"
+									<select class="form-control selectpicker veh_scolor" name="veh_scolor"
 										data-live-search="true" required>
-										<option val=""> </option>
 										<?php getColors();?>
-									</select>
-								</div>
-								<!-- ./ col-sm-9 -->
-							</div>
-							<!-- ./ form-group -->
-							<div class="form-group row">
-								<label class="col-lg-2 control-label">Insurance Status</label>
-								<div class="col-lg-10">
-									<select class="form-control veh_insurance_option" name="veh_insurance"
-										id="insurance_edit" required>
-										<option value=""> </option>
-										<option value="VALID"> Valid </option>
-										<option value="EXPIRED"> Expired </option>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -1049,65 +974,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<label class="col-lg-2 control-label">Vehicle's Registered State</label>
 								<div class="col-lg-10">
 									<select class="form-control veh_reg_state_option" name="veh_reg_state" required>
-										<option value=""> </option>
-										<option value="Alabama"> Alabama </option>
-										<option value="Alaska"> Alaska </option>
-										<option value="Arizona"> Arizona </option>
-										<option value="Arkansas"> Arkansas </option>
-										<option value="California"> California </option>
-										<option value="Colorado"> Colorado </option>
-										<option value="Connecticut"> Connecticut </option>
-										<option value="Delaware"> Delaware </option>
-										<option value="Florida"> Florida </option>
-										<option value="Georgia"> Georgia </option>
-										<option value="Hawaii"> Hawaii </option>
-										<option value="Idaho"> Idaho </option>
-										<option value="Illinois"> Illinois </option>
-										<option value="Indiana"> Indiana </option>
-										<option value="Iowa"> Iowa </option>
-										<option value="Kansas"> Kansas </option>
-										<option value="Kentucky"> Kentucky </option>
-										<option value="Louisiana"> Louisiana </option>
-										<option value="Maine"> Maine </option>
-										<option value="Maryland"> Maryland </option>
-										<option value="Massachusetts"> Massachusetts </option>
-										<option value="Michigan"> Michigan </option>
-										<option value="Minnesota"> Minnesota </option>
-										<option value="Mississippi"> Mississippi </option>
-										<option value="Missouri"> Missouri </option>
-										<option value="Montana"> Montana </option>
-										<option value="Nebraska"> Nebraska </option>
-										<option value="Nevada"> Nevada </option>
-										<option value="New Hampshire"> New Hampshire </option>
-										<option value="New Jersey"> New Jersey </option>
-										<option value="New Mexico"> New Mexico </option>
-										<option value="New York"> New York </option>
-										<option value="North Carolina"> North Carolina </option>
-										<option value="North Dakota"> North Dakota </option>
-										<option value="Ohio"> Ohio </option>
-										<option value="Oklahoma"> Oklahoma </option>
-										<option value="Oregon"> Oregon </option>
-										<option value="Pennsylvania"> Pennsylvania </option>
-										<option value="Rhode Island"> Rhode Island </option>
-										<option value="San Andreas"> San Andreas </option>
-										<option value="South Carolina"> South Carolina </option>
-										<option value="South Dakota"> South Dakota </option>
-										<option value="Tennessee"> Tennessee </option>
-										<option value="Texas"> Texas </option>
-										<option value="Utah"> Utah </option>
-										<option value="Vermont"> Vermont </option>
-										<option value="Virginia"> Virginia </option>
-										<option value="Washington"> Washington </option>
-										<option value="West Virginia"> West Virginia </option>
-										<option value="Wisconsin"> Wisconsin </option>
-										<option value="Wyoming"> Wyoming </option>
+										<?php getStates();?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
 							</div>
 							<!-- ./ form-group -->
-							<!-- ./ form-group -->
-
 					</div>
 					<!-- ./ modal-body -->
 					<div class="modal-footer">
@@ -1309,6 +1181,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			$(document).on('click', '#edit_plateBtn', function(e) {
 				e.preventDefault();
 				var edit_id = $(this).data('id');
+				console.log(edit_id);
 				$.ajax({
 						url: '<?php echo BASE_URL .'/'. OCINC ?>/civActions.php',
 						type: 'POST',
@@ -1317,15 +1190,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						cache: false
 					})
 					.done(function(data) {
-						$('.civilian_names_picker').selectpicker('val', data.name_id);
+						$('.civilian_names').selectpicker('val', data.name_id);
 						$('.veh_plate').val(data.veh_plate);
-						$('.veh_makemodelpicker').selectpicker('val', data.veh_make + ' ' + data
+						$('.veh_makemodel').selectpicker('val', data.veh_make + ' ' + data
 							.veh_model);
-						$('.veh_pcolor_picker').selectpicker('val', data.veh_pcolor);
-						$('.veh_scolor_picker').selectpicker('val', data.veh_scolor);
-						$('#insurance_edit').val(data.veh_insurance);
+						$('.veh_pcolor').selectpicker('val', data.veh_pcolor);
+						$('.veh_scolor').selectpicker('val', data.veh_scolor);
 						$('.notes').val(data.notes);
-						$('.veh_reg_state_option').val(data.veh_reg_state);
+						$('.veh_reg_state').val(data.veh_reg_state);
 						$('.editplateid').val(data.id);
 					});
 			});
