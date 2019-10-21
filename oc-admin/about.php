@@ -125,8 +125,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						      <label for="name"><?php echo lang_key("APPLICATION_VERSION"); ?></label><input type="text" class="form-control" readonly="readonly" placeholder="<?php echo getOpenCADVersion(); ?>" />
 						      <?php echo lang_key("APPLICATION_VERSION_notes"); ?>
 					      </div>
+					      <div class="form-group">
+						      <label for="name"><?php echo lang_key("DATABASE_VERSION"); ?></label><input type="text" class="form-control" readonly="readonly" placeholder="<?php echo number_format($oc_db_version,1 ); ?>" />
+						      <?php echo lang_key("DATABASE_VERSION_notes"); ?>
+					      </div>
               </div>
-                <!-- /.row-->
+              <!-- /.row-->
             </div>
           </div>
           <!-- /.card-->

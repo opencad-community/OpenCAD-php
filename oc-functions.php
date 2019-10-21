@@ -25,25 +25,43 @@ include_once( ABSPATH . OCINC . "/version.php");
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT oc_db_version FROM ".DB_PREFIX."config");
-    $dbVersion = $stmt->execute();
-    $dbVersion = $stmt;
+	$stmt = $pdo->query("SELECT * FROM ".DB_PREFIX."config WHERE `key` = 'schema_version'");
+	$stmt->execute();
+	$result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if (!$dbVersion)
+
+	if (!$result['value'])
     {
-        $_SESSION['error'] = $stmt->errorInfo();
+		session_start();
+		$_SESSION['error_title'] = "No Values Provided";
+		$_SESSION['error'] = "We are sorry, but there are now vlues set. Please raise a support ticket.";
         header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
-	$pdo = null;
-	
-	if ( $dbVersion > $oc_db_version )
+
+	if ( $result['value'] != $oc_db_version )
     {
-		  die("Database version mimatch. Please upgrade.");
+		if ( $oc_db_version > $result['value'] )
+		{
+			session_start();
+			$_SESSION['error_title'] = "Upgrade Required!";
+			$_SESSION['error'] = "Please update the database schema. The currently installed version is ".$result['value'].". The expected version is ".$oc_db_version.".";
+        	header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+			die();
+		} 
+		else if ($oc_db_version < $result['value'])
+		{
+			session_start();
+			$_SESSION['error_title'] = "Upgrade Required!";
+			$_SESSION['error'] = "Please update the application. The currently installed version is ".$result['value'].". The expected version is ".$oc_db_version.".";
+        	header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+			die();
+		}
 	}
 	else{ 
 		// Do Nothing
 	};
+	$pdo = null;
 
 
 

@@ -92,7 +92,7 @@
                                 <br><br>
                                 <?php } ?>
                                 <div class="x_content">
-                                    If this error persists, please open up a <a href="https://jira.opencad.io/secure/CreateIssue!default.jspa">ticket</a>.
+                                    If this error persists, please raise up a <a href="https://jira.opencad.io/secure/CreateIssue!default.jspa">ticket</a>.
                                 </div>
                             </div>
                         </div>
@@ -101,5 +101,8 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="https://jira.opencad.io/s/d41d8cd98f00b204e9800998ecf8427e-CDN/-yswoqx/803001/e9472bc0031d5624a0697e42de63e8c8/2.2.4.7/_/download/batch/com.atlassian.plugins.jquery:jquery/com.atlassian.plugins.jquery:jquery.js?collectorId=ede74ac1"></script><script type="text/javascript" src="https://jira.opencad.io/s/ec5d7ac10d1485d91b0b86b49dbb49f9-T/-yswoqx/803001/e9472bc0031d5624a0697e42de63e8c8/3.0.7/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=ede74ac1"></script>
+
+
 </body>
 </html>
