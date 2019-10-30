@@ -89,7 +89,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         <img class="navbar-brand-full" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/tail.png" width="30" height="25" alt="OpenCAD Logo">
       </a>
       <?php include( ABSPATH . "oc-admin/oc-admin-includes/topbarNav.inc.php"); ?>
-
       <?php include( ABSPATH . "oc-includes/topProfile.inc.php"); ?>
     </header>
 

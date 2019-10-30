@@ -12,10 +12,11 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
-    if(session_id() == '' || !isset($_SESSION)) {
+if(session_id() == '' || !isset($_SESSION)) {
     // session isn't started
     session_start();
-    }
+}
+$id = $_SESSION['id'];
 require_once( "../oc-config.php" );
 require_once( ABSPATH . '/oc-functions.php');
 require_once( ABSPATH . '/oc-settings.php');
@@ -29,19 +30,24 @@ if (empty($_SESSION['logged_in']))
     setDispatcher("1");
 
 
-$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-if (!$link) {
-    die('Could not connect: ' .mysql_error());
+try{
+    $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+} catch(PDOException $ex)
+{
+    $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+    $_SESSION['error_blob'] = $ex;
+    header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+    die();
 }
 
-$id = $_SESSION['id'];
-$sql = "SELECT * from ".DB_PREFIX."user_departments WHERE user_id = \"$id\"";
-$getAdminPriv = "SELECT `admin_privilege` from ".DB_PREFIX."users WHERE id = \"$id\"";
+$getDepartments = $pdo->query("SELECT `department_id` from ".DB_PREFIX."user_departments WHERE user_id = \"$id\"");
+$getDepartments -> execute();
+$Departments = $getDepartments->fetch(PDO::FETCH_ASSOC);
+$getAdminPriv = $pdo->query("SELECT `admin_privilege` from ".DB_PREFIX."users WHERE id = \"$id\"");
+$getAdminPriv -> execute();
+$adminPriv = $getAdminPriv->fetch(PDO::FETCH_ASSOC);
 
-$result=mysqli_query($link, $sql);
-$adminPriv=mysqli_query($link, $getAdminPriv);
-
+$_SESSION['admin_privilege'] = $adminPriv['admin_privilege'];
 
 $adminButton = "";
 $dispatchButton = "";
@@ -54,10 +60,7 @@ $policeButton = "";
 $civilianButton = "";
 $roadsideAssistButton = "";
 
-$num_rows = $result->num_rows;
-
-
-    while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+    while($row = $Departments)
     {
         if ($row[1] == "1")
         {
@@ -104,31 +107,25 @@ $num_rows = $result->num_rows;
 						$_SESSION['roadsideAssist'] = 'YES';
 						$roadsideAssistButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=roadsideAssist\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Roadside Assistance</a>";
 				}
-}
-$adminRows = $adminPriv->num_rows;
-if($adminRows < 2)
-{
-	while($adminRow = mysqli_fetch_array($adminPriv, MYSQLI_BOTH))
-	{
-		if ($adminRow[0] == "3")
-		{
-			$adminButton = "<a href=\"".BASE_URL."/oc-admin/admin.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Admin</a>";
-		}
-		if ($adminRow[0] == "2")
-		{
-			$adminButton = "<a href=\"".BASE_URL."/oc-admin/admin.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Moderator</a>";
-		}
-	}
-}
+    }
 
-mysqli_close($link);
+    if ($_SESSION['admin_privilege'] == "3")
+    {
+        $adminButton = "<a href=\"".BASE_URL."/oc-admin/admin.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Admin</a>";
+    }
+        if ($_SESSION['admin_privilege'] == "2")
+    {
+        $adminButton = "<a href=\"".BASE_URL."/oc-admin/admin.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Moderator</a>";
+    }
+
+
 
 
 ?>
 
 <html lang="en">
    <!DOCTYPE html>
-   <?php include_once(ABSPATH."oc-includes/header.inc.php"); ?>
+   <?php include_once(ABSPATH . "oc-includes/header.inc.php"); ?>
    <body id="body">
       <div id="page-wrapper">
          <div class="container-fluid">

@@ -1,5 +1,6 @@
-<?php require_once( '../oc-config.php');?> 
-      <?php require_once( ABSPATH . '/oc-settings.php');?> 
+<?php require_once( __DIR__ . '/../oc-config.php');
+require_once( ABSPATH . '/oc-functions.php'); 
+require_once( ABSPATH . '/oc-settings.php');?> 
       
       <ul class="nav navbar-nav ml-auto">
 

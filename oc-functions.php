@@ -167,19 +167,20 @@ function get_avatar() {
 	**/
 function getMySQLVersion()
 {
-	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD);
 
-	/* check connection */
-	if (mysqli_connect_errno()) {
-	    printf("Connect failed: %s\n", mysqli_connect_error());
-	    exit();
+	try{
+		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+	} catch(PDOException $ex)
+	{
+		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+		$_SESSION['error_blob'] = $ex;
+		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		die();
 	}
+	
+	$getMySQLVersion = $pdo->query('select version()')->fetchColumn();
 
-	/* print server version */
-	printf($mysqli->server_info);
-
-	/* close connection */
-	$mysqli->close();
+	return $getMySQLVersion;
 }
 
 /**#@+

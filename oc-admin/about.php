@@ -16,8 +16,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     session_start();
 
     require_once(__DIR__ . '/../oc-config.php');
-    require_once(__DIR__ . '/../oc-functions.php');
-    include(__DIR__."/../oc-includes/adminActions.php");
+    require_once( ABSPATH . '/oc-functions.php');
+    require_once( ABSPATH . "/oc-includes/adminActions.php");
 
     if (empty($_SESSION['logged_in']))
     {
@@ -73,7 +73,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php include "../oc-includes/header.inc.php"; ?>
+<?php include("../oc-includes/header.inc.php"); ?>
 
 
 <body class="app header-fixed">
@@ -122,11 +122,11 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				      </div>
               <div class="card-body">
 					      <div class="form-group">
-						      <label for="name"><?php echo lang_key("APPLICATION_VERSION"); ?></label><input type="text" class="form-control" readonly="readonly" placeholder="<?php echo getOpenCADVersion(); ?>" />
+						      <label for="name"><?php echo lang_key("APPLICATION_VERSION"); ?></label><input type="text" class="form-control" readonly="readonly" placeholder="<?php echo number_format($oc_version,2); ?>" />
 						      <?php echo lang_key("APPLICATION_VERSION_notes"); ?>
 					      </div>
 					      <div class="form-group">
-						      <label for="name"><?php echo lang_key("DATABASE_VERSION"); ?></label><input type="text" class="form-control" readonly="readonly" placeholder="<?php echo number_format($oc_db_version,1 ); ?>" />
+						      <label for="name"><?php echo lang_key("DATABASE_VERSION"); ?></label><input type="text" class="form-control" readonly="readonly" placeholder="<?php echo number_format($oc_db_version,2 ); ?>" />
 						      <?php echo lang_key("DATABASE_VERSION_notes"); ?>
 					      </div>
               </div>

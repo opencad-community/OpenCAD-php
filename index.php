@@ -26,8 +26,7 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
 
     $testing = false; //If set to true, will default some data for you
 
-    session_start();
-    $_SESSION['root_path'] = getcwd();
+        $_SESSION['root_path'] = getcwd();
     $registerError = "";
     $registerSuccess = "";
     $loginMessage = "";
@@ -66,7 +65,7 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php include "./oc-includes/header.inc.php"; ?>
+<?php include( ABSPATH . "oc-includes/header.inc.php"); ?>
 
 
 <body class="app flex-row align-items-center">
