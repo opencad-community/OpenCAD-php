@@ -151,7 +151,7 @@ $arrLang['update'] = "Update";
 $arrLang['updating_completed'] = "Updating Completed!";
 $arrLang['virtual_directory_support'] = "Virtual Directory Support";
 $arrLang['we_are_ready_to_installation'] = "We are ready now to proceed with installation";
-$arrLang['we_are_ready_to_installation_text'] = "At this step setup wizard will attempt to create all required database tables and populate them with data. <br>If something goes wrong, go back to the Database Settings step and make sure every information you've entered is correct.";
+$arrLang['we_are_ready_to_installation_text'] = "At this step setup wizard will attempt to create all required database tables and populate them with data. <br>If an error is encountered then return to the database settings page and make any corrections.";
 $arrLang['writable'] = "Writable";
 
 $arrLang['core_configuration'] = "Core Configuration";
@@ -203,10 +203,13 @@ $arrLang['SESSION_KEY'] = 'Session Key';
 //** Begin Login Strings **//
 //** End Login Strings **//
 
-//** Begin Police Strings **//
-$arrLang['POLICE_NCIC'] = "Police NCIC";
+//** Begin LEO Strings **//
+$arrLang['POLICE_NCIC'] = "LEO NCIC Lookup";
 $arrLang['POLICE_NCIC_notes'] = "Shows/Hides NCIC functionality on MDT console. If 'true' then LEO will be able to use NCIC functions without the need for a dispatcher, else if 'flase' then LEO will require the presence of dispatcher to use NCIC funcationality.";
-//** End Police Strings **//
+
+$arrLang['POLICE_CALL_SELFASSIGN'] = "LEO Call Self Assign";
+$arrLang['POLICE_CALL_SELFASSIGN_notes'] = "Allows/Disallows capability for LEO officers to attach them selves to call..";
+//** End LEO Strings **//
 
 //**  Begin Fire Strings **//
 $arrLang['FIRE_PANIC'] = "Fire Panic";
@@ -220,6 +223,9 @@ $arrLang['FIRE_NCIC_NAME_notes'] = "If 'true' then Fire personnel will be able t
 
 $arrLang['FIRE_NCIC_PLATE'] = "Fire NCIC Plate";
 $arrLang['FIRE_NCIC_PLATE_notes'] = "If 'true' then Fire personnel will be able to use the NCIC plate lookup function, else if 'false' then Fire personnel will not be able to use the NICI plate lookup function.";
+
+$arrLang['FIRE_CALL_SELFASSIGN'] = "Fire Call Self Assign";
+$arrLang['FIRE_CALL_SELFASSIGN_notes'] = "Allows/Disallows capability for LEO officers to attach them selves to call..";
 //**  End Fire Strings **//
 
 //** Begin EMS Strings **//

@@ -152,10 +152,10 @@
 	<script type="text/javascript" src="js/main.js"></script>
 	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 	<?php
-		if(file_exists('languages/js/'.$curr_lang.'.js')){
-			echo '<script type="text/javascript" src="language/'.$curr_lang.'/js/common.js"></script>';
+		if(file_exists('../oc-content/languages/js/'.$curr_lang.'.inc.js')){
+			echo '<script type="text/javascript" src="../oc-content/languages/'.$curr_lang.'/js/en.inc.js"></script>';
 		}else{
-			echo '<script type="text/javascript" src="language/en/js/common.js"></script>';
+			echo '<script type="text/javascript" src="../oc-content/languages/en/js/en.inc.js"></script>';
 		}
 	?>
 </head>

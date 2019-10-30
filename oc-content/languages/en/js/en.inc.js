@@ -9,4 +9,5 @@ EasyInstaller._MSG["error"] = "Error!";
 EasyInstaller._MSG["success"] = "Success!";
 EasyInstaller._MSG["connection_was_established"] = "A connection was successfully established with the server.";
 EasyInstaller._MSG["connection_error"] = "Wrong parameters passed or connection error!";
+EasyInstaller._MSG["db_name_empty"] = "Please enter a name for the database that you wish to utilize.";
 
