@@ -11,7 +11,7 @@ This program is free software: you can redistribute it and/or modify
 
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
-
+session_start();
 require_once("../oc-config.php");
 require_once(ABSPATH . "/oc-functions.php");
 require_once(ABSPATH . "/oc-settings.php");
@@ -21,7 +21,7 @@ if(!empty($_POST))
     session_start();
     $email = htmlspecialchars($_POST['email']);
     $password = htmlspecialchars($_POST['password']);
-
+}
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
     } catch(PDOException $ex)
@@ -29,7 +29,7 @@ if(!empty($_POST))
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
         header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
+        
     }
 
     $stmt = $pdo->prepare("SELECT id, name, password, email, identifier, admin_privilege, password_reset, approved, suspend_reason FROM ".DB_PREFIX."users WHERE email = ?");
@@ -42,8 +42,7 @@ if(!empty($_POST))
         header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
-    $pdo = null;
-
+        
     $login_ok = false;
 
     if (password_verify($password, $result['password']))
@@ -78,8 +77,7 @@ if(!empty($_POST))
         header("Location:".BASE_URL."/index.php");
         exit();
     }
-
-    /* TODO: Handle password resets */
+    
     $_SESSION['logged_in'] = 'YES';
     $_SESSION['id'] = $result['id'];
     $_SESSION['name'] = $result['name'];
@@ -87,9 +85,68 @@ if(!empty($_POST))
     $_SESSION['identifier'] = $result['identifier'];
     $_SESSION['callsign'] = $result['identifier']; //Set callsign to default to identifier until the unit changes it
     $_SESSION['admin_privilege'] = $result['admin_privilege']; //Set callsign to default to identifier until the unit changes it
+
+    $id = $result['id'];
+
+    $getDepartments = $pdo->prepare("SELECT department_id from ".DB_PREFIX."user_departments WHERE user_id = \"$id\" ORDER BY 1 ASC");
+    $getDepartments->execute();
+    $rowCount = $getDepartments->rowCount(); 
+    $Departments = $getDepartments->fetchAll(PDO::FETCH_ASSOC);
+    $Departments[1];
+    print_r($Departments[1]);
+    foreach( $Departments as $Department)
+    {
+            if ($Department = "7")
+    {
+        $_SESSION['ems'] = 'YES';
+                    
+    }
+    else if ($Department == "6")
+    {
+        $_SESSION['fire'] = 'YES';
+                    
+    }
+    else if ($Department == "3")
+    {
+        $_SESSION['highway'] = 'YES';
+        
+    }
+    else if ($Department == "5")
+    {
+        $_SESSION['police'] = 'YES';
+        
+            }
+    else if ($Department == "4")
+    {
+        $_SESSION['sheriff'] = 'YES';
+        
+    }
+    else if ($Department == "2")
+    {
+        $_SESSION['state'] = 'YES';
+        
+    }
+    else if ($Department == "8")
+    {
+        $_SESSION['civillian'] = 'YES';
+    }
+        else if ($Department == "9")
+        {
+                $_SESSION['roadsideAssist'] = 'YES';
+                
+        }
+    }
+$getAdminPriv = $pdo->query("SELECT `admin_privilege` from ".DB_PREFIX."users WHERE id = \"$id\"");
+$getAdminPriv -> execute();
+$adminPriv = $getAdminPriv->fetch(PDO::FETCH_ASSOC );
+$_SESSION['admin_privilege'] = $adminPriv['admin_privilege'];
+
+    $pdo = null;
+
+
+    session_start();
     if(ENABLE_API_SECURITY === true)
         setcookie("aljksdz7", hash('md5', session_id().getApiKey()), time() + (86400 * 7), "/");
-    header("Location:".BASE_URL.OCAPPS."/oc-start.php");
-}
+        header("Location:".BASE_URL."/".OCAPPS."/oc-start.php");
 
 ?>

@@ -29,27 +29,7 @@ if (empty($_SESSION['logged_in']))
 }
     setDispatcher("1");
 
-
-try{
-    $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-} catch(PDOException $ex)
-{
-    $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-    $_SESSION['error_blob'] = $ex;
-    header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-    die();
-}
-
-$getDepartments = $pdo->query("SELECT `department_id` from ".DB_PREFIX."user_departments WHERE user_id = \"$id\"");
-$getDepartments -> execute();
-$Departments = $getDepartments->fetch(PDO::FETCH_ASSOC);
-$getAdminPriv = $pdo->query("SELECT `admin_privilege` from ".DB_PREFIX."users WHERE id = \"$id\"");
-$getAdminPriv -> execute();
-$adminPriv = $getAdminPriv->fetch(PDO::FETCH_ASSOC);
-
-$_SESSION['admin_privilege'] = $adminPriv['admin_privilege'];
-
-$adminButton = "";
+    $adminButton = "";
 $dispatchButton = "";
 $highwayButton = "";
 $stateButton = "";
@@ -60,67 +40,44 @@ $policeButton = "";
 $civilianButton = "";
 $roadsideAssistButton = "";
 
-    while($row = $Departments)
+
+    if ($_SESSION['dispatch'] = 'YES')
     {
-        if ($row[1] == "1")
-        {
-            $_SESSION['dispatch'] = 'YES';
-            $dispatchButton = "<a href=\"".BASE_URL.OCAPPS."/cad.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Dispatch</a>";
-        }
-        else if ($row[1] == "7")
-        {
-            $_SESSION['ems'] = 'YES';
-						$emsButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=ems\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">EMS</a>";
-        }
-        else if ($row[1] == "6")
-        {
-            $_SESSION['fire'] = 'YES';
-						$fireButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=fire\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Fire</a>";
-        }
-        else if ($row[1] == "3")
-        {
-            $_SESSION['highway'] = 'YES';
-            $highwayButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=highway\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Highway Patrol</a>";
-        }
-        else if ($row[1] == "5")
-        {
-            $_SESSION['police'] = 'YES';
-            $policeButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=police\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Police Department</a>";
-				}
-        else if ($row[1] == "4")
-        {
-            $_SESSION['sheriff'] = 'YES';
-            $sheriffButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=sheriff\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Sheriff's Office</a>";
-        }
-        else if ($row[1] == "2")
-        {
-            $_SESSION['state'] = 'YES';
-            $stateButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=state\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">State Police</a>";
-        }
-        else if ($row[1] == "8")
-        {
-            $_SESSION['civillian'] = 'YES';
-            $civilianButton = "<a href=\"".BASE_URL.OCAPPS."/civilian.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Civilian</a>";
-        }
-				else if ($row[1] == "9")
-				{
-						$_SESSION['roadsideAssist'] = 'YES';
-						$roadsideAssistButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=roadsideAssist\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Roadside Assistance</a>";
-				}
+        $dipatchButton = "<a href=\"".BASE_URL.OCAPPS."/cad.php?dep=ems\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Dispatch</a>";
+    }
+    if ($_SESSION['ems'] = 'YES')
+    {
+        $emsButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=ems\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">EMS</a>";   
+    }
+        if ($_SESSION['fire'] = 'YES')
+    {
+        $fireButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=fire\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Fire</a>";
+    }
+    if ($_SESSION['highway'] = 'YES')
+    {
+        $highwayButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=highway\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Highway Patrol</a>";
+    }
+    if ($_SESSION['police'] = 'YES')
+    {
+        $policeButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=police\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Police Department</a>";
+    }
+    if ($_SESSION['sheriff'] = 'YES')
+    {
+        $sheriffButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=sheriff\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Sheriff's Office</a>";
+    }
+    if ($_SESSION['state'] = 'YES')
+    {
+        $stateButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=state\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">State Police</a>";
     }
 
-    if ($_SESSION['admin_privilege'] == "3")
+    if ($_SESSION['admin_privilege'] = '4')
     {
         $adminButton = "<a href=\"".BASE_URL."/oc-admin/admin.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Admin</a>";
     }
-        if ($_SESSION['admin_privilege'] == "2")
+    if ($_SESSION['admin_privilege'] == "2")
     {
         $adminButton = "<a href=\"".BASE_URL."/oc-admin/admin.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Moderator</a>";
     }
-
-
-
-
 ?>
 
 <html lang="en">

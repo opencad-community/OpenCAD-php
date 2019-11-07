@@ -16,7 +16,7 @@ include_once( ABSPATH . "oc-settings.php");
 include_once( ABSPATH . OCINC . "/version.php");
 
     try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+      $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
     } catch(PDOException $ex)
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
@@ -61,7 +61,6 @@ include_once( ABSPATH . OCINC . "/version.php");
 	else{ 
 		// Do Nothing
 	};
-	$pdo = null;
 
 
 
@@ -165,19 +164,10 @@ function get_avatar() {
 	* @since 1.0a RC2
 	*
 	**/
-function getMySQLVersion()
+function getMySQLVersion($pdo)
 {
 
-	try{
-		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-	} catch(PDOException $ex)
-	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-		die();
-	}
-	
+
 	$getMySQLVersion = $pdo->query('select version()')->fetchColumn();
 
 	return $getMySQLVersion;
@@ -210,8 +200,9 @@ function pageLoadTime() {
 	**/
 function getApiKey($del_key = false)
 {
-	try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+
+	    try{
+      $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
     } catch(PDOException $ex)
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
