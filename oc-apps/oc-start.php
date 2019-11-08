@@ -43,31 +43,31 @@ $roadsideAssistButton = "";
 
     if ($_SESSION['dispatch'] = 'YES')
     {
-        $dipatchButton = "<a href=\"".BASE_URL.OCAPPS."/cad.php?dep=ems\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Dispatch</a>";
+        $dipatchButton = "<a href=\"".BASE_URL."/".OCAPPS."/cad.php?dep=ems\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Dispatch</a>";
     }
     if ($_SESSION['ems'] = 'YES')
     {
-        $emsButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=ems\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">EMS</a>";   
+        $emsButton = "<a href=\"".BASE_URL."/".OCAPPS."/mdt.php?dep=ems\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">EMS</a>";   
     }
         if ($_SESSION['fire'] = 'YES')
     {
-        $fireButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=fire\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Fire</a>";
+        $fireButton = "<a href=\"".BASE_URL."/".OCAPPS."/mdt.php?dep=fire\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Fire</a>";
     }
     if ($_SESSION['highway'] = 'YES')
     {
-        $highwayButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=highway\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Highway Patrol</a>";
+        $highwayButton = "<a href=\"".BASE_URL."/".OCAPPS."/mdt.php?dep=highway\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Highway Patrol</a>";
     }
     if ($_SESSION['police'] = 'YES')
     {
-        $policeButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=police\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Police Department</a>";
+        $policeButton = "<a href=\"".BASE_URL."/".OCAPPS."/mdt.php?dep=police\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Police Department</a>";
     }
     if ($_SESSION['sheriff'] = 'YES')
     {
-        $sheriffButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=sheriff\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Sheriff's Office</a>";
+        $sheriffButton = "<a href=\"".BASE_URL."/".OCAPPS."/mdt.php?dep=sheriff\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Sheriff's Office</a>";
     }
     if ($_SESSION['state'] = 'YES')
     {
-        $stateButton = "<a href=\"".BASE_URL.OCAPPS."/mdt.php?dep=state\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">State Police</a>";
+        $stateButton = "<a href=\"".BASE_URL."/".OCAPPS."/mdt.php?dep=state\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">State Police</a>";
     }
 
     if ($_SESSION['admin_privilege'] = '4')
