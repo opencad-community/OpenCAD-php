@@ -13,6 +13,7 @@ info.php
 .MESSAGE
 patch.diff
 oc-lang/*
+web.config
 
 # Include these exceptions
 !oc-lang/index.php
