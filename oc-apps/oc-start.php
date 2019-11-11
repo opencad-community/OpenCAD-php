@@ -29,7 +29,7 @@ if (empty($_SESSION['logged_in']))
 }
     setDispatcher("1");
 
-    $adminButton = "";
+$adminButton = "";
 $dispatchButton = "";
 $highwayButton = "";
 $stateButton = "";
@@ -70,7 +70,7 @@ $roadsideAssistButton = "";
         $stateButton = "<a href=\"".BASE_URL."/".OCAPPS."/mdt.php?dep=state\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">State Police</a>";
     }
 
-    if ($_SESSION['admin_privilege'] = '4')
+    if ($_SESSION['admin_privilege'] = '3')
     {
         $adminButton = "<a href=\"".BASE_URL."/oc-admin/admin.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Admin</a>";
     }

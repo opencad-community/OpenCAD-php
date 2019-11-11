@@ -388,7 +388,7 @@ function getData2($tableName, $column1, $column2)
     if(!(isset($_POST[$column1])))
         $column1 = 0;
     if(!(isset($_POST[$column2])))
-        $column1 = 0;
+        $column2 = 0;
 
      try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);

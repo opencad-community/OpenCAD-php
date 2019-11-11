@@ -12,15 +12,15 @@ require_once( ABSPATH . '/oc-settings.php');?>
             <div class="dropdown-header text-center">
               <strong>Applications</strong>
             </div>
-            <a class="dropdown-item" href="<?php echo BASE_URL.OCAPPS ?>/oc-start.php">
+            <a class="dropdown-item" href="<?php echo BASE_URL.'/'.OCAPPS ?>/oc-start.php">
               <i class="fa fa-bell-o"></i> Dashboard
             </a>
             <div class="dropdown-header text-center">
               <strong>Settings</strong>
             </div>
-            <a class="dropdown-item" href="<?php echo BASE_URL.OCAPPS ?>/oc-profile.php">
+            <a class="dropdown-item" href="<?php echo BASE_URL.'/'.OCAPPS ?>/oc-profile.php">
               <i class="fa fa-user"></i> Profile</a>
-            <a class="dropdown-item" href="<?php echo BASE_URL.OCINC ?>/logout.php">
+            <a class="dropdown-item" href="<?php echo BASE_URL.'/'.OCINC ?>/logout.php">
               <i class="fa fa-lock"></i> Logout</a>
           </div>
         </li>

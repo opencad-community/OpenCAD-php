@@ -40,7 +40,7 @@ include( ABSPATH .`/`. OCINC . "/publicFunctions.php");
         </tr>
       </thead>
       <tbody>
-        <?php getData2($table = "statuses", $column1 = "0", $column12 = "1"); ?>
+        <?php getData2($table = "statuses", $column1 = "1", $column2 = "2"); ?>
       </tbody>
     </table>
   </div>
@@ -54,7 +54,7 @@ include( ABSPATH .`/`. OCINC . "/publicFunctions.php");
               </tr>
           </thead>
           <tbody>
-              <?php getData2($table = "incident_types", $column1 = "2", $column12 = "1"); ?>
+              <?php getData2($table = "incident_types", $column1 = "2", $column2 = "1"); ?>
           </tbody>
         </table>
     </div>
