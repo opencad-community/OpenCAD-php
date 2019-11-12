@@ -379,5 +379,10 @@ CREATE TABLE `<DB_PREFIX>weapons` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 
+
 INSERT INTO `<DB_PREFIX>users` (`id`, `name`, `email`, `password`, `identifier`, `admin_privilege`, `supervisor_privilege`, `password_reset`, `approved`, `suspend_reason`, `suspend_duration`) VALUES
 (1, '<NAME>', '<EMAIL>', '<PASSWORD>', '<IDENTIFIER>', 3, 1, 0, 1, NULL, NULL);
+
+INSERT INTO `<DB_PREFIX>config` (`key`, `value`) VALUES
+('api_key',	'HadROvwkb415l7RC7EzQ9riymS931RowCiU8qJn4'),
+('schema_version',	'1.0');
