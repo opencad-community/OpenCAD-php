@@ -33,8 +33,8 @@ include_once( ABSPATH . OCINC . "/version.php");
 	if (!$result['value'])
     {
 		session_start();
-		$_SESSION['error_title'] = "No Values Provided";
-		$_SESSION['error'] = "We are sorry, but there are now vlues set. Please raise a support ticket.";
+		$_SESSION['error_title'] = "Schema Version Uknown";
+		$_SESSION['error'] = "We are sorry, there is no schema version uknown. Please raise a support ticket.";
         header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
