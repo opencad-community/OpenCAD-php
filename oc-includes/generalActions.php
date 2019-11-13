@@ -129,7 +129,9 @@ function quickStatus()
 
 function getMyCall()
 {
+    if(session_id() == '' || !isset($_SESSION)) {
     session_start();
+    }
     //First, check to see if they're on a call
     $uid = $_SESSION['id'];
 
@@ -284,7 +286,7 @@ function checkTones()
         die();
     }
 
-    $result = $pdo->query("SELECT tones from ".DB_PREFIX."tones");
+    $result = $pdo->query("SELECT id from ".DB_PREFIX."tones");
 
     if (!$result)
     {

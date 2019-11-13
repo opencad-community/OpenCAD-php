@@ -72,6 +72,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         $successMessage = $_SESSION['successMessage'];
         unset($_SESSION['successMessage']);
     }
+
+    $boloMessage = "";
+    if(isset($_SESSION['boloMessage']))
+    {
+        $boloMessage = $_SESSION['boloMessage'];
+        unset($_SESSION['boloMessage']);
+    }
 ?>
 
 <!DOCTYPE html>

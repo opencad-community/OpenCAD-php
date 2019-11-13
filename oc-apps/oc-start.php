@@ -71,7 +71,7 @@ $roadsideAssistButton = "";
     }
     if ($_SESSION['roadsideAssist'] = 'YES')
     {
-        $civilianButton = "<a href=\"".BASE_URL."/civilian.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Civilian Services</a>";
+        $roadsideAssistButton = "<a href=\"".BASE_URL."/mdt.php?dep=roadesideAssist\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Civilian Services</a>";
     }
     if ($_SESSION['civilian_privilege'] = '1')
     {
