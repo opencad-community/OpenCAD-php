@@ -43,7 +43,7 @@ $roadsideAssistButton = "";
 
     if ($_SESSION['state'] = 'YES')
     {
-        $dipatchButton = "<a href=\"".BASE_URL."/".OCAPPS."/cad.php?dep=ems\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Dispatch</a>";
+        $stateButton = "<a href=\"".BASE_URL."/".OCAPPS."//mdt.php?dep=state\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">State</a>";
     }
     if ($_SESSION['ems'] = 'YES')
     {
@@ -69,10 +69,15 @@ $roadsideAssistButton = "";
     {
         $dispatchButton = "<a href=\"".BASE_URL."/".OCAPPS."/cad.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Dispatch</a>";
     }
-    else if ($_SESSION['raodsideAssist'] = 'YES')
+    if ($_SESSION['roadsideAssist'] = 'YES')
     {
-        $roadsideAssistButton = "<a href=\"".BASE_URL."/civilian.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Roadside Assistance</a>";
+        $civilianButton = "<a href=\"".BASE_URL."/civilian.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Civilian Services</a>";
     }
+    if ($_SESSION['civilian_privilege'] = '1')
+    {
+        $civilianButton = "<a href=\"".BASE_URL."/civilian.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Civilian Services</a>";
+    }
+
 
     if ($_SESSION['admin_privilege'] = '3')
     {

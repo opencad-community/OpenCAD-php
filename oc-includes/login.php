@@ -91,51 +91,55 @@ if(!empty($_POST))
     $getDepartments->execute();
     $rowCount = $getDepartments->rowCount(); 
     $Departments = $getDepartments->fetchAll(PDO::FETCH_ASSOC);
-    $Departments[1];
-    print_r($Departments);
-    foreach( $Departments as $Department)
+    foreach($Departments as $Department)
     {
-        if ($Department = "7")
-        {
-            $_SESSION['ems'] = 'YES';
-        }
-        else if ($Department == "6")
-        {
-            $_SESSION['fire'] = 'YES';
-        }
-        else if ($Department == "3")
-        {
-            $_SESSION['highway'] = 'YES';
-        }
-        else if ($Department == "5")
-        {
-            $_SESSION['police'] = 'YES';
-        }
-        else if ($Department == "4")
-        {
-            $_SESSION['sheriff'] = 'YES';
-        }
-        else if ($Department == "2")
-        {
-            $_SESSION['state'] = 'YES';
-        }
-        else if ($Department == "8")
-        {
-            $_SESSION['civillian'] = 'YES';
-        }
-        else if ($Department == "9")
-        {
-            $_SESSION['roadsideAssist'] = 'YES';
-        }
-        else if ($Department == "1")
+        if ($Department = "0")
         {
             $_SESSION['dispatch'] = 'YES';
         }
+        else if ($Department == "1")
+        {
+            $_SESSION['state'] = 'YES';
+        }
+        else if ($Department == "2")
+        {
+            $_SESSION['highway'] = 'YES';
+        }
+        else if ($Department == "3")
+        {
+            $_SESSION['sheriff'] = 'YES';
+        }
+        else if ($Department == "4")
+        {
+            $_SESSION['police'] = 'YES';
+        }
+        else if ($Department == "5")
+        {
+            $_SESSION['fire'] = 'YES';
+        }
+        else if ($Department == "6")
+        {
+            $_SESSION['ems'] = 'YES';
+        }
+        else if ($Department == "7")
+        {
+            $_SESSION['dispatch'] = 'YES';
+        }
+        else if ($Department == "8")
+        {
+            $_SESSION['roadsideAssist'] = 'YES';
+        }
     }
+
     $getAdminPriv = $pdo->query("SELECT `admin_privilege` from ".DB_PREFIX."users WHERE id = \"$id\"");
     $getAdminPriv -> execute();
     $adminPriv = $getAdminPriv->fetch(PDO::FETCH_ASSOC );
     $_SESSION['admin_privilege'] = $adminPriv['admin_privilege'];
+
+    $getCivPriv = $pdo->query("SELECT `civilian_privilege` from ".DB_PREFIX."users WHERE id = \"$id\"");
+    $getCivPriv -> execute();
+    $civPriv = $getCivPriv->fetch(PDO::FETCH_ASSOC );
+    $_SESSION['civilian_privilege'] = $civPriv['civilian_privilege'];
 
     $pdo = null;
 
