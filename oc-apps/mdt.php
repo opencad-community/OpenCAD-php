@@ -157,7 +157,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                       <div class="col-sm-12">
                         <div class="form-group row">
                           <label class="col-md-2 control-label" for="ccnumber">Status</label>
-                              <select name="statusSelect" class="col-md-9 form-control selectpicker <?php echo $_SESSION['identifier'];?>" id="statusSelect" onChange="responderChangeStatus(this);" title="Select a Status">
+                              <select name="statusSelect" class="form-control col-md-9 <?php echo $_SESSION['identifier'];?>" id="statusSelect" onChange="responderChangeStatus(this);" title="Select a Status">
                                  <option value="10-6">10-6/Busy</option>
                                  <option value="10-5">10-5/Meal Break</option>
                                  <option value="10-7">10-7/Unavailable</option>
@@ -172,7 +172,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                       </form>
                     </div>
                     <!-- /.row-->
-                     </form>
+
                   </div>
                 </div>
               </div>
