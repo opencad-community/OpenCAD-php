@@ -69,7 +69,7 @@ include( ABSPATH .`/`. OCINC . "/publicFunctions.php");
             </tr>
           </thead>
           <tbody>
-            <?php getData3($table = "citation_types", $column1 = "1", $column2 = "2", $column3 = "3"); ?>
+            <?php getData3($table = "citationTypes", $column1 = "1", $column2 = "2", $column3 = "3"); ?>
           </tbody>
         </table>
     </div>

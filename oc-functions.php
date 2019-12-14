@@ -25,7 +25,7 @@ include_once( ABSPATH . OCINC . "/version.php");
         die();
     }
 
-	$stmt = $pdo->query("SELECT * FROM ".DB_PREFIX."config WHERE `key` = 'schema_version'");
+	$stmt = $pdo->query("SELECT * FROM ".DB_PREFIX."config WHERE `key` = 'dbSchemaVersion'");
 	$stmt->execute();
 	$result = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -211,7 +211,7 @@ function getApiKey($del_key = false)
         die();
     }
 
-    $result = $pdo->query("SELECT value FROM ".DB_PREFIX."config WHERE `key`='api_key'");
+    $result = $pdo->query("SELECT value FROM ".DB_PREFIX."config WHERE `key`='sessionKey'");
 
     if (!$result)
     {
@@ -225,7 +225,7 @@ function getApiKey($del_key = false)
 	{
 		error_log("Do delete: $del_key");
 		$key = generateRandomString(64);
-		$result = $pdo->query("UPDATE ".DB_PREFIX."config SET `value`='$key' WHERE `key`='api_key'");
+		$result = $pdo->query("UPDATE ".DB_PREFIX."config SET `value`='$key' WHERE `key`='sessionKey'");
 
 		if (!$result)
 		{
@@ -241,7 +241,7 @@ function getApiKey($del_key = false)
 		return $key;
 	}else{
 		$key = generateRandomString(64);
-		$result = $pdo->query("INSERT INTO ".DB_PREFIX."config VALUES ('api_key', '$key')");
+		$result = $pdo->query("INSERT INTO ".DB_PREFIX."config VALUES ('sessionKey', '$key')");
 
 		if (!$result)
 		{

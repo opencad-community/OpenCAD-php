@@ -50,7 +50,7 @@ function getAgencies()
         die();
     }
 
-    $result = $pdo->query("SELECT department_id, department_name from ".DB_PREFIX."departments");
+    $result = $pdo->query("SELECT departmentId, departmentName from ".DB_PREFIX."departments");
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
@@ -59,7 +59,7 @@ function getAgencies()
     }
     foreach ($result as $row)
     {
-            echo '<option value="' . $row['department_id'] . '">' . $row['department_name'] . '</option>';
+            echo '<option value="' . $row['departmentId'] . '">' . $row['departmentName'] . '</option>';
     }
     $pdo = null;
 }
@@ -76,7 +76,7 @@ function getAgenciesWarrants()
         die();
     }
 
-    $result = $pdo->query("SELECT department_id, department_name from ".DB_PREFIX."departments ".WHERE." department_id != 1 AND department_id != 7 AND department_id != 8 AND department_id != 9");
+    $result = $pdo->query("SELECT departmentId, departmentName from ".DB_PREFIX."departments ".WHERE." departmentId != 1 AND departmentId != 7 AND departmentId != 8 AND departmentId != 9");
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
@@ -85,13 +85,13 @@ function getAgenciesWarrants()
     }
     foreach ($result as $row)
     {
-            echo '<option value="' . $row['department_id'] . '">' . $row['department_name'] . '</option>';
+            echo '<option value="' . $row['departmentId'] . '">' . $row['departmentName'] . '</option>';
     }
     $pdo = null;
 }
 /**#@+
 * function getLicenseStatuses()
-* Get list of possible license statuses from status() of the 'dl_status' column of the ncic_names table.
+* Get list of possible license statuses from status() of the 'dlStatus' column of the ncic_names table.
 *
 * @since 0.2.6
 *
@@ -108,7 +108,7 @@ function getLicenseStatuses()
         die();
     }
 
-    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_names LIKE 'dl_status'";
+    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_names LIKE 'dlStatus'";
     $stmt = $pdo->prepare( $query );
     if (!$stmt)
     {
@@ -136,7 +136,7 @@ function getLicenseStatuses()
 
 /**#@+
 * function getLicenseType()
-* Get list of possible license types from status() of the 'dl_type' column of the ncic_names table.
+* Get list of possible license types from status() of the 'dlType' column of the ncic_names table.
 *
 * @since 0.2.6
 *
@@ -153,7 +153,7 @@ function getLicenseTypes()
         die();
     }
 
-    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_names LIKE 'dl_type'";
+    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_names LIKE 'dlType'";
     $stmt = $pdo->prepare( $query );
     if (!$stmt)
     {
@@ -192,7 +192,7 @@ function getLicenseClasses()
         die();
     }
 
-    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_names LIKE 'dl_class'";
+    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_names LIKE 'dlClass'";
     $stmt = $pdo->prepare( $query );
     if (!$stmt)
     {
@@ -238,7 +238,7 @@ function getLicenseIssuers()
         die();
     }
 
-    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_names LIKE 'dl_Issued_by'";
+    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_names LIKE 'dlIssuer'";
     $stmt = $pdo->prepare( $query );
     if (!$stmt)
     {
@@ -320,7 +320,7 @@ function getIncidentTypes()
         die();
     }
 
-    $result = $pdo->query("SELECT id, code_id, code_name from ".DB_PREFIX."incident_types");
+    $result = $pdo->query("SELECT id, codeId, codeName from ".DB_PREFIX."incident_types");
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
@@ -333,7 +333,7 @@ function getIncidentTypes()
 
     foreach ($result as $row)
     {
-            echo '<option value="' . $row['id'] . '">'. $row['code_id'] .' &#8212; '.$row['code_name'] . '</option>\n';
+            echo '<option value="' . $row['id'] . '">'. $row['codeId'] .' &#8212; '.$row['codeName'] . '</option>\n';
     }
     $pdo = null;
 }

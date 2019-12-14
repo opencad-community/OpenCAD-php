@@ -89,7 +89,7 @@ function register()
     {
         $division = str_replace("department", "", $division);
 
-        $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."user_departments_temp (user_id, department_id) SELECT id , ? FROM ".DB_PREFIX."users WHERE email = ?");
+        $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."userDepartmentsTemp (userId, departmentId) SELECT id , ? FROM ".DB_PREFIX."users WHERE email = ?");
         $result = $stmt->execute(array($division, $email));
 
         if (!$result)
@@ -168,7 +168,7 @@ function civreg()
     }
 
     $civ = "8";
-    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."user_departments (user_id, department_id) SELECT id , ? FROM ".DB_PREFIX."users WHERE email = ?");
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."userDepartments (userId, departmentId) SELECT id , ? FROM ".DB_PREFIX."users WHERE email = ?");
     $result = $stmt->execute(array($civ, $email));
 
     if (!$result)

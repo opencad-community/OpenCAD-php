@@ -34,16 +34,16 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     }
 
 
-    if ( $_SESSION['admin_privilege'] == 3)
+    if ( $_SESSION['adminPrivilege'] == 3)
     {
-      if ($_SESSION['admin_privilege'] == 'Administrator')
+      if ($_SESSION['adminPrivilege'] == 'Administrator')
       {
           //Do nothing
       }
     }
-    else if ($_SESSION['admin_privilege'] == 2)
+    else if ($_SESSION['adminPrivilege'] == 2)
     {
-      if ($_SESSION['admin_privilege'] == 'Moderator')
+      if ($_SESSION['adminPrivilege'] == 'Moderator')
       {
           // Do Nothing
       }
@@ -140,7 +140,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Department Name</label>
                             <div class="col-md-9">
-                                <input data-lpignore='true' type="text" name="department_name" class="form-control" id="department_name" required />
+                                <input data-lpignore='true' type="text" name="departmentName" class="form-control" id="departmentName" required />
                                 <span class="fas fa-road form-control-feedback right" aria-hidden="true"></span>
                             </div>
                             <!-- ./ col-sm-9 -->
@@ -149,7 +149,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Department Short Name</label>
                             <div class="col-md-9">
-                                <input data-lpignore='true' type="text" name="department_short_name" class="form-control" id="department_short_name" required/>
+                                <input data-lpignore='true' type="text" name="departmentShortName" class="form-control" id="departmentShortName" required/>
                                 <span class="fas fa-map form-control-feedback right" aria-hidden="true"></span>
                             </div>
                             <!-- ./ col-sm-9 -->
@@ -158,7 +158,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                          <div class="form-group row">
                             <label class="col-md-3 control-label">Description Long Name</label>
                             <div class="col-md-9">
-                                <input data-lpignore='true' type="text" name="department_long_name" class="form-control" id="department_long_name" required />
+                                <input data-lpignore='true' type="text" name="departmentLongName" class="form-control" id="departmentLongName" required />
                                 <span class="fas fa-road form-control-feedback right" aria-hidden="true"></span>
                             </div>
                             <!-- ./ col-sm-9 -->
@@ -213,10 +213,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 console.log(result);
                 data = JSON.parse(result);
 
-                $('input[name="department_name"]').val(data['department_name']);
-                $('input[name="department_short_name"]').val(data['department_short_name']);
-                $('input[name="department_long_name"]').val(data['department_long_name']);
-                $('input[name="allow_department"]').val(data['allow_department']);
+                $('input[name="departmentName"]').val(data['departmentName']);
+                $('input[name="departmentShortName"]').val(data['departmentShortName']);
+                $('input[name="departmentLongName"]').val(data['departmentLongName']);
+                $('input[name="departmentEnabled"]').val(data['departmentEnabled']);
                 $('input[name="departmentID"]').val(data['departmentID']);
             },
 

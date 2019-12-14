@@ -31,14 +31,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     }
 
 
-    if ( $_SESSION['admin_privilege'] == 3)
+    if ( $_SESSION['adminPrivilege'] == 3)
     {
-      if ($_SESSION['admin_privilege'] == 'Administrator')
+      if ($_SESSION['adminPrivilege'] == 'Administrator')
       {}
     }
-    else if ($_SESSION['admin_privilege'] == 2)
+    else if ($_SESSION['adminPrivilege'] == 2)
     {
-      if ($_SESSION['admin_privilege'] == 'Moderator')
+      if ($_SESSION['adminPrivilege'] == 'Moderator')
       {}
     }
     else
@@ -442,13 +442,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
         $(".delete_group").click(function() {
             var dept_id = $(this).attr("data-dept-id");
-            var user_id = $(this).attr("data-user-id");
+            var userId = $(this).attr("data-user-id");
             if (confirm("Are you sure to delete the selected Group?")) {
                 $.ajax({
                     cache: false,
                     type: 'GET',
                     url: '<?php echo BASE_URL; ?>/oc-includes/adminActions.php',
-                    data: 'dept_id=' + dept_id + '&user_id=' + user_id,
+                    data: 'dept_id=' + dept_id + '&userId=' + userId,
                     success: function(result) {
                         //obj = jQuery.parseJSON(result);
 

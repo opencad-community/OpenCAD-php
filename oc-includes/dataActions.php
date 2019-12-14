@@ -163,7 +163,7 @@ else if (isset($_POST['resetData']))
 
 /**#@+
 * function getCitationTypes()
-* Fetches all Warrant Types from the warrant_types table with their resepective IDs and
+* Fetches all Warrant Types from the warrantTypes table with their resepective IDs and
 * types. It then builds the table and includes functions such as Edit and Delete
 * These functions are handled by editCitationTypes(); and deleteCitationTypes(); 
 *
@@ -182,7 +182,7 @@ function getCitationTypes()
         die();
     }
 
-    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."citation_types");
+    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."citationTypes");
 
     if (!$result)
     {
@@ -219,14 +219,14 @@ function getCitationTypes()
                 <td>';
         if ( DEMO_MODE == false) {
             echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
-            if ( ( MODERATOR_EDIT_WARNINGTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            if ( ( MODERATOR_EDIT_WARNINGTYPE == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
             {
                 echo '<button name="editCitationType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editCitationTypeModal" class="btn btn-xs btn-link" >Edit</button>';
             } else {
                 echo '<button name="editCitationType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editCitationTypeModal" class="btn btn-xs btn-link" disabled >Edit</button>';
             }
 
-            if ( ( MODERATOR_DELETE_WARNINGTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            if ( ( MODERATOR_DELETE_WARNINGTYPE == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
             {
                 echo '<input name="deleteCitationType" type="submit" class="btn btn-xs btn-link" onclick="deleteCitationType(' . $row[0] . ')" value="Delete" />';
             } else {
@@ -275,7 +275,7 @@ function getCitationTypeDetails()
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."citation_types WHERE id = ?");
+    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."citationTypes WHERE id = ?");
     $resStatus = $stmt->execute(array($id));
     $result = $stmt;
 
@@ -291,8 +291,8 @@ function getCitationTypeDetails()
     foreach($result as $row)
     {
         $encode["id"] = $row[0];
-        $encode["citation_description"] = $row[1];
-        $encode["citation_fine"] = $row[2];
+        $encode["citationDescription"] = $row[1];
+        $encode["citationFine"] = $row[2];
     }
     
     echo json_encode($encode);
@@ -302,8 +302,8 @@ function getCitationTypeDetails()
 function editCitationType()
 {
     $id	        	                = !empty($_POST['id']) ? htmlspecialchars($_POST['id']) : '';
-    $citation_description           = !empty($_POST['citation_description']) ? htmlspecialchars($_POST['citation_description']) : '';
-    $citation_fine  		        = !empty($_POST['citation_fine']) ? $_POST['citation_fine'] : '';
+    $citationDescription           = !empty($_POST['citationDescription']) ? htmlspecialchars($_POST['citationDescription']) : '';
+    $citationFine  		        = !empty($_POST['citationFine']) ? $_POST['citationFine'] : '';
 
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -316,8 +316,8 @@ function editCitationType()
     }
 
     
-     $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."citation_types SET	citation_description = ?, citation_fine = ? WHERE id = ?");
-    if ($stmt->execute(array($citation_description, $citation_fine, $id))) {
+     $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."citationTypes SET	citationDescription = ?, citationFine = ? WHERE id = ?");
+    if ($stmt->execute(array($citationDescription, $citationFine, $id))) {
         $pdo = null;
 
         //Let the user know their information was updated
@@ -351,7 +351,7 @@ function deleteCitationType()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."citation_types WHERE id = ?");
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."citationTypes WHERE id = ?");
     if (!$stmt->execute(array($id)))
     {
         $_SESSION['error'] = $stmt->errorInfo();
@@ -438,7 +438,7 @@ function getDepartments()
                 <td>';
         if ( DEMO_MODE == false) {
             echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
-            if ( ( MODERATOR_DATAMAN_DEPARTMENTS== true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            if ( ( MODERATOR_DATAMAN_DEPARTMENTS== true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
             {
                 echo '<button name="editDepartment" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editDepartmentModal" class="btn btn-xs btn-link">Edit</button>';
                 echo '<input name="deleteDepartment" type="submit" class="btn btn-xs btn-link" onclick="deleteDepartment(' . $row[0] . ')" value="Delete" />';
@@ -489,7 +489,7 @@ function getDepartmentDetails()
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."departments WHERE department_id = ?");
+    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."departments WHERE departmentId = ?");
     $resStatus = $stmt->execute(array($departmentID));
     $result = $stmt;
 
@@ -505,10 +505,10 @@ function getDepartmentDetails()
     foreach($result as $row)
     {
         $encode["departmentID"] = $row[0];
-        $encode["department_name"] = $row[1];
-        $encode["department_short_name"] = $row[2];
-        $encode["department_long_name"] = $row[3];
-        $encode["allow_department"] = $row[4];
+        $encode["departmentName"] = $row[1];
+        $encode["departmentShortName"] = $row[2];
+        $encode["departmentLongName"] = $row[3];
+        $encode["departmentEnabled"] = $row[4];
 
     }
     
@@ -519,10 +519,10 @@ function getDepartmentDetails()
 function editDepartment()
 {
     $departmentID					= !empty($_POST['departmentID']) ? htmlspecialchars($_POST['departmentID']) : '';
-    $department_name				= !empty($_POST['department_name']) ? htmlspecialchars($_POST['department_name']) : '';
-    $department_short_name			= !empty($_POST['department_short_name']) ? htmlspecialchars($_POST['department_short_name']) : '';
-	$department_long_name			= !empty($_POST['department_long_name']) ? htmlspecialchars($_POST['department_long_name']) : '';
-	$allow_department				= !empty($_POST['allow_department']) ? htmlspecialchars($_POST['allow_department']) : '';
+    $departmentName				= !empty($_POST['departmentName']) ? htmlspecialchars($_POST['departmentName']) : '';
+    $departmentShortName			= !empty($_POST['departmentShortName']) ? htmlspecialchars($_POST['departmentShortName']) : '';
+	$departmentLongName			= !empty($_POST['departmentLongName']) ? htmlspecialchars($_POST['departmentLongName']) : '';
+	$departmentEnabled				= !empty($_POST['departmentEnabled']) ? htmlspecialchars($_POST['departmentEnabled']) : '';
 
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -535,12 +535,12 @@ function editDepartment()
     }
 
     
-     $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."departments SET	department_name = ?, department_short_name = ?, department_long_name = ? WHERE department_id = ?");
-    if ($stmt->execute(array($department_name, $department_short_name, $department_long_name, $departmentID))) {
+     $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."departments SET	departmentName = ?, departmentShortName = ?, departmentLongName = ? WHERE departmentId = ?");
+    if ($stmt->execute(array($departmentName, $departmentShortName, $departmentLongName, $departmentID))) {
         $pdo = null;
 
         //Let the user know their information was updated
-        $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Department '.$department_long_name.' ('.$department_short_name.')  was  edited successfully.</span></div>';
+        $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Department '.$departmentLongName.' ('.$departmentShortName.')  was  edited successfully.</span></div>';
         header("Location: ".BASE_URL."/oc-admin/dataManagement/departmentsManager.php");
     } else {
         echo "Error updating record: " . print_r($stmt->errorInfo(), true);
@@ -570,7 +570,7 @@ function deleteDepartment()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."departments WHERE department_id = ?");
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."departments WHERE departmentId = ?");
     if (!$stmt->execute(array($departmentID)))
     {
         $_SESSION['error'] = $stmt->errorInfo();
@@ -648,14 +648,14 @@ function getIncidentTypes()
                 <td>';
         if ( DEMO_MODE == false) {
             echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
-            if ( ( MODERATOR_EDIT_INCIDENTTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            if ( ( MODERATOR_EDIT_INCIDENTTYPE == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
             {
                 echo '<button name="editIncidentType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editIncidentTypeModal" class="btn btn-xs btn-link" >Edit</button>';
             } else {
                 echo '<button name="editIncidentType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editIncidentTypeModal" class="btn btn-xs btn-link" disabled >Edit</button>';
             }
 
-            if ( ( MODERATOR_DELETE_INCIDENTTPYE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            if ( ( MODERATOR_DELETE_INCIDENTTPYE == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
             {
                 echo '<input name="deleteIncidentType" type="submit" class="btn btn-xs btn-link" onclick="deleteIncidentType(' . $row[0] . ')" value="Delete" />';
             } else {
@@ -746,7 +746,7 @@ function editIncidentType()
     }
 
     
-    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."incident_types SET code_id = ?, code_name = ? WHERE id = ?");
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."incident_types SET codeId = ?, codeName = ? WHERE id = ?");
     if ($stmt->execute(array($incident_code, $incident_name, $id))) {
         $pdo = null;
 
@@ -802,7 +802,7 @@ function deleteIncidentType()
 
 /**#@+
 * function getRadioCodes()
-* Fetches all Warrant Types from the warrant_types table with their resepective IDs and
+* Fetches all Warrant Types from the warrantTypes table with their resepective IDs and
 * types. It then builds the table and includes functions such as Edit and Delete
 * These functions are handled by editRadioCode(); and deleteRadioCode(); 
 *
@@ -821,7 +821,7 @@ function getRadioCodes()
         die();
     }
 
-    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."radio_codes");
+    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."radioCodes");
 
     if (!$result)
     {
@@ -858,14 +858,14 @@ function getRadioCodes()
                 <td>';
         if ( DEMO_MODE == false) {
             echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
-            if ( ( MODERATOR_EDIT_WARNINGTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            if ( ( MODERATOR_EDIT_WARNINGTYPE == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
             {
                 echo '<button name="editRadioCode" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editRadioCodeModal" class="btn btn-xs btn-link" >Edit</button>';
             } else {
                 echo '<button name="editRadioCode" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editRadioCodeModal" class="btn btn-xs btn-link" disabled >Edit</button>';
             }
 
-            if ( ( MODERATOR_DELETE_WARNINGTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            if ( ( MODERATOR_DELETE_WARNINGTYPE == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
             {
                 echo '<input name="deleteRadioCode" type="submit" class="btn btn-xs btn-link" onclick="deleteRadioCode(' . $row[0] . ')" value="Delete" />';
             } else {
@@ -914,7 +914,7 @@ function getRadioCodeDetails()
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."radio_codes WHERE id = ?");
+    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."radioCodes WHERE id = ?");
     $resStatus = $stmt->execute(array($id));
     $result = $stmt;
 
@@ -931,7 +931,7 @@ function getRadioCodeDetails()
     {
         $encode["id"] = $row[0];
         $encode["code"] = $row[1];
-        $encode["code_description"] = $row[2];
+        $encode["codeDescription"] = $row[2];
     }
     
     echo json_encode($encode);
@@ -942,7 +942,7 @@ function editRadioCode()
 {
     $id	        	        = !empty($_POST['id']) ? htmlspecialchars($_POST['id']) : '';
     $code		            = !empty($_POST['code']) ? htmlspecialchars($_POST['code']) : '';
-    $code_description		= !empty($_POST['code_description']) ? htmlspecialchars($_POST['code_description']) : '';
+    $codeDescription		= !empty($_POST['codeDescription']) ? htmlspecialchars($_POST['codeDescription']) : '';
     $OnCall		            = !empty($_POST['OnCall']) ? htmlspecialchars($_POST['OnCall']) : '';
 
     try{
@@ -956,12 +956,12 @@ function editRadioCode()
     }
 
     
-    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."radio_codes SET code_description = ?, code = ? WHERE id = ?");
-    if ($stmt->execute(array($code_description, $code, $id))) {
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."radioCodes SET codeDescription = ?, code = ? WHERE id = ?");
+    if ($stmt->execute(array($codeDescription, $code, $id))) {
         $pdo = null;
 
         //Let the user know their information was updated
-        $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Code '.$code.' – '.$code_description.'  edited successfully.</span></div>';
+        $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Code '.$code.' – '.$codeDescription.'  edited successfully.</span></div>';
         header("Location: ".BASE_URL."/oc-admin/dataManagement/radioCodeManager.php");
     } else {
         echo "Error updating record: " . print_r($stmt->errorInfo(), true);
@@ -991,7 +991,7 @@ function deleteRadioCode()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."radio_codes WHERE id = ?");
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."radioCodes WHERE id = ?");
     if (!$stmt->execute(array($id)))
     {
         $_SESSION['error'] = $stmt->errorInfo();
@@ -1068,14 +1068,14 @@ function getStreets()
                 <td>';
         if ( DEMO_MODE == false) {
             echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
-            if ( ( MODERATOR_EDIT_STREET == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            if ( ( MODERATOR_EDIT_STREET == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
             {
                 echo '<button name="editStreet" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editStreetModal" class="btn btn-xs btn-link" >Edit</button>';
             } else {
                 echo '<button name="editStreet" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editStreetModal" class="btn btn-xs btn-link" disabled >Edit</button>';
             }
 
-            if ( ( MODERATOR_DELETE_STREET == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            if ( ( MODERATOR_DELETE_STREET == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
             {
                 echo '<input name="deleteStreet" type="submit" class="btn btn-xs btn-link" onclick="deleteStreet(' . $row[0] . ')" value="Delete" />';
             } else {
@@ -1278,14 +1278,14 @@ function getVehicles()
                 <td>';
         if ( DEMO_MODE == false) {
             echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
-            if ( ( MODERATOR_EDIT_VEHICLE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            if ( ( MODERATOR_EDIT_VEHICLE == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
             {
                 echo '<button name="editVehicle" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editVehicleModal" class="btn btn-xs btn-link" >Edit</button>';
             } else {
                 echo '<button name="editVehicle" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editVehicleModal" class="btn btn-xs btn-link" disabled >Edit</button>';
             }
 
-            if ( ( MODERATOR_DELETE_VEHICLE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            if ( ( MODERATOR_DELETE_VEHICLE == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
             {
                 echo '<input name="deleteVehicle" type="submit" class="btn btn-xs btn-link" onclick="deleteVehicle(' . $row[0] . ')" value="Delete" />';
             } else {
@@ -1440,7 +1440,7 @@ function deleteVehicle()
 
 /**#@+
 * function getWarningTypes()
-* Fetches all Warning Types from the warning_types table with their resepective IDs and
+* Fetches all Warning Types from the warningTypes table with their resepective IDs and
 * types. It then builds the table and includes functions such as Edit and Delete
 * These functions are handled by editWarningType(); and deleteWarningTypes(); 
 *
@@ -1459,7 +1459,7 @@ function getWarningTypes()
         die();
     }
 
-    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."warning_types");
+    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."warningTypes");
 
     if (!$result)
     {
@@ -1494,14 +1494,14 @@ function getWarningTypes()
                 <td>';
         if ( DEMO_MODE == false) {
             echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
-            if ( ( MODERATOR_EDIT_WARNINGTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            if ( ( MODERATOR_EDIT_WARNINGTYPE == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
             {
                 echo '<button name="editWarningType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWarningTypeModal" class="btn btn-xs btn-link" >Edit</button>';
             } else {
                 echo '<button name="editWarningType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWarningypeModal" class="btn btn-xs btn-link" disabled >Edit</button>';
             }
 
-            if ( ( MODERATOR_DELETE_WARNINGTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            if ( ( MODERATOR_DELETE_WARNINGTYPE == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
             {
                 echo '<input name="deleteWarningType" type="submit" class="btn btn-xs btn-link" onclick="deleteWarningType(' . $row[0] . ')" value="Delete" />';
             } else {
@@ -1550,7 +1550,7 @@ function getWarningTypeDetails()
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."warning_types WHERE id = ?");
+    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."warningTypes WHERE id = ?");
     $resStatus = $stmt->execute(array($warningTypeID));
     $result = $stmt;
 
@@ -1566,7 +1566,7 @@ function getWarningTypeDetails()
     foreach($result as $row)
     {
         $encode["warningTypeID"] = $row[0];
-        $encode["warning_description"] = $row[1];
+        $encode["warningDescription"] = $row[1];
     }
     
     echo json_encode($encode);
@@ -1576,7 +1576,7 @@ function getWarningTypeDetails()
 function editWarningType()
 {
 	$id	        	            = !empty($_POST['warningTypeID']) ? htmlspecialchars($_POST['warningTypeID']) : '';
-	$warning_description		= !empty($_POST['warning_description']) ? htmlspecialchars($_POST['warning_description']) : '';
+	$warningDescription		= !empty($_POST['warningDescription']) ? htmlspecialchars($_POST['warningDescription']) : '';
 
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -1589,8 +1589,8 @@ function editWarningType()
     }
 
     
-    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."warning_types SET warning_description = ? WHERE id = ?");
-    if ($stmt->execute(array($warning_description, $id))) {
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."warningTypes SET warningDescription = ? WHERE id = ?");
+    if ($stmt->execute(array($warningDescription, $id))) {
         $pdo = null;
 
         //Let the user know their information was updated
@@ -1624,7 +1624,7 @@ function deleteWarningType()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."warning_types WHERE id = ?");
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."warningTypes WHERE id = ?");
     if (!$stmt->execute(array($id)))
     {
         $_SESSION['error'] = $stmt->errorInfo();
@@ -1645,7 +1645,7 @@ function deleteWarningType()
 
 /**#@+
 * function getWarrantTypes()
-* Fetches all Warrant Types from the warrant_types table with their resepective IDs and
+* Fetches all Warrant Types from the warrantTypes table with their resepective IDs and
 * types. It then builds the table and includes functions such as Edit and Delete
 * These functions are handled by editWarrantType(); and deleteWarrantType(); 
 *
@@ -1664,7 +1664,7 @@ function getWarrantTypes()
         die();
     }
 
-    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."warrant_types");
+    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."warrantTypes");
 
     if (!$result)
     {
@@ -1699,14 +1699,14 @@ function getWarrantTypes()
                 <td>';
         if ( DEMO_MODE == false) {
             echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
-            if ( ( MODERATOR_EDIT_WARRANTTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            if ( ( MODERATOR_EDIT_WARRANTTYPE == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
             {
                 echo '<button name="editWarrantType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWarrantTypeModal" class="btn btn-xs btn-link" >Edit</button>';
             } else {
                 echo '<button name="editWarrantType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWarrantypeModal" class="btn btn-xs btn-link" disabled >Edit</button>';
             }
 
-            if ( ( MODERATOR_DELETE_WARRANTTYPE == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            if ( ( MODERATOR_DELETE_WARRANTTYPE == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
             {
                 echo '<input name="deleteWarrantType" type="submit" class="btn btn-xs btn-link" onclick="deleteWarrantType(' . $row[0] . ')" value="Delete" />';
             } else {
@@ -1755,7 +1755,7 @@ function getWarrantTypeDetails()
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."warrant_types WHERE id = ?");
+    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."warrantTypes WHERE id = ?");
     $resStatus = $stmt->execute(array($warrantTypeID));
     $result = $stmt;
 
@@ -1771,7 +1771,7 @@ function getWarrantTypeDetails()
     foreach($result as $row)
     {
         $encode["warrantTypeID"] = $row[0];
-        $encode["warrant_description"] = $row[1];
+        $encode["warrantDescription"] = $row[1];
     }
     
     echo json_encode($encode);
@@ -1781,7 +1781,7 @@ function getWarrantTypeDetails()
 function editWarrantType()
 {
 	$id	        	            = !empty($_POST['warrantTypeID']) ? htmlspecialchars($_POST['warrantTypeID']) : '';
-	$warrant_description		= !empty($_POST['warrant_description']) ? htmlspecialchars($_POST['warrant_description']) : '';
+	$warrantDescription		= !empty($_POST['warrantDescription']) ? htmlspecialchars($_POST['warrantDescription']) : '';
 
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -1794,12 +1794,12 @@ function editWarrantType()
     }
 
     
-    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."warrant_types SET warrant_description = ? WHERE id = ?");
-    if ($stmt->execute(array($warrant_description, $id))) {
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."warrantTypes SET warrantDescription = ? WHERE id = ?");
+    if ($stmt->execute(array($warrantDescription, $id))) {
         $pdo = null;
 
         //Let the user know their information was updated
-        $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Warrant type "'.$warrant_description.'" edited successfully.</span></div>';
+        $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Warrant type "'.$warrantDescription.'" edited successfully.</span></div>';
         header("Location: ".BASE_URL."/oc-admin/dataManagement/warrantTypeManager.php");
     } else {
         echo "Error updating record: " . print_r($stmt->errorInfo(), true);
@@ -1829,7 +1829,7 @@ function deleteWarrantType()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."warrant_types WHERE id = ?");
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."warrantTypes WHERE id = ?");
     if (!$stmt->execute(array($id)))
     {
         $_SESSION['error'] = $stmt->errorInfo();
@@ -1907,14 +1907,14 @@ function getWeapons()
                 <td>';
         if ( DEMO_MODE == false) {
             echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
-            if ( ( MODERATOR_EDIT_WEAPON == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            if ( ( MODERATOR_EDIT_WEAPON == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
             {
                 echo '<button name="editWeapon" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWeaponModal" class="btn btn-xs btn-link" >Edit</button>';
             } else {
                 echo '<button name="editWeapon" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWeaponModal" class="btn btn-xs btn-link" disabled >Edit</button>';
             }
 
-            if ( ( MODERATOR_DELETE_WEAPON == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            if ( ( MODERATOR_DELETE_WEAPON == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
             {
                 echo '<input name="deleteWeapon" type="submit" class="btn btn-xs btn-link" onclick="deleteWeapon(' . $row[0] . ')" value="Delete" />';
             } else {
@@ -1979,8 +1979,8 @@ function getWeaponDetails()
     foreach($result as $row)
     {
         $encode["weaponID"] = $row[0];
-        $encode["weapon_type"] = $row[1];
-        $encode["weapon_name"] = $row[2];
+        $encode["weaponType"] = $row[1];
+        $encode["weaponName"] = $row[2];
     }
     
     echo json_encode($encode);
@@ -1990,8 +1990,8 @@ function getWeaponDetails()
 function editWeapon()
 {
 	$id	        	    = !empty($_POST['weaponID']) ? htmlspecialchars($_POST['weaponID']) : '';
-	$weapon_type 		= !empty($_POST['weapon_type']) ? htmlspecialchars($_POST['weapon_type']) : '';
-	$weapon_name     	= !empty($_POST['weapon_name']) ? htmlspecialchars($_POST['weapon_name']) : '';
+	$weaponType 		= !empty($_POST['weaponType']) ? htmlspecialchars($_POST['weaponType']) : '';
+	$weaponName     	= !empty($_POST['weaponName']) ? htmlspecialchars($_POST['weaponName']) : '';
 
 
     try{
@@ -2005,12 +2005,12 @@ function editWeapon()
     }
 
     
-    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."weapons SET weapon_name = ?, weapon_type = ? WHERE id = ?");
-    if ($stmt->execute(array($weapon_name, $weapon_type, $id))) {
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."weapons SET weaponName = ?, weaponType = ? WHERE id = ?");
+    if ($stmt->execute(array($weaponName, $weaponType, $id))) {
         $pdo = null;
 
         //Let the user know their information was updated
-        $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Weapon '.$weapon_name.' '.$weapon_type.' edited successfully.</span></div>';
+        $_SESSION['successMessage'] = '<div class="alert alert-success"><span>Weapon '.$weaponName.' '.$weaponType.' edited successfully.</span></div>';
         header("Location: ".BASE_URL."/oc-admin/dataManagement/weaponManager.php");
     } else {
         echo "Error updating record: " . print_r($stmt->errorInfo(), true);
@@ -2088,16 +2088,16 @@ function resetData()
     if ($_POST == "allData") 
     {
         $tables = array(
-                "user_departments",
-                "user_departments_temp",
-                "active_users",
+                "userDepartments",
+                "userDepartmentsTemp",
+                "activeUsers",
                 "aop",
                 "bolos_persons",
-                "bolos_vehicles",
+                "bolosVehicles",
                 "calls",
-                "calls_users",
-                "call_history",
-                "call_list",
+                "callsUsers",
+                "callHistory",
+                "callList",
                 "call_citations",
                 "civilian_names",
                 "colors",
@@ -2117,9 +2117,9 @@ function resetData()
                 "vehicles",
                 "weapons",
                 "radio_cdoes",
-                "warning_types",
-                "warrant_types",
-                "citation_types"
+                "warningTypes",
+                "warrantTypes",
+                "citationTypes"
         );
         foreach ( $tables as $value ) 
         {

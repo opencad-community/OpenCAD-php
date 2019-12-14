@@ -34,16 +34,16 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     }
 
 
-    if ( $_SESSION['admin_privilege'] == 3)
+    if ( $_SESSION['adminPrivilege'] == 3)
     {
-      if ($_SESSION['admin_privilege'] == 'Administrator')
+      if ($_SESSION['adminPrivilege'] == 'Administrator')
       {
           //Do nothing
       }
     }
-    else if ($_SESSION['admin_privilege'] == 2)
+    else if ($_SESSION['adminPrivilege'] == 2)
     {
-      if ($_SESSION['admin_privilege'] == 'Moderator')
+      if ($_SESSION['adminPrivilege'] == 'Moderator')
       {
           // Do Nothing
       }
@@ -145,7 +145,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Weapon Type</label>
                             <div class="col-md-9">
-                                <input type="text" name="weapon_type" class="form-control" id="weapon_type" required />
+                                <input type="text" name="weaponType" class="form-control" id="weaponType" required />
                                 <span class="fas fa-road form-control-feedback right" aria-hidden="true"></span>
                             </div>
                             <!-- ./ col-sm-9 -->
@@ -154,7 +154,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Weapon Name</label>
                             <div class="col-md-9">
-                                <input type="text" name="weapon_name" class="form-control" id="weapon_name" required />
+                                <input type="text" name="weaponName" class="form-control" id="weaponName" required />
                                 <span class="fas fa-map form-control-feedback right" aria-hidden="true"></span>
                             </div>
                             <!-- ./ col-sm-9 -->
@@ -201,8 +201,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 console.log(result);
                 data = JSON.parse(result);
 
-                $('input[name="weapon_name"]').val(data['weapon_name']);
-                $('input[name="weapon_type"]').val(data['weapon_type']);
+                $('input[name="weaponName"]').val(data['weaponName']);
+                $('input[name="weaponType"]').val(data['weaponType']);
                 $('input[name="weaponID"]').val(data['weaponID']);
             },
 

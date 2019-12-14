@@ -1,5 +1,5 @@
 
-<?php if ( ( MODERATOR_DATAMAN_IMPEXPRES == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+<?php if ( ( MODERATOR_DATAMAN_IMPEXPRES == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
 { ?>
  <!-- Data Manager Modal -->
  <div class="modal" id="dataManager" tabindex="-1" role="dialog" aria-hidden="true">
@@ -51,7 +51,7 @@
                                     <optgroup label="<?php echo lang_key("LEO_SUPPORT_DATA_OPTGRP"); ?>">
                                         <option value="citation_type"><?php echo lang_key("CITATION_TYPES"); ?></option>
                                         <option value="incident_types"><?php echo lang_key("INCIDENT_TYPES"); ?></option>
-                                        <option value="radio_codes"><?php echo lang_key("RADIO_CODES"); ?></option>
+                                        <option value="radioCodes"><?php echo lang_key("RADIO_CODES"); ?></option>
                                         <option value="warrant_type"><?php echo lang_key("WARRANT_TYPES"); ?></option>
                                         <option value="warning_type"><?php echo lang_key("WARNING_TYPES"); ?></option>
                                     <optgroup label="<?php echo lang_key("RESET_ALL_DATA_OPTGRP"); ?>">

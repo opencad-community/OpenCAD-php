@@ -2,7 +2,7 @@
 -- Dumping data for table `colors`
 --
 
-INSERT INTO `cvfddj_colors` (`id`, `color_group`, `color_name`) VALUES
+INSERT INTO `cvfddj_colors` (`id`, `colorGorup`, `colorName`) VALUES
 (1, 'Chrome', 'Chrome'),
 (2, 'Classic', 'Black'),
 (3, 'Classic', 'Carbon Black'),
@@ -256,7 +256,7 @@ INSERT INTO `cvfddj_colors` (`id`, `color_group`, `color_name`) VALUES
 -- Dumping data for table `departments`
 --
 
-INSERT INTO `cvfddj_departments` (`department_id`, `department_name`, `department_short_name`, `department_long_name`, `allow_department`) VALUES
+INSERT INTO `cvfddj_departments` (`departmentId`, `departmentName`, `departmentShortName`, `departmentLongName`, `departmentEnabled`) VALUES
 (1, 'Communications', 'SAECOMM', 'San Andreas Emergency Communications', 0),
 (2, 'State', 'SASP', 'San Andreas State Police', 0),
 (3, 'Highway', 'SAHP', 'San Andreas Highway Patrol', 0),
@@ -271,7 +271,7 @@ INSERT INTO `cvfddj_departments` (`department_id`, `department_name`, `departmen
 -- Dumping data for table `incident_types`
 --
 
-INSERT INTO `cvfddj_incident_types` (`code_id`, `code_name`) VALUES
+INSERT INTO `cvfddj_incident_types` (`codeId`, `codeName`) VALUES
 ('68', 'Armed Robbery'),
 ('25', 'Domestic Dispute'),
 ('10', 'Fight in Progress'),
@@ -291,7 +291,7 @@ INSERT INTO `cvfddj_incident_types` (`code_id`, `code_name`) VALUES
 -- Dumping data for table `statuses`
 --
 
-INSERT INTO `cvfddj_statuses` (`status_id`, `status_text`) VALUES
+INSERT INTO `cvfddj_statuses` (`statusId`, `statusText`) VALUES
 (1, '10-8 | Available'),
 (2, '10-6 | Busy'),
 (3, '10-7 | Unavailable | On Call'),
@@ -2773,7 +2773,7 @@ INSERT INTO `cvfddj_vehicles` (`id`, `Make`, `Model`) VALUES
 -- Dumping data for table `weapons`
 --
 
-INSERT INTO `cvfddj_weapons` (`id`, `weapon_type`, `weapon_name`) VALUES
+INSERT INTO `cvfddj_weapons` (`id`, `weaponType`, `weaponName`) VALUES
 (1, 'Vom Feuer', 'Advanced Rifle'),
 (2, 'Shrewsbury', 'Assault Rifle'),
 (3, 'Shrewsbury', 'Assault Rifle MKII'),
@@ -2863,7 +2863,7 @@ INSERT INTO `cvfddj_weapons` (`id`, `weapon_type`, `weapon_name`) VALUES
 (87, 'Throwable', 'Snowball'),
 (88, 'Throwable', 'Pipe Bomb');
 
-INSERT INTO `cvfddj_radio_codes` (`id`, `code`, `code_description`, `onCall`) VALUES
+INSERT INTO `cvfddj_radio_codes` (`id`, `code`, `codeDescription`, `onCall`) VALUES
 (1, '10-8',			'Available', 2),
 (2, '10-6',			'Busy', 1),
 (3, '10-7C',		'Unavailable | On Call', 1),

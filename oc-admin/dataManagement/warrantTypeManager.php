@@ -34,16 +34,16 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     }
 
 
-    if ( $_SESSION['admin_privilege'] == 3)
+    if ( $_SESSION['adminPrivilege'] == 3)
     {
-      if ($_SESSION['admin_privilege'] == 'Administrator')
+      if ($_SESSION['adminPrivilege'] == 'Administrator')
       {
           //Do nothing
       }
     }
-    else if ($_SESSION['admin_privilege'] == 2)
+    else if ($_SESSION['adminPrivilege'] == 2)
     {
-      if ($_SESSION['admin_privilege'] == 'Moderator')
+      if ($_SESSION['adminPrivilege'] == 'Moderator')
       {
           // Do Nothing
       }
@@ -143,8 +143,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Warrant Description</label>
                             <div class="col-md-9">
-                                <input type="text" name="warrant_description" class="form-control"
-                                    id="warrant_description" />
+                                <input type="text" name="warrantDescription" class="form-control"
+                                    id="warrantDescription" />
                                 <span class="fas fa-exclamation-triangle form-control-feedback right"
                                     aria-hidden="true"></span> </div>
                             <!-- ./ col-sm-9 -->
@@ -192,7 +192,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 console.log(result);
                 data = JSON.parse(result);
 
-                $('input[name="warrant_description"]').val(data['warrant_description']);
+                $('input[name="warrantDescription"]').val(data['warrantDescription']);
                 $('input[name="warrantTypeID"]').val(data['warrantTypeID']);
             },
 

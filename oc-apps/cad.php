@@ -34,16 +34,16 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     }
 
 
-    if ( $_SESSION['admin_privilege'] == 3)
+    if ( $_SESSION['adminPrivilege'] == 3)
     {
-      if ($_SESSION['admin_privilege'] == 'Administrator')
+      if ($_SESSION['adminPrivilege'] == 'Administrator')
       {
           //Do nothing
       }
     }
-    else if ($_SESSION['admin_privilege'] == 2)
+    else if ($_SESSION['adminPrivilege'] == 2)
     {
-      if ($_SESSION['admin_privilege'] == 'Moderator')
+      if ($_SESSION['adminPrivilege'] == 'Moderator')
       {
           // Do Nothing
       }
@@ -544,7 +544,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <div class="form-group row">
                         <label class="col-lg-2 control-label">Incident Type</label>
                         <div class="col-lg-10">
-                           <select class="form-control selectpicker" data-live-search="true" name="call_type" title="Incident Type" required>
+                           <select class="form-control selectpicker" data-live-search="true" name="callType" title="Incident Type" required>
                               <?php getIncidentTypes();?>
                            </select>
                         </div>
@@ -609,7 +609,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">First Name</label>
                 <div class="col-lg-10">
-					<input name="first_name" class="form-control" id="first_name" placeholder="First Name of the BOLOed subject."/>
+					<input name="firstName" class="form-control" id="firstName" placeholder="First Name of the BOLOed subject."/>
 					<span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -618,7 +618,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">Last Name</label>
                 <div class="col-lg-10">
-					<input name="last_name" class="form-control" id="last_name" placeholder="Last Name of the BOLOed subject."/>
+					<input name="lastName" class="form-control" id="lastName" placeholder="Last Name of the BOLOed subject."/>
 					<span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -638,7 +638,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">Physical Description</label>
                 <div class="col-lg-10">
-					<input name="physical_description" class="form-control" id="physical_description" placeholder="Physical description of the BOLOed subject."/>
+					<input name="physicalDescription" class="form-control" id="physicalDescription" placeholder="Physical description of the BOLOed subject."/>
 					<span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -647,7 +647,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">Reason Wanted</label>
                 <div class="col-lg-10">
-					<textarea name="reason_wanted" class="form-control" style="text-transform:uppercase" rows="5" id="reason_wanted" placeholder="Wanted reason of the BOLOed subject." required> </textarea>
+					<textarea name="reasonWanted" class="form-control" style="text-transform:uppercase" rows="5" id="reasonWanted" placeholder="Wanted reason of the BOLOed subject." required> </textarea>
 					<span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -656,7 +656,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">Last Seen</label>
                 <div class="col-lg-10">
-					<input name="last_seen" class="form-control" id="last_seen" placeholder="Last observed location of the BOLOed subject."/>
+					<input name="lastSeen" class="form-control" id="lastSeen" placeholder="Last observed location of the BOLOed subject."/>
 					<span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -693,7 +693,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">First Name</label>
                 <div class="col-lg-10">
-          <input name="first_name" class="form-control" id="first_name" placeholder="First Name of the BOLOed subject."/>
+          <input name="firstName" class="form-control" id="firstName" placeholder="First Name of the BOLOed subject."/>
           <span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -702,7 +702,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">Last Name</label>
                 <div class="col-lg-10">
-          <input name="last_name" class="form-control" id="last_name" placeholder="Last Name of the BOLOed subject."/>
+          <input name="lastName" class="form-control" id="lastName" placeholder="Last Name of the BOLOed subject."/>
           <span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -722,7 +722,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">Physical Description</label>
                 <div class="col-lg-10">
-          <input name="physical_description" class="form-control" id="physical_description" placeholder="Physical description of the BOLOed subject."/>
+          <input name="physicalDescription" class="form-control" id="physicalDescription" placeholder="Physical description of the BOLOed subject."/>
           <span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -731,7 +731,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">Reason Wanted</label>
                 <div class="col-lg-10">
-          <textarea name="reason_wanted" class="form-control" style="text-transform:uppercase" rows="5" id="reason_wanted" placeholder="Wanted reason of the BOLOed subject." required> </textarea>
+          <textarea name="reasonWanted" class="form-control" style="text-transform:uppercase" rows="5" id="reasonWanted" placeholder="Wanted reason of the BOLOed subject." required> </textarea>
           <span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -740,7 +740,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="form-group row">
                 <label class="col-lg-2 control-label">Last Seen</label>
                 <div class="col-lg-10">
-          <input name="last_seen" class="form-control" id="last_seen" placeholder="Last observed location of the BOLOed subject."/>
+          <input name="lastSeen" class="form-control" id="lastSeen" placeholder="Last observed location of the BOLOed subject."/>
           <span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -777,7 +777,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="form-group row">
                         <label class="col-lg-2 control-label">Vehicle Make</label>
                         <div class="col-lg-10">
-                           <select class="form-control selectpicker" data-live-search="true" name="vehicle_make" title="Vehicle Make">
+                           <select class="form-control selectpicker" data-live-search="true" name="make" title="Vehicle Make">
                               <?php getVehicleMakes();?>
                            </select>
                         </div>
@@ -786,7 +786,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="form-group row">
                         <label class="col-lg-2 control-label">Vehicle Model</label>
                         <div class="col-lg-10">
-                           <select class="form-control selectpicker" data-live-search="true" name="vehicle_model" title="Vehicle Model">
+                           <select class="form-control selectpicker" data-live-search="true" name="model" title="Vehicle Model">
                               <?php getVehicleModels();?>
                            </select>
                         </div>
@@ -796,7 +796,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="form-group row">
                         <label class="col-lg-2 control-label">Vehicle Plate</label>
                         <div class="col-lg-10">
-                						<input type="text" class="form-control vehicle_plate" name="vehicle_plate" placeholder="The plate of the BOLO vehicle." />
+                						<input type="text" class="form-control plate" name="plate" placeholder="The plate of the BOLO vehicle." />
                         </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -804,7 +804,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                         <label class="col-lg-2 control-label">Primary Color</label>
                         <div class="col-lg-10">
-                						<input type="text" class="form-control primary_color" name="primary_color" placeholder="The primary color of the BOLO vehicle." />
+                						<input type="text" class="form-control primaryColor" name="primaryColor" placeholder="The primary color of the BOLO vehicle." />
                         </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -812,7 +812,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <div class="form-group row">
                         <label class="col-lg-2 control-label">Secondary Color</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control secondary_color" name="secondary_color" placeholder="The secondary color, if any, of the BOLO vehicle." />                        </div>
+                            <input type="text" class="form-control secondaryColor" name="secondaryColor" placeholder="The secondary color, if any, of the BOLO vehicle." />                        </div>
                         <!-- ./ col-sm-9 -->
                      </div>
                 <!-- ./ col-sm-9 -->
@@ -820,7 +820,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <div class="form-group row">
                         <label class="col-lg-2 control-label">Reason Wanted</label>
                         <div class="col-lg-10">
-                                <textarea name="reason_wanted" id="narrative" class="form-control reason_wanted" style="text-transform:uppercase" rows="5"></textarea>
+                                <textarea name="reasonWanted" id="narrative" class="form-control reasonWanted" style="text-transform:uppercase" rows="5"></textarea>
                         </div>
                         <!-- ./ col-sm-9 -->
                      </div>
@@ -828,7 +828,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <div class="form-group row">
                         <label class="col-lg-2 control-label">Last Seen</label>
                         <div class="col-lg-10">
-                           <input type="text" class="form-control last_seen" name="last_seen" placeholder="Last observed location of the BOLOed vehicle." />
+                           <input type="text" class="form-control lastSeen" name="lastSeen" placeholder="Last observed location of the BOLOed vehicle." />
                         </div>
                         <!-- ./ col-sm-9 -->
                      </div>
@@ -864,7 +864,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="form-group row">
                         <label class="col-lg-2 control-label">Vehicle Make</label>
                         <div class="col-lg-10">
-                           <select class="form-control selectpicker vehicle_make" data-live-search="true" name="vehicle_make" title="Vehicle Make" required>
+                           <select class="form-control selectpicker make" data-live-search="true" name="make" title="Vehicle Make" required>
                               <?php getVehicleMakes();?>
                            </select>
                         </div>
@@ -872,7 +872,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="form-group row">
                         <label class="col-lg-2 control-label">Vehicle Model</label>
                         <div class="col-lg-10">
-                           <select class="form-control selectpicker vehicle_model" data-live-search="true" name="vehicle_model" title="Vehicle Model" required>
+                           <select class="form-control selectpicker model" data-live-search="true" name="model" title="Vehicle Model" required>
                               <?php getVehicleModels();?>
                            </select>
                         </div>
@@ -882,7 +882,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="form-group row">
                         <label class="col-lg-2 control-label">Vehicle Plate</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control vehicle_plate" name="vehicle_plate" placeholder="The plate of the BOLO vehicle." />
+                            <input type="text" class="form-control plate" name="plate" placeholder="The plate of the BOLO vehicle." />
                         </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -890,7 +890,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                         <label class="col-lg-2 control-label">Primary Color</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control primary_color" name="primary_color" placeholder="The primary color of the BOLO vehicle." />
+                            <input type="text" class="form-control primaryColor" name="primaryColor" placeholder="The primary color of the BOLO vehicle." />
                         </div>
                 <!-- ./ col-sm-9 -->
               </div>
@@ -898,7 +898,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <div class="form-group row">
                         <label class="col-lg-2 control-label">Secondary Color</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control secondary_color" name="secondary_color" placeholder="The secondary color, if any, of the BOLO vehicle." />                        </div>
+                            <input type="text" class="form-control secondaryColor" name="secondaryColor" placeholder="The secondary color, if any, of the BOLO vehicle." />                        </div>
                         <!-- ./ col-sm-9 -->
                      </div>
                 <!-- ./ col-sm-9 -->
@@ -907,7 +907,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <div class="form-group row">
                         <label class="col-lg-2 control-label">Reason Wanted</label>
                         <div class="col-lg-10">
-                                <textarea name="reason_wanted" id="narrative" class="form-control reason_wanted" style="text-transform:uppercase" rows="5"></textarea>
+                                <textarea name="reasonWanted" id="narrative" class="form-control reasonWanted" style="text-transform:uppercase" rows="5"></textarea>
                         </div>
                         <!-- ./ col-sm-9 -->
                      </div>
@@ -915,7 +915,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <div class="form-group row">
                         <label class="col-lg-2 control-label">Last Seen</label>
                         <div class="col-lg-10">
-                           <input type="text" class="form-control last_seen" name="last_seen" placeholder="Last observed location of the BOLOed vehicle." />
+                           <input type="text" class="form-control lastSeen" name="lastSeen" placeholder="Last observed location of the BOLOed vehicle." />
                         </div>
                         <!-- ./ col-sm-9 -->
                      </div>
@@ -998,7 +998,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <div class="form-group">
                         <label class="col-lg-2 control-label">Narrative</label>
                         <div class="col-lg-10">
-                           <div name="call_narrative" id="call_narrative" contenteditable="false" style="background-color: #eee; opacity: 1; border: 1px solid #ccc; padding: 6px 12px; font-size: 14px; word-wrap: break-word; overflow-wrap: break-word; white-space: normal;"></div>
+                           <div name="callNarrative" id="callNarrative" contenteditable="false" style="background-color: #eee; opacity: 1; border: 1px solid #ccc; padding: 6px 12px; font-size: 14px; word-wrap: break-word; overflow-wrap: break-word; white-space: normal;"></div>
                         </div>
                         <!-- ./ col-sm-9 -->
                      </div>
@@ -1046,7 +1046,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <div class="form-group row">
                         <label class="col-lg-2 control-label">Vehicle Make</label>
                         <div class="col-lg-10">
-                           <select class="form-control selectpicker" data-live-search="true" name="vehicle_make" title="Vehicle Make" required>
+                           <select class="form-control selectpicker" data-live-search="true" name="make" title="Vehicle Make" required>
                               <?php getVehicleMakes();?>
                            </select>
                         </div>
@@ -1562,7 +1562,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="form-group row">
                 <label class="col-lg-2 control-label">Issuing Agency</label>
                 <div class="col-lg-10">
-                  <select class="form-control selectpicker" name="issuing_agency" id="issuing_agency" data-live-search="true" required>
+                  <select class="form-control selectpicker" name="issuer" id="issuer" data-live-search="true" required>
                     <?php getAgenciesWarrants();?>
                   </select>
                 </div>
@@ -1954,12 +1954,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   cache: false
                   })
                   .done(function(data){
-                    $('#editPersonboloModal #first_name').val(data.first_name);
-                    $('#editPersonboloModal #last_name').val(data.last_name);
-                    $('#editPersonboloModal #physical_description').val(data.physical_description);
+                    $('#editPersonboloModal #firstName').val(data.firstName);
+                    $('#editPersonboloModal #lastName').val(data.lastName);
+                    $('#editPersonboloModal #physicalDescription').val(data.physicalDescription);
                     $('.gender_picker').selectpicker('val', data.gender);
-                    $('#editPersonboloModal #reason_wanted').val(data.reason_wanted);
-                    $('#editPersonboloModal #last_seen').val(data.last_seen);
+                    $('#editPersonboloModal #reasonWanted').val(data.reasonWanted);
+                    $('#editPersonboloModal #lastSeen').val(data.lastSeen);
                     $('#editPersonboloModal .Editdataid').val(data.id);
                   });
               });
@@ -1974,13 +1974,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                   cache: false
                   })
                   .done(function(data){
-                    $('#editVehicleBOLO .vehicle_make').selectpicker('val', data.vehicle_make);
-                    $('#editVehicleBOLO .vehicle_model').selectpicker('val', data.vehicle_model);
-                    $('#editVehicleBOLO .vehicle_plate').val(data.vehicle_plate);
-                    $('#editVehicleBOLO .primary_color').val(data.primary_color);
-                    $('#editVehicleBOLO .secondary_color').val(data.secondary_color);
-                    $('#editVehicleBOLO .last_seen').val(data.last_seen);
-                    $('#editVehicleBOLO .reason_wanted').val(data.reason_wanted);
+                    $('#editVehicleBOLO .make').selectpicker('val', data.make);
+                    $('#editVehicleBOLO .model').selectpicker('val', data.model);
+                    $('#editVehicleBOLO .plate').val(data.plate);
+                    $('#editVehicleBOLO .primaryColor').val(data.primaryColor);
+                    $('#editVehicleBOLO .secondaryColor').val(data.secondaryColor);
+                    $('#editVehicleBOLO .lastSeen').val(data.lastSeen);
+                    $('#editVehicleBOLO .reasonWanted').val(data.reasonWanted);
                     $('#editVehicleBOLO .EditVehicleId').val(data.id);
                   });
               })

@@ -169,7 +169,7 @@ function ncicGetNames()
         die();
     }
 
-    $result = $pdo->query("SELECT name, dob, address, gender, race, dl_status, hair_color, build, weapon_permit, deceased FROM ".DB_PREFIX."ncic_names");
+    $result = $pdo->query("SELECT name, dob, address, gender, race, dlStatus, hairColor, build, weaponPermitStatus, deceased FROM ".DB_PREFIX."ncic_names");
 
     if (!$result)
     {
@@ -216,10 +216,10 @@ function ncicGetNames()
                 <td>'.$row['address'].'</td>
                 <td>'.$row['gender'].'</td>
                 <td>'.$row['race'].'</td>
-                <td>'.$row['dl_status'].'</td>
-                <td>'.$row['hair_color'].'</td>
+                <td>'.$row['dlStatus'].'</td>
+                <td>'.$row['hairColor'].'</td>
                 <td>'.$row['build'].'</td>
-                <td>'.$row['weapon_permit'].'</td>
+                <td>'.$row['weaponPermitStatus'].'</td>
 				<td>'.$row['deceased'].'</td>
                 <td>
                     <button name="edit_name" data-toggle="modal" data-target="#IdentityEditModal" id="edit_nameBtn" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
@@ -251,7 +251,7 @@ function ncicGetPlates()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_plates.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_plates INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_plates.name_id");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_plates.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_plates INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_plates.nameId");
 
     if (!$result)
     {
@@ -293,12 +293,12 @@ function ncicGetPlates()
             echo '
             <tr>
                 <td>'.$row['name'].'</td>
-                <td>'.$row['veh_plate'].'</td>
+                <td>'.$row['vehPlate'].'</td>
                 <td>'.$row['veh_reg_state'].'</td>
-                <td>'.$row['veh_make'].'</td>
-                <td>'.$row['veh_model'].'</td>
-                <td>'.$row['veh_pcolor'].'/'.$row['veh_scolor'].'</td>
-                <td>'.$row['veh_insurance'].' / '.$row['veh_insurance type'].'</td>
+                <td>'.$row['vehMake'].'</td>
+                <td>'.$row['vehModel'].'</td>
+                <td>'.$row['vehPrimaryColor'].'/'.$row['vehSecondaryColor'].'</td>
+                <td>'.$row['vehInsurance'].' / '.$row['vehInsuranceType'].'</td>
                 <td>'.$row['flags'].'</td>
                 <td>'.$row['notes'].'</td>
                 <td>
@@ -331,7 +331,7 @@ function ncicGetWeapons()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_weapons.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_weapons INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_weapons.name_id");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_weapons.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_weapons INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_weapons.nameId");
 
     if (!$result)
     {
@@ -367,8 +367,8 @@ function ncicGetWeapons()
             echo '
             <tr>
                 <td>'.$row['name'].'</td>
-                <td>'.$row['weapon_type'].'</td>
-                <td>'.$row['weapon_name'].'</td>
+                <td>'.$row['weaponType'].'</td>
+                <td>'.$row['weaponName'].'</td>
                 <td>
                     <form action="".BASE_URL."/oc-includes/ncicAdminActions.php" method="post">
                     <input name="delete_weapon" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
@@ -548,7 +548,7 @@ function ncicGetArrests()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_arrests.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_arrests INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_arrests.name_id");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_arrests.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_arrests INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_arrests.nameId");
 
     if (!$result)
     {
@@ -587,10 +587,10 @@ function ncicGetArrests()
             echo '
             <tr>
                 <td>'.$row['name'].'</td>
-                <td>'.$row['arrest_reason'].'</td>
-                <td>'.$row['arrest_fine'].'</td>
-                <td>'.$row['issued_date'].'</td>
-                <td>'.$row['issued_by'].'</td>
+                <td>'.$row['arrestReason'].'</td>
+                <td>'.$row['arrestFine'].'</td>
+                <td>'.$row['issuedDate'].'</td>
+                <td>'.$row['Issuer'].'</td>
                 <td>'.$row['issued_by_agency'].'</td>
                 <td>
                     <form action="".BASE_URL."/oc-includes/ncicAdminActions.php" method="post">
@@ -621,7 +621,7 @@ function ncicGetWarrants()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_warrants.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_warrants INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_warrants.name_id");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_warrants.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_warrants INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_warrants.nameId");
 
     if (!$result)
     {
@@ -661,10 +661,10 @@ function ncicGetWarrants()
             <tr>
                 <td>'.$row['status'].'</td>
                 <td>'.$row['name'].'</td>
-                <td>'.$row['warrant_name'].'</td>
-                <td>'.$row['issued_date'].'</td>
-                <td>'.$row['expiration_date'].'</td>
-                <td>'.$row['issuing_agency'].'</td>
+                <td>'.$row['warrantName'].'</td>
+                <td>'.$row['issuedDate'].'</td>
+                <td>'.$row['expirationDate'].'</td>
+                <td>'.$row['issuer'].'</td>
                 <td>
                     <form action="".BASE_URL."/oc-includes/ncicAdminActions.php" method="post">
                     ';
@@ -704,7 +704,7 @@ function ncicGetCitations()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_citations.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_citations INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_citations.name_id");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_citations.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_citations INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_citations.nameId");
 
     if (!$result)
     {
@@ -743,10 +743,10 @@ function ncicGetCitations()
             echo '
             <tr>
                 <td>'.$row['name'].'</td>
-                <td>'.$row['citation_name'].'</td>
-                <td>'.$row['citation_fine'].'</td>
-                <td>'.$row['issued_date'].'</td>
-                <td>'.$row['issued_by'].'</td>
+                <td>'.$row['citationName'].'</td>
+                <td>'.$row['citationFine'].'</td>
+                <td>'.$row['issuedDate'].'</td>
+                <td>'.$row['Issuer'].'</td>
                 <td>'.$row['issued_by_agency'].'</td>
                 <td>
                     <form action="".BASE_URL."/oc-includes/ncicAdminActions.php" method="post">
@@ -777,7 +777,7 @@ function ncicGetWarnings()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_warnings.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_warnings INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_warnings.name_id");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_warnings.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_warnings INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_warnings.nameId");
 
     if (!$result)
     {
@@ -815,9 +815,9 @@ function ncicGetWarnings()
             echo '
             <tr>
                 <td>'.$row['name'].'</td>
-                <td>'.$row['warning_name'].'</td>
-                <td>'.$row['issued_date'].'</td>
-                <td>'.$row['issued_by'].'</td>
+                <td>'.$row['warningName'].'</td>
+                <td>'.$row['issuedDate'].'</td>
+                <td>'.$row['Issuer'].'</td>
                 <td>'.$row['issued_by_agency'].'</td>
                 <td>
                     <form action="".BASE_URL."/oc-includes/ncicAdminActions.php" method="post">
@@ -955,7 +955,7 @@ function edit_name()
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT first_name FROM ".DB_PREFIX."ncic_names WHERE first_name = ?");
+    $stmt = $pdo->prepare("SELECT firstName FROM ".DB_PREFIX."ncic_names WHERE firstName = ?");
     $result = $stmt->execute(array($name));
 
     if (!$result)
@@ -985,15 +985,15 @@ function edit_name()
     $address = htmlspecialchars($_POST['civAddressReq']);
     $sex = htmlspecialchars($_POST['civSexReq']);
     $race = htmlspecialchars($_POST['civRaceReq']);
-    $dlstatus = htmlspecialchars($_POST['civDL']);
+    $dlStatus = htmlspecialchars($_POST['civDL']);
     $hair = htmlspecialchars($_POST['civHairReq']);
     $build = htmlspecialchars($_POST['civBuildReq']);
 	$weapon = htmlspecialchars($_POST['civWepStat']);
 	$deceased = htmlspecialchars($_POST['civDec']);
     $editid = htmlspecialchars($_POST['Edit_id']);
 
-    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."ncic_names SET name = ?, dob = ?, address = ?, gender = ?, race = ?, dl_status = ?, hair_color = ?, build = ?, weapon_permit = ?, deceased = ? WHERE id = ?");
-    $result = $stmt->execute(array($name, $dob, $address, $sex, $race, $dlstatus, $hair, $build, $weapon, $deceased, $editid));
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."ncic_names SET name = ?, dob = ?, address = ?, gender = ?, race = ?, dlStatus = ?, hairColor = ?, build = ?, weaponPermitStatus = ?, deceased = ? WHERE id = ?");
+    $result = $stmt->execute(array($name, $dob, $address, $sex, $race, $dlStatus, $hair, $build, $weapon, $deceased, $editid));
 
     if (!$result)
     {
@@ -1013,7 +1013,7 @@ function edit_plate()
 {
     session_start();
     
-    $plate = htmlspecialchars($_POST['veh_plate']);
+    $plate = htmlspecialchars($_POST['vehPlate']);
     
     //Remove all spaces from plate
     $plate = str_replace(' ', '', $plate);
@@ -1025,17 +1025,17 @@ function edit_plate()
     $plate = preg_replace('/[^A-Za-z0-9\-]/', '', $plate);
     
     $vehicle = htmlspecialchars($_POST['veh_make_model']);
-    $veh_make = explode(" ", $vehicle) [0];
-    $veh_model = explode(" ", $vehicle) [1];
+    $vehMake = explode(" ", $vehicle) [0];
+    $vehModel = explode(" ", $vehicle) [1];
     
     $uid = $_SESSION['id'];
 
     $submittedById = $_SESSION['id'];
     $userId = htmlspecialchars($_POST['civilian_names']);
-    $veh_plate = $plate;
-    $veh_pcolor = htmlspecialchars($_POST['veh_pcolor']);
-    $veh_scolor = htmlspecialchars($_POST['veh_scolor']);
-    $veh_insurance = htmlspecialchars($_POST['veh_insurance']);
+    $vehPlate = $plate;
+    $vehPrimaryColor = htmlspecialchars($_POST['vehPrimaryColor']);
+    $vehSecondaryColor = htmlspecialchars($_POST['vehSecondaryColor']);
+    $vehInsurance = htmlspecialchars($_POST['vehInsurance']);
     $flags = htmlspecialchars($_POST['flags']);
     $veh_reg_state = htmlspecialchars($_POST['veh_reg_state']);
     $notes = htmlspecialchars($_POST['notes']);
@@ -1051,8 +1051,8 @@ function edit_plate()
         die();
     }
 
-    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."ncic_plates SET name_id = ?, veh_plate = ?, veh_make = ?, veh_model = ?, veh_pcolor = ?, veh_scolor = ?, veh_insurance = ?, flags = ?, veh_reg_state = ?, notes = ? WHERE id = ?");
-    $result = $stmt->execute(array($userId, $veh_plate, $veh_make, $veh_model, $veh_pcolor, $veh_scolor, $veh_insurance, $flags, $veh_reg_state, $notes, $plate_id));
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."ncic_plates SET nameId = ?, vehPlate = ?, vehMake = ?, vehModel = ?, vehPrimaryColor = ?, vehSecondaryColor = ?, vehInsurance = ?, flags = ?, veh_reg_state = ?, notes = ? WHERE id = ?");
+    $result = $stmt->execute(array($userId, $vehPlate, $vehMake, $vehModel, $vehPrimaryColor, $vehSecondaryColor, $vehInsurance, $flags, $veh_reg_state, $notes, $plate_id));
 
     if (!$result)
     {

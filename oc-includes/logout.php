@@ -18,7 +18,7 @@ if (isset($_GET['responder']))
     logoutResponder();
 }
 
-//Need to make sure they're out of the active_users table
+//Need to make sure they're out of the activeUsers table
 function logoutResponder()
 {
     $identifier = htmlspecialchars($_GET['responder']);
@@ -33,7 +33,7 @@ function logoutResponder()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."active_users WHERE identifier = ?");
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."activeUsers WHERE identifier = ?");
     $result = $stmt->execute(array($identifier));
 
     if (!$result)

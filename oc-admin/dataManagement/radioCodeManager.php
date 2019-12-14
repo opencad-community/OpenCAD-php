@@ -34,16 +34,16 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     }
 
 
-    if ( $_SESSION['admin_privilege'] == 3)
+    if ( $_SESSION['adminPrivilege'] == 3)
     {
-      if ($_SESSION['admin_privilege'] == 'Administrator')
+      if ($_SESSION['adminPrivilege'] == 'Administrator')
       {
           //Do nothing
       }
     }
-    else if ($_SESSION['admin_privilege'] == 2)
+    else if ($_SESSION['adminPrivilege'] == 2)
     {
-      if ($_SESSION['admin_privilege'] == 'Moderator')
+      if ($_SESSION['adminPrivilege'] == 'Moderator')
       {
           // Do Nothing
       }
@@ -149,7 +149,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Code Description</label>
                             <div class="col-md-9">
-                                <input type="text" name="code_description" class="form-control" id="code_description" required />
+                                <input type="text" name="codeDescription" class="form-control" id="codeDescription" required />
                                 <span class="fas fa-map form-control-feedback right" aria-hidden="true"></span>
                             </div>
                             <!-- ./ col-sm-9 -->
@@ -197,7 +197,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 data = JSON.parse(result);
 
                 $('input[name="code"]').val(data['code']);
-                $('input[name="code_description"]').val(data['code_description']);
+                $('input[name="codeDescription"]').val(data['codeDescription']);
                 $('input[name="id"]').val(data['id']);
             },
 

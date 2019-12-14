@@ -6,9 +6,9 @@ $db = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 //get search term
 $searchTerm = $_GET['term'];
 //get matched data from skills table
-$query = $db->query("SELECT * FROM ".DB_PREFIX."ncic_plates WHERE veh_plate LIKE '%".$searchTerm."%' ORDER BY veh_plate ASC");
+$query = $db->query("SELECT * FROM ".DB_PREFIX."ncic_plates WHERE vehPlate LIKE '%".$searchTerm."%' ORDER BY vehPlate ASC");
 while ($row = $query->fetch_assoc()) {
-    $data[] = $row['veh_plate'];
+    $data[] = $row['vehPlate'];
 }
 //return json data
 echo json_encode($data);

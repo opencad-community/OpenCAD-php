@@ -26,16 +26,16 @@ permissionDenied();
       $name = $_SESSION['name'];
     }
 
-    if ( $_SESSION['admin_privilege'] == 3)
+    if ( $_SESSION['adminPrivilege'] == 3)
     {
-      if ($_SESSION['admin_privilege'] == 'Administrator')
+      if ($_SESSION['adminPrivilege'] == 'Administrator')
       {
           //Do nothing
       }
     }
-    else if ($_SESSION['admin_privilege'] == 2)
+    else if ($_SESSION['adminPrivilege'] == 2)
     {
-      if ($_SESSION['admin_privilege'] == 'Moderator')
+      if ($_SESSION['adminPrivilege'] == 'Moderator')
       {
           // Do Nothing
       }
@@ -189,7 +189,7 @@ permissionDenied();
     <?php include "../oc-includes/jquery-colsolidated.inc.php"; ?>
     <script>
     $(document).ready(function() {
-        $('#call_history').DataTable({
+        $('#callHistory').DataTable({
 
         });
     });

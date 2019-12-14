@@ -34,16 +34,16 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     }
 
 
-    if ( $_SESSION['admin_privilege'] == 3)
+    if ( $_SESSION['adminPrivilege'] == 3)
     {
-      if ($_SESSION['admin_privilege'] == 'Administrator')
+      if ($_SESSION['adminPrivilege'] == 'Administrator')
       {
           //Do nothing
       }
     }
-    else if ($_SESSION['admin_privilege'] == 2)
+    else if ($_SESSION['adminPrivilege'] == 2)
     {
-      if ($_SESSION['admin_privilege'] == 'Moderator')
+      if ($_SESSION['adminPrivilege'] == 'Moderator')
       {
           // Do Nothing
       }
@@ -141,7 +141,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Citation Description</label>
                             <div class="col-md-9">
-                                <input data-lpignore='true' type="text" name="citation_description" class="form-control" id="citation_description" required />
+                                <input data-lpignore='true' type="text" name="citationDescription" class="form-control" id="citationDescription" required />
                             </div>
                             <!-- ./ col-sm-9 -->
                         </div>
@@ -149,7 +149,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Citation Fine (Reccomended)</label>
                             <div class="col-md-9">
-                                <input data-lpignore='true' type="text" name="citation_fine" class="form-control" id="citation_fine"/>
+                                <input data-lpignore='true' type="text" name="citationFine" class="form-control" id="citationFine"/>
                             </div>
                             <!-- ./ col-sm-9 -->
                         </div>
@@ -197,8 +197,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 console.log(result);
                 data = JSON.parse(result);
 
-                $('input[name="citation_fine"]').val(data['citation_fine']);
-                $('input[name="citation_description"]').val(data['citation_description']);
+                $('input[name="citationFine"]').val(data['citationFine']);
+                $('input[name="citationDescription"]').val(data['citationDescription']);
                 $('input[name="id"]').val(data['id']);
             },
 

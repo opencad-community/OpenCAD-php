@@ -73,17 +73,17 @@ $roadsideAssistButton = "";
     {
         $roadsideAssistButton = "<a href=\"".BASE_URL."/mdt.php?dep=roadesideAssist\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Civilian Services</a>";
     }
-    if ($_SESSION['civilian_privilege'] = '1')
+    if ($_SESSION['civilianPrivilege'] = '1')
     {
         $civilianButton = "<a href=\"".BASE_URL."/civilian.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Civilian Services</a>";
     }
 
 
-    if ($_SESSION['admin_privilege'] = '3')
+    if ($_SESSION['adminPrivilege'] = '3')
     {
         $adminButton = "<a href=\"".BASE_URL."/oc-admin/admin.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Admin</a>";
     }
-    if ($_SESSION['admin_privilege'] == "2")
+    if ($_SESSION['adminPrivilege'] == "2")
     {
         $adminButton = "<a href=\"".BASE_URL."/oc-admin/admin.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Moderator</a>";
     }

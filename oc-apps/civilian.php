@@ -480,7 +480,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Issuing Agency</label>
 								<div class="col-lg-10">
-									<select class="form-control selectpicker" name="issuing_agency" id="issuing_agency"
+									<select class="form-control selectpicker" name="issuer" id="issuer"
 										data-live-search="true" required>
 										<?php getAgencies();?>
 									</select>
@@ -823,7 +823,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">License Plate</label>
 								<div class="col-lg-10">
-									<input type="text" class="form-control" name="veh_plate" required />
+									<input type="text" class="form-control" name="vehPlate" required />
 								</div>
 								<!-- ./ col-sm-9 -->
 							</div>
@@ -843,7 +843,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Vehicle Primary Color</label>
 								<div class="col-lg-10">
-									<select class="form-control selectpicker" name="veh_pcolor" data-live-search="true"
+									<select class="form-control selectpicker" name="vehPrimaryColor" data-live-search="true"
 										required>
 										<option val=""> </option>
 										<?php getColors();?>
@@ -855,7 +855,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Vehicle Secondary Color</label>
 								<div class="col-lg-10">
-									<select class="form-control selectpicker" name="veh_scolor" data-live-search="true"
+									<select class="form-control selectpicker" name="vehSecondaryColor" data-live-search="true"
 										required>
 										<option val=""> </option>
 										<?php getColors();?>
@@ -924,7 +924,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">License Plate</label>
 								<div class="col-lg-10">
-									<input type="text" class="form-control veh_plate" name="veh_plate" required />
+									<input type="text" class="form-control vehPlate" name="vehPlate" required />
 								</div>
 								<!-- ./ col-sm-9 -->
 							</div>
@@ -943,7 +943,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Vehicle Primary Color</label>
 								<div class="col-lg-10">
-									<select class="form-control selectpicker veh_pcolor" name="veh_pcolor"
+									<select class="form-control selectpicker vehPrimaryColor" name="vehPrimaryColor"
 										data-live-search="true" required>
 										<?php getColors();?>
 									</select>
@@ -954,7 +954,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Vehicle Secondary Color</label>
 								<div class="col-lg-10">
-									<select class="form-control selectpicker veh_scolor" name="veh_scolor"
+									<select class="form-control selectpicker vehSecondaryColor" name="vehSecondaryColor"
 										data-live-search="true" required>
 										<?php getColors();?>
 									</select>
@@ -1108,7 +1108,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				url: '/oc-includes/civActions.php',
 				data: {
 					'getCivilianDetails': 'yes',
-					'name_id': civId
+					'nameId': civId
 				},
 				success: function(result) {
 					console.log(result);
@@ -1119,11 +1119,11 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 					$('input[name="civAddress"]').val(data['address']);
 					$('input[name="civSex"]').val(data['sex']);
 					$('input[name="civRace"]').val(data['race']);
-					$('input[name="civHair"]').val(data['hair_color']);
+					$('input[name="civHair"]').val(data['hairColor']);
 					$('input[name="civBuild"]').val(data['build']);
-					$('input[name="civPlate"]').val(data['veh_plate']);
-					$('input[name="civMake"]').val(data['veh_make']);
-					$('input[name="civModel"]').val(data['veh_model']);
+					$('input[name="civPlate"]').val(data['vehPlate']);
+					$('input[name="civMake"]').val(data['vehMake']);
+					$('input[name="civModel"]').val(data['vehModel']);
 					$('input[name="civColor"]').val(data['veh_color']);
 
 
@@ -1168,10 +1168,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						$('#IdentityEditModal #civAddressReq').val(data.address);
 						$('.selectpicker3').selectpicker('val', data.gender);
 						$('.civRaceReq_picker').selectpicker('val', data.race);
-						$('.civDL_picker').selectpicker('val', data.dl_status);
-						$('.civHairReq_picker').selectpicker('val', data.hair_color);
+						$('.civDL_picker').selectpicker('val', data.dlStatus);
+						$('.civHairReq_picker').selectpicker('val', data.hairColor);
 						$('.civBuildReq_picker').selectpicker('val', data.build);
-						$('.civWepStat_picker').selectpicker('val', data.weapon_permit);
+						$('.civWepStat_picker').selectpicker('val', data.weaponPermitStatus);
 						$('.civDec_picker').selectpicker('val', data.deceased);
 						$('#IdentityEditModal .Editdataid').val(data.id);
 					});
@@ -1190,12 +1190,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						cache: false
 					})
 					.done(function(data) {
-						$('.civilian_names').selectpicker('val', data.name_id);
-						$('.veh_plate').val(data.veh_plate);
-						$('.veh_makemodel').selectpicker('val', data.veh_make + ' ' + data
-							.veh_model);
-						$('.veh_pcolor').selectpicker('val', data.veh_pcolor);
-						$('.veh_scolor').selectpicker('val', data.veh_scolor);
+						$('.civilian_names').selectpicker('val', data.nameId);
+						$('.vehPlate').val(data.vehPlate);
+						$('.veh_makemodel').selectpicker('val', data.vehMake + ' ' + data
+							.vehModel);
+						$('.vehPrimaryColor').selectpicker('val', data.vehPrimaryColor);
+						$('.vehSecondaryColor').selectpicker('val', data.vehSecondaryColor);
 						$('.notes').val(data.notes);
 						$('.veh_reg_state').val(data.veh_reg_state);
 						$('.editplateid').val(data.id);

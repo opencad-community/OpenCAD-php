@@ -197,11 +197,11 @@ $('#ncic_plate_btn').on('click', function (e) {
             }
             else {
                 var insurance_status = "";
-                if (data['veh_insurance'] == "VALID") {
+                if (data['vehInsurance'] == "VALID") {
                     insurance_status = "<span style=\"color: green;\">Valid</span>";
                 }
                 else {
-                    insurance_status = "<span style=\"color: red;\">" + data['veh_insurance'] + "</span>";
+                    insurance_status = "<span style=\"color: red;\">" + data['vehInsurance'] + "</span>";
                 }
 
                 var notes = "";
@@ -262,7 +262,7 @@ $('#ncic_plate_btn').on('click', function (e) {
 
                 phoentic = result;
 
-                $('#ncic_plate_return').append("Plate: " + data['plate'] + "<br/>Phoenetic: " + phoentic + "<br/>Primary Color: " + data['veh_pcolor'] + "<br/>Secondary Color: " + data['veh_scolor'] + "<br/>Make: " + data['veh_make'] + "<br/>Model: " + data['veh_model'] + "<br/>Owner: " + data['veh_ro']
+                $('#ncic_plate_return').append("Plate: " + data['plate'] + "<br/>Phoenetic: " + phoentic + "<br/>Primary Color: " + data['vehPrimaryColor'] + "<br/>Secondary Color: " + data['vehSecondaryColor'] + "<br/>Make: " + data['vehMake'] + "<br/>Model: " + data['vehModel'] + "<br/>Owner: " + data['veh_ro']
                     + "<br/>Insurance: " + insurance_status + "<br/>Flags: " + flags + "<br/><br/>Notes: " + notes);
 
                 $("#ncic_plate_return").attr("tabindex", -1).focus();
@@ -302,9 +302,9 @@ $('#ncic_name_btn').on('click', function (e) {
                 }
                 else {
                     var warrantText = "";
-                    warrantText += "    Count: " + data.warrant_name.length + "<br/>";
-                    for (i = 0; i < data.warrant_name.length; i++) {
-                        warrantText += "<span style=\"color:red\">&nbsp;&nbsp;&nbsp;&nbsp;" + data.warrant_name[i] + "</span><br/>";
+                    warrantText += "    Count: " + data.warrantName.length + "<br/>";
+                    for (i = 0; i < data.warrantName.length; i++) {
+                        warrantText += "<span style=\"color:red\">&nbsp;&nbsp;&nbsp;&nbsp;" + data.warrantName[i] + "</span><br/>";
                     }
                 }
 
@@ -313,9 +313,9 @@ $('#ncic_name_btn').on('click', function (e) {
                 }
                 else {
                     var citationText = "";
-                    citationText += "    Count: " + data.citation_name.length + "<br/>";
-                    for (i = 0; i < data.citation_name.length; i++) {
-                        citationText += "&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #F78F2B\">" + data.citation_name[i] + "</span><br/>";
+                    citationText += "    Count: " + data.citationName.length + "<br/>";
+                    for (i = 0; i < data.citationName.length; i++) {
+                        citationText += "&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #F78F2B\">" + data.citationName[i] + "</span><br/>";
                     }
                 }
 
@@ -324,9 +324,9 @@ $('#ncic_name_btn').on('click', function (e) {
                 }
                 else {
                     var arrestText = "";
-                    arrestText += "    Count: " + data.arrest_reason.length + "<br/>";
-                    for (i = 0; i < data.arrest_reason.length; i++) {
-                        arrestText += "&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #F78F2B\">" + data.arrest_reason[i] + "</span><br/>";
+                    arrestText += "    Count: " + data.arrestReason.length + "<br/>";
+                    for (i = 0; i < data.arrestReason.length; i++) {
+                        arrestText += "&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #F78F2B\">" + data.arrestReason[i] + "</span><br/>";
                     }
                 }
 
@@ -335,34 +335,34 @@ $('#ncic_name_btn').on('click', function (e) {
                 }
                 else {
                     var warningText = "";
-                    warningText += "    Count: " + data.warning_name.length + "<br/>";
-                    for (i = 0; i < data.warning_name.length; i++) {
-                        warningText += "&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #F78F2B\">" + data.warning_name[i] + "</span><br/>";
+                    warningText += "    Count: " + data.warningName.length + "<br/>";
+                    for (i = 0; i < data.warningName.length; i++) {
+                        warningText += "&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"color: #F78F2B\">" + data.warningName[i] + "</span><br/>";
                     }
                 }
 
                 var dl_status_text = "";
-                if (data['dl_status'] == "None") {
+                if (data['dlStatus'] == "None") {
                     dl_status_text = "<span style=\"color: red;\">None</span>";
                 }
                 else {
-                    dl_status_text = "<span style=\"color: green;\">" + data['dl_status'] + "</span>";
+                    dl_status_text = "<span style=\"color: green;\">" + data['dlStatus'] + "</span>";
                 }
 
                 var dl_type_text = "";
-                if (data['dl_type'] == "Not Issued") {
+                if (data['dlType'] == "Not Issued") {
                     dl_type_text = "";
                 }
                 else {
-                    dl_type_text = "<span style=\"color: green;\">" + data['dl_type'] + "</span>";
+                    dl_type_text = "<span style=\"color: green;\">" + data['dlType'] + "</span>";
                 }
 
                 var weapon_permit_text = "";
-                if (data['weapon_permit'] == "Obtained") {
+                if (data['weaponPermitStatus'] == "Obtained") {
                     weapon_permit_text = "<span style=\"color: green;\">Obtained</span>";
                 }
                 else {
-                    weapon_permit_text = "<span style=\"color: red;\">" + data['weapon_permit'] + "</span>";
+                    weapon_permit_text = "<span style=\"color: red;\">" + data['weaponPermitStatus'] + "</span>";
                 }
 
                 var deceased_text = "";
@@ -374,12 +374,12 @@ $('#ncic_name_btn').on('click', function (e) {
                 }
 
                 $('#ncic_name_return').append("Name: " + data['name'] + "<br/>DOB: " + data['dob'] + "<br/>Sex: " + data['sex']
-                    + "<br/>Race: " + data['race'] + "<br/>Hair Color: " + data['hair_color']
+                    + "<br/>Race: " + data['race'] + "<br/>Hair Color: " + data['hairColor']
                     + "<br/>Build: " + data['build']
                     + "<br/>Address: " + data['address']
                     + "<br/>DL Status: " + dl_status_text
                     + "<br/>DL Type: " + dl_type_text
-                    + "<br/>DL Issued: " + dl_Issued_by
+                    + "<br/>DL Issued: " + dlIssuer
                     + "<br/>Weapon Permit: " + weapon_permit_text
                     + "<br/>Deceased: " + deceased_text
                     + "<br/><br/>Warnings:<br/>" + warningText + "<br/><br/>Citations:<br/>" + citationText + "<br/>Arrests:<br/>" + arrestText + "<br/>Warrants:<br/>" + warrantText);
@@ -421,20 +421,20 @@ $('#ncic_weapon_btn').on('click', function (e) {
                 }
                 else {
                     var weaponText = "";
-                    for (i = 0; i < data.weapon_name.length; i++) {
-                        weaponText += "<span style=\"color:red\">&nbsp;&nbsp;&nbsp;&nbsp;" + data.weapon_name[i] + "</span><br/>";
+                    for (i = 0; i < data.weaponName.length; i++) {
+                        weaponText += "<span style=\"color:red\">&nbsp;&nbsp;&nbsp;&nbsp;" + data.weaponName[i] + "</span><br/>";
                     }
                 }
                 var weapon_permit_text = "";
-                if (data['weapon_permit'] == "Obtained") {
+                if (data['weaponPermitStatus'] == "Obtained") {
                     weapon_permit_text = "<span style=\"color: green;\">Obtained</span>";
                 }
                 else {
-                    weapon_permit_text = "<span style=\"color: red;\">" + data['weapon_permit'] + "</span>";
+                    weapon_permit_text = "<span style=\"color: red;\">" + data['weaponPermitStatus'] + "</span>";
                 }
 
 
-                $('#ncic_weapon_return').append("Name: " + data['first_name'] + "<br/>Weapon Permit: " + weapon_permit_text
+                $('#ncic_weapon_return').append("Name: " + data['firstName'] + "<br/>Weapon Permit: " + weapon_permit_text
                     + "<br/><br/>Weapons: <br/>" + weaponText);
 
                 $("#ncic_weapon_return").attr("tabindex", -1).focus();
@@ -733,13 +733,13 @@ $('#callDetails').on('show.bs.modal', function (e) {
             data = JSON.parse(result);
 
             var mymodal = $('#callDetails');
-            mymodal.find('input[name="call_id_det"]').val(data['call_id']);
-            mymodal.find('input[name="call_type_det"]').val(data['call_type']);
-            mymodal.find('input[name="call_street1_det"]').val(data['call_street1']);
-            mymodal.find('input[name="call_street2_det"]').val(data['call_street2']);
-            mymodal.find('input[name="call_street3_det"]').val(data['call_street3']);
-            mymodal.find('div[name="call_narrative"]').html('');
-            mymodal.find('div[name="call_narrative"]').append(data['narrative']);
+            mymodal.find('input[name="call_id_det"]').val(data['callId']);
+            mymodal.find('input[name="call_type_det"]').val(data['callType']);
+            mymodal.find('input[name="call_street1_det"]').val(data['callStreet1']);
+            mymodal.find('input[name="call_street2_det"]').val(data['callStreet2']);
+            mymodal.find('input[name="call_street3_det"]').val(data['callStreet3']);
+            mymodal.find('div[name="callNarrative"]').html('');
+            mymodal.find('div[name="callNarrative"]').append(data['narrative']);
 
         },
 

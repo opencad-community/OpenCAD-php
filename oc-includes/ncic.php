@@ -40,7 +40,7 @@ function name()
             die();
         }
 
-        $stmt = $pdo->prepare("SELECT id, name, dob, address, gender, race, dl_Issued_by dl_status, dl_type, hair_color, build, weapon_permit, deceased, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS age FROM ".DB_PREFIX."ncic_names WHERE name = ?");
+        $stmt = $pdo->prepare("SELECT id, name, dob, address, gender, race, dlIssuer dlStatus, dlType, hairColor, build, weaponPermitStatus, deceased, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS age FROM ".DB_PREFIX."ncic_names WHERE name = ?");
         $resStatus = $stmt->execute(array($name));
         $result = $stmt;
 
@@ -70,17 +70,17 @@ function name()
                 $encode["address"] = $row[3];
                 $encode["sex"] = $row[4];
                 $encode["race"] = $row[5];
-                $encode["dl_status"] = $row[6];
-                $encode["dl_type"] = $row[12];
-                $encode["dl_class"] = $row[8];
-                $encode["dl_Issued_by"] = $row[9];
-                $encode["hair_color"] = $row[7];
+                $encode["dlStatus"] = $row[6];
+                $encode["dlType"] = $row[12];
+                $encode["dlClass"] = $row[8];
+                $encode["dlIssuer"] = $row[9];
+                $encode["hairColor"] = $row[7];
                 $encode["build"] = $row[8];
-				$encode["weapon_permit"] = $row[9];
+				$encode["weaponPermitStatus"] = $row[9];
 				$encode["deceased"] = $row[10];
             }
 
-            $stmt = $pdo->prepare("SELECT id, name_id, warrant_name FROM ".DB_PREFIX."ncic_warrants WHERE name_id = ?");
+            $stmt = $pdo->prepare("SELECT id, nameId, warrantName FROM ".DB_PREFIX."ncic_warrants WHERE nameId = ?");
             $resStatus = $stmt->execute(array($userId));
             $result = $stmt;
 
@@ -102,13 +102,13 @@ function name()
                 foreach($result as $row)
                 {
                     $encode["warrantId"][$warrantIndex] = $row[0];
-                    $encode["warrant_name"][$warrantIndex] = $row[2];
+                    $encode["warrantName"][$warrantIndex] = $row[2];
 
                     $warrantIndex++;
                 }
             }
 
-            $stmt = $pdo->prepare("SELECT id, name_id, arrest_reason FROM ".DB_PREFIX."ncic_arrests WHERE name_id = ?");
+            $stmt = $pdo->prepare("SELECT id, nameId, arrestReason FROM ".DB_PREFIX."ncic_arrests WHERE nameId = ?");
             $resStatus = $stmt->execute(array($userId));
             $result = $stmt;
 
@@ -130,13 +130,13 @@ function name()
                 foreach($result as $row)
                 {
                     $encode["arrestId"][$arrestIndex] = $row[0];
-                    $encode["arrest_reason"][$arrestIndex] = $row[2];
+                    $encode["arrestReason"][$arrestIndex] = $row[2];
 
                     $arrestIndex++;
                 }
             }
 
-            $stmt = $pdo->prepare("SELECT id, name_id, citation_name FROM ".DB_PREFIX."ncic_citations WHERE name_id = ?");
+            $stmt = $pdo->prepare("SELECT id, nameId, citationName FROM ".DB_PREFIX."ncic_citations WHERE nameId = ?");
             $resStatus = $stmt->execute(array($userId));
             $result = $stmt;
 
@@ -158,13 +158,13 @@ function name()
                 foreach($result as $row)
                 {
                     $encode["citationId"][$citationIndex] = $row[0];
-                    $encode["citation_name"][$citationIndex] = $row[2];
+                    $encode["citationName"][$citationIndex] = $row[2];
 
                     $citationIndex++;
                 }
             }
 			
-            $stmt = $pdo->prepare("SELECT id, name_id, warning_name FROM ".DB_PREFIX."ncic_warnings WHERE name_id = ?");
+            $stmt = $pdo->prepare("SELECT id, nameId, warningName FROM ".DB_PREFIX."ncic_warnings WHERE nameId = ?");
             $resStatus = $stmt->execute(array($userId));
             $result = $stmt;
 
@@ -186,7 +186,7 @@ function name()
                 foreach($result as $row)
                 {
                     $encode["warningId"][$warningIndex] = $row['id'];
-                    $encode["warning_name"][$warningIndex] = $row['warning_name'];
+                    $encode["warningName"][$warningIndex] = $row['warningName'];
 
                     $warningIndex++;
                 }
@@ -215,7 +215,7 @@ function plate()
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ncic_plates.*,".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_plates INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_plates.name_id WHERE veh_plate = ?");
+    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ncic_plates.*,".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_plates INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_plates.nameId WHERE vehPlate = ?");
     $resStatus = $stmt->execute(array($plate));
     $result = $stmt;
 
@@ -238,13 +238,13 @@ function plate()
         foreach($result as $row)
         {
 
-            $encode["plate"] = $row['veh_plate'];
-            $encode["veh_make"] = $row['veh_make'];
-            $encode["veh_model"] = $row['veh_model'];
-            $encode["veh_pcolor"] = $row['veh_pcolor'];
-            $encode["veh_scolor"] = $row['veh_scolor'];
+            $encode["plate"] = $row['vehPlate'];
+            $encode["vehMake"] = $row['vehMake'];
+            $encode["vehModel"] = $row['vehModel'];
+            $encode["vehPrimaryColor"] = $row['vehPrimaryColor'];
+            $encode["vehSecondaryColor"] = $row['vehSecondaryColor'];
             $encode["veh_ro"] = $row['name'];
-            $encode["veh_insurance"] = $row['veh_insurance'];
+            $encode["vehInsurance"] = $row['vehInsurance'];
             $encode["flags"] = $row['flags'];
             $encode["veh_reg_state"] = $row['veh_reg_state'];
             $encode["notes"] = $row['notes'];
@@ -263,7 +263,7 @@ function firearm()
 function weapon()
 {
     $name = htmlspecialchars($_POST['ncic_weapon']);
-    $name_id = htmlspecialchars($_POST['ncic_weapon_id']);
+    $nameId = htmlspecialchars($_POST['ncic_weapon_id']);
     
 
 
@@ -303,12 +303,12 @@ function weapon()
             {
                 $userId = $row['id'];
                 $encode["userId"] = $row['submittedById'];
-                $encode["first_name"] = $row['name'];
-                $encode["weapon_permit"] = $row['weapon_permit'];
+                $encode["firstName"] = $row['name'];
+                $encode["weaponPermitStatus"] = $row['weaponPermitStatus'];
 
             }
 
-            $stmt = $pdo->prepare("SELECT id, name_id, weapon_type, weapon_name FROM ".DB_PREFIX."ncic_weapons WHERE name_id = $userId");
+            $stmt = $pdo->prepare("SELECT id, nameId, weaponType, weaponName FROM ".DB_PREFIX."ncic_weapons WHERE nameId = $userId");
             $resStatus = $stmt->execute(array($name));
             $result = $stmt;
 
@@ -329,9 +329,9 @@ function weapon()
                 $warrantIndex = 0;
                 foreach($result as $row)
                 {
-                    $encode["name_id"] = $row['name_id'];
+                    $encode["nameId"] = $row['nameId'];
                     $encode['weaponId'][$warrantIndex] = $row[id];
-                    $encode['weapon_name'][$warrantIndex] = "$row[weapon_type] | $row[weapon_name]";
+                    $encode['weaponName'][$warrantIndex] = "$row[weaponType] | $row[weaponName]";
 
                     $warrantIndex++;
                 }

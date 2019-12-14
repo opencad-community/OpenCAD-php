@@ -84,7 +84,7 @@ function getMyRank()
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ranks.rank_name FROM ".DB_PREFIX."ranks_users INNER JOIN ".DB_PREFIX."ranks ON ".DB_PREFIX."ranks.rank_id=".DB_PREFIX."ranks_users.rank_id WHERE ".DB_PREFIX."ranks_users.user_id = ?");
+    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ranks.rank_name FROM ".DB_PREFIX."ranks_users INNER JOIN ".DB_PREFIX."ranks ON ".DB_PREFIX."ranks.rank_id=".DB_PREFIX."ranks_users.rank_id WHERE ".DB_PREFIX."ranks_users.userId = ?");
     $result = $stmt->execute(array($id));
 
     if (!$result)

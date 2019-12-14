@@ -31,7 +31,7 @@ if(!empty($_POST))
         header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
     }
 
-    $stmt = $pdo->prepare("SELECT id, name, password, email, identifier, admin_privilege, password_reset, approved, suspend_reason FROM ".DB_PREFIX."users WHERE email = ?");
+    $stmt = $pdo->prepare("SELECT id, name, password, email, identifier, adminPrivilege, passwordReset, approved, suspendReason FROM ".DB_PREFIX."users WHERE email = ?");
     $resStatus = $stmt->execute(array($email));
     $result = $stmt->fetch();
 
@@ -83,11 +83,11 @@ if(!empty($_POST))
     $_SESSION['email'] = $result['email'];
     $_SESSION['identifier'] = $result['identifier'];
     $_SESSION['callsign'] = $result['identifier']; //Set callsign to default to identifier until the unit changes it
-    $_SESSION['admin_privilege'] = $result['admin_privilege']; //Set callsign to default to identifier until the unit changes it
+    $_SESSION['adminPrivilege'] = $result['adminPrivilege']; //Set callsign to default to identifier until the unit changes it
 
     $id = $result['id'];
 
-    $getDepartments = $pdo->prepare("SELECT department_id from ".DB_PREFIX."user_departments WHERE user_id = \"$id\" ORDER BY 1 ASC");
+    $getDepartments = $pdo->prepare("SELECT departmentId from ".DB_PREFIX."userDepartments WHERE userId = \"$id\" ORDER BY 1 ASC");
     $getDepartments->execute();
     $rowCount = $getDepartments->rowCount(); 
     $Departments = $getDepartments->fetchAll(PDO::FETCH_ASSOC);
@@ -131,15 +131,15 @@ if(!empty($_POST))
         }
     }
 
-    $getAdminPriv = $pdo->query("SELECT `admin_privilege` from ".DB_PREFIX."users WHERE id = \"$id\"");
+    $getAdminPriv = $pdo->query("SELECT `adminPrivilege` from ".DB_PREFIX."users WHERE id = \"$id\"");
     $getAdminPriv -> execute();
     $adminPriv = $getAdminPriv->fetch(PDO::FETCH_ASSOC );
-    $_SESSION['admin_privilege'] = $adminPriv['admin_privilege'];
+    $_SESSION['adminPrivilege'] = $adminPriv['adminPrivilege'];
 
-    $getCivPriv = $pdo->query("SELECT `civilian_privilege` from ".DB_PREFIX."users WHERE id = \"$id\"");
+    $getCivPriv = $pdo->query("SELECT `civilianPrivilege` from ".DB_PREFIX."users WHERE id = \"$id\"");
     $getCivPriv -> execute();
     $civPriv = $getCivPriv->fetch(PDO::FETCH_ASSOC );
-    $_SESSION['civilian_privilege'] = $civPriv['civilian_privilege'];
+    $_SESSION['civilianPrivilege'] = $civPriv['civilianPrivilege'];
 
     $pdo = null;
 

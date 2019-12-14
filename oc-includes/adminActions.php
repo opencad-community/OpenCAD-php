@@ -31,7 +31,7 @@ This file handles all actions for admin.php script
  * Running multiple functions at the same time doesnt seem to
  * be a needed feature.
  */
-if (isset($_GET['dept_id']) && isset($_GET['user_id']))
+if (isset($_GET['dept_id']) && isset($_GET['userId']))
 {
     deleteGroupItem();
 }else if (isset($_POST['approveUser']))
@@ -78,7 +78,7 @@ else if (isset($_POST['changeUserPassword']))
 function deleteGroupItem()
 {
 	$dept_id 		= !empty($_GET['dept_id']) ? $_GET['dept_id'] : '';
-    $user_id 		= !empty($_GET['user_id']) ? $_GET['user_id'] : '';
+    $userId 		= !empty($_GET['userId']) ? $_GET['userId'] : '';
 
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -90,10 +90,10 @@ function deleteGroupItem()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."user_departments WHERE user_id = ? AND department_id = ?");
-	if ($stmt->execute(array($user_id, $dept_id))) {
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."userDepartments WHERE userId = ? AND departmentId = ?");
+	if ($stmt->execute(array($userId, $dept_id))) {
 
-		$show_record=getUserGroupsApproved($user_id);
+		$show_record=getUserGroupsApproved($userId);
         echo  $show_record;
     } else {
         echo "Error updating record: " . $stmt->errorInfo();
@@ -111,7 +111,7 @@ function editUserAccount()
     $userRole       = !empty($_POST['userRole']) ? htmlspecialchars($_POST['userRole']) : '';
 
     session_start();
-    $myRank = $_SESSION['admin_privilege'];
+    $myRank = $_SESSION['adminPrivilege'];
     $hisRank = _getRole($userID);
 
     if($myRank >= $hisRank && $myRank == 2){
@@ -143,7 +143,7 @@ function editUserAccount()
 		foreach($userGroups as $key=>$val)
 		{
             $val = htmlspecialchars($val);
-			$stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."user_departments (user_id, department_id) VALUES (?, ?)");
+			$stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."userDepartments (userId, departmentId) VALUES (?, ?)");
             $stmt->execute(array($userID, $val));
 		}
 	}
@@ -165,7 +165,7 @@ function editUserAccountRole()
     $userRole 		= !empty($_POST['userRole']) ? htmlspecialchars($_POST['userRole']) : '';
 
     session_start();
-    $myRank = $_SESSION['admin_privilege'];
+    $myRank = $_SESSION['adminPrivilege'];
     $hisRank = _getRole($userID);
 
     if($myRank >= $hisRank && $myRank == 2){
@@ -191,7 +191,7 @@ function editUserAccountRole()
         die();
     }
  
-    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."users SET admin_privilege = ? WHERE id = ?");
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."users SET adminPrivilege = ? WHERE id = ?");
     
     if ($stmt->execute(array($userRole, $userID))) {
         $pdo = null;
@@ -208,7 +208,7 @@ function delete_user()
 {
     session_start();
     $uid = htmlspecialchars($_POST['uid']);
-    $myRank = $_SESSION['admin_privilege'];
+    $myRank = $_SESSION['adminPrivilege'];
     $hisRank = _getRole($uid);
 
     if($myRank <= $hisRank && $myRank == 1){
@@ -236,7 +236,7 @@ function delete_user()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."user_departments WHERE user_id = ?");
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."userDepartments WHERE userId = ?");
     if (!$stmt->execute(array($uid)))
     {
         $_SESSION['error'] = $stmt->errorInfo();
@@ -348,7 +348,7 @@ function _getRole($id)
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT admin_privilege FROM ".DB_PREFIX."users WHERE id = ?");
+    $stmt = $pdo->prepare("SELECT adminPrivilege FROM ".DB_PREFIX."users WHERE id = ?");
     $result = $stmt->execute(array($userID));
     if (!$result)
     {
@@ -374,7 +374,7 @@ function getUserGroups($uid)
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."departments.department_name FROM ".DB_PREFIX."user_departments_temp INNER JOIN ".DB_PREFIX."departments on ".DB_PREFIX."user_departments_temp.department_id=".DB_PREFIX."departments.department_id WHERE ".DB_PREFIX."user_departments_temp.user_id = ?");
+    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."departments.departmentName FROM ".DB_PREFIX."userDepartmentsTemp INNER JOIN ".DB_PREFIX."departments on ".DB_PREFIX."userDepartmentsTemp.departmentId=".DB_PREFIX."departments.departmentId WHERE ".DB_PREFIX."userDepartmentsTemp.userId = ?");
     $resStatus = $stmt->execute(array(htmlspecialchars($uid)));
 
     if (!$resStatus)
@@ -404,7 +404,7 @@ function getUserGroupsApproved($uid)
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."departments.department_name,".DB_PREFIX."departments.department_id FROM ".DB_PREFIX."user_departments INNER JOIN ".DB_PREFIX."departments on ".DB_PREFIX."user_departments.department_id=".DB_PREFIX."departments.department_id WHERE ".DB_PREFIX."user_departments.user_id = ?");
+    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."departments.departmentName,".DB_PREFIX."departments.departmentId FROM ".DB_PREFIX."userDepartments INNER JOIN ".DB_PREFIX."departments on ".DB_PREFIX."userDepartments.departmentId=".DB_PREFIX."departments.departmentId WHERE ".DB_PREFIX."userDepartments.userId = ?");
     $resStatus = $stmt->execute(array($uid));
 
     if (!$resStatus)
@@ -443,7 +443,7 @@ function approveUser()
         die();
     }
 
-    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."user_departments SELECT u.* FROM ".DB_PREFIX."user_departments_temp u WHERE user_id = ?");
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."userDepartments SELECT u.* FROM ".DB_PREFIX."userDepartmentsTemp u WHERE userId = ?");
     $result = $stmt->execute(array($uid));
 
     if (!$result)
@@ -453,7 +453,7 @@ function approveUser()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."user_departments_temp WHERE user_id = ?");
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."userDepartmentsTemp WHERE userId = ?");
     $result = $stmt->execute(array($uid));
 
     if (!$result)
@@ -495,7 +495,7 @@ function rejectUser()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."user_departments_temp where user_id = ?");
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."userDepartmentsTemp where userId = ?");
     $result = $stmt->execute(array($uid));
 
     if (!$result)
@@ -537,7 +537,7 @@ function getGroupCount($gid)
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT COUNT(*) from ".DB_PREFIX."user_departments WHERE department_id = ?");
+    $stmt = $pdo->prepare("SELECT COUNT(*) from ".DB_PREFIX."userDepartments WHERE departmentId = ?");
     $stmt->execute(array($gid));
     $result = $stmt->fetch(PDO::FETCH_NUM);
 
@@ -567,7 +567,7 @@ function getGroupName($gid)
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT department_name from ".DB_PREFIX."departments WHERE department_id = ?");
+    $stmt = $pdo->prepare("SELECT departmentName from ".DB_PREFIX."departments WHERE departmentId = ?");
     $stmt->execute(array($gid));
     $result = $stmt->fetch(PDO::FETCH_NUM);
 
@@ -595,7 +595,7 @@ function getUsers()
         die();
     }
 
-    $result = $pdo->query("SELECT id, name, email, admin_privilege, identifier, approved FROM ".DB_PREFIX."users WHERE approved = '1' OR approved = '2'");
+    $result = $pdo->query("SELECT id, name, email, adminPrivilege, identifier, approved FROM ".DB_PREFIX."users WHERE approved = '1' OR approved = '2'");
 
     if (!$result)
     {
@@ -645,7 +645,7 @@ function getUsers()
         echo '</td><td>';
     if ( DEMO_MODE == false) {
         echo '<form action="'.BASE_URL.'/oc-includes/adminActions.php" method="post">';
-        if ( ( MODERATOR_EDIT_USER == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+        if ( ( MODERATOR_EDIT_USER == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
         {
             echo '<button name="editUser" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editUserModal" class="btn btn-xs btn-link" >Edit</button>';
             echo '<button name="changeUserPassword" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#changeUserPassword" class="btn btn-xs btn-link" >Change Password</button>';
@@ -655,7 +655,7 @@ function getUsers()
             echo '<button name="changeUserPassword" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#changeUserPassword" class="btn btn-xs btn-link" disabled >Change Password</button>';
             echo '<button name="editUserRole" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editUserRoleModal" class="btn btn-xs btn-link" disabled >Change Role</button>';
         }
-        if ( ( MODERATOR_DELETE_USER == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+        if ( ( MODERATOR_DELETE_USER == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
         {
             echo '<input name="deleteUser" type="submit" class="btn btn-xs btn-link" onclick="deleteUser(' . $row[0] . ')" value="Delete" />';
         } else {
@@ -664,7 +664,7 @@ function getUsers()
 
         if ($row[5] == '2')
         {
-            if ( ( MODERATOR_REACTIVATE_USER == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+            if ( ( MODERATOR_REACTIVATE_USER == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
             {
                 echo '<input name="reactivateUser" type="submit" class="btn btn-xs btn-link" value="Reactivate" />';
             } else {
@@ -673,17 +673,17 @@ function getUsers()
         }
         else
         {
-          if ( ( MODERATOR_SUSPEND_WITHOUT_REASON == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+          if ( ( MODERATOR_SUSPEND_WITHOUT_REASON == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
           {
             echo '<input name="suspendUser" type="submit" class="btn btn-xs btn-link" value="Suspend without Reason" />';
           } else {
             echo '<input name="suspendUser" type="submit" class="btn btn-xs btn-link" value="Suspend without Reason" disabled />';
           }
-          if ( ( MODERATOR_SUSPEND_WITH_REASON == true && $_SESSION['admin_privilege'] == 2 ) || ( $_SESSION['admin_privilege'] == 3 ) )
+          if ( ( MODERATOR_SUSPEND_WITH_REASON == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
           {
-            echo '<input name="suspendUserWithReason" type="submit" class="btn btn-xs btn-link" method="post" value="Suspend With Reason: " /><input class="form-control" type="text" method="post" placeholder="Reason Here" name="suspend_reason" id="suspend_reason">';
+            echo '<input name="suspendUserWithReason" type="submit" class="btn btn-xs btn-link" method="post" value="Suspend With Reason: " /><input class="form-control" type="text" method="post" placeholder="Reason Here" name="suspendReason" id="suspendReason">';
           } else {
-            echo '<input name="suspendUserWithReason" type="submit" class="btn btn-xs btn-link" method="post" value="Suspend With Reason: " disabled /><input class="form-control" type="text" method="post" placeholder="Reason Here" name="suspend_reason" id="suspend_reason" readonly>';
+            echo '<input name="suspendUserWithReason" type="submit" class="btn btn-xs btn-link" method="post" value="Suspend With Reason: " disabled /><input class="form-control" type="text" method="post" placeholder="Reason Here" name="suspendReason" id="suspendReason" readonly>';
           }
         }
     } else {
@@ -700,7 +700,7 @@ function getUsers()
         else
         {
             echo '<input name="suspendUser" type="submit" class="btn btn-xs btn-link" value="Suspend without Reason" disabled />';
-            echo '<input name="suspendUserWithReason" type="submit" class="btn btn-xs btn-link" method="post" value="Suspend With Reason: " disabled  /><input class="form-control" type="text" method="post" placeholder="Reason Here" name="suspend_reason" id="suspend_reason" readonly>';
+            echo '<input name="suspendUserWithReason" type="submit" class="btn btn-xs btn-link" method="post" value="Suspend With Reason: " disabled  /><input class="form-control" type="text" method="post" placeholder="Reason Here" name="suspendReason" id="suspendReason" readonly>';
         }
     }
     echo '<input name="uid" type="hidden" value=' . $row[0] . ' />
@@ -721,7 +721,7 @@ function suspendUser()
 {
     session_start();
     $uid = htmlspecialchars($_POST['uid']);
-    $myRank = $_SESSION['admin_privilege'];
+    $myRank = $_SESSION['adminPrivilege'];
     $hisRank = _getRole($uid);
 
     if($myRank <= $hisRank && $myRank == 2){
@@ -762,8 +762,8 @@ function suspendUserWithReason()
 {
     session_start();
     $uid = htmlspecialchars($_POST['uid']);
-    $suspend_reason = htmlspecialchars($_POST['suspend_reason']);
-    $myRank = $_SESSION['admin_privilege'];
+    $suspendReason = htmlspecialchars($_POST['suspendReason']);
+    $myRank = $_SESSION['adminPrivilege'];
     $hisRank = _getRole($uid);
 
     if($myRank <= $hisRank && $myRank == 1){
@@ -793,8 +793,8 @@ function suspendUserWithReason()
         die();
     }
 
-    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."users SET suspend_reason = (?) WHERE id = ?");
-    $result = $stmt->execute(array($suspend_reason,$uid));
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."users SET suspendReason = (?) WHERE id = ?");
+    $result = $stmt->execute(array($suspendReason,$uid));
 
     if (!$result)
     {
@@ -876,7 +876,7 @@ function getUserDetails()
         $encode["name"] = $row['name'];
         $encode["email"] = $row['email'];
         $encode["identifier"] = $row['identifier'];
-        $encode["role"] = $row['admin_privilege'];
+        $encode["role"] = $row['adminPrivilege'];
     }
 
     //Pass the array and userID to getUserGroupsEditor which will return it
@@ -928,7 +928,7 @@ function getUserGroupsEditor($encode, $userId)
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."departments.department_name FROM ".DB_PREFIX."user_departments INNER JOIN ".DB_PREFIX."departments on ".DB_PREFIX."user_departments.department_id=".DB_PREFIX."departments.department_id WHERE ".DB_PREFIX."user_departments.user_id = ?");
+    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."departments.departmentName FROM ".DB_PREFIX."userDepartments INNER JOIN ".DB_PREFIX."departments on ".DB_PREFIX."userDepartments.departmentId=".DB_PREFIX."departments.departmentId WHERE ".DB_PREFIX."userDepartments.userId = ?");
     $resStatus = $stmt->execute(array($userId));
     $result = $stmt;
 
@@ -964,7 +964,7 @@ function getCodes()
         die();
     }
 
-    $result = $pdo->query("SELECT code_id, code_name FROM ".DB_PREFIX."codes");
+    $result = $pdo->query("SELECT codeId, codeName FROM ".DB_PREFIX."codes");
 
     if (!$result)
     {
@@ -1013,7 +1013,7 @@ function getCallHistory()
         die();
     }
 
-    $result = $pdo->query("SELECT call_id, call_type, call_primary, call_street1 call_street2, call_street3, call_narrative FROM ".DB_PREFIX."call_history");
+    $result = $pdo->query("SELECT callId, callType, callPrimaryUnit, callStreet1 callStreet2, callStreet3, callNarrative FROM ".DB_PREFIX."callHistory");
 
     if (!$result)
     {
@@ -1032,7 +1032,7 @@ function getCallHistory()
     else
     {
         echo '
-        <table id="call_history" class="table table-striped table-bordered">
+        <table id="callHistory" class="table table-striped table-bordered">
         <thead>
             <tr>
             <th>Call ID</th>
@@ -1052,17 +1052,17 @@ function getCallHistory()
         {
             echo '
         <tr>
-            <td>' . $row['call_id'] . '</td>
-            <td>' . $row['call_type'] . '</td>
-            <td>' . $row['call_primary'] . '</td>
-            <td>' . $row['call_street1'] . '</td>
-            <td>' . $row['call_street2'] . '</td>
-            <td>' . $row['call_street3'] . '</td>
-            <td>' . $row['call_narrative'] . '</td>
+            <td>' . $row['callId'] . '</td>
+            <td>' . $row['callType'] . '</td>
+            <td>' . $row['callPrimaryUnit'] . '</td>
+            <td>' . $row['callStreet1'] . '</td>
+            <td>' . $row['callStreet2'] . '</td>
+            <td>' . $row['callStreet3'] . '</td>
+            <td>' . $row['callNarrative'] . '</td>
             <td>
                 <form action="'.BASE_URL.'/oc-includes/adminActions.php" method="post">
                 <input name="delete_callhistory" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
-                <input name="call_id" type="hidden" value=' . $row[0] . ' />
+                <input name="callId" type="hidden" value=' . $row[0] . ' />
                 </form>
             </td>
         </tr>
@@ -1078,7 +1078,7 @@ function getCallHistory()
 
 function delete_callhistory()
 {
-    $callid = htmlspecialchars($_POST['call_id']);
+    $callid = htmlspecialchars($_POST['callId']);
 
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -1090,7 +1090,7 @@ function delete_callhistory()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."call_history WHERE call_id = ?");
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."callHistory WHERE callId = ?");
     $result = $stmt->execute(array($callid));
 
     if (!$result)

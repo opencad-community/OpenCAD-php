@@ -468,7 +468,7 @@
             <div class="form-group">
                <label class="col-lg-2 control-label">Narrative</label>
                <div class="col-lg-10">
-                  <div name="call_narrative" id="call_narrative" contenteditable="false" style="background-color: #eee; opacity: 1; border: 1px solid #ccc; padding: 6px 12px; font-size: 14px; word-wrap: break-word; overflow-wrap: break-word; white-space: normal;"></div>
+                  <div name="callNarrative" id="callNarrative" contenteditable="false" style="background-color: #eee; opacity: 1; border: 1px solid #ccc; padding: 6px 12px; font-size: 14px; word-wrap: break-word; overflow-wrap: break-word; white-space: normal;"></div>
                </div>
                <!-- ./ col-sm-9 -->
             </div>
