@@ -18,7 +18,9 @@ require_once(ABSPATH . "/oc-settings.php");
 
 if(!empty($_POST))
 {
+    if(session_id() == '' || !isset($_SESSION)) {
     session_start();
+    }
     $email = htmlspecialchars($_POST['email']);
     $password = htmlspecialchars($_POST['password']);
 }
@@ -50,7 +52,9 @@ if(!empty($_POST))
     }
     else
     {
-        session_start();
+        if(session_id() == '' || !isset($_SESSION)) {
+            session_start();
+        }
         $_SESSION['loginMessageDanger'] = 'Invalid credentials';
         header("Location:".BASE_URL."/index.php");
         exit();
@@ -63,7 +67,9 @@ if(!empty($_POST))
     */
     if ($result['approved'] == "0")
     {
-        session_start();
+        if(session_id() == '' || !isset($_SESSION)) {
+            session_start();
+        }
         $_SESSION['loginMessageDanger'] = 'Your account hasn\'t been approved yet. Please wait for an administrator to approve your access request.';
         header("Location:".BASE_URL."/index.php");
         exit();
@@ -71,7 +77,9 @@ if(!empty($_POST))
     else if ($result['approved'] == "2")
     {
         /* TODO: Show reason why user is suspended */
-        session_start();
+        if(session_id() == '' || !isset($_SESSION)) {
+            session_start();
+        }
         $_SESSION['loginMessageDanger'] = "Your account has been suspended by an administrator for: $suspended_reason";
         header("Location:".BASE_URL."/index.php");
         exit();
@@ -138,13 +146,20 @@ if(!empty($_POST))
 
     $getCivPriv = $pdo->query("SELECT `civilianPrivilege` from ".DB_PREFIX."users WHERE id = \"$id\"");
     $getCivPriv -> execute();
-    $civPriv = $getCivPriv->fetch(PDO::FETCH_ASSOC );
+    $civPriv = $getCivPriv->fetch(PDO::FETCH_ASSOC);
     $_SESSION['civilianPrivilege'] = $civPriv['civilianPrivilege'];
+
+    $getSuperPriv = $pdo->query("SELECT `suoervisorPrivilege` from ".DB_PREFIX."users WHERE id = \"$id\"");
+    $getSuperPriv -> execute();
+    $superPriv = $getSuperPriv->fetch(PDO::FETCH_ASSOC);
+    $_SESSION['suoervisorPrivilege'] = $civPriv['suoervisorPrivilege'];
 
     $pdo = null;
 
 
-    session_start();
+    if(session_id() == '' || !isset($_SESSION)) {
+        session_start();
+    }
     if(ENABLE_API_SECURITY === true)
         setcookie("aljksdz7", hash('md5', session_id().getApiKey()), time() + (86400 * 7), "/");
     header("Location:".BASE_URL."/".OCAPPS."/oc-start.php");
