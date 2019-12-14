@@ -497,8 +497,10 @@ function create911Call()
 
     $callNarrative = $created.'<br/>Caller States: '.$description.'<br/>';
 
+
     $stmt = $pdo->prepare("INSERT IGNORE INTO ".DB_PREFIX."calls (callId, callType, callStreet1, callNarrative) VALUES (?, '911', ?, ?)");
     $result = $stmt->execute(array($callId, $callStreet1, $callNarrative));
+
 
     if (!$result)
     {
@@ -628,6 +630,10 @@ function edit_plate()
 
     $submittedById = $_SESSION['id'];
     $userId = htmlspecialchars($_POST['civilian_names']);
+
+    $veh_plate = $plate;
+    $veh_make;
+    $veh_model;
     $vehPlate = $plate;
     $vehMake;
     $vehModel;

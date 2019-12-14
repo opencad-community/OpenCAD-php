@@ -67,7 +67,8 @@ function updateCallsign()
         die();
     }
 
-    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."activeUsers SET c    allsign = ?, status = '0' WHERE ".DB_PREFIX."activeUsers.identifier = ?");
+
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."activeUsers SET callsign = ?, status = '0' WHERE ".DB_PREFIX."activeUsers.identifier = ?");
     $result = $stmt->execute(array($callsign, $identifier));
 
     if (!$result)
