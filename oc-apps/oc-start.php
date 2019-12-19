@@ -70,11 +70,11 @@ $roadsideAssistButton = "";
     }
     if ($_SESSION['roadsideAssist'] = 'YES')
     {
-        $roadsideAssistButton = "<a href=\"".BASE_URL."/mdt.php?dep=roadesideAssist\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Civilian Services</a>";
+        $roadsideAssistButton = "<a href=\"".BASE_URL."/".OCAPPS."/mdt.php?dep=roadesideAssist\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Roadside Assistance</a>";
     }
     if ($_SESSION['civilianPrivilege'] = '1')
     {
-        $civilianButton = "<a href=\"".BASE_URL."/civilian.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Civilian Services</a>";
+        $civilianButton = "<a href=\"".BASE_URL."/".OCAPPS."/civilian.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Civilian Services</a>";
     }
 
 

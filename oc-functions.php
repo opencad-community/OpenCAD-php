@@ -29,12 +29,11 @@ include_once( ABSPATH . OCINC . "/version.php");
 	$stmt->execute();
 	$result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-
 	if (!$result['value'])
     {
 		session_start();
 		$_SESSION['error_title'] = "Schema Version Uknown";
-		$_SESSION['error'] = "We are sorry, there is no schema version uknown. Please raise a support ticket.";
+		$_SESSION['error'] = "We are sorry, the schema version is uknown. Please raise a support ticket.";
         header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }

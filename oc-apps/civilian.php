@@ -100,21 +100,51 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="card">
                            <div class="card-header">
-                              <h2>Active Calls</h2>
+                              <h2>My Identities</h2>
                            </div>
                            <!-- ./ x_title -->
                            <div class="card-content">
-                              <div id="noCallsAlertHolder">
- 
-                              </div>
-                              <div id="live_calls"></div>
+						   		<?php echo $nameMessage;?>
+								<?php echo $identityMessage;?>
+								<?php ncicGetNames();?>
                            </div>
                            <!-- ./ x_content -->
                            <div class="card-footer">
-                              <button class="btn btn-primary" name="new_call_btn" data-toggle="modal" data-target="#newCall">New Call</button>
-                              <button class="btn btn-danger float-right" onClick="priorityTone('single')" value="0" id="priorityTone">10-3 Tone</button>
-                              <button class="btn btn-danger float-right" onClick="priorityTone('recurring')" value="0" id="recurringTone">Priority Tone</button>
-                              <button class="btn btn-danger float-right" onClick="priorityTone('panic')" value="0" id="panicTone">Panic Button</button>
+
+                           </div>
+                        </div>
+                        <!-- ./ card -->
+
+						<div class="card">
+                           <div class="card-header">
+                              <h2>My Vehicles</h2>
+                           </div>
+                           <!-- ./ x_title -->
+                           <div class="card-content">
+						   		<?php echo $nameMessage;?>
+								<?php echo $identityMessage;?>
+								<?php ncicGetPlates();?>
+                           </div>
+                           <!-- ./ x_content -->
+                           <div class="card-footer">
+
+                           </div>
+                        </div>
+                        <!-- ./ card -->
+
+						<div class="card">
+                           <div class="card-header">
+                              <h2>My Weapons</h2>
+                           </div>
+                           <!-- ./ x_title -->
+                           <div class="card-content">
+						   		<?php echo $nameMessage;?>
+								<?php echo $identityMessage;?>
+								<?php ncicGetWeapons();?>
+                           </div>
+                           <!-- ./ x_content -->
+                           <div class="card-footer">
+
                            </div>
                         </div>
                         <!-- ./ card -->
