@@ -517,12 +517,5 @@
 			</div>
 			<!-- ./ modal-dialog modal-lg -->
 		</div>
-<<<<<<< HEAD
 		<!-- ./ modal fade bs-example-modal-lg -->
-=======
-<<<<<<< HEAD
-		<!-- ./ modal fade bs-example-modal-lg -->
-=======
-		<!-- ./ modal fade bs-example-modal-lg -->
->>>>>>> 4ce202a... Finished civilian modals but not operable
->>>>>>> Commit cosolidation.
+
