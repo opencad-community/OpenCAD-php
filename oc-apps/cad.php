@@ -33,6 +33,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       $name = $_SESSION['name'];
     }
 
+    setDispatcher("1");
 
     if ( $_SESSION['adminPrivilege'] == 3)
     {

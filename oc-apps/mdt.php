@@ -166,7 +166,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                  <option value="10-65">10-65/Transporting Prisoner</option>
                                  <option value="sig11">Signal 11</option>
                               </select>
-                          </select>
                         </div>
                       </div>
                       </form>

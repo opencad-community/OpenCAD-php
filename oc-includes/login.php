@@ -149,10 +149,10 @@ if(!empty($_POST))
     $civPriv = $getCivPriv->fetch(PDO::FETCH_ASSOC);
     $_SESSION['civilianPrivilege'] = $civPriv['civilianPrivilege'];
 
-    $getSuperPriv = $pdo->query("SELECT `suoervisorPrivilege` from ".DB_PREFIX."users WHERE id = \"$id\"");
+    $getSuperPriv = $pdo->query("SELECT `supervisorPrivilege` from ".DB_PREFIX."users WHERE id = \"$id\"");
     $getSuperPriv -> execute();
     $superPriv = $getSuperPriv->fetch(PDO::FETCH_ASSOC);
-    $_SESSION['suoervisorPrivilege'] = $civPriv['suoervisorPrivilege'];
+    $_SESSION['supervisorPrivilege'] = $civPriv['supervisorPrivilege'];
 
     $pdo = null;
 

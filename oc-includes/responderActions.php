@@ -67,7 +67,7 @@ function updateCallsign()
         die();
     }
 
-    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."activeUsers SET callsign = ?, status = '0' WHERE ".DB_PREFIX."activeUsers.identifier = ?");
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."activeUsers SET c    allsign = ?, status = '0' WHERE ".DB_PREFIX."activeUsers.identifier = ?");
     $result = $stmt->execute(array($callsign, $identifier));
 
     if (!$result)
@@ -96,7 +96,6 @@ function getStatus()
         header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
-
     $stmt = $pdo->prepare("SELECT statusDetail FROM ".DB_PREFIX."activeUsers WHERE identifier = ?");
 	$resStatus = $stmt->execute(array($identifier));
 	$result = $stmt;

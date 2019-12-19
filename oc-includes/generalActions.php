@@ -624,7 +624,7 @@ function getAOP()
         die();
     }
 
-    $result = $pdo->query("SELECT aop from ".DB_PREFIX."aop");
+    $result = $pdo->query("SELECT * FROM ".DB_PREFIX."patrolInformation WHERE `key` = 'areaOfPatrol'");
 
     if (!$result)
     {
