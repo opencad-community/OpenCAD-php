@@ -11,7 +11,7 @@
 									</li>
 									<?php } else { ?>
 									<?php } ?>
-										<li class="nav-item"><a type="button" data-toggle="modal" data-target="#newCall"> <i class="fas fa-phone"></i> <?php echo lang_key("CREATE_A_CALL"); ?></a></li>
+										<li class="nav-item"><a type="button" data-toggle="modal" data-target="#newCallModal"> <i class="fas fa-phone"></i> <?php echo lang_key("CREATE_A_CALL"); ?></a></li>
 									<?php
 				if ( CIV_LIMIT_MAX_IDENTITIES == 0 ) {
 					echo '<li><a type="button" data-toggle="modal" data-target="#IdentityModal"><i class="fas fa-user-alt"></i> '. lang_key("ADD_NEW_IDENTITY").'</a></li>';

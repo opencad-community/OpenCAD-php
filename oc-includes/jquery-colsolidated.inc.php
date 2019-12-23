@@ -70,3 +70,7 @@
     <script src="<?php echo BASE_URL;?>/oc-includes/OpenCAD.js"></script>
     <script src="<?php echo BASE_URL; ?>/oc-includes/custom.js"></script>
 
+    <script>
+    $('.datepicker').datepicker();
+    </script>
+

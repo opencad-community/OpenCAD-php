@@ -76,6 +76,7 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
             <div class="card p-4">
               <div class="card-body">
                 <h1>Login</h1>
+				<?php echo $loginMessage, $registerError ?>
 				<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/login.php" method="post">
                 	<p class="text-muted">Sign In to your account</p>
                 		<div class="input-group mb-3">

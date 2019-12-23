@@ -145,7 +145,7 @@ function ncicGetNames()
                 <td>'.$row['address'].'</td>
                 <td>'.$row['gender'].'</td>
                 <td>'.$row['race'].'</td>
-                <td>'.$row['dlType']. ' / '.$row['dlStatus'].'</td>
+                <td>'.$row['dlStatus']. ' / '.$row['dlType'].' / '.$row['dlIssuer'].'</td>
                 <td>'.$row['hairColor'].'</td>
                 <td>'.$row['build'].'</td>
                 <td>
@@ -225,7 +225,7 @@ function ncicGetPlates()
             <tr>
                 <td>'.$row['name'].'</td>
                 <td>'.$row['vehPlate'].'</td>
-                <td>'.$row['veh_reg_state'].'</td>
+                <td>'.$row['vehRegState'].'</td>
                 <td>'.$row['vehMake'].'</td>
                 <td>'.$row['vehModel'].'</td>
                 <td>'.$row['vehPrimaryColor'].'/'.$row['vehSecondaryColor'].'</td>
@@ -276,7 +276,7 @@ function delete_name()
 
     session_start();
     $_SESSION['nameMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian name</span></div>';
-    header("Location: ".BASE_URL."/civilian.php");
+    header("Location: ".BASE_URL."/".OCAPPS."/civilian.php");
 }
 
 function delete_plate()
@@ -306,7 +306,7 @@ function delete_plate()
 
     session_start();
     $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian plate</span></div>';
-    header("Location: ".BASE_URL."/civilian.php");
+    header("Location: ".BASE_URL."/".OCAPPS."/civilian.php");
 }
 
 function create_name()
@@ -361,7 +361,7 @@ function create_name()
         $_SESSION['identityMessage'] = '<div class="alert alert-danger"><span>Name already exists</span></div>';
 
         sleep(1);
-        header("Location:".BASE_URL."/civilian.php");
+        header("Location:".BASE_URL."/".OCAPPS."/civilian.php");
     }
 
     // If name doesn't exist, add it to ncic_requests table
@@ -373,19 +373,15 @@ function create_name()
     $dob = htmlspecialchars($_POST['civDobReq']);
     $address = htmlspecialchars($_POST['civAddressReq']);
     $sex = htmlspecialchars($_POST['civSexReq']);
-    $race = htmlspecialchars($_POST['civRaceReq']);
-    $dlStatus = htmlspecialchars($_POST['civDLStatus']);
-    $dlType = htmlspecialchars($_POST['civDLType']);
-    $dlClass = htmlspecialchars($_POST['civDLClass']);
+    $race = htmlspecialchars($_POST['civRaceReq']);;
     $dlIssuer = htmlspecialchars($_POST['civDLIssuer']);
     $hair = htmlspecialchars($_POST['civHairReq']);
     $build = htmlspecialchars($_POST['civBuildReq']);
-	$weapon = htmlspecialchars($_POST['civWepStat']);
-	$deceased = htmlspecialchars($_POST['civDec']);
+	
 
-    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_names (submittedByName, submittedById, name, dob, address, gender, race, dlStatus, dlType, dlClass, dlIssuer, hairColor, build, deceased)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-    $result = $stmt->execute(array($submittedByName, $submitttedById, $name, $dob, $address, $sex, $race, $dlStatus, $dlType, $dlClass, $dlIssuer, $hair, $build, $deceased));
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_names (submittedByName, submittedById, name, dob, address, gender, race, hairColor, build)
+    VALUES (?,?,?,?,?,?,?,?,?)");
+    $result = $stmt->execute(array($submittedByName, $submitttedById, $name, $dob, $address, $sex, $race, $hair, $build));
 
     if (!$result)
     {
@@ -398,7 +394,7 @@ function create_name()
     $_SESSION['identityMessage'] = '<div class="alert alert-success"><span>Successfully created your identity!</span></div>';
 
     sleep(1);
-    header("Location:".BASE_URL."/civilian.php#name_panel");
+    header("Location:".BASE_URL."/".OCAPPS."/civilian.php#name_panel");
 }
 
 function create_plate()
@@ -429,7 +425,7 @@ function create_plate()
     $vehModel;
     $vehPrimaryColor = htmlspecialchars($_POST['vehPrimaryColor']);
     $vehSecondaryColor = htmlspecialchars($_POST['vehSecondaryColor']);
-    $veh_reg_state = htmlspecialchars($_POST['veh_reg_state']);
+    $vehRegState = htmlspecialchars($_POST['vehRegState']);
     $notes = htmlspecialchars($_POST['notes']);
 
 	try{
@@ -442,12 +438,12 @@ function create_plate()
         die();
     }
 
-    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_plates (nameId, vehPlate, vehMake, vehModel, vehPrimaryColor, vehSecondaryColor, veh_reg_state, notes, userId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $result = $stmt->execute(array($userId, $vehPlate, $vehMake, $vehModel, $vehPrimaryColor, $vehSecondaryColor, $veh_reg_state, $notes, $submittedById));
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_plates (nameId, vehPlate, vehMake, vehModel, vehPrimaryColor, vehSecondaryColor, vehRegState, notes, userId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $result = $stmt->execute(array($userId, $vehPlate, $vehMake, $vehModel, $vehPrimaryColor, $vehSecondaryColor, $vehRegState, $notes, $submittedById));
 
     if (!$result)
     {
-        $_SESSION['error'] = $stmt->errorInfo();
+        $_SESSION['error'] = $stmt->errorInfo()."#1";
         header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
@@ -456,7 +452,7 @@ function create_plate()
     session_start();
     $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully added plate to the database</span></div>';
 
-    header("Location:".BASE_URL."/civilian.php#plate_panel");
+    header("Location:".BASE_URL."/".OCAPPS."/civilian.php#plate_panel");
 }
 
 function create911Call()
@@ -480,13 +476,13 @@ function create911Call()
 
 	foreach($result as $row)
 	{
-		$callid = $row['max'];
+		$callId = $row['max'];
 	}
 
 	$callid++;
 
 	$stmt = $pdo->prepare("REPLACE INTO ".DB_PREFIX."callList (callId) VALUES (?)");
-    $result = $stmt->execute(array($callid));
+    $result = $stmt->execute(array($callId));
 
     if (!$result)
     {
@@ -494,7 +490,7 @@ function create911Call()
     }
 
     $caller = htmlspecialchars($_POST['911_caller']);
-    $location = htmlspecialchars($_POST['911_location']);
+    $street1 = htmlspecialchars($_POST['911_location']);
     $description = htmlspecialchars($_POST['911_description']);
 
     $created = date("Y-m-d H:i:s").': 911 Call Received<br/><br/>Caller Name: '.$caller;
@@ -502,7 +498,7 @@ function create911Call()
     $callNarrative = $created.'<br/>Caller States: '.$description.'<br/>';
 
     $stmt = $pdo->prepare("INSERT IGNORE INTO ".DB_PREFIX."calls (callId, callType, callStreet1, callNarrative) VALUES (?, '911', ?, ?)");
-    $result = $stmt->execute(array($callid, $location, $callNarrative));
+    $result = $stmt->execute(array($callId, $callStreet1, $callNarrative));
 
     if (!$result)
     {
@@ -516,7 +512,7 @@ function create911Call()
     $_SESSION['good911'] = '<div class="alert alert-success"><span>Successfully created 911 call</span></div>';
 
     sleep(1);
-    header("Location:".BASE_URL."/civilian.php#911_panel");
+    header("Location:".BASE_URL."/oc-apps/civilian.php#911_panel");
 
 }
 
@@ -891,7 +887,7 @@ function delete_warrant()
 
     session_start();
     $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully removed warrant</span></div>';
-    header("Location: ".BASE_URL."/civilian.php");
+    header("Location: ".BASE_URL."/".OCAPPS."/civilian.php");
 }
 
 function create_weapon()
@@ -934,7 +930,7 @@ function create_weapon()
     session_start();
     $_SESSION['weaponMessage'] = '<div class="alert alert-success"><span>Successfully added a weapon to the database</span></div>';
 
-    header("Location:".BASE_URL."/civilian.php#weapon_panel");
+    header("Location:".BASE_URL."/".OCAPPS."/civilian.php#weapon_panel");
 }
 
 function ncicGetWeapons()
@@ -1037,7 +1033,7 @@ function delete_weapon()
 
     session_start();
     $_SESSION['weaponMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian weapon</span></div>';
-    header("Location: ".BASE_URL."/civilian.php");
+    header("Location: ".BASE_URL."/".OCAPPS."/civilian.php");
 }
 
 function getNumberOfProfiles()
