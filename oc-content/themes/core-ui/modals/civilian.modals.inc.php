@@ -1,61 +1,62 @@
 <!-- modals -->
 
-		<!-- Create 911 Call Modal -->
-		<div class="modal" id="newCall" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal" id="newCallModal" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title" id="myModalLabel"><?php echo lang_key("CREATE_A_CALL");?></h4>
-						<button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span></button>
+						<h4 class="modal-title" id="myModalLabel">Create Identity</h4>
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form id="new_911" method="post" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php">
-							<div class="form-group row">
-								<label class="col-md-2 control-label">Caller Name</label>
-								<div class="col-md-10">
-									<input type="text" name="911_caller" class="form-control" id="911_caller" required />
-								</div>
-								<!-- ./ col-sm-9 -->
+					<form id="new_911" method="post" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php">
+						<div class="form-group row">
+							<label class="col-md-2 control-label">Caller Name</label>
+							<div class="col-md-10">
+								<input type="text" name="911_caller" class="form-control" id="911_caller" required />
 							</div>
-							<!-- ./ form-group row -->
-							<div class="form-group row">
-								<label class="col-md-2 control-label">Location</label>
-								<div class="col-md-10">
-									<input type="text" name="911_location" class="form-control" id="911_location" required />
-								</div>
-								<!-- ./ col-sm-9 -->
+							<!-- ./ col-sm-9 -->
+						</div>
+						<!-- ./ form-group row -->
+						<div class="form-group row">
+							<label class="col-md-2 control-label">Location</label>
+							<div class="col-md-10">
+								<input type="text" name="911_location" class="form-control" id="911_location" required />
 							</div>
-							<!-- ./ form-group row -->
-							<div class="form-group row">
-								<label class="col-md-2 control-label"><span>Description <a data-toggle="modal"
-											href="#911CallHelpModal"><i class="fasfa-question-circle"></i></a></span></label>
-								<div class="col-md-10">
-									<textarea id="911_description" name="911_description" class="form-control" style="resize:none;" rows="4"></textarea>
-								</div>
-								<!-- ./ col-sm-9 -->
+							<!-- ./ col-sm-9 -->
+						</div>
+						<!-- ./ form-group row -->
+						<div class="form-group row">
+							<label class="col-md-2 control-label"><span>Description <a data-toggle="modal"
+										href="#911CallHelpModal"><i class="fasfa-question-circle"></i></a></span></label>
+							<div class="col-md-10">
+								<textarea id="911_description" name="911_description" class="form-control" style="resize:none;" rows="4"></textarea>
 							</div>
-							<!-- ./ form-group row -->
+							<!-- ./ col-sm-9 -->
+						</div>
+						<!-- ./ form-group row -->
 					</div>
 					<!-- ./ modal-body -->
 					<div class="modal-footer">
-						<input type="submit" class="btn btn-primary" name="new_911" value="Submit 911 Call" />
+						<input name="create_name" type="submit" class="btn btn-primary" value="Create" />
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						</form>
+					</form>
 					</div>
 					<!-- ./ modal-footer -->
 				</div>
 				<!-- ./ modal-content -->
-			</div>
+			</div>	
 			<!-- ./ modal-dialog modal-lg -->
 		</div>
+
+
 
       <div class="modal" id="IdentityModal" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
-                  <h4 class="modal-title" id="myModalLabel">Create Identity</h4>
+						<h4 class="modal-title" id="myModalLabel">Create Identity</h4>
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">

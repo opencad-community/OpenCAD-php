@@ -447,7 +447,7 @@ function create_plate()
 
     if (!$result)
     {
-        $_SESSION['error'] = $stmt->errorInfo();
+        $_SESSION['error'] = $stmt->errorInfo()."#1";
         header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
@@ -465,7 +465,7 @@ function create911Call()
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
     } catch(PDOException $ex)
     {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage()."#2";
         $_SESSION['error_blob'] = $ex;
         header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
@@ -506,7 +506,7 @@ function create911Call()
 
     if (!$result)
     {
-        $_SESSION['error'] = $stmt->errorInfo();
+        $_SESSION['error'] = $stmt->errorInfo()."#3";
         header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
