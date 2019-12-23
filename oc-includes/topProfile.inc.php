@@ -10,18 +10,18 @@ require_once( ABSPATH . '/oc-settings.php');?>
           </a>
           <div class="dropdown-menu dropdown-menu-right">
             <div class="dropdown-header text-center">
-              <strong>Applications</strong>
+              <strong><?php echo lang_key("APPLICATIONS"); ?></strong>
             </div>
             <a class="dropdown-item" href="<?php echo BASE_URL.'/'.OCAPPS ?>/oc-start.php">
-              <i class="fa fa-bell-o"></i> Dashboard
+              <i class="fa fa-bell-o"></i> <?php echo lang_key("DASHBOARD"); ?>
             </a>
             <div class="dropdown-header text-center">
-              <strong>Settings</strong>
+              <strong><?php echo lang_key("SETTINGS"); ?></strong>
             </div>
             <a class="dropdown-item" href="<?php echo BASE_URL.'/'.OCAPPS ?>/oc-profile.php">
-              <i class="fa fa-user"></i> Profile</a>
+              <i class="fa fa-user"></i> <?php echo lang_key("MY_PROFILE"); ?></a>
             <a class="dropdown-item" href="<?php echo BASE_URL.'/'.OCINC ?>/logout.php">
-              <i class="fa fa-lock"></i> Logout</a>
+              <i class="fa fa-lock"></i> <?php echo lang_key("LOGOUT") ?></a>
           </div>
         </li>
       </ul>

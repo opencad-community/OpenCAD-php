@@ -104,7 +104,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <div class="animated fadeIn">
             <div class="card">
                       <div class="card-header">
-          <i class="fa fa-align-justify"></i> <?php echo lang_key("ACCESS_REQUESTS"); ?></div>
+          <i class="fa fa-align-justify"></i> <?php echo lang_key("CAD_CONSOLE"); ?></div>
               <div class="card-body">
 <div class="row">
                      <div class="col-md-12 col-sm-12 col-xs-12">

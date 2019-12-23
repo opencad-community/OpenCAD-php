@@ -384,6 +384,8 @@ $arrLang["NCIC_PLATE_LOOKUP"] = "NCIC Plate Lookup";
 $arrLang["NCIC_WEAPON_LOOKUP"] = "NCIC Weapon Lookup";
 $arrLang["SEND"] = "Send";
 $arrLang["MY_PROFILE"] = "My Profile";
+$arrLang["APPLICATIONS"] = "Applications";
+$arrLang["SETTINGS"] = "Settings";
 //** End Common Global Strings */
 
 //** Begin Administrator/Moderator Console Strings  **/
