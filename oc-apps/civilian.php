@@ -39,6 +39,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     $good911 = "";
     if(isset($_SESSION['good911']))
+
     {
         $good911 = $_SESSION['good911'];
         unset($_SESSION['good911']);
@@ -100,17 +101,15 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						<div class="card-header">
 							<i class="fa fa-align-justify"></i> <?php echo lang_key("MY_IDENTITIES"); ?>
 						</div>
-              			<div class="card-body">
-							<?php echo $nameMessage;?>
-							<?php echo $identityMessage;?>
+                        <div class="card-body">
+							<?php echo $nameMessage, $identityMessage;?>
 							<?php ncicGetNames();?>
-		                </div>
-        	        	<!-- /.row-->
-						
-		            </div>
-        	    </div>
+                        </div>
+                        <!-- /.row-->
+                    </div>
+                </div>
             <!-- /.card-->
-			</div>
+            </div>
 
 			<div class="container-fluid">
 				<div class="animated fadeIn">

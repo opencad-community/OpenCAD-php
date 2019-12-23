@@ -1,10 +1,15 @@
 <!-- modals -->
-
 		<div class="modal" id="newCallModal" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h4 class="modal-title" id="myModalLabel">Create Call</h4>
+
+<div class="modal" id="newCallModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="myModalLabel">Create Identity</h4>
 						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
 					</div>
 					<!-- ./ modal-header -->
@@ -85,8 +90,7 @@
 								</div>
 							</div>
 								<!-- ./ col-sm-9 -->
-						</div>
-						<div class="form-group row">
+							<div class="form-group row">
 								<label class="col-lg-2 control-label">Race</label>
 								<div class="col-lg-10">
 									<select name="civRaceReq" class="form-control selectpicker" id="civRaceReq"
@@ -97,6 +101,7 @@
 								<!-- ./ col-sm-9 -->
 							</div>
 							<!-- ./ form-group -->
+
 													<div class="form-group row">
 								<label class="col-lg-2 control-label">Hair Color</label>
 								<div class="col-lg-10">
@@ -184,6 +189,7 @@
 								<!-- ./ col-sm-9 -->
 							</div>
 							<!-- ./ form-group -->
+>>>>>>> 37f5660... no message
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Address</label>
 								<div class="col-lg-10">
@@ -259,11 +265,17 @@
 			</div>
 			<!-- ./ modal-dialog modal-lg -->
 		</div>
+<<<<<<< HEAD
 	</div>
 
 
 		<!-- Vehicle Modals -->
 		<div class="modal" id="createPlateModal" tabindex="-1" role="dialog" aria-hidden="true">
+=======
+
+			  <!-- Vehicle Modals -->
+			  <div class="modal" id="createPlateModal" tabindex="-1" role="dialog" aria-hidden="true">
+>>>>>>> Various fixes for civilian for 1.0 and database patches.
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -518,4 +530,7 @@
 			<!-- ./ modal-dialog modal-lg -->
 		</div>
 		<!-- ./ modal fade bs-example-modal-lg -->
+<<<<<<< HEAD
 
+=======
+>>>>>>> Various fixes for civilian for 1.0 and database patches.
