@@ -479,10 +479,10 @@ $arrLang["MY_WARRANTS"] = "My Warrants";
 $arrLang["MY_WARRANTS_none"] = "No results found in the warrants database.";
 $arrLang["CREATE_A_CALL"] = "Create A Call";
 $arrLang["ADD_NEW_IDENTITY"] = "Add New Identity";
-$arrLang["ADD_NEW_PLATE"] = "Add New Plate";
+$arrLang["ADD_NEW_VEHICLE"] = "Add New Vehcile";
 $arrLang["ADD_NEW_WEAPON"] = "Add New Weapon";
 $arrLang["CIVILLIAN_DASHBOARD"] = "Civillian Dashboard";
-$arrLang["VIEW_WARRANTS"] = "View Warrans";
+$arrLang["VIEW_WARRANTS"] = "View Warrants";
 $arrLang["CREATE_WARRANT"] = "Create Warrant";
 $arrLang["UPDATE"] = "Update";
 //** End Civillian Console Strings **/

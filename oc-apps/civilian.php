@@ -17,9 +17,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     // session isn't started
     session_start();
     }
-    require_once('oc-config.php');
+    require_once('../oc-config.php');
     require_once( ABSPATH . '/oc-functions.php');
     require_once( ABSPATH . '/oc-settings.php');
+    require_once( ABSPATH . "/" . OCINC . '/civActions.php');
+    require_once( ABSPATH . "/" . OCINC . '/generalActions.php');
+    require_once( ABSPATH . "/" . OCINC . '/publicFunctions.php');
 
     if (empty($_SESSION['logged_in']))
     {
@@ -84,27 +87,67 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <a class="navbar-brand" href="#">
         <img class="navbar-brand-full" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/tail.png" width="30" height="25" alt="OpenCAD Logo">
       </a>
+      
       <?php include( ABSPATH . "oc-includes/civNav.inc.php"); ?>
       <?php include( ABSPATH . "oc-includes/topProfile.inc.php"); ?>
+      
     </header>
 
-      <div class="app-body">
-        <main class="main">
-        <div class="breadcrumb" />
-        <div class="container-fluid">
-          <div class="animated fadeIn">
-            <div class="card">
-                      <div class="card-header">
-          <i class="fa fa-align-justify"></i> <?php echo lang_key("ACCESS_REQUESTS"); ?></div>
-              <div class="card-body">
-                                    <?php echo $accessMessage;?>
-                                    
-                </div>
-                <!-- /.row-->
-
-              </div>
-            </div>
+	<div class="app-body">
+		<main class="main">
+			<div class="breadcrumb" />
+			<div class="container-fluid">
+				<div class="animated fadeIn">
+					<div class="card">
+						<div class="card-header">
+							<i class="fa fa-align-justify"></i> <?php echo lang_key("MY_IDENTITIES"); ?>
+						</div>
+              			<div class="card-body">
+							<?php echo $nameMessage;?>
+							<?php echo $identityMessage;?>
+							<?php ncicGetNames();?>
+		                </div>
+        	        	<!-- /.row-->
+						
+		            </div>
+        	    </div>
             <!-- /.card-->
+			</div>
+
+			<div class="container-fluid">
+				<div class="animated fadeIn">
+					<div class="card">
+						<div class="card-header">
+							<i class="fa fa-align-justify"></i> <?php echo lang_key("MY_VEHICLES"); ?>
+						</div>
+              			<div class="card-body">
+							<?php echo $plateMessage;?>
+							<?php ncicGetPlates();?>
+		                </div>
+        	        	<!-- /.row-->
+						
+		            </div>
+        	    </div>
+            <!-- /.card-->
+			</div>
+
+			<div class="container-fluid">
+				<div class="animated fadeIn">
+					<div class="card">
+						<div class="card-header">
+							<i class="fa fa-align-justify"></i> <?php echo lang_key("MY_WEAPONS"); ?>
+						</div>
+              			<div class="card-body">
+							<?php echo $weaponMessage;?>
+							<?php ncicGetWeapons();?>
+		                </div>
+        	        	<!-- /.row-->
+						
+		            </div>
+        	    </div>
+            <!-- /.card-->
+			</div>
+
         </main>
 
         </div>
@@ -121,7 +164,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         </footer>
 
     <?php
-    include ( ABSPATH . "oc-admin/oc-admin-includes/globalModals.inc.php");
+    include ( ABSPATH . "/" . OCCONTENT . "/themes/". THEME . "/modals/civilian.modals.inc.php");
     include ( ABSPATH . "/oc-includes/jquery-colsolidated.inc.php"); ?>
 </body>
 
