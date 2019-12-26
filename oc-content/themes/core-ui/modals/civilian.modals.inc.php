@@ -60,7 +60,7 @@
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form role="form" action="<?php echo BASE_URL; ?>/actions/civActions.php" method="post">
+						<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" method="post">
                      <div class="form-group row">
                         <label class="col-lg-2 control-label">Name</label>
                         <div class="col-lg-10">
@@ -146,7 +146,7 @@
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form role="form" action="<?php echo BASE_URL; ?>/actions/civActions.php"
+						<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php"
 							class="editname_modalform" method="post">
 							<div class="form-group row">
 							</div>
@@ -272,7 +272,7 @@
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form role="form" action="<?php echo BASE_URL; ?>/actions/civActions.php" method="post">
+						<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" method="post">
 							<div class="form-group row">
 							</div>
 							<div class="form-group row">
@@ -374,7 +374,7 @@
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form role="form" action="<?php echo BASE_URL; ?>/actions/civActions.php" method="post">
+						<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" method="post">
 							<div class="form-group row">
 							</div>
 							<div class="form-group row">
@@ -473,7 +473,7 @@
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form role="form" action="<?php echo BASE_URL; ?>/actions/civActions.php" method="post">
+						<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" method="post">
 							<div class="form-group row">
 							</div>
 							<div class="form-group row">

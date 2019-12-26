@@ -480,13 +480,13 @@ function create911Call()
 
 	foreach($result as $row)
 	{
-		$callid = $row['max'];
+		$callId = $row['max'];
 	}
 
 	$callid++;
 
 	$stmt = $pdo->prepare("REPLACE INTO ".DB_PREFIX."callList (callId) VALUES (?)");
-    $result = $stmt->execute(array($callid));
+    $result = $stmt->execute(array($callId));
 
     if (!$result)
     {
@@ -494,7 +494,7 @@ function create911Call()
     }
 
     $caller = htmlspecialchars($_POST['911_caller']);
-    $location = htmlspecialchars($_POST['911_location']);
+    $street1 = htmlspecialchars($_POST['911_location']);
     $description = htmlspecialchars($_POST['911_description']);
 
     $created = date("Y-m-d H:i:s").': 911 Call Received<br/><br/>Caller Name: '.$caller;
@@ -502,7 +502,7 @@ function create911Call()
     $callNarrative = $created.'<br/>Caller States: '.$description.'<br/>';
 
     $stmt = $pdo->prepare("INSERT IGNORE INTO ".DB_PREFIX."calls (callId, callType, callStreet1, callNarrative) VALUES (?, '911', ?, ?)");
-    $result = $stmt->execute(array($callid, $location, $callNarrative));
+    $result = $stmt->execute(array($callId, $callStreet1, $callNarrative));
 
     if (!$result)
     {
@@ -516,7 +516,7 @@ function create911Call()
     $_SESSION['good911'] = '<div class="alert alert-success"><span>Successfully created 911 call</span></div>';
 
     sleep(1);
-    header("Location:".BASE_URL."/civilian.php#911_panel");
+    header("Location:".BASE_URL."/oc-apps/civilian.php#911_panel");
 
 }
 
