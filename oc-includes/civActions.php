@@ -145,7 +145,7 @@ function ncicGetNames()
                 <td>'.$row['address'].'</td>
                 <td>'.$row['gender'].'</td>
                 <td>'.$row['race'].'</td>
-                <td>'.$row['dlType']. ' / '.$row['dlStatus'].'</td>
+                <td>'.$row['dlStatus']. ' / '.$row['dlType'].' / '.$row['dlIssuer'].'</td>
                 <td>'.$row['hairColor'].'</td>
                 <td>'.$row['build'].'</td>
                 <td>
@@ -225,7 +225,7 @@ function ncicGetPlates()
             <tr>
                 <td>'.$row['name'].'</td>
                 <td>'.$row['vehPlate'].'</td>
-                <td>'.$row['veh_reg_state'].'</td>
+                <td>'.$row['vehRegState'].'</td>
                 <td>'.$row['vehMake'].'</td>
                 <td>'.$row['vehModel'].'</td>
                 <td>'.$row['vehPrimaryColor'].'/'.$row['vehSecondaryColor'].'</td>
@@ -276,7 +276,7 @@ function delete_name()
 
     session_start();
     $_SESSION['nameMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian name</span></div>';
-    header("Location: ".BASE_URL."/civilian.php");
+    header("Location: ".BASE_URL."/".OCAPPS."/civilian.php");
 }
 
 function delete_plate()
@@ -306,7 +306,7 @@ function delete_plate()
 
     session_start();
     $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian plate</span></div>';
-    header("Location: ".BASE_URL."/civilian.php");
+    header("Location: ".BASE_URL."/".OCAPPS."/civilian.php");
 }
 
 function create_name()
@@ -425,7 +425,7 @@ function create_plate()
     $vehModel;
     $vehPrimaryColor = htmlspecialchars($_POST['vehPrimaryColor']);
     $vehSecondaryColor = htmlspecialchars($_POST['vehSecondaryColor']);
-    $veh_reg_state = htmlspecialchars($_POST['veh_reg_state']);
+    $vehRegState = htmlspecialchars($_POST['vehRegState']);
     $notes = htmlspecialchars($_POST['notes']);
 
 	try{
@@ -438,8 +438,8 @@ function create_plate()
         die();
     }
 
-    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_plates (nameId, vehPlate, vehMake, vehModel, vehPrimaryColor, vehSecondaryColor, veh_reg_state, notes, userId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $result = $stmt->execute(array($userId, $vehPlate, $vehMake, $vehModel, $vehPrimaryColor, $vehSecondaryColor, $veh_reg_state, $notes, $submittedById));
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_plates (nameId, vehPlate, vehMake, vehModel, vehPrimaryColor, vehSecondaryColor, vehRegState, notes, userId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $result = $stmt->execute(array($userId, $vehPlate, $vehMake, $vehModel, $vehPrimaryColor, $vehSecondaryColor, $vehRegState, $notes, $submittedById));
 
     if (!$result)
     {
@@ -452,7 +452,7 @@ function create_plate()
     session_start();
     $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully added plate to the database</span></div>';
 
-    header("Location:".BASE_URL."/civilian.php#plate_panel");
+    header("Location:".BASE_URL."/".OCAPPS."/civilian.php#plate_panel");
 }
 
 function create911Call()
@@ -461,7 +461,7 @@ function create911Call()
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
     } catch(PDOException $ex)
     {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage()."#2";
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
         header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
@@ -502,7 +502,7 @@ function create911Call()
 
     if (!$result)
     {
-        $_SESSION['error'] = $stmt->errorInfo()."#3";
+        $_SESSION['error'] = $stmt->errorInfo();
         header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
@@ -887,7 +887,7 @@ function delete_warrant()
 
     session_start();
     $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully removed warrant</span></div>';
-    header("Location: ".BASE_URL."/civilian.php");
+    header("Location: ".BASE_URL."/".OCAPPS."/civilian.php");
 }
 
 function create_weapon()
@@ -930,7 +930,7 @@ function create_weapon()
     session_start();
     $_SESSION['weaponMessage'] = '<div class="alert alert-success"><span>Successfully added a weapon to the database</span></div>';
 
-    header("Location:".BASE_URL."/civilian.php#weapon_panel");
+    header("Location:".BASE_URL."/".OCAPPS."/civilian.php#weapon_panel");
 }
 
 function ncicGetWeapons()
@@ -1033,7 +1033,7 @@ function delete_weapon()
 
     session_start();
     $_SESSION['weaponMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian weapon</span></div>';
-    header("Location: ".BASE_URL."/civilian.php");
+    header("Location: ".BASE_URL."/".OCAPPS."/civilian.php");
 }
 
 function getNumberOfProfiles()
