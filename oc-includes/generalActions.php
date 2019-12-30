@@ -159,7 +159,7 @@ function getMyCall()
 
     if($num_rows == 0)
     {
-        echo '<div class="alert alert-info"><span>Not currently on a call</span></div>';
+        echo '<div class="alert alert-info"><span>No call assigned.</span></div>';
     }
     else
     {
