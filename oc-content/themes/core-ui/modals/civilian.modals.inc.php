@@ -64,6 +64,13 @@
 					<!-- ./ modal-header -->
 					<div class="modal-body">
 						<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" method="post">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 8630f29... A little tweaking around with civilian things.
+>>>>>>> A little tweaking around with civilian things.
 					 <div class="form-group row">
 						<label class="col-lg-2 control-label">Name</label>
 						<div class="col-lg-10">
@@ -71,6 +78,11 @@
 						   <span class="fasfa-user form-control-feedback right" aria-hidden="true"></span>
 						</div>
 						<!-- ./ col-sm-9 -->
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> A little tweaking around with civilian things.
                      <div class="form-group row">
                         <label class="col-lg-2 control-label">Name</label>
                         <div class="col-lg-10">
@@ -90,6 +102,23 @@
 								</div>
 							</div>
 								<!-- ./ col-sm-9 -->
+<<<<<<< HEAD
+=======
+=======
+							</div>
+							<!-- ./ form-group -->
+
+							<div class="form-group row date" data-provide="datepicker">
+								<label class="col-lg-2 control-label">Date of Birth</label>
+								<div class="col-lg-10">
+								<div class="input-group" data-provide="datepicker" >
+   									<input type="date" class="form-control" name="civDobReq" value="<?php echo $civDob;?>" required >   
+								</div>
+								</div>
+							</div>
+								<!-- ./ col-sm-9 -->
+						</div>
+>>>>>>> A little tweaking around with civilian things.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Race</label>
 								<div class="col-lg-10">
@@ -189,7 +218,7 @@
 								<!-- ./ col-sm-9 -->
 							</div>
 							<!-- ./ form-group -->
->>>>>>> 37f5660... no message
+
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Address</label>
 								<div class="col-lg-10">
@@ -375,6 +404,11 @@
 			</div>
 			<!-- ./ modal-dialog modal-lg -->
 		</div>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+		<!-- ./ modal bs-example-modal-lg -->
+>>>>>>> A little tweaking around with civilian things.
 
 		<!-- ./ modal bs-example-modal-lg -->
 		
