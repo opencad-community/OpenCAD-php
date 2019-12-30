@@ -84,7 +84,10 @@ function updateCallsign()
 
 function getStatus()
 {
-    session_start();
+    if(session_id() == '' || !isset($_SESSION)) {
+        // session isn't started
+        session_start();
+    }
     $identifier = $_SESSION['identifier'];
 
     try{
