@@ -361,7 +361,7 @@ function create_name()
         $_SESSION['identityMessage'] = '<div class="alert alert-danger"><span>Name already exists</span></div>';
 
         sleep(1);
-        header("Location:".BASE_URL."/civilian.php");
+        header("Location:".BASE_URL."/".OCAPPS."/civilian.php");
     }
 
     // If name doesn't exist, add it to ncic_requests table
@@ -373,19 +373,15 @@ function create_name()
     $dob = htmlspecialchars($_POST['civDobReq']);
     $address = htmlspecialchars($_POST['civAddressReq']);
     $sex = htmlspecialchars($_POST['civSexReq']);
-    $race = htmlspecialchars($_POST['civRaceReq']);
-    $dlStatus = htmlspecialchars($_POST['civDLStatus']);
-    $dlType = htmlspecialchars($_POST['civDLType']);
-    $dlClass = htmlspecialchars($_POST['civDLClass']);
+    $race = htmlspecialchars($_POST['civRaceReq']);;
     $dlIssuer = htmlspecialchars($_POST['civDLIssuer']);
     $hair = htmlspecialchars($_POST['civHairReq']);
     $build = htmlspecialchars($_POST['civBuildReq']);
-	$weapon = htmlspecialchars($_POST['civWepStat']);
-	$deceased = htmlspecialchars($_POST['civDec']);
+	
 
-    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_names (submittedByName, submittedById, name, dob, address, gender, race, dlStatus, dlType, dlClass, dlIssuer, hairColor, build, deceased)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-    $result = $stmt->execute(array($submittedByName, $submitttedById, $name, $dob, $address, $sex, $race, $dlStatus, $dlType, $dlClass, $dlIssuer, $hair, $build, $deceased));
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_names (submittedByName, submittedById, name, dob, address, gender, race, hairColor, build)
+    VALUES (?,?,?,?,?,?,?,?,?)");
+    $result = $stmt->execute(array($submittedByName, $submitttedById, $name, $dob, $address, $sex, $race, $hair, $build));
 
     if (!$result)
     {
@@ -398,7 +394,7 @@ function create_name()
     $_SESSION['identityMessage'] = '<div class="alert alert-success"><span>Successfully created your identity!</span></div>';
 
     sleep(1);
-    header("Location:".BASE_URL."/civilian.php#name_panel");
+    header("Location:".BASE_URL."/".OCAPPS."/civilian.php#name_panel");
 }
 
 function create_plate()

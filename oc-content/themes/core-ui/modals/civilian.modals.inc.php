@@ -51,7 +51,7 @@
 
 
 
-      <div class="modal" id="IdentityModal" tabindex="-1" role="dialog" aria-hidden="true">
+	  <div class="modal" id="IdentityModal" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -61,15 +61,26 @@
 					<!-- ./ modal-header -->
 					<div class="modal-body">
 						<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" method="post">
-                     <div class="form-group row">
-                        <label class="col-lg-2 control-label">Name</label>
-                        <div class="col-lg-10">
-                           <input name="civNameReq" class="form-control" id="civNameReq" value="<?php echo $civName;?>" required />
-                           <span class="fasfa-user form-control-feedback right" aria-hidden="true"></span>
-                        </div>
-                        <!-- ./ col-sm-9 -->
+					 <div class="form-group row">
+						<label class="col-lg-2 control-label">Name</label>
+						<div class="col-lg-10">
+						   <input name="civNameReq" class="form-control" id="civNameReq" value="<?php echo $civName;?>" required />
+						   <span class="fasfa-user form-control-feedback right" aria-hidden="true"></span>
+						</div>
+						<!-- ./ col-sm-9 -->
 							</div>
 							<!-- ./ form-group -->
+
+							<div class="form-group row col-lg-10 date" data-provide="datepicker">
+								<div class="input-group" data-provide="datepicker" >
+   									<input type="date" class="form-control" >
+									<div class="input-group-addon">
+										<span class="glyphicon glyphicon-th"></span>
+									</div>
+								</div>
+							</div>
+								<!-- ./ col-sm-9 -->
+						</div>
 
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Race</label>
@@ -136,13 +147,13 @@
 			<!-- ./ modal-dialog modal-lg -->
 		</div>
 
-      <!-- Civilian - Edit Identity modal -->
+	  <!-- Civilian - Edit Identity modal -->
 		<div class="modal" id="IdentityEditModal" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h4 class="modal-title" id="myModalLabel">Edit Identity</h4>
-                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+				  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
@@ -262,13 +273,13 @@
 		</div>
 		<!-- ./ modal bs-example-modal-lg -->
 
-      <!-- Vehicle Modals -->
-      <div class="modal" id="createPlateModal" tabindex="-1" role="dialog" aria-hidden="true">
+	  <!-- Vehicle Modals -->
+	  <div class="modal" id="createPlateModal" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h4 class="modal-title" id="myModalLabel">Add Plate to Database</h4>
-                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+				  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
@@ -370,7 +381,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<h4 class="modal-title" id="myModalLabel">Edit Plate in Database</h4>
-                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+				  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
@@ -463,12 +474,12 @@
 		</div>
 		<!-- ./ modal bs-example-modal-lg -->
 
-      <!-- Weapon modals -->
-      <div class="modal" id="createWeaponModal" tabindex="-1" role="dialog" aria-hidden="true">
+	  <!-- Weapon modals -->
+	  <div class="modal" id="createWeaponModal" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-                  <h4 class="modal-title" id="myModalLabel">Add Weapon to Database</h4>
+				  <h4 class="modal-title" id="myModalLabel">Add Weapon to Database</h4>
 						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
 					</div>
 					<!-- ./ modal-header -->
