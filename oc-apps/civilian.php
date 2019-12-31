@@ -37,44 +37,40 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     $civName = $civDob = $civAddr = "";
 
-    if ( $_SESSION['adminPrivilege'] == 3)
+    $good911 = "";
+    if(isset($_SESSION['good911']))
     {
-      if ($_SESSION['adminPrivilege'] == 'Administrator')
-      {
-          //Do nothing
-      }
-    }
-    else if ($_SESSION['adminPrivilege'] == 2)
-    {
-      if ($_SESSION['adminPrivilege'] == 'Moderator')
-      {
-          // Do Nothing
-      }
-    }
-    else
-    {
-        
+        $good911 = $_SESSION['good911'];
+        unset($_SESSION['good911']);
     }
 
-    $accessMessage = "";
-    if(isset($_SESSION['accessMessage']))
+    $identityMessage = "";
+    if(isset($_SESSION['identityMessage']))
     {
-        $accessMessage = $_SESSION['accessMessage'];
-        unset($_SESSION['accessMessage']);
-    }
-    $adminMessage = "";
-    if(isset($_SESSION['adminMessage']))
-    {
-        $adminMessage = $_SESSION['adminMessage'];
-        unset($_SESSION['adminMessage']);
+        $identityMessage = $_SESSION['identityMessage'];
+        unset($_SESSION['identityMessage']);
     }
 
-    $successMessage = "";
-    if(isset($_SESSION['successMessage']))
+    $plateMessage = "";
+    if(isset($_SESSION['plateMessage']))
     {
-        $successMessage = $_SESSION['successMessage'];
-        unset($_SESSION['successMessage']);
+        $plateMessage = $_SESSION['plateMessage'];
+        unset($_SESSION['plateMessage']);
     }
+
+    $nameMessage = "";
+    if(isset($_SESSION['nameMessage']))
+    {
+        $nameMessage = $_SESSION['nameMessage'];
+        unset($_SESSION['nameMessage']);
+    }
+    $weaponMessage = "";
+    if(isset($_SESSION['weaponMessage']))
+    {
+        $weaponMessage = $_SESSION['weaponMessage'];
+        unset($_SESSION['weaponMessage']);
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -95,22 +91,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
       <div class="app-body">
         <main class="main">
-        <div class="breadcrumb" />
-        <div class="container-fluid">
-          <div class="animated fadeIn">
-            <div class="card">
-                      <div class="card-header">
-          <i class="fa fa-align-justify"></i> <?php echo lang_key("ACCESS_REQUESTS"); ?></div>
-              <div class="card-body">
-                                    <?php echo $accessMessage;?>
-                                    
-                </div>
-                <!-- /.row-->
-
-              </div>
-            </div>
-
-			<div class="container-fluid">
+    			<div class="container-fluid">
 				<div class="animated fadeIn">
 					<div class="card">
 						<div class="card-header">
