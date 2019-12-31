@@ -61,7 +61,7 @@ permissionDenied();
 
 <!DOCTYPE html>
 <html lang="en">
-	<?php include "../oc-includes/header.inc.php"; ?>
+	<?php include ( ABSPATH . "/".OCTHEMES."/".THEME."/header.inc.php"); ?>
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
