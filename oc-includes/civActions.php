@@ -633,7 +633,7 @@ function edit_plate()
     $vehModel;
     $vehPrimaryColor = htmlspecialchars($_POST['vehPrimaryColor']);
     $vehSecondaryColor = htmlspecialchars($_POST['vehSecondaryColor']);
-    $veh_reg_state = htmlspecialchars($_POST['veh_reg_state']);
+    $vehRegState = htmlspecialchars($_POST['vehRegState']);
     $notes = htmlspecialchars($_POST['notes']);
     $plate_id = htmlspecialchars($_POST['Edit_plateId']);
 
@@ -647,8 +647,8 @@ function edit_plate()
         die();
     }
 
-    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."ncic_plates SET nameId = ?, vehPlate = ?, vehMake = ?, vehModel = ?, vehPrimaryColor = ?, vehSecondaryColor = ?, veh_reg_state = ?, notes = ? WHERE id = ?");
-    $result = $stmt->execute(array($userId, $vehPlate, $vehMake, $vehModel, $vehPrimaryColor, $vehSecondaryColor, $veh_reg_state, $notes, $plate_id));
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."ncic_plates SET nameId = ?, vehPlate = ?, vehMake = ?, vehModel = ?, vehPrimaryColor = ?, vehSecondaryColor = ?, vehRegState = ?, notes = ? WHERE id = ?");
+    $result = $stmt->execute(array($userId, $vehPlate, $vehMake, $vehModel, $vehPrimaryColor, $vehSecondaryColor, $vehRegState, $notes, $plate_id));
 
     if (!$result)
     {

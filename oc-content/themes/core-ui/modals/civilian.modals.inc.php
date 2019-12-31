@@ -166,9 +166,10 @@
 			</div>
 			<!-- ./ modal-dialog modal-lg -->
 		</div>
+	</div>
 
-			  <!-- Vehicle Modals -->
-			  <div class="modal" id="createPlateModal" tabindex="-1" role="dialog" aria-hidden="true">
+	  <!-- Vehicle Modals -->
+	  <div class="modal" id="createPlateModal" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -269,3 +270,158 @@
 			<!-- ./ modal-dialog modal-lg -->
 		</div>
 		<!-- ./ modal bs-example-modal-lg -->
+		
+
+
+		<!-- Civilian - Edit Plate Modal -->
+		<div class="modal" id="editPlateModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="myModalLabel">Edit Plate in Database</h4>
+				  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+					</div>
+					<!-- ./ modal-header -->
+					<div class="modal-body">
+						<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" method="post">
+							<div class="form-group row">
+							</div>
+							<div class="form-group row">
+								<label class="col-lg-2 control-label">Registered Owner</label>
+								<div class="col-lg-10">
+									<select class="form-control selectpicker civilian_names_picker"
+										name="civilian_names" id="civilian_names" data-live-search="true" required>
+										<?php getCivilianNamesOwn();?>
+									</select>
+								</div>
+								<!-- ./ col-sm-9 -->
+							</div>
+							<!-- ./ form-group -->
+							<div class="form-group row">
+								<label class="col-lg-2 control-label">License Plate</label>
+								<div class="col-lg-10">
+									<input type="text" class="form-control veh_plate" name="veh_plate" required />
+								</div>
+								<!-- ./ col-sm-9 -->
+							</div>
+							<!-- ./ form-group -->
+							<div class="form-group row">
+								<label class="col-lg-2 control-label">Vehicle Make-Model</label>
+								<div class="col-lg-10">
+									<select class="form-control selectpicker veh_make_model" name="veh_make_model"
+										id="veh_make_model" data-live-search="true" required>
+										<?php getVehicle();?>
+									</select>
+								</div>
+								<!-- ./ col-sm-9 -->
+							</div>
+							<!-- ./ form-group -->
+							<div class="form-group row">
+								<label class="col-lg-2 control-label">Vehicle Primary Color</label>
+								<div class="col-lg-10">
+									<select class="form-control selectpicker veh_pcolor" name="veh_pcolor"
+										data-live-search="true" required>
+										<?php getColors();?>
+									</select>
+								</div>
+								<!-- ./ col-sm-9 -->
+							</div>
+							<!-- ./ form-group -->
+							<div class="form-group row">
+								<label class="col-lg-2 control-label">Vehicle Secondary Color</label>
+								<div class="col-lg-10">
+									<select class="form-control selectpicker veh_scolor" name="veh_scolor"
+										data-live-search="true" required>
+										<?php getColors();?>
+									</select>
+								</div>
+								<!-- ./ col-sm-9 -->
+							</div>
+							<!-- ./ form-group -->
+							<div class="form-group row">
+								<label class="col-lg-2 control-label">Notes</label>
+								<div class="col-lg-10">
+									<input type="text" class="form-control notes" name="notes" />
+								</div>
+								<!-- ./ col-sm-9 -->
+							</div>
+							<!-- ./ form-group -->
+							<div class="form-group row">
+								<label class="col-lg-2 control-label">Vehicle's Registered State</label>
+								<div class="col-lg-10">
+									<input type="text" class="form-control vehRegState" name="vehRegState" readonly />
+								</div>
+								<!-- ./ col-sm-9 -->
+							</div>
+							<!-- ./ form-group -->
+					</div>
+					<!-- ./ modal-body -->
+					<div class="modal-footer">
+						<input type="hidden" class="editplateid" name="Edit_plateId" />
+						<input name="edit_plate" type="submit" class="btn btn-primary" value="Edit" />
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</form>
+					</div>
+					<!-- ./ modal-footer -->
+				</div>
+				<!-- ./ modal-content -->
+			</div>
+			<!-- ./ modal-dialog modal-lg -->
+		</div>
+		<!-- ./ modal bs-example-modal-lg -->
+
+	  <!-- Weapon modals -->
+	  <div class="modal" id="createWeaponModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+				  <h4 class="modal-title" id="myModalLabel">Add Weapon to Database</h4>
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+					</div>
+					<!-- ./ modal-header -->
+					<div class="modal-body">
+						<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" method="post">
+							<div class="form-group row">
+							</div>
+							<div class="form-group row">
+								<label class="col-lg-2 control-label">Registered Owner</label>
+								<div class="col-lg-10">
+									<select class="form-control selectpicker" name="civilian_names" id="civilian_names"
+										data-live-search="true" required>
+										<option> </option>
+										<?php getCivilianNamesOwn();?>
+									</select>
+								</div>
+								<!-- ./ col-sm-9 -->
+							</div>
+							<!-- ./ form-group -->
+							<div class="form-group row">
+								<label class="col-lg-2 control-label">Weapon Type-Name</label>
+								<div class="col-lg-10">
+									<select class="form-control selectpicker" name="weapon_all" id="weapon_all"
+										data-live-search="true" required>
+										<option> </option>
+										<?php getWeapons();?>
+									</select>
+								</div>
+								<!-- ./ col-sm-9 -->
+							</div>
+							<div class="form-group row">
+								<label class="col-lg-2 control-label">Notes</label>
+								<div class="col-lg-10">
+									<input type="text" class="form-control" name="weapon_notes" />
+								</div>
+							</div>
+							<!-- ./ modal-body -->
+							<div class="modal-footer">
+								<input name="create_weapon" type="submit" class="btn btn-primary" value="Create" />
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</form>
+					</div>
+					<!-- ./ modal-footer -->
+				</div>
+				<!-- ./ modal-content -->
+			</div>
+			<!-- ./ modal-dialog modal-lg -->
+		</div>
+		<!-- ./ modal fade bs-example-modal-lg -->
