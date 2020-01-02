@@ -40,7 +40,8 @@
     "fastclick": "^1.0.6",
     "daterangepicker": "bootstrap-daterangepicker#^3.0.5",
     "bootstrap-progressbar": "^0.9.0",
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "CoreUI-Free-Bootstrap-Admin": "*"
   },
   "resolutions": {
     "jquery": "^3.4.1"
