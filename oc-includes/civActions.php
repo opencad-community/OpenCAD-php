@@ -631,6 +631,7 @@ function edit_plate()
     $submittedById = $_SESSION['id'];
     $userId = htmlspecialchars($_POST['civilian_names']);
 
+    $veh_plate = $plate;
     $veh_make;
     $veh_model;
     $vehPlate = $plate;

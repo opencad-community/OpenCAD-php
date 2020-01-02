@@ -76,7 +76,9 @@
 								</div>
 								</div>
 							</div>
-							<div class="form-group row">
+								<!-- ./ col-sm-9 -->
+						</div>
+						<div class="form-group row">
 								<label class="col-lg-2 control-label">Race</label>
 								<div class="col-lg-10">
 									<select name="civRaceReq" class="form-control selectpicker" id="civRaceReq"
@@ -248,18 +250,9 @@
 			</div>
 			<!-- ./ modal-dialog modal-lg -->
 		</div>
-<<<<<<< HEAD
-		</div>
-		</div>
 
 		<!-- Vehicle Modals -->
 		<div class="modal" id="createPlateModal" tabindex="-1" role="dialog" aria-hidden="true">
-=======
-	</div>
-
-	  <!-- Vehicle Modals -->
-	  <div class="modal" id="createPlateModal" tabindex="-1" role="dialog" aria-hidden="true">
->>>>>>> Finished civilian modals but not operable
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -360,12 +353,7 @@
 			<!-- ./ modal-dialog modal-lg -->
 		</div>
 		<!-- ./ modal bs-example-modal-lg -->
-<<<<<<< HEAD
 	</div>
-=======
-		
-
->>>>>>> Finished civilian modals but not operable
 
 		<!-- Civilian - Edit Plate Modal -->
 		<div class="modal" id="editPlateModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -373,21 +361,12 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<h4 class="modal-title" id="myModalLabel">Edit Plate in Database</h4>
-<<<<<<< HEAD
 				  		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
-=======
-				  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
->>>>>>> Finished civilian modals but not operable
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
 						<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" method="post">
 							<div class="form-group row">
-<<<<<<< HEAD
-=======
-							</div>
-							<div class="form-group row">
->>>>>>> Finished civilian modals but not operable
 								<label class="col-lg-2 control-label">Registered Owner</label>
 								<div class="col-lg-10">
 									<select class="form-control selectpicker civilian_names_picker"
@@ -401,11 +380,7 @@
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">License Plate</label>
 								<div class="col-lg-10">
-<<<<<<< HEAD
 									<input type="text" class="form-control veh_plate" name="vehPlate" readonly />
-=======
-									<input type="text" class="form-control veh_plate" name="veh_plate" required />
->>>>>>> Finished civilian modals but not operable
 								</div>
 								<!-- ./ col-sm-9 -->
 							</div>
@@ -474,10 +449,8 @@
 			<!-- ./ modal-dialog modal-lg -->
 		</div>
 		<!-- ./ modal bs-example-modal-lg -->
-<<<<<<< HEAD
 		</div>
-=======
->>>>>>> Finished civilian modals but not operable
+
 
 	  <!-- Weapon modals -->
 	  <div class="modal" id="createWeaponModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -534,3 +507,4 @@
 			<!-- ./ modal-dialog modal-lg -->
 		</div>
 		<!-- ./ modal fade bs-example-modal-lg -->
+

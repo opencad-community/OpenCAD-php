@@ -14,15 +14,12 @@ info.php
 patch.diff
 oc-lang/*
 <<<<<<< HEAD
-sql.php
-adminner.php
-sql.php
-adminner.php
 <<<<<<< HEAD
+
 sql.php
 adminner.php
-=======
->>>>>>> Various fixes for civilian for 1.0 and database patches.
+sql.php
+adminner.php
 *web.config*
 
 
