@@ -13,7 +13,6 @@ info.php
 .MESSAGE
 patch.diff
 oc-lang/*
-<<<<<<< HEAD
 sql.php
 adminner.php
 sql.php
