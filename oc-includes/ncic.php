@@ -203,7 +203,7 @@ function name()
 
 function plate()
 {
-    $plate = htmlspecialchars($_POST['ncic_plate']);
+    $plate = htmlspecialchars($_POST['vehPlate']);
 
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
