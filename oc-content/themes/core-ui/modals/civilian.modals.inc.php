@@ -1,5 +1,11 @@
-		<!-- modals -->
+<!-- modals -->
 		<div class="modal" id="newCallModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="myModalLabel">Create Call</h4>
+
+<div class="modal" id="newCallModal" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -84,8 +90,7 @@
 								</div>
 							</div>
 								<!-- ./ col-sm-9 -->
-						</div>
-						<div class="form-group row">
+							<div class="form-group row">
 								<label class="col-lg-2 control-label">Race</label>
 								<div class="col-lg-10">
 									<select name="civRaceReq" class="form-control selectpicker" id="civRaceReq"
@@ -236,6 +241,7 @@
 								<!-- ./ col-sm-9 -->
 							</div>
 							<!-- ./ form-group -->
+>>>>>>> 37f5660... no message
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Address</label>
 								<div class="col-lg-10">
@@ -568,4 +574,3 @@
 			<!-- ./ modal-dialog modal-lg -->
 		</div>
 		<!-- ./ modal fade bs-example-modal-lg -->
-

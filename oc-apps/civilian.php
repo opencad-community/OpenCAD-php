@@ -37,8 +37,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     $civName = $civDob = $civAddr = "";
 
-
-
     $good911 = "";
     if(isset($_SESSION['good911']))
     {
@@ -102,9 +100,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						<div class="card-header">
 							<i class="fa fa-align-justify"></i> <?php echo lang_key("MY_IDENTITIES"); ?>
 						</div>
-<<<<<<< HEAD
                         <div class="card-body">
 							<?php echo $nameMessage, $identityMessage;?>
+>>>>>>> Various fixes for civilian for 1.0 and database patches.
 							<?php ncicGetNames();?>
                         </div>
                         <!-- /.row-->
@@ -112,19 +110,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 </div>
             <!-- /.card-->
             </div>
-=======
-              			<div class="card-body">
-							<?php echo $nameMessage;?>
-							<?php echo $identityMessage;?>
-							<?php ncicGetNames();?>
-		                </div>
-        	        	<!-- /.row-->
-						
-		            </div>
-        	    </div>
-            <!-- /.card-->
-			</div>
->>>>>>> Ignored web.config and removed sql.php.
 
 			<div class="container-fluid">
 				<div class="animated fadeIn">
