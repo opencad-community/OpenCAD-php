@@ -65,6 +65,22 @@
                            			<span class="fasfa-user form-control-feedback right" aria-hidden="true"></span>
                         		</div>
                         		<!-- ./ col-sm-9 -->
+					 <div class="form-group row">
+						<label class="col-lg-2 control-label">Name</label>
+						<div class="col-lg-10">
+						   <input name="civNameReq" class="form-control" id="civNameReq" value="<?php echo $civName;?>" required />
+						   <span class="fasfa-user form-control-feedback right" aria-hidden="true"></span>
+						</div>
+						<!-- ./ col-sm-9 -->
+  							<div class="form-group row date" data-provide="datepicker">
+								<label class="col-lg-2 control-label">Date of Birth</label>
+								<div class="col-lg-10">
+								<div class="input-group" data-provide="datepicker" >
+   									<input type="date" class="form-control" name="civDobReq" value="<?php echo $civDob;?>" required >   
+								</div>
+								</div>
+							</div>
+								<!-- ./ col-sm-9 -->
 							</div>
 							<!-- ./ form-group -->
 
@@ -77,6 +93,8 @@
 								</div>
 							</div>
 								<!-- ./ col-sm-9 -->
+						</div>
+>>>>>>> A little tweaking around with civilian things.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Race</label>
 								<div class="col-lg-10">
