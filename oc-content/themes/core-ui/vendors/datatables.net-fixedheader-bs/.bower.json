@@ -1,6 +1,6 @@
 {
   "name": "datatables.net-fixedheader-bs",
-  "description": "FixedHeader for DataTables with styling for [Bootstrap](http://getbootstrap.com/)",
+  "description": "FixedHeader for DataTables with styling for [Bootstrap 3](http://getbootstrap.com/)",
   "main": [
     "css/fixedHeader.bootstrap.css"
   ],
@@ -35,14 +35,15 @@
   ],
   "homepage": "https://datatables.net",
   "license": "MIT",
-  "version": "3.1.2",
-  "_release": "3.1.2",
+  "version": "3.1.6",
+  "_release": "3.1.6",
   "_resolution": {
     "type": "version",
-    "tag": "3.1.2",
-    "commit": "91d68462495809d2c58cb772824219b803a25510"
+    "tag": "3.1.6",
+    "commit": "1d13ee4dc044b1d67b4b2fa06864e938f71cd59d"
   },
   "_source": "https://github.com/DataTables/Dist-DataTables-FixedHeader-Bootstrap.git",
-  "_target": "^3.1.1",
-  "_originalSource": "datatables.net-fixedheader-bs"
+  "_target": "^3.1.6",
+  "_originalSource": "datatables.net-fixedheader-bs",
+  "_direct": true
 }

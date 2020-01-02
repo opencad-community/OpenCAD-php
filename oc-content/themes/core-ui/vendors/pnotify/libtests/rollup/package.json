@@ -1,0 +1,19 @@
+{
+  "name": "pnotify-test-rollup",
+  "version": "0.0.0",
+  "description": "Just a test.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c",
+    "prepare": "npm run build"
+  },
+  "author": "",
+  "license": "none",
+  "dependencies": {},
+  "devDependencies": {
+    "pnotify": "file:../../",
+    "rollup": "^0.59.1",
+    "rollup-plugin-node-resolve": "^3.3.0"
+  }
+}
