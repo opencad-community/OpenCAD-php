@@ -1,4 +1,4 @@
-<!-- modals -->
+		<!-- modals -->
 		<div class="modal" id="newCallModal" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -64,20 +64,13 @@
 					<!-- ./ modal-header -->
 					<div class="modal-body">
 						<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" method="post">
-					 <div class="form-group row">
-						<label class="col-lg-2 control-label">Name</label>
-						<div class="col-lg-10">
-						   <input name="civNameReq" class="form-control" id="civNameReq" value="<?php echo $civName;?>" required />
-						   <span class="fasfa-user form-control-feedback right" aria-hidden="true"></span>
-						</div>
-						<!-- ./ col-sm-9 -->
-                     <div class="form-group row">
-                        <label class="col-lg-2 control-label">Name</label>
-                        <div class="col-lg-10">
-                           <input name="civNameReq" class="form-control" id="civNameReq" value="<?php echo $civName;?>" required />
-                           <span class="fasfa-user form-control-feedback right" aria-hidden="true"></span>
-                        </div>
-                        <!-- ./ col-sm-9 -->
+                    		<div class="form-group row">
+                        		<label class="col-lg-2 control-label">Name</label>
+                        		<div class="col-lg-10">
+	                           		<input name="civNameReq" class="form-control" id="civNameReq" value="<?php echo $civName;?>" required />
+                           			<span class="fasfa-user form-control-feedback right" aria-hidden="true"></span>
+                        		</div>
+                        		<!-- ./ col-sm-9 -->
 							</div>
 							<!-- ./ form-group -->
 
@@ -89,7 +82,7 @@
 								</div>
 								</div>
 							</div>
-								<!-- ./ col-sm-9 -->
+							<div class="form-group row">
 								<label class="col-lg-2 control-label">Race</label>
 								<div class="col-lg-10">
 									<select name="civRaceReq" class="form-control selectpicker" id="civRaceReq"
@@ -100,7 +93,7 @@
 								<!-- ./ col-sm-9 -->
 							</div>
 							<!-- ./ form-group -->
-													<div class="form-group row">
+							<div class="form-group row">
 								<label class="col-lg-2 control-label">Hair Color</label>
 								<div class="col-lg-10">
 									<select name="civHairReq" class="form-control selectpicker" id="civHairReq"
@@ -262,7 +255,6 @@
 								<!-- ./ col-sm-9 -->
 							</div>
 							<!-- ./ form-group -->
-
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Hair Color</label>
 								<div class="col-lg-10">
@@ -315,8 +307,8 @@
 			</div>
 			<!-- ./ modal-dialog modal-lg -->
 		</div>
-	</div>
-
+		</div>
+		</div>
 
 		<!-- Vehicle Modals -->
 		<div class="modal" id="createPlateModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -420,14 +412,15 @@
 			<!-- ./ modal-dialog modal-lg -->
 		</div>
 		<!-- ./ modal bs-example-modal-lg -->
-		
+	</div>
+
 		<!-- Civilian - Edit Plate Modal -->
 		<div class="modal" id="editPlateModal" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h4 class="modal-title" id="myModalLabel">Edit Plate in Database</h4>
-				  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+				  		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
@@ -448,7 +441,7 @@
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">License Plate</label>
 								<div class="col-lg-10">
-									<input type="text" class="form-control veh_plate" name="veh_plate" required />
+									<input type="text" class="form-control veh_plate" name="vehPlate" readonly />
 								</div>
 								<!-- ./ col-sm-9 -->
 							</div>
@@ -517,6 +510,7 @@
 			<!-- ./ modal-dialog modal-lg -->
 		</div>
 		<!-- ./ modal bs-example-modal-lg -->
+		</div>
 
 	  <!-- Weapon modals -->
 	  <div class="modal" id="createWeaponModal" tabindex="-1" role="dialog" aria-hidden="true">

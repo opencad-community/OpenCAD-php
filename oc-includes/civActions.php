@@ -228,7 +228,7 @@ function ncicGetPlates()
                 <td>'.$row['vehRegState'].'</td>
                 <td>'.$row['vehMake'].'</td>
                 <td>'.$row['vehModel'].'</td>
-                <td>'.$row['vehPrimaryColor'].'/'.$row['vehSecondaryColor'].'</td>
+                <td>'.$row['vehPrimaryColor'].' / '.$row['vehSecondaryColor'].'</td>
                 <td>'.$row['vehInsurance'].' / '.$row['vehInsuranceType'].'</td>
                 <td>'.$row['notes'].'</td>
                 <td>

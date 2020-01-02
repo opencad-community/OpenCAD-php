@@ -1,7 +1,5 @@
 <?php
 
- error_reporting(-1);
-ini_set('display_errors', 'On');
 /**
 Open source CAD system for RolePlaying Communities.
 Copyright (C) 2017 Shane Gill
@@ -65,7 +63,7 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php include( ABSPATH . "oc-includes/header.inc.php"); ?>
+<?php include ( ABSPATH . "/".OCTHEMES."/".THEME."/header.inc.php"); ?>
 
 
 <body class="app flex-row align-items-center">

@@ -263,8 +263,9 @@ function getLicenseIssuers()
     }
 }
 
+
 /**#@+
-* function getLicenseIssuers()
+* function getLicenseRegistrars()
 * Description of function
 *
 * @since version
