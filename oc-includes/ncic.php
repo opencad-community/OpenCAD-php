@@ -238,7 +238,7 @@ function plate()
         foreach($result as $row)
         {
 
-            $encode["plate"] = $row['vehPlate'];
+            $encode["vehPlate"] = $row['vehPlate'];
             $encode["vehMake"] = $row['vehMake'];
             $encode["vehModel"] = $row['vehModel'];
             $encode["vehPrimaryColor"] = $row['vehPrimaryColor'];
@@ -248,17 +248,11 @@ function plate()
             $encode["flags"] = $row['flags'];
             $encode["vehRegState"] = $row['vehRegState'];
             $encode["notes"] = $row['notes'];
-            $_SESSION["TestVar"] =  $row['vehRegState'];
 
         }
     }
 
     echo json_encode($encode);
-}
-
-function firearm()
-{
-
 }
 
 function weapon()
@@ -346,4 +340,5 @@ function weapon()
         echo json_encode($encode);
     }
 }
+
 ?>

@@ -228,7 +228,7 @@ function ncicGetPlates()
                 <td>'.$row['vehRegState'].'</td>
                 <td>'.$row['vehMake'].'</td>
                 <td>'.$row['vehModel'].'</td>
-                <td>'.$row['vehPrimaryColor'].'/'.$row['vehSecondaryColor'].'</td>
+                <td>'.$row['vehPrimaryColor'].' / '.$row['vehSecondaryColor'].'</td>
                 <td>'.$row['vehInsurance'].' / '.$row['vehInsuranceType'].'</td>
                 <td>'.$row['notes'].'</td>
                 <td>
@@ -631,7 +631,6 @@ function edit_plate()
     $submittedById = $_SESSION['id'];
     $userId = htmlspecialchars($_POST['civilian_names']);
 
-    $veh_plate = $plate;
     $veh_make;
     $veh_model;
     $vehPlate = $plate;

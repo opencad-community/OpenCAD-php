@@ -263,97 +263,9 @@ function getLicenseIssuers()
     }
 }
 
-/**#@+
-* function getLicenseIssuers()
-* Description of function
-*
-* @since version
-*
-**/
-function getPlateRegisrars()
-{
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
-    }
-
-    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_plates LIKE 'vehRegState'";
-    $stmt = $pdo->prepare( $query );
-    if (!$stmt)
-    {
-        $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
-    }
-
-    $result = $stmt -> execute();
-    if ($result) 
-    {
-        $row = $stmt -> fetch(PDO::FETCH_ASSOC);
-        $dl_issuers = implode($row);
-        // Remove "set(" at start and ");" at end.
-        $dl_issuers  = substr($dl_issuers,17,strlen($dl_issuers)-36);
-        $dl_issuers = preg_split("/','/",$dl_issuers);
-
-        foreach ($dl_issuers as $key=>$value)
-        {
-            echo "<option name = '$value' value = '$value'>$value</option>\n";
-        };
-    }
-}
-
 
 /**#@+
-* function getLicenseIssuers()
-* Description of function
-*
-* @since version
-*
-**/
-function getPlateRegisrars()
-{
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
-    }
-
-    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_plates LIKE 'vehRegState'";
-    $stmt = $pdo->prepare( $query );
-    if (!$stmt)
-    {
-        $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
-    }
-
-    $result = $stmt -> execute();
-    if ($result) 
-    {
-        $row = $stmt -> fetch(PDO::FETCH_ASSOC);
-        $dl_issuers = implode($row);
-        // Remove "set(" at start and ");" at end.
-        $dl_issuers  = substr($dl_issuers,17,strlen($dl_issuers)-36);
-        $dl_issuers = preg_split("/','/",$dl_issuers);
-
-        foreach ($dl_issuers as $key=>$value)
-        {
-            echo "<option name = '$value' value = '$value'>$value</option>\n";
-        };
-    }
-}
-
-/**#@+
-* function getLicenseIssuers()
+* function getLicenseRegistrars()
 * Description of function
 *
 * @since version
