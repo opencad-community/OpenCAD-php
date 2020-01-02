@@ -1,4 +1,4 @@
-		<!-- modals -->
+<!-- modals -->
 		<div class="modal" id="newCallModal" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -74,6 +74,7 @@
 								</div>
 							</div>
 								<!-- ./ col-sm-9 -->
+							<div class="form-group row">
 								<label class="col-lg-2 control-label">Race</label>
 								<div class="col-lg-10">
 									<select name="civRaceReq" class="form-control selectpicker" id="civRaceReq"
@@ -85,6 +86,59 @@
 							</div>
 							<!-- ./ form-group -->
 							<div class="form-group row">
+								<label class="col-lg-2 control-label">Hair Color</label>
+								<div class="col-lg-10">
+									<select name="civHairReq" class="form-control selectpicker" id="civHairReq"
+										title="Select a hair color" required>
+										<option val="bld">Bald</option>
+										<option val="blk">Black</option>
+										<option val="bln">Blonde</option>
+										<option val="blu">Blue</option>
+										<option val="bro">Brown</option>
+										<option val="gry">Gray or Partially Gray</option>
+										<option val="grn">Green</option>
+										<option val="ong">Orange</option>
+										<option val="pnk">Pink</option>
+										<option val="ple">Purple</option>
+										<option val="red">Red or Auburn</option>
+										<option val="sdy">Sandy</option>
+										<option val="stw">Strawberry</option>
+										<option val="whi">White</option>
+									</select>
+								</div>
+								<!-- ./ col-sm-9 -->
+							</div>
+							<!-- ./ form-group -->
+							<div class="form-group row">
+								<label class="col-lg-2 control-label">Build</label>
+								<div class="col-lg-10">
+									<select name="civBuildReq" class="form-control selectpicker" id="civBuildReq"
+										title="Select a build" required>
+										<option val="Average">Average</option>
+										<option val="Fit">Fit</option>
+										<option val="Muscular">Muscular</option>
+										<option val="Overweight">Overweight</option>
+										<option val="Skinny">Skinny</option>
+										<option val="Thin">Thin</option>
+									</select>
+									<!-- ./ col-sm-9 -->
+								</div>
+								<!-- ./ form-group -->
+							</div>
+							<!-- ./ modal-body -->
+							<div class="modal-footer">
+								<input name="create_name" type="submit" class="btn btn-primary" value="Create" />
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</form>
+					</div>
+					<!-- ./ modal-footer -->
+				</div>
+				<!-- ./ modal-content -->
+			</div>
+			<!-- ./ modal-dialog modal-lg -->
+		</div>
+
+													<div class="form-group row">
 								<label class="col-lg-2 control-label">Hair Color</label>
 								<div class="col-lg-10">
 									<select name="civHairReq" class="form-control selectpicker" id="civHairReq"
@@ -350,11 +404,10 @@
 			<!-- ./ modal-dialog modal-lg -->
 		</div>
 		<!-- ./ modal bs-example-modal-lg -->
-
 		<!-- Civilian - Edit Plate Modal -->
 					<div class="modal-header">
 						<h4 class="modal-title" id="myModalLabel">Edit Plate in Database</h4>
-				  		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+				  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
