@@ -461,7 +461,7 @@ function create911Call()
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
     } catch(PDOException $ex)
     {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage()."#2";
         $_SESSION['error_blob'] = $ex;
         header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
@@ -501,10 +501,9 @@ function create911Call()
     $stmt = $pdo->prepare("INSERT IGNORE INTO ".DB_PREFIX."calls (callId, callType, callStreet1, callNarrative) VALUES (?, '911', ?, ?)");
     $result = $stmt->execute(array($callId, $callStreet1, $callNarrative));
 
-
     if (!$result)
     {
-        $_SESSION['error'] = $stmt->errorInfo();
+        $_SESSION['error'] = $stmt->errorInfo()."#3";
         header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }

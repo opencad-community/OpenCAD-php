@@ -37,8 +37,17 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     $civName = $civDob = $civAddr = "";
 
+<<<<<<< HEAD
     $good911 = "";
     if(isset($_SESSION['good911']))
+=======
+<<<<<<< HEAD
+    if ( $_SESSION['adminPrivilege'] == 3)
+=======
+    $good911 = "";
+    if(isset($_SESSION['good911']))
+>>>>>>> Various fixes for civilian for 1.0 and database patches.
+>>>>>>> Various fixes for civilian for 1.0 and database patches.
     {
         $good911 = $_SESSION['good911'];
         unset($_SESSION['good911']);
@@ -101,6 +110,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<i class="fa fa-align-justify"></i> <?php echo lang_key("MY_IDENTITIES"); ?>
 						</div>
 <<<<<<< HEAD
+<<<<<<< HEAD
                         <div class="card-body">
 							<?php echo $nameMessage, $identityMessage;?>
 							<?php ncicGetNames();?>
@@ -114,15 +124,22 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               			<div class="card-body">
 							<?php echo $nameMessage;?>
 							<?php echo $identityMessage;?>
+=======
+                        <div class="card-body">
+							<?php echo $nameMessage, $identityMessage;?>
+>>>>>>> Various fixes for civilian for 1.0 and database patches.
 							<?php ncicGetNames();?>
-		                </div>
-        	        	<!-- /.row-->
-						
-		            </div>
-        	    </div>
+                        </div>
+                        <!-- /.row-->
+                    </div>
+                </div>
             <!-- /.card-->
+<<<<<<< HEAD
 			</div>
 >>>>>>> Ignored web.config and removed sql.php.
+=======
+            </div>
+>>>>>>> Various fixes for civilian for 1.0 and database patches.
 
 			<div class="container-fluid">
 				<div class="animated fadeIn">
