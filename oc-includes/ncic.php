@@ -248,6 +248,7 @@ function plate()
             $encode["flags"] = $row['flags'];
             $encode["vehRegState"] = $row['vehRegState'];
             $encode["notes"] = $row['notes'];
+            $_SESSION["TestVar"] =  $row['vehRegState'];
 
         }
     }
