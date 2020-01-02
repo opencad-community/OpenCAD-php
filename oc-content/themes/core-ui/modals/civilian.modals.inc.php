@@ -312,9 +312,8 @@
 	</div>
 
 
-
-	  <!-- Vehicle Modals -->
-	  <div class="modal" id="createPlateModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<!-- Vehicle Modals -->
+		<div class="modal" id="createPlateModal" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -567,3 +566,4 @@
 			<!-- ./ modal-dialog modal-lg -->
 		</div>
 		<!-- ./ modal fade bs-example-modal-lg -->
+

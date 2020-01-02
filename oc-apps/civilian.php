@@ -102,7 +102,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						</div>
                         <div class="card-body">
 							<?php echo $nameMessage, $identityMessage;?>
->>>>>>> Various fixes for civilian for 1.0 and database patches.
 							<?php ncicGetNames();?>
                         </div>
                         <!-- /.row-->
