@@ -426,8 +426,6 @@
 					<div class="modal-body">
 						<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" method="post">
 							<div class="form-group row">
-							</div>
-							<div class="form-group row">
 								<label class="col-lg-2 control-label">Registered Owner</label>
 								<div class="col-lg-10">
 									<select class="form-control selectpicker civilian_names_picker"
@@ -567,4 +565,3 @@
 			<!-- ./ modal-dialog modal-lg -->
 		</div>
 		<!-- ./ modal fade bs-example-modal-lg -->
-
