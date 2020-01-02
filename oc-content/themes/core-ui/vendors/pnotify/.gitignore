@@ -1,4 +1,6 @@
-bower_components
-node_modules
-libtests/browserify/node_modules
-libtests/browserify/bundle.js
+/node_modules/
+/libtests/*/node_modules
+/libtests/*/dist
+/vendor/
+/lib/
+/dist/

@@ -1,0 +1,48 @@
+{
+  "name": "core-ui",
+  "authors": [
+    "help@opencad.io"
+  ],
+  "description": "CoreUI theme for OpenCAD",
+  "main": "style.css",
+  "keywords": [
+    "css",
+    "bower",
+    "less",
+    "js",
+    "coreui"
+  ],
+  "license": "MIT",
+  "homepage": "https://OpenCAD.io/",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "boostrap": "bootstrap#^4.4.1",
+    "pnotify": "^4.0.0",
+    "datatables.net-fixedheader": "^3.1.6",
+    "datatables.net-responsive": "^2.2.3",
+    "datatables.net": "^1.10.20",
+    "datatables.net-buttons": "^1.6.1",
+    "datatables.net-scroller": "^2.0.1",
+    "jquery": "^3.4.1",
+    "jquery-ui": "^1.12.1",
+    "datatables.net-fixedheader-bs": "^3.1.6",
+    "datatables.net-scroller-bs": "^2.0.1",
+    "datatables.net-responsive-bs": "^2.2.3",
+    "datatables.net-buttons-bs": "^1.6.1",
+    "nprogress": "^0.2.0",
+    "fastclick": "^1.0.6",
+    "daterangepicker": "bootstrap-daterangepicker#^3.0.5",
+    "bootstrap-progressbar": "^0.9.0",
+    "moment": "^2.24.0"
+  },
+  "resolutions": {
+    "jquery": "^3.4.1"
+  }
+}

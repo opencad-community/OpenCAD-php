@@ -1,0 +1,22 @@
+{
+  "name": "pnotify-test-webpack",
+  "version": "0.0.0",
+  "description": "Just a test.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "prepare": "npm run build"
+  },
+  "author": "",
+  "license": "none",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "pnotify": "file:../../",
+    "uglifyjs-webpack-plugin": "^1.2.5",
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.3"
+  }
+}

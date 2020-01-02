@@ -34,7 +34,7 @@ module.exports = function generateRawFilesJs(grunt, banner) {
   var files = banner + dirs.map(getFiles).reduce(function (combined, file) {
     return combined + file;
   }, '');
-  var rawFilesJs = 'docs/oc-content/assets/js/raw-files.min.js';
+  var rawFilesJs = 'docs/assets/js/raw-files.min.js';
   try {
     fs.writeFileSync(rawFilesJs, files);
   } catch (err) {

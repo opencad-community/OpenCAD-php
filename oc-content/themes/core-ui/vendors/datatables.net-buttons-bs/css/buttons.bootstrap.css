@@ -1,3 +1,32 @@
+@keyframes dtb-spinner {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes dtb-spinner {
+  100% {
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-ms-keyframes dtb-spinner {
+  100% {
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes dtb-spinner {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-moz-keyframes dtb-spinner {
+  100% {
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
 div.dt-button-info {
   position: fixed;
   top: 50%;
@@ -23,37 +52,59 @@ div.dt-button-info > div {
   padding: 1em;
 }
 
-ul.dt-button-collection.dropdown-menu {
+div.dt-button-collection-title {
+  text-align: center;
+  padding: 0.3em 0 0.5em;
+  font-size: 0.9em;
+}
+
+div.dt-button-collection-title:empty {
+  display: none;
+}
+
+div.dt-button-collection {
+  position: absolute;
+}
+div.dt-button-collection ul.dropdown-menu {
   display: block;
   z-index: 2002;
-  -webkit-column-gap: 8px;
-  -moz-column-gap: 8px;
-  -ms-column-gap: 8px;
-  -o-column-gap: 8px;
-  column-gap: 8px;
+  min-width: 100%;
 }
-ul.dt-button-collection.dropdown-menu.fixed {
+div.dt-button-collection div.dt-button-collection-title {
+  background-color: white;
+}
+div.dt-button-collection.fixed {
   position: fixed;
   top: 50%;
   left: 50%;
   margin-left: -75px;
   border-radius: 0;
 }
-ul.dt-button-collection.dropdown-menu.fixed.two-column {
-  margin-left: -150px;
+div.dt-button-collection.fixed.two-column {
+  margin-left: -200px;
 }
-ul.dt-button-collection.dropdown-menu.fixed.three-column {
+div.dt-button-collection.fixed.three-column {
   margin-left: -225px;
 }
-ul.dt-button-collection.dropdown-menu.fixed.four-column {
+div.dt-button-collection.fixed.four-column {
   margin-left: -300px;
 }
-ul.dt-button-collection.dropdown-menu > * {
+div.dt-button-collection > :last-child {
+  display: block !important;
+  -webkit-column-gap: 8px;
+  -moz-column-gap: 8px;
+  -ms-column-gap: 8px;
+  -o-column-gap: 8px;
+  column-gap: 8px;
+}
+div.dt-button-collection > :last-child > * {
   -webkit-column-break-inside: avoid;
   break-inside: avoid;
 }
-ul.dt-button-collection.dropdown-menu.two-column {
-  width: 300px;
+div.dt-button-collection.two-column {
+  width: 400px;
+}
+div.dt-button-collection.two-column > :last-child {
   padding-bottom: 1px;
   -webkit-column-count: 2;
   -moz-column-count: 2;
@@ -61,8 +112,10 @@ ul.dt-button-collection.dropdown-menu.two-column {
   -o-column-count: 2;
   column-count: 2;
 }
-ul.dt-button-collection.dropdown-menu.three-column {
+div.dt-button-collection.three-column {
   width: 450px;
+}
+div.dt-button-collection.three-column > :last-child {
   padding-bottom: 1px;
   -webkit-column-count: 3;
   -moz-column-count: 3;
@@ -70,14 +123,19 @@ ul.dt-button-collection.dropdown-menu.three-column {
   -o-column-count: 3;
   column-count: 3;
 }
-ul.dt-button-collection.dropdown-menu.four-column {
+div.dt-button-collection.four-column {
   width: 600px;
+}
+div.dt-button-collection.four-column > :last-child {
   padding-bottom: 1px;
   -webkit-column-count: 4;
   -moz-column-count: 4;
   -ms-column-count: 4;
   -o-column-count: 4;
   column-count: 4;
+}
+div.dt-button-collection .dt-button {
+  border-radius: 0;
 }
 
 div.dt-button-background {
@@ -99,4 +157,31 @@ div.dt-button-background {
   div.dt-buttons a.btn {
     float: none;
   }
+}
+div.dt-buttons button.btn.processing,
+div.dt-buttons div.btn.processing,
+div.dt-buttons a.btn.processing {
+  color: rgba(0, 0, 0, 0.2);
+}
+div.dt-buttons button.btn.processing:after,
+div.dt-buttons div.btn.processing:after,
+div.dt-buttons a.btn.processing:after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  box-sizing: border-box;
+  display: block;
+  content: ' ';
+  border: 2px solid #282828;
+  border-radius: 50%;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  animation: dtb-spinner 1500ms infinite linear;
+  -o-animation: dtb-spinner 1500ms infinite linear;
+  -ms-animation: dtb-spinner 1500ms infinite linear;
+  -webkit-animation: dtb-spinner 1500ms infinite linear;
+  -moz-animation: dtb-spinner 1500ms infinite linear;
 }

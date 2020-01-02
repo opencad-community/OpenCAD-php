@@ -1,5 +1,5 @@
 {
-  "extends" : "../oc-content/themes/default/js/.jshintrc",
+  "extends" : "../js/.jshintrc",
   "asi"     : false,
   "browser" : false,
   "es3"     : false,
