@@ -74,20 +74,6 @@
 								</div>
 							</div>
 								<!-- ./ col-sm-9 -->
-							</div>
-							<!-- ./ form-group -->
-
-							<div class="form-group row date" data-provide="datepicker">
-								<label class="col-lg-2 control-label">Date of Birth</label>
-								<div class="col-lg-10">
-								<div class="input-group" data-provide="datepicker" >
-   									<input type="date" class="form-control" name="civDobReq" value="<?php echo $civDob;?>" required >   
-								</div>
-								</div>
-							</div>
-								<!-- ./ col-sm-9 -->
-						</div>
-							<div class="form-group row">
 								<label class="col-lg-2 control-label">Race</label>
 								<div class="col-lg-10">
 									<select name="civRaceReq" class="form-control selectpicker" id="civRaceReq"
@@ -312,11 +298,11 @@
 			</div>
 			<!-- ./ modal-dialog modal-lg -->
 		</div>
-		</div>
-		</div>
+	</div>
 
-	  <!-- Vehicle Modals -->
-	  <div class="modal" id="createPlateModal" tabindex="-1" role="dialog" aria-hidden="true">
+
+		<!-- Vehicle Modals -->
+		<div class="modal" id="createPlateModal" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -566,3 +552,4 @@
 			<!-- ./ modal-dialog modal-lg -->
 		</div>
 		<!-- ./ modal fade bs-example-modal-lg -->
+

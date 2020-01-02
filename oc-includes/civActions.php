@@ -501,6 +501,7 @@ function create911Call()
     $stmt = $pdo->prepare("INSERT IGNORE INTO ".DB_PREFIX."calls (callId, callType, callStreet1, callNarrative) VALUES (?, '911', ?, ?)");
     $result = $stmt->execute(array($callId, $callStreet1, $callNarrative));
 
+
     if (!$result)
     {
         $_SESSION['error'] = $stmt->errorInfo();

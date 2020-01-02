@@ -13,16 +13,8 @@ info.php
 .MESSAGE
 patch.diff
 oc-lang/*
-<<<<<<< HEAD
-=======
 sql.php
 adminner.php
-<<<<<<< HEAD
-sql.php
->>>>>>> Various fixes for civilian for 1.0 and database patches.
-adminner.php
-=======
->>>>>>> Various fixes for civilian for 1.0 and database patches.
 *web.config*
 
 
