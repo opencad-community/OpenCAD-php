@@ -63,7 +63,7 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php include ( ABSPATH . "/".OCTHEMES."/".THEME."/header.inc.php"); ?>
+<?php include ( ABSPATH . "/".OCTHEMES."/".THEME."/includes/header.inc.php"); ?>
 
 
 <body class="app flex-row align-items-center">

@@ -1,0 +1,20 @@
+{
+  "name": "coreui-free-bootstrap-admin-template",
+  "authors": [
+    "Łukasz Holeczek"
+  ],
+  "description": "CoreUI is free bootstrap admin template http://coreui.io",
+  "main": [
+    "src/index.html",
+    "src/js/main.js",
+    "src/css/style.css"
+  ],
+  "keywords": [
+    "coreui",
+    "bootstrap",
+    "admin",
+    "template"
+  ],
+  "license": "MIT",
+  "homepage": "http://coreui.io/"
+}

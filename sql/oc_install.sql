@@ -386,4 +386,4 @@ INSERT INTO `<DB_PREFIX>users` (`id`, `name`, `email`, `password`, `identifier`,
 
 INSERT INTO `<DB_PREFIX>config` (`key`, `value`) VALUES
 ('api_key',	'HadROvwkb415l7RC7EzQ9riymS931RowCiU8qJn4'),
-('schema_version',	'1.0');
+('dbSchemaVersion',	'1.0');
