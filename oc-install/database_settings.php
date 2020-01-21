@@ -137,11 +137,11 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="author" content="ApPHP Company - Advanced Power of PHP">
-    <meta name="generator" content="ApPHP EasyInstaller">
+    <meta name="author" content="StormLight Tech">
+    <meta name="generator" content="OpenCAD – a StormLight Tech Project">
 	<title><?php echo lang_key("installation_guide"); ?> | <?php echo lang_key('database_settings'); ?></title>
 
-	<link href="images/apphp.ico" rel="shortcut icon" />
+	<link href="images/favicon.ico" rel="shortcut icon" />
 	<link rel="stylesheet" type="text/css" href="templates/<?php echo EI_TEMPLATE; ?>/css/styles.css" />
 	<?php
 		if($curr_lang_direction == 'rtl'){

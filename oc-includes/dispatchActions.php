@@ -1414,7 +1414,7 @@ function changeaop()
         die();
     }
 
-    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."aop SET aop = ?");
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."patrolInformation SET `value`=? WHERE `key`='areaOfPatrol'");
     $result = $stmt->execute(array(htmlspecialchars($_POST['aop'])));
 
     if (!$result)
@@ -1424,15 +1424,9 @@ function changeaop()
         die();
     }
 
-    if($stmt->rowCount() == 0)
-    {
-        $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."aop VALUES (?)");
-        $result = $stmt->execute(array(htmlspecialchars($_POST['aop'])));
-    }
-
     $pdo = null;
 
-    header("Location:".BASE_URL."/cad.php");
+    header("Location:".BASE_URL."/oc-apps/cad.php");
 }
 
 function editPersonBOLOS()

@@ -287,8 +287,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     
         </footer>
 
-             <!-- modals -->
-<?php echo file_get_contents(ABSPATH . "/oc-content/themes/".THEME."/modals/mdt.modals.inc.php")?>
+      <!-- modals -->
+      <?php echo file_get_contents(ABSPATH . "/oc-content/themes/".THEME."/modals/mdt.modals.inc.php")?>
       <!-- AUDIO TONES -->
       <audio id="recurringToneAudio" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/sounds/priority.mp3" preload="auto"></audio>
       <audio id="priorityToneAudio" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
