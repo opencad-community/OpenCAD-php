@@ -506,6 +506,7 @@ $arrLang["WARNINGS"] = "Warnings";
 $arrLang["CITATIONS"] = "Citations";
 $arrLang["ARREST_REPORT"] = "Arrest Report";
 $arrLang["WARRANTS"] = "Warrants";
+$arrLang["SET_AREA_OF_PATROL"] = "Set Area of Patrol";
 //** End CAD Console Strings *//
 
 //** Begin MDT Console Strings **/

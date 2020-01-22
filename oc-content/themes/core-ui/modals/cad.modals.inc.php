@@ -198,7 +198,7 @@
 	  <div class="modal-dialog modal-lg">
 		<div class="modal-content">
 		  <div class="modal-header">
-			<h4 class="modal-title" id="myModalLabel">Set Aera of Patrol</h4>
+			<h4 class="modal-title" id="myModalLabel"><?php echo lang_key("SET_AREA_OF_PATROL"); ?></h4>
 			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
 			</button>
 		  </div>
