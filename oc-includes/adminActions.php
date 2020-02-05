@@ -23,14 +23,6 @@ This file handles all actions for admin.php script
 
 /* Handle POST requests */
 
-/**
- * Patch notes:
- * Adding the `else` to make a `else if` prevents the execution
- * of multiple functions at the same time by the same client
- *
- * Running multiple functions at the same time doesnt seem to
- * be a needed feature.
- */
 if (isset($_GET['dept_id']) && isset($_GET['userId']))
 {
     deleteGroupItem();
@@ -595,7 +587,7 @@ function getUsers()
         die();
     }
 
-    $result = $pdo->query("SELECT id, name, email, adminPrivilege, identifier, approved FROM ".DB_PREFIX."users WHERE approved = '1' OR approved = '2'");
+    $result = $pdo->query("SELECT id, name, email, adminPrivilege, civilianPrivilege, identifier, approved FROM ".DB_PREFIX."users WHERE approved = '1' OR approved = '2'");
 
     if (!$result)
     {
@@ -622,6 +614,11 @@ function getUsers()
     foreach($result as $row)
     {
 
+        if ( $row[4] == 2 )
+        {
+            $civState =  "(Civilian)";
+        } else { $civState = ""; }
+        
         if ( $row[3] == 2 )
         {
           $roleIs = "Moderator";
@@ -633,11 +630,14 @@ function getUsers()
         else {
           $roleIs = "User";
         }
+
+
+
         echo '
         <tr>
             <td>' . $row['name'] . '</td>
             <td>' . $row['email'] . '</td>
-            <td>' . $roleIs . '</td>
+            <td>' . $roleIs . ' '.$civState.'</td>
             <td>' . $row['identifier'] . '</td>
             <td id="show_group">';
 

@@ -15,18 +15,19 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     session_start();
 
-    require_once(__DIR__ . '/../oc-config.php');
+    require_once('../oc-config.php');
     require_once( ABSPATH . '/oc-functions.php');
+    require_once( ABSPATH . '/oc-settings.php');
     require_once( ABSPATH . "/oc-includes/adminActions.php");
 
     if (empty($_SESSION['logged_in']))
     {
-        header('Location: ../index.php');
+        header('Location: '.BASE_URL);
         die("Not logged in");
     }
     else
     {
-      $name = $_SESSION['name'];
+      // Do Nothing
     }
 
 
@@ -79,11 +80,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 <body class="app header-fixed">
 
     <header class="app-header navbar">
-      <a class="navbar-brand" href="#">
-        <img class="navbar-brand-full" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/tail.png" width="30" height="25" alt="OpenCAD Logo">
-      </a>
+
       <?php include( ABSPATH . "oc-admin/oc-admin-includes/topbarNav.inc.php"); ?>
-      <?php include( ABSPATH . "oc-includes/topProfile.inc.php"); ?>
+      <?php include( ABSPATH . "/" .  OCCONTENT . "/themes/". THEME ."/includes/topProfile.inc.php"); ?>
     </header>
 
     <div class="app-body">
@@ -102,7 +101,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               </div>
               <div class="form-group">
                 <label for="name"><?php echo lang_key("DATABASE_ENGINE"); ?></label>
-                <input type="text" class="form-control" readonly="readonly" placeholder="<?php echo getMySQLVersion(); ?>" />
+                <input type="text" class="form-control" readonly="readonly" value="<? echo getMySQLVersion(); ?>" />
                 <?php echo lang_key("DATABASE_ENGINE_notes"); ?>
               </div>
               <div class="form-group">

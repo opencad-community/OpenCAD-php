@@ -33,7 +33,7 @@ if(!empty($_POST))
         header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
     }
 
-    $stmt = $pdo->prepare("SELECT id, name, password, email, identifier, adminPrivilege, passwordReset, approved, suspendReason FROM ".DB_PREFIX."users WHERE email = ?");
+    $stmt = $pdo->prepare("SELECT id, name, password, email, identifier, passwordReset, approved, suspendReason FROM ".DB_PREFIX."users WHERE email = ?");
     $resStatus = $stmt->execute(array($email));
     $result = $stmt->fetch();
 
@@ -91,53 +91,41 @@ if(!empty($_POST))
     $_SESSION['email'] = $result['email'];
     $_SESSION['identifier'] = $result['identifier'];
     $_SESSION['callsign'] = $result['identifier']; //Set callsign to default to identifier until the unit changes it
-    $_SESSION['adminPrivilege'] = $result['adminPrivilege']; //Set callsign to default to identifier until the unit changes it
 
-    $id = $result['id'];
 
-    $getDepartments = $pdo->prepare("SELECT departmentId from ".DB_PREFIX."userDepartments WHERE userId = \"$id\" ORDER BY 1 ASC");
+    $getDepartments = $pdo->query("SELECT * from ".DB_PREFIX."userdepartments WHERE userId = \"$id\" ORDER BY 1 ASC");
     $getDepartments->execute();
     $rowCount = $getDepartments->rowCount(); 
     $Departments = $getDepartments->fetchAll(PDO::FETCH_ASSOC);
-    foreach($Departments as $Department)
-    {
-        if ($Department = "0")
+    print_r($Departments);
+        if ($Departments[0]['departmentId'] == "1")
         {
             $_SESSION['dispatch'] = 'YES';
         }
-        else if ($Department == "1")
+        else if ($Departments[0]['departmentId'] == "2")
         {
             $_SESSION['state'] = 'YES';
         }
-        else if ($Department == "2")
+        else if ($Departments[0]['departmentId'] == "3")
         {
             $_SESSION['highway'] = 'YES';
         }
-        else if ($Department == "3")
+        else if ($Departments[0]['departmentId'] == "4")
         {
             $_SESSION['sheriff'] = 'YES';
         }
-        else if ($Department == "4")
+        else if ($Departments[0]['departmentId'] == "5")
         {
             $_SESSION['police'] = 'YES';
         }
-        else if ($Department == "5")
+        else if ($Departments[0]['departmentId'] == "6")
         {
             $_SESSION['fire'] = 'YES';
         }
-        else if ($Department == "6")
+        else if ($Departments[0]['departmentId'] == "7")
         {
             $_SESSION['ems'] = 'YES';
-        }
-        else if ($Department == "7")
-        {
-            $_SESSION['dispatch'] = 'YES';
-        }
-        else if ($Department == "8")
-        {
-            $_SESSION['roadsideAssist'] = 'YES';
-        }
-    }
+        } else {};
 
     $getAdminPriv = $pdo->query("SELECT `adminPrivilege` from ".DB_PREFIX."users WHERE id = \"$id\"");
     $getAdminPriv -> execute();
@@ -152,14 +140,11 @@ if(!empty($_POST))
     $getSuperPriv = $pdo->query("SELECT `supervisorPrivilege` from ".DB_PREFIX."users WHERE id = \"$id\"");
     $getSuperPriv -> execute();
     $superPriv = $getSuperPriv->fetch(PDO::FETCH_ASSOC);
-    $_SESSION['supervisorPrivilege'] = $civPriv['supervisorPrivilege'];
+    $_SESSION['supervisorPrivilege'] = $superPriv['supervisorPrivilege'];
 
     $pdo = null;
 
 
-    if(session_id() == '' || !isset($_SESSION)) {
-        session_start();
-    }
     if(ENABLE_API_SECURITY === true)
         setcookie("aljksdz7", hash('md5', session_id().getApiKey()), time() + (86400 * 7), "/");
     header("Location:".BASE_URL."/".OCAPPS."/oc-start.php");
