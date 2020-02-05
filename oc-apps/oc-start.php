@@ -15,18 +15,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 if(session_id() == '' || !isset($_SESSION)) {
     session_start();
 }
-$id = $_SESSION['id'];
 require_once( "../oc-config.php" );
 require_once( ABSPATH . '/oc-functions.php');
 require_once( ABSPATH . '/oc-settings.php');
 require_once( ABSPATH . "/oc-includes/generalActions.php" );
 
-if (empty($_SESSION['logged_in']))
-{
-	header('Location:'.ABSPATH.'/index.php');
-    die("Not logged in");
-}
-    setDispatcher("1");
+setDispatcher("1");
 
 $adminButton = "";
 $dispatchButton = "";
@@ -40,44 +34,43 @@ $civilianButton = "";
 $roadsideAssistButton = "";
 
 
-    if ($_SESSION['state'] = 'YES')
+    if ($_SESSION['state'] === 'YES')
     {
         $stateButton = "<a href=\"".BASE_URL."/".OCAPPS."//mdt.php?dep=state\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">State</a>";
     }
-    if ($_SESSION['ems'] = 'YES')
+    if ($_SESSION['ems'] === 'YES')
     {
         $emsButton = "<a href=\"".BASE_URL."/".OCAPPS."/mdt.php?dep=ems\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">EMS</a>";   
     }
-        if ($_SESSION['fire'] = 'YES')
+    if ($_SESSION['fire'] == 'YES')
     {
         $fireButton = "<a href=\"".BASE_URL."/".OCAPPS."/mdt.php?dep=fire\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Fire</a>";
     }
-    if ($_SESSION['highway'] = 'YES')
+    if ($_SESSION['highway'] === 'YES')
     {
         $highwayButton = "<a href=\"".BASE_URL."/".OCAPPS."/mdt.php?dep=highway\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Highway Patrol</a>";
     }
-    if ($_SESSION['police'] = 'YES')
+    if ($_SESSION['police'] == 'YES')
     {
         $policeButton = "<a href=\"".BASE_URL."/".OCAPPS."/mdt.php?dep=police\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Police Department</a>";
     }
-    if ($_SESSION['sheriff'] = 'YES')
+    if ($_SESSION['sheriff'] == 'YES')
     {
         $sheriffButton = "<a href=\"".BASE_URL."/".OCAPPS."/mdt.php?dep=sheriff\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Sheriff's Office</a>";
     }
-    if ($_SESSION['dispatch'] = 'YES')
+    if ($_SESSION['dispatch'] == 'YES')
     {
         $dispatchButton = "<a href=\"".BASE_URL."/".OCAPPS."/cad.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Dispatch</a>";
-    }
-    if ($_SESSION['roadsideAssist'] = 'YES')
+    } 
+    if ($_SESSION['roadsideAssist'] == 'YES')
     {
         $roadsideAssistButton = "<a href=\"".BASE_URL."/".OCAPPS."/mdt.php?dep=roadesideAssist\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Roadside Assistance</a>";
-    }
-    if ($_SESSION['civilianPrivilege'] = '1')
+    } else {}
+    
+    if ($_SESSION['civilianPrivilege'] == '1')
     {
         $civilianButton = "<a href=\"".BASE_URL."/".OCAPPS."/civilian.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Civilian Services</a>";
     }
-
-
     if ($_SESSION['adminPrivilege'] = '3')
     {
         $adminButton = "<a href=\"".BASE_URL."/oc-admin/admin.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Admin</a>";
@@ -85,7 +78,7 @@ $roadsideAssistButton = "";
     if ($_SESSION['adminPrivilege'] == "2")
     {
         $adminButton = "<a href=\"".BASE_URL."/oc-admin/admin.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Moderator</a>";
-    }
+    } else {}
 ?>
 
 <html lang="en">
@@ -103,10 +96,9 @@ $roadsideAssistButton = "";
             <!-- ./ row -->
             </div class="row">
             <div class="col-lg-12">
-							&nbsp;
-							<div id="buttongroup">
-								<?php echo $adminButton;?>
-							</div>
+                                <div id="buttongroup">
+                                    <?php echo $adminButton;?>
+                                </div>
 								<div id="buttongroup">
 									<?php echo $dispatchButton;?>
 								</div>

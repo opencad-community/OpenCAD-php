@@ -1,21 +1,21 @@
-    <?
+    <?php
     require_once( __DIR__ . '/../oc-config.php');
     require_once( ABSPATH . '/oc-functions.php');?>
     
     <!-- jQuery -->
-    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/jquery/dist/jquery.js"></script>
-    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/jquery-migrate/jquery-migrate.js"></script>
+    <script type="text/javascript" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/jquery-migrate/jquery-migrate.js"></script>
     
     <!-- popper.js -->
-    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/popper.js/dist/umd/popper.js"></script>
-    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/popper.js/dist/umd/popper-utils.js"></script>
-    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/tooltip.js/index.js"></script>
+    <script type="text/javascript" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/popper.js/dist/umd/popper.js"></script>
+    <script type="text/javascript" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/popper.js/dist/umd/popper-utils.js"></script>
+    <script type="text/javascript" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/tooltip.js/index.js"></script>
 
     <!-- Bootstrap -->
-    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!-- FastClick -->
-    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/fastclick/lib/fastclick.js"></script>
+    <script type="text/javascript" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/fastclick/lib/fastclick.js"></script>
 
 	<script type="text/javascript" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/jszip/dist/jszip.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
@@ -66,7 +66,7 @@
     <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/jquery-ui/jquery-ui.js"></script>
 
     <!-- Custom Theme Scripts -->
-    <link href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/coreui/src/js/main.js" rel="stylesheet">
+    <script type="text/javascript" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/coreui/src/js/coreui.min.js"></script>
     <script src="<?php echo BASE_URL;?>/oc-includes/OpenCAD.js"></script>
     <script src="<?php echo BASE_URL; ?>/oc-includes/custom.js"></script>
 

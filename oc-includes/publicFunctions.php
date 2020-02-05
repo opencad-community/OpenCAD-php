@@ -50,7 +50,7 @@ function getAgencies()
         die();
     }
 
-    $result = $pdo->query("SELECT departmentId, departmentName from ".DB_PREFIX."departments");
+    $result = $pdo->query("SELECT departmentId, departmentName, departmentLongName from ".DB_PREFIX."departments");
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
@@ -59,7 +59,7 @@ function getAgencies()
     }
     foreach ($result as $row)
     {
-            echo '<option value="' . $row['departmentId'] . '">' . $row['departmentName'] . '</option>';
+            echo '<option value="' . $row['departmentId'] . '">' . $row['departmentLongName'] . '</option>';
     }
     $pdo = null;
 }

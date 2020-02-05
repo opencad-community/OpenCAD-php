@@ -1263,7 +1263,7 @@
 				<label class="col-lg-2 control-label">Issuing Agency</label>
 				<div class="col-lg-10">
 				  <select class="form-control selectpicker" name="issuer" id="issuer" data-live-search="true" required>
-					<?php getAgenciesWarrants();?>
+					<?php getAgencies();?>
 				  </select>
 				</div>
 				<!-- ./ col-sm-9 -->
