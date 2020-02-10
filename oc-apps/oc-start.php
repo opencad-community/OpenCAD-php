@@ -75,7 +75,7 @@ $roadsideAssistButton = "";
     {
         $adminButton = "<a href=\"".BASE_URL."/oc-admin/admin.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Admin</a>";
     }
-    if ($_SESSION['adminPrivilege'] == "2")
+    else if ($_SESSION['adminPrivilege'] == "2")
     {
         $adminButton = "<a href=\"".BASE_URL."/oc-admin/admin.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Moderator</a>";
     } else {}

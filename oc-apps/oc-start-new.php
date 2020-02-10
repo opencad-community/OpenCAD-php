@@ -102,6 +102,7 @@ else
 	  <div class="sidebar">
 		<nav class="sidebar-nav">
 		  <ul class="nav">
+<<<<<<< HEAD
 				<ul "nav-dropdown-items">
 					<?php echo $dispatchButton;?>			
 				</ul>
@@ -115,6 +116,70 @@ else
 					<?php echo $fireButton;?>
 					<?php echo $emsButton;?>
 				</ul>
+=======
+			<li class="nav-title">Civilian Services</li>
+				<?php echo $dispatchButton;?>			
+			<li class="nav-item">
+			  <a class="nav-link" href="typography.html">
+				<i class="nav-icon icon-pencil"></i> Typograhy</a>
+			</li>
+			<li class="nav-title">Law Enforement Services</li>
+				<ul>
+				<?php echo $sheriffButton;?>
+				<?php echo $highwayButton;?>
+				<?php echo $stateButton;?>
+				<?php echo $policeButton;?>
+			  </ul>
+			</li>
+			<li class="nav-item nav-dropdown">
+			  <a class="nav-link nav-dropdown-toggle" href="#">
+				<i class="nav-icon icon-bell"></i> Notifications</a>
+			  <ul class="nav-dropdown-items">
+				<li class="nav-item">
+				  <a class="nav-link" href="notifications-alerts.html">
+					<i class="nav-icon icon-bell"></i> Alerts</a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="notifications-badge.html">
+					<i class="nav-icon icon-bell"></i> Badge</a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="notifications-modals.html">
+					<i class="nav-icon icon-bell"></i> Modals</a>
+				</li>
+			  </ul>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link" href="widgets.html">
+				<i class="nav-icon icon-calculator"></i> Widgets
+				<span class="badge badge-primary">NEW</span>
+			  </a>
+			</li>
+			<li class="divider"></li>
+			<li class="nav-title">First Responder Services</li>
+			<li class="nav-item nav-dropdown">
+			  <a class="nav-link nav-dropdown-toggle" href="#">
+				<i class="nav-icon icon-star"></i> Pages</a>
+			  <ul class="nav-dropdown-items">
+				<li class="nav-item">
+				  <a class="nav-link" href="login.html" target="_top">
+					<i class="nav-icon icon-star"></i> Login</a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="register.html" target="_top">
+					<i class="nav-icon icon-star"></i> Register</a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="404.html" target="_top">
+					<i class="nav-icon icon-star"></i> Error 404</a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="500.html" target="_top">
+					<i class="nav-icon icon-star"></i> Error 500</a>
+				</li>
+			  </ul>
+			</li>
+>>>>>>> 213ef0dd853e19eb3d9e412b77d130fdfd5475ad
 		  </ul>
 		</nav>
 	  </div>
