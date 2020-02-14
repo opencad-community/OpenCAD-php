@@ -88,6 +88,8 @@ $arrLang['installation_guide'] = "Installation Guide";
 $arrLang['installation_type'] = "Installation Type";
 $arrLang['language'] = "Language";
 $arrLang['license'] = "License";
+$arrLang['Import'] = "Import";
+$arrLang['Export'] = "Export";
 $arrLang['loading'] = "loading";
 $arrLang['mbstring_support'] = "Multibyte String Support";
 $arrLang['magic_quotes_gpc'] = "Magic Quotes for GPC (Get/Post/Cookie)";
@@ -149,7 +151,7 @@ $arrLang['update'] = "Update";
 $arrLang['updating_completed'] = "Updating Completed!";
 $arrLang['virtual_directory_support'] = "Virtual Directory Support";
 $arrLang['we_are_ready_to_installation'] = "We are ready now to proceed with installation";
-$arrLang['we_are_ready_to_installation_text'] = "At this step setup wizard will attempt to create all required database tables and populate them with data. <br>If something goes wrong, go back to the Database Settings step and make sure every information you've entered is correct.";
+$arrLang['we_are_ready_to_installation_text'] = "At this step setup wizard will attempt to create all required database tables and populate them with data. <br>If an error is encountered then return to the database settings page and make any corrections.";
 $arrLang['writable'] = "Writable";
 
 $arrLang['core_configuration'] = "Core Configuration";
@@ -198,10 +200,16 @@ $arrLang['SESSION_KEY'] = 'Session Key';
 
 //** End Core Configuration Strings **//
 
-//** Begin Police Strings **//
-$arrLang['POLICE_NCIC'] = "Police NCIC";
+//** Begin Login Strings **//
+//** End Login Strings **//
+
+//** Begin LEO Strings **//
+$arrLang['POLICE_NCIC'] = "LEO NCIC Lookup";
 $arrLang['POLICE_NCIC_notes'] = "Shows/Hides NCIC functionality on MDT console. If 'true' then LEO will be able to use NCIC functions without the need for a dispatcher, else if 'flase' then LEO will require the presence of dispatcher to use NCIC funcationality.";
-//** End Police Strings **//
+
+$arrLang['POLICE_CALL_SELFASSIGN'] = "LEO Call Self Assign";
+$arrLang['POLICE_CALL_SELFASSIGN_notes'] = "Allows/Disallows capability for LEO officers to attach them selves to call..";
+//** End LEO Strings **//
 
 //**  Begin Fire Strings **//
 $arrLang['FIRE_PANIC'] = "Fire Panic";
@@ -215,6 +223,9 @@ $arrLang['FIRE_NCIC_NAME_notes'] = "If 'true' then Fire personnel will be able t
 
 $arrLang['FIRE_NCIC_PLATE'] = "Fire NCIC Plate";
 $arrLang['FIRE_NCIC_PLATE_notes'] = "If 'true' then Fire personnel will be able to use the NCIC plate lookup function, else if 'false' then Fire personnel will not be able to use the NICI plate lookup function.";
+
+$arrLang['FIRE_CALL_SELFASSIGN'] = "Fire Call Self Assign";
+$arrLang['FIRE_CALL_SELFASSIGN_notes'] = "Allows/Disallows capability for LEO officers to attach them selves to call..";
 //**  End Fire Strings **//
 
 //** Begin EMS Strings **//
@@ -373,6 +384,8 @@ $arrLang["NCIC_PLATE_LOOKUP"] = "NCIC Plate Lookup";
 $arrLang["NCIC_WEAPON_LOOKUP"] = "NCIC Weapon Lookup";
 $arrLang["SEND"] = "Send";
 $arrLang["MY_PROFILE"] = "My Profile";
+$arrLang["APPLICATIONS"] = "Applications";
+$arrLang["SETTINGS"] = "Settings";
 //** End Common Global Strings */
 
 //** Begin Administrator/Moderator Console Strings  **/
@@ -385,9 +398,8 @@ $arrLang["CAD_USER_MANAGEMENT"] = "CAD User Management";
 $arrLang["ACCOUNT_MANAGEMENT"] = "Account Management";
 $arrLang["SUSPEND_WITH_REASON"] = "Suspend With Reason";
 $arrLang["SUSPEND_WITHOUT_REASON"] = "Suspend Without Reason";
-$arrLang["NCIC_EDITOR"] = "NCIC Editor";
-$arrLang["NCIC_NAMES_DB"] = "No results found in the NCIC Names database.";
-$arrLang["NCIC_NAMES_DB_none"] = "NCIC Names Database";
+$arrLang["NCIC_NAMES_DB"] = "NCIC Names Database"; 
+$arrLang["NCIC_NAMES_DB_none"] = "No results found in the NCIC Names database.";
 $arrLang["NCIC_VEHICLES_DB"] = "NCIC Vehicles Database";
 $arrLang["NCIC_VEHICLES_DB_none"] = "No results found in the NCIC Vehicles database.";
 $arrLang["NCIC_WEAPONS_DB"] = "NCIC Weapons Database";
@@ -400,6 +412,61 @@ $arrLang["NCIC_ARRESTS_DB"] = "NCIC Arrests Database";
 $arrLang["NCIC_ARRESTS_DB_none"] = "No results found in the NCIC Arrests database.";
 $arrLang["NCIC_WARRANTS_DB"] = "NCIC Warrants Database";
 $arrLang["NCIC_WARRANTS_DB_none"] = "No results found in the NCIC Warrants database";
+$arrLang["USER_MANAGER"] = "Users";
+$arrLang["NCIC_EDITOR"] = "NCIC Editor";
+$arrLang["DATA_MANAGER"] = "Data Manager";
+$arrLang["ABOUT_ENVIRONMENT"] = "About Your Environment";
+$arrLang["PHP_VERSION"] = "PHP Version";
+$arrLang["PHP_VERSION_notes"] = "<em>Note:</em> The active version of PHP.</p>";
+$arrLang["DATABASE_ENGINE"] = "Database Engine";
+$arrLang["DATABASE_ENGINE_notes"] = "<em>Note:</em> The active database engine.";
+$arrLang["LOADED_PHP_MODULES"] = "Loaded PHP Modules";
+$arrLang["LOADED_PHP_MODULES_notes"] = "<em>Note:</em> Active PHP modules.";
+$arrLang["ABOUT_YOUR_APPLICATION"] = "About Your Application";
+$arrLang["APPLICATION_VERSION"] = "Application Version";
+$arrLang["APPLICATION_VERSION_notes"] = "<em>Note:</em> The currently installed version of OpenCAD.</p>";
+$arrLang["DATABASE_VERSION"] = "Database Version";
+$arrLang["DATABASE_VERSION_notes"] = "<em>Note:</em> The currently installed OpenCAD database schema version.</p>";
+$arrLang["CITATIONTYPE_MANAGER"] = "Citation Type Manager";
+$arrLang["CITATIONTYPE_MANAGER_none"] = "No results found in the <em>Citation Type</em> datbase";
+$arrLang["DEPARTMENT_MANAGER"] = "Department Manager";
+$arrLang["DEPARTMENT_MANAGER_none"] = "No results found in the <em>Department</em> datbase";
+$arrLang["INCIDENTTYPE_MANAGER"] = "Incident Type Manager";
+$arrLang["INCIDENTTYPE_MANAGER_none"] = "No results found in the <em>Incident Type</em> datbase";
+$arrLang["CITATIONTYPE_MANAGER"] = "Citation Type Manager";
+$arrLang["CITATIONTYPE_MANAGER_none"] = "No results found in the <em>Citation Type</em> datbase";
+$arrLang["RADIOCODE_MANAGER"] = "Radio Code Manager";
+$arrLang["RADIOCODE_MANAGER_none"] = "No results found in the <em>Radio Code</em> datbase";
+$arrLang["STREET_MANAGER"] = "Street Manager";
+$arrLang["STREET_MANAGER_none"] = "No results found in the <em>Street</em> datbase";
+$arrLang["VEHICLE_MANAGER"] = "Vehicle Manager";
+$arrLang["VEHICLE_MANAGER_none"] = "No results found in the <em>Vehicle</em> datbase";
+$arrLang["WARNINGTYPE_MANAGER"] = "Warning Type Manager";
+$arrLang["WARNINGTYPE_MANAGER_none"] = "No results found in the <em>Warning Type</em> datbase";
+$arrLang["WARRANTTYPE_MANAGER"] = "Warrant Type Manager";
+$arrLang["WARRANTTYPE_MANAGER_none"] = "No results found in the <em>Warrant Type</em> datbase";
+$arrLang["WEAPON_MANAGER"] = "Weapon Manager";
+$arrLang["WEAPON_MANAGER_none"] = "No results found in the <em>weapons</em> datbase";
+$arrLang["ABOUT_OPENCAD"] = "About OpenCAD";
+$arrLang["RESET_DATA"] = "Reset Data";
+$arrLang["ENVIRONMENTAL_DATA_OPTGRP"] = "Environmental Data";
+$arrLang["STREETS"] = "Streets";
+$arrLang["VEHICLES"] = "Vehicles";
+$arrLang["WEAPONS"] = "Weapons";
+$arrLang["CIVILIAN_DATA_OPTGRP"] = "Civilian Data";
+$arrLang["IDENTITIES"] = "Identites";
+$arrLang["REGISTERED_PLATES"] = "Registered Plates";
+$arrLang["REGISTERED_WEAPONS"] = "Registered Weapons";
+$arrLang["WARRANT_HISTORY"] = "Warrant History";
+$arrLang["WARNING_HISTORY"] = "Warning History";
+$arrLang["LEO_SUPPORT_DATA_OPTGRP"] = "LEO Support Data";
+$arrLang["CITATION_TYPES"] = "Citation Types";
+$arrLang["INCIDENT_TYPES"] = "Incident Types";
+$arrLang["RADIO_CODES"] = "Radio Codes";
+$arrLang["WARRANT_TYPES"] = "Warrant Types";
+$arrLang["WARNING_TYPES"] = "Warning Types";
+$arrLang["RESET_ALL_DATA_OPTGRP"] = "RESET ALL DATA (USE WITH CUATION)";
+$arrLang["RESET_ALL_DATA"] = "All Data (Use with CAUTION)";
 //** End Administrator/Moderator Console Strings  **/
 
 //** Begin Civillian Console Strings **/
@@ -414,10 +481,10 @@ $arrLang["MY_WARRANTS"] = "My Warrants";
 $arrLang["MY_WARRANTS_none"] = "No results found in the warrants database.";
 $arrLang["CREATE_A_CALL"] = "Create A Call";
 $arrLang["ADD_NEW_IDENTITY"] = "Add New Identity";
-$arrLang["Add_ADD_NEW_PLATE"] = "Add New Plate";
+$arrLang["ADD_NEW_VEHICLE"] = "Add New Vehcile";
 $arrLang["ADD_NEW_WEAPON"] = "Add New Weapon";
 $arrLang["CIVILLIAN_DASHBOARD"] = "Civillian Dashboard";
-$arrLang["VIEW_WARRANTS"] = "View Warrans";
+$arrLang["VIEW_WARRANTS"] = "View Warrants";
 $arrLang["CREATE_WARRANT"] = "Create Warrant";
 $arrLang["UPDATE"] = "Update";
 //** End Civillian Console Strings **/
@@ -439,6 +506,7 @@ $arrLang["WARNINGS"] = "Warnings";
 $arrLang["CITATIONS"] = "Citations";
 $arrLang["ARREST_REPORT"] = "Arrest Report";
 $arrLang["WARRANTS"] = "Warrants";
+$arrLang["SET_AREA_OF_PATROL"] = "Set Area of Patrol";
 //** End CAD Console Strings *//
 
 //** Begin MDT Console Strings **/
