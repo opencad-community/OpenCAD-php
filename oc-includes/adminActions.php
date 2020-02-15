@@ -315,6 +315,68 @@ function getPendingUsers()
     }
 }
 
+function getPendingUsersReadOnly()
+{
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        die();
+    }
+
+    $result = $pdo->query("SELECT id, name, email, identifier FROM ".DB_PREFIX."users WHERE approved = '0'");
+    if (!$result)
+    {
+        $_SESSION['error'] = $pdo->errorInfo();
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        die();
+    }
+    $num_rows = $result->rowCount();
+    $pdo = null;
+
+    if ($num_rows == 0)
+    {
+        echo "<div class=\"alert alert-info\"><span>There are currently no access requests</span></div>";
+    }
+    else
+    {
+        echo '
+            <table id="pendingUsers" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Identifier</th>
+                        <th>Groups</th>
+                    </tr>
+                </thead>
+            <tbody>
+        ';
+
+        foreach($result as $row)
+        {
+            echo '
+            <tr>
+                <td>' . $row[1] . '</td>
+                <td>' . $row[2] . '</td>
+                <td>' . $row[3] . '</td>
+                <td>';
+
+            getUserGroups($row[0]);
+
+            echo ' </td>';
+        }
+
+        echo '
+            </tbody>
+            </table>
+        ';
+    }
+}
+
 function getRole()
 {
     $output = "";

@@ -4,6 +4,7 @@ require_once( "../oc-config.php");
 require_once( ABSPATH . '/oc-functions.php');
 require_once( ABSPATH . '/oc-settings.php');
 require_once( ABSPATH . "/oc-includes/generalActions.php");
+require_once( ABSPATH . "/oc-includes/adminActions.php");
 
 setDispatcher("1");
 
@@ -58,11 +59,11 @@ $roadsideAssistButton = "";
     }
     if ($_SESSION['adminPrivilege'] === '3')
     {
-        $adminButton = "<li class=\"nav-item\" style=\"list-style: none;\"><a class=\"nav-link\" href=\"".BASE_URL."/oc-admin/admin.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Admin</a></li>";
+        $adminButton = "<a href=\"".BASE_URL."/oc-admin/admin.php\" class=\"btn btn-primary btn-md animate fadeInLeft delay1 \">Admin</a>";
     }
     if ($_SESSION['adminPrivilege'] === "2")
     {
-        $adminButton = "<li class=\"nav-item\" style=\"list-style: none;\"><a class=\"nav-link\" href=\"".BASE_URL."/oc-admin/admin.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Moderator</a></li>";
+        $adminButton = "<a href=\"".BASE_URL."/oc-admin/admin.php\" class=\"btnbtn-primary btn-md animate fadeInLeft delay1\">Moderator</a>";
     }
 
 if (empty($_SESSION['logged_in']))
@@ -77,13 +78,6 @@ else
 
 ?>
 
-<!--
-* CoreUI - Free Bootstrap Admin Template
-* @version v2.0.0-beta.0
-* @link https://coreui.io
-* Copyright (c) 2018 creativeLabs Łukasz Holeczek
-* Licensed under MIT (https://coreui.io/license)
--->
 <!DOCTYPE html>
 <html lang="en">
 <?php include ( ABSPATH . "/".OCTHEMES."/".THEME."/includes/header.inc.php"); ?>
@@ -129,19 +123,23 @@ else
 			<br />
 			<div class="row">
 			  <div class="col-md-12">
+			  <?php if ( $_SESSION['adminPrivilege'] == 3 | $_SESSION['adminPrivilege'] == 2 ) {?>
 				<div class="card">
 				  <div class="card-header">
-					Traffic &amp; Sales
+					<?php echo lang_key("ACCESS_REQUESTS"); ?>
 				  </div>
 				  <div class="card-body">
-					
-					<br/>
+				  	<?php getPendingUsersReadOnly();?>
+				  </div>
+				  <div class="card-footer">
+					<?php echo $adminButton; ?>
 				  </div>
 				</div>
 			  </div>
 			  <!--/.col-->
 			</div>
 			<!--/.row-->
+			  <?php } else {} ?>
 		  </div>
 
 		</div>
