@@ -5,6 +5,7 @@ require_once( ABSPATH . '/oc-functions.php');
 require_once( ABSPATH . '/oc-settings.php');
 require_once( ABSPATH . "/oc-includes/generalActions.php");
 require_once( ABSPATH . "/oc-includes/adminActions.php");
+include_once( ABSPATH . "/" . OCCONTENT . "/plugins/api_auth.php" );
 
 setDispatcher("1");
 
@@ -101,11 +102,11 @@ else
 				<?php echo $civilianButton; ?>
 			<li class="nav-title">Law Enforement Services</li>
 				<ul>
-				<?php echo $sheriffButton;?>
-				<?php echo $highwayButton;?>
-				<?php echo $stateButton;?>
-				<?php echo $policeButton;?>
-			  </ul>
+					<?php echo $sheriffButton;?>
+					<?php echo $highwayButton;?>
+					<?php echo $stateButton;?>
+					<?php echo $policeButton;?>
+				</ul>
 			</li>
 
 			<li class="divider"></li>
@@ -114,33 +115,73 @@ else
 				<?php echo $fireButton;?>
 				<?php echo $emsButton;?>
 			</ul>
-		  </ul>
+		</ul>
 		</nav>
-	  </div>
-	  <main class="main">
+	</div>
+	<main class="main">
 		<div class="container-fluid">
 			<div class="animated fadeIn">
 			<br />
+			<?php if ( $_SESSION['adminPrivilege'] == 3 | $_SESSION['adminPrivilege'] == 2 ) {?>
 			<div class="row">
-			  <div class="col-md-12">
-			  <?php if ( $_SESSION['adminPrivilege'] == 3 | $_SESSION['adminPrivilege'] == 2 ) {?>
-				<div class="card">
-				  <div class="card-header">
-					<?php echo lang_key("ACCESS_REQUESTS"); ?>
-				  </div>
-				  <div class="card-body">
-				  	<?php getPendingUsersReadOnly();?>
-				  </div>
-				  <div class="card-footer">
-					<?php echo $adminButton; ?>
-				  </div>
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<?php echo lang_key("ACCESS_REQUESTS"); ?>
+						</div>
+						<div class="card-body">
+							<?php getPendingUsersReadOnly();?>
+						</div>
+						<div class="card-footer">
+							<?php echo $adminButton; ?>
+						</div>
+					</div>
 				</div>
-			  </div>
-			  <!--/.col-->
+				<!--/.col-->
 			</div>
 			<!--/.row-->
-			  <?php } else {} ?>
-		  </div>
+			<?php } else {} ?>
+
+			
+			<div class="row justify-content-center">
+				<div class="col-md-12">	
+					<div class="card">
+						<div class="card-header">
+							<?php echo lang_key("PATROL_STATUS"); ?> <button class="btn btn-primary" name="aop" data-target="#aop" id="getAOP" disabled></button>
+						</div>
+						<div class="card-body">
+						<?php if (!empty(LIVEMAP_URL)) {?>
+							<iframe src="<?php echo LIVEMAP_URL; ?>" height="500px" width="100%"></iframe>
+						<?php } else {} ?>
+						</div>
+						<div class="card-columns col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<?php echo lang_key("ONLINE_NOW_CIV"); ?>
+								</div>
+								<div class="card-body">
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header">
+									<?php echo lang_key("ONLINE_NOW_LEO"); ?>
+								</div>
+								<div class="card-body">
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header">
+									<?php echo lang_key("ONLINE_NOW_FIRE_EMS"); ?>
+								</div>
+								<div class="card-body">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--/.col-->
+			</div>
+			<!--/.row-->
 
 		</div>
 	  </main>
@@ -155,5 +196,45 @@ else
           </div>
         </footer>
 	<?php include ( ABSPATH . "/oc-includes/jquery-colsolidated.inc.php"); ?>
+<script type="text/javascript">
+$(document).ready(function() {
+
+      $(function() {
+         $('#menu_toggle').click();
+      });
+
+		getAOP();
+	});
+function getAOP() {
+   $.ajax({
+         type: "GET",
+         url: "../<?php echo OCINC ?>/generalActions.php",
+         data: {
+            getAOP: 'yes'
+         },
+         success: function(response)
+         {
+            $('#getAOP').html(response);
+
+            // SG - Removed until node/real-time data setup
+            /*$('#activeUsers').DataTable({
+            searching: false,
+            scrollY: "200px",
+            lengthMenu: [[4, -1], [4, "All"]]
+         });*/
+            setTimeout(getAOP, 5000);
+
+
+        },
+        error : function(XMLHttpRequest, textStatus, errorThrown)
+        {
+    	    console.log("Error");
+        }
+
+    });
+}
+
+
+</script>
   </body>
 </html>
