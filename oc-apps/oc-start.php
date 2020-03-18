@@ -97,10 +97,10 @@ else
 	  <div class="sidebar">
 		<nav class="sidebar-nav">
 		  <ul class="nav">
-			<li class="nav-title">Civilian Services</li>
+			<li class="nav-title"><?php echo lang_key("CIVILIAN_SERVICES"); ?></li>
 				<?php echo $dispatchButton;?>
 				<?php echo $civilianButton; ?>
-			<li class="nav-title">Law Enforement Services</li>
+			<li class="nav-title"><?php echo lang_key("LAW_ENFORCEMENT_SERVICES"); ?></li>
 				<ul>
 					<?php echo $sheriffButton;?>
 					<?php echo $highwayButton;?>
@@ -110,7 +110,7 @@ else
 			</li>
 
 			<li class="divider"></li>
-			<li class="nav-title">First Responder Services</li>
+			<li class="nav-title"><?php echo lang_key("FIRST_RESPONDER_SERVICES"); ?></li>
 			<ul>
 				<?php echo $fireButton;?>
 				<?php echo $emsButton;?>
@@ -153,29 +153,6 @@ else
 						<?php if (!empty(LIVEMAP_URL)) {?>
 							<iframe src="<?php echo LIVEMAP_URL; ?>" height="500px" width="100%"></iframe>
 						<?php } else {} ?>
-						</div>
-						<div class="card-columns col-md-12">
-							<div class="card">
-								<div class="card-header">
-									<?php echo lang_key("ONLINE_NOW_CIV"); ?>
-								</div>
-								<div class="card-body">
-								</div>
-							</div>
-							<div class="card">
-								<div class="card-header">
-									<?php echo lang_key("ONLINE_NOW_LEO"); ?>
-								</div>
-								<div class="card-body">
-								</div>
-							</div>
-							<div class="card">
-								<div class="card-header">
-									<?php echo lang_key("ONLINE_NOW_FIRE_EMS"); ?>
-								</div>
-								<div class="card-body">
-								</div>
-							</div>
 						</div>
 					</div>
 				</div>

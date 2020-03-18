@@ -197,11 +197,18 @@ $arrLang['LOGGED_IN_SALT'] = 'Logged-In Salt';
 $arrLang['NONCE_KEY'] = 'Nonce Key';
 $arrLang['NONCE_SALT'] = 'Nonce Salt';
 $arrLang['SESSION_KEY'] = 'Session Key';
-
 //** End Core Configuration Strings **//
 
 //** Begin Login Strings **//
+
 //** End Login Strings **//
+
+//** Begin Dashboard Strings **//
+$arrLang['CIVILIAN_SERVICES'] = "Civilian Services";
+$arrLang['LAW_ENFORCEMENT_SERVICES'] = "Law Enforcement Services";
+$arrLang['FIRST_RESPONDER_SERVICES'] = "First Responder Services";
+//** End Dashboard Strings **//
+
 
 //** Begin LEO Strings **//
 $arrLang['POLICE_NCIC'] = "LEO NCIC Lookup";
