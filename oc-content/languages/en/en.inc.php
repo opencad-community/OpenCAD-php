@@ -200,8 +200,26 @@ $arrLang['SESSION_KEY'] = 'Session Key';
 //** End Core Configuration Strings **//
 
 //** Begin Login Strings **//
-
+$arrLang['LAW_ENFORCEMENT_OFFICER'] = "Law Enforcement Officer";
+$arrLang['FIRST_RESPONDER'] = "First Responder";
+$arrLang['CIVILIAN'] = "Civilian";
+$arrLang['SIGN_IN_TO_YOUR_ACCOUNT'] = "Sign in to your account";
+$arrLang['LOGIN'] = "Log In";
+$arrLang['REQUEST_ACCESS'] = "Request Access";
 //** End Login Strings **//
+
+
+//** Begin Registration Modal Strings **//
+$arrLang['FIRST_RESPONDER_ACCESS_REQUEST'] = "First Responder Access Request";
+$arrLang['CIVILIAN_ACCESS_REQUEST'] = "Civilian Access Request";
+$arrLang['DIVISION_SELECT_ALL'] = "Division (Select all that apply)";
+$arrLang['IDENTIFIER_PLCAEHOLDER'] = "Identifier (Code Number, Unit ID)";
+//** End Registration Modal Strings  **//
+
+
+//** Begin Registration Modal Strings **//
+$arrLang['CONFIRM_PASSWORD'] = "Confirm Password";
+//** End Registration Modal Strings **//
 
 //** Begin Dashboard Strings **//
 $arrLang['CIVILIAN_SERVICES'] = "Civilian Services";
@@ -393,6 +411,9 @@ $arrLang["SEND"] = "Send";
 $arrLang["MY_PROFILE"] = "My Profile";
 $arrLang["APPLICATIONS"] = "Applications";
 $arrLang["SETTINGS"] = "Settings";
+$arrLang["REQUEST"] = "Request";
+$arrLang["CLOSE"] = "Close";
+$arrLang["RESET"] = "Reset";
 //** End Common Global Strings */
 
 //** Begin Administrator/Moderator Console Strings  **/
