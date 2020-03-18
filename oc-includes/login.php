@@ -77,7 +77,7 @@ require_once(ABSPATH . "/oc-settings.php");
     }
     if ($result['approved'] == "2")
     {
-        /* TODO: Show reason why user is suspended */
+        /* TODO: [OCPHP-704] Show reason why user is suspended */
         if(session_id() == '' || !isset($_SESSION)) {
             session_start();
         }
