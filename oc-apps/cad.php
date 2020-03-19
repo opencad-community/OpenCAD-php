@@ -112,7 +112,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="col-md-12 col-sm-12 col-xs-12">
 								<div class="card">
 									<div class="card-header">
-										<h2>Active Calls</h2>
+										<h2><?php echo lang_key("ACTIVE_CALLS"); ?></h2>
 									</div>
 									<!-- ./ x_title -->
 									<div class="card-content">
@@ -123,10 +123,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								</div>
 								<!-- ./ x_content -->
 									<div class="card-footer">
-										<button class="btn btn-primary" name="new_call_btn" data-toggle="modal" data-target="#newCall">New Call</button>
-										<button class="btn btn-danger float-right" onClick="priorityTone('single')" value="0" id="priorityTone">10-3 Tone</button>
-										<button class="btn btn-danger float-right" onClick="priorityTone('recurring')" value="0" id="recurringTone">Priority Tone</button>
-										<button class="btn btn-danger float-right" onClick="priorityTone('panic')" value="0" id="panicTone">Panic Button</button>
+										<button class="btn btn-primary" name="new_call_btn" data-toggle="modal" data-target="#newCall"><?php echo lang_key("NEW_CALL"); ?></button>
+										<button class="btn btn-danger float-right" onClick="priorityTone('single')" value="0" id="priorityTone"><?php echo lang_key("STOP_TRANSMITTING"); ?></button>
+										<button class="btn btn-danger float-right" onClick="priorityTone('recurring')" value="0" id="recurringTone"><?php echo lang_key("PRIORITY_SIGNAL"); ?>/button>
+										<button class="btn btn-danger float-right" onClick="priorityTone('panic')" value="0" id="panicTone"><?php echo lang_key("PANIC_BUTTON"); ?></button>
 									</div>
 								</div>
 								<!-- ./ x_panel -->
@@ -137,7 +137,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="col-md-12 col-sm-12 col-xs-12">
 								<div class="card">
 									<div class="card-header">
-										<h2>Active BOLOs</h2>
+										<h2><?php echo lang_key("ACTIVE_BOLOS"); ?></h2>
 									</div>
 									<!-- ./ x_title -->
 									<div class="card-conent">
@@ -157,8 +157,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 									<!-- ./ x_content -->
 
 									<div class="card-footer">
-										<button class="btn btn-warning" name="new_call_btn" data-toggle="modal" data-target="#newPersonsBOLO">New Persons BOLO</button>
-										<button class="btn btn-warning" name="new_call_btn" data-toggle="modal" data-target="#newVehicleBOLO">New Vehicle BOLO</button>
+										<button class="btn btn-warning" name="new_call_btn" data-toggle="modal" data-target="#newPersonsBOLO"><?php echo lang_key("NEW_PERSONS_BOLO"); ?></button>
+										<button class="btn btn-warning" name="new_call_btn" data-toggle="modal" data-target="#newVehicleBOLO"><?php echo lang_key("NEW_VEHICLE_BOLO"); ?></button>
 									</div>
 								</div>
 							</div>
@@ -169,7 +169,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						<div class="col-md-4 col-xs-4">
 							<div class="card w-1000">
 								<div class="card-header">
-									<h2>Active Dispatchers</h2>
+									<h2><?php echo lang_key("ACTIVE_DISPATCHERS"); ?></h2>
 									<div class="clearfix"></div>
 								</div>
 								<!-- ./ x_title -->
@@ -182,7 +182,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						<div class="col-md-4 col-xs-4">
 							<div class="card">
 								<div class="card-header">
-									<h2>Available Units</h2>
+									<h2><?php echo lang_key("AVAILABLE_UNITS"); ?></h2>
 									<div class="clearfix"></div>
 								</div>
 								<!-- ./ x_title -->
@@ -195,7 +195,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						<div class="col-md-4 col-xs-4">
 							<div class="card">
 								<div class="card-header">
-									<h2>Unavailable Units</h2>
+									<h2><?php echo lang_key("UNAVAILABLE_UNITS"); ?></h2>
 								</div>
 								<!-- ./ x_title -->
 								<div class="card-content">
@@ -214,7 +214,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						<div class="col-md-4 col-xs-4">
 							<div class="card">
 								<div class="card-header">
-									<h2>NCIC Name Lookup</h2>
+									<h2><?php echo lang_key("NCIC_NAME_LOOKUP"); ?></h2>
 									<div class="clearfix"></div>
 								</div>
 								<!-- ./ x_title -->
@@ -222,7 +222,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 									<div class="input-group">
 										<input id="ncic_name" type="text" class="form-control" placeholder="John Doe" name="ncic_name"/>
 										<span class="input-group-append">
-											<button class="btn btn-primary" type="button" name="ncic_name_btn" id="ncic_name_btn">Send</button>
+											<button class="btn btn-primary" type="button" name="ncic_name_btn" id="ncic_name_btn"><?php echo lang_key("SEND"); ?></button>
 										</span>
 									</div>
 									<!-- ./ input-group -->
@@ -238,14 +238,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						<div class="col-md-4 col-xs-4">
 							<div class="card">
 								<div class="card-header">
-								<h2>NCIC Plate Lookup</h2>
+								<h2><?php echo lang_key("NCIC_PLATE_LOOKUP"); ?></h2>
 							</div>
 							<!-- ./ x_title -->
 							<div class="card-body">
 								<div class="input-group">
 									<input type="text" name="ncic_plate" class="form-control" id="ncic_plate" placeholder="License Plate, (ABC123)"/>
 									<span class="input-group-append">
-										<button type="button" class="btn btn-primary" id="ncic_plate_btn">Send</button>
+										<button type="button" class="btn btn-primary" id="ncic_plate_btn"><?php echo lang_key("SEND"); ?></button>
 									</span>
 								</div>
 									<!-- ./ input-group -->
@@ -261,14 +261,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 					<div class="col-md-4 col-xs-4">
 						<div class="card">
 							<div class="card-header">
-								<h2>NCIC Weapon Lookup</h2>
+								<h2><?php echo lang_key("NCIC_WEAPON_LOOKUP"); ?></h2>
 							</div>
 							<!-- ./ x_title -->
 							<div class="card-body">
 								<div class="input-group">
 									<input type="text" name="ncic_weapon" class="form-control" id="ncic_weapon" placeholder="John Doe"/>
 									<span class="input-group-append">
-										<button type="button" class="btn btn-primary" name="ncic_weapon_btn" id="ncic_weapon_btn">Send</button>
+										<button type="button" class="btn btn-primary" name="ncic_weapon_btn" id="ncic_weapon_btn"><?php echo lang_key("SEND"); ?></button>
 									</span>
 								</div>
 								<!-- ./ input-group -->

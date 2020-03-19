@@ -97,13 +97,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <div class="animated fadeIn">
             <div class="card">
                       <div class="card-header">
-          <i class="fa fa-align-justify"></i> <?php echo lang_key("ACCESS_REQUESTS"); ?></div>
+          <i class="fa fa-align-justify"></i> <?php echo lang_key("MDT_CONSOLE"); ?></div>
               <div class="card-body">
 <div class="row">
                      <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="card">
                            <div class="card-header">
-                              <h2>Active Calls</h2>
+                              <h2><?php echo lang_key("ACTIVE_CALLS"); ?></h2>
                            </div>
                            <!-- ./ x_title -->
                            <div class="card-content">
@@ -114,10 +114,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                            </div>
                            <!-- ./ x_content -->
                            <div class="card-footer">
-                              <button class="btn btn-primary" name="new_call_btn" data-toggle="modal" data-target="#newCall">New Call</button>
-                              <button class="btn btn-danger float-right" onClick="priorityTone('single')" value="0" id="priorityTone">10-3 Tone</button>
-                              <button class="btn btn-danger float-right" onClick="priorityTone('recurring')" value="0" id="recurringTone">Priority Tone</button>
-                              <button class="btn btn-danger float-right" onClick="priorityTone('panic')" value="0" id="panicTone">Panic Button</button>
+                              <button class="btn btn-primary" name="new_call_btn" data-toggle="modal" data-target="#newCall"><?php echo lang_key("NEW_CALL"); ?></button>
+                              <button class="btn btn-danger float-right" onClick="priorityTone('single')" value="0" id="priorityTone"><?php echo lang_key("STOP_TRANSMITTING"); ?></button>
+                              <button class="btn btn-danger float-right" onClick="priorityTone('recurring')" value="0" id="recurringTone"><?php echo lang_key("PRIORITY_SIGNAL"); ?></button>
+                              <button class="btn btn-danger float-right" onClick="priorityTone('panic')" value="0" id="panicTone"><?php echo lang_key("PANIC_BUTTON"); ?></button>
                            </div>
                         </div>
                         <!-- ./ card -->
@@ -139,7 +139,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                       <div class="row">
                       <div class="col-sm-12">
                         <div class="form-group row">
-                          <label class="col-md-2 control-label"for="name">My Callsign</label>
+                          <label class="col-md-2 control-label"for="name"><?php echo lang_key("MY_CALLSIGN"); ?></label>
                           <input  name="callsign" class="col-md-9 form-control" id="callsign1" type="text" value="<?php echo $_SESSION['identifier'];?>" readonly />
                         </div>
                       </div>
@@ -148,7 +148,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                     <div class="row">
                       <div class="col-sm-12">
                         <div class="form-group row">
-                          <label class="col-md-2 control-label" for="callsign">My Status</label>
+                          <label class="col-md-2 control-label" for="callsign"><?php echo lang_key("MY_STATUS"); ?></label>
                           <input type="text" name="status" id="status" class="col-md-9 form-control" readonly />
                         </div>
                       </div>
@@ -157,7 +157,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                     <div class="row">
                       <div class="col-sm-12">
                         <div class="form-group row">
-                          <label class="col-md-2 control-label" for="ccnumber">Status</label>
+                          <label class="col-md-2 control-label" for="ccnumber"><?php echo lang_key("STATUS"); ?></label>
                               <select name="statusSelect" class="form-control col-md-9 <?php echo $_SESSION['identifier'];?>" id="statusSelect" onChange="responderChangeStatus(this);" title="Select a Status">
                                  <option value="10-6">10-6/Busy</option>
                                  <option value="10-5">10-5/Meal Break</option>
@@ -180,7 +180,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="card">
                            <div class="card-header">
-                              <h2>My Call</h2>
+                              <h2><?php echo lang_key("MY_CALL"); ?></h2>
                            </div>
                            <!-- ./ x_title -->
                            <div class="card-content">
@@ -199,7 +199,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <div class="col-md-4 col-xs-4">
                         <div class="card">
                            <div class="card-header">
-                              <h2>NCIC Name Lookup</h2>
+                              <h2><?php echo lang_key("NCIC_NAME_LOOKUP"); ?></h2>
                               <div class="clearfix"></div>
                            </div>
                            <!-- ./ x_title -->
@@ -223,7 +223,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <div class="col-md-4 col-xs-4">
                         <div class="card">
                            <div class="card-header">
-                              <h2>NCIC Plate Lookup</h2>
+                              <h2><?php echo lang_key("NCIC_PLATE_LOOKUP"); ?></h2>
                            </div>
                            <!-- ./ x_title -->
                            <div class="card-body">
@@ -246,7 +246,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                      <div class="col-md-4 col-xs-4">
                         <div class="card">
                            <div class="card-header">
-                              <h2>NCIC Weapon Lookup</h2>
+                              <h2><?php echo lang_key("NCIC_WEAPON_LOOKUP"); ?></h2>
                            </div>
                            <!-- ./ x_title -->
                            <div class="card-body">
