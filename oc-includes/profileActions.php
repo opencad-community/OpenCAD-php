@@ -64,7 +64,7 @@ function updateProfile()
 	$_SESSION['identifier'] = $identifier;
 
 	//Let the user know their information was updated
-	$_SESSION['profileUpdate'] = '<div class="alert alert-success"><span>Successfully updated your user information</span></div>';
+	$_SESSION['profileUpdate'] = '<div class="alert alert-success"><span>'.lang_key("PROFILE_SUCCESS").'</span></div>';
 
 	sleep(1); //Seconds to wait
 	header("Location: ".BASE_URL."/".OCAPPS."/oc-profile.php");
@@ -130,7 +130,7 @@ function changePassword()
         die();
     }
 
-    $_SESSION['profileUpdate'] = '<div class="alert alert-success"><span>Password successfully updated.</span></div>';
+    $_SESSION['profileUpdate'] = '<div class="alert alert-success"><span>'.lang_key("PASSWORD_SUCCESS").'</span></div>';
 
     $pdo = null;
     sleep(1); //Seconds to wait
