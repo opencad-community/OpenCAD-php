@@ -549,5 +549,7 @@ $arrLang["VIEW_VEHICLE_BOLOS"] = "View Vehicle BOLOs";
 $arrLang["PASSWORD"] = "Password";
 $arrLang["CHANGE_PASSWORD"] = "Change Password";
 $arrLang["MY_PRFILE"] ="My Profile";
+$arrLang["PROFILE_SUCCESS"] = "Successfully updated your user profile.";
+$arrLang["PASSWORD_SUCCESS"] = "Successfully updated your password."
 //** End Profile Console Strings *//
 ?>

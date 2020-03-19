@@ -67,7 +67,7 @@ function updateProfile()
 	$_SESSION['profileUpdate'] = '<div class="alert alert-success"><span>Successfully updated your user information</span></div>';
 
 	sleep(1); //Seconds to wait
-	header("Location: ".BASE_URL."/profile.php");
+	header("Location: ".BASE_URL."/".OCAPPS."/oc-profile.php");
 }
 
 function getMyRank()
@@ -135,5 +135,5 @@ function changePassword()
     $pdo = null;
     sleep(1); //Seconds to wait
     echo $_SESSION['profileUpdate'];
-    header("Location: ".BASE_URL."/profile.php");
+    header("Location: ".BASE_URL."/".OCAPPS."/oc-profile.php");
 }

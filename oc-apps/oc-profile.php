@@ -17,7 +17,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		// session isn't started
 		session_start();
 		}
-		require_once('./oc-config.php');
+		require_once('../oc-config.php');
 		require_once( ABSPATH . '/oc-functions.php');
 		require_once( ABSPATH . "/oc-includes/generalActions.php");
 		require_once( ABSPATH . "/oc-includes/profileActions.php");
@@ -85,10 +85,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 					</div>
 				<div class="card-body">
 					<?php echo $profileUpdate ?>
-									<form action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/profileActions.php" method="post" class="form-horizontal">
+									<form action="<?php echo BASE_URL; ?>/oc-includes/profileActions.php" method="post" class="form-horizontal">
 									<fieldset>
 										<div class="form-group">
-						<label class="col-sm-2 control-label">Name:</label>
+						<label class="col-sm-2 control-label"><?php echo lang_key("NAME"); ?></label>
 						<div class="col-sm-10">
 							<input name="name" class="form-control" type="text" maxlength="255" value="<?php echo $name;?>" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?>>
 						</div>
@@ -96,7 +96,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 										</div>
 										<!-- ./ form-group -->
 										<div class="form-group">
-												<label class="col-sm-2 control-label">Email:</label>
+												<label class="col-sm-2 control-label"><?php echo lang_key("EMAIL"); ?></label>
 												<div class="col-sm-10">
 														<input name="email" class="form-control" type="email" maxlength="255" value="<?php echo $_SESSION['email'];?>" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?>>
 														<span class="muted">Note: Your email is how you login, so make sure it's valid!</span>
@@ -104,24 +104,24 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 												<!-- ./ col-sm-10 -->
 										</div>
 										<!-- ./ form-group -->
-										<?php if ( DEMO_MODE == false ) {?>
 										<div class="form-group">
-												<label class="col-sm-2 control-label">Password:</label>
-												<div class="col-sm-10">
-														<a class="btn btn-primary" data-toggle="modal" data-target="#changePassword" ?>Change Password</a>
-												</div>
-												<!-- ./ col-sm-10 -->
-										</div>
-									<?php } else {} ?>
-										<!-- ./ form-group -->
-										<div class="form-group">
-												<label class="col-sm-2 control-label">Identifier:</label>
+												<label class="col-sm-2 control-label"><?php echo lang_key("IDENTIFIER"); ?></label>
 												<div class="col-sm-10">
 														<input name="identifier" class="form-control" type="text" maxlength="255" value="<?php echo $_SESSION['identifier'];?>" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?>>
 												</div>
 												<!-- ./ col-sm-10 -->
 										</div>
-					<input name="update_profile_btn" type="submit" class="btn btn-primary btn-lg btn-block" value="Update" <?php if ( DEMO_MODE == true ) {?> disabled <?php } ?>/>
+										<?php if ( DEMO_MODE == false ) {?>
+										<div class="form-group">
+												<label class="col-sm-2 control-label"><?php echo lang_key("PASSWORD"); ?></label>
+												<div class="col-sm-10">
+														<a class="btn btn-primary" data-toggle="modal" data-target="#changePassword" ?><?php echo lang_key("CHANGE_PASSWORD"); ?></a>
+												</div>
+												<!-- ./ col-sm-10 -->
+										</div>
+									<?php } else {} ?>
+										<!-- ./ form-group -->
+										<input name="update_profile_btn" type="submit" class="btn btn-primary btn-lg btn-block" value="<?php echo lang_key("UPDATE"); ?>" <?php if ( DEMO_MODE == true ) {?> disabled <?php } ?>/>
 									</fieldset>
 									</form>
 						</div>
@@ -158,16 +158,16 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				<div class="modal-body">
 					<form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/profileActions.php" method="post">
 						<div class="form-group row">
-							<label class="col-lg-2 control-label">Password</label>
+							<label class="col-lg-2 control-label"><?php echo lang_key("PASSWORD"); ?></label>
 							<div class="col-lg-10">
-						<input class="form-control" type="password" name="password" id="password" size="30" maxlength="255" placeholder="Enter your new password..." value="" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?> />
+						<input class="form-control" type="password" name="password" id="password" size="30" maxlength="255" placeholder="<?php echo lang_key("PASSWORD"); ?>" value="" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?> />
 							</div>
 							<!-- ./ col-sm-9 -->
 						</div>
 						<div class="form-group row">
-							<label class="col-lg-2 control-label">Confirm Password</label>
+							<label class="col-lg-2 control-label"><?php echo lang_key("CONFIRM_PASSWORD"); ?></label>
 							<div class="col-lg-10">
-				<input class="form-control" type="password" name="confirm_password" size="30" id="confirm_password" maxlength="255" placeholder="Retype your new password..." value="" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?> />
+				<input class="form-control" type="password" name="confirm_password" size="30" id="confirm_password" maxlength="255" placeholder="<?php echo lang_key("CONFIRM_PASSWORD"); ?>" value="" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?> />
 							</div>
 							<!-- ./ col-sm-9 -->
 						</div>
