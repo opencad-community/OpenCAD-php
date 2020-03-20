@@ -378,15 +378,15 @@ function create_name()
     $dlstatus = htmlspecialchars($_POST['civDLStatus']);
     $dltype = htmlspecialchars($_POST['civDLType']);
     $dlclass = htmlspecialchars($_POST['civDLClass']);
-    $dlIssuedby = htmlspecialchars($_POST['civDLIssuer']);
+    $dl_issuer = htmlspecialchars($_POST['civDLIssuer']);
     $hair = htmlspecialchars($_POST['civHairReq']);
     $build = htmlspecialchars($_POST['civBuildReq']);
 	$weapon = htmlspecialchars($_POST['civWepStat']);
 	$deceased = htmlspecialchars($_POST['civDec']);
 
-    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_names (submittedByName, submittedById, name, dob, address, gender, race, dl_status, dl_type, dl_class, dl_Issued_by, hair_color, build, weapon_permit, deceased)
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_names (submittedByName, submittedById, name, dob, address, gender, race, dl_status, dl_type, dl_class, dl_issuer, hair_color, build, weapon_permit, deceased)
     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-    $result = $stmt->execute(array($submittedByName, $submitttedById, $name, $dob, $address, $sex, $race, $dlstatus, $dltype, $dlclass, $dlIssuedby , $hair, $build, $weapon, $deceased));
+    $result = $stmt->execute(array($submittedByName, $submitttedById, $name, $dob, $address, $sex, $race, $dlstatus, $dltype, $dlclass, $dl_issuer , $hair, $build, $weapon, $deceased));
 
     if (!$result)
     {
