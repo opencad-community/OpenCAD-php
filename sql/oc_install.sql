@@ -358,7 +358,7 @@ CREATE TABLE `<DB_PREFIX>weapons` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
-INSERT INTO `<DB_PREFIX>users` (`id`, `name`, `email`, `password`, `identifier`, `adminPrivilege`, `civilianPrivilege`, `supervisorPrivilege`, `password_reset`, `approved`, `suspend_reason`, `suspend_duration`) VALUES
+INSERT INTO `<DB_PREFIX>users` (`id`, `name`, `email`, `password`, `identifier`, `adminPrivilege`, `civilianPrivilege`, `supervisorPrivilege`, `passwordReset`, `approved`, `suspendReason`, `suspendDuration`) VALUES
 (1, '<NAME>', '<EMAIL>', '<PASSWORD>', '<IDENTIFIER>', 3, 0, 0, 0, 1, NULL, NULL);
 
 INSERT INTO `<DB_PREFIX>config` (`key`, `value`) VALUES
