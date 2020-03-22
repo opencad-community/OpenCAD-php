@@ -325,7 +325,7 @@ function getIncidentTypes()
 
     foreach ($result as $row)
     {
-            echo '<option value="' . $row[0] . '">'. $row[1] .' '.$row[2] . '</option>\n';
+            echo '<option value="'. $row[1] .' / ' . $row[2] . '">'. $row[1] .' '.$row[2] . '</option>\n';
     }
     $pdo = null;
 }
