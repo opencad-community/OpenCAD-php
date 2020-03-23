@@ -68,6 +68,22 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         unset($_SESSION['weaponMessage']);
     }
 
+    if(isset($_SESSION['civilian']))
+    {
+
+      if ($_SESSION['civilian'] == 'YES')
+      {
+    	setDispatcher("1");
+      }
+    }
+    else
+    {
+		echo "You do not have permission to be here. Request access to dispatch through your administration.<br />Redirecting to the dashboard...";
+		sleep(5);
+		header("Location:".BASE_URL);
+		die();
+    }
+
 ?>
 
 <!DOCTYPE html>
