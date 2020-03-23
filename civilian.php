@@ -68,10 +68,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         unset($_SESSION['weaponMessage']);
     }
 
-    if(isset($_SESSION['civilian']))
+    if(isset($_SESSION['civillian']))
     {
 
-      if ($_SESSION['civilian'] == 'YES')
+      if ($_SESSION['civillian'] == 'YES')
       {
     	setDispatcher("1");
       }
@@ -591,7 +591,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<div class="col-lg-10">
 									<select name="civSexReq" class="form-control selectpicker" id="civSexReq"
 										title="Select a sex" data-live-search="true" required>
-										<?php getDataSet($table = "ncic_names", $data = "gender", $leadTrim = 11, $followTrim = 20); ?>
+										<?php getDataSet($table = "ncic_names", $data = "gender", $leadTrim = 11, $followTrim = 16); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
