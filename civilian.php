@@ -11,16 +11,15 @@ This program is free software: you can redistribute it and/or modify
 
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
+	if(session_id() == '' || !isset($_SESSION)) {
+    // session isn't started
     session_start();
+    }
     include_once(__DIR__."/oc-config.php");
     include_once(__DIR__."/oc-functions.php");
     include(__DIR__."/actions/civActions.php");
     include(__DIR__."/actions/publicFunctions.php");
     include(__DIR__."/actions/generalActions.php");
-    /*include("./actions/civActions.php");
-    include_once(__DIR__."/oc-functions.php");
-    include("./actions/generalActions.php");
-    include("./actions/publicFunctions.php");*/
 
     if (empty($_SESSION['logged_in']))
     {
@@ -576,7 +575,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<div class="col-lg-10">
 									<select name="civSexReq" class="form-control selectpicker" id="civSexReq"
 										title="Select a sex" data-live-search="true" required>
-										<?php getGenders();?>
+										<?php getDataSet($table = "ncic_names", $data = "gender", $leadTrim = 11, $followTrim = 20); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -587,31 +586,18 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<div class="col-lg-10">
 									<select name="civRaceReq" class="form-control selectpicker" id="civRaceReq"
 										title="Select a race or ethnicity" data-live-search="true" required>
-										<?php getRaces(); ?>
+										<?php getDataSet($table = "ncic_names", $data = "race", $leadTrim = 9, $followTrim = 19); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
 							</div>
-							<!-- ./ form-group -->
+							<!-- ./ form-group -->	
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Hair Color</label>
 								<div class="col-lg-10">
 									<select name="civHairReq" class="form-control selectpicker" id="civHairReq"
 										title="Select a hair color" required>
-										<option val="bld">Bald</option>
-										<option val="blk">Black</option>
-										<option val="bln">Blonde</option>
-										<option val="blu">Blue</option>
-										<option val="bro">Brown</option>
-										<option val="gry">Gray or Partially Gray</option>
-										<option val="grn">Green</option>
-										<option val="ong">Orange</option>
-										<option val="pnk">Pink</option>
-										<option val="ple">Purple</option>
-										<option val="red">Red or Auburn</option>
-										<option val="sdy">Sandy</option>
-										<option val="stw">Strawberry</option>
-										<option val="whi">White</option>
+										<?php getDataSet($table = "ncic_names", $data = "hair_color", $leadTrim = 15, $followTrim = 20); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -622,12 +608,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<div class="col-lg-10">
 									<select name="civBuildReq" class="form-control selectpicker" id="civBuildReq"
 										title="Select a build" required>
-										<option val="Average">Average</option>
-										<option val="Fit">Fit</option>
-										<option val="Muscular">Muscular</option>
-										<option val="Overweight">Overweight</option>
-										<option val="Skinny">Skinny</option>
-										<option val="Thin">Thin</option>
+										<?php getDataSet($table = "ncic_names", $data = "build", $leadTrim = 20, $followTrim = 25); ?>
 									</select>
 									<!-- ./ col-sm-9 -->
 								</div>

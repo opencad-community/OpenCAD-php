@@ -230,7 +230,7 @@ function ncicGetPlates()
                 <td>'.$row['veh_make'].'</td>
                 <td>'.$row['veh_model'].'</td>
                 <td>'.$row['veh_pcolor'].'/'.$row['veh_scolor'].'</td>
-                <td>'.$row['veh_insurance'].' / '.$row['veh_insurance type'].'</td>
+                <td>'.$row['veh_insurance'].' / '.$row['veh_insurance_type'].'</td>
                 <td>'.$row['notes'].'</td>
                 <td>
                     <button name="edit_plate" data-toggle="modal" data-target="#editPlateModal" id="edit_plateBtn" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
@@ -384,9 +384,9 @@ function create_name()
 	$weapon = htmlspecialchars($_POST['civWepStat']);
 	$deceased = htmlspecialchars($_POST['civDec']);
 
-    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_names (submittedByName, submittedById, name, dob, address, gender, race, dl_status, dl_type, dl_class, dl_issuer, hair_color, build, weapon_permit, deceased)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-    $result = $stmt->execute(array($submittedByName, $submitttedById, $name, $dob, $address, $sex, $race, $dlstatus, $dltype, $dlclass, $dl_issuer , $hair, $build, $weapon, $deceased));
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_names (submittedByName, submittedById, name, dob, address, gender, race, hair_color, build)
+    VALUES (?,?,?,?,?,?,?,?,?)");
+    $result = $stmt->execute(array($submittedByName, $submitttedById, $name, $dob, $address, $sex, $race, $hair, $build));
 
     if (!$result)
     {
