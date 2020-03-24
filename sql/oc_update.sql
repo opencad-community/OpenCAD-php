@@ -1,7 +1,7 @@
 -- Last updated for OpenCAD 0.2.6
 
 CREATE TABLE IF NOT EXISTS `oc_citation_types` (
-    `id` INT(11)  AUTO_INCREMENT,
+    `citation_id` INT(11)  AUTO_INCREMENT,
     `citation_description` VARCHAR(255) COMMENT 'Description of an often issued citation.',
     `citation_fine` DECIMAL(19, 2) COMMENT 'Reccomended fine for given citation.',
     PRIMARY KEY(`id`)

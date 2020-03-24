@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>call_list` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 CREATE TABLE IF NOT EXISTS `<DB_PREFIX>citation_types` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `citation_id` int(11) NOT NULL AUTO_INCREMENT,
   `citation_description` varchar(255) NOT NULL,
   `citation_fine` decimal(19,2) NOT NULL,
   PRIMARY KEY (`id`)
