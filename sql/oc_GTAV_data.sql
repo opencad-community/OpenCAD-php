@@ -252,6 +252,25 @@ INSERT INTO `colors` (`id`, `color_group`, `color_name`) VALUES
 (247, 'Pearlescent', 'Ice White'),
 (248, 'Pearlescent', 'Frost White');
 
+
+---
+--- Dumping data for table `citation_types
+---
+
+INSERT INTO `citation_types` (`citation_id`, `citation_description`, `citation_fine`)
+(1, 'Felony Hit and Run', 400),
+(2, 'Hit and Run', 300),
+(3, 'Reckless Driving', 200),
+(4, 'Failure to Yield', 300),
+(5, 'Obstruction of Traffic', 200),
+(6, 'Speeding', 200),
+(7, 'Failure to Signal', 300),
+(8, 'Failure to Signal at a Stop Light', 200),
+(9, 'Failure to Signal at a Stop Sign', 200),
+(10, 'Compromised Safety during Lane Change', 150),
+(11, 'Illegal Parking', 150),
+(12, 'Driving without Headlights Active when appropriate', 150);
+
 --
 -- Dumping data for table `departments`
 --
