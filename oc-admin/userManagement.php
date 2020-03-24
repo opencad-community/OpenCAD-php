@@ -311,9 +311,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                             <div class="form-group row">
                                 <label class="col-md-3 control-label">User Groups</label>
                                 <div class="col-md-9">
-                                    <select name="userGroups[]" class="selectpicker form-control" id="userGroups"
-                                        multiple>
-                                        <?php getAgencies();?>
+                                    <select name="userGroups[]" class="selectpicker form-control" id="userGroups" multiple>
+                                        <?php getDataSetTable($data = "departments", $column1 = "department_id", $column2 = "department_long_name", $leadTrim = 17, $followTrim = 11); ?>
                                     </select>
                                 </div>
                                 <!-- ./ col-sm-9 -->
