@@ -1,440 +1,31 @@
 <?php
-if (isset($_GET['getAgencies']))
+if (isset($_GET['getDataSetTable']))
 {
-    getAgencies();
+    getDataSetTable();
 }
-else if (isset($_GET['getLicenseStatuses']))
+else if (isset($_GET['getDataSetColumn']))
 {
-    getLicenseStatusesa();
-}
-else if (isset($_GET['getLicenseTypes']))
-{
-    getLicenseTypes();
-}
-else if (isset($_GET['getLicenseClasses']))
-{
-    getLicenseClassses();
-}
-else if (isset($_GET['getLicenseIssuers']))
-{
-    getLicenseIssuers();
-}
-else if (isset($_GET['getGenders']))
-{
-    getGenders();
-}
-else if (isset($_GET['getRaces']))
-{
-    getRaces();
-}
-else if (isset($_GET['getDataSet']))
-{
-    getDataSet();
-}
-
-
-
-
-function getAgencies()
-{
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-
-    $result = $pdo->query("SELECT * from ".DB_PREFIX."departments");
-    if (!$result)
-    {
-        $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-    foreach ($result as $row)
-    {
-            echo '<option value="' . $row[0] . '">' . $row[1] . '</option>';
-    }
-    $pdo = null;
-}
-
-function getAgenciesWarrants()
-{
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-
-    $result = $pdo->query("SELECT * from ".DB_PREFIX."departments ".WHERE." department_id != 1 AND department_id != 7 AND department_id != 8 AND department_id != 9");
-    if (!$result)
-    {
-        $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-    foreach ($result as $row)
-    {
-            echo '<option value="' . $row[0] . '">' . $row[1] . '</option>';
-    }
-    $pdo = null;
-}
-/**#@+
-* function getLicenseStatuses()
-* Get list of possible license statuses from status() of the 'dl_status' column of the ncic_names table.
-*
-* @since 0.2.6
-*
-**/
-function getLicenseStatuses()
-{
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-
-    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_names LIKE 'dl_status'";
-    $stmt = $pdo->prepare( $query );
-    if (!$stmt)
-    {
-        $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-
-    $result = $stmt -> execute();
-    if ($result)
-    {
-        $row = $stmt -> fetch(PDO::FETCH_ASSOC);
-        $dl_statuses = implode($row);
-        
-        // Remove "set(" at start and ");" at end.
-        $dl_statuses  = substr($dl_statuses,14,strlen($dl_statuses)-29);
-        $dl_statuses = preg_split("/','/",$dl_statuses);
-    
-        foreach ($dl_statuses as $key=>$value) 
-        {
-            echo "<option name = '$value' value = '$value'>$value</option>\n";
-        };
-    }
+    getDataSetColumn();
 }
 
 /**#@+
-* function getLicenseType()
-* Get list of possible license types from status() of the 'dl_type' column of the ncic_names table.
+* function getDataSetColumn()
+* Get set() values from a given table column as select options
 *
-* @since 0.2.6
-*
-**/
-function getLicenseTypes()
-{
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-
-    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_names LIKE 'dl_type'";
-    $stmt = $pdo->prepare( $query );
-    if (!$stmt)
-    {
-        $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-
-    $result = $stmt -> execute();
-    if ($result) 
-    {
-        $row = $stmt -> fetch(PDO::FETCH_ASSOC);
-        $dl_types = implode($row);
-
-        // Remove "set(" at start and ");" at end.
-        $dl_types  = substr($dl_types,12,strlen($dl_types)-27);
-        //echo $dl_types;
-        $dl_types = preg_split("/','/",$dl_types);
-
-        foreach ($dl_types as $key=>$value)
-        {
-            echo "<option name = '$value' value = '$value'>$value</option>\n";
-        };
-    }
-}
-
-function getLicenseClasses()
-{
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-
-    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_names LIKE 'dl_class'";
-    $stmt = $pdo->prepare( $query );
-    if (!$stmt)
-    {
-        $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-
-    $result = $stmt -> execute();
-    if ($result) 
-    {
-        $row = $stmt -> fetch(PDO::FETCH_ASSOC);
-        $dl_classes = implode($row);
-
-        // Remove "set(" at start and ");" at end.
-        $dl_classes  = substr($dl_classes,13,strlen($dl_classes)-32);
-        //echo $dl_classes;
-        $dl_classes = preg_split("/','/",$dl_classes);
-
-        foreach ($dl_classes as $key=>$value)
-        {
-            echo "<option name = '$value' value = '$value'>$value</option>\n";
-        };
-    }
-}
-
-/**#@+
-* function getLicenseIssuers()
-* Description of function
-*
-* @since version
+* @since 0.3.1
 *
 **/
-function getLicenseIssuers()
+function getDataSetColumn($table, $data, $leadTrim, $followTrimm)
 {
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
+
+    if (empty($leadTrim))
     {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
+        $leadTrim = 17;
     }
-
-    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_names LIKE 'dl_Issued_by'";
-    $stmt = $pdo->prepare( $query );
-    if (!$stmt)
+    if (empty($followTrim))
     {
-        $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
+        $leadTrim = 22;
     }
-
-    $result = $stmt -> execute();
-    if ($result) 
-    {
-        $row = $stmt -> fetch(PDO::FETCH_ASSOC);
-        $dl_issuers = implode($row);
-        // Remove "set(" at start and ");" at end.
-        $dl_issuers  = substr($dl_issuers,17,strlen($dl_issuers)-36);
-        $dl_issuers = preg_split("/','/",$dl_issuers);
-
-        foreach ($dl_issuers as $key=>$value)
-        {
-            echo "<option name = '$value' value = '$value'>$value</option>\n";
-        };
-    }
-}
-
-/**#@+
-* function getGenders()
-* Get list of possible genders from set() of the 'gender' column of the ncic_names table.
-*
-* @since 0.2.6
-*
-**/
-function getGenders()
-{
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-
-    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_names LIKE 'gender'";
-    $stmt = $pdo->prepare( $query );
-    if (!$stmt)
-    {
-        $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-
-    $result = $stmt -> execute();
-    if ($result) 
-    {
-        $row = $stmt -> fetch(PDO::FETCH_ASSOC);
-        $genders = implode($row);
-    
-        // Remove "set(" at start and ");" at end.
-        $genders  = substr($genders,11,strlen($genders)-16);
-        $genders = preg_split("/','/",$genders);
-    
-        foreach ($genders as $key=>$value)
-        {
-            echo "<option name = '$value' value = '$value'>$value</option>\n";
-        };
-    }
-}
-
-function getIncidentTypes()
-{
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-
-    $result = $pdo->query("SELECT * from ".DB_PREFIX."incident_types");
-    if (!$result)
-    {
-        $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-
-    $races  = substr($races,14,strlen($races)-18);
-    $races = preg_split("/','/",$races);
-
-    foreach ($result as $row)
-    {
-            echo '<option value="'. $row[1] .' / ' . $row[2] . '">'. $row[1] .' '.$row[2] . '</option>\n';
-    }
-    $pdo = null;
-}
-
-/**#@+
-* function getRaces()
-* Get list of possible Races from the  'race' column of the ncic_names table.
-*
-* @since 0.3.0
-*
-**/
-function getRaces()
-{
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-
-    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_names LIKE 'race'";
-    $stmt = $pdo->prepare( $query );
-    if (!$stmt)
-    {
-        $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-
-    $result = $stmt -> execute();
-    if ($result) 
-    {
-        $row = $stmt -> fetch(PDO::FETCH_ASSOC);
-        $genders = implode($row);
-    
-        // Remove "set(" at start and ");" at end.
-        $genders  = substr($genders,9,strlen($genders)-14);
-        $genders = preg_split("/','/",$genders);
-    
-        foreach ($genders as $key=>$value)
-        {
-            echo "<option name = '$value' value = '$value'>$value</option>\n";
-        };
-    }
-}
-
-/**#@+
-* function getStates()
-* Get list of possible Races from the  'race' column of the ncic_names table.
-*
-* @since 0.3.0
-*
-**/
-function getStates()
-{
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-
-    $query = "SHOW COLUMNS FROM ".DB_PREFIX."ncic_plates LIKE 'veh_reg_state'";
-    $stmt = $pdo->prepare( $query );
-    if (!$stmt)
-    {
-        $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
-        die();
-    }
-
-    $result = $stmt -> execute();
-    if ($result) 
-    {
-        $row = $stmt -> fetch(PDO::FETCH_ASSOC);
-        $genders = implode($row);
-    
-        // Remove "set(" at start and ");" at end.
-        $genders  = substr($genders,18,strlen($genders)-23);
-        $genders = preg_split("/','/",$genders);
-    
-        foreach ($genders as $key=>$value)
-        {
-            echo "<option name = '$value' value = '$value'>$value</option>\n";
-        };
-    }
-}
-
-
-/**#@+
-* function getStates()
-* Get list of possible Races from the  'race' column of the ncic_names table.
-*
-* @since 0.3.0
-*
-**/
-function getDataSet($table = "ncic_names", $data = "hair_color", $leadTrim, $followTrim)
-{
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
     } catch(PDOException $ex)
@@ -458,17 +49,69 @@ function getDataSet($table = "ncic_names", $data = "hair_color", $leadTrim, $fol
     if ($result) 
     {
         $row = $stmt -> fetch(PDO::FETCH_ASSOC);
-        $genders = implode($row);
+        $dataSet = implode($row);
     
         // Remove "set(" at start and ");" at end.
-        $genders  = substr($genders,$leadTrim,strlen($genders)-$followTrim);
-        $genders = preg_split("/','/",$genders);
+        $dataSet  = substr($dataSet,$leadTrim,strlen($dataSet)-$followTrim);
+        $dataSet = preg_split("/','/",$dataSet);
     
-        foreach ($genders as $key=>$value)
+        foreach ($dataSet as $key=>$value)
         {
-            echo "<option name = '$value' value = '$value'>$value</option>\n";
+            echo "<option name = '$value' value = '$value'>$value</option>\n\n";
         };
     }
+}
+
+
+/**#@+
+* function getDataTable()
+* Get values from a given table column as select options
+*
+* @since 0.3.1
+*
+**/
+function getDataSetTable($data, $column1, $column2, $leadTrim, $followTrimm)
+{
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $result = $pdo->query("SELECT * from ".DB_PREFIX.$data);
+    if (!$result)
+    {
+        $_SESSION['error'] = $pdo->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $dataSet  = substr($dataSet,$leadTrim,strlen($dataSet)-$followTrim);
+    $dataSet = preg_split("/','/",$dataSet);
+
+    foreach ($result as $row)
+    {
+        if( empty($row[$column2]) )
+        {
+            echo '
+                    <option value="'. $row[$column1] . '">'. $row[$column1] .'</option>
+                ';
+        }
+        if ( $isRegistration = true)
+        {
+            echo '
+                    <option value="'. $row[$column1] . '">'. $row[$column2] .'</option>                ';
+        } else {
+            echo '
+                    <option value="'. $row[$column1] .' | ' . $row[$column2] . '">'. $row[$column1] .' | '.$row[$column2] . '</option>
+                ';
+        }
+    }
+    $pdo = null;
 }
 
 ?>

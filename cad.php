@@ -726,7 +726,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <label class="col-lg-2 control-label">Incident Type</label>
                         <div class="col-lg-10">
                            <select class="form-control selectpicker" data-live-search="true" name="call_type" title="Incident Type" required>
-                              <?php getIncidentTypes();?>
+                              <?php getDataSetTable($table = "incident_types", $column1 = "code_id", $column2 = "code_name", $leadTrim = 17, $followTrim = 22);?>
                            </select>
                         </div>
                         <!-- ./ col-sm-9 -->
@@ -810,7 +810,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="col-lg-10">
 					<select name="gender" class="form-control selectpicker" id="gender" title="Select a sex" data-live-search="true">
                     <option> </option>
-                    <?php getGenders();?>
+                    <?php getDataSetColumn($table = "ncic_names", $data = "gender", $leadTrim = 11, $followTrim = 19); ?>
 					</select>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -894,7 +894,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="col-lg-10">
           <select name="gender" class="form-control selectpicker gender_picker" id="gender" title="Select a sex" data-live-search="true">
                     <option> </option>
-                    <?php getGenders();?>
+                    <?php getDataSetColumn($table = "ncic_names", $data = "gender", $leadTrim = 11, $followTrim = 16); ?>
           </select>
                 </div>
                 <!-- ./ col-sm-9 -->
@@ -1744,7 +1744,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Issuing Agency</label>
                 <div class="col-lg-10">
                   <select class="form-control selectpicker" name="issuing_agency" id="issuing_agency" data-live-search="true" required>
-                    <?php getAgenciesWarrants();?>
+                  <?php getDataSetTable($data = "departments", $column1 = "department_long_name", $column2 = "", $leadTrim = 17, $followTrim = 11, $isRegistration = true); ?>
                   </select>
                 </div>
                 <!-- ./ col-sm-9 -->

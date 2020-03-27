@@ -143,8 +143,9 @@ if(!file_exists(getcwd().'/oc-config.php') && is_writable(getcwd())){
                      <div class="form-group">
                         <label>Division (Select all that apply)</label>
                         <select class="form-control selectpicker" id="division" name="division[]" multiple="multiple" size="6" required>
-                         <?php getAgencies(); ?>
-                        </select>
+                        	<?php getDataSetTable($data = "departments", $column1 = "department_id", $column2 = "department_long_name", $leadTrim = 17, $followTrim = 11); ?>
+							
+						</select>
                      </div>
                      <div class="clearfix"></div>
                      <div>

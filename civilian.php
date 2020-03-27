@@ -142,9 +142,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 												class="fas fa-phone"></i> Create a Call</a></li>
 									<?php
 				if ( CIV_LIMIT_MAX_IDENTITIES == 0 ) {
-					echo '<li><a type="button" data-toggle="modal" data-target="#IdentityModal"><i class="fas fa-user-alt"></i> Add New Identity</a></li>';
+					echo '<li><a type="button" data-toggle="modal" data-target="#createIdentityModal"><i class="fas fa-user-alt"></i> Add New Identity</a></li>';
 				} else if ( CIV_LIMIT_MAX_IDENTITIES > getNumberOfProfiles() ) {
-					echo '<li><a type="button" data-toggle="modal" data-target="#IdentityModal"><i class="fas fa-user-alt"></i> Add New Identity</a></li>';
+					echo '<li><a type="button" data-toggle="modal" data-target="#createIdentityModal"><i class="fas fa-user-alt"></i> Add New Identity</a></li>';
 				} else {/* Do Nothing. */}
 				if ( CIV_LIMIT_MAX_VEHICLES == 0 ) {
 					echo '<li><a type="button" data-toggle="modal" data-target="#createPlateModal"> <i class="fas fa-car"></i> Add New Plate</a></li>';
@@ -164,11 +164,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						<!-- /sidebar menu -->
 						<!-- /menu footer buttons -->
 						<div class="sidebar-footer hidden-small">
-							<!--
-                        —— Left in for user settings. To be introduced later. Probably after RC1. ——
-                        <a data-toggle="tooltip" data-placement="top">
-                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                        </a>-->
 							<a data-toggle="tooltip" data-placement="top" title="Go to Dashboard"
 								href="<?php echo BASE_URL; ?>/dashboard.php">
 								<span class="fas fa-clipboard-list" aria-hidden="true"></span>
@@ -410,61 +405,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Warrant Name</label>
 								<div class="col-lg-10">
-									<select class="form-control selectpicker" name="warrant_name_sel"
-										id="warrant_name_sel" data-live-search="true" title="Select a Warrant">
-										<optgroup label="Violent Warrants (60 day expiry)">
-											<option value="1st Degree Murder">1st Degree Murder</option>
-											<option value="2nd Degree Murder">2nd Degree Murder</option>
-											<option value="3rd Degree Murder">3rd Degree Murder</option>
-											<option value="Attempted Murder">Attempted Murder</option>
-											<option value="Kidnapping">Kidnapping</option>
-											<option value="Attempted Kidnapping">Attempted Kidnapping</option>
-											<option value="Hostage Taking">Hostage Taking</option>
-											<option value="Bank/Fed Robbery">Bank/Fed Robbery</option>
-											<option value="Terroristic Activity">Terroristic Activity</option>
-											<option value="Terroristic Threats">Terroristic Threats</option>
-											<option value="JailBreak">JailBreak</option>
-											<option value="Robbery">Robbery</option>
-											<option value="Grand Theft Auto">Grand Theft Auto</option>
-											<option value="Burglary">Burglary</option>
-											<option value="Threatening an Official">Threatening an Official</option>
-											<option value="Sexual Assault">Sexual Assault</option>
-											<option value="Hate Crime">Hate Crime</option>
-											<option value="Assault">Assault</option>
-											<option value="Conspiracy">Conspiracy</option>
-											<option value="Drug Trafficking">Drug Trafficking</option>
-											<option value="Evasion/Fleeing/Eluding">Evasion/Fleeing/Eluding</option>
-											<option value="Felony Evading">Felony Evading</option>
-											<option value="Resisting Arrest">Resisting Arrest</option>
-											<option value="Firearm in City Limits">Firearm in City Limits</option>
-											<option value="Firearm by Felon">Firearm by Felon</option>
-											<option value="Unlicensed Firearm">Unlicensed Firearm</option>
-											<option value="Firearm Discharge in City Limits">Firearm Discharge in City
-												Limits</option>
-											<option value="Illegal Weapon">Illegal Weapon</option>
-											<option value="Illegal Magazine">Illegal Magazine</option>
-											<option value="Concealed Carry Rifle">Concealed Carry Rifle</option>
-											<option value="Failure to Inform">Failure to Inform</option>
-										</optgroup>
-										<optgroup label="Non-Violent Warrants (30 day expiry)">
-											<option value="FTA: Lewd Conduct">FTA: Lewd Conduct</option>
-											<option value="FTA: DUI/DWI">FTA: DUI/DWI</option>
-											<option value="FTA: Fraud">FTA: Fraud</option>
-											<option value="FTA: Hit and Run">FTA: Hit and Run</option>
-											<option value="FTA: Speeding">FTA: Speeding</option>
-											<option value="FTA: Reckless Driving">FTA: Reckless Driving</option>
-											<option value="FTA: Obstruction of Justice">FTA: Obstruction of Justice
-											</option>
-											<option value="FTA: Verbal Abuse">FTA: Verbal Abuse</option>
-											<option value="FTA: Bribery">FTA: Bribery</option>
-											<option value="FTA: Disorderly Conduct">FTA: Disorderly Conduct</option>
-											<option value="FTA: Drug Posession">FTA: Drug Posession</option>
-											<option value="FTA: Trespassing">FTA: Trespassing</option>
-											<option value="FTA: Excessive Noise">FTA: Excessive Noise</option>
-											<option value="FTA: Failure to Identify">FTA: Failure to Identify</option>
-											<option value="FTA: Stalking">FTA: Stalking</option>
-											<option value="FTA: Public Intoxication">FTA: Public Intoxication</option>
-										</optgroup>
+									<select class="form-control selectpicker" name="warrant_name_sel" id="warrant_name_sel" data-live-search="true" title="Select a Warrant">
+									<?php getDataSetTable($table = "citation_types", $data = "citation_description", $leadTrim = 17, $followTrim = 11); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -473,9 +415,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Issuing Agency</label>
 								<div class="col-lg-10">
-									<select class="form-control selectpicker" name="issuing_agency" id="issuing_agency"
-										data-live-search="true" required>
-										<?php getAgencies();?>
+									<select class="form-control selectpicker" name="issuing_agency" id="issuing_agency" data-live-search="true" required>
+										<?php getDataSetTable($table = "departments", $data = "department_long_name", $leadTrim = 17, $followTrim = 11); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -542,12 +483,11 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			<!-- ./ modal-dialog modal-lg -->
 		</div>
 
-		<div class="modal fade" id="IdentityModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal fade" id="createIdentityModal" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-						</button>
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
 						<h4 class="modal-title" id="myModalLabel">Create Identity</h4>
 					</div>
 					<!-- ./ modal-header -->
@@ -558,8 +498,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Name</label>
 								<div class="col-lg-10">
-									<input name="civNameReq" class="form-control" id="civNameReq"
-										value="<?php echo $civName;?>" required />
+									<input name="civNameReq" class="form-control" id="civNameReq"value="<?php echo $civName;?>" required />
 									<span class="fasfa-user form-control-feedback right" aria-hidden="true"></span>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -568,8 +507,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Date of Birth</label>
 								<div class="col-lg-10">
-									<input type="text" name="civDobReq" class="form-control" id="datepicker"
-										maxlength="10" value="<?php echo $civDob;?>" required />
+									<input type="text" name="civDobReq" class="form-control" id="datepicker" maxlength="10" value="<?php echo $civDob;?>" required />
 									<span class="fasfa-calendar form-control-feedback right" aria-hidden="true"></span>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -578,10 +516,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Address</label>
 								<div class="col-lg-10">
-									<input type="text" name="civAddressReq" class="form-control" id="civAddressReq"
-										value="<?php echo $civAddr;?>" required />
-									<span class="fasfa-location-arrow form-control-feedback right"
-										aria-hidden="true"></span>
+									<input type="text" name="civAddressReq" class="form-control" id="civAddressReq" value="<?php echo $civAddr;?>" required />
+									<span class="fasfa-location-arrow form-control-feedback right" aria-hidden="true"></span>
 								</div>
 								<!-- ./ col-sm-9 -->
 							</div>
@@ -591,7 +527,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<div class="col-lg-10">
 									<select name="civSexReq" class="form-control selectpicker" id="civSexReq"
 										title="Select a sex" data-live-search="true" required>
-										<?php getDataSet($table = "ncic_names", $data = "gender", $leadTrim = 11, $followTrim = 16); ?>
+										<?php getDataSetColumn($table = "ncic_names", $data = "gender", $leadTrim = 11, $followTrim = 16); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -602,7 +538,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<div class="col-lg-10">
 									<select name="civRaceReq" class="form-control selectpicker" id="civRaceReq"
 										title="Select a race or ethnicity" data-live-search="true" required>
-										<?php getDataSet($table = "ncic_names", $data = "race", $leadTrim = 9, $followTrim = 19); ?>
+										<?php getDataSetColumn($table = "ncic_names", $data = "race", $leadTrim = 9, $followTrim = 19); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -613,7 +549,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<div class="col-lg-10">
 									<select name="civHairReq" class="form-control selectpicker" id="civHairReq"
 										title="Select a hair color" required>
-										<?php getDataSet($table = "ncic_names", $data = "hair_color", $leadTrim = 15, $followTrim = 20); ?>
+										<?php getDataSetColumn($table = "ncic_names", $data = "hair_color", $leadTrim = 15, $followTrim = 20); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -622,9 +558,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Build</label>
 								<div class="col-lg-10">
-									<select name="civBuildReq" class="form-control selectpicker" id="civBuildReq"
-										title="Select a build" required>
-										<?php getDataSet($table = "ncic_names", $data = "build", $leadTrim = 20, $followTrim = 25); ?>
+									<select name="civBuildReq" class="form-control selectpicker" id="civBuildReq" title="Select a build" required>
+										<?php getDataSetColumn($table = "ncic_names", $data = "build", $leadTrim = 20, $followTrim = 25); ?>
 									</select>
 									<!-- ./ col-sm-9 -->
 								</div>
@@ -644,7 +579,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		</div>
 		</div>
 		<!--Edit modal -->
-		<div class="modal fade" id="IdentityEditModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal fade" id="editIdentityModal" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -661,8 +596,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Name</label>
 								<div class="col-lg-10">
-									<input name="civNameReq" class="form-control" id="civNameReq"
-										value="<?php echo $civName;?>" required />
+									<input name="civNameReq" class="form-control" id="civNameReq" value="<?php echo $civName;?>" required />
 									<span class="fasfa-user form-control-feedback right" aria-hidden="true"></span>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -671,8 +605,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Date of Birth</label>
 								<div class="col-lg-10">
-									<input type="text" name="civDobReq" class="form-control" id="datepicker2"
-										maxlength="10" value="<?php echo $civDob;?>" required />
+									<input type="text" name="civDobReq" class="form-control" id="datepicker2" maxlength="10" value="<?php echo $civDob;?>" required />
 									<span class="fasfa-calendar form-control-feedback right" aria-hidden="true"></span>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -681,10 +614,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Address</label>
 								<div class="col-lg-10">
-									<input type="text" name="civAddressReq" class="form-control" id="civAddressReq"
-										value="<?php echo $civAddr;?>" required />
-									<span class="fasfa-location-arrow form-control-feedback right"
-										aria-hidden="true"></span>
+									<input type="text" name="civAddressReq" class="form-control" id="civAddressReq" value="<?php echo $civAddr;?>" required />
+									<span class="fasfa-location-arrow form-control-feedback right" aria-hidden="true"></span>
 								</div>
 								<!-- ./ col-sm-9 -->
 							</div>
@@ -692,9 +623,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Sex</label>
 								<div class="col-lg-10">
-									<select name="civSexReq" class="form-control selectpicker selectpicker3"
-										id="civSexReq" title="Select a sex" data-live-search="true" required>
-										<?php getGenders();?>
+									<select name="civSexReq" class="form-control selectpicker selectpicker3" id="civSexReq" title="Select a sex" data-live-search="true" required>
+										<?php getDataSetColumn($table = "ncic_names", $data = "gender", $leadTrim = 11, $followTrim = 16); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -703,9 +633,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Race</label>
 								<div class="col-lg-10">
-									<select name="civRaceReq" class="form-control selectpicker" id="civRaceReq"
-										title="Select a race or ethnicity" data-live-search="true" required>
-										<?php getRaces(); ?>
+									<select name="civRaceReq" class="form-control selectpicker" id="civRaceReq" title="Select a race or ethnicity" data-live-search="true" required>
+										<?php getDataSetColumn($table = "ncic_names", $data = "race", $leadTrim = 9, $followTrim = 19); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -714,22 +643,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Hair Color</label>
 								<div class="col-lg-10">
-									<select name="civHairReq" class="form-control selectpicker civHairReq_picker"
-										id="civHairReq" title="Select a hair color" required>
-										<option val="bld">Bald</option>
-										<option val="blk">Black</option>
-										<option val="bln">Blonde</option>
-										<option val="blu">Blue</option>
-										<option val="bro">Brown</option>
-										<option val="gry">Gray or Partially Gray</option>
-										<option val="grn">Green</option>
-										<option val="ong">Orange</option>
-										<option val="pnk">Pink</option>
-										<option val="ple">Purple</option>
-										<option val="red">Red or Auburn</option>
-										<option val="sdy">Sandy</option>
-										<option val="stw">Strawberry</option>
-										<option val="whi">White</option>
+									<select name="civHairReq" class="form-control selectpicker civHairReq_picker" id="civHairReq" title="Select a hair color" required>
+										<?php getDataSetColumn($table = "ncic_names", $data = "hair_color", $leadTrim = 15, $followTrim = 20); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -738,14 +653,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Build</label>
 								<div class="col-lg-10">
-									<select name="civBuildReq" class="form-control selectpicker civBuildReq_picker"
-										id="civBuildReq" title="Select a build" required>
-										<option val="Average">Average</option>
-										<option val="Fit">Fit</option>
-										<option val="Muscular">Muscular</option>
-										<option val="Overweight">Overweight</option>
-										<option val="Skinny">Skinny</option>
-										<option val="Thin">Thin</option>
+									<select name="civBuildReq" class="form-control selectpicker civBuildReq_picker"id="civBuildReq" title="Select a build" required>
+										<?php getDataSetColumn($table = "ncic_names", $data = "build", $leadTrim = 20, $followTrim = 25); ?>
 									</select>
 									<!-- ./ col-sm-9 -->
 								</div>
@@ -786,8 +695,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Registered Owner</label>
 								<div class="col-lg-10">
-									<select class="form-control selectpicker" name="civilian_names" id="civilian_names"
-										data-live-search="true" required>
+									<select class="form-control selectpicker" name="civilian_names" id="civilian_names" data-live-search="true" required>
 										<option> </option>
 										<?php getCivilianNamesOwn();?>
 									</select>
@@ -806,10 +714,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Vehicle Make-Model</label>
 								<div class="col-lg-10">
-									<select class="form-control selectpicker" name="veh_make_model" id="veh_make_model"
-										data-live-search="true" required>
-										<option> </option>
-										<?php getVehicle();?>
+									<select class="form-control selectpicker" name="veh_make_model" id="veh_make_model" data-live-search="true" required>
+									<?php getDataSetTable($data = "vehicles", $leadTrim = 17, $followTrim = 22); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -821,7 +727,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 									<select class="form-control selectpicker" name="veh_pcolor" data-live-search="true"
 										required>
 										<option val=""> </option>
-										<?php getColors();?>
+										<?php getDataSetTable($data = "colors", $leadTrim = 17, $followTrim = 22); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -833,7 +739,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 									<select class="form-control selectpicker" name="veh_scolor" data-live-search="true"
 										required>
 										<option val=""> </option>
-										<?php getColors();?>
+										<?php getDataSetTable($data = "colors", $leadTrim = 17, $followTrim = 22); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -843,7 +749,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<label class="col-lg-2 control-label">Vehicle's Registered State</label>
 								<div class="col-lg-10">
 									<select class="form-control veh_reg_state_option" name="veh_reg_state" required>
-										<?php getStates();?>
+										<option></option>
+										<?php getDataSetColumn($table = "ncic_plates", $data = "veh_reg_state", $leadTrim = 17, $followTrim = 22); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -907,9 +814,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Vehicle Make-Model</label>
 								<div class="col-lg-10">
-									<select class="form-control selectpicker veh_make_model" name="veh_make_model"
-										id="veh_make_model" data-live-search="true" required>
-										<?php getVehicle();?>
+									<select class="form-control selectpicker veh_make_model" name="veh_make_model" id="veh_make_model" data-live-search="true" required>
+										<?php getDataSetTable($data = "vehicles", $leadTrim = 17, $followTrim = 22); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -918,9 +824,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Vehicle Primary Color</label>
 								<div class="col-lg-10">
-									<select class="form-control selectpicker veh_pcolor" name="veh_pcolor"
-										data-live-search="true" required>
-										<?php getColors();?>
+									<select class="form-control selectpicker veh_pcolor" name="veh_pcolor" data-live-search="true" required>
+										<?php getDataSetTable($data = "colors", $leadTrim = 17, $followTrim = 22); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -929,9 +834,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Vehicle Secondary Color</label>
 								<div class="col-lg-10">
-									<select class="form-control selectpicker veh_scolor" name="veh_scolor"
-										data-live-search="true" required>
-										<?php getColors();?>
+									<select class="form-control selectpicker veh_scolor" name="veh_scolor" data-live-search="true" required>
+										<?php getDataSetTable($data = "colors", $leadTrim = 17, $followTrim = 22); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -949,7 +853,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<label class="col-lg-2 control-label">Vehicle's Registered State</label>
 								<div class="col-lg-10">
 									<select class="form-control veh_reg_state_option" name="veh_reg_state" required>
-										<?php getStates();?>
+									<?php getDataSetColumn($table = "ncic_plates", $data = "veh_reg_state", $leadTrim = 17, $followTrim = 22); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -999,10 +903,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Weapon Type-Name</label>
 								<div class="col-lg-10">
-									<select class="form-control selectpicker" name="weapon_all" id="weapon_all"
-										data-live-search="true" required>
-										<option> </option>
-										<?php getWeapons();?>
+									<select class="form-control selectpicker" name="weapon_all" id="weapon_all" data-live-search="true" required>
+										<option> </option>2
+										<?php getDataSetTable($data = "weapons", $leadTrim = 17, $followTrim = 22); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
