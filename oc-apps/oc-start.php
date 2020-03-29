@@ -103,8 +103,10 @@ else
 		<nav class="sidebar-nav">
 		  <ul class="nav">
 			<li class="nav-title"><?php echo lang_key("CIVILIAN_SERVICES"); ?></li>
-				<?php echo $dispatchButton;?>
-				<?php echo $civilianButton; ?>
+				<ul>
+					<?php echo $dispatchButton;?>
+					<?php echo $civilianButton; ?>
+				</ul>
 			<li class="nav-title"><?php echo lang_key("LAW_ENFORCEMENT_SERVICES"); ?></li>
 				<ul>
 					<?php echo $sheriffButton;?>

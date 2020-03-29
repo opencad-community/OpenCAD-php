@@ -109,13 +109,19 @@ require_once(ABSPATH . "/oc-settings.php");
     $superPriv = $getSuperPriv->fetch(PDO::FETCH_ASSOC);
     $_SESSION['supervisorPrivilege'] = $superPriv['supervisorPrivilege'];
 
-    $getDepartments = $pdo->query("SELECT `departmentId` from ".DB_PREFIX."userDepartments WHERE userId = \"$id\"");
+    $getDepartments = $pdo->query("SELECT `departmentId` from ".DB_PREFIX."userdepartments WHERE userId = \"$id\"");
     $getDepartments -> execute();
     $Department = $getDepartments->fetchAll(PDO::FETCH_COLUMN);
     print_r($Department);
     foreach ($Department as $Department)
     {
-        if ($Department == "7")
+
+        if ($Department == "1")
+        {
+            $_SESSION['dispatch'] = 'YES';
+			$dispatchjButton = "<a href=\"".BASE_URL."/cad.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Dispatch</a>";
+        }
+        else if ($Department == "7")
         {
             $_SESSION['ems'] = 'YES';
 			$emsButton = "<a href=\"".BASE_URL."/mdt.php?dep=ems\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">EMS</a>";
