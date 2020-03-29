@@ -42,7 +42,10 @@ include_once( ABSPATH . OCINC . "/version.php");
     {
 		if ( $oc_db_version > $result['value'] )
 		{
-			session_start();
+			if(session_id() == '' || !isset($_SESSION)) {
+				// session isn't started
+				session_start();
+				}
 			$_SESSION['error_title'] = "Upgrade Required!";
 			$_SESSION['error'] = "Please update the database schema. The currently installed version is ".$result['value'].". The expected version is ".$oc_db_version.".";
         	header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
@@ -50,7 +53,10 @@ include_once( ABSPATH . OCINC . "/version.php");
 		} 
 		else if ($oc_db_version < $result['value'])
 		{
-			session_start();
+			if(session_id() == '' || !isset($_SESSION)) {
+				// session isn't started
+				session_start();
+				}
 			$_SESSION['error_title'] = "Upgrade Required!";
 			$_SESSION['error'] = "Please update the application. The currently installed version is ".$result['value'].". The expected version is ".$oc_db_version.".";
         	header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
@@ -93,7 +99,10 @@ if(file_exists( ABSPATH . '/oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.i
 
 
  if(version_compare(PHP_VERSION, '7.1', '<')) {
-	session_start();
+	if(session_id() == '' || !isset($_SESSION)) {
+		// session isn't started
+		session_start();
+		}
 	$_SESSION['error_title'] = "Incompatable PHP Version";
 	$_SESSION['error'] = "An incompatable version  of PHP is active. OpenCAD requires PHP 7.1 at minimum, the current recommended version is 7.2. Currently PHP ".phpversion()." is active, please contact your server administrator.";
 	header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
