@@ -12,8 +12,10 @@ This program is free software: you can redistribute it and/or modify
 
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
-    session_start();
-
+  if(session_id() == '' || !isset($_SESSION)) {
+  // session isn't started
+  session_start();
+  }
 permissionDenied();
 
     if (empty($_SESSION['logged_in']))
