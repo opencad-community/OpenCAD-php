@@ -14,24 +14,6 @@
                  <div class="clearifx"></div>
                  <!-- ./ modal-header -->
                  <div class="modal-body">
-                     <div class="form-group row">
-                         <label class="col-md-3 control-label"><?php echo lang_key("Import"); ?></label>
-                         <div class="col-md-9">
-                             <form role="form" method="post" action="<?php echo BASE_URL; ?>/<?php echo OCINC ?>/adminActions.php"
-                                 class="form-horizontal">
-                                 <input name="userName" class="form-control" id="userName" />
-                             </form>
-                         </div>
-                         <!-- ./ col-sm-9 -->
-                     </div>
-                     <!-- ./ form-group -->
-                     <div class="form-group row">
-                         <label class="col-md-3 control-label"><?php echo lang_key("Export"); ?></label>
-                         <div class="col-md-9">
-                             <input type="email" name="userEmail" class="form-control" id="userEmail" />
-                         </div>
-                         <!-- ./ col-sm-9 -->
-                     </div>
                      <!-- ./ form-group -->
                      <form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/dataActions.php" class="form-inline">
                          <label class="col-md-3 control-label"><?php echo lang_key("RESET_DATA"); ?></label>
