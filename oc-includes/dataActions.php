@@ -2088,8 +2088,8 @@ function resetData()
     if ($_POST == "allData") 
     {
         $tables = array(
-                "userDepartments",
-                "userDepartmentsTemp",
+                "userdepartments",
+                "userdepartmentsTemp",
                 "activeUsers",
                 "aop",
                 "bolos_persons",

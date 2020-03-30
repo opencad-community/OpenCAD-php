@@ -82,7 +82,7 @@ function deleteGroupItem()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."userDepartments WHERE userId = ? AND departmentId = ?");
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."userdepartments WHERE userId = ? AND departmentId = ?");
 	if ($stmt->execute(array($userId, $dept_id))) {
 
 		$show_record=getUserGroupsApproved($userId);
@@ -135,7 +135,7 @@ function editUserAccount()
 		foreach($userGroups as $key=>$val)
 		{
             $val = htmlspecialchars($val);
-			$stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."userDepartments (userId, departmentId) VALUES (?, ?)");
+			$stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."userdepartments (userId, departmentId) VALUES (?, ?)");
             $stmt->execute(array($userID, $val));
 		}
 	}
@@ -228,7 +228,7 @@ function delete_user()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."userDepartments WHERE userId = ?");
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."userdepartments WHERE userId = ?");
     if (!$stmt->execute(array($uid)))
     {
         $_SESSION['error'] = $stmt->errorInfo();
@@ -428,7 +428,7 @@ function getUserGroups($uid)
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."departments.departmentName FROM ".DB_PREFIX."userDepartmentsTemp INNER JOIN ".DB_PREFIX."departments on ".DB_PREFIX."userDepartmentsTemp.departmentId=".DB_PREFIX."departments.departmentId WHERE ".DB_PREFIX."userDepartmentsTemp.userId = ?");
+    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."departments.departmentName FROM ".DB_PREFIX."userdepartmentsTemp INNER JOIN ".DB_PREFIX."departments on ".DB_PREFIX."userdepartmentsTemp.departmentId=".DB_PREFIX."departments.departmentId WHERE ".DB_PREFIX."userdepartmentsTemp.userId = ?");
     $resStatus = $stmt->execute(array(htmlspecialchars($uid)));
 
     if (!$resStatus)
@@ -458,7 +458,7 @@ function getUserGroupsApproved($uid)
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."departments.departmentName,".DB_PREFIX."departments.departmentId FROM ".DB_PREFIX."userDepartments INNER JOIN ".DB_PREFIX."departments on ".DB_PREFIX."userDepartments.departmentId=".DB_PREFIX."departments.departmentId WHERE ".DB_PREFIX."userDepartments.userId = ?");
+    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."departments.departmentName,".DB_PREFIX."departments.departmentId FROM ".DB_PREFIX."userdepartments INNER JOIN ".DB_PREFIX."departments on ".DB_PREFIX."userdepartments.departmentId=".DB_PREFIX."departments.departmentId WHERE ".DB_PREFIX."userdepartments.userId = ?");
     $resStatus = $stmt->execute(array($uid));
 
     if (!$resStatus)
@@ -497,7 +497,7 @@ function approveUser()
         die();
     }
 
-    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."userDepartments SELECT u.* FROM ".DB_PREFIX."userDepartmentsTemp u WHERE userId = ?");
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."userdepartments SELECT u.* FROM ".DB_PREFIX."userdepartmentsTemp u WHERE userId = ?");
     $result = $stmt->execute(array($uid));
 
     if (!$result)
@@ -507,7 +507,7 @@ function approveUser()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."userDepartmentsTemp WHERE userId = ?");
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."userdepartmentsTemp WHERE userId = ?");
     $result = $stmt->execute(array($uid));
 
     if (!$result)
@@ -549,7 +549,7 @@ function rejectUser()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."userDepartmentsTemp where userId = ?");
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."userdepartmentsTemp where userId = ?");
     $result = $stmt->execute(array($uid));
 
     if (!$result)
@@ -591,7 +591,7 @@ function getGroupCount($gid)
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT COUNT(*) from ".DB_PREFIX."userDepartments WHERE departmentId = ?");
+    $stmt = $pdo->prepare("SELECT COUNT(*) from ".DB_PREFIX."userdepartments WHERE departmentId = ?");
     $stmt->execute(array($gid));
     $result = $stmt->fetch(PDO::FETCH_NUM);
 
@@ -990,7 +990,7 @@ function getUserGroupsEditor($encode, $userId)
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."departments.departmentName FROM ".DB_PREFIX."userDepartments INNER JOIN ".DB_PREFIX."departments on ".DB_PREFIX."userDepartments.departmentId=".DB_PREFIX."departments.departmentId WHERE ".DB_PREFIX."userDepartments.userId = ?");
+    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."departments.departmentName FROM ".DB_PREFIX."userdepartments INNER JOIN ".DB_PREFIX."departments on ".DB_PREFIX."userdepartments.departmentId=".DB_PREFIX."departments.departmentId WHERE ".DB_PREFIX."userdepartments.userId = ?");
     $resStatus = $stmt->execute(array($userId));
     $result = $stmt;
 
