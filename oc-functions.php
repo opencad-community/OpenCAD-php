@@ -172,13 +172,11 @@ function get_avatar() {
 	* @since 1.0a RC2
 	*
 	**/
-function getMySQLVersion($pdo)
+function getMySQLVersion()
 {
-
-
-	$getMySQLVersion = $pdo->query('select version()')->fetchColumn();
-
-	return $getMySQLVersion;
+	$output = shell_exec('mysql -V'); 
+	preg_match('@[0-9]+\.[0-9]+\.[0-9]+@', $output, $version); 
+	return $version[0];
 }
 
 /**#@+
@@ -369,5 +367,12 @@ function lang_key($key){
 	return $output;
 }
 
-
+function getPHPModules()
+{
+$modules = get_loaded_extensions();
+foreach ($modules as $module)
+{
+	echo $module.", ";
+}
+}
 ?>

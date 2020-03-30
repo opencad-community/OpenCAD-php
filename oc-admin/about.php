@@ -101,12 +101,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               </div>
               <div class="form-group">
                 <label for="name"><?php echo lang_key("DATABASE_ENGINE"); ?></label>
-                <input type="text" class="form-control" readonly="readonly" value="<? echo getMySQLVersion(); ?>" />
+                <input type="text" class="form-control" readonly="readonly" value="<?php echo getMySQLVersion(); ?>" />
                 <?php echo lang_key("DATABASE_ENGINE_notes"); ?>
               </div>
               <div class="form-group">
                 <label for="name"><?php echo lang_key("LOADED_PHP_MODULES"); ?></label>
-                <input type="text" class="form-control" readonly="readonly" placeholder="<?php print_r(get_loaded_extensions()); ?>" />
+                <input type="text" class="form-control" readonly="readonly" placeholder="<?php getPHPModules(); ?>" />
                 <?php echo lang_key("LOADED_PHP_MODULES_notes"); ?>
               </div>
             </div>
