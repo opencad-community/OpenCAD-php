@@ -302,6 +302,9 @@ $arrLang['CIV_LIMIT_MAX_WEAPONS_notes'] = "If CIV_LIMIT_MAX_WEAPONS is '0' then 
 //** End Civilian Strings **//
 
 //** Begin Administrative Strings**//
+$arrLang['MODERATOR_USER_MANAGER'] = "Moderator Approve User";
+$arrLang['MODERATOR_USER_MANAGER_notes'] = "If 'true' then Moderators will be able to approve new user requests, else, if 'false' then Moderators will not be able to approve new user requests.";
+
 $arrLang['MODERATOR_APPROVE_USER'] = "Moderator Approve User";
 $arrLang['MODERATOR_APPROVE_USER_notes'] = "If 'true' then Moderators will be able to approve new user requests, else, if 'false' then Moderators will not be able to approve new user requests.";
 
@@ -344,7 +347,7 @@ $arrLang['MODERATOR_DATAMAN_RADIOCODES_notes'] = "If 'true' then Moderators will
 $arrLang['MODERATOR_DATAMAN_STREETS'] = "Moderator Streets Editor";
 $arrLang['MODERATOR_DATAMAN_STREETS_notes'] = "If 'true' then Moderators will have access to the Streets Manager module of the Game Data Manager, else if 'false' then Moderators will be denied access.";
 
-$arrLang['MODERATOR_DATAMAN_VECHILES'] = "Moderator Vehicles Editor";
+$arrLang['MODERATOR_DATAMAN_VEHICLES'] = "Moderator Vehicles Editor";
 $arrLang['MODERATOR_DATAMAN_VEHICLES_notes'] = "If 'true' then Moderators will have access to the Vehicles Manager module of the Game Data Manager, else if 'false' then Moderators will be denied access.";
 
 $arrLang['MODERATOR_DATAMAN_WARNINGTYPES'] = "Moderator Warning Types Editor";
