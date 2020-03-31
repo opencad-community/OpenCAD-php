@@ -22,7 +22,7 @@ CREATE TABLE `<DB_PREFIX>bolosvehicles` (
   `reasonWanted` varchar(255) NOT NULL COMMENT 'Reason BOLO suspect is wanted.',
   `lastSeen` varchar(255) NOT NULL COMMENT 'Last observed location of BOLO vehicle.',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>bolos_persons`;
@@ -35,7 +35,7 @@ CREATE TABLE `<DB_PREFIX>bolos_persons` (
   `reasonWanted` varchar(255) NOT NULL COMMENT 'Reason BOLO suspect is wanted.',
   `lastSeen` varchar(255) NOT NULL COMMENT 'Last observed location of BOLO suspect.',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>callhistory`;
@@ -47,13 +47,13 @@ CREATE TABLE `<DB_PREFIX>callhistory` (
   `callStreet2` text DEFAULT NULL,
   `callStreet3` text DEFAULT NULL,
   `callNarrative` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>calllist`;
 CREATE TABLE `<DB_PREFIX>calllist` (
   `callId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>calls`;
@@ -65,7 +65,7 @@ CREATE TABLE `<DB_PREFIX>calls` (
   `callStreet2` text DEFAULT NULL,
   `callStreet3` text DEFAULT NULL,
   `callNarrative` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>callsusers`;
@@ -75,7 +75,7 @@ CREATE TABLE `<DB_PREFIX>callsusers` (
   `callsign` varchar(255) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>citationtypes`;
@@ -84,14 +84,14 @@ CREATE TABLE `<DB_PREFIX>citationtypes` (
   `citationDescription` varchar(255) NOT NULL,
   `citationFine` decimal(19,2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>civilian_names`;
 CREATE TABLE `<DB_PREFIX>civilian_names` (
   `userId` int(11) NOT NULL COMMENT 'Links to users table',
   `namesId` int(11) NOT NULL COMMENT 'Links to names table'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>colors`;
@@ -99,14 +99,14 @@ CREATE TABLE `<DB_PREFIX>colors` (
   `id` int(11) NOT NULL,
   `colorGorup` varchar(255) DEFAULT NULL,
   `colorName` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>config`;
 CREATE TABLE `<DB_PREFIX>config` (
   `key` varchar(80) NOT NULL,
   `value` varchar(80) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>departments`;
@@ -116,7 +116,7 @@ CREATE TABLE `<DB_PREFIX>departments` (
   `departmentShortName` varchar(10) NOT NULL COMMENT 'The acronym of the department name. (eg. BCSO, LAPD, LAFD)',
   `departmentLongName` varchar(255) NOT NULL COMMENT 'The name of the department. (eg. Los Angeles Police Department, Blaine County Sheriffs` Office)',
   `departmentEnabled` int(1) DEFAULT 2 COMMENT 'If 1 then department is disabled, if 2 then department is enabled.'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>dispatchers`;
@@ -125,14 +125,14 @@ CREATE TABLE `<DB_PREFIX>dispatchers` (
   `callsign` varchar(255) NOT NULL COMMENT 'Unit Callsign',
   `status` int(11) NOT NULL COMMENT 'Unit status, 0=offline, 1=online',
   UNIQUE KEY `identifier` (`identifier`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>genders`;
 CREATE TABLE `<DB_PREFIX>genders` (
   `id` int(11) NOT NULL,
   `genders` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>incident_types`;
@@ -141,7 +141,7 @@ CREATE TABLE `<DB_PREFIX>incident_types` (
   `codeId` varchar(255) DEFAULT '',
   `codeName` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>ncic_arrests`;
@@ -153,7 +153,7 @@ CREATE TABLE `<DB_PREFIX>ncic_arrests` (
   `issuedDate` date DEFAULT NULL,
   `issuer` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>ncic_citations`;
@@ -166,7 +166,7 @@ CREATE TABLE `<DB_PREFIX>ncic_citations` (
   `issuedDate` date DEFAULT NULL,
   `issuer` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>ncic_names`;
@@ -192,7 +192,7 @@ CREATE TABLE `<DB_PREFIX>ncic_names` (
   `organDonor` set('NO','YES') DEFAULT 'NO',
   `deceased` set('NO','YES') DEFAULT 'NO',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>ncic_plates`;
@@ -211,7 +211,7 @@ CREATE TABLE `<DB_PREFIX>ncic_plates` (
   `notes` text DEFAULT NULL COMMENT 'Any special flags visible to dispatchers',
   `userId` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>ncic_warnings`;
@@ -223,7 +223,7 @@ CREATE TABLE `<DB_PREFIX>ncic_warnings` (
   `issuedDate` date DEFAULT NULL,
   `issuer` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>ncic_warrants`;
@@ -236,7 +236,7 @@ CREATE TABLE `<DB_PREFIX>ncic_warrants` (
   `issuedDate` date DEFAULT NULL,
   `status` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>ncic_weapons`;
@@ -248,14 +248,14 @@ CREATE TABLE `<DB_PREFIX>ncic_weapons` (
   `userId` int(11) NOT NULL,
   `notes` varchar(2048) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>patrolinformation`;
 CREATE TABLE `<DB_PREFIX>patrolinformation` (
   `key` varchar(80) NOT NULL,
   `value` varchar(80) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>radiocodes`;
@@ -266,14 +266,14 @@ CREATE TABLE `<DB_PREFIX>radiocodes` (
   `onCall` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `code` (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>statuses`;
 CREATE TABLE `<DB_PREFIX>statuses` (
   `statusId` int(11) NOT NULL,
   `statusText` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>streets`;
@@ -282,7 +282,7 @@ CREATE TABLE `<DB_PREFIX>streets` (
   `name` text NOT NULL COMMENT 'Street name',
   `county` text NOT NULL COMMENT 'County name',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>tones`;
@@ -290,21 +290,21 @@ CREATE TABLE `<DB_PREFIX>tones` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `active` set('0','1') DEFAULT '0' COMMENT '0 = inactive, 1 = active'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT COMMENT='Tones table. DO NOT ADD ROWS TO THIS TABLE';
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT COMMENT='Tones table. DO NOT ADD ROWS TO THIS TABLE';
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>userdepartments`;
 CREATE TABLE `<DB_PREFIX>userdepartments` (
   `userId` int(11) NOT NULL,
   `departmentId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>userdepartmentstemp`;
 CREATE TABLE `<DB_PREFIX>userdepartmentstemp` (
   `userId` int(11) NOT NULL,
   `departmentId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT COMMENT='Temporary table - stores user departments for non-approved users';
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT COMMENT='Temporary table - stores user departments for non-approved users';
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>users`;
@@ -322,7 +322,7 @@ CREATE TABLE `<DB_PREFIX>users` (
   `suspendReason` tinytext DEFAULT NULL COMMENT 'Stores the reason why a user is Suspended',
   `suspendDuration` date DEFAULT NULL COMMENT 'Stores the duration a user is Suspended for',
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT COMMENT='User table';
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT COMMENT='User table';
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>vehicles`;
@@ -331,7 +331,7 @@ CREATE TABLE `<DB_PREFIX>vehicles` (
   `make` varchar(100) NOT NULL,
   `model` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>warningtypes`;
@@ -339,7 +339,7 @@ CREATE TABLE `<DB_PREFIX>warningtypes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `warningDescription` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1  COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>warranttypes`;
@@ -347,7 +347,7 @@ CREATE TABLE `<DB_PREFIX>warranttypes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `warrantDescription` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 
 DROP TABLE IF EXISTS `<DB_PREFIX>weapons`;
@@ -356,7 +356,7 @@ CREATE TABLE `<DB_PREFIX>weapons` (
   `weaponType` varchar(255) NOT NULL,
   `weaponName` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
 
 INSERT INTO `<DB_PREFIX>users` (`id`, `name`, `email`, `password`, `identifier`, `adminPrivilege`, `civilianPrivilege`, `supervisorPrivilege`, `passwordReset`, `approved`, `suspendReason`, `suspendDuration`) VALUES
 (1, '<NAME>', '<EMAIL>', '<PASSWORD>', '<IDENTIFIER>', 3, 0, 0, 0, 1, NULL, NULL);
