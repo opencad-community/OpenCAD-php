@@ -168,7 +168,7 @@ function civreg()
     }
 
     $civ = "8";
-    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."userdepartments (userId, departmentId) SELECT id , ? FROM ".DB_PREFIX."users WHERE email = ?");
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."userDepartments (userId, departmentId) SELECT id , ? FROM ".DB_PREFIX."users WHERE email = ?");
     $result = $stmt->execute(array($civ, $email));
 
     if (!$result)

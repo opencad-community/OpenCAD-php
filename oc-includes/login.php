@@ -109,7 +109,7 @@ require_once(ABSPATH . "/oc-settings.php");
     $superPriv = $getSuperPriv->fetch(PDO::FETCH_ASSOC);
     $_SESSION['supervisorPrivilege'] = $superPriv['supervisorPrivilege'];
 
-    $getDepartments = $pdo->query("SELECT `departmentId` from ".DB_PREFIX."userdepartments WHERE userId = \"$id\"");
+    $getDepartments = $pdo->query("SELECT `departmentId` from ".DB_PREFIX."userDepartments WHERE userId = \"$id\"");
     $getDepartments -> execute();
     $Department = $getDepartments->fetchAll(PDO::FETCH_COLUMN);
     print_r($Department);

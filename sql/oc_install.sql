@@ -293,8 +293,8 @@ CREATE TABLE `<DB_PREFIX>tones` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT COMMENT='Tones table. DO NOT ADD ROWS TO THIS TABLE';
 
 
-DROP TABLE IF EXISTS `<DB_PREFIX>userdepartments`;
-CREATE TABLE `<DB_PREFIX>userdepartments` (
+DROP TABLE IF EXISTS `<DB_PREFIX>userDepartments`;
+CREATE TABLE `<DB_PREFIX>userDepartments` (
   `userId` int(11) NOT NULL,
   `departmentId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPACT;
