@@ -16,6 +16,8 @@ oc-lang/*
 sql.php
 adminner.php
 *web.config*
+mirror_ssh
+log_file
 
 
 # Include these exceptions
