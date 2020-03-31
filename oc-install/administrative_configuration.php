@@ -161,7 +161,7 @@
 	
 	<div id="content">
 		<?php
-			draw_side_navigation(7);		
+			draw_side_navigation(8);
 		?>
 		<div class="central-part">
 			<h2><?php echo lang_key('step_8_of'); ?> - Administrative Settings</h2>

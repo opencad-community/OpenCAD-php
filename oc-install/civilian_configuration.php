@@ -104,7 +104,7 @@
 	
 	<div id="content">
 		<?php
-			draw_side_navigation(7);		
+			draw_side_navigation(7);
 		?>
 		<div class="central-part">
 			<h2><?php echo lang_key('step_7_of'); ?> - Civilian Settings</h2>
