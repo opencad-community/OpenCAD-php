@@ -12,3 +12,5 @@ info.php
 .vscode
 .MESSAGE
 patch.diff
+mirror_ssh
+log_file
