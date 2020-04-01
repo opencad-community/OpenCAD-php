@@ -329,8 +329,8 @@ $arrLang['MODERATOR_REMOVE_GROUP_notes'] = "If 'true' then Moderators will be ab
 $arrLang['MODERATOR_NCIC_EDITOR'] = "Moderator NCIC Editor";
 $arrLang['MODERATOR_NCIC_EDITOR_notes'] = "If 'true' then Moderators will be able to access the NCIC editor, else if 'false' Moderators will not be able to access the NCIC editor.";
 
-$arrLang['MODERATOR_DATA_MANAGER'] = "Moderator Data Manager";
-$arrLang['MODERATOR_DATA_MANAGER_notes'] = "If 'true' then Moderators will be able to access the Game Data Manager, else if 'false' then Moderators will not be able to access the Gam Data Manager.";
+$arrLang['MODERATOR_DATA_MANAGER'] = "Moderator Game Data Manager";
+$arrLang['MODERATOR_DATA_MANAGER_notes'] = "If 'true' then Moderators will be able to access the Game Data Manager, else if 'false' then Moderators will not be able to access the Game Data Manager.";
 
 $arrLang['MODERATOR_DATAMAN_CITATIONTYPES'] = "Moderator Citation Types Editor";
 $arrLang['MODERATOR_DATAMAN_CITATIONTYPES_notes'] = "If 'true' then Moderators will have access to the Citation Types Manager module of the Game Data Manager, else if 'false' then Moderators will be denied access.";
