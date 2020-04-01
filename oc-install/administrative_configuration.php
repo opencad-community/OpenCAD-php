@@ -207,7 +207,7 @@
 						<p><?php echo lang_key('MODERATOR_EDIT_USER_notes'); ?></p>
 					</div>
 					<div id="MODERATOR_SUSPEND_WITH_REASON_notes" class="notes_container">
-						<h4><?php echo lang_key('MODERATOR_SUSPEND_WITH_REASON_URL'); ?></h4>
+						<h4><?php echo lang_key('MODERATOR_SUSPEND_WITH_REASON'); ?></h4>
 						<p><?php echo lang_key('MODERATOR_SUSPEND_WITH_REASON_notes'); ?></p>
 					</div>
 					<div id="MODERATOR_SUSPEND_WITHOUT_REASON_notes" class="notes_container">

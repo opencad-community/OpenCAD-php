@@ -157,7 +157,7 @@ $arrLang['writable'] = "Writable";
 $arrLang['core_configuration'] = "Core Configuration";
 $arrLang['department_configuration'] = 'Department Configuration';
 $arrLang['civilian_configuration'] = 'Civilian Configuration'; 
-$arrLang['administrative_configuration'] = 'Administrative Configuratiion';
+$arrLang['administrative_configuration'] = 'Administrative Configuration';
 $arrLang['extra_settings'] = 'Extra Settings';
 
 //** Begin Core Configuration Strings **//
@@ -327,7 +327,7 @@ $arrLang['MODERATOR_REMOVE_GROUP'] = "Moderator Remove Group";
 $arrLang['MODERATOR_REMOVE_GROUP_notes'] = "If 'true' then Moderators will be able to remove user's groups, else if 'false' Moderators will not be able to remove user's groups.";
 
 $arrLang['MODERATOR_NCIC_EDITOR'] = "Moderator NCIC Editor";
-$arrLang['MODERATOR_NCIC_EDITOR_notes'] = "If 'true' then Moderators will be able to access the NCIC editor, else if 'false' Moderators will not be able to access the NCCIC editor.";
+$arrLang['MODERATOR_NCIC_EDITOR_notes'] = "If 'true' then Moderators will be able to access the NCIC editor, else if 'false' Moderators will not be able to access the NCIC editor.";
 
 $arrLang['MODERATOR_DATA_MANAGER'] = "Moderator Data Manager";
 $arrLang['MODERATOR_DATA_MANAGER_notes'] = "If 'true' then Moderators will be able to access the Game Data Manager, else if 'false' then Moderators will not be able to access the Gam Data Manager.";
