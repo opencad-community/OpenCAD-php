@@ -810,7 +810,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <div class="col-lg-10">
 					<select name="gender" class="form-control selectpicker" id="gender" title="Select a sex" data-live-search="true">
                     <option> </option>
-                    <?php getDataSetColumn($table = "ncic_names", $data = "gender", $leadTrim = 11, $followTrim = 19); ?>
+                    <?php getDataSetColumn($table = "ncic_names", $data = "gender", $leadTrim = 11, $followTrim = 16); ?>
 					</select>
                 </div>
                 <!-- ./ col-sm-9 -->

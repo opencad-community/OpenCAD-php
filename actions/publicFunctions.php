@@ -15,7 +15,7 @@ else if (isset($_GET['getDataSetColumn']))
 * @since 0.3.1
 *
 **/
-function getDataSetColumn($table, $data, $leadTrim, $followTrimm)
+function getDataSetColumn($table, $data, $leadTrim, $followTrim)
 {
 
     if (empty($leadTrim))
@@ -26,6 +26,7 @@ function getDataSetColumn($table, $data, $leadTrim, $followTrimm)
     {
         $leadTrim = 22;
     }
+    
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
     } catch(PDOException $ex)
@@ -70,7 +71,7 @@ function getDataSetColumn($table, $data, $leadTrim, $followTrimm)
 * @since 0.3.1
 *
 **/
-function getDataSetTable($data, $column1, $column2, $leadTrim, $followTrimm)
+function getDataSetTable($data, $column1, $column2, $leadTrim, $followTrim)
 {
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
