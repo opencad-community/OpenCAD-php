@@ -25,6 +25,7 @@
 	// -------------------------------------------------
 	if($task == 'send'){
 
+		$MODERATOR_USER_MANAGER = isset($_POST['MODERATOR_USER_MANAGER']) ? prepare_input($_POST['MODERATOR_USER_MANAGER']) : '';
 		$MODERATOR_APPROVE_USER = isset($_POST['MODERATOR_APPROVE_USER']) ? prepare_input($_POST['MODERATOR_APPROVE_USER']) : '';
         $MODERATOR_EDIT_USER = isset($_POST['MODERATOR_EDIT_USER']) ? prepare_input($_POST['MODERATOR_EDIT_USER']) : '';
 		$MODERATOR_DELETE_USER = isset($_POST['MODERATOR_DELETE_USER']) ? prepare_input($_POST['MODERATOR_DELETE_USER']) : '';
@@ -49,6 +50,7 @@
 		$MODERATOR_DATAMAN_WEAPONS = isset($_POST['MODERATOR_DATAMAN_WEAPONS']) ? prepare_input($_POST['MODERATOR_DATAMAN_WEAPONS']) : '';
 		$MODERATOR_DATAMAN_IMPEXPRESET = isset($_POST['MODERATOR_DATAMAN_IMPEXPRESET']) ? prepare_input($_POST['MODERATOR_DATAMAN_IMPEXPRESET']) : '';
 
+		$_SESSION['MODERATOR_USER_MANAGER'] = $MODERATOR_USER_MANAGER;
 		$_SESSION['MODERATOR_APPROVE_USER'] = $MODERATOR_APPROVE_USER;
 		$_SESSION['MODERATOR_EDIT_USER'] = $MODERATOR_EDIT_USER;			
 		$_SESSION['MODERATOR_DELETE_USER'] = $MODERATOR_DELETE_USER;
@@ -79,6 +81,7 @@
 
 	}else{
 
+		$MODERATOR_USER_MANAGER = isset($_POST['MODERATOR_USER_MANAGER']) ? prepare_input($_POST['MODERATOR_USER_MANAGER']) : '';
 		$MODERATOR_APPROVE_USER = isset($_POST['MODERATOR_APPROVE_USER']) ? prepare_input($_POST['MODERATOR_APPROVE_USER']) : '';
         $MODERATOR_EDIT_USER = isset($_POST['MODERATOR_EDIT_USER']) ? prepare_input($_POST['MODERATOR_EDIT_USER']) : '';
 		$MODERATOR_DELETE_USER = isset($_POST['MODERATOR_DELETE_USER']) ? prepare_input($_POST['MODERATOR_DELETE_USER']) : '';
@@ -102,6 +105,7 @@
 		$MODERATOR_DATAMAN_WEAPONS = isset($_POST['MODERATOR_DATAMAN_WEAPONS']) ? prepare_input($_POST['MODERATOR_DATAMAN_WEAPONS']) : '';
 		$MODERATOR_DATAMAN_IMPEXPRESET = isset($_POST['MODERATOR_DATAMAN_IMPEXPRESET']) ? prepare_input($_POST['MODERATOR_DATAMAN_IMPEXPRESET']) : '';
 
+		$_SESSION['MODERATOR_USER_MANAGER'] = $MODERATOR_USER_MANAGER;
 		$_SESSION['MODERATOR_APPROVE_USER'] = $MODERATOR_APPROVE_USER;
 		$_SESSION['MODERATOR_EDIT_USER'] = $MODERATOR_EDIT_USER;			
 		$_SESSION['MODERATOR_DELETE_USER'] = $MODERATOR_DELETE_USER;
@@ -132,11 +136,11 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="author" content="ApPHP Company - Advanced Power of PHP">
-    <meta name="generator" content="ApPHP EasyInstaller">
+    <meta name="author" content="StormLight Tech">
+    <meta name="generator" content="OpenCAD – a StormLight Tech Project">
 	<title><?php echo lang_key("installation_guide"); ?> | System Settings</title>
 
-	<link href="../images/favicon.ico" rel="shortcut icon" />
+	<link href="./images/favicon.ico" rel="shortcut icon" />
 	<link rel="stylesheet" type="text/css" href="templates/<?php echo EI_TEMPLATE; ?>/css/styles.css" />
 	<?php
 		if($curr_lang_direction == 'rtl'){
@@ -161,7 +165,7 @@
 	
 	<div id="content">
 		<?php
-			draw_side_navigation(8);
+			draw_side_navigation(7);		
 		?>
 		<div class="central-part">
 			<h2><?php echo lang_key('step_8_of'); ?> - Administrative Settings</h2>
@@ -183,6 +187,11 @@
 			</tr>
 			<tr><td nowrap height="10px" colspan="3"></td></tr>
 			<tr>
+			<td width="250px">&nbsp;<?php echo lang_key('MODERATOR_USER_MANAGER'); ?>&nbsp;</td>
+				<td>
+					<input type="radio" name="MODERATOR_USER_MANAGER" id="MODERATOR_USER_MANAGER" <?php echo ($MODERATOR_USER_MANAGER=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_USER_MANAGER_notes')" checked onblur="textboxOnBlur('MODERATOR_USER_MANAGER_notes')" value="true" />True
+					<input type="radio" name="MODERATOR_USER_MANAGER" id="MODERATOR_USER_MANAGER" <?php echo ($MODERATOR_USER_MANAGER=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_USER_MANAGER_notes')" onblur="textboxOnBlur('MODERATOR_USER_MANAGER_notes')" value="false" />False
+				</td>
 				<td width="250px">&nbsp;<?php echo lang_key('MODERATOR_APPROVE_USER'); ?>&nbsp;</td>
 				<td>
 					<input type="radio" name="MODERATOR_APPROVE_USER" id="MODERATOR_APPROVE_USER" <?php echo ($MODERATOR_APPROVE_USER=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_APPROVE_USER_notes')" checked onblur="textboxOnBlur('MODERATOR_APPROVE_USER_notes')" value="true" />True
@@ -198,7 +207,7 @@
 						<p><?php echo lang_key('MODERATOR_EDIT_USER_notes'); ?></p>
 					</div>
 					<div id="MODERATOR_SUSPEND_WITH_REASON_notes" class="notes_container">
-						<h4><?php echo lang_key('MODERATOR_SUSPEND_WITH_REASON_URL'); ?></h4>
+						<h4><?php echo lang_key('MODERATOR_SUSPEND_WITH_REASON'); ?></h4>
 						<p><?php echo lang_key('MODERATOR_SUSPEND_WITH_REASON_notes'); ?></p>
 					</div>
 					<div id="MODERATOR_SUSPEND_WITHOUT_REASON_notes" class="notes_container">

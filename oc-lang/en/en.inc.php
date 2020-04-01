@@ -157,7 +157,7 @@ $arrLang['writable'] = "Writable";
 $arrLang['core_configuration'] = "Core Configuration";
 $arrLang['department_configuration'] = 'Department Configuration';
 $arrLang['civilian_configuration'] = 'Civilian Configuration'; 
-$arrLang['administrative_configuration'] = 'Administrative Configuratiion';
+$arrLang['administrative_configuration'] = 'Administrative Configuration';
 $arrLang['extra_settings'] = 'Extra Settings';
 
 //** Begin Core Configuration Strings **//
@@ -197,11 +197,36 @@ $arrLang['LOGGED_IN_SALT'] = 'Logged-In Salt';
 $arrLang['NONCE_KEY'] = 'Nonce Key';
 $arrLang['NONCE_SALT'] = 'Nonce Salt';
 $arrLang['SESSION_KEY'] = 'Session Key';
-
 //** End Core Configuration Strings **//
 
 //** Begin Login Strings **//
+$arrLang['LAW_ENFORCEMENT_OFFICER'] = "Law Enforcement Officer";
+$arrLang['FIRST_RESPONDER'] = "First Responder";
+$arrLang['CIVILIAN'] = "Civilian";
+$arrLang['SIGN_IN_TO_YOUR_ACCOUNT'] = "Sign in to your account";
+$arrLang['LOGIN'] = "Log In";
+$arrLang['REQUEST_ACCESS'] = "Request Access";
 //** End Login Strings **//
+
+
+//** Begin Registration Modal Strings **//
+$arrLang['FIRST_RESPONDER_ACCESS_REQUEST'] = "First Responder Access Request";
+$arrLang['CIVILIAN_ACCESS_REQUEST'] = "Civilian Access Request";
+$arrLang['DIVISION_SELECT_ALL'] = "Division (Select all that apply)";
+$arrLang['IDENTIFIER_PLCAEHOLDER'] = "Identifier (Code Number, Unit ID)";
+//** End Registration Modal Strings  **//
+
+
+//** Begin Registration Modal Strings **//
+$arrLang['CONFIRM_PASSWORD'] = "Confirm Password";
+//** End Registration Modal Strings **//
+
+//** Begin Dashboard Strings **//
+$arrLang['CIVILIAN_SERVICES'] = "Civilian Services";
+$arrLang['LAW_ENFORCEMENT_SERVICES'] = "Law Enforcement Services";
+$arrLang['FIRST_RESPONDER_SERVICES'] = "First Responder Services";
+//** End Dashboard Strings **//
+
 
 //** Begin LEO Strings **//
 $arrLang['POLICE_NCIC'] = "LEO NCIC Lookup";
@@ -277,6 +302,9 @@ $arrLang['CIV_LIMIT_MAX_WEAPONS_notes'] = "If CIV_LIMIT_MAX_WEAPONS is '0' then 
 //** End Civilian Strings **//
 
 //** Begin Administrative Strings**//
+$arrLang['MODERATOR_USER_MANAGER'] = "Moderator Approve User";
+$arrLang['MODERATOR_USER_MANAGER_notes'] = "If 'true' then Moderators will be able to approve new user requests, else, if 'false' then Moderators will not be able to approve new user requests.";
+
 $arrLang['MODERATOR_APPROVE_USER'] = "Moderator Approve User";
 $arrLang['MODERATOR_APPROVE_USER_notes'] = "If 'true' then Moderators will be able to approve new user requests, else, if 'false' then Moderators will not be able to approve new user requests.";
 
@@ -299,7 +327,7 @@ $arrLang['MODERATOR_REMOVE_GROUP'] = "Moderator Remove Group";
 $arrLang['MODERATOR_REMOVE_GROUP_notes'] = "If 'true' then Moderators will be able to remove user's groups, else if 'false' Moderators will not be able to remove user's groups.";
 
 $arrLang['MODERATOR_NCIC_EDITOR'] = "Moderator NCIC Editor";
-$arrLang['MODERATOR_NCIC_EDITOR_notes'] = "If 'true' then Moderators will be able to access the NCIC editor, else if 'false' Moderators will not be able to access the NCCIC editor.";
+$arrLang['MODERATOR_NCIC_EDITOR_notes'] = "If 'true' then Moderators will be able to access the NCIC editor, else if 'false' Moderators will not be able to access the NCIC editor.";
 
 $arrLang['MODERATOR_DATA_MANAGER'] = "Moderator Data Manager";
 $arrLang['MODERATOR_DATA_MANAGER_notes'] = "If 'true' then Moderators will be able to access the Game Data Manager, else if 'false' then Moderators will not be able to access the Gam Data Manager.";
@@ -319,7 +347,7 @@ $arrLang['MODERATOR_DATAMAN_RADIOCODES_notes'] = "If 'true' then Moderators will
 $arrLang['MODERATOR_DATAMAN_STREETS'] = "Moderator Streets Editor";
 $arrLang['MODERATOR_DATAMAN_STREETS_notes'] = "If 'true' then Moderators will have access to the Streets Manager module of the Game Data Manager, else if 'false' then Moderators will be denied access.";
 
-$arrLang['MODERATOR_DATAMAN_VECHILES'] = "Moderator Vehicles Editor";
+$arrLang['MODERATOR_DATAMAN_VEHICLES'] = "Moderator Vehicles Editor";
 $arrLang['MODERATOR_DATAMAN_VEHICLES_notes'] = "If 'true' then Moderators will have access to the Vehicles Manager module of the Game Data Manager, else if 'false' then Moderators will be denied access.";
 
 $arrLang['MODERATOR_DATAMAN_WARNINGTYPES'] = "Moderator Warning Types Editor";
@@ -386,6 +414,9 @@ $arrLang["SEND"] = "Send";
 $arrLang["MY_PROFILE"] = "My Profile";
 $arrLang["APPLICATIONS"] = "Applications";
 $arrLang["SETTINGS"] = "Settings";
+$arrLang["REQUEST"] = "Request";
+$arrLang["CLOSE"] = "Close";
+$arrLang["RESET"] = "Reset";
 //** End Common Global Strings */
 
 //** Begin Administrator/Moderator Console Strings  **/
@@ -521,5 +552,7 @@ $arrLang["VIEW_VEHICLE_BOLOS"] = "View Vehicle BOLOs";
 $arrLang["PASSWORD"] = "Password";
 $arrLang["CHANGE_PASSWORD"] = "Change Password";
 $arrLang["MY_PRFILE"] ="My Profile";
+$arrLang["PROFILE_SUCCESS"] = "Successfully updated your user profile.";
+$arrLang["PASSWORD_SUCCESS"] = "Successfully updated your password."
 //** End Profile Console Strings *//
 ?>
