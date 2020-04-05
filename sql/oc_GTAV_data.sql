@@ -253,23 +253,23 @@ INSERT INTO `colors` (`id`, `color_group`, `color_name`) VALUES
 (248, 'Pearlescent', 'Frost White');
 
 
----
---- Dumping data for table `citation_types
----
+--
+-- Dumping data for table `citation_types
+--
 
 INSERT INTO `citation_types` (`citation_id`, `citation_description`, `citation_fine`) VALUES
-(1, 'Felony Hit and Run', 400),
-(2, 'Hit and Run', 300),
-(3, 'Reckless Driving', 200),
-(4, 'Failure to Yield', 300),
-(5, 'Obstruction of Traffic', 200),
-(6, 'Speeding', 200),
-(7, 'Failure to Signal', 300),
-(8, 'Failure to Signal at a Stop Light', 200),
-(9, 'Failure to Signal at a Stop Sign', 200),
-(10, 'Compromised Safety during Lane Change', 150),
-(11, 'Illegal Parking', 150),
-(12, 'Driving without Headlights Active when appropriate', 150);
+(1, 'Felony Hit and Run','400'),
+(2, 'Hit and Run', '300'),
+(3, 'Reckless Driving', '200'),
+(4, 'Failure to Yield', '300'),
+(5, 'Obstruction of Traffic', '200'),
+(6, 'Speeding', '200'),
+(7, 'Failure to Signal', '300'),
+(8, 'Failure to Signal at a Stop Light', '200'),
+(9, 'Failure to Signal at a Stop Sign', '200'),
+(10, 'Compromised Safety during Lane Change', '150'),
+(11, 'Illegal Parking', '150'),
+(12, 'Driving without Headlights Active when appropriate', '150');
 
 --
 -- Dumping data for table `departments`
@@ -323,7 +323,7 @@ INSERT INTO `incident_types` (`code_id`, `code_name`) VALUES
 ('10-29', 'Records Check'),
 ('10-30', 'Caution / Danger'),
 ('10-31', 'Pick Up'),
-('10-32', 'Additional Units Needed (Specify Number Needed)')
+('10-32', 'Additional Units Needed (Specify Number Needed)'),
 ('10-33', 'Need Immediate Assistance'),
 ('10-34', 'Current Time'),
 ('10-40', 'Fight in Progress'),
