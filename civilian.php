@@ -406,7 +406,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<label class="col-lg-2 control-label">Warrant Name</label>
 								<div class="col-lg-10">
 									<select class="form-control selectpicker" name="warrant_name_sel" id="warrant_name_sel" data-live-search="true" title="Select a Warrant">
-									<?php getDataSetTable($table = "citation_types", $column1 = "citation_description", $column2 = "citation_fine", $leadTrim = 17, $followTrim = 11, $isVeh="", $isRegistration=""); ?>
+									<?php getDataSetTable($dataSet = "citation_types", $column1 = "citation_description", $column2 = "citation_fine", $leadTrim = 17, $followTrim = 11, $isVeh="", $isRegistration=""); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -416,7 +416,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<label class="col-lg-2 control-label">Issuing Agency</label>
 								<div class="col-lg-10">
 									<select class="form-control selectpicker" name="issuing_agency" id="issuing_agency" data-live-search="true" required>
-										<?php getDataSetTable($table = "departments", $column1 = "department_long_name", $column2 = "department_short_name", $leadTrim = 17, $followTrim = 11, $isVeh, $isRegistration); ?>
+										<?php getDataSetTable($dataSet = "departments", $column1 = "department_long_name", $column2 = "department_short_name", $leadTrim = 17, $followTrim = 11, $isVeh, $isRegistration); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
