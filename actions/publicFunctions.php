@@ -71,7 +71,7 @@ function getDataSetColumn($table, $data, $leadTrim, $followTrim)
 * @since 0.3.1
 *
 **/
-function getDataSetTable($data, $column1, $column2, $leadTrim, $followTrim, $isRegistration, $veh)
+function getDataSetTable($dataSet, $column1, $column2, $leadTrim, $followTrim, $isRegistration, $veh)
 {
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -83,7 +83,7 @@ function getDataSetTable($data, $column1, $column2, $leadTrim, $followTrim, $isR
         die();
     }
 
-    $result = $pdo->query("SELECT * from ".DB_PREFIX.$data);
+    $result = $pdo->query("SELECT * from ".DB_PREFIX.$dataSet);
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
@@ -104,12 +104,12 @@ function getDataSetTable($data, $column1, $column2, $leadTrim, $followTrim, $isR
                     <option value="'. $row[$column1] . '">'. $row[$column1] .'</option>
                 ';
         }
-        else if ( $isRegistration == true)
+        else if ( $isRegistration = "1")
         {
             echo '
                     <option value="'. $row[$column1] . '">'. $row[$column2] .'</option>                ';
         }
-        else if ( $veh == true )
+        else if ( $veh = "1 " )
         {
             echo '
                     <option value="'. $row[$column1] .' ' . $row[$column2] . '">'. $row[$column1] .' '.$row[$column2] . '</option>
