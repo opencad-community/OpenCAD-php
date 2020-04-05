@@ -726,7 +726,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <label class="col-lg-2 control-label">Incident Type</label>
                         <div class="col-lg-10">
                            <select class="form-control selectpicker" data-live-search="true" name="call_type" title="Incident Type" required>
-                              <?php getDataSetTable($table = "incident_types", $column1 = "code_id", $column2 = "code_name", $leadTrim = 17, $followTrim = 22);?>
+                              <?php getDataSetTable($dataSet = "incident_types", $column1 = "code_id", $column2 = "code_name", $leadTrim = 17, $followTrim = 22, $veh, $isRegistration);?>
                            </select>
                         </div>
                         <!-- ./ col-sm-9 -->
@@ -1744,7 +1744,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Issuing Agency</label>
                 <div class="col-lg-10">
                   <select class="form-control selectpicker" name="issuing_agency" id="issuing_agency" data-live-search="true" required>
-                  <?php getDataSetTable($data = "departments", $column1 = "department_long_name", $column2 = "", $leadTrim = 17, $followTrim = 11, $isRegistration = true); ?>
+                  <?php getDataSetTable($dataSet = "departments", $column1 = "department_long_name", $column2 = "", $leadTrim = 17, $followTrim = 11, $isRegistration = "1", $veh); ?>
                   </select>
                 </div>
                 <!-- ./ col-sm-9 -->

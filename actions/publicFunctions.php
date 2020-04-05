@@ -109,7 +109,7 @@ function getDataSetTable($dataSet, $column1, $column2, $leadTrim, $followTrim, $
             echo '
                     <option value="'. $row[$column1] . '">'. $row[$column2] .'</option>                ';
         }
-        else if ( $veh = "1 " )
+        else if ( $veh = "1" )
         {
             echo '
                     <option value="'. $row[$column1] .' ' . $row[$column2] . '">'. $row[$column1] .' '.$row[$column2] . '</option>
