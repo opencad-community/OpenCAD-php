@@ -406,7 +406,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<label class="col-lg-2 control-label">Warrant Name</label>
 								<div class="col-lg-10">
 									<select class="form-control selectpicker" name="warrant_name_sel" id="warrant_name_sel" data-live-search="true" title="Select a Warrant">
-									<?php getDataSetTable($table = "citation_types", $data = "citation_description", $leadTrim = 17, $followTrim = 11); ?>
+									<?php getDataSetTable($dataSet = "citation_types", $column1 = "citation_description", $column2 = "citation_fine", $leadTrim = 17, $followTrim = 11, $isVeh="", $isRegistration=""); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -416,7 +416,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<label class="col-lg-2 control-label">Issuing Agency</label>
 								<div class="col-lg-10">
 									<select class="form-control selectpicker" name="issuing_agency" id="issuing_agency" data-live-search="true" required>
-										<?php getDataSetTable($table = "departments", $data = "department_long_name", $leadTrim = 17, $followTrim = 11); ?>
+										<?php getDataSetTable($dataSet = "departments", $column1 = "department_long_name", $column2 = "department_short_name", $leadTrim = 17, $followTrim = 11, $isVeh, $isRegistration); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -715,7 +715,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<label class="col-lg-2 control-label">Vehicle Make-Model</label>
 								<div class="col-lg-10">
 									<select class="form-control selectpicker" name="veh_make_model" id="veh_make_model" data-live-search="true" required>
-									<?php getDataSetTable($data = "vehicles", $leadTrim = 17, $followTrim = 22); ?>
+									
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -727,7 +727,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 									<select class="form-control selectpicker" name="veh_pcolor" data-live-search="true"
 										required>
 										<option val=""> </option>
-										<?php getDataSetTable($data = "colors", $leadTrim = 17, $followTrim = 22); ?>
+										<?php getDataSetTable($data = "colors", $column1 = "color_group", $column2 = "color_name", $leadTrim = 17, $followTrim = 22, $veh, $isRegistration); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -739,7 +739,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 									<select class="form-control selectpicker" name="veh_scolor" data-live-search="true"
 										required>
 										<option val=""> </option>
-										<?php getDataSetTable($data = "colors", $leadTrim = 17, $followTrim = 22); ?>
+										<?php getDataSetTable($data = "colors", $column1 = "color_group", $column2 = "color_name", $leadTrim = 17, $followTrim = 22, $veh, $isRegistration); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -815,7 +815,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<label class="col-lg-2 control-label">Vehicle Make-Model</label>
 								<div class="col-lg-10">
 									<select class="form-control selectpicker veh_make_model" name="veh_make_model" id="veh_make_model" data-live-search="true" required>
-										<?php getDataSetTable($data = "vehicles", $leadTrim = 17, $followTrim = 22); ?>
+										<?php getDataSetTable($data = "vehicles", $column1 = "Make", $column2 ="Model",  $leadTrim = 17, $followTrim = 22, $veh = true, $isRegistration); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -825,7 +825,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<label class="col-lg-2 control-label">Vehicle Primary Color</label>
 								<div class="col-lg-10">
 									<select class="form-control selectpicker veh_pcolor" name="veh_pcolor" data-live-search="true" required>
-										<?php getDataSetTable($data = "colors", $leadTrim = 17, $followTrim = 22); ?>
+									<?php getDataSetTable($data = "colors", $column1 = "color_group", $column2 = "color_name", $leadTrim = 17, $followTrim = 22, $veh, $isRegistration); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -835,7 +835,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<label class="col-lg-2 control-label">Vehicle Secondary Color</label>
 								<div class="col-lg-10">
 									<select class="form-control selectpicker veh_scolor" name="veh_scolor" data-live-search="true" required>
-										<?php getDataSetTable($data = "colors", $leadTrim = 17, $followTrim = 22); ?>
+									<?php getDataSetTable($data = "colors", $column1 = "color_group", $column2 = "color_name", $leadTrim = 17, $followTrim = 22, $veh, $isRegistration); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -904,8 +904,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<label class="col-lg-2 control-label">Weapon Type-Name</label>
 								<div class="col-lg-10">
 									<select class="form-control selectpicker" name="weapon_all" id="weapon_all" data-live-search="true" required>
-										<option> </option>2
-										<?php getDataSetTable($data = "weapons", $leadTrim = 17, $followTrim = 22); ?>
+										<option> </option>
+										<?php getDataSetTable($data = "weapons", $column1 = "weapon_type", $column2 = "weapon_name", $leadTrim = 17, $followTrim = 22, $veh, $isRegistration); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
