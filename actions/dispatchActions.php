@@ -1418,17 +1418,18 @@ function changeaop()
     $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."aop SET aop = ?");
     $result = $stmt->execute(array(htmlspecialchars($_POST['aop'])));
 
+    if($stmt->rowCount() == 0)
+    {
+        $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."aop VALUES (?)");
+        $result = $stmt->execute(array(htmlspecialchars($_POST['aop'])));
+        die();
+    }
+
     if (!$result)
     {
         $_SESSION['error'] = $stmt->errorInfo();
         header('Location: '.BASE_URL.'/plugins/error/index.php');
         die();
-    }
-
-    if($stmt->rowCount() == 0)
-    {
-        $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."aop VALUES (?)");
-        $result = $stmt->execute(array(htmlspecialchars($_POST['aop'])));
     }
 
     $pdo = null;
