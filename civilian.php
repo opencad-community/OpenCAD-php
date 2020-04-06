@@ -750,7 +750,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<div class="col-lg-10">
 									<select class="form-control veh_reg_state_option" name="veh_reg_state" required>
 										<option></option>
-										<?php getDataSetColumn($table = "ncic_plates", $data = "veh_reg_state", $leadTrim = 17, $followTrim = 22); ?>
+										<?php getDataSetColumn($table = "ncic_plates", $data = "veh_reg_state", $leadTrim = 18, $followTrim = 22); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -853,7 +853,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<label class="col-lg-2 control-label">Vehicle's Registered State</label>
 								<div class="col-lg-10">
 									<select class="form-control veh_reg_state_option" name="veh_reg_state" required>
-									<?php getDataSetColumn($table = "ncic_plates", $data = "veh_reg_state", $leadTrim = 17, $followTrim = 22); ?>
+									<?php getDataSetColumn($table = "ncic_plates", $data = "veh_reg_state", $leadTrim = 18, $followTrim = 22); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
