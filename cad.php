@@ -8,7 +8,7 @@ This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation, either version 3 of the License, or
  (at your option) any later version.
-I will                  qwe   qer   qwr      r  rr
+
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
@@ -680,7 +680,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
             </button>
-            <h4 class="modal-title" id="myModalLabel">Create Person BOLO</h4>
+            <h4 class="modal-title" id="myModalLabel">Set AOP</h4>
           </div>
           <!-- ./ modal-header -->
 		  <div class="modal-body">
