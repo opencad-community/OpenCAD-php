@@ -71,7 +71,7 @@ function getDataSetColumn($table, $data, $leadTrim, $followTrim)
 * @since 0.3.1
 *
 **/
-function getDataSetTable($dataSet, $column1, $column2, $leadTrim, $followTrim, $isRegistration, $veh)
+function getDataSetTable($dataSet, $column1, $column2, $leadTrim, $followTrim, $isRegistration, $isVehicle)
 {
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -104,17 +104,18 @@ function getDataSetTable($dataSet, $column1, $column2, $leadTrim, $followTrim, $
                     <option value="'. $row[$column1] . '">'. $row[$column1] .'</option>
                 ';
         }
-        else if ( $isRegistration = "1")
+        else if ( $isRegistration == true )
         {
             echo '
-                    <option value="'. $row[$column1] . '">'. $row[$column2] .'</option>                ';
+                    <option value="'. $row[$column1] . '">'. $row[$column2] .'</option>
+            ';
         }
-        else if ( $veh = "1" )
+        else if ( $isVehicle == true )
         {
             echo '
                     <option value="'. $row[$column1] .' ' . $row[$column2] . '">'. $row[$column1] .' '.$row[$column2] . '</option>
                 ';
-        } else{
+        } else {
             echo '
                     <option value="'. $row[$column1] .' | ' . $row[$column2] . '">'. $row[$column1] .' | '.$row[$column2] . '</option>
                 ';

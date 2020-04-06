@@ -312,7 +312,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                 <label class="col-md-3 control-label">User Groups</label>
                                 <div class="col-md-9">
                                     <select name="userGroups[]" class="selectpicker form-control" id="userGroups" multiple>
-                                        <?php getDataSetTable($data = "departments", $column1 = "department_id", $column2 = "department_long_name", $leadTrim = 17, $followTrim = 11); ?>
+                                        <?php getDataSetTable($data = "departments", $column1 = "department_id", $column2 = "department_long_name", $leadTrim = 17, $followTrim = 11, $isRegistration = true, $isVehicle = false); ?>
                                     </select>
                                 </div>
                                 <!-- ./ col-sm-9 -->
