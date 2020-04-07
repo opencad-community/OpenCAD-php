@@ -150,7 +150,7 @@ function ncicGetNames()
                 <td>'.$row['hair_color'].'</td>
                 <td>'.$row['build'].'</td>
                 <td>
-                    <button name="edit_name" data-toggle="modal" data-target="#IdentityEditModal" id="edit_nameBtn" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
+                    <button name="edit_name" data-toggle="modal" data-target="#editIdentityModal" id="edit_nameBtn" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
                     <form action="".BASE_URL."/actions/civActions.php" method="post">
                     <input name="delete_name" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
                     <input name="uid" type="hidden" value='.$row[0].' />
@@ -592,9 +592,9 @@ function edit_name()
 	$deceased = htmlspecialchars($_POST['civDec']);
     $editid = htmlspecialchars($_POST['Edit_id']);
 
-    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."ncic_names SET name = ?, dob = ?, address = ?, gender = ?, race = ?, dl_status = ?, hair_color = ?, build = ?, weapon_permit = ?, deceased = ? WHERE id = ?");
-    $result = $stmt->execute(array($name, $dob, $address, $sex, $race, $dlstatus, $hair, $build, $weapon, $deceased, $editid));
-
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."ncic_names SET name = ?, dob = ?, address = ?, gender = ?, race = ?, hair_color = ?, build = ? WHERE id = ?");
+    $result = $stmt->execute(array($name, $dob, $address, $sex, $race, $hair, $build, $editid));
+    die();
     if (!$result)
     {
         $_SESSION['error'] = $stmt->errorInfo();

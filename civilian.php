@@ -536,8 +536,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Race</label>
 								<div class="col-lg-10">
-									<select name="civRaceReq" class="form-control selectpicker" id="civRaceReq"
-										title="Select a race or ethnicity" data-live-search="true" required>
+									<select name="civRaceReq" class="form-control selectpicker civRaceReq_picker" id="civRaceReq" title="Select a race or ethnicity" data-live-search="true" required>
 										<?php getDataSetColumn($table = "ncic_names", $data = "race", $leadTrim = 9, $followTrim = 19); ?>
 									</select>
 								</div>
@@ -547,7 +546,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Hair Color</label>
 								<div class="col-lg-10">
-									<select name="civHairReq" class="form-control selectpicker" id="civHairReq"
+									<select name="civHairReq" class="form-control selectpicker civHairReq_picker" id="civHairReq"
 										title="Select a hair color" required>
 										<?php getDataSetColumn($table = "ncic_names", $data = "hair_color", $leadTrim = 15, $followTrim = 20); ?>
 									</select>
@@ -558,7 +557,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Build</label>
 								<div class="col-lg-10">
-									<select name="civBuildReq" class="form-control selectpicker" id="civBuildReq" title="Select a build" required>
+									<select name="civBuildReq" class="form-control selectpicker civBuildReq_picker" id="civBuildReq" title="Select a build" required>
 										<?php getDataSetColumn($table = "ncic_names", $data = "build", $leadTrim = 20, $followTrim = 25); ?>
 									</select>
 									<!-- ./ col-sm-9 -->
@@ -596,7 +595,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Name</label>
 								<div class="col-lg-10">
-									<input name="civNameReq" class="form-control" id="civNameReq" value="<?php echo $civName;?>" required />
+									<input name="civNameReq" class="form-control civNameReq" id="civNameReq" value="<?php echo $civName;?>" required />
 									<span class="fasfa-user form-control-feedback right" aria-hidden="true"></span>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -605,7 +604,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Date of Birth</label>
 								<div class="col-lg-10">
-									<input type="text" name="civDobReq" class="form-control" id="datepicker2" maxlength="10" value="<?php echo $civDob;?>" required />
+									<input type="text" name="civDobReq" class="form-control civDobReq" id="datepicker2" maxlength="10" value="<?php echo $civDob;?>" readonly />
 									<span class="fasfa-calendar form-control-feedback right" aria-hidden="true"></span>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -614,7 +613,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Address</label>
 								<div class="col-lg-10">
-									<input type="text" name="civAddressReq" class="form-control" id="civAddressReq" value="<?php echo $civAddr;?>" required />
+									<input type="text" name="civAddressReq" class="form-control civAddressReq" id="civAddressReq" value="<?php echo $civAddr;?>" required />
 									<span class="fasfa-location-arrow form-control-feedback right" aria-hidden="true"></span>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -633,7 +632,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Race</label>
 								<div class="col-lg-10">
-									<select name="civRaceReq" class="form-control selectpicker" id="civRaceReq" title="Select a race or ethnicity" data-live-search="true" required>
+									<select name="civRaceReq" class="form-control selectpicker civRaceReq_picker" id="civRaceReq" title="Select a race or ethnicity" data-live-search="true" required>
 										<?php getDataSetColumn($table = "ncic_names", $data = "race", $leadTrim = 9, $followTrim = 19); ?>
 									</select>
 								</div>
@@ -1017,15 +1016,15 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>jQuery UI Datepicker - Default functionality</title>
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-		<link rel="stylesheet" href="/resources/demos/style.css">
 		<script>
 		$(function() {
 			$("#datepicker").datepicker({
 				dateFormat: 'yy-mm-dd'
 			});
 		});
-		</script>
-		<script>
+
+
+		// Edit Name
 		$(function() {
 			$(document).on('click', '#edit_nameBtn', function(e) {
 				e.preventDefault();
@@ -1039,11 +1038,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						cache: false
 					})
 					.done(function(data) {
-						$('#IdentityEditModal #civNameReq').val(data.name);
-						$('#IdentityEditModal #datepicker2').datepicker({
-							dateFormat: 'yy-mm-dd'
-						}).datepicker('setDate', new Date(data.dob));
-						$('#IdentityEditModal #civAddressReq').val(data.address);
+						console.log(data.address);
+						$('.civNameReq').val(data.name);
+						$('.civDobReq').val(data.dob);
+						/*$('.civDobReq_picker').datepicker({
+							dateFormat: 'yyyy-mm-dd'
+						}).datepicker('setDate', new Date(data.dob));*/
+						$('.civAddressReq').val(data.address);
 						$('.selectpicker3').selectpicker('val', data.gender);
 						$('.civRaceReq_picker').selectpicker('val', data.race);
 						$('.civDL_picker').selectpicker('val', data.dl_status);
