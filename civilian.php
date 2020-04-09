@@ -406,7 +406,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<label class="col-lg-2 control-label">Warrant Name</label>
 								<div class="col-lg-10">
 									<select class="form-control selectpicker" name="warrant_name_sel" id="warrant_name_sel" data-live-search="true" title="Select a Warrant">
-									<?php getDataSetTable($dataSet = "citation_types", $column1 = "citation_description", $column2 = "citation_fine", $leadTrim = 17, $followTrim = 11, $isVeh="", $isRegistration=""); ?>
+									<?php getDataSetTable($dataSet = "warrant_types", $column1 = "id", $column2 = "warrant_description", $leadTrim = 17, $followTrim = 11, $isVeh="", $isRegistration=""); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
