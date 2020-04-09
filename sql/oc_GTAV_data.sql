@@ -2962,7 +2962,7 @@ INSERT INTO `radio_codes` (`id`, `code`, `code_description`, `onCall`) VALUES
 (8, '10-65',		'Transporting Prisoner', 1);
 
 --
--- Dumping data into warrant_types
+-- Dumping data into `warrant_types`
 --
 
 INSERT INTO `warrant_types` (`id`, `warrant_type`, `warrant_description`) VALUES
