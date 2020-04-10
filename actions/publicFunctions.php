@@ -63,9 +63,50 @@ function getDataSetColumn($table, $data, $leadTrim, $followTrim)
     }
 }
 
+/**#@+
+* function getDataSetTableWhere()
+* Get values from a given table column as select options
+*
+* @since 0.3.1
+*
+**/
+function getDataSetTableWhere($dataSet, $whereThing, $trueornotThing, $column1, $column2, $leadTrim, $followTrim)
+{
+    try {
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch (PDOException $ex)
+    {
+        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
+        $_SESSION['error_blob'] = $ex;
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $result = $pdo->query("SELECT * FROM ".DB_PREFIX.$dataSet." WHERE ".$whereThing." = ".$trueornotThing);
+    if (!$result)
+    {
+        $_SESSION['error'] = $pdo->errorInfo();
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        die();
+    }
+
+    $dataSet = substr($dataSet,$leadTrim,strlen($dataSet)-$followTrim);
+    $dataSet = preg_split("/','/",$dataSet);
+
+    foreach ($result as $row)
+    {
+        if( !empty($row[$column2]) )
+        {
+            echo '
+                    <option value="'. $row[$column2] . '">'. $row[$column2] .'</option>
+                ';
+        }
+    }
+    $pdo = null;
+}
 
 /**#@+
-* function getDataTable()
+* function getDataSetTable()
 * Get values from a given table column as select options
 *
 * @since 0.3.1
