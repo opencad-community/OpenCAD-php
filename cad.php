@@ -1684,8 +1684,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 <label class="col-lg-2 control-label">Warrant Name</label>
                     <div class="col-lg-10">
                     <select class="form-control selectpicker" name="warrant_name_sel" id="warrant_name_sel" data-live-search="true" title="Select a Warrant">
-                    <?php getDataSetTable($dataSet = "warrant_types", $column1 = "warrant_description", $column2 = "warrant_fine", $leadTrim = 17, $followTrim = 11, $isVeh="", $isRegistration=""); ?>
-                </select>
+						<optgroup label="Violent">
+							<?php getDataSetTableWhere($dataSet = "warrant_types", $whereThing = "warrant_violent", $trueornotThing = "1", $column1 = "warrant_violent", $column2 = "warrant_description", $leadTrim = 17, $followTrim = 11); ?>
+						</optgroup>
+						<optgroup label="Non-violent">
+							<?php getDataSetTableWhere($dataSet = "warrant_types", $whereThing = "warrant_violent", $trueornotThing = "0", $column1 = "warrant_violent", $column2 = "warrant_description", $leadTrim = 17, $followTrim = 11); ?>
+						</optgroup>
+					</select>
                   </div>
 				<!-- ./ col-sm-9 -->
 			  </div>
