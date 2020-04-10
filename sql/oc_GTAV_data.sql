@@ -2947,6 +2947,10 @@ INSERT INTO `weapons` (`id`, `weapon_type`, `weapon_name`) VALUES
 (87, 'Throwable', 'Snowball'),
 (88, 'Throwable', 'Pipe Bomb');
 
+--
+-- Dumping data into `radio_codes`
+--
+
 INSERT INTO `radio_codes` (`id`, `code`, `code_description`, `onCall`) VALUES
 (1, '10-8',			'Available', 2),
 (2, '10-6',			'Busy', 1),
@@ -2956,3 +2960,59 @@ INSERT INTO `radio_codes` (`id`, `code`, `code_description`, `onCall`) VALUES
 (6, '10-7U',		'Unavailable', 1),
 (7, '10-23',		'Arrived on Scene', 1),
 (8, '10-65',		'Transporting Prisoner', 1);
+
+--
+-- Dumping data into `warrant_types`
+--
+
+INSERT INTO `warrant_types` (`id`, `warrant_type`, `warrant_description`) VALUES
+(1, 'Violent', 'First Degree Murder'),
+(2, 'Violent', 'Second Degree Murder'),
+(3, 'Violent', 'Third Degree Murder'),
+(4, 'Violent', 'Attempted Murder'),
+(5, 'Violent', 'Kidnapping'),
+(6, 'Violent', 'Attempted Kidnapping'),
+(7, 'Violent', 'Hostage Taking'),
+(8, 'Violent', 'Bank/Fed Robbery'),
+(9, 'Violent', 'Terroristic Threats'),
+(10, 'Violent', 'Terroristic Activities'),
+(11, 'Violent', 'Prison Escape'),
+(12, 'Violent', 'Robbery'),
+(13, 'Violent', 'Burglary'),
+(14, 'Violent', 'Threatening a Government Official'),
+(15, 'Violent', 'Threatening a Public Service Official'),
+(16, 'Violent', 'Threatening a Law Enforcement Officer'), 
+(17, 'Violent', 'Sexual Assault'),
+(18, 'Violent', 'Hate Crime'),
+(19, 'Violent', 'Assault'),
+(20, 'Violent', 'Conspiracy to Commit'),
+(21, 'Violent', 'Conspiracy'),
+(22, 'Violent', 'Drug Trafficking'),
+(23, 'Violent', 'Evasion/Eluding'),
+(24, 'Violent', 'Felony Evasion'),
+(25, 'Violent', 'Resisting Arrest'),
+(26, 'Violent', 'Discharge of a Firearm within City Limits'),
+(27, 'Violent', 'Firearm by Felon'),
+(28, 'Violent', 'Unlicensed Firearm'),
+(29, 'Violent', 'Illegal Weapon'),
+(30, 'Violent', 'Illegal Magazine'),
+(31, 'Violent', 'Concealed Carry Rifle'),
+(32, 'Violent', 'Failure to Inform'),
+(33, 'Non-Violent', 'FTA: Lewd Conduct'),
+(34, 'Non-Violent', 'FTA: DUI/DWI'),
+(35, 'Non-Violent', 'FTA: Fraud'),
+(36, 'Non-Violent', 'FTA: Hit and Run'),
+(37, 'Non-Violent', 'FTA: Speeding'),
+(38, 'Non-Violent', 'FTA: Reckless Driving'),
+(39, 'Non-Violent', 'FTA: Obstruction of Justice'),
+(40, 'Non-Violent', 'FTA: Verbal Abuse'),
+(41, 'Non-Violent', 'FTA: Bribery'),
+(42, 'Non-Violent', 'Bribery of a Public Official'),
+(43, 'Non-Violent', 'Bribery of a Law Enforcement Officer'),
+(44, 'Non-Violent', 'FTA: Disorderly Conduct'),
+(45, 'Non-Violent', 'FTA: Drug Possession'),
+(46, 'Non-Violent', 'FTA: Trespassing'),
+(47, 'Non-Violent', 'FTA: Excessive Noise'),
+(48, 'Non-Violent', 'FTA: Failure to Identify'),
+(49, 'Non-Violent', 'FTA: Stalking'),
+(50, 'Non-Violent', 'FTA: Public Intoxication');

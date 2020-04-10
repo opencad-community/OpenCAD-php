@@ -1681,62 +1681,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			  </div>
 			  <!-- ./ form-group -->
 			  <div class="form-group row">
-				<label class="col-lg-2 control-label">Warrant Name</label>
-				<div class="col-lg-10">
-				  <select class="form-control selectpicker" name="warrant_name_sel" id="warrant_name_sel" data-live-search="true" title="Select a Warrant">
-					<optgroup label="Violent Warrants (60 day expiry)">
-					  <option value="1st Degree Murder">1st Degree Murder</option>
-					  <option value="2nd Degree Murder">2nd Degree Murder</option>
-					  <option value="3rd Degree Murder">3rd Degree Murder</option>
-					  <option value="Attempted Murder">Attempted Murder</option>
-					  <option value="Kidnapping">Kidnapping</option>
-					  <option value="Attempted Kidnapping">Attempted Kidnapping</option>
-					  <option value="Hostage Taking">Hostage Taking</option>
-					  <option value="Bank/Fed Robbery">Bank/Fed Robbery</option>
-					  <option value="Terroristic Activity">Terroristic Activity</option>
-					  <option value="Terroristic Threats">Terroristic Threats</option>
-					  <option value="JailBreak">JailBreak</option>
-					  <option value="Robbery">Robbery</option>
-					  <option value="Grand Theft Auto">Grand Theft Auto</option>
-					  <option value="Burglary">Burglary</option>
-					  <option value="Threatening an Official">Threatening an Official</option>
-					  <option value="Sexual Assault">Sexual Assault</option>
-					  <option value="Hate Crime">Hate Crime</option>
-					  <option value="Assault">Assault</option>
-					  <option value="Conspiracy">Conspiracy</option>
-					  <option value="Drug Trafficking">Drug Trafficking</option>
-					  <option value="Evasion/Fleeing/Eluding">Evasion/Fleeing/Eluding</option>
-					  <option value="Felony Evading">Felony Evading</option>
-					  <option value="Resisting Arrest">Resisting Arrest</option>
-					  <option value="Firearm in City Limits">Firearm in City Limits</option>
-					  <option value="Firearm by Felon">Firearm by Felon</option>
-					  <option value="Unlicensed Firearm">Unlicensed Firearm</option>
-					  <option value="Firearm Discharge in City Limits">Firearm Discharge in City Limits</option>
-					  <option value="Illegal Weapon">Illegal Weapon</option>
-					  <option value="Illegal Magazine">Illegal Magazine</option>
-					  <option value="Concealed Carry Rifle">Concealed Carry Rifle</option>
-					  <option value="Failure to Inform">Failure to Inform</option>
-					</optgroup>
-					<optgroup label="Non-Violent Warrants (30 day expiry)">
-					  <option value="FTA: Lewd Conduct">FTA: Lewd Conduct</option>
-					  <option value="FTA: DUI/DWI">FTA: DUI/DWI</option>
-					  <option value="FTA: Fraud">FTA: Fraud</option>
-					  <option value="FTA: Hit and Run">FTA: Hit and Run</option>
-					  <option value="FTA: Speeding">FTA: Speeding</option>
-					  <option value="FTA: Reckless Driving">FTA: Reckless Driving</option>
-					  <option value="FTA: Obstruction of Justice">FTA: Obstruction of Justice</option>
-					  <option valu e="FTA: Verbal Abuse">FTA: Verbal Abuse</option>
-					  <option value="FTA: Bribery">FTA: Bribery</option>
-					  <option value="FTA: Disorderly Conduct">FTA: Disorderly Conduct</option>
-					  <option value="FTA: Drug Posession">FTA: Drug Posession</option>
-					  <option value="FTA: Trespassing">FTA: Trespassing</option>
-					  <option value="FTA: Excessive Noise">FTA: Excessive Noise</option>
-					  <option value="FTA: Failure to Identify">FTA: Failure to Identify</option>
-					  <option value="FTA: Stalking">FTA: Stalking</option>
-					  <option value="FTA: Public Intoxication">FTA: Public Intoxication</option>
-					</optgroup>
-				  </select>
-				</div>
+                <label class="col-lg-2 control-label">Warrant Name</label>
+                    <div class="col-lg-10">
+                    <select class="form-control selectpicker" name="warrant_name_sel" id="warrant_name_sel" data-live-search="true" title="Select a Warrant">
+                    <?php getDataSetTable($dataSet = "warrant_types", $column1 = "warrant_description", $column2 = "warrant_fine", $leadTrim = 17, $followTrim = 11, $isVeh="", $isRegistration=""); ?>
+                </select>
+                  </div>
 				<!-- ./ col-sm-9 -->
 			  </div>
 			  <!-- ./ form-group -->

@@ -40,6 +40,7 @@ CREATE TABLE IF NOT EXISTS `<DBPREFIX>warning_types` (
 
 CREATE TABLE IF NOT EXISTS `<DBPREFIX>warrant_types` (
     `id` INT(11) AUTO_INCREMENT,
+    `warrant_type` VARCHAR(255) COMMENT 'Violent/Non-Violent.',
     `warrant_description` VARCHAR(255) COMMENT 'Description of a frequently used warrant type.',
     PRIMARY KEY(`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = latin1;
