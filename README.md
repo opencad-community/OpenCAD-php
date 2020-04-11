@@ -1,3 +1,15 @@
+<p align="center">
+![Discord](https://img.shields.io/discord/352884538676084756?label=Join%20Discord&logo=Discord&style=for-the-badge)
+</p>
+<p align="center">
+![Bitbucket Server open pull requests](https://img.shields.io/bitbucket/pr/oc/opencad-app?server=https%3A%2F%2Frepo.opencad.io&style=for-the-badge)
+</p>
+<p align="center">
+![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/opencad-app/opencad-php?style=for-the-badge)
+</p>
+<p align="center">
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/opencad-app/opencad-php?style=for-the-badge)
+</p>
 # OpenCAD
 Open Source Computer Aided Dispatch System for GTA V Roleplay Communities.
 
