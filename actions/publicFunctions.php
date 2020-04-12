@@ -82,7 +82,7 @@ function getDataSetTableWhere($dataSet, $whereString, $isTrue, $column1, $column
         die();
     }
 
-    $result = $pdo->query("SELECT * FROM ".DB_PREFIX.$dataSet." WHERE ".$whereThing." = ".$trueornotThing);
+    $result = $pdo->query("SELECT * FROM ".DB_PREFIX.$dataSet." WHERE ".$whereString." = ".$isTrue);
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
