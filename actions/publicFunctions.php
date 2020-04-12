@@ -70,7 +70,7 @@ function getDataSetColumn($table, $data, $leadTrim, $followTrim)
 * @since 0.3.1
 *
 **/
-function getDataSetTableWhere($dataSet, $whereThing, $trueornotThing, $column1, $column2, $leadTrim, $followTrim)
+function getDataSetTableWhere($dataSet, $whereString, $isTrue, $column1, $column2, $leadTrim, $followTrim)
 {
     try {
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
