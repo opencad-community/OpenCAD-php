@@ -276,9 +276,9 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>warning_types` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
-CREATE TABLE IF NOT EXISTS `d5l7l1_warrant_types` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>warrant_types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `warrant_type` varchar(255) NOT NULL,
+  `warrant_violent` int(1) NOT NULL,
   `warrant_description` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
