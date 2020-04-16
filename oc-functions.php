@@ -232,7 +232,7 @@ function generateRandomString($length = 10) {
 	**/
 function getOpenCADVersion()
 {
-	echo '0.3.1 (commit 0e793a9e7c3)';
+	echo '0.3.1 (commit f1cfe311e6a)';
 }
 
 /**#@+
