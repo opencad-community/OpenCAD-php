@@ -69,7 +69,7 @@
     // 3. DATABASE SETTINGS
     // -------------------------------------------------------------------------
     // *** force database creation
-    define('EI_DATABASE_CREATE', false);
+    define('EI_DATABASE_CREATE', true);
 
     // *** define database type
     // *** to check installed drivers use: print_r(PDO::getAvailableDrivers());
