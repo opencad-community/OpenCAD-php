@@ -7,7 +7,6 @@
 	require_once('include/functions.inc.php');
 	require_once('include/languages.inc.php');	
 
-	$task = isset($_POST['task']) ? prepare_input($_POST['task']) : '';
 	$passed_step = isset($_SESSION['passed_step']) ? (int)$_SESSION['passed_step'] : 0;
 	$focus_field = 'DEMO_MODE';
 	$error_msg = '';
@@ -23,7 +22,7 @@
 	
 	// handle form submission
 	// -------------------------------------------------
-	if($task == 'send'){
+	if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 		$DEMO_MODE = isset($_POST['DEMO_MODE']) ? prepare_input($_POST['DEMO_MODE']) : '';
 		$USE_GRAVATAR = isset($_POST['USE_GRAVATAR']) ? prepare_input($_POST['USE_GRAVATAR']) : '';

@@ -17,7 +17,6 @@
 	require_once('include/functions.inc.php');
 	require_once('include/languages.inc.php');	
 
-	$task = isset($_POST['task']) ? prepare_input($_POST['task']) : '';
 	$passed_step = isset($_SESSION['passed_step']) ? (int)$_SESSION['passed_step'] : 0;
 	$focus_field = 'admin_name';
 	$error_msg = '';
@@ -33,7 +32,7 @@
 	
 	// handle form submission
 	// -------------------------------------------------
-	if($task == 'send'){
+	if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 		// skip this step if admin account is not required
 		if(!EI_USE_ADMIN_ACCOUNT){

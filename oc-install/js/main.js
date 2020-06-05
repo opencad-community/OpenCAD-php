@@ -40,6 +40,7 @@ function testDatabaseConnection(){
             $("#notes_message").html(EasyInstaller._MSG["ajax_connection_error"]);
 		},
 		success: function(html){
+			console.log(html);
 			var obj = jQuery.parseJSON(html);
 			if(obj.status == "1"){
 				if(obj.db_connection_status == "1"){

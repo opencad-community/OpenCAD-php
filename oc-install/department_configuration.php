@@ -7,7 +7,6 @@
 	require_once('include/functions.inc.php');
 	require_once('include/languages.inc.php');	
 
-	$task = isset($_POST['task']) ? prepare_input($_POST['task']) : '';
 	$passed_step = isset($_SESSION['passed_step']) ? (int)$_SESSION['passed_step'] : 0;
 	$focus_field = 'POLICE_NCIC';
 	$error_msg = '';
@@ -23,7 +22,7 @@
 	
 	// handle form submission
 	// -------------------------------------------------
-	if($task == 'send'){
+	if($_SERVER['REQUEST_METHOD'] === 'POST'){
 		
 		$POLICE_NCIC = isset($_POST['POLICE_NCIC']) ? prepare_input($_POST['POLICE_NCIC']) : '';
 		$POLICE_CALL_SELFASSIGN = isset($_POST['POLICE_CALL_SELFASSIGN']) ? prepare_input($_POST['POLICE_CALL_SELFASSIGN']) : '';

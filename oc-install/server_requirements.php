@@ -7,7 +7,6 @@
 	require_once('include/functions.inc.php');
 	require_once('include/languages.inc.php');	
 
-	$task = isset($_POST['task']) ? prepare_input($_POST['task']) : '';
 	$passed_step = isset($_SESSION['passed_step']) ? (int)$_SESSION['passed_step'] : 0;
 	$installation_type = isset($_SESSION['installation_type']) ? $_SESSION['installation_type'] : 'wizard';
 	$program_already_installed = false;
@@ -31,7 +30,7 @@
 
 	// handle form submission
 	// -------------------------------------------------
-	if($task == 'send'){
+	if($_SERVER['REQUEST_METHOD'] === 'POST'){
 		$_SESSION['passed_step'] = 2;
 		header('location: database_settings.php');
 		exit;
