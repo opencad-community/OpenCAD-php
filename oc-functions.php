@@ -232,7 +232,7 @@ function generateRandomString($length = 10) {
 	**/
 function getOpenCADVersion()
 {
-	echo '0.3.2';
+	echo '0.3.2 Update 01/15/2021';
 }
 
 /**#@+
