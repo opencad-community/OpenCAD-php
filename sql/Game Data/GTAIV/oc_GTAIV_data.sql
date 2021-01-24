@@ -278,3 +278,12 @@ INSERT INTO `<DB_PREFIX>citation_types` (`citation_id`, `citation_description`, 
 --
 
 INSERT INTO `<DB_PREFIX>departments` (`department_id`, `department_name`, `department_short_name`, `department_long_name`, `allow_department`) VALUES
+(1, 'Communications', 'LCEC', 'Liberty City Emergency Communications', 0),
+(2, 'State', 'LSP', 'Liberty State Police', 0),
+(3, 'Highway', 'LHP', 'Liberty Highway Patrol', 0),
+(4, 'Sheriff', 'LCSO', 'Liberty County Sheriffs\' Office', 0),
+(5, 'Police', 'LCPD', 'Liberty City Police Department', 0),
+(6, 'Fire', 'LCFD', 'Liberty City Fire Department', 0),
+(7, 'EMS', 'LCEMS', 'Liberty City Emergency Medical Services', 0),
+(8, 'Civilian', 'LCC', 'Liberty City Civilians', 0),
+(9, 'Roadside Assistance', 'LCRA', 'Liberty City Roadside Assistance', 0);
