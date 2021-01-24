@@ -372,3 +372,9 @@ INSERT INTO `<DB_PREFIX>incident_types` (`code_id`, `code_name`) VALUES
 ('10-82', 'Fire in Progress'),
 ('10-83', 'Smoke Visible'),
 ('10-84', 'No Smoke Visible');
+
+--
+-- Dumping data for table `statuses`
+--
+
+INSERT INTO `<DB_PREFIX>statuses` (`status_id`, `status_text`) VALUES
