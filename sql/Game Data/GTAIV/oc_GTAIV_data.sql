@@ -378,3 +378,11 @@ INSERT INTO `<DB_PREFIX>incident_types` (`code_id`, `code_name`) VALUES
 --
 
 INSERT INTO `<DB_PREFIX>statuses` (`status_id`, `status_text`) VALUES
+(1, '10-8 | Available'),
+(2, '10-6 | Busy'),
+(3, '10-7 | Unavailable | On Call'),
+(4, '10-5 | Meal Break'),
+(5, 'S-11 | Signal 11'),
+(6, '10-7 | Unavailable'),
+(7, '10-23 | Arrived on Scene'),
+(8, '10-65 | Transporting Prisoner');
