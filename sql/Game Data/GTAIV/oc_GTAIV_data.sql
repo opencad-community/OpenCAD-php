@@ -287,3 +287,10 @@ INSERT INTO `<DB_PREFIX>departments` (`department_id`, `department_name`, `depar
 (7, 'EMS', 'LCEMS', 'Liberty City Emergency Medical Services', 0),
 (8, 'Civilian', 'LCC', 'Liberty City Civilians', 0),
 (9, 'Roadside Assistance', 'LCRA', 'Liberty City Roadside Assistance', 0);
+
+
+--
+-- Dumping data for table `incident_types`
+--
+
+INSERT INTO `<DB_PREFIX>incident_types` (`code_id`, `code_name`) VALUES
