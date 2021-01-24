@@ -250,7 +250,8 @@ INSERT INTO `<DB_PREFIX>colors` (`id`, `color_group`, `color_name`) VALUES
 (245, 'Pearlescent', 'Bright Purple'),
 (246, 'Pearlescent', 'Cream'),
 (247, 'Pearlescent', 'Ice White'),
-(248, 'Pearlescent', 'Frost White');
+(248, 'Pearlescent', 'Frost White'),
+(249, 'Custom', 'Custom');
 
 
 --

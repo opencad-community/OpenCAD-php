@@ -248,7 +248,8 @@
 {"id":"245","color_group":"Pearlescent","color_name":"Bright Purple"},
 {"id":"246","color_group":"Pearlescent","color_name":"Cream"},
 {"id":"247","color_group":"Pearlescent","color_name":"Ice White"},
-{"id":"248","color_group":"Pearlescent","color_name":"Frost White"}
+{"id":"248","color_group":"Pearlescent","color_name":"Frost White"},
+{"id":"249","color_group":"Custom","color_name":"Custom"}
 ]
 }
 ,{"action":"insert","table":"departments","rows":
