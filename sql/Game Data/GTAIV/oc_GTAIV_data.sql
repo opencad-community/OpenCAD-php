@@ -386,3 +386,10 @@ INSERT INTO `<DB_PREFIX>statuses` (`status_id`, `status_text`) VALUES
 (6, '10-7 | Unavailable'),
 (7, '10-23 | Arrived on Scene'),
 (8, '10-65 | Transporting Prisoner');
+
+--
+-- Dumping data for the table `streets`
+--
+
+INSERT INTO `<DB_PREFIX>streets` (`id`, `name`, `county`) VALUES
+

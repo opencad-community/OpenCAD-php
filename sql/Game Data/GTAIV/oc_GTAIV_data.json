@@ -251,4 +251,9 @@
     {"id":"248","color_group":"Pearlescent","color_name":"Frost White"},
     {"id":"249","color_group":"Custom","color_name":"Custom"}
     ]
-    }
+}
+,{"action":"insert","table":"departments","rows":
+    [
+
+]
+}
