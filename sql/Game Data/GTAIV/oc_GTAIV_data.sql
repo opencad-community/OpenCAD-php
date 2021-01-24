@@ -271,3 +271,10 @@ INSERT INTO `<DB_PREFIX>citation_types` (`citation_id`, `citation_description`, 
 (10, 'Compromised Safety during Lane Change', '150'),
 (11, 'Illegal Parking', '150'),
 (12, 'Driving without Headlights Active when appropriate', '150');
+
+
+--
+-- Dumping data for table `departments`
+--
+
+INSERT INTO `<DB_PREFIX>departments` (`department_id`, `department_name`, `department_short_name`, `department_long_name`, `allow_department`) VALUES
