@@ -252,3 +252,10 @@ INSERT INTO `<DB_PREFIX>colors` (`id`, `color_group`, `color_name`) VALUES
 (247, 'Pearlescent', 'Ice White'),
 (248, 'Pearlescent', 'Frost White'),
 (249, 'Custom', 'Custom');
+
+
+--
+-- Dumping data for table `citation_types
+--
+
+INSERT INTO `<DB_PREFIX>citation_types` (`citation_id`, `citation_description`, `citation_fine`) VALUES
