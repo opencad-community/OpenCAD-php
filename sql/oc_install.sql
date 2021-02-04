@@ -164,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncic_names` (
   `address` text DEFAULT NULL,
   `gender` set('Male','Female','Transgender Man','Transgender Woman','Intersex','Other') DEFAULT NULL,
   `race` set('Indian','Asian','Black or African American','Hispanic','Caucasian','Pacific Islander','White') DEFAULT NULL,
-  `dl_status` set('Unobtained','Valid','Suspended','Canceled','Expired') DEFAULT 'Unobtained',
+  `dl_status` set('Unobtained','Valid','Suspended','Cancelled','Expired') DEFAULT 'Unobtained',
   `dl_type` set('Not Issued','Learners','Provisional','Open','Identification Only') DEFAULT 'Not Issued',
   `dl_class` set('Not Applicable','Car','Light Rig','Heavy Rig','Boat','Motorbike','Military') DEFAULT 'Not Applicable',
   `dl_issuer` set('Not Applicable','Government','Military') DEFAULT 'Not Applicable',
