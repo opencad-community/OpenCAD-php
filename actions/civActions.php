@@ -146,7 +146,8 @@ function ncicGetNames()
                 <td>'.$row['address'].'</td>
                 <td>'.$row['gender'].'</td>
                 <td>'.$row['race'].'</td>
-                <td>'.$row['dl_type']. ' / '.$row['dl_status'].'</td>
+                <td>'.$row['dl_type'].'</td> 
+                <td>'.$row['dl_status'].'</td>
                 <td>'.$row['hair_color'].'</td>
                 <td>'.$row['build'].'</td>
                 <td>
