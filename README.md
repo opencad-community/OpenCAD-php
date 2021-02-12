@@ -1,5 +1,5 @@
 <p align="center">
-<a href="http://discord.io/opencad"><img alt="Join our Discord" src="https://img.shields.io/discord/352884538676084756?style=for-the-badge"></a>
+<a href="http://discord.io/opencadproject"><img alt="Join our Discord" src="https://img.shields.io/discord/352884538676084756?style=for-the-badge"></a>
 <img alt="GitHub tag (latest SemVer)" src="https://img.shields.io/github/v/tag/opencad-app/opencad-php?style=for-the-badge">
 <img alt="GitHub release (latest SemVer)" src="https://img.shields.io/github/v/release/opencad-app/opencad-php?style=for-the-badge">
 </p>
@@ -22,7 +22,7 @@ Open Source Computer Aided Dispatch System for GTA V Roleplay Communities.
 
 #### Important Notes
 * This has been tested to work on Linux, Windows and cPanel.
-* The OpenCAD Development team **DOES NOT** recommend the utilization of "free" webhosting solutions due to a multitude of reasons. Our team has compiled a *[list of Recommended Hosting Providers](https://guides.opencad.io/alldoc/installation-guides/recommended-hosting-providers)*.
+* The OpenCAD Development team **DOES NOT** recommend the utilization of "free" webhosting solutions due to a multitude of reasons. We suggest [Spearware Networks](https://spearwarenetworks.com/web-hosting/) for web hosting.
 
 ## Support
 
