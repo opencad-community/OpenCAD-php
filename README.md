@@ -19,6 +19,7 @@ Open Source Computer Aided Dispatch System for GTA V Roleplay Communities.
 
 #### Unsuppported Environments
 * Free hosting of any kind
+* XAMPP
 
 #### Important Notes
 * This has been tested to work on Linux, Windows and cPanel.
