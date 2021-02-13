@@ -7,7 +7,7 @@
 -------------------
 
 # OpenCAD
-Open Source Computer Aided Dispatch System for GTA V Roleplay Communities.
+Open Source Computer Aided Dispatch System for Roleplay Communities.
 
 ## Installation Requirements
 * Operating System: Linux or Windows
