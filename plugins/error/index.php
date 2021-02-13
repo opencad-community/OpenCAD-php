@@ -92,7 +92,7 @@
                                 <br><br>
                                 <?php } ?>
                                 <div class="x_content">
-                                    If this error persists, please open up a <a href="https://jira.opencad.io/secure/CreateIssue!default.jspa">ticket</a>.
+                                    If this error persists, please open up a <a href="https://opencad.io">bug report</a>.
                                 </div>
                             </div>
                         </div>
