@@ -23,7 +23,7 @@ Open Source Computer Aided Dispatch System for Roleplay Communities.
 
 #### Important Notes
 * This has been tested to work on Linux, Windows and cPanel.
-* The OpenCAD Development team **DOES NOT** recommend the utilization of "free" webhosting solutions due to a multitude of reasons. We suggest [Spearware Networks](https://spearwarenetworks.com/web-hosting/) for web hosting.
+* The OpenCAD Development team **DOES NOT** recommend the utilization of "free" webhosting solutions due to a multitude of reasons. We suggest [Spearware Networks](https://spearwarenetworks.com/web-hosting) for web hosting.
 
 ## Support
 
