@@ -16,3 +16,4 @@ mirror_ssh
 log_file
 sql.php
 *adminer*.php
+errorlog
