@@ -21,6 +21,14 @@ if(ENABLE_API_SECURITY === true)
         session_start();
     }
 
+    // Handle Authentication
+    if (empty($_SESSION['logged_in']))
+    {
+        header('Location: ./index.php');
+        die("Not logged in");
+    }
+
+    // Handle Authorization
     if(hash('md5', session_id().getApiKey()) !== $_COOKIE['aljksdz7'])
     {
         if (isset($_SERVER['PHP_AUTH_DIGEST'])) {
