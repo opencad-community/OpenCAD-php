@@ -32,8 +32,8 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="author" content="ApPHP Company - Advanced Power of PHP">
-    <meta name="generator" content="ApPHP EasyInstaller">
+    <meta name="author" content="OpenCAD Project">
+    <meta name="generator" content="OpenCAD Project Installer">
 	<title><?php echo lang_key("installation_guide"); ?> | <?php echo lang_key('ready_to_install'); ?></title>
 
 	<link href="../images/favicon.ico" rel="shortcut icon" />
