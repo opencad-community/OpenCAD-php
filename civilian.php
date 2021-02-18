@@ -21,12 +21,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     include(__DIR__."/actions/publicFunctions.php");
     include(__DIR__."/actions/generalActions.php");
 
-    if (empty($_SESSION['logged_in']))
-    {
-        header('Location: ./index.php');
-        die("Not logged in");
-    }
-    else
+    if (!empty($_SESSION['logged_in']))
     {
       $name = $_SESSION['name'];
       $uid = $_SESSION['id'];
