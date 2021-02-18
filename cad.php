@@ -21,15 +21,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	include(__DIR__."/plugins/api_auth.php");
 
 	// TODO: Verify user has permission to be on this page
-
-	if (empty($_SESSION['logged_in']))
+	if (!empty($_SESSION['logged_in']))
 	{
-		header('Location: ./index.php');
-		die("Not logged in");
-	}
-	else
-	{
-	  $name = $_SESSION['name'];
+		$name = $_SESSION['name'];
 	}
 
 	if(isset($_SESSION['dispatch']))

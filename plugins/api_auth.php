@@ -19,15 +19,30 @@ if(ENABLE_API_SECURITY === true)
     if(session_id() == '' || !isset($_SESSION)) {
         // session isn't started
         session_start();
-        }
+    }
+
+    // Handle Authentication
+    if (empty($_SESSION['logged_in']))
+    {
+        header('Location: ./index.php');
+        die("Not logged in");
+    }
+
+    // Handle Authorization
     if(hash('md5', session_id().getApiKey()) !== $_COOKIE['aljksdz7'])
     {
-        $headers = $_SERVER['PHP_AUTH_DIGEST'];
-        if(isset($headers['Authorization']))
-        {
-            if(substr($headers['Authorization'], 0, 5) === "Basic")
+        if (isset($_SERVER['PHP_AUTH_DIGEST'])) {
+            $headers = $_SERVER['PHP_AUTH_DIGEST'];
+            if(isset($headers['Authorization']))
             {
-                if(base64_decode(str_replace('Basic', '', $headers['Authorization'])) !== "api:".getApiKey())
+                if(substr($headers['Authorization'], 0, 5) === "Basic")
+                {
+                    if(base64_decode(str_replace('Basic', '', $headers['Authorization'])) !== "api:".getApiKey())
+                    {
+                        header('HTTP/1.1 403 Unauthorized');
+                        die();
+                    }
+                }else
                 {
                     header('HTTP/1.1 403 Unauthorized');
                     die();
@@ -37,10 +52,6 @@ if(ENABLE_API_SECURITY === true)
                 header('HTTP/1.1 403 Unauthorized');
                 die();
             }
-        }else
-        {
-            header('HTTP/1.1 403 Unauthorized');
-            die();
         }
     }
 }
