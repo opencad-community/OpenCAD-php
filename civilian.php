@@ -543,7 +543,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<label class="col-lg-2 control-label">Drivers License Status</label>
 								<div class="col-lg-10">
 									<select name="civDLStatus" class="form-control selectpicker civDLStatus_picker" id="civBuildReq" title="Select Status" required>
-										<?php getDataSetColumn($table = "ncic_names", $data = "dl_status", $leadTrim = 25, $followTrim = 35); ?>
+										<?php getDataSetColumn($table = "ncic_names", $data = "dl_status", $leadTrim = 27, $followTrim = 42); ?>
 									</select>
 								</div>
 								
@@ -671,7 +671,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<label class="col-lg-2 control-label">Drivers License Status</label>
 								<div class="col-lg-10">
 									<select name="civDLStatus" class="form-control selectpicker civDLStatus_picker" id="civBuildReq" title="Select Status" required>
-										<?php getDataSetColumn($table = "ncic_names", $data = "dl_status", $leadTrim = 25, $followTrim = 35); ?>
+										<?php getDataSetColumn($table = "ncic_names", $data = "dl_status", $leadTrim = 27, $followTrim = 42); ?>
 									</select>
 								</div>
 
