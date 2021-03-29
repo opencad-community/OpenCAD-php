@@ -114,7 +114,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						   <li>
 							  <a><i class="fas fa-stopwatch"></i> Stopwatch <span class="fas fa-chevron-down"></span></a>
 							  <ul class="nav child_menu">
-								 <li><a href="https://www.timeanddate.com/stopwatch/" target="_blank">Stopwatch</a></li>
+								 <li><a href="https://www.timeanddate.com/stopwatch/" target="_blank" rel="noopener">Stopwatch</a></li>
 							  </ul>
 						   </li>
 						   <li>
