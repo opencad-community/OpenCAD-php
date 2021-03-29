@@ -1239,7 +1239,7 @@ license GPL/LGPL/MPL
         icon: null,
         genNotice: function(notice, options){
             if (options.icon === null) {
-                this.icon = "http://sciactive.com/pnotify/includes/desktop/"+notice.options.type+".png";
+                this.icon = "https://sciactive.com/pnotify/includes/desktop/"+notice.options.type+".png";
             } else if (options.icon === false) {
                 this.icon = null;
             } else {
