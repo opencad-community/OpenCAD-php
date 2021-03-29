@@ -105,8 +105,6 @@ function getMyRank()
 function changePassword()
 {
     session_start();
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
 
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);

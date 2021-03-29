@@ -1104,8 +1104,6 @@ function delete_callhistory()
 function changeUserPassword()
 {
     session_start();
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
     $userID 		= !empty($_POST['userID']) ? htmlspecialchars($_POST['userID']) : '';
 
     try{
