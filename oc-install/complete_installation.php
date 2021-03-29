@@ -120,8 +120,6 @@
 		if(empty($database_host)) $error_mg[] = lang_key('alert_database_host_empty');	
 		if(empty($database_name)) $error_mg[] = lang_key('alert_database_name_empty'); 
 		if(empty($database_username)) $error_mg[] = lang_key('alert_database_usernamename_empty'); 	
-		//if (empty($database_password)) $error_mg[] = lang_key('alert_database_password_empty');
-		//if (empty($database_prefix)) $error_mg[] = lang_key('alert_database_prefix_empty');
 
 		if(empty($error_mg)){		
 			if(EI_MODE == 'demo'){
@@ -295,7 +293,6 @@
 				- <?php echo lang_key('database_import_error'); ?>
 			<?php }else{ ?>
 				- <?php echo lang_key('completed'); ?>
-				<!--<h3><?php //echo lang_key('updating_completed'); ?></h3>			-->
 			<?php } ?>
 			</h2>
 

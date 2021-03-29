@@ -169,10 +169,6 @@ callCheck();
          <!-- /sidebar menu -->
          <!-- /menu footer buttons -->
          <div class="sidebar-footer hidden-small" style="background:#172d44">
-            <!--  —— Left in for user settings. To be introduced later. Probably after RC1. ——
-               <a data-toggle="tooltip" data-placement="top">
-                  <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-               </a>-->
             <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard" href="<?php echo BASE_URL; ?>/dashboard.php">
             <span class="fas fa-clipboard-list" aria-hidden="true"></span>
             </a>
@@ -473,7 +469,6 @@ callCheck();
                      </div>
                      <!-- ./ input-group -->
                      <div name="ncic_name_return" id="ncic_name_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
-                        <!--<textarea class="form-control" style="resize:none;" id="ncic_name_return" name="ncic_name_return" readonly="readonly"></textarea> -->
                      </div>
                      <!-- ./ ncic_name_return -->
                   </div>
@@ -528,7 +523,6 @@ callCheck();
                      </div>
                      <!-- ./ input-group -->
                      <div name="ncic_weapon_return" id="ncic_weapon_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
-                        <!--<textarea class="form-control" style="resize:none;" id="ncic_name_return" name="ncic_name_return" readonly="readonly"></textarea> -->
                      </div>
                      <!-- ./ ncic_name_return -->
                   </div>
@@ -561,7 +555,6 @@ callCheck();
             </div>
             <!-- ./ input-group -->
             <div name="ncic_name_return" id="ncic_name_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
-               <!--<textarea class="form-control" style="resize:none;" id="ncic_name_return" name="ncic_name_return" readonly="readonly"></textarea> -->
             </div>
             <!-- ./ ncic_name_return -->
          </div>

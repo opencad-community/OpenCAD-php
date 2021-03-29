@@ -218,9 +218,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                     concept by <a href="https://github.com/ossified"
                                         title="a link to the original developer's GitHub.">Shane Gill</a>. This project
                                     is maintained by Overt Source</p>
-                                <!--<h3>Got Feedback?</h3>
-                                <p>The OpenCAD team wants to know what you think. Please send us your feedback today!
-                                </p>-->
                             </div>
                             <!-- ./ x_content -->
                         </div>

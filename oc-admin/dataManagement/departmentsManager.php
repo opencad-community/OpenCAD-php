@@ -148,35 +148,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         </div>
                     </div>
                     <div class="clearfix"></div>
-                    <!-- going to be utilized in v2 of Street Manager - PJF/10MAR19 
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>At A Glance</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
-                      </li>
-                      <li><a class="close-link"><i class="fas fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <!-- ./ x_title ->
-                  <div class="x_content">
-                      <div class="row tile_count">
-                       
-                      </div>
-                      <!-- ./ row tile_count ->
-                  </div>
-                  <!-- ./ x_content ->
-                </div>
-                <!-- ./ x_panel ->
-              </div>
-              <!-- ./ col-md-12 col-sm-12 col-xs-12 --
-            </div>
-            <!-- ./ row ->
-             going to be utilized in v2 of Street Manager - PJF/10MAR19 -->
                     <div class="clearfix"></div>
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
