@@ -125,8 +125,8 @@
 		if(empty($database_host)) $error_mg[] = lang_key('alert_database_host_empty');	
 		if(empty($database_name)) $error_mg[] = lang_key('alert_database_name_empty'); 
 		if(empty($database_username)) $error_mg[] = lang_key('alert_database_usernamename_empty'); 	
-		if (empty($database_password)) $error_mg[] = lang_key('alert_database_password_empty');
-		if (empty($database_prefix)) $error_mg[] = lang_key('alert_database_prefix_empty');
+		//if (empty($database_password)) $error_mg[] = lang_key('alert_database_password_empty');
+		//if (empty($database_prefix)) $error_mg[] = lang_key('alert_database_prefix_empty');
 
 		if(empty($error_mg)){		
 			if(EI_MODE == 'demo'){
@@ -271,8 +271,8 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="author" content="StormLight Tech">
-    <meta name="generator" content="OpenCAD – a StormLight Tech Project">
+    <meta name="author" content="OpenCAD Project">
+    <meta name="generator" content="OpenCAD Project Installer">
 	<title><?php echo lang_key('installation_guide'); ?> | <?php echo lang_key('complete_installation'); ?></title>
 
 	<link href="./images/favicon.ico" rel="shortcut icon" />

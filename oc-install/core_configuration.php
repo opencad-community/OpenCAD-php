@@ -7,7 +7,6 @@
 	require_once('include/functions.inc.php');
 	require_once('include/languages.inc.php');	
 
-	$task = isset($_POST['task']) ? prepare_input($_POST['task']) : '';
 	$passed_step = isset($_SESSION['passed_step']) ? (int)$_SESSION['passed_step'] : 0;
 	$focus_field = 'COMMUNITY_NAME';
 	$error_msg = '';
@@ -23,7 +22,7 @@
 	
 	// handle form submission
 	// -------------------------------------------------
-	if($task == 'send'){
+	if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 		$COMMUNITY_NAME = isset($_POST['COMMUNITY_NAME']) ? prepare_input($_POST['COMMUNITY_NAME']) : '';
 		$BASE_URL = isset($_POST['BASE_URL']) ? prepare_input($_POST['BASE_URL']) : '';
@@ -90,8 +89,8 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="author" content="StormLight Tech">
-    <meta name="generator" content="OpenCAD – a StormLight Tech Project">
+    <meta name="author" content="OpenCAD Project">
+    <meta name="generator" content="OpenCAD Project Installer">
 	<title><?php echo lang_key("installation_guide"); ?> | System Settings</title>
 
 	<link href="./images/favicon.ico" rel="shortcut icon" />

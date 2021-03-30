@@ -17,7 +17,6 @@
 	require_once('include/functions.inc.php');
 	require_once('include/languages.inc.php');	
 
-	$task = isset($_POST['task']) ? prepare_input($_POST['task']) : '';
 	$passed_step = isset($_SESSION['passed_step']) ? (int)$_SESSION['passed_step'] : 0;
 	$program_already_installed = false;
 	$focus_field = 'database_host';
@@ -34,7 +33,7 @@
 
 	// handle form submission
 	// -------------------------------------------------
-	if($task == 'send'){
+	if($_SERVER['REQUEST_METHOD'] === 'POST'){
 		$database_host		= isset($_POST['database_host']) ? prepare_input($_POST['database_host']) : 'localhost';
 		$database_name 		= isset($_POST['database_name']) ? prepare_input($_POST['database_name']) : '';
 		$database_username	= isset($_POST['database_username']) ? prepare_input($_POST['database_username']) : '';
@@ -137,8 +136,8 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="author" content="StormLight Tech">
-    <meta name="generator" content="OpenCAD – a StormLight Tech Project">
+    <meta name="author" content="OpenCAD Project">
+    <meta name="generator" content="OpenCAD Project">
 	<title><?php echo lang_key("installation_guide"); ?> | <?php echo lang_key('database_settings'); ?></title>
 
 	<link href="images/favicon.ico" rel="shortcut icon" />

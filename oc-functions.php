@@ -289,7 +289,11 @@ function generateRandomString($length = 10) {
 	**/
 function getOpenCADVersion()
 {
+<<<<<<< HEAD
 	echo '0.3.0 Hotfix 14 (commit a790d5655d8)';
+=======
+	echo '0.3.2 Update 01/15/2021';
+>>>>>>> oc-main/canary
 }
 
 /**#@+

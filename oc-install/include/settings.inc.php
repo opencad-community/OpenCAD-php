@@ -69,7 +69,7 @@
     // 3. DATABASE SETTINGS
     // -------------------------------------------------------------------------
     // *** force database creation
-    define('EI_DATABASE_CREATE', false);
+    define('EI_DATABASE_CREATE', true);
 
     // *** define database type
     // *** to check installed drivers use: print_r(PDO::getAvailableDrivers());
@@ -156,7 +156,7 @@
     // *** application name
     define('EI_APPLICATION_NAME', 'OpenCAD');
     // *** version number of your application 
-    define('EI_APPLICATION_VERSION', '1.0');
+    define('EI_APPLICATION_VERSION', '0.3.2 : 1/15/2021');
     
     // *** default start file name - application start file
     define('EI_APPLICATION_START_FILE', '../index.php');

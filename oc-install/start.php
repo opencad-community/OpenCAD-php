@@ -54,8 +54,8 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="author" content="StormLight Tech">
-    <meta name="generator" content="OpenCAD – a StormLight Tech Project">
+    <meta name="author" content="OpenCAD Project">
+    <meta name="generator" content="OpenCAD Project">
 	<title><?php echo lang_key('installation_guide'); ?> | <?php echo lang_key('start'); ?></title>
 
 	<link href="./images/favicon.ico" rel="shortcut icon" />

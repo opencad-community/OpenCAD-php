@@ -80,7 +80,28 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 <?php include ( ABSPATH . "/".OCTHEMES."/".THEME."/includes/header.inc.php"); ?>
 
 
+<<<<<<< HEAD
 <body class="app header-fixed">
+=======
+                        </div>
+
+                        <?php /* HIDE SEARCH FUNCTION FOR NOW
+              <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                  </div>
+                  <!-- ./ input-group -->
+                </div>
+                <!-- ./ col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search -->
+              </div>
+              <!-- ./ title_right -->
+              */?>
+                    </div>
+>>>>>>> oc-main/canary
 
     <header class="app-header navbar">
 
@@ -125,8 +146,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     include ( ABSPATH . "/oc-includes/jquery-colsolidated.inc.php"); ?>
 </body>
 
+<<<<<<< HEAD
             <script type="text/javascript"
         src="https://jira.opencad.io/s/a0c4d8ca8eced10a4b49aaf45ec76490-T/-f9bgig/77001/9e193173deda371ba40b4eda00f7488e/2.0.24/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=ede74ac1">
     </script>
+=======
+
+</body>
+>>>>>>> oc-main/canary
 
 </html>
