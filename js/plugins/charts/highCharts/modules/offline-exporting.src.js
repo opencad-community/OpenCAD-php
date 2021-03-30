@@ -226,7 +226,7 @@ Highcharts.Chart.prototype.exportChartLocal = function (exportingOptions, chartO
 			++imagesEmbedded;
 
 			// Change image href in chart copy
-			callbackArgs.imageElement.setAttributeNS('http://www.w3.org/1999/xlink', 'href', imageURL);
+			callbackArgs.imageElement.setAttributeNS('https://www.w3.org/1999/xlink', 'href', imageURL);
 
 			// Start download when done with the last image
 			if (imagesEmbedded === images.length) {
@@ -237,7 +237,7 @@ Highcharts.Chart.prototype.exportChartLocal = function (exportingOptions, chartO
 		// Go through the images we want to embed
 		for (i = 0, l = images.length; i < l; ++i) {
 			el = images[i];
-			imageToDataUrl(el.getAttributeNS('http://www.w3.org/1999/xlink', 'href'), { imageElement: el },
+			imageToDataUrl(el.getAttributeNS('https://www.w3.org/1999/xlink', 'href'), { imageElement: el },
 				embeddedSuccess,
 				// Tainted canvas
 				fallbackToExportServer,

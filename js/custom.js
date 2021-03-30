@@ -2473,7 +2473,7 @@ if (typeof NProgress != 'undefined') {
 					title: 'Click for Google',
 					start: new Date(y, m, 28),
 					end: new Date(y, m, 29),
-					url: 'http://google.com/'
+					url: 'https://google.com/'
 				  }]
 				});
 				
@@ -4294,7 +4294,7 @@ if (typeof NProgress != 'undefined') {
 				title: {
 				  text: 'Chart #2',
 				  subtext: 'From ExcelHome',
-				  sublink: 'http://e.weibo.com/1341556070/AhQXtjbqh',
+				  sublink: 'https://opencad.io',
 				  x: 'center',
 				  y: 'center',
 				  itemGap: 20,
