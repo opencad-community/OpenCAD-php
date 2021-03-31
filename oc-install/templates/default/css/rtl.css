@@ -1,6 +1,6 @@
 HTML { direction:rtl; }
 
-DIV#main H1               { background:url('../images/wizard.png') no-repeat right center; padding:0 40px; }
+DIV#main H1               { background:url('../images/tail.png') no-repeat right center; padding:0 40px; }
 DIV#main H2.sub-title     { margin:-27px 40px 12px 0px; }
 
 DIV#content               { }

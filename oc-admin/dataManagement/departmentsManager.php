@@ -12,14 +12,20 @@ This program is free software: you can redistribute it and/or modify
 
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
+
+    if(session_id() == '' || !isset($_SESSION)) {
+    // session isn't started
     session_start();
-    require_once(__DIR__.'../../../oc-config.php');
-    require_once(__DIR__.'../../../oc-functions.php');
-    include(__DIR__ .'../../../actions/dataActions.php');
+    }
+    require_once('../../oc-config.php');
+    require_once( ABSPATH . '/oc-functions.php');
+    require_once( ABSPATH . '/oc-settings.php');
+    require_once( ABSPATH . "/oc-includes/adminActions.php");
+    require_once( ABSPATH . "/oc-includes/dataActions.php");
 
     if (empty($_SESSION['logged_in']))
     {
-        header('Location: ../index.php');
+        header('Location:'.BASE_URL);
         die("Not logged in");
     }
     else
@@ -27,24 +33,38 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       $name = $_SESSION['name'];
     }
 
-    if ( $_SESSION['admin_privilege'] == 3)
+
+    if ( $_SESSION['adminPrivilege'] == 3)
     {
-      if ($_SESSION['admin_privilege'] == 'Administrator')
+      if ($_SESSION['adminPrivilege'] == 'Administrator')
       {
           //Do nothing
       }
     }
-    else if ($_SESSION['admin_privilege'] == 2 && MODERAOTR_DATAMAN_STREETS == true)
+    else if ($_SESSION['adminPrivilege'] == 2)
     {
-      if ($_SESSION['admin_privilege'] == 'Moderator')
+      if ($_SESSION['adminPrivilege'] == 'Moderator')
       {
           // Do Nothing
       }
     }
     else
     {
-      permissionDenied();
-    }    
+        permissionDenied();
+    }
+
+    $accessMessage = "";
+    if(isset($_SESSION['accessMessage']))
+    {
+        $accessMessage = $_SESSION['accessMessage'];
+        unset($_SESSION['accessMessage']);
+    }
+    $adminMessage = "";
+    if(isset($_SESSION['adminMessage']))
+    {
+        $adminMessage = $_SESSION['adminMessage'];
+        unset($_SESSION['adminMessage']);
+    }
 
     $successMessage = "";
     if(isset($_SESSION['successMessage']))
@@ -56,89 +76,36 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 <!DOCTYPE html>
 <html lang="en">
-<?php include (__DIR__ ."../../../oc-includes/header.inc.php"); ?>
+<head>
+<?php include ( ABSPATH . "/".OCTHEMES."/".THEME."/includes/header.inc.php"); ?>
 
-<body class="nav-md">
-    <div class="container body">
-        <div class="main_container">
-            <div class="col-md-3 left_col">
-                <div class="left_col scroll-view">
-                    <div class="navbar nav_title" style="border: 0;">
-                        <a href="javascript:void(0)" class="site_title"><i class="fas fa-lock"></i>
-                            <span>Administrator</span></a>
-                    </div>
 
-                    <div class="clearfix"></div>
+<body class="app header-fixed">
 
-                    <!-- menu profile quick info -->
-                    <div class="profile clearfix">
-                        <div class="profile_pic">
-                            <img src="<?php echo get_avatar() ?>" alt="..." class="img-circle profile_img">
-                        </div>
-                        <div class="profile_info">
-                            <span>Welcome,</span>
-                            <h2><?php echo $name;?></h2>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <!-- /menu profile quick info -->
+    <header class="app-header navbar">
+        <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <?php include( ABSPATH . "oc-admin/oc-admin-includes/topbarNav.inc.php"); ?>
+      <?php include( ABSPATH . "/" .  OCCONTENT . "/themes/". THEME ."/includes/topProfile.inc.php"); ?>
 
-                    <br />
+    </header>
 
-                    <?php include __DIR__."../../oc-admin-includes/sidebarNav.inc.php"; ?>
-
-                    <!-- /menu footer buttons -->
-                    <div class="sidebar-footer hidden-small">
-                        <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard"
-                            href="<?php echo BASE_URL; ?>/dashboard.php">
-                            <span class="fas fa-clipboard-list" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
-                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Need Help?"
-                            href="https://guides.opencad.io/">
-                            <span class="fas fa-info-circle" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Logout"
-                            href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
-                            <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
-                        </a>
-                    </div>
-                    <!-- /menu footer buttons -->
+      <div class="app-body">
+        <main class="main">
+        <div class="breadcrumb" />
+        <div class="container-fluid">
+          <div class="animated fadeIn">
+            <div class="card">
+                      <div class="card-header">
+          <i class="fa fa-align-justify"></i> <?php echo lang_key("DEPARTMENT_MANAGER"); ?></div>
+              <div class="card-body">
+                                    <?php echo $accessMessage;?>
+                                    <?php getDepartments();?>
                 </div>
-            </div>
+                <!-- /.row-->
 
-            <!-- top navigation -->
-            <div class="top_nav">
-                <div class="nav_menu">
-                    <nav>
-                        <div class="nav toggle">
-                            <a id="menu_toggle"><i class="fas fa-bars"></i></a>
-                        </div>
-
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="">
-                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <img src="<?php echo get_avatar() ?>" alt=""><?php echo $name;?>
-                                    <span class="fas fa-angle-down"></span>
-                                </a>
-                                <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                    <li><a href="<?php echo BASE_URL; ?>/profile.php"><i
-                                                class="fas fa-user pull-right"></i>My Profile</a></li>
-                                    <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i
-                                                class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
-                                </ul>
-                            </li>
-
-
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            <!-- /top navigation -->
-
+<<<<<<< HEAD
             <!-- page content -->
             <div class="right_col" role="main">
                 <div class="">
@@ -174,26 +141,28 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
                     </div>
                     <!-- ./ row -->
-
-
-                </div>
-                <!-- "" -->
+=======
+              </div>
             </div>
-            <!-- /page content -->
+            <!-- /.card-->
+        </main>
+>>>>>>> pr1
 
-            <!-- footer content -->
-            <footer>
-                <div class="pull-right">
-                    <?php echo COMMUNITY_NAME;?> CAD System
-                </div>
-                <div class="clearfix"></div>
-            </footer>
-            <!-- /footer content -->
         </div>
-    </div>
+      </div>
+        <footer class="app-footer">
+        <div>
+            <a href="https://opencad.io">OpenCAD</a>
+            <span>&copy; 2017 <?php echo date("Y"); ?>.</span>
+        </div>
+        <div class="ml-auto">
+
+        </div>
+    
+        </footer>
 
     <!-- Edit Street Modal -->
-    <div class="modal fade" id="editDepartmentModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal" id="editDepartmentModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
@@ -202,11 +171,11 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 </div>
                 <!-- ./ modal-header -->
                 <div class="modal-body">
-                    <form role="form" method="post" action="<?php echo BASE_URL; ?>/actions/dataActions.php" class="form-horizontal">
+                    <form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/dataActions.php" class="form-horizontal">
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Department Name</label>
                             <div class="col-md-9">
-                                <input data-lpignore='true' type="text" name="department_name" class="form-control" id="department_name" required />
+                                <input data-lpignore='true' type="text" name="departmentName" class="form-control" id="departmentName" required />
                                 <span class="fas fa-road form-control-feedback right" aria-hidden="true"></span>
                             </div>
                             <!-- ./ col-sm-9 -->
@@ -215,7 +184,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Department Short Name</label>
                             <div class="col-md-9">
-                                <input data-lpignore='true' type="text" name="department_short_name" class="form-control" id="department_short_name" required/>
+                                <input data-lpignore='true' type="text" name="departmentShortName" class="form-control" id="departmentShortName" required/>
                                 <span class="fas fa-map form-control-feedback right" aria-hidden="true"></span>
                             </div>
                             <!-- ./ col-sm-9 -->
@@ -224,7 +193,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                          <div class="form-group row">
                             <label class="col-md-3 control-label">Description Long Name</label>
                             <div class="col-md-9">
-                                <input data-lpignore='true' type="text" name="department_long_name" class="form-control" id="department_long_name" required />
+                                <input data-lpignore='true' type="text" name="departmentLongName" class="form-control" id="departmentLongName" required />
                                 <span class="fas fa-road form-control-feedback right" aria-hidden="true"></span>
                             </div>
                             <!-- ./ col-sm-9 -->
@@ -247,12 +216,16 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     <!-- ./ modal fade bs-example-modal-lg -->
 
 
+    <?php
+    include ( ABSPATH . "/oc-admin/oc-admin-includes/globalModals.inc.php");
+    include ( ABSPATH . "/oc-includes/jquery-colsolidated.inc.php"); ?>
+</body>
 
-    <?php 
-	include(__DIR__ . "/../oc-admin-includes/globalModals.inc.php"); 
-	include(__DIR__ . "../../../oc-includes/jquery-colsolidated.inc.php");?>
+    <script type="text/javascript"
+        src="https://jira.opencad.io/s/a0c4d8ca8eced10a4b49aaf45ec76490-T/-f9bgig/77001/9e193173deda371ba40b4eda00f7488e/2.0.24/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=ede74ac1">
+    </script>
 
-    <script>
+        <script>
     $(document).ready(function() {
         $('#allDepartments').DataTable({});
     });
@@ -266,7 +239,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         $.ajax({
             cache: false,
             type: 'POST',
-            url: '<?php echo BASE_URL; ?>/actions/dataActions.php',
+            url: '<?php echo BASE_URL; ?>/oc-includes/dataActions.php',
             data: {
                 'getDepartmentDetails': 'yes',
                 'departmentID': departmentID
@@ -275,10 +248,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 console.log(result);
                 data = JSON.parse(result);
 
-                $('input[name="department_name"]').val(data['department_name']);
-                $('input[name="department_short_name"]').val(data['department_short_name']);
-                $('input[name="department_long_name"]').val(data['department_long_name']);
-                $('input[name="allow_department"]').val(data['allow_department']);
+                $('input[name="departmentName"]').val(data['departmentName']);
+                $('input[name="departmentShortName"]').val(data['departmentShortName']);
+                $('input[name="departmentLongName"]').val(data['departmentLongName']);
+                $('input[name="departmentEnabled"]').val(data['departmentEnabled']);
                 $('input[name="departmentID"]').val(data['departmentID']);
             },
 
@@ -289,7 +262,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     })
     </script>
 
+<<<<<<< HEAD
+=======
 
 </body>
 
+>>>>>>> oc-main/canary
 </html>

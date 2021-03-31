@@ -78,7 +78,7 @@
     <meta name="generator" content="OpenCAD Project Installer">
 	<title><?php echo lang_key("installation_guide"); ?> | System Settings</title>
 
-	<link href="../images/favicon.ico" rel="shortcut icon" />
+	<link href="./images/favicon.ico" rel="shortcut icon" />
 	<link rel="stylesheet" type="text/css" href="templates/<?php echo EI_TEMPLATE; ?>/css/styles.css" />
 	<?php
 		if($curr_lang_direction == 'rtl'){

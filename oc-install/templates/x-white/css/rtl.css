@@ -1,7 +1,7 @@
 HTML          { direction:rtl; }
 H1, H2        { margin-left:0px; margin-right:2px; }
 
-DIV#main H1                { background:url('../images/wizard.png') #eeeeee no-repeat center right; }
+DIV#main H1                { background:url('../images/tail.png') #eeeeee no-repeat center right; }
 DIV#main H2.sub-title      { margin:-22px 60px 12px 0px; }
 
 DIV#content .left-part     { width:19%; float:right;  }

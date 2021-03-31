@@ -1,0 +1,8 @@
+{
+	"name" : "OpenCAD",
+	"short_name" : "Open Source Computer Aided Dipsatch",
+	"start_url" : "http://oc-dev.local",
+	"display" : "standalone",
+	"orientation" : "landscape-primary",
+	"lang" : "English"
+}

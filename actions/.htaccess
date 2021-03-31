@@ -1,6 +1,0 @@
-### Begin ATVG ErrorPages ###
-ErrorDocument 403 \actions/plugins/error/static/403.php
-ErrorDocument 404 \actions/plugins/error/static/404.php
-ErrorDocument 502 \actions/plugins/error/static/502.php
-ErrorDocument 503 \actions/plugins/error/static/503.php
-### End ATVG ErrorPages ###
