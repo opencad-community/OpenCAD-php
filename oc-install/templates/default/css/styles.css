@@ -22,7 +22,7 @@ SPAN.passed               { background:url('../images/passed.png') no-repeat lef
 SPAN.failed               { background:url('../images/failed.png') no-repeat left center; padding:2px 0px 0px 20px; color:darkred; margin-right:10px; } 
 
 DIV#main                  { width:960px; margin:0 auto; padding-top:10px; }
-DIV#main H1               { background:url('../images/wizard.png') no-repeat left center; font-size:18px; height:35px; padding:0 40px; }
+DIV#main H1               { background:url('../images/tail.png') no-repeat left center; font-size:18px; height:35px; padding:0 40px; }
 DIV#main H2.sub-title     { margin:-27px 0 12px 40px; font-size:11px; color:#777; }
 
 DIV#content               { width:100%; padding:10px 0 15px 0; background-image:url(../images/bg.gif); border-radius:15px; -moz-border-radius:15px; -webkit-border-radius:15px; }

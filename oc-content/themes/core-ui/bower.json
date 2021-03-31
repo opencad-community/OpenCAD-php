@@ -1,0 +1,82 @@
+{
+  "name": "core-ui",
+  "authors": [
+    "help@opencad.io"
+  ],
+  "description": "CoreUI theme for OpenCAD",
+  "main": "style.css",
+  "keywords": [
+    "css",
+    "bower",
+    "less",
+    "js",
+    "coreui"
+  ],
+  "license": "MIT",
+  "homepage": "https://OpenCAD.io/",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "pnotify": "^4.0.0",
+    "datatables.net-fixedheader": "^3.1.6",
+    "datatables.net-responsive": "^2.2.3",
+    "datatables.net": "^1.10.20",
+    "datatables.net-buttons": "^1.6.1",
+    "datatables.net-scroller": "^2.0.1",
+    "jquery": "^3.4.1",
+    "jquery-ui": "^1.12.1",
+    "datatables.net-fixedheader-bs": "^3.1.6",
+    "datatables.net-scroller-bs": "^2.0.1",
+    "datatables.net-responsive-bs": "^2.2.3",
+    "datatables.net-buttons-bs": "^1.6.1",
+    "nprogress": "^0.2.0",
+    "fastclick": "^1.0.6",
+    "bootstrap-progressbar": "^0.9.0",
+    "moment": "^2.24.0",
+    "bootstrap": "^4.4.1",
+    "animate.css": "^3.7.2",
+    "jszip": "^3.2.2",
+    "popper.js": "^1.16.0",
+    "tooltip.js": "https://unpkg.com/tooltip.js",
+    "jspanel": "^2.6.3",
+    "bootstrap-select": "^1.13.12",
+    "coreui": "coreui-free-bootstrap-admin-template#2.1.15",
+    "jquery-migrate": "^3.0.0"
+  },
+  "resolutions": {
+    "jquery": "^3.4.1"
+  },
+  "dependencies": {
+    "pnotify": "^4.0.0",
+    "datatables.net-fixedheader": "^3.1.6",
+    "datatables.net-responsive": "^2.2.3",
+    "datatables.net": "^1.10.20",
+    "datatables.net-buttons": "^1.6.1",
+    "datatables.net-scroller": "^2.0.1",
+    "jquery": "^3.4.1",
+    "jquery-ui": "^1.12.1",
+    "datatables.net-fixedheader-bs": "^3.1.6",
+    "datatables.net-scroller-bs": "^2.0.1",
+    "datatables.net-responsive-bs": "^2.2.3",
+    "datatables.net-buttons-bs": "^1.6.1",
+    "nprogress": "^0.2.0",
+    "fastclick": "^1.0.6",
+    "bootstrap-progressbar": "^0.9.0",
+    "moment": "^2.24.0",
+    "bootstrap": "^4.4.1",
+    "animate.css": "^3.7.2",
+    "jszip": "^3.2.2",
+    "popper.js": "^1.16.0",
+    "tooltip.js": "https://unpkg.com/tooltip.js",
+    "jspanel": "^2.6.3",
+    "bootstrap-select": "^1.13.12",
+    "coreui": "coreui-free-bootstrap-admin-template#2.1.15",
+    "jquery-migrate": "^3.0.0"
+  }
+}

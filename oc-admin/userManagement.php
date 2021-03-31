@@ -12,14 +12,14 @@ This program is free software: you can redistribute it and/or modify
 
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
-    session_start();
 
-    require_once(__DIR__ . '/../oc-config.php');
-    require_once(__DIR__ . '/../oc-functions.php');
-    include(__DIR__ . '/../actions/adminActions.php');
-    include(__DIR__ . '/../actions/publicFunctions.php');
-    include(__DIR__ . '/../actions/generalActions.php');
-
+    if(session_id() == '' || !isset($_SESSION)) {
+      session_start();
+    }
+    require_once('../oc-config.php');
+    require_once( ABSPATH . '/oc-functions.php');
+    require_once( ABSPATH . "/oc-includes/adminActions.php");
+    require_once( ABSPATH . "/oc-includes/publicFunctions.php");
     if (empty($_SESSION['logged_in']))
     {
         header('Location: ../index.php');
@@ -30,19 +30,16 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       $name = $_SESSION['name'];
     }
 
-    if ( $_SESSION['admin_privilege'] == 3)
+
+    if ( $_SESSION['adminPrivilege'] == 3)
     {
-        if ($_SESSION['admin_privilege'] == 'Administrator')
-        {
-          //Do nothing
-        }
+      if ($_SESSION['adminPrivilege'] == 'Administrator')
+      {}
     }
-    else if ($_SESSION['admin_privilege'] == 2)
+    else if ($_SESSION['adminPrivilege'] == 2)
     {
-        if ($_SESSION['admin_privilege'] == 'Moderator')
-        {
-              // Do Nothing
-        }
+      if ($_SESSION['adminPrivilege'] == 'Moderator')
+      {}
     }
     else
     {
@@ -55,236 +52,180 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         $accessMessage = $_SESSION['accessMessage'];
         unset($_SESSION['accessMessage']);
     }
+    $adminMessage = "";
+    if(isset($_SESSION['adminMessage']))
+    {
+        $adminMessage = $_SESSION['adminMessage'];
+        unset($_SESSION['adminMessage']);
+    }
+
+    $successMessage = "";
+    if(isset($_SESSION['successMessage']))
+    {    
+        $successMessage = $_SESSION['successMessage'];
+        unset($_SESSION['successMessage']);
+    }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<?php include "../oc-includes/header.inc.php"; ?>
+<head>
+<?php include ( ABSPATH . "/".OCTHEMES."/".THEME."/includes/header.inc.php"); ?>
 
-<body class="nav-md">
-    <div class="container body">
-        <div class="main_container">
-            <div class="col-md-3 left_col">
-                <div class="left_col scroll-view">
-                    <div class="navbar nav_title" style="border: 0;">
-                        <a href="javascript:void(0)" class="site_title"><i class="fas fa-lock"></i>
-                            <span>Administrator</span></a>
-                    </div>
+<body class="app header-fixed">
 
-                    <div class="clearfix"></div>
+    <header class="app-header navbar">
 
-                    <!-- menu profile quick info -->
-                    <div class="profile clearfix">
-                        <div class="profile_pic">
-                            <img src="<?php echo get_avatar() ?>" alt="..." class="img-circle profile_img">
-                        </div>
-                        <div class="profile_info">
-                            <span>Welcome,</span>
-                            <h2><?php echo $name;?></h2>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <!-- /menu profile quick info -->
+      <?php include( ABSPATH . "oc-admin/oc-admin-includes/topbarNav.inc.php"); ?>
+      <?php include( ABSPATH . "/" .  OCCONTENT . "/themes/". THEME ."/includes/topProfile.inc.php"); ?>
+    </header>
 
+      <div class="app-body">
+        <main class="main">
+        <div class="breadcrumb" />
+        <div class="container-fluid">
+          <div class="animated fadeIn">
+            <div class="row">
+              <div class="col-sm-2 col-sm-2">
+                <div class="card text-white bg-primary">
+                  <div class="card-body pb-0">
+                    <div class="text-value"><?php echo getGroupCount("1");?></div>
+                    <div><?php echo getGroupName("1");?></div>
                     <br />
-
-                    <?php include (__DIR__ ."/oc-admin-includes/sidebarNav.inc.php"); ?>
-
-                    <!-- /menu footer buttons -->
-                    <div class="sidebar-footer hidden-small">
-                        <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard"
-                            href="<?php echo BASE_URL; ?>/dashboard.php">
-                            <span class="fas fa-clipboard-list" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
-                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Need Help?"
-                            href="https://guides.opencad.io/">
-                            <span class="fas fa-info-circle" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Logout"
-                            href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
-                            <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
-                        </a>
-                    </div>
-                    <!-- /menu footer buttons -->
+                  </div>
                 </div>
+              </div>
+              <!-- /.col-->
+              <div class="col-sm-2 col-sm-2">
+                <div class="card text-white bg-primary">
+                  <div class="card-body pb-0">
+                    <button class="btn btn-transparent p-0 float-right" type="button">
+                      <i class="icon-location-pin"></i>
+                    </button>
+                    <div class="text-value"><?php echo getGroupCount("2");?></div>
+                    <div><?php echo getGroupName("2");?></div>
+                    <br />
+                  </div>
+                </div>
+                <br />
+              </div>
+              <!-- /.col-->
+              <div class="col-sm-2 col-sm-2">
+                <div class="card text-white bg-primary">
+                  <div class="card-body pb-0">
+                    <div class="text-value"><?php echo getGroupCount("3");?></div>
+                    <div><?php echo getGroupName("3");?></div>
+                  </div>
+                  <br />
+                </div>
+              </div>
+              <!-- /.col-->
+              <div class="col-sm-2 col-sm-2">
+                <div class="card text-white bg-primary">
+                  <div class="card-body pb-0">
+                    <div class="text-value"><?php echo getGroupCount("4");?></div>
+                    <div><?php echo getGroupName("4");?></div>
+                    <br />
+                  </div>
+                </div>
+              </div>
+              <!-- /.col-->
+            <div class="col-sm-2 col-sm-2">
+                <div class="card text-white bg-primary">
+                  <div class="card-body pb-0">
+                    <div class="text-value"><?php echo getGroupCount("5");?></div>
+                    <div><?php echo getGroupName("5");?></div>
+                    <br />
+                  </div>
+                </div>
+              </div>
+              <!-- /.col-->
             </div>
-
-            <!-- top navigation -->
-            <div class="top_nav">
-                <div class="nav_menu">
-                    <nav>
-                        <div class="nav toggle">
-                            <a id="menu_toggle"><i class="fas fa-bars"></i></a>
-                        </div>
-
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="">
-                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <img src="<?php echo get_avatar() ?>" alt=""><?php echo $name;?>
-                                    <span class="fas fa-angle-down"></span>
-                                </a>
-                                <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                    <li><a href="<?php echo BASE_URL; ?>/profile.php"><i
-                                                class="fas fa-user pull-right"></i>My Profile</a></li>
-                                    <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i
-                                                class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
-                                </ul>
-                            </li>
-
-
-                        </ul>
-                    </nav>
+            <!-- /.row-->
+            <div class="row align-self-center">
+            <div class="col-sm-2 col-sm-2">
+                <div class="card text-white bg-primary">
+                  <div class="card-body pb-0">
+                    <div class="text-value"><?php echo getGroupCount("5");?></div>
+                    <div><?php echo getGroupName("5");?></div>
+                    <br />
+                  </div>
                 </div>
+              </div>
+              <!-- /.col-->
+              <div class="col-sm-2 col-sm-2">
+                <div class="card text-white bg-primary">
+                  <div class="card-body pb-0">
+                    <div class="text-value"><?php echo getGroupCount("6");?></div>
+                    <div><?php echo getGroupName("6");?></div>
+                    <br />
+                  </div>
+                </div>
+              </div>
+              <!-- /.col-->
+              <div class="col-sm-2 col-sm-2">
+                <div class="card text-white bg-primary">
+                  <div class="card-body pb-0">
+                    <div class="text-value"><?php echo getGroupCount("7");?></div>
+                    <div><?php echo getGroupName("7");?></div>
+                    <br />
+                  </div>
+                </div>
+              </div>
+              <!-- /.col-->
             </div>
-            <!-- /top navigation -->
-
-            <!-- page content -->
-            <div class="right_col" role="main">
-                <div class="">
-                    <div class="page-title">
-                        <div class="title_left">
-                            <h3>CAD User Management</h3>
-                        </div>
-                    </div>
-
-                    <div class="clearfix"></div>
-
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>At A Glance</h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
-                                        </li>
-                                        <li><a class="close-link"><i class="fas fa-close"></i></a>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <!-- ./ x_title -->
-                                <div class="x_content">
-                                    <div class="row tile_count">
-                                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                                            <span class="count_top"><i class="fas fa-user"></i> Communications</span>
-                                            <div class="count"><?php echo getGroupCount("1");?></div>
-                                        </div>
-                                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
-                                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                                            <span class="count_top"><i class="fas fa-user"></i> State</span>
-                                            <div class="count"><?php echo getGroupCount("2");?></div>
-                                        </div>
-                                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
-                                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                                            <span class="count_top"><i class="fas fa-user"></i> Highway Patrol</span>
-                                            <div class="count"><?php echo getGroupCount("3");?></div>
-                                        </div>
-                                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
-                                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                                            <span class="count_top"><i class="fas fa-user"></i> Sheriff</span>
-                                            <div class="count"><?php echo getGroupCount("4");?></div>
-                                        </div>
-                                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
-                                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                                            <span class="count_top"><i class="fas fa-user"></i> Police</span>
-                                            <div class="count"><?php echo getGroupCount("5");?></div>
-                                        </div>
-                                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
-                                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                                            <span class="count_top"><i class="fas fa-user"></i> Fire</span>
-                                            <div class="count"><?php echo getGroupCount("6");?></div>
-                                        </div>
-                                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
-                                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                                            <span class="count_top"><i class="fas fa-user"></i> EMS</span>
-                                            <div class="count"><?php echo getGroupCount("7");?></div>
-                                        </div>
-                                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
-                                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                                            <span class="count_top"><i class="fas fa-user"></i> Civilian</span>
-                                            <div class="count"><?php echo getGroupCount("8");?></div>
-                                        </div>
-                                        <!-- ./ col-md-2 col-sm-4 col-xs-6 tile_stats_count -->
-                                    </div>
-                                    <!-- ./ row tile_count -->
-                                </div>
-                                <!-- ./ x_content -->
-                            </div>
-                            <!-- ./ x_panel -->
-                        </div>
-                        <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
-                    </div>
-                    <!-- ./ row -->
-
-                    <div class="clearfix"></div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>Account Management</h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
-                                        </li>
-                                        <li><a class="close-link"><i class="fas fa-close"></i></a>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <!-- ./ x_title -->
-                                <div class="x_content">
-                                    <?php echo $accessMessage;?>
-                                    <?php getUsers();?>
-                                </div>
-                                <!-- ./ x_content -->
-                            </div>
-                            <!-- ./ x_panel -->
-                        </div>
-                        <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
-                    </div>
-                    <!-- ./ row -->
-
-
+            <!-- /.row-->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> <<?php echo lang_key("USER_MANAGER"); ?>
                 </div>
-                <!-- "" -->
+                <div class="card-body">
+                    <?php echo $accessMessage;?>
+                    <?php getUsers();?>
+                </div>
+                <!-- /.row-->
+
+              </div>
+
             </div>
-            <!-- /page content -->
+            <!-- /.card-->
 
-            <!-- footer content -->
-            <footer>
-                <div class="pull-right">
-                    <?php echo COMMUNITY_NAME;?> CAD System
-                </div>
-                <div class="clearfix"></div>
-            </footer>
-            <!-- /footer content -->
+        </main>
+
         </div>
-    </div>
 
-    <!-- Edit User Modal -->
-    <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <footer class="app-footer">
+        <div>
+            <a href="https://opencad.io">OpenCAD</a>
+            <span>&copy; 2017 <?php echo date("Y"); ?>.</span>
+        </div>
+        <div class="ml-auto">
+
+        </div>
+        </footer>
+
+            <?php
+    include ( ABSPATH . "/oc-admin/oc-admin-includes/globalModals.inc.php");
+    include ( ABSPATH . "/oc-includes/jquery-colsolidated.inc.php"); ?>
+
+
+   <!-- Edit User Modal -->
+    <div class="modal" id="editUserModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                    </button>
-                    <h4 class="modal-title" id="editUserModal">Edit User</h4>
-                    <div class="clearifx">
-                        <div class="speparator">
-                            <h5><strong>ALWAYS</strong> select proper user role before saving.</h5>
-                        </div>
-                    </div>
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
                     <!-- ./ modal-header -->
                     <div class="modal-body">
-                        <form role="form" method="post" action="<?php echo BASE_URL; ?>/actions/adminActions.php"
-                            class="form-horizontal">
+                        <form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/adminActions.php" class="form-horizontal">
                             <div class="form-group row">
                                 <label class="col-md-3 control-label">Name</label>
                                 <div class="col-md-9">
-                                    <input name="userName" class="form-control" id="userName" />
+                                    <input name="name" class="form-control" id="name" />
                                     <span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                                 </div>
                                 <!-- ./ col-sm-9 -->
@@ -293,7 +234,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                             <div class="form-group row">
                                 <label class="col-md-3 control-label">Email</label>
                                 <div class="col-md-9">
-                                    <input type="email" name="userEmail" class="form-control" id="userEmail" />
+                                    <input type="email" name="email" class="form-control" id="Email" />
                                     <span class="fas fa-envelope form-control-feedback right" aria-hidden="true"></span>
                                 </div>
                                 <!-- ./ col-sm-9 -->
@@ -302,7 +243,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                             <div class="form-group row">
                                 <label class="col-md-3 control-label">Identifier</label>
                                 <div class="col-md-9">
-                                    <input type="text" name="userIdentifier" class="form-control" id="userIdentifier" />
+                                    <input type="text" name="identifier" class="form-control" id="identifier" />
                                     <span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
                                 </div>
                                 <!-- ./ col-sm-9 -->
@@ -321,9 +262,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                     </div>
                     <!-- ./ modal-body -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <input type="hidden" name="userID" id="userID">
-                        <input type="submit" name="editUserAccount" class="btn btn-primary" value="Update User" />
+                      <input type="hidden" name="userID" id="userID">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <input type="submit" name="editUserAccount" class="btn btn-primary" value="Update User" />
                     </div>
                     <!-- ./ modal-footer -->
                     </form>
@@ -333,19 +274,20 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             <!-- ./ modal-dialog modal-lg -->
         </div>
         <!-- ./ modal fade bs-example-modal-lg -->
-        </div>
 
-    <!-- Change User Role Modal -->
-    <div class="modal fade" id="editUserRoleModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <!-- Change User Role Modal -->
+    <div class="modal" id="editUserRoleModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                    </button>
                     <h4 class="modal-title" id="editUserRoleModal">Change User Role</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
                     <!-- ./ modal-header -->
                     <div class="modal-body">
-                        <form role="form" method="post" action="<?php echo BASE_URL; ?>/actions/adminActions.php"
+                        <form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/adminActions.php"
                             class="form-horizontal">
                             <!-- ./ form-group -->
                             <div class="form-group row">
@@ -376,28 +318,29 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         </div>
 
         <!-- Change Password -->
-    <div class="modal fade" id="changeUserPassword" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal" id="changeUserPassword" tabindex="-1" role="dialog" aria-hidden="true">
        <div class="modal-dialog modal-lg">
           <div class="modal-content">
              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" id="closeChangePassword"><span aria-hidden="true">×</span>
-                </button>
-          <h4 class="modal-title" id="myModalLabel">Change Password</h4>
-        </div>
+                        <h4 class="modal-title" id="changeUserPasswordLabel">Change Password</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+              </div>
         <!-- ./ modal-header -->
         <div class="modal-body">
-          <form role="form" action="<?php echo BASE_URL; ?>/actions/adminActions.php" method="post">
+          <form role="form" action="<?php echo BASE_URL; ?>/oc-includes/adminActions.php" method="post">
             <div class="form-group row">
               <label class="col-lg-2 control-label">Password</label>
               <div class="col-lg-10">
-        <input class="form-control" type="password" name="password" id="password" size="30" maxlength="255" placeholder="Enter your new password..." value="" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?> />
+                <input class="form-control" type="password" name="password" id="password" size="30" maxlength="255" placeholder="Enter your new password..." value="" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?> />
               </div>
               <!-- ./ col-sm-9 -->
             </div>
             <div class="form-group row">
               <label class="col-lg-2 control-label">Confirm Password</label>
               <div class="col-lg-10">
-        <input class="form-control" type="password" name="confirm_password" size="30" id="confirm_password" maxlength="255" placeholder="Retype your new password..." value="" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?> />
+                <input class="form-control" type="password" name="confirm_password" size="30" id="confirm_password" maxlength="255" placeholder="Retype your new password..." value="" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?> />
               </div>
               <!-- ./ col-sm-9 -->
             </div>
@@ -416,12 +359,19 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     <!-- ./ modal-dialog modal-lg -->
   </div>
   <!-- ./ modal fade bs-example-modal-lg -->
+
+            <script>
+        $(document).ready(function() {
+
+            $('#pendingUsers').DataTable({
+                paging: true,
+                searching: true
+            });
+
+        });
+        </script>
+
         
-
-        <?php
-    include(__DIR__ . "./oc-admin-includes/globalModals.inc.php");
-    include(__DIR__ . "/../oc-includes/jquery-colsolidated.inc.php"); ?>
-
         <script>
         $(document).ready(function() {
             $('#allUsers').DataTable;
@@ -434,36 +384,25 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             $.ajax({
                 cache: false,
                 type: 'POST',
-                url: '<?php echo BASE_URL; ?>/actions/adminActions.php',
+                url: '<?php echo BASE_URL; ?>/oc-includes/adminActions.php',
                 data: {
                     'getUserDetails': 'yes',
                     'userId': userId
-                },
+                },                
                 success: function(result) {
-                    //console.log(result);
                     data = JSON.parse(result);
-
-                    $('input[name="userName"]').val(data['name']);
-                    $('input[name="userEmail"]').val(data['email']);
-                    $('input[name="userIdentifier"]').val(data['identifier']);
-                    $('input[name="userID"]').val(data['userId']);
-
-                    for (var i = 0; i < data['department'].length; i++) {
-                        //print $('select[name="userGroups"] option[value="'+data['department'][i]+'"]').val(1);
-                        // console.log(option);
-                    }
+                    $('input[name="name"]').val(data['name']);
+                    $('input[name="email"]').val(data['email']);
+                    $('input[name="identifier"]').val(data['identifier']);
+                    $('input[name="userId"]').val(data['userId']);
 
                     $("#userRole").selectpicker();
                     for (var i = 0; i < data['role'].length; i++) {
                         $('select[name="userRole"] option[value="' + data['role'][i] +
                             ' selected"]').val(1);
-                        console.log();
                     }
                     console.log("object: %O", result)
-                    $('select[name="userGroups"]').selectpicker('refresh');
                     $('#userRole').selectpicker('refresh');
-
-
                 },
 
                 error: function(exception) {
@@ -479,13 +418,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
             $.ajax({
                 cache: false,
                 type: 'POST',
-                url: '<?php echo BASE_URL; ?>/actions/adminActions.php',
+                url: '<?php echo BASE_URL; ?>/oc-includes/adminActions.php',
                 data: {
                     'getUserID': 'yes',
                     'userId': userId
                 },
                 success: function(result) {
-                    //console.log(result);
                     data = JSON.parse(result);
                     $('input[name="userID"]').val(data['userId']);
 
@@ -501,13 +439,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
         $(".delete_group").click(function() {
             var dept_id = $(this).attr("data-dept-id");
-            var user_id = $(this).attr("data-user-id");
+            var userId = $(this).attr("data-user-id");
             if (confirm("Are you sure to delete the selected Group?")) {
                 $.ajax({
                     cache: false,
                     type: 'GET',
-                    url: '<?php echo BASE_URL; ?>/actions/adminActions.php',
-                    data: 'dept_id=' + dept_id + '&user_id=' + user_id,
+                    url: '<?php echo BASE_URL; ?>/oc-includes/adminActions.php',
+                    data: 'dept_id=' + dept_id + '&userId=' + userId,
                     success: function(result) {
                         //obj = jQuery.parseJSON(result);
 
@@ -522,6 +460,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         });
         </script>
 
+<<<<<<< HEAD
+=======
 
         <script>
         $(document).ready(function() {
@@ -534,6 +474,11 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         });
         </script>
 
+>>>>>>> oc-main/canary
 </body>
+
+            <script type="text/javascript"
+        src="https://jira.opencad.io/s/a0c4d8ca8eced10a4b49aaf45ec76490-T/-f9bgig/77001/9e193173deda371ba40b4eda00f7488e/2.0.24/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=ede74ac1">
+    </script>
 
 </html>

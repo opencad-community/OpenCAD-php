@@ -32,6 +32,9 @@
 		$database_password					= isset($_SESSION['database_password']) ? prepare_input($_SESSION['database_password']) : '';
 		$database_prefix					= isset($_SESSION['database_prefix']) ? prepare_input($_SESSION['database_prefix']) : '';
 		$install_type						= isset($_SESSION['install_type']) ? $_SESSION['install_type'] : 'create';
+
+		$default_language					= isset($_SESSION['curr_lang']) ? prepare_input($_SESSION['curr_lang']) : '';
+		$default_languge_direction			= isset($_SESSION['curr_lang_direction']) ? prepare_input($_SESSION['curr_lang_direction']) : '';
 		
 		$admin_name							= isset($_SESSION['admin_name']) ? stripslashes($_SESSION['admin_name']) : '';
 		$admin_identifier					= isset($_SESSION['admin_identifier']) ? stripslashes($_SESSION['admin_identifier']) : '';
@@ -56,6 +59,7 @@
 		$SECURE_AUTH_SALT					= isset($_SESSION['SECURE_AUTH_SALT']) ? prepare_input($_SESSION['SECURE_AUTH_SALT']) : '';
 		$LOGGED_IN_SALT						= isset($_SESSION['LOGGED_IN_SALT']) ? prepare_input($_SESSION['LOGGED_IN_SALT']) : '';
 		$NONCE_SALT							= isset($_SESSION['NONCE_SALT']) ? prepare_input($_SESSION['NONCE_SALT']) : '';
+		$COOKIE_NAME						= isset($_SESSION['COOKIE_NAME']) ? prepare_input($_SESSION['COOKIE_NAME']) : '';
 		
 		$POLICE_NCIC						= isset($_SESSION['POLICE_NCIC']) ? prepare_input($_SESSION['POLICE_NCIC']) : '';
 		$POLICE_CALL_SELFASSIGN				= isset($_SESSION['POLICE_CALL_SELFASSIGN']) ? prepare_input($_SESSION['POLICE_CALL_SELFASSIGN']) : '';
@@ -84,11 +88,12 @@
 		$CIV_LIMIT_MAX_VEHICLES				= isset($_SESSION['CIV_LIMIT_MAX_VEHICLES']) ? prepare_input($_SESSION['CIV_LIMIT_MAX_VEHICLES']) : '';
 		$CIV_LIMIT_MAX_WEAPONS				= isset($_SESSION['CIV_LIMIT_MAX_WEAPONS']) ? prepare_input($_SESSION['CIV_LIMIT_MAX_WEAPONS']) : '';
 
+		$MODERATOR_USER_MANAGER				= isset($_SESSION['MODERATOR_USER_MANAGER']) ? prepare_input($_SESSION['MODERATOR_USER_MANAGER']):
 		$MODERATOR_APPROVE_USER				= isset($_SESSION['MODERATOR_APPROVE_USER']) ? prepare_input($_SESSION['MODERATOR_APPROVE_USER']) : '';
 		$MODERATOR_EDIT_USER				= isset($_SESSION['MODERATOR_EDIT_USER']) ? prepare_input($_SESSION['MODERATOR_EDIT_USER']) : '';
 		$MODERATOR_SUSPEND_WITH_REASON		= isset($_SESSION['MODERATOR_SUSPEND_WITH_REASON']) ? prepare_input($_SESSION['MODERATOR_SUSPEND_WITH_REASON']) : '';
 		$MODERATOR_SUSPEND_WITHOUT_REASON	= isset($_SESSION['MODERATOR_SUSPEND_WITHOUT_REASON']) ? prepare_input($_SESSION['MODERATOR_SUSPEND_WITHOUT_REASON']) : '';
-	$MODERATOR_REACTIVATE_USER				= isset($_SESSION['MODERATOR_REACTIVATE_USER']) ? prepare_input($_SESSION['MODERATOR_REACTIVATE_USER']) : '';
+		$MODERATOR_REACTIVATE_USER			= isset($_SESSION['MODERATOR_REACTIVATE_USER']) ? prepare_input($_SESSION['MODERATOR_REACTIVATE_USER']) : '';
 		$MODERATOR_REMOVE_GROUP 			= isset($_SESSION['MODERATOR_REMOVE_GROUP']) ? prepare_input($_SESSION['MODERATOR_REMOVE_GROUP']) : '';
 		$MODERATOR_DELETE_USER 				= isset($_SESSION['MODERATOR_DELETE_USER']) ? prepare_input($_SESSION['MODERATOR_DELETE_USER']) : '';
 		$MODERATOR_NCIC_EDITOR 				= isset($_SESSION['MODERATOR_NCIC_EDITOR']) ? prepare_input($_SESSION['MODERATOR_NCIC_EDITOR']) : '';
@@ -159,9 +164,9 @@
 								$config_file = str_replace('<DB_USER>', $database_username, $config_file);
 								$config_file = str_replace('<DB_PASSWORD>', $database_password, $config_file);
 								$config_file = str_replace('<DB_PREFIX>', $database_prefix, $config_file);
-								
-								$config_file = str_replace('<DEFAULT_LANGUAGE>', $DEFAULT_LANUGAGE, $config_file);
-								$config_file = str_replace('<DEFAULT_LANUGAGE_DIRECTION>', $DEFAULT_LANUGAGE_DIRECTION, $config_file);
+
+								$config_file = str_replace('<DEFAULT_LANGUAGE>', $default_language, $config_file);
+								$config_file = str_replace('<DEFAULT_LANGUAGE_DIRECTION>', $default_languge_direction, $config_file);
 
 								$config_file = str_replace('<COMMUNITY_NAME>', $COMMUNITY_NAME, $config_file);
 								$config_file = str_replace('<BASE_URL>', $BASE_URL, $config_file);
@@ -178,6 +183,7 @@
 								$config_file = str_replace('<SECURE_AUTH_SALT>', $SECURE_AUTH_SALT, $config_file);
 								$config_file = str_replace('<LOGGED_IN_SALT>', $LOGGED_IN_SALT, $config_file);
 								$config_file = str_replace('<NONCE_SALT>', $NONCE_SALT, $config_file);
+								$config_file = str_replace('<COOKIE_NAME>', $COOKIE_NAME, $config_file);
 								
 								$config_file = str_replace('<POLICE_NCIC>', $POLICE_NCIC, $config_file);
 								$config_file = str_replace('<POLICE_CALL_SELFASSIGN>', $POLICE_CALL_SELFASSIGN, $config_file);
@@ -206,6 +212,7 @@
 								$config_file = str_replace('<CIV_LIMIT_MAX_VEHICLES>', $CIV_LIMIT_MAX_VEHICLES, $config_file);
 								$config_file = str_replace('<CIV_LIMIT_MAX_WEAPONS>', $CIV_LIMIT_MAX_WEAPONS, $config_file);
 
+								$config_file = str_replace('<MODERATOR_USER_MANAGER>', $MODERATOR_USER_MANAGER, $config_file);
 								$config_file = str_replace('<MODERATOR_APPROVE_USER>', $MODERATOR_APPROVE_USER, $config_file);
 								$config_file = str_replace('<MODERATOR_EDIT_USER>', $MODERATOR_EDIT_USER, $config_file);
 								$config_file = str_replace('<MODERATOR_SUSPEND_WITH_REASON>', $MODERATOR_SUSPEND_WITH_REASON, $config_file);
@@ -266,7 +273,7 @@
     <meta name="generator" content="OpenCAD Project Installer">
 	<title><?php echo lang_key('installation_guide'); ?> | <?php echo lang_key('complete_installation'); ?></title>
 
-	<link href="../images/favicon.ico" rel="shortcut icon" />
+	<link href="./images/favicon.ico" rel="shortcut icon" />
 	<link rel="stylesheet" type="text/css" href="templates/<?php echo EI_TEMPLATE; ?>/css/styles.css" />
 	<?php
 		if($curr_lang_direction == 'rtl'){

@@ -46,6 +46,7 @@ function apphp_db_install($sql_dump_file) {
 	// replace username and password if exists
 		$sql_dump = str_ireplace('<NAME>', $admin_name, $sql_dump);
 		$sql_dump = str_ireplace('<EMAIL>', $admin_email, $sql_dump);
+		$sql_dump = str_ireplace('<IDENTIFIER>', $admin_identifier, $sql_dump);
 		$password = password_hash($admin_password, PASSWORD_DEFAULT);
 		$sql_dump = str_ireplace('<PASSWORD>', $password, $sql_dump);
 
