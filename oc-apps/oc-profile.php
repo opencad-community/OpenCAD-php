@@ -156,7 +156,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				</div>
 				<!-- ./ modal-header -->
 				<div class="modal-body">
-					<form role="form" action="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/oc-includes/profileActions.php" method="post">
+					<form role="form" action="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/oc-includes/profileActions.php" method="post">
 						<div class="form-group row">
 							<label class="col-lg-2 control-label"><?php echo lang_key("PASSWORD"); ?></label>
 							<div class="col-lg-10">

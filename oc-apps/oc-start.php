@@ -92,7 +92,7 @@ else
   <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
 	<header class="app-header navbar">
 				<a rel="noopener" class="navbar-brand" href="#">
-        		<img class="navbar-brand-full" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/tail.png" width="30" height="25" alt="OpenCAD Logo">
+        		<img class="navbar-brand-full" src="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/images/tail.png" width="30" height="25" alt="OpenCAD Logo">
       		</a>
 	<button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
 		<span class="navbar-toggler-icon"></span>

@@ -7,12 +7,12 @@
 	"lang" : "English",
 	"icons": [
 		{
-			"src": "/oc-content/themes/core-ui/images/tail.png",
+			"src": "/" . OCTHEMES . "/core-ui/images/tail.png",
 			"sizes": "512x512",
 			"type": "image/png"
 		},
 		{
-			"src": "/oc-content/themes/core-ui/images/tail.png",
+			"src": "/" . OCTHEMES . "/core-ui/images/tail.png",
 			"sizes": "144x144",
 			"type": "image/png"
 		}

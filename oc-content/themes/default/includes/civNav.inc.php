@@ -2,7 +2,7 @@
 		echo '		<ul class="nav navbar-nav">';
 			?>
 				<a rel="noopener" class="navbar-brand" href="#">
-					<img class="navbar-brand-full" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/tail.png" width="30" height="25" alt="OpenCAD Logo">
+					<img class="navbar-brand-full" src="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/images/tail.png" width="30" height="25" alt="OpenCAD Logo">
 				</a>
 			<?php
 				if (CIV_WARRANT === true) { ?> 

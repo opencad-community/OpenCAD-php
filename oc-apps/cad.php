@@ -91,10 +91,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 		<header class="app-header navbar">
 			<a rel="noopener" class="navbar-brand" href="#">
-				<img class="navbar-brand-full" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/tail.png" width="30" height="25" alt="OpenCAD Logo">
+				<img class="navbar-brand-full" src="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/images/tail.png" width="30" height="25" alt="OpenCAD Logo">
 			</a>
 		<?php
-			include_once ( ABSPATH . "/oc-content/themes/".THEME."/includes/topProfile.inc.php");
+			include_once ( ABSPATH . "/" . OCTHEMES . "/".THEME."/includes/topProfile.inc.php");
 		?>
 		</header>
 
@@ -299,7 +299,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		</div>
 	</footer>
 		<?php 
-		include_once ( ABSPATH . "/oc-content/themes/".THEME."/modals/cad.modals.inc.php");
+		include_once ( ABSPATH . "/" . OCTHEMES . "/".THEME."/modals/cad.modals.inc.php");
 		include_once ( ABSPATH . "oc-includes/jquery-colsolidated.inc.php"); ?>
 
 		<!-- AUDIO TONES -->

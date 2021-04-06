@@ -287,11 +287,11 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         </footer>
 
       <!-- modals -->
-      <?php echo file_get_contents(ABSPATH . "/oc-content/themes/".THEME."/modals/mdt.modals.inc.php")?>
+      <?php echo file_get_contents(ABSPATH . "/" . OCTHEMES . "/".THEME."/modals/mdt.modals.inc.php")?>
       <!-- AUDIO TONES -->
-      <audio id="recurringToneAudio" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/sounds/priority.mp3" preload="auto"></audio>
-      <audio id="priorityToneAudio" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
-      <audio id="panicToneAudio" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/sounds/Panic_Button.m4a" preload="auto"></audio>
+      <audio id="recurringToneAudio" src="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/sounds/priority.mp3" preload="auto"></audio>
+      <audio id="priorityToneAudio" src="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
+      <audio id="panicToneAudio" src="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/sounds/Panic_Button.m4a" preload="auto"></audio>
 <script>
 var vid = document.getElementById("recurringToneAudio");
 vid.volume = 0.3;
@@ -299,11 +299,11 @@ vid.volume = 0.3;
 <?php
    if ($_SESSION['activeDepartment'] == 'fire')
    {
-      echo '<audio id="newCallAudio" src="'.BASE_URL.'/oc-content/themes/'.THEME.'/sounds/Fire_Tones_Aligned.wav" preload="auto"></audio>';
+      echo '<audio id="newCallAudio" src="'.BASE_URL.'/" . OCTHEMES . "/'.THEME.'/sounds/Fire_Tones_Aligned.wav" preload="auto"></audio>';
    }
 else
 {
-   echo '<audio id="newCallAudio" src="'.BASE_URL.'/oc-content/themes/'.THEME.'/sounds/New_Dispatch.mp3"  preload="auto"></audio>';
+   echo '<audio id="newCallAudio" src="'.BASE_URL.'/" . OCTHEMES . "/'.THEME.'/sounds/New_Dispatch.mp3"  preload="auto"></audio>';
    }
    ?>
     <?php    

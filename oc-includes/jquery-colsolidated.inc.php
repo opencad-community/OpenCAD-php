@@ -3,21 +3,21 @@
     require_once( ABSPATH . '/oc-functions.php');?>
     
     <!-- jQuery -->
-    <script type="text/javascript" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/jquery/dist/jquery.js"></script>
-    <script type="text/javascript" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/jquery-migrate/jquery-migrate.js"></script>
+    <script type="text/javascript" src="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/vendors/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/vendors/jquery-migrate/jquery-migrate.js"></script>
     
     <!-- popper.js -->
-    <script type="text/javascript" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/popper.js/dist/umd/popper.js"></script>
-    <script type="text/javascript" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/popper.js/dist/umd/popper-utils.js"></script>
-    <script type="text/javascript" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/tooltip.js/index.js"></script>
+    <script type="text/javascript" src="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/vendors/popper.js/dist/umd/popper.js"></script>
+    <script type="text/javascript" src="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/vendors/popper.js/dist/umd/popper-utils.js"></script>
+    <script type="text/javascript" src="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/vendors/tooltip.js/index.js"></script>
 
     <!-- Bootstrap -->
-    <script type="text/javascript" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!-- FastClick -->
-    <script type="text/javascript" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/fastclick/lib/fastclick.js"></script>
+    <script type="text/javascript" src="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/vendors/fastclick/lib/fastclick.js"></script>
 
-	<script type="text/javascript" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/jszip/dist/jszip.min.js"></script>
+	<script type="text/javascript" src="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/vendors/jszip/dist/jszip.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
@@ -53,20 +53,20 @@
 
     <!-- Bootstrap Select -->
     <!-- Latest compiled and minified JavaScript -->
-    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/bootstrap-select/dist/js/bootstrap-select.js"></script>
+    <script src="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/vendors/bootstrap-select/dist/js/bootstrap-select.js"></script>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/bootstrap-select/dist/css/bootstrap-select.css"></script>
+    <link rel="stylesheet" href="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/vendors/bootstrap-select/dist/css/bootstrap-select.css"></script>
     
     <!-- Bootstrap progressbar -->
     <!-- Latest compiled and minified JavaScript -->
-    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/bootstrap-progressbar/bootstrap-progressbar.js"></script>
+    <script src="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/vendors/bootstrap-progressbar/bootstrap-progressbar.js"></script>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.css"></script>
+    <link rel="stylesheet" href="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.css"></script>
 
-    <script src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/jquery-ui/jquery-ui.js"></script>
+    <script src="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/vendors/jquery-ui/jquery-ui.js"></script>
 
     <!-- Custom Theme Scripts -->
-    <script type="text/javascript" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/vendors/coreui/src/js/coreui.min.js"></script>
+    <script type="text/javascript" src="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/vendors/coreui/src/js/coreui.min.js"></script>
     <script src="<?php echo BASE_URL;?>/oc-includes/OpenCAD.js"></script>
     <script src="<?php echo BASE_URL; ?>/oc-includes/custom.js"></script>
 
