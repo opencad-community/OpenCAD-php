@@ -68,7 +68,7 @@ require_once( ABSPATH . '/oc-settings.php');?>
 
   <style>
   #buttonGroup {
-    margin: 50%px 50%px;
+    margin: 50px 50px;
     position:relative;
     text-align:center;
   }
