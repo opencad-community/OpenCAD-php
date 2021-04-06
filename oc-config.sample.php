@@ -760,6 +760,16 @@ define('MODERATOR_NCIC_EDITOR', <MODERATOR_NCIC_EDITOR>);
 define('WEBHOOK_URL', '<WEBHOOK_URL>');
 
 /**#@+
+* LIVEMAP_URL
+* 
+* If configured a LiveMap will show on the dashboard and throughout OpenCAD.
+*
+* @since OpenCAD version 1.0
+*
+**/
+define('LIVEMAP_URL', '');
+
+/**#@+
   * DEMO_MODE
   *
   * If 'true' then various user management features of OpenCAD will be

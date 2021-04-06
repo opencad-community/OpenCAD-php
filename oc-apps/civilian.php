@@ -86,8 +86,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     <header class="app-header navbar">
 
       
-      <?php include( ABSPATH . "/" .  OCCONTENT . "/themes/". THEME ."/includes/civNav.inc.php"); ?>
-      <?php include( ABSPATH . "/" .  OCCONTENT . "/themes/". THEME ."/includes/topProfile.inc.php"); ?>
+      <?php include( ABSPATH . "/" . OCTHEMES ."/". THEME ."/includes/civNav.inc.php"); ?>
+      <?php include( ABSPATH . "/" . OCTHEMES ."/". THEME ."/includes/topProfile.inc.php"); ?>
       
     </header>
 
@@ -98,7 +98,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				<div class="animated fadeIn">
 					<div class="card">
 						<div class="card-header">
-							<i class="fa fa-align-justify"></i> <?php echo lang_key("MY_IDENTITIES"); ?>
+							<em class="fa fa-align-justify"></em> <?php echo lang_key("MY_IDENTITIES"); ?>
 						</div>
                         <div class="card-body">
 							<?php echo $nameMessage, $identityMessage;?>
@@ -114,7 +114,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				<div class="animated fadeIn">
 					<div class="card">
 						<div class="card-header">
-							<i class="fa fa-align-justify"></i> <?php echo lang_key("MY_VEHICLES"); ?>
+							<em class="fa fa-align-justify"></em> <?php echo lang_key("MY_VEHICLES"); ?>
 						</div>
               			<div class="card-body">
 							<?php echo $plateMessage;?>
@@ -131,7 +131,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				<div class="animated fadeIn">
 					<div class="card">
 						<div class="card-header">
-							<i class="fa fa-align-justify"></i> <?php echo lang_key("MY_WEAPONS"); ?>
+							<em class="fa fa-align-justify"></em> <?php echo lang_key("MY_WEAPONS"); ?>
 						</div>
               			<div class="card-body">
 							<?php echo $weaponMessage;?>
@@ -149,7 +149,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         </div>
         <footer class="app-footer">
             <div>
-                <a href="https://opencad.io">OpenCAD</a>
+                <a rel="noopener" href="https://opencad.io">OpenCAD</a>
                 <span>&copy; 2017 <?php echo date("Y"); ?>.</span>
             </div>
             <div class="ml-auto">
@@ -159,12 +159,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 		<?php
         include ( ABSPATH . "/oc-includes/jquery-colsolidated.inc.php");
-        include ( ABSPATH . "/" . OCCONTENT . "/themes/". THEME . "/modals/civilian.modals.inc.php");
+        include ( ABSPATH . "/" . OCTHEMES . "/" . THEME . "/modals/civilian.modals.inc.php");
         ?>
         
 	</body>
 
-    <script type="text/javascript" src="<?php echo BASE_URL . "/" . OCCONTENT . "/themes/". THEME . "/js/civilian.inc.js";?>"></script>
+    <script type="text/javascript" src="<?php echo BASE_URL ."/". OCTHEMES ."/". THEME . "/js/civilian.inc.js";?>"></script>
     <script type="text/javascript" src="https://jira.opencad.io/s/a0c4d8ca8eced10a4b49aaf45ec76490-T/-f9bgig/77001/9e193173deda371ba40b4eda00f7488e/2.0.24/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=ede74ac1"></script>
 
 </html>

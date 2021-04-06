@@ -110,8 +110,10 @@
 		$MODERATOR_DATAMAN_WEAPONS			= isset($_SESSION['MODERATOR_DATAMAN_WEAPONS']) ? prepare_input($_SESSION['MODERATOR_DATAMAN_WEAPONS']) : '';
 		$MODERATOR_DATAMAN_IMPEXPRESET		= isset($_SESSION['MODERATOR_DATAMAN_IMPEXPRESET']) ? prepare_input($_SESSION['MODERATOR_DATAMAN_IMPEXPRESET']) : '';
 
-		$DEMO_MODE							= isset($_SESSION['DEMO_MODE']) ? prepare_input($_SESSION['DEMO_MODE']) : '';
 
+		$LIVEMAP_URL						= isset($_POST['LIVEMAP_URL']) ? prepare_input($_POST['LIVEMAP_URL']) : '';
+		$WEBHOOK_URL						= isset($_POST['WEBHOOK_URL']) ? prepare_input($_POST['WEBHOOK_URL']) : '';
+		$DEMO_MODE							= isset($_SESSION['DEMO_MODE']) ? prepare_input($_SESSION['DEMO_MODE']) : '';
 		$USE_GRAVATAR						= isset($_SESSION['USE_GRAVATAR']) ? prepare_input($_SESSION['USE_GRAVATAR']) : '';
 		
 		if($install_type == 'update'){
@@ -234,6 +236,8 @@
 								$config_file = str_replace('<MODERATOR_DATAMAN_WEAPONS>', $MODERATOR_DATAMAN_WEAPONS, $config_file);
 								$config_file = str_replace('<MODERATOR_DATAMAN_IMPEXPRESET>', $MODERATOR_DATAMAN_IMPEXPRESET, $config_file);
 
+								$config_file = str_replace('<LIVEMAP_URL>', $LIVEMAP_URL, $config_file);
+								$config_file = str_replace('WEBHOOK_URL', $WEBHOOK_URL, $config_file);
 								$config_file = str_replace('<DEMO_MODE>', $DEMO_MODE, $config_file);
 								$config_file = str_replace('<USE_GRAVATAR>', $USE_GRAVATAR, $config_file);
 								
@@ -319,7 +323,7 @@
 				<tr><td nowrap height="25px">&nbsp;</td></tr>
 				<tr>
 					<td>	
-						<a href="ready_to_install.php" class="form_button"><?php echo lang_key('back'); ?></a>
+						<a rel="noopener" href="ready_to_install.php" class="form_button"><?php echo lang_key('back'); ?></a>
 						&nbsp;&nbsp;&nbsp;&nbsp;
 						<input type="submit" class="form_button" onclick="javascript:location.reload();" value="<?php echo lang_key('complete'); ?>" />
 					</td>
@@ -334,7 +338,7 @@
 							<div class="alert alert-warning"><?php echo lang_key('alert_remove_files'); ?></div>
 							<?php echo (EI_POST_INSTALLATION_TEXT != '') ? '<div class="alert alert-info">'.EI_POST_INSTALLATION_TEXT.'</div>' : ''; ?>
 							<br /><br />
-							<?php if(EI_APPLICATION_START_FILE != ''){ ?><a href="<?php echo '../'.EI_APPLICATION_START_FILE;?>"><?php echo lang_key('proceed_to_login_page'); ?></a><?php } ?>
+							<?php if(EI_APPLICATION_START_FILE != ''){ ?><a rel="noopener" href="<?php echo '../'.EI_APPLICATION_START_FILE;?>"><?php echo lang_key('proceed_to_login_page'); ?></a><?php } ?>
 						</td>
 					</tr>									
 				<?php }else if($install_type == 'un-install'){ ?>
@@ -344,7 +348,7 @@
 							<div class="alert alert-success"><?php echo str_replace('_CONFIG_FILE_', EI_CONFIG_FILE_PATH, lang_key('file_successfully_deleted')); ?></div>
 							<div class="alert alert-warning"><?php echo lang_key('alert_remove_files'); ?></div>
 							<br /><br />
-							<?php if(EI_APPLICATION_START_FILE != ''){ ?><a href="<?php echo '../'.EI_APPLICATION_START_FILE;?>"><?php echo lang_key('proceed_to_login_page'); ?></a><?php } ?>
+							<?php if(EI_APPLICATION_START_FILE != ''){ ?><a rel="noopener" href="<?php echo '../'.EI_APPLICATION_START_FILE;?>"><?php echo lang_key('proceed_to_login_page'); ?></a><?php } ?>
 						</td>
 					</tr>															
 				<?php }else{ ?>									
@@ -355,7 +359,7 @@
 							<div class="alert alert-warning"><?php echo lang_key('alert_remove_files'); ?></div>
 							<?php echo (EI_POST_INSTALLATION_TEXT != '') ? '<div class="alert alert-info">'.EI_POST_INSTALLATION_TEXT.'</div>' : ''; ?>
 							<br /><br />
-							<?php if(EI_APPLICATION_START_FILE != ''){ ?><a href="<?php echo '../'.EI_APPLICATION_START_FILE;?>"><?php echo lang_key('proceed_to_login_page'); ?></a><?php } ?>
+							<?php if(EI_APPLICATION_START_FILE != ''){ ?><a rel="noopener" href="<?php echo '../'.EI_APPLICATION_START_FILE;?>"><?php echo lang_key('proceed_to_login_page'); ?></a><?php } ?>
 						</td>
 					</tr>															
 				<?php } ?>

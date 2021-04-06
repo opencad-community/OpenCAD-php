@@ -25,8 +25,8 @@
                                          <option value="vehicles"><?php echo lang_key("vehicles"); ?></option>
                                          <option value="weapons"><?php echo lang_key("WEAPONS"); ?></option>
                                     <optgroup label="<?php echo lang_key("CIVILIAN_DATA_OPTGRP"); ?>">
-                                         <option value="ncic_names"><?php echo lang_key("IDENTITIES"); ?></option>
-                                         <option value="ncic_plates"><?php echo lang_key("REGISTERED_PLATES"); ?></option>
+                                         <option value="ncicNames"><?php echo lang_key("IDENTITIES"); ?></option>
+                                         <option value="ncicPlates"><?php echo lang_key("REGISTERED_PLATES"); ?></option>
                                          <option value="ncic_weapons"><?php echo lang_key("REGISTERED_WEAPONS"); ?></option>
                                          <option value="ncic_warrants"><?php echo lang_key("WARRANT_HISTORY"); ?></option>
                                          <option value="ncic_warnings"><?php echo lang_key("WARNING_HISTORY"); ?></option>
@@ -42,7 +42,7 @@
                              </div>
                              <div class="form-group">
                                  <button onclick="return confirm('Are you sure? (This cannot be reversed.)')" type="submit" name="resetData" class="btn btn-primary btn-sm" style="margin-left:0.5px;margin-bottom:0.5px;min-height:30px;">
-                                     <i class="fas fa-power-off fa-s right"></i></button>
+                                     <em class="fas fa-power-off fa-s right"></em></button>
                              </div>
                      </form>
                  </div>
@@ -61,4 +61,4 @@
  <!-- ./ modal-dialog modal-lg -->
  </div>
  <!-- ./ modal fade bs-example-modal-lg -->
-<?php } else {} ?>
+<?php } ?>

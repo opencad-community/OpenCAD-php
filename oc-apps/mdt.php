@@ -84,7 +84,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     <header class="app-header navbar">
 
-      <?php include( ABSPATH . "/" .  OCCONTENT . "/themes/". THEME ."/includes/topProfile.inc.php"); ?>
+      <?php include( ABSPATH . "/" . OCTHEMES ."/". THEME ."/includes/topProfile.inc.php"); ?>
 
     </header>
 
@@ -95,7 +95,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <div class="animated fadeIn">
             <div class="card">
                       <div class="card-header">
-          <i class="fa fa-align-justify"></i> <?php echo lang_key("MDT_CONSOLE"); ?></div>
+          <em class="fa fa-align-justify"></em> <?php echo lang_key("MDT_CONSOLE"); ?></div>
               <div class="card-body">
 <div class="row">
                      <div class="col-md-12 col-sm-12 col-xs-12">
@@ -209,7 +209,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                             </span>
                               </div>
                               <!-- ./ input-group -->
-                              <div name="ncic_name_return" id="ncic_name_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
+                              <div name="ncic_name_return" id="ncic_name_return" contenteditable="false" style="background-color: #eee; opacity: 1;  font-size: 15px; font-weight: bold;">
                               </div>
                               <!-- ./ ncic_name_return -->
                            </div>
@@ -232,7 +232,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                  </span>
                               </div>
                               <!-- ./ input-group -->
-                              <div name="ncic_plate_return" id="ncic_plate_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
+                              <div name="ncic_plate_return" id="ncic_plate_return" contenteditable="false" style="background-color: #eee; opacity: 1;  font-size: 15px; font-weight: bold;">
                               </div>
                               <!-- ./ ncic_plate_return -->
                            </div>
@@ -255,7 +255,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                                  </span>
                               </div>
                               <!-- ./ input-group -->
-                              <div name="ncic_weapon_return" id="ncic_weapon_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
+                              <div name="ncic_weapon_return" id="ncic_weapon_return" contenteditable="false" style="background-color: #eee; opacity: 1;  font-size: 15px; font-weight: bold;">
                               </div>
                               <!-- ./ ncic_name_return -->
                            </div>
@@ -277,7 +277,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       
         <footer class="app-footer">
         <div>
-            <a href="https://opencad.io">OpenCAD</a>
+            <a rel="noopener" href="https://opencad.io">OpenCAD</a>
             <span>&copy; 2017 <?php echo date("Y"); ?>.</span>
         </div>
         <div class="ml-auto">
@@ -384,7 +384,7 @@ $(document).ready(function() {
 
       $('#enroute_btn').click(function(evt) {
       console.log(evt);
-      var callId = $('#call_id_det').val();
+      var callId = $('#callId_det').val();
 
       $.ajax({
             type: "POST",
@@ -418,21 +418,21 @@ $(document).ready(function() {
 <script>
 $(function() {
 $( "#ncic_name" ).autocomplete({
-source: "../<?php echo OCINC ?>/js/search_name.php"
+source: "../<?php echo OCINC ?>/search_name.php"
 });
 });
 </script>
 <script>
 $(function() {
 $( "#ncic_plate" ).autocomplete({
-source: "../<?php echo OCINC ?>/js/search_plate.php"
+source: "../<?php echo OCINC ?>/search_plate.php"
 });
 });
 </script>
 <script>
 $(function() {
 $( "#ncic_weapon" ).autocomplete({
-source: "../<?php echo OCINC ?>/js/search_name.php"
+source: "../<?php echo OCINC ?>/search_name.php"
 });
 });
 </script>

@@ -50,6 +50,6 @@
     "commit": "bf8315785d9432f125c22986f424b756f14872b8"
   },
   "_source": "https://github.com/DataTables/Dist-DataTables-Buttons.git",
-  "_target": ">=1.0.3",
+  "_target": "^1.6.1",
   "_originalSource": "datatables.net-buttons"
 }

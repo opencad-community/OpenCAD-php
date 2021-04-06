@@ -11,70 +11,8 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
-include_once("oc-config.php");
-include_once( ABSPATH . "oc-settings.php");
-include_once( ABSPATH . OCINC . "/version.php");
-
-    try{
-      $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
-    }
-
-	$stmt = $pdo->query("SELECT * FROM ".DB_PREFIX."config WHERE `key` = 'dbSchemaVersion'");
-	$stmt->execute();
-	$result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-	if (!$result['value'])
-    {
-		session_start();
-		$_SESSION['error_title'] = "Schema Version Uknown";
-		$_SESSION['error'] = "We are sorry, the schema version is uknown. Please raise a support ticket.";
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
-    }
-
-	if ( $result['value'] != $oc_db_version )
-    {
-		if ( $oc_db_version > $result['value'] )
-		{
-			if(session_id() == '' || !isset($_SESSION)) {
-				// session isn't started
-				session_start();
-				}
-			$_SESSION['error_title'] = "Upgrade Required!";
-			$_SESSION['error'] = "Please update the database schema. The currently installed version is ".$result['value'].". The expected version is ".$oc_db_version.".";
-        	header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-			die();
-		} 
-		else if ($oc_db_version < $result['value'])
-		{
-			if(session_id() == '' || !isset($_SESSION)) {
-				// session isn't started
-				session_start();
-				}
-			$_SESSION['error_title'] = "Upgrade Required!";
-			$_SESSION['error'] = "Please update the application. The currently installed version is ".$result['value'].". The expected version is ".$oc_db_version.".";
-        	header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-			die();
-		}
-	}
-	else{ 
-		// Do Nothing
-	};
-
-
-
-if (file_exists(getcwd().'/oc-install') && is_writable(getcwd()) && OC_DEVELOP == false ){
-   echo "Please remove <strong>oc-install</strong> from the server befroe continuing.<br />";
-   echo "<a href=//".$_SERVER['SERVER_NAME'].">Refresh OpenCAD Login</a>";
-   die();
-} else {
-}
+require_once("oc-config.php");
+require_once( ABSPATH . "/oc-includes/version.php");
 
 $lang = isset($_REQUEST['lang']) ? prepare_input($_REQUEST['lang']) : '';
 	
@@ -91,39 +29,36 @@ if(!empty($lang) && array_key_exists($lang, $arr_active_languages)){
 	$curr_lang_direction = DEFAULT_LANGUAGE_DIRECTION;
 }
 
-if(file_exists( ABSPATH . '/oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php') ) {
-	include_once( ABSPATH .'/oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php' );
+if(file_exists('/oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
+	include_once('/oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php');
+}else if(file_exists('../oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
+	include_once('../oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php');
+}else if(file_exists('../../oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
+	include_once('../../oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php');
 }else{
-	include_once(ABSPATH . '/oc-content/languages/en/en.inc.php');    	
+	include_once('./oc-content/languages/en/en.inc.php');    	
+}	
+
+/**
+* @return bool
+*/
+function isSessionStarted()
+{
+    if ( php_sapi_name() !== 'cli' | php_sapi_name() === 'cgi' ){
+        if ( version_compare(phpversion(), REQUIRED_PHP_VERSION, '<') ) {
+			session_start();
+			$_SESSION['error_title'] = "Incompatable PHP Version";
+			$_SESSION['error'] = "An incompatable version of PHP is active. OpenCAD requires PHP 7.2 at minimum, the current recommended version is ".REQUIRED_PHP_VERSION." Currently PHP ".phpversion()." is active, please contact your server administrator.";
+			header('Location:'.BASE_URL.'/oc-content/plugins/error/index.php');
+			return session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE;
+			die();
+        } else {
+			session_start();			
+        }
+    }
+    return FALSE;
+	die();
 }
-
-
- if(version_compare(PHP_VERSION, '7.1', '<')) {
-	if(session_id() == '' || !isset($_SESSION)) {
-		// session isn't started
-		session_start();
-		}
-	$_SESSION['error_title'] = "Incompatable PHP Version";
-	$_SESSION['error'] = "An incompatable version  of PHP is active. OpenCAD requires PHP 7.1 at minimum, the current recommended version is 7.2. Currently PHP ".phpversion()." is active, please contact your server administrator.";
-	header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-}
-
-if ( OC_DEBUG == "true" )
-	{	
-		if(session_id() == '' || !isset($_SESSION)) {
-    		// session isn't started
-    		session_start();
-		}
-		ini_set('display_errors', 1);
-		ini_set('display_startup_errors', 1);
-		error_reporting(E_ALL);
-		echo "<pre>";
-		print_r($_SESSION);
-		echo "</pre>";
-	} else {
-		ini_set('display_errors', 0);
-		ini_set('display_startup_errors', 0);
-	}
 
 if(!file_exists(getcwd().'/.htaccess') && is_writable(getcwd())){
 	
@@ -160,9 +95,11 @@ function get_avatar() {
 	    $url .= "?size=200&default=https://i.imgur.com/VN4YCW7.png";
 	    return $url;
 		}else{
-			return "https://i.imgur.com/VN4YCW7.png";
+			return "//i.imgur.com/VN4YCW7.png";
 		}
 }
+
+
 
 /**#@+
   * function getMySQLVersion()
@@ -173,9 +110,19 @@ function get_avatar() {
 	**/
 function getMySQLVersion()
 {
-	$output = shell_exec('mysql -V'); 
-	preg_match('@[0-9]+\.[0-9]+\.[0-9]+@', $output, $version); 
-	return $version[0];
+	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD);
+
+	/* check connection */
+	if (mysqli_connect_errno()) {
+	    printf("Connect failed: %s\n", mysqli_connect_error());
+	    exit();
+	}
+
+	/* print server version */
+	printf($mysqli->server_info);
+
+	/* close connection */
+	$mysqli->close();
 }
 
 /**#@+
@@ -205,24 +152,23 @@ function pageLoadTime() {
 	**/
 function getApiKey($del_key = false)
 {
-
-	    try{
-      $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+	try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
     } catch(PDOException $ex)
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/plugins/error/index.php');
         die();
     }
 
-    $result = $pdo->query("SELECT value FROM ".DB_PREFIX."config WHERE `key`='sessionKey'");
+    $result = $pdo->query("SELECT value FROM ".DB_PREFIX."config WHERE `key`='api_key'");
 
     if (!$result)
     {
 		$_SESSION['error'] = $pdo->errorInfo();
 		error_log(print_r($pdo->errorInfo(), true));
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header('Location: '.BASE_URL.'/plugins/error/index.php');
 		die();
     }
 
@@ -230,13 +176,13 @@ function getApiKey($del_key = false)
 	{
 		error_log("Do delete: $del_key");
 		$key = generateRandomString(64);
-		$result = $pdo->query("UPDATE ".DB_PREFIX."config SET `value`='$key' WHERE `key`='sessionKey'");
+		$result = $pdo->query("UPDATE ".DB_PREFIX."config SET `value`='$key' WHERE `key`='api_key'");
 
 		if (!$result)
 		{
 			$_SESSION['error'] = $pdo->errorInfo();
 			error_log(print_r($pdo->errorInfo(), true));
-			header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+			header('Location: '.BASE_URL.'/plugins/error/index.php');
 			die();
 		}
 
@@ -246,13 +192,13 @@ function getApiKey($del_key = false)
 		return $key;
 	}else{
 		$key = generateRandomString(64);
-		$result = $pdo->query("INSERT INTO ".DB_PREFIX."config VALUES ('sessionKey', '$key')");
+		$result = $pdo->query("INSERT INTO ".DB_PREFIX."config VALUES ('api_key', '$key')");
 
 		if (!$result)
 		{
 			$_SESSION['error'] = $pdo->errorInfo();
 			error_log(print_r($pdo->errorInfo(), true));
-			header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+			header('Location: '.BASE_URL.'/plugins/error/index.php');
 			die();
 		}
 
@@ -280,18 +226,6 @@ function generateRandomString($length = 10) {
 }
 
 /**#@+
-  * function getOpenCADVersion()
-	* Get current installed version of OpenCAD.
-	*
-	* @since 0.2.0
-	*
-	**/
-function getOpenCADVersion()
-{
-	echo '0.3.4';
-}
-
-/**#@+
 * function function()
 * Description of function
 *
@@ -304,50 +238,6 @@ function permissionDenied()
 	$_SESSION['error'] = "Sorry, you don't have permission to access this page.";
 	header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
 	die();
-}
-
-function regWebhook() {
-$identifier = $_SESSION['identifier'];
-$hookObject = json_encode([
-    "content" => "@here",
-
-    "username" => "OpenCAD",
-
-    "embeds" => [
-
-        [
-
-            "title" => "New Sign Up",
-
-            "type" => "rich",
-
-            "description" => "A new user requires approval on OpenCAD - Identifier: $identifier",
-
-            "color" => hexdec( "FF0000" ),
-
-            "footer" => [
-                "text" => "OpenCAD",
-            ],
-        ]
-    ]
-
-], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
-
-$ch = curl_init();
-
-curl_setopt_array( $ch, [
-    CURLOPT_URL => WEBHOOK_URL,
-    CURLOPT_POST => true,
-    CURLOPT_POSTFIELDS => $hookObject,
-    CURLOPT_HTTPHEADER => [
-        "Length" => strlen( $hookObject ),
-        "Content-Type" => "application/json"
-    ]
-]);
-
-$response = curl_exec( $ch );
-curl_close( $ch );
-    
 }
 
 /**
@@ -366,12 +256,5 @@ function lang_key($key){
 	return $output;
 }
 
-function getPHPModules()
-{
-$modules = get_loaded_extensions();
-foreach ($modules as $module)
-{
-	echo $module.", ";
-}
-}
+
 ?>

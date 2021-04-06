@@ -85,7 +85,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     <header class="app-header navbar">
 
       <?php include( ABSPATH . "oc-admin/oc-admin-includes/topbarNav.inc.php"); ?>
-      <?php include( ABSPATH . "/" .  OCCONTENT . "/themes/". THEME ."/includes/topProfile.inc.php"); ?>
+      <?php include( ABSPATH . "/" . OCTHEMES ."/". THEME ."/includes/topProfile.inc.php"); ?>
     </header>
 
       <div class="app-body">
@@ -95,7 +95,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           <div class="animated fadeIn">
 			<div class="card">
 				<div class="card-header">
-				<i class="fa fa-align-justify"></i> <?php echo lang_key("NCIC_NAMES_DB"); ?></div>
+				<em class="fa fa-align-justify"></em> <?php echo lang_key("NCIC_NAMES_DB"); ?></div>
 				<div class="card-body">
 					<?php echo $nameMessage;?>
 					<?php ncicGetNames();?>
@@ -106,7 +106,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 			<div class="card">
 				<div class="card-header">
-				<i class="fa fa-align-justify"></i> <?php echo lang_key("NCIC_VEHICLES_DB"); ?></div>
+				<em class="fa fa-align-justify"></em> <?php echo lang_key("NCIC_VEHICLES_DB"); ?></div>
 				<div class="card-body">
 					<?php echo $plateMessage;?>
 					<?php ncicGetPlates();?>
@@ -117,7 +117,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 			<div class="card">
 				<div class="card-header">
-				<i class="fa fa-align-justify"></i> <?php echo lang_key("NCIC_WEAPONS_DB"); ?></div>
+				<em class="fa fa-align-justify"></em> <?php echo lang_key("NCIC_WEAPONS_DB"); ?></div>
 				<div class="card-body">
 					<?php echo $weaponMessage;?>
 					<?php ncicGetWeapons();?>
@@ -128,7 +128,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 			<div class="card">
 				<div class="card-header">
-				<i class="fa fa-align-justify"></i> <?php echo lang_key("NCIC_WARNINGS_DB"); ?></div>
+				<em class="fa fa-align-justify"></em> <?php echo lang_key("NCIC_WARNINGS_DB"); ?></div>
 				<div class="card-body">
 					<?php echo $warningMessage;?>
 					<?php ncicGetWarnings();?>
@@ -139,7 +139,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 			<div class="card">
 				<div class="card-header">
-				<i class="fa fa-align-justify"></i> <?php echo lang_key("NCIC_WARRANTS_DB"); ?></div>
+				<em class="fa fa-align-justify"></em> <?php echo lang_key("NCIC_WARRANTS_DB"); ?></div>
 				<div class="card-body">
 					<?php echo $warrantMessage;?>
 					<?php ncicGetWarrants();?>
@@ -150,7 +150,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 			<div class="card">
 				<div class="card-header">
-				<i class="fa fa-align-justify"></i> <?php echo lang_key("NCIC_ARRESTS_DB"); ?></div>
+				<em class="fa fa-align-justify"></em> <?php echo lang_key("ncicArrests_DB"); ?></div>
 				<div class="card-body">
 					<?php echo $arrestMessage;?>
 					<?php ncicGetArrests();?>
@@ -165,7 +165,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       </div>
         <footer class="app-footer">
         <div>
-            <a href="https://opencad.io">OpenCAD</a>
+            <a rel="noopener" href="https://opencad.io">OpenCAD</a>
             <span>&copy; 2017 <?php echo date("Y"); ?>.</span>
         </div>
         <div class="ml-auto">
@@ -195,15 +195,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     });
     </script>
-<<<<<<< HEAD
 </body>
-
-            <script type="text/javascript"
-        src="https://jira.opencad.io/s/a0c4d8ca8eced10a4b49aaf45ec76490-T/-f9bgig/77001/9e193173deda371ba40b4eda00f7488e/2.0.24/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=ede74ac1">
-    </script>
-=======
-
-</body>
->>>>>>> oc-main/canary
 
 </html>

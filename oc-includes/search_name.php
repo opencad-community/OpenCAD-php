@@ -6,7 +6,7 @@ $db = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 //get search term
 $searchTerm = $_GET['term'];
 //get matched data from skills table
-$query = $db->query("SELECT * FROM ".DB_PREFIX."ncic_names WHERE name LIKE '%".$searchTerm."%' ORDER BY name ASC");
+$query = $db->query("SELECT * FROM ".DB_PREFIX."ncicNames WHERE name LIKE '%".$searchTerm."%' ORDER BY name ASC");
 while ($row = $query->fetch_assoc()) {
     $data[] = $row['name'];
 }

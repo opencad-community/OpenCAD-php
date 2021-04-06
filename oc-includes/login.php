@@ -34,7 +34,7 @@ require_once(ABSPATH . "/oc-settings.php");
         header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
     }
 
-    $stmt = $pdo->prepare("SELECT id, name, password, email, identifier, passwordReset, approved, suspendReason FROM ".DB_PREFIX."users WHERE email = ?");
+    $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."users WHERE email = ?");
     $resStatus = $stmt->execute(array($email));
     $result = $stmt->fetch();
 
@@ -119,47 +119,47 @@ require_once(ABSPATH . "/oc-settings.php");
         if ($Department == "1")
         {
             $_SESSION['dispatch'] = 'YES';
-			$dispatchjButton = "<a href=\"".BASE_URL."/cad.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Dispatch</a>";
+			$dispatchButton = "<a rel=\"noopener\" href=\"".BASE_URL."/cad.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Dispatch</a>";
         }
         else if ($Department == "7")
         {
             $_SESSION['ems'] = 'YES';
-			$emsButton = "<a href=\"".BASE_URL."/mdt.php?dep=ems\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">EMS</a>";
+			$emsButton = "<a rel=\"noopener\" href=\"".BASE_URL."/mdt.php?dep=ems\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">EMS</a>";
         }
         else if ($Department == "6")
         {
             $_SESSION['fire'] = 'YES';
-			$fireButton = "<a href=\"".BASE_URL."/mdt.php?dep=fire\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Fire</a>";
+			$fireButton = "<a rel=\"noopener\" href=\"".BASE_URL."/mdt.php?dep=fire\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Fire</a>";
         }
         else if ($Department == "3")
         {
             $_SESSION['highway'] = 'YES';
-            $highwayButton = "<a href=\"".BASE_URL."/mdt.php?dep=highway\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Highway Patrol</a>";
+            $highwayButton = "<a rel=\"noopener\" href=\"".BASE_URL."/mdt.php?dep=highway\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Highway Patrol</a>";
         }
         else if ($Department == "5")
         {
             $_SESSION['police'] = 'YES';
-            $policeButton = "<a href=\"".BASE_URL."/mdt.php?dep=police\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Police Department</a>";
+            $policeButton = "<a rel=\"noopener\" href=\"".BASE_URL."/mdt.php?dep=police\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Police Department</a>";
 				}
         else if ($Department == "4")
         {
             $_SESSION['sheriff'] = 'YES';
-            $sheriffButton = "<a href=\"".BASE_URL."/mdt.php?dep=sheriff\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Sheriff's Office</a>";
+            $sheriffButton = "<a rel=\"noopener\" href=\"".BASE_URL."/mdt.php?dep=sheriff\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Sheriff's Office</a>";
         }
         else if ($Department == "2")
         {
             $_SESSION['state'] = 'YES';
-            $stateButton = "<a href=\"".BASE_URL."/mdt.php?dep=state\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">State Police</a>";
+            $stateButton = "<a rel=\"noopener\" href=\"".BASE_URL."/mdt.php?dep=state\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">State Police</a>";
         }
         else if ($Department == "8")
         {
             $_SESSION['civillian'] = 'YES';
-            $civilianButton = "<a href=\"".BASE_URL."/civilian.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Civilian</a>";
+            $civilianButton = "<a rel=\"noopener\" href=\"".BASE_URL."/civilian.php\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Civilian</a>";
         }
         else if ($Department == "9")
         {
             $_SESSION['roadsideAssist'] = 'YES';
-            $roadsideAssistButton = "<a href=\"".BASE_URL."/mdt.php?dep=roadsideAssist\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Roadside Assistance</a>";
+            $roadsideAssistButton = "<a rel=\"noopener\" href=\"".BASE_URL."/mdt.php?dep=roadsideAssist\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">Roadside Assistance</a>";
         }
     }
     

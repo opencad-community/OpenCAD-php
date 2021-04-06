@@ -26,8 +26,8 @@
 </head>
 <body>
 <h1>QapTcha Plugin v3.0</h1>
-<p><a href="http://www.myjqueryplugins.com/QapTcha">Home Page QapTcha</a></p>
-<p><a href="http://www.myjqueryplugins.com/QapTcha/demo">Online Demo QapTcha</a></p>
+<p><a rel="noopener" href="http://www.myjqueryplugins.com/QapTcha">Home Page QapTcha</a></p>
+<p><a rel="noopener" href="http://www.myjqueryplugins.com/QapTcha/demo">Online Demo QapTcha</a></p>
 <?php
 	// if form is submit
 	if(isset($_POST['submit']))

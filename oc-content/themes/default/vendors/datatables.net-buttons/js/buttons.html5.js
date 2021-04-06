@@ -867,7 +867,7 @@ DataTable.ext.buttons.copyHtml5 = {
 
 		// Otherwise we show the text box and instruct the user to use it
 		var message = $('<span>'+dt.i18n( 'buttons.copyKeys',
-				'Press <i>ctrl</i> or <i>\u2318</i> + <i>C</i> to copy the table data<br>to your system clipboard.<br><br>'+
+				'Press <em>ctrl</em> or <em>\u2318</em> + <em>C</em> to copy the table data<br>to your system clipboard.<br><br>'+
 				'To cancel, click this message or press escape.' )+'</span>'
 			)
 			.append( hiddenDiv );

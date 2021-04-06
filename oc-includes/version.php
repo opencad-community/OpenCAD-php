@@ -13,25 +13,25 @@
  *
  * @global string $oc_version
  */
-$oc_version = 1.0;
+define('OC_VERSION', '1.0');
 
 /**
  * Holds the OpenCAD DB revision, increments when changes are made to the OpenCAD DB schema.
  *
  * @global int $oc_db_version
  */
-$oc_db_version = 1.0;
+define('OC_DB_VERSION', '1.0');
 
 /**
  * Holds the required PHP version
  *
  * @global string $required_php_version
  */
-$required_php_version = '7.2';
+define('REQUIRED_PHP_VERSION', '7.2');
 
 /**
  * Holds the required MySQL version
  *
  * @global string $required_mysql_version
  */
-$required_mysql_version = '5.0';
+define('REQUIRED_MYSQL_VERSION', '5.0');

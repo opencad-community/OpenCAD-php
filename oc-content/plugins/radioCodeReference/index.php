@@ -25,14 +25,15 @@ include( ABSPATH .`/`. OCINC . "/publicFunctions.php");
 
 <div id="core-refConent">
 <nav class="nav nav-tabs nav-justified">
-  <a class="nav-item nav-link active" data-toggle="tab" href="#home">Statuses</a>
-  <a class="nav-item nav-link" data-toggle="tab" href="#menu1">Incidents</a>
-  <a class="nav-item nav-link" data-toggle="tab" href="#menu2">Citations</a>
+  <a rel="noopener" class="nav-item nav-link active" data-toggle="tab" href="#home">Statuses</a>
+  <a rel="noopener" class="nav-item nav-link" data-toggle="tab" href="#menu1">Incidents</a>
+  <a rel="noopener" class="nav-item nav-link" data-toggle="tab" href="#menu2">Citations</a>
 </nav>
     <div class="tab-content">
   <div id="home" class="tab-pane fade show active" style="padding-left:10px;padding-right:10px;">
     <h3>Status Codes</h3>
     <table class="table table-dark tbl_codeReference">
+      <caption>Radio code reference.</caption>
       <thead>
         <tr>
           <th scope="col">Code</th>
@@ -54,7 +55,7 @@ include( ABSPATH .`/`. OCINC . "/publicFunctions.php");
               </tr>
           </thead>
           <tbody>
-              <?php getData2($table = "incident_types", $column1 = "2", $column2 = "1"); ?>
+              <?php getData2($table = "incidentTypes", $column1 = "2", $column2 = "1"); ?>
           </tbody>
         </table>
     </div>

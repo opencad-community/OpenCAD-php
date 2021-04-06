@@ -1,6 +1,6 @@
 {
   "name": "animate.css",
-  "version": "3.5.0",
+  "version": "3.7.2",
   "main": "animate.css",
   "repository": {
     "type": "git",
@@ -9,7 +9,7 @@
   "author": {
     "name": "Daniel Eden"
   },
-  "homepage": "http://daneden.me/animate",
+  "homepage": "https://daneden.github.io/animate.css/",
   "license": "MIT",
   "style": "./animate.css",
   "jspm": {
@@ -20,14 +20,37 @@
     }
   },
   "devDependencies": {
-    "gulp": "^3.9.0",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-concat": "^2.6.0",
-    "gulp-cssnano": "^2.0.0",
-    "gulp-header": "^1.7.1",
+    "autoprefixer": "^9.0.1",
+    "cssnano": "^4.0.3",
+    "eslint": "^5.2.0",
+    "gulp": "^4.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-header": "^2.0.1",
+    "gulp-postcss": "^8.0.0",
     "gulp-rename": "^1.2.2",
-    "gulp-util": "^3.0.7",
-    "run-sequence": "^1.1.5"
+    "gulp-util": "^3.0.8",
+    "husky": "^1.2.0",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.10.2",
+    "run-sequence": "^2.2.1"
+  },
+  "lint-staged": {
+    "*.{js,json,md,css}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "bracketSpacing": false,
+    "proseWrap": "never",
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "scripts": {
+    "gulp": "./node_modules/gulp/bin/gulp.js",
+    "start": "gulp",
+    "prettier": "prettier --write \"**/*.{js,json,md,css}\"",
+    "precommit": "lint-staged"
   },
   "spm": {
     "main": "./animate.css"

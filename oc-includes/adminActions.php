@@ -78,7 +78,7 @@ function deleteGroupItem()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+        header('Location:'.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -473,8 +473,8 @@ function getUserGroupsApproved($uid)
         {
             if ( ( MODERATOR_REMOVE_GROUP == true ) )
             {
-                echo "&nbsp;<i class='fas fa-user-times delete_group' style='font-size:16px;color:red;' data-dept-id=".$row[1]." data-user-id=".$uid."></i>" . $row[0] . "<br/>";
-            } else {}
+                echo "&nbsp;<em class='fas fa-user-times delete_group' style='font-size:16px;color:red;' data-dept-id=".$row[1]." data-user-id=".$uid."></em>" . $row[0] . "<br/>";
+            } 
         }
     } else {
         foreach($result as $row)
@@ -940,8 +940,6 @@ function getUserDetails()
         $encode["identifier"] = $row['identifier'];
         $encode["role"] = $row['adminPrivilege'];
     }
-
-    //Pass the array and userID to getUserGroupsEditor which will return it
     echo json_encode($encode);
 }
 
@@ -954,7 +952,7 @@ function getUserID()
     {
         $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -965,7 +963,7 @@ function getUserID()
     if (!$resStatus)
     {
         $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
     $pdo = null;
@@ -1008,8 +1006,6 @@ function getUserGroupsEditor($encode, $userId)
         $encode["department"][$counter] = $row[0];
         $counter++;
     }
-
-//    echo json_encode($encode);
 }
 
 
@@ -1178,20 +1174,20 @@ function changeUserPassword()
     } catch(PDOException $ex)
     {
         $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
 
     $newpassword = htmlspecialchars($_POST['password']);
-    $hashed_password = password_hash($newpassword, PASSWORD_DEFAULT);
+    $hashedPassword = password_hash($newpassword, PASSWORD_DEFAULT);
 
     $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."users SET password = ? WHERE id = ?");
-    $result = $stmt->execute(array($hashed_password, $userID));
+    $result = $stmt->execute(array($hashedPassword, $userID));
 
     if (!$result)
     {
         $_SESSION['error'] = $pdo->errorInfo();
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
         die();
     }
 
@@ -1201,9 +1197,5 @@ function changeUserPassword()
 
     sleep(1);
     header("Location:".BASE_URL."/oc-admin/userManagement.php");
-    sleep(1);
-    //Seconds to wait
-    /*echo $_SESSION['profileUpdate'];
-    header("Location: ".BASE_URL."/profile.php");*/
 }
 ?>

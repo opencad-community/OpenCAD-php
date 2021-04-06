@@ -1204,7 +1204,7 @@ function getActivePersonBOLO()
         die();
     }
 
-    $result = $pdo->query("SELECT * from ".DB_PREFIX."bolos_persons");
+    $result = $pdo->query("SELECT * from ".DB_PREFIX."bolosPersons");
 
     if (!$result)
     {
@@ -1388,7 +1388,7 @@ function getCivilianNamesOption()
         die();
     }
 
-    $result = $pdo->query("SELECT id, name FROM ".DB_PREFIX."ncic_names");
+    $result = $pdo->query("SELECT id, name FROM ".DB_PREFIX."ncicNames");
 
     if (!$result)
     {
@@ -1629,7 +1629,7 @@ function getCivilianNames()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_names.id, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_names");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncicNames.id, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncicNames");
 
     if (!$result)
     {
@@ -1745,7 +1745,7 @@ function rms_warnings()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_names.name, ".DB_PREFIX."ncic_warnings.id, ".DB_PREFIX."ncic_warnings.warningName, ".DB_PREFIX."ncic_warnings.issuedDate, ".DB_PREFIX."ncic_warnings.Issuer FROM ".DB_PREFIX."ncic_warnings INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_warnings.nameId=".DB_PREFIX."ncic_names.id WHERE ".DB_PREFIX."ncic_warnings.status = '1'");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncicNames.name, ".DB_PREFIX."ncic_warnings.id, ".DB_PREFIX."ncic_warnings.warningName, ".DB_PREFIX."ncic_warnings.issuedDate, ".DB_PREFIX."ncic_warnings.Issuer FROM ".DB_PREFIX."ncic_warnings INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncic_warnings.nameId=".DB_PREFIX."ncicNames.id WHERE ".DB_PREFIX."ncic_warnings.status = '1'");
 
     if (!$result)
     {
@@ -1807,7 +1807,7 @@ function rms_citations()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_names.name, ".DB_PREFIX."ncic_citations.id, ".DB_PREFIX."ncic_citations.citationName, ".DB_PREFIX."ncic_citations.citationFine, ".DB_PREFIX."ncic_citations.issuedDate, ".DB_PREFIX."ncic_citations.Issuer FROM ".DB_PREFIX."ncic_citations INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_citations.nameId=".DB_PREFIX."ncic_names.id WHERE ".DB_PREFIX."ncic_citations.status = '1'");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncicNames.name, ".DB_PREFIX."ncic_citations.id, ".DB_PREFIX."ncic_citations.citationName, ".DB_PREFIX."ncic_citations.citationFine, ".DB_PREFIX."ncic_citations.issuedDate, ".DB_PREFIX."ncic_citations.Issuer FROM ".DB_PREFIX."ncic_citations INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncic_citations.nameId=".DB_PREFIX."ncicNames.id WHERE ".DB_PREFIX."ncic_citations.status = '1'");
 
     if (!$result)
     {
@@ -1871,7 +1871,7 @@ function rms_arrests()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_names.name, ".DB_PREFIX."ncic_arrests.id, ".DB_PREFIX."ncic_arrests.arrestReason, ".DB_PREFIX."ncic_arrests.arrestFine, ".DB_PREFIX."ncic_arrests.issuedDate, ".DB_PREFIX."ncic_arrests.Issuer FROM ".DB_PREFIX."ncic_arrests INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_arrests.nameId=".DB_PREFIX."ncic_names.id");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncicNames.name, ".DB_PREFIX."ncicArrests.id, ".DB_PREFIX."ncicArrests.arrestReason, ".DB_PREFIX."ncicArrests.arrestFine, ".DB_PREFIX."ncicArrests.issuedDate, ".DB_PREFIX."ncicArrests.Issuer FROM ".DB_PREFIX."ncicArrests INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicArrests.nameId=".DB_PREFIX."ncicNames.id");
 
     if (!$result)
     {
@@ -1935,7 +1935,7 @@ function rms_warrants()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_warrants.*, ".DB_PREFIX."ncic_names.name FROM ".DB_PREFIX."ncic_warrants INNER JOIN ".DB_PREFIX."ncic_names ON ".DB_PREFIX."ncic_names.id=".DB_PREFIX."ncic_warrants.nameId");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_warrants.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncic_warrants INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncic_warrants.nameId");
 
     if (!$result)
     {

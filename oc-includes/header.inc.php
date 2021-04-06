@@ -1,4 +1,6 @@
 <?php
+require_once("/oc-config.php");
+
 if(basename($_SERVER['PHP_SELF']) == 'admin.php') {
   $pageName = "OpenCAD Admin Dashboard";
   $currentPage = 'class="acitve"';
@@ -31,7 +33,6 @@ if(basename($_SERVER['PHP_SELF']) == 'admin.php') {
   $currentPage = 'class="acitve"';
 } else {
   $pageName = "OpenCAD";
-}
 
 ?>
 

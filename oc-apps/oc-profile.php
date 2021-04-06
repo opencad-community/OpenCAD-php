@@ -71,7 +71,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 <body class="app header-fixed">
 
 		<header class="app-header navbar">
-			<?php include( ABSPATH . "/" .  OCCONTENT . "/themes/". THEME ."/includes/topProfile.inc.php"); ?>
+			<?php include( ABSPATH . "/" . OCTHEMES ."/". THEME ."/includes/topProfile.inc.php"); ?>
 		</header>
 
 			<div class="app-body">
@@ -81,7 +81,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 					<div class="animated fadeIn">
 						<div class="card">
 							<div class="card-header">
-								<i class="fa fa-align-justify"></i> <?php echo lang_key("MY_PROFILE"); ?>
+								<em class="fa fa-align-justify"></em> <?php echo lang_key("MY_PROFILE"); ?>
 					</div>
 				<div class="card-body">
 					<?php echo $profileUpdate ?>
@@ -115,11 +115,11 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 										<div class="form-group">
 												<label class="col-sm-2 control-label"><?php echo lang_key("PASSWORD"); ?></label>
 												<div class="col-sm-10">
-														<a class="btn btn-primary" data-toggle="modal" data-target="#changePassword" ?><?php echo lang_key("CHANGE_PASSWORD"); ?></a>
+														<a rel="noopener" class="btn btn-primary" data-toggle="modal" data-target="#changePassword" ?><?php echo lang_key("CHANGE_PASSWORD"); ?></a>
 												</div>
 												<!-- ./ col-sm-10 -->
 										</div>
-									<?php } else {} ?>
+									<?php } ?>
 										<!-- ./ form-group -->
 										<input name="update_profile_btn" type="submit" class="btn btn-primary btn-lg btn-block" value="<?php echo lang_key("UPDATE"); ?>" <?php if ( DEMO_MODE == true ) {?> disabled <?php } ?>/>
 									</fieldset>
@@ -132,7 +132,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			</div>
 				<footer class="app-footer">
 				<div>
-						<a href="https://opencad.io">OpenCAD</a>
+						<a rel="noopener" href="https://opencad.io">OpenCAD</a>
 						<span>&copy; 2017 <?php echo date("Y"); ?>.</span>
 				</div>
 				<div class="ml-auto">

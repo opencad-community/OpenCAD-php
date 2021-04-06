@@ -12,21 +12,9 @@ info.php
 .vscode
 .MESSAGE
 patch.diff
-<<<<<<< HEAD
-oc-lang/*
-sql.php
-adminner.php
-*web.config*
-mirror_ssh
-log_file
-
-
-# Include these exceptions
-!oc-lang/index.php
-=======
 mirror_ssh
 log_file
 sql.php
 *adminer*.php
+web.config
 errorlog
->>>>>>> oc-main/canary

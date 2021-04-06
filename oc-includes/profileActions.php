@@ -84,7 +84,7 @@ function getMyRank()
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ranks.rank_name FROM ".DB_PREFIX."ranks_users INNER JOIN ".DB_PREFIX."ranks ON ".DB_PREFIX."ranks.rank_id=".DB_PREFIX."ranks_users.rank_id WHERE ".DB_PREFIX."ranks_users.userId = ?");
+    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ranks.rankName FROM ".DB_PREFIX."ranksUsers INNER JOIN ".DB_PREFIX."ranks ON ".DB_PREFIX."ranks.rank_id=".DB_PREFIX."ranksUsers.rank_id WHERE ".DB_PREFIX."ranksUsers.userId = ?");
     $result = $stmt->execute(array($id));
 
     if (!$result)
@@ -103,10 +103,6 @@ function getMyRank()
 
 function changePassword()
 {
-    session_start();
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
-
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
     } catch(PDOException $ex)
@@ -118,10 +114,10 @@ function changePassword()
 
     $id = $_SESSION['id'];
     $newpassword = htmlspecialchars($_POST['password']);
-    $hashed_password = password_hash($newpassword, PASSWORD_DEFAULT);
+    $hashedPassword = password_hash($newpassword, PASSWORD_DEFAULT);
 
     $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."users SET password = ? WHERE id = ?");
-    $result = $stmt->execute(array($hashed_password, $id));
+    $result = $stmt->execute(array($hashedPassword, $id));
 
     if (!$result)
     {

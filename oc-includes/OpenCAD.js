@@ -510,7 +510,7 @@ $(function () {
             url: "../oc-includes/dispatchActions.php",
             data: {
                 addNarrative: 'yes',
-                callId: $('#call_id_det').val(),
+                callId: $('#callId_det').val(),
                 details: $("#" + this.id).serialize()
             },
             success: function (response) {
@@ -733,7 +733,7 @@ $('#callDetails').on('show.bs.modal', function (e) {
             data = JSON.parse(result);
 
             var mymodal = $('#callDetails');
-            mymodal.find('input[name="call_id_det"]').val(data['callId']);
+            mymodal.find('input[name="callId_det"]').val(data['callId']);
             mymodal.find('input[name="call_type_det"]').val(data['callType']);
             mymodal.find('input[name="call_street1_det"]').val(data['callStreet1']);
             mymodal.find('input[name="call_street2_det"]').val(data['callStreet2']);

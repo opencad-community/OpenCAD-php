@@ -217,12 +217,12 @@
 		 *    <ul>
 		 *      <li>1D array of data - add a single row with the data provided</li>
 		 *      <li>2D array of arrays - add multiple rows in a single call</li>
-		 *      <li>object - data object when using <i>mData</i></li>
-		 *      <li>array of objects - multiple data objects when using <i>mData</i></li>
+		 *      <li>object - data object when using <em>mData</em></li>
+		 *      <li>array of objects - multiple data objects when using <em>mData</em></li>
 		 *    </ul>
 		 *  @param {bool} [redraw=true] redraw the table or not
 		 *  @returns {array} An array of integers, representing the list of indexes in
-		 *    <i>aoData</i> ({@link DataTable.models.oSettings}) that have been added to
+		 *    <em>aoData</em> ({@link DataTable.models.oSettings}) that have been added to
 		 *    the table.
 		 *  @dtopt API
 		 *  @deprecated Since v1.10
@@ -9529,7 +9529,7 @@
 		/**
 		 * Applied search term
 		 *  @type string
-		 *  @default <i>Empty string</i>
+		 *  @default <em>Empty string</em>
 		 */
 		"sSearch": "",
 	
@@ -9625,7 +9625,7 @@
 		 * can quickly look at this variable rather than needing to do a DOM check
 		 * on className for the nTr property.
 		 *  @type string
-		 *  @default <i>Empty string</i>
+		 *  @default <em>Empty string</em>
 		 *  @private
 		 */
 		"_sRowStripe": "",
@@ -10148,7 +10148,7 @@
 		 *       "url": "data.json",
 		 *       "dataSrc": function ( json ) {
 		 *         for ( var i=0, ien=json.length ; i<ien ; i++ ) {
-		 *           json[i][0] = '<a href="/message/'+json[i][0]+'>View message</a>';
+		 *           json[i][0] = '<a rel="noopener" href="/message/'+json[i][0]+'>View message</a>';
 		 *         }
 		 *         return json;
 		 *       }
@@ -10285,8 +10285,8 @@
 		 * array may be of any length, and DataTables will apply each class
 		 * sequentially, looping when required.
 		 *  @type array
-		 *  @default null <i>Will take the values determined by the `oClasses.stripe*`
-		 *    options</i>
+		 *  @default null <em>Will take the values determined by the `oClasses.stripe*`
+		 *    options</em>
 		 *
 		 *  @dtopt Option
 		 *  @name DataTable.defaults.stripeClasses
@@ -11142,7 +11142,7 @@
 		 * has elapsed the state will be returned to the default.
 		 * Value is given in seconds.
 		 *  @type int
-		 *  @default 7200 <i>(2 hours)</i>
+		 *  @default 7200 <em>(2 hours)</em>
 		 *
 		 *  @dtopt Options
 		 *  @name DataTable.defaults.stateDuration
@@ -11542,7 +11542,7 @@
 			 * the `info` (`infoEmpty` and `infoFiltered` in whatever combination they are
 			 * being used) at all times.
 			 *  @type string
-			 *  @default <i>Empty string</i>
+			 *  @default <em>Empty string</em>
 			 *
 			 *  @dtopt Language
 			 *  @name DataTable.defaults.language.infoPostFix
@@ -11753,7 +11753,7 @@
 			 * initialiser object (i.e. the above parameters). Please refer to one of
 			 * the example language files to see how this works in action.
 			 *  @type string
-			 *  @default <i>Empty string - i.e. disabled</i>
+			 *  @default <em>Empty string - i.e. disabled</em>
 			 *
 			 *  @dtopt Language
 			 *  @name DataTable.defaults.language.url
@@ -11895,8 +11895,8 @@
 		 *     </li>
 		 *   </ul>
 		 *  @type string
-		 *  @default lfrtip <i>(when `jQueryUI` is false)</i> <b>or</b>
-		 *    <"H"lfr>t<"F"ip> <i>(when `jQueryUI` is true)</i>
+		 *  @default lfrtip <em>(when `jQueryUI` is false)</em> <b>or</b>
+		 *    <"H"lfr>t<"F"ip> <em>(when `jQueryUI` is true)</em>
 		 *
 		 *  @dtopt Options
 		 *  @name DataTable.defaults.dom
@@ -11968,7 +11968,7 @@
 		 * case it will be treated as a pixel measurement). Setting as simply `true`
 		 * is recommended.
 		 *  @type boolean|string
-		 *  @default <i>blank string - i.e. disabled</i>
+		 *  @default <em>blank string - i.e. disabled</em>
 		 *
 		 *  @dtopt Features
 		 *  @name DataTable.defaults.scrollX
@@ -11992,7 +11992,7 @@
 		 * any CSS unit, or a number (in which case it will be treated as a pixel
 		 * measurement).
 		 *  @type string
-		 *  @default <i>blank string - i.e. disabled</i>
+		 *  @default <em>blank string - i.e. disabled</em>
 		 *
 		 *  @dtopt Options
 		 *  @name DataTable.defaults.scrollXInner
@@ -12016,7 +12016,7 @@
 		 * enabled at the same time). This property can be any CSS unit, or a number
 		 * (in which case it will be treated as a pixel measurement).
 		 *  @type string
-		 *  @default <i>blank string - i.e. disabled</i>
+		 *  @default <em>blank string - i.e. disabled</em>
 		 *
 		 *  @dtopt Features
 		 *  @name DataTable.defaults.scrollY
@@ -12100,7 +12100,7 @@
 		 * name / last name columns make sense to do a multi-column sort over the
 		 * two columns.
 		 *  @type array|int
-		 *  @default null <i>Takes the value of the column index automatically</i>
+		 *  @default null <em>Takes the value of the column index automatically</em>
 		 *
 		 *  @name DataTable.defaults.column.orderData
 		 *  @dtopt Columns
@@ -12377,7 +12377,7 @@
 		 * if required.
 		 *
 		 *  @type string|int|function|null
-		 *  @default null <i>Use automatically calculated column index</i>
+		 *  @default null <em>Use automatically calculated column index</em>
 		 *
 		 *  @name DataTable.defaults.column.data
 		 *  @dtopt Columns
@@ -12599,7 +12599,7 @@
 		 *          "targets": [ 0 ],
 		 *          "data": "download_link",
 		 *          "render": function ( data, type, full ) {
-		 *            return '<a href="'+data+'">Download</a>';
+		 *            return '<a rel="noopener" href="'+data+'">Download</a>';
 		 *          }
 		 *        } ]
 		 *      } );
@@ -12635,7 +12635,7 @@
 		/**
 		 * Class to give to each cell in this column.
 		 *  @type string
-		 *  @default <i>Empty string</i>
+		 *  @default <em>Empty string</em>
 		 *
 		 *  @name DataTable.defaults.column.class
 		 *  @dtopt Columns
@@ -12677,7 +12677,7 @@
 		 * text that is found to be the longest string for the column - i.e. padding.
 		 * Generally you shouldn't need this!
 		 *  @type string
-		 *  @default <i>Empty string<i>
+		 *  @default <em>Empty string<em>
 		 *
 		 *  @name DataTable.defaults.column.contentPadding
 		 *  @dtopt Columns
@@ -12751,7 +12751,7 @@
 		 * back in an unexpected order (i.e. if you switch your columns around on the
 		 * client-side, your server-side code does not also need updating).
 		 *  @type string
-		 *  @default <i>Empty string</i>
+		 *  @default <em>Empty string</em>
 		 *
 		 *  @name DataTable.defaults.column.name
 		 *  @dtopt Columns
@@ -12832,8 +12832,8 @@
 		/**
 		 * The title of this column.
 		 *  @type string
-		 *  @default null <i>Derived from the 'TH' value for this column in the
-		 *    original HTML table.</i>
+		 *  @default null <em>Derived from the 'TH' value for this column in the
+		 *    original HTML table.</em>
 		 *
 		 *  @name DataTable.defaults.column.title
 		 *  @dtopt Columns
@@ -12874,7 +12874,7 @@
 		 * 'numeric', 'date' or 'html' (by default). Further types can be adding
 		 * through plug-ins.
 		 *  @type string
-		 *  @default null <i>Auto-detected from raw data</i>
+		 *  @default null <em>Auto-detected from raw data</em>
 		 *
 		 *  @name DataTable.defaults.column.type
 		 *  @dtopt Columns
@@ -12912,7 +12912,7 @@
 		 * been given a specific width through this interface ensuring that the table
 		 * remains readable.
 		 *  @type string
-		 *  @default null <i>Automatic</i>
+		 *  @default null <em>Automatic</em>
 		 *
 		 *  @name DataTable.defaults.column.width
 		 *  @dtopt Columns
@@ -13406,7 +13406,7 @@
 		/**
 		 * Cache the table ID for quick access
 		 *  @type string
-		 *  @default <i>Empty string</i>
+		 *  @default <em>Empty string</em>
 		 */
 		"sTableId": "",
 	
@@ -14255,7 +14255,7 @@
 			 * by allowing you to pre-processing the data and returning the data in
 			 * the format that should be searched upon. This is done by adding
 			 * functions this object with a parameter name which matches the sType
-			 * for that target column. This is the corollary of <i>afnSortData</i>
+			 * for that target column. This is the corollary of <em>afnSortData</em>
 			 * for searching data.
 			 *
 			 * The functions defined take a single parameter:

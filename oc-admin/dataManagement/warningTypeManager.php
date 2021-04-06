@@ -13,65 +13,65 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
-    if(session_id() == '' || !isset($_SESSION)) {
-    // session isn't started
-    session_start();
-    }
-    require_once('../../oc-config.php');
-    require_once( ABSPATH . '/oc-functions.php');
-    require_once( ABSPATH . '/oc-settings.php');
-    require_once( ABSPATH . "/oc-includes/adminActions.php");
-    require_once( ABSPATH . "/oc-includes/dataActions.php");
+	if(session_id() == '' || !isset($_SESSION)) {
+	// session isn't started
+	session_start();
+	}
+	require_once('../../oc-config.php');
+	require_once( ABSPATH . '/oc-functions.php');
+	require_once( ABSPATH . '/oc-settings.php');
+	require_once( ABSPATH . "/oc-includes/adminActions.php");
+	require_once( ABSPATH . "/oc-includes/dataActions.php");
 
-    if (empty($_SESSION['logged_in']))
-    {
-        header('Location: ../index.php');
-        die("Not logged in");
-    }
-    else
-    {
-      $name = $_SESSION['name'];
-    }
+	if (empty($_SESSION['logged_in']))
+	{
+		header('Location: ../index.php');
+		die("Not logged in");
+	}
+	else
+	{
+	  $name = $_SESSION['name'];
+	}
 
 
-    if ( $_SESSION['adminPrivilege'] == 3)
-    {
-      if ($_SESSION['adminPrivilege'] == 'Administrator')
-      {
-          //Do nothing
-      }
-    }
-    else if ($_SESSION['adminPrivilege'] == 2)
-    {
-      if ($_SESSION['adminPrivilege'] == 'Moderator')
-      {
-          // Do Nothing
-      }
-    }
-    else
-    {
-        permissionDenied();
-    }
+	if ( $_SESSION['adminPrivilege'] == 3)
+	{
+	  if ($_SESSION['adminPrivilege'] == 'Administrator')
+	  {
+		  //Do nothing
+	  }
+	}
+	else if ($_SESSION['adminPrivilege'] == 2)
+	{
+	  if ($_SESSION['adminPrivilege'] == 'Moderator')
+	  {
+		  // Do Nothing
+	  }
+	}
+	else
+	{
+		permissionDenied();
+	}
 
-    $accessMessage = "";
-    if(isset($_SESSION['accessMessage']))
-    {
-        $accessMessage = $_SESSION['accessMessage'];
-        unset($_SESSION['accessMessage']);
-    }
-    $adminMessage = "";
-    if(isset($_SESSION['adminMessage']))
-    {
-        $adminMessage = $_SESSION['adminMessage'];
-        unset($_SESSION['adminMessage']);
-    }
+	$accessMessage = "";
+	if(isset($_SESSION['accessMessage']))
+	{
+		$accessMessage = $_SESSION['accessMessage'];
+		unset($_SESSION['accessMessage']);
+	}
+	$adminMessage = "";
+	if(isset($_SESSION['adminMessage']))
+	{
+		$adminMessage = $_SESSION['adminMessage'];
+		unset($_SESSION['adminMessage']);
+	}
 
-    $successMessage = "";
-    if(isset($_SESSION['successMessage']))
-    {
-        $successMessage = $_SESSION['successMessage'];
-        unset($_SESSION['successMessage']);
-    }
+	$successMessage = "";
+	if(isset($_SESSION['successMessage']))
+	{
+		$successMessage = $_SESSION['successMessage'];
+		unset($_SESSION['successMessage']);
+	}
 ?>
 
 <!DOCTYPE html>
@@ -82,163 +82,123 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 <body class="app header-fixed">
 
-    <header class="app-header navbar">
+	<header class="app-header navbar">
+		<?php include( ABSPATH . "oc-admin/oc-admin-includes/topbarNav.inc.php"); ?>
+		<?php include( ABSPATH . "/" . OCTHEMES ."/". THEME ."/includes/topProfile.inc.php"); ?>
+	</header>
 
-      <?php include( ABSPATH . "oc-admin/oc-admin-includes/topbarNav.inc.php"); ?>
-      <?php include( ABSPATH . "/" .  OCCONTENT . "/themes/". THEME ."/includes/topProfile.inc.php"); ?>
+	<div class="app-body">
+		<main class="main">
 
-
-    </header>
-
-    <div class="app-body">
-        <main class="main">
-
-            <div class="breadcrumb" />
-            <div class="container-fluid">
-                <div class="animated fadeIn">
-                    <div class="card">
-                        <div class="card-header">
-                            <i class="fa fa-align-justify"></i> <?php echo lang_key("WARNINGTYPE_MANAGER"); ?>
-                        </div>
-                        <div class="card-body">
-                            <?php echo $accessMessage;?>
-                            <?php getWarningTypes();?>
-                        </div>
-                        <!-- /.car-body-->
-                    </div>
-<<<<<<< HEAD
-                    <div class="clearfix"></div>
-                    <div class="clearfix"></div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>Warning Manager</h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
-                                        </li>
-                                        <li><a class="close-link"><i class="fas fa-close"></i></a>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <!-- ./ x_title -->
-                                <div class="x_content">
-                                    <?php echo $successMessage;?>
-                                    <?php getWarningTypes();?>
-                                </div>
-                                <!-- ./ x_content -->
-                            </div>
-                            <!-- ./ x_panel -->
-                        </div>
-                        <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
-                    </div>
-                    <!-- ./ row -->
-
-=======
-                    <!-- /.card-->
-                </div>
-                <!-- /.animated fadeIn -->  
-            </div>
-            <!-- /.container-fluid -->
+			<div class="breadcrumb" />
+			<div class="container-fluid">
+				<div class="animated fadeIn">
+					<div class="card">
+						<div class="card-header">
+							<em class="fa fa-align-justify"></em> <?php echo lang_key("WARNINGTYPE_MANAGER"); ?>
+						</div>
+						<div class="card-body">
+							<?php echo $accessMessage;?>
+							<?php getWarningTypes();?>
+						</div>
+						<!-- /.car-body-->
+					</div>
+					<!-- /.card-->
+				</div>
+				<!-- /.animated fadeIn -->  
+			</div>
+			<!-- /.container-fluid -->
 </div>
 </div>
-        </main>
+		</main>
 
-        <footer class="app-footer">
-            <div>
-                <a href="https://opencad.io">OpenCAD</a>
-                <span>&copy; 2017 <?php echo date("Y"); ?>.</span>
-            </div>
-            <div class="ml-auto">
->>>>>>> pr1
+		<footer class="app-footer">
+			<div>
+				<a rel="noopener" href="https://opencad.io">OpenCAD</a>
+				<span>&copy; 2017 <?php echo date("Y"); ?>.</span>
+			</div>
+			<div class="ml-auto">
 
-            </div>
+			</div>
 
-        </footer>
+		</footer>
 
-    <!-- Edit Street Modal -->
-    <div class="modal fade" id="editWarningTypeModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-md">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                    </button>
-                    <h4 class="modal-title" id="editWarningTypeModal">Edit Warning</h4>
-                </div>
-                <!-- ./ modal-header -->
-                <div class="modal-body">
-                    <form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/dataActions.php"
-                        class="form-horizontal">
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">Warning Description</label>
-                            <div class="col-md-9">
-                                <input type="text" name="warningDescription" class="form-control" id="warningDescription" />
-                                <span class="fas fa-exclamation-triangle form-control-feedback right"
-                                    aria-hidden="true"></span> </div>
-                            <!-- ./ col-sm-9 -->
-                        </div>
-                        <!-- ./ form-group -->>
-                </div>
-                <!-- ./ modal-body -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <input type="hidden" name="warningTypeID" id="warningTypeID" aria-hidden="true">
-                    <input type="submit" name="editWarningType" class="btn btn-primary" value="Edit Warning Type" />
-                </div>
-                <!-- ./ modal-footer -->
-                </form>
-            </div>
-            <!-- ./ modal-content -->
-        </div>
-        <!-- ./ modal-dialog modal-lg -->
-    </div>
-    <!-- ./ modal fade bs-example-modal-lg -->
+	<!-- Edit Street Modal -->
+	<div class="modal fade" id="editWarningTypeModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title" id="editWarningTypeModal">Edit Warning</h4>
+				</div>
+				<!-- ./ modal-header -->
+				<div class="modal-body">
+					<form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/dataActions.php"
+						class="form-horizontal">
+						<div class="form-group row">
+							<label class="col-md-3 control-label">Warning Description</label>
+							<div class="col-md-9">
+								<input type="text" name="warningDescription" class="form-control" id="warningDescription" />
+								<span class="fas fa-exclamation-triangle form-control-feedback right"
+									aria-hidden="true"></span> </div>
+							<!-- ./ col-sm-9 -->
+						</div>
+						<!-- ./ form-group -->>
+				</div>
+				<!-- ./ modal-body -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<input type="hidden" name="warningTypeID" id="warningTypeID" aria-hidden="true">
+					<input type="submit" name="editWarningType" class="btn btn-primary" value="Edit Warning Type" />
+				</div>
+				<!-- ./ modal-footer -->
+				</form>
+			</div>
+			<!-- ./ modal-content -->
+		</div>
+		<!-- ./ modal-dialog modal-lg -->
+	</div>
+	<!-- ./ modal fade bs-example-modal-lg -->
 
-    <?php
-    include ( ABSPATH . "/oc-admin/oc-admin-includes/globalModals.inc.php");
-    include ( ABSPATH . "/oc-includes/jquery-colsolidated.inc.php"); ?>
+	<?php
+	include ( ABSPATH . "/oc-admin/oc-admin-includes/globalModals.inc.php");
+	include ( ABSPATH . "/oc-includes/jquery-colsolidated.inc.php"); ?>
 
    <script>
-    $(document).ready(function() {
-        $('#allStreets').DataTable({});
-    });
+	$(document).ready(function() {
+		$('#allStreets').DataTable({});
+	});
 
-    $('#editWarningTypeModal').on('show.bs.modal', function(e) {
-        var $modal = $(this),
-            warningTypeID = e.relatedTarget.id;
+	$('#editWarningTypeModal').on('show.bs.modal', function(e) {
+		var $modal = $(this),
+			warningTypeID = e.relatedTarget.id;
 
-        $.ajax({
-            cache: false,
-            type: 'POST',
-            url: '<?php echo BASE_URL; ?>/oc-includes/dataActions.php',
-            data: {
-                'getWarningTypeDetails': 'yes',
-                'warningTypeID': warningTypeID
-            },
-            success: function(result) {
-                console.log(result);
-                data = JSON.parse(result);
+		$.ajax({
+			cache: false,
+			type: 'POST',
+			url: '<?php echo BASE_URL; ?>/oc-includes/dataActions.php',
+			data: {
+				'getWarningTypeDetails': 'yes',
+				'warningTypeID': warningTypeID
+			},
+			success: function(result) {
+				console.log(result);
+				data = JSON.parse(result);
 
-                $('input[name="warningDescription"]').val(data['warningDescription']);
-                $('input[name="warningTypeID"]').val(data['warningTypeID']);
-            },
+				$('input[name="warningDescription"]').val(data['warningDescription']);
+				$('input[name="warningTypeID"]').val(data['warningTypeID']);
+			},
 
-            error: function(exception) {
-                alert('Exeption:' + exception);
-            }
-        });
-    })
-    </script>
+			error: function(exception) {
+				alert('Exeption:' + exception);
+			}
+		});
+	})
+	</script>
 </body>
 
-<<<<<<< HEAD
-            <script type="text/javascript"
-        src="https://jira.opencad.io/s/a0c4d8ca8eced10a4b49aaf45ec76490-T/-f9bgig/77001/9e193173deda371ba40b4eda00f7488e/2.0.24/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=ede74ac1">
-    </script>
-=======
 
 </body>
->>>>>>> oc-main/canary
 
 </html>

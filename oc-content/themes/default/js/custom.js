@@ -1,11 +1,3 @@
-/**
- * Resize function without multiple trigger
- * 
- * Usage:
- * $(window).smartresize(function(){  
- *     // code here
- * });
- */
 (function($,sr){
     // debouncing function from John Hann
     // http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
@@ -28,16 +20,9 @@
             timeout = setTimeout(delayed, threshold || 100); 
         };
     };
-
-    // smartresize 
     jQuery.fn[sr] = function(fn){  return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr); };
 
 })(jQuery,'smartresize');
-/**
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 var CURRENT_URL = window.location.href.split('#')[0].split('?')[0],
     $BODY = $('body'),
@@ -79,7 +64,6 @@ var setContentHeight = function () {
                 setContentHeight();
             });
         } else {
-            // prevent closing menu if we are on child menu
             if (!$li.parent().is('.child_menu')) {
                 $SIDEBAR_MENU.find('li').removeClass('active active-sm');
                 $SIDEBAR_MENU.find('li ul').slideUp();
@@ -99,7 +83,6 @@ var setContentHeight = function () {
         }
     });
 
-// toggle small or large menu 
 $MENU_TOGGLE.on('click', function() {
 		console.log('clicked - menu toggle');
 		
@@ -116,7 +99,6 @@ $MENU_TOGGLE.on('click', function() {
 	setContentHeight();
 });
 
-	// check active menu
 	$SIDEBAR_MENU.find('a[href="' + CURRENT_URL + '"]').parent('li').addClass('current-page');
 
 	$SIDEBAR_MENU.find('a').filter(function () {
@@ -148,14 +130,12 @@ $MENU_TOGGLE.on('click', function() {
 	};
 
 
-// Panel toolbox
 $(document).ready(function() {
     $('.collapse-link').on('click', function() {
         var $BOX_PANEL = $(this).closest('.x_panel'),
             $ICON = $(this).find('i'),
             $BOX_CONTENT = $BOX_PANEL.find('.x_content');
         
-        // fix for some div with hardcoded fix class
         if ($BOX_PANEL.attr('style')) {
             $BOX_CONTENT.slideToggle(200, function(){
                 $BOX_PANEL.removeAttr('style');
@@ -294,8 +274,7 @@ if (typeof NProgress != 'undefined') {
 
     $(window).load(function () {
         NProgress.done();
-	});
-	
+    });
 }
 
 	
@@ -1856,13 +1835,13 @@ if (typeof NProgress != 'undefined') {
 			var cnt = 10;
 
 			TabbedNotification = function(options) {
-			  var message = "<div id='ntf" + cnt + "' class='text alert-" + options.type + "' style='display:none'><h2><i class='fa fa-bell'></i> " + options.title +
-				"</h2><div class='close'><a href='javascript:;' class='notification_close'><i class='fa fa-close'></i></a></div><p>" + options.text + "</p></div>";
+			  var message = "<div id='ntf" + cnt + "' class='text alert-" + options.type + "' style='display:none'><h2><em class='fa fa-bell'></em> " + options.title +
+				"</h2><div class='close'><a rel="noopener" href='javascript:;' class='notification_close'><em class='fa fa-close'></em></a></div><p>" + options.text + "</p></div>";
 
 			  if (!document.getElementById('custom_notifications')) {
 				alert('doesnt exists');
 			  } else {
-				$('#custom_notifications ul.notifications').append("<li><a id='ntlink" + cnt + "' class='alert-" + options.type + "' href='#ntf" + cnt + "'><i class='fa fa-bell animated shake'></i></a></li>");
+				$('#custom_notifications ul.notifications').append("<li><a id='ntlink" + cnt + "' class='alert-" + options.type + "' href='#ntf" + cnt + "'><em class='fa fa-bell animated shake'></em></a></li>");
 				$('#custom_notifications #notif-group').append(message);
 				cnt++;
 				CustomTabs(options);

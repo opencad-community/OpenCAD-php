@@ -256,7 +256,7 @@
 			<tr><td nowrap height="10px" colspan="3"></td></tr>
 			<tr>
 				<td colspan="2">
-					<a href="server_requirements.php" class="form_button" /><?php echo lang_key('back'); ?></a>
+					<a rel="noopener" href="server_requirements.php" class="form_button" /><?php echo lang_key('back'); ?></a>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="submit" class="form_button" value="<?php echo lang_key('continue'); ?>" />
 				</td>

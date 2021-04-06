@@ -41,6 +41,6 @@
     "commit": "6d40e73c7e3137df98ca288ad41120f3485b8c07"
   },
   "_source": "https://github.com/DataTables/Dist-DataTables-Responsive.git",
-  "_target": ">=1.0.7",
+  "_target": "^2.2.3",
   "_originalSource": "datatables.net-responsive"
 }

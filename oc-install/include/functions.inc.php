@@ -1,5 +1,8 @@
 <?php
 
+require_once(__DIR__ ."/../../oc-config.php");
+require_once(__DIR__ ."/../../oc-functions.php");
+
 if ( EI_MODE === "debug" )
 	{
 		echo "<pre>";
@@ -74,21 +77,6 @@ function apphp_db_install($sql_dump_file) {
 	return true;
 }
 
-/**
- * 	Returns language key
- * 		@param $key
- */
-function lang_key($key){
-	global $arrLang;
-        $output = '';
-        
-	if(isset($arrLang[$key])){
-		$output = $arrLang[$key];
-	}else{
-		$output = str_replace('_', ' ', $key);		
-	}
-	return $output;
-}
 
 /**
  *	Remove bad chars from input
@@ -154,7 +142,7 @@ function draw_side_navigation($step = 1, $draw = true)
 		foreach($steps as $key => $val){
 			if($step > $key){				
 				$css_class = ' class="passed"';
-				$output .= '<li'.$css_class.'><a href="'.$val['url'].'">'.$val['text'].'</a></li>';
+				$output .= '<li'.$css_class.'><a rel="noopener" href="'.$val['url'].'">'.$val['text'].'</a></li>';
 			}else if($step == $key){
 				$css_class = ' class="current"';
 				$output .= '<li'.$css_class.'><label>'.$val['text'].'</label></li>';

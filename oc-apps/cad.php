@@ -90,7 +90,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 <body class="app header-fixed">
 
 		<header class="app-header navbar">
-			<a class="navbar-brand" href="#">
+			<a rel="noopener" class="navbar-brand" href="#">
 				<img class="navbar-brand-full" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/images/tail.png" width="30" height="25" alt="OpenCAD Logo">
 			</a>
 		<?php
@@ -226,7 +226,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 										</span>
 									</div>
 									<!-- ./ input-group -->
-									<div name="ncic_name_return" id="ncic_name_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
+									<div name="ncic_name_return" id="ncic_name_return" contenteditable="false" style="background-color: #eee; opacity: 1;  font-size: 15px; font-weight: bold;">
 									</div>
 									<!-- ./ ncic_name_return -->
 								</div>
@@ -249,7 +249,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 									</span>
 								</div>
 									<!-- ./ input-group -->
-								<div name="ncic_plate_return" id="ncic_plate_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
+								<div name="ncic_plate_return" id="ncic_plate_return" contenteditable="false" style="background-color: #eee; opacity: 1;  font-size: 15px; font-weight: bold;">
 								</div>
 								<!-- ./ ncic_plate_return -->
 							</div>
@@ -272,7 +272,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 									</span>
 								</div>
 								<!-- ./ input-group -->
-								<div name="ncic_weapon_return" id="ncic_weapon_return" contenteditable="false" style="background-color: #eee; opacity: 1; font-family: 'Courier New'; font-size: 15px; font-weight: bold;">
+								<div name="ncic_weapon_return" id="ncic_weapon_return" contenteditable="false" style="background-color: #eee; opacity: 1;  font-size: 15px; font-weight: bold;">
 								</div>
 								<!-- ./ ncic_name_return -->
 							</div>
@@ -291,7 +291,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			
 	<footer class="app-footer">
 		<div>
-				<a href="https://opencad.io">OpenCAD</a>
+				<a rel="noopener" href="https://opencad.io">OpenCAD</a>
 				<span>&copy; 2017 <?php echo date("Y"); ?>.</span>
 		</div>
 		<div class="ml-auto">
@@ -342,7 +342,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		});
 		
 		$(document).ready(function() {
-				$('#ncic_arrests').DataTable({
+				$('#ncicArrests').DataTable({
 
 				});
 		});

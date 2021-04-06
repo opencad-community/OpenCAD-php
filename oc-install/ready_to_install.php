@@ -79,7 +79,7 @@
 			<tr><td colspan="2" nowrap height="20px">&nbsp;</td></tr>
 			<tr>
 				<td colspan="2">
-					<a href="extra_settings.php" class="form_button" /><?php echo lang_key('back'); ?></a>
+					<a rel="noopener" href="extra_settings.php" class="form_button" /><?php echo lang_key('back'); ?></a>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="submit" class="form_button" value="<?php echo lang_key('continue'); ?>" />
 				</td>

@@ -70,7 +70,7 @@ permissionDenied();
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="javascript:void(0)" class="site_title"><i class="fas fa-lock"></i> <span>Administrator</span></a>
+              <a rel="noopener" href="javascript:void(0)" class="site_title"><em class="fas fa-lock"></em> <span>Administrator</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -115,18 +115,18 @@ permissionDenied();
           <div class="nav_menu">
             <nav>
               <div class="nav toggle">
-                <a id="menu_toggle"><i class="fas fa-bars"></i></a>
+                <a id="menu_toggle"><em class="fas fa-bars"></em></a>
               </div>
 
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <a rel="noopener" href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     <img src="<?php echo get_avatar() ?>" alt=""><?php echo $name;?>
                     <span class="fas fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="../profile.php"><i class="fas fa-user pull-right"></i>My Profile</a></li>
-                    <li><a href="<?php echo BASE_URL; ?>/oc-includes/logout.php"><i class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
+                    <li><a rel="noopener" href="../profile.php"><em class="fas fa-user pull-right"></em>My Profile</a></li>
+                    <li><a rel="noopener" href="<?php echo BASE_URL; ?>/oc-includes/logout.php"><em class="fas fa-sign-out-alt pull-right"></em> Log Out</a></li>
                   </ul>
                 </li>
 
@@ -153,9 +153,9 @@ permissionDenied();
                   <div class="x_title">
                     <h2>Call History</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
+                      <li><a rel="noopener" class="collapse-link"><em class="fas fa-chevron-up"></em></a>
                       </li>
-                      <li><a class="close-link"><i class="fas fa-close"></i></a>
+                      <li><a rel="noopener" class="close-link"><em class="fas fa-close"></em></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>

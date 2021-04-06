@@ -87,77 +87,35 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         <span class="navbar-toggler-icon"></span>
       </button>
       <?php include( ABSPATH . "oc-admin/oc-admin-includes/topbarNav.inc.php"); ?>
-      <?php include( ABSPATH . "/" .  OCCONTENT . "/themes/". THEME ."/includes/topProfile.inc.php"); ?>
+      <?php include( ABSPATH . "/" . OCTHEMES ."/". THEME ."/includes/topProfile.inc.php"); ?>
 
     </header>
 
-      <div class="app-body">
+    <div class="app-body">
         <main class="main">
-        <div class="breadcrumb" />
-        <div class="container-fluid">
-          <div class="animated fadeIn">
+            <div class="breadcrumb" />
+            <div class="container-fluid">
+            <div class="animated fadeIn">
             <div class="card">
-                      <div class="card-header">
-          <i class="fa fa-align-justify"></i> <?php echo lang_key("DEPARTMENT_MANAGER"); ?></div>
-              <div class="card-body">
-                                    <?php echo $accessMessage;?>
-                                    <?php getDepartments();?>
+                <div class="card-header">
+                    <em class="fa fa-align-justify"></em> <?php echo lang_key("DEPARTMENT_MANAGER"); ?></div>
+                <div class="card-body">
+                    <?php echo $accessMessage;?>
+                    <?php getDepartments();?>
                 </div>
-                <!-- /.row-->
-
-<<<<<<< HEAD
-            <!-- page content -->
-            <div class="right_col" role="main">
-                <div class="">
-                    <div class="page-title">
-                        <div class="title_left">
-                            <h3>CAD Data Manager</h3>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="clearfix"></div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>Departments Manager</h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
-                                        </li>
-                                        <li><a class="close-link"><i class="fas fa-close"></i></a>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <!-- ./ x_title -->
-                                <div class="x_content">
-                                    <?php echo $successMessage;?>
-                                    <?php getDepartments();?>
-                                </div>
-                                <!-- ./ x_content -->
-                            </div>
-                            <!-- ./ x_panel -->
-                        </div>
-                        <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
-                    </div>
-                    <!-- ./ row -->
-=======
-              </div>
             </div>
-            <!-- /.card-->
         </main>
->>>>>>> pr1
+    </div>
 
-        </div>
-      </div>
-        <footer class="app-footer">
+            
+    <footer class="app-footer">
         <div>
-            <a href="https://opencad.io">OpenCAD</a>
+            <a rel="noopener" href="https://opencad.io">OpenCAD</a>
             <span>&copy; 2017 <?php echo date("Y"); ?>.</span>
         </div>
         <div class="ml-auto">
-
         </div>
+
     
         </footer>
 
@@ -221,10 +179,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     include ( ABSPATH . "/oc-includes/jquery-colsolidated.inc.php"); ?>
 </body>
 
-    <script type="text/javascript"
-        src="https://jira.opencad.io/s/a0c4d8ca8eced10a4b49aaf45ec76490-T/-f9bgig/77001/9e193173deda371ba40b4eda00f7488e/2.0.24/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=ede74ac1">
-    </script>
-
         <script>
     $(document).ready(function() {
         $('#allDepartments').DataTable({});
@@ -262,10 +216,4 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     })
     </script>
 
-<<<<<<< HEAD
-=======
-
-</body>
-
->>>>>>> oc-main/canary
 </html>

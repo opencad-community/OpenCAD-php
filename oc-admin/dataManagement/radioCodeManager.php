@@ -22,7 +22,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	require_once( ABSPATH . '/oc-settings.php');
 	require_once( ABSPATH . "/oc-includes/adminActions.php");
 	require_once( ABSPATH . "/oc-includes/dataActions.php");
-
 	if (empty($_SESSION['logged_in']))
 	{
 		header('Location: ../index.php');
@@ -30,29 +29,26 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	}
 	else
 	{
-	  $name = $_SESSION['name'];
+		$name = $_SESSION['name'];
 	}
-
-
 	if ( $_SESSION['adminPrivilege'] == 3)
 	{
-	  if ($_SESSION['adminPrivilege'] == 'Administrator')
-	  {
-		  //Do nothing
-	  }
+		if ($_SESSION['adminPrivilege'] == 'Administrator')
+		{
+			//Do nothing
+		}
 	}
 	else if ($_SESSION['adminPrivilege'] == 2)
 	{
-	  if ($_SESSION['adminPrivilege'] == 'Moderator')
-	  {
+		if ($_SESSION['adminPrivilege'] == 'Moderator')
+		{
 		  // Do Nothing
-	  }
+		}
 	}
 	else
 	{
 		permissionDenied();
 	}
-
 	$accessMessage = "";
 	if(isset($_SESSION['accessMessage']))
 	{
@@ -65,7 +61,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		$adminMessage = $_SESSION['adminMessage'];
 		unset($_SESSION['adminMessage']);
 	}
-
 	$successMessage = "";
 	if(isset($_SESSION['successMessage']))
 	{
@@ -73,51 +68,40 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		unset($_SESSION['successMessage']);
 	}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <?php include ( ABSPATH . "/".OCTHEMES."/".THEME."/includes/header.inc.php"); ?>
-
-
-<body class="app header-fixed">
-
+<body class="app header-fixed footer-fixed">
 	<header class="app-header navbar">
-		<?php include( ABSPATH . "/" .  OCCONTENT . "/themes/". THEME ."/includes/topProfile.inc.php"); ?>
+		<?php include( ABSPATH . "/" . OCTHEMES ."/". THEME ."/includes/topProfile.inc.php"); ?>
 	</header>
-
-	  <div class="app-body">
+		<div class="app-body">
 		<main class="main">
-		<div class="breadcrumb" />
-		<div class="container-fluid">
-		  <div class="animated fadeIn">
-			<div class="card">
-					  <div class="card-header">
-		  <i class="fa fa-align-justify"></i> <?php echo lang_key("RADIOCODE_MANAGER"); ?></div>
-			  <div class="card-body">
-									<?php echo $accessMessage;?>
-									<?php getRadioCodes();?>
+			<div class="breadcrumb" />
+			<div class="container-fluid">
+				<div class="animated fadeIn">
+					<div class="card">
+						<div class="card-header">
+							<em class="fa fa-align-justify"></em> <?php echo lang_key("RADIOCODE_MANAGER"); ?>
+						</div>
+						<div class="card-body">
+							<?php echo $accessMessage;?>
+							<?php getRadioCodes();?>
+						</div>
+					</div>
 				</div>
-				<!-- /.row-->
-
-			  </div>
-			</div>
-			<!-- /.card-->
-		</main>
-
+			</main>
 		</div>
-	  </div>
-		<footer class="app-footer">
+	</div>
+	<footer class="app-footer navbar-fixed-bottom"">
 		<div>
-			<a href="https://opencad.io">OpenCAD</a>
+			<a rel="noopener" href="https://opencad.io">OpenCAD</a>
 			<span>&copy; 2017 <?php echo date("Y"); ?>.</span>
 		</div>
 		<div class="ml-auto">
-
 		</div>
-	
-		</footer>
-
+	</footer>
 	<!-- Edit Radio Code Modal -->
 	<div class="modal" id="editRadioCodeModal" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog modal-md">
