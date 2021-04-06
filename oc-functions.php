@@ -48,7 +48,7 @@ function isSessionStarted()
         if ( version_compare(phpversion(), REQUIRED_PHP_VERSION, '<') ) {
 			session_start();
 			$_SESSION['error_title'] = "Incompatable PHP Version";
-			$_SESSION['error'] = "An incompatable version of PHP is active. OpenCAD requires PHP 7.2 at minimum, the current recommended version is ".REQUIRED_PHP_VERSION." Currently PHP ".phpversion()." is active, please contact your server administrator.";
+			$_SESSION['error'] = "An incompatable version of PHP is active. OpenCAD requires PHP 7.3 at minimum, the current recommended version is ".REQUIRED_PHP_VERSION." Currently PHP ".phpversion()." is active, please contact your server administrator.";
 			header('Location:'.BASE_URL.'/oc-content/plugins/error/index.php');
 			return session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE;
 			die();

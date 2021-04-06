@@ -10,10 +10,19 @@
 Open Source Computer Aided Dispatch System for Roleplay Communities.
 
 ## Installation Requirements
-* Operating System: Linux or Windows
-* Webserver: Apache or Nginx
-* PHP: 7.3 (Recommended), 7.2 (Minimum)
-* Database: MySQL >=5.5 or MariaDB >=10.0  (Recommended Version: 10.3)
+* Operating System: 
+    * Linux
+    * Windows
+* Webserver:
+    * Apache
+    * Nginx
+* PHP: >=7.3
+    >Recommended: 8.0
+* Database:
+    * MySQL >=8.0
+    >Recommended: 8.0
+    * MariaDB >=10.2
+    >Recommended: 10.5
 
 ### Deployment Notes
 
@@ -23,14 +32,13 @@ Open Source Computer Aided Dispatch System for Roleplay Communities.
 
 #### Important Notes
 * This has been tested to work on Linux, Windows and cPanel.
-* The OpenCAD Development team **DOES NOT** recommend the utilization of "free" webhosting solutions due to a multitude of reasons. We suggest [Spearware Networks](https://spearwarenetworks.com/web-hosting) for web hosting.
+* The OpenCAD Development team **DOES NOT** recommend the utilization of "free" webhosting solutions due to a multitude of reasons.
+We suggest [Spearware Networks](https://spearwarenetworks.com/web-hosting) for web hosting.
 
 ## Support
 
-Need Help? [View our Documentation](https://guides.opencad.io) which has all the documentation you need.
+######Need Help?
+[View our Documentation](https://guides.opencad.io) which has all the documentation you need.
 
-Still Having Trouble? on the community Discord post your issue in [#general-help](http://discord.io/opencadproject).
-
-## License
-
-Do you suspect someone of violating the license of OpenCAD or plagiarizing code? Please [send these reports to our security desk](https://security.opencad.io/).
+######Still Having Trouble?
+Join us on the community Discord and post your issue in [#general-help](http://discord.io/opencadproject).
