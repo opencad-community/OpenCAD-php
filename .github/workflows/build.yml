@@ -1,6 +1,0 @@
-on:
-  push:
-    branches:
-      - release/stable
-      - release/beta
-      - release/canary
