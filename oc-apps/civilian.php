@@ -133,7 +133,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						<div class="card-header">
 							<em class="fa fa-align-justify"></em> <?php echo lang_key("MY_WEAPONS"); ?>
 						</div>
-              			<div class="card-body">
+                    	<div class="card-body">
 							<?php echo $weaponMessage;?>
 							<?php ncicGetWeapons();?>
 		                </div>
@@ -165,5 +165,4 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	</body>
 
     <script type="text/javascript" src="<?php echo BASE_URL ."/". OCTHEMES ."/". THEME . "/js/civilian.inc.js";?>"></script>
-
 </html>

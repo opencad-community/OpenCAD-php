@@ -1,10 +1,13 @@
-"use strict";
+/* global coreui */
 
 /**
  * --------------------------------------------------------------------------
- * CoreUI Free Boostrap Admin Template (v2.1.14): tooltips.js
+ * CoreUI Free Boostrap Admin Template (v4.0.0-alpha.2): tooltips.js
  * Licensed under MIT (https://coreui.io/license)
  * --------------------------------------------------------------------------
  */
-$('[data-toggle="tooltip"]').tooltip();
-//# sourceMappingURL=tooltips.js.map
+
+document.querySelectorAll('[data-coreui-toggle="tooltip"]').forEach(element => {
+  // eslint-disable-next-line no-new
+  new coreui.Tooltip(element)
+})

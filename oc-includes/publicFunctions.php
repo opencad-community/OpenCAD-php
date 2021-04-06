@@ -130,7 +130,7 @@ function getLicenseStatuses()
         foreach ($dl_statuses as $key=>$value) 
         {
             echo "<option name = '$value' value = '$value'>$value</option>\n";
-        };
+        }
     }
 }
 
@@ -176,7 +176,7 @@ function getLicenseTypes()
         foreach ($dl_types as $key=>$value)
         {
             echo "<option name = '$value' value = '$value'>$value</option>\n";
-        };
+        }
     }
 }
 
@@ -215,7 +215,7 @@ function getLicenseClasses()
         foreach ($dl_classes as $key=>$value)
         {
             echo "<option name = '$value' value = '$value'>$value</option>\n";
-        };
+        }
     }
 }
 
@@ -259,7 +259,7 @@ function getLicenseIssuers()
         foreach ($dl_issuers as $key=>$value)
         {
             echo "<option name = '$value' value = '$value'>$value</option>\n";
-        };
+        }
     }
 }
 
@@ -305,7 +305,7 @@ function getPlateRegisrars()
         foreach ($dl_issuers as $key=>$value)
         {
             echo "<option name = '$value' value = '$value'>$value</option>\n";
-        };
+        }
     }
 }
 
@@ -350,7 +350,7 @@ function getGenders()
         foreach ($genders as $key=>$value)
         {
             echo "<option name = '$value' value = '$value'>$value</option>\n";
-        };
+        }
     }
 }
 
@@ -425,7 +425,7 @@ function getRaces()
         foreach ($genders as $key=>$value)
         {
             echo "<option name = '$value' value = '$value'>$value</option>\n";
-        };
+        }
     }
 }
 

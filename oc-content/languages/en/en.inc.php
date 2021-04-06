@@ -276,16 +276,16 @@ $arrLang['ROADSIDE_PANIC'] = "Roadside Panic";
 $arrLang['ROADSIDE_PANIC_notes'] = "If 'true' then RAO will be able to use the Panic button, else if 'false' then RAO will not be able to use the Panic button.";
 
 $arrLang['ROADSIDE_BOLO'] = "Roadside BOLO";
-$arrLang['ROADSIDE_BOLO_notes'] = "If 'true' then RAO will be able to use the Panic button, else if 'false' then RAO will not be able to use the Panic button.";
+$arrLang['ROADSIDE_BOLO_notes'] = "If 'true' then RAO will be able to use the BOLO button, else if 'false' then RAO will not be able to use the BOLO functionality.";
 
 $arrLang['ROADSIDE_NCIC_NAME'] = "Roadside NCIC Name";
-$arrLang['ROADSIDE_NCIC_NAME_notes'] = "If 'true' then RAO will be able to use NCIC plate query without the need for a dispatcher, else if 'false' then RAO will require the presence of dispatcher to use NCIC plate query funcationality.";
+$arrLang['ROADSIDE_NCIC_NAME_notes'] = "If 'true' then RAO will be able to use NCIC name query without the need for a dispatcher, else if 'false' then RAO will require the presence of dispatcher to use NCIC name query funcationality.";
 
 $arrLang['ROADSIDE_NCIC_PLATE'] = "Roadside NCIC Plate";
 $arrLang['ROADSIDE_NCIC_PLATE_notes'] = "If 'true' then RAO will be able to use NCIC plate query without the need for a dispatcher, else if 'false' then RAO will require the presence of dispatcher to use NCIC plate query funcationality.";
 
 $arrLang['ROADSIDE_CALL_SELFASSIGN'] = "Roadside Call Self Assign";
-$arrLang['ROADSIDE_CALL_SELFASSIGN_notes'] = "If 'true' then RAO will be able to use NCIC plate query without the need for a dispatcher, else if 'false' then RAO will require the presence of dispatcher to use NCIC plate query funcationality.";
+$arrLang['ROADSIDE_CALL_SELFASSIGN_notes'] = "If 'true' then RAO will be able to self assign to call without the need for a dispatcher, else if 'false' then RAO will require the presence of dispatcher to be assigned to a call.";
 //** End Roadside Assistance Strings **//
 
 //** Begin Civilian Strings **//

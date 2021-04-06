@@ -93,7 +93,7 @@
    </div>
    <!-- ./ modal-header -->
    <div class="modal-body">
-   <form role="form" action="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/oc-includes/responderActions.php" method="post">
+   <form role="form" action="<?php BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/oc-includes/responderActions.php" method="post">
          <div class="form-group row">
          <label class="col-lg-2 control-label">Civilian Name</label>
          <div class="col-lg-10">
@@ -266,7 +266,7 @@
    </div>
    <!-- ./ modal-header -->
    <div class="modal-body">
-   <form role="form" action="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/oc-includes/responderActions.php" method="post">
+   <form role="form" action="<?php BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/oc-includes/responderActions.php" method="post">
          <div class="form-group row">
          <label class="col-lg-2 control-label">Civilian Name</label>
          <div class="col-lg-10">
@@ -344,7 +344,7 @@
    </div>
    <!-- ./ modal-header -->
    <div class="modal-body">
-   <form role="form" action="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/oc-includes/responderActions.php" method="post">
+   <form role="form" action="<?php BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/oc-includes/responderActions.php" method="post">
          <div class="form-group row">
          <label class="col-lg-2 control-label">Civilian Name</label>
          <div class="col-lg-10">
@@ -507,7 +507,7 @@
    </div>
    <!-- ./ modal-header -->
    <div class="modal-body">
-   <form role="form" action="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/oc-includes/responderActions.php" method="post">
+   <form role="form" action="<?php BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/oc-includes/responderActions.php" method="post">
          <div class="form-group row">
          <label class="col-lg-2 control-label">Civilian Name</label>
          <div class="col-lg-10">

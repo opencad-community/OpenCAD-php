@@ -17,7 +17,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     require_once('../oc-config.php');
     require_once( ABSPATH . '/oc-functions.php');
     require_once( ABSPATH . "/oc-content/plugins/api_auth.php");
-
+    if(session_id() == '' || !isset($_SESSION)) {
+    // session isn't started
+    session_start();
+    }
 /**
  * Patch notes:
  * Adding the `else` to make a `else if` prevents the execution

@@ -48,10 +48,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
           // Do Nothing
       }
     }
-    else
-    {
-        
-    }
 
     $accessMessage = "";
     if(isset($_SESSION['accessMessage']))
@@ -289,9 +285,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       <!-- modals -->
       <?php echo file_get_contents(ABSPATH . "/" . OCTHEMES . "/".THEME."/modals/mdt.modals.inc.php")?>
       <!-- AUDIO TONES -->
-      <audio id="recurringToneAudio" src="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/sounds/priority.mp3" preload="auto"></audio>
-      <audio id="priorityToneAudio" src="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
-      <audio id="panicToneAudio" src="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/sounds/Panic_Button.m4a" preload="auto"></audio>
+      <audio id="recurringToneAudio" src="<?php BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/sounds/priority.mp3" preload="auto"></audio>
+      <audio id="priorityToneAudio" src="<?php BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
+      <audio id="panicToneAudio" src="<?php BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/sounds/Panic_Button.m4a" preload="auto"></audio>
 <script>
 var vid = document.getElementById("recurringToneAudio");
 vid.volume = 0.3;
@@ -699,10 +695,6 @@ $.ajax({
          {
             console.log("LOGGED OUT");
             window.location.href = '<?php echo BASE_URL .'/'. OCINC; ?>/logout.php';
-         }
-         else
-         {
-
          }
 
 

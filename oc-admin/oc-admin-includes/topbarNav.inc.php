@@ -1,5 +1,5 @@
 	 			<a rel="noopener" class="navbar-brand" href="#">
-				<img class="navbar-brand-full" src="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/images/tail.png" width="30" height="25" alt="OpenCAD Logo">
+				<img class="navbar-brand-full" src="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME ?>/images/logo_brand.png" width="30" height="25" alt="OpenCAD Logo">
 	  		</a>
 	<ul class="nav navbar-nav">
 		<li class="nav-item px-3" <?php if ( $pageName == "Dashboard") echo $currentPage; ?>><a rel="noopener" href="<?php echo BASE_URL; ?>/oc-admin/admin.php" style="color:black"><em class="fas fa-home"  style="color:black"></em>  Dashboard</a></li>

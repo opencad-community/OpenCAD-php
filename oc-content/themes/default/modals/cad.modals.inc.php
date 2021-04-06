@@ -1155,7 +1155,7 @@
 				  </div>
 				  <!-- ./ x_title -->
 				  <div class="x_content">
-					 <?php ncicGetWarnings();;?>
+					 <?php ncicGetWarnings();?>
 				  </div>
 				  <!-- ./ x_content -->
 				</div>

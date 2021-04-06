@@ -1,8 +1,13 @@
 <?php
+
+    if(session_id() == '' || !isset($_SESSION)) {
+    // session isn't started
+    session_start();
+    }
 		echo '		<ul class="nav navbar-nav">';
 			?>
 				<a rel="noopener" class="navbar-brand" href="#">
-					<img class="navbar-brand-full" src="<?php echo BASE_URL; . "/" . OCTHEMES . "/" . THEME; ?>/images/tail.png" width="30" height="25" alt="OpenCAD Logo">
+					<img class="navbar-brand-full" src="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/images/logo_brand.png" width="30" height="25" alt="OpenCAD Logo">
 				</a>
 			<?php
 				if (CIV_WARRANT === true) { ?> 

@@ -57,8 +57,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<?php include ( ABSPATH . "/".OCTHEMES."/".THEME."/includes/header.inc.php"); ?>
+	
+		<?php include ( ABSPATH . "/".OCTHEMES . "/" . THEME . "/includes/header.inc.php"); ?>
 
 
 	<body class="app flex-row align-items-center">

@@ -377,7 +377,7 @@ function create_name()
     $dateOfBirth = htmlspecialchars($_POST['civDobReq']);
     $address = htmlspecialchars($_POST['civAddressReq']);
     $gender = htmlspecialchars($_POST['civSexReq']);
-    $race = htmlspecialchars($_POST['civRaceReq']);;
+    $race = htmlspecialchars($_POST['civRaceReq']);
     $hairColor = htmlspecialchars($_POST['civHairReq']);
     $build = htmlspecialchars($_POST['civBuildReq']);
 	

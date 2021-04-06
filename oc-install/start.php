@@ -58,7 +58,7 @@
     <meta name="generator" content="OpenCAD Project">
 	<title><?php echo lang_key('installation_guide'); ?> | <?php echo lang_key('start'); ?></title>
 
-	<link href="./images/favicon.ico" rel="shortcut icon" />
+	<link rel="icon" href="<?php echo BASE_URL . "/" . OCTHEMES . "/" THEME . "/images/favicon.ico"?> sizes="any" />
 	<link rel="stylesheet" type="text/css" href="templates/<?php echo EI_TEMPLATE; ?>/css/styles.css" />
 	<?php
 		if($curr_lang_direction == 'rtl'){
