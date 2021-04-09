@@ -12,7 +12,6 @@ the Free Software Foundation, either version 3 of the License, or
 
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
-
 	if(session_id() == '' || !isset($_SESSION)) {
 	session_start();
 	}
@@ -27,14 +26,13 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		die("Not logged in");
 	}
 
-
 	if ( $_SESSION['adminPrivilege'] == 3)
 	{
-	if ($_SESSION['adminPrivilege'] == 'Administrator')
+		if ($_SESSION['adminPrivilege'] == 'Administrator');
 	}
 	else if ($_SESSION['adminPrivilege'] == 2)
 	{
-	if ($_SESSION['adminPrivilege'] == 'Moderator')
+		if ($_SESSION['adminPrivilege'] == 'Moderator');
 	}
 	else
 	{
@@ -53,7 +51,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		$adminMessage = $_SESSION['adminMessage'];
 		unset($_SESSION['adminMessage']);
 	}
-
 	$successMessage = "";
 	if(isset($_SESSION['successMessage']))
 	{    
@@ -210,7 +207,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Dismiss: Edit User">
 						<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
@@ -248,7 +245,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<label class="col-md-3 control-label">User Groups</label>
 								<div class="col-md-9">
 									<select name="userGroups[]" class="selectpicker form-control" id="userGroups" multiple>
-										<?php getDataSetTable($data = "departments", $column1 = "departmentId", $column2 = "department_long_name", $leadTrim = 17, $followTrim = 11, $isRegistration = true, $isVehicle = false); ?>
+										<?php getDataSetTable($data = "departments", $column1 = "departmentId", $column2 = "departmentLongName", $leadTrim = 17, $followTrim = 11, $modeIs = "userGroupEditor" ); ?>
 									</select>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -276,7 +273,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			<div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title" id="editUserRoleModal">Change User Role</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Dismiss: Change User Role">
 						<span aria-hidden="true">&times;</span>
 						</button>
 				</div>
@@ -318,7 +315,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		<div class="modal-content">
 			<div class="modal-header">
 						<h4 class="modal-title" id="changeUserPasswordLabel">Change Password</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Dismiss: Change Password">
 						<span aria-hidden="true">&times;</span>
 						</button>
 			</div>
@@ -386,14 +383,15 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				},                
 				success: function(result) {
 					data = JSON.parse(result);
+					console.log(data);
 					$('input[name="name"]').val(data['name']);
 					$('input[name="email"]').val(data['email']);
 					$('input[name="identifier"]').val(data['identifier']);
 					$('input[name="userId"]').val(data['userId']);
 
 					$("#userRole").selectpicker();
-					for (var i = 0; i < data['role'].length; i++) {
-						$('select[name="userRole"] option[value="' + data['role'][i] +
+					for (var i = 0; i < data['userRole'].length; i++) {
+						$('select[name="userRole"] option[value="' + data['userRole'][i] +
 							' selected"]').val(1);
 					}
 					console.log("object: %O", result)
