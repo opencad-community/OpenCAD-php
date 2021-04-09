@@ -237,7 +237,7 @@
 								$config_file = str_replace('<MODERATOR_DATAMAN_IMPEXPRESET>', $MODERATOR_DATAMAN_IMPEXPRESET, $config_file);
 
 								$config_file = str_replace('<LIVEMAP_URL>', $LIVEMAP_URL, $config_file);
-								$config_file = str_replace('WEBHOOK_URL', $WEBHOOK_URL, $config_file);
+								$config_file = str_replace('<WEBHOOK_URL>', $WEBHOOK_URL, $config_file);
 								$config_file = str_replace('<DEMO_MODE>', $DEMO_MODE, $config_file);
 								$config_file = str_replace('<USE_GRAVATAR>', $USE_GRAVATAR, $config_file);
 								

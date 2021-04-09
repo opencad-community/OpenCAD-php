@@ -246,6 +246,7 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>users` (
   `identifier` varchar(255) DEFAULT NULL,
   `adminPrivilege` int(1) DEFAULT 1 COMMENT 'If 1 then user does not possess any administrative permissions, else if 2 then user possess Moderator privileges, else if 3 then user possess Administrator privileges.',
   `supervisorPrivilege` int(1) DEFAULT 1 COMMENT 'If 1 then user does not possess any supervisor privileges, else 2 then user possess supervisor privileges.',
+  `civilianPrivilege` int(1) DEFAULT 1 COMMENT 'If 1 then user does not possess any civilian privileges, else 2 then user possess civilian privileges.',
   `passwordReset` int(1) DEFAULT 0 COMMENT '1 means password reset required. 0 means it''s not.',
   `approved` int(1) DEFAULT 0 COMMENT 'Three main statuses: 0 means pending approval. 1 means has access. 2 means suspended',
   `suspendReason` tinytext DEFAULT NULL COMMENT 'Stores the reason why a user is Suspended',
@@ -297,3 +298,10 @@ INSERT INTO `<DB_PREFIX>users` (`id`, `name`, `email`, `password`, `identifier`,
 
 
 
+CREATE TABLE `<DB_PREFIX>patrolinformation` (
+  `key` tinytext COLLATE latin1_general_cs NOT NULL,
+  `value` tinytext COLLATE latin1_general_cs NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+
+INSERT INTO `<DB_PREFIX>patrolinformation` (`key`, `value`) VALUES
+('aop',	'Metro Los Santos');
