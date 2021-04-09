@@ -1,8 +1,5 @@
 <?php
 
-require_once(__DIR__ ."/../../oc-config.php");
-require_once(__DIR__ ."/../../oc-functions.php");
-
 if ( EI_MODE === "debug" )
 	{
 		echo "<pre>";
@@ -169,4 +166,18 @@ function random_str($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzAB
     }
     return implode('', $pieces);
 }
-
+/**
+ * 	Returns language key
+ * 		@param $key
+ */
+function lang_key($key){
+	global $arrLang;
+        $output = '';
+        
+	if(isset($arrLang[$key])){
+		$output = $arrLang[$key];
+	}else{
+		$output = str_replace('_', ' ', $key);		
+	}
+	return $output;
+}
