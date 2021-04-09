@@ -767,7 +767,7 @@ define('WEBHOOK_URL', '<WEBHOOK_URL>');
 * @since OpenCAD version 1.0
 *
 **/
-define('LIVEMAP_URL', '');
+define('LIVEMAP_URL', '<LIVEMAP_URL>');
 
 /**#@+
   * DEMO_MODE
