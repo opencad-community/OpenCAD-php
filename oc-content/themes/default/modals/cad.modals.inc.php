@@ -198,13 +198,13 @@
 	  <div class="modal-dialog modal-lg">
 		<div class="modal-content">
 		  <div class="modal-header">
-			<h4 class="modal-title" id="myModalLabel"><?php echo lang_key("SET_AREA_OF_PATROL"); ?></h4>
+			<h4 class="modal-title" id="setAreaOfPatrolLabel"><?php echo lang_key("SET_AREA_OF_PATROL"); ?></h4>
 			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
 			</button>
 		  </div>
 		  <!-- ./ modal-header -->
 		  <div class="modal-body">
-			<form role="form" action="<?php echo BASE_URL . "/" . OCINC ?>/dispatchActions.php" method="post">
+			<form role="form" action="<?php echo BASE_URL . "/" . OCINC ?>/dispatchActions.php" method="post" aria-labelledby="setAreaOfPatrolLabel">
 				<div class="form-group row">
 				</div>
 				<div class="form-group row">
@@ -299,11 +299,11 @@
 		  <div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
 			</button>
-			<h4 class="modal-title" id="myModalLabel">Create Person BOLO</h4>
+			<h4 class="modal-title" id="createPersonBoloLabel">Create Person BOLO</h4>
 		  </div>
 		  <!-- ./ modal-header -->
 		  <div class="modal-body">
-			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post">
+			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post" aria-labelledby="createPersonBoloLabel">
 				<div class="form-group row">
 				</div>
 				<div class="form-group row">
@@ -383,11 +383,11 @@
 		  <div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
 			</button>
-			<h4 class="modal-title" id="myModalLabel">Edit Person BOLO</h4>
+			<h4 class="modal-title" id="editPersonBoloLabel">Edit Person BOLO</h4>
 		  </div>
 		  <!-- ./ modal-header -->
 	  <div class="modal-body">
-			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post">
+			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post" aria-labelledby="editPersonBoloLabel">
 				<div class="form-group row">
 				</div>
 				<div class="form-group row">
@@ -467,11 +467,11 @@
 		  <div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
 			</button>
-			<h4 class="modal-title" id="myModalLabel">Create Vehicle BOLO</h4>
+			<h4 class="modal-title" id="createVehicleBoloLabel">Create Vehicle BOLO</h4>
 		  </div>
 		  <!-- ./ modal-header -->
 		  <div class="modal-body">
-			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post">
+			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post" aria-labelledby="createVehicleBoloLabel">
 				<div class="form-group row">
 				</div>
 				<div class="form-group row">
@@ -554,11 +554,11 @@
 		  <div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
 			</button>
-			<h4 class="modal-title" id="myModalLabel">Edit Vehicle BOLO</h4>
+			<h4 class="modal-title" id="editVehicleBoloLabel">Edit Vehicle BOLO</h4>
 		  </div>
 		  <!-- ./ modal-header -->
 	  <div class="modal-body">
-			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post">
+			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post" aria-labelledby="editVehicleBoloLabel">
 				<div class="form-group row">
 				</div>
 				<div class="form-group row">
@@ -820,11 +820,11 @@
 			   <div class="modal-header">
 				  <button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
 				  </button>
-			<h4 class="modal-title" id="myModalLabel">Citation Creator</h4>
+			<h4 class="modal-title" id="createCitationBoloLabel">Create Citation</h4>
 		  </div>
 		  <!-- ./ modal-header -->
 		  <div class="modal-body">
-			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post">
+			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post" aria-labelledby="createCitationLabel">
 				<div class="form-group row">
 				<label class="col-lg-2 control-label">Civilian Name</label>
 				<div class="col-lg-10">
@@ -943,11 +943,11 @@
 			   <div class="modal-header">
 				  <button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
 				  </button>
-			<h4 class="modal-title" id="myModalLabel">Warning Creator</h4>
+			<h4 class="modal-title" id="createWarningLabel">Create Warning</h4>
 		  </div>
 		  <!-- ./ modal-header -->
 		  <div class="modal-body">
-			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post">
+			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post" aria-labelledby="createWarningLabel">
 				<div class="form-group row">
 				<label class="col-lg-2 control-label">Civilian Name</label>
 				<div class="col-lg-10">
@@ -1015,11 +1015,11 @@
 			<div class="modal-header">
 			   <button type="button" class="close" data-dismiss="modal" id="closecallDetails"><span aria-hidden="true">×</span>
 			   </button>
-			   <h4 class="modal-title" id="myModalLabel">Arrest Report</h4>
+			   <h4 class="modal-title" id="createArrestReportLabel">Create Arrest Report</h4>
 			</div>
 			<!-- ./ modal-header -->
 		  <div class="modal-body">
-			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post">
+			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post" aria-labelledby="createArrestReportLabel">
 				<div class="form-group row">
 				<label class="col-lg-2 control-label">Civilian Name</label>
 				<div class="col-lg-10">
@@ -1183,11 +1183,11 @@
 			   <div class="modal-header">
 				  <button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
 				  </button>
-			<h4 class="modal-title" id="myModalLabel">Warrant Creator</h4>
+			<h4 class="modal-title" id="createWarrantLabel">Create Warrant</h4>
 		  </div>
 		  <!-- ./ modal-header -->
 		  <div class="modal-body">
-			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post">
+			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post" aria-labelledby="createWarrantLabel">
 				<div class="form-group row">
 				<label class="col-lg-2 control-label">Civilian Name</label>
 				<div class="col-lg-10">
