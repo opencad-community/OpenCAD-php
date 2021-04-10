@@ -3,12 +3,12 @@
 	  <div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-			<h4 class="modal-title" id="myModalLabel"><?php echo lang_key("FIRST_RESPONDER_ACCESS_REQUEST"); ?></h4>
+			<h4 class="modal-title" id="firstResponderRegLabel"><?php echo lang_key("FIRST_RESPONDER_ACCESS_REQUEST"); ?></h4>
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
 			</div>
 		<!-- ./ modal-header -->
 		<div class="modal-body">
-			<form role="form" action="<?php echo BASE_URL . "/" . OCINC ?>/register.php" method="post">
+			<form role="form" action="<?php echo BASE_URL . "/" . OCINC ?>/register.php" method="post" aria-labelledby="firstResponderRegLabel">
 					<div class="form-group row">
 						<label class="col-lg-2 control-label"><?php echo lang_key("NAME"); ?></label>
 						<div class="col-lg-10">
@@ -70,12 +70,12 @@
 	  <div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-			<h4 class="modal-title" id="myModalLabel"><?php echo lang_key("CIVILIAN_ACCESS_REQUEST"); ?></h4>
+			<h4 class="modal-title" id="civiliaAccessReqLabel"><?php echo lang_key("CIVILIAN_ACCESS_REQUEST"); ?></h4>
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
 			</div>
 		<!-- ./ modal-header -->
 		<div class="modal-body">
-			<form role="form" action="<?php echo BASE_URL . "/" . OCINC ?>/register.php" method="post">
+			<form role="form" action="<?php echo BASE_URL . "/" . OCINC ?>/register.php" method="post" aria-labelledby="civiliaAccessReqLabel">
 					<div class="form-group row">
 						<label class="col-lg-2 control-label"><?php echo lang_key("NAME"); ?></label>
 						<div class="col-lg-10">
