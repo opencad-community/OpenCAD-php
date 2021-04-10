@@ -3,12 +3,12 @@
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title" id="myModalLabel">Create Identity</h4>
+						<h4 class="modal-title" id="createNewCallLabel">Create Call</h4>
 						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-					<form id="new_911" method="post" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php">
+					<form id="new_911" method="post" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" aria-labelledby="createNewCallLabel">
 						<div class="form-group row">
 							<label class="col-md-2 control-label">Caller Name</label>
 							<div class="col-md-10">
@@ -52,12 +52,12 @@
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title" id="myModalLabel">Create Identity</h4>
+						<h4 class="createIdentityLabel" id="create">Create Identity</h4>
 						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" method="post">
+						<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" method="post" aria-labelledby="createIdentityLabel">
 						<div class="form-group row">
 							<label class="col-lg-2 control-label">Name</label>
 							<div class="col-lg-10">
@@ -148,13 +148,12 @@
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title" id="myModalLabel">Edit Identity</h4>
-				  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+						<h4 class="editIdentityLabel" id="myModalLabel">Edit Identity</h4>
+				  <button type="button" class="close data-dismiss="modal"><span aria-hidden="true">×</span></button>
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php"
-							class="editname_modalform" method="post">
+						<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" class="editname_modalform" method="post" aria-labelledby="editIdentityLabel">
 							<div class="form-group row">
 							</div>
 							<div class="form-group row">
@@ -251,17 +250,18 @@
 		</div>
 		</div>
 
-		<!-- Vehicle Modals -->
+		<!-- Civilian Vehicle Modals -->
+		<!-- Civilian - Create Plate Modal -->
 		<div class="modal" id="createPlateModal" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title" id="myModalLabel">Add Plate to Database</h4>
+						<h4 class="modal-title" id="createPlateModal">Add Plate to Database</h4>
 						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" method="post">
+						<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" method="post" aria-labelledby="createPlateModal">
 							<div class="form-group row">
 							</div>
 							<div class="form-group row">
@@ -355,18 +355,19 @@
 		<!-- ./ modal bs-example-modal-lg -->
 		</div>
 		</div>
+		<!-- ./Civilian - Create Plate Modal -->
 
 		<!-- Civilian - Edit Plate Modal -->
 		<div class="modal" id="editPlateModal" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title" id="myModalLabel">Edit Plate in Database</h4>
+						<h4 class="modal-title" id="editPlateLabel">Edit Plate in Database</h4>
 				  		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" method="post">
+						<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" method="post" aria-labelledby="editPlateLabel">
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Registered Owner</label>
 								<div class="col-lg-10">
@@ -451,6 +452,8 @@
 			</div>
 			<!-- ./ modal bs-example-modal-lg -->
 			</div>
+			<!-- ./Civilian - Edit Plate -->
+			<!-- ./ Civilian - Vehicle Modals -->
 
 
 	  <!-- Weapon modals -->
@@ -458,12 +461,12 @@
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-				  <h4 class="modal-title" id="myModalLabel">Add Weapon to Database</h4>
+				  <h4 class="modal-title" id="createWeaponLabel">Create Weapon</h4>
 						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" method="post">
+						<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" method="post" aria-labellednby="createWeaponLabel">
 							<div class="form-group row">
 							</div>
 							<div class="form-group row">
@@ -509,3 +512,5 @@
 		</div>
 		<!-- ./ modal fade bs-example-modal-lg -->
 		</div>
+		<!-- ./Civlian - Create Weapon Modal -->
+		<!-- ./Civilian Modal -->
