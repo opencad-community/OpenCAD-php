@@ -271,7 +271,7 @@
 	</div>
 	<!-- ./ modal-header -->
 	<div class="modal-body">
-	<form role="form" action="<?php BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/oc-includes/responderActions.php" method="post" aria-labelled="createCitationLabel">
+	<form role="form" action="<?php BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/oc-includes/responderActions.php" method="post" aria-labelledby="createCitationLabel">
 			<div class="form-group row">
 			<label class="col-lg-2 control-label">Civilian Name</label>
 			<div class="col-lg-10">
