@@ -209,7 +209,7 @@
 				</div>
 				<div class="form-group row">
 				<div class="col-lg-10">
-					<input name="aop" class="form-control" id="aop" placeholder="Set AOP" required />
+					<input name="aop" class="form-control" id="aop" placeholder="Set AOP" required aria-label="Set Area of Patrol" />
 					<span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
 				</div>
 				<!-- ./ col-sm-9 -->
@@ -255,13 +255,13 @@
 					 <div class="form-group row">
 						<label class="col-lg-2 control-label">Address</label>
 						<div class="col-lg-10">
-						   <select class="form-control selectpicker" data-live-search="true" name="street1" id="street1" title="Street 1" required>
+						   <select class="form-control selectpicker" data-live-search="true" name="street1" id="street1" title="Street 1" aria-label="Select Primary Street or Postal" required>
 								<?php getStreet();?>
 							</select>
-							<select class="form-control selectpicker" data-live-search="true" name="street2" id="street2" title="Street 2/Cross/Postal" >
+							<select class="form-control selectpicker" data-live-search="true" name="street2" id="street2" title="Street 2/Cross/Postal" aria-label="Select Cross Street or Postal" >
 								<?php getStreet();?>
 							</select>
-								<input type="text" class="form-control" name="additionalLocation" placeholder="Any Additional Location Information" />
+								<input type="text" class="form-control" name="additionalLocation" placeholder="Any Additional Location Information" aria-label="Provide any additional information" />
 						</div>
 						<!-- ./ col-sm-9 -->
 					 </div>
@@ -272,7 +272,7 @@
 					 <div class="form-group row">
 						<label class="col-lg-2 control-label">Narrative</label>
 						<div class="col-lg-10">
-						   <textarea name="narrative" id="narrative" class="form-control" style="text-transform:uppercase" rows="5"></textarea>
+						   <textarea name="narrative" id="narrative" class="form-control" style="text-transform:uppercase" rows="5" aria-label="Narrative" ></textarea>
 						</div>
 						<!-- ./ col-sm-9 -->
 					 </div>
@@ -281,8 +281,8 @@
 			   <!-- ./ modal-body -->
 			   <div class="modal-footer">
 			   <input type="submit" name="create_call" class="btn btn-primary" value="Send"/>
-			   <button type="reset" class="btn btn-default" value="Reset">Reset</button>
-			   <button id="newCallReset" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			   <button type="reset" class="btn btn-default" value="Reset" aria-label="Reset new call form">Reset</button>
+			   <button id="newCallReset" type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close new call form.">Close</button>
 			   </div>
 			   <!-- ./ modal-footer -->
 			   </form>
@@ -338,7 +338,7 @@
 				<div class="form-group row">
 				<label class="col-lg-2 control-label">Physical Description</label>
 				<div class="col-lg-10">
-					<input name="physicalDescription" class="form-control" id="physicalDescription" placeholder="Physical description of the BOLOed subject."/>
+					<input name="physicalDescription" class="form-control" id="physicalDescription" placeholder="Physical description of the BOLOed subject." aria-label="Physical description of the BOLOed subject."/>
 					<span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
 				</div>
 				<!-- ./ col-sm-9 -->
@@ -347,7 +347,7 @@
 				<div class="form-group row">
 				<label class="col-lg-2 control-label">Reason Wanted</label>
 				<div class="col-lg-10">
-					<textarea name="reasonWanted" class="form-control" style="text-transform:uppercase" rows="5" id="reasonWanted" placeholder="Wanted reason of the BOLOed subject." required> </textarea>
+					<textarea name="reasonWanted" class="form-control" style="text-transform:uppercase" rows="5" id="reasonWanted" placeholder="Wanted reason of the BOLOed subject." aria-label="Wanted reason of the BOLOed subject." required> </textarea>
 					<span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
 				</div>
 				<!-- ./ col-sm-9 -->
@@ -356,7 +356,7 @@
 				<div class="form-group row">
 				<label class="col-lg-2 control-label">Last Seen</label>
 				<div class="col-lg-10">
-					<input name="lastSeen" class="form-control" id="lastSeen" placeholder="Last observed location of the BOLOed subject."/>
+					<input name="lastSeen" class="form-control" id="lastSeen" placeholder="Last observed location of the BOLOed subject." aria-label="=Last observed location of the BOLOed subject."/>
 					<span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
 				</div>
 				<!-- ./ col-sm-9 -->
@@ -364,8 +364,8 @@
 			  <!-- ./ form-group -->
 		  <div class="modal-footer">
 				<input name="create_personbolo" type="submit" class="btn btn-primary" value="Send" />
-			   <button type="reset" class="btn btn-default" value="Reset">Reset</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			   <button type="reset" class="btn btn-default" value="Reset" aria-label="Reset new bolo form.">Reset</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close new bolo form.">Close</button>
 			</form>
 		  </div>
 		  <!-- ./ modal-footer -->
@@ -1191,7 +1191,7 @@
 				<div class="form-group row">
 				<label class="col-lg-2 control-label">Civilian Name</label>
 				<div class="col-lg-10">
-				  <select class="form-control selectpicker" name="civilian_names" id="civilian_names" data-live-search="true" required>
+				  <select class="form-control selectpicker" name="civilian_names" id="civilian_names" data-live-search="true" aria-label="Select subject of warrant." required>
 					<option> </option>
 					<?php getCivilianNames();?>
 				  </select>
@@ -1202,7 +1202,7 @@
 			  <div class="form-group row">
 				<label class="col-lg-2 control-label">Warrant Name</label>
 				<div class="col-lg-10">
-				  <select class="form-control selectpicker" name="warrant_name_sel" id="warrant_name_sel" data-live-search="true" title="Select a Warrant">
+				  <select class="form-control selectpicker" name="warrant_name_sel" id="warrant_name_sel" data-live-search="true" title="Select a Warrant" aria-label="Select reason for warrant.">
 					<optgroup label="Violent Warrants (60 day expiry)">
 					  <option value="1st Degree Murder">1st Degree Murder</option>
 					  <option value="2nd Degree Murder">2nd Degree Murder</option>
@@ -1262,7 +1262,7 @@
 			  <div class="form-group row">
 				<label class="col-lg-2 control-label">Issuing Agency</label>
 				<div class="col-lg-10">
-				  <select class="form-control selectpicker" name="issuer" id="issuer" data-live-search="true" required>
+				  <select class="form-control selectpicker" name="issuer" id="issuer" data-live-search="true" aria-label="Select department which is issuing the warrant." required>
 					<?php getAgencies();?>
 				  </select>
 				</div>
@@ -1273,8 +1273,8 @@
 		  </div>
 		  <!-- ./ modal-body -->
 		  <div class="modal-footer">
-				<input name="create_warrant" type="submit" class="btn btn-primary" value="Create" />
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<input name="create_warrant" type="submit" class="btn btn-primary" value="Create" aria-label="Create warrant" />
+				<button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close new warrant eentry modal.">Close</button>
 			</form>
 		  </div>
 		  <!-- ./ modal-footer -->
