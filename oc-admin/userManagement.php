@@ -320,18 +320,18 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			</div>
 		<!-- ./ modal-header -->
 		<div class="modal-body">
-		<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/adminActions.php" method="post">
+		<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/adminActions.php" method="post" aria-labelledby="changeUserPasswordLabel">
 			<div class="form-group row">
 			<label class="col-lg-2 control-label" id="NewPassword">Password</label>
 			<div class="col-lg-10">
-				<input class="form-control" type="password" name="password" id="password" size="30" maxlength="255" placeholder="Enter your new password..." value="" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?> aria-labeledby="NewPassword" />
+				<input class="form-control" type="password" name="password" id="password" size="30" maxlength="255" placeholder="Enter your new password..." value="" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?> aria-labelledby="NewPassword" />
 			</div>
 			<!-- ./ col-sm-9 -->
 			</div>
 			<div class="form-group row">
 			<label class="col-lg-2 control-label" id="NewPasswordConfirmation">Confirm Password</label>
 			<div class="col-lg-10">
-				<input class="form-control" type="password" name="confirm_password" size="30" id="confirm_password" maxlength="255" placeholder="Retype your new password..." value="" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?> aria-labeledby="NewPasswordConfirmation" />
+				<input class="form-control" type="password" name="confirm_password" size="30" id="confirm_password" maxlength="255" placeholder="Retype your new password..." value="" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?> aria-labelledby="NewPasswordConfirmation" />
 			</div>
 			<!-- ./ col-sm-9 -->
 			</div>
