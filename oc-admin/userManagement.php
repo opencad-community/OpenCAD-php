@@ -213,7 +213,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/adminActions.php" class="form-horizontal">
+						<form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/adminActions.php" class="form-horizontal" aria-label="Administrative user profile editor">
 							<div class="form-group row">
 								<label class="col-md-3 control-label">Name</label>
 								<div class="col-md-9">
@@ -279,8 +279,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
-						<form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/adminActions.php"
-							class="form-horizontal">
+						<form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/adminActions.php" class="form-horizontal" aria-label="Administrative user role editor">
 							<!-- ./ form-group -->
 							<div class="form-group row">
 								<label class="col-md-3 control-label">User Role</label>
@@ -323,16 +322,16 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		<div class="modal-body">
 		<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/adminActions.php" method="post">
 			<div class="form-group row">
-			<label class="col-lg-2 control-label">Password</label>
+			<label class="col-lg-2 control-label" id="NewPassword">Password</label>
 			<div class="col-lg-10">
-				<input class="form-control" type="password" name="password" id="password" size="30" maxlength="255" placeholder="Enter your new password..." value="" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?> />
+				<input class="form-control" type="password" name="password" id="password" size="30" maxlength="255" placeholder="Enter your new password..." value="" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?> aria-labeledby="NewPassword" />
 			</div>
 			<!-- ./ col-sm-9 -->
 			</div>
 			<div class="form-group row">
-			<label class="col-lg-2 control-label">Confirm Password</label>
+			<label class="col-lg-2 control-label" id="NewPasswordConfirmation">Confirm Password</label>
 			<div class="col-lg-10">
-				<input class="form-control" type="password" name="confirm_password" size="30" id="confirm_password" maxlength="255" placeholder="Retype your new password..." value="" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?> />
+				<input class="form-control" type="password" name="confirm_password" size="30" id="confirm_password" maxlength="255" placeholder="Retype your new password..." value="" required <?php if ( DEMO_MODE == true ) {?> readonly <?php } ?> aria-labeledby="NewPasswordConfirmation" />
 			</div>
 			<!-- ./ col-sm-9 -->
 			</div>
