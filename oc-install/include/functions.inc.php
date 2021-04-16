@@ -166,6 +166,7 @@ function random_str($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzAB
     }
     return implode('', $pieces);
 }
+
 /**
  * 	Returns language key
  * 		@param $key
