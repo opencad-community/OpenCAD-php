@@ -17,7 +17,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	// session isn't started
 	session_start();
 	}
-	require_once('../../oc-config.php');
+	require_once('/../../oc-config.php');
 	require_once( ABSPATH . '/oc-functions.php');
 	require_once( ABSPATH . '/oc-settings.php');
 	require_once( ABSPATH . "/oc-includes/adminActions.php");
@@ -151,8 +151,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	<!-- ./ modal fade bs-example-modal-lg -->
 
 	<?php
-	include ( ABSPATH . "/oc-admin/oc-admin-includes/globalModals.inc.php");
-	include ( ABSPATH . "/oc-includes/jquery-colsolidated.inc.php"); ?>
+	require_once( ABSPATH . OCTHEMEMOD . "/admin/globalModals.inc.php");
+	require_once( ABSPATH . OCTHEMEINC ."/scripts.inc.php" ); ?>
 
 		<script>
 	$(document).ready(function() {

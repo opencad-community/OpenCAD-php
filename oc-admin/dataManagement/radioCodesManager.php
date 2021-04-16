@@ -16,7 +16,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	// session isn't started
 	session_start();
 	}
-	require_once('../../oc-config.php');
+	require_once(__DIR__ . '/../../oc-config.php');
 	require_once( ABSPATH . '/oc-functions.php');
 	require_once( ABSPATH . '/oc-settings.php');
 	require_once( ABSPATH . "/oc-includes/adminActions.php");
@@ -59,8 +59,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     	<button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<?php include( ABSPATH . "oc-admin/oc-admin-includes/topbarNav.inc.php"); ?>
-		<?php include( ABSPATH . "/" . OCTHEMES ."/". THEME ."/includes/topProfile.inc.php"); ?>
+		<?php require_once( ABSPATH . OCTHEMEINC ."/admin/topbarNav.inc.php" ); ?>
+		<?php require_once( ABSPATH . "/" . OCTHEMES ."/". THEME ."/includes/topProfile.inc.php"); ?>
 	</header>
 
     <div class="app-body">
@@ -142,9 +142,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     </div>
     <!-- ./ modal fade bs-example-modal-lg -->
 
-    <?php 
-	include(__DIR__ . "/../oc-admin-includes/globalModals.inc.php"); 
-	include(__DIR__ . "../../../oc-includes/jquery-colsolidated.inc.php");?>
+	<?php
+	require_once( ABSPATH . OCTHEMEMOD . "/admin/globalModals.inc.php");
+	require_once( ABSPATH . OCTHEMEINC ."/scripts.inc.php" ); ?>
 
     <script>
     $(document).ready(function() {

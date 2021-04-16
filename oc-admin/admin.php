@@ -84,7 +84,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     <header class="app-header navbar">
 
-      <?php include( ABSPATH . "oc-admin/oc-admin-includes/topbarNav.inc.php"); ?>
+      <?php require_once ( ABSPATH . OCTHEMEINC ."/admin/topbarNav.inc.php" ); ?>
       <?php include( ABSPATH . "/" . OCTHEMES ."/". THEME ."/includes/topProfile.inc.php"); ?>
     </header>
 
@@ -121,8 +121,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         </footer>
 
     <?php
-    include ( ABSPATH . "oc-admin/oc-admin-includes/globalModals.inc.php");
-    include ( ABSPATH . "/oc-includes/jquery-colsolidated.inc.php"); ?>
+    require_once ( ABSPATH . OCTHEMEMOD . "/admin/globalModals.inc.php");
+    require_once ( ABSPATH . OCTHEMEINC ."/scripts.inc.php" ); ?>
 </body>
 
 

@@ -17,11 +17,11 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     // session isn't started
     session_start();
     }
-
-    require_once(__DIR__ . '/../oc-config.php');
-    require_once(__DIR__ . '/../oc-functions.php');
-	include(__DIR__."/../oc-includes/adminActions.php");
-	include(__DIR__."/../oc-includes/ncicAdminActions.php");
+    require_once('../oc-config.php');
+    require_once( ABSPATH . '/oc-functions.php');
+    require_once( ABSPATH . '/oc-settings.php');
+	require_once( ABSPATH ."/oc-includes/adminActions.php");
+	require_once( ABSPATH . "/oc-includes/ncicAdminActions.php");
 
     if (empty($_SESSION['logged_in']))
     {
@@ -84,7 +84,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     <header class="app-header navbar">
 
-      <?php include( ABSPATH . "oc-admin/oc-admin-includes/topbarNav.inc.php"); ?>
+      <?php require_once ( ABSPATH . OCTHEMEINC ."/admin/topbarNav.inc.php" ); ?>
       <?php include( ABSPATH . "/" . OCTHEMES ."/". THEME ."/includes/topProfile.inc.php"); ?>
     </header>
 
@@ -175,8 +175,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         </footer>
 
     <?php
-    include (__DIR__ . "/oc-admin-includes/globalModals.inc.php");
-    include (__DIR__ . "/../oc-includes/jquery-colsolidated.inc.php"); ?>
+    include (__DIR__ . "/" . ABSPATH . OCTHEMEINC ."/admin/topbarNav.inc.php" );
+    require_once( ABSPATH . OCTHEMEINC ."/scripts.inc.php" );  ?>
 
         <script>
     $(function() {
