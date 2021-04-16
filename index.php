@@ -114,6 +114,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		</div>
 		<?php
 		include_once ( ABSPATH . "/". OCTHEMES . "/" . THEME ."/modals/register.modals.inc.php");
-		include_once ( ABSPATH . "/oc-includes/jquery-colsolidated.inc.php" ); ?>
+		include_once ( ABSPATH . OCTHEMEINC ."/scripts.inc.php" ); ?>
 	</body>
 </html>
