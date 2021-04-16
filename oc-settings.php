@@ -11,7 +11,7 @@
 /**
  * Stores the location of the OpenCAD directory of functions, classes, and core content.
  *
- * @from WordPress
+ * @from OpenCAD
  * 
  * @since 0.3.1
  */
@@ -19,6 +19,8 @@ define( 'OCINC', 'oc-includes' );
 define( 'OCAPPS', 'oc-apps' );
 define( 'OCCONTENT', 'oc-content' );
 define( 'OCTHEMES', 'oc-content/themes' );
+define( 'OCTHEMEINC', 'oc-content/themes/'. THEME .'/includes' );
+define( 'OCTHEMEMOD', 'oc-content/themes/'. THEME .'/modals' );
 /*
  * These can't be directly globalized in version.php. When updating,
  * we're including version.php from another installation and don't want

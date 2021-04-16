@@ -158,8 +158,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         </footer>
 
 		<?php
-        include ( ABSPATH . "/oc-includes/jquery-colsolidated.inc.php");
-        include ( ABSPATH . "/" . OCTHEMES . "/" . THEME . "/modals/civilian.modals.inc.php");
+        require_once( ABSPATH . "/" . OCTHEMEMOD  . "/civilian.modals.inc.php");
+        require_once( ABSPATH . OCTHEMEINC ."/scripts.inc.php" );
         ?>
         
 	</body>

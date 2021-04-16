@@ -186,7 +186,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	</div>
 	<!-- ./ modal fade bs-example-modal-lg -->
 		<?php
-		include ( ABSPATH . "/oc-includes/jquery-colsolidated.inc.php"); ?>
+		require_once( ABSPATH . OCTHEMEINC ."/scripts.inc.php" );  ?>
 </body>
 
 

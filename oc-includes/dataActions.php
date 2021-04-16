@@ -9,8 +9,8 @@
  This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
  **/
 
-	require_once(__DIR__ . "/../oc-config.php");
-	include_once( ABSPATH . "/oc-functions.php");
+	require_once(__DIR__ .'/../oc-config.php');
+	require_once( ABSPATH . "/oc-functions.php");
 	require_once( ABSPATH . "/oc-content/plugins/api_auth.php");
 
 /* This file handles all actions for admin.php script */
@@ -653,14 +653,14 @@ function getIncidentTypes()
 				<td>';
 		if ( DEMO_MODE == false) {
 			echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
-			if ( ( MODERATOR_EDIT_INCIDENTTYPE == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
+			if ( ( MODERATOR_EDIT_INCIDENTTYPES == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
 			{
 				echo '<button name="editIncidentType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editIncidentTypeModal" class="btn btn-xs btn-link" >Edit</button>';
 			} else {
 				echo '<button name="editIncidentType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editIncidentTypeModal" class="btn btn-xs btn-link" disabled >Edit</button>';
 			}
 
-			if ( ( MODERATOR_DELETE_INCIDENTTPYE == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
+			if ( ( MODERATOR_DELETE_INCIDENTTYPES == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
 			{
 				echo '<input name="deleteIncidentType" type="submit" class="btn btn-xs btn-link" onclick="deleteIncidentType(' . $row[0] . ')" value="Delete" />';
 			} else {
@@ -1075,14 +1075,14 @@ function getStreets()
 				<td>';
 		if ( DEMO_MODE == false) {
 			echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
-			if ( ( MODERATOR_EDIT_STREET == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
+			if ( ( MODERATOR_EDIT_STREETS == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
 			{
 				echo '<button name="editStreet" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editStreetModal" class="btn btn-xs btn-link" >Edit</button>';
 			} else {
 				echo '<button name="editStreet" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editStreetModal" class="btn btn-xs btn-link" disabled >Edit</button>';
 			}
 
-			if ( ( MODERATOR_DELETE_STREET == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
+			if ( ( MODERATOR_DELETE_STREETS == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
 			{
 				echo '<input name="deleteStreet" type="submit" class="btn btn-xs btn-link" onclick="deleteStreet(' . $row[0] . ')" value="Delete" />';
 			} else {
@@ -1287,14 +1287,14 @@ function getVehicles()
 				<td>';
 		if ( DEMO_MODE == false) {
 			echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
-			if ( ( MODERATOR_EDIT_VEHICLE == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
+			if ( ( MODERATOR_EDIT_VEHICLES == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
 			{
 				echo '<button name="editVehicle" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editVehicleModal" class="btn btn-xs btn-link" >Edit</button>';
 			} else {
 				echo '<button name="editVehicle" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editVehicleModal" class="btn btn-xs btn-link" disabled >Edit</button>';
 			}
 
-			if ( ( MODERATOR_DELETE_VEHICLE == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
+			if ( ( MODERATOR_DELETE_VEHICLES == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
 			{
 				echo '<input name="deleteVehicle" type="submit" class="btn btn-xs btn-link" onclick="deleteVehicle(' . $row[0] . ')" value="Delete" />';
 			} else {
@@ -1723,14 +1723,14 @@ function getWarrantTypes()
 				<td>';
 		if ( DEMO_MODE == false) {
 			echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
-			if ( ( MODERATOR_EDIT_WARRANTTYPE == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
+			if ( ( MODERATOR_EDIT_WARRANTTYPES == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
 			{
 				echo '<button name="editWarrantType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWarrantTypeModal" class="btn btn-xs btn-link" >Edit</button>';
 			} else {
 				echo '<button name="editWarrantType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWarrantypeModal" class="btn btn-xs btn-link" disabled >Edit</button>';
 			}
 
-			if ( ( MODERATOR_DELETE_WARRANTTYPE == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
+			if ( ( MODERATOR_DELETE_WARRANTTYPES == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
 			{
 				echo '<input name="deleteWarrantType" type="submit" class="btn btn-xs btn-link" onclick="deleteWarrantType(' . $row[0] . ')" value="Delete" />';
 			} else {
@@ -1933,14 +1933,14 @@ function getWeapons()
 				<td>';
 		if ( DEMO_MODE == false) {
 			echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
-			if ( ( MODERATOR_EDIT_WEAPON == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
+			if ( ( MODERATOR_EDIT_WEAPONS == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
 			{
 				echo '<button name="editWeapon" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWeaponModal" class="btn btn-xs btn-link" >Edit</button>';
 			} else {
 				echo '<button name="editWeapon" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWeaponModal" class="btn btn-xs btn-link" disabled >Edit</button>';
 			}
 
-			if ( ( MODERATOR_DELETE_WEAPON == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
+			if ( ( MODERATOR_DELETE_WEAPONS == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
 			{
 				echo '<input name="deleteWeapon" type="submit" class="btn btn-xs btn-link" onclick="deleteWeapon(' . $row[0] . ')" value="Delete" />';
 			} else {

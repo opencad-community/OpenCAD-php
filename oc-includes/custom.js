@@ -1837,7 +1837,7 @@ if (typeof NProgress != 'undefined') {
 
 			TabbedNotification = function(options) {
 			  var message = "<div id='ntf" + cnt + "' class='text alert-" + options.type + "' style='display:none'><h2><em class='fa fa-bell'></em> " + options.title +
-				"</h2><div class='close'><a rel="noopener" href='javascript:;' class='notification_close'><em class='fa fa-close'></em></a></div><p>" + options.text + "</p></div>";
+				"</h2><div class='close'><a rel='noopener' href='javascript:;' class='notification_close'><em class='fa fa-close'></em></a></div><p>" + options.text + "</p></div>";
 
 			  if (!document.getElementById('custom_notifications')) {
 				alert('doesnt exists');

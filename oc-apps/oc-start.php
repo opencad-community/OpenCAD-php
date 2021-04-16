@@ -151,7 +151,7 @@ if (empty($_SESSION['logged_in']))
 							</div>
 							<?php if (!empty(LIVEMAP_URL)) {?>
 						<div class="card-body">
-							<iframe src="<?php echo LIVEMAP_URL; ?>" height="500px" width="100%"></iframe>>
+							<iframe src="<?php echo LIVEMAP_URL; ?>" height="1024px" width="100%"></iframe>
 						</div>
 						<?php } ?>
 					</div>
@@ -169,7 +169,7 @@ if (empty($_SESSION['logged_in']))
 
 		  </div>
 		</footer>
-	<?php include ( ABSPATH . "/oc-includes/jquery-colsolidated.inc.php"); ?>
+	<?php require_once( ABSPATH . OCTHEMEINC ."/scripts.inc.php" ); ?>
 	<?php include ( ABSPATH . "/" .OCTHEMES ."/". THEME . "/modals/dashboard.modals.inc.php");?>
 		<script type="text/javascript">
 			$(document).ready(function() {

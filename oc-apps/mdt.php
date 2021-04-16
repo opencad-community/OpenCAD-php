@@ -303,8 +303,8 @@ else
    }
    ?>
     <?php    
-    include_once ( ABSPATH . "oc-admin/oc-admin-includes/globalModals.inc.php");
-    include_once ( ABSPATH . "oc-includes/jquery-colsolidated.inc.php"); ?>
+    include_once ( ABSPATH . "oc-admin/require_once( ABSPATH . OCTHEMEINC ."/topbarNav.inc.php" );");
+    require_once( ABSPATH . OCTHEMEINC ."/scripts.inc.php" );?>
 <script type="text/javascript">
 // Parse the URL parameter
 function getParameterByName(name, url) {
