@@ -14,17 +14,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     This file handles all actions for admin.php script
 */
 
-    if(session_id() == '' || !isset($_SESSION)) {
-    // session isn't started
-    session_start();
-    }
     require_once('../oc-config.php');
     require_once( ABSPATH . '/oc-functions.php');
     require_once( ABSPATH . "/oc-content/plugins/api_auth.php");
-    if(session_id() == '' || !isset($_SESSION)) {
-    // session isn't started
-    session_start();
-    }
+
 /**
  * Patch notes:
  * Adding the `else` to make a `else if` prevents the execution
@@ -1606,7 +1599,7 @@ function getColors()
         die();
     }
 
-    $result = $pdo->query("SELECT colorGorup, colorName FROM ".DB_PREFIX."colors");
+    $result = $pdo->query("SELECT colorGroup, colorName FROM ".DB_PREFIX."colors");
 
     if (!$result)
     {
