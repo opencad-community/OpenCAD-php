@@ -53,13 +53,13 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/vendors/bootstrap-select/dist/js/bootstrap-select.js"></script>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/vendors/bootstrap-select/dist/css/bootstrap-select.css"></script>
+    <link rel="stylesheet" href="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/vendors/bootstrap-select/dist/css/bootstrap-select.css">
     
     <!-- Bootstrap progressbar -->
     <!-- Latest compiled and minified JavaScript -->
     <script src="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/vendors/bootstrap-progressbar/bootstrap-progressbar.js"></script>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.css"></script>
+    <link rel="stylesheet" href="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.css">
 
     <script src="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/vendors/jquery-ui/jquery-ui.js"></script>
 
