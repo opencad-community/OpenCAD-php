@@ -26,6 +26,21 @@ $policeButton = "";
 $civilianButton = "";
 $roadsideAssistButton = "";
 
+	if ( $_SESSION['state'] === "YES" || $_SESSION['police'] === "YES" || $_SESSION['highway'] === "YES" || $_SESSION['sheriff'] === "YES" )
+	{
+		$leoTitle = "<li class=\"nav-title\">".lang_key("LAW_ENFORCEMENT_SERVICES")."</li>";
+	}
+
+	if ( $_SESSION['first'] === "YES" || $_SESSION['ems'] === "YES" )
+	{
+		$firstResponderTitle = "<li class=\"nav-title\">".lang_key("FIRST_RESPONDER_SERVICES")."</li>";
+	}
+
+	if ( $_SESSION['civilianPrivilege'] === '1' || $_SESSION['dispath'] === "YES" )
+	{
+		$civilianTitle = "<li class=\"nav-title\">".lang_key("CIVILIAN_SERVICES")."</li>";
+	}
+
 	if ($_SESSION['state'] === 'YES')
 	{
 		$stateButton = "<li class=\"nav-item\" style=\"list-style: none;\"><a rel=\"noopener\" class=\"nav-link\"  href=\"".BASE_URL."/".OCAPPS."//mdt.php?dep=state\" class=\"btn btn-lg cusbtn animate fadeInLeft delay1\">State</a></li>";
@@ -83,7 +98,7 @@ if (empty($_SESSION['logged_in']))
 <!DOCTYPE html>
 <html lang="en">
 	<?php include ( ABSPATH . "/".OCTHEMES."/".THEME."/includes/header.inc.php"); ?>
-	<body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
+	<body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-sm">
 		<header class="app-header navbar">
 			<a rel="noopener" class="navbar-brand" href="#">
 				<img class="navbar-brand-full" src="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/images/logo_brand.png" width="30" height="25" alt="OpenCAD Logo">
@@ -100,12 +115,12 @@ if (empty($_SESSION['logged_in']))
 	  		<div class="sidebar">
 				<nav class="sidebar-nav">
 		  			<ul class="nav">
-					<li class="nav-title"><?php echo lang_key("CIVILIAN_SERVICES"); ?></li>
+							<?php echo $civilianTitle; ?>
 						<ul>
 							<?php echo $dispatchButton;?>
 							<?php echo $civilianButton; ?>
 						</ul>
-							<li class="nav-title"><?php echo lang_key("LAW_ENFORCEMENT_SERVICES"); ?></li>
+							<?php echo $leoTitle; ?>
 						<ul>
 							<?php echo $sheriffButton;?>
 							<?php echo $highwayButton;?>
@@ -113,7 +128,7 @@ if (empty($_SESSION['logged_in']))
 							<?php echo $policeButton;?>
 						</ul>
 					</li>
-					<li class="nav-title"><?php echo lang_key("FIRST_RESPONDER_SERVICES"); ?></li>
+						<?php echo $firstResponderTitle; ?>
 						<ul>
 							<?php echo $fireButton;?>
 							<?php echo $emsButton;?>
@@ -169,8 +184,8 @@ if (empty($_SESSION['logged_in']))
 
 		  </div>
 		</footer>
-	<?php require_once( ABSPATH . OCTHEMEINC ."/scripts.inc.php" ); ?>
-	<?php include ( ABSPATH . "/" .OCTHEMES ."/". THEME . "/modals/dashboard.modals.inc.php");?>
+	
+	<?php include ( ABSPATH . OCTHEMEINC ."/scripts.inc.php" ); ?>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$(function() {
