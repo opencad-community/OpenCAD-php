@@ -90,9 +90,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 <body class="app header-fixed">
 
 		<header class="app-header navbar">
-			<a rel="noopener" class="navbar-brand" href="#">
-				<img class="navbar-brand-full" src="<?php BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/images/tail.png" width="30" height="25" alt="OpenCAD Logo">
-			</a>
+				<a rel="noopener" class="navbar-brand" href="#">
+					<img class="navbar-brand-full" src="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/images/logo_brand.png" width="30" height="25" alt="OpenCAD Logo">
+				</a>
 		<?php
 			include_once ( ABSPATH . "/" . OCTHEMES . "/".THEME."/includes/topProfile.inc.php");
 		?>
