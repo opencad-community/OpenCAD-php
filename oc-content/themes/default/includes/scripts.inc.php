@@ -63,6 +63,8 @@
 
     <script src="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/vendors/jquery-ui/jquery-ui.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.js" integrity="sha512-dDguQu7KUV0H745sT2li8mTXz2K8mh3mkySZHb1Ukgee3cNqWdCFMFsDjYo9vRdFRzwBmny9RrylAkAmZf0ZtQ==" crossorigin="anonymous"></script>
+
     <!-- Custom Theme Scripts -->
     <script type="text/javascript" src="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/vendors/coreui/src/js/coreui.min.js"></script>
     <script src="<?php echo BASE_URL;?>/oc-includes/OpenCAD.js"></script>
