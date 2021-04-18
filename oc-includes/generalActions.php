@@ -10,9 +10,18 @@ This program is free software: you can redistribute it and/or modify
 
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
-/*
-    This file handles all actions for admin.php script
-*/
+
+    /**
+     * Geeneral toolbelt
+     *
+     * Non-specific actions library.
+     *
+     * @package      OpenCAD
+     * @category     Library
+     * @author       Phill Fernandes <pfernandes@opencad.io>
+     * 
+     */
+
     if(session_id() == '' || !isset($_SESSION)) {
     session_start();
     }
@@ -79,6 +88,10 @@ if (isset($_GET['getCalls'])){
     }
 }
 
+/* function quickStatus()
+ *
+ * Insert status in to database. 
+*/
 function quickStatus()
 {
     $event = htmlspecialchars($_POST['event']);
