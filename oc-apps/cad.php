@@ -300,7 +300,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	</footer>
 		<?php 
 		include_once ( ABSPATH . "/" . OCTHEMES . "/".THEME."/modals/cad.modals.inc.php");
-		require_once( ABSPATH . OCTHEMEINC ."/scripts.inc.php" );
+		require_once ( ABSPATH . OCTHEMEINC ."/scripts.inc.php" ); ?>
 
 		<!-- AUDIO TONES -->
 			<audio id="recurringToneAudio" src="<?php echo BASE_URL; ?>oc-content/themes/<?php echo THEME; ?>/sounds/priority.mp3" preload="auto"></audio>
