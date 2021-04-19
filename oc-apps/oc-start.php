@@ -175,17 +175,10 @@ if (empty($_SESSION['logged_in']))
 		</div>
 	</div>
 	</div>
-	<footer class="app-footer">
-		  <div>
-			  <a rel="noopener" href="https://opencad.io">OpenCAD</a>
-			  <span>&copy; 2017 <?php echo date("Y"); ?>.</span>
-		  </div>
-		  <div class="ml-auto">
-
-		  </div>
-		</footer>
-	
-	<?php include ( ABSPATH . OCTHEMEINC ."/scripts.inc.php" ); ?>
+	<?php 
+		require_once ( ABSPATH . "/" . OCTHEMES ."/". THEME ."/includes/footer.inc.php");
+		require_once ( ABSPATH . OCTHEMEINC ."/scripts.inc.php" ); 
+	?>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$(function() {

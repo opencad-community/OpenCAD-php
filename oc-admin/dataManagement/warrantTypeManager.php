@@ -114,16 +114,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	</div>
 	<!-- /.app-body -->
 
-	<footer class="app-footer">
-	<div>
-		<a rel="noopener" href="https://opencad.io">OpenCAD</a>
-		<span>&copy; 2017 <?php echo date("Y"); ?>.</span>
-	</div>
-		<div class="ml-auto">
-
-		</div>
-
-	</footer>
+			<?php require_once ( ABSPATH . "/" . OCTHEMES ."/". THEME ."/includes/footer.inc.php"); ?>
 
 	<!-- Edit Street Modal -->
 	<div class="modal fade" id="editWarrantTypeModal" tabindex="-1" role="dialog" aria-hidden="true">
