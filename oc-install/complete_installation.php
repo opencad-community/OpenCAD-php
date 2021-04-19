@@ -43,6 +43,7 @@
 		$password_encryption 				= isset($_SESSION['password_encryption']) ? $_SESSION['password_encryption'] : EI_PASSWORD_ENCRYPTION_TYPE;
 		
 	    $COMMUNITY_NAME						= isset($_SESSION['COMMUNITY_NAME']) ? prepare_input($_SESSION['COMMUNITY_NAME']) : '';
+		$COMMUNITY_HOMEPAGE					= isset($_SESSION['COMMUNITY_HOMEPAGE']) ? prepare_input($_SESSION['COMMUNITY_HOMEPAGE']) : '';
 		
 		$BASE_URL							= isset($_SESSION['BASE_URL']) ? prepare_input($_SESSION['BASE_URL']) : '';
 		
@@ -171,6 +172,7 @@
 								$config_file = str_replace('<DEFAULT_LANGUAGE_DIRECTION>', $default_languge_direction, $config_file);
 
 								$config_file = str_replace('<COMMUNITY_NAME>', $COMMUNITY_NAME, $config_file);
+								$config_file = str_replace('<COMMUNITY_HOMEPAGE>', $COMMUNITY_HOMEPAGE, $config_file);
 								$config_file = str_replace('<BASE_URL>', $BASE_URL, $config_file);
 								$config_file = str_replace('<API_SECURITY>', $API_SECURITY, $config_file);
 								

@@ -14,12 +14,22 @@
 /**#@+
  * Community Name
  *
- * This is where you will change the community name to suit your Community.
+ * This constant controls the community name as it rendered in the CAD.
  * Only change the variable named 'My Community'
  *
  * @since 1.0a RC1
  **/
 define('COMMUNITY_NAME', '<COMMUNITY_NAME>');
+
+
+/**#@+
+ * Community Homepage
+ *
+ * This contants will control what URL is used for a communities homepage.
+ *
+ * @since OpenCAD 1.0
+ **/
+define('COMMUNITY_HOMEPAGE', '<COMMUNITY_HOMEPAGE>');
 
 /**#@+
  *

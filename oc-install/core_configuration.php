@@ -25,6 +25,7 @@
 	if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 		$COMMUNITY_NAME = isset($_POST['COMMUNITY_NAME']) ? prepare_input($_POST['COMMUNITY_NAME']) : '';
+		$COMMUNITY_HOMEPAGE = isset($_POST['COMMUNITY_HOMEPAGE']) ? prepare_input($_POST['COMMUNITY_HOMEPAGE']) : '';
 		$BASE_URL = isset($_POST['BASE_URL']) ? prepare_input($_POST['BASE_URL']) : '';
 		$API_SECURITY = isset($_POST['API_SECURITY']) ? prepare_input($_POST['API_SECURITY']) : '';
 
@@ -42,6 +43,7 @@
 		$COOKIE_NAME = isset($_POST['COOKIE_NAME']) ? prepare_input($_POST['COOKIE_NAME']) : '';
 		
 		$_SESSION['COMMUNITY_NAME'] = $COMMUNITY_NAME;
+		$_SESSION['COMMUNITY_HOMEPAGE'] = $COMMUNITY_HOMEPAGE;
 		$_SESSION['BASE_URL'] = $BASE_URL;
 		$_SESSION['API_SECURITY'] = $API_SECURITY;
 
@@ -64,7 +66,8 @@
 
 	}else{
 	    $COMMUNITY_NAME = isset($_POST['COMMUNITY_NAME']) ? prepare_input($_POST['COMMUNITY_NAME']) : '';
-		
+		$COMMUNITY_HOMEPAGE = isset($_POST['COMMUNITY_HOMEPAGE']) ? prepare_input($_POST['COMMUNITY_HOMEPAGE']) : '';
+
 		$BASE_URL = isset($_POST['BASE_URL']) ? prepare_input($_POST['BASE_URL']) : '';
 		
 		$API_SECURITY = isset($_POST['API_SECURITY']) ? prepare_input($_POST['API_SECURITY']) : '';
@@ -140,8 +143,6 @@
 			</tr>
 			<tr><td nowrap height="10px" colspan="3"></td></tr>
 			<tr>
-				<td width="250px">&nbsp;<?php echo lang_key('COMMUNITY_NAME'); ?>&nbsp;<span class="star">*</span></td>
-				<td><input name="COMMUNITY_NAME" id="COMMUNITY_NAME" value="My Community" class="form_text" size="28" maxlength="22" value="<?php echo $COMMUNITY_NAME; ?>" onfocus="textboxOnFocus('COMMUNITY_NAME_notes')" onblur="textboxOnBlur('COMMUNITY_NAME_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 				<td rowspan="6" valign="top">					
 					<div id="API_SECURITY_notes" class="notes_container">
 						<h4><?php echo lang_key('API_SECURITY'); ?></h4>
@@ -150,6 +151,10 @@
 					<div id="COMMUNITY_NAME_notes" class="notes_container">
 						<h4><?php echo lang_key('COMMUNITY_NAME'); ?></h4>
 						<p><?php echo lang_key('COMMUNITY_NAME_notes'); ?></p>
+					</div>
+					<div id="COMMUNITY_HOMEPAGE_notes" class="notes_container">
+						<h4><?php echo lang_key('COMMUNITY_HOMEPAGE'); ?></h4>
+						<p><?php echo lang_key('COMMUNITY_HOMEPAGE_notes'); ?></p>
 					</div>
 					<div id="BASE_URL_notes" class="notes_container">
 						<h4><?php echo lang_key('BASE_URL'); ?></h4>
@@ -170,6 +175,14 @@
 					<img class="loading_img" src="images/ajax_loading.gif" alt="<?php echo lang_key('loading'); ?>..." />
 					<div id="notes_message" class="notes_container"></div>					
 				</td>
+			</tr>
+			<tr>
+				<td width="250px">&nbsp;<?php echo lang_key('COMMUNITY_NAME'); ?>&nbsp;<span class="star">*</span></td>
+				<td><input name="COMMUNITY_NAME" id="COMMUNITY_NAME" value="My Community" class="form_text" size="28" maxlength="22" value="<?php echo $COMMUNITY_NAME; ?>" onfocus="textboxOnFocus('COMMUNITY_NAME_notes')" onblur="textboxOnBlur('COMMUNITY_NAME_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+			</tr>
+			<tr>
+				<td width="250px">&nbsp;<?php echo lang_key('COMMUNITY_HOMEPAGE'); ?>&nbsp;<span class="star">*</span></td>
+				<td><input name="COMMUNITY_HOMEPAGE" id="COMMUNITY_HOMEPAGE" value="//www.opencad.io/" class="form_text" size="28" maxlength="40" value="<?php echo $COMMUNITY_NAME; ?>" onfocus="textboxOnFocus('COMMUNITY_NAME_notes')" onblur="textboxOnBlur('COMMUNITY_HOMEPAGE_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('BASE_URL'); ?>&nbsp;<span class="star">*</span></td>
