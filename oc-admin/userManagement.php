@@ -254,7 +254,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 					</div>
 					<!-- ./ modal-body -->
 					<div class="modal-footer">
-					<input type="hidden" name="userID" id="userID">
+					<input type="hidden" name="userId" id="userId">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					<input type="submit" name="editUserAccount" class="btn btn-primary" value="Update User" />
 					</div>
@@ -295,7 +295,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 					<!-- ./ modal-body -->
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<input type="hidden" name="userID" id="userID">
+						<input type="hidden" name="userId" id="userId">
 						<input type="submit" name="editUserAccountRole" class="btn btn-primary" value="Update Role" />
 					</div>
 					<!-- ./ modal-footer -->
@@ -338,7 +338,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		</div>
 		<!-- ./ modal-body -->
 		<div class="modal-footer">
-			<input type="hidden" name="userID" id="userID">
+			<input type="hidden" name="userId" id="userId">
 			<input type="submit" name="changeUserPassword" id="changeUserPassword" class="btn btn-primary" value="Change Password" />
 			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		</form>
@@ -375,7 +375,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			$.ajax({
 				cache: false,
 				type: 'POST',
-				url: '<?php echo BASE_URL; ?>/oc-includes/adminActions.php',
+				url: '../<?php echo OCINC ?>/adminActions.php',
 				data: {
 					'getUserDetails': 'yes',
 					'userId': userId
@@ -410,14 +410,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			$.ajax({
 				cache: false,
 				type: 'POST',
-				url: '<?php echo BASE_URL; ?>/oc-includes/adminActions.php',
+				url: '../<?php echo OCINC ?>/adminActions.php',
 				data: {
 					'getUserID': 'yes',
 					'userId': userId
 				},
 				success: function(result) {
 					data = JSON.parse(result);
-					$('input[name="userID"]').val(data['userId']);
+					$('input[name="userId"]').val(data['userId']);
 
 				},
 
@@ -436,7 +436,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				$.ajax({
 					cache: false,
 					type: 'GET',
-					url: '<?php echo BASE_URL; ?>/oc-includes/adminActions.php',
+					url: '../<?php echo OCINC ?>/adminActions.php',
 					data: 'dept_id=' + dept_id + '&userId=' + userId,
 					success: function(result) {
 						//obj = jQuery.parseJSON(result);

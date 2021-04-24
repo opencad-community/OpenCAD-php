@@ -112,27 +112,27 @@ if (empty($_SESSION['logged_in']))
 			<?php include( ABSPATH . "/" . OCTHEMES ."/". THEME ."/includes/topProfile.inc.php"); ?>
 		</header>
 		<div class="app-body">
-	  		<div class="sidebar">
+			<div class="sidebar">
 				<nav class="sidebar-nav">
-		  			<ul class="nav">
-							<?php echo $civilianTitle; ?>
-						<ul>
-							<?php echo $dispatchButton;?>
-							<?php echo $civilianButton; ?>
-						</ul>
-							<?php echo $leoTitle; ?>
-						<ul>
-							<?php echo $sheriffButton;?>
-							<?php echo $highwayButton;?>
-							<?php echo $stateButton;?>
-							<?php echo $policeButton;?>
-						</ul>
-					</li>
-						<?php echo $firstResponderTitle; ?>
-						<ul>
-							<?php echo $fireButton;?>
-							<?php echo $emsButton;?>
-						</ul>
+					<ul class="nav">
+						<?php echo $civilianTitle; ?>
+					<ul>
+						<?php echo $dispatchButton;?>
+						<?php echo $civilianButton; ?>
+					</ul>
+						<?php echo $leoTitle; ?>
+					<ul>
+						<?php echo $sheriffButton;?>
+						<?php echo $highwayButton;?>
+						<?php echo $stateButton;?>
+						<?php echo $policeButton;?>
+					</ul>
+				</li>
+					<?php echo $firstResponderTitle; ?>
+					<ul>
+						<?php echo $fireButton;?>
+						<?php echo $emsButton;?>
+					</ul>
 					</ul>
 				</nav>
 			</div>

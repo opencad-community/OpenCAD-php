@@ -72,14 +72,42 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<?php include ( ABSPATH . "/".OCTHEMES."/".THEME."/includes/header.inc.php"); ?>
+		<?php require_once ( ABSPATH . "/".OCTHEMES."/".THEME."/includes/header.inc.php"); ?>
 	<body class="app header-fixed">
 		<header class="app-header navbar">
 			<a rel="noopener" class="navbar-brand" href="#"><img class="navbar-brand-full" src="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/images/logo_brand.png" width="30" height="25" alt="<?php echo COMMUNITY_NAME; ?> Logo"></a>
+			<button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 			<?php include( ABSPATH . "/" . OCTHEMES ."/". THEME ."/includes/topProfile.inc.php"); ?>
 		</header>
 		<div class="app-body">
+			<div class="sidebar">
+				<nav class="sidebar-nav">
+					<ul class="nav">
+						<?php echo $civilianTitle; ?>
+					<ul>
+						<?php echo $dispatchButton;?>
+						<?php echo $civilianButton; ?>
+					</ul>
+						<?php echo $leoTitle; ?>
+					<ul>
+						<?php echo $sheriffButton;?>
+						<?php echo $highwayButton;?>
+						<?php echo $stateButton;?>
+						<?php echo $policeButton;?>
+					</ul>
+					<?php echo $firstResponderTitle; ?>
+					<ul>
+						<?php echo $fireButton;?>
+						<?php echo $emsButton;?>
+					</ul>
+					</ul>
+				</nav>
+			</div>
 			<main class="main">
 				<div class="breadcrumb" />
 				<div class="container-fluid">
@@ -260,10 +288,11 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			<!-- /.card-->
 		</main>
 	</div>
-	<?php require_once ( ABSPATH . "/" . OCTHEMES ."/". THEME ."/includes/footer.inc.php"); ?>
+	</div>
+	<?php require_once ( ABSPATH .  OCTHEMEINC . "/footer.inc.php"); ?>
 	<!-- modals -->
-	<?php require_once( ABSPATH . OCTHEMEINC ."/scripts.inc.php" );?>
-	<?php require_once(ABSPATH . "/" . OCTHEMES . "/".THEME."/modals/mdt.modals.inc.php")?>
+	<?php require_once ( ABSPATH . OCTHEMEINC ."/scripts.inc.php" );?>
+	<?php require_once (ABSPATH .  OCTHEMEMOD . "/mdt.modals.inc.php")?>
 	<!-- AUDIO TONES -->
 	<audio id="recurringToneAudio" src="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/sounds/priority.mp3" preload="auto"></audio>
 	<audio id="priorityToneAudio" src="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
@@ -310,36 +339,31 @@ else if (dynamicContent == 'roadsideAssist') {
 $('#roadsideAssist').show();
 }
 });
-</script>
-<script>
+
 $(document).ready(function() {
 $('#rms_warnings').DataTable({
 
 });
 });
-</script>
-<script>
+
 $(document).ready(function() {
 $('#rms_citations').DataTable({
 
 });
 });
-</script>
-<script>
+
 $(document).ready(function() {
 $('#rms_arrests').DataTable({
 
 });
 });
-</script>
-<script>
+
 $(document).ready(function() {
 $('#rms_warrants').DataTable({
 
 });
 });
-</script>
-<script>
+
 $(document).ready(function() {
 
 	  $(function() {
@@ -387,15 +411,11 @@ $(document).ready(function() {
 	  });
 
 });
-</script>
-<script>
 $(function() {
 $( "#ncic_name" ).autocomplete({
 source: "<?php echo "/" . OCINC ?>/search_name.php"
 });
 });
-</script>
-<script>
 $(function() {
 $( "#ncic_plate" ).autocomplete({
 source: "<?php echo "/" . OCINC ?>/search_plate.php"
@@ -408,8 +428,6 @@ $( "#ncic_weapon" ).autocomplete({
 source: "<?php echo "/" . OCINC ?>/search_name.php"
 });
 });
-</script>
-<script>
 // PNotify Stuff
 priorityNotification = new PNotify({
 	  title: 'Priority Traffic',
@@ -423,9 +441,6 @@ priorityNotification = new PNotify({
 		 sticker: false
 	  }
    });
-
-</script>
-<script>
 function getAOP() {
    $.ajax({
 		 type: "GET",
@@ -454,10 +469,6 @@ function getAOP() {
 
 	  });
 }
-
-
-</script>
-<script>
 function getCalls() {
 	  $.ajax({
 			type: "GET",
@@ -479,8 +490,6 @@ function getCalls() {
 
 		 });
    }
-</script>
-<script>
 function getMyCall() {
 	  $.ajax({
 			type: "GET",
@@ -502,8 +511,6 @@ function getMyCall() {
 
 		 });
    }
-</script>
-<script>
 function mdtGetVehicleBOLOS() {
 	  $.ajax({
 			type: "GET",
@@ -525,8 +532,6 @@ function mdtGetVehicleBOLOS() {
 
 		 });
    }
-</script>
-<script>
 function mdtGetPersonBOLOS() {
 	  $.ajax({
 			type: "GET",
@@ -553,8 +558,7 @@ function mdtGetPersonBOLOS() {
 $('#callsign').on('shown.bs.modal', function(e) {
 	  $('#callsign').find('input[name="callsign"]').val('<?php echo $_SESSION['identifier'];?>');
 });
-</script>
-<script>
+
 $(function() {
 	  $('.callsignForm').submit(function(e) {
 		 e.preventDefault(); // avoid to execute the actual submit of the form.
@@ -627,8 +631,6 @@ $(function() {
 
 	  });
    });
-</script>
-<script>
 
 function getStatus() {
 $.ajax({
