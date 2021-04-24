@@ -26,19 +26,19 @@ Open Source Computer Aided Dispatch System for Roleplay Communities.
 
 ### Deployment Notes
 
-#### Unsuppported Environments
+#### Unsupported Environments
 * Free hosting of any kind
 * XAMPP
 
 #### Important Notes
-* This has been tested to work on Linux, Windows and cPanel.
+* This has been tested to work on Linux, Windows, DirectAdmin, and Plesk.
 * The OpenCAD Development team **DOES NOT** recommend the utilization of "free" webhosting solutions due to a multitude of reasons.
 We suggest [Spearware Networks](https://spearwarenetworks.com/web-hosting) for web hosting.
 
 ## Support
 
 ######Need Help?
-[View our Documentation](https://guides.opencad.io) which has all the documentation you need.
+[View our Documentation](https://docs.opencad.io) which has all the documentation you need.
 
 ######Still Having Trouble?
 Join us on the community Discord and post your issue in [#general-help](http://discord.io/opencadproject).
