@@ -158,19 +158,31 @@ if (empty($_SESSION['logged_in']))
 						</div>
 					</div>
 				<?php } ?>
-			<main class="row justify-content-center">
-				<div class="col-md-12">	
-					<div class="card">
-						<div class="card-header">
-								<?php echo lang_key("PATROL_STATUS"); ?> <button class="btn btn-primary" name="aop" data-target="#aop" id="getAOP" disabled></button>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<?php echo lang_key("PATROL_STATUS"); ?>
+									<div class="float-right">
+										<button class="btn btn-primary btn-sm justify-content-right float-right" name="aop" data-target="#aop" id="getAOP" disabled></button>
+									</div>
+								</div>
+								<?php if (!empty(LIVEMAP_URL)) {?>
+								<div class="card-body">
+									<iframe src="<?php echo LIVEMAP_URL; ?>" height="1024px" width="100%"></iframe>
+								</div>
+								<?php } else { ?>
+								<div class="card-body">
+									<strong>ADMINITRATOR:</strong> <i>Configure LIVEMAP_URL variable in oc-config.php</i>
+								</div>
+								<?php } ?>
+								<div class="card=footer">
+								</div>
 							</div>
-							<?php if (!empty(LIVEMAP_URL)) {?>
-						<div class="card-body">
-							<iframe src="<?php echo LIVEMAP_URL; ?>" height="1024px" width="100%"></iframe>
 						</div>
-						<?php } ?>
 					</div>
 				</div>
+			</div>
 			</main>
 		</div>
 	</div>
