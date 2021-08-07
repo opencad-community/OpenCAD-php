@@ -369,18 +369,18 @@ function getIncidentTypes()
 		die();
 	}
 
-	$result = $pdo->query("SELECT id, codeId, codeName from ".DB_PREFIX."incidentTypes");
-	if (!$result)
+	$incidentTypes = $pdo->query("SELECT id, codeId, codeName from ".DB_PREFIX."incidentTypes");
+	if (!$incidentTypes)
 	{
 		$_SESSION['error'] = $pdo->errorInfo();
 		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
 		die();
 	}
 
-	$races  = substr($races,14,strlen($races)-18);
-	$races = preg_split("/','/",$races);
+	$incidentTypes  = substr($incidentTypes,14,strlen($incidentTypes)-18);
+	$incidentTypes = preg_split("/','/",$incidentTypes);
 
-	foreach ($result as $row)
+	foreach ($incidentTypes as $row)
 	{
 			echo '<option value="' . $row['id'] . '">'. $row['codeId'] .' &#8212; '.$row['codeName'] . '</option>\n';
 	}

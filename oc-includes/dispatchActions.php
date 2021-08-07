@@ -616,7 +616,7 @@ function create_citation()
         die();
     }
 
-    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_citations (nameId, citationName, citationFine, Issuer, status, issuedDate) VALUES (?, ?, ?, ?, '1', ?)");
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncicCitations (nameId, citationName, citationFine, Issuer, status, issuedDate) VALUES (?, ?, ?, ?, '1', ?)");
     $result = $stmt->execute(array($userId, $citation_name_1, $citation_fine_1, $Issuer, $date));
 
     if (!$result)
@@ -627,7 +627,7 @@ function create_citation()
     }
 
 	if ($citation_name_2){
-        $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_citations (nameId, citationName, citationFine, Issuer, status, issuedDate) VALUES (?, ?, ?, ?, '1', ?)");
+        $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncicCitations (nameId, citationName, citationFine, Issuer, status, issuedDate) VALUES (?, ?, ?, ?, '1', ?)");
         $result = $stmt->execute(array($userId, $citation_name_2, $citation_fine_2, $Issuer, $date));
 
         if (!$result)
@@ -638,7 +638,7 @@ function create_citation()
         }
 	}
 	if ($citation_name_3) {
-        $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_citations (nameId, citationName, citationFine, Issuer, status, issuedDate) VALUES (?, ?, ?, ?, '1', ?)");
+        $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncicCitations (nameId, citationName, citationFine, Issuer, status, issuedDate) VALUES (?, ?, ?, ?, '1', ?)");
         $result = $stmt->execute(array($userId, $citation_name_3, $citation_fine_3, $Issuer, $date));
 
         if (!$result)
@@ -649,7 +649,7 @@ function create_citation()
         }
 	}
 	if ($citation_name_4) {
-        $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_citations (nameId, citationName, citationFine, Issuer, status, issuedDate) VALUES (?, ?, ?, ?, '1', ?)");
+        $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncicCitations (nameId, citationName, citationFine, Issuer, status, issuedDate) VALUES (?, ?, ?, ?, '1', ?)");
         $result = $stmt->execute(array($userId, $citation_name_4, $citation_fine_4, $Issuer, $date));
 
         if (!$result)
@@ -660,7 +660,7 @@ function create_citation()
         }
 	}
 	if ($citation_name_5) {
-        $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_citations (nameId, citationName, citationFine, Issuer, status, issuedDate) VALUES (?, ?, ?, ?, '1', ?)");
+        $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncicCitations (nameId, citationName, citationFine, Issuer, status, issuedDate) VALUES (?, ?, ?, ?, '1', ?)");
         $result = $stmt->execute(array($userId, $citation_name_5, $citation_fine_5, $Issuer, $date));
 
         if (!$result)
@@ -698,7 +698,7 @@ function create_warning()
         die();
     }
 
-    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_warnings (nameId, warningName, Issuer, status, issuedDate) VALUES (?, ?, ?, '1', ?)");
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncicWarnings (nameId, warningName, Issuer, status, issuedDate) VALUES (?, ?, ?, '1', ?)");
     $result = $stmt->execute(array($userId, $warning_name_1, $Issuer, $date));
 
     if (!$result)
@@ -709,7 +709,7 @@ function create_warning()
     }
 
 	if ($warning_name_2){
-        $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_warnings (nameId, warningName, Issuer, status, issuedDate) VALUES (?, ?, ?, '1', ?)");
+        $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncicWarnings (nameId, warningName, Issuer, status, issuedDate) VALUES (?, ?, ?, '1', ?)");
         $result = $stmt->execute(array($userId, $warning_name_2, $Issuer, $date));
     
         if (!$result)
@@ -721,7 +721,7 @@ function create_warning()
 	}
 	
 	if ($warning_name_3) {
-        $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_warnings (nameId, warningName, Issuer, status, issuedDate) VALUES (?, ?, ?, '1', ?)");
+        $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncicWarnings (nameId, warningName, Issuer, status, issuedDate) VALUES (?, ?, ?, '1', ?)");
         $result = $stmt->execute(array($userId, $warning_name_3, $Issuer, $date));
     
         if (!$result)
@@ -733,7 +733,7 @@ function create_warning()
 	}
 	
 	if ($warning_name_4) {
-		$stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_warnings (nameId, warningName, Issuer, status, issuedDate) VALUES (?, ?, ?, '1', ?)");
+		$stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncicWarnings (nameId, warningName, Issuer, status, issuedDate) VALUES (?, ?, ?, '1', ?)");
         $result = $stmt->execute(array($userId, $warning_name_4, $Issuer, $date));
 
         if (!$result)
@@ -745,7 +745,7 @@ function create_warning()
 	}
 	
 	if ($warning_name_5) {
-		$stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_warnings (nameId, warningName, Issuer, status, issuedDate) VALUES (?, ?, ?, '1', ?)");
+		$stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncicWarnings (nameId, warningName, Issuer, status, issuedDate) VALUES (?, ?, ?, '1', ?)");
         $result = $stmt->execute(array($userId, $warning_name_5, $Issuer, $date));
 
         if (!$result)
@@ -785,7 +785,7 @@ function create_warrant()
         die();
     }
 
-    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_warrants (nameId, expirationDate, warrantName, issuer, status, issuedDate) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncicWarrants (nameId, expirationDate, warrantName, issuer, status, issuedDate) VALUES (?, ?, ?, ?, ?, ?)");
     $result = $stmt->execute(array($userId, $expire, $warrantName, $issuer, $status, $date));
 
     if (!$result)
@@ -815,7 +815,7 @@ function delete_citation()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncic_citations WHERE id = ?");
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncicCitations WHERE id = ?");
     $result = $stmt->execute(array($cid));
 
     if (!$result)
@@ -873,7 +873,7 @@ function delete_warning()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncic_warnings WHERE id = ?");
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncicWarnings WHERE id = ?");
     $result = $stmt->execute(array($wgid));
 
     if (!$result)
@@ -902,7 +902,7 @@ function delete_warrant()
         die();
 	}
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncic_warrants WHERE id = ?");
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncicWarrants WHERE id = ?");
     $result = $stmt->execute(array($wid));
 
     if (!$result)
@@ -1000,7 +1000,7 @@ function ncicGetWarrants()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_warrants.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncic_warrants INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncic_warrants.nameId");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncicWarrants.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncicWarrants INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncicWarrants.nameId");
 
     if (!$result)
     {
@@ -1019,7 +1019,7 @@ function ncicGetWarrants()
     else
     {
         echo '
-            <table id="ncic_warrants" class="table table-striped table-bordered">
+            <table id="ncicWarrants" class="table table-striped table-bordered">
             <thead>
                 <tr>
                 <th>Status</th>
@@ -1083,7 +1083,7 @@ function ncicGetCitations()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_citations.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncic_citations INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncic_citations.nameId");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncicCitations.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncicCitations INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncicCitations.nameId");
 
     if (!$result)
     {
@@ -1102,7 +1102,7 @@ function ncicGetCitations()
     else
     {
         echo '
-            <table id="ncic_citations" class="table table-striped table-bordered">
+            <table id="ncicCitations" class="table table-striped table-bordered">
             <thead>
                 <tr>
                 <th>Name</th>
@@ -1120,15 +1120,15 @@ function ncicGetCitations()
         {
             echo '
             <tr>
-                <td>'.$row[7].'</td>
-                <td>'.$row[3].'</td>
-                <td>'.$row[4].'</td>
-                <td>'.$row[5].'</td>
-                <td>'.$row[6].'</td>
+                <td>'.$row["name"].'</td>
+                <td>'.$row["citationName"].'</td>
+                <td>'.$row["citationFine"].'</td>
+                <td>'.$row["issuedDate"].'</td>
+                <td>'.$row["issuedBy"].'</td>
                 <td>
                     <form action="".BASE_URL."/oc-includes/dispatchActions.php" method="post">
                     <input name="delete_citation" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Remove"/>
-                    <input name="cid" type="hidden" value='.$row[0].' />
+                    <input name="cid" type="hidden" value='.$row[id].' />
                     </form>
                 </td>
             </tr>
@@ -1154,7 +1154,7 @@ function ncicGetWarnings()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_warnings.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncic_warnings INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncic_warnings.nameId");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncicWarnings.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncicWarnings INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncicWarnings.nameId");
 
     if (!$result)
     {
@@ -1173,7 +1173,7 @@ function ncicGetWarnings()
     else
     {
         echo '
-            <table id="ncic_warnings" class="table table-striped table-bordered">
+            <table id="ncicWarnings" class="table table-striped table-bordered">
             <thead>
                 <tr>
                 <th>Name</th>
@@ -1190,10 +1190,10 @@ function ncicGetWarnings()
         {
             echo '
             <tr>
-                <td>'.$row[6].'</td>
-                <td>'.$row[3].'</td>
-                <td>'.$row[4].'</td>
-                <td>'.$row[5].'</td>
+                <td>'.$row["name"].'</td>
+                <td>'.$row["warningName"].'</td>
+                <td>'.$row["issuedDate"].'</td>
+                <td>'.$row["issedBy"].'</td>
                 <td>
                     <form action="".BASE_URL."/oc-includes/dispatchActions.php" method="post">
                     <input name="delete_warning" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Remove"/>

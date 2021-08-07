@@ -488,7 +488,7 @@ function create911Call()
 		$callId = $row['max'];
 	}
 
-	$callid++;
+	$callId++;
 
 	$stmt = $pdo->prepare("REPLACE INTO ".DB_PREFIX."callList (callId) VALUES (?)");
     $result = $stmt->execute(array($callId));
@@ -507,7 +507,7 @@ function create911Call()
     $callNarrative = $created.'<br/>Caller States: '.$description.'<br/>';
 
 
-    $stmt = $pdo->prepare("INSERT IGNORE INTO ".DB_PREFIX."calls (callId, callType, callStreet1, callNarrative) VALUES (?, '911', ?, ?)");
+    $stmt = $pdo->prepare("INSERT IGNORE INTO ".DB_PREFIX."calls (callId, callStreet1, callNarrative) VALUES (?, ?, ?)");
     $result = $stmt->execute(array($callId, $callStreet1, $callNarrative));
 
 

@@ -1,3 +1,6 @@
+<?php 
+	include_once(__DIR__ . '/../../../../oc-config.php');
+	include_once( ABSPATH . OCINC . "/dispatchActions.php" ); ?>
 	<!-- modals -->
 	<!-- Quick Guide Modal -->
 	<div class="modal" id="quickGuide" tabindex="-1" role="dialog" aria-hidden="true">

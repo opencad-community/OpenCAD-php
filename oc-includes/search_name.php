@@ -1,5 +1,5 @@
 <?php
-reqiuire_once("../oc-config.php");
+require_once("../oc-config.php");
 
 //connect with the database
 $db = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);

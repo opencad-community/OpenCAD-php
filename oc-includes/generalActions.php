@@ -293,7 +293,7 @@ function checkTones()
         die();
     }
 
-    $result = $pdo->query("SELECT id from ".DB_PREFIX."tones");
+    $result = $pdo->query("SELECT * from ".DB_PREFIX."tones");
 
     if (!$result)
     {
@@ -302,7 +302,7 @@ function checkTones()
         die();
     }
     $pdo = null;
-
+    
     $encode = array();
     foreach($result as $row)
     {
@@ -380,7 +380,7 @@ function logoutUser()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE identifier FROM ".DB_PREFIX."activeUsers WHERE identifier = ?");
+    $stmt = $pdo->prepare("DELETE * FROM ".DB_PREFIX."activeUsers WHERE identifier = ?");
     $result = $stmt->execute(array($identifier));
 
     if (!$result)
@@ -1147,17 +1147,17 @@ function getActiveCalls()
         {
             echo '
             <tr id="'.$counter.'">
-                <td>'.$row[0].'</td>';
+                <td>'.$row["callId"].'</td>';
 
                 //Issue #28. Check if $row[1] == bolo. If so, change text color to orange
-                if ($row[1] == "BOLO")
+                if ($row["callType"] == "BOLO")
                 {
-                    echo '<td style="color:orange;">'.$row[1].'</td>';
+                    echo '<td style="color:orange;">'.$row["callType"].'</td>';
                     echo '<td><!--Leave blank--></td>';
                 }
                 else
                 {
-                    echo '<td>'.$row[1].'</td>';
+                    echo '<td>'.$row["callType"].'</td>';
                     echo '
                         <td>';
                             getUnitsOnCall($row[0]);
@@ -1171,17 +1171,17 @@ function getActiveCalls()
                 {
                     echo'
                     <td>
-                        <button id="'.$row[0].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
+                        <button id="'.$row["callId"].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
                     </td>';
                 }
                 else
                 {
                 echo'
                 <td>
-                    <button id="'.$row[0].'" class="btn-link" style="color: red;" value="'.$row[0].'" onclick="clearCall('.$row[0].')">Clear</button>
-                    <button id="'.$row[0].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
-                    <input id="'.$row[0].'" type="submit" name="assign_unit" data-toggle="modal" data-target="#assign" class="btn-link '.$row[0].'" value="Assign"/>
-                    <input name="uid" name="uid" type="hidden" value="'.$row[0].'"/>
+                    <button id="'.$row["callId"].'" class="btn-link" style="color: red;" value="'.$row["callId"].'" onclick="clearCall('.$row["callId"].')">Clear</button>
+                    <button id="'.$row["callId"].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
+                    <input id="'.$row["callId"].'" type="submit" name="assign_unit" data-toggle="modal" data-target="#assign" class="btn-link '.$row["callId"].'" value="Assign"/>
+                    <input name="uid" name="uid" type="hidden" value="'.$row["callId"].'"/>
                 </td>';
                 }
 
@@ -1435,7 +1435,7 @@ function getCitations()
 
     foreach($result as $row)
     {
-        echo '<option value="'.$row[0].'">'.$row[0].'</option>';
+        echo '<option value="'.$row["id"].'">'.$row["codeName"].'</option>';
     }
 }
 
