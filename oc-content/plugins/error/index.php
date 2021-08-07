@@ -13,7 +13,8 @@
      * 
      * File origin: ATVG-CAD v1.3.0.0 by ATVG-Studios
     **/
-
+    require_once('../../../oc-config.php');
+    require_once( ABSPATH . '/oc-settings.php');
     session_start();
     $error_title = "We are sorry! It looks as a error had occurred.";
     if(!empty($_SESSION['error_title']))
@@ -50,19 +51,19 @@
 <html lang="en">
 
 <head>
-    <?php $_NOLOAD['oc-functions'] = 'true'; include_once("../../../oc-config.php"); ?>
-    <link rel="icon" href="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/images/favicon.ico" />
-    <link href="<?php BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <?php $_NOLOAD['oc-functions'] = 'true';?>
+    <link rel="icon" href="<?php echo BASE_URL . OCTHEMES . "/" . THEME; ?>/images/favicon.ico" />
+    <link href="<?php echo BASE_URL . OCTHEMES . "/" . THEME; ?>/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
         crossorigin="anonymous">
-    <link href="<?php BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/vendors/nprogress/nprogress.css" rel="stylesheet">
-    <link href="<?php BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/vendors/animate.css/animate.min.css" rel="stylesheet">
-    <link href="<?php BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-    <link href="<?php BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-    <link href="<?php BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-    <link href="<?php BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-    <link href="<?php BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-    <link href="<?php BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/css/custom.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL . OCTHEMES . "/" . THEME; ?>/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL . OCTHEMES . "/" . THEME; ?>/vendors/animate.css/animate.min.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL . OCTHEMES . "/" . THEME; ?>/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL . OCTHEMES . "/" . THEME; ?>/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL . OCTHEMES . "/" . THEME; ?>/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL . OCTHEMES . "/" . THEME; ?>/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL . OCTHEMES . "/" . THEME; ?>/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/vendors/coreui/src/css/style.css" rel="stylesheet">
     <style>
         .wrapper{
             overflow:hidden;
