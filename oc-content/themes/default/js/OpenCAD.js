@@ -182,7 +182,7 @@ $('#ncic_plate_btn').on('click', function (e) {
     $.ajax({
         cache: false,
         type: 'POST',
-        url: '../oc-includes/ncic.php',
+        url: hdir + 'oc-includes/ncic.php',
         data: {
             'ncicPlate': 'yes',
             'ncic_plate': plate
@@ -290,7 +290,7 @@ $('#ncic_name_btn').on('click', function (e) {
         success: function (result) {
             console.log(result);
             data = JSON.parse(result);
-
+            
             var textarea = document.getElementById("ncic_name_return");
 
             if (data['noResult'] == "true") {

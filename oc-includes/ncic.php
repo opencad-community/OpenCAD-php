@@ -80,7 +80,7 @@ function name()
 				$encode["deceased"] = $row[10];
             }
 
-            $stmt = $pdo->prepare("SELECT id, nameId, warrantName FROM ".DB_PREFIX."ncic_warrants WHERE nameId = ?");
+            $stmt = $pdo->prepare("SELECT id, nameId, warrantName FROM ".DB_PREFIX."ncicWarrants WHERE nameId = ?");
             $resStatus = $stmt->execute(array($userId));
             $result = $stmt;
 
@@ -136,7 +136,7 @@ function name()
                 }
             }
 
-            $stmt = $pdo->prepare("SELECT id, nameId, citationName FROM ".DB_PREFIX."ncic_citations WHERE nameId = ?");
+            $stmt = $pdo->prepare("SELECT id, nameId, citationName FROM ".DB_PREFIX."ncicCitations WHERE nameId = ?");
             $resStatus = $stmt->execute(array($userId));
             $result = $stmt;
 
@@ -164,7 +164,7 @@ function name()
                 }
             }
 			
-            $stmt = $pdo->prepare("SELECT id, nameId, warningName FROM ".DB_PREFIX."ncic_warnings WHERE nameId = ?");
+            $stmt = $pdo->prepare("SELECT id, nameId, warningName FROM ".DB_PREFIX."ncicWarnings WHERE nameId = ?");
             $resStatus = $stmt->execute(array($userId));
             $result = $stmt;
 
@@ -275,7 +275,7 @@ function weapon()
             die();
         }
     
-        $stmt = $pdo->prepare("SELECT id, name, name, weapon, permit FROM ".DB_PREFIX."ncicNames WHERE name = ?");
+        $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."ncicNames WHERE name = ?");
         $resStatus = $stmt->execute(array($name));
         $result = $stmt;
 
@@ -304,7 +304,7 @@ function weapon()
 
             }
 
-            $stmt = $pdo->prepare("SELECT id, nameId, weaponType, weaponName FROM ".DB_PREFIX."ncic_weapons WHERE nameId = $userId");
+            $stmt = $pdo->prepare("SELECT id, nameId, weaponType, weaponName FROM ".DB_PREFIX."ncicWeapons WHERE nameId = $userId");
             $resStatus = $stmt->execute(array($name));
             $result = $stmt;
 

@@ -20,9 +20,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		include_once(ABSPATH . "/oc-functions.php");
 		include_once(ABSPATH . "/oc-settings.php");
 		include_once(ABSPATH . OCINC . "/generalActions.php");
-		include_once( "../" . OCINC . "/publicFunctions.php" );
-		include_once( "../" . OCINC . "/dispatchActions.php" );
-		include_once( "../" . OCCONTENT . "/plugins/api_auth.php" );
+		include_once( ABSPATH .  OCINC . "/publicFunctions.php" );
+		include_once( ABSPATH . OCINC . "/dispatchActions.php" );
+		include_once( ABSPATH . OCCONTENT . "/plugins/api_auth.php" );
 		if (empty($_SESSION['logged_in']))
 		{
 				header('Location: ../index.php');
