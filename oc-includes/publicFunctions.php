@@ -302,7 +302,7 @@ function getPlateRegisrars()
 		$row = $stmt -> fetch(PDO::FETCH_ASSOC);
 		$dl_issuers = implode($row);
 		// Remove "set(" at start and ");" at end.
-		$dl_issuers  = substr($dl_issuers,17,strlen($dl_issuers)-36);
+		$dl_issuers  = substr($dl_issuers,16,strlen($dl_issuers)-35);
 		$dl_issuers = preg_split("/','/",$dl_issuers);
 
 		foreach ($dl_issuers as $key=>$value)

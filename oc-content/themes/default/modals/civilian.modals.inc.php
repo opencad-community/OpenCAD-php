@@ -178,7 +178,7 @@
 								<label class="col-lg-2 control-label">Address</label>
 								<div class="col-lg-10">
 									<input type="text" name="civAddressReq" class="form-control" id="civAddressReq"
-										value="<?php echo $civAddr;?>" required />
+										value="<?php echo $civAddr;?>" readonly />
 									<span class="fasfa-location-arrow form-control-feedback right"
 										aria-hidden="true"></span>
 								</div>
@@ -188,10 +188,7 @@
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Gender</label>
 								<div class="col-lg-10">
-									<select name="civSexReq" class="form-control selectpicker" id="civSexReq"
-										title="Select a sex" data-live-search="true" required>
-										<?php getGenders();?>
-									</select>
+									<input type="text" name="civSexrReq" class="form-control" id="civGexReq" value="<?php echo $civSex;?>" >
 								</div>
 								<!-- ./ col-sm-9 -->
 							</div>
@@ -200,7 +197,7 @@
 								<label class="col-lg-2 control-label">Hair Color</label>
 								<div class="col-lg-10">
 									<select name="civHairReq" class="form-control selectpicker" id="civHairReq"
-										title="Select a hair color" required>
+										title="Select a hair color" readonly>
 										<option val="bld">Bald</option>
 										<option val="blk">Black</option>
 										<option val="bln">Blonde</option>
@@ -221,7 +218,7 @@
 							</div>
 							<!-- ./ form-group -->
 							<div class="form-group row">
-								<label class="col-lg-2 control-label">Build</label>
+								<label class="col-lg-2 control-label">readonly</label>
 								<div class="col-lg-10">
 									<select name="civBuildReq" class="form-control selectpicker" id="civBuildReq"
 										title="Select a build" required>

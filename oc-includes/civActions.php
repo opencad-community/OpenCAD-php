@@ -18,6 +18,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 
 require_once(__DIR__ . "/../oc-config.php");
+require_once( ABSPATH . "/oc-functions.php");
+require_once( ABSPATH . "/oc-settings.php");
 include_once(__DIR__ . "/../oc-content/plugins/api_auth.php");
 
 
@@ -137,13 +139,15 @@ function ncicGetNames()
                 <th>Hair Color</th>
                 <th>Build</th>
                 <th>Actions</th>
-                </tr>
+                </t>
             </thead>
             <tbody>
         ';
 
         foreach($result as $row)
         {
+
+            if ( CIV_CAN_EDIT_IDENTITIES == true ) { $editButton = '<button name="edit_name" data-toggle="modal" data-target="#IdentityEditModal" id="edit_nameBtn" data-id="'.$row["id"].'" class="btn btn-xs btn-link">Edit</button>';};
             echo '
             <tr>
                 <td>'.$row['name'].'</td>
@@ -155,10 +159,10 @@ function ncicGetNames()
                 <td>'.$row['hairColor'].'</td>
                 <td>'.$row['build'].'</td>
                 <td>
-                    <button name="edit_name" data-toggle="modal" data-target="#IdentityEditModal" id="edit_nameBtn" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
+                    '.$editButton.'
                     <form action="".BASE_URL."/oc-includes/civActions.php" method="post">
                     <input name="delete_name" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
-                    <input name="uid" type="hidden" value='.$row[0].' />
+                    <input name="uid" type="hidden" value='.$row["id"].' />
                     </form>
                 </td>
             </tr>
@@ -396,7 +400,7 @@ function create_name()
     }
     $pdo = null;
 
-    $_SESSION['identityMessage'] = '<div class="alert alert-success"><span>Successfully created your identity!</span></div>';
+    $_SESSION['identityMessage'] = '<div class="alert alert-success"><span>Successfully created identity: '.$fullName.'. Visit the DMV to register your address and get a Driver\'s License or State Identification card.</span></div>';
 
     sleep(1);
     header("Location:".BASE_URL."/".OCAPPS."/civilian.php#name_panel");
@@ -574,7 +578,7 @@ function edit_name()
         $_SESSION['identityMessage'] = '<div class="alert alert-danger"><span>Name already exists</span></div>';
 
         sleep(1);
-        header("Location:".BASE_URL."/civilian.php");
+        header("Location:".BASE_URL."/".OCAPPS."/civilian.php");
     }
 
     // If name doesn't exist, add it to ncic_requests table
@@ -608,7 +612,7 @@ function edit_name()
     $_SESSION['identityMessage'] = '<div class="alert alert-success"><span>Successfully updated the identity.</span></div>';
 
     sleep(1);
-    header("Location:".BASE_URL."/civilian.php#name_panel");
+    header("Location:".BASE_URL."/".OCAPPS."/civilian.php#name_panel");
 
 }
 
@@ -927,7 +931,7 @@ function create_weapon()
         die();
     }
 
-    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncic_weapons (nameId, weaponType, weaponName, userId, notes) VALUES (?, ?, ?, ?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncicWeapons (nameId, weaponType, weaponName, userId, notes) VALUES (?, ?, ?, ?, ?)");
     $result = $stmt->execute(array($userId, $wea_type, $wea_name, $submittedById, $notes));
 
     if (!$result)
@@ -958,7 +962,7 @@ function ncicGetWeapons()
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ncic_weapons.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncic_weapons INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncic_weapons.nameId WHERE ".DB_PREFIX."ncic_weapons.userId = ?");
+    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ncicWeapons.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncicWeapons INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncicWeapons.nameId WHERE ".DB_PREFIX."ncicWeapons.userId = ?");
     $resStatus = $stmt->execute(array($uid));
     $result = $stmt;
 
@@ -1031,7 +1035,7 @@ function delete_weapon()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncic_weapons WHERE id = ?");
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncicWeapons WHERE id = ?");
     $result = $stmt->execute(array($weaid));
 
     if (!$result)
@@ -1126,7 +1130,7 @@ function getNumberOfWeapons()
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT COUNT(nameId) FROM ".DB_PREFIX."ncic_weapons WHERE userId=?");
+    $stmt = $pdo->prepare("SELECT COUNT(nameId) FROM ".DB_PREFIX."ncicWeapons WHERE userId=?");
     $result = $stmt->execute(array($id));
 
     if (!$result)

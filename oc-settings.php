@@ -27,7 +27,7 @@ define( 'OCTHEMEMOD', 'oc-content/themes/'. THEME .'/modals' );
  * these values to be overridden if already set.
  */
 global $oc_version, $oc_db_version, $tinymce_version, $required_php_version, $required_mysql_version, $oc_local_package;
-require( ABSPATH . OCINC . '/version.php' );
+require_once ( ABSPATH . OCINC . '/version.php' );
 
 // Set initial default constants including OC_MEMORY_LIMIT, OC_MAX_MEMORY_LIMIT, OC_DEBUG, SCRIPT_DEBUG, OC_CONTENT_DIR and OC_CACHE.
 oc_initial_constants();

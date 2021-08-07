@@ -652,7 +652,7 @@ function getAOP()
     {
         foreach($result as $row)
         {
-            echo 'AOP: '.$row[1].' ';
+            echo 'AOP: ' . $row[1];
         }
     }
 }

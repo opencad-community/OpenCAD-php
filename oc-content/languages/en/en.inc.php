@@ -166,6 +166,8 @@ $arrLang['COMMUNITY_NAME'] = "Community Name";
 $arrLang['COMMUNITY_NAME_notes'] = "Set your community's name";
 $arrLang['COMMUNITY_NAME_alert'] = "Community Name cannot be empty! Please re-enter.";
 
+$arrLang['COMMUNITY_HOMEPAGE'] = "Community Homepage";
+
 $arrLang['BASE_URL'] = "Application URL";
 $arrLang['BASE_URL_notes'] = "The URL to your installation of OpenCAD inlcuding, if utilized, it's subdirectory
             Valid Examples include:
@@ -368,6 +370,10 @@ $arrLang['MODERATOR_DATAMAN_IMPEXPRESET_notes'] = "If 'true' then Moderators wil
 //** End Administrative Strings**//
 
 //** Begin Extra Settings Strings **//
+$arrLang['LIVEMAP_URL'] = "Livemap URL";
+
+$arrLang['WEBHOOK_URL'] = "Webhook URL";
+
 $arrLang['DEMO_MODE'] = "Demo Mode";
 $arrLang['DEMO_MODE_notes'] = "'true' then various user management features of OpenCAD will be locked down, else if 'false' then OpenCAD's full functionality* will be available to use.";
 
