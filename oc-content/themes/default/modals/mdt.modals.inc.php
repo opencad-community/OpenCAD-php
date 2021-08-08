@@ -1,5 +1,7 @@
-<!-- MDT - Modals -->
+	<?php include_once(__DIR__ . '/../../../../oc-config.php');
+	include_once( ABSPATH . OCINC . "/generalActions.php" ); ?>
 
+<!-- MDT - Modals -->
 	  <!-- MDT - New Call Modal -->
 	  <div class="modal" id="newCall" tabindex="-1" role="dialog" aria-hidden="true">
 		 <div class="modal-dialog modal-md">

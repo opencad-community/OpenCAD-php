@@ -154,21 +154,21 @@ function deleteVehicle(vehicleID) {
 }
 
 // When the user presses enter in ncic_name it does a search
-$("#ncic_name").keyup(function (event) {
+$("#ncicName").keyup(function (event) {
     if (event.keyCode == 13) {
         $("#ncic_name_btn").click();
     }
 });
 
 // When the user presses enter in ncic_plate it does a search
-$("#ncic_plate").keyup(function (event) {
+$("#ncicPlate").keyup(function (event) {
     if (event.keyCode == 13) {
         $("#ncic_plate_btn").click();
     }
 });
 
 // When the user presses enter in ncic_weapon it does a search
-$("#ncic_weapon").keyup(function (event) {
+$("#ncicWeapon").keyup(function (event) {
     if (event.keyCode == 13) {
         $("#ncic_weapon_btn").click();
     }
@@ -176,16 +176,16 @@ $("#ncic_weapon").keyup(function (event) {
 
 // Handles the NCIC Plate Lookup on cad.php
 $('#ncic_plate_btn').on('click', function (e) {
-    var plate = document.getElementById('ncic_plate').value;
+    var plate = document.getElementById('ncicPlate').value;
     $('#ncic_plate_return').empty();
 
     $.ajax({
         cache: false,
         type: 'POST',
-        url: hdir + 'oc-includes/ncic.php',
+        url: "oc-includes/ncic.php",
         data: {
             'ncicPlate': 'yes',
-            'ncic_plate': plate
+            'ncicPlate': plate
         },
 
         success: function (result) {
@@ -222,7 +222,7 @@ $('#ncic_plate_btn').on('click', function (e) {
 
                 //Convert plate to phoentic
                 var phoentic = "";
-                var text = data['plate'];
+                var text = plate;
                 var result = '';
 
                 text = text.toUpperCase();
@@ -262,7 +262,7 @@ $('#ncic_plate_btn').on('click', function (e) {
 
                 phoentic = result;
 
-                $('#ncic_plate_return').append("Plate: " + data['plate'] + "<br/>Phoenetic: " + phoentic + "<br/>Primary Color: " + data['vehPrimaryColor'] + "<br/>Secondary Color: " + data['vehSecondaryColor'] + "<br/>Make: " + data['vehMake'] + "<br/>Model: " + data['vehModel'] + "<br/>Owner: " + data['veh_ro']
+                $('#ncic_plate_return').append("Plate: " + plate + "<br/>Phoenetic: " + phoentic + "<br/>Primary Color: " + data['vehPrimaryColor'] + "<br/>Secondary Color: " + data['vehSecondaryColor'] + "<br/>Make: " + data['vehMake'] + "<br/>Model: " + data['vehModel'] + "<br/>Owner: " + data['veh_ro']
                     + "<br/>Insurance: " + insurance_status + "<br/>Flags: " + flags + "<br/><br/>Notes: " + notes);
 
                 $("#ncic_plate_return").attr("tabindex", -1).focus();
@@ -275,16 +275,16 @@ $('#ncic_plate_btn').on('click', function (e) {
 
 // Handles the NCIC Name Lookup on cad.php
 $('#ncic_name_btn').on('click', function (e) {
-    var name = document.getElementById('ncic_name').value;
+    var name = document.getElementById('ncic').value;
     $('#ncic_name_return').empty();
 
     $.ajax({
         cache: false,
         type: 'POST',
-        url: hdir + "oc-includes/ncic.php",
+        url: "oc-includes/ncic.php",
         data: {
             'ncicName': 'yes',
-            'ncic_name': name
+            'ncicName': name
         },
 
         success: function (result) {
@@ -378,8 +378,8 @@ $('#ncic_name_btn').on('click', function (e) {
                     + "<br/>Build: " + data['build']
                     + "<br/>Address: " + data['address']
                     + "<br/>DL Status: " + dl_status_text
-                    + "<br/>DL Type: " + dl_type_text
-                    + "<br/>DL Issued: " + dlIssuer
+                    + "<br/>DL Type: " + data['dlType']
+                    + "<br/>DL Issued By: " + data['dlIssuer']
                     + "<br/>Weapon Permit: " + weapon_permit_text
                     + "<br/>Deceased: " + deceased_text
                     + "<br/><br/>Warnings:<br/>" + warningText + "<br/><br/>Citations:<br/>" + citationText + "<br/>Arrests:<br/>" + arrestText + "<br/>Warrants:<br/>" + warrantText);
@@ -394,16 +394,16 @@ $('#ncic_name_btn').on('click', function (e) {
 
 
 $('#ncic_weapon_btn').on('click', function (e) {
-    var name = document.getElementById('ncic_weapon').value;
+    var name = document.getElementById('ncicWeapon').value;
     $('#ncic_weapon_return').empty();
 
     $.ajax({
         cache: false,
         type: 'POST',
-        url: hdir + "oc-includes/ncic.php",
+        url: "oc-includes/ncic.php",
         data: {
             'ncicWeapon': 'yes',
-            'ncic_weapon': name
+            'ncicWeapon': name
         },
 
         success: function (result) {
@@ -617,7 +617,7 @@ function getActiveDispatchers() {
 function getUnAvailableUnits() {
     $.ajax({
         type: "GET",
-        url: hdir + "oc-includes/generalActions.php",
+        url: "oc-includes/generalActions.php",
         data: {
             getUnAvailableUnits: 'yes'
         },
@@ -792,7 +792,7 @@ function getCalls() {
 
     $.ajax({
         type: "GET",
-        url: hdir + "oc-includes/generalActions.php",
+        url:  "oc-includes/generalActions.php",
         data: {
             getCalls: 'yes',
             type: file
@@ -922,7 +922,7 @@ function priorityTone(type) {
 function checkTones() {
     $.ajax({
         type: "GET",
-        url: hdir + "oc-includes/generalActions.php",
+        url: "oc-includes/generalActions.php",
         data: {
             checkTones: 'yes'
         },

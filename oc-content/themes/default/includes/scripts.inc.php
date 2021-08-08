@@ -67,8 +67,8 @@
 
     <!-- Custom Theme Scripts -->
     <script type="text/javascript" src="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/vendors/coreui/src/js/coreui.min.js"></script>
-    <script src="<?php echo BASE_URL;?>/oc-includes/OpenCAD.js"></script>
-    <script src="<?php echo BASE_URL; ?>/oc-includes/custom.js"></script>
+    <script src="<?php echo OCTHEMEJS ?>/OpenCAD.js"></script>
+    <script src="<?php echo OCTHEMEJS ?>/theme.js"></script>
 
     <script type="text/javascript">
     $('.datepicker').datepicker();

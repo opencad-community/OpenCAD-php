@@ -220,7 +220,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<!-- ./ x_title -->
 								<div class="card-body">
 									<div class="input-group">
-										<input id="ncic_name" type="text" class="form-control" placeholder="John Doe" name="ncic_name"/>
+										<input id="ncicName" type="text" class="form-control" placeholder="John Doe" name="ncicName"/>
 										<span class="input-group-append">
 											<button class="btn btn-primary" type="button" name="ncic_name_btn" id="ncic_name_btn"><?php echo lang_key("SEND"); ?></button>
 										</span>
@@ -243,7 +243,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<!-- ./ x_title -->
 							<div class="card-body">
 								<div class="input-group">
-									<input type="text" name="ncic_plate" class="form-control" id="ncic_plate" placeholder="License Plate, (ABC123)"/>
+									<input type="text" name="ncicPlate" class="form-control" id="ncicPlate" placeholder="License Plate, (ABC123)"/>
 									<span class="input-group-append">
 										<button type="button" class="btn btn-primary" id="ncic_plate_btn"><?php echo lang_key("SEND"); ?></button>
 									</span>
@@ -266,7 +266,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<!-- ./ x_title -->
 							<div class="card-body">
 								<div class="input-group">
-									<input type="text" name="ncic_weapon" class="form-control" id="ncic_weapon" placeholder="John Doe"/>
+									<input type="text" name="ncicWeapon" class="form-control" id="ncicWeapon" placeholder="John Doe"/>
 									<span class="input-group-append">
 										<button type="button" class="btn btn-primary" name="ncic_weapon_btn" id="ncic_weapon_btn"><?php echo lang_key("SEND"); ?></button>
 									</span>
@@ -274,7 +274,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<!-- ./ input-group -->
 								<div name="ncic_weapon_return" id="ncic_weapon_return" contenteditable="false" style="background-color: #eee; opacity: 1;  font-size: 15px; font-weight: bold;">
 								</div>
-								<!-- ./ ncic_name_return -->
+								<!-- ./ ncic_weapon_return -->
 							</div>
 							<!-- ./ x_content -->
 						</div>
@@ -303,23 +303,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				 var vid = document.getElementById("recurringToneAudio");
 				 vid.volume = 0.3;
 
-	$(function() {
-		$( "#ncic_name" ).autocomplete({
-			source: "../<?php echo OCINC ?>/search_name.php"
-		});
-	});
-
-	$(function() {
-		$( "#ncic_plate" ).autocomplete({
-			source: "../<?php echo OCINC ?>/search_plate.php"
-		});
-	});
-	
-	$(function() {
-		$( "#ncic_weapon" ).autocomplete({
-			source: "../<?php echo OCINC ?>/search_name.php"
-		});
-	});
 	
 		$(document).ready(function() {
 				$('#ncic_warnings').DataTable({
@@ -398,6 +381,24 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								 sticker: false
 						 }
 				 });
+
+				 $(function() {
+		$( "#ncicName" ).autocomplete({
+			source: "../<?php echo OCINC ?>/search_name.php"
+		});
+	});
+
+	$(function() {
+		$( "#ncicPlate" ).autocomplete({
+			source: "../<?php echo OCINC ?>/search_plate.php"
+		});
+	});
+	
+	$(function() {
+		$( "#ncicWeapon" ).autocomplete({
+			source: "../<?php echo OCINC ?>/search_name.php"
+		});
+	});
 				 function testFunction(element)
 				 {
 					 statusInit = element.className;

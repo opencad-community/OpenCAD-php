@@ -17,9 +17,9 @@ require_once( ABSPATH . "/oc-content/plugins/api_auth.php");
 
 if (isset($_POST['ncicName'])){
     name();
-}else if (isset($_POST['ncic_plate'])){
+}else if (isset($_POST['ncicPlate'])){
     plate();
-}else if (isset($_POST['ncic_weapon'])){
+}else if (isset($_POST['ncicWeapon'])){
     weapon();
 }
 
@@ -40,7 +40,7 @@ function name()
             die();
         }
 
-        $stmt = $pdo->prepare("SELECT id, name, dob, address, gender, race, dlIssuer dlStatus, dlType, hairColor, build, weaponPermitStatus, deceased, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS age FROM ".DB_PREFIX."ncicNames WHERE name = ?");
+        $stmt = $pdo->prepare("SELECT id, name, dob, address, gender, race, dlIssuer, dlStatus, dlType, hairColor, build, weaponPermitStatus, deceased, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS age FROM ".DB_PREFIX."ncicNames WHERE name = ?");
         $resStatus = $stmt->execute(array($name));
         $result = $stmt;
 
@@ -65,19 +65,18 @@ function name()
                 $userId = $row[0];
                 $encode["userId"] = $row[0];
                 $encode["name"] = $row[1];
-                $encode["dob"] = $row[2];
-                $encode["age"] = $row[11];
-                $encode["address"] = $row[3];
-                $encode["sex"] = $row[4];
-                $encode["race"] = $row[5];
-                $encode["dlStatus"] = $row[6];
-                $encode["dlType"] = $row[12];
-                $encode["dlClass"] = $row[8];
-                $encode["dlIssuer"] = $row[9];
-                $encode["hairColor"] = $row[7];
-                $encode["build"] = $row[8];
-				$encode["weaponPermitStatus"] = $row[9];
-				$encode["deceased"] = $row[10];
+                $encode["dob"] = $row["dob"];
+                $encode["address"] = $row["address"];
+                $encode["sex"] = $row["gender"];
+                $encode["race"] = $row["race"];
+                $encode["dlStatus"] = $row["dlStatus"];
+                $encode["dlType"] = $row["dlType"];
+                $encode["dlClass"] = $row["dlCass"];
+                $encode["dlIssuer"] = $row["dlIssuer"];
+                $encode["hairColor"] = $row["hairColor"];
+                $encode["build"] = $row["build"];
+				$encode["weaponPermitStatus"] = $row["weaponPermitStatus"];
+				$encode["deceased"] = $row["deceased"];
             }
 
             $stmt = $pdo->prepare("SELECT id, nameId, warrantName FROM ".DB_PREFIX."ncicWarrants WHERE nameId = ?");
@@ -203,7 +202,7 @@ function name()
 
 function plate()
 {
-    $plate = htmlspecialchars($_POST['vehPlate']);
+    $plate = htmlspecialchars($_POST['ncicPlate']);
 
     try{
         $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -258,7 +257,7 @@ function plate()
 
 function weapon()
 {
-    $name = htmlspecialchars($_POST['ncic_weapon']);
+    $name = htmlspecialchars($_POST['ncicWweapon']);
     $nameId = htmlspecialchars($_POST['ncic_weapon_id']);
     
 
@@ -304,7 +303,7 @@ function weapon()
 
             }
 
-            $stmt = $pdo->prepare("SELECT id, nameId, weaponType, weaponName FROM ".DB_PREFIX."ncicWeapons WHERE nameId = $userId");
+            $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."ncicWeapons WHERE nameId = $userId");
             $resStatus = $stmt->execute(array($name));
             $result = $stmt;
 

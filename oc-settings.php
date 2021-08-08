@@ -21,6 +21,7 @@ define( 'OCCONTENT', 'oc-content' );
 define( 'OCTHEMES', 'oc-content/themes' );
 define( 'OCTHEMEINC', 'oc-content/themes/'. THEME .'/includes' );
 define( 'OCTHEMEMOD', 'oc-content/themes/'. THEME .'/modals' );
+define( 'OCTHEMEJS', 'oc-content/themes/'. THEME .'/js' );
 /*
  * These can't be directly globalized in version.php. When updating,
  * we're including version.php from another installation and don't want
