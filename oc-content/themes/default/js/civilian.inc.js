@@ -61,15 +61,17 @@ $(function() {
                 cache: false
             })
             .done(function(data) {
+                console.log(data);
                 $('#IdentityEditModal #civNameReq').val(data.name);
                 $('#IdentityEditModal #datepicker2').datepicker({
                     dateFormat: 'yy-mm-dd'
                 }).datepicker('setDate', new Date(data.dob));
                 $('#IdentityEditModal #civAddressReq').val(data.address);
-                $('.selectpicker3').selectpicker('val', data.gender);
+                $('#IdentityEditModal #civSexReq').val(data.gender);
                 $('.civRaceReq_picker').selectpicker('val', data.race);
                 $('.civDL_picker').selectpicker('val', data.dl_status);
-                $('.civHairReq_picker').selectpicker('val', data.hairColor);
+                $('#IdentityEditModal #civHairReq').val(data.hairColor);
+                $('#IdentityEditModal #civBuildReq').val(data.build);
                 $('.civBuildReq_picker').selectpicker('val', data.build);
                 $('.civWepStat_picker').selectpicker('val', data.weapon_permit);
                 $('.civDec_picker').selectpicker('val', data.deceased);
