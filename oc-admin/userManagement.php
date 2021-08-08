@@ -138,16 +138,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			<div class="col-sm-2 col-sm-2">
 				<div class="card text-white bg-primary">
 				<div class="card-body pb-0">
-					<div class="text-value"><?php echo getGroupCount("5");?></div>
-					<div><?php echo getGroupName("5");?></div>
-					<br />
-				</div>
-				</div>
-			</div>
-			<!-- /.col-->
-			<div class="col-sm-2 col-sm-2">
-				<div class="card text-white bg-primary">
-				<div class="card-body pb-0">
 					<div class="text-value"><?php echo getGroupCount("6");?></div>
 					<div><?php echo getGroupName("6");?></div>
 					<br />
@@ -160,6 +150,16 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				<div class="card-body pb-0">
 					<div class="text-value"><?php echo getGroupCount("7");?></div>
 					<div><?php echo getGroupName("7");?></div>
+					<br />
+				</div>
+				</div>
+			</div>
+			<!-- /.col-->
+			<div class="col-sm-2 col-sm-2">
+				<div class="card text-white bg-primary">
+				<div class="card-body pb-0">
+					<div class="text-value"><?php echo getGroupCount("8");?></div>
+					<div><?php echo getGroupName("8");?></div>
 					<br />
 				</div>
 				</div>
