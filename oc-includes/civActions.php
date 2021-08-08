@@ -910,8 +910,8 @@ function create_weapon()
 	session_start();
 
     $weapon = htmlspecialchars($_POST['weapon_all']);
-    $wea_type = explode("&#8212;", $weapon) [0];
-    $wea_name = explode("&#8212;", $weapon) [0];
+    $wea_type = explode("—", $weapon) [0];
+    $wea_name = explode("—", $weapon) [1];
 
     $uid = $_SESSION['id'];
 

@@ -257,7 +257,7 @@ function plate()
 
 function weapon()
 {
-    $name = htmlspecialchars($_POST['ncicWweapon']);
+    $name = htmlspecialchars($_POST['ncicWeapon']);
     $nameId = htmlspecialchars($_POST['ncic_weapon_id']);
     
 
@@ -325,7 +325,7 @@ function weapon()
                 foreach($result as $row)
                 {
                     $encode["nameId"] = $row['nameId'];
-                    $encode['weaponId'][$warrantIndex] = $row[id];
+                    $encode['weaponId'][$warrantIndex] = $row["ncicNid"];
                     $encode['weaponName'][$warrantIndex] = "$row[weaponType] | $row[weaponName]";
 
                     $warrantIndex++;

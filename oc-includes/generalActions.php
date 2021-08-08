@@ -1736,7 +1736,7 @@ function getWeapons()
 
     foreach($result as $row)
     {
-        echo '<option value="'.$row[1].' '.$row[2].'">'.$row[1].'&#8212;'.$row[2].'</option>';
+        echo '<option value="'.$row["weaponType"].' &#8212; '.$row["weaponName"].'">'.$row["weaponType"].' &#8212; '.$row["weaponName"].'</option>';
     }
 }
 

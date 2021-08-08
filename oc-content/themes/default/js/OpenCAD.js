@@ -206,18 +206,18 @@ $('#ncic_plate_btn').on('click', function (e) {
 
                 var notes = "";
                 if (data['notes'] == "") {
-                    notes = "NO VEHICLE NOTES";
+                    notes_text = "NO VEHICLE NOTES";
                 }
                 else {
-                    notes = "<span style=\"font-weight: bold;\">" + data['notes'] + "</span>";
+                    notes_text = "<span style=\"font-weight: bold;\">" + data['notes'] + "</span>";
                 }
 
                 var flags = "";
-                if (data['flags'] == "NONE") {
-                    flags = "<span style=\"color: green;\">None</span>";
+                if (data['flags'] == "NONE" | data['flags'] == "" ) {
+                    flags_text = "<span style=\"color: green;\">None</span>";
                 }
                 else {
-                    flags = "<span style=\"color: red;\">" + data['flags'] + "</span>";
+                    flags_text = "<span style=\"color: red;\">" + data['flags'] + "</span>";
                 }
 
                 //Convert plate to phoentic
@@ -262,8 +262,8 @@ $('#ncic_plate_btn').on('click', function (e) {
 
                 phoentic = result;
 
-                $('#ncic_plate_return').append("Plate: " + plate + "<br/>Phoenetic: " + phoentic + "<br/>Primary Color: " + data['vehPrimaryColor'] + "<br/>Secondary Color: " + data['vehSecondaryColor'] + "<br/>Make: " + data['vehMake'] + "<br/>Model: " + data['vehModel'] + "<br/>Owner: " + data['veh_ro']
-                    + "<br/>Insurance: " + insurance_status + "<br/>Flags: " + flags + "<br/><br/>Notes: " + notes);
+                $('#ncic_plate_return').append("Plate: " + plate + "<br/>Phoenetic: " + phoentic + "<br/><br/>Primary Color: " + data['vehPrimaryColor'] + "<br/>Secondary Color: " + data['vehSecondaryColor'] + "<br/><br/>Make: " + data['vehMake'] + "<br/>Model: " + data['vehModel'] + "<br/><br/>Owner: " + data['veh_ro']
+                    + "<br/>Insurance: " + insurance_status + "<br/>Flags: " + flags_text + "<br/><br/>Notes: " + notes_text);
 
                 $("#ncic_plate_return").attr("tabindex", -1).focus();
             }
@@ -275,7 +275,7 @@ $('#ncic_plate_btn').on('click', function (e) {
 
 // Handles the NCIC Name Lookup on cad.php
 $('#ncic_name_btn').on('click', function (e) {
-    var name = document.getElementById('ncic').value;
+    var name = document.getElementById('ncicName').value;
     $('#ncic_name_return').empty();
 
     $.ajax({
@@ -466,7 +466,7 @@ $(function () {
 
         $.ajax({
             type: "POST",
-            url: hdir + "oc-includes/dispatchActions.php",
+            url: "oc-includes/dispatchActions.php",
             data: {
                 newCall: 'yes',
                 details: $("#" + this.id).serialize()
@@ -507,7 +507,7 @@ $(function () {
 
         $.ajax({
             type: "POST",
-            url: hdir + "oc-includes/dispatchActions.php",
+            url: "oc-includes/dispatchActions.php",
             data: {
                 addNarrative: 'yes',
                 callId: $('#callId_det').val(),
