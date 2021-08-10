@@ -11,6 +11,8 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
+require_once("oc-config.php");
+require_once( ABSPATH . "/oc-includes/version.php");
 
 $lang = isset($_REQUEST['lang']) ? prepare_input($_REQUEST['lang']) : '';
 	
@@ -27,42 +29,40 @@ if(!empty($lang) && array_key_exists($lang, $arr_active_languages)){
 	$curr_lang_direction = DEFAULT_LANGUAGE_DIRECTION;
 }
 
-if(file_exists('/oc-lang/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
-	include_once('/oc-lang/'.$curr_lang.'/'.$curr_lang.'.inc.php');
-}else if(file_exists('../oc-lang/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
-	include_once('../oc-lang/'.$curr_lang.'/'.$curr_lang.'.inc.php');
-}else if(file_exists('../../oc-lang/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
-	include_once('../../oc-lang/'.$curr_lang.'/'.$curr_lang.'.inc.php');
+if(file_exists('/oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
+	include_once('/oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php');
+}else if(file_exists('../oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
+	include_once('../oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php');
+}else if(file_exists('../../oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php')){
+	include_once('../../oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php');
 }else{
-	include_once('./oc-lang/en/en.inc.php');    	
+	include_once( ABSPATH .'/oc-content/languages/en/en.inc.php');    	
 }	
 
-
- if(version_compare(PHP_VERSION, '7.1', '<')) {
-	session_start();
-	$_SESSION['error_title'] = "Incompatable PHP Version";
-	$_SESSION['error'] = "An incompatable version  of PHP is active. OpenCAD requires PHP 7.1 at minimum, the current recommended version is 7.2. Currently PHP ".phpversion()." is active, please contact your server administrator.";
-	header('Location: '.BASE_URL.'/plugins/error/index.php');
+/**
+* @return bool
+*/
+function isSessionStarted()
+{
+    if ( php_sapi_name() !== 'cli' | php_sapi_name() === 'cgi' ){
+        if ( version_compare(phpversion(), MINIMUM_PHP_VERSION, '<') ) {
+			session_start();
+			$_SESSION['error_title'] = "Incompatable PHP Version";
+			$_SESSION['error'] = "An incompatable version of PHP is active. OpenCAD requires PHP " . MINIMUM_PHP_VERSION . " at minimum, the current recommended version is " . RECOMENDED_PHP_VERSION . " Currently PHP ".phpversion()." is active, please contact your server administrator.";
+			header('Location:'.BASE_URL.'/oc-content/plugins/error/index.php');
+			return session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE;
+			die();
+        } else {
+			session_start();			
+        }
+    }
+    return FALSE;
+	die();
 }
-
-if ( OC_DEBUG == "true" )
-	{	
-		session_start();
-		ini_set('display_errors', 1);
-		ini_set('display_startup_errors', 1);
-		error_reporting(E_ALL);
-		echo "<pre>";
-		print_r($_SESSION);
-		echo "</pre>";
-	} else {
-		ini_set('display_errors', 0);
-		ini_set('display_startup_errors', 0);
-		error_reporting(E_ERROR);
-	}
 
 if(!file_exists(getcwd().'/.htaccess') && is_writable(getcwd())){
 	
-	$root = str_replace($_SERVER['DOCUMENT_ROOT'], '', getcwd())."/plugins/error/static";
+	$root = str_replace($_SERVER['DOCUMENT_ROOT'], '', getcwd())."/oc-content/plugins/error/static";
 
 	$htaccess =	"RewriteEngine on".PHP_EOL
 				."RewriteCond %{REQUEST_FILENAME} -d".PHP_EOL
@@ -95,9 +95,11 @@ function get_avatar() {
 	    $url .= "?size=200&default=https://i.imgur.com/VN4YCW7.png";
 	    return $url;
 		}else{
-			return "https://i.imgur.com/VN4YCW7.png";
+			return "//i.imgur.com/VN4YCW7.png";
 		}
 }
+
+
 
 /**#@+
   * function getMySQLVersion()
@@ -224,18 +226,6 @@ function generateRandomString($length = 10) {
 }
 
 /**#@+
-  * function getOpenCADVersion()
-	* Get current installed version of OpenCAD.
-	*
-	* @since 0.2.0
-	*
-	**/
-function getOpenCADVersion()
-{
-	echo '0.3.2 Update 01/15/2021';
-}
-
-/**#@+
 * function function()
 * Description of function
 *
@@ -246,8 +236,25 @@ function permissionDenied()
 {
 	$_SESSION['error_title'] = "Permission Denied";
 	$_SESSION['error'] = "Sorry, you don't have permission to access this page.";
-	header('Location: '.BASE_URL.'/plugins/error/index.php');
+	header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
 	die();
 }
+
+/**
+ * 	Returns language key
+ * 		@param $key
+ */
+function lang_key($key){
+	global $arrLang;
+        $output = '';
+        
+	if(isset($arrLang[$key])){
+		$output = $arrLang[$key];
+	}else{
+		$output = str_replace('_', ' ', $key);		
+	}
+	return $output;
+}
+
 
 ?>

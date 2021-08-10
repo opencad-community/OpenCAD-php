@@ -80,10 +80,10 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="author" content="OpenCAD Project">
-    <meta name="generator" content="OpenCAD Project Installer">
+    <meta name="generator" content="OpenCAD Project">
 	<title><?php echo lang_key("installation_guide"); ?> | System Settings</title>
 
-	<link href="../images/favicon.ico" rel="shortcut icon" />
+	<link href="./images/favicon.ico" rel="shortcut icon" />
 	<link rel="stylesheet" type="text/css" href="templates/<?php echo EI_TEMPLATE; ?>/css/styles.css" />
 	<?php
 		if($curr_lang_direction == 'rtl'){
@@ -241,7 +241,7 @@
 			<tr><td colspan="2" nowrap height="50px">&nbsp;</td></tr>
 			<tr>
 				<td colspan="2">
-					<a href="core_configuration.php" class="form_button" /><?php echo lang_key('back'); ?></a>
+					<a rel="noopener" href="core_configuration.php" class="form_button" /><?php echo lang_key('back'); ?></a>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="submit" class="form_button" value="<?php echo lang_key('continue'); ?>" />
 				</td>

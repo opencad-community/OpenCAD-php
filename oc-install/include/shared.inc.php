@@ -33,14 +33,3 @@ function generateRandomString2($length = 10) {
     return $randomString;
 }
 
-// *** disabling magic quotes at runtime
-if(get_magic_quotes_gpc()){
-    function stripslashes_gpc(&$value) {
-		$value = stripslashes($value);	
-	}
-    array_walk_recursive($_GET, 'stripslashes_gpc');
-    array_walk_recursive($_POST, 'stripslashes_gpc');
-    array_walk_recursive($_COOKIE, 'stripslashes_gpc');
-    if(is_array($_REQUEST)) array_walk_recursive($_REQUEST, 'stripslashes_gpc');
-}
-

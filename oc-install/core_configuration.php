@@ -25,6 +25,7 @@
 	if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 		$COMMUNITY_NAME = isset($_POST['COMMUNITY_NAME']) ? prepare_input($_POST['COMMUNITY_NAME']) : '';
+		$COMMUNITY_HOMEPAGE = isset($_POST['COMMUNITY_HOMEPAGE']) ? prepare_input($_POST['COMMUNITY_HOMEPAGE']) : '';
 		$BASE_URL = isset($_POST['BASE_URL']) ? prepare_input($_POST['BASE_URL']) : '';
 		$API_SECURITY = isset($_POST['API_SECURITY']) ? prepare_input($_POST['API_SECURITY']) : '';
 
@@ -39,22 +40,25 @@
 		$SECURE_AUTH_SALT = isset($_POST['SECURE_AUTH_SALT']) ? prepare_input($_POST['SECURE_AUTH_SALT']) : '';
 		$LOGGED_IN_SALT = isset($_POST['LOGGED_IN_SALT']) ? prepare_input($_POST['LOGGED_IN_SALT']) : '';
 		$NONCE_SALT = isset($_POST['NONCE_SALT']) ? prepare_input($_POST['NONCE_SALT']) : '';
+		$COOKIE_NAME = isset($_POST['COOKIE_NAME']) ? prepare_input($_POST['COOKIE_NAME']) : '';
 		
 		$_SESSION['COMMUNITY_NAME'] = $COMMUNITY_NAME;
+		$_SESSION['COMMUNITY_HOMEPAGE'] = $COMMUNITY_HOMEPAGE;
 		$_SESSION['BASE_URL'] = $BASE_URL;
 		$_SESSION['API_SECURITY'] = $API_SECURITY;
-		
-		$_SESSION['CAD_FROM_EMAIL'] = $CAD_FROM_EMAIL;	
-		$_SESSION['CAD_TO_EMAIL'] = $CAD_TO_EMAIL;			
-		
-		$_SESSION['AUTH_KEY'] = $AUTH_KEY;			
-		$_SESSION['SECURE_AUTH_KEY'] = $SECURE_AUTH_KEY;			
-		$_SESSION['LOGGED_IN_KEY'] = $LOGGED_IN_KEY;			
-		$_SESSION['NONCE_KEY'] = $NONCE_KEY;			
-		$_SESSION['AUTH_SALT'] = $AUTH_SALT;			
-		$_SESSION['SECURE_AUTH_SALT'] = $SECURE_AUTH_SALT;			
-		$_SESSION['LOGGED_IN_SALT'] = $LOGGED_IN_SALT;			
-		$_SESSION['NONCE_SALT'] = $NONCE_SALT;		
+
+		$_SESSION['CAD_FROM_EMAIL'] = $CAD_FROM_EMAIL;
+		$_SESSION['CAD_TO_EMAIL'] = $CAD_TO_EMAIL;
+
+		$_SESSION['AUTH_KEY'] = $AUTH_KEY;
+		$_SESSION['SECURE_AUTH_KEY'] = $SECURE_AUTH_KEY;
+		$_SESSION['LOGGED_IN_KEY'] = $LOGGED_IN_KEY;
+		$_SESSION['NONCE_KEY'] = $NONCE_KEY;
+		$_SESSION['AUTH_SALT'] = $AUTH_SALT;
+		$_SESSION['SECURE_AUTH_SALT'] = $SECURE_AUTH_SALT;
+		$_SESSION['LOGGED_IN_SALT'] = $LOGGED_IN_SALT;
+		$_SESSION['NONCE_SALT'] = $NONCE_SALT;
+		$_SESSION['COOKIE_NAME'] = $COOKIE_NAME;
 
 		$_SESSION['passed_step'] = 5;
 		header('location: department_configuration.php');
@@ -62,7 +66,8 @@
 
 	}else{
 	    $COMMUNITY_NAME = isset($_POST['COMMUNITY_NAME']) ? prepare_input($_POST['COMMUNITY_NAME']) : '';
-		
+		$COMMUNITY_HOMEPAGE = isset($_POST['COMMUNITY_HOMEPAGE']) ? prepare_input($_POST['COMMUNITY_HOMEPAGE']) : '';
+
 		$BASE_URL = isset($_POST['BASE_URL']) ? prepare_input($_POST['BASE_URL']) : '';
 		
 		$API_SECURITY = isset($_POST['API_SECURITY']) ? prepare_input($_POST['API_SECURITY']) : '';
@@ -78,6 +83,7 @@
 		$SECURE_AUTH_SALT = isset($_POST['SECURE_AUTH_SALT']) ? prepare_input($_POST['SECURE_AUTH_SALT']) : '';
 		$LOGGED_IN_SALT = isset($_POST['LOGGED_IN_SALT']) ? prepare_input($_POST['LOGGED_IN_SALT']) : '';
 		$NONCE_SALT = isset($_POST['NONCE_SALT']) ? prepare_input($_POST['NONCE_SALT']) : '';
+		$COOKIE_NAME = isset($_POST['COOKIE_NAME']) ? prepare_input($_POST['COOKIE_NAME']) : '';
 
 	}
 ?>	
@@ -90,7 +96,7 @@
     <meta name="generator" content="OpenCAD Project Installer">
 	<title><?php echo lang_key("installation_guide"); ?> | System Settings</title>
 
-	<link href="../images/favicon.ico" rel="shortcut icon" />
+	<link href="./images/favicon.ico" rel="shortcut icon" />
 	<link rel="stylesheet" type="text/css" href="templates/<?php echo EI_TEMPLATE; ?>/css/styles.css" />
 	<?php
 		if($curr_lang_direction == 'rtl'){
@@ -136,37 +142,14 @@
 				<td colspan="3"><span class="star">*</span> <?php echo lang_key('alert_required_fields'); ?></td>
 			</tr>
 			<tr><td nowrap height="10px" colspan="3"></td></tr>
+
 			<tr>
 				<td width="250px">&nbsp;<?php echo lang_key('COMMUNITY_NAME'); ?>&nbsp;<span class="star">*</span></td>
 				<td><input name="COMMUNITY_NAME" id="COMMUNITY_NAME" value="My Community" class="form_text" size="28" maxlength="22" value="<?php echo $COMMUNITY_NAME; ?>" onfocus="textboxOnFocus('COMMUNITY_NAME_notes')" onblur="textboxOnBlur('COMMUNITY_NAME_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
-				<td rowspan="6" valign="top">					
-					<div id="API_SECURITY_notes" class="notes_container">
-						<h4><?php echo lang_key('API_SECURITY'); ?></h4>
-						<p><?php echo lang_key('API_SECURITY_notes'); ?></p>
-					</div>
-					<div id="COMMUNITY_NAME_notes" class="notes_container">
-						<h4><?php echo lang_key('COMMUNITY_NAME'); ?></h4>
-						<p><?php echo lang_key('COMMUNITY_NAME_notes'); ?></p>
-					</div>
-					<div id="BASE_URL_notes" class="notes_container">
-						<h4><?php echo lang_key('BASE_URL'); ?></h4>
-						<p><?php echo lang_key('BASE_URL_notes'); ?></p>
-					</div>
-					<div id="CAD_FROM_EMAIL_notes" class="notes_container">
-						<h4><?php echo lang_key('CAD_FROM_EMAIL_URL'); ?></h4>
-						<p><?php echo lang_key('CAD_FROM_EMAIL_notes'); ?></p>
-					</div>
-					<div id="CAD_TO_EMAIL_notes" class="notes_container">
-						<h4><?php echo lang_key('CAD_TO_EMAIL_URL'); ?></h4>
-						<p><?php echo lang_key('CAD_TO_EMAIL_notes'); ?></p>
-					</div>
-					<div id="SECURITY_KEYS_notes" class="notes_container">
-						<h4><?php echo lang_key('SECURITY_KEYS_URL'); ?></h4>
-						<p><?php echo lang_key('SECURITY_KEYS_notes'); ?></p>
-					</div>
-					<img class="loading_img" src="images/ajax_loading.gif" alt="<?php echo lang_key('loading'); ?>..." />
-					<div id="notes_message" class="notes_container"></div>					
-				</td>
+			</tr>
+			<tr>
+				<td width="250px">&nbsp;<?php echo lang_key('COMMUNITY_HOMEPAGE'); ?>&nbsp;<span class="star">*</span></td>
+				<td><input name="COMMUNITY_HOMEPAGE" id="COMMUNITY_HOMEPAGE" value="//www.opencad.io/" class="form_text" size="28" maxlength="40" value="<?php echo $COMMUNITY_NAME; ?>" onfocus="textboxOnFocus('COMMUNITY_NAME_notes')" onblur="textboxOnBlur('COMMUNITY_HOMEPAGE_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('BASE_URL'); ?>&nbsp;<span class="star">*</span></td>
@@ -189,39 +172,43 @@
 			<tr><td colspan="2" nowrap height="50px">&nbsp;</td></tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('AUTH_KEY'); ?>&nbsp;<span class="star">*</span></td>
-				<td><input name="AUTH_KEY" id="AUTH_KEY" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="255" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('AUTH_KEY_notes')" onblur="textboxOnBlur('SECURITY_KEYS_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+				<td><input name="AUTH_KEY" id="AUTH_KEY" value="<?php echo random_str(128); ?>" class="form_text" size="28" maxlength="255" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('AUTH_KEY_notes')" onblur="textboxOnBlur('SECURITY_KEYS_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('SECURE_AUTH_KEY'); ?>&nbsp;<span class="star">*</span></td>
-				<td><input name="SECURE_AUTH_KEY" id="SECURE_AUTH_KEY" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('SECURE_AUTH_KEY_notes')" onblur="textboxOnBlur('SECURITY_KEYS_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+				<td><input name="SECURE_AUTH_KEY" id="SECURE_AUTH_KEY" value="<?php echo random_str(128); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('SECURE_AUTH_KEY_notes')" onblur="textboxOnBlur('SECURITY_KEYS_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('LOGGED_IN_KEY'); ?>&nbsp;<span class="star">*</span></td>
-				<td><input name="LOGGED_IN_KEY" id="LOGGED_IN_KEY" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('LOGGED_IN_KEY_notes')" onblur="textboxOnBlur('SECURITY_KEYS_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+				<td><input name="LOGGED_IN_KEY" id="LOGGED_IN_KEY" value="<?php echo random_str(128); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('LOGGED_IN_KEY_notes')" onblur="textboxOnBlur('SECURITY_KEYS_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('NONCE_KEY'); ?>&nbsp;<span class="star">*</span></td>
-				<td><input name="NONCE_KEY" id="NONCE_KEY" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('NONCE_KEY_notes')" onblur="textboxOnBlur('SECURITY_KEYS_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+				<td><input name="NONCE_KEY" id="NONCE_KEY" value="<?php echo random_str(128); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('NONCE_KEY_notes')" onblur="textboxOnBlur('SECURITY_KEYS_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('AUTH_SALT'); ?>&nbsp;<span class="star">*</span></td>
-				<td><input name="AUTH_SALT" id="AUTH_SALT" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('AUTH_SALT_notes')" onblur="textboxOnBlur('SECURITY_KEYS_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+				<td><input name="AUTH_SALT" id="AUTH_SALT" value="<?php echo random_str(128); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('AUTH_SALT_notes')" onblur="textboxOnBlur('SECURITY_KEYS_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('SECURE_AUTH_SALT'); ?>&nbsp;<span class="star">*</span></td>
-				<td><input name="SECURE_AUTH_SALT" id="SECURE_AUTH_SALT" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('SECURE_AUTH_SALTL_notes')" onblur="textboxOnBlur('SECURITY_KEYST_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+				<td><input name="SECURE_AUTH_SALT" id="SECURE_AUTH_SALT" value="<?php echo random_str(128); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('SECURE_AUTH_SALTL_notes')" onblur="textboxOnBlur('SECURITY_KEYST_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('LOGGED_IN_SALT'); ?>&nbsp;<span class="star">*</span></td>
-				<td><input name="LOGGED_IN_SALT" id="LOGGED_IN_SALT" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('LOGGED_IN_SALT_notes')" onblur="textboxOnBlur('SECURITY_KEYS_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+				<td><input name="LOGGED_IN_SALT" id="LOGGED_IN_SALT" value="<?php echo random_str(128); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('LOGGED_IN_SALT_notes')" onblur="textboxOnBlur('SECURITY_KEYS_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('NONCE_SALT'); ?>&nbsp;<span class="star">*</span></td>
-				<td><input name="NONCE_SALT" id="NONCE_SALT" value="<?php echo random_str(64); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('NONCE_SALT_notes')" onblur="textboxOnBlur('SECURITY_KEYS_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+				<td><input name="NONCE_SALT" id="NONCE_SALT" value="<?php echo random_str(128); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('NONCE_SALT_notes')" onblur="textboxOnBlur('SECURITY_KEYS_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+			</tr>
+			<tr>
+				<td>&nbsp;<?php echo lang_key('COOKIE_NAME'); ?>&nbsp;<span class="star">*</span></td>
+				<td><input name="COOKIE_NAME" id="COOKIE_NAME" value="<?php echo random_str(128); ?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('NONCE_SALT_notes')" onblur="textboxOnBlur('SECURITY_KEYS_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<a href="administrator_account.php" class="form_button" /><?php echo lang_key('back'); ?></a>
+					<a rel="noopener" href="administrator_account.php" class="form_button" /><?php echo lang_key('back'); ?></a>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="submit" class="form_button" value="<?php echo lang_key('continue'); ?>" />
 				</td>

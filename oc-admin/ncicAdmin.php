@@ -13,20 +13,15 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
-/**
- * ncicAdmin.php
- *
- * Admin page for managing NCIC entries
- *
- * @author     Shane G
- */
-
+    if(session_id() == '' || !isset($_SESSION)) {
+    // session isn't started
     session_start();
-
-    // HACK
-    $civName = "";
-    $civDob  = "";
-    $civAddr = "";
+    }
+    require_once('../oc-config.php');
+    require_once( ABSPATH . '/oc-functions.php');
+    require_once( ABSPATH . '/oc-settings.php');
+	require_once( ABSPATH ."/oc-includes/adminActions.php");
+	require_once( ABSPATH . "/oc-includes/ncicAdminActions.php");
 
     if (empty($_SESSION['logged_in']))
     {
@@ -38,467 +33,143 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       $name = $_SESSION['name'];
     }
 
-    require_once(__DIR__ . '/../oc-config.php');
-    require_once(__DIR__ . '/../oc-functions.php');
-    include(__DIR__ . './../actions/adminActions.php');
-    include(__DIR__ . './../actions/ncicAdminActions.php');
-    include("../actions/publicFunctions.php");
 
-    if ( $_SESSION['admin_privilege'] == 3)
+    if ( $_SESSION['adminPrivilege'] == 3)
     {
-      if ($_SESSION['admin_privilege'] == 'Administrator')
+      if ($_SESSION['adminPrivilege'] == 'Administrator')
       {
           //Do nothing
       }
     }
-    else if ( $_SESSION['admin_privilege'] == 2 && MODERATOR_NCIC_EDITOR == true )
+    else if ($_SESSION['adminPrivilege'] == 2)
     {
-      if ($_SESSION['admin_privilege'] == 'Moderator')
+      if ($_SESSION['adminPrivilege'] == 'Moderator')
       {
-          //Do nothing
+          // Do Nothing
       }
     }
     else
     {
-      permissionDenied();
+        permissionDenied();
     }
 
-
-    $citationMessage = "";
-    if(isset($_SESSION['citationMessage']))
+    $accessMessage = "";
+    if(isset($_SESSION['accessMessage']))
     {
-        $citationMessage = $_SESSION['citationMessage'];
-        unset($_SESSION['citationMessage']);
+        $accessMessage = $_SESSION['accessMessage'];
+        unset($_SESSION['accessMessage']);
     }
-
-    $warrantMessage = "";
-    if(isset($_SESSION['warrantMessage']))
+    $adminMessage = "";
+    if(isset($_SESSION['adminMessage']))
     {
-        $warrantMessage = $_SESSION['warrantMessage'];
-        unset($_SESSION['warrantMessage']);
+        $adminMessage = $_SESSION['adminMessage'];
+        unset($_SESSION['adminMessage']);
     }
 
-    $plateMessage = "";
-    if(isset($_SESSION['plateMessage']))
+    $successMessage = "";
+    if(isset($_SESSION['successMessage']))
     {
-        $plateMessage = $_SESSION['plateMessage'];
-        unset($_SESSION['plateMessage']);
+        $successMessage = $_SESSION['successMessage'];
+        unset($_SESSION['successMessage']);
     }
-
-    $nameMessage = "";
-    if(isset($_SESSION['nameMessage']))
-    {
-        $nameMessage = $_SESSION['nameMessage'];
-        unset($_SESSION['nameMessage']);
-    }
-
-    $identityRequestMessage = "";
-    if(isset($_SESSION['identityRequestMessage']))
-    {
-        $identityRequestMessage = $_SESSION['identityRequestMessage'];
-        unset($_SESSION['identityRequestMessage']);
-    }
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<?php include "../oc-includes/header.inc.php"; ?>
-
-<body class="nav-md">
-    <div class="container body">
-        <div class="main_container">
-            <div class="col-md-3 left_col">
-                <div class="left_col scroll-view">
-                    <div class="navbar nav_title" style="border: 0;">
-                        <a href="javascript:void(0)" class="site_title"><i class="fas fa-lock"></i>
-                            <span>Administrator</span></a>
-                    </div>
-
-                    <div class="clearfix"></div>
-
-                    <!-- menu profile quick info -->
-                    <div class="profile clearfix">
-                        <div class="profile_pic">
-                            <img src="<?php echo get_avatar() ?>" alt="..." class="img-circle profile_img">
-                        </div>
-                        <div class="profile_info">
-                            <span>Welcome,</span>
-                            <h2><?php echo $name;?></h2>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <!-- /menu profile quick info -->
-
-                    <br />
-
-                    <?php include(__DIR__ ."/oc-admin-includes/sidebarNav.inc.php"); ?>
-
-                    <!-- /menu footer buttons -->
-                    <div class="sidebar-footer hidden-small">
-                        <a data-toggle="tooltip" data-placement="top" title="Go to Dashboard"
-                            href="<?php echo BASE_URL; ?>/dashboard.php">
-                            <span class="fas fa-clipboard-list" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="FullScreen" onClick="toggleFullScreen()">
-                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Need Help?"
-                            href="https://guides.opencad.io/">
-                            <span class="fas fa-info-circle" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Logout"
-                            href="<?php echo BASE_URL; ?>/actions/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
-                            <span class="fas fa-sign-out-alt" aria-hidden="true"></span>
-                        </a>
-                    </div>
-                    <!-- /menu footer buttons -->
-                </div>
-            </div>
-
-            <!-- top navigation -->
-            <div class="top_nav">
-                <div class="nav_menu">
-                    <nav>
-                        <div class="nav toggle">
-                            <a id="menu_toggle"><i class="fas fa-bars"></i></a>
-                        </div>
-
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="">
-                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <img src="<?php echo get_avatar() ?>" alt=""><?php echo $name;?>
-                                    <span class="fas fa-angle-down"></span>
-                                </a>
-                                <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                    <li><a href="<?php echo BASE_URL; ?>/profile.php"><i
-                                                class="fas fa-user pull-right"></i>My Profile</a></li>
-                                    <li><a href="<?php echo BASE_URL; ?>/actions/logout.php"><i
-                                                class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
-                                </ul>
-                            </li>
+<head>
+<?php include ( ABSPATH . "/".OCTHEMES."/".THEME."/includes/header.inc.php"); ?>
 
 
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            <!-- /top navigation -->
+<body class="app header-fixed">
 
-            <!-- page content -->
-            <div class="right_col" role="main">
-                <div class="">
-                    <div class="page-title">
-                        <div class="title_left">
-                            <h3>CAD NCIC Admin</h3>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="x_panel" id="name_panel">
-                                <div class="x_title">
-                                    <h2>NCIC Names DB</h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
-                                        </li>
-                                        <li><a class="close-link"><i class="fas fa-close"></i></a>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <!-- ./ x_title -->
-                                <div class="x_content">
-                                    <?php echo $nameMessage;?>
-                                    <?php ncicGetNames();?>
-                                </div>
-                                <!-- ./ x_content -->
-                                <!-- ./ x_footer -->
-                            </div>
-                            <!-- ./ x_panel -->
-                        </div>
-                        <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
-                    </div>
-                    <!-- ./ row -->
+    <header class="app-header navbar">
 
-                    <div class="clearfix"></div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="x_panel" id="plate_panel">
-                                <div class="x_title">
-                                    <h2>NCIC Vehicle DB</h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
-                                        </li>
-                                        <li><a class="close-link"><i class="fas fa-close"></i></a>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <!-- ./ x_title -->
-                                <div class="x_content">
-                                    <?php echo $plateMessage;?>
-                                    <?php ncicGetPlates();?>
-                                </div>
-                                <!-- ./ x_content -->
-                                <!-- ./ x_footer -->
-                            </div>
-                            <!-- ./ x_panel -->
-                        </div>
-                        <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
-                    </div>
-                    <!-- ./ row -->
+      <?php require_once ( ABSPATH . OCTHEMEINC ."/admin/topbarNav.inc.php" ); ?>
+      <?php include( ABSPATH . "/" . OCTHEMES ."/". THEME ."/includes/topProfile.inc.php"); ?>
+    </header>
 
-                    <div class="clearfix"></div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="x_panel" id="plate_panel">
-                                <div class="x_title">
-                                    <h2>NCIC Weapon DB</h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
-                                        </li>
-                                        <li><a class="close-link"><i class="fas fa-close"></i></a>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <!-- ./ x_title -->
-                                <div class="x_content">
-                                    <?php echo $plateMessage;?>
-                                    <?php ncicGetWeapons();?>
-                                </div>
-                                <!-- ./ x_content -->
-                                <!-- ./ x_footer -->
-                            </div>
-                            <!-- ./ x_panel -->
-                        </div>
-                        <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
-                    </div>
-                    <!-- ./ row -->
+      <div class="app-body">
+        <main class="main">
+        <div class="breadcrumb" />
+        <div class="container-fluid">
+          <div class="animated fadeIn">
+			<div class="card">
+				<div class="card-header">
+				<em class="fa fa-align-justify"></em> <?php echo lang_key("NCIC_NAMES_DB"); ?></div>
+				<div class="card-body">
+					<?php echo $nameMessage;?>
+					<?php ncicGetNames();?>
+				</div>
+				<!-- /.row-->
+			</div>
+			<!-- /.card-->
 
-                    <div class="clearfix"></div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="x_panel" id="citation_panel">
-                                <div class="x_title">
-                                    <h2>NCIC Warnings DB</h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
-                                        </li>
-                                        <li><a class="close-link"><i class="fas fa-close"></i></a>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <!-- ./ x_title -->
-                                <div class="x_content">
-                                    <?php echo $citationMessage;?>
-                                    <?php ncic_warnings();?>
-                                </div>
-                                <!-- ./ x_content -->
-                            </div>
-                            <!-- ./ x_panel -->
-                        </div>
-                        <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
-                    </div>
-                    <!-- ./ row -->
+			<div class="card">
+				<div class="card-header">
+				<em class="fa fa-align-justify"></em> <?php echo lang_key("NCIC_VEHICLES_DB"); ?></div>
+				<div class="card-body">
+					<?php echo $plateMessage;?>
+					<?php ncicGetPlates();?>
+				</div>
+				<!-- /.row-->
+			</div>
+			<!-- /.card-->
 
-                    <div class="clearfix"></div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="x_panel" id="citation_panel">
-                                <div class="x_title">
-                                    <h2>NCIC Citations DB</h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
-                                        </li>
-                                        <li><a class="close-link"><i class="fas fa-close"></i></a>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <!-- ./ x_title -->
-                                <div class="x_content">
-                                    <?php echo $citationMessage;?>
-                                    <?php ncic_citations();?>
-                                </div>
-                                <!-- ./ x_content -->
-                            </div>
-                            <!-- ./ x_panel -->
-                        </div>
-                        <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
-                    </div>
-                    <!-- ./ row -->
+			<div class="card">
+				<div class="card-header">
+				<em class="fa fa-align-justify"></em> <?php echo lang_key("NCIC_WEAPONS_DB"); ?></div>
+				<div class="card-body">
+					<?php echo $weaponMessage;?>
+					<?php ncicGetWeapons();?>
+				</div>
+				<!-- /.row-->
+			</div>
+			<!-- /.card-->
 
-                    <div class="clearfix"></div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="x_panel" id="citation_panel">
-                                <div class="x_title">
-                                    <h2>NCIC Arrests DB</h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
-                                        </li>
-                                        <li><a class="close-link"><i class="fas fa-close"></i></a>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <!-- ./ x_title -->
-                                <div class="x_content">
-                                    <?php echo $citationMessage;?>
-                                    <?php ncic_arrests();?>
-                                </div>
-                                <!-- ./ x_content -->
-                            </div>
-                            <!-- ./ x_panel -->
-                        </div>
-                        <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
-                    </div>
-                    <!-- ./ row -->
+			<div class="card">
+				<div class="card-header">
+				<em class="fa fa-align-justify"></em> <?php echo lang_key("NCIC_WARNINGS_DB"); ?></div>
+				<div class="card-body">
+					<?php echo $warningMessage;?>
+					<?php ncicGetWarnings();?>
+				</div>
+				<!-- /.row-->
+			</div>
+			<!-- /.card-->
 
-                    <div class="clearfix"></div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="x_panel" id="warrant_panel">
-                                <div class="x_title">
-                                    <h2>NCIC Warrants DB</h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
-                                        </li>
-                                        <li><a class="close-link"><i class="fas fa-close"></i></a>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <!-- ./ x_title -->
-                                <div class="x_content">
+			<div class="card">
+				<div class="card-header">
+				<em class="fa fa-align-justify"></em> <?php echo lang_key("NCIC_WARRANTS_DB"); ?></div>
+				<div class="card-body">
+					<?php echo $warrantMessage;?>
+					<?php ncicGetWarrants();?>
+				</div>
+				<!-- /.row-->
+			</div>
+			<!-- /.card-->
 
-                                    <?php echo $warrantMessage;?>
-                                    <?php ncic_warrants();?>
-                                </div>
-                                <!-- ./ x_content -->
-                                <!-- ./ x_footer -->
-                            </div>
-                            <!-- ./ x_panel -->
-                        </div>
-                        <!-- ./ col-md-12 col-sm-12 col-xs-12 -->
-                    </div>
-                    <!-- ./ row -->
+			<div class="card">
+				<div class="card-header">
+				<em class="fa fa-align-justify"></em> <?php echo lang_key("ncicArrests_DB"); ?></div>
+				<div class="card-body">
+					<?php echo $arrestMessage;?>
+					<?php ncicGetArrests();?>
+				</div>
+				<!-- /.row-->
+			</div>
+			<!-- /.card-->
 
-                </div>
-                <!-- "" -->
-            </div>
-            <!-- /page content -->
+    </main>
 
-            <!-- footer content -->
-            <footer>
-                <div class="pull-right">
-                    <?php echo COMMUNITY_NAME;?> CAD System
-                </div>
-                <div class="clearfix"></div>
-            </footer>
-            <!-- /footer content -->
         </div>
-    </div>
+      </div>
+			<?php require_once ( ABSPATH . "/" . OCTHEMES ."/". THEME ."/includes/footer.inc.php"); ?>
 
     <?php
-    include (__DIR__ . "/oc-admin-includes/globalModals.inc.php");
-    include (__DIR__ . "/../oc-includes/jquery-colsolidated.inc.php"); ?>
+    include (__DIR__ . "/" . ABSPATH . OCTHEMEINC ."/admin/topbarNav.inc.php" );
+    require_once( ABSPATH . OCTHEMEINC ."/scripts.inc.php" );  ?>
 
-    <script>
-    $(document).ready(function() {
-
-        $('#ncic_names').DataTable({
-
-        });
-
-        $('#ncic_plates').DataTable({
-
-        });
-
-        $('#ncic_warrants').DataTable({
-
-        });
-
-        $('#ncic_citations').DataTable({
-
-        });
-
-        $('#ncic_arrests').DataTable({
-
-        });
-
-        $('#ncic_warnings').DataTable({
-
-        });
-
-    });
-    </script>
-    <script>
-    $(function() {
-        $(document).on('click', '#edit_nameBtn', function(e) {
-            e.preventDefault();
-            var edit_id = $(this).data('id');
-            console.log();
-            $.ajax({
-                    url: '<?php echo BASE_URL; ?>/actions/ncicAdminActions.php',
-                    type: 'POST',
-                    data: 'editid=' + edit_id,
-                    dataType: 'json',
-                    cache: false
-                })
-                .done(function(data) {
-                    $('#IdentityEditModal #civNameReq').val(data.name);
-                    $('#IdentityEditModal #datepicker2').datepicker({
-                        dateFormat: 'yy-mm-dd'
-                    }).datepicker('setDate', new Date(data.dob));
-                    $('#IdentityEditModal #civAddressReq').val(data.address);
-                    $('.selectpicker3').selectpicker('val', data.gender);
-                    $('.civRaceReq_picker').selectpicker('val', data.race);
-                    $('.civDL_picker').selectpicker('val', data.dl_status);
-                    $('.civHairReq_picker').selectpicker('val', data.hair_color);
-                    $('.civBuildReq_picker').selectpicker('val', data.build);
-                    $('.civWepStat_picker').selectpicker('val', data.weapon_permit);
-                    $('.civDec_picker').selectpicker('val', data.deceased);
-                    $('#IdentityEditModal .Editdataid').val(data.id);
-                });
-
-        })
-        /* Edit Plate */
-        $(document).on('click', '#edit_plateBtn', function(e) {
-            e.preventDefault();
-            var edit_id = $(this).data('id');
-            $.ajax({
-                    url: '<?php echo BASE_URL; ?>/actions/ncicAdminActions.php',
-                    type: 'POST',
-                    data: 'edit_plateid=' + edit_id,
-                    dataType: 'json',
-                    cache: false
-                })
-                .done(function(data) {
-                    $('.civilian_names_picker').selectpicker('val', data.name_id);
-                    $('.veh_plate').val(data.veh_plate);
-                    $('.veh_makemodelpicker').selectpicker('val', data.veh_make + ' ' + data
-                        .veh_model);
-                    $('.veh_pcolor_picker').selectpicker('val', data.veh_pcolor);
-                    $('.veh_scolor_picker').selectpicker('val', data.veh_scolor);
-                    $('#insurance_edit').val(data.veh_insurance);
-                    $('.flags_option').val(data.flags);
-                    $('.notes').val(data.notes);
-                    $('.veh_reg_state_option').val(data.veh_reg_state);
-                    $('.editplateid').val(data.id);
-                });
-        });
-    })
-    </script>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <script>
+        <script>
     $(function() {
         $("#datepicker").datepicker({
             dateFormat: 'yy-mm-dd'
@@ -515,7 +186,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
     });
     </script>
-
 </body>
 
 </html>

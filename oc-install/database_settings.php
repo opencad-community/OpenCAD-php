@@ -137,10 +137,10 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="author" content="OpenCAD Project">
-    <meta name="generator" content="OpenCAD Project Installer">
+    <meta name="generator" content="OpenCAD Project">
 	<title><?php echo lang_key("installation_guide"); ?> | <?php echo lang_key('database_settings'); ?></title>
 
-	<link href="images/apphp.ico" rel="shortcut icon" />
+	<link href="images/favicon.ico" rel="shortcut icon" />
 	<link rel="stylesheet" type="text/css" href="templates/<?php echo EI_TEMPLATE; ?>/css/styles.css" />
 	<?php
 		if($curr_lang_direction == 'rtl'){
@@ -151,10 +151,10 @@
 	<script type="text/javascript" src="js/main.js"></script>
 	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 	<?php
-		if(file_exists('languages/js/'.$curr_lang.'.js')){
-			echo '<script type="text/javascript" src="language/'.$curr_lang.'/js/common.js"></script>';
+		if(file_exists('../oc-content/languages/js/'.$curr_lang.'.inc.js')){
+			echo '<script type="text/javascript" src="../oc-content/languages/'.$curr_lang.'/js/en.inc.js"></script>';
 		}else{
-			echo '<script type="text/javascript" src="language/en/js/common.js"></script>';
+			echo '<script type="text/javascript" src="../oc-content/languages/en/js/en.inc.js"></script>';
 		}
 	?>
 </head>
@@ -256,7 +256,7 @@
 			<tr><td nowrap height="10px" colspan="3"></td></tr>
 			<tr>
 				<td colspan="2">
-					<a href="server_requirements.php" class="form_button" /><?php echo lang_key('back'); ?></a>
+					<a rel="noopener" href="server_requirements.php" class="form_button" /><?php echo lang_key('back'); ?></a>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="submit" class="form_button" value="<?php echo lang_key('continue'); ?>" />
 				</td>

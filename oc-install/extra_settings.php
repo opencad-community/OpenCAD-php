@@ -23,10 +23,13 @@
 	// handle form submission
 	// -------------------------------------------------
 	if($_SERVER['REQUEST_METHOD'] === 'POST'){
-
+		$LIVEMAP_URL = isset($_POST['LIVEMAP_URL']) ? prepare_input($_POST['LIVEMAP_URL']) : '';
+		$WEBHOOK_URL = isset($_POST['WEBHOOK_URL']) ? prepare_input($_POST['WEBHOOK_URL']) : '';
 		$DEMO_MODE = isset($_POST['DEMO_MODE']) ? prepare_input($_POST['DEMO_MODE']) : '';
 		$USE_GRAVATAR = isset($_POST['USE_GRAVATAR']) ? prepare_input($_POST['USE_GRAVATAR']) : '';
-		
+
+		$_SESSION['LIVEMAP_URL'] = $LIVEMAP_URL;
+		$_SESSION['WEBHOOK_URL'] = $WEBHOOK_URL;
 		$_SESSION['DEMO_MODE'] = $DEMO_MODE;
 		$_SESSION['USE_GRAVATAR'] = $USE_GRAVATAR;		
 
@@ -35,7 +38,8 @@
 		exit;
 
 	}else{
-
+		$LIVEMAP_URL = isset($_POST['LIVEMAP_URL']) ? prepare_input($_POST['LIVEMAP_URL']) : '';
+		$WEBHOOK_URL = isset($_POST['WEBHOOK_URL']) ? prepare_input($_POST['WEBHOOK_URL']) : '';
 		$DEMO_MODE = isset($_POST['DEMO_MODE']) ? prepare_input($_POST['DEMO_MODE']) : '';
 		$USE_GRAVATAR = isset($_POST['USE_GRAVATAR']) ? prepare_input($_POST['USE_GRAVATAR']) : '';
 
@@ -47,10 +51,10 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="author" content="OpenCAD Project">
-    <meta name="generator" content="OpenCAD Project Installer">
+    <meta name="generator" content="OpenCAD Project">
 	<title><?php echo lang_key("installation_guide"); ?> | System Settings</title>
 
-	<link href="../images/favicon.ico" rel="shortcut icon" />
+	<link href="./images/favicon.ico" rel="shortcut icon" />
 	<link rel="stylesheet" type="text/css" href="templates/<?php echo EI_TEMPLATE; ?>/css/styles.css" />
 	<?php
 		if($curr_lang_direction == 'rtl'){
@@ -64,7 +68,7 @@
 		if(file_exists('languages/js/'.$curr_lang.'.js')){
 			echo '<script type="text/javascript" src="language/'.$curr_lang.'/js/common.js"></script>';
 		}else{
-			echo '<script type="text/javascript" src="language/en/js/common.js"></script>';
+			echo '<script type="text/javascript" src="../../languages/en/js/common.js"></script>';
 		}
 	?>
 </head>
@@ -93,9 +97,13 @@
 
 			<table width="100%" border="0" cellspacing="1" cellpadding="1">
 			<tr>
-				<td colspan="3"><span class="star">*</span> <?php echo lang_key('alert_required_fields'); ?></td>
+				<td>&nbsp;<?php echo lang_key('LIVEMAP_URL'); ?>&nbsp;</td>
+				<td><input name="LIVEMAP_URL" id="LIVEMAP_URL" value="0" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('LIVEMAP_URL_notes')" onblur="textboxOnBlur('LIVEMAP_URL_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
-			<tr><td nowrap height="10px" colspan="3"></td></tr>
+			<tr>
+				<td>&nbsp;<?php echo lang_key('WEBHOOK_URL'); ?>&nbsp;</td>
+				<td><input name="WEBHOOK_URL" id="WEBHOOK_URL" value="0" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('LIVEMAP_URL_notes')" onblur="textboxOnBlur('WEBHOOK_URL_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+			</tr>
 			<tr>
 			<td>&nbsp;<?php echo lang_key('DEMO_MODE'); ?>&nbsp;</td>
 				<td>
@@ -128,7 +136,7 @@
 			<tr><td colspan="2" nowrap height="50px">&nbsp;</td></tr>
 			<tr>
 				<td colspan="2">
-					<a href="administrative_configuration.php" class="form_button" /><?php echo lang_key('back'); ?></a>
+					<a rel="noopener" href="administrative_configuration.php" class="form_button" /><?php echo lang_key('back'); ?></a>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="submit" class="form_button" value="<?php echo lang_key('continue'); ?>" />
 				</td>

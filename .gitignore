@@ -1,5 +1,5 @@
-# Ignore config file
-oc-config.php
+# Ignore these files
+oc-config.php*
 /phpmyadmin
 *.swp
 *.code-workspace
@@ -8,7 +8,7 @@ info.php
 .github/
 *.bak*
 .travis.yml
-.crowdin.yml
+.crowdin.ymlW
 .vscode
 .MESSAGE
 patch.diff
@@ -16,4 +16,6 @@ mirror_ssh
 log_file
 sql.php
 *adminer*.php
+web.configW
 errorlog
+oc-content/themes/default/includes/header.inc.php

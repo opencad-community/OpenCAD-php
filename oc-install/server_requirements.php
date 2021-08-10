@@ -135,10 +135,10 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="author" content="OpenCAD Project">
-    <meta name="generator" content="OpenCAD Project Installer">
+    <meta name="generator" content="OpenCAD Project">
 	<title><?php echo lang_key('installation_guide'); ?> | <?php echo lang_key('server_requirements'); ?></title>
 	
-	<link href="../images/favicon.ico" rel="shortcut icon" />
+	<link href="./images/favicon.ico" rel="shortcut icon" />
 	<link rel="stylesheet" type="text/css" href="templates/<?php echo EI_TEMPLATE; ?>/css/styles.css" />
 	<?php
 		if($curr_lang_direction == 'rtl'){
@@ -180,7 +180,7 @@
 								$content .= '<td colspan="2" nowrap height="9px"></td>';
 							}
 						}else{
-							$content .= '<td>&#8226; '.$val[1].': <i>'.(($val[2]) ? '<span class="found">'.$val[3].'</span>' : '<span class="disabled">'.$val[4].'</span>').'</i></td>';
+							$content .= '<td>&#8226; '.$val[1].': <em>'.(($val[2]) ? '<span class="found">'.$val[3].'</span>' : '<span class="disabled">'.$val[4].'</span>').'</em></td>';
 							if($val[0] == true && !$val[2]){
 								$is_error = true;
 								$error_mg[$key] = isset($val[5]) ? $val[5] : str_ireplace('_SETTINGS_NAME_', '<b>'.$key.'</b>', lang_key('error_server_requirements'));
@@ -212,7 +212,7 @@
 				</table>
 				
 				<div class="buttons-wrapper">
-					<a href="start.php" class="form_button" /><?php echo lang_key('back'); ?></a>
+					<a rel="noopener" href="start.php" class="form_button" /><?php echo lang_key('back'); ?></a>
 					<?php if(!$is_error){ ?>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="submit" class="form_button" name="btnSubmit" value="<?php echo lang_key('continue'); ?>" />
@@ -227,7 +227,7 @@
 					echo '<div class="content">';
 					include_once(EI_MANUAL_INSTALLATION_DIR.$arr_manual_installations[$curr_lang]);
 					echo '</div>';
-					echo '<div class="footer"><a href="start.php" class="form_button" title="'.lang_key('cancel_installation').'" />'.lang_key('back').'</a></div>';
+					echo '<div class="footer"><a rel="noopener" href="start.php" class="form_button" title="'.lang_key('cancel_installation').'" />'.lang_key('back').'</a></div>';
 					echo '</div>';
 				}
 			} 	

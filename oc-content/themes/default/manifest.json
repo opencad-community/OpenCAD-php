@@ -1,0 +1,20 @@
+{
+	"name" : "OpenCAD",
+	"short_name" : "Open Source Computer Aided Dipsatch",
+	"start_url" : "/",
+	"display" : "standalone",
+	"orientation" : "landscape-primary",
+	"lang" : "English",
+	"icons": [
+		{
+			"src": "/" . OCTHEMES . "/core-ui/images/tail.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		},
+		{
+			"src": "/" . OCTHEMES . "/core-ui/images/tail.png",
+			"sizes": "144x144",
+			"type": "image/png"
+		}
+	]
+}

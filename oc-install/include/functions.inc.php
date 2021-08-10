@@ -46,6 +46,7 @@ function apphp_db_install($sql_dump_file) {
 	// replace username and password if exists
 		$sql_dump = str_ireplace('<NAME>', $admin_name, $sql_dump);
 		$sql_dump = str_ireplace('<EMAIL>', $admin_email, $sql_dump);
+		$sql_dump = str_ireplace('<IDENTIFIER>', $admin_identifier, $sql_dump);
 		$password = password_hash($admin_password, PASSWORD_DEFAULT);
 		$sql_dump = str_ireplace('<PASSWORD>', $password, $sql_dump);
 
@@ -73,21 +74,6 @@ function apphp_db_install($sql_dump_file) {
 	return true;
 }
 
-/**
- * 	Returns language key
- * 		@param $key
- */
-function lang_key($key){
-	global $arrLang;
-        $output = '';
-        
-	if(isset($arrLang[$key])){
-		$output = $arrLang[$key];
-	}else{
-		$output = str_replace('_', ' ', $key);		
-	}
-	return $output;
-}
 
 /**
  *	Remove bad chars from input
@@ -153,7 +139,7 @@ function draw_side_navigation($step = 1, $draw = true)
 		foreach($steps as $key => $val){
 			if($step > $key){				
 				$css_class = ' class="passed"';
-				$output .= '<li'.$css_class.'><a href="'.$val['url'].'">'.$val['text'].'</a></li>';
+				$output .= '<li'.$css_class.'><a rel="noopener" href="'.$val['url'].'">'.$val['text'].'</a></li>';
 			}else if($step == $key){
 				$css_class = ' class="current"';
 				$output .= '<li'.$css_class.'><label>'.$val['text'].'</label></li>';
@@ -181,3 +167,18 @@ function random_str($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzAB
     return implode('', $pieces);
 }
 
+/**
+ * 	Returns language key
+ * 		@param $key
+ */
+function lang_key($key){
+	global $arrLang;
+        $output = '';
+        
+	if(isset($arrLang[$key])){
+		$output = $arrLang[$key];
+	}else{
+		$output = str_replace('_', ' ', $key);		
+	}
+	return $output;
+}
