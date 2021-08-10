@@ -170,10 +170,10 @@ if (empty($_SESSION['logged_in']))
 								<?php if (!empty(LIVEMAP_URL)) {?>
 								<div class="card-body">
 									<iframe src="<?php echo LIVEMAP_URL; ?>" height="1024px" width="100%"></iframe>
-								</div>
+								</div>S
 								<?php } else { ?>
 								<div class="card-body">
-									<strong>ADMINITRATOR:</strong> <i>Configure LIVEMAP_URL variable in oc-config.php</i>
+									<?php echo lang_key("CONFIGURE_LIVEMAP"); ?>
 								</div>
 								<?php } ?>
 								<div class="card=footer">

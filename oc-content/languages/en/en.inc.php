@@ -231,6 +231,7 @@ $arrLang['CONFIRM_PASSWORD'] = "Confirm Password";
 $arrLang['CIVILIAN_SERVICES'] = "Civilian Services";
 $arrLang['LAW_ENFORCEMENT_SERVICES'] = "Law Enforcement Services";
 $arrLang['FIRST_RESPONDER_SERVICES'] = "First Responder Services";
+$arrLang["CONFIGURE_LIVEMAP"] = "<strong>ADMINISTRATOR:</strong> <i>Configure LIVEMAP_URL variable in oc-config.php</i>";
 //** End Dashboard Strings **//
 
 
@@ -551,7 +552,9 @@ $arrLang["SET_AREA_OF_PATROL"] = "Set Area of Patrol";
 
 //** Begin MDT Console Strings **/
 $arrLang["MDT_CONSOLE"] = "MDT Console";
+$arrLang["MY_CALLSIGN"] = "My Callsign";
 $arrLang["MY_STATUS"] = "My Status";
+$arrLang["STATUS"] = "My Status";
 $arrLang["MY_CALL"] ="My Call";
 $arrLang["VIEW_PERSONS_BOLOS"] = "View Persons BOLOs";
 $arrLang["VIEW_VEHICLE_BOLOS"] = "View Vehicle BOLOs";
