@@ -115,8 +115,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
                     <h4 class="modal-title" id="editDepartmentModal">Edit Department</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
                 </div>
                 <!-- ./ modal-header -->
                 <div class="modal-body">
@@ -125,7 +125,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                             <label class="col-md-3 control-label">Department Name</label>
                             <div class="col-md-9">
                                 <input data-lpignore='true' type="text" name="departmentName" class="form-control" id="departmentName" required />
-                                <span class="fas fa-road form-control-feedback right" aria-hidden="true"></span>
                             </div>
                             <!-- ./ col-sm-9 -->
                         </div>
@@ -134,7 +133,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                             <label class="col-md-3 control-label">Department Short Name</label>
                             <div class="col-md-9">
                                 <input data-lpignore='true' type="text" name="departmentShortName" class="form-control" id="departmentShortName" required/>
-                                <span class="fas fa-map form-control-feedback right" aria-hidden="true"></span>
                             </div>
                             <!-- ./ col-sm-9 -->
                         </div>
@@ -143,7 +141,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                             <label class="col-md-3 control-label">Description Long Name</label>
                             <div class="col-md-9">
                                 <input data-lpignore='true' type="text" name="departmentLongName" class="form-control" id="departmentLongName" required />
-                                <span class="fas fa-road form-control-feedback right" aria-hidden="true"></span>
                             </div>
                             <!-- ./ col-sm-9 -->
                         </div>

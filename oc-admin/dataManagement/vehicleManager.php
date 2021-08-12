@@ -102,9 +102,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			<div class="modal-dialog modal-md">
 				<div class="modal-content">
 					<div class="modal-header">
+						<h4 class="modal-title" id="editVehicleModal">Edit Vehicle</h4>
 						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
 						</button>
-						<h4 class="modal-title" id="editVehicleModal">Edit Vehicle</h4>
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
@@ -114,7 +114,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<label class="col-md-3 control-label">Vehicle Make</label>
 								<div class="col-md-9">
 									<input type="text" name="make" class="form-control" id="make" required />
-									<span class="fas fa-car form-control-feedback right" aria-hidden="true"></span>
 								</div>
 								<!-- ./ col-sm-9 -->
 							</div>
@@ -123,7 +122,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<label class="col-md-3 control-label">Vehicle Model</label>
 								<div class="col-md-9">
 									<input type="text" name="model" class="form-control" id="model" required />
-									<span class="fas fa-car form-control-feedback right" aria-hidden="true"></span>
 								</div>
 								<!-- ./ col-sm-9 -->
 							</div>

@@ -112,8 +112,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 						<div class="form-group row">
 							<label class="col-md-3 control-label">Radio Code</label>
 							<div class="col-md-9">
-								<input type="text" name="code" class="form-control" id="code" required />
 								<span class="fas fa-road form-control-feedback right" aria-hidden="true"></span>
+								<input type="text" name="code" class="form-control" id="code" required />
 							</div>
 							<!-- ./ col-sm-9 -->
 						</div>

@@ -936,9 +936,10 @@ function getRadioCodeDetails()
 	$encode = array();
 	foreach($result as $row)
 	{
-		$encode["id"] = $row[0];
-		$encode["code"] = $row[1];
-		$encode["codeDescription"] = $row[2];
+		$encode["id"] = $row["id"];
+		$encode["code"] = $row["code"];
+		$encode["codeDescription"] = $row["codeDescription"];
+		$encode["onCall"] = $row["onCall"];
 	}
 	
 	echo json_encode($encode);

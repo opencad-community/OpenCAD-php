@@ -103,7 +103,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                             <label class="col-md-3 control-label">Radio Code</label>
                             <div class="col-md-9">
                                 <input type="text" name="code" class="form-control" id="code" required />
-                                <span class="fas fa-road form-control-feedback right" aria-hidden="true"></span>
                             </div>
                             <!-- ./ col-sm-9 -->
                         </div>
@@ -111,8 +110,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Code Description</label>
                             <div class="col-md-9">
-                                <input type="text" name="code_description" class="form-control" id="code_description" required />
-                                <span class="fas fa-map form-control-feedback right" aria-hidden="true"></span>
+                                <input type="text" name="codeDescription" class="form-control" id="codeDescription" required />
                             </div>
                             <!-- ./ col-sm-9 -->
                         </div>
@@ -151,7 +149,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         $.ajax({
             cache: false,
             type: 'POST',
-            url: '<?php echo BASE_URL; ?>/actions/dataActions.php',
+            url: '<?php echo BASE_URL . OCINC; ?>/dataActions.php',
             data: {
                 'getRadioCodeDetails': 'yes',
                 'id': id
@@ -161,7 +159,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 data = JSON.parse(result);
 
                 $('input[name="code"]').val(data['code']);
-                $('input[name="code_description"]').val(data['code_description']);
+                $('input[name="codeDescription"]').val(data['codeDescription']);
                 $('input[name="id"]').val(data['id']);
             },
 

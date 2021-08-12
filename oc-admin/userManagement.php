@@ -218,7 +218,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<label class="col-md-3 control-label">Name</label>
 								<div class="col-md-9">
 									<input name="userName" class="form-control" id="userName" />
-									<span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
 								</div>
 								<!-- ./ col-sm-9 -->
 							</div>
@@ -227,7 +226,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<label class="col-md-3 control-label">Email</label>
 								<div class="col-md-9">
 									<input type="userEmail" name="userEmail" class="form-control" id="Email" />
-									<span class="fas fa-envelope form-control-feedback right" aria-hidden="true"></span>
 								</div>
 								<!-- ./ col-sm-9 -->
 							</div>
@@ -236,7 +234,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<label class="col-md-3 control-label">Identifier</label>
 								<div class="col-md-9">
 									<input type="text" name="userIdentifier" class="form-control" id="userIdentifier" />
-									<span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
 								</div>
 								<!-- ./ col-sm-9 -->
 							</div>
