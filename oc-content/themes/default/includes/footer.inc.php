@@ -2,7 +2,7 @@
 	<footer class="app-footer">
 		<div>
 			<a rel="noopener" href="<?php echo COMMUNITY_HOMEPAGE ?>""><?php echo COMMUNITY_NAME ?> CAD </a> powered by <a rel="noopener" href="https://opencad.io">OpenCAD</a>
-			<span>&copy; 2017 <?php echo date("Y"); ?></span>
+			<span>&copy; 2017 - <?php echo date("Y"); ?></span>
 		</div>
 		<div class="ml-auto">
 		</div>
@@ -11,7 +11,7 @@
 	<footer class="app-footer">
 		<div>
 			<?php echo COMMUNITY_NAME ?> CAD powered by <a rel="noopener" href="https://opencad.io">OpenCAD</a>
-			<span>&copy; 2017 <?php echo date("Y"); ?></span>
+			<span>&copy; 2017 - <?php echo date("Y"); ?></span>
 		</div>
 		<div class="ml-auto">
 		</div>
