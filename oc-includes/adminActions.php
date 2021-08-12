@@ -294,14 +294,14 @@ function getPendingUsers()
 				<td>' . $row["identifier"] . '</td>
 				<td>';
 
-			getUserGroups($row[0]);
+			getUserGroups($row["id"]);
 
 			echo ' </td>
 				<td>
 					<form action="'.BASE_URL.'/oc-includes/adminActions.php" method="post">
 					<input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Approve" />
 					<input name="rejectUser" type="submit" class="btn btn-xs btn-link" value="Reject" />
-					<input name="uid" type="hidden" value=' . $row[0] . ' />
+					<input name="uid" type="hidden" value=' . $row["id"] . ' />
 					</form>
 				</td>
 			</tr>
@@ -935,10 +935,9 @@ function getUserDetails()
 	foreach($result as $row)
 	{
 		$encode["userId"] = $row['id'];
-		$encode["name"] = $row['name'];
-		$encode["email"] = $row['email'];
-		$encode["identifier"] = $row['identifier'];
-		$encode["role"] = $row['adminPrivilege'];
+		$encode["userName"] = $row['name'];
+		$encode["userEmail"] = $row['email'];
+		$encode["userIdentifier"] = $row['identifier'];
 	}
 	echo json_encode($encode);
 }
@@ -956,7 +955,7 @@ function getUserID()
 		die();
 	}
 
-	$stmt = $pdo->prepare("SELECT id FROM ".DB_PREFIX."users WHERE ID = ?");
+	$stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."users WHERE ID = ?");
 	$resStatus = $stmt->execute(array($userId));
 	$result = $stmt;
 
