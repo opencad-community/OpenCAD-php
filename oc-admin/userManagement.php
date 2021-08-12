@@ -217,7 +217,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-md-3 control-label">Name</label>
 								<div class="col-md-9">
-									<input name="name" class="form-control" id="name" />
+									<input name="userName" class="form-control" id="userName" />
 									<span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -226,7 +226,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-md-3 control-label">Email</label>
 								<div class="col-md-9">
-									<input type="email" name="email" class="form-control" id="Email" />
+									<input type="userEmail" name="userEmail" class="form-control" id="Email" />
 									<span class="fas fa-envelope form-control-feedback right" aria-hidden="true"></span>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -235,7 +235,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<div class="form-group row">
 								<label class="col-md-3 control-label">Identifier</label>
 								<div class="col-md-9">
-									<input type="text" name="identifier" class="form-control" id="identifier" />
+									<input type="text" name="userIdentifier" class="form-control" id="userIdentifier" />
 									<span class="fas fa-user form-control-feedback right" aria-hidden="true"></span>
 								</div>
 								<!-- ./ col-sm-9 -->
@@ -375,7 +375,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			$.ajax({
 				cache: false,
 				type: 'POST',
-				url: '../<?php echo OCINC ?>/adminActions.php',
+				url: '<?php echo BASE_URL . "/" .OCINC ?>/adminActions.php',
 				data: {
 					'getUserDetails': 'yes',
 					'userId': userId
@@ -383,16 +383,11 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				success: function(result) {
 					data = JSON.parse(result);
 					console.log(data);
-					$('input[name="name"]').val(data['name']);
-					$('input[name="email"]').val(data['email']);
-					$('input[name="identifier"]').val(data['identifier']);
+					$('input[name="userName"]').val(data['userName']);
+					$('input[name="userEmail"]').val(data['userEmail']);
+					$('input[name="userIdentifier"]').val(data['userIdentifier']);
 					$('input[name="userId"]').val(data['userId']);
 
-					$("#userRole").selectpicker();
-					for (var i = 0; i < data['userRole'].length; i++) {
-						$('select[name="userRole"] option[value="' + data['userRole'][i] +
-							' selected"]').val(1);
-					}
 					console.log("object: %O", result)
 					$('#userRole').selectpicker('refresh');
 				},

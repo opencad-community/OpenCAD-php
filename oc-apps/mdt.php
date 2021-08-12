@@ -19,7 +19,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	include_once("../oc-config.php");
 	include_once(ABSPATH . "/oc-functions.php");
 	include_once(ABSPATH . "/oc-settings.php");
-	include_once(OCINC . "/generalActions.php");
+	include_once( "../" . OCINC . "/generalActions.php");
 	include_once( "../" . OCINC . "/publicFunctions.php" );
 	include_once( "../" . OCINC . "/dispatchActions.php" );
 	include_once( "../" . OCCONTENT . "/plugins/api_auth.php" );
@@ -176,7 +176,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 												<div class="col-sm-12">
 													<div class="form-group row">
 														<label class="col-md-2 control-label" for="ccnumber"><?php echo lang_key("STATUS"); ?></label>
-														<select name="statusSelect" class="form-control col-md-9 <?php echo $_SESSION['identifier'];?>" id="statusSelect" onChange="responderChangeStatus(this);" title="Select a Status">
+														<select name="statusSelect" class="form-control col-md-9 <?php echo $_SESSION['callsign'];?>" id="statusSelect" onChange="responderChangeStatus(this);" title="Select a Status">
 															<option value="10-6">10-6/Busy</option>
 															<option value="10-5">10-5/Meal Break</option>
 															<option value="10-7">10-7/Unavailable</option>
@@ -297,6 +297,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	<audio id="recurringToneAudio" src="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/sounds/priority.mp3" preload="auto"></audio>
 	<audio id="priorityToneAudio" src="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
 	<audio id="panicToneAudio" src="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/sounds/Panic_Button.m4a" preload="auto"></audio>
+	<audio id="newCallAudio" src="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/sounds/Panic_Button.m4a" preload="auto"></audio>
 <script>
 var vid = document.getElementById("recurringToneAudio");
 vid.volume = 0.3;
