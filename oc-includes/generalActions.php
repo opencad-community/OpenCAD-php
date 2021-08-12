@@ -258,9 +258,9 @@ function getMyCall()
                     {
                     echo'
                     <td>
-                        <button id="'.$row["callId"].'" class="btn-link" style="color: red;" value="'.$row[0].'" onclick="clearCall('.$row[0].')">Clear</button>
+                        <button id="'.$row["callId"].'" class="btn-link" style="color: red;" value="'.$row["callId"].'" onclick="clearCall('.$row["callId"].')">Clear</button>
                         <button id="'.$row["callId"].'" class="btn-link" name="call_details_btn" data-toggle="modal" data-target="#callDetails">Details</button>
-                        <input name="uid" name="uid" type="hidden" value="'.$row[0].'"/>
+                        <input name="uid" name="uid" type="hidden" value="'.$row["callId"].'"/>
                     </td>';
                     }
 
@@ -497,7 +497,7 @@ function changeStatus()
 
     if ($onCall)
     {
-        $stmt = $pdo->prepare("SELECT callId FROM ".DB_PREFIX."callsUsers WHERE identifier = ?");
+        $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."callsUsers WHERE identifier = ?");
         $resStatus = $stmt->execute(array($unit));
         $result = $stmt;
 
@@ -507,13 +507,12 @@ function changeStatus()
             header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
             die();
         }
-
         $callId = "";
         foreach($result as $row)
         {
             $callId = $row["callId"];
         }
-
+        
         $stmt = $pdo->prepare("SELECT callsign FROM ".DB_PREFIX."activeUsers WHERE identifier = ?");
         $resStatus = $stmt->execute(array($unit));
         $result = $stmt;
@@ -529,23 +528,26 @@ function changeStatus()
         {
             $callsign = $row["callsign"];
         }
-
+        $callsign = "";
         //Update the callNarrative to say they were cleared
         $narrativeAdd = date("Y-m-d H:i:s").': Unit Cleared: '.$callsign.'<br/>';
 
+        
         $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."calls SET callNarrative = concat(callNarrative, ?) WHERE callId = ?");
         $result = $stmt->execute(array($narrativeAdd, $callId));
-
+        
         if (!$result)
         {
+            
+            die();
             $_SESSION['error'] = $stmt->errorInfo();
             header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
             die();
         }
-
+        
         $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."callsUsers WHERE identifier = ?");
         $result = $stmt->execute(array($unit));
-
+        
         if (!$result)
         {
             $_SESSION['error'] = $stmt->errorInfo();
@@ -837,9 +839,9 @@ function getAvailableUnits()
                 <td>'.$row["callsign"].'</td>
                 <td>
                 <div class="dropdown"><button class="btn btn-link dropdown-toggle nopadding" type="button" data-toggle="dropdown">Status <span class="caret"></span></button><ul class="dropdown-menu">
-                    <li><a id="statusMeal'.$counter.'" class="statusMeal '.$row[0].'" onclick="testFunction(this);">10-5/Meal Break</a></li>
-                    <li><a id="statusOther'.$counter.'" class="statusOther '.$row[0].'" onclick="testFunction(this);">10-6/Other</a></li>
-                    <li><a id="statusSig11'.$counter.'" class="statusSig11 '.$row[0].'" onclick="testFunction(this);">Signal 11</a></li>
+                    <li><a id="statusMeal'.$counter.'" class="statusMeal '.$row["callsign"].'" onclick="testFunction(this);">10-5/Meal Break</a></li>
+                    <li><a id="statusOther'.$counter.'" class="statusOther '.$row["callsign"].'" onclick="testFunction(this);">10-6/Other</a></li>
+                    <li><a id="statusSig11'.$counter.'" class="statusSig11 '.$row["callsign"].'" onclick="testFunction(this);">Signal 11</a></li>
                 </ul></div>
 
                 </td>
@@ -912,12 +914,12 @@ function getUnAvailableUnits()
                 echo '</td>
 
                 <td>
-                <a id="logoutUser" class="nopadding logoutUser '.$row[0].'" onclick="logoutUser(this);" style="color:red; cursor:pointer;">Logout</a>&nbsp;&nbsp;&nbsp;
+                <a id="logoutUser" class="nopadding logoutUser '.$row["callsign"].'" onclick="logoutUser(this);" style="color:red; cursor:pointer;">Logout</a>&nbsp;&nbsp;&nbsp;
                 <div class="dropdown"><button class="btn btn-link dropdown-toggle nopadding" style="display: inline-block; vertical-align:top;" type="button" data-toggle="dropdown">Status <span class="caret"></span></button><ul class="dropdown-menu">
-                    <li><a id="statusAvail" class="statusAvailBusy '.$row[0].'" onclick="testFunction(this);">10-8/Available</a></li>
+                    <li><a id="statusAvail" class="statusAvailBusy '.$row["callsign"].'" onclick="testFunction(this);">10-8/Available</a></li>
                 </ul></div>
                 </td>
-                <input name="uid" type="hidden" value='.$row[0].' />
+                <input name="uid" type="hidden" value='.$row["callsign"].' />
             </tr>
             ';
         }
@@ -1160,7 +1162,7 @@ function getActiveCalls()
                     echo '<td>'.$row["callType"].'</td>';
                     echo '
                         <td>';
-                            getUnitsOnCall($row[0]);
+                            getUnitsOnCall($row["callId"]);
                         echo '</td>';
                 }
 
