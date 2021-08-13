@@ -216,34 +216,34 @@ function getCitationTypes()
 		{
 			echo '
 			<tr>
-				<td>' . $row[1] . '</td>
-				<td>' . $row[2] . '</td>
+				<td>' . $row["citationDescription"] . '</td>
+				<td>' . $row["citationFine"] . '</td>
 				<td>';
 		if ( DEMO_MODE == false) {
 			echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
 			if ( ( MODERATOR_EDIT_WARNINGTYPE == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
 			{
-				echo '<button name="editCitationType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editCitationTypeModal" class="btn btn-xs btn-link" >Edit</button>';
+				echo '<button name="editCitationType" type="button" data-toggle="modal" id="' . $row["citationId"] . '" data-target="#editCitationTypeModal" class="btn btn-xs btn-link" >Edit</button>';
 			} else {
-				echo '<button name="editCitationType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editCitationTypeModal" class="btn btn-xs btn-link" disabled >Edit</button>';
+				echo '<button name="editCitationType" type="button" data-toggle="modal" id="' . $row["citationId"] . '" data-target="#editCitationTypeModal" class="btn btn-xs btn-link" disabled >Edit</button>';
 			}
 
 			if ( ( MODERATOR_DELETE_WARNINGTYPE == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
 			{
-				echo '<input name="deleteCitationType" type="submit" class="btn btn-xs btn-link" onclick="deleteCitationType(' . $row[0] . ')" value="Delete" />';
+				echo '<input name="deleteCitationType" type="submit" class="btn btn-xs btn-link" onclick="deleteCitationType(' . $row["citationId"] . ')" value="Delete" />';
 			} else {
-				echo '<input name="deleteCitationType" type="submit" class="btn btn-xs btn-link" onclick="deleteCitationType(' . $row[0] . ')" value="Delete" disabled />';
+				echo '<input name="deleteCitationType" type="submit" class="btn btn-xs btn-link" onclick="deleteCitationType(' . $row["citationId"] . ')" value="Delete" disabled />';
 			}
 		} else {
 			echo ' </td>
 				<td>
 				<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">
-				<button name="editCitationType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editCitationTypeModal" class="btn btn-xs btn-link" disabled >Edit</button>
-				<input name="deleteCitationType" type="submit" class="btn btn-xs btn-link" onclick="deleteCitationTypeCode(' . $row[0] . ')" value="Delete" disabled />
+				<button name="editCitationType" type="button" data-toggle="modal" id="' . $row["citationId"] . '" data-target="#editCitationTypeModal" class="btn btn-xs btn-link" disabled >Edit</button>
+				<input name="deleteCitationType" type="submit" class="btn btn-xs btn-link" onclick="deleteCitationTypeCode(' . $row["citationId"] . ')" value="Delete" disabled />
 				';
 			}
 		
-		echo '<input name="warrantTypeID" type="hidden" value=' . $row[0] . ' />
+		echo '<input name="warrantTypeID" type="hidden" value=' . $row["citationId"] . ' />
 			</form>
 			</td>
 			</tr>
@@ -277,7 +277,7 @@ function getCitationTypeDetails()
 		die();
 	}
 
-	$stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."citationTypes WHERE id = ?");
+	$stmt = $pdo->prepare("SELECT citationId FROM ".DB_PREFIX."citationTypes WHERE id = ?");
 	$resStatus = $stmt->execute(array($id));
 	$result = $stmt;
 

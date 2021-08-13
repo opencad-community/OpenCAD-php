@@ -105,7 +105,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				<div class="animated fadeIn">
 					<div class="card">
 						<div class="card-header">
-							<button class="btn btn-primary" name="aop" data-toggle="modal" data-target="#aop" id="getAOP"></button>
+							<h1>CAD Sonsole
+							<button class="btn btn-primary float-right" name="aop" data-toggle="modal" data-target="#aop" id="getAOP"></button></h1>
 						</div>
 						<div class="card-body">
 						<div class="row">
