@@ -285,8 +285,8 @@ function getCitationTypeDetails()
 function editCitationType()
 {
 	$id	        	                = !empty($_POST['id']) ? htmlspecialchars($_POST['id']) : '';
-	$citationDescription           = !empty($_POST['citationDescription']) ? htmlspecialchars($_POST['citationDescription']) : '';
-	$citationFine  		        = !empty($_POST['citationFine']) ? $_POST['citationFine'] : '';
+	$citationDescription			= !empty($_POST['citationDescription']) ? htmlspecialchars($_POST['citationDescription']) : '';
+	$citationFine  		        	= !empty($_POST['citationFine']) ? $_POST['citationFine'] : '';
 
 	try{
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -323,26 +323,7 @@ function deleteCitationType()
 	session_start();
 	$id = htmlspecialchars($_POST['citationTypeID']);
 
-	try{
-		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-	} catch(PDOException $ex)
-	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
-		die();
-	}
-
-	$stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."citationTypes WHERE id = ?");
-	if (!$stmt->execute(array($id)))
-	{
-		$_SESSION['error'] = $stmt->errorInfo();
-		header(ERRORREDIRECT);
-		die();
-	}
-
-	$pdo = null;
-
+	DB::query("DELETE FROM ".DB_PREFIX."citationTypes WHERE id = ". $id);
 	session_start();
 	$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed incident type from database</span></div>';
 	header("Location: ".BASE_URL."/oc-admin/dataManagement/citationTypeManager.php");
