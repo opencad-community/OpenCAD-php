@@ -1210,27 +1210,8 @@ function delete_personbolo()
 {
     $pbid = htmlspecialchars($_POST['pbid']);
 
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
-    }
-
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."bolosPersons WHERE id = ?");
-    $result = $stmt->execute(array($pbid));
-
-    if (!$result)
-    {
-        $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
-    }
-    $pdo = null;
-
+    DB::query("DELETE FROM ".DB_PREFIX."bolosPersons WHERE id = " . $pbid);
+ 
     $_SESSION['boloMessage'] = '<div class="alert alert-success"><span>Successfully removed person BOLO</span></div>';
     header("Location: ".BASE_URL."/cad.php");
 }
@@ -1239,27 +1220,8 @@ function delete_vehiclebolo()
 {
     $vbid = htmlspecialchars($_POST['vbid']);
 
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
-    }
-
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."bolosVehicles WHERE id = ?");
-    $result = $stmt->execute(array($vbid));
-
-    if (!$result)
-    {
-        $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
-    }
-    $pdo = null;
-
+    DB::query("DELETE FROM ".DB_PREFIX."bolosVehicles WHERE id = " . $vbid);
+    
     $_SESSION['boloMessage'] = '<div class="alert alert-success"><span>Successfully removed vehicle BOLO</span></div>';
     header("Location: ".BASE_URL."/cad.php");
 }
