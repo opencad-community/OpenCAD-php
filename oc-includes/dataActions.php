@@ -525,27 +525,8 @@ function deleteDepartment()
 	session_start();
 	$departmentID = htmlspecialchars($_POST['departmentID']);
 
-	try{
-		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-	} catch(PDOException $ex)
-	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
-		die();
-	}
+	DB::query("DELETE FROM ".DB_PREFIX."departments WHERE departmentId = " . $departmentID);
 
-	$stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."departments WHERE departmentId = ?");
-	if (!$stmt->execute(array($departmentID)))
-	{
-		$_SESSION['error'] = $stmt->errorInfo();
-		header(ERRORREDIRECT);
-		die();
-	}
-
-	$pdo = null;
-
-	session_start();
 	$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed incident  from database</span></div>';
 	header("Location: ".BASE_URL."/oc-admin/dataManagement/departmentsManager.php");
 }
@@ -738,27 +719,8 @@ function deleteIncidentType()
 	session_start();
 	$id = htmlspecialchars($_POST['IncidentTypeID']);
 
-	try{
-		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-	} catch(PDOException $ex)
-	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
-		die();
-	}
+	DB::query("DELETE FROM ".DB_PREFIX."incident_types WHERE id = ". $id);
 
-	$stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."incident_types WHERE id = ?");
-	if (!$stmt->execute(array($id)))
-	{
-		$_SESSION['error'] = $stmt->errorInfo();
-		header(ERRORREDIRECT);
-		die();
-	}
-
-	$pdo = null;
-
-	session_start();
 	$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed incident type from database</span></div>';
 	header("Location: ".BASE_URL."/oc-admin/dataManagement/incidentTypeManager.php");
 }
@@ -951,25 +913,7 @@ function deleteRadioCode()
 	session_start();
 	$id = htmlspecialchars($_POST['warrantTypeID']);
 
-	try{
-		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-	} catch(PDOException $ex)
-	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
-		die();
-	}
-
-	$stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."radioCodes WHERE id = ?");
-	if (!$stmt->execute(array($id)))
-	{
-		$_SESSION['error'] = $stmt->errorInfo();
-		header(ERRORREDIRECT);
-		die();
-	}
-
-	$pdo = null;
+	DB::query("DELETE FROM ".DB_PREFIX."radioCodes WHERE id = " . $id);
 
 	session_start();
 	$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed incident type from database</span></div>';
@@ -1161,27 +1105,9 @@ function deleteStreet()
 	session_start();
 	$id = htmlspecialchars($_POST['streetID']);
 
-	try{
-		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-	} catch(PDOException $ex)
-	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
-		die();
-	}
 
-	$stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."streets WHERE id = ?");
-	if (!$stmt->execute(array($id)))
-	{
-		$_SESSION['error'] = $stmt->errorInfo();
-		header(ERRORREDIRECT);
-		die();
-	}
+	DB::query("DELETE FROM ".DB_PREFIX."streets WHERE id = " . $id);
 
-	$pdo = null;
-
-	session_start();
 	$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed street from database</span></div>';
 	header("Location: ".BASE_URL."/oc-admin/dataManagement/streetManager.php");
 }
@@ -1381,27 +1307,8 @@ function deleteVehicle()
 	$make 		= !empty($_POST['make']) ? htmlspecialchars($_POST['make']) : '';
 	$model   	= !empty($_POST['model']) ? htmlspecialchars($_POST['model']) : '';
 
-	try{
-		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-	} catch(PDOException $ex)
-	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
-		die();
-	}
+	DB::query("DELETE FROM ".DB_PREFIX."vehicles WHERE id = " . $id); 
 
-	$stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."vehicles WHERE id = ?");
-	if (!$stmt->execute(array($id)))
-	{
-		$_SESSION['error'] = $stmt->errorInfo();
-		header(ERRORREDIRECT);
-		die();
-	}
-
-	$pdo = null;
-
-	session_start();
 	$_SESSION['successMessage'] = "<div class=\"alert alert-success\"><span>Vehicle ".$_POST['make']." ".$_POST['model']." removed successfully.</div>";
 	header("Location: ".BASE_URL."/oc-admin/dataManagement/vehicleManager.php");
 }
@@ -1806,27 +1713,8 @@ function deleteWarrantType()
 	session_start();
 	$id = htmlspecialchars($_POST['warrantTypeID']);
 
-	try{
-		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-	} catch(PDOException $ex)
-	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
-		die();
-	}
+	DB::query("DELETE FROM ".DB_PREFIX."warrantTypes WHERE id = " . $id);
 
-	$stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."warrantTypes WHERE id = ?");
-	if (!$stmt->execute(array($id)))
-	{
-		$_SESSION['error'] = $stmt->errorInfo();
-		header(ERRORREDIRECT);
-		die();
-	}
-
-	$pdo = null;
-
-	session_start();
 	$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed warrant type from database</span></div>';
 	header("Location: ".BASE_URL."/oc-admin/dataManagement/warrantTypeManager.php");
 }
@@ -2009,28 +1897,9 @@ function deleteWeapon()
 {
 	session_start();
 	$id = htmlspecialchars($_POST['WeaponID']);
-
-	try{
-		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-	} catch(PDOException $ex)
-	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
-		die();
-	}
-
-	$stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."weapons WHERE id = ?");
-	if (!$stmt->execute(array($id)))
-	{
-		$_SESSION['error'] = $stmt->errorInfo();
-		header(ERRORREDIRECT);
-		die();
-	}
-
-	$pdo = null;
-
-	session_start();
+	
+	DB::query("DELETE FROM ".DB_PREFIX."weapons WHERE id = " . $id);
+	
 	$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed weapon from database</span></div>';
 	header("Location: ".BASE_URL."/oc-admin/dataManagement/weaponManager.php");
 }
