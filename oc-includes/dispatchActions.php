@@ -805,26 +805,7 @@ function delete_citation()
 {
     $cid = htmlspecialchars($_POST['cid']);
 
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
-    }
-
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncicCitations WHERE id = ?");
-    $result = $stmt->execute(array($cid));
-
-    if (!$result)
-    {
-        $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
-    }
-    $pdo = null;
+    DB::query("DELETE FROM ".DB_PREFIX."ncicCitations WHERE id = " . $cid);
 
     $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully removed citation</span></div>';
     header("Location: ".BASE_URL."/cad.php");
@@ -834,26 +815,7 @@ function delete_arrest()
 {
     $aid = htmlspecialchars($_POST['aid']);
 
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
-    }
-
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncicArrests WHERE id = ?");
-    $result = $stmt->execute(array($aid));
-
-    if (!$result)
-    {
-        $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
-    }
-    $pdo = null;
+    DB::query("DELETE FROM ".DB_PREFIX."ncicArrests WHERE id = " . $aid);
 
     $_SESSION['arrestMessage'] = '<div class="alert alert-success"><span>Successfully removed arrest</span></div>';
     header("Location: ".BASE_URL."/cad.php");
@@ -862,27 +824,8 @@ function delete_arrest()
 function delete_warning()
 {
     $wgid = htmlspecialchars($_POST['wgid']);
-
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
-    }
-
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncicWarnings WHERE id = ?");
-    $result = $stmt->execute(array($wgid));
-
-    if (!$result)
-    {
-        $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
-    }
-    $pdo = null;
+    
+    DB::query("DELETE FROM ".DB_PREFIX."ncicWarnings WHERE id = " . $wgid);
 
     $_SESSION['warningMessage'] = '<div class="alert alert-success"><span>Successfully removed warning</span></div>';
     header("Location: ".BASE_URL."/cad.php");
@@ -892,26 +835,7 @@ function delete_warrant()
 {
     $wid = htmlspecialchars($_POST['wid']);
 
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
-	}
-
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncicWarrants WHERE id = ?");
-    $result = $stmt->execute(array($wid));
-
-    if (!$result)
-    {
-        $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
-    }
-    $pdo = null;
+    DB::query("DELETE FROM ".DB_PREFIX."ncicWarrants WHERE id = " . $wid);
 
     $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully removed warrant</span></div>';
     header("Location: ".BASE_URL."/cad.php");
