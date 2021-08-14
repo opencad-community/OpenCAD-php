@@ -38,27 +38,19 @@ function toggleFullScreen() {
 
 function deleteUser(uid) {
     var $tr = $(this).closest('tr');
-    var r = confirm("Are you sure you want to delete this user? This cannot be undone!");
-
+    
     if (r == true) {
         $.ajax({
             type: "POST",
-            url: href + "oc-includes/dispatchActions.php",
+            url: "oc-includes/dispatchActions.php",
             data: {
                 deleteUser: 'yes',
-                uid: uid
+                userId: userId
             },
             success: function (response) {
                 console.log(response);
                 $tr.find('td').fadeOut(1000, function () {
                     $tr.remove();
-                });
-
-                new PNotify({
-                    title: 'Success',
-                    text: 'Successfully deleted user',
-                    type: 'success',
-                    styling: 'bootstrap3'
                 });
 
                 getCalls();

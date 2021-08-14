@@ -266,34 +266,16 @@ function getCitationTypes()
 function getCitationTypeDetails()
 {
 	$id = htmlspecialchars($_POST['id']);
-	try{
-		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-	} catch(PDOException $ex)
-	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
-		die();
-	}
 
-	$stmt = $pdo->prepare("SELECT citationId FROM ".DB_PREFIX."citationTypes WHERE id = ?");
-	$resStatus = $stmt->execute(array($id));
+	$stmt = DB::query("SELECT citationId FROM ".DB_PREFIX."citationTypes WHERE id = " . $id);
 	$result = $stmt;
-
-	if (!$resStatus)
-	{
-		$_SESSION['error'] = $stmt->errorInfo();
-		header(ERRORREDIRECT);
-		die();
-	}
-	$pdo = null;
 
 	$encode = array();
 	foreach($result as $row)
 	{
-		$encode["id"] = $row[0];
-		$encode["citationDescription"] = $row[1];
-		$encode["citationFine"] = $row[2];
+		$encode["id"] = $row["citationIdd"];
+		$encode["citationDescription"] = $row["citationDescription"];
+		$encode["citationFine"] = $row["citationFine"];
 	}
 	
 	echo json_encode($encode);

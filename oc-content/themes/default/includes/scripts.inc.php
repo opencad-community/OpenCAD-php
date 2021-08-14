@@ -1,5 +1,6 @@
     <?php    
-    require_once( ABSPATH . '/oc-functions.php');?>
+    require_once( ABSPATH . '/oc-functions.php');
+    require_once( ABSPATH . '/oc-settings.php');?>
     
     <!-- jQuery -->
     <script type="text/javascript" src="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/vendors/jquery/dist/jquery.min.js"></script>
