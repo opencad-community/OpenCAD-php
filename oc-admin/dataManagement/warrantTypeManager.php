@@ -121,9 +121,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	<div class="modal-dialog modal-md">
 		<div class="modal-content">
 			<div class="modal-header">
+				<h4 class="modal-title" id="editWarrantTypeModal">Edit Warrant</h4>
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
 				</button>
-				<h4 class="modal-title" id="editWarrantTypeModal">Edit Warrant</h4>
 			</div>
 			<!-- ./ modal-header -->
 			<div class="modal-body">
@@ -132,10 +132,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 					<div class="form-group row">
 						<label class="col-md-3 control-label">Warrant Description</label>
 						<div class="col-md-9">
-							<input type="text" name="warrantDescription" class="form-control"
-								id="warrantDescription" />
-							<span class="fas fa-exclamation-triangle form-control-feedback right"
-								aria-hidden="true"></span> </div>
+							<input type="text" name="warrantDescription" class="form-control" id="warrantDescription" />
+						</div>
 						<!-- ./ col-sm-9 -->
 					</div>
 					<!-- ./ form-group -->>

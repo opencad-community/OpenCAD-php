@@ -879,28 +879,9 @@ function ncicGetWarrants()
 function delete_warrant()
 {
     $wid = htmlspecialchars($_POST['wid']);
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
-    }
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncic_warrants WHERE id = ?");
-    $result = $stmt->execute(array($wid));
+    DB::query("DELETE FROM ".DB_PREFIX."ncic_warrants WHERE id = " . $wid);
 
-    if (!$result)
-    {
-        $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
-    }
-    $pdo = null;
-
-    session_start();
     $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully removed warrant</span></div>';
     header("Location: ".BASE_URL."/".OCAPPS."/civilian.php");
 }
@@ -1025,26 +1006,7 @@ function delete_weapon()
 {
     $weaid = htmlspecialchars($_POST['weaid']);
 
-    try{
-        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-    } catch(PDOException $ex)
-    {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
-    }
-
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncicWeapons WHERE id = ?");
-    $result = $stmt->execute(array($weaid));
-
-    if (!$result)
-    {
-        $_SESSION['error'] = $stmt->errorInfo();
-        header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-        die();
-    }
-    $pdo = null;
+    DB::query("DELETE FROM ".DB_PREFIX."ncicWeapons WHERE id = " . $weaid);
 
     session_start();
     $_SESSION['weaponMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian weapon</span></div>';

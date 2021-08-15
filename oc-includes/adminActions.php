@@ -15,6 +15,8 @@
 
 require_once(__DIR__ . "/../oc-config.php");
 include_once( ABSPATH . "/oc-functions.php");
+include_once( ABSPATH . "/oc-settings.php");
+include_once( ABSPATH . OCINC . "/dbActions.php");
 include_once( ABSPATH . "/oc-content/plugins/api_auth.php");
 
 /*
@@ -199,7 +201,7 @@ function editUserAccountRole()
 function delete_user()
 {
 	session_start();
-	$uid = htmlspecialchars($_POST['uid']);
+	$uid = htmlspecialchars($_POST['userId']);
 	$myRank = $_SESSION['adminPrivilege'];
 	$hisRank = _getRole($uid);
 
@@ -210,33 +212,8 @@ function delete_user()
 		die();
 	}
 
-	try{
-		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-	} catch(PDOException $ex)
-	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-		die();
-	}
-
-	$stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."users WHERE id = ?");
-	if (!$stmt->execute(array($uid)))
-	{
-		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-		die();
-	}
-
-	$stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."userDepartments WHERE userId = ?");
-	if (!$stmt->execute(array($uid)))
-	{
-		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-		die();
-	}
-
-	$pdo = null;
+	DB::query("DELETE FROM ".DB_PREFIX."users WHERE id = " . $uid);
+	DB::query("DELETE FROM ".DB_PREFIX."userDepartments WHERE userId = " . $uid);
 
 	session_start();
 	$_SESSION['userMessage'] = '<div class="alert alert-success"><span>Successfully removed user from database</span></div>';
@@ -294,14 +271,14 @@ function getPendingUsers()
 				<td>' . $row["identifier"] . '</td>
 				<td>';
 
-			getUserGroups($row[0]);
+			getUserGroups($row["id"]);
 
 			echo ' </td>
 				<td>
 					<form action="'.BASE_URL.'/oc-includes/adminActions.php" method="post">
 					<input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Approve" />
 					<input name="rejectUser" type="submit" class="btn btn-xs btn-link" value="Reject" />
-					<input name="uid" type="hidden" value=' . $row[0] . ' />
+					<input name="uid" type="hidden" value=' . $row["id"] . ' />
 					</form>
 				</td>
 			</tr>
@@ -662,17 +639,17 @@ function getUsers()
 
 	echo '
 		<table id="allUsers" class="table table-striped table-bordered" aria-label="Manage all users">
-		<thead>
-			<tr>
-			<th>Name</th>
-			<th>Email</th>
-			<th>Role</th>
-			<th>Identifier</th>
-			<th>Groups</th>
-			<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Role</th>
+					<th>Identifier</th>
+					<th>Groups</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
 	';
 
 	foreach($result as $row)
@@ -935,10 +912,9 @@ function getUserDetails()
 	foreach($result as $row)
 	{
 		$encode["userId"] = $row['id'];
-		$encode["name"] = $row['name'];
-		$encode["email"] = $row['email'];
-		$encode["identifier"] = $row['identifier'];
-		$encode["role"] = $row['adminPrivilege'];
+		$encode["userName"] = $row['name'];
+		$encode["userEmail"] = $row['email'];
+		$encode["userIdentifier"] = $row['identifier'];
 	}
 	echo json_encode($encode);
 }
@@ -956,7 +932,7 @@ function getUserID()
 		die();
 	}
 
-	$stmt = $pdo->prepare("SELECT id FROM ".DB_PREFIX."users WHERE ID = ?");
+	$stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."users WHERE ID = ?");
 	$resStatus = $stmt->execute(array($userId));
 	$result = $stmt;
 
@@ -1012,25 +988,8 @@ function getUserGroupsEditor($encode, $userId)
 
 function getCodes()
 {
-	try{
-		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-	} catch(PDOException $ex)
-	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-		die();
-	}
 
-	$result = $pdo->query("SELECT codeId, codeName FROM ".DB_PREFIX."codes");
-
-	if (!$result)
-	{
-		$_SESSION['error'] = $pdo->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-		die();
-	}
-	$pdo = null;
+	$result = DB::query("SELECT codeId, codeName FROM ".DB_PREFIX."codes");
 
 	echo '
 		<table id="codes" class="table table-striped table-bordered">
@@ -1047,8 +1006,8 @@ function getCodes()
 	{
 		echo '
 		<tr>
-			<td>' . $row[0] . '</td>
-			<td>' . $row[1] . '</td>
+			<td>' . $row["codeId"] . '</td>
+			<td>' . $row["codeName"] . '</td>
 		</tr>
 		';
 	}

@@ -38,27 +38,19 @@ function toggleFullScreen() {
 
 function deleteUser(uid) {
     var $tr = $(this).closest('tr');
-    var r = confirm("Are you sure you want to delete this user? This cannot be undone!");
-
+    
     if (r == true) {
         $.ajax({
             type: "POST",
-            url: href + "oc-includes/dispatchActions.php",
+            url: "oc-includes/dispatchActions.php",
             data: {
                 deleteUser: 'yes',
-                uid: uid
+                userId: userId
             },
             success: function (response) {
                 console.log(response);
                 $tr.find('td').fadeOut(1000, function () {
                     $tr.remove();
-                });
-
-                new PNotify({
-                    title: 'Success',
-                    text: 'Successfully deleted user',
-                    type: 'success',
-                    styling: 'bootstrap3'
                 });
 
                 getCalls();
@@ -83,7 +75,7 @@ function deleteStreet(streetID) {
 
         $.ajax({
             type: "POST",
-            url: hdir + "oc-includes/dataActions.php",
+            url: "oc-includes/dataActions.php",
             data: {
                 deleteStreet: 'yes',
                 streetID: streetID
@@ -122,7 +114,7 @@ function deleteVehicle(vehicleID) {
 
         $.ajax({
             type: "POST",
-            url: hdir + "oc-includes/dataActions.php",
+            url: "oc-includes/dataActions.php",
             data: {
                 deleteVehicle: 'yes',
                 vehicleID: vehicleID
@@ -448,13 +440,13 @@ $('#ncic_weapon_btn').on('click', function (e) {
 
 // Handles autocompletion on the new call form
 $(".txt-auto").autocomplete({
-    source: hdir + "oc-includes/dispatchActions.php",
+    source: "oc-includes/dispatchActions.php",
     minLength: 2
 });
 $(".txt-auto").autocomplete("option", "appendTo", ".newCallForm");
 
 $(".txt-auto2").autocomplete({
-    source: hdir + "oc-includes/dispatchActions.php",
+    source: "oc-includes/dispatchActions.php",
     minLength: 2
 });
 $(".txt-auto2").autocomplete("option", "appendTo", ".newCallForm");
@@ -546,7 +538,7 @@ $(function () {
 
         $.ajax({
             type: "POST",
-            url: hdir + "oc-includes/dispatchActions.php",
+            url: "oc-includes/dispatchActions.php",
             data: {
                 assignUnit: 'yes',
                 details: $("#" + this.id).serialize(),
@@ -592,7 +584,7 @@ $(function () {
 function getActiveDispatchers() {
     $.ajax({
         type: "GET",
-        url: hdir + "oc-includes/generalActions.php",
+        url: "oc-includes/generalActions.php",
         data: {
             getDispatchers: 'yes'
         },
@@ -640,7 +632,7 @@ $('#newCall').on('show.bs.modal', function (e) {
     $.ajax({
         cache: false,
         type: 'GET',
-        url: hdir + 'oc-includes/generalActions.php',
+        url: 'oc-includes/generalActions.php',
         data: { 'getActiveUnits': 'yes' },
         success: function (result) {
             data = JSON.parse(result);
@@ -692,7 +684,7 @@ $('#assign').on('show.bs.modal', function (e) {
     $.ajax({
         cache: false,
         type: 'GET',
-        url: hdir + 'oc-includes/generalActions.php',
+        url: 'oc-includes/generalActions.php',
         data: { 'getActiveUnitsModal': 'yes' },
         success: function (result) {
             //console.log(result);
@@ -723,7 +715,7 @@ $('#callDetails').on('show.bs.modal', function (e) {
     $.ajax({
         cache: false,
         type: 'GET',
-        url: hdir + 'oc-includes/generalActions.php',
+        url: 'oc-includes/generalActions.php',
         data: {
             'getCallDetails': 'yes',
             'callId': callId
@@ -755,7 +747,7 @@ function clearCall(btn_id) {
     if (r == true) {
         $.ajax({
             type: "POST",
-            url: hdir + "oc-includes/dispatchActions.php",
+            url: "oc-includes/dispatchActions.php",
             data: {
                 clearCall: 'yes',
                 callId: btn_id
@@ -815,7 +807,7 @@ function getMyCall() {
 
     $.ajax({
         type: "GET",
-        url: hdir + "oc-includes/generalActions.php",
+        url: "oc-includes/generalActions.php",
         data: {
             getMyCall: 'yes',
             type: file
@@ -883,7 +875,7 @@ function priorityTone(type) {
     function sendTone(name, action) {
         $.ajax({
             type: "POST",
-            url: hdir + "oc-includes/generalActions.php",
+            url: "oc-includes/generalActions.php",
             data: {
                 setTone: 'yes',
                 tone: name,
@@ -1016,7 +1008,7 @@ function responderChangeStatus(element) {
 
     $.ajax({
         type: "POST",
-        url: hdir + "oc-includes/generalActions.php",
+        url: "oc-includes/generalActions.php",
         data: {
             changeStatus: 'yes',
             unit: unit,
@@ -1049,7 +1041,7 @@ function getMyRank(id) {
 
     $.ajax({
         type: "GET",
-        url: hdir + "oc-includes/profileActions.php",
+        url: "oc-includes/profileActions.php",
         data: {
             getMyRank: 'yes',
             unit: id

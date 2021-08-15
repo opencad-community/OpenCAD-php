@@ -121,9 +121,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		<div class="modal-dialog modal-md">
 			<div class="modal-content">
 				<div class="modal-header">
+					<h4 class="modal-title" id="editWeaponModal">Edit Weapon</h4>
 					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
 					</button>
-					<h4 class="modal-title" id="editWeaponModal">Edit Weapon</h4>
 				</div>
 				<!-- ./ modal-header -->
 				<div class="modal-body">
@@ -133,7 +133,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<label class="col-md-3 control-label">Weapon Type</label>
 							<div class="col-md-9">
 								<input type="text" name="weaponType" class="form-control" id="weaponType" required />
-								<span class="fas fa-road form-control-feedback right" aria-hidden="true"></span>
 							</div>
 							<!-- ./ col-sm-9 -->
 						</div>
@@ -142,7 +141,6 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<label class="col-md-3 control-label">Weapon Name</label>
 							<div class="col-md-9">
 								<input type="text" name="weaponName" class="form-control" id="weaponName" required />
-								<span class="fas fa-map form-control-feedback right" aria-hidden="true"></span>
 							</div>
 							<!-- ./ col-sm-9 -->
 						</div>

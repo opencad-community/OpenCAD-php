@@ -119,9 +119,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		<div class="modal-dialog modal-md">
 			<div class="modal-content">
 				<div class="modal-header">
+					<h4 class="modal-title" id="editWarningTypeModal">Edit Warning</h4>
 					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
 					</button>
-					<h4 class="modal-title" id="editWarningTypeModal">Edit Warning</h4>
 				</div>
 				<!-- ./ modal-header -->
 				<div class="modal-body">
@@ -131,8 +131,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<label class="col-md-3 control-label">Warning Description</label>
 							<div class="col-md-9">
 								<input type="text" name="warningDescription" class="form-control" id="warningDescription" />
-								<span class="fas fa-exclamation-triangle form-control-feedback right"
-									aria-hidden="true"></span> </div>
+							</div>
 							<!-- ./ col-sm-9 -->
 						</div>
 						<!-- ./ form-group -->>

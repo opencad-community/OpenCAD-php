@@ -178,7 +178,7 @@ function getCitationTypes()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -189,7 +189,7 @@ function getCitationTypes()
 	if (!$result)
 	{
 		$_SESSION['error'] = $pdo->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$num_rows = $result->rowCount();
@@ -216,34 +216,33 @@ function getCitationTypes()
 		{
 			echo '
 			<tr>
-				<td>' . $row[1] . '</td>
-				<td>' . $row[2] . '</td>
+				<td>' . $row["citationDescription"] . '</td>
+				<td>' . $row["citationFine"] . '</td>
 				<td>';
 		if ( DEMO_MODE == false) {
-			echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
+			echo APIDATAACTIONS;
 			if ( ( MODERATOR_EDIT_WARNINGTYPE == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
 			{
-				echo '<button name="editCitationType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editCitationTypeModal" class="btn btn-xs btn-link" >Edit</button>';
+				echo '<button name="editCitationType" type="button" data-toggle="modal" id="' . $row["citationId"] . '" data-target="#editCitationTypeModal" class="btn btn-xs btn-link" >Edit</button>';
 			} else {
-				echo '<button name="editCitationType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editCitationTypeModal" class="btn btn-xs btn-link" disabled >Edit</button>';
+				echo '<button name="editCitationType" type="button" data-toggle="modal" id="' . $row["citationId"] . '" data-target="#editCitationTypeModal" class="btn btn-xs btn-link" disabled >Edit</button>';
 			}
 
 			if ( ( MODERATOR_DELETE_WARNINGTYPE == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
 			{
-				echo '<input name="deleteCitationType" type="submit" class="btn btn-xs btn-link" onclick="deleteCitationType(' . $row[0] . ')" value="Delete" />';
+				echo '<input name="deleteCitationType" type="submit" class="btn btn-xs btn-link" onclick="deleteCitationType(' . $row["citationId"] . ')" value="Delete" />';
 			} else {
-				echo '<input name="deleteCitationType" type="submit" class="btn btn-xs btn-link" onclick="deleteCitationType(' . $row[0] . ')" value="Delete" disabled />';
+				echo '<input name="deleteCitationType" type="submit" class="btn btn-xs btn-link" onclick="deleteCitationType(' . $row["citationId"] . ')" value="Delete" disabled />';
 			}
 		} else {
 			echo ' </td>
-				<td>
-				<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">
-				<button name="editCitationType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editCitationTypeModal" class="btn btn-xs btn-link" disabled >Edit</button>
-				<input name="deleteCitationType" type="submit" class="btn btn-xs btn-link" onclick="deleteCitationTypeCode(' . $row[0] . ')" value="Delete" disabled />
+				<td>' . APIDATAACTIONS . '
+				<button name="editCitationType" type="button" data-toggle="modal" id="' . $row["citationId"] . '" data-target="#editCitationTypeModal" class="btn btn-xs btn-link" disabled >Edit</button>
+				<input name="deleteCitationType" type="submit" class="btn btn-xs btn-link" onclick="deleteCitationTypeCode(' . $row["citationId"] . ')" value="Delete" disabled />
 				';
 			}
 		
-		echo '<input name="warrantTypeID" type="hidden" value=' . $row[0] . ' />
+		echo '<input name="citationTypeID" type="hidden" value=' . $row["citationId"] . ' />
 			</form>
 			</td>
 			</tr>
@@ -267,34 +266,16 @@ function getCitationTypes()
 function getCitationTypeDetails()
 {
 	$id = htmlspecialchars($_POST['id']);
-	try{
-		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-	} catch(PDOException $ex)
-	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-		die();
-	}
 
-	$stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."citationTypes WHERE id = ?");
-	$resStatus = $stmt->execute(array($id));
+	$stmt = DB::query("SELECT citationId FROM ".DB_PREFIX."citationTypes WHERE id = " . $id);
 	$result = $stmt;
-
-	if (!$resStatus)
-	{
-		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-		die();
-	}
-	$pdo = null;
 
 	$encode = array();
 	foreach($result as $row)
 	{
-		$encode["id"] = $row[0];
-		$encode["citationDescription"] = $row[1];
-		$encode["citationFine"] = $row[2];
+		$encode["id"] = $row["citationIdd"];
+		$encode["citationDescription"] = $row["citationDescription"];
+		$encode["citationFine"] = $row["citationFine"];
 	}
 	
 	echo json_encode($encode);
@@ -304,8 +285,8 @@ function getCitationTypeDetails()
 function editCitationType()
 {
 	$id	        	                = !empty($_POST['id']) ? htmlspecialchars($_POST['id']) : '';
-	$citationDescription           = !empty($_POST['citationDescription']) ? htmlspecialchars($_POST['citationDescription']) : '';
-	$citationFine  		        = !empty($_POST['citationFine']) ? $_POST['citationFine'] : '';
+	$citationDescription			= !empty($_POST['citationDescription']) ? htmlspecialchars($_POST['citationDescription']) : '';
+	$citationFine  		        	= !empty($_POST['citationFine']) ? $_POST['citationFine'] : '';
 
 	try{
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -313,7 +294,7 @@ function editCitationType()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	
@@ -342,26 +323,7 @@ function deleteCitationType()
 	session_start();
 	$id = htmlspecialchars($_POST['citationTypeID']);
 
-	try{
-		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-	} catch(PDOException $ex)
-	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-		die();
-	}
-
-	$stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."citationTypes WHERE id = ?");
-	if (!$stmt->execute(array($id)))
-	{
-		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-		die();
-	}
-
-	$pdo = null;
-
+	DB::query("DELETE FROM ".DB_PREFIX."citationTypes WHERE id = ". $id);
 	session_start();
 	$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed incident type from database</span></div>';
 	header("Location: ".BASE_URL."/oc-admin/dataManagement/citationTypeManager.php");
@@ -388,7 +350,7 @@ function getDepartments()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -399,7 +361,7 @@ function getDepartments()
 	if (!$result)
 	{
 		$_SESSION['error'] = $pdo->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$num_rows = $result->rowCount();
@@ -440,7 +402,7 @@ function getDepartments()
 
 				<td>';
 		if ( DEMO_MODE == false) {
-			echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
+			echo APIDATAACTIONS;
 			if ( ( MODERATOR_DATAMAN_DEPARTMENTS== true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
 			{
 				echo '<button name="editDepartment" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editDepartmentModal" class="btn btn-xs btn-link">Edit</button>';
@@ -488,7 +450,7 @@ function getDepartmentDetails()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -499,7 +461,7 @@ function getDepartmentDetails()
 	if (!$resStatus)
 	{
 		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -507,11 +469,11 @@ function getDepartmentDetails()
 	$encode = array();
 	foreach($result as $row)
 	{
-		$encode["departmentID"] = $row[0];
-		$encode["departmentName"] = $row[1];
-		$encode["departmentShortName"] = $row[2];
-		$encode["departmentLongName"] = $row[3];
-		$encode["departmentEnabled"] = $row[4];
+		$encode["departmentID"] = $row["departmentID"];
+		$encode["departmentName"] = $row["departmentName"];
+		$encode["departmentShortName"] = $row["departmentShortName"];
+		$encode["departmentLongName"] = $row["departmentLongName"];
+		$encode["departmentEnabled"] = $row["departmentEnabled"];
 
 	}
 	
@@ -533,7 +495,7 @@ function editDepartment()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -563,27 +525,8 @@ function deleteDepartment()
 	session_start();
 	$departmentID = htmlspecialchars($_POST['departmentID']);
 
-	try{
-		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-	} catch(PDOException $ex)
-	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-		die();
-	}
+	DB::query("DELETE FROM ".DB_PREFIX."departments WHERE departmentId = " . $departmentID);
 
-	$stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."departments WHERE departmentId = ?");
-	if (!$stmt->execute(array($departmentID)))
-	{
-		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-		die();
-	}
-
-	$pdo = null;
-
-	session_start();
 	$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed incident  from database</span></div>';
 	header("Location: ".BASE_URL."/oc-admin/dataManagement/departmentsManager.php");
 }
@@ -609,7 +552,7 @@ function getIncidentTypes()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	
@@ -620,7 +563,7 @@ function getIncidentTypes()
 	if (!$result)
 	{
 		$_SESSION['error'] = $pdo->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$num_rows = $result->rowCount();
@@ -652,7 +595,7 @@ function getIncidentTypes()
 				<td>' . $row[2] . '</td>
 				<td>';
 		if ( DEMO_MODE == false) {
-			echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
+			echo APIDATAACTIONS;
 			if ( ( MODERATOR_EDIT_INCIDENTTYPES == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
 			{
 				echo '<button name="editIncidentType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editIncidentTypeModal" class="btn btn-xs btn-link" >Edit</button>';
@@ -705,7 +648,7 @@ function getIncidentTypeDetails()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -716,7 +659,7 @@ function getIncidentTypeDetails()
 	if (!$resStatus)
 	{
 		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -746,7 +689,7 @@ function editIncidentType()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -776,27 +719,8 @@ function deleteIncidentType()
 	session_start();
 	$id = htmlspecialchars($_POST['IncidentTypeID']);
 
-	try{
-		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-	} catch(PDOException $ex)
-	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-		die();
-	}
+	DB::query("DELETE FROM ".DB_PREFIX."incident_types WHERE id = ". $id);
 
-	$stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."incident_types WHERE id = ?");
-	if (!$stmt->execute(array($id)))
-	{
-		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-		die();
-	}
-
-	$pdo = null;
-
-	session_start();
 	$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed incident type from database</span></div>';
 	header("Location: ".BASE_URL."/oc-admin/dataManagement/incidentTypeManager.php");
 }
@@ -822,7 +746,7 @@ function getRadioCodes()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -833,7 +757,7 @@ function getRadioCodes()
 	if (!$result)
 	{
 		$_SESSION['error'] = $pdo->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$num_rows = $result->rowCount();
@@ -864,7 +788,7 @@ function getRadioCodes()
 				<td>' . $row[2] . '</td>
 				<td>';
 		if ( DEMO_MODE == false) {
-			echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
+			echo APIDATAACTIONS;
 			if ( ( MODERATOR_EDIT_WARNINGTYPE == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
 			{
 				echo '<button name="editRadioCode" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editRadioCodeModal" class="btn btn-xs btn-link" >Edit</button>';
@@ -917,7 +841,7 @@ function getRadioCodeDetails()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -928,7 +852,7 @@ function getRadioCodeDetails()
 	if (!$resStatus)
 	{
 		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -936,9 +860,10 @@ function getRadioCodeDetails()
 	$encode = array();
 	foreach($result as $row)
 	{
-		$encode["id"] = $row[0];
-		$encode["code"] = $row[1];
-		$encode["codeDescription"] = $row[2];
+		$encode["id"] = $row["id"];
+		$encode["code"] = $row["code"];
+		$encode["codeDescription"] = $row["codeDescription"];
+		$encode["onCall"] = $row["onCall"];
 	}
 	
 	echo json_encode($encode);
@@ -958,7 +883,7 @@ function editRadioCode()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -988,25 +913,7 @@ function deleteRadioCode()
 	session_start();
 	$id = htmlspecialchars($_POST['warrantTypeID']);
 
-	try{
-		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-	} catch(PDOException $ex)
-	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-		die();
-	}
-
-	$stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."radioCodes WHERE id = ?");
-	if (!$stmt->execute(array($id)))
-	{
-		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-		die();
-	}
-
-	$pdo = null;
+	DB::query("DELETE FROM ".DB_PREFIX."radioCodes WHERE id = " . $id);
 
 	session_start();
 	$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed incident type from database</span></div>';
@@ -1033,7 +940,7 @@ function getStreets()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -1042,7 +949,7 @@ function getStreets()
 	if (!$result)
 	{
 		$_SESSION['error'] = $pdo->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$num_rows = $result->rowCount();
@@ -1074,7 +981,7 @@ function getStreets()
 				<td>' . $row[2] . '</td>
 				<td>';
 		if ( DEMO_MODE == false) {
-			echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
+			echo APIDATAACTIONS;
 			if ( ( MODERATOR_EDIT_STREETS == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
 			{
 				echo '<button name="editStreet" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editStreetModal" class="btn btn-xs btn-link" >Edit</button>';
@@ -1127,7 +1034,7 @@ function getStreetDetails()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -1138,7 +1045,7 @@ function getStreetDetails()
 	if (!$resStatus)
 	{
 		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -1168,7 +1075,7 @@ function editStreet()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -1198,27 +1105,9 @@ function deleteStreet()
 	session_start();
 	$id = htmlspecialchars($_POST['streetID']);
 
-	try{
-		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-	} catch(PDOException $ex)
-	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-		die();
-	}
 
-	$stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."streets WHERE id = ?");
-	if (!$stmt->execute(array($id)))
-	{
-		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-		die();
-	}
+	DB::query("DELETE FROM ".DB_PREFIX."streets WHERE id = " . $id);
 
-	$pdo = null;
-
-	session_start();
 	$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed street from database</span></div>';
 	header("Location: ".BASE_URL."/oc-admin/dataManagement/streetManager.php");
 }
@@ -1243,7 +1132,7 @@ function getVehicles()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -1254,7 +1143,7 @@ function getVehicles()
 	if (!$result)
 	{
 		$_SESSION['error'] = $pdo->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$num_rows = $result->rowCount();
@@ -1286,7 +1175,7 @@ function getVehicles()
 				<td>' . $row[2] . '</td>
 				<td>';
 		if ( DEMO_MODE == false) {
-			echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
+			echo APIDATAACTIONS;
 			if ( ( MODERATOR_EDIT_VEHICLES == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
 			{
 				echo '<button name="editVehicle" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editVehicleModal" class="btn btn-xs btn-link" >Edit</button>';
@@ -1339,7 +1228,7 @@ function getVehicleDetails()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -1350,7 +1239,7 @@ function getVehicleDetails()
 	if (!$resStatus)
 	{
 		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -1386,7 +1275,7 @@ function editVehicle()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -1418,27 +1307,8 @@ function deleteVehicle()
 	$make 		= !empty($_POST['make']) ? htmlspecialchars($_POST['make']) : '';
 	$model   	= !empty($_POST['model']) ? htmlspecialchars($_POST['model']) : '';
 
-	try{
-		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-	} catch(PDOException $ex)
-	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-		die();
-	}
+	DB::query("DELETE FROM ".DB_PREFIX."vehicles WHERE id = " . $id); 
 
-	$stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."vehicles WHERE id = ?");
-	if (!$stmt->execute(array($id)))
-	{
-		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-		die();
-	}
-
-	$pdo = null;
-
-	session_start();
 	$_SESSION['successMessage'] = "<div class=\"alert alert-success\"><span>Vehicle ".$_POST['make']." ".$_POST['model']." removed successfully.</div>";
 	header("Location: ".BASE_URL."/oc-admin/dataManagement/vehicleManager.php");
 }
@@ -1464,7 +1334,7 @@ function getWarningTypes()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -1475,7 +1345,7 @@ function getWarningTypes()
 	if (!$result)
 	{
 		$_SESSION['error'] = $pdo->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$num_rows = $result->rowCount();
@@ -1504,7 +1374,7 @@ function getWarningTypes()
 				<td>' . $row[1] . '</td>
 				<td>';
 		if ( DEMO_MODE == false) {
-			echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
+			echo APIDATAACTIONS;
 			if ( ( MODERATOR_EDIT_WARNINGTYPE == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
 			{
 				echo '<button name="editWarningType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWarningTypeModal" class="btn btn-xs btn-link" >Edit</button>';
@@ -1555,7 +1425,7 @@ function getWarningTypeDetails()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -1566,7 +1436,7 @@ function getWarningTypeDetails()
 	if (!$resStatus)
 	{
 		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -1593,7 +1463,7 @@ function editWarningType()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -1629,7 +1499,7 @@ function deleteWarningType()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -1637,7 +1507,7 @@ function deleteWarningType()
 	if (!$stmt->execute(array($id)))
 	{
 		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -1669,7 +1539,7 @@ function getWarrantTypes()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -1680,7 +1550,7 @@ function getWarrantTypes()
 	if (!$result)
 	{
 		$_SESSION['error'] = $pdo->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$num_rows = $result->rowCount();
@@ -1722,7 +1592,7 @@ function getWarrantTypes()
 				<td>' . $warrantViolent . '</td>
 				<td>';
 		if ( DEMO_MODE == false) {
-			echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
+			echo APIDATAACTIONS;
 			if ( ( MODERATOR_EDIT_WARRANTTYPES == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
 			{
 				echo '<button name="editWarrantType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWarrantTypeModal" class="btn btn-xs btn-link" >Edit</button>';
@@ -1775,7 +1645,7 @@ function getWarrantTypeDetails()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -1786,7 +1656,7 @@ function getWarrantTypeDetails()
 	if (!$resStatus)
 	{
 		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -1813,7 +1683,7 @@ function editWarrantType()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -1843,27 +1713,8 @@ function deleteWarrantType()
 	session_start();
 	$id = htmlspecialchars($_POST['warrantTypeID']);
 
-	try{
-		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-	} catch(PDOException $ex)
-	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-		die();
-	}
+	DB::query("DELETE FROM ".DB_PREFIX."warrantTypes WHERE id = " . $id);
 
-	$stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."warrantTypes WHERE id = ?");
-	if (!$stmt->execute(array($id)))
-	{
-		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-		die();
-	}
-
-	$pdo = null;
-
-	session_start();
 	$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed warrant type from database</span></div>';
 	header("Location: ".BASE_URL."/oc-admin/dataManagement/warrantTypeManager.php");
 }
@@ -1889,7 +1740,7 @@ function getWeapons()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -1900,7 +1751,7 @@ function getWeapons()
 	if (!$result)
 	{
 		$_SESSION['error'] = $pdo->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$num_rows = $result->rowCount();
@@ -1932,7 +1783,7 @@ function getWeapons()
 				<td>' . $row[2] . '</td>
 				<td>';
 		if ( DEMO_MODE == false) {
-			echo '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">';
+			echo APIDATAACTIONS;
 			if ( ( MODERATOR_EDIT_WEAPONS == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
 			{
 				echo '<button name="editWeapon" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWeaponModal" class="btn btn-xs btn-link" >Edit</button>';
@@ -1985,7 +1836,7 @@ function getWeaponDetails()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."weapons WHERE id = ?");
@@ -1994,7 +1845,7 @@ function getWeaponDetails()
 	if (!$resStatus)
 	{
 		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -2020,7 +1871,7 @@ function editWeapon()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$stmt = $pdo->prepare("UPDATE ".DB_PREFIX."weapons SET weaponName = ?, weaponType = ? WHERE id = ?");
@@ -2046,28 +1897,9 @@ function deleteWeapon()
 {
 	session_start();
 	$id = htmlspecialchars($_POST['WeaponID']);
-
-	try{
-		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-	} catch(PDOException $ex)
-	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-		die();
-	}
-
-	$stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."weapons WHERE id = ?");
-	if (!$stmt->execute(array($id)))
-	{
-		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
-		die();
-	}
-
-	$pdo = null;
-
-	session_start();
+	
+	DB::query("DELETE FROM ".DB_PREFIX."weapons WHERE id = " . $id);
+	
 	$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed weapon from database</span></div>';
 	header("Location: ".BASE_URL."/oc-admin/dataManagement/weaponManager.php");
 }
@@ -2099,7 +1931,7 @@ function resetData()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	if ($_POST == "allData") 
@@ -2151,7 +1983,7 @@ function resetData()
 	if (!$result)
 	{
 		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
