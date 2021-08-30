@@ -10,7 +10,7 @@ require_once( ABSPATH . '/oc-functions.php');
 require_once( ABSPATH. '/oc-settings.php');
 require_once( ABSPATH . "/oc-includes/generalActions.php");
 require_once( ABSPATH . "/oc-includes/adminActions.php");
-include_once( ABSPATH . "/" . OCCONTENT . "/plugins/api_auth.php" );
+include_once( ABSPATH . OCINC . "/plugins/apiAuth.php" );
 
 setDispatcher("1");
 

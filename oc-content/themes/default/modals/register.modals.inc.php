@@ -30,7 +30,7 @@
                     <div class="form-group row">
 						<label class="col-lg-2 control-label"><?php echo lang_key("PASSWORD"); ?></label>
 						<div class="col-lg-10">
-                        	<input class="form-control" placeholder="<?php echo lang_key("PASSWORD"); ?>" name="password" type="password" value="<?php if($testing){echo "password";}?>" required>
+                        	<input class="form-control" placeholder="<?php echo lang_key("PASSWORD"); ?>" name="password" type="password" value="Password" required>
 						</div>
                     </div>
                     <!-- ./ form-group -->
@@ -91,7 +91,7 @@
                     <div class="form-group row">
 						<label class="col-lg-2 control-label"><?php echo lang_key("PASSWORD"); ?></label>
 						<div class="col-lg-10">
-                        	<input class="form-control" placeholder="<?php echo lang_key("PASSWORD"); ?>" name="password" type="password" value="<?php if($testing){echo "password";}?>" required>
+                        	<input class="form-control" placeholder="<?php echo lang_key("PASSWORD"); ?>" name="password" type="password" value="Password" required>
 						</div>
                     </div>
                     <!-- ./ form-group -->

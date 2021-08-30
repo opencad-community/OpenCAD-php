@@ -20,7 +20,7 @@ if(ENABLE_API_SECURITY === true)
     // session isn't started
     session_start();
     }
-    if(hash('md5', session_id().getApiKey()) !== $_COOKIE['aljksdz7'])
+    if(hash('md5', session_id().getApiKey()) !== $_COOKIE[htmlspecialchars(COOKIE_NAME)])
     {
         $headers = $_SERVER['PHP_AUTH_DIGEST'];
         if(isset($headers['Authorization']))
@@ -29,17 +29,17 @@ if(ENABLE_API_SECURITY === true)
             {
                 if(base64_decode(str_replace('Basic', '', $headers['Authorization'])) !== "api:".getApiKey())
                 {
-                    header('HTTP/1.1 403 Unauthorized');
+                    header("Location:" .BASE_URL."/index.php?sessionExpired=true");
                     die();
                 }
             }else
             {
-                header('HTTP/1.1 403 Unauthorized');
+                header("Location:" .BASE_URL."/index.php?sessionExpired=true");
                 die();
             }
         }else
         {
-            header('HTTP/1.1 403 Unauthorized');
+            header("Location:" .BASE_URL."/index.php?sessionExpired=true");
             die();
         }
     }

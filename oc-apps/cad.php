@@ -22,7 +22,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		include_once(ABSPATH . OCINC . "/generalActions.php");
 		include_once( ABSPATH .  OCINC . "/publicFunctions.php" );
 		include_once( ABSPATH . OCINC . "/dispatchActions.php" );
-		include_once( ABSPATH . OCCONTENT . "/plugins/api_auth.php" );
+		include_once( ABSPATH . OCCONTENT . "/plugins/apiAuth.php" );
 		if (empty($_SESSION['logged_in']))
 		{
 				header('Location: ../index.php');
