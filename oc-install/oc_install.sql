@@ -305,3 +305,13 @@ CREATE TABLE `<DB_PREFIX>patrolinformation` (
 
 INSERT INTO `<DB_PREFIX>patrolinformation` (`key`, `value`) VALUES
 ('aop',	'Metro Los Santos');
+
+`CREATE TABLE IF NOT EXISTS `<DB_PREFIX>penalCodes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `referenceNumber` varchar(255) NOT NULL,
+  `offenseName` varchar(255) NOT NULL,
+  `fineAmount` varchar(255) NOT NULL,
+  `dmvPointsOffRecord` varchar(255) NOT NULL,
+  `jailTimeInSeconds` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
