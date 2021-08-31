@@ -17,7 +17,7 @@ require_once(__DIR__ . "/../oc-config.php");
 include_once( ABSPATH . "/oc-functions.php");
 include_once( ABSPATH . "/oc-settings.php");
 include_once( ABSPATH . OCINC . "/dbActions.php");
-include_once( ABSPATH . "/oc-content/plugins/api_auth.php");
+include_once( ABSPATH . OCINC . "/apiAuth.php");
 
 /*
 This file handles all actions for admin.php script

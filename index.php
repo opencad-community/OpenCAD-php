@@ -36,6 +36,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	{
 		$loginMessage = '<div class="alert alert-success" style="text-align: center;" ><span>You\'ve successfully been logged out</span></div>';
 	}
+		if (isset($_GET['sessionExpired']))
+	{
+		$loginMessage = '<div class="alert alert-primary" style="text-align: center;" ><span>Your session has expired.</span></div>';
+	}
 	if(isset($_SESSION['register_error']))
 	{
 		$registerError = '<div class="alert alert-danger" style="text-align: center;"><span>'.$_SESSION['register_error'].'</span></div>';

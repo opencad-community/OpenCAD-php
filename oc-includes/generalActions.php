@@ -27,7 +27,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     }
     require_once('../oc-config.php');
     require_once( ABSPATH . '/oc-functions.php');
-    require_once( ABSPATH . "/oc-content/plugins/api_auth.php");
+    require_once( ABSPATH . '/oc-settings.php');
+    require_once( ABSPATH . OCINC . "/apiAuth.php");
 
 if (isset($_GET['getCalls'])){
     getActiveCalls();
@@ -77,8 +78,7 @@ if (isset($_GET['getCalls'])){
         session_start();
         session_unset();
         session_destroy();
-        if(ENABLE_API_SECURITY === true)
-            setcookie('aljksdz7', null, -1, "/");
+        setcookie(htmlspecialchars(COOKIE_NAME), null, -1, "/", null, true, false);
 
         header("Location: ".BASE_URL."/index.php?loggedOut=true");
         exit();
