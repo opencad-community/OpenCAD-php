@@ -168,7 +168,6 @@ require_once(ABSPATH . "/oc-settings.php");
     if(ENABLE_API_SECURITY === true) {
         setcookie($name = htmlspecialchars(COOKIE_NAME), hash('whirlpool', session_id().getApiKey()), time() + (86400 * 7), "/", $secure = true);
     }
-        //setcookie("aljksdz7", hash('md5', session_id().getApiKey()), time() + (86400 * 7), "/");
     header("Location:".BASE_URL."/".OCAPPS."/oc-start.php");
 
 ?>
