@@ -298,7 +298,7 @@ INSERT INTO `<DB_PREFIX>users` (`id`, `name`, `email`, `password`, `identifier`,
 
 
 
-CREATE TABLE `<DB_PREFIX>patrolinformation` (
+CREATE TABLE `<DB_PREFIX>patrolnformation` (
   `key` tinytext COLLATE latin1_general_cs NOT NULL,
   `value` tinytext COLLATE latin1_general_cs NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
@@ -306,7 +306,7 @@ CREATE TABLE `<DB_PREFIX>patrolinformation` (
 INSERT INTO `<DB_PREFIX>patrolinformation` (`key`, `value`) VALUES
 ('aop',	'Metro Los Santos');
 
-CREATE TABLE `<DB_PREFIX>penalcode` (
+CREATE TABLE `<DB_PREFIX>penalCode` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `offenseName` varchar(255) NOT NULL COMMENT 'Name of the penal offense.',
   `titleNumber` varchar(255) NOT NULL COMMENT 'The title number in roman numeral of which the entity is resident. eg. I, II, III, etc...',
