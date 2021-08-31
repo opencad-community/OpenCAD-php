@@ -306,12 +306,12 @@ CREATE TABLE `<DB_PREFIX>patrolinformation` (
 INSERT INTO `<DB_PREFIX>patrolinformation` (`key`, `value`) VALUES
 ('aop',	'Metro Los Santos');
 
-`CREATE TABLE IF NOT EXISTS `<DB_PREFIX>penalCodes` (
+CREATE TABLE `<DB_PREFIX>penalcode` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `referenceNumber` varchar(255) NOT NULL,
-  `offenseName` varchar(255) NOT NULL,
-  `fineAmount` varchar(255) NOT NULL,
-  `dmvPointsOffRecord` varchar(255) NOT NULL,
-  `jailTimeInSeconds` varchar(255) NOT NULL,
+  `offenseName` varchar(255) NOT NULL COMMENT 'Name of the penal offense.',
+  `titleNumber` varchar(255) NOT NULL COMMENT 'The title number in roman numeral of which the entity is resident. eg. I, II, III, etc...',
+  `fineAmount` varchar(255) NOT NULL COMMENT 'Amount of fine to be paid in relation to the entity.',
+  `dmvPointsOffRecord` varchar(255) NOT NULL COMMENT 'Quantity of license points to be deducted in relation to the entity.',
+  `jailTimeInSeconds` varchar(255) NOT NULL COMMENT 'Length of time (in seconds) violator should be jailed for in relation to the entity.',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT COMMENT='Table for storing penal code entities.';
