@@ -20,7 +20,7 @@ if(ENABLE_API_SECURITY === true)
     // session isn't started
     session_start();
     }
-    if(hash('md5', session_id().getApiKey()) !== $_COOKIE[htmlspecialchars(COOKIE_NAME)])
+    if('whirlpool', session_id().getApiKey()) !== $_COOKIE[htmlspecialchars(COOKIE_NAME)])
     {
         $headers = $_SERVER['PHP_AUTH_DIGEST'];
         if(isset($headers['Authorization']))
