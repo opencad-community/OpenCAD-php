@@ -48,7 +48,7 @@ function logoutResponder()
 session_start();
 session_unset();
 session_destroy();
-setcookie($name = htmlspecialchars(COOKIE_NAME), null, -1, "/", null, true, false, 'Strict');
+setcookie($name = htmlspecialchars(COOKIE_NAME), null, -1, "/", null, true, true, 'Strict');
 
 header("Location: ".BASE_URL."/index.php?loggedOut=true");
 exit();
