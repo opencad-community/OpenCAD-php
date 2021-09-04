@@ -78,7 +78,7 @@ if (isset($_GET['getCalls'])){
         session_start();
         session_unset();
         session_destroy();
-        setcookie(htmlspecialchars(COOKIE_NAME), null, -1, "/", null, true, true, 'Strict');
+        setcookie(htmlspecialchars(COOKIE_NAME), null, -1, "/", null, true, true);
 
         header("Location: ".BASE_URL."/index.php?loggedOut=true");
         exit();
