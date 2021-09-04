@@ -12,7 +12,7 @@ export default function removeEventListeners(reference, state) {
 
   // Remove scroll event listener on scroll parents
   state.scrollParents.forEach(target => {
-    target.removeEventListener('scroll', state.updateBound);
+	target.removeEventListener('scroll', state.updateBound);
   });
 
   // Reset state

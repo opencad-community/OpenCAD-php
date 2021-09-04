@@ -202,9 +202,9 @@ return $.widget( "ui.sortable", $.ui.mouse, {
 		this._cacheHelperProportions();
 
 		/*
-		 * - Position generation -
-		 * This block generates everything position related - it's the core of draggables.
-		 */
+		* - Position generation -
+		* This block generates everything position related - it's the core of draggables.
+		*/
 
 		//Cache the margins of the original element
 		this._cacheMargins();
@@ -1297,9 +1297,9 @@ return $.widget( "ui.sortable", $.ui.mouse, {
 		}
 
 		/*
-		 * - Position constraining -
-		 * Constrain the position to a mix of grid, containment.
-		 */
+		* - Position constraining -
+		* Constrain the position to a mix of grid, containment.
+		*/
 
 		if ( this.originalPosition ) { //If we are not dragging yet, we won't check for options
 

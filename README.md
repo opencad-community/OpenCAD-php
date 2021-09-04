@@ -11,18 +11,18 @@ Open Source Computer Aided Dispatch System for Roleplay Communities.
 
 ## Installation Requirements
 * Operating System: 
-    * Linux
-    * Windows
+	* Linux
+	* Windows
 * Webserver:
-    * Apache
-    * Nginx
+	* Apache
+	* Nginx
 * PHP: >=7.3
-    >Recommended: 8.0
+	>Recommended: 8.0
 * Database:
-    * MySQL >=8.0
-    >Recommended: 8.0
-    * MariaDB >=10.2
-    >Recommended: 10.5
+	* MySQL >=8.0
+	>Recommended: 8.0
+	* MariaDB >=10.2
+	>Recommended: 10.5
 
 ### Deployment Notes
 

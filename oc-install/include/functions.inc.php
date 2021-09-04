@@ -32,13 +32,13 @@ function apphp_db_install($sql_dump_file) {
 	// replace database prefix if exists
 	$sql_dump = str_ireplace('<DB_PREFIX>', $database_prefix, $sql_dump);
 
-    // disabling magic quotes at runtime
-    if(get_magic_quotes_runtime()){
-        function stripslashes_runtime(&$value){
-            $value = stripslashes($value);	
-        }
-        array_walk_recursive($sql_dump, 'stripslashes_runtime');
-    }
+	// disabling magic quotes at runtime
+	if(get_magic_quotes_runtime()){
+		function stripslashes_runtime(&$value){
+			$value = stripslashes($value);	
+		}
+		array_walk_recursive($sql_dump, 'stripslashes_runtime');
+	}
 
 	// add ';' at the end of file to catch last sql query
 	if(substr($sql_dump[count($sql_dump)-1], -1) != ';') $sql_dump[count($sql_dump)-1] .= ';';
@@ -77,7 +77,7 @@ function apphp_db_install($sql_dump_file) {
 
 /**
  *	Remove bad chars from input
- *	  	@param $str_words - input
+ *		@param $str_words - input
  **/
 function prepare_input($str_words, $escape = false, $level = 'low')
 {
@@ -107,7 +107,7 @@ function prepare_input($str_words, $escape = false, $level = 'low')
  */
 function encode_text($string = '')
 {
-	$search	 = array("\\","\0","\n","\r","\x1a","'",'"',"\'",'\"');
+	$search	= array("\\","\0","\n","\r","\x1a","'",'"',"\'",'\"');
 	$replace = array("\\\\","\\0","\\n","\\r","\Z","\'",'\"',"\\'",'\\"');
 	return str_replace($search, $replace, $string);
 }
@@ -159,12 +159,12 @@ function draw_side_navigation($step = 1, $draw = true)
 
 function random_str($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#')
 {
-    $pieces = [];
-    $max = mb_strlen($keyspace, '8bit') - 1;
-    for ($i = 0; $i < $length; ++$i) {
-        $pieces []= $keyspace[random_int(0, $max)];
-    }
-    return implode('', $pieces);
+	$pieces = [];
+	$max = mb_strlen($keyspace, '8bit') - 1;
+	for ($i = 0; $i < $length; ++$i) {
+		$pieces []= $keyspace[random_int(0, $max)];
+	}
+	return implode('', $pieces);
 }
 
 /**
@@ -173,8 +173,8 @@ function random_str($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzAB
  */
 function lang_key($key){
 	global $arrLang;
-        $output = '';
-        
+		$output = '';
+		
 	if(isset($arrLang[$key])){
 		$output = $arrLang[$key];
 	}else{

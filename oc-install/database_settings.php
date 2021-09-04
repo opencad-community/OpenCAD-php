@@ -1,18 +1,18 @@
 <?php
 ################################################################################
-##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 #
+##			 -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-				#
 ## --------------------------------------------------------------------------- #
-##  ApPHP EasyInstaller Free version                                           #
-##  Developed by:  ApPHP <info@apphp.com>                                      #
-##  License:       GNU LGPL v.3                                                #
-##  Site:          https://www.apphp.com/php-easyinstaller/                    #
-##  Copyright:     ApPHP EasyInstaller (c) 2009-2013. All rights reserved.     #
-##                                                                             #
+##  ApPHP EasyInstaller Free version										  #
+##  Developed by:  ApPHP <info@apphp.com>									 #
+##  License:	  GNU LGPL v.3												#
+##  Site:		 https://www.apphp.com/php-easyinstaller/					#
+##  Copyright:	ApPHP EasyInstaller (c) 2009-2013. All rights reserved.	#
+##																			#
 ################################################################################
 
 	session_start();
-	require_once('include/shared.inc.php');    
-    require_once('include/settings.inc.php');    
+	require_once('include/shared.inc.php');	
+	require_once('include/settings.inc.php');	
 	require_once('include/database.class.php'); 
 	require_once('include/functions.inc.php');
 	require_once('include/languages.inc.php');	
@@ -111,14 +111,14 @@
 		$database_password	= isset($_SESSION['database_password']) ? $_SESSION['database_password'] : '';
 		$database_prefix	= isset($_SESSION['database_prefix']) ? $_SESSION['database_prefix'] : '';
 		$install_type		= isset($_SESSION['install_type']) ? $_SESSION['install_type'] : 'create';		
-		if(file_exists(".dbname")){ $database_name     = file_get_contents(".dbname"); unlink(".dbname"); }
-        	if(file_exists(".dbuser")){ $database_username = file_get_contents(".dbuser"); unlink(".dbuser"); }
-        	if(file_exists(".dbpass")){ $database_password = file_get_contents(".dbpass"); unlink(".dbpass"); }
+		if(file_exists(".dbname")){ $database_name	= file_get_contents(".dbname"); unlink(".dbname"); }
+			if(file_exists(".dbuser")){ $database_username = file_get_contents(".dbuser"); unlink(".dbuser"); }
+			if(file_exists(".dbpass")){ $database_password = file_get_contents(".dbpass"); unlink(".dbpass"); }
 	} 
 
 	// handle previous installation
 	// -------------------------------------------------
-    if(file_exists(EI_CONFIG_FILE_PATH)){        
+	if(file_exists(EI_CONFIG_FILE_PATH)){		
 		$program_already_installed = true;
 		if($install_type == 'create'){
 			if(EI_ALLOW_UPDATE) $install_type = 'update';
@@ -127,7 +127,7 @@
 		include_once(EI_CONFIG_FILE_PATH);
 		if(defined('DB_PREFIX')) $database_prefix = DB_PREFIX;	
 		///header('location: ../'.EI_APPLICATION_START_FILE);
-        ///exit;
+		///exit;
 	}	
 	
 ?>	
@@ -136,8 +136,8 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="author" content="OpenCAD Project">
-    <meta name="generator" content="OpenCAD Project">
+	<meta name="author" content="OpenCAD Project">
+	<meta name="generator" content="OpenCAD Project">
 	<title><?php echo lang_key("installation_guide"); ?> | <?php echo lang_key('database_settings'); ?></title>
 
 	<link href="images/favicon.ico" rel="shortcut icon" />
@@ -260,15 +260,15 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="submit" class="form_button" value="<?php echo lang_key('continue'); ?>" />
 				</td>
-			</tr>                        
+			</tr>						
 			</table>
-			</form>                        
+			</form>						
 
 		</div>
 		<div class="clear"></div>
 	</div>
 	
-	<?php include_once('include/footer.inc.php'); ?>        
+	<?php include_once('include/footer.inc.php'); ?>		
 
 </div>
 

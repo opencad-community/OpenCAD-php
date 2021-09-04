@@ -439,7 +439,7 @@ function getData2($tableName, $column1, $column2)
 	if(!(isset($_POST[$column2])))
 		$column2 = 0;
 
-	 try{
+	try{
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
@@ -475,7 +475,7 @@ function getData3($tableName, $column1, $column2, $column3)
 	if(!(isset($_POST[$column3])))
 		$column = 3;
 
-	 try{
+	try{
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{

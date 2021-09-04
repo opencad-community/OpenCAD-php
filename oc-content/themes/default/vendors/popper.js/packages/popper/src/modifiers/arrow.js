@@ -13,28 +13,28 @@ import getStyleComputedProperty from '../utils/getStyleComputedProperty';
 export default function arrow(data, options) {
   // arrow depends on keepTogether in order to work
   if (!isModifierRequired(data.instance.modifiers, 'arrow', 'keepTogether')) {
-    return data;
+	return data;
   }
 
   let arrowElement = options.element;
 
   // if arrowElement is a string, suppose it's a CSS selector
   if (typeof arrowElement === 'string') {
-    arrowElement = data.instance.popper.querySelector(arrowElement);
+	arrowElement = data.instance.popper.querySelector(arrowElement);
 
-    // if arrowElement is not found, don't run the modifier
-    if (!arrowElement) {
-      return data;
-    }
+	// if arrowElement is not found, don't run the modifier
+	if (!arrowElement) {
+	 return data;
+	}
   } else {
-    // if the arrowElement isn't a query selector we must check that the
-    // provided DOM node is child of its popper node
-    if (!data.instance.popper.contains(arrowElement)) {
-      console.warn(
-        'WARNING: `arrow.element` must be child of its popper element!'
-      );
-      return data;
-    }
+	// if the arrowElement isn't a query selector we must check that the
+	// provided DOM node is child of its popper node
+	if (!data.instance.popper.contains(arrowElement)) {
+	 console.warn(
+		'WARNING: `arrow.element` must be child of its popper element!'
+	 );
+	 return data;
+	}
   }
 
   const placement = data.placement.split('-')[0];
@@ -55,13 +55,13 @@ export default function arrow(data, options) {
 
   // top/left side
   if (reference[opSide] - arrowElementSize < popper[side]) {
-    data.offsets.popper[side] -=
-      popper[side] - (reference[opSide] - arrowElementSize);
+	data.offsets.popper[side] -=
+	 popper[side] - (reference[opSide] - arrowElementSize);
   }
   // bottom/right side
   if (reference[side] + arrowElementSize > popper[opSide]) {
-    data.offsets.popper[side] +=
-      reference[side] + arrowElementSize - popper[opSide];
+	data.offsets.popper[side] +=
+	 reference[side] + arrowElementSize - popper[opSide];
   }
   data.offsets.popper = getClientRect(data.offsets.popper);
 
@@ -74,15 +74,15 @@ export default function arrow(data, options) {
   const popperMarginSide = parseFloat(css[`margin${sideCapitalized}`], 10);
   const popperBorderSide = parseFloat(css[`border${sideCapitalized}Width`], 10);
   let sideValue =
-    center - data.offsets.popper[side] - popperMarginSide - popperBorderSide;
+	center - data.offsets.popper[side] - popperMarginSide - popperBorderSide;
 
   // prevent arrowElement from being placed not contiguously to its popper
   sideValue = Math.max(Math.min(popper[len] - arrowElementSize, sideValue), 0);
 
   data.arrowElement = arrowElement;
   data.offsets.arrow = {
-    [side]: Math.round(sideValue),
-    [altSide]: '', // make sure to unset any eventual altSide value from the DOM node
+	[side]: Math.round(sideValue),
+	[altSide]: '', // make sure to unset any eventual altSide value from the DOM node
   };
 
   return data;

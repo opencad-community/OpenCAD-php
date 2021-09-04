@@ -15,11 +15,11 @@ export default function keepTogether(data) {
   const measurement = isVertical ? 'width' : 'height';
 
   if (popper[side] < floor(reference[opSide])) {
-    data.offsets.popper[opSide] =
-      floor(reference[opSide]) - popper[measurement];
+	data.offsets.popper[opSide] =
+	 floor(reference[opSide]) - popper[measurement];
   }
   if (popper[opSide] > floor(reference[side])) {
-    data.offsets.popper[opSide] = floor(reference[side]);
+	data.offsets.popper[opSide] = floor(reference[side]);
   }
 
   return data;

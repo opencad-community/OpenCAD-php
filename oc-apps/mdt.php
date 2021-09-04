@@ -30,23 +30,23 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	}
 	else
 	{
-	  $name = $_SESSION['name'];
+	$name = $_SESSION['name'];
 	}
 
 
 	if ( $_SESSION['adminPrivilege'] == 3)
 	{
-	  if ($_SESSION['adminPrivilege'] == 'Administrator')
-	  {
-		  //Do nothing
-	  }
+	if ($_SESSION['adminPrivilege'] == 'Administrator')
+	{
+		//Do nothing
+	}
 	}
 	else if ($_SESSION['adminPrivilege'] == 2)
 	{
-	  if ($_SESSION['adminPrivilege'] == 'Moderator')
-	  {
-		  // Do Nothing
-	  }
+	if ($_SESSION['adminPrivilege'] == 'Moderator')
+	{
+		// Do Nothing
+	}
 	}
 
 	$accessMessage = "";
@@ -305,7 +305,7 @@ vid.volume = 0.3;
 <?php
    if ($_SESSION['activeDepartment'] == 'fire')
    {
-	  
+	
    }
 else
 {
@@ -370,40 +370,40 @@ $('#rms_warrants').DataTable({
 $(document).ready(function() {
 
 	
-	  $(function() {
-		 $('#menu_toggle').click();
-	  });
+	$(function() {
+		$('#menu_toggle').click();
+	});
 
-	  //$('#callsign').modal('show');
-	  getCalls();
-	  getStatus();
-	  checkTones();
-	  getMyCall();
-	  mdtGetVehicleBOLOS();
-	  mdtGetPersonBOLOS();
+	//$('#callsign').modal('show');
+	getCalls();
+	getStatus();
+	checkTones();
+	getMyCall();
+	mdtGetVehicleBOLOS();
+	mdtGetPersonBOLOS();
    getAOP();
 
-	  $('#enroute_btn').click(function(evt) {
-	  console.log(evt);
-	  var callId = $('#callId_det').val();
+	$('#enroute_btn').click(function(evt) {
+	console.log(evt);
+	var callId = $('#callId_det').val();
 
-	  $.ajax({
+	$.ajax({
 			type: "POST",
 			url: "<?php echo "/" . OCINC ?>/generalActions.php",
 			data: {
-			   quickStatus: 'yes',
-			   event: 'enroute',
-			   callId: callId
+			quickStatus: 'yes',
+			event: 'enroute',
+			callId: callId
 			},
 			success: function(response)
 			{
 			console.log(response);
 
 			new PNotify({
-			   title: 'Success',
-			   text: 'Successfully updated narrative',
-			   type: 'success',
-			   styling: 'bootstrap3'
+			title: 'Success',
+			text: 'Successfully updated narrative',
+			type: 'success',
+			styling: 'bootstrap3'
 			});
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown)
@@ -411,8 +411,8 @@ $(document).ready(function() {
 			console.log("Error");
 			}
 
-		 });
-	  });
+		});
+	});
 
 });
 $(function() {
@@ -432,26 +432,26 @@ source: "<?php echo "/" . OCINC ?>/search_name.php"
 });
 // PNotify Stuff
 priorityNotification = new PNotify({
-	  title: 'Priority Traffic',
-	  text: 'Priority Traffic Only',
-	  type: 'error',
-	  hide: false,
-	  auto_display: false,
-	  styling: 'bootstrap3',
-	  buttons: {
-		 closer: false,
-		 sticker: false
-	  }
+	title: 'Priority Traffic',
+	text: 'Priority Traffic Only',
+	type: 'error',
+	hide: false,
+	auto_display: false,
+	styling: 'bootstrap3',
+	buttons: {
+		closer: false,
+		sticker: false
+	}
    });
 function getAOP() {
    $.ajax({
-		 type: "GET",
-		 url: "<?php echo "/" . OCINC ?>/generalActions.php",
-		 data: {
+		type: "GET",
+		url: "<?php echo "/" . OCINC ?>/generalActions.php",
+		data: {
 			getAOP: 'yes'
-		 },
-		 success: function(response)
-		 {
+		},
+		success: function(response)
+		{
 			$('#getAOP').html(response);
 
 			// SG - Removed until node/real-time data setup
@@ -459,25 +459,25 @@ function getAOP() {
 			searching: false,
 			scrollY: "200px",
 			lengthMenu: [[4, -1], [4, "All"]]
-		 });*/
+		});*/
 			setTimeout(getAOP, 5000);
 
 
-		 },
-		 error : function(XMLHttpRequest, textStatus, errorThrown)
-		 {
+		},
+		error : function(XMLHttpRequest, textStatus, errorThrown)
+		{
 			console.log("Error");
-		 }
+		}
 
-	  });
+	});
 }
 function getCalls() {
-	  $.ajax({
+	$.ajax({
 			type: "GET",
 			url: "<?php echo "/" . OCINC ?>/generalActions.php",
 			data: {
-			   getCalls: 'yes',
-			   responder: 'yes'
+			getCalls: 'yes',
+			responder: 'yes'
 			},
 			success: function(response)
 			{
@@ -490,15 +490,15 @@ function getCalls() {
 			console.log("Error");
 			}
 
-		 });
+		});
    }
 function getMyCall() {
-	  $.ajax({
+	$.ajax({
 			type: "GET",
 			url: "<?php echo "/" . OCINC ?>/generalActions.php",
 			data: {
-			   getMyCall: 'yes',
-			   responder: 'yes'
+			getMyCall: 'yes',
+			responder: 'yes'
 			},
 			success: function(response)
 			{
@@ -511,15 +511,15 @@ function getMyCall() {
 			console.log("Error");
 			}
 
-		 });
+		});
    }
 function mdtGetVehicleBOLOS() {
-	  $.ajax({
+	$.ajax({
 			type: "GET",
 			url: "<?php echo "/" . OCINC ?>/responderActions.php",
 			data: {
-			   mdtGetVehicleBOLOS: 'yes',
-			   responder: 'yes'
+			mdtGetVehicleBOLOS: 'yes',
+			responder: 'yes'
 			},
 			success: function(response)
 			{
@@ -532,15 +532,15 @@ function mdtGetVehicleBOLOS() {
 			console.log("Error");
 			}
 
-		 });
+		});
    }
 function mdtGetPersonBOLOS() {
-	  $.ajax({
+	$.ajax({
 			type: "GET",
 			url: "<?php echo "/" . OCINC ?>/responderActions.php",
 			data: {
-			   mdtGetPersonBOLOS: 'yes',
-			   responder: 'yes'
+			mdtGetPersonBOLOS: 'yes',
+			responder: 'yes'
 			},
 			success: function(response)
 			{
@@ -553,75 +553,75 @@ function mdtGetPersonBOLOS() {
 			console.log("Error");
 			}
 
-		 });
+		});
    }
 </script>
 <script>
 $('#callsign').on('shown.bs.modal', function(e) {
-	  $('#callsign').find('input[name="callsign"]').val('<?php echo $_SESSION['identifier'];?>');
+	$('#callsign').find('input[name="callsign"]').val('<?php echo $_SESSION['identifier'];?>');
 });
 
 $(function() {
-	  $('.callsignForm').submit(function(e) {
-		 e.preventDefault(); // avoid to execute the actual submit of the form.
+	$('.callsignForm').submit(function(e) {
+		e.preventDefault(); // avoid to execute the actual submit of the form.
 
-		 $.ajax({
+		$.ajax({
 			type: "POST",
 			url: "<?php echo "/" . OCINC ?>/responderActions.php",
 			data: {
-			   updateCallsign: 'yes',
-			   details: $("#"+this.id).serialize()
+			updateCallsign: 'yes',
+			details: $("#"+this.id).serialize()
 			},
 			success: function(response)
 			{
 
 			if (response.match("^Duplicate"))
 			{
-				  var call2 = $('#callsign').find('input[name="callsign"]').val();
-				  if (call2 == "<?php echo $_SESSION['identifier'];?>")
-				  {
-					 $('#closeCallsign').trigger('click');
+				var call2 = $('#callsign').find('input[name="callsign"]').val();
+				if (call2 == "<?php echo $_SESSION['identifier'];?>")
+				{
+					$('#closeCallsign').trigger('click');
 
-					 new PNotify({
+					new PNotify({
 						title: 'Success',
 						text: 'Successfully set your callsign',
 						type: 'success',
 						styling: 'bootstrap3'
-					 });
+					});
 
-					 return false;
+					return false;
 
-				  }
-				  else
-				  {
-					 $('#closeCallsign').trigger('click');
+				}
+				else
+				{
+					$('#closeCallsign').trigger('click');
 
-					 new PNotify({
-					 title: 'Error',
-					 text: 'That callsign is already in use',
-					 type: 'error',
-					 styling: 'bootstrap3'
-					 });
-				  }
+					new PNotify({
+					title: 'Error',
+					text: 'That callsign is already in use',
+					type: 'error',
+					styling: 'bootstrap3'
+					});
+				}
 
 			}
 
 			if (response == "SUCCESS")
 			{
 
-			   $('#closeCallsign').trigger('click');
+			$('#closeCallsign').trigger('click');
 
-			   new PNotify({
-				  title: 'Success',
-				  text: 'Successfully set your callsign',
-				  type: 'success',
-				  styling: 'bootstrap3'
-			   });
+			new PNotify({
+				title: 'Success',
+				text: 'Successfully set your callsign',
+				type: 'success',
+				styling: 'bootstrap3'
+			});
 
-			   var call1 = $('#callsign').find('input[name="callsign"]').val();
+			var call1 = $('#callsign').find('input[name="callsign"]').val();
 
-			   $('#callsign1').val(call1);
-			   }
+			$('#callsign1').val(call1);
+			}
 
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown)
@@ -629,63 +629,63 @@ $(function() {
 			console.log("Error");
 			}
 
-		 });
+		});
 
-	  });
+	});
    });
 
 function getStatus() {
 $.ajax({
-	  type: "GET",
-	  url: "<?php echo "/" . OCINC ?>/responderActions.php",
-	  data: {
-		 getStatus: 'yes'
-	  },
-	  success: function(response)
-	  {
-		 console.log(response);
+	type: "GET",
+	url: "<?php echo "/" . OCINC ?>/responderActions.php",
+	data: {
+		getStatus: 'yes'
+	},
+	success: function(response)
+	{
+		console.log(response);
 
-		 if (response.match("^10-7 | Unavailable"))
-		 {
+		if (response.match("^10-7 | Unavailable"))
+		{
 			var currentStatus = $('#status').val();
 			if (currentStatus == "10-7 | Unavailable | On Call")
 			{
-			   //do nothing
+			//do nothing
 			}
 			else if(currentStatus == '10-7 | Unavailable')
-		 {
+		{
 
-		 }
-		 else
-		 {
+		}
+		else
+		{
 
 			document.getElementById('newCallAudio').play();
 			new PNotify({
-			   title: 'New Call!',
-			   text: 'You\'ve been assigned a new call!',
-			   type: 'success',
-			   styling: 'bootstrap3'
+			title: 'New Call!',
+			text: 'You\'ve been assigned a new call!',
+			type: 'success',
+			styling: 'bootstrap3'
 			});
 			getMyCallDetails();
 
 			}
 
 
-		 }
-		 else if (response.match("^<br>"))
-		 {
+		}
+		else if (response.match("^<br>"))
+		{
 			console.log("LOGGED OUT");
 			window.location.href = '<?php echo BASE_URL .'/'. OCINC; ?>/logout.php';
-		 }
+		}
 
 
-	  $('#status').val(response);
-	  setTimeout(getStatus, 5000);
-	  },
-	  error : function(XMLHttpRequest, textStatus, errorThrown)
-	  {
+	$('#status').val(response);
+	setTimeout(getStatus, 5000);
+	},
+	error : function(XMLHttpRequest, textStatus, errorThrown)
+	{
    console.log("Error");
-	  }
+	}
 
 });
 }

@@ -30,23 +30,23 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	}
 	else
 	{
-	  $name = $_SESSION['name'];
+	$name = $_SESSION['name'];
 	}
 
 
 	if ( $_SESSION['adminPrivilege'] == 3)
 	{
-	  if ($_SESSION['adminPrivilege'] == 'Administrator')
-	  {
-		  //Do nothing
-	  }
+	if ($_SESSION['adminPrivilege'] == 'Administrator')
+	{
+		//Do nothing
+	}
 	}
 	else if ($_SESSION['adminPrivilege'] == 2)
 	{
-	  if ($_SESSION['adminPrivilege'] == 'Moderator')
-	  {
-		  // Do Nothing
-	  }
+	if ($_SESSION['adminPrivilege'] == 'Moderator')
+	{
+		// Do Nothing
+	}
 	}
 	else
 	{
@@ -83,10 +83,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 <body class="app header-fixed">
 
 	<header class="app-header navbar">
-	  <?php 
+	<?php 
 		require_once ( ABSPATH . OCTHEMEINC ."/admin/topbarNav.inc.php" );
 		require_once ( ABSPATH . "/" . OCTHEMES ."/". THEME ."/includes/topProfile.inc.php");
-	  ?>
+	?>
 	</header>
 
 	<div class="app-body">
@@ -162,7 +162,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	<!-- ./ modal fade bs-example-modal-lg -->
 
 	<?php
-	 require_once ( ABSPATH . OCTHEMEMOD . "/admin/globalModals.inc.php");
+	require_once ( ABSPATH . OCTHEMEMOD . "/admin/globalModals.inc.php");
 	require_once( ABSPATH . OCTHEMEINC ."/scripts.inc.php" ); ?>
 
 	<script>

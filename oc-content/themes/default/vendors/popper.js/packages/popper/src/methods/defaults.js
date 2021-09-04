@@ -8,7 +8,7 @@ import modifiers from '../modifiers/index';
  * ```
  * new Popper(ref, pop, {
  *   modifiers: {
- *     preventOverflow: { enabled: false }
+ *	preventOverflow: { enabled: false }
  *   }
  * })
  * ```

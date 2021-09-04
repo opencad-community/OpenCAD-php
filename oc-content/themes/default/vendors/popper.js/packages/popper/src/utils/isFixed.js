@@ -12,14 +12,14 @@ import getParentNode from './getParentNode';
 export default function isFixed(element) {
   const nodeName = element.nodeName;
   if (nodeName === 'BODY' || nodeName === 'HTML') {
-    return false;
+	return false;
   }
   if (getStyleComputedProperty(element, 'position') === 'fixed') {
-    return true;
+	return true;
   }
   const parentNode = getParentNode(element);
   if (!parentNode) {
-    return false;
+	return false;
   }
   return isFixed(parentNode);
 }

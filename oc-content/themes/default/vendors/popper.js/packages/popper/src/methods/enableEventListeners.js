@@ -8,11 +8,11 @@ import setupEventListeners from '../utils/setupEventListeners';
  */
 export default function enableEventListeners() {
   if (!this.state.eventsEnabled) {
-    this.state = setupEventListeners(
-      this.reference,
-      this.options,
-      this.state,
-      this.scheduleUpdate
-    );
+	this.state = setupEventListeners(
+	 this.reference,
+	 this.options,
+	 this.state,
+	 this.scheduleUpdate
+	);
   }
 }

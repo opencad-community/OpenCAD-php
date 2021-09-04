@@ -30,20 +30,20 @@ Copyright (C) 2012 SciActive.com. All Rights Reserved.
 /* Mobile */
 @media (max-width: 768px) {
   .page-banner h1 {
-    font-size: 35px;
-    line-height: 35px;
+	font-size: 35px;
+	line-height: 35px;
   }
   .page-banner p {
-    font-size: 16px;
-    line-height: 30px;
+	font-size: 16px;
+	line-height: 30px;
   }
   .page-banner .btn-lg {
-    font-size: 16px;
+	font-size: 16px;
   }
   .container {
-    padding: 0 .4em;
+	padding: 0 .4em;
   }
   #fb-root {
-    display: none; /* Facebook's code makes a horizontal scrollbar. Grr. */
+	display: none; /* Facebook's code makes a horizontal scrollbar. Grr. */
   }
 }

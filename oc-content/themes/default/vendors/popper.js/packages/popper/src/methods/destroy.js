@@ -11,14 +11,14 @@ export default function destroy() {
 
   // touch DOM only if `applyStyle` modifier is enabled
   if (isModifierEnabled(this.modifiers, 'applyStyle')) {
-    this.popper.removeAttribute('x-placement');
-    this.popper.style.position = '';
-    this.popper.style.top = '';
-    this.popper.style.left = '';
-    this.popper.style.right = '';
-    this.popper.style.bottom = '';
-    this.popper.style.willChange = '';
-    this.popper.style[getSupportedPropertyName('transform')] = '';
+	this.popper.removeAttribute('x-placement');
+	this.popper.style.position = '';
+	this.popper.style.top = '';
+	this.popper.style.left = '';
+	this.popper.style.right = '';
+	this.popper.style.bottom = '';
+	this.popper.style.willChange = '';
+	this.popper.style[getSupportedPropertyName('transform')] = '';
   }
 
   this.disableEventListeners();
@@ -26,7 +26,7 @@ export default function destroy() {
   // remove the popper if user explicitly asked for the deletion on destroy
   // do not use `remove` because IE11 doesn't support it
   if (this.options.removeOnDestroy) {
-    this.popper.parentNode.removeChild(this.popper);
+	this.popper.parentNode.removeChild(this.popper);
   }
   return this;
 }

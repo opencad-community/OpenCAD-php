@@ -360,7 +360,7 @@ jQuery.event.fix = function( originalEvent ) {
 		migrateWarn( "jQuery.event.fixHooks are deprecated and removed: " + type );
 		if ( ( props = fixHook.props ) && props.length ) {
 			while ( props.length ) {
-			   jQuery.event.addProp( props.pop() );
+			jQuery.event.addProp( props.pop() );
 			}
 		}
 	}

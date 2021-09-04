@@ -2,104 +2,104 @@
 	'use strict';
 
 	/**
-	 * @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
-	 *
-	 * @codingstandard ftlabs-jsv2
-	 * @copyright The Financial Times Limited [All Rights Reserved]
-	 * @license MIT License (see LICENSE.txt)
-	 */
+	* @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
+	*
+	* @codingstandard ftlabs-jsv2
+	* @copyright The Financial Times Limited [All Rights Reserved]
+	* @license MIT License (see LICENSE.txt)
+	*/
 
 	/*jslint browser:true, node:true*/
 	/*global define, Event, Node*/
 
 
 	/**
-	 * Instantiate fast-clicking listeners on the specified layer.
-	 *
-	 * @constructor
-	 * @param {Element} layer The layer to listen on
-	 * @param {Object} [options={}] The options to override the defaults
-	 */
+	* Instantiate fast-clicking listeners on the specified layer.
+	*
+	* @constructor
+	* @param {Element} layer The layer to listen on
+	* @param {Object} [options={}] The options to override the defaults
+	*/
 	function FastClick(layer, options) {
 		var oldOnClick;
 
 		options = options || {};
 
 		/**
-		 * Whether a click is currently being tracked.
-		 *
-		 * @type boolean
-		 */
+		* Whether a click is currently being tracked.
+		*
+		* @type boolean
+		*/
 		this.trackingClick = false;
 
 
 		/**
-		 * Timestamp for when click tracking started.
-		 *
-		 * @type number
-		 */
+		* Timestamp for when click tracking started.
+		*
+		* @type number
+		*/
 		this.trackingClickStart = 0;
 
 
 		/**
-		 * The element being tracked for a click.
-		 *
-		 * @type EventTarget
-		 */
+		* The element being tracked for a click.
+		*
+		* @type EventTarget
+		*/
 		this.targetElement = null;
 
 
 		/**
-		 * X-coordinate of touch start event.
-		 *
-		 * @type number
-		 */
+		* X-coordinate of touch start event.
+		*
+		* @type number
+		*/
 		this.touchStartX = 0;
 
 
 		/**
-		 * Y-coordinate of touch start event.
-		 *
-		 * @type number
-		 */
+		* Y-coordinate of touch start event.
+		*
+		* @type number
+		*/
 		this.touchStartY = 0;
 
 
 		/**
-		 * ID of the last touch, retrieved from Touch.identifier.
-		 *
-		 * @type number
-		 */
+		* ID of the last touch, retrieved from Touch.identifier.
+		*
+		* @type number
+		*/
 		this.lastTouchIdentifier = 0;
 
 
 		/**
-		 * Touchmove boundary, beyond which a click will be cancelled.
-		 *
-		 * @type number
-		 */
+		* Touchmove boundary, beyond which a click will be cancelled.
+		*
+		* @type number
+		*/
 		this.touchBoundary = options.touchBoundary || 10;
 
 
 		/**
-		 * The FastClick layer.
-		 *
-		 * @type Element
-		 */
+		* The FastClick layer.
+		*
+		* @type Element
+		*/
 		this.layer = layer;
 
 		/**
-		 * The minimum time between tap(touchstart and touchend) events
-		 *
-		 * @type number
-		 */
+		* The minimum time between tap(touchstart and touchend) events
+		*
+		* @type number
+		*/
 		this.tapDelay = options.tapDelay || 200;
 
 		/**
-		 * The maximum time for a tap
-		 *
-		 * @type number
-		 */
+		* The maximum time for a tap
+		*
+		* @type number
+		*/
 		this.tapTimeout = options.tapTimeout || 700;
 
 		if (FastClick.notNeeded(layer)) {
@@ -181,49 +181,49 @@
 	var deviceIsWindowsPhone = navigator.userAgent.indexOf("Windows Phone") >= 0;
 
 	/**
-	 * Android requires exceptions.
-	 *
-	 * @type boolean
-	 */
+	* Android requires exceptions.
+	*
+	* @type boolean
+	*/
 	var deviceIsAndroid = navigator.userAgent.indexOf('Android') > 0 && !deviceIsWindowsPhone;
 
 
 	/**
-	 * iOS requires exceptions.
-	 *
-	 * @type boolean
-	 */
+	* iOS requires exceptions.
+	*
+	* @type boolean
+	*/
 	var deviceIsIOS = /iP(ad|hone|od)/.test(navigator.userAgent) && !deviceIsWindowsPhone;
 
 
 	/**
-	 * iOS 4 requires an exception for select elements.
-	 *
-	 * @type boolean
-	 */
+	* iOS 4 requires an exception for select elements.
+	*
+	* @type boolean
+	*/
 	var deviceIsIOS4 = deviceIsIOS && (/OS 4_\d(_\d)?/).test(navigator.userAgent);
 
 
 	/**
-	 * iOS 6.0-7.* requires the target element to be manually derived
-	 *
-	 * @type boolean
-	 */
+	* iOS 6.0-7.* requires the target element to be manually derived
+	*
+	* @type boolean
+	*/
 	var deviceIsIOSWithBadTarget = deviceIsIOS && (/OS [6-7]_\d/).test(navigator.userAgent);
 
 	/**
-	 * BlackBerry requires exceptions.
-	 *
-	 * @type boolean
-	 */
+	* BlackBerry requires exceptions.
+	*
+	* @type boolean
+	*/
 	var deviceIsBlackBerry10 = navigator.userAgent.indexOf('BB10') > 0;
 
 	/**
-	 * Determine whether a given element requires a native click.
-	 *
-	 * @param {EventTarget|Element} target Target DOM element
-	 * @returns {boolean} Returns true if the element needs a native click
-	 */
+	* Determine whether a given element requires a native click.
+	*
+	* @param {EventTarget|Element} target Target DOM element
+	* @returns {boolean} Returns true if the element needs a native click
+	*/
 	FastClick.prototype.needsClick = function(target) {
 		switch (target.nodeName.toLowerCase()) {
 
@@ -255,11 +255,11 @@
 
 
 	/**
-	 * Determine whether a given element requires a call to focus to simulate click into element.
-	 *
-	 * @param {EventTarget|Element} target Target DOM element
-	 * @returns {boolean} Returns true if the element requires a call to focus to simulate native click.
-	 */
+	* Determine whether a given element requires a call to focus to simulate click into element.
+	*
+	* @param {EventTarget|Element} target Target DOM element
+	* @returns {boolean} Returns true if the element requires a call to focus to simulate native click.
+	*/
 	FastClick.prototype.needsFocus = function(target) {
 		switch (target.nodeName.toLowerCase()) {
 		case 'textarea':
@@ -286,11 +286,11 @@
 
 
 	/**
-	 * Send a click event to the specified element.
-	 *
-	 * @param {EventTarget|Element} targetElement
-	 * @param {Event} event
-	 */
+	* Send a click event to the specified element.
+	*
+	* @param {EventTarget|Element} targetElement
+	* @param {Event} event
+	*/
 	FastClick.prototype.sendClick = function(targetElement, event) {
 		var clickEvent, touch;
 
@@ -320,8 +320,8 @@
 
 
 	/**
-	 * @param {EventTarget|Element} targetElement
-	 */
+	* @param {EventTarget|Element} targetElement
+	*/
 	FastClick.prototype.focus = function(targetElement) {
 		var length;
 
@@ -336,10 +336,10 @@
 
 
 	/**
-	 * Check whether the given target element is a child of a scrollable layer and if so, set a flag on it.
-	 *
-	 * @param {EventTarget|Element} targetElement
-	 */
+	* Check whether the given target element is a child of a scrollable layer and if so, set a flag on it.
+	*
+	* @param {EventTarget|Element} targetElement
+	*/
 	FastClick.prototype.updateScrollParent = function(targetElement) {
 		var scrollParent, parentElement;
 
@@ -368,9 +368,9 @@
 
 
 	/**
-	 * @param {EventTarget} targetElement
-	 * @returns {Element|EventTarget}
-	 */
+	* @param {EventTarget} targetElement
+	* @returns {Element|EventTarget}
+	*/
 	FastClick.prototype.getTargetElementFromEventTarget = function(eventTarget) {
 
 		// On some older browsers (notably Safari on iOS 4.1 - see issue #56) the event target may be a text node.
@@ -383,11 +383,11 @@
 
 
 	/**
-	 * On touch start, record the position and scroll offset.
-	 *
-	 * @param {Event} event
-	 * @returns {boolean}
-	 */
+	* On touch start, record the position and scroll offset.
+	*
+	* @param {Event} event
+	* @returns {boolean}
+	*/
 	FastClick.prototype.onTouchStart = function(event) {
 		var targetElement, touch, selection;
 
@@ -451,11 +451,11 @@
 
 
 	/**
-	 * Based on a touchmove event object, check whether the touch has moved past a boundary since it started.
-	 *
-	 * @param {Event} event
-	 * @returns {boolean}
-	 */
+	* Based on a touchmove event object, check whether the touch has moved past a boundary since it started.
+	*
+	* @param {Event} event
+	* @returns {boolean}
+	*/
 	FastClick.prototype.touchHasMoved = function(event) {
 		var touch = event.changedTouches[0], boundary = this.touchBoundary;
 
@@ -468,11 +468,11 @@
 
 
 	/**
-	 * Update the last position.
-	 *
-	 * @param {Event} event
-	 * @returns {boolean}
-	 */
+	* Update the last position.
+	*
+	* @param {Event} event
+	* @returns {boolean}
+	*/
 	FastClick.prototype.onTouchMove = function(event) {
 		if (!this.trackingClick) {
 			return true;
@@ -489,11 +489,11 @@
 
 
 	/**
-	 * Attempt to find the labelled control for the given label element.
-	 *
-	 * @param {EventTarget|HTMLLabelElement} labelElement
-	 * @returns {Element|null}
-	 */
+	* Attempt to find the labelled control for the given label element.
+	*
+	* @param {EventTarget|HTMLLabelElement} labelElement
+	* @returns {Element|null}
+	*/
 	FastClick.prototype.findControl = function(labelElement) {
 
 		// Fast path for newer browsers supporting the HTML5 control attribute
@@ -513,11 +513,11 @@
 
 
 	/**
-	 * On touch end, determine whether to send a click event at once.
-	 *
-	 * @param {Event} event
-	 * @returns {boolean}
-	 */
+	* On touch end, determine whether to send a click event at once.
+	*
+	* @param {Event} event
+	* @returns {boolean}
+	*/
 	FastClick.prototype.onTouchEnd = function(event) {
 		var forElement, trackingClickStart, targetTagName, scrollParent, touch, targetElement = this.targetElement;
 
@@ -611,10 +611,10 @@
 
 
 	/**
-	 * On touch cancel, stop tracking the click.
-	 *
-	 * @returns {void}
-	 */
+	* On touch cancel, stop tracking the click.
+	*
+	* @returns {void}
+	*/
 	FastClick.prototype.onTouchCancel = function() {
 		this.trackingClick = false;
 		this.targetElement = null;
@@ -622,11 +622,11 @@
 
 
 	/**
-	 * Determine mouse events which should be permitted.
-	 *
-	 * @param {Event} event
-	 * @returns {boolean}
-	 */
+	* Determine mouse events which should be permitted.
+	*
+	* @param {Event} event
+	* @returns {boolean}
+	*/
 	FastClick.prototype.onMouse = function(event) {
 
 		// If a target element was never set (because a touch event was never fired) allow the event
@@ -670,13 +670,13 @@
 
 
 	/**
-	 * On actual clicks, determine whether this is a touch-generated click, a click action occurring
-	 * naturally after a delay after a touch (which needs to be cancelled to avoid duplication), or
-	 * an actual click which should be permitted.
-	 *
-	 * @param {Event} event
-	 * @returns {boolean}
-	 */
+	* On actual clicks, determine whether this is a touch-generated click, a click action occurring
+	* naturally after a delay after a touch (which needs to be cancelled to avoid duplication), or
+	* an actual click which should be permitted.
+	*
+	* @param {Event} event
+	* @returns {boolean}
+	*/
 	FastClick.prototype.onClick = function(event) {
 		var permitted;
 
@@ -705,10 +705,10 @@
 
 
 	/**
-	 * Remove all FastClick's event listeners.
-	 *
-	 * @returns {void}
-	 */
+	* Remove all FastClick's event listeners.
+	*
+	* @returns {void}
+	*/
 	FastClick.prototype.destroy = function() {
 		var layer = this.layer;
 
@@ -727,10 +727,10 @@
 
 
 	/**
-	 * Check whether FastClick is needed.
-	 *
-	 * @param {Element} layer The layer to listen on
-	 */
+	* Check whether FastClick is needed.
+	*
+	* @param {Element} layer The layer to listen on
+	*/
 	FastClick.notNeeded = function(layer) {
 		var metaViewport;
 		var chromeVersion;
@@ -816,11 +816,11 @@
 
 
 	/**
-	 * Factory method for creating a FastClick object
-	 *
-	 * @param {Element} layer The layer to listen on
-	 * @param {Object} [options={}] The options to override the defaults
-	 */
+	* Factory method for creating a FastClick object
+	*
+	* @param {Element} layer The layer to listen on
+	* @param {Object} [options={}] The options to override the defaults
+	*/
 	FastClick.attach = function(layer, options) {
 		return new FastClick(layer, options);
 	};

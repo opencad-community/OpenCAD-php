@@ -55,7 +55,7 @@ var setContentHeight = function () {
 };
 
   $SIDEBAR_MENU.find('a').on('click', function(ev) {
-	  console.log('clicked - sidebar_menu');
+	console.log('clicked - sidebar_menu');
         var $li = $(this).parent();
 
         if ($li.is('.active')) {
@@ -126,7 +126,7 @@ $MENU_TOGGLE.on('click', function() {
 // /Sidebar
 
 	var randNum = function() {
-	  return (Math.floor(Math.random() * (1 + 40 - 20))) + 20;
+	return (Math.floor(Math.random() * (1 + 40 - 20))) + 20;
 	};
 
 
@@ -278,7 +278,7 @@ if (typeof NProgress != 'undefined') {
 }
 
 	
-	  //hover and retain popover when on popover content
+	//hover and retain popover when on popover content
         var originalLeave = $.fn.popover.Constructor.prototype.leave;
         $.fn.popover.Constructor.prototype.leave = function(obj) {
           var self = obj instanceof this.constructor ?
@@ -314,7 +314,7 @@ if (typeof NProgress != 'undefined') {
 	function gd(year, month, day) {
 		return new Date(year, month - 1, day).getTime();
 	}
-	  
+	
 	
 	function init_flot_chart(){
 		
@@ -335,13 +335,13 @@ if (typeof NProgress != 'undefined') {
 		];
 
 		var arr_data2 = [
-		  [gd(2012, 1, 1), 82],
-		  [gd(2012, 1, 2), 23],
-		  [gd(2012, 1, 3), 66],
-		  [gd(2012, 1, 4), 9],
-		  [gd(2012, 1, 5), 119],
-		  [gd(2012, 1, 6), 6],
-		  [gd(2012, 1, 7), 9]
+		[gd(2012, 1, 1), 82],
+		[gd(2012, 1, 2), 23],
+		[gd(2012, 1, 3), 66],
+		[gd(2012, 1, 4), 9],
+		[gd(2012, 1, 5), 119],
+		[gd(2012, 1, 6), 6],
+		[gd(2012, 1, 7), 9]
 		];
 		
 		var arr_data3 = [
@@ -388,7 +388,7 @@ if (typeof NProgress != 'undefined') {
 		
 		
 		for (var i = 0; i < 30; i++) {
-		  chart_plot_02_data.push([new Date(Date.today().add(i).days()).getTime(), randNum() + i + i + 10]);
+		chart_plot_02_data.push([new Date(Date.today().add(i).days()).getTime(), randNum() + i + i + 10]);
 		}
 		
 		
@@ -564,7 +564,7 @@ if (typeof NProgress != 'undefined') {
 			}], chart_plot_03_settings);
 			
 		};
-	  
+	
 	} 
 	
 		
@@ -578,18 +578,18 @@ if (typeof NProgress != 'undefined') {
 		$(".stars").starrr();
 
 		$('.stars-existing').starrr({
-		  rating: 4
+		rating: 4
 		});
 
 		$('.stars').on('starrr:change', function (e, value) {
-		  $('.stars-count').html(value);
+		$('.stars-count').html(value);
 		});
 
 		$('.stars-existing').on('starrr:change', function (e, value) {
-		  $('.stars-count-existing').html(value);
+		$('.stars-count-existing').html(value);
 		});
 		
-	  };
+	};
 	
 	
 	function init_JQVmap(){
@@ -599,9 +599,9 @@ if (typeof NProgress != 'undefined') {
 		if(typeof (jQuery.fn.vectorMap) === 'undefined'){ return; }
 		
 		console.log('init_JQVmap');
-	     
+	
 			if ($('#world-map-gdp').length ){
-		 
+		
 				$('#world-map-gdp').vectorMap({
 					map: 'world_en',
 					backgroundColor: null,
@@ -636,7 +636,7 @@ if (typeof NProgress != 'undefined') {
 			
 	};
 			
-	    
+	
 	function init_skycons(){
 				
 			if( typeof (Skycons) === 'undefined'){ return; }
@@ -644,28 +644,28 @@ if (typeof NProgress != 'undefined') {
 		
 			var icons = new Skycons({
 				"color": "#73879C"
-			  }),
-			  list = [
+			}),
+			list = [
 				"clear-day", "clear-night", "partly-cloudy-day",
 				"partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
 				"fog"
-			  ],
-			  i;
+			],
+			i;
 
 			for (i = list.length; i--;)
-			  icons.set(list[i], list[i]);
+			icons.set(list[i], list[i]);
 
 			icons.play();
 	
 	}  
-	   
-	   
+	
+	
 	function init_chart_doughnut(){
 				
 		if( typeof (Chart) === 'undefined'){ return; }
 		
 		console.log('init_chart_doughnut');
-	 
+	
 		if ($('.canvasDoughnut').length){
 			
 		var chart_doughnut_settings = {
@@ -711,9 +711,9 @@ if (typeof NProgress != 'undefined') {
 			});			
 		
 		}  
-	   
+	
 	}
-	   
+	
 	function init_gauge() {
 			
 		if( typeof (Gauge) === 'undefined'){ return; }
@@ -723,21 +723,21 @@ if (typeof NProgress != 'undefined') {
 		console.log('init_gauge');
 		
 
-		  var chart_gauge_settings = {
-		  lines: 12,
-		  angle: 0,
-		  lineWidth: 0.4,
-		  pointer: {
-			  length: 0.75,
-			  strokeWidth: 0.042,
-			  color: '#1D212A'
-		  },
-		  limitMax: 'false',
-		  colorStart: '#1ABC9C',
-		  colorStop: '#1ABC9C',
-		  strokeColor: '#F0F3F3',
-		  generateGradient: true
-	  };
+		var chart_gauge_settings = {
+		lines: 12,
+		angle: 0,
+		lineWidth: 0.4,
+		pointer: {
+			length: 0.75,
+			strokeWidth: 0.042,
+			color: '#1D212A'
+		},
+		limitMax: 'false',
+		colorStart: '#1ABC9C',
+		colorStop: '#1ABC9C',
+		strokeColor: '#F0F3F3',
+		generateGradient: true
+	};
 		
 		
 		if ($('#chart_gauge_01').length){ 
@@ -776,7 +776,7 @@ if (typeof NProgress != 'undefined') {
 	
 	
 	}   
-	   	   
+		
 	/* SPARKLINES */
 			
 		function init_sparklines() {
@@ -893,9 +893,9 @@ if (typeof NProgress != 'undefined') {
 
 			
 		};   
-	   
-	   
-	   /* AUTOCOMPLETE */
+	
+	
+	/* AUTOCOMPLETE */
 			
 		function init_autocomplete() {
 			
@@ -905,20 +905,20 @@ if (typeof NProgress != 'undefined') {
 			var countries = { AD:"Andorra",A2:"Andorra Test",AE:"United Arab Emirates",AF:"Afghanistan",AG:"Antigua and Barbuda",AI:"Anguilla",AL:"Albania",AM:"Armenia",AN:"Netherlands Antilles",AO:"Angola",AQ:"Antarctica",AR:"Argentina",AS:"American Samoa",AT:"Austria",AU:"Australia",AW:"Aruba",AX:"Åland Islands",AZ:"Azerbaijan",BA:"Bosnia and Herzegovina",BB:"Barbados",BD:"Bangladesh",BE:"Belgium",BF:"Burkina Faso",BG:"Bulgaria",BH:"Bahrain",BI:"Burundi",BJ:"Benin",BL:"Saint Barthélemy",BM:"Bermuda",BN:"Brunei",BO:"Bolivia",BQ:"British Antarctic Territory",BR:"Brazil",BS:"Bahamas",BT:"Bhutan",BV:"Bouvet Island",BW:"Botswana",BY:"Belarus",BZ:"Belize",CA:"Canada",CC:"Cocos [Keeling] Islands",CD:"Congo - Kinshasa",CF:"Central African Republic",CG:"Congo - Brazzaville",CH:"Switzerland",CI:"Côte d’Ivoire",CK:"Cook Islands",CL:"Chile",CM:"Cameroon",CN:"China",CO:"Colombia",CR:"Costa Rica",CS:"Serbia and Montenegro",CT:"Canton and Enderbury Islands",CU:"Cuba",CV:"Cape Verde",CX:"Christmas Island",CY:"Cyprus",CZ:"Czech Republic",DD:"East Germany",DE:"Germany",DJ:"Djibouti",DK:"Denmark",DM:"Dominica",DO:"Dominican Republic",DZ:"Algeria",EC:"Ecuador",EE:"Estonia",EG:"Egypt",EH:"Western Sahara",ER:"Eritrea",ES:"Spain",ET:"Ethiopia",FI:"Finland",FJ:"Fiji",FK:"Falkland Islands",FM:"Micronesia",FO:"Faroe Islands",FQ:"French Southern and Antarctic Territories",FR:"France",FX:"Metropolitan France",GA:"Gabon",GB:"United Kingdom",GD:"Grenada",GE:"Georgia",GF:"French Guiana",GG:"Guernsey",GH:"Ghana",GI:"Gibraltar",GL:"Greenland",GM:"Gambia",GN:"Guinea",GP:"Guadeloupe",GQ:"Equatorial Guinea",GR:"Greece",GS:"South Georgia and the South Sandwich Islands",GT:"Guatemala",GU:"Guam",GW:"Guinea-Bissau",GY:"Guyana",HK:"Hong Kong SAR China",HM:"Heard Island and McDonald Islands",HN:"Honduras",HR:"Croatia",HT:"Haiti",HU:"Hungary",ID:"Indonesia",IE:"Ireland",IL:"Israel",IM:"Isle of Man",IN:"India",IO:"British Indian Ocean Territory",IQ:"Iraq",IR:"Iran",IS:"Iceland",IT:"Italy",JE:"Jersey",JM:"Jamaica",JO:"Jordan",JP:"Japan",JT:"Johnston Island",KE:"Kenya",KG:"Kyrgyzstan",KH:"Cambodia",KI:"Kiribati",KM:"Comoros",KN:"Saint Kitts and Nevis",KP:"North Korea",KR:"South Korea",KW:"Kuwait",KY:"Cayman Islands",KZ:"Kazakhstan",LA:"Laos",LB:"Lebanon",LC:"Saint Lucia",LI:"Liechtenstein",LK:"Sri Lanka",LR:"Liberia",LS:"Lesotho",LT:"Lithuania",LU:"Luxembourg",LV:"Latvia",LY:"Libya",MA:"Morocco",MC:"Monaco",MD:"Moldova",ME:"Montenegro",MF:"Saint Martin",MG:"Madagascar",MH:"Marshall Islands",MI:"Midway Islands",MK:"Macedonia",ML:"Mali",MM:"Myanmar [Burma]",MN:"Mongolia",MO:"Macau SAR China",MP:"Northern Mariana Islands",MQ:"Martinique",MR:"Mauritania",MS:"Montserrat",MT:"Malta",MU:"Mauritius",MV:"Maldives",MW:"Malawi",MX:"Mexico",MY:"Malaysia",MZ:"Mozambique",NA:"Namibia",NC:"New Caledonia",NE:"Niger",NF:"Norfolk Island",NG:"Nigeria",NI:"Nicaragua",NL:"Netherlands",NO:"Norway",NP:"Nepal",NQ:"Dronning Maud Land",NR:"Nauru",NT:"Neutral Zone",NU:"Niue",NZ:"New Zealand",OM:"Oman",PA:"Panama",PC:"Pacific Islands Trust Territory",PE:"Peru",PF:"French Polynesia",PG:"Papua New Guinea",PH:"Philippines",PK:"Pakistan",PL:"Poland",PM:"Saint Pierre and Miquelon",PN:"Pitcairn Islands",PR:"Puerto Rico",PS:"Palestinian Territories",PT:"Portugal",PU:"U.S. Miscellaneous Pacific Islands",PW:"Palau",PY:"Paraguay",PZ:"Panama Canal Zone",QA:"Qatar",RE:"Réunion",RO:"Romania",RS:"Serbia",RU:"Russia",RW:"Rwanda",SA:"Saudi Arabia",SB:"Solomon Islands",SC:"Seychelles",SD:"Sudan",SE:"Sweden",SG:"Singapore",SH:"Saint Helena",SI:"Slovenia",SJ:"Svalbard and Jan Mayen",SK:"Slovakia",SL:"Sierra Leone",SM:"San Marino",SN:"Senegal",SO:"Somalia",SR:"Suriname",ST:"São Tomé and Príncipe",SU:"Union of Soviet Socialist Republics",SV:"El Salvador",SY:"Syria",SZ:"Swaziland",TC:"Turks and Caicos Islands",TD:"Chad",TF:"French Southern Territories",TG:"Togo",TH:"Thailand",TJ:"Tajikistan",TK:"Tokelau",TL:"Timor-Leste",TM:"Turkmenistan",TN:"Tunisia",TO:"Tonga",TR:"Turkey",TT:"Trinidad and Tobago",TV:"Tuvalu",TW:"Taiwan",TZ:"Tanzania",UA:"Ukraine",UG:"Uganda",UM:"U.S. Minor Outlying Islands",US:"United States",UY:"Uruguay",UZ:"Uzbekistan",VA:"Vatican City",VC:"Saint Vincent and the Grenadines",VD:"North Vietnam",VE:"Venezuela",VG:"British Virgin Islands",VI:"U.S. Virgin Islands",VN:"Vietnam",VU:"Vanuatu",WF:"Wallis and Futuna",WK:"Wake Island",WS:"Samoa",YD:"People's Democratic Republic of Yemen",YE:"Yemen",YT:"Mayotte",ZA:"South Africa",ZM:"Zambia",ZW:"Zimbabwe",ZZ:"Unknown or Invalid Region" };
 
 			var countriesArray = $.map(countries, function(value, key) {
-			  return {
+			return {
 				value: value,
 				data: key
-			  };
+			};
 			});
 
 			// initialize autocomplete with custom appendTo
 			$('#autocomplete-custom-append').autocomplete({
-			  lookup: countriesArray
+			lookup: countriesArray
 			});
 			
 		};
-	   
-	 /* AUTOSIZE */
+	
+	/* AUTOSIZE */
 			
 		function init_autosize() {
 			
@@ -929,8 +929,8 @@ if (typeof NProgress != 'undefined') {
 			}
 			
 		};  
-	   
-	   /* PARSLEY */
+	
+	/* PARSLEY */
 			
 		function init_parsley() {
 			
@@ -938,94 +938,94 @@ if (typeof NProgress != 'undefined') {
 			console.log('init_parsley');
 			
 			$/*.listen*/('parsley:field:validate', function() {
-			  validateFront();
+			validateFront();
 			});
 			$('#demo-form .btn').on('click', function() {
-			  $('#demo-form').parsley().validate();
-			  validateFront();
+			$('#demo-form').parsley().validate();
+			validateFront();
 			});
 			var validateFront = function() {
-			  if (true === $('#demo-form').parsley().isValid()) {
+			if (true === $('#demo-form').parsley().isValid()) {
 				$('.bs-callout-info').removeClass('hidden');
 				$('.bs-callout-warning').addClass('hidden');
-			  } else {
+			} else {
 				$('.bs-callout-info').addClass('hidden');
 				$('.bs-callout-warning').removeClass('hidden');
-			  }
+			}
 			};
-		  
+		
 			$/*.listen*/('parsley:field:validate', function() {
-			  validateFront();
+			validateFront();
 			});
 			$('#demo-form2 .btn').on('click', function() {
-			  $('#demo-form2').parsley().validate();
-			  validateFront();
+			$('#demo-form2').parsley().validate();
+			validateFront();
 			});
 			var validateFront = function() {
-			  if (true === $('#demo-form2').parsley().isValid()) {
+			if (true === $('#demo-form2').parsley().isValid()) {
 				$('.bs-callout-info').removeClass('hidden');
 				$('.bs-callout-warning').addClass('hidden');
-			  } else {
+			} else {
 				$('.bs-callout-info').addClass('hidden');
 				$('.bs-callout-warning').removeClass('hidden');
-			  }
+			}
 			};
 			
-			  try {
+			try {
 				hljs.initHighlightingOnLoad();
-			  } catch (err) {}
+			} catch (err) {}
 			
 		};
-	   
+	
 		
-		  /* INPUTS */
-		  
+		/* INPUTS */
+		
 			function onAddTag(tag) {
 				alert("Added a tag: " + tag);
-			  }
+			}
 
-			  function onRemoveTag(tag) {
+			function onRemoveTag(tag) {
 				alert("Removed a tag: " + tag);
-			  }
+			}
 
-			  function onChangeTag(input, tag) {
+			function onChangeTag(input, tag) {
 				alert("Changed a tag: " + tag);
-			  }
+			}
 
-			  //tags input
+			//tags input
 			function init_TagsInput() {
-				  
+				
 				if(typeof $.fn.tagsInput !== 'undefined'){	
-				 
+				
 				$('#tags_1').tagsInput({
-				  width: 'auto'
+				width: 'auto'
 				});
 				
 				}
 				
-		    };
-	   
+		};
+	
 		/* SELECT2 */
-	  
+	
 		function init_select2() {
-			 
+			
 			if( typeof (select2) === 'undefined'){ return; }
 			console.log('init_toolbox');
-			 
+			
 			$(".select2_single").select2({
-			  placeholder: "Select a state",
-			  allowClear: true
+			placeholder: "Select a state",
+			allowClear: true
 			});
 			$(".select2_group").select2({});
 			$(".select2_multiple").select2({
-			  maximumSelectionLength: 4,
-			  placeholder: "With Max Selection limit 4",
-			  allowClear: true
+			maximumSelectionLength: 4,
+			placeholder: "With Max Selection limit 4",
+			allowClear: true
 			});
 			
 		};
-	   
-	   /* WYSIWYG EDITOR */
+	
+	/* WYSIWYG EDITOR */
 
 		function init_wysiwyg() {
 			
@@ -1098,7 +1098,7 @@ if (typeof NProgress != 'undefined') {
         prettyPrint();
 	
     };
-	  
+	
 	/* CROPPER */
 		
 		function init_cropper() {
@@ -1117,9 +1117,9 @@ if (typeof NProgress != 'undefined') {
 			var $dataScaleX = $('#dataScaleX');
 			var $dataScaleY = $('#dataScaleY');
 			var options = {
-				  aspectRatio: 16 / 9,
-				  preview: '.img-preview',
-				  crop: function (e) {
+				aspectRatio: 16 / 9,
+				preview: '.img-preview',
+				crop: function (e) {
 					$dataX.val(Math.round(e.x));
 					$dataY.val(Math.round(e.y));
 					$dataHeight.val(Math.round(e.height));
@@ -1127,7 +1127,7 @@ if (typeof NProgress != 'undefined') {
 					$dataRotate.val(e.rotate);
 					$dataScaleX.val(e.scaleX);
 					$dataScaleY.val(e.scaleY);
-				  }
+				}
 				};
 
 
@@ -1137,162 +1137,162 @@ if (typeof NProgress != 'undefined') {
 
 			// Cropper
 			$image.on({
-			  'build.cropper': function (e) {
+			'build.cropper': function (e) {
 				console.log(e.type);
-			  },
-			  'built.cropper': function (e) {
+			},
+			'built.cropper': function (e) {
 				console.log(e.type);
-			  },
-			  'cropstart.cropper': function (e) {
+			},
+			'cropstart.cropper': function (e) {
 				console.log(e.type, e.action);
-			  },
-			  'cropmove.cropper': function (e) {
+			},
+			'cropmove.cropper': function (e) {
 				console.log(e.type, e.action);
-			  },
-			  'cropend.cropper': function (e) {
+			},
+			'cropend.cropper': function (e) {
 				console.log(e.type, e.action);
-			  },
-			  'crop.cropper': function (e) {
+			},
+			'crop.cropper': function (e) {
 				console.log(e.type, e.x, e.y, e.width, e.height, e.rotate, e.scaleX, e.scaleY);
-			  },
-			  'zoom.cropper': function (e) {
+			},
+			'zoom.cropper': function (e) {
 				console.log(e.type, e.ratio);
-			  }
+			}
 			}).cropper(options);
 
 
 			// Buttons
 			if (!$.isFunction(document.createElement('canvas').getContext)) {
-			  $('button[data-method="getCroppedCanvas"]').prop('disabled', true);
+			$('button[data-method="getCroppedCanvas"]').prop('disabled', true);
 			}
 
 			if (typeof document.createElement('cropper').style.transition === 'undefined') {
-			  $('button[data-method="rotate"]').prop('disabled', true);
-			  $('button[data-method="scale"]').prop('disabled', true);
+			$('button[data-method="rotate"]').prop('disabled', true);
+			$('button[data-method="scale"]').prop('disabled', true);
 			}
 
 
 			// Download
 			if (typeof $download[0].download === 'undefined') {
-			  $download.addClass('disabled');
+			$download.addClass('disabled');
 			}
 
 
 			// Options
 			$('.docs-toggles').on('change', 'input', function () {
-			  var $this = $(this);
-			  var name = $this.attr('name');
-			  var type = $this.prop('type');
-			  var cropBoxData;
-			  var canvasData;
+			var $this = $(this);
+			var name = $this.attr('name');
+			var type = $this.prop('type');
+			var cropBoxData;
+			var canvasData;
 
-			  if (!$image.data('cropper')) {
+			if (!$image.data('cropper')) {
 				return;
-			  }
+			}
 
-			  if (type === 'checkbox') {
+			if (type === 'checkbox') {
 				options[name] = $this.prop('checked');
 				cropBoxData = $image.cropper('getCropBoxData');
 				canvasData = $image.cropper('getCanvasData');
 
 				options.built = function () {
-				  $image.cropper('setCropBoxData', cropBoxData);
-				  $image.cropper('setCanvasData', canvasData);
+				$image.cropper('setCropBoxData', cropBoxData);
+				$image.cropper('setCanvasData', canvasData);
 				};
-			  } else if (type === 'radio') {
+			} else if (type === 'radio') {
 				options[name] = $this.val();
-			  }
+			}
 
-			  $image.cropper('destroy').cropper(options);
+			$image.cropper('destroy').cropper(options);
 			});
 
 
 			// Methods
 			$('.docs-buttons').on('click', '[data-method]', function () {
-			  var $this = $(this);
-			  var data = $this.data();
-			  var $target;
-			  var result;
+			var $this = $(this);
+			var data = $this.data();
+			var $target;
+			var result;
 
-			  if ($this.prop('disabled') || $this.hasClass('disabled')) {
+			if ($this.prop('disabled') || $this.hasClass('disabled')) {
 				return;
-			  }
+			}
 
-			  if ($image.data('cropper') && data.method) {
+			if ($image.data('cropper') && data.method) {
 				data = $.extend({}, data); // Clone a new one
 
 				if (typeof data.target !== 'undefined') {
-				  $target = $(data.target);
+				$target = $(data.target);
 
-				  if (typeof data.option === 'undefined') {
+				if (typeof data.option === 'undefined') {
 					try {
-					  data.option = JSON.parse($target.val());
+					data.option = JSON.parse($target.val());
 					} catch (e) {
-					  console.log(e.message);
+					console.log(e.message);
 					}
-				  }
+				}
 				}
 
 				result = $image.cropper(data.method, data.option, data.secondOption);
 
 				switch (data.method) {
-				  case 'scaleX':
-				  case 'scaleY':
+				case 'scaleX':
+				case 'scaleY':
 					$(this).data('option', -data.option);
 					break;
 
-				  case 'getCroppedCanvas':
+				case 'getCroppedCanvas':
 					if (result) {
 
-					  // Bootstrap's Modal
-					  $('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
+					// Bootstrap's Modal
+					$('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
 
-					  if (!$download.hasClass('disabled')) {
+					if (!$download.hasClass('disabled')) {
 						$download.attr('href', result.toDataURL());
-					  }
+					}
 					}
 
 					break;
 				}
 
 				if ($.isPlainObject(result) && $target) {
-				  try {
+				try {
 					$target.val(JSON.stringify(result));
-				  } catch (e) {
+				} catch (e) {
 					console.log(e.message);
-				  }
+				}
 				}
 
-			  }
+			}
 			});
 
 			// Keyboard
 			$(document.body).on('keydown', function (e) {
-			  if (!$image.data('cropper') || this.scrollTop > 300) {
+			if (!$image.data('cropper') || this.scrollTop > 300) {
 				return;
-			  }
+			}
 
-			  switch (e.which) {
+			switch (e.which) {
 				case 37:
-				  e.preventDefault();
-				  $image.cropper('move', -1, 0);
-				  break;
+				e.preventDefault();
+				$image.cropper('move', -1, 0);
+				break;
 
 				case 38:
-				  e.preventDefault();
-				  $image.cropper('move', 0, -1);
-				  break;
+				e.preventDefault();
+				$image.cropper('move', 0, -1);
+				break;
 
 				case 39:
-				  e.preventDefault();
-				  $image.cropper('move', 1, 0);
-				  break;
+				e.preventDefault();
+				$image.cropper('move', 1, 0);
+				break;
 
 				case 40:
-				  e.preventDefault();
-				  $image.cropper('move', 0, 1);
-				  break;
-			  }
+				e.preventDefault();
+				$image.cropper('move', 0, 1);
+				break;
+			}
 			});
 
 			// Import image
@@ -1301,145 +1301,145 @@ if (typeof NProgress != 'undefined') {
 			var blobURL;
 
 			if (URL) {
-			  $inputImage.change(function () {
+			$inputImage.change(function () {
 				var files = this.files;
 				var file;
 
 				if (!$image.data('cropper')) {
-				  return;
+				return;
 				}
 
 				if (files && files.length) {
-				  file = files[0];
+				file = files[0];
 
-				  if (/^image\/\w+$/.test(file.type)) {
+				if (/^image\/\w+$/.test(file.type)) {
 					blobURL = URL.createObjectURL(file);
 					$image.one('built.cropper', function () {
 
-					  // Revoke when load complete
-					  URL.revokeObjectURL(blobURL);
+					// Revoke when load complete
+					URL.revokeObjectURL(blobURL);
 					}).cropper('reset').cropper('replace', blobURL);
 					$inputImage.val('');
-				  } else {
+				} else {
 					window.alert('Please choose an image file.');
-				  }
 				}
-			  });
+				}
+			});
 			} else {
-			  $inputImage.prop('disabled', true).parent().addClass('disabled');
+			$inputImage.prop('disabled', true).parent().addClass('disabled');
 			}
 			
 			
 		};
 		
 		/* CROPPER --- end */  
-	  
+	
 		/* KNOB */
-	  
+	
 		function init_knob() {
 		
 				if( typeof ($.fn.knob) === 'undefined'){ return; }
 				console.log('init_knob');
 	
 				$(".knob").knob({
-				  change: function(value) {
+				change: function(value) {
 					//console.log("change : " + value);
-				  },
-				  release: function(value) {
+				},
+				release: function(value) {
 					//console.log(this.$.attr('value'));
 					console.log("release : " + value);
-				  },
-				  cancel: function() {
+				},
+				cancel: function() {
 					console.log("cancel : ", this);
-				  },
-				  /*format : function (value) {
-				   return value + '%';
-				   },*/
-				  draw: function() {
+				},
+				/*format : function (value) {
+				return value + '%';
+				},*/
+				draw: function() {
 
 					// "tron" case
 					if (this.$.data('skin') == 'tron') {
 
-					  this.cursorExt = 0.3;
+					this.cursorExt = 0.3;
 
-					  var a = this.arc(this.cv) // Arc
+					var a = this.arc(this.cv) // Arc
 						,
 						pa // Previous arc
 						, r = 1;
 
-					  this.g.lineWidth = this.lineWidth;
+					this.g.lineWidth = this.lineWidth;
 
-					  if (this.o.displayPrevious) {
+					if (this.o.displayPrevious) {
 						pa = this.arc(this.v);
 						this.g.beginPath();
 						this.g.strokeStyle = this.pColor;
 						this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, pa.s, pa.e, pa.d);
 						this.g.stroke();
-					  }
-
-					  this.g.beginPath();
-					  this.g.strokeStyle = r ? this.o.fgColor : this.fgColor;
-					  this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, a.s, a.e, a.d);
-					  this.g.stroke();
-
-					  this.g.lineWidth = 2;
-					  this.g.beginPath();
-					  this.g.strokeStyle = this.o.fgColor;
-					  this.g.arc(this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false);
-					  this.g.stroke();
-
-					  return false;
 					}
-				  }
-				  
+
+					this.g.beginPath();
+					this.g.strokeStyle = r ? this.o.fgColor : this.fgColor;
+					this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, a.s, a.e, a.d);
+					this.g.stroke();
+
+					this.g.lineWidth = 2;
+					this.g.beginPath();
+					this.g.strokeStyle = this.o.fgColor;
+					this.g.arc(this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false);
+					this.g.stroke();
+
+					return false;
+					}
+				}
+				
 				});
 
 				// Example of infinite knob, iPod click wheel
 				var v, up = 0,
-				  down = 0,
-				  i = 0,
-				  $idir = $("div.idir"),
-				  $ival = $("div.ival"),
-				  incr = function() {
+				down = 0,
+				i = 0,
+				$idir = $("div.idir"),
+				$ival = $("div.ival"),
+				incr = function() {
 					i++;
 					$idir.show().html("+").fadeOut();
 					$ival.html(i);
-				  },
-				  decr = function() {
+				},
+				decr = function() {
 					i--;
 					$idir.show().html("-").fadeOut();
 					$ival.html(i);
-				  };
+				};
 				$("input.infinite").knob({
-				  min: 0,
-				  max: 20,
-				  stopper: false,
-				  change: function() {
+				min: 0,
+				max: 20,
+				stopper: false,
+				change: function() {
 					if (v > this.cv) {
-					  if (up) {
+					if (up) {
 						decr();
 						up = 0;
-					  } else {
+					} else {
 						up = 1;
 						down = 0;
-					  }
+					}
 					} else {
-					  if (v < this.cv) {
+					if (v < this.cv) {
 						if (down) {
-						  incr();
-						  down = 0;
+						incr();
+						down = 0;
 						} else {
-						  down = 1;
-						  up = 0;
+						down = 1;
+						up = 0;
 						}
-					  }
+					}
 					}
 					v = this.cv;
-				  }
+				}
 				});
 				
 		};
-	 
+	
 		/* INPUT MASK */
 			
 		function init_InputMask() {
@@ -1450,9 +1450,9 @@ if (typeof NProgress != 'undefined') {
 				$(":input").inputmask();
 				
 		};
-	  
+	
 		/* COLOR PICKER */
-			 
+			
 		function init_ColorPicker() {
 			
 			if( typeof ($.fn.colorpicker) === 'undefined'){ return; }
@@ -1473,8 +1473,8 @@ if (typeof NProgress != 'undefined') {
 				$('.demo-auto').colorpicker();
 			
 		}; 
-	   
-	   
+	
+	
 		/* ION RANGE SLIDER */
 			
 		function init_IonRangeSlider() {
@@ -1483,109 +1483,109 @@ if (typeof NProgress != 'undefined') {
 			console.log('init_IonRangeSlider');
 			
 			$("#range_27").ionRangeSlider({
-			  type: "double",
-			  min: 1000000,
-			  max: 2000000,
-			  grid: true,
-			  force_edges: true
+			type: "double",
+			min: 1000000,
+			max: 2000000,
+			grid: true,
+			force_edges: true
 			});
 			$("#range").ionRangeSlider({
-			  hide_min_max: true,
-			  keyboard: true,
-			  min: 0,
-			  max: 5000,
-			  from: 1000,
-			  to: 4000,
-			  type: 'double',
-			  step: 1,
-			  prefix: "$",
-			  grid: true
+			hide_min_max: true,
+			keyboard: true,
+			min: 0,
+			max: 5000,
+			from: 1000,
+			to: 4000,
+			type: 'double',
+			step: 1,
+			prefix: "$",
+			grid: true
 			});
 			$("#range_25").ionRangeSlider({
-			  type: "double",
-			  min: 1000000,
-			  max: 2000000,
-			  grid: true
+			type: "double",
+			min: 1000000,
+			max: 2000000,
+			grid: true
 			});
 			$("#range_26").ionRangeSlider({
-			  type: "double",
-			  min: 0,
-			  max: 10000,
-			  step: 500,
-			  grid: true,
-			  grid_snap: true
+			type: "double",
+			min: 0,
+			max: 10000,
+			step: 500,
+			grid: true,
+			grid_snap: true
 			});
 			$("#range_31").ionRangeSlider({
-			  type: "double",
-			  min: 0,
-			  max: 100,
-			  from: 30,
-			  to: 70,
-			  from_fixed: true
+			type: "double",
+			min: 0,
+			max: 100,
+			from: 30,
+			to: 70,
+			from_fixed: true
 			});
 			$(".range_min_max").ionRangeSlider({
-			  type: "double",
-			  min: 0,
-			  max: 100,
-			  from: 30,
-			  to: 70,
-			  max_interval: 50
+			type: "double",
+			min: 0,
+			max: 100,
+			from: 30,
+			to: 70,
+			max_interval: 50
 			});
 			$(".range_time24").ionRangeSlider({
-			  min: +moment().subtract(12, "hours").format("X"),
-			  max: +moment().format("X"),
-			  from: +moment().subtract(6, "hours").format("X"),
-			  grid: true,
-			  force_edges: true,
-			  prettify: function(num) {
+			min: +moment().subtract(12, "hours").format("X"),
+			max: +moment().format("X"),
+			from: +moment().subtract(6, "hours").format("X"),
+			grid: true,
+			force_edges: true,
+			prettify: function(num) {
 				var m = moment(num, "X");
 				return m.format("Do MMMM, HH:mm");
-			  }
+			}
 			});
 			
 		};
-	   
-	   
-	   /* DATERANGEPICKER */
-	   
+	
+	
+	/* DATERANGEPICKER */
+	
 		function init_daterangepicker() {
 
 			if( typeof ($.fn.daterangepicker) === 'undefined'){ return; }
 			console.log('init_daterangepicker');
 		
 			var cb = function(start, end, label) {
-			  console.log(start.toISOString(), end.toISOString(), label);
-			  $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+			console.log(start.toISOString(), end.toISOString(), label);
+			$('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
 			};
 
 			var optionSet1 = {
-			  startDate: moment().subtract(29, 'days'),
-			  endDate: moment(),
-			  minDate: '01/01/2012',
-			  maxDate: '12/31/2015',
-			  dateLimit: {
+			startDate: moment().subtract(29, 'days'),
+			endDate: moment(),
+			minDate: '01/01/2012',
+			maxDate: '12/31/2015',
+			dateLimit: {
 				days: 60
-			  },
-			  showDropdowns: true,
-			  showWeekNumbers: true,
-			  timePicker: false,
-			  timePickerIncrement: 1,
-			  timePicker12Hour: true,
-			  ranges: {
+			},
+			showDropdowns: true,
+			showWeekNumbers: true,
+			timePicker: false,
+			timePickerIncrement: 1,
+			timePicker12Hour: true,
+			ranges: {
 				'Today': [moment(), moment()],
 				'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
 				'Last 7 Days': [moment().subtract(6, 'days'), moment()],
 				'Last 30 Days': [moment().subtract(29, 'days'), moment()],
 				'This Month': [moment().startOf('month'), moment().endOf('month')],
 				'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-			  },
-			  opens: 'left',
-			  buttonClasses: ['btn btn-default'],
-			  applyClass: 'btn-small btn-primary',
-			  cancelClass: 'btn-small',
-			  format: 'MM/DD/YYYY',
-			  separator: ' to ',
-			  locale: {
+			},
+			opens: 'left',
+			buttonClasses: ['btn btn-default'],
+			applyClass: 'btn-small btn-primary',
+			cancelClass: 'btn-small',
+			format: 'MM/DD/YYYY',
+			separator: ' to ',
+			locale: {
 				applyLabel: 'Submit',
 				cancelLabel: 'Clear',
 				fromLabel: 'From',
@@ -1594,73 +1594,73 @@ if (typeof NProgress != 'undefined') {
 				daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
 				monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 				firstDay: 1
-			  }
+			}
 			};
 			
 			$('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
 			$('#reportrange').daterangepicker(optionSet1, cb);
 			$('#reportrange').on('show.daterangepicker', function() {
-			  console.log("show event fired");
+			console.log("show event fired");
 			});
 			$('#reportrange').on('hide.daterangepicker', function() {
-			  console.log("hide event fired");
+			console.log("hide event fired");
 			});
 			$('#reportrange').on('apply.daterangepicker', function(ev, picker) {
-			  console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
+			console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
 			});
 			$('#reportrange').on('cancel.daterangepicker', function(ev, picker) {
-			  console.log("cancel event fired");
+			console.log("cancel event fired");
 			});
 			$('#options1').click(function() {
-			  $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
+			$('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
 			});
 			$('#options2').click(function() {
-			  $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
+			$('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
 			});
 			$('#destroy').click(function() {
-			  $('#reportrange').data('daterangepicker').remove();
+			$('#reportrange').data('daterangepicker').remove();
 			});
    
 		}
-   	   
-	   function init_daterangepicker_right() {
-	      
+   	
+	function init_daterangepicker_right() {
+	 
 				if( typeof ($.fn.daterangepicker) === 'undefined'){ return; }
 				console.log('init_daterangepicker_right');
-		  
+		
 				var cb = function(start, end, label) {
-				  console.log(start.toISOString(), end.toISOString(), label);
-				  $('#reportrange_right span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+				console.log(start.toISOString(), end.toISOString(), label);
+				$('#reportrange_right span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
 				};
 
 				var optionSet1 = {
-				  startDate: moment().subtract(29, 'days'),
-				  endDate: moment(),
-				  minDate: '01/01/2012',
-				  maxDate: '12/31/2020',
-				  dateLimit: {
+				startDate: moment().subtract(29, 'days'),
+				endDate: moment(),
+				minDate: '01/01/2012',
+				maxDate: '12/31/2020',
+				dateLimit: {
 					days: 60
-				  },
-				  showDropdowns: true,
-				  showWeekNumbers: true,
-				  timePicker: false,
-				  timePickerIncrement: 1,
-				  timePicker12Hour: true,
-				  ranges: {
+				},
+				showDropdowns: true,
+				showWeekNumbers: true,
+				timePicker: false,
+				timePickerIncrement: 1,
+				timePicker12Hour: true,
+				ranges: {
 					'Today': [moment(), moment()],
 					'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
 					'Last 7 Days': [moment().subtract(6, 'days'), moment()],
 					'Last 30 Days': [moment().subtract(29, 'days'), moment()],
 					'This Month': [moment().startOf('month'), moment().endOf('month')],
 					'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-				  },
-				  opens: 'right',
-				  buttonClasses: ['btn btn-default'],
-				  applyClass: 'btn-small btn-primary',
-				  cancelClass: 'btn-small',
-				  format: 'MM/DD/YYYY',
-				  separator: ' to ',
-				  locale: {
+				},
+				opens: 'right',
+				buttonClasses: ['btn btn-default'],
+				applyClass: 'btn-small btn-primary',
+				cancelClass: 'btn-small',
+				format: 'MM/DD/YYYY',
+				separator: ' to ',
+				locale: {
 					applyLabel: 'Submit',
 					cancelLabel: 'Clear',
 					fromLabel: 'From',
@@ -1669,7 +1669,7 @@ if (typeof NProgress != 'undefined') {
 					daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
 					monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 					firstDay: 1
-				  }
+				}
 				};
 
 				$('#reportrange_right span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
@@ -1677,86 +1677,86 @@ if (typeof NProgress != 'undefined') {
 				$('#reportrange_right').daterangepicker(optionSet1, cb);
 
 				$('#reportrange_right').on('show.daterangepicker', function() {
-				  console.log("show event fired");
+				console.log("show event fired");
 				});
 				$('#reportrange_right').on('hide.daterangepicker', function() {
-				  console.log("hide event fired");
+				console.log("hide event fired");
 				});
 				$('#reportrange_right').on('apply.daterangepicker', function(ev, picker) {
-				  console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
+				console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
 				});
 				$('#reportrange_right').on('cancel.daterangepicker', function(ev, picker) {
-				  console.log("cancel event fired");
+				console.log("cancel event fired");
 				});
 
 				$('#options1').click(function() {
-				  $('#reportrange_right').data('daterangepicker').setOptions(optionSet1, cb);
+				$('#reportrange_right').data('daterangepicker').setOptions(optionSet1, cb);
 				});
 
 				$('#options2').click(function() {
-				  $('#reportrange_right').data('daterangepicker').setOptions(optionSet2, cb);
+				$('#reportrange_right').data('daterangepicker').setOptions(optionSet2, cb);
 				});
 
 				$('#destroy').click(function() {
-				  $('#reportrange_right').data('daterangepicker').remove();
+				$('#reportrange_right').data('daterangepicker').remove();
 				});
 
-	   }
-	   
-	    function init_daterangepicker_single_call() {
-	      
+	}
+	
+	function init_daterangepicker_single_call() {
+	 
 			if( typeof ($.fn.daterangepicker) === 'undefined'){ return; }
 			console.log('init_daterangepicker_single_call');
-		   
+		
 			$('#single_cal1').daterangepicker({
-			  singleDatePicker: true,
-			  singleClasses: "picker_1"
+			singleDatePicker: true,
+			singleClasses: "picker_1"
 			}, function(start, end, label) {
-			  console.log(start.toISOString(), end.toISOString(), label);
+			console.log(start.toISOString(), end.toISOString(), label);
 			});
 			$('#single_cal2').daterangepicker({
-			  singleDatePicker: true,
-			  singleClasses: "picker_2"
+			singleDatePicker: true,
+			singleClasses: "picker_2"
 			}, function(start, end, label) {
-			  console.log(start.toISOString(), end.toISOString(), label);
+			console.log(start.toISOString(), end.toISOString(), label);
 			});
 			$('#single_cal3').daterangepicker({
-			  singleDatePicker: true,
-			  singleClasses: "picker_3"
+			singleDatePicker: true,
+			singleClasses: "picker_3"
 			}, function(start, end, label) {
-			  console.log(start.toISOString(), end.toISOString(), label);
+			console.log(start.toISOString(), end.toISOString(), label);
 			});
 			$('#single_cal4').daterangepicker({
-			  singleDatePicker: true,
-			  singleClasses: "picker_4"
+			singleDatePicker: true,
+			singleClasses: "picker_4"
 			}, function(start, end, label) {
-			  console.log(start.toISOString(), end.toISOString(), label);
+			console.log(start.toISOString(), end.toISOString(), label);
 			});
   
   
 		}
 		
-		 
+		
 		function init_daterangepicker_reservation() {
-	      
+	 
 			if( typeof ($.fn.daterangepicker) === 'undefined'){ return; }
 			console.log('init_daterangepicker_reservation');
-		 
+		
 			$('#reservation').daterangepicker(null, function(start, end, label) {
-			  console.log(start.toISOString(), end.toISOString(), label);
+			console.log(start.toISOString(), end.toISOString(), label);
 			});
 
 			$('#reservation-time').daterangepicker({
-			  timePicker: true,
-			  timePickerIncrement: 30,
-			  locale: {
+			timePicker: true,
+			timePickerIncrement: 30,
+			locale: {
 				format: 'MM/DD/YYYY h:mm A'
-			  }
+			}
 			});
 	
 		}
-	   
-	   /* SMART WIZARD */
+	
+	/* SMART WIZARD */
 		
 		function init_SmartWizard() {
 			
@@ -1766,7 +1766,7 @@ if (typeof NProgress != 'undefined') {
 			$('#wizard').smartWizard();
 
 			$('#wizard_verticle').smartWizard({
-			  transitionEffect: 'slide'
+			transitionEffect: 'slide'
 			});
 
 			$('.buttonNext').addClass('btn btn-success');
@@ -1774,16 +1774,16 @@ if (typeof NProgress != 'undefined') {
 			$('.buttonFinish').addClass('btn btn-default');
 			
 		};
-	   
-	   
-	  /* VALIDATOR */
+	
+	
+	/* VALIDATOR */
 
-	  function init_validator () {
-		 
+	function init_validator () {
+		
 		if( typeof (validator) === 'undefined'){ return; }
 		console.log('init_validator'); 
-	  
-	  // initialize the validator function
+	
+	// initialize the validator function
       validator.message.date = 'not a real date';
 
       // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
@@ -1810,10 +1810,10 @@ if (typeof NProgress != 'undefined') {
 
         return false;
 		});
-	  
-	  };
-	   
-	  	/* PNotify */
+	
+	};
+	
+		/* PNotify */
 			
 		function init_PNotify() {
 			
@@ -1821,9 +1821,9 @@ if (typeof NProgress != 'undefined') {
 			console.log('init_PNotify');
 
 		}; 
-	   
-	   
-	   /* CUSTOM NOTIFICATION */
+	
+	
+	/* CUSTOM NOTIFICATION */
 			
 		function init_CustomNotification() {
 			
@@ -1835,34 +1835,34 @@ if (typeof NProgress != 'undefined') {
 			var cnt = 10;
 
 			TabbedNotification = function(options) {
-			  var message = "<div id='ntf" + cnt + "' class='text alert-" + options.type + "' style='display:none'><h2><em class='fa fa-bell'></em> " + options.title +
+			var message = "<div id='ntf" + cnt + "' class='text alert-" + options.type + "' style='display:none'><h2><em class='fa fa-bell'></em> " + options.title +
 				"</h2><div class='close'><a rel="noopener" href='javascript:;' class='notification_close'><em class='fa fa-close'></em></a></div><p>" + options.text + "</p></div>";
 
-			  if (!document.getElementById('custom_notifications')) {
+			if (!document.getElementById('custom_notifications')) {
 				alert('doesnt exists');
-			  } else {
+			} else {
 				$('#custom_notifications ul.notifications').append("<li><a id='ntlink" + cnt + "' class='alert-" + options.type + "' href='#ntf" + cnt + "'><em class='fa fa-bell animated shake'></em></a></li>");
 				$('#custom_notifications #notif-group').append(message);
 				cnt++;
 				CustomTabs(options);
-			  }
+			}
 			};
 
 			CustomTabs = function(options) {
-			  $('.tabbed_notifications > div').hide();
-			  $('.tabbed_notifications > div:first-of-type').show();
-			  $('#custom_notifications').removeClass('dsp_none');
-			  $('.notifications a').click(function(e) {
+			$('.tabbed_notifications > div').hide();
+			$('.tabbed_notifications > div:first-of-type').show();
+			$('#custom_notifications').removeClass('dsp_none');
+			$('.notifications a').click(function(e) {
 				e.preventDefault();
 				var $this = $(this),
-				  tabbed_notifications = '#' + $this.parents('.notifications').data('tabbed_notifications'),
-				  others = $this.closest('li').siblings().children('a'),
-				  target = $this.attr('href');
+				tabbed_notifications = '#' + $this.parents('.notifications').data('tabbed_notifications'),
+				others = $this.closest('li').siblings().children('a'),
+				target = $this.attr('href');
 				others.removeClass('active');
 				$this.addClass('active');
 				$(tabbed_notifications).children('div').hide();
 				$(target).show();
-			  });
+			});
 			};
 
 			CustomTabs();
@@ -1870,12 +1870,12 @@ if (typeof NProgress != 'undefined') {
 			var tabid = idname = '';
 
 			$(document).on('click', '.notification_close', function(e) {
-			  idname = $(this).parent().parent().attr("id");
-			  tabid = idname.substr(-2);
-			  $('#ntf' + tabid).remove();
-			  $('#ntlink' + tabid).parent().remove();
-			  $('.notifications a').first().addClass('active');
-			  $('#notif-group div').first().css('display', 'block');
+			idname = $(this).parent().parent().attr("id");
+			tabid = idname.substr(-2);
+			$('#ntf' + tabid).remove();
+			$('#ntlink' + tabid).parent().remove();
+			$('.notifications a').first().addClass('active');
+			$('#notif-group div').first().css('display', 'block');
 			});
 			
 		};
@@ -1888,57 +1888,57 @@ if (typeof NProgress != 'undefined') {
 				console.log('init_EasyPieChart');
 				
 				$('.chart').easyPieChart({
-				  easing: 'easeOutElastic',
-				  delay: 3000,
-				  barColor: '#26B99A',
-				  trackColor: '#fff',
-				  scaleColor: false,
-				  lineWidth: 20,
-				  trackWidth: 16,
-				  lineCap: 'butt',
-				  onStep: function(from, to, percent) {
+				easing: 'easeOutElastic',
+				delay: 3000,
+				barColor: '#26B99A',
+				trackColor: '#fff',
+				scaleColor: false,
+				lineWidth: 20,
+				trackWidth: 16,
+				lineCap: 'butt',
+				onStep: function(from, to, percent) {
 					$(this.el).find('.percent').text(Math.round(percent));
-				  }
+				}
 				});
 				var chart = window.chart = $('.chart').data('easyPieChart');
 				$('.js_update').on('click', function() {
-				  chart.update(Math.random() * 200 - 100);
+				chart.update(Math.random() * 200 - 100);
 				});
 
 				//hover and retain popover when on popover content
 				var originalLeave = $.fn.popover.Constructor.prototype.leave;
 				$.fn.popover.Constructor.prototype.leave = function(obj) {
-				  var self = obj instanceof this.constructor ?
+				var self = obj instanceof this.constructor ?
 					obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type);
-				  var container, timeout;
+				var container, timeout;
 
-				  originalLeave.call(this, obj);
+				originalLeave.call(this, obj);
 
-				  if (obj.currentTarget) {
+				if (obj.currentTarget) {
 					container = $(obj.currentTarget).siblings('.popover');
 					timeout = self.timeout;
 					container.one('mouseenter', function() {
-					  //We entered the actual popover – call off the dogs
-					  clearTimeout(timeout);
-					  //Let's monitor popover content instead
-					  container.one('mouseleave', function() {
+					//We entered the actual popover – call off the dogs
+					clearTimeout(timeout);
+					//Let's monitor popover content instead
+					container.one('mouseleave', function() {
 						$.fn.popover.Constructor.prototype.leave.call(self, self);
-					  });
 					});
-				  }
+					});
+				}
 				};
 
 				$('body').popover({
-				  selector: '[data-popover]',
-				  trigger: 'click hover',
-				  delay: {
+				selector: '[data-popover]',
+				trigger: 'click hover',
+				delay: {
 					show: 50,
 					hide: 400
-				  }
+				}
 				});
 				
 			};
-	   
+	
 		
 		function init_charts() {
 			
@@ -1958,178 +1958,10 @@ if (typeof NProgress != 'undefined') {
 			if ($('#canvas_line').length ){
 				
 				var canvas_line_00 = new Chart(document.getElementById("canvas_line"), {
-				  type: 'line',
-				  data: {
-					labels: ["January", "February", "March", "April", "May", "June", "July"],
-					datasets: [{
-					  label: "My First dataset",
-					  backgroundColor: "rgba(38, 185, 154, 0.31)",
-					  borderColor: "rgba(38, 185, 154, 0.7)",
-					  pointBorderColor: "rgba(38, 185, 154, 0.7)",
-					  pointBackgroundColor: "rgba(38, 185, 154, 0.7)",
-					  pointHoverBackgroundColor: "#fff",
-					  pointHoverBorderColor: "rgba(220,220,220,1)",
-					  pointBorderWidth: 1,
-					  data: [31, 74, 6, 39, 20, 85, 7]
-					}, {
-					  label: "My Second dataset",
-					  backgroundColor: "rgba(3, 88, 106, 0.3)",
-					  borderColor: "rgba(3, 88, 106, 0.70)",
-					  pointBorderColor: "rgba(3, 88, 106, 0.70)",
-					  pointBackgroundColor: "rgba(3, 88, 106, 0.70)",
-					  pointHoverBackgroundColor: "#fff",
-					  pointHoverBorderColor: "rgba(151,187,205,1)",
-					  pointBorderWidth: 1,
-					  data: [82, 23, 66, 9, 99, 4, 2]
-					}]
-				  },
-				});
-				
-			}
-
-			
-			if ($('#canvas_line1').length ){
-			
-				var canvas_line_01 = new Chart(document.getElementById("canvas_line1"), {
-				  type: 'line',
-				  data: {
-					labels: ["January", "February", "March", "April", "May", "June", "July"],
-					datasets: [{
-					  label: "My First dataset",
-					  backgroundColor: "rgba(38, 185, 154, 0.31)",
-					  borderColor: "rgba(38, 185, 154, 0.7)",
-					  pointBorderColor: "rgba(38, 185, 154, 0.7)",
-					  pointBackgroundColor: "rgba(38, 185, 154, 0.7)",
-					  pointHoverBackgroundColor: "#fff",
-					  pointHoverBorderColor: "rgba(220,220,220,1)",
-					  pointBorderWidth: 1,
-					  data: [31, 74, 6, 39, 20, 85, 7]
-					}, {
-					  label: "My Second dataset",
-					  backgroundColor: "rgba(3, 88, 106, 0.3)",
-					  borderColor: "rgba(3, 88, 106, 0.70)",
-					  pointBorderColor: "rgba(3, 88, 106, 0.70)",
-					  pointBackgroundColor: "rgba(3, 88, 106, 0.70)",
-					  pointHoverBackgroundColor: "#fff",
-					  pointHoverBorderColor: "rgba(151,187,205,1)",
-					  pointBorderWidth: 1,
-					  data: [82, 23, 66, 9, 99, 4, 2]
-					}]
-				  },
-				});
-			
-			}
-				
-				
-			if ($('#canvas_line2').length ){		
-			
-				var canvas_line_02 = new Chart(document.getElementById("canvas_line2"), {
-				  type: 'line',
-				  data: {
-					labels: ["January", "February", "March", "April", "May", "June", "July"],
-					datasets: [{
-					  label: "My First dataset",
-					  backgroundColor: "rgba(38, 185, 154, 0.31)",
-					  borderColor: "rgba(38, 185, 154, 0.7)",
-					  pointBorderColor: "rgba(38, 185, 154, 0.7)",
-					  pointBackgroundColor: "rgba(38, 185, 154, 0.7)",
-					  pointHoverBackgroundColor: "#fff",
-					  pointHoverBorderColor: "rgba(220,220,220,1)",
-					  pointBorderWidth: 1,
-					  data: [31, 74, 6, 39, 20, 85, 7]
-					}, {
-					  label: "My Second dataset",
-					  backgroundColor: "rgba(3, 88, 106, 0.3)",
-					  borderColor: "rgba(3, 88, 106, 0.70)",
-					  pointBorderColor: "rgba(3, 88, 106, 0.70)",
-					  pointBackgroundColor: "rgba(3, 88, 106, 0.70)",
-					  pointHoverBackgroundColor: "#fff",
-					  pointHoverBorderColor: "rgba(151,187,205,1)",
-					  pointBorderWidth: 1,
-					  data: [82, 23, 66, 9, 99, 4, 2]
-					}]
-				  },
-				});
-
-			}	
-			
-			
-			if ($('#canvas_line3').length ){
-			
-				var canvas_line_03 = new Chart(document.getElementById("canvas_line3"), {
-				  type: 'line',
-				  data: {
-					labels: ["January", "February", "March", "April", "May", "June", "July"],
-					datasets: [{
-					  label: "My First dataset",
-					  backgroundColor: "rgba(38, 185, 154, 0.31)",
-					  borderColor: "rgba(38, 185, 154, 0.7)",
-					  pointBorderColor: "rgba(38, 185, 154, 0.7)",
-					  pointBackgroundColor: "rgba(38, 185, 154, 0.7)",
-					  pointHoverBackgroundColor: "#fff",
-					  pointHoverBorderColor: "rgba(220,220,220,1)",
-					  pointBorderWidth: 1,
-					  data: [31, 74, 6, 39, 20, 85, 7]
-					}, {
-					  label: "My Second dataset",
-					  backgroundColor: "rgba(3, 88, 106, 0.3)",
-					  borderColor: "rgba(3, 88, 106, 0.70)",
-					  pointBorderColor: "rgba(3, 88, 106, 0.70)",
-					  pointBackgroundColor: "rgba(3, 88, 106, 0.70)",
-					  pointHoverBackgroundColor: "#fff",
-					  pointHoverBorderColor: "rgba(151,187,205,1)",
-					  pointBorderWidth: 1,
-					  data: [82, 23, 66, 9, 99, 4, 2]
-					}]
-				  },
-				});
-
-			}	
-			
-			
-			if ($('#canvas_line4').length ){
-				
-				var canvas_line_04 = new Chart(document.getElementById("canvas_line4"), {
-				  type: 'line',
-				  data: {
-					labels: ["January", "February", "March", "April", "May", "June", "July"],
-					datasets: [{
-					  label: "My First dataset",
-					  backgroundColor: "rgba(38, 185, 154, 0.31)",
-					  borderColor: "rgba(38, 185, 154, 0.7)",
-					  pointBorderColor: "rgba(38, 185, 154, 0.7)",
-					  pointBackgroundColor: "rgba(38, 185, 154, 0.7)",
-					  pointHoverBackgroundColor: "#fff",
-					  pointHoverBorderColor: "rgba(220,220,220,1)",
-					  pointBorderWidth: 1,
-					  data: [31, 74, 6, 39, 20, 85, 7]
-					}, {
-					  label: "My Second dataset",
-					  backgroundColor: "rgba(3, 88, 106, 0.3)",
-					  borderColor: "rgba(3, 88, 106, 0.70)",
-					  pointBorderColor: "rgba(3, 88, 106, 0.70)",
-					  pointBackgroundColor: "rgba(3, 88, 106, 0.70)",
-					  pointHoverBackgroundColor: "#fff",
-					  pointHoverBorderColor: "rgba(151,187,205,1)",
-					  pointBorderWidth: 1,
-					  data: [82, 23, 66, 9, 99, 4, 2]
-					}]
-				  },
-				});		
-				
-			}
-			
-				
-			  // Line chart
-			 
-			if ($('#lineChart').length ){	
-			
-			  var ctx = document.getElementById("lineChart");
-			  var lineChart = new Chart(ctx, {
 				type: 'line',
 				data: {
-				  labels: ["January", "February", "March", "April", "May", "June", "July"],
-				  datasets: [{
+					labels: ["January", "February", "March", "April", "May", "June", "July"],
+					datasets: [{
 					label: "My First dataset",
 					backgroundColor: "rgba(38, 185, 154, 0.31)",
 					borderColor: "rgba(38, 185, 154, 0.7)",
@@ -2139,7 +1971,7 @@ if (typeof NProgress != 'undefined') {
 					pointHoverBorderColor: "rgba(220,220,220,1)",
 					pointBorderWidth: 1,
 					data: [31, 74, 6, 39, 20, 85, 7]
-				  }, {
+					}, {
 					label: "My Second dataset",
 					backgroundColor: "rgba(3, 88, 106, 0.3)",
 					borderColor: "rgba(3, 88, 106, 0.70)",
@@ -2149,182 +1981,350 @@ if (typeof NProgress != 'undefined') {
 					pointHoverBorderColor: "rgba(151,187,205,1)",
 					pointBorderWidth: 1,
 					data: [82, 23, 66, 9, 99, 4, 2]
-				  }]
+					}]
 				},
-			  });
+				});
+				
+			}
+
+			
+			if ($('#canvas_line1').length ){
+			
+				var canvas_line_01 = new Chart(document.getElementById("canvas_line1"), {
+				type: 'line',
+				data: {
+					labels: ["January", "February", "March", "April", "May", "June", "July"],
+					datasets: [{
+					label: "My First dataset",
+					backgroundColor: "rgba(38, 185, 154, 0.31)",
+					borderColor: "rgba(38, 185, 154, 0.7)",
+					pointBorderColor: "rgba(38, 185, 154, 0.7)",
+					pointBackgroundColor: "rgba(38, 185, 154, 0.7)",
+					pointHoverBackgroundColor: "#fff",
+					pointHoverBorderColor: "rgba(220,220,220,1)",
+					pointBorderWidth: 1,
+					data: [31, 74, 6, 39, 20, 85, 7]
+					}, {
+					label: "My Second dataset",
+					backgroundColor: "rgba(3, 88, 106, 0.3)",
+					borderColor: "rgba(3, 88, 106, 0.70)",
+					pointBorderColor: "rgba(3, 88, 106, 0.70)",
+					pointBackgroundColor: "rgba(3, 88, 106, 0.70)",
+					pointHoverBackgroundColor: "#fff",
+					pointHoverBorderColor: "rgba(151,187,205,1)",
+					pointBorderWidth: 1,
+					data: [82, 23, 66, 9, 99, 4, 2]
+					}]
+				},
+				});
 			
 			}
 				
-			  // Bar chart
-			  
+				
+			if ($('#canvas_line2').length ){		
+			
+				var canvas_line_02 = new Chart(document.getElementById("canvas_line2"), {
+				type: 'line',
+				data: {
+					labels: ["January", "February", "March", "April", "May", "June", "July"],
+					datasets: [{
+					label: "My First dataset",
+					backgroundColor: "rgba(38, 185, 154, 0.31)",
+					borderColor: "rgba(38, 185, 154, 0.7)",
+					pointBorderColor: "rgba(38, 185, 154, 0.7)",
+					pointBackgroundColor: "rgba(38, 185, 154, 0.7)",
+					pointHoverBackgroundColor: "#fff",
+					pointHoverBorderColor: "rgba(220,220,220,1)",
+					pointBorderWidth: 1,
+					data: [31, 74, 6, 39, 20, 85, 7]
+					}, {
+					label: "My Second dataset",
+					backgroundColor: "rgba(3, 88, 106, 0.3)",
+					borderColor: "rgba(3, 88, 106, 0.70)",
+					pointBorderColor: "rgba(3, 88, 106, 0.70)",
+					pointBackgroundColor: "rgba(3, 88, 106, 0.70)",
+					pointHoverBackgroundColor: "#fff",
+					pointHoverBorderColor: "rgba(151,187,205,1)",
+					pointBorderWidth: 1,
+					data: [82, 23, 66, 9, 99, 4, 2]
+					}]
+				},
+				});
+
+			}	
+			
+			
+			if ($('#canvas_line3').length ){
+			
+				var canvas_line_03 = new Chart(document.getElementById("canvas_line3"), {
+				type: 'line',
+				data: {
+					labels: ["January", "February", "March", "April", "May", "June", "July"],
+					datasets: [{
+					label: "My First dataset",
+					backgroundColor: "rgba(38, 185, 154, 0.31)",
+					borderColor: "rgba(38, 185, 154, 0.7)",
+					pointBorderColor: "rgba(38, 185, 154, 0.7)",
+					pointBackgroundColor: "rgba(38, 185, 154, 0.7)",
+					pointHoverBackgroundColor: "#fff",
+					pointHoverBorderColor: "rgba(220,220,220,1)",
+					pointBorderWidth: 1,
+					data: [31, 74, 6, 39, 20, 85, 7]
+					}, {
+					label: "My Second dataset",
+					backgroundColor: "rgba(3, 88, 106, 0.3)",
+					borderColor: "rgba(3, 88, 106, 0.70)",
+					pointBorderColor: "rgba(3, 88, 106, 0.70)",
+					pointBackgroundColor: "rgba(3, 88, 106, 0.70)",
+					pointHoverBackgroundColor: "#fff",
+					pointHoverBorderColor: "rgba(151,187,205,1)",
+					pointBorderWidth: 1,
+					data: [82, 23, 66, 9, 99, 4, 2]
+					}]
+				},
+				});
+
+			}	
+			
+			
+			if ($('#canvas_line4').length ){
+				
+				var canvas_line_04 = new Chart(document.getElementById("canvas_line4"), {
+				type: 'line',
+				data: {
+					labels: ["January", "February", "March", "April", "May", "June", "July"],
+					datasets: [{
+					label: "My First dataset",
+					backgroundColor: "rgba(38, 185, 154, 0.31)",
+					borderColor: "rgba(38, 185, 154, 0.7)",
+					pointBorderColor: "rgba(38, 185, 154, 0.7)",
+					pointBackgroundColor: "rgba(38, 185, 154, 0.7)",
+					pointHoverBackgroundColor: "#fff",
+					pointHoverBorderColor: "rgba(220,220,220,1)",
+					pointBorderWidth: 1,
+					data: [31, 74, 6, 39, 20, 85, 7]
+					}, {
+					label: "My Second dataset",
+					backgroundColor: "rgba(3, 88, 106, 0.3)",
+					borderColor: "rgba(3, 88, 106, 0.70)",
+					pointBorderColor: "rgba(3, 88, 106, 0.70)",
+					pointBackgroundColor: "rgba(3, 88, 106, 0.70)",
+					pointHoverBackgroundColor: "#fff",
+					pointHoverBorderColor: "rgba(151,187,205,1)",
+					pointBorderWidth: 1,
+					data: [82, 23, 66, 9, 99, 4, 2]
+					}]
+				},
+				});		
+				
+			}
+			
+				
+			// Line chart
+			
+			if ($('#lineChart').length ){	
+			
+			var ctx = document.getElementById("lineChart");
+			var lineChart = new Chart(ctx, {
+				type: 'line',
+				data: {
+				labels: ["January", "February", "March", "April", "May", "June", "July"],
+				datasets: [{
+					label: "My First dataset",
+					backgroundColor: "rgba(38, 185, 154, 0.31)",
+					borderColor: "rgba(38, 185, 154, 0.7)",
+					pointBorderColor: "rgba(38, 185, 154, 0.7)",
+					pointBackgroundColor: "rgba(38, 185, 154, 0.7)",
+					pointHoverBackgroundColor: "#fff",
+					pointHoverBorderColor: "rgba(220,220,220,1)",
+					pointBorderWidth: 1,
+					data: [31, 74, 6, 39, 20, 85, 7]
+				}, {
+					label: "My Second dataset",
+					backgroundColor: "rgba(3, 88, 106, 0.3)",
+					borderColor: "rgba(3, 88, 106, 0.70)",
+					pointBorderColor: "rgba(3, 88, 106, 0.70)",
+					pointBackgroundColor: "rgba(3, 88, 106, 0.70)",
+					pointHoverBackgroundColor: "#fff",
+					pointHoverBorderColor: "rgba(151,187,205,1)",
+					pointBorderWidth: 1,
+					data: [82, 23, 66, 9, 99, 4, 2]
+				}]
+				},
+			});
+			
+			}
+				
+			// Bar chart
+			
 			if ($('#mybarChart').length ){ 
-			  
-			  var ctx = document.getElementById("mybarChart");
-			  var mybarChart = new Chart(ctx, {
+			
+			var ctx = document.getElementById("mybarChart");
+			var mybarChart = new Chart(ctx, {
 				type: 'bar',
 				data: {
-				  labels: ["January", "February", "March", "April", "May", "June", "July"],
-				  datasets: [{
+				labels: ["January", "February", "March", "April", "May", "June", "July"],
+				datasets: [{
 					label: '# of Votes',
 					backgroundColor: "#26B99A",
 					data: [51, 30, 40, 28, 92, 50, 45]
-				  }, {
+				}, {
 					label: '# of Votes',
 					backgroundColor: "#03586A",
 					data: [41, 56, 25, 48, 72, 34, 12]
-				  }]
+				}]
 				},
 
 				options: {
-				  scales: {
+				scales: {
 					yAxes: [{
-					  ticks: {
+					ticks: {
 						beginAtZero: true
-					  }
+					}
 					}]
-				  }
 				}
-			  });
-			  
+				}
+			});
+			
 			} 
-			  
+			
 
-			  // Doughnut chart
-			  
+			// Doughnut chart
+			
 			if ($('#canvasDoughnut').length ){ 
-			  
-			  var ctx = document.getElementById("canvasDoughnut");
-			  var data = {
+			
+			var ctx = document.getElementById("canvasDoughnut");
+			var data = {
 				labels: [
-				  "Dark Grey",
-				  "Purple Color",
-				  "Gray Color",
-				  "Green Color",
-				  "Blue Color"
+				"Dark Grey",
+				"Purple Color",
+				"Gray Color",
+				"Green Color",
+				"Blue Color"
 				],
 				datasets: [{
-				  data: [120, 50, 140, 180, 100],
-				  backgroundColor: [
+				data: [120, 50, 140, 180, 100],
+				backgroundColor: [
 					"#455C73",
 					"#9B59B6",
 					"#BDC3C7",
 					"#26B99A",
 					"#3498DB"
-				  ],
-				  hoverBackgroundColor: [
+				],
+				hoverBackgroundColor: [
 					"#34495E",
 					"#B370CF",
 					"#CFD4D8",
 					"#36CAAB",
 					"#49A9EA"
-				  ]
+				]
 
 				}]
-			  };
+			};
 
-			  var canvasDoughnut = new Chart(ctx, {
+			var canvasDoughnut = new Chart(ctx, {
 				type: 'doughnut',
 				tooltipFillColor: "rgba(51, 51, 51, 0.55)",
 				data: data
-			  });
-			 
+			});
+			
 			} 
 
-			  // Radar chart
-			  
+			// Radar chart
+			
 			if ($('#canvasRadar').length ){ 
-			  
-			  var ctx = document.getElementById("canvasRadar");
-			  var data = {
+			
+			var ctx = document.getElementById("canvasRadar");
+			var data = {
 				labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
 				datasets: [{
-				  label: "My First dataset",
-				  backgroundColor: "rgba(3, 88, 106, 0.2)",
-				  borderColor: "rgba(3, 88, 106, 0.80)",
-				  pointBorderColor: "rgba(3, 88, 106, 0.80)",
-				  pointBackgroundColor: "rgba(3, 88, 106, 0.80)",
-				  pointHoverBackgroundColor: "#fff",
-				  pointHoverBorderColor: "rgba(220,220,220,1)",
-				  data: [65, 59, 90, 81, 56, 55, 40]
+				label: "My First dataset",
+				backgroundColor: "rgba(3, 88, 106, 0.2)",
+				borderColor: "rgba(3, 88, 106, 0.80)",
+				pointBorderColor: "rgba(3, 88, 106, 0.80)",
+				pointBackgroundColor: "rgba(3, 88, 106, 0.80)",
+				pointHoverBackgroundColor: "#fff",
+				pointHoverBorderColor: "rgba(220,220,220,1)",
+				data: [65, 59, 90, 81, 56, 55, 40]
 				}, {
-				  label: "My Second dataset",
-				  backgroundColor: "rgba(38, 185, 154, 0.2)",
-				  borderColor: "rgba(38, 185, 154, 0.85)",
-				  pointColor: "rgba(38, 185, 154, 0.85)",
-				  pointStrokeColor: "#fff",
-				  pointHighlightFill: "#fff",
-				  pointHighlightStroke: "rgba(151,187,205,1)",
-				  data: [28, 48, 40, 19, 96, 27, 100]
+				label: "My Second dataset",
+				backgroundColor: "rgba(38, 185, 154, 0.2)",
+				borderColor: "rgba(38, 185, 154, 0.85)",
+				pointColor: "rgba(38, 185, 154, 0.85)",
+				pointStrokeColor: "#fff",
+				pointHighlightFill: "#fff",
+				pointHighlightStroke: "rgba(151,187,205,1)",
+				data: [28, 48, 40, 19, 96, 27, 100]
 				}]
-			  };
+			};
 
-			  var canvasRadar = new Chart(ctx, {
+			var canvasRadar = new Chart(ctx, {
 				type: 'radar',
 				data: data,
-			  });
+			});
 			
 			}
 			
 			
-			  // Pie chart
-			  if ($('#pieChart').length ){
-				  
-				  var ctx = document.getElementById("pieChart");
-				  var data = {
+			// Pie chart
+			if ($('#pieChart').length ){
+				
+				var ctx = document.getElementById("pieChart");
+				var data = {
 					datasets: [{
-					  data: [120, 50, 140, 180, 100],
-					  backgroundColor: [
+					data: [120, 50, 140, 180, 100],
+					backgroundColor: [
 						"#455C73",
 						"#9B59B6",
 						"#BDC3C7",
 						"#26B99A",
 						"#3498DB"
-					  ],
-					  label: 'My dataset' // for legend
+					],
+					label: 'My dataset' // for legend
 					}],
 					labels: [
-					  "Dark Gray",
-					  "Purple",
-					  "Gray",
-					  "Green",
-					  "Blue"
+					"Dark Gray",
+					"Purple",
+					"Gray",
+					"Green",
+					"Blue"
 					]
-				  };
+				};
 
-				  var pieChart = new Chart(ctx, {
+				var pieChart = new Chart(ctx, {
 					data: data,
 					type: 'pie',
 					otpions: {
-					  legend: false
+					legend: false
 					}
-				  });
-				  
-			  }
+				});
+				
+			}
 			
-			  
-			  // PolarArea chart
+			
+			// PolarArea chart
 
 			if ($('#polarArea').length ){
 
 				var ctx = document.getElementById("polarArea");
 				var data = {
 				datasets: [{
-				  data: [120, 50, 140, 180, 100],
-				  backgroundColor: [
+				data: [120, 50, 140, 180, 100],
+				backgroundColor: [
 					"#455C73",
 					"#9B59B6",
 					"#BDC3C7",
 					"#26B99A",
 					"#3498DB"
-				  ],
-				  label: 'My dataset'
+				],
+				label: 'My dataset'
 				}],
 				labels: [
-				  "Dark Gray",
-				  "Purple",
-				  "Gray",
-				  "Green",
-				  "Blue"
+				"Dark Gray",
+				"Purple",
+				"Gray",
+				"Green",
+				"Blue"
 				]
 				};
 
@@ -2332,11 +2332,11 @@ if (typeof NProgress != 'undefined') {
 				data: data,
 				type: 'polarArea',
 				options: {
-				  scale: {
+				scale: {
 					ticks: {
-					  beginAtZero: true
+					beginAtZero: true
 					}
-				  }
+				}
 				}
 				});
 			
@@ -2355,10 +2355,10 @@ if (typeof NProgress != 'undefined') {
 			});
 		
 		};
-	   
-	   	/* CALENDAR */
-		  
-		    function  init_calendar() {
+	
+		/* CALENDAR */
+		
+		function  init_calendar() {
 					
 				if( typeof ($.fn.fullCalendar) === 'undefined'){ return; }
 				console.log('init_calendar');
@@ -2371,94 +2371,94 @@ if (typeof NProgress != 'undefined') {
 					categoryClass;
 
 				var calendar = $('#calendar').fullCalendar({
-				  header: {
+				header: {
 					left: 'prev,next today',
 					center: 'title',
 					right: 'month,agendaWeek,agendaDay,listMonth'
-				  },
-				  selectable: true,
-				  selectHelper: true,
-				  select: function(start, end, allDay) {
+				},
+				selectable: true,
+				selectHelper: true,
+				select: function(start, end, allDay) {
 					$('#fc_create').click();
 
 					started = start;
 					ended = end;
 
 					$(".antosubmit").on("click", function() {
-					  var title = $("#title").val();
-					  if (end) {
+					var title = $("#title").val();
+					if (end) {
 						ended = end;
-					  }
+					}
 
-					  categoryClass = $("#event_type").val();
+					categoryClass = $("#event_type").val();
 
-					  if (title) {
+					if (title) {
 						calendar.fullCalendar('renderEvent', {
 							title: title,
 							start: started,
 							end: end,
 							allDay: allDay
-						  },
-						  true // make the event "stick"
+						},
+						true // make the event "stick"
 						);
-					  }
+					}
 
-					  $('#title').val('');
+					$('#title').val('');
 
-					  calendar.fullCalendar('unselect');
+					calendar.fullCalendar('unselect');
 
-					  $('.antoclose').click();
+					$('.antoclose').click();
 
-					  return false;
+					return false;
 					});
-				  },
-				  eventClick: function(calEvent, jsEvent, view) {
+				},
+				eventClick: function(calEvent, jsEvent, view) {
 					$('#fc_edit').click();
 					$('#title2').val(calEvent.title);
 
 					categoryClass = $("#event_type").val();
 
 					$(".antosubmit2").on("click", function() {
-					  calEvent.title = $("#title2").val();
+					calEvent.title = $("#title2").val();
 
-					  calendar.fullCalendar('updateEvent', calEvent);
-					  $('.antoclose2').click();
+					calendar.fullCalendar('updateEvent', calEvent);
+					$('.antoclose2').click();
 					});
 
 					calendar.fullCalendar('unselect');
-				  },
-				  editable: true,
-				  events: [{
+				},
+				editable: true,
+				events: [{
 					title: 'All Day Event',
 					start: new Date(y, m, 1)
-				  }, {
+				}, {
 					title: 'Long Event',
 					start: new Date(y, m, d - 5),
 					end: new Date(y, m, d - 2)
-				  }, {
+				}, {
 					title: 'Meeting',
 					start: new Date(y, m, d, 10, 30),
 					allDay: false
-				  }, {
+				}, {
 					title: 'Lunch',
 					start: new Date(y, m, d + 14, 12, 0),
 					end: new Date(y, m, d, 14, 0),
 					allDay: false
-				  }, {
+				}, {
 					title: 'Birthday Party',
 					start: new Date(y, m, d + 1, 19, 0),
 					end: new Date(y, m, d + 1, 22, 30),
 					allDay: false
-				  }, {
+				}, {
 					title: 'Click for Google',
 					start: new Date(y, m, 28),
 					end: new Date(y, m, 29),
 					url: 'http://google.com/'
-				  }]
+				}]
 				});
 				
 			};
-	   
+	
 		/* DATA TABLES */
 			
 			function init_DataTables() {
@@ -2469,83 +2469,83 @@ if (typeof NProgress != 'undefined') {
 				console.log('init_DataTables');
 				
 				var handleDataTableButtons = function() {
-				  if ($("#datatable-buttons").length) {
+				if ($("#datatable-buttons").length) {
 					$("#datatable-buttons").DataTable({
-					  dom: "Bfrtip",
-					  buttons: [
+					dom: "Bfrtip",
+					buttons: [
 						{
-						  extend: "copy",
-						  className: "btn-sm"
+						extend: "copy",
+						className: "btn-sm"
 						},
 						{
-						  extend: "csv",
-						  className: "btn-sm"
+						extend: "csv",
+						className: "btn-sm"
 						},
 						{
-						  extend: "excel",
-						  className: "btn-sm"
+						extend: "excel",
+						className: "btn-sm"
 						},
 						{
-						  extend: "pdfHtml5",
-						  className: "btn-sm"
+						extend: "pdfHtml5",
+						className: "btn-sm"
 						},
 						{
-						  extend: "print",
-						  className: "btn-sm"
+						extend: "print",
+						className: "btn-sm"
 						},
-					  ],
-					  responsive: true
+					],
+					responsive: true
 					});
-				  }
+				}
 				};
 
 				TableManageButtons = function() {
-				  "use strict";
-				  return {
+				"use strict";
+				return {
 					init: function() {
-					  handleDataTableButtons();
+					handleDataTableButtons();
 					}
-				  };
+				};
 				}();
 
 				$('#datatable').dataTable();
 
 				$('#datatable-keytable').DataTable({
-				  keys: true
+				keys: true
 				});
 
 				$('#datatable-responsive').DataTable();
 
 				$('#datatable-scroller').DataTable({
-				  ajax: "js/datatables/json/scroller-demo.json",
-				  deferRender: true,
-				  scrollY: 380,
-				  scrollCollapse: true,
-				  scroller: true
+				ajax: "js/datatables/json/scroller-demo.json",
+				deferRender: true,
+				scrollY: 380,
+				scrollCollapse: true,
+				scroller: true
 				});
 
 				$('#datatable-fixed-header').DataTable({
-				  fixedHeader: true
+				fixedHeader: true
 				});
 
 				var $datatable = $('#datatable-checkbox');
 
 				$datatable.dataTable({
-				  'order': [[ 1, 'asc' ]],
-				  'columnDefs': [
+				'order': [[ 1, 'asc' ]],
+				'columnDefs': [
 					{ orderable: false, targets: [0] }
-				  ]
+				]
 				});
 				$datatable.on('draw.dt', function() {
-				  $('checkbox input').iCheck({
+				$('checkbox input').iCheck({
 					checkboxClass: 'icheckbox_flat-green'
-				  });
+				});
 				});
 
 				TableManageButtons.init();
 				
 			};
-	   
+	
 			/* CHART - MORRIS  */
 		
 		function init_morris_charts() {
@@ -2556,8 +2556,8 @@ if (typeof NProgress != 'undefined') {
 			if ($('#graph_bar').length){ 
 			
 				Morris.Bar({
-				  element: 'graph_bar',
-				  data: [
+				element: 'graph_bar',
+				data: [
 					{device: 'iPhone 4', geekbench: 380},
 					{device: 'iPhone 4S', geekbench: 655},
 					{device: 'iPhone 3GS', geekbench: 275},
@@ -2568,15 +2568,15 @@ if (typeof NProgress != 'undefined') {
 					{device: 'iPhone 6S', geekbench: 2371},
 					{device: 'iPhone 6S Plus', geekbench: 1471},
 					{device: 'Other', geekbench: 1371}
-				  ],
-				  xkey: 'device',
-				  ykeys: ['geekbench'],
-				  labels: ['Geekbench'],
-				  barRatio: 0.4,
-				  barColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
-				  xLabelAngle: 35,
-				  hideHover: 'auto',
-				  resize: true
+				],
+				xkey: 'device',
+				ykeys: ['geekbench'],
+				labels: ['Geekbench'],
+				barRatio: 0.4,
+				barColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
+				xLabelAngle: 35,
+				hideHover: 'auto',
+				resize: true
 				});
 
 			}	
@@ -2584,8 +2584,8 @@ if (typeof NProgress != 'undefined') {
 			if ($('#graph_bar_group').length ){
 			
 				Morris.Bar({
-				  element: 'graph_bar_group',
-				  data: [
+				element: 'graph_bar_group',
+				data: [
 					{"period": "2016-10-01", "licensed": 807, "sorned": 660},
 					{"period": "2016-09-30", "licensed": 1251, "sorned": 729},
 					{"period": "2016-09-29", "licensed": 1769, "sorned": 1018},
@@ -2596,14 +2596,14 @@ if (typeof NProgress != 'undefined') {
 					{"period": "2016-09-16", "licensed": 2871, "sorned": 2216},
 					{"period": "2016-09-15", "licensed": 2401, "sorned": 1656},
 					{"period": "2016-09-10", "licensed": 2115, "sorned": 1022}
-				  ],
-				  xkey: 'period',
-				  barColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
-				  ykeys: ['licensed', 'sorned'],
-				  labels: ['Licensed', 'SORN'],
-				  hideHover: 'auto',
-				  xLabelAngle: 60,
-				  resize: true
+				],
+				xkey: 'period',
+				barColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
+				ykeys: ['licensed', 'sorned'],
+				labels: ['Licensed', 'SORN'],
+				hideHover: 'auto',
+				xLabelAngle: 60,
+				resize: true
 				});
 
 			}
@@ -2611,19 +2611,19 @@ if (typeof NProgress != 'undefined') {
 			if ($('#graphx').length ){
 			
 				Morris.Bar({
-				  element: 'graphx',
-				  data: [
+				element: 'graphx',
+				data: [
 					{x: '2015 Q1', y: 2, z: 3, a: 4},
 					{x: '2015 Q2', y: 3, z: 5, a: 6},
 					{x: '2015 Q3', y: 4, z: 3, a: 2},
 					{x: '2015 Q4', y: 2, z: 4, a: 5}
-				  ],
-				  xkey: 'x',
-				  ykeys: ['y', 'z', 'a'],
-				  barColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
-				  hideHover: 'auto',
-				  labels: ['Y', 'Z', 'A'],
-				  resize: true
+				],
+				xkey: 'x',
+				ykeys: ['y', 'z', 'a'],
+				barColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
+				hideHover: 'auto',
+				labels: ['Y', 'Z', 'A'],
+				resize: true
 				}).on('click', function (i, row) {
 					console.log(i, row);
 				});
@@ -2633,8 +2633,8 @@ if (typeof NProgress != 'undefined') {
 			if ($('#graph_area').length ){
 			
 				Morris.Area({
-				  element: 'graph_area',
-				  data: [
+				element: 'graph_area',
+				data: [
 					{period: '2014 Q1', iphone: 2666, ipad: null, itouch: 2647},
 					{period: '2014 Q2', iphone: 2778, ipad: 2294, itouch: 2441},
 					{period: '2014 Q3', iphone: 4912, ipad: 1969, itouch: 2501},
@@ -2645,14 +2645,14 @@ if (typeof NProgress != 'undefined') {
 					{period: '2015 Q4', iphone: 15073, ipad: 5967, itouch: 5175},
 					{period: '2016 Q1', iphone: 10687, ipad: 4460, itouch: 2028},
 					{period: '2016 Q2', iphone: 8432, ipad: 5713, itouch: 1791}
-				  ],
-				  xkey: 'period',
-				  ykeys: ['iphone', 'ipad', 'itouch'],
-				  lineColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
-				  labels: ['iPhone', 'iPad', 'iPod Touch'],
-				  pointSize: 2,
-				  hideHover: 'auto',
-				  resize: true
+				],
+				xkey: 'period',
+				ykeys: ['iphone', 'ipad', 'itouch'],
+				lineColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
+				labels: ['iPhone', 'iPad', 'iPod Touch'],
+				pointSize: 2,
+				hideHover: 'auto',
+				resize: true
 				});
 
 			}
@@ -2660,18 +2660,18 @@ if (typeof NProgress != 'undefined') {
 			if ($('#graph_donut').length ){
 			
 				Morris.Donut({
-				  element: 'graph_donut',
-				  data: [
+				element: 'graph_donut',
+				data: [
 					{label: 'Jam', value: 25},
 					{label: 'Frosted', value: 40},
 					{label: 'Custard', value: 25},
 					{label: 'Sugar', value: 10}
-				  ],
-				  colors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
-				  formatter: function (y) {
+				],
+				colors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
+				formatter: function (y) {
 					return y + "%";
-				  },
-				  resize: true
+				},
+				resize: true
 				});
 
 			}
@@ -2679,30 +2679,30 @@ if (typeof NProgress != 'undefined') {
 			if ($('#graph_line').length ){
 			
 				Morris.Line({
-				  element: 'graph_line',
-				  xkey: 'year',
-				  ykeys: ['value'],
-				  labels: ['Value'],
-				  hideHover: 'auto',
-				  lineColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
-				  data: [
+				element: 'graph_line',
+				xkey: 'year',
+				ykeys: ['value'],
+				labels: ['Value'],
+				hideHover: 'auto',
+				lineColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
+				data: [
 					{year: '2012', value: 20},
 					{year: '2013', value: 10},
 					{year: '2014', value: 5},
 					{year: '2015', value: 5},
 					{year: '2016', value: 20}
-				  ],
-				  resize: true
+				],
+				resize: true
 				});
 
 				$MENU_TOGGLE.on('click', function() {
-				  $(window).resize();
+				$(window).resize();
 				});
 			
 			}
 			
 		};
-	   
+	
 		
 		
 		/* ECHRTS */
@@ -2714,525 +2714,525 @@ if (typeof NProgress != 'undefined') {
 				console.log('init_echarts');
 			
 		
-				  var theme = {
-				  color: [
-					  '#26B99A', '#34495E', '#BDC3C7', '#3498DB',
-					  '#9B59B6', '#8abb6f', '#759c6a', '#bfd3b7'
-				  ],
+				var theme = {
+				color: [
+					'#26B99A', '#34495E', '#BDC3C7', '#3498DB',
+					'#9B59B6', '#8abb6f', '#759c6a', '#bfd3b7'
+				],
 
-				  title: {
-					  itemGap: 8,
-					  textStyle: {
-						  fontWeight: 'normal',
-						  color: '#408829'
-					  }
-				  },
+				title: {
+					itemGap: 8,
+					textStyle: {
+						fontWeight: 'normal',
+						color: '#408829'
+					}
+				},
 
-				  dataRange: {
-					  color: ['#1f610a', '#97b58d']
-				  },
+				dataRange: {
+					color: ['#1f610a', '#97b58d']
+				},
 
-				  toolbox: {
-					  color: ['#408829', '#408829', '#408829', '#408829']
-				  },
+				toolbox: {
+					color: ['#408829', '#408829', '#408829', '#408829']
+				},
 
-				  tooltip: {
-					  backgroundColor: 'rgba(0,0,0,0.5)',
-					  axisPointer: {
-						  type: 'line',
-						  lineStyle: {
-							  color: '#408829',
-							  type: 'dashed'
-						  },
-						  crossStyle: {
-							  color: '#408829'
-						  },
-						  shadowStyle: {
-							  color: 'rgba(200,200,200,0.3)'
-						  }
-					  }
-				  },
+				tooltip: {
+					backgroundColor: 'rgba(0,0,0,0.5)',
+					axisPointer: {
+						type: 'line',
+						lineStyle: {
+							color: '#408829',
+							type: 'dashed'
+						},
+						crossStyle: {
+							color: '#408829'
+						},
+						shadowStyle: {
+							color: 'rgba(200,200,200,0.3)'
+						}
+					}
+				},
 
-				  dataZoom: {
-					  dataBackgroundColor: '#eee',
-					  fillerColor: 'rgba(64,136,41,0.2)',
-					  handleColor: '#408829'
-				  },
-				  grid: {
-					  borderWidth: 0
-				  },
+				dataZoom: {
+					dataBackgroundColor: '#eee',
+					fillerColor: 'rgba(64,136,41,0.2)',
+					handleColor: '#408829'
+				},
+				grid: {
+					borderWidth: 0
+				},
 
-				  categoryAxis: {
-					  axisLine: {
-						  lineStyle: {
-							  color: '#408829'
-						  }
-					  },
-					  splitLine: {
-						  lineStyle: {
-							  color: ['#eee']
-						  }
-					  }
-				  },
+				categoryAxis: {
+					axisLine: {
+						lineStyle: {
+							color: '#408829'
+						}
+					},
+					splitLine: {
+						lineStyle: {
+							color: ['#eee']
+						}
+					}
+				},
 
-				  valueAxis: {
-					  axisLine: {
-						  lineStyle: {
-							  color: '#408829'
-						  }
-					  },
-					  splitArea: {
-						  show: true,
-						  areaStyle: {
-							  color: ['rgba(250,250,250,0.1)', 'rgba(200,200,200,0.1)']
-						  }
-					  },
-					  splitLine: {
-						  lineStyle: {
-							  color: ['#eee']
-						  }
-					  }
-				  },
-				  timeline: {
-					  lineStyle: {
-						  color: '#408829'
-					  },
-					  controlStyle: {
-						  normal: {color: '#408829'},
-						  emphasis: {color: '#408829'}
-					  }
-				  },
+				valueAxis: {
+					axisLine: {
+						lineStyle: {
+							color: '#408829'
+						}
+					},
+					splitArea: {
+						show: true,
+						areaStyle: {
+							color: ['rgba(250,250,250,0.1)', 'rgba(200,200,200,0.1)']
+						}
+					},
+					splitLine: {
+						lineStyle: {
+							color: ['#eee']
+						}
+					}
+				},
+				timeline: {
+					lineStyle: {
+						color: '#408829'
+					},
+					controlStyle: {
+						normal: {color: '#408829'},
+						emphasis: {color: '#408829'}
+					}
+				},
 
-				  k: {
-					  itemStyle: {
-						  normal: {
-							  color: '#68a54a',
-							  color0: '#a9cba2',
-							  lineStyle: {
-								  width: 1,
-								  color: '#408829',
-								  color0: '#86b379'
-							  }
-						  }
-					  }
-				  },
-				  map: {
-					  itemStyle: {
-						  normal: {
-							  areaStyle: {
-								  color: '#ddd'
-							  },
-							  label: {
-								  textStyle: {
-									  color: '#c12e34'
-								  }
-							  }
-						  },
-						  emphasis: {
-							  areaStyle: {
-								  color: '#99d2dd'
-							  },
-							  label: {
-								  textStyle: {
-									  color: '#c12e34'
-								  }
-							  }
-						  }
-					  }
-				  },
-				  force: {
-					  itemStyle: {
-						  normal: {
-							  linkStyle: {
-								  strokeColor: '#408829'
-							  }
-						  }
-					  }
-				  },
-				  chord: {
-					  padding: 4,
-					  itemStyle: {
-						  normal: {
-							  lineStyle: {
-								  width: 1,
-								  color: 'rgba(128, 128, 128, 0.5)'
-							  },
-							  chordStyle: {
-								  lineStyle: {
-									  width: 1,
-									  color: 'rgba(128, 128, 128, 0.5)'
-								  }
-							  }
-						  },
-						  emphasis: {
-							  lineStyle: {
-								  width: 1,
-								  color: 'rgba(128, 128, 128, 0.5)'
-							  },
-							  chordStyle: {
-								  lineStyle: {
-									  width: 1,
-									  color: 'rgba(128, 128, 128, 0.5)'
-								  }
-							  }
-						  }
-					  }
-				  },
-				  gauge: {
-					  startAngle: 225,
-					  endAngle: -45,
-					  axisLine: {
-						  show: true,
-						  lineStyle: {
-							  color: [[0.2, '#86b379'], [0.8, '#68a54a'], [1, '#408829']],
-							  width: 8
-						  }
-					  },
-					  axisTick: {
-						  splitNumber: 10,
-						  length: 12,
-						  lineStyle: {
-							  color: 'auto'
-						  }
-					  },
-					  axisLabel: {
-						  textStyle: {
-							  color: 'auto'
-						  }
-					  },
-					  splitLine: {
-						  length: 18,
-						  lineStyle: {
-							  color: 'auto'
-						  }
-					  },
-					  pointer: {
-						  length: '90%',
-						  color: 'auto'
-					  },
-					  title: {
-						  textStyle: {
-							  color: '#333'
-						  }
-					  },
-					  detail: {
-						  textStyle: {
-							  color: 'auto'
-						  }
-					  }
-				  },
-				  textStyle: {
-					  fontFamily: 'Arial, Verdana, sans-serif'
-				  }
-			  };
-
-			  
-			  //echart Bar
-			  
-			if ($('#mainb').length ){
-			  
-				  var echartBar = echarts.init(document.getElementById('mainb'), theme);
-
-				  echartBar.setOption({
+				k: {
+					itemStyle: {
+						normal: {
+							color: '#68a54a',
+							color0: '#a9cba2',
+							lineStyle: {
+								width: 1,
+								color: '#408829',
+								color0: '#86b379'
+							}
+						}
+					}
+				},
+				map: {
+					itemStyle: {
+						normal: {
+							areaStyle: {
+								color: '#ddd'
+							},
+							label: {
+								textStyle: {
+									color: '#c12e34'
+								}
+							}
+						},
+						emphasis: {
+							areaStyle: {
+								color: '#99d2dd'
+							},
+							label: {
+								textStyle: {
+									color: '#c12e34'
+								}
+							}
+						}
+					}
+				},
+				force: {
+					itemStyle: {
+						normal: {
+							linkStyle: {
+								strokeColor: '#408829'
+							}
+						}
+					}
+				},
+				chord: {
+					padding: 4,
+					itemStyle: {
+						normal: {
+							lineStyle: {
+								width: 1,
+								color: 'rgba(128, 128, 128, 0.5)'
+							},
+							chordStyle: {
+								lineStyle: {
+									width: 1,
+									color: 'rgba(128, 128, 128, 0.5)'
+								}
+							}
+						},
+						emphasis: {
+							lineStyle: {
+								width: 1,
+								color: 'rgba(128, 128, 128, 0.5)'
+							},
+							chordStyle: {
+								lineStyle: {
+									width: 1,
+									color: 'rgba(128, 128, 128, 0.5)'
+								}
+							}
+						}
+					}
+				},
+				gauge: {
+					startAngle: 225,
+					endAngle: -45,
+					axisLine: {
+						show: true,
+						lineStyle: {
+							color: [[0.2, '#86b379'], [0.8, '#68a54a'], [1, '#408829']],
+							width: 8
+						}
+					},
+					axisTick: {
+						splitNumber: 10,
+						length: 12,
+						lineStyle: {
+							color: 'auto'
+						}
+					},
+					axisLabel: {
+						textStyle: {
+							color: 'auto'
+						}
+					},
+					splitLine: {
+						length: 18,
+						lineStyle: {
+							color: 'auto'
+						}
+					},
+					pointer: {
+						length: '90%',
+						color: 'auto'
+					},
 					title: {
-					  text: 'Graph title',
-					  subtext: 'Graph Sub-text'
+						textStyle: {
+							color: '#333'
+						}
+					},
+					detail: {
+						textStyle: {
+							color: 'auto'
+						}
+					}
+				},
+				textStyle: {
+					fontFamily: 'Arial, Verdana, sans-serif'
+				}
+			};
+
+			
+			//echart Bar
+			
+			if ($('#mainb').length ){
+			
+				var echartBar = echarts.init(document.getElementById('mainb'), theme);
+
+				echartBar.setOption({
+					title: {
+					text: 'Graph title',
+					subtext: 'Graph Sub-text'
 					},
 					tooltip: {
-					  trigger: 'axis'
+					trigger: 'axis'
 					},
 					legend: {
-					  data: ['sales', 'purchases']
+					data: ['sales', 'purchases']
 					},
 					toolbox: {
-					  show: false
+					show: false
 					},
 					calculable: false,
 					xAxis: [{
-					  type: 'category',
-					  data: ['1?', '2?', '3?', '4?', '5?', '6?', '7?', '8?', '9?', '10?', '11?', '12?']
+					type: 'category',
+					data: ['1?', '2?', '3?', '4?', '5?', '6?', '7?', '8?', '9?', '10?', '11?', '12?']
 					}],
 					yAxis: [{
-					  type: 'value'
+					type: 'value'
 					}],
 					series: [{
-					  name: 'sales',
-					  type: 'bar',
-					  data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
-					  markPoint: {
+					name: 'sales',
+					type: 'bar',
+					data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+					markPoint: {
 						data: [{
-						  type: 'max',
-						  name: '???'
+						type: 'max',
+						name: '???'
 						}, {
-						  type: 'min',
-						  name: '???'
+						type: 'min',
+						name: '???'
 						}]
-					  },
-					  markLine: {
+					},
+					markLine: {
 						data: [{
-						  type: 'average',
-						  name: '???'
+						type: 'average',
+						name: '???'
 						}]
-					  }
+					}
 					}, {
-					  name: 'purchases',
-					  type: 'bar',
-					  data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
-					  markPoint: {
+					name: 'purchases',
+					type: 'bar',
+					data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+					markPoint: {
 						data: [{
-						  name: 'sales',
-						  value: 182.2,
-						  xAxis: 7,
-						  yAxis: 183,
+						name: 'sales',
+						value: 182.2,
+						xAxis: 7,
+						yAxis: 183,
 						}, {
-						  name: 'purchases',
-						  value: 2.3,
-						  xAxis: 11,
-						  yAxis: 3
+						name: 'purchases',
+						value: 2.3,
+						xAxis: 11,
+						yAxis: 3
 						}]
-					  },
-					  markLine: {
+					},
+					markLine: {
 						data: [{
-						  type: 'average',
-						  name: '???'
+						type: 'average',
+						name: '???'
 						}]
-					  }
+					}
 					}]
-				  });
+				});
 
 			}
-			  
-			  
-			  
-			  
-			   //echart Radar
-			  
+			
+			
+			
+			
+			//echart Radar
+			
 			if ($('#echart_sonar').length ){ 
-			  
-			  var echartRadar = echarts.init(document.getElementById('echart_sonar'), theme);
+			
+			var echartRadar = echarts.init(document.getElementById('echart_sonar'), theme);
 
-			  echartRadar.setOption({
+			echartRadar.setOption({
 				title: {
-				  text: 'Budget vs spending',
-				  subtext: 'Subtitle'
+				text: 'Budget vs spending',
+				subtext: 'Subtitle'
 				},
-				 tooltip: {
+				tooltip: {
 					trigger: 'item'
 				},
 				legend: {
-				  orient: 'vertical',
-				  x: 'right',
-				  y: 'bottom',
-				  data: ['Allocated Budget', 'Actual Spending']
+				orient: 'vertical',
+				x: 'right',
+				y: 'bottom',
+				data: ['Allocated Budget', 'Actual Spending']
 				},
 				toolbox: {
-				  show: true,
-				  feature: {
+				show: true,
+				feature: {
 					restore: {
-					  show: true,
-					  title: "Restore"
+					show: true,
+					title: "Restore"
 					},
 					saveAsImage: {
-					  show: true,
-					  title: "Save Image"
+					show: true,
+					title: "Save Image"
 					}
-				  }
+				}
 				},
 				polar: [{
-				  indicator: [{
+				indicator: [{
 					text: 'Sales',
 					max: 6000
-				  }, {
+				}, {
 					text: 'Administration',
 					max: 16000
-				  }, {
+				}, {
 					text: 'Information Techology',
 					max: 30000
-				  }, {
+				}, {
 					text: 'Customer Support',
 					max: 38000
-				  }, {
+				}, {
 					text: 'Development',
 					max: 52000
-				  }, {
+				}, {
 					text: 'Marketing',
 					max: 25000
-				  }]
+				}]
 				}],
 				calculable: true,
 				series: [{
-				  name: 'Budget vs spending',
-				  type: 'radar',
-				  data: [{
+				name: 'Budget vs spending',
+				type: 'radar',
+				data: [{
 					value: [4300, 10000, 28000, 35000, 50000, 19000],
 					name: 'Allocated Budget'
-				  }, {
+				}, {
 					value: [5000, 14000, 28000, 31000, 42000, 21000],
 					name: 'Actual Spending'
-				  }]
 				}]
-			  });
+				}]
+			});
 
 			} 
-			  
-			   //echart Funnel
-			  
+			
+			//echart Funnel
+			
 			if ($('#echart_pyramid').length ){ 
-			  
-			  var echartFunnel = echarts.init(document.getElementById('echart_pyramid'), theme);
+			
+			var echartFunnel = echarts.init(document.getElementById('echart_pyramid'), theme);
 
-			  echartFunnel.setOption({
+			echartFunnel.setOption({
 				title: {
-				  text: 'Echart Pyramid Graph',
-				  subtext: 'Subtitle'
+				text: 'Echart Pyramid Graph',
+				subtext: 'Subtitle'
 				},
 				tooltip: {
-				  trigger: 'item',
-				  formatter: "{a} <br/>{b} : {c}%"
+				trigger: 'item',
+				formatter: "{a} <br/>{b} : {c}%"
 				},
 				toolbox: {
-				  show: true,
-				  feature: {
+				show: true,
+				feature: {
 					restore: {
-					  show: true,
-					  title: "Restore"
+					show: true,
+					title: "Restore"
 					},
 					saveAsImage: {
-					  show: true,
-					  title: "Save Image"
+					show: true,
+					title: "Save Image"
 					}
-				  }
+				}
 				},
 				legend: {
-				  data: ['Something #1', 'Something #2', 'Something #3', 'Something #4', 'Something #5'],
-				  orient: 'vertical',
-				  x: 'left',
-				  y: 'bottom'
+				data: ['Something #1', 'Something #2', 'Something #3', 'Something #4', 'Something #5'],
+				orient: 'vertical',
+				x: 'left',
+				y: 'bottom'
 				},
 				calculable: true,
 				series: [{
-				  name: '漏斗图',
-				  type: 'funnel',
-				  width: '40%',
-				  data: [{
+				name: '漏斗图',
+				type: 'funnel',
+				width: '40%',
+				data: [{
 					value: 60,
 					name: 'Something #1'
-				  }, {
+				}, {
 					value: 40,
 					name: 'Something #2'
-				  }, {
+				}, {
 					value: 20,
 					name: 'Something #3'
-				  }, {
+				}, {
 					value: 80,
 					name: 'Something #4'
-				  }, {
+				}, {
 					value: 100,
 					name: 'Something #5'
-				  }]
 				}]
-			  });
+				}]
+			});
 
 			} 
-			  
-			   //echart Gauge
-			  
+			
+			//echart Gauge
+			
 			if ($('#echart_gauge').length ){ 
-			  
-			  var echartGauge = echarts.init(document.getElementById('echart_gauge'), theme);
+			
+			var echartGauge = echarts.init(document.getElementById('echart_gauge'), theme);
 
-			  echartGauge.setOption({
+			echartGauge.setOption({
 				tooltip: {
-				  formatter: "{a} <br/>{b} : {c}%"
+				formatter: "{a} <br/>{b} : {c}%"
 				},
 				toolbox: {
-				  show: true,
-				  feature: {
+				show: true,
+				feature: {
 					restore: {
-					  show: true,
-					  title: "Restore"
+					show: true,
+					title: "Restore"
 					},
 					saveAsImage: {
-					  show: true,
-					  title: "Save Image"
+					show: true,
+					title: "Save Image"
 					}
-				  }
+				}
 				},
 				series: [{
-				  name: 'Performance',
-				  type: 'gauge',
-				  center: ['50%', '50%'],
-				  startAngle: 140,
-				  endAngle: -140,
-				  min: 0,
-				  max: 100,
-				  precision: 0,
-				  splitNumber: 10,
-				  axisLine: {
+				name: 'Performance',
+				type: 'gauge',
+				center: ['50%', '50%'],
+				startAngle: 140,
+				endAngle: -140,
+				min: 0,
+				max: 100,
+				precision: 0,
+				splitNumber: 10,
+				axisLine: {
 					show: true,
 					lineStyle: {
-					  color: [
+					color: [
 						[0.2, 'lightgreen'],
 						[0.4, 'orange'],
 						[0.8, 'skyblue'],
 						[1, '#ff4500']
-					  ],
-					  width: 30
+					],
+					width: 30
 					}
-				  },
-				  axisTick: {
+				},
+				axisTick: {
 					show: true,
 					splitNumber: 5,
 					length: 8,
 					lineStyle: {
-					  color: '#eee',
-					  width: 1,
-					  type: 'solid'
+					color: '#eee',
+					width: 1,
+					type: 'solid'
 					}
-				  },
-				  axisLabel: {
+				},
+				axisLabel: {
 					show: true,
 					formatter: function(v) {
-					  switch (v + '') {
+					switch (v + '') {
 						case '10':
-						  return 'a';
+						return 'a';
 						case '30':
-						  return 'b';
+						return 'b';
 						case '60':
-						  return 'c';
+						return 'c';
 						case '90':
-						  return 'd';
+						return 'd';
 						default:
-						  return '';
-					  }
+						return '';
+					}
 					},
 					textStyle: {
-					  color: '#333'
+					color: '#333'
 					}
-				  },
-				  splitLine: {
+				},
+				splitLine: {
 					show: true,
 					length: 30,
 					lineStyle: {
-					  color: '#eee',
-					  width: 2,
-					  type: 'solid'
+					color: '#eee',
+					width: 2,
+					type: 'solid'
 					}
-				  },
-				  pointer: {
+				},
+				pointer: {
 					length: '80%',
 					width: 8,
 					color: 'auto'
-				  },
-				  title: {
+				},
+				title: {
 					show: true,
 					offsetCenter: ['-65%', -10],
 					textStyle: {
-					  color: '#333',
-					  fontSize: 15
+					color: '#333',
+					fontSize: 15
 					}
-				  },
-				  detail: {
+				},
+				detail: {
 					show: true,
 					backgroundColor: 'rgba(0,0,0,0)',
 					borderWidth: 0,
@@ -3242,173 +3242,173 @@ if (typeof NProgress != 'undefined') {
 					offsetCenter: ['-60%', 10],
 					formatter: '{value}%',
 					textStyle: {
-					  color: 'auto',
-					  fontSize: 30
+					color: 'auto',
+					fontSize: 30
 					}
-				  },
-				  data: [{
+				},
+				data: [{
 					value: 50,
 					name: 'Performance'
-				  }]
 				}]
-			  });
+				}]
+			});
 
 			} 
-			  
-			   //echart Line
-			  
+			
+			//echart Line
+			
 			if ($('#echart_line').length ){ 
-			  
-			  var echartLine = echarts.init(document.getElementById('echart_line'), theme);
+			
+			var echartLine = echarts.init(document.getElementById('echart_line'), theme);
 
-			  echartLine.setOption({
+			echartLine.setOption({
 				title: {
-				  text: 'Line Graph',
-				  subtext: 'Subtitle'
+				text: 'Line Graph',
+				subtext: 'Subtitle'
 				},
 				tooltip: {
-				  trigger: 'axis'
+				trigger: 'axis'
 				},
 				legend: {
-				  x: 220,
-				  y: 40,
-				  data: ['Intent', 'Pre-order', 'Deal']
+				x: 220,
+				y: 40,
+				data: ['Intent', 'Pre-order', 'Deal']
 				},
 				toolbox: {
-				  show: true,
-				  feature: {
+				show: true,
+				feature: {
 					magicType: {
-					  show: true,
-					  title: {
+					show: true,
+					title: {
 						line: 'Line',
 						bar: 'Bar',
 						stack: 'Stack',
 						tiled: 'Tiled'
-					  },
-					  type: ['line', 'bar', 'stack', 'tiled']
+					},
+					type: ['line', 'bar', 'stack', 'tiled']
 					},
 					restore: {
-					  show: true,
-					  title: "Restore"
+					show: true,
+					title: "Restore"
 					},
 					saveAsImage: {
-					  show: true,
-					  title: "Save Image"
+					show: true,
+					title: "Save Image"
 					}
-				  }
+				}
 				},
 				calculable: true,
 				xAxis: [{
-				  type: 'category',
-				  boundaryGap: false,
-				  data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+				type: 'category',
+				boundaryGap: false,
+				data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 				}],
 				yAxis: [{
-				  type: 'value'
+				type: 'value'
 				}],
 				series: [{
-				  name: 'Deal',
-				  type: 'line',
-				  smooth: true,
-				  itemStyle: {
+				name: 'Deal',
+				type: 'line',
+				smooth: true,
+				itemStyle: {
 					normal: {
-					  areaStyle: {
+					areaStyle: {
 						type: 'default'
-					  }
 					}
-				  },
-				  data: [10, 12, 21, 54, 260, 830, 710]
+					}
+				},
+				data: [10, 12, 21, 54, 260, 830, 710]
 				}, {
-				  name: 'Pre-order',
-				  type: 'line',
-				  smooth: true,
-				  itemStyle: {
+				name: 'Pre-order',
+				type: 'line',
+				smooth: true,
+				itemStyle: {
 					normal: {
-					  areaStyle: {
+					areaStyle: {
 						type: 'default'
-					  }
 					}
-				  },
-				  data: [30, 182, 434, 791, 390, 30, 10]
+					}
+				},
+				data: [30, 182, 434, 791, 390, 30, 10]
 				}, {
-				  name: 'Intent',
-				  type: 'line',
-				  smooth: true,
-				  itemStyle: {
+				name: 'Intent',
+				type: 'line',
+				smooth: true,
+				itemStyle: {
 					normal: {
-					  areaStyle: {
+					areaStyle: {
 						type: 'default'
-					  }
 					}
-				  },
-				  data: [1320, 1132, 601, 234, 120, 90, 20]
+					}
+				},
+				data: [1320, 1132, 601, 234, 120, 90, 20]
 				}]
-			  });
+			});
 
 			} 
-			  
-			   //echart Scatter
-			  
+			
+			//echart Scatter
+			
 			if ($('#echart_scatter').length ){ 
-			  
-			  var echartScatter = echarts.init(document.getElementById('echart_scatter'), theme);
+			
+			var echartScatter = echarts.init(document.getElementById('echart_scatter'), theme);
 
-			  echartScatter.setOption({
+			echartScatter.setOption({
 				title: {
-				  text: 'Scatter Graph',
-				  subtext: 'Heinz  2003'
+				text: 'Scatter Graph',
+				subtext: 'Heinz  2003'
 				},
 				tooltip: {
-				  trigger: 'axis',
-				  showDelay: 0,
-				  axisPointer: {
+				trigger: 'axis',
+				showDelay: 0,
+				axisPointer: {
 					type: 'cross',
 					lineStyle: {
-					  type: 'dashed',
-					  width: 1
+					type: 'dashed',
+					width: 1
 					}
-				  }
+				}
 				},
 				legend: {
-				  data: ['Data2', 'Data1']
+				data: ['Data2', 'Data1']
 				},
 				toolbox: {
-				  show: true,
-				  feature: {
+				show: true,
+				feature: {
 					saveAsImage: {
-					  show: true,
-					  title: "Save Image"
+					show: true,
+					title: "Save Image"
 					}
-				  }
+				}
 				},
 				xAxis: [{
-				  type: 'value',
-				  scale: true,
-				  axisLabel: {
+				type: 'value',
+				scale: true,
+				axisLabel: {
 					formatter: '{value} cm'
-				  }
+				}
 				}],
 				yAxis: [{
-				  type: 'value',
-				  scale: true,
-				  axisLabel: {
+				type: 'value',
+				scale: true,
+				axisLabel: {
 					formatter: '{value} kg'
-				  }
+				}
 				}],
 				series: [{
-				  name: 'Data1',
-				  type: 'scatter',
-				  tooltip: {
+				name: 'Data1',
+				type: 'scatter',
+				tooltip: {
 					trigger: 'item',
 					formatter: function(params) {
-					  if (params.value.length > 1) {
+					if (params.value.length > 1) {
 						return params.seriesName + ' :<br/>' + params.value[0] + 'cm ' + params.value[1] + 'kg ';
-					  } else {
+					} else {
 						return params.seriesName + ' :<br/>' + params.name + ' : ' + params.value + 'kg ';
-					  }
 					}
-				  },
-				  data: [
+					}
+				},
+				data: [
 					[161.2, 51.6],
 					[167.5, 59.0],
 					[159.5, 49.2],
@@ -3669,36 +3669,36 @@ if (typeof NProgress != 'undefined') {
 					[160.7, 48.6],
 					[174.0, 66.4],
 					[163.8, 67.3]
-				  ],
-				  markPoint: {
+				],
+				markPoint: {
 					data: [{
-					  type: 'max',
-					  name: 'Max'
+					type: 'max',
+					name: 'Max'
 					}, {
-					  type: 'min',
-					  name: 'Min'
+					type: 'min',
+					name: 'Min'
 					}]
-				  },
-				  markLine: {
+				},
+				markLine: {
 					data: [{
-					  type: 'average',
-					  name: 'Mean'
+					type: 'average',
+					name: 'Mean'
 					}]
-				  }
+				}
 				}, {
-				  name: 'Data2',
-				  type: 'scatter',
-				  tooltip: {
+				name: 'Data2',
+				type: 'scatter',
+				tooltip: {
 					trigger: 'item',
 					formatter: function(params) {
-					  if (params.value.length > 1) {
+					if (params.value.length > 1) {
 						return params.seriesName + ' :<br/>' + params.value[0] + 'cm ' + params.value[1] + 'kg ';
-					  } else {
+					} else {
 						return params.seriesName + ' :<br/>' + params.name + ' : ' + params.value + 'kg ';
-					  }
 					}
-				  },
-				  data: [
+					}
+				},
+				data: [
 					[174.0, 65.6],
 					[175.3, 71.8],
 					[193.5, 80.7],
@@ -3946,1043 +3946,1043 @@ if (typeof NProgress != 'undefined') {
 					[177.8, 84.1],
 					[180.3, 83.2],
 					[180.3, 83.2]
-				  ],
-				  markPoint: {
+				],
+				markPoint: {
 					data: [{
-					  type: 'max',
-					  name: 'Max'
+					type: 'max',
+					name: 'Max'
 					}, {
-					  type: 'min',
-					  name: 'Min'
+					type: 'min',
+					name: 'Min'
 					}]
-				  },
-				  markLine: {
+				},
+				markLine: {
 					data: [{
-					  type: 'average',
-					  name: 'Mean'
+					type: 'average',
+					name: 'Mean'
 					}]
-				  }
+				}
 				}]
-			  });
+			});
 
 			} 
-			  
-			   //echart Bar Horizontal
-			  
+			
+			//echart Bar Horizontal
+			
 			if ($('#echart_bar_horizontal').length ){ 
-			  
-			  var echartBar = echarts.init(document.getElementById('echart_bar_horizontal'), theme);
+			
+			var echartBar = echarts.init(document.getElementById('echart_bar_horizontal'), theme);
 
-			  echartBar.setOption({
+			echartBar.setOption({
 				title: {
-				  text: 'Bar Graph',
-				  subtext: 'Graph subtitle'
+				text: 'Bar Graph',
+				subtext: 'Graph subtitle'
 				},
 				tooltip: {
-				  trigger: 'axis'
+				trigger: 'axis'
 				},
 				legend: {
-				  x: 100,
-				  data: ['2015', '2016']
+				x: 100,
+				data: ['2015', '2016']
 				},
 				toolbox: {
-				  show: true,
-				  feature: {
+				show: true,
+				feature: {
 					saveAsImage: {
-					  show: true,
-					  title: "Save Image"
+					show: true,
+					title: "Save Image"
 					}
-				  }
+				}
 				},
 				calculable: true,
 				xAxis: [{
-				  type: 'value',
-				  boundaryGap: [0, 0.01]
+				type: 'value',
+				boundaryGap: [0, 0.01]
 				}],
 				yAxis: [{
-				  type: 'category',
-				  data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
+				type: 'category',
+				data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
 				}],
 				series: [{
-				  name: '2015',
-				  type: 'bar',
-				  data: [18203, 23489, 29034, 104970, 131744, 630230]
+				name: '2015',
+				type: 'bar',
+				data: [18203, 23489, 29034, 104970, 131744, 630230]
 				}, {
-				  name: '2016',
-				  type: 'bar',
-				  data: [19325, 23438, 31000, 121594, 134141, 681807]
+				name: '2016',
+				type: 'bar',
+				data: [19325, 23438, 31000, 121594, 134141, 681807]
 				}]
-			  });
+			});
 
 			} 
-			  
-			   //echart Pie Collapse
-			  
+			
+			//echart Pie Collapse
+			
 			if ($('#echart_pie2').length ){ 
-			  
-			  var echartPieCollapse = echarts.init(document.getElementById('echart_pie2'), theme);
-			  
-			  echartPieCollapse.setOption({
+			
+			var echartPieCollapse = echarts.init(document.getElementById('echart_pie2'), theme);
+			
+			echartPieCollapse.setOption({
 				tooltip: {
-				  trigger: 'item',
-				  formatter: "{a} <br/>{b} : {c} ({d}%)"
+				trigger: 'item',
+				formatter: "{a} <br/>{b} : {c} ({d}%)"
 				},
 				legend: {
-				  x: 'center',
-				  y: 'bottom',
-				  data: ['rose1', 'rose2', 'rose3', 'rose4', 'rose5', 'rose6']
+				x: 'center',
+				y: 'bottom',
+				data: ['rose1', 'rose2', 'rose3', 'rose4', 'rose5', 'rose6']
 				},
 				toolbox: {
-				  show: true,
-				  feature: {
+				show: true,
+				feature: {
 					magicType: {
-					  show: true,
-					  type: ['pie', 'funnel']
+					show: true,
+					type: ['pie', 'funnel']
 					},
 					restore: {
-					  show: true,
-					  title: "Restore"
+					show: true,
+					title: "Restore"
 					},
 					saveAsImage: {
-					  show: true,
-					  title: "Save Image"
+					show: true,
+					title: "Save Image"
 					}
-				  }
+				}
 				},
 				calculable: true,
 				series: [{
-				  name: 'Area Mode',
-				  type: 'pie',
-				  radius: [25, 90],
-				  center: ['50%', 170],
-				  roseType: 'area',
-				  x: '50%',
-				  max: 40,
-				  sort: 'ascending',
-				  data: [{
+				name: 'Area Mode',
+				type: 'pie',
+				radius: [25, 90],
+				center: ['50%', 170],
+				roseType: 'area',
+				x: '50%',
+				max: 40,
+				sort: 'ascending',
+				data: [{
 					value: 10,
 					name: 'rose1'
-				  }, {
+				}, {
 					value: 5,
 					name: 'rose2'
-				  }, {
+				}, {
 					value: 15,
 					name: 'rose3'
-				  }, {
+				}, {
 					value: 25,
 					name: 'rose4'
-				  }, {
+				}, {
 					value: 20,
 					name: 'rose5'
-				  }, {
+				}, {
 					value: 35,
 					name: 'rose6'
-				  }]
 				}]
-			  });
+				}]
+			});
 
 			} 
-			  
-			   //echart Donut
-			  
+			
+			//echart Donut
+			
 			if ($('#echart_donut').length ){  
-			  
-			  var echartDonut = echarts.init(document.getElementById('echart_donut'), theme);
-			  
-			  echartDonut.setOption({
+			
+			var echartDonut = echarts.init(document.getElementById('echart_donut'), theme);
+			
+			echartDonut.setOption({
 				tooltip: {
-				  trigger: 'item',
-				  formatter: "{a} <br/>{b} : {c} ({d}%)"
+				trigger: 'item',
+				formatter: "{a} <br/>{b} : {c} ({d}%)"
 				},
 				calculable: true,
 				legend: {
-				  x: 'center',
-				  y: 'bottom',
-				  data: ['Direct Access', 'E-mail Marketing', 'Union Ad', 'Video Ads', 'Search Engine']
+				x: 'center',
+				y: 'bottom',
+				data: ['Direct Access', 'E-mail Marketing', 'Union Ad', 'Video Ads', 'Search Engine']
 				},
 				toolbox: {
-				  show: true,
-				  feature: {
+				show: true,
+				feature: {
 					magicType: {
-					  show: true,
-					  type: ['pie', 'funnel'],
-					  option: {
+					show: true,
+					type: ['pie', 'funnel'],
+					option: {
 						funnel: {
-						  x: '25%',
-						  width: '50%',
-						  funnelAlign: 'center',
-						  max: 1548
+						x: '25%',
+						width: '50%',
+						funnelAlign: 'center',
+						max: 1548
 						}
-					  }
+					}
 					},
 					restore: {
-					  show: true,
-					  title: "Restore"
+					show: true,
+					title: "Restore"
 					},
 					saveAsImage: {
-					  show: true,
-					  title: "Save Image"
+					show: true,
+					title: "Save Image"
 					}
-				  }
+				}
 				},
 				series: [{
-				  name: 'Access to the resource',
-				  type: 'pie',
-				  radius: ['35%', '55%'],
-				  itemStyle: {
+				name: 'Access to the resource',
+				type: 'pie',
+				radius: ['35%', '55%'],
+				itemStyle: {
 					normal: {
-					  label: {
+					label: {
 						show: true
-					  },
-					  labelLine: {
+					},
+					labelLine: {
 						show: true
-					  }
+					}
 					},
 					emphasis: {
-					  label: {
+					label: {
 						show: true,
 						position: 'center',
 						textStyle: {
-						  fontSize: '14',
-						  fontWeight: 'normal'
+						fontSize: '14',
+						fontWeight: 'normal'
 						}
-					  }
 					}
-				  },
-				  data: [{
+					}
+				},
+				data: [{
 					value: 335,
 					name: 'Direct Access'
-				  }, {
+				}, {
 					value: 310,
 					name: 'E-mail Marketing'
-				  }, {
+				}, {
 					value: 234,
 					name: 'Union Ad'
-				  }, {
+				}, {
 					value: 135,
 					name: 'Video Ads'
-				  }, {
+				}, {
 					value: 1548,
 					name: 'Search Engine'
-				  }]
 				}]
-			  });
+				}]
+			});
 
 			} 
-			  
-			   //echart Pie
-			  
+			
+			//echart Pie
+			
 			if ($('#echart_pie').length ){  
-			  
-			  var echartPie = echarts.init(document.getElementById('echart_pie'), theme);
+			
+			var echartPie = echarts.init(document.getElementById('echart_pie'), theme);
 
-			  echartPie.setOption({
+			echartPie.setOption({
 				tooltip: {
-				  trigger: 'item',
-				  formatter: "{a} <br/>{b} : {c} ({d}%)"
+				trigger: 'item',
+				formatter: "{a} <br/>{b} : {c} ({d}%)"
 				},
 				legend: {
-				  x: 'center',
-				  y: 'bottom',
-				  data: ['Direct Access', 'E-mail Marketing', 'Union Ad', 'Video Ads', 'Search Engine']
+				x: 'center',
+				y: 'bottom',
+				data: ['Direct Access', 'E-mail Marketing', 'Union Ad', 'Video Ads', 'Search Engine']
 				},
 				toolbox: {
-				  show: true,
-				  feature: {
+				show: true,
+				feature: {
 					magicType: {
-					  show: true,
-					  type: ['pie', 'funnel'],
-					  option: {
+					show: true,
+					type: ['pie', 'funnel'],
+					option: {
 						funnel: {
-						  x: '25%',
-						  width: '50%',
-						  funnelAlign: 'left',
-						  max: 1548
+						x: '25%',
+						width: '50%',
+						funnelAlign: 'left',
+						max: 1548
 						}
-					  }
+					}
 					},
 					restore: {
-					  show: true,
-					  title: "Restore"
+					show: true,
+					title: "Restore"
 					},
 					saveAsImage: {
-					  show: true,
-					  title: "Save Image"
+					show: true,
+					title: "Save Image"
 					}
-				  }
+				}
 				},
 				calculable: true,
 				series: [{
-				  name: '访问来源',
-				  type: 'pie',
-				  radius: '55%',
-				  center: ['50%', '48%'],
-				  data: [{
+				name: '访问来源',
+				type: 'pie',
+				radius: '55%',
+				center: ['50%', '48%'],
+				data: [{
 					value: 335,
 					name: 'Direct Access'
-				  }, {
+				}, {
 					value: 310,
 					name: 'E-mail Marketing'
-				  }, {
+				}, {
 					value: 234,
 					name: 'Union Ad'
-				  }, {
+				}, {
 					value: 135,
 					name: 'Video Ads'
-				  }, {
+				}, {
 					value: 1548,
 					name: 'Search Engine'
-				  }]
 				}]
-			  });
+				}]
+			});
 
-			  var dataStyle = {
+			var dataStyle = {
 				normal: {
-				  label: {
+				label: {
 					show: false
-				  },
-				  labelLine: {
+				},
+				labelLine: {
 					show: false
-				  }
 				}
-			  };
+				}
+			};
 
-			  var placeHolderStyle = {
+			var placeHolderStyle = {
 				normal: {
-				  color: 'rgba(0,0,0,0)',
-				  label: {
+				color: 'rgba(0,0,0,0)',
+				label: {
 					show: false
-				  },
-				  labelLine: {
+				},
+				labelLine: {
 					show: false
-				  }
+				}
 				},
 				emphasis: {
-				  color: 'rgba(0,0,0,0)'
+				color: 'rgba(0,0,0,0)'
 				}
-			  };
+			};
 
 			} 
-			  
-			   //echart Mini Pie
-			  
+			
+			//echart Mini Pie
+			
 			if ($('#echart_mini_pie').length ){ 
-			  
-			  var echartMiniPie = echarts.init(document.getElementById('echart_mini_pie'), theme);
+			
+			var echartMiniPie = echarts.init(document.getElementById('echart_mini_pie'), theme);
 
-			  echartMiniPie .setOption({
+			echartMiniPie .setOption({
 				title: {
-				  text: 'Chart #2',
-				  subtext: 'From ExcelHome',
-				  sublink: 'http://e.weibo.com/1341556070/AhQXtjbqh',
-				  x: 'center',
-				  y: 'center',
-				  itemGap: 20,
-				  textStyle: {
+				text: 'Chart #2',
+				subtext: 'From ExcelHome',
+				sublink: 'http://e.weibo.com/1341556070/AhQXtjbqh',
+				x: 'center',
+				y: 'center',
+				itemGap: 20,
+				textStyle: {
 					color: 'rgba(30,144,255,0.8)',
 					fontFamily: '微软雅黑',
 					fontSize: 35,
 					fontWeight: 'bolder'
-				  }
+				}
 				},
 				tooltip: {
-				  show: true,
-				  formatter: "{a} <br/>{b} : {c} ({d}%)"
+				show: true,
+				formatter: "{a} <br/>{b} : {c} ({d}%)"
 				},
 				legend: {
-				  orient: 'vertical',
-				  x: 170,
-				  y: 45,
-				  itemGap: 12,
-				  data: ['68%Something #1', '29%Something #2', '3%Something #3'],
+				orient: 'vertical',
+				x: 170,
+				y: 45,
+				itemGap: 12,
+				data: ['68%Something #1', '29%Something #2', '3%Something #3'],
 				},
 				toolbox: {
-				  show: true,
-				  feature: {
+				show: true,
+				feature: {
 					mark: {
-					  show: true
+					show: true
 					},
 					dataView: {
-					  show: true,
-					  title: "Text View",
-					  lang: [
+					show: true,
+					title: "Text View",
+					lang: [
 						"Text View",
 						"Close",
 						"Refresh",
-					  ],
-					  readOnly: false
+					],
+					readOnly: false
 					},
 					restore: {
-					  show: true,
-					  title: "Restore"
+					show: true,
+					title: "Restore"
 					},
 					saveAsImage: {
-					  show: true,
-					  title: "Save Image"
+					show: true,
+					title: "Save Image"
 					}
-				  }
+				}
 				},
 				series: [{
-				  name: '1',
-				  type: 'pie',
-				  clockWise: false,
-				  radius: [105, 130],
-				  itemStyle: dataStyle,
-				  data: [{
+				name: '1',
+				type: 'pie',
+				clockWise: false,
+				radius: [105, 130],
+				itemStyle: dataStyle,
+				data: [{
 					value: 68,
 					name: '68%Something #1'
-				  }, {
+				}, {
 					value: 32,
 					name: 'invisible',
 					itemStyle: placeHolderStyle
-				  }]
+				}]
 				}, {
-				  name: '2',
-				  type: 'pie',
-				  clockWise: false,
-				  radius: [80, 105],
-				  itemStyle: dataStyle,
-				  data: [{
+				name: '2',
+				type: 'pie',
+				clockWise: false,
+				radius: [80, 105],
+				itemStyle: dataStyle,
+				data: [{
 					value: 29,
 					name: '29%Something #2'
-				  }, {
+				}, {
 					value: 71,
 					name: 'invisible',
 					itemStyle: placeHolderStyle
-				  }]
+				}]
 				}, {
-				  name: '3',
-				  type: 'pie',
-				  clockWise: false,
-				  radius: [25, 80],
-				  itemStyle: dataStyle,
-				  data: [{
+				name: '3',
+				type: 'pie',
+				clockWise: false,
+				radius: [25, 80],
+				itemStyle: dataStyle,
+				data: [{
 					value: 3,
 					name: '3%Something #3'
-				  }, {
+				}, {
 					value: 97,
 					name: 'invisible',
 					itemStyle: placeHolderStyle
-				  }]
 				}]
-			  });
+				}]
+			});
 
 			} 
-			  
-			   //echart Map
-			  
+			
+			//echart Map
+			
 			if ($('#echart_world_map').length ){ 
-			  
-				  var echartMap = echarts.init(document.getElementById('echart_world_map'), theme);
-				  
-				   
-				  echartMap.setOption({
+			
+				var echartMap = echarts.init(document.getElementById('echart_world_map'), theme);
+				
+				
+				echartMap.setOption({
 					title: {
-					  text: 'World Population (2010)',
-					  subtext: 'from United Nations, Total population, both sexes combined, as of 1 July (thousands)',
-					  x: 'center',
-					  y: 'top'
+					text: 'World Population (2010)',
+					subtext: 'from United Nations, Total population, both sexes combined, as of 1 July (thousands)',
+					x: 'center',
+					y: 'top'
 					},
 					tooltip: {
-					  trigger: 'item',
-					  formatter: function(params) {
+					trigger: 'item',
+					formatter: function(params) {
 						var value = (params.value + '').split('.');
 						value = value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,') + '.' + value[1];
 						return params.seriesName + '<br/>' + params.name + ' : ' + value;
-					  }
+					}
 					},
 					toolbox: {
-					  show: true,
-					  orient: 'vertical',
-					  x: 'right',
-					  y: 'center',
-					  feature: {
+					show: true,
+					orient: 'vertical',
+					x: 'right',
+					y: 'center',
+					feature: {
 						mark: {
-						  show: true
+						show: true
 						},
 						dataView: {
-						  show: true,
-						  title: "Text View",
-						  lang: [
+						show: true,
+						title: "Text View",
+						lang: [
 							"Text View",
 							"Close",
 							"Refresh",
-						  ],
-						  readOnly: false
+						],
+						readOnly: false
 						},
 						restore: {
-						  show: true,
-						  title: "Restore"
+						show: true,
+						title: "Restore"
 						},
 						saveAsImage: {
-						  show: true,
-						  title: "Save Image"
+						show: true,
+						title: "Save Image"
 						}
-					  }
+					}
 					},
 					dataRange: {
-					  min: 0,
-					  max: 1000000,
-					  text: ['High', 'Low'],
-					  realtime: false,
-					  calculable: true,
-					  color: ['#087E65', '#26B99A', '#CBEAE3']
+					min: 0,
+					max: 1000000,
+					text: ['High', 'Low'],
+					realtime: false,
+					calculable: true,
+					color: ['#087E65', '#26B99A', '#CBEAE3']
 					},
 					series: [{
-					  name: 'World Population (2010)',
-					  type: 'map',
-					  mapType: 'world',
-					  roam: false,
-					  mapLocation: {
+					name: 'World Population (2010)',
+					type: 'map',
+					mapType: 'world',
+					roam: false,
+					mapLocation: {
 						y: 60
-					  },
-					  itemStyle: {
+					},
+					itemStyle: {
 						emphasis: {
-						  label: {
+						label: {
 							show: true
-						  }
 						}
-					  },
-					  data: [{
+						}
+					},
+					data: [{
 						name: 'Afghanistan',
 						value: 28397.812
-					  }, {
+					}, {
 						name: 'Angola',
 						value: 19549.124
-					  }, {
+					}, {
 						name: 'Albania',
 						value: 3150.143
-					  }, {
+					}, {
 						name: 'United Arab Emirates',
 						value: 8441.537
-					  }, {
+					}, {
 						name: 'Argentina',
 						value: 40374.224
-					  }, {
+					}, {
 						name: 'Armenia',
 						value: 2963.496
-					  }, {
+					}, {
 						name: 'French Southern and Antarctic Lands',
 						value: 268.065
-					  }, {
+					}, {
 						name: 'Australia',
 						value: 22404.488
-					  }, {
+					}, {
 						name: 'Austria',
 						value: 8401.924
-					  }, {
+					}, {
 						name: 'Azerbaijan',
 						value: 9094.718
-					  }, {
+					}, {
 						name: 'Burundi',
 						value: 9232.753
-					  }, {
+					}, {
 						name: 'Belgium',
 						value: 10941.288
-					  }, {
+					}, {
 						name: 'Benin',
 						value: 9509.798
-					  }, {
+					}, {
 						name: 'Burkina Faso',
 						value: 15540.284
-					  }, {
+					}, {
 						name: 'Bangladesh',
 						value: 151125.475
-					  }, {
+					}, {
 						name: 'Bulgaria',
 						value: 7389.175
-					  }, {
+					}, {
 						name: 'The Bahamas',
 						value: 66402.316
-					  }, {
+					}, {
 						name: 'Bosnia and Herzegovina',
 						value: 3845.929
-					  }, {
+					}, {
 						name: 'Belarus',
 						value: 9491.07
-					  }, {
+					}, {
 						name: 'Belize',
 						value: 308.595
-					  }, {
+					}, {
 						name: 'Bermuda',
 						value: 64.951
-					  }, {
+					}, {
 						name: 'Bolivia',
 						value: 716.939
-					  }, {
+					}, {
 						name: 'Brazil',
 						value: 195210.154
-					  }, {
+					}, {
 						name: 'Brunei',
 						value: 27.223
-					  }, {
+					}, {
 						name: 'Bhutan',
 						value: 716.939
-					  }, {
+					}, {
 						name: 'Botswana',
 						value: 1969.341
-					  }, {
+					}, {
 						name: 'Central African Republic',
 						value: 4349.921
-					  }, {
+					}, {
 						name: 'Canada',
 						value: 34126.24
-					  }, {
+					}, {
 						name: 'Switzerland',
 						value: 7830.534
-					  }, {
+					}, {
 						name: 'Chile',
 						value: 17150.76
-					  }, {
+					}, {
 						name: 'China',
 						value: 1359821.465
-					  }, {
+					}, {
 						name: 'Ivory Coast',
 						value: 60508.978
-					  }, {
+					}, {
 						name: 'Cameroon',
 						value: 20624.343
-					  }, {
+					}, {
 						name: 'Democratic Republic of the Congo',
 						value: 62191.161
-					  }, {
+					}, {
 						name: 'Republic of the Congo',
 						value: 3573.024
-					  }, {
+					}, {
 						name: 'Colombia',
 						value: 46444.798
-					  }, {
+					}, {
 						name: 'Costa Rica',
 						value: 4669.685
-					  }, {
+					}, {
 						name: 'Cuba',
 						value: 11281.768
-					  }, {
+					}, {
 						name: 'Northern Cyprus',
 						value: 1.468
-					  }, {
+					}, {
 						name: 'Cyprus',
 						value: 1103.685
-					  }, {
+					}, {
 						name: 'Czech Republic',
 						value: 10553.701
-					  }, {
+					}, {
 						name: 'Germany',
 						value: 83017.404
-					  }, {
+					}, {
 						name: 'Djibouti',
 						value: 834.036
-					  }, {
+					}, {
 						name: 'Denmark',
 						value: 5550.959
-					  }, {
+					}, {
 						name: 'Dominican Republic',
 						value: 10016.797
-					  }, {
+					}, {
 						name: 'Algeria',
 						value: 37062.82
-					  }, {
+					}, {
 						name: 'Ecuador',
 						value: 15001.072
-					  }, {
+					}, {
 						name: 'Egypt',
 						value: 78075.705
-					  }, {
+					}, {
 						name: 'Eritrea',
 						value: 5741.159
-					  }, {
+					}, {
 						name: 'Spain',
 						value: 46182.038
-					  }, {
+					}, {
 						name: 'Estonia',
 						value: 1298.533
-					  }, {
+					}, {
 						name: 'Ethiopia',
 						value: 87095.281
-					  }, {
+					}, {
 						name: 'Finland',
 						value: 5367.693
-					  }, {
+					}, {
 						name: 'Fiji',
 						value: 860.559
-					  }, {
+					}, {
 						name: 'Falkland Islands',
 						value: 49.581
-					  }, {
+					}, {
 						name: 'France',
 						value: 63230.866
-					  }, {
+					}, {
 						name: 'Gabon',
 						value: 1556.222
-					  }, {
+					}, {
 						name: 'United Kingdom',
 						value: 62066.35
-					  }, {
+					}, {
 						name: 'Georgia',
 						value: 4388.674
-					  }, {
+					}, {
 						name: 'Ghana',
 						value: 24262.901
-					  }, {
+					}, {
 						name: 'Guinea',
 						value: 10876.033
-					  }, {
+					}, {
 						name: 'Gambia',
 						value: 1680.64
-					  }, {
+					}, {
 						name: 'Guinea Bissau',
 						value: 10876.033
-					  }, {
+					}, {
 						name: 'Equatorial Guinea',
 						value: 696.167
-					  }, {
+					}, {
 						name: 'Greece',
 						value: 11109.999
-					  }, {
+					}, {
 						name: 'Greenland',
 						value: 56.546
-					  }, {
+					}, {
 						name: 'Guatemala',
 						value: 14341.576
-					  }, {
+					}, {
 						name: 'French Guiana',
 						value: 231.169
-					  }, {
+					}, {
 						name: 'Guyana',
 						value: 786.126
-					  }, {
+					}, {
 						name: 'Honduras',
 						value: 7621.204
-					  }, {
+					}, {
 						name: 'Croatia',
 						value: 4338.027
-					  }, {
+					}, {
 						name: 'Haiti',
 						value: 9896.4
-					  }, {
+					}, {
 						name: 'Hungary',
 						value: 10014.633
-					  }, {
+					}, {
 						name: 'Indonesia',
 						value: 240676.485
-					  }, {
+					}, {
 						name: 'India',
 						value: 1205624.648
-					  }, {
+					}, {
 						name: 'Ireland',
 						value: 4467.561
-					  }, {
+					}, {
 						name: 'Iran',
 						value: 240676.485
-					  }, {
+					}, {
 						name: 'Iraq',
 						value: 30962.38
-					  }, {
+					}, {
 						name: 'Iceland',
 						value: 318.042
-					  }, {
+					}, {
 						name: 'Israel',
 						value: 7420.368
-					  }, {
+					}, {
 						name: 'Italy',
 						value: 60508.978
-					  }, {
+					}, {
 						name: 'Jamaica',
 						value: 2741.485
-					  }, {
+					}, {
 						name: 'Jordan',
 						value: 6454.554
-					  }, {
+					}, {
 						name: 'Japan',
 						value: 127352.833
-					  }, {
+					}, {
 						name: 'Kazakhstan',
 						value: 15921.127
-					  }, {
+					}, {
 						name: 'Kenya',
 						value: 40909.194
-					  }, {
+					}, {
 						name: 'Kyrgyzstan',
 						value: 5334.223
-					  }, {
+					}, {
 						name: 'Cambodia',
 						value: 14364.931
-					  }, {
+					}, {
 						name: 'South Korea',
 						value: 51452.352
-					  }, {
+					}, {
 						name: 'Kosovo',
 						value: 97.743
-					  }, {
+					}, {
 						name: 'Kuwait',
 						value: 2991.58
-					  }, {
+					}, {
 						name: 'Laos',
 						value: 6395.713
-					  }, {
+					}, {
 						name: 'Lebanon',
 						value: 4341.092
-					  }, {
+					}, {
 						name: 'Liberia',
 						value: 3957.99
-					  }, {
+					}, {
 						name: 'Libya',
 						value: 6040.612
-					  }, {
+					}, {
 						name: 'Sri Lanka',
 						value: 20758.779
-					  }, {
+					}, {
 						name: 'Lesotho',
 						value: 2008.921
-					  }, {
+					}, {
 						name: 'Lithuania',
 						value: 3068.457
-					  }, {
+					}, {
 						name: 'Luxembourg',
 						value: 507.885
-					  }, {
+					}, {
 						name: 'Latvia',
 						value: 2090.519
-					  }, {
+					}, {
 						name: 'Morocco',
 						value: 31642.36
-					  }, {
+					}, {
 						name: 'Moldova',
 						value: 103.619
-					  }, {
+					}, {
 						name: 'Madagascar',
 						value: 21079.532
-					  }, {
+					}, {
 						name: 'Mexico',
 						value: 117886.404
-					  }, {
+					}, {
 						name: 'Macedonia',
 						value: 507.885
-					  }, {
+					}, {
 						name: 'Mali',
 						value: 13985.961
-					  }, {
+					}, {
 						name: 'Myanmar',
 						value: 51931.231
-					  }, {
+					}, {
 						name: 'Montenegro',
 						value: 620.078
-					  }, {
+					}, {
 						name: 'Mongolia',
 						value: 2712.738
-					  }, {
+					}, {
 						name: 'Mozambique',
 						value: 23967.265
-					  }, {
+					}, {
 						name: 'Mauritania',
 						value: 3609.42
-					  }, {
+					}, {
 						name: 'Malawi',
 						value: 15013.694
-					  }, {
+					}, {
 						name: 'Malaysia',
 						value: 28275.835
-					  }, {
+					}, {
 						name: 'Namibia',
 						value: 2178.967
-					  }, {
+					}, {
 						name: 'New Caledonia',
 						value: 246.379
-					  }, {
+					}, {
 						name: 'Niger',
 						value: 15893.746
-					  }, {
+					}, {
 						name: 'Nigeria',
 						value: 159707.78
-					  }, {
+					}, {
 						name: 'Nicaragua',
 						value: 5822.209
-					  }, {
+					}, {
 						name: 'Netherlands',
 						value: 16615.243
-					  }, {
+					}, {
 						name: 'Norway',
 						value: 4891.251
-					  }, {
+					}, {
 						name: 'Nepal',
 						value: 26846.016
-					  }, {
+					}, {
 						name: 'New Zealand',
 						value: 4368.136
-					  }, {
+					}, {
 						name: 'Oman',
 						value: 2802.768
-					  }, {
+					}, {
 						name: 'Pakistan',
 						value: 173149.306
-					  }, {
+					}, {
 						name: 'Panama',
 						value: 3678.128
-					  }, {
+					}, {
 						name: 'Peru',
 						value: 29262.83
-					  }, {
+					}, {
 						name: 'Philippines',
 						value: 93444.322
-					  }, {
+					}, {
 						name: 'Papua New Guinea',
 						value: 6858.945
-					  }, {
+					}, {
 						name: 'Poland',
 						value: 38198.754
-					  }, {
+					}, {
 						name: 'Puerto Rico',
 						value: 3709.671
-					  }, {
+					}, {
 						name: 'North Korea',
 						value: 1.468
-					  }, {
+					}, {
 						name: 'Portugal',
 						value: 10589.792
-					  }, {
+					}, {
 						name: 'Paraguay',
 						value: 6459.721
-					  }, {
+					}, {
 						name: 'Qatar',
 						value: 1749.713
-					  }, {
+					}, {
 						name: 'Romania',
 						value: 21861.476
-					  }, {
+					}, {
 						name: 'Russia',
 						value: 21861.476
-					  }, {
+					}, {
 						name: 'Rwanda',
 						value: 10836.732
-					  }, {
+					}, {
 						name: 'Western Sahara',
 						value: 514.648
-					  }, {
+					}, {
 						name: 'Saudi Arabia',
 						value: 27258.387
-					  }, {
+					}, {
 						name: 'Sudan',
 						value: 35652.002
-					  }, {
+					}, {
 						name: 'South Sudan',
 						value: 9940.929
-					  }, {
+					}, {
 						name: 'Senegal',
 						value: 12950.564
-					  }, {
+					}, {
 						name: 'Solomon Islands',
 						value: 526.447
-					  }, {
+					}, {
 						name: 'Sierra Leone',
 						value: 5751.976
-					  }, {
+					}, {
 						name: 'El Salvador',
 						value: 6218.195
-					  }, {
+					}, {
 						name: 'Somaliland',
 						value: 9636.173
-					  }, {
+					}, {
 						name: 'Somalia',
 						value: 9636.173
-					  }, {
+					}, {
 						name: 'Republic of Serbia',
 						value: 3573.024
-					  }, {
+					}, {
 						name: 'Suriname',
 						value: 524.96
-					  }, {
+					}, {
 						name: 'Slovakia',
 						value: 5433.437
-					  }, {
+					}, {
 						name: 'Slovenia',
 						value: 2054.232
-					  }, {
+					}, {
 						name: 'Sweden',
 						value: 9382.297
-					  }, {
+					}, {
 						name: 'Swaziland',
 						value: 1193.148
-					  }, {
+					}, {
 						name: 'Syria',
 						value: 7830.534
-					  }, {
+					}, {
 						name: 'Chad',
 						value: 11720.781
-					  }, {
+					}, {
 						name: 'Togo',
 						value: 6306.014
-					  }, {
+					}, {
 						name: 'Thailand',
 						value: 66402.316
-					  }, {
+					}, {
 						name: 'Tajikistan',
 						value: 7627.326
-					  }, {
+					}, {
 						name: 'Turkmenistan',
 						value: 5041.995
-					  }, {
+					}, {
 						name: 'East Timor',
 						value: 10016.797
-					  }, {
+					}, {
 						name: 'Trinidad and Tobago',
 						value: 1328.095
-					  }, {
+					}, {
 						name: 'Tunisia',
 						value: 10631.83
-					  }, {
+					}, {
 						name: 'Turkey',
 						value: 72137.546
-					  }, {
+					}, {
 						name: 'United Republic of Tanzania',
 						value: 44973.33
-					  }, {
+					}, {
 						name: 'Uganda',
 						value: 33987.213
-					  }, {
+					}, {
 						name: 'Ukraine',
 						value: 46050.22
-					  }, {
+					}, {
 						name: 'Uruguay',
 						value: 3371.982
-					  }, {
+					}, {
 						name: 'United States of America',
 						value: 312247.116
-					  }, {
+					}, {
 						name: 'Uzbekistan',
 						value: 27769.27
-					  }, {
+					}, {
 						name: 'Venezuela',
 						value: 236.299
-					  }, {
+					}, {
 						name: 'Vietnam',
 						value: 89047.397
-					  }, {
+					}, {
 						name: 'Vanuatu',
 						value: 236.299
-					  }, {
+					}, {
 						name: 'West Bank',
 						value: 13.565
-					  }, {
+					}, {
 						name: 'Yemen',
 						value: 22763.008
-					  }, {
+					}, {
 						name: 'South Africa',
 						value: 51452.352
-					  }, {
+					}, {
 						name: 'Zambia',
 						value: 13216.985
-					  }, {
+					}, {
 						name: 'Zimbabwe',
 						value: 13076.978
-					  }]
 					}]
-				  });
-	   
+					}]
+				});
+	
 			}
-	   
+	
 		}  
-	   
-	   
+	
+	
 	$(document).ready(function() {
 				
 		init_sparklines();

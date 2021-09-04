@@ -8,7 +8,7 @@ $searchTerm = $_GET['term'];
 //get matched data from skills table
 $query = $db->query("SELECT * FROM ".DB_PREFIX."ncicNames WHERE name LIKE '%".$searchTerm."%' ORDER BY name ASC");
 while ($row = $query->fetch_assoc()) {
-    $data[] = $row['name'];
+	$data[] = $row['name'];
 }
 //return json data
 echo json_encode($data);

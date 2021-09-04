@@ -12,19 +12,19 @@ export default function shift(data) {
 
   // if shift shiftvariation is specified, run the modifier
   if (shiftvariation) {
-    const { reference, popper } = data.offsets;
-    const isVertical = ['bottom', 'top'].indexOf(basePlacement) !== -1;
-    const side = isVertical ? 'left' : 'top';
-    const measurement = isVertical ? 'width' : 'height';
+	const { reference, popper } = data.offsets;
+	const isVertical = ['bottom', 'top'].indexOf(basePlacement) !== -1;
+	const side = isVertical ? 'left' : 'top';
+	const measurement = isVertical ? 'width' : 'height';
 
-    const shiftOffsets = {
-      start: { [side]: reference[side] },
-      end: {
-        [side]: reference[side] + reference[measurement] - popper[measurement],
-      },
-    };
+	const shiftOffsets = {
+	 start: { [side]: reference[side] },
+	 end: {
+		[side]: reference[side] + reference[measurement] - popper[measurement],
+	 },
+	};
 
-    data.offsets.popper = { ...popper, ...shiftOffsets[shiftvariation] };
+	data.offsets.popper = { ...popper, ...shiftOffsets[shiftvariation] };
   }
 
   return data;

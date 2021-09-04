@@ -5,12 +5,12 @@ import PNotifyConfirm from 'pnotify/dist/es/PNotifyConfirm'; // eslint-disable-l
 
 export default function moduleNotice () {
   return PNotify.notice({
-    title: 'Yay!',
-    text: 'It works!',
-    modules: {
-      Confirm: {
-        confirm: true
-      }
-    }
+	title: 'Yay!',
+	text: 'It works!',
+	modules: {
+	 Confirm: {
+		confirm: true
+	 }
+	}
   });
 }

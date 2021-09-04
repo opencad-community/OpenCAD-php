@@ -57,12 +57,12 @@ for (let module in pnotifySrc) {
   target[module + '_lib'] = (args) => compileJs(module, pnotifySrc[module], args);
 
   ((target) => {
-    const existing = target[module];
+	const existing = target[module];
 
-    target[module] = (args) => {
-      existing && existing(args);
-      target[module + '_lib'](args);
-    };
+	target[module] = (args) => {
+	 existing && existing(args);
+	 target[module + '_lib'](args);
+	};
   })(target);
 }
 
@@ -70,12 +70,12 @@ for (let module in pnotifyJs) {
   target[module + '_js'] = (args) => compressJs(module, pnotifyJs[module], args);
 
   ((target) => {
-    const existing = target[module];
+	const existing = target[module];
 
-    target[module] = (args) => {
-      existing && existing(args);
-      target[module + '_js'](args);
-    };
+	target[module] = (args) => {
+	 existing && existing(args);
+	 target[module + '_js'](args);
+	};
   })(target);
 }
 
@@ -83,24 +83,24 @@ for (let module in pnotifyCss) {
   target[module + '_css'] = () => compressCss(module, pnotifyCss[module]);
 
   ((target) => {
-    const existing = target[module];
+	const existing = target[module];
 
-    target[module] = (args) => {
-      existing && existing(args);
-      target[module + '_css'](args);
-    };
+	target[module] = (args) => {
+	 existing && existing(args);
+	 target[module + '_css'](args);
+	};
   })(target);
 }
 
 target.dist = (args) => {
   for (let module in pnotifySrc) {
-    target[module + '_lib'](args);
+	target[module + '_lib'](args);
   }
   for (let module in pnotifyJs) {
-    target[module + '_js'](args);
+	target[module + '_js'](args);
   }
   for (let module in pnotifyCss) {
-    target[module + '_css'](args);
+	target[module + '_css'](args);
   }
 };
 
@@ -125,91 +125,91 @@ let compileJs = (module, filename, args) => {
 
   // Pre-compile transforms.
   if (module === 'compat' && format === 'iife') {
-    inputCode = code = code.replace(/import PNotify(\w*) from ["']\.\/PNotify(\w*)\.html["'];/g, 'var PNotify$1 = window.PNotify$2;');
-    inputCode = code = code.replace(/export default PNotifyCompat;/g, 'window.PNotifyCompat = PNotifyCompat;');
+	inputCode = code = code.replace(/import PNotify(\w*) from ["']\.\/PNotify(\w*)\.html["'];/g, 'var PNotify$1 = window.PNotify$2;');
+	inputCode = code = code.replace(/export default PNotifyCompat;/g, 'window.PNotifyCompat = PNotifyCompat;');
   }
 
   // Compile.
   if (isSvelte) {
-    // Use Svelte to compile the code first.
-    const svelte = require('svelte');
-    const { js } = svelte.compile(code, {
-      format: format,
-      filename: srcFilename,
-      name: filename.replace(/\.html$/, ''),
-      amd: {
-        id: filename.replace(/\.html$/, '')
-      },
-      globals: {
-        './PNotify.html': 'PNotify'
-      },
-      onerror: err => {
-        console.error(err);
-      },
-      onwarn: warning => {
-        console.warn(warning);
-      },
-      css: true,
-      cascade: false
-    });
-    ({ code, map } = js);
-    [inputCode, inputMap] = [code, map];
-    inputMap.file = filename.replace(/\.html$/, '.js');
-    inputCode += '\n//# sourceMappingURL=' + filename.replace(/\.html$/, '.js') + '.map';
+	// Use Svelte to compile the code first.
+	const svelte = require('svelte');
+	const { js } = svelte.compile(code, {
+	 format: format,
+	 filename: srcFilename,
+	 name: filename.replace(/\.html$/, ''),
+	 amd: {
+		id: filename.replace(/\.html$/, '')
+	 },
+	 globals: {
+		'./PNotify.html': 'PNotify'
+	 },
+	 onerror: err => {
+		console.error(err);
+	 },
+	 onwarn: warning => {
+		console.warn(warning);
+	 },
+	 css: true,
+	 cascade: false
+	});
+	({ code, map } = js);
+	[inputCode, inputMap] = [code, map];
+	inputMap.file = filename.replace(/\.html$/, '.js');
+	inputCode += '\n//# sourceMappingURL=' + filename.replace(/\.html$/, '.js') + '.map';
   }
   if (format !== 'es') {
-    const babel = require('babel-core');
-    const babelOptions = {
-      moduleId: filename.replace(/\.(html|js)$/, ''),
-      filename: filename.replace(/\.html$/, '.js'),
-      filenameRelative: srcFilename,
-      sourceMapTarget: srcFilename,
-      moduleRoot: '',
-      sourceMaps: 'both',
-      sourceRoot: '../',
-      plugins: [
-        'transform-object-assign'
-      ],
-      sourceType: (format !== 'es' && isSvelte) ? 'script' : 'module'
-    };
+	const babel = require('babel-core');
+	const babelOptions = {
+	 moduleId: filename.replace(/\.(html|js)$/, ''),
+	 filename: filename.replace(/\.html$/, '.js'),
+	 filenameRelative: srcFilename,
+	 sourceMapTarget: srcFilename,
+	 moduleRoot: '',
+	 sourceMaps: 'both',
+	 sourceRoot: '../',
+	 plugins: [
+		'transform-object-assign'
+	 ],
+	 sourceType: (format !== 'es' && isSvelte) ? 'script' : 'module'
+	};
 
-    if (inputMap) {
-      babelOptions.inputSourceMap = inputMap;
-    }
+	if (inputMap) {
+	 babelOptions.inputSourceMap = inputMap;
+	}
 
-    if (format === 'umd' && !isSvelte) {
-      babelOptions.passPerPreset = true;
-      babelOptions.presets = [
-        ['env', {
-          modules: 'umd'
-        }],
-        'stage-3'
-      ];
-      babelOptions.plugins.push('add-module-exports');
-    } else {
-      babelOptions.presets = [
-        ['env', {
-          modules: false
-        }],
-        'stage-3'
-      ];
-    }
+	if (format === 'umd' && !isSvelte) {
+	 babelOptions.passPerPreset = true;
+	 babelOptions.presets = [
+		['env', {
+		 modules: 'umd'
+		}],
+		'stage-3'
+	 ];
+	 babelOptions.plugins.push('add-module-exports');
+	} else {
+	 babelOptions.presets = [
+		['env', {
+		 modules: false
+		}],
+		'stage-3'
+	 ];
+	}
 
-    ({ code, map } = babel.transform(inputCode, babelOptions));
+	({ code, map } = babel.transform(inputCode, babelOptions));
   }
 
   // Post-compile transforms.
   if (format === 'es') {
-    code = code.replace(/import PNotify(\w*) from ["']\.\/PNotify(\w*)\.html["'];/g, 'import PNotify$1 from "./PNotify$2.js";');
+	code = code.replace(/import PNotify(\w*) from ["']\.\/PNotify(\w*)\.html["'];/g, 'import PNotify$1 from "./PNotify$2.js";');
   }
   if (format === 'umd') {
-    code = code.replace(/require\(["']\.\/PNotify(\w*)?\.html["']\)/g, 'require(\'./PNotify$1\')');
-    code = code.replace(/, ["']\.\/PNotify(\w*)?\.html["']/g, ', \'./PNotify$1\'');
+	code = code.replace(/require\(["']\.\/PNotify(\w*)?\.html["']\)/g, 'require(\'./PNotify$1\')');
+	code = code.replace(/, ["']\.\/PNotify(\w*)?\.html["']/g, ', \'./PNotify$1\'');
   }
 
   fs.writeFileSync(dstFilename, code);
   if (map) {
-    fs.writeFileSync(dstFilename + '.map', JSON.stringify(map));
+	fs.writeFileSync(dstFilename + '.map', JSON.stringify(map));
   }
 };
 
@@ -223,21 +223,21 @@ let compressJs = (module, filename, args) => {
 
   const UglifyJS = format === 'es' ? require('uglify-es') : require('uglify-js');
   const options = {
-    sourceMap: {
-      root: '../',
-      filename: filename,
-      url: filename + '.map'
-    }
+	sourceMap: {
+	 root: '../',
+	 filename: filename,
+	 url: filename + '.map'
+	}
   };
   const { code, map, error } = UglifyJS.minify({
-    [filename]: fs.readFileSync(srcFilename, 'utf8')
+	[filename]: fs.readFileSync(srcFilename, 'utf8')
   }, options);
   if (!code) {
-    console.log('error:', error);
+	console.log('error:', error);
   }
   fs.writeFileSync(dstFilename, code);
   if (map) {
-    fs.writeFileSync(dstFilename + '.map', map);
+	fs.writeFileSync(dstFilename + '.map', map);
   }
 };
 
@@ -249,7 +249,7 @@ let compressCss = (module, filename) => {
 
   const CleanCSS = require('clean-css');
   const options = {
-    rebase: false
+	rebase: false
   };
   fs.writeFileSync(dstFilename, (new CleanCSS(options).minify(fs.readFileSync(srcFilename, 'utf8'))).styles);
 };

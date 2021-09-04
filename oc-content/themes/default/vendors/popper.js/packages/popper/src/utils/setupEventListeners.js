@@ -7,12 +7,12 @@ function attachToScrollParents(scrollParent, event, callback, scrollParents) {
   target.addEventListener(event, callback, { passive: true });
 
   if (!isBody) {
-    attachToScrollParents(
-      getScrollParent(target.parentNode),
-      event,
-      callback,
-      scrollParents
-    );
+	attachToScrollParents(
+	 getScrollParent(target.parentNode),
+	 event,
+	 callback,
+	 scrollParents
+	);
   }
   scrollParents.push(target);
 }
@@ -36,10 +36,10 @@ export default function setupEventListeners(
   // Scroll event listener on scroll parents
   const scrollElement = getScrollParent(reference);
   attachToScrollParents(
-    scrollElement,
-    'scroll',
-    state.updateBound,
-    state.scrollParents
+	scrollElement,
+	'scroll',
+	state.updateBound,
+	state.scrollParents
   );
   state.scrollElement = scrollElement;
   state.eventsEnabled = true;

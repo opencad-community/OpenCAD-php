@@ -662,14 +662,14 @@ function getUsers()
 		
 		if ( $row[3] == 2 )
 		{
-		  $roleIs = "Moderator";
+		$roleIs = "Moderator";
 		}
 		else if ( $row[3] == 3 )
 		{
-		  $roleIs = "Administrator";
+		$roleIs = "Administrator";
 		}
 		else {
-		  $roleIs = "User";
+		$roleIs = "User";
 		}
 
 		echo '
@@ -712,18 +712,18 @@ function getUsers()
 		}
 		else
 		{
-		  if ( ( MODERATOR_SUSPEND_WITHOUT_REASON == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
-		  {
+		if ( ( MODERATOR_SUSPEND_WITHOUT_REASON == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
+		{
 			echo '<input name="suspendUser" type="submit" class="btn btn-xs btn-link" value="Suspend without Reason" aria-label="Suspend user without reason: '. $row['name'] .'" />';
-		  } else {
+		} else {
 			echo '<input name="suspendUser" type="submit" class="btn btn-xs btn-link" value="Suspend without Reason" aria-label="Suspend user without reason: '. $row['name'] .'" disabled />';
-		  }
-		  if ( ( MODERATOR_SUSPEND_WITH_REASON == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
-		  {
+		}
+		if ( ( MODERATOR_SUSPEND_WITH_REASON == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
+		{
 			echo '<input name="suspendUserWithReason" type="submit" class="btn btn-xs btn-link" method="post" value="Suspend With Reason: " aria-label="Suspend user with reason: '. $row['name'] .'" /><input class="form-control" type="text" method="post" placeholder="Reason Here" name="suspendReason" id="suspendReason" aria-label="Reason for suspension of'. $row['name'].'">';
-		  } else {
+		} else {
 			echo '<input name="suspendUserWithReason" type="submit" class="btn btn-xs btn-link" method="post" value="Suspend With Reason: " aria-label="Suspend user with reason: '. $row['name'] .'" disabled /><input class="form-control" type="text" method="post" placeholder="Reason Here" name="suspendReason" id="suspendReason" aria-label="Reason for suspension of'. $row['name'].'" readonly>';
-		  }
+		}
 		}
 	} else {
 		echo ' </td>

@@ -76,8 +76,8 @@ var _saveAs = (function(view) {
 		return;
 	}
 	var
-		  doc = view.document
-		  // only get URL when necessary in case Blob.js hasn't overridden it yet
+		doc = view.document
+		// only get URL when necessary in case Blob.js hasn't overridden it yet
 		, get_URL = function() {
 			return view.URL || view.webkitURL || view;
 		}
@@ -135,7 +135,7 @@ var _saveAs = (function(view) {
 			}
 			// First try a.download, then web filesystem, then object URLs
 			var
-				  filesaver = this
+				filesaver = this
 				, type = blob.type
 				, force = type === force_saveable_type
 				, object_url
@@ -227,7 +227,7 @@ var _saveAs = (function(view) {
 
 	return saveAs;
 }(
-	   typeof self !== "undefined" && self
+	typeof self !== "undefined" && self
 	|| typeof window !== "undefined" && window
 	|| this.content
 ));
@@ -277,9 +277,9 @@ var _newLine = function ( config )
  * Combine the data from the `buttons.exportData` method into a string that
  * will be used in the export file.
  *
- * @param	{DataTable.Api} dt		 DataTables API instance
+ * @param	{DataTable.Api} dt		DataTables API instance
  * @param	{object}				config Button configuration
- * @return {object}							 The data to export
+ * @return {object}							The data to export
  */
 var _exportData = function ( dt, config )
 {

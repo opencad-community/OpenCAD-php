@@ -11,20 +11,20 @@ import getClientRect from './getClientRect';
 export default function getOffsetRect(element) {
   let elementRect;
   if (element.nodeName === 'HTML') {
-    const { width, height } = getWindowSizes(element.ownerDocument);
-    elementRect = {
-      width,
-      height,
-      left: 0,
-      top: 0,
-    };
+	const { width, height } = getWindowSizes(element.ownerDocument);
+	elementRect = {
+	 width,
+	 height,
+	 left: 0,
+	 top: 0,
+	};
   } else {
-    elementRect = {
-      width: element.offsetWidth,
-      height: element.offsetHeight,
-      left: element.offsetLeft,
-      top: element.offsetTop,
-    };
+	elementRect = {
+	 width: element.offsetWidth,
+	 height: element.offsetHeight,
+	 left: element.offsetLeft,
+	 top: element.offsetTop,
+	};
   }
 
   // position

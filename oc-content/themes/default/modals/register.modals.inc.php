@@ -1,6 +1,6 @@
 	<!-- Law Enforcement Registration -->
 	<div class="modal" id="registerFirstResponder" tabindex="-1" role="dialog" aria-hidden="true">
-	  <div class="modal-dialog modal-lg">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
 			<h4 class="modal-title" id="firstResponderRegLabel"><?php echo lang_key("FIRST_RESPONDER_ACCESS_REQUEST"); ?></h4>
@@ -37,7 +37,7 @@
                     <div class="form-group row">
 						<label class="col-lg-2 control-label"><?php echo lang_key("CONFIRM_PASSWORD"); ?></label>
 						<div class="col-lg-10">
-	                        <input class="form-control" placeholder="<?php echo lang_key("CONFIRM_PASSWORD"); ?>" name="password1" type="password" required>
+	                   <input class="form-control" placeholder="<?php echo lang_key("CONFIRM_PASSWORD"); ?>" name="password1" type="password" required>
 						</div>
                     </div>
                     <!-- ./ form-group -->
@@ -49,25 +49,25 @@
 							</select>
 						</div>
                      </div>
-			  <!-- ./ form-group -->
-		  <div class="modal-footer">
+			<!-- ./ form-group -->
+		<div class="modal-footer">
 				<input name="register" type="submit" class="btn btn-primary" value="<?php echo lang_key("REQUEST"); ?>" />
 				<button type="reset" class="btn btn-default" value="Reset"><?php echo lang_key("RESET"); ?></button>
 				<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang_key("CLOSE"); ?></button>
 			</form>
-		  </div>
-		  <!-- ./ modal-footer -->
+		</div>
+		<!-- ./ modal-footer -->
 		</div>
 		<!-- ./ modal-content -->
-	  </div>
-	  <!-- ./ modal-dialog modal-lg -->
+	</div>
+	<!-- ./ modal-dialog modal-lg -->
 	</div>
 	</div>
 	<!-- ./ modal bs-example-modal-lg -->
 
 	<!-- Civilian Registration -->
 	<div class="modal" id="registerCivilian" tabindex="-1" role="dialog" aria-hidden="true">
-	  <div class="modal-dialog modal-lg">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
 			<h4 class="modal-title" id="civiliaAccessReqLabel"><?php echo lang_key("CIVILIAN_ACCESS_REQUEST"); ?></h4>
@@ -98,21 +98,21 @@
                     <div class="form-group row">
 						<label class="col-lg-2 control-label"><?php echo lang_key("CONFIRM_PASSWORD"); ?></label>
 						<div class="col-lg-10">
-	                        <input class="form-control" placeholder="<?php echo lang_key("CONFIRM_PASSWORD"); ?>" name="password1" type="password" required>
+	                   <input class="form-control" placeholder="<?php echo lang_key("CONFIRM_PASSWORD"); ?>" name="password1" type="password" required>
 						</div>
                     </div>
                     <!-- ./ form-group -->
-		  			<div class="modal-footer">
-					  <input name="register" type="submit" class="btn btn-primary" value="<?php echo lang_key("REQUEST"); ?>" />
+					<div class="modal-footer">
+					<input name="register" type="submit" class="btn btn-primary" value="<?php echo lang_key("REQUEST"); ?>" />
 				<button type="reset" class="btn btn-default" value="Reset"><?php echo lang_key("RESET"); ?></button>
 				<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang_key("CLOSE"); ?></button>
 					</form>
-		  </div>
-		  <!-- ./ modal-footer -->
+		</div>
+		<!-- ./ modal-footer -->
 		</div>
 		<!-- ./ modal-content -->
-	  </div>
-	  <!-- ./ modal-dialog modal-lg -->
+	</div>
+	<!-- ./ modal-dialog modal-lg -->
 	</div>
 	</div>
 	<!-- ./ modal bs-example-modal-lg -->

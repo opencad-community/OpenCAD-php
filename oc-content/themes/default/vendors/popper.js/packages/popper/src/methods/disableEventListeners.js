@@ -9,7 +9,7 @@ import removeEventListeners from '../utils/removeEventListeners';
  */
 export default function disableEventListeners() {
   if (this.state.eventsEnabled) {
-    cancelAnimationFrame(this.scheduleUpdate);
-    this.state = removeEventListeners(this.reference, this.state);
+	cancelAnimationFrame(this.scheduleUpdate);
+	this.state = removeEventListeners(this.reference, this.state);
   }
 }

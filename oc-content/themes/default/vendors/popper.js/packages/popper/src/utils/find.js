@@ -10,7 +10,7 @@
 export default function find(arr, check) {
   // use native find if supported
   if (Array.prototype.find) {
-    return arr.find(check);
+	return arr.find(check);
   }
 
   // use `filter` to obtain the same behavior of `find`

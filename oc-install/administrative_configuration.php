@@ -2,8 +2,8 @@
 
 	session_start();
 
-	require_once('include/shared.inc.php');    
-    require_once('include/settings.inc.php');    
+	require_once('include/shared.inc.php');	
+	require_once('include/settings.inc.php');	
 	require_once('include/functions.inc.php');
 	require_once('include/languages.inc.php');	
 
@@ -26,10 +26,10 @@
 
 		$MODERATOR_USER_MANAGER = isset($_POST['MODERATOR_USER_MANAGER']) ? prepare_input($_POST['MODERATOR_USER_MANAGER']) : '';
 		$MODERATOR_APPROVE_USER = isset($_POST['MODERATOR_APPROVE_USER']) ? prepare_input($_POST['MODERATOR_APPROVE_USER']) : '';
-        $MODERATOR_EDIT_USER = isset($_POST['MODERATOR_EDIT_USER']) ? prepare_input($_POST['MODERATOR_EDIT_USER']) : '';
+		$MODERATOR_EDIT_USER = isset($_POST['MODERATOR_EDIT_USER']) ? prepare_input($_POST['MODERATOR_EDIT_USER']) : '';
 		$MODERATOR_DELETE_USER = isset($_POST['MODERATOR_DELETE_USER']) ? prepare_input($_POST['MODERATOR_DELETE_USER']) : '';
 		
-        $MODERATOR_SUSPEND_WITH_REASON = isset($_POST['MODERATOR_SUSPEND_WITH_REASON']) ? prepare_input($_POST['MODERATOR_SUSPEND_WITH_REASON']) : '';
+		$MODERATOR_SUSPEND_WITH_REASON = isset($_POST['MODERATOR_SUSPEND_WITH_REASON']) ? prepare_input($_POST['MODERATOR_SUSPEND_WITH_REASON']) : '';
 		$MODERATOR_SUSPEND_WITHOUT_REASON = isset($_POST['MODERATOR_SUSPEND_WITHOUT_REASON']) ? prepare_input($_POST['MODERATOR_SUSPEND_WITHOUT_REASON']) : '';
 		$MODERATOR_REACTIVATE_USER = isset($_POST['MODERATOR_REACTIVATE_USER']) ? prepare_input($_POST['MODERATOR_REACTIVATE_USER']) : '';
 
@@ -82,10 +82,10 @@
 
 		$MODERATOR_USER_MANAGER = isset($_POST['MODERATOR_USER_MANAGER']) ? prepare_input($_POST['MODERATOR_USER_MANAGER']) : '';
 		$MODERATOR_APPROVE_USER = isset($_POST['MODERATOR_APPROVE_USER']) ? prepare_input($_POST['MODERATOR_APPROVE_USER']) : '';
-        $MODERATOR_EDIT_USER = isset($_POST['MODERATOR_EDIT_USER']) ? prepare_input($_POST['MODERATOR_EDIT_USER']) : '';
+		$MODERATOR_EDIT_USER = isset($_POST['MODERATOR_EDIT_USER']) ? prepare_input($_POST['MODERATOR_EDIT_USER']) : '';
 		$MODERATOR_DELETE_USER = isset($_POST['MODERATOR_DELETE_USER']) ? prepare_input($_POST['MODERATOR_DELETE_USER']) : '';
 		
-        $MODERATOR_SUSPEND_WITH_REASON = isset($_POST['MODERATOR_SUSPEND_WITH_REASON']) ? prepare_input($_POST['MODERATOR_SUSPEND_WITH_REASON']) : '';
+		$MODERATOR_SUSPEND_WITH_REASON = isset($_POST['MODERATOR_SUSPEND_WITH_REASON']) ? prepare_input($_POST['MODERATOR_SUSPEND_WITH_REASON']) : '';
 		$MODERATOR_SUSPEND_WITHOUT_REASON = isset($_POST['MODERATOR_SUSPEND_WITHOUT_REASON']) ? prepare_input($_POST['MODERATOR_SUSPEND_WITHOUT_REASON']) : '';
 		$MODERATOR_REACTIVATE_USER = isset($_POST['MODERATOR_REACTIVATE_USER']) ? prepare_input($_POST['MODERATOR_REACTIVATE_USER']) : '';
 
@@ -135,8 +135,8 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="author" content="OpenCAD Project">
-    <meta name="generator" content="OpenCAD Project">
+	<meta name="author" content="OpenCAD Project">
+	<meta name="generator" content="OpenCAD Project">
 	<title><?php echo lang_key("installation_guide"); ?> | System Settings</title>
 
 	<link href="./images/favicon.ico" rel="shortcut icon" />
@@ -337,12 +337,12 @@
 				</td>
 			</tr>
 			</table>
-			</form>                        
+			</form>						
 		</div>
 		<div class="clear"></div>
 	</div>
 	
-	<?php include_once('include/footer.inc.php'); ?>        
+	<?php include_once('include/footer.inc.php'); ?>		
 
 </div>
 
