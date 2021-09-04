@@ -15,6 +15,7 @@ session_start();
 require_once("../oc-config.php");
 require_once(ABSPATH . "/oc-functions.php");
 require_once(ABSPATH . "/oc-settings.php");
+require_once( ABSPATH . OCINC . "/apiAuth.php");
 
 	if(!empty($_POST))
 	{
@@ -31,7 +32,7 @@ require_once(ABSPATH . "/oc-settings.php");
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 	}
 
 	$stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."users WHERE email = ?");
@@ -41,7 +42,7 @@ require_once(ABSPATH . "/oc-settings.php");
 	if (!$resStatus)
 	{
 		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 		

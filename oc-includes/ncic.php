@@ -36,7 +36,7 @@ function name()
 		{
 			$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 			$_SESSION['error_blob'] = $ex;
-			header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+			header(ERRORREDIRECT);
 			die();
 		}
 
@@ -47,7 +47,7 @@ function name()
 		if (!$resStatus)
 		{
 			$_SESSION['error'] = $stmt->errorInfo();
-			header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+			header(ERRORREDIRECT);
 			die();
 		}
 
@@ -86,7 +86,7 @@ function name()
 			if (!$resStatus)
 			{
 				$_SESSION['error'] = $stmt->errorInfo();
-				header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+				header(ERRORREDIRECT);
 				die();
 			}
 
@@ -114,7 +114,7 @@ function name()
 			if (!$resStatus)
 			{
 				$_SESSION['error'] = $stmt->errorInfo();
-				header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+				header(ERRORREDIRECT);
 				die();
 			}
 
@@ -142,7 +142,7 @@ function name()
 			if (!$resStatus)
 			{
 				$_SESSION['error'] = $stmt->errorInfo();
-				header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+				header(ERRORREDIRECT);
 				die();
 			}
 
@@ -170,7 +170,7 @@ function name()
 			if (!$resStatus)
 			{
 				$_SESSION['error'] = $stmt->errorInfo();
-				header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+				header(ERRORREDIRECT);
 				die();
 			}
 
@@ -210,7 +210,7 @@ function plate()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -221,7 +221,7 @@ function plate()
 	if (!$resStatus)
 	{
 		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -270,7 +270,7 @@ function weapon()
 		{
 			$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 			$_SESSION['error_blob'] = $ex;
-			header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+			header(ERRORREDIRECT);
 			die();
 		}
 	
@@ -281,7 +281,7 @@ function weapon()
 		if (!$resStatus)
 		{
 			$_SESSION['error'] = $stmt->errorInfo();
-			header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+			header(ERRORREDIRECT);
 			die();
 		}
 
@@ -310,7 +310,7 @@ function weapon()
 			if (!$resStatus)
 			{
 				$_SESSION['error'] = $stmt->errorInfo();
-				header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+				header(ERRORREDIRECT);
 				die();
 			}
 

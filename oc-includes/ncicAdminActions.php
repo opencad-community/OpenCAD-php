@@ -68,7 +68,7 @@ function rejectRequest()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -78,7 +78,7 @@ function rejectRequest()
 	if (!$result)
 	{
 		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -96,7 +96,7 @@ function getIdentityRequests()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -105,7 +105,7 @@ function getIdentityRequests()
 	if (!$result)
 	{
 		$_SESSION['error'] = $pdo->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -165,7 +165,7 @@ function ncicGetNames()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -174,7 +174,7 @@ function ncicGetNames()
 	if (!$result)
 	{
 		$_SESSION['error'] = $pdo->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -247,7 +247,7 @@ function ncicGetPlates()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -256,7 +256,7 @@ function ncicGetPlates()
 	if (!$result)
 	{
 		$_SESSION['error'] = $pdo->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -327,7 +327,7 @@ function ncicGetWeapons()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -336,7 +336,7 @@ function ncicGetWeapons()
 	if (!$result)
 	{
 		$_SESSION['error'] = $pdo->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -396,7 +396,7 @@ function delete_weapon()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -406,7 +406,7 @@ function delete_weapon()
 	if (!$result)
 	{
 		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -426,7 +426,7 @@ function delete_citation()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -436,7 +436,7 @@ function delete_citation()
 	if (!$result)
 	{
 		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -456,7 +456,7 @@ function delete_arrest()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -466,7 +466,7 @@ function delete_arrest()
 	if (!$result)
 	{
 		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -486,7 +486,7 @@ function delete_warning()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -496,7 +496,7 @@ function delete_warning()
 	if (!$result)
 	{
 		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -516,7 +516,7 @@ function delete_warrant()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -526,7 +526,7 @@ function delete_warrant()
 	if (!$result)
 	{
 		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -544,7 +544,7 @@ function ncicGetArrests()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -553,7 +553,7 @@ function ncicGetArrests()
 	if (!$result)
 	{
 		$_SESSION['error'] = $pdo->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -617,7 +617,7 @@ function ncicGetWarrants()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -626,7 +626,7 @@ function ncicGetWarrants()
 	if (!$result)
 	{
 		$_SESSION['error'] = $pdo->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -700,7 +700,7 @@ function ncicGetCitations()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -709,7 +709,7 @@ function ncicGetCitations()
 	if (!$result)
 	{
 		$_SESSION['error'] = $pdo->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -773,7 +773,7 @@ function ncicGetWarnings()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -782,7 +782,7 @@ function ncicGetWarnings()
 	if (!$result)
 	{
 		$_SESSION['error'] = $pdo->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -844,7 +844,7 @@ function getUserList()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -853,7 +853,7 @@ function getUserList()
 	if (!$result)
 	{
 		$_SESSION['error'] = $pdo->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -872,7 +872,7 @@ function delete_name()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -882,7 +882,7 @@ function delete_name()
 	if (!$result)
 	{
 		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -902,7 +902,7 @@ function delete_plate()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -951,7 +951,7 @@ function edit_name()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -961,7 +961,7 @@ function edit_name()
 	if (!$result)
 	{
 		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -998,7 +998,7 @@ function edit_name()
 	if (!$result)
 	{
 		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -1047,7 +1047,7 @@ function edit_plate()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -1057,7 +1057,7 @@ function edit_plate()
 	if (!$result)
 	{
 		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -1076,7 +1076,7 @@ function editnameid()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -1086,7 +1086,7 @@ function editnameid()
 	if (!$result)
 	{
 		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
@@ -1103,7 +1103,7 @@ function editplateid()
 	{
 		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
 		$_SESSION['error_blob'] = $ex;
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 
@@ -1113,7 +1113,7 @@ function editplateid()
 	if (!$result)
 	{
 		$_SESSION['error'] = $stmt->errorInfo();
-		header('Location: '.BASE_URL.'/oc-content/plugins/error/index.php');
+		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
