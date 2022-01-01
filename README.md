@@ -33,4 +33,4 @@ Still Having Trouble? on the community Discord post your issue in [#general-help
 
 ## License
 
-Do yo       u suspect someone of violating the license of OpenCAD or plagiarizing code? Please [send these reports to our security desk](https://security.opencad.io/).
+Do you suspect someone of violating the license of OpenCAD or plagiarizing code? Please [send these reports to our security desk](https://security.opencad.io/).
