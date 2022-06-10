@@ -2,8 +2,8 @@
 
 	session_start();
 
-	require_once('include/shared.inc.php');    
-    require_once('include/settings.inc.php');    
+	require_once('include/shared.inc.php');	
+	require_once('include/settings.inc.php');	
 	require_once('include/functions.inc.php');
 	require_once('include/languages.inc.php');	
 
@@ -26,9 +26,9 @@
 
 		$ROADSIDE_PANIC = isset($_POST['ROADSIDE_PANIC']) ? prepare_input($_POST['ROADSIDE_PANIC']) : '';
 		$ROADSIDE_BOLO = isset($_POST['ROADSIDE_BOLO']) ? prepare_input($_POST['ROADSIDE_BOLO']) : '';
-        $ROADSIDE_NCIC_NAME = isset($_POST['ROADSIDE_NCIC_NAME']) ? prepare_input($_POST['ROADSIDE_NCIC_NAME']) : '';
-        $ROADSIDE_NCIC_PLATE = isset($_POST['ROADSIDE_NCIC_PLATE']) ? prepare_input($_POST['ROADSIDE_NCIC_PLATE']) : '';
-        $ROADSIDE_CALL_SELFASSIGN = isset($_POST['ROADSIDE_CALL_SELFASSIGN']) ? prepare_input($_POST['ROADSIDE_CALL_SELFASSIGN']) : '';
+		$ROADSIDE_NCIC_NAME = isset($_POST['ROADSIDE_NCIC_NAME']) ? prepare_input($_POST['ROADSIDE_NCIC_NAME']) : '';
+		$ROADSIDE_NCIC_PLATE = isset($_POST['ROADSIDE_NCIC_PLATE']) ? prepare_input($_POST['ROADSIDE_NCIC_PLATE']) : '';
+		$ROADSIDE_CALL_SELFASSIGN = isset($_POST['ROADSIDE_CALL_SELFASSIGN']) ? prepare_input($_POST['ROADSIDE_CALL_SELFASSIGN']) : '';
 
 		$CIV_WARRANT = isset($_POST['CIV_WARRANT']) ? prepare_input($_POST['CIV_WARRANT']) : '';
 		$CIV_REG = isset($_POST['CIV_REG']) ? prepare_input($_POST['CIV_REG']) : '';
@@ -57,9 +57,9 @@
 
 		$ROADSIDE_PANIC = isset($_POST['ROADSIDE_PANIC']) ? prepare_input($_POST['ROADSIDE_PANIC']) : '';
 		$ROADSIDE_BOLO = isset($_POST['ROADSIDE_BOLO']) ? prepare_input($_POST['ROADSIDE_BOLO']) : '';
-        $ROADSIDE_NCIC_NAME = isset($_POST['ROADSIDE_NCIC_NAME']) ? prepare_input($_POST['ROADSIDE_NCIC_NAME']) : '';
-        $ROADSIDE_NCIC_PLATE = isset($_POST['ROADSIDE_NCIC_PLATE']) ? prepare_input($_POST['ROADSIDE_NCIC_PLATE']) : '';
-        $ROADSIDE_CALL_SELFASSIGN = isset($_POST['ROADSIDE_CALL_SELFASSIGN']) ? prepare_input($_POST['ROADSIDE_CALL_SELFASSIGN']) : '';
+		$ROADSIDE_NCIC_NAME = isset($_POST['ROADSIDE_NCIC_NAME']) ? prepare_input($_POST['ROADSIDE_NCIC_NAME']) : '';
+		$ROADSIDE_NCIC_PLATE = isset($_POST['ROADSIDE_NCIC_PLATE']) ? prepare_input($_POST['ROADSIDE_NCIC_PLATE']) : '';
+		$ROADSIDE_CALL_SELFASSIGN = isset($_POST['ROADSIDE_CALL_SELFASSIGN']) ? prepare_input($_POST['ROADSIDE_CALL_SELFASSIGN']) : '';
 
 		$CIV_WARRANT = isset($_POST['CIV_WARRANT']) ? prepare_input($_POST['CIV_WARRANT']) : '';
 		$CIV_REG = isset($_POST['CIV_REG']) ? prepare_input($_POST['CIV_REG']) : '';
@@ -74,11 +74,11 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="author" content="OpenCAD Project">
-    <meta name="generator" content="OpenCAD Project Installer">
+	<meta name="author" content="OpenCAD Project">
+	<meta name="generator" content="OpenCAD Project Installer">
 	<title><?php echo lang_key("installation_guide"); ?> | System Settings</title>
 
-	<link href="../images/favicon.ico" rel="shortcut icon" />
+	<link href="./images/favicon.ico" rel="shortcut icon" />
 	<link rel="stylesheet" type="text/css" href="templates/<?php echo EI_TEMPLATE; ?>/css/styles.css" />
 	<?php
 		if($curr_lang_direction == 'rtl'){
@@ -213,18 +213,18 @@
 			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>
 			<tr>
 				<td colspan="2">
-					<a href="department_configuration.php" class="form_button" /><?php echo lang_key('back'); ?></a>
+					<a rel="noopener" href="department_configuration.php" class="form_button" /><?php echo lang_key('back'); ?></a>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="submit" class="form_button" value="<?php echo lang_key('continue'); ?>" />
 				</td>
-			</tr>                        
+			</tr>						
 			</table>
-			</form>                        
+			</form>						
 		</div>
 		<div class="clear"></div>
 	</div>
 	
-	<?php include_once('include/footer.inc.php'); ?>        
+	<?php include_once('include/footer.inc.php'); ?>		
 
 </div>
 

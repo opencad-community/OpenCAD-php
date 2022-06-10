@@ -1,9 +1,9 @@
 <?php
    
-    session_start();   
+	session_start();   
 
-	require_once('include/shared.inc.php');    
-    require_once('include/settings.inc.php');
+	require_once('include/shared.inc.php');	
+	require_once('include/settings.inc.php');
 	require_once('include/functions.inc.php');
 	require_once('include/languages.inc.php');	
 
@@ -13,10 +13,10 @@
 	
 	// handle previous installation
 	// -------------------------------------------------
-    if(file_exists(EI_CONFIG_FILE_PATH)){ 
+	if(file_exists(EI_CONFIG_FILE_PATH)){ 
 		$program_already_installed = true;
 		//header('location: '.EI_APPLICATION_START_FILE);
-        ///exit;
+		///exit;
 	}
 	
 	// handle previous steps
@@ -36,7 +36,7 @@
 		exit;
 	}
 
-    ob_start();    
+	ob_start();	
 	if(function_exists('phpinfo')) @phpinfo(-1);
 	$phpinfo = array('phpinfo' => array());
 	if(preg_match_all('#(?:<h2>(?:<a name=".*?">)?(.*?)(?:</a>)?</h2>)|(?:<tr(?: class=".*?")?><t[hd](?: class=".*?")?>(.*?)\s*</t[hd]>(?:<t[hd](?: class=".*?")?>(.*?)\s*</t[hd]>(?:<t[hd](?: class=".*?")?>(.*?)\s*</t[hd]>)?)?</tr>)#s', ob_get_clean(), $matches, PREG_SET_ORDER))
@@ -78,7 +78,7 @@
 		'divider_system_info' => array('title'=>lang_key('getting_system_info'), 'description'=>''),
 		
 		'phpversion'   => array(true, lang_key('php_version'), function_exists('phpversion'), phpversion(), lang_key('unknown')),
-		'system'       => array(false, lang_key('system'), isset($phpinfo['phpinfo']['System']), (isset($phpinfo['phpinfo']['System']) ? $phpinfo['phpinfo']['System'] : ''), lang_key('disabled')),
+		'system'	  => array(false, lang_key('system'), isset($phpinfo['phpinfo']['System']), (isset($phpinfo['phpinfo']['System']) ? $phpinfo['phpinfo']['System'] : ''), lang_key('disabled')),
 		'architecture' => array(false, lang_key('system_architecture'), (isset($phpinfo['phpinfo']['Architecture'])), (isset($phpinfo['phpinfo']['Architecture']) ? $phpinfo['phpinfo']['Architecture'] : ''), lang_key('disabled')),
 		'build_date'   => array(false, lang_key('build_date'), isset($phpinfo['phpinfo']['Build Date']), (isset($phpinfo['phpinfo']['Build Date']) ? $phpinfo['phpinfo']['Build Date'] : ''), lang_key('disabled')),
 		'server_api'   => array(false, lang_key('server_api'), isset($phpinfo['phpinfo']['Server API']), (isset($phpinfo['phpinfo']['Server API']) ? $phpinfo['phpinfo']['Server API'] : ''), lang_key('unknown')),
@@ -134,11 +134,11 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="author" content="OpenCAD Project">
-    <meta name="generator" content="OpenCAD Project Installer">
+	<meta name="author" content="OpenCAD Project">
+	<meta name="generator" content="OpenCAD Project">
 	<title><?php echo lang_key('installation_guide'); ?> | <?php echo lang_key('server_requirements'); ?></title>
 	
-	<link href="../images/favicon.ico" rel="shortcut icon" />
+	<link href="./images/favicon.ico" rel="shortcut icon" />
 	<link rel="stylesheet" type="text/css" href="templates/<?php echo EI_TEMPLATE; ?>/css/styles.css" />
 	<?php
 		if($curr_lang_direction == 'rtl'){
@@ -180,7 +180,7 @@
 								$content .= '<td colspan="2" nowrap height="9px"></td>';
 							}
 						}else{
-							$content .= '<td>&#8226; '.$val[1].': <i>'.(($val[2]) ? '<span class="found">'.$val[3].'</span>' : '<span class="disabled">'.$val[4].'</span>').'</i></td>';
+							$content .= '<td>&#8226; '.$val[1].': <em>'.(($val[2]) ? '<span class="found">'.$val[3].'</span>' : '<span class="disabled">'.$val[4].'</span>').'</em></td>';
 							if($val[0] == true && !$val[2]){
 								$is_error = true;
 								$error_mg[$key] = isset($val[5]) ? $val[5] : str_ireplace('_SETTINGS_NAME_', '<b>'.$key.'</b>', lang_key('error_server_requirements'));
@@ -212,7 +212,7 @@
 				</table>
 				
 				<div class="buttons-wrapper">
-					<a href="start.php" class="form_button" /><?php echo lang_key('back'); ?></a>
+					<a rel="noopener" href="start.php" class="form_button" /><?php echo lang_key('back'); ?></a>
 					<?php if(!$is_error){ ?>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="submit" class="form_button" name="btnSubmit" value="<?php echo lang_key('continue'); ?>" />
@@ -227,7 +227,7 @@
 					echo '<div class="content">';
 					include_once(EI_MANUAL_INSTALLATION_DIR.$arr_manual_installations[$curr_lang]);
 					echo '</div>';
-					echo '<div class="footer"><a href="start.php" class="form_button" title="'.lang_key('cancel_installation').'" />'.lang_key('back').'</a></div>';
+					echo '<div class="footer"><a rel="noopener" href="start.php" class="form_button" title="'.lang_key('cancel_installation').'" />'.lang_key('back').'</a></div>';
 					echo '</div>';
 				}
 			} 	
