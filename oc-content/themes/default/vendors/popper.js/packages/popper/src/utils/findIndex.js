@@ -12,7 +12,7 @@ import find from './find';
 export default function findIndex(arr, prop, value) {
   // use native findIndex if supported
   if (Array.prototype.findIndex) {
-    return arr.findIndex(cur => cur[prop] === value);
+	return arr.findIndex(cur => cur[prop] === value);
   }
 
   // use `find` + `indexOf` if `findIndex` isn't supported

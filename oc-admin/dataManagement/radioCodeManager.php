@@ -42,7 +42,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	{
 		if ($_SESSION['adminPrivilege'] == 'Moderator')
 		{
-		  // Do Nothing
+		// Do Nothing
 		}
 	}
 	else
@@ -102,7 +102,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				<div class="modal-header">
 					<h4 class="modal-title" id="editRadioCodeModal">Edit Radio Codes</h4>
 					<button type="button" class="close" data-dismiss="modal">
-					  <span aria-hidden="true">×</span></button>
+					<span aria-hidden="true">×</span></button>
 					</button>
 				</div>
 				<!-- ./ modal-header -->

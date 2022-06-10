@@ -284,9 +284,9 @@ function getCitationTypeDetails()
 
 function editCitationType()
 {
-	$id	        	                = !empty($_POST['id']) ? htmlspecialchars($_POST['id']) : '';
+	$id	   	           = !empty($_POST['id']) ? htmlspecialchars($_POST['id']) : '';
 	$citationDescription			= !empty($_POST['citationDescription']) ? htmlspecialchars($_POST['citationDescription']) : '';
-	$citationFine  		        	= !empty($_POST['citationFine']) ? $_POST['citationFine'] : '';
+	$citationFine  		   	= !empty($_POST['citationFine']) ? $_POST['citationFine'] : '';
 
 	try{
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -678,7 +678,7 @@ function getIncidentTypeDetails()
 
 function editIncidentType()
 {
-	$id	        	    = !empty($_POST['incidentTypeID']) ? htmlspecialchars($_POST['incidentTypeID']) : '';
+	$id	   	= !empty($_POST['incidentTypeID']) ? htmlspecialchars($_POST['incidentTypeID']) : '';
 	$incident_code		= !empty($_POST['incident_code']) ? htmlspecialchars($_POST['incident_code']) : '';
 	$incident_name    	= !empty($_POST['incident_name']) ? htmlspecialchars($_POST['incident_name']) : '';
 
@@ -872,10 +872,10 @@ function getRadioCodeDetails()
 
 function editRadioCode()
 {
-	$id	        	        = !empty($_POST['id']) ? htmlspecialchars($_POST['id']) : '';
-	$code		            = !empty($_POST['code']) ? htmlspecialchars($_POST['code']) : '';
+	$id	   	   = !empty($_POST['id']) ? htmlspecialchars($_POST['id']) : '';
+	$code		       = !empty($_POST['code']) ? htmlspecialchars($_POST['code']) : '';
 	$codeDescription		= !empty($_POST['codeDescription']) ? htmlspecialchars($_POST['codeDescription']) : '';
-	$OnCall		            = !empty($_POST['OnCall']) ? htmlspecialchars($_POST['OnCall']) : '';
+	$OnCall		       = !empty($_POST['OnCall']) ? htmlspecialchars($_POST['OnCall']) : '';
 
 	try{
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
@@ -1064,7 +1064,7 @@ function getStreetDetails()
 
 function editStreet()
 {
-	$id		    = !empty($_POST['streetID']) ? htmlspecialchars($_POST['streetID']) : '';
+	$id		= !empty($_POST['streetID']) ? htmlspecialchars($_POST['streetID']) : '';
 	$name 		= !empty($_POST['name']) ? htmlspecialchars($_POST['name']) : '';
 	$county 	= !empty($_POST['county']) ? htmlspecialchars($_POST['county']) : '';
 
@@ -1264,7 +1264,7 @@ function getVehicleDetails()
 **/
 function editVehicle()
 {
-	$id		    = !empty($_POST['vehicleID']) ? htmlspecialchars($_POST['vehicleID']) : '';
+	$id		= !empty($_POST['vehicleID']) ? htmlspecialchars($_POST['vehicleID']) : '';
 	$make 		= !empty($_POST['make']) ? htmlspecialchars($_POST['make']) : '';
 	$model   	= !empty($_POST['model']) ? htmlspecialchars($_POST['model']) : '';
 
@@ -1862,7 +1862,7 @@ function getWeaponDetails()
 
 function editWeapon()
 {
-	$id	        	    = !empty($_POST['weaponID']) ? htmlspecialchars($_POST['weaponID']) : '';
+	$id	   	= !empty($_POST['weaponID']) ? htmlspecialchars($_POST['weaponID']) : '';
 	$weaponType 		= !empty($_POST['weaponType']) ? htmlspecialchars($_POST['weaponType']) : '';
 	$weaponName     	= !empty($_POST['weaponName']) ? htmlspecialchars($_POST['weaponName']) : '';
 	try{

@@ -197,7 +197,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		</footer>
 
 			<?php
-	 require_once ( ABSPATH . OCTHEMEMOD . "/admin/globalModals.inc.php");
+	require_once ( ABSPATH . OCTHEMEMOD . "/admin/globalModals.inc.php");
 	require_once( ABSPATH . OCTHEMEINC ."/scripts.inc.php" ); ?>
 
 

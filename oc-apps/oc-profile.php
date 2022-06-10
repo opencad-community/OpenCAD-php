@@ -137,9 +137,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 		<!-- Change Password -->
 		<div class="modal" id="changePassword" tabindex="-1" role="dialog" aria-hidden="true">
-			 <div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-lg">
 					<div class="modal-content">
-						 <div class="modal-header">
+						<div class="modal-header">
 					<h4 class="modal-title" id="myModalLabel">Change Password</h4>
 								<button type="button" class="close" data-dismiss="modal" id="closeChangePassword"><span aria-hidden="true">×</span>
 								</button>

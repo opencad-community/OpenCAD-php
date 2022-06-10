@@ -163,7 +163,7 @@ permissionDenied();
 									<!-- ./ x_title -->
 									<div class="x_content">
 										<?php echo $historyMessage;?>
-										 <?php getCallHistory();?>
+										<?php getCallHistory();?>
 									</div>
 									<!-- ./ x_content -->
 								</div>

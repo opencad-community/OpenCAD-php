@@ -68,16 +68,16 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		<div class="breadcrumb" />
 		<div class="container-fluid">
 		<div class="animated fadeIn">
-		    <div class="card">
-			    <div class="card-header">
-		            <em class="fa fa-align-justify"></em> <?php echo lang_key("RADIOCODE_MANAGER"); ?>
+		<div class="card">
+			<div class="card-header">
+		       <em class="fa fa-align-justify"></em> <?php echo lang_key("RADIOCODE_MANAGER"); ?>
                 </div>
-			    <div class="card-body">
+			<div class="card-body">
 					<?php echo $accessMessage;?>
 					<?php getRadioCodes();?>
 				</div>
 				<!-- /.row-->
-			  </div>
+			</div>
 			</div>
 			<!-- /.card-->
 		</main>

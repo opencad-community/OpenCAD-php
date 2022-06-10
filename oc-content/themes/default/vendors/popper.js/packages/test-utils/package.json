@@ -6,10 +6,10 @@
   "author": "Federico Zivolo <federico.zivolo@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "exit 0"
+	"test": "exit 0"
   },
   "dependencies": {
-    "babel-eslint": "^7.2.3",
-    "eslint-plugin-jasmine": "^2.6.2"
+	"babel-eslint": "^7.2.3",
+	"eslint-plugin-jasmine": "^2.6.2"
   }
 }

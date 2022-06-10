@@ -18,14 +18,14 @@ export default function getOffsetRectRelativeToArbitraryNode(children, parent, f
 
   // In cases where the parent is fixed, we must ignore negative scroll in offset calc
   if(fixedPosition && isHTML) {
-    parentRect.top = Math.max(parentRect.top, 0);
-    parentRect.left = Math.max(parentRect.left, 0);
+	parentRect.top = Math.max(parentRect.top, 0);
+	parentRect.left = Math.max(parentRect.left, 0);
   }
   let offsets = getClientRect({
-    top: childrenRect.top - parentRect.top - borderTopWidth,
-    left: childrenRect.left - parentRect.left - borderLeftWidth,
-    width: childrenRect.width,
-    height: childrenRect.height,
+	top: childrenRect.top - parentRect.top - borderTopWidth,
+	left: childrenRect.left - parentRect.left - borderLeftWidth,
+	width: childrenRect.width,
+	height: childrenRect.height,
   });
   offsets.marginTop = 0;
   offsets.marginLeft = 0;
@@ -35,25 +35,25 @@ export default function getOffsetRectRelativeToArbitraryNode(children, parent, f
   // differently when margins are applied to it. The margins are included in
   // the box of the documentElement, in the other cases not.
   if (!isIE10 && isHTML) {
-    const marginTop = parseFloat(styles.marginTop, 10);
-    const marginLeft = parseFloat(styles.marginLeft, 10);
+	const marginTop = parseFloat(styles.marginTop, 10);
+	const marginLeft = parseFloat(styles.marginLeft, 10);
 
-    offsets.top -= borderTopWidth - marginTop;
-    offsets.bottom -= borderTopWidth - marginTop;
-    offsets.left -= borderLeftWidth - marginLeft;
-    offsets.right -= borderLeftWidth - marginLeft;
+	offsets.top -= borderTopWidth - marginTop;
+	offsets.bottom -= borderTopWidth - marginTop;
+	offsets.left -= borderLeftWidth - marginLeft;
+	offsets.right -= borderLeftWidth - marginLeft;
 
-    // Attach marginTop and marginLeft because in some circumstances we may need them
-    offsets.marginTop = marginTop;
-    offsets.marginLeft = marginLeft;
+	// Attach marginTop and marginLeft because in some circumstances we may need them
+	offsets.marginTop = marginTop;
+	offsets.marginLeft = marginLeft;
   }
 
   if (
-    isIE10 && !fixedPosition
-      ? parent.contains(scrollParent)
-      : parent === scrollParent && scrollParent.nodeName !== 'BODY'
+	isIE10 && !fixedPosition
+	 ? parent.contains(scrollParent)
+	 : parent === scrollParent && scrollParent.nodeName !== 'BODY'
   ) {
-    offsets = includeScroll(offsets, parent);
+	offsets = includeScroll(offsets, parent);
   }
 
   return offsets;

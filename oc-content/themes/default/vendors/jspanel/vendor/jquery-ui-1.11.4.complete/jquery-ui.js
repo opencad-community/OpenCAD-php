@@ -1711,9 +1711,9 @@ $.widget("ui.draggable", $.ui.mouse, {
 		}
 
 		/*
-		 * - Position generation -
-		 * This block generates everything position related - it's the core of draggables.
-		 */
+		* - Position generation -
+		* This block generates everything position related - it's the core of draggables.
+		*/
 
 		//Cache the margins of the original element
 		this._cacheMargins();
@@ -2119,9 +2119,9 @@ $.widget("ui.draggable", $.ui.mouse, {
 		}
 
 		/*
-		 * - Position constraining -
-		 * Constrain the position to a mix of grid, containment.
-		 */
+		* - Position constraining -
+		* Constrain the position to a mix of grid, containment.
+		*/
 
 		// If we are not dragging yet, we won't check for options
 		if ( constrainPosition ) {
@@ -4650,9 +4650,9 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 		this._cacheHelperProportions();
 
 		/*
-		 * - Position generation -
-		 * This block generates everything position related - it's the core of draggables.
-		 */
+		* - Position generation -
+		* This block generates everything position related - it's the core of draggables.
+		*/
 
 		//Cache the margins of the original element
 		this._cacheMargins();
@@ -5580,9 +5580,9 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 		}
 
 		/*
-		 * - Position constraining -
-		 * Constrain the position to a mix of grid, containment.
-		 */
+		* - Position constraining -
+		* Constrain the position to a mix of grid, containment.
+		*/
 
 		if(this.originalPosition) { //If we are not dragging yet, we won't check for options
 
@@ -8134,18 +8134,18 @@ $.extend(Datepicker.prototype, {
 	},
 
 	/* Override the default settings for all instances of the date picker.
-	 * @param  settings  object - the new settings to use as defaults (anonymous object)
-	 * @return the manager object
-	 */
+	* @param  settings  object - the new settings to use as defaults (anonymous object)
+	* @return the manager object
+	*/
 	setDefaults: function(settings) {
 		datepicker_extendRemove(this._defaults, settings || {});
 		return this;
 	},
 
 	/* Attach the date picker to a jQuery selection.
-	 * @param  target	element - the target input field or division or span
-	 * @param  settings  object - the new settings to use for this date picker instance (anonymous)
-	 */
+	* @param  target	element - the target input field or division or span
+	* @param  settings  object - the new settings to use for this date picker instance (anonymous)
+	*/
 	_attachDatepicker: function(target, settings) {
 		var nodeName, inline, inst;
 		nodeName = target.nodeName.toLowerCase();
@@ -8290,15 +8290,15 @@ $.extend(Datepicker.prototype, {
 	},
 
 	/* Pop-up the date picker in a "dialog" box.
-	 * @param  input element - ignored
-	 * @param  date	string or Date - the initial date to display
-	 * @param  onSelect  function - the function to call when a date is selected
-	 * @param  settings  object - update the dialog date picker instance's settings (anonymous object)
-	 * @param  pos int[2] - coordinates for the dialog's position within the screen or
-	 *					event - with x/y coordinates or
-	 *					leave empty for default (screen centre)
-	 * @return the manager object
-	 */
+	* @param  input element - ignored
+	* @param  date	string or Date - the initial date to display
+	* @param  onSelect  function - the function to call when a date is selected
+	* @param  settings  object - update the dialog date picker instance's settings (anonymous object)
+	* @param  pos int[2] - coordinates for the dialog's position within the screen or
+	*					event - with x/y coordinates or
+	*					leave empty for default (screen centre)
+	* @return the manager object
+	*/
 	_dialogDatepicker: function(input, date, onSelect, settings, pos) {
 		var id, browserWidth, browserHeight, scrollX, scrollY,
 			inst = this._dialogInst; // internal instance
@@ -8342,8 +8342,8 @@ $.extend(Datepicker.prototype, {
 	},
 
 	/* Detach a datepicker from its control.
-	 * @param  target	element - the target input field or division or span
-	 */
+	* @param  target	element - the target input field or division or span
+	*/
 	_destroyDatepicker: function(target) {
 		var nodeName,
 			$target = $(target),
@@ -8373,8 +8373,8 @@ $.extend(Datepicker.prototype, {
 	},
 
 	/* Enable the date picker to a jQuery selection.
-	 * @param  target	element - the target input field or division or span
-	 */
+	* @param  target	element - the target input field or division or span
+	*/
 	_enableDatepicker: function(target) {
 		var nodeName, inline,
 			$target = $(target),
@@ -8401,8 +8401,8 @@ $.extend(Datepicker.prototype, {
 	},
 
 	/* Disable the date picker to a jQuery selection.
-	 * @param  target	element - the target input field or division or span
-	 */
+	* @param  target	element - the target input field or division or span
+	*/
 	_disableDatepicker: function(target) {
 		var nodeName, inline,
 			$target = $(target),
@@ -8430,9 +8430,9 @@ $.extend(Datepicker.prototype, {
 	},
 
 	/* Is the first field in a jQuery collection disabled as a datepicker?
-	 * @param  target	element - the target input field or division or span
-	 * @return boolean - true if disabled, false if enabled
-	 */
+	* @param  target	element - the target input field or division or span
+	* @return boolean - true if disabled, false if enabled
+	*/
 	_isDisabledDatepicker: function(target) {
 		if (!target) {
 			return false;
@@ -8446,10 +8446,10 @@ $.extend(Datepicker.prototype, {
 	},
 
 	/* Retrieve the instance data for the target control.
-	 * @param  target  element - the target input field or division or span
-	 * @return  object - the associated instance data
-	 * @throws  error if a jQuery problem getting data
-	 */
+	* @param  target  element - the target input field or division or span
+	* @return  object - the associated instance data
+	* @throws  error if a jQuery problem getting data
+	*/
 	_getInst: function(target) {
 		try {
 			return $.data(target, "datepicker");
@@ -8460,14 +8460,14 @@ $.extend(Datepicker.prototype, {
 	},
 
 	/* Update or retrieve the settings for a date picker attached to an input field or division.
-	 * @param  target  element - the target input field or division or span
-	 * @param  name	object - the new settings to update or
-	 *				string - the name of the setting to change or retrieve,
-	 *				when retrieving also "all" for all instance settings or
-	 *				"defaults" for all global defaults
-	 * @param  value   any - the new value for the setting
-	 *				(omit if above is an object or to retrieve a value)
-	 */
+	* @param  target  element - the target input field or division or span
+	* @param  name	object - the new settings to update or
+	*				string - the name of the setting to change or retrieve,
+	*				when retrieving also "all" for all instance settings or
+	*				"defaults" for all global defaults
+	* @param  value   any - the new value for the setting
+	*				(omit if above is an object or to retrieve a value)
+	*/
 	_optionDatepicker: function(target, name, value) {
 		var settings, date, minDate, maxDate,
 			inst = this._getInst(target);
@@ -8521,8 +8521,8 @@ $.extend(Datepicker.prototype, {
 	},
 
 	/* Redraw the date picker attached to an input field or division.
-	 * @param  target  element - the target input field or division or span
-	 */
+	* @param  target  element - the target input field or division or span
+	*/
 	_refreshDatepicker: function(target) {
 		var inst = this._getInst(target);
 		if (inst) {
@@ -8531,9 +8531,9 @@ $.extend(Datepicker.prototype, {
 	},
 
 	/* Set the dates for a jQuery selection.
-	 * @param  target element - the target input field or division or span
-	 * @param  date	Date - the new date
-	 */
+	* @param  target element - the target input field or division or span
+	* @param  date	Date - the new date
+	*/
 	_setDateDatepicker: function(target, date) {
 		var inst = this._getInst(target);
 		if (inst) {
@@ -8544,10 +8544,10 @@ $.extend(Datepicker.prototype, {
 	},
 
 	/* Get the date(s) for the first entry in a jQuery selection.
-	 * @param  target element - the target input field or division or span
-	 * @param  noDefault boolean - true if no default date is to be used
-	 * @return Date - the current date
-	 */
+	* @param  target element - the target input field or division or span
+	* @param  noDefault boolean - true if no default date is to be used
+	* @return Date - the current date
+	*/
 	_getDateDatepicker: function(target, noDefault) {
 		var inst = this._getInst(target);
 		if (inst && !inst.inline) {
@@ -8690,10 +8690,10 @@ $.extend(Datepicker.prototype, {
 	},
 
 	/* Pop-up the date picker for a given input field.
-	 * If false returned from beforeShow event handler do not show.
-	 * @param  input  element - the input field attached to the date picker or
-	 *					event - if triggered by focus
-	 */
+	* If false returned from beforeShow event handler do not show.
+	* @param  input  element - the input field attached to the date picker or
+	*					event - if triggered by focus
+	*/
 	_showDatepicker: function(input) {
 		input = input.target || input;
 		if (input.nodeName.toLowerCase() !== "input") { // find from button/image trigger
@@ -8861,8 +8861,8 @@ $.extend(Datepicker.prototype, {
 	},
 
 	/* Hide the date picker from view.
-	 * @param  input  element - the input field attached to the date picker
-	 */
+	* @param  input  element - the input field attached to the date picker
+	*/
 	_hideDatepicker: function(input) {
 		var showAnim, duration, postProcess, onClose,
 			inst = this._curInst;
@@ -9047,18 +9047,18 @@ $.extend(Datepicker.prototype, {
 	},
 
 	/* Set as beforeShowDay function to prevent selection of weekends.
-	 * @param  date  Date - the date to customise
-	 * @return [boolean, string] - is this date selectable?, what is its CSS class?
-	 */
+	* @param  date  Date - the date to customise
+	* @return [boolean, string] - is this date selectable?, what is its CSS class?
+	*/
 	noWeekends: function(date) {
 		var day = date.getDay();
 		return [(day > 0 && day < 6), ""];
 	},
 
 	/* Set as calculateWeek to determine the week of the year based on the ISO 8601 definition.
-	 * @param  date  Date - the date to get the week for
-	 * @return  number - the number of the week within the year that contains this date
-	 */
+	* @param  date  Date - the date to get the week for
+	* @return  number - the number of the week within the year that contains this date
+	*/
 	iso8601Week: function(date) {
 		var time,
 			checkDate = new Date(date.getTime());
@@ -9073,18 +9073,18 @@ $.extend(Datepicker.prototype, {
 	},
 
 	/* Parse a string value into a date object.
-	 * See formatDate below for the possible formats.
-	 *
-	 * @param  format string - the expected format of the date
-	 * @param  value string - the date in the above format
-	 * @param  settings Object - attributes include:
-	 *					shortYearCutoff  number - the cutoff year for determining the century (optional)
-	 *					dayNamesShort	string[7] - abbreviated names of the days from Sunday (optional)
-	 *					dayNames		string[7] - names of the days from Sunday (optional)
-	 *					monthNamesShort string[12] - abbreviated names of the months (optional)
-	 *					monthNames		string[12] - names of the months (optional)
-	 * @return  Date - the extracted date value or null if value is blank
-	 */
+	* See formatDate below for the possible formats.
+	*
+	* @param  format string - the expected format of the date
+	* @param  value string - the date in the above format
+	* @param  settings Object - attributes include:
+	*					shortYearCutoff  number - the cutoff year for determining the century (optional)
+	*					dayNamesShort	string[7] - abbreviated names of the days from Sunday (optional)
+	*					dayNames		string[7] - names of the days from Sunday (optional)
+	*					monthNamesShort string[12] - abbreviated names of the months (optional)
+	*					monthNames		string[12] - names of the months (optional)
+	* @return  Date - the extracted date value or null if value is blank
+	*/
 	parseDate: function (format, value, settings) {
 		if (format == null || value == null) {
 			throw "Invalid arguments";
@@ -9267,33 +9267,33 @@ $.extend(Datepicker.prototype, {
 		Math.floor(1970 / 400)) * 24 * 60 * 60 * 10000000),
 
 	/* Format a date object into a string value.
-	 * The format can be combinations of the following:
-	 * d  - day of month (no leading zero)
-	 * dd - day of month (two digit)
-	 * o  - day of year (no leading zeros)
-	 * oo - day of year (three digit)
-	 * D  - day name short
-	 * DD - day name long
-	 * m  - month of year (no leading zero)
-	 * mm - month of year (two digit)
-	 * M  - month name short
-	 * MM - month name long
-	 * y  - year (two digit)
-	 * yy - year (four digit)
-	 * @ - Unix timestamp (ms since 01/01/1970)
-	 * ! - Windows ticks (100ns since 01/01/0001)
-	 * "..." - literal text
-	 * '' - single quote
-	 *
-	 * @param  format string - the desired format of the date
-	 * @param  date Date - the date value to format
-	 * @param  settings Object - attributes include:
-	 *					dayNamesShort	string[7] - abbreviated names of the days from Sunday (optional)
-	 *					dayNames		string[7] - names of the days from Sunday (optional)
-	 *					monthNamesShort string[12] - abbreviated names of the months (optional)
-	 *					monthNames		string[12] - names of the months (optional)
-	 * @return  string - the date in the above format
-	 */
+	* The format can be combinations of the following:
+	* d  - day of month (no leading zero)
+	* dd - day of month (two digit)
+	* o  - day of year (no leading zeros)
+	* oo - day of year (three digit)
+	* D  - day name short
+	* DD - day name long
+	* m  - month of year (no leading zero)
+	* mm - month of year (two digit)
+	* M  - month name short
+	* MM - month name long
+	* y  - year (two digit)
+	* yy - year (four digit)
+	* @ - Unix timestamp (ms since 01/01/1970)
+	* ! - Windows ticks (100ns since 01/01/0001)
+	* "..." - literal text
+	* '' - single quote
+	*
+	* @param  format string - the desired format of the date
+	* @param  date Date - the date value to format
+	* @param  settings Object - attributes include:
+	*					dayNamesShort	string[7] - abbreviated names of the days from Sunday (optional)
+	*					dayNames		string[7] - names of the days from Sunday (optional)
+	*					monthNamesShort string[12] - abbreviated names of the months (optional)
+	*					monthNames		string[12] - names of the months (optional)
+	* @return  string - the date in the above format
+	*/
 	formatDate: function (format, date, settings) {
 		if (!date) {
 			return "";
@@ -9519,12 +9519,12 @@ $.extend(Datepicker.prototype, {
 	},
 
 	/* Handle switch to/from daylight saving.
-	 * Hours may be non-zero on daylight saving cut-over:
-	 * > 12 when midnight changeover, but then cannot generate
-	 * midnight datetime, so jump to 1AM, otherwise reset.
-	 * @param  date  (Date) the date to check
-	 * @return  (Date) the corrected date
-	 */
+	* Hours may be non-zero on daylight saving cut-over:
+	* > 12 when midnight changeover, but then cannot generate
+	* midnight datetime, so jump to 1AM, otherwise reset.
+	* @param  date  (Date) the date to check
+	* @return  (Date) the corrected date
+	*/
 	_daylightSavingAdjust: function(date) {
 		if (!date) {
 			return null;
@@ -9561,8 +9561,8 @@ $.extend(Datepicker.prototype, {
 	},
 
 	/* Attach the onxxx handlers.  These are declared statically so
-	 * they work with static code transformers like Caja.
-	 */
+	* they work with static code transformers like Caja.
+	*/
 	_attachHandlers: function(inst) {
 		var stepMonths = this._get(inst, "stepMonths"),
 			id = "#" + inst.id.replace( /\\\\/g, "\\" );

@@ -8,11 +8,11 @@
  */
 export default function setAttributes(element, attributes) {
   Object.keys(attributes).forEach(function(prop) {
-    const value = attributes[prop];
-    if (value !== false) {
-      element.setAttribute(prop, attributes[prop]);
-    } else {
-      element.removeAttribute(prop);
-    }
+	const value = attributes[prop];
+	if (value !== false) {
+	 element.setAttribute(prop, attributes[prop]);
+	} else {
+	 element.removeAttribute(prop);
+	}
   });
 }

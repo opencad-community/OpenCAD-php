@@ -30,23 +30,23 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	}
 	else
 	{
-	  $name = $_SESSION['name'];
+	$name = $_SESSION['name'];
 	}
 
 
 	if ( $_SESSION['adminPrivilege'] == 3)
 	{
-	  if ($_SESSION['adminPrivilege'] == 'Administrator')
-	  {
-		  //Do nothing
-	  }
+	if ($_SESSION['adminPrivilege'] == 'Administrator')
+	{
+		//Do nothing
+	}
 	}
 	else if ($_SESSION['adminPrivilege'] == 2)
 	{
-	  if ($_SESSION['adminPrivilege'] == 'Moderator')
-	  {
-		  // Do Nothing
-	  }
+	if ($_SESSION['adminPrivilege'] == 'Moderator')
+	{
+		// Do Nothing
+	}
 	}
 	else
 	{
@@ -83,34 +83,32 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 <body class="app header-fixed">
 
 	<header class="app-header navbar">
-    	<button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+		<button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<?php require_once ( ABSPATH . OCTHEMEINC ."/admin/topbarNav.inc.php" ); ?>
 		<?php include( ABSPATH . "/" . OCTHEMES ."/". THEME ."/includes/topProfile.inc.php"); ?>
 	</header>
 
-    <div class="app-body">
+	<div class="app-body">
 		<main class="main">
 		<div class="breadcrumb" />
 		<div class="container-fluid">
-		<div class="animated fadeIn">
-		    <div class="card">
-			    <div class="card-header">
-		            <em class="fa fa-align-justify"></em> <?php echo lang_key("INCIDENTTYPE_MANAGER"); ?>
-                </div>
-			    <div class="card-body">
-					<?php echo $accessMessage;?>
-					<?php getIncidentTypes();?>
+			<div class="animated fadeIn">
+				<div class="card">
+					<div class="card-header">
+						<em class="fa fa-align-justify"></em> <?php echo lang_key("INCIDENTTYPE_MANAGER"); ?>
+					</div>
+					<div class="card-body">
+						<?php echo $accessMessage;?>
+						<?php getIncidentTypes();?>
+					</div>
+					<!-- /.row-->
 				</div>
-				<!-- /.row-->
-
-			  </div>
 			</div>
 			<!-- /.card-->
 		</main>
-
-		</div>
+	</div>
 			<?php require_once ( ABSPATH . "/" . OCTHEMES ."/". THEME ."/includes/footer.inc.php"); ?>
 
 	<!-- Edit Street Modal -->
@@ -120,7 +118,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				<div class="modal-header">
 					<h4 class="modal-title" id="IncidentTypeModal">Edit Incident Difinition</h4>
 					<button type="button" class="close" data-dismiss="modal">
-					  <span aria-hidden="true">×</span>
+					<span aria-hidden="true">×</span>
 					</button>
 				</div>
 				<!-- ./ modal-header -->
@@ -160,7 +158,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	<!-- ./ modal fade bs-example-modal-lg -->
 
 	<?php
-	 require_once ( ABSPATH . OCTHEMEMOD . "/admin/globalModals.inc.php");
+	require_once ( ABSPATH . OCTHEMEMOD . "/admin/globalModals.inc.php");
 	require_once( ABSPATH . OCTHEMEINC ."/scripts.inc.php" ); ?>
 
 		<script>

@@ -34,7 +34,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	{
 		if ($_SESSION['adminPrivilege'] == 'Administrator')
 		{
-		  //Do nothing
+		//Do nothing
 		}
 	}
 	else if ($_SESSION['adminPrivilege'] == 2)
@@ -142,7 +142,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		</div>
 		<!-- ./ modal fade bs-example-modal-lg -->
 		<?php
-		 require_once ( ABSPATH . OCTHEMEMOD . "/admin/globalModals.inc.php");
+		require_once ( ABSPATH . OCTHEMEMOD . "/admin/globalModals.inc.php");
 		require_once( ABSPATH . OCTHEMEINC ."/scripts.inc.php" ); ?>
 		<script>
 		$(document).ready(function() {

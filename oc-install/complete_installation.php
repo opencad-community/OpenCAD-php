@@ -2,12 +2,12 @@
 
 	session_start();
 
-	require_once('include/shared.inc.php');    
-    require_once('include/settings.inc.php');
+	require_once('include/shared.inc.php');	
+	require_once('include/settings.inc.php');
 	require_once('include/database.class.php'); 
-    require_once('include/functions.inc.php');	
+	require_once('include/functions.inc.php');	
 	require_once('include/languages.inc.php');	
-    
+	
 	$passed_step = isset($_SESSION['passed_step']) ? (int)$_SESSION['passed_step'] : 0;
 
 	// handle previous steps
@@ -20,7 +20,7 @@
 	}
 	
 	if(EI_MODE == 'debug') error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
-    
+	
 	$completed = false;
 	$error_mg  = array();
 		
@@ -42,7 +42,7 @@
 		$admin_email 						= isset($_SESSION['admin_email']) ? stripslashes($_SESSION['admin_email']) : '';
 		$password_encryption 				= isset($_SESSION['password_encryption']) ? $_SESSION['password_encryption'] : EI_PASSWORD_ENCRYPTION_TYPE;
 		
-	    $COMMUNITY_NAME						= isset($_SESSION['COMMUNITY_NAME']) ? prepare_input($_SESSION['COMMUNITY_NAME']) : '';
+	$COMMUNITY_NAME						= isset($_SESSION['COMMUNITY_NAME']) ? prepare_input($_SESSION['COMMUNITY_NAME']) : '';
 		$COMMUNITY_HOMEPAGE					= isset($_SESSION['COMMUNITY_HOMEPAGE']) ? prepare_input($_SESSION['COMMUNITY_HOMEPAGE']) : '';
 		
 		$BASE_URL							= isset($_SESSION['BASE_URL']) ? prepare_input($_SESSION['BASE_URL']) : '';
@@ -268,15 +268,15 @@
 	}else{
 		$error_mg[] = lang_key('alert_wrong_parameter_passed');
 	}
-        
+		
 ?>	
 
 <!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="author" content="OpenCAD Project">
-    <meta name="generator" content="OpenCAD Project Installer">
+	<meta name="author" content="OpenCAD Project">
+	<meta name="generator" content="OpenCAD Project Installer">
 	<title><?php echo lang_key('installation_guide'); ?> | <?php echo lang_key('complete_installation'); ?></title>
 
 	<link href="./images/favicon.ico" rel="shortcut icon" />
@@ -291,7 +291,7 @@
 	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 </head>
 <body>
-<div id="main">    
+<div id="main">	
 	<h1><?php echo lang_key('new_installation_of'); ?> <?php echo EI_APPLICATION_NAME.' '.EI_APPLICATION_VERSION;?>!</h1>
 	<h2 class="sub-title"><?php echo lang_key('sub_title_message'); ?></h2>
 	
@@ -385,7 +385,7 @@
 		<div class="clear"></div>
 	</div>
 	
-	<?php include_once('include/footer.inc.php'); ?>        
+	<?php include_once('include/footer.inc.php'); ?>		
 
 </div>
 </body>

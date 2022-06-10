@@ -22,42 +22,42 @@ export function toValue(str, measurement, popperOffsets, referenceOffsets) {
 
   // If it's not a number it's an operator, I guess
   if (!value) {
-    return str;
+	return str;
   }
 
   if (unit.indexOf('%') === 0) {
-    let element;
-    switch (unit) {
-      case '%p':
-        element = popperOffsets;
-        break;
-      case '%':
-      case '%r':
-      default:
-        element = referenceOffsets;
-    }
+	let element;
+	switch (unit) {
+	 case '%p':
+		element = popperOffsets;
+		break;
+	 case '%':
+	 case '%r':
+	 default:
+		element = referenceOffsets;
+	}
 
-    const rect = getClientRect(element);
-    return rect[measurement] / 100 * value;
+	const rect = getClientRect(element);
+	return rect[measurement] / 100 * value;
   } else if (unit === 'vh' || unit === 'vw') {
-    // if is a vh or vw, we calculate the size based on the viewport
-    let size;
-    if (unit === 'vh') {
-      size = Math.max(
-        document.documentElement.clientHeight,
-        window.innerHeight || 0
-      );
-    } else {
-      size = Math.max(
-        document.documentElement.clientWidth,
-        window.innerWidth || 0
-      );
-    }
-    return size / 100 * value;
+	// if is a vh or vw, we calculate the size based on the viewport
+	let size;
+	if (unit === 'vh') {
+	 size = Math.max(
+		document.documentElement.clientHeight,
+		window.innerHeight || 0
+	 );
+	} else {
+	 size = Math.max(
+		document.documentElement.clientWidth,
+		window.innerWidth || 0
+	 );
+	}
+	return size / 100 * value;
   } else {
-    // if is an explicit pixel unit, we get rid of the unit and keep the value
-    // if is an implicit unit, it's px, and we return just the value
-    return value;
+	// if is an explicit pixel unit, we get rid of the unit and keep the value
+	// if is an implicit unit, it's px, and we return just the value
+	return value;
   }
 }
 
@@ -92,65 +92,65 @@ export function parseOffset(
   // Detect if the offset string contains a pair of values or a single one
   // they could be separated by comma or space
   const divider = fragments.indexOf(
-    find(fragments, frag => frag.search(/,|\s/) !== -1)
+	find(fragments, frag => frag.search(/,|\s/) !== -1)
   );
 
   if (fragments[divider] && fragments[divider].indexOf(',') === -1) {
-    console.warn(
-      'Offsets separated by white space(s) are deprecated, use a comma (,) instead.'
-    );
+	console.warn(
+	 'Offsets separated by white space(s) are deprecated, use a comma (,) instead.'
+	);
   }
 
   // If divider is found, we divide the list of values and operands to divide
   // them by ofset X and Y.
   const splitRegex = /\s*,\s*|\s+/;
   let ops = divider !== -1
-    ? [
-        fragments
-          .slice(0, divider)
-          .concat([fragments[divider].split(splitRegex)[0]]),
-        [fragments[divider].split(splitRegex)[1]].concat(
-          fragments.slice(divider + 1)
-        ),
-      ]
-    : [fragments];
+	? [
+		fragments
+		 .slice(0, divider)
+		 .concat([fragments[divider].split(splitRegex)[0]]),
+		[fragments[divider].split(splitRegex)[1]].concat(
+		 fragments.slice(divider + 1)
+		),
+	 ]
+	: [fragments];
 
   // Convert the values with units to absolute pixels to allow our computations
   ops = ops.map((op, index) => {
-    // Most of the units rely on the orientation of the popper
-    const measurement = (index === 1 ? !useHeight : useHeight)
-      ? 'height'
-      : 'width';
-    let mergeWithPrevious = false;
-    return (
-      op
-        // This aggregates any `+` or `-` sign that aren't considered operators
-        // e.g.: 10 + +5 => [10, +, +5]
-        .reduce((a, b) => {
-          if (a[a.length - 1] === '' && ['+', '-'].indexOf(b) !== -1) {
-            a[a.length - 1] = b;
-            mergeWithPrevious = true;
-            return a;
-          } else if (mergeWithPrevious) {
-            a[a.length - 1] += b;
-            mergeWithPrevious = false;
-            return a;
-          } else {
-            return a.concat(b);
-          }
-        }, [])
-        // Here we convert the string values into number values (in px)
-        .map(str => toValue(str, measurement, popperOffsets, referenceOffsets))
-    );
+	// Most of the units rely on the orientation of the popper
+	const measurement = (index === 1 ? !useHeight : useHeight)
+	 ? 'height'
+	 : 'width';
+	let mergeWithPrevious = false;
+	return (
+	 op
+		// This aggregates any `+` or `-` sign that aren't considered operators
+		// e.g.: 10 + +5 => [10, +, +5]
+		.reduce((a, b) => {
+		 if (a[a.length - 1] === '' && ['+', '-'].indexOf(b) !== -1) {
+			a[a.length - 1] = b;
+			mergeWithPrevious = true;
+			return a;
+		 } else if (mergeWithPrevious) {
+			a[a.length - 1] += b;
+			mergeWithPrevious = false;
+			return a;
+		 } else {
+			return a.concat(b);
+		 }
+		}, [])
+		// Here we convert the string values into number values (in px)
+		.map(str => toValue(str, measurement, popperOffsets, referenceOffsets))
+	);
   });
 
   // Loop trough the offsets arrays and execute the operations
   ops.forEach((op, index) => {
-    op.forEach((frag, index2) => {
-      if (isNumeric(frag)) {
-        offsets[index] += frag * (op[index2 - 1] === '-' ? -1 : 1);
-      }
-    });
+	op.forEach((frag, index2) => {
+	 if (isNumeric(frag)) {
+		offsets[index] += frag * (op[index2 - 1] === '-' ? -1 : 1);
+	 }
+	});
   });
   return offsets;
 }
@@ -170,23 +170,23 @@ export default function offset(data, { offset }) {
 
   let offsets;
   if (isNumeric(+offset)) {
-    offsets = [+offset, 0];
+	offsets = [+offset, 0];
   } else {
-    offsets = parseOffset(offset, popper, reference, basePlacement);
+	offsets = parseOffset(offset, popper, reference, basePlacement);
   }
 
   if (basePlacement === 'left') {
-    popper.top += offsets[0];
-    popper.left -= offsets[1];
+	popper.top += offsets[0];
+	popper.left -= offsets[1];
   } else if (basePlacement === 'right') {
-    popper.top += offsets[0];
-    popper.left += offsets[1];
+	popper.top += offsets[0];
+	popper.left += offsets[1];
   } else if (basePlacement === 'top') {
-    popper.left += offsets[0];
-    popper.top -= offsets[1];
+	popper.left += offsets[0];
+	popper.top -= offsets[1];
   } else if (basePlacement === 'bottom') {
-    popper.left += offsets[0];
-    popper.top += offsets[1];
+	popper.left += offsets[0];
+	popper.top += offsets[1];
   }
 
   data.popper = popper;

@@ -3,8 +3,8 @@
 @Name :       	QapTcha - jQuery Plugin
 @Revison :    	3.0
 @Date : 		20/09/2011
-@Author:     	 ALPIXEL - (www.myjqueryplugins.com - www.alpixel.fr) 
-@License :		 Open Source - MIT License : http://www.opensource.org/licenses/mit-license.php
+@Author:     	ALPIXEL - (www.myjqueryplugins.com - www.alpixel.fr) 
+@License :		Open Source - MIT License : http://www.opensource.org/licenses/mit-license.php
  
 **************************************************************************
 *************************************************************************/
@@ -77,14 +77,14 @@ jQuery.QapTcha = {
 			});
 			
 			function generatePass() {
-		        var chars = 'azertyupqsdfghjkmwxcvbn23456789AZERTYUPQSDFGHJKMWXCVBN';
-		        var pass = '';
-		        for(i=0;i<10;i++){
-		            var wpos = Math.round(Math.random()*chars.length);
-		            pass += chars.substring(wpos,wpos+1);
-		        }
-		        return pass;
-		    }
+		   var chars = 'azertyupqsdfghjkmwxcvbn23456789AZERTYUPQSDFGHJKMWXCVBN';
+		   var pass = '';
+		   for(i=0;i<10;i++){
+		       var wpos = Math.round(Math.random()*chars.length);
+		       pass += chars.substring(wpos,wpos+1);
+		   }
+		   return pass;
+		}
 			
 		});
 	}

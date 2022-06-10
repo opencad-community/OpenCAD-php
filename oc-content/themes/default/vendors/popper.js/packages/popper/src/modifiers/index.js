@@ -40,12 +40,12 @@ export default {
    * @inner
    */
   shift: {
-    /** @prop {number} order=100 - Index used to define the order of execution */
-    order: 100,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: shift,
+	/** @prop {number} order=100 - Index used to define the order of execution */
+	order: 100,
+	/** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+	enabled: true,
+	/** @prop {ModifierFn} */
+	fn: shift,
   },
 
   /**
@@ -87,16 +87,16 @@ export default {
    * @inner
    */
   offset: {
-    /** @prop {number} order=200 - Index used to define the order of execution */
-    order: 200,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: offset,
-    /** @prop {Number|String} offset=0
-     * The offset value as described in the modifier description
-     */
-    offset: 0,
+	/** @prop {number} order=200 - Index used to define the order of execution */
+	order: 200,
+	/** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+	enabled: true,
+	/** @prop {ModifierFn} */
+	fn: offset,
+	/** @prop {Number|String} offset=0
+	* The offset value as described in the modifier description
+	*/
+	offset: 0,
   },
 
   /**
@@ -117,31 +117,31 @@ export default {
    * @inner
    */
   preventOverflow: {
-    /** @prop {number} order=300 - Index used to define the order of execution */
-    order: 300,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: preventOverflow,
-    /**
-     * @prop {Array} [priority=['left','right','top','bottom']]
-     * Popper will try to prevent overflow following these priorities by default,
-     * then, it could overflow on the left and on top of the `boundariesElement`
-     */
-    priority: ['left', 'right', 'top', 'bottom'],
-    /**
-     * @prop {number} padding=5
-     * Amount of pixel used to define a minimum distance between the boundaries
-     * and the popper. This makes sure the popper always has a little padding
-     * between the edges of its container
-     */
-    padding: 5,
-    /**
-     * @prop {String|HTMLElement} boundariesElement='scrollParent'
-     * Boundaries used by the modifier. Can be `scrollParent`, `window`,
-     * `viewport` or any DOM element.
-     */
-    boundariesElement: 'scrollParent',
+	/** @prop {number} order=300 - Index used to define the order of execution */
+	order: 300,
+	/** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+	enabled: true,
+	/** @prop {ModifierFn} */
+	fn: preventOverflow,
+	/**
+	* @prop {Array} [priority=['left','right','top','bottom']]
+	* Popper will try to prevent overflow following these priorities by default,
+	* then, it could overflow on the left and on top of the `boundariesElement`
+	*/
+	priority: ['left', 'right', 'top', 'bottom'],
+	/**
+	* @prop {number} padding=5
+	* Amount of pixel used to define a minimum distance between the boundaries
+	* and the popper. This makes sure the popper always has a little padding
+	* between the edges of its container
+	*/
+	padding: 5,
+	/**
+	* @prop {String|HTMLElement} boundariesElement='scrollParent'
+	* Boundaries used by the modifier. Can be `scrollParent`, `window`,
+	* `viewport` or any DOM element.
+	*/
+	boundariesElement: 'scrollParent',
   },
 
   /**
@@ -154,12 +154,12 @@ export default {
    * @inner
    */
   keepTogether: {
-    /** @prop {number} order=400 - Index used to define the order of execution */
-    order: 400,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: keepTogether,
+	/** @prop {number} order=400 - Index used to define the order of execution */
+	order: 400,
+	/** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+	enabled: true,
+	/** @prop {ModifierFn} */
+	fn: keepTogether,
   },
 
   /**
@@ -173,14 +173,14 @@ export default {
    * @inner
    */
   arrow: {
-    /** @prop {number} order=500 - Index used to define the order of execution */
-    order: 500,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: arrow,
-    /** @prop {String|HTMLElement} element='[x-arrow]' - Selector or node used as arrow */
-    element: '[x-arrow]',
+	/** @prop {number} order=500 - Index used to define the order of execution */
+	order: 500,
+	/** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+	enabled: true,
+	/** @prop {ModifierFn} */
+	fn: arrow,
+	/** @prop {String|HTMLElement} element='[x-arrow]' - Selector or node used as arrow */
+	element: '[x-arrow]',
   },
 
   /**
@@ -195,47 +195,47 @@ export default {
    * @inner
    */
   flip: {
-    /** @prop {number} order=600 - Index used to define the order of execution */
-    order: 600,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: flip,
-    /**
-     * @prop {String|Array} behavior='flip'
-     * The behavior used to change the popper's placement. It can be one of
-     * `flip`, `clockwise`, `counterclockwise` or an array with a list of valid
-     * placements (with optional variations)
-     */
-    behavior: 'flip',
-    /**
-     * @prop {number} padding=5
-     * The popper will flip if it hits the edges of the `boundariesElement`
-     */
-    padding: 5,
-    /**
-     * @prop {String|HTMLElement} boundariesElement='viewport'
-     * The element which will define the boundaries of the popper position.
-     * The popper will never be placed outside of the defined boundaries
-     * (except if `keepTogether` is enabled)
-     */
-    boundariesElement: 'viewport',
-    /**
-     * @prop {Boolean} flipVariations=false
-     * The popper will switch placement variation between `-start` and `-end` when
-     * the reference element overlaps its boundaries.
-     *
-     * The original placement should have a set variation.
-     */
-    flipVariations: false,
-    /**
-     * @prop {Boolean} flipVariationsByContent=false
-     * The popper will switch placement variation between `-start` and `-end` when
-     * the popper element overlaps its reference boundaries.
-     *
-     * The original placement should have a set variation.
-     */
-    flipVariationsByContent: false,
+	/** @prop {number} order=600 - Index used to define the order of execution */
+	order: 600,
+	/** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+	enabled: true,
+	/** @prop {ModifierFn} */
+	fn: flip,
+	/**
+	* @prop {String|Array} behavior='flip'
+	* The behavior used to change the popper's placement. It can be one of
+	* `flip`, `clockwise`, `counterclockwise` or an array with a list of valid
+	* placements (with optional variations)
+	*/
+	behavior: 'flip',
+	/**
+	* @prop {number} padding=5
+	* The popper will flip if it hits the edges of the `boundariesElement`
+	*/
+	padding: 5,
+	/**
+	* @prop {String|HTMLElement} boundariesElement='viewport'
+	* The element which will define the boundaries of the popper position.
+	* The popper will never be placed outside of the defined boundaries
+	* (except if `keepTogether` is enabled)
+	*/
+	boundariesElement: 'viewport',
+	/**
+	* @prop {Boolean} flipVariations=false
+	* The popper will switch placement variation between `-start` and `-end` when
+	* the reference element overlaps its boundaries.
+	*
+	* The original placement should have a set variation.
+	*/
+	flipVariations: false,
+	/**
+	* @prop {Boolean} flipVariationsByContent=false
+	* The popper will switch placement variation between `-start` and `-end` when
+	* the popper element overlaps its reference boundaries.
+	*
+	* The original placement should have a set variation.
+	*/
+	flipVariationsByContent: false,
   },
 
   /**
@@ -246,12 +246,12 @@ export default {
    * @inner
    */
   inner: {
-    /** @prop {number} order=700 - Index used to define the order of execution */
-    order: 700,
-    /** @prop {Boolean} enabled=false - Whether the modifier is enabled or not */
-    enabled: false,
-    /** @prop {ModifierFn} */
-    fn: inner,
+	/** @prop {number} order=700 - Index used to define the order of execution */
+	order: 700,
+	/** @prop {Boolean} enabled=false - Whether the modifier is enabled or not */
+	enabled: false,
+	/** @prop {ModifierFn} */
+	fn: inner,
   },
 
   /**
@@ -265,12 +265,12 @@ export default {
    * @inner
    */
   hide: {
-    /** @prop {number} order=800 - Index used to define the order of execution */
-    order: 800,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: hide,
+	/** @prop {number} order=800 - Index used to define the order of execution */
+	order: 800,
+	/** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+	enabled: true,
+	/** @prop {ModifierFn} */
+	fn: hide,
   },
 
   /**
@@ -289,30 +289,30 @@ export default {
    * @inner
    */
   computeStyle: {
-    /** @prop {number} order=850 - Index used to define the order of execution */
-    order: 850,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: computeStyle,
-    /**
-     * @prop {Boolean} gpuAcceleration=true
-     * If true, it uses the CSS 3D transformation to position the popper.
-     * Otherwise, it will use the `top` and `left` properties
-     */
-    gpuAcceleration: true,
-    /**
-     * @prop {string} [x='bottom']
-     * Where to anchor the X axis (`bottom` or `top`). AKA X offset origin.
-     * Change this if your popper should grow in a direction different from `bottom`
-     */
-    x: 'bottom',
-    /**
-     * @prop {string} [x='left']
-     * Where to anchor the Y axis (`left` or `right`). AKA Y offset origin.
-     * Change this if your popper should grow in a direction different from `right`
-     */
-    y: 'right',
+	/** @prop {number} order=850 - Index used to define the order of execution */
+	order: 850,
+	/** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+	enabled: true,
+	/** @prop {ModifierFn} */
+	fn: computeStyle,
+	/**
+	* @prop {Boolean} gpuAcceleration=true
+	* If true, it uses the CSS 3D transformation to position the popper.
+	* Otherwise, it will use the `top` and `left` properties
+	*/
+	gpuAcceleration: true,
+	/**
+	* @prop {string} [x='bottom']
+	* Where to anchor the X axis (`bottom` or `top`). AKA X offset origin.
+	* Change this if your popper should grow in a direction different from `bottom`
+	*/
+	x: 'bottom',
+	/**
+	* @prop {string} [x='left']
+	* Where to anchor the Y axis (`left` or `right`). AKA Y offset origin.
+	* Change this if your popper should grow in a direction different from `right`
+	*/
+	y: 'right',
   },
 
   /**
@@ -331,21 +331,21 @@ export default {
    * @inner
    */
   applyStyle: {
-    /** @prop {number} order=900 - Index used to define the order of execution */
-    order: 900,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: applyStyle,
-    /** @prop {Function} */
-    onLoad: applyStyleOnLoad,
-    /**
-     * @deprecated since version 1.10.0, the property moved to `computeStyle` modifier
-     * @prop {Boolean} gpuAcceleration=true
-     * If true, it uses the CSS 3D transformation to position the popper.
-     * Otherwise, it will use the `top` and `left` properties
-     */
-    gpuAcceleration: undefined,
+	/** @prop {number} order=900 - Index used to define the order of execution */
+	order: 900,
+	/** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+	enabled: true,
+	/** @prop {ModifierFn} */
+	fn: applyStyle,
+	/** @prop {Function} */
+	onLoad: applyStyleOnLoad,
+	/**
+	* @deprecated since version 1.10.0, the property moved to `computeStyle` modifier
+	* @prop {Boolean} gpuAcceleration=true
+	* If true, it uses the CSS 3D transformation to position the popper.
+	* Otherwise, it will use the `top` and `left` properties
+	*/
+	gpuAcceleration: undefined,
   },
 };
 

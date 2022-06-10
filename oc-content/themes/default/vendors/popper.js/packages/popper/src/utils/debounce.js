@@ -3,9 +3,9 @@ import isBrowser from './isBrowser';
 const timeoutDuration = (function(){
   const longerTimeoutBrowsers = ['Edge', 'Trident', 'Firefox'];
   for (let i = 0; i < longerTimeoutBrowsers.length; i += 1) {
-    if (isBrowser && navigator.userAgent.indexOf(longerTimeoutBrowsers[i]) >= 0) {
-      return 1;
-    }
+	if (isBrowser && navigator.userAgent.indexOf(longerTimeoutBrowsers[i]) >= 0) {
+	 return 1;
+	}
   }
   return 0;
 }());
@@ -13,27 +13,27 @@ const timeoutDuration = (function(){
 export function microtaskDebounce(fn) {
   let called = false
   return () => {
-    if (called) {
-      return
-    }
-    called = true
-    window.Promise.resolve().then(() => {
-      called = false
-      fn()
-    })
+	if (called) {
+	 return
+	}
+	called = true
+	window.Promise.resolve().then(() => {
+	 called = false
+	 fn()
+	})
   }
 }
 
 export function taskDebounce(fn) {
   let scheduled = false;
   return () => {
-    if (!scheduled) {
-      scheduled = true;
-      setTimeout(() => {
-        scheduled = false;
-        fn();
-      }, timeoutDuration);
-    }
+	if (!scheduled) {
+	 scheduled = true;
+	 setTimeout(() => {
+		scheduled = false;
+		fn();
+	 }, timeoutDuration);
+	}
   };
 }
 

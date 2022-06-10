@@ -1,5 +1,6 @@
 <?php
 require_once("../oc-config.php");
+require_once( ABSPATH . OCINC . "/apiAuth.php");
 
 //connect with the database
 $db = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -8,7 +9,7 @@ $searchTerm = $_GET['term'];
 //get matched data from skills table
 $query = $db->query("SELECT * FROM ".DB_PREFIX."ncicNames WHERE name LIKE '%".$searchTerm."%' ORDER BY name ASC");
 while ($row = $query->fetch_assoc()) {
-    $data[] = $row['name'];
+	$data[] = $row['name'];
 }
 //return json data
 echo json_encode($data);

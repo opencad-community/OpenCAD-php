@@ -97,19 +97,19 @@ var Buttons = function( dt, config )
 
 $.extend( Buttons.prototype, {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	 * Public methods
-	 */
+	* Public methods
+	*/
 
 	/**
-	 * Get the action of a button
-	 * @param  {int|string} Button index
-	 * @return {function}
-	 *//**
-	 * Set the action of a button
-	 * @param  {node} node Button element
-	 * @param  {function} action Function to set
-	 * @return {Buttons} Self for chaining
-	 */
+	* Get the action of a button
+	* @param  {int|string} Button index
+	* @return {function}
+	*//**
+	* Set the action of a button
+	* @param  {node} node Button element
+	* @param  {function} action Function to set
+	* @return {Buttons} Self for chaining
+	*/
 	action: function ( node, action )
 	{
 		var button = this._nodeToButton( node );
@@ -124,12 +124,12 @@ $.extend( Buttons.prototype, {
 	},
 
 	/**
-	 * Add an active class to the button to make to look active or get current
-	 * active state.
-	 * @param  {node} node Button element
-	 * @param  {boolean} [flag] Enable / disable flag
-	 * @return {Buttons} Self for chaining or boolean for getter
-	 */
+	* Add an active class to the button to make to look active or get current
+	* active state.
+	* @param  {node} node Button element
+	* @param  {boolean} [flag] Enable / disable flag
+	* @return {Buttons} Self for chaining or boolean for getter
+	*/
 	active: function ( node, flag ) {
 		var button = this._nodeToButton( node );
 		var klass = this.c.dom.button.active;
@@ -145,11 +145,11 @@ $.extend( Buttons.prototype, {
 	},
 
 	/**
-	 * Add a new button
-	 * @param {object} config Button configuration object, base string name or function
-	 * @param {int|string} [idx] Button index for where to insert the button
-	 * @return {Buttons} Self for chaining
-	 */
+	* Add a new button
+	* @param {object} config Button configuration object, base string name or function
+	* @param {int|string} [idx] Button index for where to insert the button
+	* @return {Buttons} Self for chaining
+	*/
 	add: function ( config, idx )
 	{
 		var buttons = this.s.buttons;
@@ -173,19 +173,19 @@ $.extend( Buttons.prototype, {
 	},
 
 	/**
-	 * Get the container node for the buttons
-	 * @return {jQuery} Buttons node
-	 */
+	* Get the container node for the buttons
+	* @return {jQuery} Buttons node
+	*/
 	container: function ()
 	{
 		return this.dom.container;
 	},
 
 	/**
-	 * Disable a button
-	 * @param  {node} node Button node
-	 * @return {Buttons} Self for chaining
-	 */
+	* Disable a button
+	* @param  {node} node Button node
+	* @return {Buttons} Self for chaining
+	*/
 	disable: function ( node ) {
 		var button = this._nodeToButton( node );
 
@@ -195,10 +195,10 @@ $.extend( Buttons.prototype, {
 	},
 
 	/**
-	 * Destroy the instance, cleaning up event handlers and removing DOM
-	 * elements
-	 * @return {Buttons} Self for chaining
-	 */
+	* Destroy the instance, cleaning up event handlers and removing DOM
+	* elements
+	* @return {Buttons} Self for chaining
+	*/
 	destroy: function ()
 	{
 		// Key event listener
@@ -230,11 +230,11 @@ $.extend( Buttons.prototype, {
 	},
 
 	/**
-	 * Enable / disable a button
-	 * @param  {node} node Button node
-	 * @param  {boolean} [flag=true] Enable / disable flag
-	 * @return {Buttons} Self for chaining
-	 */
+	* Enable / disable a button
+	* @param  {node} node Button node
+	* @param  {boolean} [flag=true] Enable / disable flag
+	* @return {Buttons} Self for chaining
+	*/
 	enable: function ( node, flag )
 	{
 		if ( flag === false ) {
@@ -248,19 +248,19 @@ $.extend( Buttons.prototype, {
 	},
 
 	/**
-	 * Get the instance name for the button set selector
-	 * @return {string} Instance name
-	 */
+	* Get the instance name for the button set selector
+	* @return {string} Instance name
+	*/
 	name: function ()
 	{
 		return this.c.name;
 	},
 
 	/**
-	 * Get a button's node of the buttons container if no button is given
-	 * @param  {node} [node] Button node
-	 * @return {jQuery} Button element, or container
-	 */
+	* Get a button's node of the buttons container if no button is given
+	* @param  {node} [node] Button node
+	* @return {jQuery} Button element, or container
+	*/
 	node: function ( node )
 	{
 		if ( ! node ) {
@@ -272,11 +272,11 @@ $.extend( Buttons.prototype, {
 	},
 
 	/**
-	 * Set / get a processing class on the selected button
-	 * @param {element} node Triggering button node
-	 * @param  {boolean} flag true to add, false to remove, undefined to get
-	 * @return {boolean|Buttons} Getter value or this if a setter.
-	 */
+	* Set / get a processing class on the selected button
+	* @param {element} node Triggering button node
+	* @param  {boolean} flag true to add, false to remove, undefined to get
+	* @return {boolean|Buttons} Getter value or this if a setter.
+	*/
 	processing: function ( node, flag )
 	{
 		var dt = this.s.dt;
@@ -296,10 +296,10 @@ $.extend( Buttons.prototype, {
 	},
 
 	/**
-	 * Remove a button.
-	 * @param  {node} node Button node
-	 * @return {Buttons} Self for chaining
-	 */
+	* Remove a button.
+	* @param  {node} node Button node
+	* @return {Buttons} Self for chaining
+	*/
 	remove: function ( node )
 	{
 		var button = this._nodeToButton( node );
@@ -329,15 +329,15 @@ $.extend( Buttons.prototype, {
 	},
 
 	/**
-	 * Get the text for a button
-	 * @param  {int|string} node Button index
-	 * @return {string} Button text
-	 *//**
-	 * Set the text for a button
-	 * @param  {int|string|function} node Button index
-	 * @param  {string} label Text
-	 * @return {Buttons} Self for chaining
-	 */
+	* Get the text for a button
+	* @param  {int|string} node Button index
+	* @return {string} Button text
+	*//**
+	* Set the text for a button
+	* @param  {int|string|function} node Button index
+	* @param  {string} label Text
+	* @return {Buttons} Self for chaining
+	*/
 	text: function ( node, label )
 	{
 		var button = this._nodeToButton( node );
@@ -371,13 +371,13 @@ $.extend( Buttons.prototype, {
 
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	 * Constructor
-	 */
+	* Constructor
+	*/
 
 	/**
-	 * Buttons constructor
-	 * @private
-	 */
+	* Buttons constructor
+	* @private
+	*/
 	_constructor: function ()
 	{
 		var that = this;
@@ -420,14 +420,14 @@ $.extend( Buttons.prototype, {
 
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	 * Private methods
-	 */
+	* Private methods
+	*/
 
 	/**
-	 * Add a new button to the key press listener
-	 * @param {object} conf Resolved button configuration object
-	 * @private
-	 */
+	* Add a new button to the key press listener
+	* @param {object} conf Resolved button configuration object
+	* @private
+	*/
 	_addKey: function ( conf )
 	{
 		if ( conf.key ) {
@@ -438,11 +438,11 @@ $.extend( Buttons.prototype, {
 	},
 
 	/**
-	 * Insert the buttons into the container. Call without parameters!
-	 * @param  {node} [container] Recursive only - Insert point
-	 * @param  {array} [buttons] Recursive only - Buttons array
-	 * @private
-	 */
+	* Insert the buttons into the container. Call without parameters!
+	* @param  {node} [container] Recursive only - Insert point
+	* @param  {array} [buttons] Recursive only - Buttons array
+	* @private
+	*/
 	_draw: function ( container, buttons )
 	{
 		if ( ! container ) {
@@ -463,12 +463,12 @@ $.extend( Buttons.prototype, {
 	},
 
 	/**
-	 * Create buttons from an array of buttons
-	 * @param  {array} attachTo Buttons array to attach to
-	 * @param  {object} button Button definition
-	 * @param  {boolean} inCollection true if the button is in a collection
-	 * @private
-	 */
+	* Create buttons from an array of buttons
+	* @param  {array} attachTo Buttons array to attach to
+	* @param  {object} button Button definition
+	* @param  {boolean} inCollection true if the button is in a collection
+	* @private
+	*/
 	_expandButton: function ( attachTo, button, inCollection, attachPoint )
 	{
 		var dt = this.s.dt;
@@ -523,12 +523,12 @@ $.extend( Buttons.prototype, {
 	},
 
 	/**
-	 * Create an individual button
-	 * @param  {object} config            Resolved button configuration
-	 * @param  {boolean} inCollection `true` if a collection button
-	 * @return {jQuery} Created button node (jQuery)
-	 * @private
-	 */
+	* Create an individual button
+	* @param  {object} config            Resolved button configuration
+	* @param  {boolean} inCollection `true` if a collection button
+	* @return {jQuery} Created button node (jQuery)
+	* @private
+	*/
 	_buildButton: function ( config, inCollection )
 	{
 		var buttonDom = this.c.dom.button;
@@ -663,12 +663,12 @@ $.extend( Buttons.prototype, {
 	},
 
 	/**
-	 * Get the button object from a node (recursive)
-	 * @param  {node} node Button node
-	 * @param  {array} [buttons] Button array, uses base if not defined
-	 * @return {object} Button object
-	 * @private
-	 */
+	* Get the button object from a node (recursive)
+	* @param  {node} node Button node
+	* @param  {array} [buttons] Button array, uses base if not defined
+	* @return {object} Button object
+	* @private
+	*/
 	_nodeToButton: function ( node, buttons )
 	{
 		if ( ! buttons ) {
@@ -691,12 +691,12 @@ $.extend( Buttons.prototype, {
 	},
 
 	/**
-	 * Get container array for a button from a button node (recursive)
-	 * @param  {node} node Button node
-	 * @param  {array} [buttons] Button array, uses base if not defined
-	 * @return {array} Button's host array
-	 * @private
-	 */
+	* Get container array for a button from a button node (recursive)
+	* @param  {node} node Button node
+	* @param  {array} [buttons] Button array, uses base if not defined
+	* @return {array} Button's host array
+	* @private
+	*/
 	_nodeToHost: function ( node, buttons )
 	{
 		if ( ! buttons ) {
@@ -719,12 +719,12 @@ $.extend( Buttons.prototype, {
 	},
 
 	/**
-	 * Handle a key press - determine if any button's key configured matches
-	 * what was typed and trigger the action if so.
-	 * @param  {string} character The character pressed
-	 * @param  {object} e Key event that triggered this call
-	 * @private
-	 */
+	* Handle a key press - determine if any button's key configured matches
+	* what was typed and trigger the action if so.
+	* @param  {string} character The character pressed
+	* @param  {object} e Key event that triggered this call
+	* @private
+	*/
 	_keypress: function ( character, e )
 	{
 		// Check if this button press already activated on another instance of Buttons
@@ -782,11 +782,11 @@ $.extend( Buttons.prototype, {
 	},
 
 	/**
-	 * Remove a key from the key listener for this instance (to be used when a
-	 * button is removed)
-	 * @param  {object} conf Button configuration
-	 * @private
-	 */
+	* Remove a key from the key listener for this instance (to be used when a
+	* button is removed)
+	* @param  {object} conf Button configuration
+	* @private
+	*/
 	_removeKey: function ( conf )
 	{
 		if ( conf.key ) {
@@ -804,11 +804,11 @@ $.extend( Buttons.prototype, {
 	},
 
 	/**
-	 * Resolve a button configuration
-	 * @param  {string|function|object} conf Button config to resolve
-	 * @return {object} Button configuration
-	 * @private
-	 */
+	* Resolve a button configuration
+	* @param  {string|function|object} conf Button config to resolve
+	* @return {object} Button configuration
+	* @private
+	*/
 	_resolveExtends: function ( conf )
 	{
 		var dt = this.s.dt;
@@ -921,11 +921,11 @@ $.extend( Buttons.prototype, {
 	},
 
 	/**
-	 * Display (and replace if there is an existing one) a popover attached to a button
-	 * @param {string|node} content Content to show
-	 * @param {DataTable.Api} hostButton DT API instance of the button
-	 * @param {object} inOpts Options (see object below for all options)
-	 */
+	* Display (and replace if there is an existing one) a popover attached to a button
+	* @param {string|node} content Content to show
+	* @param {DataTable.Api} hostButton DT API instance of the button
+	* @param {object} inOpts Options (see object below for all options)
+	*/
 	_popover: function ( content, hostButton, inOpts ) {
 		var dt = hostButton;
 		var buttonsSettings = this.c;

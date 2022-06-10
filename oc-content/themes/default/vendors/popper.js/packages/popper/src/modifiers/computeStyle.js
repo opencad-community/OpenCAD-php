@@ -20,30 +20,30 @@ export default function computeStyle(data, options) {
 
   // Remove this legacy support in Popper.js v2
   const legacyGpuAccelerationOption = find(
-    data.instance.modifiers,
-    modifier => modifier.name === 'applyStyle'
+	data.instance.modifiers,
+	modifier => modifier.name === 'applyStyle'
   ).gpuAcceleration;
   if (legacyGpuAccelerationOption !== undefined) {
-    console.warn(
-      'WARNING: `gpuAcceleration` option moved to `computeStyle` modifier and will not be supported in future versions of Popper.js!'
-    );
+	console.warn(
+	 'WARNING: `gpuAcceleration` option moved to `computeStyle` modifier and will not be supported in future versions of Popper.js!'
+	);
   }
   const gpuAcceleration =
-    legacyGpuAccelerationOption !== undefined
-      ? legacyGpuAccelerationOption
-      : options.gpuAcceleration;
+	legacyGpuAccelerationOption !== undefined
+	 ? legacyGpuAccelerationOption
+	 : options.gpuAcceleration;
 
   const offsetParent = getOffsetParent(data.instance.popper);
   const offsetParentRect = getBoundingClientRect(offsetParent);
 
   // Styles
   const styles = {
-    position: popper.position,
+	position: popper.position,
   };
 
   const offsets = getRoundedOffsets(
-    data,
-    window.devicePixelRatio < 2 || !isFirefox
+	data,
+	window.devicePixelRatio < 2 || !isFirefox
   );
 
   const sideA = x === 'bottom' ? 'top' : 'bottom';
@@ -65,42 +65,42 @@ export default function computeStyle(data, options) {
   // its bottom.
   let left, top;
   if (sideA === 'bottom') {
-    // when offsetParent is <html> the positioning is relative to the bottom of the screen (excluding the scrollbar)
-    // and not the bottom of the html element
-    if (offsetParent.nodeName === 'HTML') {
-      top = -offsetParent.clientHeight + offsets.bottom;
-    } else {
-      top = -offsetParentRect.height + offsets.bottom;
-    }
+	// when offsetParent is <html> the positioning is relative to the bottom of the screen (excluding the scrollbar)
+	// and not the bottom of the html element
+	if (offsetParent.nodeName === 'HTML') {
+	 top = -offsetParent.clientHeight + offsets.bottom;
+	} else {
+	 top = -offsetParentRect.height + offsets.bottom;
+	}
   } else {
-    top = offsets.top;
+	top = offsets.top;
   }
   if (sideB === 'right') {
-    if (offsetParent.nodeName === 'HTML') {
-      left = -offsetParent.clientWidth + offsets.right;
-    } else {
-      left = -offsetParentRect.width + offsets.right;
-    }
+	if (offsetParent.nodeName === 'HTML') {
+	 left = -offsetParent.clientWidth + offsets.right;
+	} else {
+	 left = -offsetParentRect.width + offsets.right;
+	}
   } else {
-    left = offsets.left;
+	left = offsets.left;
   }
   if (gpuAcceleration && prefixedProperty) {
-    styles[prefixedProperty] = `translate3d(${left}px, ${top}px, 0)`;
-    styles[sideA] = 0;
-    styles[sideB] = 0;
-    styles.willChange = 'transform';
+	styles[prefixedProperty] = `translate3d(${left}px, ${top}px, 0)`;
+	styles[sideA] = 0;
+	styles[sideB] = 0;
+	styles.willChange = 'transform';
   } else {
-    // othwerise, we use the standard `top`, `left`, `bottom` and `right` properties
-    const invertTop = sideA === 'bottom' ? -1 : 1;
-    const invertLeft = sideB === 'right' ? -1 : 1;
-    styles[sideA] = top * invertTop;
-    styles[sideB] = left * invertLeft;
-    styles.willChange = `${sideA}, ${sideB}`;
+	// othwerise, we use the standard `top`, `left`, `bottom` and `right` properties
+	const invertTop = sideA === 'bottom' ? -1 : 1;
+	const invertLeft = sideB === 'right' ? -1 : 1;
+	styles[sideA] = top * invertTop;
+	styles[sideB] = left * invertLeft;
+	styles.willChange = `${sideA}, ${sideB}`;
   }
 
   // Attributes
   const attributes = {
-    'x-placement': data.placement,
+	'x-placement': data.placement,
   };
 
   // Update `data` attributes, styles and arrowStyles

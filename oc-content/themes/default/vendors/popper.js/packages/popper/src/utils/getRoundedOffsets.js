@@ -31,20 +31,20 @@ export default function getRoundedOffsets(data, shouldRound) {
   const bothOddWidth = referenceWidth % 2 === 1 && popperWidth % 2 === 1;
 
   const horizontalToInteger = !shouldRound
-    ? noRound
-    : isVertical || isVariation || sameWidthParity
-    ? round
-    : floor;
+	? noRound
+	: isVertical || isVariation || sameWidthParity
+	? round
+	: floor;
   const verticalToInteger = !shouldRound ? noRound : round;
 
   return {
-    left: horizontalToInteger(
-      bothOddWidth && !isVariation && shouldRound
-        ? popper.left - 1
-        : popper.left
-    ),
-    top: verticalToInteger(popper.top),
-    bottom: verticalToInteger(popper.bottom),
-    right: horizontalToInteger(popper.right),
+	left: horizontalToInteger(
+	 bothOddWidth && !isVariation && shouldRound
+		? popper.left - 1
+		: popper.left
+	),
+	top: verticalToInteger(popper.top),
+	bottom: verticalToInteger(popper.bottom),
+	right: horizontalToInteger(popper.right),
   };
 }

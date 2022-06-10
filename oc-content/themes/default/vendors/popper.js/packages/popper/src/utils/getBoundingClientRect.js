@@ -19,34 +19,34 @@ export default function getBoundingClientRect(element) {
   // considered in DOM in some circumstances...
   // This isn't reproducible in IE10 compatibility mode of IE11
   try {
-    if (isIE(10)) {
-      rect = element.getBoundingClientRect();
-      const scrollTop = getScroll(element, 'top');
-      const scrollLeft = getScroll(element, 'left');
-      rect.top += scrollTop;
-      rect.left += scrollLeft;
-      rect.bottom += scrollTop;
-      rect.right += scrollLeft;
-    }
-    else {
-      rect = element.getBoundingClientRect();
-    }
+	if (isIE(10)) {
+	 rect = element.getBoundingClientRect();
+	 const scrollTop = getScroll(element, 'top');
+	 const scrollLeft = getScroll(element, 'left');
+	 rect.top += scrollTop;
+	 rect.left += scrollLeft;
+	 rect.bottom += scrollTop;
+	 rect.right += scrollLeft;
+	}
+	else {
+	 rect = element.getBoundingClientRect();
+	}
   }
   catch(e){}
 
   const result = {
-    left: rect.left,
-    top: rect.top,
-    width: rect.right - rect.left,
-    height: rect.bottom - rect.top,
+	left: rect.left,
+	top: rect.top,
+	width: rect.right - rect.left,
+	height: rect.bottom - rect.top,
   };
 
   // subtract scrollbar size from sizes
   const sizes = element.nodeName === 'HTML' ? getWindowSizes(element.ownerDocument) : {};
   const width =
-    sizes.width || element.clientWidth || result.width;
+	sizes.width || element.clientWidth || result.width;
   const height =
-    sizes.height || element.clientHeight || result.height;
+	sizes.height || element.clientHeight || result.height;
 
   let horizScrollbar = element.offsetWidth - width;
   let vertScrollbar = element.offsetHeight - height;
@@ -54,12 +54,12 @@ export default function getBoundingClientRect(element) {
   // if an hypothetical scrollbar is detected, we must be sure it's not a `border`
   // we make this check conditional for performance reasons
   if (horizScrollbar || vertScrollbar) {
-    const styles = getStyleComputedProperty(element);
-    horizScrollbar -= getBordersSize(styles, 'x');
-    vertScrollbar -= getBordersSize(styles, 'y');
+	const styles = getStyleComputedProperty(element);
+	horizScrollbar -= getBordersSize(styles, 'x');
+	vertScrollbar -= getBordersSize(styles, 'y');
 
-    result.width -= horizScrollbar;
-    result.height -= vertScrollbar;
+	result.width -= horizScrollbar;
+	result.height -= vertScrollbar;
   }
 
   return getClientRect(result);

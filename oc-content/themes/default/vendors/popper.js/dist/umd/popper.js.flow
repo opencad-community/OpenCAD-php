@@ -42,12 +42,12 @@ export type Data = {
   arrowStyles: CSSStyleDeclaration,
   boundaries: Object,
   offsets: {
-    popper: Offset,
-    reference: Offset,
-    arrow: {
-      top: number,
-      left: number,
-    },
+	popper: Offset,
+	reference: Offset,
+	arrow: {
+	 top: number,
+	 left: number,
+	},
   },
 };
 
@@ -69,35 +69,35 @@ export type BaseModifier = {
 export type Modifiers = {
   shift?: BaseModifier,
   offset?: BaseModifier & {
-    offset?: number | string,
+	offset?: number | string,
   },
   preventOverflow?: BaseModifier & {
-    priority?: Position[],
-    padding?: number | Padding,
-    boundariesElement?: Boundary | Element,
-    escapeWithReference?: boolean,
+	priority?: Position[],
+	padding?: number | Padding,
+	boundariesElement?: Boundary | Element,
+	escapeWithReference?: boolean,
   },
   keepTogether?: BaseModifier,
   arrow?: BaseModifier & {
-    element?: string | Element | null,
+	element?: string | Element | null,
   },
   flip?: BaseModifier & {
-    behavior?: Behavior | Position[],
-    padding?: number | Padding,
-    boundariesElement?: Boundary | Element,
-    flipVariations?: boolean,
-    flipVariationsByContent?: boolean,
+	behavior?: Behavior | Position[],
+	padding?: number | Padding,
+	boundariesElement?: Boundary | Element,
+	flipVariations?: boolean,
+	flipVariationsByContent?: boolean,
   },
   inner?: BaseModifier,
   hide?: BaseModifier,
   applyStyle?: BaseModifier & {
-    onLoad?: Function,
-    gpuAcceleration?: boolean,
+	onLoad?: Function,
+	gpuAcceleration?: boolean,
   },
   computeStyle?: BaseModifier & {
-    gpuAcceleration?: boolean,
-    x?: 'bottom' | 'top',
-    y?: 'left' | 'right',
+	gpuAcceleration?: boolean,
+	x?: 'bottom' | 'top',
+	y?: 'left' | 'right',
   },
 
   [name: string]: (BaseModifier & { [string]: * }) | null,
@@ -121,15 +121,15 @@ export type ReferenceObject = {
   +referenceNode?: Node,
 
   getBoundingClientRect():
-    | ClientRect
-    | {
-        width: number,
-        height: number,
-        top: number,
-        right: number,
-        bottom: number,
-        left: number,
-      },
+	| ClientRect
+	| {
+		width: number,
+		height: number,
+		top: number,
+		right: number,
+		bottom: number,
+		left: number,
+	 },
 };
 
 export type Instance = {
@@ -147,9 +147,9 @@ declare class Popper {
   reference: Element | ReferenceObject;
 
   constructor(
-    reference: Element | ReferenceObject,
-    popper: Element,
-    options?: Options
+	reference: Element | ReferenceObject,
+	popper: Element,
+	options?: Options
   ): Instance;
 }
 

@@ -43,19 +43,19 @@ oc_initial_constants();
  * 
  * @since 3.0.1
  *
- * @global int    $blog_id    The current site ID.
+ * @global int	$blog_id	The current site ID.
  * @global string $oc_version The OpenCAD version string.
  */
 function oc_initial_constants() {
 
 
 	/**#@+
-	 * Constants for expressing human-readable data sizes in their respective number of bytes.
-	 *
-	 * @from WordPress
-	 * 
-	 * @since 0.3.1
-	 */
+	* Constants for expressing human-readable data sizes in their respective number of bytes.
+	*
+	* @from WordPress
+	* 
+	* @since 0.3.1
+	*/
 	define( 'KB_IN_BYTES', 1024 );
 	define( 'MB_IN_BYTES', 1024 * KB_IN_BYTES );
 	define( 'GB_IN_BYTES', 1024 * MB_IN_BYTES );
@@ -67,7 +67,7 @@ function oc_initial_constants() {
 		define( 'OC_START_TIMESTAMP', microtime( true ) );
 	}
 
-	$current_limit     = ini_get( 'memory_limit' );
+	$current_limit	= ini_get( 'memory_limit' );
 	$current_limit_int = oc_convert_hr_to_bytes( $current_limit );
 
 	// Define memory limits.
@@ -136,8 +136,8 @@ function oc_initial_constants() {
 	}
 
 	/**
-	 * Private
-	 */
+	* Private
+	*/
 	if ( ! defined( 'MEDIA_TRASH' ) ) {
 		define( 'MEDIA_TRASH', false );
 	}
@@ -150,20 +150,20 @@ function oc_initial_constants() {
 	define( 'OC_FEATURE_BETTER_PASSWORDS', true );
 
 	/**#@+
-	 * Constants for expressing human-readable intervals
-	 * in their respective number of seconds.
-	 *
-	 * Please note that these values are approximate and are provided for convenience.
-	 * For example, MONTH_IN_SECONDS wrongly assumes every month has 30 days and
-	 * YEAR_IN_SECONDS does not take leap years into account.
-	 *
-	 * If you need more accuracy please consider using the DateTime class (https://secure.php.net/manual/en/class.datetime.php).
-	 *
-	 * @from WordPress
-	 * 
-	 * @since 0.3.1
-	 * @since 4.4.0 Introduced `MONTH_IN_SECONDS`.
-	 */
+	* Constants for expressing human-readable intervals
+	* in their respective number of seconds.
+	*
+	* Please note that these values are approximate and are provided for convenience.
+	* For example, MONTH_IN_SECONDS wrongly assumes every month has 30 days and
+	* YEAR_IN_SECONDS does not take leap years into account.
+	*
+	* If you need more accuracy please consider using the DateTime class (https://secure.php.net/manual/en/class.datetime.php).
+	*
+	* @from WordPress
+	* 
+	* @since 0.3.1
+	* @since 4.4.0 Introduced `MONTH_IN_SECONDS`.
+	*/
 	define( 'MINUTE_IN_SECONDS', 60 );
 	define( 'HOUR_IN_SECONDS', 60 * MINUTE_IN_SECONDS );
 	define( 'DAY_IN_SECONDS', 24 * HOUR_IN_SECONDS );

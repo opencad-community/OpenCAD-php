@@ -6,22 +6,22 @@ document.body.appendChild(wrapper);
 
 beforeEach(function() {
   jasmine.addMatchers({
-    toBeApprox: function() {
-      return {
-        compare: function(actual, expected, within) {
-          within = within || 1.5;
-          return {
-            pass: actual >= expected - within && actual <= expected + within,
-          };
-        },
-      };
-    },
+	toBeApprox: function() {
+	 return {
+		compare: function(actual, expected, within) {
+		 within = within || 1.5;
+		 return {
+			pass: actual >= expected - within && actual <= expected + within,
+		 };
+		},
+	 };
+	},
   });
 
   const reporterCurrentSpec = {
-    specStarted: function(result) {
-      window.testName = result.fullName;
-    },
+	specStarted: function(result) {
+	 window.testName = result.fullName;
+	},
   };
   jasmine.getEnv().addReporter(reporterCurrentSpec);
 

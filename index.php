@@ -106,7 +106,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 								<div>
 									<h2><?php echo lang_key("REQUEST_ACCESS"); ?></h2>
 									<!-- Will be reintroduced in a future version. Requires some rejiggering of functions. -->
-									<!--<button class="btn btn-primary active mt-3" type="button" data-toggle="modal" data-target="#registerLawEnforcement"><?php //echo lang_key("LAW_ENFORCEMENT_OFFICER"); ?></button><br />-->
+									<button class="btn btn-primary active mt-3" type="button" data-toggle="modal" data-target="#registerLawEnforcement"><?php echo lang_key("LAW_ENFORCEMENT_OFFICER"); ?></button><br />
 									<button class="btn btn-primary active mt-3" type="button" data-toggle="modal" data-target="#registerFirstResponder"><?php echo lang_key("FIRST_RESPONDER"); ?></button><br />
 									<button class="btn btn-primary active mt-3" type="button" data-toggle="modal" data-target="#registerCivilian"><?php echo lang_key('CIVILIAN'); ?></>
 								</div>

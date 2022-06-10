@@ -25,7 +25,7 @@ export default function applyStyle(data) {
 
   // if arrowElement is defined and arrowStyles has some properties
   if (data.arrowElement && Object.keys(data.arrowStyles).length) {
-    setStyles(data.arrowElement, data.arrowStyles);
+	setStyles(data.arrowElement, data.arrowStyles);
   }
 
   return data;
@@ -55,12 +55,12 @@ export function applyStyleOnLoad(
   // modifiers will be able to edit `placement` if needed
   // and refer to originalPlacement to know the original value
   const placement = computeAutoPlacement(
-    options.placement,
-    referenceOffsets,
-    popper,
-    reference,
-    options.modifiers.flip.boundariesElement,
-    options.modifiers.flip.padding
+	options.placement,
+	referenceOffsets,
+	popper,
+	reference,
+	options.modifiers.flip.boundariesElement,
+	options.modifiers.flip.padding
   );
 
   popper.setAttribute('x-placement', placement);

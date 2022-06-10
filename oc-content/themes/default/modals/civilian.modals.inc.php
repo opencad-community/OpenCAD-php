@@ -151,7 +151,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<h4 class="editIdentityLabel" id="myModalLabel">Edit Identity</h4>
-				  <button type="button" class="close data-dismiss="modal"><span aria-hidden="true">×</span></button>
+				<button type="button" class="close data-dismiss="modal"><span aria-hidden="true">×</span></button>
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
@@ -337,7 +337,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<h4 class="modal-title" id="editPlateLabel">Edit Plate in Database</h4>
-				  		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
 					</div>
 					<!-- ./ modal-header -->
 					<div class="modal-body">
@@ -430,12 +430,12 @@
 			<!-- ./ Civilian - Vehicle Modals -->
 
 
-	  <!-- Weapon modals -->
-	  <div class="modal" id="createWeaponModal" tabindex="-1" role="dialog" aria-hidden="true">
+	<!-- Weapon modals -->
+	<div class="modal" id="createWeaponModal" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-				  <h4 class="modal-title" id="createWeaponLabel">Create Weapon</h4>
+				<h4 class="modal-title" id="createWeaponLabel">Create Weapon</h4>
 						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
 					</div>
 					<!-- ./ modal-header -->

@@ -7,9 +7,9 @@
  */
 export default function getOppositeVariation(variation) {
   if (variation === 'end') {
-    return 'start';
+	return 'start';
   } else if (variation === 'start') {
-    return 'end';
+	return 'end';
   }
   return variation;
 }

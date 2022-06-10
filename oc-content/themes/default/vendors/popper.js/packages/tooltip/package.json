@@ -9,29 +9,29 @@
   "types": "index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "build": "node bundle.js",
-    "prepublish": "yarn build",
-    "pretest": "yarn lint",
-    "test": "popper-karma",
-    "posttest": "tsc --project tests/types/tsconfig.json",
-    "test:dev": "BROWSERS=Chrome NODE_ENV=development yarn test",
-    "lint": "eslint .",
-    "coverage": "COVERAGE=true yarn test"
+	"build": "node bundle.js",
+	"prepublish": "yarn build",
+	"pretest": "yarn lint",
+	"test": "popper-karma",
+	"posttest": "tsc --project tests/types/tsconfig.json",
+	"test:dev": "BROWSERS=Chrome NODE_ENV=development yarn test",
+	"lint": "eslint .",
+	"coverage": "COVERAGE=true yarn test"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/FezVrasta/popper.js.git"
+	"type": "git",
+	"url": "git+https://github.com/FezVrasta/popper.js.git"
   },
   "dependencies": {
-    "popper.js": "^1.0.2"
+	"popper.js": "^1.0.2"
   },
   "devDependencies": {
-    "@popperjs/bundle": "^1.0.0",
-    "@popperjs/eslint-config-popper": "^1.0.0",
-    "@popperjs/test": "^1.0.0",
-    "@popperjs/test-utils": "^1.0.0",
-    "eslint": "^4.1.1",
-    "eslint-plugin-jasmine": "^2.6.2",
-    "typescript": "^2.7.1"
+	"@popperjs/bundle": "^1.0.0",
+	"@popperjs/eslint-config-popper": "^1.0.0",
+	"@popperjs/test": "^1.0.0",
+	"@popperjs/test-utils": "^1.0.0",
+	"eslint": "^4.1.1",
+	"eslint-plugin-jasmine": "^2.6.2",
+	"typescript": "^2.7.1"
   }
 }

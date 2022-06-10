@@ -21,12 +21,12 @@ var saveAs = saveAs
 	"use strict";
 	// IE <10 is explicitly unsupported
 	if (typeof navigator !== "undefined" &&
-	    /MSIE [1-9]\./.test(navigator.userAgent)) {
+	/MSIE [1-9]\./.test(navigator.userAgent)) {
 		return;
 	}
 	var
-		  doc = view.document
-		  // only get URL when necessary in case BlobBuilder.js hasn't overridden it yet
+		doc = view.document
+		// only get URL when necessary in case BlobBuilder.js hasn't overridden it yet
 		, get_URL = function() {
 			return view.URL || view.webkitURL || view;
 		}
@@ -80,7 +80,7 @@ var saveAs = saveAs
 		, FileSaver = function(blob, name) {
 			// First try a.download, then web filesystem, then object URLs
 			var
-				  filesaver = this
+				filesaver = this
 				, type = blob.type
 				, blob_changed = false
 				, object_url
@@ -236,7 +236,7 @@ var saveAs = saveAs
 	};
 	return saveAs;
 }(
-	   typeof self !== "undefined" && self
+	typeof self !== "undefined" && self
 	|| typeof window !== "undefined" && window
 	|| this.content
 ));

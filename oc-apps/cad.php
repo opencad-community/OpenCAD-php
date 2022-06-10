@@ -301,8 +301,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			<audio id="panicToneAudio" src="<?php echo BASE_URL; ?>oc-content/themes/<?php echo THEME; ?>/sounds/Panic_Button.m4a" preload="auto"></audio>
 
 					<script>
-				 var vid = document.getElementById("recurringToneAudio");
-				 vid.volume = 0.3;
+				var vid = document.getElementById("recurringToneAudio");
+				vid.volume = 0.3;
 
 	
 		$(document).ready(function() {
@@ -353,37 +353,37 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				});
 		});
 		
-				 $(document).ready(function() {
-						 $(function() {
-								 $('#menu_toggle').click();
-						 });
+				$(document).ready(function() {
+						$(function() {
+								$('#menu_toggle').click();
+						});
 
-						 getCalls();
-						 getAvailableUnits();
-						 getUnAvailableUnits();
-						 getDispatchers();
-						 checkTones();
-						 cadGetPersonBOLOS();
-						 cadGetVehicleBOLOS();
-						 getAOP();
+						getCalls();
+						getAvailableUnits();
+						getUnAvailableUnits();
+						getDispatchers();
+						checkTones();
+						cadGetPersonBOLOS();
+						cadGetVehicleBOLOS();
+						getAOP();
 
-				 });
-				 
-				 // PNotify Stuff
-				 priorityNotification = new PNotify({
-						 title: 'Priority Traffic',
-						 text: 'Priority Traffic Only',
-						 type: 'error',
-						 hide: false,
-						 auto_display: false,
-						 styling: 'bootstrap3',
-						 buttons: {
-								 closer: false,
-								 sticker: false
-						 }
-				 });
+				});
+				
+				// PNotify Stuff
+				priorityNotification = new PNotify({
+						title: 'Priority Traffic',
+						text: 'Priority Traffic Only',
+						type: 'error',
+						hide: false,
+						auto_display: false,
+						styling: 'bootstrap3',
+						buttons: {
+								closer: false,
+								sticker: false
+						}
+				});
 
-				 $(function() {
+				$(function() {
 		$( "#ncicName" ).autocomplete({
 			source: "../<?php echo OCINC ?>/search_name.php"
 		});
@@ -400,211 +400,211 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			source: "../<?php echo OCINC ?>/search_name.php"
 		});
 	});
-				 function testFunction(element)
-				 {
-					 statusInit = element.className;
-					 status = statusInit.split(" ")[0];
-					 //If a user has a space in their username, it'll cause some problems. First, we need to split the string by spaces which will generate
-					 // an array. Then, we need to remove the first item from the array which is presumably an "action". Then, we join the array again via spaces
-					 unit = statusInit.split(" ");
-					 unit.shift();
-					 unit = unit.join(' ');
+				function testFunction(element)
+				{
+					statusInit = element.className;
+					status = statusInit.split(" ")[0];
+					//If a user has a space in their username, it'll cause some problems. First, we need to split the string by spaces which will generate
+					// an array. Then, we need to remove the first item from the array which is presumably an "action". Then, we join the array again via spaces
+					unit = statusInit.split(" ");
+					unit.shift();
+					unit = unit.join(' ');
 
-					 console.log(unit);
+					console.log(unit);
 
-					 $.ajax({
-							 type: "POST",
-							 url: "../<?php echo OCINC ?>/generalActions.php",
-							 data: {
-									 changeStatus: 'yes',
-									 unit: unit,
-									 status: status
-							 },
-							 success: function(response)
-							 {
-								 console.log(response);
-								 if (response == "SUCCESS")
-								 {
-									 new PNotify({
-										 title: 'Success',
-										 text: 'Successfully modified user status',
-										 type: 'success',
-										 styling: 'bootstrap3'
-									 });
-								 }
+					$.ajax({
+							type: "POST",
+							url: "../<?php echo OCINC ?>/generalActions.php",
+							data: {
+									changeStatus: 'yes',
+									unit: unit,
+									status: status
+							},
+							success: function(response)
+							{
+								console.log(response);
+								if (response == "SUCCESS")
+								{
+									new PNotify({
+										title: 'Success',
+										text: 'Successfully modified user status',
+										type: 'success',
+										styling: 'bootstrap3'
+									});
+								}
 
-							 },
-							 error : function(XMLHttpRequest, textStatus, errorThrown)
-							 {
-								 console.log("Error");
-							 }
+							},
+							error : function(XMLHttpRequest, textStatus, errorThrown)
+							{
+								console.log("Error");
+							}
 
-						 });
-				 }
+						});
+				}
 
-				 function logoutUser(element)
-				 {
-					 var r = confirm("Are you sure you want to log this user out?");
+				function logoutUser(element)
+				{
+					var r = confirm("Are you sure you want to log this user out?");
 
-					 if (r == true)
-					 {
-						 unit = element.className.split(" ");
-						 unit.shift(); //Remove the nopadding class
-						 unit.shift(); //Remove the logoutUser class
-						 unit = unit.join(' '); //Rejoin the array
-						 console.log(unit);
+					if (r == true)
+					{
+						unit = element.className.split(" ");
+						unit.shift(); //Remove the nopadding class
+						unit.shift(); //Remove the logoutUser class
+						unit = unit.join(' '); //Rejoin the array
+						console.log(unit);
 
-						 $.ajax({
-								 type: "POST",
-								 url: "../<?php echo OCINC ?>/generalActions.php",
-								 data: {
-										 logoutUser: 'yes',
-										 unit: unit
-								 },
-								 success: function(response)
-								 {
-									 console.log(response);
-									 if (response == "SUCCESS")
-									 {
-										 new PNotify({
-											 title: 'Success',
-											 text: 'Successfully logged out user',
-											 type: 'success',
-											 styling: 'bootstrap3'
-										 });
-									 }
+						$.ajax({
+								type: "POST",
+								url: "../<?php echo OCINC ?>/generalActions.php",
+								data: {
+										logoutUser: 'yes',
+										unit: unit
+								},
+								success: function(response)
+								{
+									console.log(response);
+									if (response == "SUCCESS")
+									{
+										new PNotify({
+											title: 'Success',
+											text: 'Successfully logged out user',
+											type: 'success',
+											styling: 'bootstrap3'
+										});
+									}
 
-								 },
-								 error : function(XMLHttpRequest, textStatus, errorThrown)
-								 {
-									 console.log("Error");
-								 }
+								},
+								error : function(XMLHttpRequest, textStatus, errorThrown)
+								{
+									console.log("Error");
+								}
 
-							 });
-						 }
-						 else
-						 {
-							 //Do nothing
-						 }
-				 }
-				 
-				 function getAvailableUnits() {
-					 $.ajax({
-								 type: "GET",
-								 url: "../<?php echo OCINC ?>/generalActions.php",
-								 data: {
-										 getAvailableUnits: 'yes'
-								 },
-								 success: function(response)
-								 {
-									 $('#availableUnits').html(response);
+							});
+						}
+						else
+						{
+							//Do nothing
+						}
+				}
+				
+				function getAvailableUnits() {
+					$.ajax({
+								type: "GET",
+								url: "../<?php echo OCINC ?>/generalActions.php",
+								data: {
+										getAvailableUnits: 'yes'
+								},
+								success: function(response)
+								{
+									$('#availableUnits').html(response);
 
-									 setTimeout(getAvailableUnits, 5000);
-
-
-								 },
-								 error : function(XMLHttpRequest, textStatus, errorThrown)
-								 {
-									 console.log("Error");
-								 }
-
-							 });
-				 }
+									setTimeout(getAvailableUnits, 5000);
 
 
-				 function getDispatchers() {
-					 $.ajax({
-								 type: "GET",
-								 url: "../<?php echo OCINC ?>/generalActions.php",
-								 data: {
-										 getDispatchers: 'yes'
-								 },
-								 success: function(response)
-								 {
-									 $('#activeDispatchers').html(response);
+								},
+								error : function(XMLHttpRequest, textStatus, errorThrown)
+								{
+									console.log("Error");
+								}
 
-									 setTimeout(getDispatchers, 5000);
+							});
+				}
 
 
-								 },
-								 error : function(XMLHttpRequest, textStatus, errorThrown)
-								 {
-									 console.log("Error");
-								 }
+				function getDispatchers() {
+					$.ajax({
+								type: "GET",
+								url: "../<?php echo OCINC ?>/generalActions.php",
+								data: {
+										getDispatchers: 'yes'
+								},
+								success: function(response)
+								{
+									$('#activeDispatchers').html(response);
 
-							 });
-				 }
-
-
-				 function getAOP() {
-					 $.ajax({
-								 type: "GET",
-								 url: "../<?php echo OCINC ?>/generalActions.php",
-								 data: {
-										 getAOP: 'yes'
-								 },
-								 success: function(response)
-								 {
-									 $('#getAOP').html(response);
-
-									 setTimeout(getAOP, 5000);
+									setTimeout(getDispatchers, 5000);
 
 
-								 },
-								 error : function(XMLHttpRequest, textStatus, errorThrown)
-								 {
-									 console.log("Error");
-								 }
+								},
+								error : function(XMLHttpRequest, textStatus, errorThrown)
+								{
+									console.log("Error");
+								}
 
-							 });
-				 }
-
-
-				 function cadGetPersonBOLOS() {
-					 $.ajax({
-								 type: "GET",
-								 url: "../<?php echo OCINC ?>/dispatchActions.php",
-								 data: {
-										 cadGetPersonBOLOS: 'yes'
-								 },
-								 success: function(response)
-								 {
-									 $('#cadpersonbolo').html(response);
-
-									 setTimeout(cadGetPersonBOLOS, 5000);
+							});
+				}
 
 
-								 },
-								 error : function(XMLHttpRequest, textStatus, errorThrown)
-								 {
-									 console.log("Error");
-								 }
+				function getAOP() {
+					$.ajax({
+								type: "GET",
+								url: "../<?php echo OCINC ?>/generalActions.php",
+								data: {
+										getAOP: 'yes'
+								},
+								success: function(response)
+								{
+									$('#getAOP').html(response);
 
-							 });
-				 }
-
-				 function cadGetVehicleBOLOS() {
-					 $.ajax({
-								 type: "GET",
-								 url: "../<?php echo OCINC ?>/dispatchActions.php",
-								 data: {
-										 cadGetVehicleBOLOS: 'yes'
-								 },
-								 success: function(response)
-								 {
-									 $('#cadvehiclebolo').html(response);
-
-									 setTimeout(cadGetVehicleBOLOS, 5000);
+									setTimeout(getAOP, 5000);
 
 
-								 },
-								 error : function(XMLHttpRequest, textStatus, errorThrown)
-								 {
-									 console.log("Error");
-								 }
+								},
+								error : function(XMLHttpRequest, textStatus, errorThrown)
+								{
+									console.log("Error");
+								}
 
-							 });
-				 }
+							});
+				}
+
+
+				function cadGetPersonBOLOS() {
+					$.ajax({
+								type: "GET",
+								url: "../<?php echo OCINC ?>/dispatchActions.php",
+								data: {
+										cadGetPersonBOLOS: 'yes'
+								},
+								success: function(response)
+								{
+									$('#cadpersonbolo').html(response);
+
+									setTimeout(cadGetPersonBOLOS, 5000);
+
+
+								},
+								error : function(XMLHttpRequest, textStatus, errorThrown)
+								{
+									console.log("Error");
+								}
+
+							});
+				}
+
+				function cadGetVehicleBOLOS() {
+					$.ajax({
+								type: "GET",
+								url: "../<?php echo OCINC ?>/dispatchActions.php",
+								data: {
+										cadGetVehicleBOLOS: 'yes'
+								},
+								success: function(response)
+								{
+									$('#cadvehiclebolo').html(response);
+
+									setTimeout(cadGetVehicleBOLOS, 5000);
+
+
+								},
+								error : function(XMLHttpRequest, textStatus, errorThrown)
+								{
+									console.log("Error");
+								}
+
+							});
+				}
 
 				$(function(){
 						$(document).on('click', '#edit_personbolo', function(e){

@@ -16,7 +16,7 @@ const validPlacements = placements.slice(3);
 export default function clockwise(placement, counter = false) {
   const index = validPlacements.indexOf(placement);
   const arr = validPlacements
-    .slice(index + 1)
-    .concat(validPlacements.slice(0, index));
+	.slice(index + 1)
+	.concat(validPlacements.slice(0, index));
   return counter ? arr.reverse() : arr;
 }

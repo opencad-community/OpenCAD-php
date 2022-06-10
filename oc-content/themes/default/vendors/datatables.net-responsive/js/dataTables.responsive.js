@@ -131,14 +131,14 @@ var Responsive = function ( settings, opts ) {
 
 $.extend( Responsive.prototype, {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	 * Constructor
-	 */
+	* Constructor
+	*/
 
 	/**
-	 * Initialise the Responsive instance
-	 *
-	 * @private
-	 */
+	* Initialise the Responsive instance
+	*
+	* @private
+	*/
 	_constructor: function ()
 	{
 		var that = this;
@@ -284,21 +284,21 @@ $.extend( Responsive.prototype, {
 
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	 * Private methods
-	 */
+	* Private methods
+	*/
 
 	/**
-	 * Calculate the visibility for the columns in a table for a given
-	 * breakpoint. The result is pre-determined based on the class logic if
-	 * class names are used to control all columns, but the width of the table
-	 * is also used if there are columns which are to be automatically shown
-	 * and hidden.
-	 *
-	 * @param  {string} breakpoint Breakpoint name to use for the calculation
-	 * @return {array} Array of boolean values initiating the visibility of each
-	 *   column.
-	 *  @private
-	 */
+	* Calculate the visibility for the columns in a table for a given
+	* breakpoint. The result is pre-determined based on the class logic if
+	* class names are used to control all columns, but the width of the table
+	* is also used if there are columns which are to be automatically shown
+	* and hidden.
+	*
+	* @param  {string} breakpoint Breakpoint name to use for the calculation
+	* @return {array} Array of boolean values initiating the visibility of each
+	*   column.
+	*  @private
+	*/
 	_columnsVisiblity: function ( breakpoint )
 	{
 		var dt = this.s.dt;
@@ -424,13 +424,13 @@ $.extend( Responsive.prototype, {
 
 
 	/**
-	 * Create the internal `columns` array with information about the columns
-	 * for the table. This includes determining which breakpoints the column
-	 * will appear in, based upon class names in the column, which makes up the
-	 * vast majority of this method.
-	 *
-	 * @private
-	 */
+	* Create the internal `columns` array with information about the columns
+	* for the table. This includes determining which breakpoints the column
+	* will appear in, based upon class names in the column, which makes up the
+	* vast majority of this method.
+	*
+	* @private
+	*/
 	_classLogic: function ()
 	{
 		var that = this;
@@ -569,12 +569,12 @@ $.extend( Responsive.prototype, {
 
 
 	/**
-	 * Show the details for the child row
-	 *
-	 * @param  {DataTables.Api} row    API instance for the row
-	 * @param  {boolean}        update Update flag
-	 * @private
-	 */
+	* Show the details for the child row
+	*
+	* @param  {DataTables.Api} row    API instance for the row
+	* @param  {boolean}        update Update flag
+	* @private
+	*/
 	_detailsDisplay: function ( row, update )
 	{
 		var that = this;
@@ -596,10 +596,10 @@ $.extend( Responsive.prototype, {
 
 
 	/**
-	 * Initialisation for the details handler
-	 *
-	 * @private
-	 */
+	* Initialisation for the details handler
+	*
+	* @private
+	*/
 	_detailsInit: function ()
 	{
 		var that    = this;
@@ -676,10 +676,10 @@ $.extend( Responsive.prototype, {
 
 
 	/**
-	 * Get the details to pass to a renderer for a row
-	 * @param  {int} rowIdx Row index
-	 * @private
-	 */
+	* Get the details to pass to a renderer for a row
+	* @param  {int} rowIdx Row index
+	* @private
+	*/
 	_detailsObj: function ( rowIdx )
 	{
 		var that = this;
@@ -703,12 +703,12 @@ $.extend( Responsive.prototype, {
 
 
 	/**
-	 * Find a breakpoint object from a name
-	 *
-	 * @param  {string} name Breakpoint name to find
-	 * @return {object}      Breakpoint description object
-	 * @private
-	 */
+	* Find a breakpoint object from a name
+	*
+	* @param  {string} name Breakpoint name to find
+	* @return {object}      Breakpoint description object
+	* @private
+	*/
 	_find: function ( name )
 	{
 		var breakpoints = this.c.breakpoints;
@@ -722,11 +722,11 @@ $.extend( Responsive.prototype, {
 
 
 	/**
-	 * Re-create the contents of the child rows as the display has changed in
-	 * some way.
-	 *
-	 * @private
-	 */
+	* Re-create the contents of the child rows as the display has changed in
+	* some way.
+	*
+	* @private
+	*/
 	_redrawChildren: function ()
 	{
 		var that = this;
@@ -741,12 +741,12 @@ $.extend( Responsive.prototype, {
 
 
 	/**
-	 * Alter the table display for a resized viewport. This involves first
-	 * determining what breakpoint the window currently is in, getting the
-	 * column visibilities to apply and then setting them.
-	 *
-	 * @private
-	 */
+	* Alter the table display for a resized viewport. This involves first
+	* determining what breakpoint the window currently is in, getting the
+	* column visibilities to apply and then setting them.
+	*
+	* @private
+	*/
 	_resize: function ()
 	{
 		var that = this;
@@ -812,13 +812,13 @@ $.extend( Responsive.prototype, {
 
 
 	/**
-	 * Determine the width of each column in the table so the auto column hiding
-	 * has that information to work with. This method is never going to be 100%
-	 * perfect since column widths can change slightly per page, but without
-	 * seriously compromising performance this is quite effective.
-	 *
-	 * @private
-	 */
+	* Determine the width of each column in the table so the auto column hiding
+	* has that information to work with. This method is never going to be 100%
+	* perfect since column widths can change slightly per page, but without
+	* seriously compromising performance this is quite effective.
+	*
+	* @private
+	*/
 	_resizeAuto: function ()
 	{
 		var dt = this.s.dt;
@@ -927,17 +927,17 @@ $.extend( Responsive.prototype, {
 	},
 
 	/**
-	 * Set a column's visibility.
-	 *
-	 * We don't use DataTables' column visibility controls in order to ensure
-	 * that column visibility can Responsive can no-exist. Since only IE8+ is
-	 * supported (and all evergreen browsers of course) the control of the
-	 * display attribute works well.
-	 *
-	 * @param {integer} col      Column index
-	 * @param {boolean} showHide Show or hide (true or false)
-	 * @private
-	 */
+	* Set a column's visibility.
+	*
+	* We don't use DataTables' column visibility controls in order to ensure
+	* that column visibility can Responsive can no-exist. Since only IE8+ is
+	* supported (and all evergreen browsers of course) the control of the
+	* display attribute works well.
+	*
+	* @param {integer} col      Column index
+	* @param {boolean} showHide Show or hide (true or false)
+	* @private
+	*/
 	_setColumnVis: function ( col, showHide )
 	{
 		var dt = this.s.dt;
@@ -957,14 +957,14 @@ $.extend( Responsive.prototype, {
 
 
 	/**
-	 * Update the cell tab indexes for keyboard accessibility. This is called on
-	 * every table draw - that is potentially inefficient, but also the least
-	 * complex option given that column visibility can change on the fly. Its a
-	 * shame user-focus was removed from CSS 3 UI, as it would have solved this
-	 * issue with a single CSS statement.
-	 *
-	 * @private
-	 */
+	* Update the cell tab indexes for keyboard accessibility. This is called on
+	* every table draw - that is potentially inefficient, but also the least
+	* complex option given that column visibility can change on the fly. Its a
+	* shame user-focus was removed from CSS 3 UI, as it would have solved this
+	* issue with a single CSS statement.
+	*
+	* @private
+	*/
 	_tabIndexes: function ()
 	{
 		var dt = this.s.dt;
@@ -1247,42 +1247,42 @@ Responsive.renderer = {
  */
 Responsive.defaults = {
 	/**
-	 * List of breakpoints for the instance. Note that this means that each
-	 * instance can have its own breakpoints. Additionally, the breakpoints
-	 * cannot be changed once an instance has been creased.
-	 *
-	 * @type {Array}
-	 * @default Takes the value of `Responsive.breakpoints`
-	 */
+	* List of breakpoints for the instance. Note that this means that each
+	* instance can have its own breakpoints. Additionally, the breakpoints
+	* cannot be changed once an instance has been creased.
+	*
+	* @type {Array}
+	* @default Takes the value of `Responsive.breakpoints`
+	*/
 	breakpoints: Responsive.breakpoints,
 
 	/**
-	 * Enable / disable auto hiding calculations. It can help to increase
-	 * performance slightly if you disable this option, but all columns would
-	 * need to have breakpoint classes assigned to them
-	 *
-	 * @type {Boolean}
-	 * @default  `true`
-	 */
+	* Enable / disable auto hiding calculations. It can help to increase
+	* performance slightly if you disable this option, but all columns would
+	* need to have breakpoint classes assigned to them
+	*
+	* @type {Boolean}
+	* @default  `true`
+	*/
 	auto: true,
 
 	/**
-	 * Details control. If given as a string value, the `type` property of the
-	 * default object is set to that value, and the defaults used for the rest
-	 * of the object - this is for ease of implementation.
-	 *
-	 * The object consists of the following properties:
-	 *
-	 * * `display` - A function that is used to show and hide the hidden details
-	 * * `renderer` - function that is called for display of the child row data.
-	 *   The default function will show the data from the hidden columns
-	 * * `target` - Used as the selector for what objects to attach the child
-	 *   open / close to
-	 * * `type` - `false` to disable the details display, `inline` or `column`
-	 *   for the two control types
-	 *
-	 * @type {Object|string}
-	 */
+	* Details control. If given as a string value, the `type` property of the
+	* default object is set to that value, and the defaults used for the rest
+	* of the object - this is for ease of implementation.
+	*
+	* The object consists of the following properties:
+	*
+	* * `display` - A function that is used to show and hide the hidden details
+	* * `renderer` - function that is called for display of the child row data.
+	*   The default function will show the data from the hidden columns
+	* * `target` - Used as the selector for what objects to attach the child
+	*   open / close to
+	* * `type` - `false` to disable the details display, `inline` or `column`
+	*   for the two control types
+	*
+	* @type {Object|string}
+	*/
 	details: {
 		display: Responsive.display.childRow,
 
@@ -1294,11 +1294,11 @@ Responsive.defaults = {
 	},
 
 	/**
-	 * Orthogonal data request option. This is used to define the data type
-	 * requested when Responsive gets the data to show in the child row.
-	 *
-	 * @type {String}
-	 */
+	* Orthogonal data request option. This is used to define the data type
+	* requested when Responsive gets the data to show in the child row.
+	*
+	* @type {String}
+	*/
 	orthogonal: 'display'
 };
 
@@ -1376,9 +1376,9 @@ $(document).on( 'preInit.dt.dtr', function (e, settings, json) {
 	}
 
 	if ( $(settings.nTable).hasClass( 'responsive' ) ||
-		 $(settings.nTable).hasClass( 'dt-responsive' ) ||
-		 settings.oInit.responsive ||
-		 DataTable.defaults.responsive
+		$(settings.nTable).hasClass( 'dt-responsive' ) ||
+		settings.oInit.responsive ||
+		DataTable.defaults.responsive
 	) {
 		var init = settings.oInit.responsive;
 

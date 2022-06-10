@@ -20,87 +20,87 @@ export default class Popper {
    * @return {Object} instance - The generated Popper.js instance
    */
   constructor(reference, popper, options = {}) {
-    // make update() debounced, so that it only runs at most once-per-tick
-    this.update = debounce(this.update.bind(this));
+	// make update() debounced, so that it only runs at most once-per-tick
+	this.update = debounce(this.update.bind(this));
 
-    // with {} we create a new object with the options inside it
-    this.options = { ...Popper.Defaults, ...options };
+	// with {} we create a new object with the options inside it
+	this.options = { ...Popper.Defaults, ...options };
 
-    // init state
-    this.state = {
-      isDestroyed: false,
-      isCreated: false,
-      scrollParents: [],
-    };
+	// init state
+	this.state = {
+	 isDestroyed: false,
+	 isCreated: false,
+	 scrollParents: [],
+	};
 
-    // get reference and popper elements (allow jQuery wrappers)
-    this.reference = reference && reference.jquery ? reference[0] : reference;
-    this.popper = popper && popper.jquery ? popper[0] : popper;
+	// get reference and popper elements (allow jQuery wrappers)
+	this.reference = reference && reference.jquery ? reference[0] : reference;
+	this.popper = popper && popper.jquery ? popper[0] : popper;
 
-    // Deep merge modifiers options
-    this.options.modifiers = {};
-    Object.keys({
-      ...Popper.Defaults.modifiers,
-      ...options.modifiers,
-    }).forEach(name => {
-      this.options.modifiers[name] = {
-        // If it's a built-in modifier, use it as base
-        ...(Popper.Defaults.modifiers[name] || {}),
-        // If there are custom options, override and merge with default ones
-        ...(options.modifiers ? options.modifiers[name] : {}),
-      };
-    });
+	// Deep merge modifiers options
+	this.options.modifiers = {};
+	Object.keys({
+	 ...Popper.Defaults.modifiers,
+	 ...options.modifiers,
+	}).forEach(name => {
+	 this.options.modifiers[name] = {
+		// If it's a built-in modifier, use it as base
+		...(Popper.Defaults.modifiers[name] || {}),
+		// If there are custom options, override and merge with default ones
+		...(options.modifiers ? options.modifiers[name] : {}),
+	 };
+	});
 
-    // Refactoring modifiers' list (Object => Array)
-    this.modifiers = Object.keys(this.options.modifiers)
-      .map(name => ({
-        name,
-        ...this.options.modifiers[name],
-      }))
-      // sort the modifiers by order
-      .sort((a, b) => a.order - b.order);
+	// Refactoring modifiers' list (Object => Array)
+	this.modifiers = Object.keys(this.options.modifiers)
+	 .map(name => ({
+		name,
+		...this.options.modifiers[name],
+	 }))
+	 // sort the modifiers by order
+	 .sort((a, b) => a.order - b.order);
 
-    // modifiers have the ability to execute arbitrary code when Popper.js get inited
-    // such code is executed in the same order of its modifier
-    // they could add new properties to their options configuration
-    // BE AWARE: don't add options to `options.modifiers.name` but to `modifierOptions`!
-    this.modifiers.forEach(modifierOptions => {
-      if (modifierOptions.enabled && isFunction(modifierOptions.onLoad)) {
-        modifierOptions.onLoad(
-          this.reference,
-          this.popper,
-          this.options,
-          modifierOptions,
-          this.state
-        );
-      }
-    });
+	// modifiers have the ability to execute arbitrary code when Popper.js get inited
+	// such code is executed in the same order of its modifier
+	// they could add new properties to their options configuration
+	// BE AWARE: don't add options to `options.modifiers.name` but to `modifierOptions`!
+	this.modifiers.forEach(modifierOptions => {
+	 if (modifierOptions.enabled && isFunction(modifierOptions.onLoad)) {
+		modifierOptions.onLoad(
+		 this.reference,
+		 this.popper,
+		 this.options,
+		 modifierOptions,
+		 this.state
+		);
+	 }
+	});
 
-    // fire the first update to position the popper in the right place
-    this.update();
+	// fire the first update to position the popper in the right place
+	this.update();
 
-    const eventsEnabled = this.options.eventsEnabled;
-    if (eventsEnabled) {
-      // setup event listeners, they will take care of update the position in specific situations
-      this.enableEventListeners();
-    }
+	const eventsEnabled = this.options.eventsEnabled;
+	if (eventsEnabled) {
+	 // setup event listeners, they will take care of update the position in specific situations
+	 this.enableEventListeners();
+	}
 
-    this.state.eventsEnabled = eventsEnabled;
+	this.state.eventsEnabled = eventsEnabled;
   }
 
   // We can't use class properties because they don't get listed in the
   // class prototype and break stuff like Sinon stubs
   update() {
-    return update.call(this);
+	return update.call(this);
   }
   destroy() {
-    return destroy.call(this);
+	return destroy.call(this);
   }
   enableEventListeners() {
-    return enableEventListeners.call(this);
+	return enableEventListeners.call(this);
   }
   disableEventListeners() {
-    return disableEventListeners.call(this);
+	return disableEventListeners.call(this);
   }
 
   /**
