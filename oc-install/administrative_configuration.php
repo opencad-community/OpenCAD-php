@@ -1,6 +1,6 @@
 <?php
 
-	session_start();
+	     session_start(); 
 
 	require_once('include/shared.inc.php');    
     require_once('include/settings.inc.php');    
@@ -92,7 +92,8 @@
 		$MODERATOR_REMOVE_GROUP = isset($_POST['MODERATOR_REMOVE_GROUP']) ? prepare_input($_POST['MODERATOR_REMOVE_GROUP']) : '';
 
 		$MODERATOR_NCIC_EDITOR = isset($_POST['MODERATOR_NCIC_EDITOR']) ? prepare_input($_POST['MODERATOR_NCIC_EDITOR']) : '';
-		
+		// $MODERATOR_DATA_MANAGER seems to be missing within this statement causing "undefined variable"
+		$MODERATOR_DATA_MANAGER = isset($_POST['MODERATOR_DATA_MANAGER']) ? prepare_input($_POST['MODERATOR_DATA_MANAGER']) : '';
 		$MODERATOR_DATAMAN_CITATIONTYPES = isset($_POST['MODERATOR_DATAMAN_CITATIONTYPES']) ? prepare_input($_POST['MODERATOR_DATAMAN_CITATIONTYPES']) : '';
 		$MODERATOR_DATAMAN_DEPARTMENTS = isset($_POST['MODERATOR_DATAMAN_DEPARTMENTS']) ? prepare_input($_POST['MODERATOR_DATAMAN_DEPARTMENTS']) : '';
 		$MODERATOR_DATAMAN_INCIDENTTYPES = isset($_POST['MODERATOR_DATAMAN_INCIDENTTYPES']) ? prepare_input($_POST['MODERATOR_DATAMAN_INCIDENTTYPES']) : '';
@@ -186,17 +187,18 @@
 			</tr>
 			<tr><td nowrap height="10px" colspan="3"></td></tr>
 			<tr>
-			<td width="250px">&nbsp;<?php echo lang_key('MODERATOR_USER_MANAGER'); ?>&nbsp;</td>
-				<td>
-					<input type="radio" name="MODERATOR_USER_MANAGER" id="MODERATOR_USER_MANAGER" <?php echo ($MODERATOR_USER_MANAGER=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_USER_MANAGER_notes')" checked onblur="textboxOnBlur('MODERATOR_USER_MANAGER_notes')" value="true" />True
-					<input type="radio" name="MODERATOR_USER_MANAGER" id="MODERATOR_USER_MANAGER" <?php echo ($MODERATOR_USER_MANAGER=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_USER_MANAGER_notes')" onblur="textboxOnBlur('MODERATOR_USER_MANAGER_notes')" value="false" />False
-				</td>
-				<td width="250px">&nbsp;<?php echo lang_key('MODERATOR_APPROVE_USER'); ?>&nbsp;</td>
+			<td width="250px">&nbsp;<?php echo lang_key('MODERATOR_APPROVE_USER'); ?>&nbsp;</td>
 				<td>
 					<input type="radio" name="MODERATOR_APPROVE_USER" id="MODERATOR_APPROVE_USER" <?php echo ($MODERATOR_APPROVE_USER=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_APPROVE_USER_notes')" checked onblur="textboxOnBlur('MODERATOR_APPROVE_USER_notes')" value="true" />True
 					<input type="radio" name="MODERATOR_APPROVE_USER" id="MODERATOR_APPROVE_USER" <?php echo ($MODERATOR_APPROVE_USER=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_APPROVE_USER_notes')" onblur="textboxOnBlur('MODERATOR_APPROVE_USER_notes')" value="false" />False
 				</td>
-				<td rowspan="6" valign="top">					
+				
+				
+				<td rowspan="6" valign="top">		
+					<div id="MODERATOR_USER_MANAGER_notes" class="notes_container">
+						<h4><?php echo lang_key('MODERATOR_USER_MANAGER'); ?></h4>
+						<p><?php echo lang_key('MODERATOR_USER_MANAGER_notes'); ?></p>
+					</div>			
 					<div id="MODERATOR_APPROVE_USER_notes" class="notes_container">
 						<h4><?php echo lang_key('MODERATOR_APPROVE_USER'); ?></h4>
 						<p><?php echo lang_key('MODERATOR_APPROVE_USER_notes'); ?></p>
@@ -235,9 +237,14 @@
 				</td>
 			</tr>
 			<tr>
+				<td>&nbsp;<?php echo lang_key('MODERATOR_USER_MANAGER'); ?>&nbsp;</td>
+				<td><input type="radio" name="MODERATOR_USER_MANAGER" id="MODERATOR_USER_MANAGER" <?php echo ($MODERATOR_USER_MANAGER=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_USER_MANAGER_notes')" onblur="textboxOnBlur('MODERATOR_USER_MANAGER_notes')" value="true" />True
+				<input type="radio" name="MODERATOR_USER_MANAGER" id="MODERATOR_USER_MANAGER" <?php echo ($MODERATOR_USER_MANAGER=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_USER_MANAGER_notes')" onblur="textboxOnBlur('MODERATOR_USER_MANAGER_notes')" value="false" />False</td>
+			</tr>
+			<tr>
 				<td>&nbsp;<?php echo lang_key('MODERATOR_EDIT_USER'); ?>&nbsp;</td>
-				<td><input type="radio" name="MODERATOR_EDIT_USER" id="MODERATOR_EDIT_USER" <?php echo ($MODERATOR_APPROVE_USER=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_EDIT_USER_notes')" onblur="textboxOnBlur('MODERATOR_EDIT_USER')" value="true" />True
-				<input type="radio" name="MODERATOR_EDIT_USER" id="MODERATOR_EDIT_USER" <?php echo ($MODERATOR_APPROVE_USER=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_EDIT_USER_notes')" onblur="textboxOnBlur('MODERATOR_EDIT_USER)" value="false" />False</td>
+				<td><input type="radio" name="MODERATOR_EDIT_USER" id="MODERATOR_EDIT_USER" <?php echo ($MODERATOR_EDIT_USER=='true')?'checked':'' ?> checked onfocus="textboxOnFocus('MODERATOR_EDIT_USER_notes')" onblur="textboxOnBlur('MODERATOR_EDIT_USER')" value="true" />True
+				<input type="radio" name="MODERATOR_EDIT_USER" id="MODERATOR_EDIT_USER" <?php echo ($MODERATOR_EDIT_USER=='false')?'checked':'' ?> onfocus="textboxOnFocus('MODERATOR_EDIT_USER_notes')" onblur="textboxOnBlur('MODERATOR_EDIT_USER')" value="false" />False</td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('MODERATOR_DELETE_USER'); ?>&nbsp;</td>

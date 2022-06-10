@@ -293,15 +293,15 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>weapons` (
 
 
 
-INSERT INTO `<DB_PREFIX>users` (`id`, `name`, `email`, `password`, `identifier`, `adminPrivilege`, `supervisorPrivilege`, `passwordReset`, `approved`, `suspendReason`, `suspendDuration`) VALUES
-(1, '<NAME>', '<EMAIL>', '<PASSWORD>', '<IDENTIFIER>', 3, 1, 0, 1, NULL, NULL);
+INSERT INTO `<DB_PREFIX>users` (`name`, `email`, `password`, `identifier`, `adminPrivilege`, `supervisorPrivilege`, `passwordReset`, `approved`, `suspendReason`, `suspendDuration`) VALUES
+('<NAME>', '<EMAIL>', '<PASSWORD>', '<IDENTIFIER>', 3, 1, 0, 1, NULL, NULL);
 
+-- SQL doesn't like the two below, states patrolinformation has already been created.
 
-
-CREATE TABLE `<DB_PREFIX>patrolnformation` (
-  `key` tinytext COLLATE latin1_general_cs NOT NULL,
-  `value` tinytext COLLATE latin1_general_cs NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>patrolinformation` (
+  `key` tinytext NOT NULL,
+  `value` tinytext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 INSERT INTO `<DB_PREFIX>patrolinformation` (`key`, `value`) VALUES
 ('aop',	'Metro Los Santos');

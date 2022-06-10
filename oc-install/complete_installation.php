@@ -1,6 +1,6 @@
 <?php
 
-	session_start();
+	     session_start(); 
 
 	require_once('include/shared.inc.php');    
     require_once('include/settings.inc.php');
@@ -88,8 +88,8 @@
 		$CIV_LIMIT_MAX_IDENTITIES			= isset($_SESSION['CIV_LIMIT_MAX_IDENTITIES']) ? prepare_input($_SESSION['CIV_LIMIT_MAX_IDENTITIES']) : '';
 		$CIV_LIMIT_MAX_VEHICLES				= isset($_SESSION['CIV_LIMIT_MAX_VEHICLES']) ? prepare_input($_SESSION['CIV_LIMIT_MAX_VEHICLES']) : '';
 		$CIV_LIMIT_MAX_WEAPONS				= isset($_SESSION['CIV_LIMIT_MAX_WEAPONS']) ? prepare_input($_SESSION['CIV_LIMIT_MAX_WEAPONS']) : '';
-
-		$MODERATOR_USER_MANAGER				= isset($_SESSION['MODERATOR_USER_MANAGER']) ? prepare_input($_SESSION['MODERATOR_USER_MANAGER']):
+		// Missing ''; from above line, spent ages figuring out this issue!
+		$MODERATOR_USER_MANAGER				= isset($_SESSION['MODERATOR_USER_MANAGER']) ? prepare_input($_SESSION['MODERATOR_USER_MANAGER']):'';
 		$MODERATOR_APPROVE_USER				= isset($_SESSION['MODERATOR_APPROVE_USER']) ? prepare_input($_SESSION['MODERATOR_APPROVE_USER']) : '';
 		$MODERATOR_EDIT_USER				= isset($_SESSION['MODERATOR_EDIT_USER']) ? prepare_input($_SESSION['MODERATOR_EDIT_USER']) : '';
 		$MODERATOR_SUSPEND_WITH_REASON		= isset($_SESSION['MODERATOR_SUSPEND_WITH_REASON']) ? prepare_input($_SESSION['MODERATOR_SUSPEND_WITH_REASON']) : '';
@@ -136,7 +136,7 @@
 				}else{
 					$error_mg[] = lang_key('alert_wrong_testing_parameters');
 				}
-			}else{				
+			}else{			
 				$db = Database::GetInstance($database_host, $database_name, $database_username, $database_password, EI_DATABASE_TYPE, false, true);
 				if(EI_DATABASE_CREATE && ($install_type == 'create') && !$db->Create()){
 					$error_mg[] = $db->Error();					
@@ -157,9 +157,7 @@
 								// write additional operations here, like setting up system preferences etc.
 								// ...
 								$completed = true;
-								
 								session_destroy();
-								
 								// now try to create file and write information
 								$config_file = file_get_contents(EI_CONFIG_FILE_TEMPLATE);
 								$config_file = str_replace('<DB_HOST>', $database_host, $config_file);
@@ -243,7 +241,7 @@
 								$config_file = str_replace('<DEMO_MODE>', $DEMO_MODE, $config_file);
 								$config_file = str_replace('<USE_GRAVATAR>', $USE_GRAVATAR, $config_file);
 								
-								chmod(EI_CONFIG_FILE_PATH, 0600);
+								//chmod(EI_CONFIG_FILE_PATH, 0600);
 								$f = fopen(EI_CONFIG_FILE_PATH, 'w+');
 								if(!fwrite($f, $config_file) > 0){
 									$error_mg[] = str_replace('_CONFIG_FILE_PATH_', EI_CONFIG_FILE_PATH, lang_key('error_can_not_open_config_file')); 
