@@ -32,15 +32,6 @@ function apphp_db_install($sql_dump_file) {
 	// replace database prefix if exists
 	$sql_dump = str_ireplace('<DB_PREFIX>', $database_prefix, $sql_dump);
 
-    // disabling magic quotes at runtime
-	// 'get_magic_quotes_runtime' is deprecated, may need to find a fix for this in the future. Seems fine with this function disabled?
-    // if(get_magic_quotes_runtime()){
-    //     function stripslashes_runtime(&$value){
-    //         $value = stripslashes($value);	
-    //     }
-    //     array_walk_recursive($sql_dump, 'stripslashes_runtime');
-    // }
-
 	// add ';' at the end of file to catch last sql query
 	if(substr($sql_dump[count($sql_dump)-1], -1) != ';') $sql_dump[count($sql_dump)-1] .= ';';
 
