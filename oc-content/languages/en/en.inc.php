@@ -153,6 +153,7 @@ $arrLang['updating_completed'] = "Updating Completed!";
 $arrLang['virtual_directory_support'] = "Virtual Directory Support";
 $arrLang['we_are_ready_to_installation'] = "We are ready now to proceed with installation";
 $arrLang['we_are_ready_to_installation_text'] = "At this step setup wizard will attempt to create all required database tables and populate them with data. <br>If an error is encountered then return to the database settings page and make any corrections.";
+$arrLang['we_are_ready_to_install_warning'] = "Please note, this page may be stuck on loading for up to 60 seconds (Depending on your systems speed). <br>Please do NOT refresh or close this window as you may cause SQL errors and have to completely start again with a clean database!";
 $arrLang['writable'] = "Writable";
 
 $arrLang['core_configuration'] = "Core Configuration";
@@ -309,8 +310,8 @@ $arrLang['CIV_LIMIT_MAX_WEAPONS_notes'] = "If CIV_LIMIT_MAX_WEAPONS is '0' then 
 //** End Civilian Strings **//
 
 //** Begin Administrative Strings**//
-$arrLang['MODERATOR_USER_MANAGER'] = "Moderator Approve User";
-$arrLang['MODERATOR_USER_MANAGER_notes'] = "If 'true' then Moderators will be able to approve new user requests, else, if 'false' then Moderators will not be able to approve new user requests.";
+$arrLang['MODERATOR_USER_MANAGER'] = "Moderator Manage User";
+$arrLang['MODERATOR_USER_MANAGER_notes'] = "If 'true' then Moderators will be able to manage users, else, if 'false' then Moderators will not be able to manage users.";
 
 $arrLang['MODERATOR_APPROVE_USER'] = "Moderator Approve User";
 $arrLang['MODERATOR_APPROVE_USER_notes'] = "If 'true' then Moderators will be able to approve new user requests, else, if 'false' then Moderators will not be able to approve new user requests.";
@@ -377,6 +378,9 @@ $arrLang['WEBHOOK_URL'] = "Webhook URL";
 
 $arrLang['DEMO_MODE'] = "Demo Mode";
 $arrLang['DEMO_MODE_notes'] = "'true' then various user management features of OpenCAD will be locked down, else if 'false' then OpenCAD's full functionality* will be available to use.";
+
+$arrLang['GENERATE_GTAV_DATA'] = "Generate GTAV Game Data";
+$arrLang['GENERATE_GTAV_DATA_notes'] = "Generates GTAV Data and inserts it into the database. This will allow quicker configuration of your cad if you are using GTAV. Disable for a blank canvas to use with other games";
 
 $arrLang['USE_GRAVATAR'] = "Gravatar";
 $arrLang['USE_GRAVATAR_notes'] = "OpenCAD will dynamically retrieve your avatar from {@link Gravatar http://en.gravatar.com/} if you have an account. Otherwise it will use the default generic avatar image included with OpenCAD .";
@@ -522,7 +526,7 @@ $arrLang["MY_WARRANTS"] = "My Warrants";
 $arrLang["MY_WARRANTS_notes"] = "No results found in the warrants database.";
 $arrLang["CREATE_A_CALL"] = "Create A Call";
 $arrLang["ADD_NEW_IDENTITY"] = "Add New Identity";
-$arrLang["ADD_NEW_VEHICLE"] = "Add New Vehcile";
+$arrLang["ADD_NEW_VEHICLE"] = "Add New Vehicle";
 $arrLang["ADD_NEW_WEAPON"] = "Add New Weapon";
 $arrLang["CIVILLIAN_DASHBOARD"] = "Civillian Dashboard";
 $arrLang["VIEW_WARRANTS"] = "View Warrants";

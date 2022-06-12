@@ -11,7 +11,7 @@
 
 	require_once(__DIR__ .'/../oc-config.php');
 	require_once( ABSPATH . "/oc-functions.php");
-	require_once( ABSPATH . OCINC . "/apiAuth.php");
+	require_once( ABSPATH ."oc-includes/apiAuth.php");
 
 /* This file handles all actions for admin.php script */
 
@@ -1934,41 +1934,41 @@ function resetData()
 		header(ERRORREDIRECT);
 		die();
 	}
-	if ($_POST == "allData") 
+	if ($_POST["dataType"] == "allData") 
 	{
 		$tables = array(
-				"userDepartments",
-				"userdepartmentsTemp",
-				"activeUsers",
+				"userdepartments",
+				"userdepartmentstemp",
+				"activeusers",
 				"aop",
-				"bolosPersons",
-				"bolosVehicles",
+				"bolospersons",
+				"bolosvehicles",
 				"calls",
-				"callsUsers",
-				"callHistory",
-				"callList",
-				"callCitations",
-				"civilianNames",
+				"callsusers",
+				"callhistory",
+				"calllist",
+				"callcitations",
+				"civiliannames",
 				"colors",
 				"departments",
 				"dispatchers",
-				"incident_types",
-				"ncicArrests",
-				"ncic_citations",
-				"ncicNames",
-				"ncicPlates",
-				"ncicWarnings",
-				"ncicWarrants",
-				"ncicWeapons",
+				"incidenttypes",
+				"ncicarrests",
+				"nciccitations",
+				"ncicnames",
+				"ncicplates",
+				"ncicwarnings",
+				"ncicwarrants",
+				"ncicweapons",
 				"statuses",
 				"streets",
 				"tones",
 				"vehicles",
 				"weapons",
-				"radioCdoes",
-				"warningTypes",
-				"warrantTypes",
-				"citationTypes"
+				"radiocdoes",
+				"warningtypes",
+				"warranttypes",
+				"citationtypes"
 		);
 		foreach ( $tables as $value ) 
 		{

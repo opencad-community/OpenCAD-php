@@ -126,6 +126,7 @@
     define('EI_SQL_DUMP_FILE_CREATE', '../oc-install/oc_install.sql');
     define('EI_SQL_DUMP_FILE_UPDATE', '../oc-install/oc_update.sql');
     define('EI_SQL_DUMP_FILE_UN_INSTALL', '../oc-install/oc_uninstall.sql');
+    define('EI_SQL_DUMP_FILE_CREATE_GTAV', '../oc-install/oc_GTAV_data.sql');
 
     // *** defines using of utf-8 encoding and collation for SQL dump file
     define('EI_USE_ENCODING', true);

@@ -52,6 +52,7 @@
 		}else{
 			echo '<script type="text/javascript" src="language/en/js/common.js"></script>';
 		}
+		
 	?>
 </head>
 <body>
@@ -64,10 +65,12 @@
 			draw_side_navigation(10);		
 		?>
 		<div class="central-part">
+			
 			<h2><?php echo lang_key('step_10_of'); ?> - <?php echo lang_key('ready_to_install'); ?></h2>
 			<h3><?php echo lang_key('we_are_ready_to_installation'); ?></h3>			
 		
-			<p><?php echo lang_key('we_are_ready_to_installation_text'); ?></p>			
+			<p><?php echo lang_key('we_are_ready_to_installation_text'); ?></p>		
+			<strong><p><?php echo lang_key('we_are_ready_to_install_warning');?></p></strong>
 		
 			<form method="post" action="ready_to_install.php">
 			<input type="hidden" name="task" value="send" />

@@ -520,6 +520,16 @@ define('CIV_LIMIT_MAX_VEHICLES', '<CIV_LIMIT_MAX_VEHICLES>');
 define('CIV_LIMIT_MAX_WEAPONS', '<CIV_LIMIT_MAX_WEAPONS>');
 
 /**#@+
+ * CIV_CAN_EDIT_IDENTITIES
+ * 
+ * CIV_CAN_EDIT_IDENTITIES default mode true
+ *
+ * TO DO:
+ * Needs to be updated with proper description and add to installer!
+ **/
+define('CIV_CAN_EDIT_IDENTITIES', true);
+
+/**#@+
   * Administrative Settings
 	*
   * These settings will likely be moved to an *_options table in a future version.
