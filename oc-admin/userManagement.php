@@ -25,13 +25,7 @@ if (empty($_SESSION['logged_in'])) {
 	die("Not logged in");
 }
 
-if ($_SESSION['adminPrivilege'] == 3) {
-	if ($_SESSION['adminPrivilege'] == 'Administrator');
-} else if ($_SESSION['adminPrivilege'] == 2) {
-	if ($_SESSION['adminPrivilege'] == 'Moderator');
-} else {
-	permissionDenied();
-}
+isAdminOrMod();
 
 $accessMessage = "";
 if (isset($_SESSION['accessMessage'])) {

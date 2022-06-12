@@ -240,6 +240,20 @@ function permissionDenied()
 	die();
 }
 
+/**#@+
+* function isAdminOrMod()
+* Will check if the user is an Administrator or a Moderator. If neither, will redirect to permissionDenied()
+*
+* @since 1.0
+*
+**/
+function isAdminOrMod()
+{
+	if (!$_SESSION['adminPrivilege'] == 3 || !$_SESSION['adminPrivilege'] == 'Administrator' | !$_SESSION['adminPrivilege'] == 2 | !$_SESSION['adminPrivilege'] == 'Moderator') {
+		permissionDenied();
+	} else{return true;}
+}
+
 /**
  * 	Returns language key
  * 		@param $key

@@ -22,24 +22,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	require_once( ABSPATH . "/oc-includes/adminActions.php");
 	require_once( ABSPATH . "/oc-includes/dataActions.php");
 
-    if ( $_SESSION['adminPrivilege'] == 3)
-    {
-      if ($_SESSION['adminPrivilege'] == 'Administrator')
-      {
-          //Do nothing
-      }
-    }
-    else if ($_SESSION['adminPrivilege'] == 2 && MODERATOR_DATAMAN_RADIOCODES == true)
-    {
-      if ($_SESSION['adminPrivilege'] == 'Moderator')
-      {
-          // Do Nothing
-      }
-    }
-    else
-    {
-      permissionDenied();
-    }  
+    isAdminOrMod();
 
     $accessMessage = "";
 	if(isset($_SESSION['accessMessage']))

@@ -28,17 +28,7 @@ if (empty($_SESSION['logged_in'])) {
 }
 
 
-if ($_SESSION['adminPrivilege'] == 3) {
-	if ($_SESSION['adminPrivilege'] == 'Administrator') {
-		//Do nothing
-	}
-} else if ($_SESSION['adminPrivilege'] == 2) {
-	if ($_SESSION['adminPrivilege'] == 'Moderator') {
-		// Do Nothing
-	}
-} else {
-	permissionDenied();
-}
+isAdminOrMod();
 
 $accessMessage = "";
 if (isset($_SESSION['accessMessage'])) {

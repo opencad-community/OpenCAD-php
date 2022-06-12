@@ -11,11 +11,14 @@
 
 	require_once(__DIR__ .'/../oc-config.php');
 	require_once( ABSPATH . "/oc-functions.php");
+	require_once( ABSPATH . "oc-includes/dbActions.php");
 	require_once( ABSPATH ."oc-includes/apiAuth.php");
 
 /* This file handles all actions for admin.php script */
 
 /* Handle resetData POST request */
+
+// echo '<pre>' . var_export($_POST, true) . '</pre>';exit();
 
 //** Handle POST requests for Citation Type Manager **/
 if (isset($_POST['getCitationTypes']))
@@ -267,13 +270,13 @@ function getCitationTypeDetails()
 {
 	$id = htmlspecialchars($_POST['id']);
 
-	$stmt = DB::query("SELECT citationId FROM ".DB_PREFIX."citationTypes WHERE id = " . $id);
+	$stmt = DB::query("SELECT * FROM ".DB_PREFIX."citationTypes WHERE citationId = " . $id);
 	$result = $stmt;
 
 	$encode = array();
 	foreach($result as $row)
 	{
-		$encode["id"] = $row["citationIdd"];
+		$encode["id"] = $row["citationId"];
 		$encode["citationDescription"] = $row["citationDescription"];
 		$encode["citationFine"] = $row["citationFine"];
 	}
@@ -298,13 +301,15 @@ function editCitationType()
 		die();
 	}
 	
-	$stmt = $pdo->prepare("UPDATE ".DB_PREFIX."citationTypes SET	citationDescription = ?, citationFine = ? WHERE id = ?");
+	$stmt = $pdo->prepare("UPDATE ".DB_PREFIX."citationTypes SET citationDescription = ?, citationFine = ? WHERE citationId = ?");
 	if ($stmt->execute(array($citationDescription, $citationFine, $id))) {
 		$pdo = null;
 
 		//Let the user know their information was updated
-		$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Citation '.$citation.' with a recommended fine of '.$code_fine.'  edited successfully.</span></div>';
-		header("Location: ".BASE_URL."/oc-admin/dataManagement/citationTypeManager.php");
+		$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Citation '.$citationDescription.' with a recommended fine of '.$citationFine.'  edited successfully.</span></div>';
+		$referer = $_SERVER["HTTP_REFERER"]; 
+		$referer = substr($referer, strpos($referer, "=") + 1);    
+		header("Location: ".BASE_URL."/oc-admin/dataManagement/manager.php?type=$referer");
 	} else {
 		echo "Error updating record: " . print_r($stmt->errorInfo(), true);
 	}
@@ -323,10 +328,12 @@ function deleteCitationType()
 	session_start();
 	$id = htmlspecialchars($_POST['citationTypeID']);
 
-	DB::query("DELETE FROM ".DB_PREFIX."citationTypes WHERE id = ". $id);
+	DB::query("DELETE FROM ".DB_PREFIX."citationTypes WHERE citationId = ". $id);
 	session_start();
 	$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed incident type from database</span></div>';
-	header("Location: ".BASE_URL."/oc-admin/dataManagement/citationTypeManager.php");
+	$referer = $_SERVER["HTTP_REFERER"]; 
+	$referer = substr($referer, strpos($referer, "=") + 1);    
+	header("Location: ".BASE_URL."/oc-admin/dataManagement/manager.php?type=$referer");
 }
 
 //** END Citation Types Manager FUNCTIONS **//
@@ -469,11 +476,11 @@ function getDepartmentDetails()
 	$encode = array();
 	foreach($result as $row)
 	{
-		$encode["departmentID"] = $row["departmentID"];
+		$encode["departmentID"] = $row["departmentId"];
 		$encode["departmentName"] = $row["departmentName"];
 		$encode["departmentShortName"] = $row["departmentShortName"];
 		$encode["departmentLongName"] = $row["departmentLongName"];
-		$encode["departmentEnabled"] = $row["departmentEnabled"];
+		$encode["departmentEnabled"] = $row["allowDepartment"];
 
 	}
 	
@@ -506,7 +513,9 @@ function editDepartment()
 
 		//Let the user know their information was updated
 		$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Department '.$departmentLongName.' ('.$departmentShortName.')  was  edited successfully.</span></div>';
-		header("Location: ".BASE_URL."/oc-admin/dataManagement/departmentsManager.php");
+		$referer = $_SERVER["HTTP_REFERER"]; 
+		$referer = substr($referer, strpos($referer, "=") + 1);    
+		header("Location: ".BASE_URL."/oc-admin/dataManagement/manager.php?type=$referer");
 	} else {
 		echo "Error updating record: " . print_r($stmt->errorInfo(), true);
 	}
@@ -528,7 +537,9 @@ function deleteDepartment()
 	DB::query("DELETE FROM ".DB_PREFIX."departments WHERE departmentId = " . $departmentID);
 
 	$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed incident  from database</span></div>';
-	header("Location: ".BASE_URL."/oc-admin/dataManagement/departmentsManager.php");
+	$referer = $_SERVER["HTTP_REFERER"]; 
+	$referer = substr($referer, strpos($referer, "=") + 1);    
+	header("Location: ".BASE_URL."/oc-admin/dataManagement/manager.php?type=$referer");
 }
 
 //** END Departments Manager FUNCTIONS **//
@@ -618,7 +629,7 @@ function getIncidentTypes()
 				';
 			}
 		
-		echo '<input name="WeaponID" type="hidden" value=' . $row[0] . ' />
+		echo '<input name="IncidentTypeID" type="hidden" value=' . $row[0] . ' />
 			</form>
 			</td>
 			</tr>
@@ -652,7 +663,7 @@ function getIncidentTypeDetails()
 		die();
 	}
 
-	$stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."incident_types WHERE id = ?");
+	$stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."incidenttypes WHERE id = ?");
 	$resStatus = $stmt->execute(array($incidentTypeID));
 	$result = $stmt;
 
@@ -694,14 +705,15 @@ function editIncidentType()
 	}
 
 	
-	$stmt = $pdo->prepare("UPDATE ".DB_PREFIX."incident_types SET codeId = ?, codeName = ? WHERE id = ?");
+	$stmt = $pdo->prepare("UPDATE ".DB_PREFIX."incidenttypes SET codeId = ?, codeName = ? WHERE id = ?");
 	if ($stmt->execute(array($incident_code, $incident_name, $id))) {
 		$pdo = null;
 
 		//Let the user know their information was updated
 		$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Incident '.$incident_code.' – '.$incident_name.' edited successfully.</span></div>';
-		header("Location: ".BASE_URL."/oc-admin/dataManagement/incidentTypeManager.php");
-	} else {
+		$referer = $_SERVER["HTTP_REFERER"]; 
+		$referer = substr($referer, strpos($referer, "=") + 1);    
+		header("Location: ".BASE_URL."/oc-admin/dataManagement/manager.php?type=$referer");	} else {
 		echo "Error updating record: " . print_r($stmt->errorInfo(), true);
 	}
 	$pdo = null;
@@ -719,11 +731,12 @@ function deleteIncidentType()
 	session_start();
 	$id = htmlspecialchars($_POST['IncidentTypeID']);
 
-	DB::query("DELETE FROM ".DB_PREFIX."incident_types WHERE id = ". $id);
+	DB::query("DELETE FROM ".DB_PREFIX."incidenttypes WHERE id = ". $id);
 
 	$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed incident type from database</span></div>';
-	header("Location: ".BASE_URL."/oc-admin/dataManagement/incidentTypeManager.php");
-}
+	$referer = $_SERVER["HTTP_REFERER"]; 
+	$referer = substr($referer, strpos($referer, "=") + 1);    
+	header("Location: ".BASE_URL."/oc-admin/dataManagement/manager.php?type=$referer");}
 
 //** END Incident Types Manager FUNCTIONS **//
 
@@ -894,8 +907,9 @@ function editRadioCode()
 
 		//Let the user know their information was updated
 		$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Code '.$code.' – '.$codeDescription.'  edited successfully.</span></div>';
-		header("Location: ".BASE_URL."/oc-admin/dataManagement/radioCodeManager.php");
-	} else {
+		$referer = $_SERVER["HTTP_REFERER"]; 
+		$referer = substr($referer, strpos($referer, "=") + 1);    
+		header("Location: ".BASE_URL."/oc-admin/dataManagement/manager.php?type=$referer");	} else {
 		echo "Error updating record: " . print_r($stmt->errorInfo(), true);
 	}
 	$pdo = null;
@@ -917,8 +931,9 @@ function deleteRadioCode()
 
 	session_start();
 	$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed incident type from database</span></div>';
-	header("Location: ".BASE_URL."/oc-admin/dataManagement/warrantTypeManager.php");
-}
+	$referer = $_SERVER["HTTP_REFERER"]; 
+	$referer = substr($referer, strpos($referer, "=") + 1);    
+	header("Location: ".BASE_URL."/oc-admin/dataManagement/manager.php?type=$referer");}
 
 //** END Radio Codes Manager FUNCTIONS **//
 
@@ -1086,8 +1101,9 @@ function editStreet()
 
 		//Let the user know their information was updated
 		$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Street '.$name.' in '.$county.' edited successfully.</span></div>';
-		header("Location: ".BASE_URL."/oc-admin/dataManagement/streetManager.php");
-	} else {
+		$referer = $_SERVER["HTTP_REFERER"]; 
+		$referer = substr($referer, strpos($referer, "=") + 1);    
+		header("Location: ".BASE_URL."/oc-admin/dataManagement/manager.php?type=$referer");	} else {
 		echo "Error updating record: " . print_r($stmt->errorInfo(), true);
 	}
 	$pdo = null;
@@ -1109,8 +1125,9 @@ function deleteStreet()
 	DB::query("DELETE FROM ".DB_PREFIX."streets WHERE id = " . $id);
 
 	$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed street from database</span></div>';
-	header("Location: ".BASE_URL."/oc-admin/dataManagement/streetManager.php");
-}
+	$referer = $_SERVER["HTTP_REFERER"]; 
+	$referer = substr($referer, strpos($referer, "=") + 1);    
+	header("Location: ".BASE_URL."/oc-admin/dataManagement/manager.php?type=$referer");}
 
 //** END Streets Manager FUNCTIONS **//
 
@@ -1286,8 +1303,9 @@ function editVehicle()
 
 		/** Indicate that the vehicle record was updated successfully **/
 		$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Vehicle '.$make.' '.$model.' edited successfully.</span></div>';
-		header("Location: ".BASE_URL."/oc-admin/dataManagement/vehicleManager.php");
-	} else {
+		$referer = $_SERVER["HTTP_REFERER"]; 
+		$referer = substr($referer, strpos($referer, "=") + 1);    
+		header("Location: ".BASE_URL."/oc-admin/dataManagement/manager.php?type=$referer");	} else {
 		echo "Error updating record: " . print_r($stmt->errorInfo(), true);
 	}
 	$pdo = null;
@@ -1303,15 +1321,14 @@ function editVehicle()
 function deleteVehicle()
 {
 	session_start();
-	$id         = !empty($_POST['make']) ? htmlspecialchars($_POST['vehicleID']) : '';
-	$make 		= !empty($_POST['make']) ? htmlspecialchars($_POST['make']) : '';
-	$model   	= !empty($_POST['model']) ? htmlspecialchars($_POST['model']) : '';
+	$id         = htmlspecialchars($_POST['vehicleID']);
 
-	DB::query("DELETE FROM ".DB_PREFIX."vehicles WHERE id = " . $id); 
+	DB::query("DELETE FROM ".DB_PREFIX."vehicles WHERE id=".$id); 
 
 	$_SESSION['successMessage'] = "<div class=\"alert alert-success\"><span>Vehicle ".$_POST['make']." ".$_POST['model']." removed successfully.</div>";
-	header("Location: ".BASE_URL."/oc-admin/dataManagement/vehicleManager.php");
-}
+	$referer = $_SERVER["HTTP_REFERER"]; 
+	$referer = substr($referer, strpos($referer, "=") + 1);    
+	header("Location: ".BASE_URL."/oc-admin/dataManagement/manager.php?type=$referer");}
 
 //** END Vehicle Manager FUNCTIONS **//
 
@@ -1474,8 +1491,9 @@ function editWarningType()
 
 		//Let the user know their information was updated
 		$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Incident edited successfully.</span></div>';
-		header("Location: ".BASE_URL."/oc-admin/dataManagement/warningTypeManager.php");
-	} else {
+		$referer = $_SERVER["HTTP_REFERER"]; 
+		$referer = substr($referer, strpos($referer, "=") + 1);    
+		header("Location: ".BASE_URL."/oc-admin/dataManagement/manager.php?type=$referer");	} else {
 		echo "Error updating record: " . print_r($stmt->errorInfo(), true);
 	}
 	$pdo = null;
@@ -1515,8 +1533,9 @@ function deleteWarningType()
 
 	session_start();
 	$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed incident type from database</span></div>';
-	header("Location: ".BASE_URL."/oc-admin/dataManagement/warningTypeManager.php");
-}
+	$referer = $_SERVER["HTTP_REFERER"]; 
+	$referer = substr($referer, strpos($referer, "=") + 1);    
+	header("Location: ".BASE_URL."/oc-admin/dataManagement/manager.php?type=$referer");}
 
 //** END Warning Types Manager FUNCTIONS **//
 
@@ -1665,7 +1684,8 @@ function getWarrantTypeDetails()
 	foreach($result as $row)
 	{
 		$encode["warrantTypeID"] = $row[0];
-		$encode["warrantDescription"] = $row[1];
+		$encode["warrantViolent"] = $row[1];
+		$encode["warrantDescription"] = $row[2];
 	}
 	
 	echo json_encode($encode);
@@ -1694,8 +1714,9 @@ function editWarrantType()
 
 		//Let the user know their information was updated
 		$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Warrant type "'.$warrantDescription.'" edited successfully.</span></div>';
-		header("Location: ".BASE_URL."/oc-admin/dataManagement/warrantTypeManager.php");
-	} else {
+		$referer = $_SERVER["HTTP_REFERER"]; 
+		$referer = substr($referer, strpos($referer, "=") + 1);    
+		header("Location: ".BASE_URL."/oc-admin/dataManagement/manager.php?type=$referer");	} else {
 		echo "Error updating record: " . print_r($stmt->errorInfo(), true);
 	}
 	$pdo = null;
@@ -1716,8 +1737,9 @@ function deleteWarrantType()
 	DB::query("DELETE FROM ".DB_PREFIX."warrantTypes WHERE id = " . $id);
 
 	$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed warrant type from database</span></div>';
-	header("Location: ".BASE_URL."/oc-admin/dataManagement/warrantTypeManager.php");
-}
+	$referer = $_SERVER["HTTP_REFERER"]; 
+	$referer = substr($referer, strpos($referer, "=") + 1);    
+	header("Location: ".BASE_URL."/oc-admin/dataManagement/manager.php?type=$referer");}
 
 //** END Warrant Types Manager FUNCTIONS **//
 
@@ -1879,8 +1901,9 @@ function editWeapon()
 		$pdo = null;
 		//Let the user know their information was updated
 		$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Weapon '.$weaponName.' '.$weaponType.' edited successfully.</span></div>';
-		header("Location: ".BASE_URL."/oc-admin/dataManagement/weaponManager.php");
-	} else {
+		$referer = $_SERVER["HTTP_REFERER"]; 
+		$referer = substr($referer, strpos($referer, "=") + 1);    
+		header("Location: ".BASE_URL."/oc-admin/dataManagement/manager.php?type=$referer");	} else {
 		echo "Error updating record: " . print_r($stmt->errorInfo(), true);
 	}
 	$pdo = null;
@@ -1901,8 +1924,9 @@ function deleteWeapon()
 	DB::query("DELETE FROM ".DB_PREFIX."weapons WHERE id = " . $id);
 	
 	$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed weapon from database</span></div>';
-	header("Location: ".BASE_URL."/oc-admin/dataManagement/weaponManager.php");
-}
+	$referer = $_SERVER["HTTP_REFERER"]; 
+	$referer = substr($referer, strpos($referer, "=") + 1);    
+	header("Location: ".BASE_URL."/oc-admin/dataManagement/manager.php?type=$referer");}
 
 //** END Weapon Manager FUNCTIONS **//
 
@@ -1994,4 +2018,3 @@ function resetData()
 	header("Location: ".BASE_URL."/oc-admin/admin.php");
 }
 //** END Data Import/Export/Reset FUNCTIONS **//
-?>

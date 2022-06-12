@@ -24,6 +24,33 @@ define( 'OCTHEMEMOD', 'oc-content/themes/'. THEME .'/modals' );
 define( 'OCTHEMEJS', 'oc-content/themes/'. THEME .'/js' );
 define( 'APIDATAACTIONS', '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">');
 define( 'ERRORREDIRECT', '\'Location: '.BASE_URL.'/oc-content/plugins/error/index.php\'');
+
+// Load class autoloader
+
+spl_autoload_register("classAutoLoader");
+function classAutoLoader($className){
+	$url = $_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"];
+    
+    if(strpos($url, "includes") !== false){
+        $path = "../classes/";
+    }elseif(strpos($url, "functions") !== false){
+        $path = "../classes/";
+    }elseif(strpos($url, "actions") !== false){
+        $path = "../classes/";
+    }elseif(strpos($url, "dataManagement") !== false){
+        $path = "../../classes/";
+    }elseif(strpos($url, "oc-admin") !== false){
+        $path = "../classes/";
+    } else{
+        $path = "classes/";
+    }
+    
+    
+	$extensions = ".class.php";
+
+   require $path . $className . $extensions;
+}
+
 /*
  * These can't be directly globalized in version.php. When updating,
  * we're including version.php from another installation and don't want

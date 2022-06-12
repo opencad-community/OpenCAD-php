@@ -11,82 +11,70 @@ This program is free software: you can redistribute it and/or modify
  (at your option) any later version.
 
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
-**/
+ **/
 
-	if(session_id() == '' || !isset($_SESSION)) {
+if (session_id() == '' || !isset($_SESSION)) {
 	// session isn't started
 	session_start();
-	}
-	require_once('../../oc-config.php');
-	require_once( ABSPATH . '/oc-functions.php');
-	require_once( ABSPATH . '/oc-settings.php');
-	require_once( ABSPATH . "/oc-includes/adminActions.php");
-	require_once( ABSPATH . "/oc-includes/dataActions.php");
+}
+require_once('../../oc-config.php');
+require_once(ABSPATH . '/oc-functions.php');
+require_once(ABSPATH . '/oc-settings.php');
+require_once(ABSPATH . "/oc-includes/adminActions.php");
+require_once(ABSPATH . "/oc-includes/dataActions.php");
 
-	if (empty($_SESSION['logged_in']))
-	{
-		header('Location: ../index.php');
-		die("Not logged in");
-	}
-	else
-	{
-	  $name = $_SESSION['name'];
-	}
+if (empty($_SESSION['logged_in'])) {
+	header('Location: ../index.php');
+	die("Not logged in");
+} else {
+	$name = $_SESSION['name'];
+}
 
 
-	if ( $_SESSION['adminPrivilege'] == 3)
-	{
-	  if ($_SESSION['adminPrivilege'] == 'Administrator')
-	  {
-		  //Do nothing
-	  }
+if ($_SESSION['adminPrivilege'] == 3) {
+	if ($_SESSION['adminPrivilege'] == 'Administrator') {
+		//Do nothing
 	}
-	else if ($_SESSION['adminPrivilege'] == 2)
-	{
-	  if ($_SESSION['adminPrivilege'] == 'Moderator')
-	  {
-		  // Do Nothing
-	  }
+} else if ($_SESSION['adminPrivilege'] == 2) {
+	if ($_SESSION['adminPrivilege'] == 'Moderator') {
+		// Do Nothing
 	}
-	else
-	{
-		permissionDenied();
-	}
+} else {
+	permissionDenied();
+}
 
-	$accessMessage = "";
-	if(isset($_SESSION['accessMessage']))
-	{
-		$accessMessage = $_SESSION['accessMessage'];
-		unset($_SESSION['accessMessage']);
-	}
-	$adminMessage = "";
-	if(isset($_SESSION['adminMessage']))
-	{
-		$adminMessage = $_SESSION['adminMessage'];
-		unset($_SESSION['adminMessage']);
-	}
+$accessMessage = "";
+if (isset($_SESSION['accessMessage'])) {
+	$accessMessage = $_SESSION['accessMessage'];
+	unset($_SESSION['accessMessage']);
+}
+$adminMessage = "";
+if (isset($_SESSION['adminMessage'])) {
+	$adminMessage = $_SESSION['adminMessage'];
+	unset($_SESSION['adminMessage']);
+}
 
-	$successMessage = "";
-	if(isset($_SESSION['successMessage']))
-	{
-		$successMessage = $_SESSION['successMessage'];
-		unset($_SESSION['successMessage']);
-	}
+$successMessage = "";
+if (isset($_SESSION['successMessage'])) {
+	$successMessage = $_SESSION['successMessage'];
+	unset($_SESSION['successMessage']);
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-	<?php include ( ABSPATH . "/".OCTHEMES."/".THEME."/includes/header.inc.php"); ?>
+
+<head>
+	<?php include(ABSPATH . "/" . OCTHEMES . "/" . THEME . "/includes/header.inc.php"); ?>
 
 
-	<body class="app header-fixed">
+<body class="app header-fixed">
 
 	<header class="app-header navbar">
-	<?php 
-	require_once( ABSPATH . OCTHEMEINC ."/admin/topbarNav.inc.php" );
-	include( ABSPATH . "/" . OCTHEMES ."/". THEME ."/includes/topProfile.inc.php");
-	?>
+		<?php
+		require_once(ABSPATH . OCTHEMEINC . "/admin/topbarNav.inc.php");
+		include(ABSPATH . "/" . OCTHEMES . "/" . THEME . "/includes/topProfile.inc.php");
+		?>
 	</header>
 
 	<div class="app-body">
@@ -99,14 +87,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 							<em class="fa fa-align-justify"></em> <?php echo lang_key("WARRANTTYPE_MANAGER"); ?>
 						</div>
 						<div class="card-body">
-							<?php echo $accessMessage;?>
-							<?php getWarrantTypes();?>
+							<?php echo $accessMessage; ?>
+							<?php getWarrantTypes(); ?>
 						</div>
 						<!-- /.card-body-->
 					</div>
 					<!-- /.card-->
 				</div>
-				<!-- /.animated fadeIn -->  
+				<!-- /.animated fadeIn -->
 			</div>
 			<!-- /.container-fluid -->
 		</main>
@@ -114,83 +102,85 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	</div>
 	<!-- /.app-body -->
 
-			<?php require_once ( ABSPATH . "/" . OCTHEMES ."/". THEME ."/includes/footer.inc.php"); ?>
+	<?php require_once(ABSPATH . "/" . OCTHEMES . "/" . THEME . "/includes/footer.inc.php"); ?>
 
 	<!-- Edit Street Modal -->
 	<div class="modal fade" id="editWarrantTypeModal" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog modal-md">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title" id="editWarrantTypeModal">Edit Warrant</h4>
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-				</button>
-			</div>
-			<!-- ./ modal-header -->
-			<div class="modal-body">
-				<form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/dataActions.php"
-					class="form-horizontal">
-					<div class="form-group row">
-						<label class="col-md-3 control-label">Warrant Description</label>
-						<div class="col-md-9">
-							<input type="text" name="warrantDescription" class="form-control" id="warrantDescription" />
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="editWarrantTypeModal">Edit Warrant</h4>
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<!-- ./ modal-header -->
+				<div class="modal-body">
+					<form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/dataActions.php" class="form-horizontal">
+						<div class="form-group row">
+							<label class="col-md-3 control-label">Warrant Description</label>
+							<div class="col-md-9">
+								<input type="text" name="warrantDescription" class="form-control" id="warrantDescription" />
+							</div>
+							<!-- ./ col-sm-9 -->
 						</div>
-						<!-- ./ col-sm-9 -->
-					</div>
-					<!-- ./ form-group -->>
+						<!-- ./ form-group -->
+						<div class="form-group row">
+							<label class="col-md-3 control-label">Violent</label>
+							<div class="col-md-9">
+								<input type="text" name="warrantDescription" class="form-control" id="warrantDescription" />
+							</div>
+							<!-- ./ col-sm-9 -->
+						</div>
+						<!-- ./ form-group -->>
+				</div>
+				<!-- ./ modal-body -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<input type="hidden" name="warrantTypeID" id="warrantTypeID" aria-hidden="true">
+					<input type="submit" name="editWarrantType" class="btn btn-primary" value="Edit Warrant Type" />
+				</div>
+				<!-- ./ modal-footer -->
+				</form>
 			</div>
-			<!-- ./ modal-body -->
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<input type="hidden" name="warrantTypeID" id="warrantTypeID" aria-hidden="true">
-				<input type="submit" name="editWarrantType" class="btn btn-primary" value="Edit Warrant Type" />
-			</div>
-			<!-- ./ modal-footer -->
-			</form>
+			<!-- ./ modal-content -->
 		</div>
-		<!-- ./ modal-content -->
-	</div>
-	<!-- ./ modal-dialog modal-lg -->
+		<!-- ./ modal-dialog modal-lg -->
 	</div>
 	<!-- ./ modal fade bs-example-modal-lg -->
 
 	<?php
-	 require_once ( ABSPATH . OCTHEMEMOD . "/admin/globalModals.inc.php");
-	require_once( ABSPATH . OCTHEMEINC ."/scripts.inc.php" ); ?>
+	require_once(ABSPATH . OCTHEMEMOD . "/admin/globalModals.inc.php");
+	require_once(ABSPATH . OCTHEMEINC . "/scripts.inc.php"); ?>
 	<script>
-	$(document).ready(function() {
-	$('#allWarrantTypes').DataTable({});
-	});
+		$(document).ready(function() {
+			$('#allWarrantTypes').DataTable({});
+		});
 
-	<>
-	$('#editWarrantTypeModal').on('show.bs.modal', function(e) {
-	var $modal = $(this),
-		warrantTypeID = e.relatedTarget.id;
+		$('#editWarrantTypeModal').on('show.bs.modal', function(e) {
+			var $modal = $(this),
+				warningTypeID = e.relatedTarget.id;
 
-	$.ajax({
-		cache: false,
-		type: 'POST',
-		url: '<?php echo BASE_URL; ?>/actions/dataActions.php',
-		data: {
-			'getWarrantTypeDetails': 'yes',
-			'warrantTypeID': warrantTypeID
-		},
-		success: function(result) {
-			console.log(result);
-			data = JSON.parse(result);
+			$.ajax({
+				cache: false,
+				type: 'POST',
+				url: '<?php echo BASE_URL; ?>/oc-includes/dataActions.php',
+				data: {
+					'getWarrantTypeDetails': 'yes',
+					'warrantTypeID': warrantTypeID
+				},
+				success: function(result) {
+					console.log(result);
+					data = JSON.parse(result);
 
-			$('input[name="warrantDescription"]').val(data['warrantDescription']);
-			$('input[name="warrantTypeID"]').val(data['warrantTypeID']);
-		},
+					$('input[name="warrantDescription"]').val(data['warrantDescription']);
+					$('input[name="warrantTypeID"]').val(data['warrantTypeID']);
+				},
 
-		error: function(exception) {
-			alert('Exeption:' + exception);
-		}
-	});
-	})
-	</scrip>
-	</body>
-
-
-	</body>
-
-</html>
+				error: function(exception) {
+					alert('Exeption:' + exception);
+				}
+			});
+		})
+	</script>
+</body>
+</
