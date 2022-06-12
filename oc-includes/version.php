@@ -27,8 +27,8 @@ define('OC_DB_VERSION', '1.0.0');
  *
  * @global string $required_php_version
  */
-define('MINIMUM_PHP_VERSION', '7.3');
-define('RECOMENDED_PHP_VERSION', '7.4');
+define('MINIMUM_PHP_VERSION', '8.0');
+define('RECOMENDED_PHP_VERSION', '8.1');
 
 /**
  * Holds the required MySQL version
