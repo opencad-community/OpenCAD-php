@@ -310,8 +310,8 @@ $arrLang['CIV_LIMIT_MAX_WEAPONS_notes'] = "If CIV_LIMIT_MAX_WEAPONS is '0' then 
 //** End Civilian Strings **//
 
 //** Begin Administrative Strings**//
-$arrLang['MODERATOR_USER_MANAGER'] = "Moderator Manage User";
-$arrLang['MODERATOR_USER_MANAGER_notes'] = "If 'true' then Moderators will be able to manage users, else, if 'false' then Moderators will not be able to manage users.";
+$arrLang['MODERATOR_USER_MANAGER'] = "Moderator Approve User";
+$arrLang['MODERATOR_USER_MANAGER_notes'] = "If 'true' then Moderators will be able to approve new user requests, else, if 'false' then Moderators will not be able to approve new user requests.";
 
 $arrLang['MODERATOR_APPROVE_USER'] = "Moderator Approve User";
 $arrLang['MODERATOR_APPROVE_USER_notes'] = "If 'true' then Moderators will be able to approve new user requests, else, if 'false' then Moderators will not be able to approve new user requests.";
@@ -321,6 +321,42 @@ $arrLang['MODERATOR_EDIT_USER_notes'] = "If 'true' then Moderators will be able 
 
 $arrLang['MODERATOR_DELETE_USER'] = "Moderator Delete User";
 $arrLang['MODERATOR_DELETE_USER_notes'] = "If 'true' then Moderators will be able to delete users, else if 'false' Moderators will not be able to delete users.";
+
+$arrLang['MODERATOR_EDIT_VEHICLES'] = "Moderator Edit Vehicle";
+$arrLang['MODERATOR_EDIT_VEHICLES_notes'] = "If 'true' then Moderators will be able to edit vehicles, if 'false' then this option will be disabled.";
+
+$arrLang['MODERATOR_DELETE_VEHICLES'] = "Moderator Delete Vehicle";
+$arrLang['MODERATOR_DELETE_VEHICLES_notes'] = "If 'true' then Moderators will be able to delete vehicles, if 'false' then this option will be disabled.";
+
+$arrLang['MODERATOR_EDIT_WARNINGTYPE'] = "Moderator Edit Warning Types";
+$arrLang['MODERATOR_EDIT_WARNINGTYPE_notes'] = "If 'true' then Moderators will be able to edit Warning Types, if 'false' then this option will be disabled.";
+
+$arrLang['MODERATOR_DELETE_WARNINGTYPE'] = "Moderator Delete Warning Types";
+$arrLang['MODERATOR_DELETE_WARNINGTYPE_notes'] = "If 'true' then Moderators will be able to delete Warning Types, if 'false' then this option will be disabled.";
+
+$arrLang['MODERATOR_EDIT_INCIDENTTYPES'] = "Moderator Edit Incident Types";
+$arrLang['MODERATOR_EDIT_INCIDENTTYPES_notes'] = "If 'true' then Moderators will be able to edit incident types, if 'false' then this option will be disabled.";
+
+$arrLang['MODERATOR_DELETE_INCIDENTTYPES'] = "Moderator Delete Incident Types";
+$arrLang['MODERATOR_DELETE_INCIDENTTYPES_notes'] = "If 'true' then Moderators will be able to delete incident types, if 'false' then this option will be disabled.";
+
+$arrLang['MODERATOR_EDIT_STREETS'] = "Moderator Edit Streets";
+$arrLang['MODERATOR_EDIT_STREETS_notes'] = "If 'true' then Moderators will be able to edit streets, if 'false' then this option will be disabled.";
+
+$arrLang['MODERATOR_DELETE_STREETS'] = "Moderator Delete Streets";
+$arrLang['MODERATOR_DELETE_STREETS_notes'] = "If 'true' then Moderators will be able to delete streets, if 'false' then this option will be disabled.";
+
+$arrLang['MODERATOR_EDIT_WARRANTTYPES'] = "Moderator Edit Warrant Types";
+$arrLang['MODERATOR_EDIT_WARRANTTYPES_notes'] = "If 'true' then Moderators will be able to edit warrant types, if 'false' then this option will be disabled.";
+
+$arrLang['MODERATOR_DELETE_WARRANTTYPES'] = "Moderator Delete Warrant Types";
+$arrLang['MODERATOR_DELETE_WARRANTTYPES_notes'] = "If 'true' then Moderators will be able to delete warrant types, if 'false' then this option will be disabled.";
+
+$arrLang['MODERATOR_EDIT_WEAPONS'] = "Moderator Edit Weapons";
+$arrLang['MODERATOR_EDIT_WEAPONS_notes'] = "If 'true' then Moderators will be able to edit weapons, if 'false' then this option will be disabled.";
+
+$arrLang['MODERATOR_DELETE_WEAPONS'] = "Moderator Delete Weapons";
+$arrLang['MODERATOR_DELETE_WEAPONS_notes'] = "If 'true' then Moderators will be able to delete weapons, if 'false' then this option will be disabled.";
 
 $arrLang['MODERATOR_SUSPEND_WITHOUT_REASON'] = "Moderator Suspend without Reason";
 $arrLang['MODERATOR_SUSPEND_WITHOUT_REASON_notes'] = "If 'true' then Moderators will be able suspend users without a reason, else if 'false' Moderators will not be able suspend users without a reason.";
@@ -337,8 +373,8 @@ $arrLang['MODERATOR_REMOVE_GROUP_notes'] = "If 'true' then Moderators will be ab
 $arrLang['MODERATOR_NCIC_EDITOR'] = "Moderator NCIC Editor";
 $arrLang['MODERATOR_NCIC_EDITOR_notes'] = "If 'true' then Moderators will be able to access the NCIC editor, else if 'false' Moderators will not be able to access the NCIC editor.";
 
-$arrLang['MODERATOR_DATA_MANAGER'] = "Moderator Data Manager";
-$arrLang['MODERATOR_DATA_MANAGER_notes'] = "If 'true' then Moderators will be able to access the Game Data Manager, else if 'false' then Moderators will not be able to access the Gam Data Manager.";
+$arrLang['MODERATOR_DATA_MANAGER'] = "Moderator Game Data Manager";
+$arrLang['MODERATOR_DATA_MANAGER_notes'] = "If 'true' then Moderators will be able to access the Game Data Manager, else if 'false' then Moderators will not be able to access the Game Data Manager.";
 
 $arrLang['MODERATOR_DATAMAN_CITATIONTYPES'] = "Moderator Citation Types Editor";
 $arrLang['MODERATOR_DATAMAN_CITATIONTYPES_notes'] = "If 'true' then Moderators will have access to the Citation Types Manager module of the Game Data Manager, else if 'false' then Moderators will be denied access.";
@@ -456,8 +492,8 @@ $arrLang["NCIC_CITATIONS_DB"] = "NCIC Citations Database.";
 $arrLang["NCIC_CITATIONS_DB_notes"] = "No results found in the NCIC Citations database.";
 $arrLang["ncicArrests_DB"] = "NCIC Arrests Database";
 $arrLang["ncicArrests_DB_notes"] = "No results found in the NCIC Arrests database.";
-$arrLang["NCIC_WARRANTS_DB"] = "NCIC Warrants Database";
-$arrLang["NCIC_WARRANTS_DB_notes"] = "No results found in the NCIC Warrants database";
+$arrLang["ncicwarrants_DB"] = "NCIC Warrants Database";
+$arrLang["ncicwarrants_DB_notes"] = "No results found in the NCIC Warrants database";
 $arrLang["USER_MANAGER"] = "Users";
 $arrLang["NCIC_EDITOR"] = "NCIC Editor";
 $arrLang["DATA_MANAGER"] = "Data Manager";
@@ -506,7 +542,7 @@ $arrLang["WARRANT_HISTORY"] = "Warrant History";
 $arrLang["WARNING_HISTORY"] = "Warning History";
 $arrLang["LEO_SUPPORT_DATA_OPTGRP"] = "LEO Support Data";
 $arrLang["CITATION_TYPES"] = "Citation Types";
-$arrLang["incidentTypes"] = "Incident Types";
+$arrLang["INCIDENT_TYPES"] = "Incident Types";
 $arrLang["RADIO_CODES"] = "Radio Codes";
 $arrLang["WARRANT_TYPES"] = "Warrant Types";
 $arrLang["WARNING_TYPES"] = "Warning Types";

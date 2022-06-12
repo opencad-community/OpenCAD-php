@@ -40,7 +40,7 @@ function name()
             die();
         }
 
-        $stmt = $pdo->prepare("SELECT id, name, dob, address, gender, race, dlIssuer, dlStatus, dlType, hairColor, build, weaponPermitStatus, deceased, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS age FROM ".DB_PREFIX."ncicNames WHERE name = ?");
+        $stmt = $pdo->prepare("SELECT id, name, dob, address, gender, race, dlIssuer, dlStatus, dlType, hairColor, build, weaponPermitStatus, deceased, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS age FROM ".DB_PREFIX."ncicnames WHERE name = ?");
         $resStatus = $stmt->execute(array($name));
         $result = $stmt;
 
@@ -214,7 +214,7 @@ function plate()
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ncicPlates.*,".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncicPlates INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncicPlates.nameId WHERE vehPlate = ?");
+    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ncicPlates.*,".DB_PREFIX."ncicnames.name FROM ".DB_PREFIX."ncicPlates INNER JOIN ".DB_PREFIX."ncicnames ON ".DB_PREFIX."ncicnames.id=".DB_PREFIX."ncicPlates.nameId WHERE vehPlate = ?");
     $resStatus = $stmt->execute(array($plate));
     $result = $stmt;
 
@@ -274,7 +274,7 @@ function weapon()
             die();
         }
     
-        $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."ncicNames WHERE name = ?");
+        $stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."ncicnames WHERE name = ?");
         $resStatus = $stmt->execute(array($name));
         $result = $stmt;
 

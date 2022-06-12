@@ -78,7 +78,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	</header>
 		<div class="app-body">
 		<main class="main">
-			<div class="breadcrumb" />
+			<div class="breadcrumb">
 			<div class="container-fluid">
 				<div class="animated fadeIn">
 					<div class="card">

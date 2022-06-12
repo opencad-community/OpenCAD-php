@@ -760,7 +760,109 @@ define('MODERATOR_NCIC_EDITOR', <MODERATOR_NCIC_EDITOR>);
   *
   **/
   define('MODERATOR_DATAMAN_IMPEXPRES', <MODERATOR_DATAMAN_IMPEXPRESET>);
+/**#@+
+  * MODERATOR_EDIT_VEHICLES
+  * If 'true' then Moderators will have access to editing vehicles,
+  * else if 'false' then Moderators will be denied access.
+  *
+  **/
+  define('MODERATOR_EDIT_VEHICLES', <MODERATOR_EDIT_VEHICLES>);
 
+  /**#@+
+  * MODERATOR_DELETE_VEHICLES
+  * If 'true' then Moderators will have access to deleting vehicles,
+  * else if 'false' then Moderators will be denied access.
+  *
+  **/
+  define('MODERATOR_DELETE_VEHICLES', <MODERATOR_DELETE_VEHICLES>);
+
+  /**#@+
+  * MODERATOR_EDIT_WARNINGTYPE
+  * If 'true' then Moderators will have access to editing waring types,
+  * else if 'false' then Moderators will be denied access.
+  *
+  **/
+  define('MODERATOR_EDIT_WARNINGTYPE', <MODERATOR_EDIT_WARNINGTYPE>);
+
+  /**#@+
+  * MODERATOR_DELETE_WARNINGTYPE
+  * If 'true' then Moderators will have access to deleting warning types,
+  * else if 'false' then Moderators will be denied access.
+  *
+  **/
+  define('MODERATOR_DELETE_WARNINGTYPE', <MODERATOR_DELETE_WARNINGTYPE>);
+
+  /**#@+
+  * MODERATOR_EDIT_INCIDENTTYPES
+  * If 'true' then Moderators will have access to editing incident types,
+  * else if 'false' then Moderators will be denied access.
+  *
+  **/
+
+  define('MODERATOR_EDIT_INCIDENTTYPES', <MODERATOR_EDIT_INCIDENTTYPES>);
+
+  /**#@+
+  * MODERATOR_DELETE_INCIDENTTYPES
+  * If 'true' then Moderators will have access to deleting incident types,
+  * else if 'false' then Moderators will be denied access.
+  *
+  **/
+  
+  define('MODERATOR_DELETE_INCIDENTTYPES', <MODERATOR_DELETE_INCIDENTTYPES>);
+
+  /**#@+
+  * MODERATOR_EDIT_STREETS
+  * If 'true' then Moderators will have access to editing streets,
+  * else if 'false' then Moderators will be denied access.
+  *
+  **/
+  
+  define('MODERATOR_EDIT_STREETS', <MODERATOR_EDIT_STREETS>);
+
+  /**#@+
+  * MODERATOR_DELETE_STREETS
+  * If 'true' then Moderators will have access to deleting streets,
+  * else if 'false' then Moderators will be denied access.
+  *
+  **/
+  
+  define('MODERATOR_DELETE_STREETS', <MODERATOR_DELETE_STREETS>);
+
+  /**#@+
+  * MODERATOR_EDIT_WARRANTTYPES
+  * If 'true' then Moderators will have access to editing warrant types,
+  * else if 'false' then Moderators will be denied access.
+  *
+  **/
+  
+  define('MODERATOR_EDIT_WARRANTTYPES', <MODERATOR_EDIT_WARRANTTYPES>);
+
+  /**#@+
+  * MODERATOR_DELETE_WARRANTTYPES
+  * If 'true' then Moderators will have access to deleting warrant types,
+  * else if 'false' then Moderators will be denied access.
+  *
+  **/
+  
+  define('MODERATOR_DELETE_WARRANTTYPES', <MODERATOR_DELETE_WARRANTTYPES>);
+
+  /**#@+
+  * MODERATOR_EDIT_WEAPONS
+  * If 'true' then Moderators will have access to editing weapons,
+  * else if 'false' then Moderators will be denied access.
+  *
+  **/
+  
+  define('MODERATOR_EDIT_WEAPONS', <MODERATOR_EDIT_WEAPONS>);
+
+  /**#@+
+  * MODERATOR_DELETE_WEAPONS
+  * If 'true' then Moderators will have access to deleting weapon,
+  * else if 'false' then Moderators will be denied access.
+  *
+  **/
+  
+  define('MODERATOR_DELETE_WEAPONS', <MODERATOR_DELETE_WEAPONS>);
 /**#@+
   * Extra Settings
 	*

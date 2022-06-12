@@ -46,7 +46,6 @@
 			header('location: core_configuration.php');
 			exit;
 		}
-
 		$admin_name = isset($_POST['admin_name']) ? prepare_input($_POST['admin_name']) : '';
 		$admin_identifier = isset($_POST['admin_identifier']) ? prepare_input($_POST['admin_identifier']) : '';
 		$admin_password = isset($_POST['admin_password']) ? prepare_input($_POST['admin_password']) : '';

@@ -25,10 +25,10 @@
                                          <option value="vehicles"><?php echo lang_key("vehicles"); ?></option>
                                          <option value="weapons"><?php echo lang_key("WEAPONS"); ?></option>
                                     <optgroup label="<?php echo lang_key("CIVILIAN_DATA_OPTGRP"); ?>">
-                                         <option value="ncicNames"><?php echo lang_key("IDENTITIES"); ?></option>
+                                         <option value="ncicnames"><?php echo lang_key("IDENTITIES"); ?></option>
                                          <option value="ncicPlates"><?php echo lang_key("REGISTERED_PLATES"); ?></option>
                                          <option value="ncic_weapons"><?php echo lang_key("REGISTERED_WEAPONS"); ?></option>
-                                         <option value="ncic_warrants"><?php echo lang_key("WARRANT_HISTORY"); ?></option>
+                                         <option value="ncicwarrants"><?php echo lang_key("WARRANT_HISTORY"); ?></option>
                                          <option value="ncic_warnings"><?php echo lang_key("WARNING_HISTORY"); ?></option>
                                     <optgroup label="<?php echo lang_key("LEO_SUPPORT_DATA_OPTGRP"); ?>">
                                         <option value="citation_type"><?php echo lang_key("CITATION_TYPES"); ?></option>

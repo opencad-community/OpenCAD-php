@@ -853,7 +853,7 @@ function ncicGetArrests()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncicArrests.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncicArrests INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncicArrests.nameId");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncicArrests.*, ".DB_PREFIX."ncicnames.name FROM ".DB_PREFIX."ncicArrests INNER JOIN ".DB_PREFIX."ncicnames ON ".DB_PREFIX."ncicnames.id=".DB_PREFIX."ncicArrests.nameId");
 
     if (!$result)
     {
@@ -924,7 +924,7 @@ function ncicGetWarrants()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncicWarrants.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncicWarrants INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncicWarrants.nameId");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncicWarrants.*, ".DB_PREFIX."ncicnames.name FROM ".DB_PREFIX."ncicWarrants INNER JOIN ".DB_PREFIX."ncicnames ON ".DB_PREFIX."ncicnames.id=".DB_PREFIX."ncicWarrants.nameId");
 
     if (!$result)
     {
@@ -1007,7 +1007,7 @@ function ncicGetCitations()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncicCitations.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncicCitations INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncicCitations.nameId");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncicCitations.*, ".DB_PREFIX."ncicnames.name FROM ".DB_PREFIX."ncicCitations INNER JOIN ".DB_PREFIX."ncicnames ON ".DB_PREFIX."ncicnames.id=".DB_PREFIX."ncicCitations.nameId");
 
     if (!$result)
     {
@@ -1078,7 +1078,7 @@ function ncicGetWarnings()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncicWarnings.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncicWarnings INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncicWarnings.nameId");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncicWarnings.*, ".DB_PREFIX."ncicnames.name FROM ".DB_PREFIX."ncicWarnings INNER JOIN ".DB_PREFIX."ncicnames ON ".DB_PREFIX."ncicnames.id=".DB_PREFIX."ncicWarnings.nameId");
 
     if (!$result)
     {

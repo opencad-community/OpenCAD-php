@@ -94,7 +94,7 @@ function getAgenciesWarrants()
 }
 /**#@+
 * function getLicenseStatuses()
-* Get list of possible license statuses from status() of the 'dlStatus' column of the ncicNames table.
+* Get list of possible license statuses from status() of the 'dlStatus' column of the ncicnames table.
 *
 * @since 0.2.6
 *
@@ -111,7 +111,7 @@ function getLicenseStatuses()
 		die();
 	}
 
-	$query = "SHOW COLUMNS FROM ".DB_PREFIX."ncicNames LIKE 'dlStatus'";
+	$query = "SHOW COLUMNS FROM ".DB_PREFIX."ncicnames LIKE 'dlStatus'";
 	$stmt = $pdo->prepare( $query );
 	if (!$stmt)
 	{
@@ -139,7 +139,7 @@ function getLicenseStatuses()
 
 /**#@+
 * function getLicenseType()
-* Get list of possible license types from status() of the 'dlType' column of the ncicNames table.
+* Get list of possible license types from status() of the 'dlType' column of the ncicnames table.
 *
 * @since 0.2.6
 *
@@ -156,7 +156,7 @@ function getLicenseTypes()
 		die();
 	}
 
-	$query = "SHOW COLUMNS FROM ".DB_PREFIX."ncicNames LIKE 'dlType'";
+	$query = "SHOW COLUMNS FROM ".DB_PREFIX."ncicnames LIKE 'dlType'";
 	$stmt = $pdo->prepare( $query );
 	if (!$stmt)
 	{
@@ -195,7 +195,7 @@ function getLicenseClasses()
 		die();
 	}
 
-	$query = "SHOW COLUMNS FROM ".DB_PREFIX."ncicNames LIKE 'dlClass'";
+	$query = "SHOW COLUMNS FROM ".DB_PREFIX."ncicnames LIKE 'dlClass'";
 	$stmt = $pdo->prepare( $query );
 	if (!$stmt)
 	{
@@ -241,7 +241,7 @@ function getLicenseIssuers()
 		die();
 	}
 
-	$query = "SHOW COLUMNS FROM ".DB_PREFIX."ncicNames LIKE 'dlIssuer'";
+	$query = "SHOW COLUMNS FROM ".DB_PREFIX."ncicnames LIKE 'dlIssuer'";
 	$stmt = $pdo->prepare( $query );
 	if (!$stmt)
 	{
@@ -314,7 +314,7 @@ function getPlateRegisrars()
 
 /**#@+
 * function getGenders()
-* Get list of possible genders from set() of the 'gender' column of the ncicNames table.
+* Get list of possible genders from set() of the 'gender' column of the ncicnames table.
 *
 * @since 0.2.6
 *
@@ -331,7 +331,7 @@ function getGenders()
 		die();
 	}
 
-	$query = "SHOW COLUMNS FROM ".DB_PREFIX."ncicNames LIKE 'gender'";
+	$query = "SHOW COLUMNS FROM ".DB_PREFIX."ncicnames LIKE 'gender'";
 	$stmt = $pdo->prepare( $query );
 	if (!$stmt)
 	{
@@ -389,7 +389,7 @@ function getIncidentTypes()
 
 /**#@+
 * function getRaces()
-* Get list of possible Races from the  'race' column of the ncicNames table.
+* Get list of possible Races from the  'race' column of the ncicnames table.
 *
 * @since 0.3.0
 *
@@ -406,7 +406,7 @@ function getRaces()
 		die();
 	}
 
-	$query = "SHOW COLUMNS FROM ".DB_PREFIX."ncicNames LIKE 'race'";
+	$query = "SHOW COLUMNS FROM ".DB_PREFIX."ncicnames LIKE 'race'";
 	$stmt = $pdo->prepare( $query );
 	if (!$stmt)
 	{

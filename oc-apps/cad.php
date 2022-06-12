@@ -312,7 +312,7 @@ if (isset($_SESSION['boloMessage'])) {
 		});
 
 		$(document).ready(function() {
-			$('#ncic_warrants').DataTable({
+			$('#ncicwarrants').DataTable({
 
 			});
 		});

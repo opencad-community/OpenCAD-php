@@ -41,6 +41,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
       permissionDenied();
     }  
 
+    $accessMessage = "";
+	if(isset($_SESSION['accessMessage']))
+	{
+		$accessMessage = $_SESSION['accessMessage'];
+		unset($_SESSION['accessMessage']);
+	}
     $successMessage = "";
     if(isset($_SESSION['successMessage']))
     {

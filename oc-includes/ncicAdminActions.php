@@ -169,7 +169,7 @@ function ncicGetNames()
         die();
     }
 
-    $result = $pdo->query("SELECT name, dob, address, gender, race, dlStatus, hairColor, build, weaponPermitStatus, deceased FROM ".DB_PREFIX."ncicNames");
+    $result = $pdo->query("SELECT name, dob, address, gender, race, dlStatus, hairColor, build, weaponPermitStatus, deceased FROM ".DB_PREFIX."ncicnames");
 
     if (!$result)
     {
@@ -188,7 +188,7 @@ function ncicGetNames()
     else
     {
         echo '
-            <table id="ncicNames" class="table table-striped table-bordered">
+            <table id="ncicnames" class="table table-striped table-bordered">
             <thead>
                 <tr>
                 <th>Name</th>
@@ -251,7 +251,7 @@ function ncicGetPlates()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncicPlates.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncicPlates INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncicPlates.nameId");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncicPlates.*, ".DB_PREFIX."ncicnames.name FROM ".DB_PREFIX."ncicPlates INNER JOIN ".DB_PREFIX."ncicnames ON ".DB_PREFIX."ncicnames.id=".DB_PREFIX."ncicPlates.nameId");
 
     if (!$result)
     {
@@ -331,7 +331,7 @@ function ncicGetWeapons()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_weapons.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncic_weapons INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncic_weapons.nameId");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncicweapons.*, ".DB_PREFIX."ncicnames.name FROM ".DB_PREFIX."ncicweapons INNER JOIN ".DB_PREFIX."ncicnames ON ".DB_PREFIX."ncicnames.id=".DB_PREFIX."ncicweapons.nameId");
 
     if (!$result)
     {
@@ -350,7 +350,7 @@ function ncicGetWeapons()
     else
     {
         echo '
-            <table id="ncicNames" class="table table-striped table-bordered">
+            <table id="ncicnames" class="table table-striped table-bordered">
             <thead>
                 <tr>
                 <th>Name</th>
@@ -520,7 +520,7 @@ function delete_warrant()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncic_warrants WHERE id = ?");
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncicwarrants WHERE id = ?");
     $result = $stmt->execute(array($wid));
 
     if (!$result)
@@ -548,7 +548,7 @@ function ncicGetArrests()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncicArrests.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncicArrests INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncicArrests.nameId");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncicArrests.*, ".DB_PREFIX."ncicnames.name FROM ".DB_PREFIX."ncicArrests INNER JOIN ".DB_PREFIX."ncicnames ON ".DB_PREFIX."ncicnames.id=".DB_PREFIX."ncicArrests.nameId");
 
     if (!$result)
     {
@@ -621,7 +621,7 @@ function ncicGetWarrants()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_warrants.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncic_warrants INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncic_warrants.nameId");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncicwarrants.*, ".DB_PREFIX."ncicnames.name FROM ".DB_PREFIX."ncicwarrants INNER JOIN ".DB_PREFIX."ncicnames ON ".DB_PREFIX."ncicnames.id=".DB_PREFIX."ncicwarrants.nameId");
 
     if (!$result)
     {
@@ -640,7 +640,7 @@ function ncicGetWarrants()
     else
     {
         echo '
-            <table id="ncic_warrants" class="table table-striped table-bordered">
+            <table id="ncicwarrants" class="table table-striped table-bordered">
             <thead>
                 <tr>
                 <th>Status</th>
@@ -704,7 +704,7 @@ function ncicGetCitations()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_citations.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncic_citations INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncic_citations.nameId");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_citations.*, ".DB_PREFIX."ncicnames.name FROM ".DB_PREFIX."ncic_citations INNER JOIN ".DB_PREFIX."ncicnames ON ".DB_PREFIX."ncicnames.id=".DB_PREFIX."ncic_citations.nameId");
 
     if (!$result)
     {
@@ -777,7 +777,7 @@ function ncicGetWarnings()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncic_warnings.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncic_warnings INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncic_warnings.nameId");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncicwarnings.*, ".DB_PREFIX."ncicnames.name FROM ".DB_PREFIX."ncicwarnings INNER JOIN ".DB_PREFIX."ncicnames ON ".DB_PREFIX."ncicnames.id=".DB_PREFIX."ncicwarnings.nameId");
 
     if (!$result)
     {
@@ -876,7 +876,7 @@ function delete_name()
         die();
     }
 
-    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncicNames WHERE id = ?");
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncicnames WHERE id = ?");
     $result = $stmt->execute(array(htmlspecialchars($_POST['uid'])));
 
     if (!$result)
@@ -955,7 +955,7 @@ function edit_name()
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT firstName FROM ".DB_PREFIX."ncicNames WHERE firstName = ?");
+    $stmt = $pdo->prepare("SELECT firstName FROM ".DB_PREFIX."ncicnames WHERE firstName = ?");
     $result = $stmt->execute(array($name));
 
     if (!$result)
@@ -992,7 +992,7 @@ function edit_name()
 	$deceased = htmlspecialchars($_POST['civDec']);
     $editid = htmlspecialchars($_POST['Edit_id']);
 
-    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."ncicNames SET name = ?, dob = ?, address = ?, gender = ?, race = ?, dlStatus = ?, hairColor = ?, build = ?, weaponPermitStatus = ?, deceased = ? WHERE id = ?");
+    $stmt = $pdo->prepare("UPDATE ".DB_PREFIX."ncicnames SET name = ?, dob = ?, address = ?, gender = ?, race = ?, dlStatus = ?, hairColor = ?, build = ?, weaponPermitStatus = ?, deceased = ? WHERE id = ?");
     $result = $stmt->execute(array($name, $dob, $address, $sex, $race, $dlStatus, $hair, $build, $weapon, $deceased, $editid));
 
     if (!$result)
@@ -1080,7 +1080,7 @@ function editnameid()
         die();
     }
 
-    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ncicNames.* FROM ".DB_PREFIX."ncicNames WHERE id = ?");
+    $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ncicnames.* FROM ".DB_PREFIX."ncicnames WHERE id = ?");
     $result = $stmt->execute(array(htmlspecialchars($_POST['editid'])));
 
     if (!$result)

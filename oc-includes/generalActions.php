@@ -1397,7 +1397,7 @@ function getCivilianNamesOption()
         die();
     }
 
-    $result = $pdo->query("SELECT id, name FROM ".DB_PREFIX."ncicNames");
+    $result = $pdo->query("SELECT id, name FROM ".DB_PREFIX."ncicnames");
 
     if (!$result)
     {
@@ -1638,7 +1638,7 @@ function getCivilianNames()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncicNames.id, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncicNames");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncicnames.id, ".DB_PREFIX."ncicnames.name FROM ".DB_PREFIX."ncicnames");
 
     if (!$result)
     {
@@ -1754,7 +1754,7 @@ function rms_warnings()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncicNames.name, ".DB_PREFIX."ncicWarnings.id, ".DB_PREFIX."ncicWarnings.warningName, ".DB_PREFIX."ncicWarnings.issuedDate, ".DB_PREFIX."ncicWarnings.issuedBy FROM ".DB_PREFIX."ncicWarnings INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicWarnings.nameId=".DB_PREFIX."ncicNames.id WHERE ".DB_PREFIX."ncicWarnings.status = '1'");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncicnames.name, ".DB_PREFIX."ncicWarnings.id, ".DB_PREFIX."ncicWarnings.warningName, ".DB_PREFIX."ncicWarnings.issuedDate, ".DB_PREFIX."ncicWarnings.issuedBy FROM ".DB_PREFIX."ncicWarnings INNER JOIN ".DB_PREFIX."ncicnames ON ".DB_PREFIX."ncicWarnings.nameId=".DB_PREFIX."ncicnames.id WHERE ".DB_PREFIX."ncicWarnings.status = '1'");
 
     if (!$result)
     {
@@ -1816,7 +1816,7 @@ function rms_citations()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncicNames.name, ".DB_PREFIX."ncicCitations.id, ".DB_PREFIX."ncicCitations.citationName, ".DB_PREFIX."ncicCitations.citationFine, ".DB_PREFIX."ncicCitations.issuedDate, ".DB_PREFIX."ncicCitations.IssuedBy FROM ".DB_PREFIX."ncicCitations INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicCitations.nameId=".DB_PREFIX."ncicNames.id WHERE ".DB_PREFIX."ncicCitations.status = '1'");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncicnames.name, ".DB_PREFIX."ncicCitations.id, ".DB_PREFIX."ncicCitations.citationName, ".DB_PREFIX."ncicCitations.citationFine, ".DB_PREFIX."ncicCitations.issuedDate, ".DB_PREFIX."ncicCitations.IssuedBy FROM ".DB_PREFIX."ncicCitations INNER JOIN ".DB_PREFIX."ncicnames ON ".DB_PREFIX."ncicCitations.nameId=".DB_PREFIX."ncicnames.id WHERE ".DB_PREFIX."ncicCitations.status = '1'");
 
     if (!$result)
     {
@@ -1880,7 +1880,7 @@ function rms_arrests()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncicNames.name, ".DB_PREFIX."ncicArrests.id, ".DB_PREFIX."ncicArrests.arrestReason, ".DB_PREFIX."ncicArrests.arrestFine, ".DB_PREFIX."ncicArrests.issuedDate, ".DB_PREFIX."ncicArrests.issuedBy FROM ".DB_PREFIX."ncicArrests INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicArrests.nameId=".DB_PREFIX."ncicNames.id");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncicnames.name, ".DB_PREFIX."ncicArrests.id, ".DB_PREFIX."ncicArrests.arrestReason, ".DB_PREFIX."ncicArrests.arrestFine, ".DB_PREFIX."ncicArrests.issuedDate, ".DB_PREFIX."ncicArrests.issuedBy FROM ".DB_PREFIX."ncicArrests INNER JOIN ".DB_PREFIX."ncicnames ON ".DB_PREFIX."ncicArrests.nameId=".DB_PREFIX."ncicnames.id");
 
     if (!$result)
     {
@@ -1944,7 +1944,7 @@ function rms_warrants()
         die();
     }
 
-    $result = $pdo->query("SELECT ".DB_PREFIX."ncicWarrants.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncicWarrants INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncicWarrants.nameId");
+    $result = $pdo->query("SELECT ".DB_PREFIX."ncicWarrants.*, ".DB_PREFIX."ncicnames.name FROM ".DB_PREFIX."ncicWarrants INNER JOIN ".DB_PREFIX."ncicnames ON ".DB_PREFIX."ncicnames.id=".DB_PREFIX."ncicWarrants.nameId");
 
     if (!$result)
     {
