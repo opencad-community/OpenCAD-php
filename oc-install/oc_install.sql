@@ -247,7 +247,7 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>users` (
   `adminPrivilege` int(1) DEFAULT 1 COMMENT 'If 1 then user does not possess any administrative permissions, else if 2 then user possess Moderator privileges, else if 3 then user possess Administrator privileges.',
   `supervisorPrivilege` int(1) DEFAULT 1 COMMENT 'If 1 then user does not possess any supervisor privileges, else 2 then user possess supervisor privileges.',
   `civilianPrivilege` int(1) DEFAULT 1 COMMENT 'If 1 then user does not possess any civilian privileges, else 2 then user possess civilian privileges.',
-  `approved` int(1) DEFAULT 0 COMMENT 'Three main statuses: 0 means pending approval. 1 means has access. 2 means suspended',
+  `approved` int(1) DEFAULT 0 COMMENT 'Three main statuses: 0 means pending approval. 1 means has access. 2 means suspended. 3 means User must change password on login',
   `suspendReason` tinytext DEFAULT NULL COMMENT 'Stores the reason why a user is Suspended',
   `suspendDuration` date DEFAULT NULL COMMENT 'Stores the duration a user is Suspended for',
   UNIQUE KEY `id` (`id`)
