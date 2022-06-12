@@ -1,18 +1,18 @@
 function textboxOnFocus(key){
-	$("#notes_message").attr("style", "display:none;");
-	$('#'+key).show();
+    $("#notes_message").attr("style", "display:none;");
+    $('#'+key).show();
 	//$('#'+key).fadeIn('slow');
 }
 
 function textboxOnBlur(key){
-	$("#"+key).attr("style", "display:none;");
+    $("#"+key).attr("style", "display:none;");
 }
 
 function setFocus(key){
 	$("#"+key).focus();
 }
 
-function testDatabaseConnection(){	
+function testDatabaseConnection(){    
 	
 	$('.loading_img').show();
 	$('#notes_message').attr("style", "display:none;");
@@ -28,7 +28,7 @@ function testDatabaseConnection(){
 		global: false,
 		type: "POST",
 		data: ({db_host:database_host,
-			db_name:database_name,
+			    db_name:database_name,
 				db_username:database_username,
 				db_password:database_password,
 				check_key : "apphpei"
@@ -37,7 +37,7 @@ function testDatabaseConnection(){
 		async:false,
 		error: function(html){
 			$('.loading_img').hide();
-			$("#notes_message").html(EasyInstaller._MSG["ajax_connection_error"]);
+            $("#notes_message").html(EasyInstaller._MSG["ajax_connection_error"]);
 		},
 		success: function(html){
 			var obj = jQuery.parseJSON(html);
@@ -46,9 +46,9 @@ function testDatabaseConnection(){
 					$("#notes_message").html("<h4 class='success'>"+EasyInstaller._MSG["success"]+"</h4><p>"+EasyInstaller._MSG["db_version"]+": "+obj.db_version+"</p><p>"+EasyInstaller._MSG["connection_was_established"]+"</p>");	
 				}else{
 					$("#notes_message").html("<h4>"+EasyInstaller._MSG["error"]+"</h4><p>"+obj.db_error+"</p>");	
-				}				
+				}                
 			}else{
-				$("#notes_message").html("<span class='msg_error'>"+EasyInstaller._MSG["connection_error"]+"</span>");
+                $("#notes_message").html("<span class='msg_error'>"+EasyInstaller._MSG["connection_error"]+"</span>");
 			}			
 		}
 	});
@@ -83,5 +83,5 @@ function installTypeOnClick(val){
  *   Change location 
  */
 function goTo(page){
-	window.location.href = page;
+    window.location.href = page;
 }

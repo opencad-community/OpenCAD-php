@@ -30,24 +30,9 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	{
 		$name = $_SESSION['name'];
 	}
-	if ( $_SESSION['adminPrivilege'] == 3)
-	{
-		if ($_SESSION['adminPrivilege'] == 'Administrator')
-		{
-		//Do nothing
-		}
-	}
-	else if ($_SESSION['adminPrivilege'] == 2)
-		{
-			if ($_SESSION['adminPrivilege'] == 'Moderator')
-		{
-		// Do Nothing
-		}
-	}
-	else
-	{
-		permissionDenied();
-	}
+
+	isAdminOrMod();
+
 	$accessMessage = "";
 	if(isset($_SESSION['accessMessage']))
 	{
@@ -142,7 +127,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		</div>
 		<!-- ./ modal fade bs-example-modal-lg -->
 		<?php
-		require_once ( ABSPATH . OCTHEMEMOD . "/admin/globalModals.inc.php");
+		 require_once ( ABSPATH . OCTHEMEMOD . "/admin/globalModals.inc.php");
 		require_once( ABSPATH . OCTHEMEINC ."/scripts.inc.php" ); ?>
 		<script>
 		$(document).ready(function() {

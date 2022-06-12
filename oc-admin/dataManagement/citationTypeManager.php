@@ -30,28 +30,11 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	}
 	else
 	{
-		name = $_SESSION['name'];
+	  $name = $_SESSION['name'];
 	}
 
 
-	if ( $_SESSION['adminPrivilege'] == 3)
-	{
-	if ($_SESSION['adminPrivilege'] == 'Administrator')
-	{
-		//Do nothing
-	}
-	}
-	else if ($_SESSION['adminPrivilege'] == 2)
-	{
-	if ($_SESSION['adminPrivilege'] == 'Moderator')
-	{
-		// Do Nothing
-	}
-	}
-	else
-	{
-		permissionDenied();
-	}
+	isAdminOrMod();
 
 	$accessMessage = "";
 	if(isset($_SESSION['accessMessage']))

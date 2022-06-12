@@ -22,25 +22,14 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	require_once( ABSPATH . "/oc-includes/adminActions.php");
 	require_once( ABSPATH . "/oc-includes/dataActions.php");
 
-    if ( $_SESSION['adminPrivilege'] == 3)
-    {
-      if ($_SESSION['adminPrivilege'] == 'Administrator')
-      {
-          //Do nothing
-      }
-    }
-    else if ($_SESSION['adminPrivilege'] == 2 && MODERATOR_DATAMAN_RADIOCODES == true)
-    {
-      if ($_SESSION['adminPrivilege'] == 'Moderator')
-      {
-          // Do Nothing
-      }
-    }
-    else
-    {
-      permissionDenied();
-    }  
+    isAdminOrMod();
 
+    $accessMessage = "";
+	if(isset($_SESSION['accessMessage']))
+	{
+		$accessMessage = $_SESSION['accessMessage'];
+		unset($_SESSION['accessMessage']);
+	}
     $successMessage = "";
     if(isset($_SESSION['successMessage']))
     {
@@ -68,16 +57,16 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		<div class="breadcrumb" />
 		<div class="container-fluid">
 		<div class="animated fadeIn">
-		<div class="card">
-			<div class="card-header">
-		       <em class="fa fa-align-justify"></em> <?php echo lang_key("RADIOCODE_MANAGER"); ?>
+		    <div class="card">
+			    <div class="card-header">
+		            <em class="fa fa-align-justify"></em> <?php echo lang_key("RADIOCODE_MANAGER"); ?>
                 </div>
-			<div class="card-body">
+			    <div class="card-body">
 					<?php echo $accessMessage;?>
 					<?php getRadioCodes();?>
 				</div>
 				<!-- /.row-->
-			</div>
+			  </div>
 			</div>
 			<!-- /.card-->
 		</main>

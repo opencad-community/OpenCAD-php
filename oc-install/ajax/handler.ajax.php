@@ -1,20 +1,20 @@
 <?php
 ################################################################################
-##			 -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-				#
+##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 #
 ## --------------------------------------------------------------------------- #
-##  ApPHP EasyInstaller Free version										  #
-##  Developed by:  ApPHP <info@apphp.com>									 #
-##  License:	  GNU LGPL v.3												#
-##  Site:		 http://www.apphp.com/php-easyinstaller/					#
-##  Copyright:	ApPHP EasyInstaller (c) 2009-2013. All rights reserved.	#
-##																			#
+##  ApPHP EasyInstaller Free version                                           #
+##  Developed by:  ApPHP <info@apphp.com>                                      #
+##  License:       GNU LGPL v.3                                                #
+##  Site:          http://www.apphp.com/php-easyinstaller/                     #
+##  Copyright:     ApPHP EasyInstaller (c) 2009-2013. All rights reserved.     #
+##                                                                             #
 ################################################################################
 
 	session_start();
 
-	require_once('../include/settings.inc.php');
+    require_once('../include/settings.inc.php');
 	require_once('../include/database.class.php'); 
-	require_once('../include/functions.inc.php');
+    require_once('../include/functions.inc.php');
 	require_once('../include/languages.inc.php');	
 
 	$check_key = isset($_POST['check_key']) ? prepare_input($_POST['check_key']) : '';
@@ -23,7 +23,7 @@
 	$database_username = isset($_POST['db_username']) ? prepare_input($_POST['db_username']) : '';
 	$database_password = isset($_POST['db_password']) ? prepare_input($_POST['db_password']) : '';
 	
-	$arr = array();
+    $arr = array();
 
 	$arr[] = '"status": "0"';
 	$arr[] = '"db_connection_status": "0"';
@@ -36,9 +36,9 @@
 	header('Pragma: no-cache'); // HTTP/1.0
 	header('Content-Type: application/json');		
 	
-	if($check_key == 'apphpei'){
+    if($check_key == 'apphpei'){
 		
-		$arr[] = '"status": "1"';
+        $arr[] = '"status": "1"';
 
 		$error = false;
 		if(EI_MODE == 'demo'){
@@ -84,11 +84,11 @@
 				$arr[] = '"db_error": "'.$error_text.'"';
 			}			
 		}
-	}else{
+    }else{
 		// wrong parameters passed!
-		$arr[] = '"status": "0"';
-	}
-	
+        $arr[] = '"status": "0"';
+    }
+    
 	echo '{';
 	echo implode(',', $arr);
 	echo '}';
