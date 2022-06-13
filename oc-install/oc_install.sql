@@ -174,7 +174,6 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncicNames` (
   `weaponPermitType` set('Small Arms','Specialised Weapon','Automatic Weapon','Semi-Automatic','Military Grade') DEFAULT NULL,
   `weaponPermitIssuedBy` set('Ammu-Nation','Government','Military') DEFAULT NULL,
   `bloodType` set('A+','O+','B+','AB+','A-','O-','B-','AB-') DEFAULT NULL,
-  `blodType` set('A+','O+','B+','AB+','A-','O-','B-','AB-') DEFAULT NULL,
   `organDonor` set('NO','YES') DEFAULT 'NO',
   `deceased` set('NO','YES') DEFAULT 'NO',
   PRIMARY KEY (`id`)
