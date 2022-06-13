@@ -205,7 +205,6 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncicWeapons` (
   `nameId` int(11) NOT NULL COMMENT 'Links to ncicnames db for driver information',
   `weaponType` varchar(255) NOT NULL,
   `weaponName` varchar(255) NOT NULL,
-  `userId` int(11) NOT NULL,
   `notes` varchar(2048) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
