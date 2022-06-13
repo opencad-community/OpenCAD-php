@@ -78,6 +78,12 @@ if (isset($_SESSION['successMessage'])) {
 								<?php echo lang_key("APPLICATION_VERSION_notes"); ?>
 							</div>
 							<div class="form-group">
+								<label for="name"><?php echo lang_key("LATEST_VERSION"); ?></label><input type="text" class="form-control" readonly="readonly" placeholder="<?php $latest = file_get_contents(APPLATESTVERSIONURL);
+																																													$obj = json_decode($latest);
+																																													echo $obj->version; ?>" />
+								<?php echo lang_key("LATEST_VERSION_notes"); ?>
+							</div>
+							<div class="form-group">
 								<label for="name"><?php echo lang_key("DATABASE_SCHEMA_VERSION"); ?></label><input type="text" class="form-control" readonly="readonly" placeholder="<?php echo OC_DB_VERSION ?>" />
 								<?php echo lang_key("DATABASE_SCHEMA_VERSION_notes"); ?>
 							</div>

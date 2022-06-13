@@ -29,7 +29,7 @@ $leoTitle  = "";
 $firstResponderTitle  = "";
 
 if (isset($_SESSION['state']) || isset($_SESSION['police']) || isset($_SESSION['highway']) || isset($_SESSION['sheriff'])) {
-	if ($_SESSION['state'] === "YES" || $_SESSION['police'] === "YES" || $_SESSION['highway'] === "YES" || $_SESSION['sheriff'] === "YES") {
+	if ($_SESSION['police'] === "YES" || $_SESSION['highway'] === "YES" || $_SESSION['sheriff'] === "YES") {
 		$leoTitle = "<li class=\"nav-title\">" . lang_key("LAW_ENFORCEMENT_SERVICES") . "</li>";
 	}
 }
