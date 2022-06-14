@@ -16,8 +16,8 @@ Open Source Computer Aided Dispatch System for Roleplay Communities.
 * Webserver:
 	* Apache
 	* Nginx
-* PHP: >=7.3
-	>Recommended: 8.0
+* PHP: >=8.0
+	>Recommended: 8.0.10
 * Database:
 	* MySQL >=8.0
 	>Recommended: 8.0
@@ -31,14 +31,12 @@ Open Source Computer Aided Dispatch System for Roleplay Communities.
 * XAMPP
 
 #### Important Notes
-* This has been tested to work on Linux, Windows, DirectAdmin, and Plesk.
 * The OpenCAD Development team **DOES NOT** recommend the utilization of "free" webhosting solutions due to a multitude of reasons.
-We suggest [Spearware Networks](https://spearwarenetworks.com/web-hosting) for web hosting.
 
 ## Support
 
-######N eed Help?
+### Need Help?
 [View our Documentation](https://docs.opencad.io) which has all the documentation you need.
 
-###### Still Having Trouble?
+### Still Having Trouble?
 Join us on the community Discord and post your issue in [#general-help](http://discord.io/opencadproject).
