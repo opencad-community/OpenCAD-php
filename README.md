@@ -37,8 +37,8 @@ We suggest [Spearware Networks](https://spearwarenetworks.com/web-hosting) for w
 
 ## Support
 
-######Need Help?
+######N eed Help?
 [View our Documentation](https://docs.opencad.io) which has all the documentation you need.
 
-######Still Having Trouble?
+###### Still Having Trouble?
 Join us on the community Discord and post your issue in [#general-help](http://discord.io/opencadproject).
