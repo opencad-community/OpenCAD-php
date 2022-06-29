@@ -84,7 +84,7 @@ if (isset($_SESSION["webhook_success"])) {
 							<div class="card-header">
 								<em class="fa fa-align-justify"></em> <?php echo lang_key("WEBHOOK_CREATE_TITLE"); ?>
 							</div>
-							<form action="<?php echo BASE_URL; ?>/oc-includes/webhook.php?verifyWebhook" method="POST">
+							<form action="<?php if (isset($_GET["update"]) && $_GET["update"] == true) {echo BASE_URL . "/oc-includes/webhook.php?updateWebhook";} else {echo BASE_URL . "/oc-includes/webhook.php?verifyWebhook";} ?>" method="POST">
 								<div class="card-body">
 									<?php if (!empty($errorMsg)) {
 										echo "<span class='label danger'>" . $errorMsg . "</span>";
@@ -103,8 +103,8 @@ if (isset($_SESSION["webhook_success"])) {
 									</div>
 									<div class="form-group">
 										<label for="name"><?php echo lang_key("WEBHOOK_JSON"); ?></label><textarea id="json_data" rows="10" class="form-control" name="json_data"><?php if (isset($_GET["json"])) {
-																																																echo $_GET["json"];
-																																															} ?></textarea>
+																																														echo json_decode($_GET["json"]);
+																																													} ?></textarea>
 										<?php echo lang_key("WEBHOOK_JSON_NOTES"); ?><br>
 										<button type="button" class="btn btn-primary" onclick="discordExample()">Example Discord Data</button>
 
@@ -113,27 +113,46 @@ if (isset($_SESSION["webhook_success"])) {
 									</div>
 									<div class="form-group">
 										<label for="name"><?php echo lang_key("WEBHOOK_NEW_TYPE"); ?></label><br>
-										<input type="radio" id="webhook_notification" name="webhook_settings" value="Notification" <?php if(isset($_GET["settings"]) && str_contains($_GET["type"], "Notification")){echo "checked='checked'";}else{echo "checked='checked'";}?>>
+										<input type="radio" id="webhook_notification" name="webhook_settings" value="Notification" <?php if (isset($_GET["settings"]) && str_contains($_GET["type"], "Notification")) {
+																																		echo "checked='checked'";
+																																	} else {
+																																		echo "checked='checked'";
+																																	} ?>>
 										<label for="webhook_notification"><?php echo lang_key("WEBHOOK_NEW_RADIO_NOTIFICATION"); ?></label><br>
 
 									</div>
 									<div class="form-group">
 										<label for="name"><?php echo lang_key("WEBHOOK_NEW_SETTING"); ?></label><br>
 
-										<input type="checkbox" id="civRegistered" name='webhook_activation[]' value="civRegistered" <?php if(isset($_GET["settings"]) && str_contains($_GET["settings"], "civRegistered")){echo "checked='checked'";}?>>
+										<input type="checkbox" id="civRegistered" name='webhook_activation[]' value="civRegistered" <?php if (isset($_GET["settings"]) && str_contains($_GET["settings"], "civRegistered")) {
+																																		echo "checked='checked'";
+																																	} ?>>
 										<label for="civRegistered"><?php echo lang_key("WEBHOOK_SETTINGS_CIVREGISTERED"); ?></label><br>
 
-										<input type="checkbox" id="userRequested" name='webhook_activation[]' value="userRequested" <?php if(isset($_GET["settings"]) && str_contains($_GET["settings"], "userRequested")){echo "checked='checked'";}?>>
+										<input type="checkbox" id="userRequested" name='webhook_activation[]' value="userRequested" <?php if (isset($_GET["settings"]) && str_contains($_GET["settings"], "userRequested")) {
+																																		echo "checked='checked'";
+																																	} ?>>
 										<label for="userRequested"><?php echo lang_key("WEBHOOK_SETTINGS_USERREQUESTED"); ?></label><br>
 
-										<input type="checkbox" id="userDelete" name='webhook_activation[]' value="userDelete" <?php if(isset($_GET["settings"]) && str_contains($_GET["settings"], "userDelete")){echo "checked='checked'";}?>>
+										<input type="checkbox" id="userDelete" name='webhook_activation[]' value="userDelete" <?php if (isset($_GET["settings"]) && str_contains($_GET["settings"], "userDelete")) {
+																																	echo "checked='checked'";
+																																} ?>>
 										<label for="userDelete"><?php echo lang_key("WEBHOOK_SETTINGS_USERDELETE"); ?></label><br>
 
-										<input type="checkbox" id="userSuspension" name='webhook_activation[]' value="userSuspension" <?php if(isset($_GET["settings"]) && str_contains($_GET["settings"], "userSuspension")){echo "checked='checked'";}?>>
+										<input type="checkbox" id="userSuspension" name='webhook_activation[]' value="userSuspension" <?php if (isset($_GET["settings"]) && str_contains($_GET["settings"], "userSuspension")) {
+																																			echo "checked='checked'";
+																																		} ?>>
 										<label for="userSuspension"><?php echo lang_key("WEBHOOK_SETTINGS_USERSUSPENSION"); ?></label><br>
 
+										<?php if(isset($_GET["update"]) && $_GET["update"] == "true"){echo '<input type="hidden" id="webhook_id" name="webhook_id" value="'.$_GET["id"].'">';}?>
+
 									</div>
-									<input class="btn btn-primary" type="submit" value="Submit">
+									<?php
+									if (isset($_GET["update"]) && $_GET["update"] == "true") {
+										echo '<input class="btn btn-primary" type="submit" value="Update">';
+									} else {
+										echo '<input class="btn btn-primary" type="submit" value="Submit">';
+									} ?>
 								</div>
 							</form>
 						</div>
@@ -170,7 +189,7 @@ if (isset($_SESSION["webhook_success"])) {
 											echo "<td>" . json_decode($data["webhook_json"], true) . "</td>";
 											echo "<td>" . $data["webhook_type"] . "</td>";
 											echo "<td>" . $data["webhook_settings"] . "</td>";
-											echo '<td><input class="btn btn-primary" type="button" id="' . $data["id"] . '" value="Edit"></td>';
+											echo '<td><input class="btn btn-primary" name="edit" type="submit" value="Edit"></td>';
 											echo '<td><input class="btn btn-primary" name="delete" type="submit" value="Delete"></td>';
 											echo '<input name="webhookId" type="hidden" value=' . $data["id"] . ' />';
 											echo "</tr>";

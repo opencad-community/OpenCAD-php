@@ -579,8 +579,10 @@ $arrLang["WEBHOOK_NEW_RADIO_NOTIFICATION"] = "Notification - Sends Notification 
 $arrLang["WEBHOOK_ERROR_INCORRECTJSON"] = "Incorrect JSON Format! Please correct this before submitting again!";
 $arrLang["WEBHOOK_ERROR_EMPTYSTRING"] = "Be sure to fill all fields before submitting!";
 $arrLang["WEBHOOK_ERROR_INVALIDURI"] = "Webhook URL seems to be invalid, if this isn't the case, please contact support!";
+$arrLang["WEBHOOK_ERROR_EMPTYOPTION"] = "Be sure to select an activation parameter!";
 $arrLang["WEBHOOK_SUCCESS_SUBMITTED"] = "Succesfully Created Webhook!";
 $arrLang["WEBHOOK_SUCCESS_DELETED"] = "Succesfully Deleted Webhook!";
+$arrLang["WEBHOOK_SUCCESS_UPDATED"] = "Succesfully Updated Webhook!";
 
 $arrLang["WEBHOOK_NEW_SETTING"] = "Select Activation Parameters";
 $arrLang["WEBHOOK_SETTINGS_CIVREGISTERED"] = "On Civ Register";
