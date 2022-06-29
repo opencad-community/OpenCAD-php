@@ -79,8 +79,8 @@ if (isset($_SESSION['successMessage'])) {
 							</div>
 							<div class="form-group">
 								<label for="name"><?php echo lang_key("LATEST_VERSION"); ?></label><input type="text" class="form-control" readonly="readonly" placeholder="<?php $latest = file_get_contents(APPLATESTVERSIONURL);
-																																													$obj = json_decode($latest);
-																																													echo $obj->version; ?>" />
+																																											$obj = json_decode($latest);
+																																											echo $obj->version; ?>" />
 								<?php echo lang_key("LATEST_VERSION_notes"); ?>
 							</div>
 							<div class="form-group">
@@ -114,12 +114,14 @@ if (isset($_SESSION['successMessage'])) {
 							</div>
 							<div class="form-group">
 								<label for="name"><?php echo lang_key("API_KEY"); ?></label>
-								<input type="text" class="form-control" readonly="readonly" placeholder="<?php echo getApiKey(); ?>" />
+								<input type="text" class="form-control" readonly="readonly" id="apikey" value="<?php echo getApiKey();?> " placeholder="<?php echo getApiKey(); ?>" />
 								<p>
 									<em>Note:</em> Used to encrypt cookie 'aljksdz7' and authenticate
 									request to the api if the requestor is not logged in.
+									This key is also used to authenticate with the API Endpoints.
 								</p>
-								<a style="margin-left:10px" class="btn btn-primary" href="<?php echo BASE_URL; ?>/actions/generalActions.php?newApiKey=1">Generate</a>
+								<a style="margin-left:10px" class="btn btn-primary" href="<?php echo BASE_URL; ?>/oc-includes/generalActions.php?newApiKey=1">Generate</a>
+								<a style="margin-left:10px" class="btn btn-primary" href="#" onclick="copyAPI();return false;">Copy API Key</a>
 							</div>
 						</div>
 					</div>
@@ -137,6 +139,22 @@ if (isset($_SESSION['successMessage'])) {
 	<?php require_once(ABSPATH . "/" . OCTHEMES . "/" . THEME . "/includes/footer.inc.php"); ?>
 	<?php require_once(ABSPATH . OCTHEMEINC . "/admin/topbarNav.inc.php"); ?>
 	<?php require_once(ABSPATH . OCTHEMEINC . "/scripts.inc.php"); ?>
+
+
+	<script>
+		function copyAPI() {
+			/* Get the text field */
+			var copyText = document.getElementById("apikey");
+
+			/* Select the text field */
+			copyText.select();
+			copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+			/* Copy the text inside the text field */
+			navigator.clipboard.writeText(copyText.value);
+		}
+	</script>
+
 </body>
 
 </html>

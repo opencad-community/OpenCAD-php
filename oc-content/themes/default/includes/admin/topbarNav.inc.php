@@ -33,5 +33,8 @@
 			</div>
 		</li>
 		<?php  } ?>
+		<li class="nav-item px-3"<?php if ( $pageName == "" . lang_key("WEBHOOK_TAB") . "") echo $currentPage; ?>><a rel="noopener" href="<?php echo BASE_URL; ?>/oc-admin/webhook.php"  style="color:black"><em class="fas fa-globe fa-3px" style="color:black"></em> <?php echo lang_key("WEBHOOK_TAB"); ?></a></li>
 		<li class="nav-item px-3"<?php if ( $pageName == "" . lang_key("ABOUT_OPENCAD") . "") echo $currentPage; ?>><a rel="noopener" href="<?php echo BASE_URL; ?>/oc-admin/about.php"  style="color:black"><em class="fas fa-info-circle fa-3px" style="color:black"></em> <?php echo lang_key("ABOUT_OPENCAD"); ?></a></li>
-		</ul>
+		<li class="nav-item px-3"<?php if ( $pageName == "" . lang_key("SUPPORT_TAB") . "") echo $currentPage; ?>><a rel="noopener" href="<?php echo BASE_URL; ?>/oc-admin/support.php"  style="color:black"><em class="fas fa-info-circle fa-3px" style="color:black"></em> <?php echo lang_key("SUPPORT_TAB"); ?></a></li>
+	
+	</ul>

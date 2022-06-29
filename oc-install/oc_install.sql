@@ -289,7 +289,15 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>weapons` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
-
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>webhooks` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `webhook_title` varchar(255) NOT NULL,
+  `webhook_uri` text NOT NULL,
+  `webhook_json` longtext NOT NULL,
+  `webhook_type` varchar(50) NOT NULL,
+  `webhook_settings` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 INSERT INTO `<DB_PREFIX>users` (`name`, `email`, `password`, `identifier`, `adminPrivilege`, `supervisorPrivilege`, `passwordReset`, `approved`, `suspendReason`, `suspendDuration`) VALUES
 ('<NAME>', '<EMAIL>', '<PASSWORD>', '<IDENTIFIER>', 3, 1, 0, 1, NULL, NULL);

@@ -22,8 +22,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	require_once( ABSPATH . "/oc-includes/register.php");
 	require_once( ABSPATH . "/oc-includes/publicFunctions.php");
 
-	if ( isSessionStarted() === FALSE ) session_start();
-	$_SESSION['root_path'] = getcwd();
+    isSessionStarted();
+    $_SESSION['root_path'] = getcwd();
 	$registerError = "";
 	$registerSuccess = "";
 	$loginMessage = "";

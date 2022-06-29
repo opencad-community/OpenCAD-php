@@ -29,6 +29,8 @@
 		$GENERATE_GTAV_DATA = isset($_POST['GENERATE_GTAV_DATA']) ? prepare_input($_POST['GENERATE_GTAV_DATA']) : '';
 		$USE_GRAVATAR = isset($_POST['USE_GRAVATAR']) ? prepare_input($_POST['USE_GRAVATAR']) : '';
 
+		$BASE_URL = isset($_POST['BASE_URL']) ? prepare_input($_POST['BASE_URL']) : '';
+
 		$_SESSION['LIVEMAP_URL'] = $LIVEMAP_URL;
 		$_SESSION['WEBHOOK_URL'] = $WEBHOOK_URL;
 		$_SESSION['DEMO_MODE'] = $DEMO_MODE;
@@ -47,6 +49,7 @@
 		$GENERATE_GTAV_DATA = isset($_POST['GENERATE_GTAV_DATA']) ? prepare_input($_POST['GENERATE_GTAV_DATA']) : '';
 		$USE_GRAVATAR = isset($_POST['USE_GRAVATAR']) ? prepare_input($_POST['USE_GRAVATAR']) : '';
 
+		$BASE_URL = isset($_POST['BASE_URL']) ? prepare_input($_POST['BASE_URL']) : '';
 	}
 ?>	
 

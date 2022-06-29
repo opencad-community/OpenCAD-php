@@ -37,6 +37,8 @@
 		$CIV_LIMIT_MAX_VEHICLES = isset($_POST['CIV_LIMIT_MAX_VEHICLES']) ? prepare_input($_POST['CIV_LIMIT_MAX_VEHICLES']) : '';
 		$CIV_LIMIT_MAX_WEAPONS = isset($_POST['CIV_LIMIT_MAX_WEAPONS']) ? prepare_input($_POST['CIV_LIMIT_MAX_WEAPONS']) : '';
 		
+		$BASE_URL = isset($_POST['BASE_URL']) ? prepare_input($_POST['BASE_URL']) : '';
+
 		$_SESSION['ROADSIDE_PANIC'] = $ROADSIDE_PANIC;
 		$_SESSION['ROADSIDE_BOLO'] = $ROADSIDE_BOLO;
 		$_SESSION['ROADSIDE_NCIC_NAME'] = $ROADSIDE_NCIC_NAME;			
@@ -67,6 +69,7 @@
 		$CIV_LIMIT_MAX_VEHICLES = isset($_POST['CIV_LIMIT_MAX_VEHICLES']) ? prepare_input($_POST['CIV_LIMIT_MAX_VEHICLES']) : '';
 		$CIV_LIMIT_MAX_WEAPONS = isset($_POST['CIV_LIMIT_MAX_WEAPONS']) ? prepare_input($_POST['CIV_LIMIT_MAX_WEAPONS']) : '';
 
+		$BASE_URL = isset($_POST['BASE_URL']) ? prepare_input($_POST['BASE_URL']) : '';
 	}
 ?>	
 

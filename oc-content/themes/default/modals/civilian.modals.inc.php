@@ -189,7 +189,7 @@
 							<div class="form-group row">
 								<label class="col-lg-2 control-label">Gender</label>
 								<div class="col-lg-10">
-									<input type="text" name="civSexrReq" class="form-control" id="civSexReq" value="<?php echo $civGender;?>"  readonly />
+									<input type="text" name="civSexReq" class="form-control" id="civSexReq" value="<?php echo $civGender;?>"  readonly />
 								</div>
 								<!-- ./ col-sm-9 -->
 							</div>

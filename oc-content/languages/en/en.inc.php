@@ -507,6 +507,8 @@ $arrLang["LOADED_PHP_MODULES_notes"] = "<em>Note:</em> Active PHP modules.";
 $arrLang["ABOUT_YOUR_APPLICATION"] = "About Your Application";
 $arrLang["APPLICATION_VERSION"] = "Application Version";
 $arrLang["APPLICATION_VERSION_notes"] = "<em>Note:</em> The currently installed version of OpenCAD.</p>";
+$arrLang["LATEST_VERSION"] = "Latest Version";
+$arrLang["LATEST_VERSION_notes"] ="<em>Note:</em> This is the latest released version available.</p>";
 $arrLang["DATABASE_SCHEMA_VERSION"] = "Database Schema Version";
 $arrLang["DATABASE_SCHEMA_VERSION_notes"] = "<em>Note:</em> The currently installed OpenCAD database schema version.</p>";
 
@@ -529,6 +531,8 @@ $arrLang["WARRANTTYPE_MANAGER_notes"] = "No results found in the <em>Warrant Typ
 $arrLang["WEAPON_MANAGER"] = "Weapon Manager";
 $arrLang["WEAPON_MANAGER_notes"] = "No results found in the <em>weapons</em> datbase";
 $arrLang["ABOUT_OPENCAD"] = "About OpenCAD";
+$arrLang["SUPPORT_TAB"] = "Get Support";
+$arrLang["SUPPORT_TITLE"] = "Support";
 $arrLang["RESET_DATA"] = "Reset Data";
 $arrLang["ENVIRONMENTAL_DATA_OPTGRP"] = "Environmental Data";
 $arrLang["STREETS"] = "Streets";
@@ -549,6 +553,45 @@ $arrLang["WARNING_TYPES"] = "Warning Types";
 $arrLang["RESET_ALL_DATA_OPTGRP"] = "RESET ALL DATA (USE WITH CUATION)";
 $arrLang["RESET_ALL_DATA"] = "All Data (Use with CAUTION)";
 //** End Administrator/Moderator Console Strings  **/
+
+//** Begin Support Strings **/
+$arrLang["SUPPORT_DESCRIBE_PROBLEM"] = "Please Describe Problem";
+$arrLang["SUPPORT_DESCRIBE_PROBLEM_notes"] = "Example: 'Unknown user' error on login even though details are correct";
+$arrLang["SUPPORT_AFFECTING_FILE"] = "File Causing Issues";
+$arrLang["SUPPORT_AFFECTING_FILE_notes"] = "Please provide what file is causing this error";
+$arrLang["SUPPORT_TITLE"] = "Get Support";
+$arrLang["SUPPORT_DETAILS_SENT"] = "Details Sent With Request";
+//** End Support Strings **/
+
+//** Begin Webhook Strings **/
+
+$arrLang["WEBHOOK_TAB"] = "Webhook Manager";
+$arrLang["WEBHOOK_LIST_TITLE"] = "Active Webhooks";
+$arrLang["WEBHOOK_CREATE_TITLE"] = "Create a new webhook";
+$arrLang["WEBHOOK_JSON"] = "Enter Your Custom Webhook Data";
+$arrLang["WEBHOOK_JSON_NOTES"] = "Note: Please ensure this is in 'JSON' format!";
+$arrLang["WEBHOOK_NEW_TITLE"] = "Create Webhook Title";
+$arrLang["WEBHOOK_NEW_TITLE_PLACEHOLDER"] = "My New Webhook";
+$arrLang["WEBHOOK_NEW_URI"] = "Enter Webook URL";
+$arrLang["WEBHOOK_NEW_URI_PLACEHOLDER"] = "https://discordapp.com/api/webhooks/xxxxxxxxx";
+$arrLang["WEBHOOK_NEW_TYPE"] = "Select Type Of Webhook";
+$arrLang["WEBHOOK_NEW_RADIO_NOTIFICATION"] = "Notification - Sends Notification To Your Webhook Based On Certain Events";
+$arrLang["WEBHOOK_ERROR_INCORRECTJSON"] = "Incorrect JSON Format! Please correct this before submitting again!";
+$arrLang["WEBHOOK_ERROR_EMPTYSTRING"] = "Be sure to fill all fields before submitting!";
+$arrLang["WEBHOOK_ERROR_INVALIDURI"] = "Webhook URL seems to be invalid, if this isn't the case, please contact support!";
+$arrLang["WEBHOOK_SUCCESS_SUBMITTED"] = "Succesfully Created Webhook!";
+$arrLang["WEBHOOK_SUCCESS_DELETED"] = "Succesfully Deleted Webhook!";
+
+$arrLang["WEBHOOK_NEW_SETTING"] = "Select Activation Parameters";
+$arrLang["WEBHOOK_SETTINGS_CIVREGISTERED"] = "On Civ Register";
+$arrLang["WEBHOOK_SETTINGS_USERREQUESTED"] = "On User Requested";
+$arrLang["WEBHOOK_SETTINGS_USERDELETE"] = "On User Deletetion";
+$arrLang["WEBHOOK_SETTINGS_USERSUSPENSION"] = "On User Suspension";
+$arrLang["WEBHOOK_SETTINGS_USERREGISTRATION"] = "On User Registration";
+$arrLang["WEBHOOK_SETTINGS_PANICBUTTONPRESSED"] = "On Panic Button Pressed";
+
+
+//** End Webhook Strings **/
 
 //** Begin Civillian Console Strings **/
 $arrLang["CIVILLIAN_CONSOLE"] = "Civillian Console";
