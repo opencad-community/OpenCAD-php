@@ -24,6 +24,7 @@ define( 'OCTHEMEMOD', 'oc-content/themes/'. THEME .'/modals' );
 define( 'OCTHEMEJS', 'oc-content/themes/'. THEME .'/js' );
 define( 'APIDATAACTIONS', '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">');
 define( 'ERRORREDIRECT', '\'Location: '.BASE_URL.'/oc-content/plugins/error/index.php\'');
+define( 'APPLATESTVERSIONURL', "https://raw.githubusercontent.com/kevingorman1000/OpenCad-Versions-TEMP/main/version.json");
 /*
  * These can't be directly globalized in version.php. When updating,
  * we're including version.php from another installation and don't want
@@ -239,3 +240,4 @@ function oc_is_ini_value_changeable( $setting ) {
 
 	return false;
 }
+

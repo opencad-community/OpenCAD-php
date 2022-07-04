@@ -1,22 +1,22 @@
 <?php
 ################################################################################
-##			 -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-				#
+##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 #
 ## --------------------------------------------------------------------------- #
-##  ApPHP EasyInstaller Free version										  #
-##  Developed by:  ApPHP <info@apphp.com>									 #
-##  License:	  GNU LGPL v.3												#
-##  Site:		 http://www.apphp.com/php-easyinstaller/					#
-##  Copyright:	ApPHP EasyInstaller (c) 2009-2013. All rights reserved.	#
-##																			#
-##  Additional modules (embedded):											#
-##  -- jQuery (JavaScript Library)						  http://jquery.com #
-##																			#
+##  ApPHP EasyInstaller Free version                                           #
+##  Developed by:  ApPHP <info@apphp.com>                                      #
+##  License:       GNU LGPL v.3                                                #
+##  Site:          http://www.apphp.com/php-easyinstaller/                     #
+##  Copyright:     ApPHP EasyInstaller (c) 2009-2013. All rights reserved.     #
+##                                                                             #
+##  Additional modules (embedded):                                             #
+##  -- jQuery (JavaScript Library)                           http://jquery.com #
+##                                                                             #
 ################################################################################
    
-	session_start();   
+    session_start();   
 
-	require_once('include/shared.inc.php');	
-	require_once('include/settings.inc.php');
+	require_once('include/shared.inc.php');    
+    require_once('include/settings.inc.php');
 	require_once('include/functions.inc.php');
 	require_once('include/languages.inc.php');	
 
@@ -26,10 +26,10 @@
 	
 	// handle previous installation
 	// -------------------------------------------------
-	if(file_exists(EI_CONFIG_FILE_PATH)){ 
+    if(file_exists(EI_CONFIG_FILE_PATH)){ 
 		$program_already_installed = true;
 		///header('location: '.EI_APPLICATION_START_FILE);
-		///exit;
+        ///exit;
 	}
 	
 	// handle form submission
@@ -54,8 +54,8 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="author" content="OpenCAD Project">
-	<meta name="generator" content="OpenCAD Project">
+    <meta name="author" content="OpenCAD Project">
+    <meta name="generator" content="OpenCAD Project">
 	<title><?php echo lang_key('installation_guide'); ?> | <?php echo lang_key('start'); ?></title>
 
 	
@@ -111,7 +111,7 @@
 							echo '</select>';						
 						}
 					?>
-				</td>				
+				</td>                
 			</tr>
 			<tr><td nowrap="nowrap" height="30px"></td></tr>
 			<tr>

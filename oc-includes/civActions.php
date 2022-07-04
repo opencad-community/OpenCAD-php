@@ -12,15 +12,16 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
-        if(session_id() == '' || !isset($_SESSION)) {
-        session_start();
-        }
 
 
 require_once(__DIR__ . "/../oc-config.php");
 require_once( ABSPATH . "/oc-functions.php");
 require_once( ABSPATH . "/oc-settings.php");
 require_once( ABSPATH . OCINC . "/apiAuth.php");
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 
 /* Handle POST requests */
@@ -354,7 +355,7 @@ function create_name()
     }
 
     $stmt = $pdo->prepare("SELECT name FROM ".DB_PREFIX."ncicNames WHERE name = ?");
-    $resStatus = $stmt->execute(array($name));
+    $resStatus = $stmt->execute(array($fullName));
     $result = $stmt;
 
     if (!$resStatus)

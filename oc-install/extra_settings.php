@@ -2,8 +2,8 @@
 
 	session_start();
 
-	require_once('include/shared.inc.php');	
-	require_once('include/settings.inc.php');	
+	require_once('include/shared.inc.php');    
+    require_once('include/settings.inc.php');    
 	require_once('include/functions.inc.php');
 	require_once('include/languages.inc.php');	
 
@@ -26,11 +26,15 @@
 		$LIVEMAP_URL = isset($_POST['LIVEMAP_URL']) ? prepare_input($_POST['LIVEMAP_URL']) : '';
 		$WEBHOOK_URL = isset($_POST['WEBHOOK_URL']) ? prepare_input($_POST['WEBHOOK_URL']) : '';
 		$DEMO_MODE = isset($_POST['DEMO_MODE']) ? prepare_input($_POST['DEMO_MODE']) : '';
+		$GENERATE_GTAV_DATA = isset($_POST['GENERATE_GTAV_DATA']) ? prepare_input($_POST['GENERATE_GTAV_DATA']) : '';
 		$USE_GRAVATAR = isset($_POST['USE_GRAVATAR']) ? prepare_input($_POST['USE_GRAVATAR']) : '';
+
+		$BASE_URL = isset($_POST['BASE_URL']) ? prepare_input($_POST['BASE_URL']) : '';
 
 		$_SESSION['LIVEMAP_URL'] = $LIVEMAP_URL;
 		$_SESSION['WEBHOOK_URL'] = $WEBHOOK_URL;
 		$_SESSION['DEMO_MODE'] = $DEMO_MODE;
+		$_SESSION['GENERATE_GTAV_DATA'] = $GENERATE_GTAV_DATA;
 		$_SESSION['USE_GRAVATAR'] = $USE_GRAVATAR;		
 
 		$_SESSION['passed_step'] = 9;
@@ -38,11 +42,14 @@
 		exit;
 
 	}else{
+
 		$LIVEMAP_URL = isset($_POST['LIVEMAP_URL']) ? prepare_input($_POST['LIVEMAP_URL']) : '';
 		$WEBHOOK_URL = isset($_POST['WEBHOOK_URL']) ? prepare_input($_POST['WEBHOOK_URL']) : '';
 		$DEMO_MODE = isset($_POST['DEMO_MODE']) ? prepare_input($_POST['DEMO_MODE']) : '';
+		$GENERATE_GTAV_DATA = isset($_POST['GENERATE_GTAV_DATA']) ? prepare_input($_POST['GENERATE_GTAV_DATA']) : '';
 		$USE_GRAVATAR = isset($_POST['USE_GRAVATAR']) ? prepare_input($_POST['USE_GRAVATAR']) : '';
 
+		$BASE_URL = isset($_POST['BASE_URL']) ? prepare_input($_POST['BASE_URL']) : '';
 	}
 ?>	
 
@@ -50,8 +57,8 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="author" content="OpenCAD Project">
-	<meta name="generator" content="OpenCAD Project">
+    <meta name="author" content="OpenCAD Project">
+    <meta name="generator" content="OpenCAD Project">
 	<title><?php echo lang_key("installation_guide"); ?> | System Settings</title>
 
 	<link href="./images/favicon.ico" rel="shortcut icon" />
@@ -115,7 +122,10 @@
 						<h4><?php echo lang_key('DEMO_MODE'); ?></h4>
 						<p><?php echo lang_key('DEMO_MODE_notes'); ?></p>
 					</div>
-					
+					<div id="GENERATE_GTAV_DATA_notes" class="notes_container">
+						<h4><?php echo lang_key('GENERATE_GTAV_DATA'); ?></h4>
+						<p><?php echo lang_key('GENERATE_GTAV_DATA_notes'); ?></p>
+					</div>
 					<div id="USE_GRAVATAR_notes" class="notes_container">
 						<h4><?php echo lang_key('USE_GRAVATAR'); ?></h4>
 						<p><?php echo lang_key('USE_GRAVATAR_notes'); ?></p>
@@ -123,6 +133,14 @@
 					
 					<img class="loading_img" src="images/ajax_loading.gif" alt="<?php echo lang_key('loading'); ?>..." />
 					<div id="notes_message" class="notes_container"></div>					
+				</td>
+			</tr>
+			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>
+			<tr>
+				<td>&nbsp;<?php echo lang_key('GENERATE_GTAV_DATA'); ?>&nbsp;</td>
+				<td>
+					<input type="radio" name="GENERATE_GTAV_DATA" id="GENERATE_GTAV_DATA" <?php echo ($GENERATE_GTAV_DATA=='true')?'checked':'' ?> onfocus="textboxOnFocus('GENERATE_GTAV_DATA_notes')" checked onblur="textboxOnBlur('GENERATE_GTAV_DATA_notes')" value="true" />True
+					<input type="radio" name="GENERATE_GTAV_DATA" id="GENERATE_GTAV_DATA" <?php echo ($GENERATE_GTAV_DATA=='false')?'checked':'' ?> onfocus="textboxOnFocus('GENERATE_GTAV_DATA_notes')"  onblur="textboxOnBlur('GENERATE_GTAV_DATA_notes')" value="false" />False
 				</td>
 			</tr>
 			<tr><td colspan="2" nowrap height="5px">&nbsp;</td></tr>
@@ -140,14 +158,14 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="submit" class="form_button" value="<?php echo lang_key('continue'); ?>" />
 				</td>
-			</tr>						
+			</tr>                        
 			</table>
-			</form>						
+			</form>                        
 		</div>
 		<div class="clear"></div>
 	</div>
 	
-	<?php include_once('include/footer.inc.php'); ?>		
+	<?php include_once('include/footer.inc.php'); ?>        
 
 </div>
 

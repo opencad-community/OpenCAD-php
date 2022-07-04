@@ -1,9 +1,9 @@
 <?php
    
-	session_start();   
+    session_start();   
 
-	require_once('include/shared.inc.php');	
-	require_once('include/settings.inc.php');
+	require_once('include/shared.inc.php');    
+    require_once('include/settings.inc.php');
 	require_once('include/functions.inc.php');
 	require_once('include/languages.inc.php');	
 
@@ -13,10 +13,10 @@
 	
 	// handle previous installation
 	// -------------------------------------------------
-	if(file_exists(EI_CONFIG_FILE_PATH)){ 
+    if(file_exists(EI_CONFIG_FILE_PATH)){ 
 		$program_already_installed = true;
 		//header('location: '.EI_APPLICATION_START_FILE);
-		///exit;
+        ///exit;
 	}
 	
 	// handle previous steps
@@ -36,7 +36,7 @@
 		exit;
 	}
 
-	ob_start();	
+    ob_start();    
 	if(function_exists('phpinfo')) @phpinfo(-1);
 	$phpinfo = array('phpinfo' => array());
 	if(preg_match_all('#(?:<h2>(?:<a name=".*?">)?(.*?)(?:</a>)?</h2>)|(?:<tr(?: class=".*?")?><t[hd](?: class=".*?")?>(.*?)\s*</t[hd]>(?:<t[hd](?: class=".*?")?>(.*?)\s*</t[hd]>(?:<t[hd](?: class=".*?")?>(.*?)\s*</t[hd]>)?)?</tr>)#s', ob_get_clean(), $matches, PREG_SET_ORDER))
@@ -78,7 +78,7 @@
 		'divider_system_info' => array('title'=>lang_key('getting_system_info'), 'description'=>''),
 		
 		'phpversion'   => array(true, lang_key('php_version'), function_exists('phpversion'), phpversion(), lang_key('unknown')),
-		'system'	  => array(false, lang_key('system'), isset($phpinfo['phpinfo']['System']), (isset($phpinfo['phpinfo']['System']) ? $phpinfo['phpinfo']['System'] : ''), lang_key('disabled')),
+		'system'       => array(false, lang_key('system'), isset($phpinfo['phpinfo']['System']), (isset($phpinfo['phpinfo']['System']) ? $phpinfo['phpinfo']['System'] : ''), lang_key('disabled')),
 		'architecture' => array(false, lang_key('system_architecture'), (isset($phpinfo['phpinfo']['Architecture'])), (isset($phpinfo['phpinfo']['Architecture']) ? $phpinfo['phpinfo']['Architecture'] : ''), lang_key('disabled')),
 		'build_date'   => array(false, lang_key('build_date'), isset($phpinfo['phpinfo']['Build Date']), (isset($phpinfo['phpinfo']['Build Date']) ? $phpinfo['phpinfo']['Build Date'] : ''), lang_key('disabled')),
 		'server_api'   => array(false, lang_key('server_api'), isset($phpinfo['phpinfo']['Server API']), (isset($phpinfo['phpinfo']['Server API']) ? $phpinfo['phpinfo']['Server API'] : ''), lang_key('unknown')),
@@ -134,8 +134,8 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="author" content="OpenCAD Project">
-	<meta name="generator" content="OpenCAD Project">
+    <meta name="author" content="OpenCAD Project">
+    <meta name="generator" content="OpenCAD Project">
 	<title><?php echo lang_key('installation_guide'); ?> | <?php echo lang_key('server_requirements'); ?></title>
 	
 	<link href="./images/favicon.ico" rel="shortcut icon" />

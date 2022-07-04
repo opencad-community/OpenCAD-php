@@ -2,8 +2,8 @@
 
 	session_start();
 
-	require_once('include/shared.inc.php');	
-	require_once('include/settings.inc.php');	
+	require_once('include/shared.inc.php');    
+    require_once('include/settings.inc.php');    
 	require_once('include/functions.inc.php');
 	require_once('include/languages.inc.php');	
 
@@ -32,8 +32,8 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="author" content="OpenCAD Project">
-	<meta name="generator" content="OpenCAD Project">
+    <meta name="author" content="OpenCAD Project">
+    <meta name="generator" content="OpenCAD Project">
 	<title><?php echo lang_key("installation_guide"); ?> | <?php echo lang_key('ready_to_install'); ?></title>
 
 	<link href="./images/favicon.ico" rel="shortcut icon" />
@@ -52,6 +52,7 @@
 		}else{
 			echo '<script type="text/javascript" src="language/en/js/common.js"></script>';
 		}
+		
 	?>
 </head>
 <body>
@@ -64,10 +65,12 @@
 			draw_side_navigation(10);		
 		?>
 		<div class="central-part">
+			
 			<h2><?php echo lang_key('step_10_of'); ?> - <?php echo lang_key('ready_to_install'); ?></h2>
 			<h3><?php echo lang_key('we_are_ready_to_installation'); ?></h3>			
 		
-			<p><?php echo lang_key('we_are_ready_to_installation_text'); ?></p>			
+			<p><?php echo lang_key('we_are_ready_to_installation_text'); ?></p>		
+			<strong><p><?php echo lang_key('we_are_ready_to_install_warning');?></p></strong>
 		
 			<form method="post" action="ready_to_install.php">
 			<input type="hidden" name="task" value="send" />
@@ -83,15 +86,15 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="submit" class="form_button" value="<?php echo lang_key('continue'); ?>" />
 				</td>
-			</tr>						
+			</tr>                        
 			</table>
-			</form>						
+			</form>                        
 
 		</div>
 		<div class="clear"></div>
 	</div>
 	
-	<?php include_once('include/footer.inc.php'); ?>		
+	<?php include_once('include/footer.inc.php'); ?>        
 
 </div>
 </body>

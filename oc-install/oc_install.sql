@@ -93,8 +93,8 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>config` (
 CREATE TABLE IF NOT EXISTS `<DB_PREFIX>departments` (
   `departmentId` int(11) NOT NULL,
   `departmentName` varchar(255) DEFAULT NULL COMMENT 'The functional name of the department. (eg. Police, Fire, EMS)',
-  `departmentShortName` varchar(10) NOT NULL COMMENT 'The acronym of the department name. (eg. BCSO, LAPD, LAFD)',
-  `departmentLongName` varchar(255) NOT NULL COMMENT 'The name of the department. (eg. Los Angeles Police Department, Blaine County Sheriffs` Office',
+  `departmentShortName` varchar(10) NOT NULL COMMENT 'The name of the department. (eg. Los Angeles Police Department, Blaine County Sheriffs` Office',
+  `departmentLongName` varchar(255) NOT NULL COMMENT 'The acronym of the department name. (eg. BCSO, LAPD, LAFD)',
   `allowDepartment` int(1) DEFAULT 2 COMMENT 'If 1 then department is disabled, if 2 then department is enabled.'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
@@ -119,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>incidentTypes` (
 
 CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncicArrests` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nameId` int(11) NOT NULL COMMENT 'Paired to ID of ncicNames table',
+  `nameId` int(11) NOT NULL COMMENT 'Paired to ID of ncicnames table',
   `arrestReason` varchar(255) NOT NULL,
   `arrestFine` int(11) NOT NULL,
   `issuedDate` date DEFAULT NULL,
@@ -130,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncicArrests` (
 CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncicCitations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `status` tinyint(2) DEFAULT 0 COMMENT '0 = Pending, 1 = Approved/Active',
-  `nameId` int(11) NOT NULL COMMENT 'Paired to ID of ncicNames table',
+  `nameId` int(11) NOT NULL COMMENT 'Paired to ID of ncicnames table',
   `citationName` varchar(255) NOT NULL,
   `citationFine` int(11) NOT NULL,
   `issuedDate` date DEFAULT NULL,
@@ -140,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncicCitations` (
 
 CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncicPlates` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nameId` int(11) NOT NULL COMMENT 'Links to ncicNames db for driver information',
+  `nameId` int(11) NOT NULL COMMENT 'Links to ncicnames db for driver information',
   `vehPlate` text NOT NULL,
   `vehMake` text NOT NULL,
   `veh_model` text NOT NULL,
@@ -155,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncicPlates` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
-CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncicNames` (
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncicnames` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `submittedByName` varchar(255) NOT NULL,
   `submittedById` varchar(255) NOT NULL,
@@ -182,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncicNames` (
 CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncicWarnings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `status` tinyint(2) DEFAULT 0 COMMENT '0 = Pending, 1 = Approved/Active',
-  `nameId` int(11) NOT NULL COMMENT 'Paired to ID of ncicNames table',
+  `nameId` int(11) NOT NULL COMMENT 'Paired to ID of ncicnames table',
   `warningName` varchar(255) NOT NULL,
   `issuedDate` date DEFAULT NULL,
   `issuedBy` varchar(255) NOT NULL,
@@ -202,10 +202,9 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncicWarrants` (
 
 CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncicWeapons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nameId` int(11) NOT NULL COMMENT 'Links to ncicNames db for driver information',
+  `nameId` int(11) NOT NULL COMMENT 'Links to ncicnames db for driver information',
   `weaponType` varchar(255) NOT NULL,
   `weaponName` varchar(255) NOT NULL,
-  `userId` int(11) NOT NULL,
   `notes` varchar(2048) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
@@ -290,17 +289,25 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>weapons` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>webhooks` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `webhook_title` varchar(255) NOT NULL,
+  `webhook_uri` text NOT NULL,
+  `webhook_json` longtext NOT NULL,
+  `webhook_type` varchar(50) NOT NULL,
+  `webhook_settings` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
+INSERT INTO `<DB_PREFIX>users` (`name`, `email`, `password`, `identifier`, `adminPrivilege`, `supervisorPrivilege`, `passwordReset`, `approved`, `suspendReason`, `suspendDuration`) VALUES
+('<NAME>', '<EMAIL>', '<PASSWORD>', '<IDENTIFIER>', 3, 1, 0, 1, NULL, NULL);
 
-INSERT INTO `<DB_PREFIX>users` (`id`, `name`, `email`, `password`, `identifier`, `adminPrivilege`, `supervisorPrivilege`, `passwordReset`, `approved`, `suspendReason`, `suspendDuration`) VALUES
-(1, '<NAME>', '<EMAIL>', '<PASSWORD>', '<IDENTIFIER>', 3, 1, 0, 1, NULL, NULL);
+-- SQL doesn't like the two below, states patrolinformation has already been created.
 
-
-
-CREATE TABLE `<DB_PREFIX>patrolnformation` (
-  `key` tinytext COLLATE latin1_general_cs NOT NULL,
-  `value` tinytext COLLATE latin1_general_cs NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>patrolinformation` (
+  `key` tinytext NOT NULL,
+  `value` tinytext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 INSERT INTO `<DB_PREFIX>patrolinformation` (`key`, `value`) VALUES
 ('aop',	'Metro Los Santos');

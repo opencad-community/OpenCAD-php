@@ -1,0 +1,23 @@
+Endpoint: /oc-api/v1/ncic/ncicarrests
+Description: Will fetch all NCIC Arrests located within DB and joins to users NCICNames record.
+
+Endpoint: /oc-api/v1/ncic/nciccitations
+Description: Will fetch all NCIC citations located within DB and joins to users NCICNames record.
+
+Endpoint: /oc-api/v1/ncic/ncicnames
+Description: Will fetch all NCIC Names located within DB.
+
+Endpoint: /oc-api/v1/ncic/ncicplates
+Description: Will fetch all NCIC Plates located within DB and joins to users NCICNames record.
+
+Endpoint: /oc-api/v1/ncic/ncicplates?search={Plate}
+Description: Will search the NCIC Plates table and return all records with the queried parameter. Joins to NCICNames table.
+
+Endpoint: /oc-api/v1/ncic/ncicwarnings
+Description: Will fetch all NCIC Warnings located within DB and joins to users NCICNames record.
+
+Endpoint: /oc-api/v1/ncic/ncicwarrants
+Description: Will fetch all NCIC Warrants located within DB and joins to users NCICNames record.
+
+Endpoint: /oc-api/v1/ncic/ncicweapons
+Description: Will fetch all NCIC Weapons located within DB and joins to users NCICNames record.

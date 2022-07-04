@@ -34,24 +34,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     }
 
 
-    if ( $_SESSION['adminPrivilege'] == 3)
-    {
-      if ($_SESSION['adminPrivilege'] == 'Administrator')
-      {
-          //Do nothing
-      }
-    }
-    else if ($_SESSION['adminPrivilege'] == 2)
-    {
-      if ($_SESSION['adminPrivilege'] == 'Moderator')
-      {
-          // Do Nothing
-      }
-    }
-    else
-    {
-        permissionDenied();
-    }
+    isAdminOrMod();
 
     $accessMessage = "";
     if(isset($_SESSION['accessMessage']))
@@ -72,6 +55,39 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         $successMessage = $_SESSION['successMessage'];
         unset($_SESSION['successMessage']);
     }
+
+    $nameMessage = "";
+    if(isset($_SESSION["nameMessage"])){
+        $nameMessage = $_SESSION["nameMessage"];
+        unset($_SESSION["nameMessage"]);
+    }
+
+    $plateMessage = "";
+    if(isset($_SESSION["plateMessage"])){
+        $nameMessage = $_SESSION["plateMessage"];
+        unset($_SESSION["plateMessage"]);
+    }
+    $weaponMessage = "";
+    if(isset($_SESSION["weaponMessage"])){
+        $nameMessage = $_SESSION["weaponMessage"];
+        unset($_SESSION["weaponMessage"]);
+    }
+    $warningMessage = "";
+    if(isset($_SESSION["warningMessage"])){
+        $nameMessage = $_SESSION["warningMessage"];
+        unset($_SESSION["warningMessage"]);
+    }
+    $warrantMessage = "";
+    if(isset($_SESSION["warrantMessage"])){
+        $nameMessage = $_SESSION["warrantMessage"];
+        unset($_SESSION["warrantMessage"]);
+    }
+    $arrestMessage = "";
+    if(isset($_SESSION["arrestMessage"])){
+        $nameMessage = $_SESSION["arrestMessage "];
+        unset($_SESSION["arrestMessage "]);
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -90,7 +106,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
       <div class="app-body">
         <main class="main">
-        <div class="breadcrumb" />
+        <div class="breadcrumb">
         <div class="container-fluid">
           <div class="animated fadeIn">
 			<div class="card">
@@ -139,7 +155,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 			<div class="card">
 				<div class="card-header">
-				<em class="fa fa-align-justify"></em> <?php echo lang_key("NCIC_WARRANTS_DB"); ?></div>
+				<em class="fa fa-align-justify"></em> <?php echo lang_key("ncicwarrants_DB"); ?></div>
 				<div class="card-body">
 					<?php echo $warrantMessage;?>
 					<?php ncicGetWarrants();?>
@@ -166,7 +182,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 			<?php require_once ( ABSPATH . "/" . OCTHEMES ."/". THEME ."/includes/footer.inc.php"); ?>
 
     <?php
-    include (__DIR__ . "/" . ABSPATH . OCTHEMEINC ."/admin/topbarNav.inc.php" );
+    // Not sure this is meant to be here? 
+    // include (__DIR__ . "/" . ABSPATH . OCTHEMEINC ."/admin/topbarNav.inc.php" );
     require_once( ABSPATH . OCTHEMEINC ."/scripts.inc.php" );  ?>
 
         <script>

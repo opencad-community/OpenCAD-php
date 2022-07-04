@@ -18,6 +18,7 @@ include_once( ABSPATH . "/oc-functions.php");
 include_once( ABSPATH . "/oc-settings.php");
 include_once( ABSPATH . OCINC . "/dbActions.php");
 include_once( ABSPATH . OCINC . "/apiAuth.php");
+include_once( ABSPATH . OCINC . "/autoload.inc.php");
 
 /*
 This file handles all actions for admin.php script
@@ -69,31 +70,22 @@ else if (isset($_POST['changeUserPassword']))
 }
 
 /* FUNCTIONS */
-function deleteGroupItem()
-{
-	$dept_id 		= !empty($_GET['dept_id']) ? $_GET['dept_id'] : '';
-	$userId 		= !empty($_GET['userId']) ? $_GET['userId'] : '';
+// function deleteGroupItem()
+// {
+// 	$dept_data = new Departments\DepartmentManager();
 
-	try{
-		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-	} catch(PDOException $ex)
-	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header('Location:'.BASE_URL.'/oc-content/plugins/error/index.php');
-		die();
-	}
+// 	$dept_id 		= !empty($_GET['dept_id']) ? $_GET['dept_id'] : '';
+// 	$userId 		= !empty($_GET['userId']) ? $_GET['userId'] : '';
 
-	$stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."userDepartments WHERE userId = ? AND departmentId = ?");
-	if ($stmt->execute(array($userId, $dept_id))) {
+// 	$result = $dept_data->deleteGroupItem($userId, $dept_id);
 
-		$show_record=getUserGroupsApproved($userId);
-		echo  $show_record;
-	} else {
-		echo "Error updating record: " . $stmt->errorInfo();
-	}
-	$pdo = null;
-}
+// 	if ($result) {
+// 		$show_record=getUserGroupsApproved($userId);
+// 		echo  $show_record;
+// 	} else {
+// 		echo $result;
+// 	}
+// }
 
 function editUserAccount()
 {
@@ -214,6 +206,15 @@ function delete_user()
 
 	DB::query("DELETE FROM ".DB_PREFIX."users WHERE id = " . $uid);
 	DB::query("DELETE FROM ".DB_PREFIX."userDepartments WHERE userId = " . $uid);
+
+	$webhook_data = new System\Webhook();
+	$getWebhooks = $webhook_data->getWebhookSetting("userDelete");
+
+	if ($getWebhooks) {
+		foreach ($getWebhooks as $data) {
+			$webhook_data->postWebhook($data["webhook_uri"], $data["webhook_json"]);
+		}
+	}
 
 	session_start();
 	$_SESSION['userMessage'] = '<div class="alert alert-success"><span>Successfully removed user from database</span></div>';
@@ -793,6 +794,15 @@ function suspendUser()
 
 	$_SESSION['accessMessage'] = '<div class="alert alert-success"><span>Successfully suspended user account</span></div>';
 
+	$webhook_data = new System\Webhook();
+	$getWebhooks = $webhook_data->getWebhookSetting("userSuspension");
+
+	if ($getWebhooks) {
+		foreach ($getWebhooks as $data) {
+			$webhook_data->postWebhook($data["webhook_uri"], $data["webhook_json"]);
+		}
+	}
+	
 	sleep(1);
 	header("Location:".BASE_URL."/oc-admin/userManagement.php");
 }
@@ -845,7 +855,16 @@ function suspendUserWithReason()
 
 	session_start();
 	$_SESSION['accessMessage'] = '<div class="alert alert-success"><span>Successfully suspended user account with reason</span></div>';
+	
+	$webhook_data = new System\Webhook();
+	$getWebhooks = $webhook_data->getWebhookSetting("userSuspension");
 
+	if ($getWebhooks) {
+		foreach ($getWebhooks as $data) {
+			$webhook_data->postWebhook($data["webhook_uri"], $data["webhook_json"]);
+		}
+	}
+	
 	sleep(1);
 	header("Location:".BASE_URL."/oc-admin/userManagement.php");
 }

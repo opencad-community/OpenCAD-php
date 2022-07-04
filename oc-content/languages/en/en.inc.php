@@ -153,6 +153,7 @@ $arrLang['updating_completed'] = "Updating Completed!";
 $arrLang['virtual_directory_support'] = "Virtual Directory Support";
 $arrLang['we_are_ready_to_installation'] = "We are ready now to proceed with installation";
 $arrLang['we_are_ready_to_installation_text'] = "At this step setup wizard will attempt to create all required database tables and populate them with data. <br>If an error is encountered then return to the database settings page and make any corrections.";
+$arrLang['we_are_ready_to_install_warning'] = "Please note, this page may be stuck on loading for up to 60 seconds (Depending on your systems speed). <br>Please do NOT refresh or close this window as you may cause SQL errors and have to completely start again with a clean database!";
 $arrLang['writable'] = "Writable";
 
 $arrLang['core_configuration'] = "Core Configuration";
@@ -321,6 +322,42 @@ $arrLang['MODERATOR_EDIT_USER_notes'] = "If 'true' then Moderators will be able 
 $arrLang['MODERATOR_DELETE_USER'] = "Moderator Delete User";
 $arrLang['MODERATOR_DELETE_USER_notes'] = "If 'true' then Moderators will be able to delete users, else if 'false' Moderators will not be able to delete users.";
 
+$arrLang['MODERATOR_EDIT_VEHICLES'] = "Moderator Edit Vehicle";
+$arrLang['MODERATOR_EDIT_VEHICLES_notes'] = "If 'true' then Moderators will be able to edit vehicles, if 'false' then this option will be disabled.";
+
+$arrLang['MODERATOR_DELETE_VEHICLES'] = "Moderator Delete Vehicle";
+$arrLang['MODERATOR_DELETE_VEHICLES_notes'] = "If 'true' then Moderators will be able to delete vehicles, if 'false' then this option will be disabled.";
+
+$arrLang['MODERATOR_EDIT_WARNINGTYPE'] = "Moderator Edit Warning Types";
+$arrLang['MODERATOR_EDIT_WARNINGTYPE_notes'] = "If 'true' then Moderators will be able to edit Warning Types, if 'false' then this option will be disabled.";
+
+$arrLang['MODERATOR_DELETE_WARNINGTYPE'] = "Moderator Delete Warning Types";
+$arrLang['MODERATOR_DELETE_WARNINGTYPE_notes'] = "If 'true' then Moderators will be able to delete Warning Types, if 'false' then this option will be disabled.";
+
+$arrLang['MODERATOR_EDIT_INCIDENTTYPES'] = "Moderator Edit Incident Types";
+$arrLang['MODERATOR_EDIT_INCIDENTTYPES_notes'] = "If 'true' then Moderators will be able to edit incident types, if 'false' then this option will be disabled.";
+
+$arrLang['MODERATOR_DELETE_INCIDENTTYPES'] = "Moderator Delete Incident Types";
+$arrLang['MODERATOR_DELETE_INCIDENTTYPES_notes'] = "If 'true' then Moderators will be able to delete incident types, if 'false' then this option will be disabled.";
+
+$arrLang['MODERATOR_EDIT_STREETS'] = "Moderator Edit Streets";
+$arrLang['MODERATOR_EDIT_STREETS_notes'] = "If 'true' then Moderators will be able to edit streets, if 'false' then this option will be disabled.";
+
+$arrLang['MODERATOR_DELETE_STREETS'] = "Moderator Delete Streets";
+$arrLang['MODERATOR_DELETE_STREETS_notes'] = "If 'true' then Moderators will be able to delete streets, if 'false' then this option will be disabled.";
+
+$arrLang['MODERATOR_EDIT_WARRANTTYPES'] = "Moderator Edit Warrant Types";
+$arrLang['MODERATOR_EDIT_WARRANTTYPES_notes'] = "If 'true' then Moderators will be able to edit warrant types, if 'false' then this option will be disabled.";
+
+$arrLang['MODERATOR_DELETE_WARRANTTYPES'] = "Moderator Delete Warrant Types";
+$arrLang['MODERATOR_DELETE_WARRANTTYPES_notes'] = "If 'true' then Moderators will be able to delete warrant types, if 'false' then this option will be disabled.";
+
+$arrLang['MODERATOR_EDIT_WEAPONS'] = "Moderator Edit Weapons";
+$arrLang['MODERATOR_EDIT_WEAPONS_notes'] = "If 'true' then Moderators will be able to edit weapons, if 'false' then this option will be disabled.";
+
+$arrLang['MODERATOR_DELETE_WEAPONS'] = "Moderator Delete Weapons";
+$arrLang['MODERATOR_DELETE_WEAPONS_notes'] = "If 'true' then Moderators will be able to delete weapons, if 'false' then this option will be disabled.";
+
 $arrLang['MODERATOR_SUSPEND_WITHOUT_REASON'] = "Moderator Suspend without Reason";
 $arrLang['MODERATOR_SUSPEND_WITHOUT_REASON_notes'] = "If 'true' then Moderators will be able suspend users without a reason, else if 'false' Moderators will not be able suspend users without a reason.";
 
@@ -336,8 +373,8 @@ $arrLang['MODERATOR_REMOVE_GROUP_notes'] = "If 'true' then Moderators will be ab
 $arrLang['MODERATOR_NCIC_EDITOR'] = "Moderator NCIC Editor";
 $arrLang['MODERATOR_NCIC_EDITOR_notes'] = "If 'true' then Moderators will be able to access the NCIC editor, else if 'false' Moderators will not be able to access the NCIC editor.";
 
-$arrLang['MODERATOR_DATA_MANAGER'] = "Moderator Data Manager";
-$arrLang['MODERATOR_DATA_MANAGER_notes'] = "If 'true' then Moderators will be able to access the Game Data Manager, else if 'false' then Moderators will not be able to access the Gam Data Manager.";
+$arrLang['MODERATOR_DATA_MANAGER'] = "Moderator Game Data Manager";
+$arrLang['MODERATOR_DATA_MANAGER_notes'] = "If 'true' then Moderators will be able to access the Game Data Manager, else if 'false' then Moderators will not be able to access the Game Data Manager.";
 
 $arrLang['MODERATOR_DATAMAN_CITATIONTYPES'] = "Moderator Citation Types Editor";
 $arrLang['MODERATOR_DATAMAN_CITATIONTYPES_notes'] = "If 'true' then Moderators will have access to the Citation Types Manager module of the Game Data Manager, else if 'false' then Moderators will be denied access.";
@@ -377,6 +414,9 @@ $arrLang['WEBHOOK_URL'] = "Webhook URL";
 
 $arrLang['DEMO_MODE'] = "Demo Mode";
 $arrLang['DEMO_MODE_notes'] = "'true' then various user management features of OpenCAD will be locked down, else if 'false' then OpenCAD's full functionality* will be available to use.";
+
+$arrLang['GENERATE_GTAV_DATA'] = "Generate GTAV Game Data";
+$arrLang['GENERATE_GTAV_DATA_notes'] = "Generates GTAV Data and inserts it into the database. This will allow quicker configuration of your cad if you are using GTAV. Disable for a blank canvas to use with other games";
 
 $arrLang['USE_GRAVATAR'] = "Gravatar";
 $arrLang['USE_GRAVATAR_notes'] = "OpenCAD will dynamically retrieve your avatar from {@link Gravatar http://en.gravatar.com/} if you have an account. Otherwise it will use the default generic avatar image included with OpenCAD .";
@@ -452,8 +492,8 @@ $arrLang["NCIC_CITATIONS_DB"] = "NCIC Citations Database.";
 $arrLang["NCIC_CITATIONS_DB_notes"] = "No results found in the NCIC Citations database.";
 $arrLang["ncicArrests_DB"] = "NCIC Arrests Database";
 $arrLang["ncicArrests_DB_notes"] = "No results found in the NCIC Arrests database.";
-$arrLang["NCIC_WARRANTS_DB"] = "NCIC Warrants Database";
-$arrLang["NCIC_WARRANTS_DB_notes"] = "No results found in the NCIC Warrants database";
+$arrLang["ncicwarrants_DB"] = "NCIC Warrants Database";
+$arrLang["ncicwarrants_DB_notes"] = "No results found in the NCIC Warrants database";
 $arrLang["USER_MANAGER"] = "Users";
 $arrLang["NCIC_EDITOR"] = "NCIC Editor";
 $arrLang["DATA_MANAGER"] = "Data Manager";
@@ -467,6 +507,8 @@ $arrLang["LOADED_PHP_MODULES_notes"] = "<em>Note:</em> Active PHP modules.";
 $arrLang["ABOUT_YOUR_APPLICATION"] = "About Your Application";
 $arrLang["APPLICATION_VERSION"] = "Application Version";
 $arrLang["APPLICATION_VERSION_notes"] = "<em>Note:</em> The currently installed version of OpenCAD.</p>";
+$arrLang["LATEST_VERSION"] = "Latest Version";
+$arrLang["LATEST_VERSION_notes"] ="<em>Note:</em> This is the latest released version available.</p>";
 $arrLang["DATABASE_SCHEMA_VERSION"] = "Database Schema Version";
 $arrLang["DATABASE_SCHEMA_VERSION_notes"] = "<em>Note:</em> The currently installed OpenCAD database schema version.</p>";
 
@@ -489,6 +531,8 @@ $arrLang["WARRANTTYPE_MANAGER_notes"] = "No results found in the <em>Warrant Typ
 $arrLang["WEAPON_MANAGER"] = "Weapon Manager";
 $arrLang["WEAPON_MANAGER_notes"] = "No results found in the <em>weapons</em> datbase";
 $arrLang["ABOUT_OPENCAD"] = "About OpenCAD";
+$arrLang["SUPPORT_TAB"] = "Get Support";
+$arrLang["SUPPORT_TITLE"] = "Support";
 $arrLang["RESET_DATA"] = "Reset Data";
 $arrLang["ENVIRONMENTAL_DATA_OPTGRP"] = "Environmental Data";
 $arrLang["STREETS"] = "Streets";
@@ -502,13 +546,54 @@ $arrLang["WARRANT_HISTORY"] = "Warrant History";
 $arrLang["WARNING_HISTORY"] = "Warning History";
 $arrLang["LEO_SUPPORT_DATA_OPTGRP"] = "LEO Support Data";
 $arrLang["CITATION_TYPES"] = "Citation Types";
-$arrLang["incidentTypes"] = "Incident Types";
+$arrLang["INCIDENT_TYPES"] = "Incident Types";
 $arrLang["RADIO_CODES"] = "Radio Codes";
 $arrLang["WARRANT_TYPES"] = "Warrant Types";
 $arrLang["WARNING_TYPES"] = "Warning Types";
 $arrLang["RESET_ALL_DATA_OPTGRP"] = "RESET ALL DATA (USE WITH CUATION)";
 $arrLang["RESET_ALL_DATA"] = "All Data (Use with CAUTION)";
 //** End Administrator/Moderator Console Strings  **/
+
+//** Begin Support Strings **/
+$arrLang["SUPPORT_DESCRIBE_PROBLEM"] = "Please Describe Problem";
+$arrLang["SUPPORT_DESCRIBE_PROBLEM_notes"] = "Example: 'Unknown user' error on login even though details are correct";
+$arrLang["SUPPORT_AFFECTING_FILE"] = "File Causing Issues";
+$arrLang["SUPPORT_AFFECTING_FILE_notes"] = "Please provide what file is causing this error";
+$arrLang["SUPPORT_TITLE"] = "Get Support";
+$arrLang["SUPPORT_DETAILS_SENT"] = "Details Sent With Request";
+//** End Support Strings **/
+
+//** Begin Webhook Strings **/
+
+$arrLang["WEBHOOK_TAB"] = "Webhook Manager";
+$arrLang["WEBHOOK_LIST_TITLE"] = "Active Webhooks";
+$arrLang["WEBHOOK_CREATE_TITLE"] = "Create a new webhook";
+$arrLang["WEBHOOK_JSON"] = "Enter Your Custom Webhook Data";
+$arrLang["WEBHOOK_JSON_NOTES"] = "Note: Please ensure this is in 'JSON' format!";
+$arrLang["WEBHOOK_NEW_TITLE"] = "Create Webhook Title";
+$arrLang["WEBHOOK_NEW_TITLE_PLACEHOLDER"] = "My New Webhook";
+$arrLang["WEBHOOK_NEW_URI"] = "Enter Webook URL";
+$arrLang["WEBHOOK_NEW_URI_PLACEHOLDER"] = "https://discordapp.com/api/webhooks/xxxxxxxxx";
+$arrLang["WEBHOOK_NEW_TYPE"] = "Select Type Of Webhook";
+$arrLang["WEBHOOK_NEW_RADIO_NOTIFICATION"] = "Notification - Sends Notification To Your Webhook Based On Certain Events";
+$arrLang["WEBHOOK_ERROR_INCORRECTJSON"] = "Incorrect JSON Format! Please correct this before submitting again!";
+$arrLang["WEBHOOK_ERROR_EMPTYSTRING"] = "Be sure to fill all fields before submitting!";
+$arrLang["WEBHOOK_ERROR_INVALIDURI"] = "Webhook URL seems to be invalid, if this isn't the case, please contact support!";
+$arrLang["WEBHOOK_ERROR_EMPTYOPTION"] = "Be sure to select an activation parameter!";
+$arrLang["WEBHOOK_SUCCESS_SUBMITTED"] = "Succesfully Created Webhook!";
+$arrLang["WEBHOOK_SUCCESS_DELETED"] = "Succesfully Deleted Webhook!";
+$arrLang["WEBHOOK_SUCCESS_UPDATED"] = "Succesfully Updated Webhook!";
+
+$arrLang["WEBHOOK_NEW_SETTING"] = "Select Activation Parameters";
+$arrLang["WEBHOOK_SETTINGS_CIVREGISTERED"] = "On Civ Register";
+$arrLang["WEBHOOK_SETTINGS_USERREQUESTED"] = "On User Requested";
+$arrLang["WEBHOOK_SETTINGS_USERDELETE"] = "On User Deletetion";
+$arrLang["WEBHOOK_SETTINGS_USERSUSPENSION"] = "On User Suspension";
+$arrLang["WEBHOOK_SETTINGS_USERREGISTRATION"] = "On User Registration";
+$arrLang["WEBHOOK_SETTINGS_PANICBUTTONPRESSED"] = "On Panic Button Pressed";
+
+
+//** End Webhook Strings **/
 
 //** Begin Civillian Console Strings **/
 $arrLang["CIVILLIAN_CONSOLE"] = "Civillian Console";
@@ -522,7 +607,7 @@ $arrLang["MY_WARRANTS"] = "My Warrants";
 $arrLang["MY_WARRANTS_notes"] = "No results found in the warrants database.";
 $arrLang["CREATE_A_CALL"] = "Create A Call";
 $arrLang["ADD_NEW_IDENTITY"] = "Add New Identity";
-$arrLang["ADD_NEW_VEHICLE"] = "Add New Vehcile";
+$arrLang["ADD_NEW_VEHICLE"] = "Add New Vehicle";
 $arrLang["ADD_NEW_WEAPON"] = "Add New Weapon";
 $arrLang["CIVILLIAN_DASHBOARD"] = "Civillian Dashboard";
 $arrLang["VIEW_WARRANTS"] = "View Warrants";

@@ -119,11 +119,11 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
               			<div class="card-body">
 							<?php echo $plateMessage;?>
 							<?php ncicGetPlates();?>
-		           </div>
-        	   	<!-- /.row-->
+		                </div>
+        	        	<!-- /.row-->
 						
-		       </div>
-        	</div>
+		            </div>
+        	    </div>
             <!-- /.card-->
 			</div>
 
@@ -136,11 +136,11 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                     	<div class="card-body">
 							<?php echo $weaponMessage;?>
 							<?php ncicGetWeapons();?>
-		           </div>
-        	   	<!-- /.row-->
+		                </div>
+        	        	<!-- /.row-->
 						
-		       </div>
-        	</div>
+		            </div>
+        	    </div>
             <!-- /.card-->
 			</div>
 

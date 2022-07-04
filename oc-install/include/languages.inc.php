@@ -18,6 +18,6 @@
 if(file_exists( '../oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php') ) {
 	include_once( '../oc-content/languages/'.$curr_lang.'/'.$curr_lang.'.inc.php' );
 }else{
-	include_once( '../oc-content/languages/en/en.inc.php');		
+	include_once( '../oc-content/languages/en/en.inc.php');    	
 }
 

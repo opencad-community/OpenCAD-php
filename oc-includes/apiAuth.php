@@ -14,7 +14,7 @@
  * File origin: ATVG-CAD v1.3.0.0 by ATVG-Studios
 **/
 
-if(ENABLE_API_SECURITY === true)
+if(ENABLE_API_SECURITY === false)
 {
     if(session_id() == '' || !isset($_SESSION)) {
     // session isn't started

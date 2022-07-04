@@ -18,4 +18,5 @@ sql.php
 *adminer*.php
 web.configW
 errorlog
-oc-content/themes/default/includes/header.inc.php
+apiAuth.php
+test.php

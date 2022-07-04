@@ -294,7 +294,7 @@ function ncicGetPlates()
 			<tr>
 				<td>'.$row['name'].'</td>
 				<td>'.$row['vehPlate'].'</td>
-				<td>'.$row['veh_reg_state'].'</td>
+				<td>'.$row['vehRegState'].'</td>
 				<td>'.$row['vehMake'].'</td>
 				<td>'.$row['vehModel'].'</td>
 				<td>'.$row['vehPrimaryColor'].'/'.$row['vehSecondaryColor'].'</td>
@@ -331,7 +331,7 @@ function ncicGetWeapons()
 		die();
 	}
 
-	$result = $pdo->query("SELECT ".DB_PREFIX."ncic_weapons.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncic_weapons INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncic_weapons.nameId");
+	$result = $pdo->query("SELECT ".DB_PREFIX."ncicweapons.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncicweapons INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncicweapons.nameId");
 
 	if (!$result)
 	{
@@ -400,7 +400,7 @@ function delete_weapon()
 		die();
 	}
 
-	$stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncic_weapons WHERE id = ?");
+	$stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncicweapons WHERE id = ?");
 	$result = $stmt->execute(array($weaid));
 
 	if (!$result)
@@ -490,7 +490,7 @@ function delete_warning()
 		die();
 	}
 
-	$stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncic_warnings WHERE id = ?");
+	$stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncicwarnings WHERE id = ?");
 	$result = $stmt->execute(array($wgid));
 
 	if (!$result)
@@ -520,7 +520,7 @@ function delete_warrant()
 		die();
 	}
 
-	$stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncic_warrants WHERE id = ?");
+	$stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."ncicwarrants WHERE id = ?");
 	$result = $stmt->execute(array($wid));
 
 	if (!$result)
@@ -621,7 +621,7 @@ function ncicGetWarrants()
 		die();
 	}
 
-	$result = $pdo->query("SELECT ".DB_PREFIX."ncic_warrants.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncic_warrants INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncic_warrants.nameId");
+	$result = $pdo->query("SELECT ".DB_PREFIX."ncicwarrants.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncicwarrants INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncicwarrants.nameId");
 
 	if (!$result)
 	{
@@ -640,7 +640,7 @@ function ncicGetWarrants()
 	else
 	{
 		echo '
-			<table id="ncic_warrants" class="table table-striped table-bordered">
+			<table id="ncicwarrants" class="table table-striped table-bordered">
 			<thead>
 				<tr>
 				<th>Status</th>
@@ -777,7 +777,7 @@ function ncicGetWarnings()
 		die();
 	}
 
-	$result = $pdo->query("SELECT ".DB_PREFIX."ncic_warnings.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncic_warnings INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncic_warnings.nameId");
+	$result = $pdo->query("SELECT ".DB_PREFIX."ncicwarnings.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncicwarnings INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncicwarnings.nameId");
 
 	if (!$result)
 	{
@@ -796,7 +796,7 @@ function ncicGetWarnings()
 	else
 	{
 		echo '
-			<table id="ncic_warnings" class="table table-striped table-bordered">
+			<table id="ncicwarnings" class="table table-striped table-bordered">
 			<thead>
 				<tr>
 				<th>Name</th>

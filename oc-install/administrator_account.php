@@ -1,19 +1,19 @@
 <?php
 ################################################################################
-##			 -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-				#
+##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 #
 ## --------------------------------------------------------------------------- #
-##  ApPHP EasyInstaller Pro version											#
-##  Developed by:  ApPHP <info@apphp.com>									 #
-##  License:	  GNU LGPL v.3												#
-##  Site:		 http://www.apphp.com/php-easyinstaller/					#
-##  Copyright:	ApPHP EasyInstaller (c) 2009-2013. All rights reserved.	#
-##																			#
+##  ApPHP EasyInstaller Pro version                                            #
+##  Developed by:  ApPHP <info@apphp.com>                                      #
+##  License:       GNU LGPL v.3                                                #
+##  Site:          http://www.apphp.com/php-easyinstaller/                     #
+##  Copyright:     ApPHP EasyInstaller (c) 2009-2013. All rights reserved.     #
+##                                                                             #
 ################################################################################
 
 	session_start();
 	
-	require_once('include/shared.inc.php');	
-	require_once('include/settings.inc.php');	
+	require_once('include/shared.inc.php');    
+    require_once('include/settings.inc.php');    
 	require_once('include/functions.inc.php');
 	require_once('include/languages.inc.php');	
 
@@ -46,7 +46,6 @@
 			header('location: core_configuration.php');
 			exit;
 		}
-
 		$admin_name = isset($_POST['admin_name']) ? prepare_input($_POST['admin_name']) : '';
 		$admin_identifier = isset($_POST['admin_identifier']) ? prepare_input($_POST['admin_identifier']) : '';
 		$admin_password = isset($_POST['admin_password']) ? prepare_input($_POST['admin_password']) : '';
@@ -102,8 +101,8 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="author" content="OpenCAD Project">
-	<meta name="generator" content="OpenCAD Project">
+    <meta name="author" content="OpenCAD Project">
+    <meta name="generator" content="OpenCAD Project">
 	<title><?php echo lang_key("installation_guide"); ?> | <?php echo lang_key('administrator_account'); ?></title>
 
 	<link href="./images/favicon.ico" rel="shortcut icon" />
@@ -186,7 +185,7 @@
 				<td><input name="admin_password" id="admin_password" class="form_text" type="password" size="28" maxlength="22" value="<?php echo $admin_password; ?>" onfocus="textboxOnFocus('notes_admin_password')" onblur="textboxOnBlur('notes_admin_password')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" required /></td>
 			</tr>
 			<tr>
-			<td width="250px">&nbsp;<?php echo lang_key('admin_identifier'); ?>&nbsp;<span class="star">*</span></td>
+			    <td width="250px">&nbsp;<?php echo lang_key('admin_identifier'); ?>&nbsp;<span class="star">*</span></td>
 				<td><input name="admin_identifier" id="admin_identifier" class="form_text" size="28" maxlength="22" value="<?php echo $admin_identifier; ?>" onfocus="textboxOnFocus('admin_identifier_notes')" onblur="textboxOnBlur('admin_identifier_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" required /></td>
 			</tr>
 			<?php }else{ ?>
@@ -199,14 +198,14 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="submit" class="form_button" value="<?php echo lang_key('continue'); ?>" />
 				</td>
-			</tr>						
+			</tr>                        
 			</table>
-			</form>						
+			</form>                        
 		</div>
 		<div class="clear"></div>
 	</div>
 	
-	<?php include_once('include/footer.inc.php'); ?>		
+	<?php include_once('include/footer.inc.php'); ?>        
 
 </div>
 
