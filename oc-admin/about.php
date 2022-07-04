@@ -130,7 +130,7 @@ if (isset($_SESSION['successMessage'])) {
 							<em class="fa fa-align-justify"></em> <?php echo lang_key("ABOUT_OPENCAD"); ?>
 						</div>
 						<div class="card-body">
-							<p>OpenCAD is an open source project licensed under GNU GPL v3. The original code and concept by <a rel="noopener" href="https://github.com/ossified" title="a link to the original developer's GitHub.">Shane Gill</a>. This project is maintained by Overt Source.</p>
+							<p>OpenCAD is an open source project licensed under GNU GPL v3. The original code and concept by <a rel="noopener" href="https://github.com/ossified" title="a link to the original developer's GitHub.">Shane Gill</a>.</p>
 						</div>
 					</div>
 				</div>
