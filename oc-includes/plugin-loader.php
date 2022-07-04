@@ -3,7 +3,6 @@
 require_once(__DIR__ . '/../oc-config.php');
 require_once(ABSPATH . '/oc-functions.php');
 require_once(ABSPATH . '/oc-settings.php');
-require_once("plugin.php");
 
 class PluginLoader {
   function __construct($root, $excludes = []) {
