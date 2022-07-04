@@ -945,7 +945,7 @@ define('USE_GRAVATAR', <USE_GRAVATAR>);
 	*
   * @since OpenCAD OpenCAD version 0.3.1
   **/
-  define('OC_DEVELOP', true);
+  define('OC_DEVELOP', false);
 
 /** That's all, stop editing! Happy roleplaying. **/
 /**    Absolute path to the OpenCAD directory.   **/
