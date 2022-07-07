@@ -555,37 +555,34 @@ $arrLang["RESET_ALL_DATA"] = "All Data (Use with CAUTION)";
 //** End Administrator/Moderator Console Strings  **/
 
 //** Begin Support Strings **/
-$arrLang["SUPPORT_TITLE_BUG"] = "Enter Title *";
-$arrLang["SUPPORT_DESCRIBE_BUG"] = "Description You are Facing *";
-$arrLang["SUPPORT_REPRODUCE_BUG"] = "Steps to Reproduce *";
-$arrLang["SUPPORT_EXPECTED_BEHAVIOUR_BUG"] = "Expected behavior";
-$arrLang["SUPPORT_SCREENSHOTS_BUG"] = "Screenshots";
-$arrLang["SUPPORT_DESKTOP_BUG"] = "Desktop Information";
-$arrLang["SUPPORT_SMARTPHONE_BUG"] = "Smartphone Information (If affecting mobile too)";
-$arrLang["SUPPORT_SERVER_BUG"] = "Server Information";
-$arrLang["SUPPORT_ADDITIONAL_INFO_BUG"] = "Additional Useful Information";
-
-$arrLang["SUPPORT_TITLE_BUG_notes"] = "Enter a title for your issue";
-$arrLang["SUPPORT_DESCRIBE_BUG_notes"] = "A clear and concise description of what the bug is.";
-$arrLang["SUPPORT_REPRODUCE_BUG_notes"] = "Steps to reproduce the behavior";
-$arrLang["SUPPORT_EXPECTED_BEHAVIOUR_BUG_notes"] = "A clear and concise description of what you expected to happen.";
-$arrLang["SUPPORT_SCREENSHOTS_BUG_notes"] = " If applicable, add screenshots to help explain your problem. These need to be links, seperated by a comma ','";
-$arrLang["SUPPORT_DESKTOP_BUG_notes"] = "OS: [e.g. iOS], Browser [e.g. chrome, safari], Version [e.g. 22]";
-$arrLang["SUPPORT_SMARTPHONE_BUG_notes"] = "Device: [e.g. iPhone6], OS: [e.g. iOS8.1], Browser [e.g. stock browser, safari], Version [e.g. 22]";
-$arrLang["SUPPORT_SERVER_BUG_notes"] = "OS: [e.g, Debian Linux], Version [e.g. 11], Control Panel [e.g. CPanel 106]";
-$arrLang["SUPPORT_ADDITIONAL_INFO_BUG_notes"] = "Any additional information that will be useful to help resolve this issue.";
-
-$arrLang["SUPPORT_ERROR_GH_KEY_NOT_VALID"] = "Your Github Key is either not set or is invalid!";
-$arrLang["SUPPORT_ERROR_GH_KEY_INCORRECT"] = "Your Github Key Incorrect! Please check and try again";
-$arrLang["SUPPORT_ERROR_GH_KEY_EXISTS"] = "There is already a key in the Database. Please remove this before trying again!";
-
-$arrLang["SUPPORT_SUCCESS_GH_KEY_CREATE"] = "Your Github Key Has been Created!";
-$arrLang["SUPPORT_SUCCESS_GH_ISSUE_CREATED"] = "Sucessfully Created Issue!";
-
-$arrLang["SUPPORT_GH_CREATE_TITLE"] = "Create Your GitHub Key";
-$arrLang["SUPPORT_GH_CREATE_KEY"] = "Enter Key";
-$arrLang["SUPPORT_GH_CREATE_KEY_notes"] = "Enter your GitHub Personal Access Key";
-$arrLang["SUPPORT_GH_CREATE_DESCRIPTION"] = "To gain your access key, follow the below instructions<br><br>◉ Head over to this link: https://github.com/settings/tokens <br>◉ Sign in with your main account<br>◉ Create your new Personal Access token<br>◉ Be sure to set the Expiration to never<br>◉ Be Sure to select 'repo' as the minimum scope!";
+$arrLang["ISSUE_TITLE"] = "Report An Issue";
+$arrLang["ISSUE_TITLE_BUG"] = "Enter Title *";
+$arrLang["ISSUE_DESCRIBE_BUG"] = "Description You are Facing *";
+$arrLang["ISSUE_REPRODUCE_BUG"] = "Steps to Reproduce *";
+$arrLang["ISSUE_EXPECTED_BEHAVIOUR_BUG"] = "Expected behavior";
+$arrLang["ISSUE_SCREENSHOTS_BUG"] = "Screenshots";
+$arrLang["ISSUE_DESKTOP_BUG"] = "Desktop Information";
+$arrLang["ISSUE_SMARTPHONE_BUG"] = "Smartphone Information (If affecting mobile too)";
+$arrLang["ISSUE_SERVER_BUG"] = "Server Information";
+$arrLang["ISSUE_ADDITIONAL_INFO_BUG"] = "Additional Useful Information";
+$arrLang["ISSUE_TITLE_BUG_notes"] = "Enter a title for your issue";
+$arrLang["ISSUE_DESCRIBE_BUG_notes"] = "A clear and concise description of what the bug is.";
+$arrLang["ISSUE_REPRODUCE_BUG_notes"] = "Steps to reproduce the behavior";
+$arrLang["ISSUE_EXPECTED_BEHAVIOUR_BUG_notes"] = "A clear and concise description of what you expected to happen.";
+$arrLang["ISSUE_SCREENSHOTS_BUG_notes"] = " If applicable, add screenshots to help explain your problem. These need to be links, seperated by a comma ','";
+$arrLang["ISSUE_DESKTOP_BUG_notes"] = "OS: [e.g. iOS], Browser [e.g. chrome, safari], Version [e.g. 22]";
+$arrLang["ISSUE_SMARTPHONE_BUG_notes"] = "Device: [e.g. iPhone6], OS: [e.g. iOS8.1], Browser [e.g. stock browser, safari], Version [e.g. 22]";
+$arrLang["ISSUE_SERVER_BUG_notes"] = "OS: [e.g, Debian Linux], Version [e.g. 11], Control Panel [e.g. CPanel 106]";
+$arrLang["ISSUE_ADDITIONAL_INFO_BUG_notes"] = "Any additional information that will be useful to help resolve this issue.";
+$arrLang["ISSUE_ERROR_GH_KEY_NOT_VALID"] = "Your Github Key is either not set or is invalid!";
+$arrLang["ISSUE_ERROR_GH_KEY_INCORRECT"] = "Your Github Key Incorrect! Please check and try again";
+$arrLang["ISSUE_ERROR_GH_KEY_EXISTS"] = "There is already a key in the Database. Please remove this before trying again!";
+$arrLang["ISSUE_SUCCESS_GH_KEY_CREATE"] = "Your Github Key Has been Created!";
+$arrLang["ISSUE_SUCCESS_GH_ISSUE_CREATED"] = "Sucessfully Created Issue!";
+$arrLang["ISSUE_GH_CREATE_TITLE"] = "Create Your GitHub Key";
+$arrLang["ISSUE_GH_CREATE_KEY"] = "Enter Key";
+$arrLang["ISSUE_GH_CREATE_KEY_notes"] = "Enter your GitHub Personal Access Key";
+$arrLang["ISSUE_GH_CREATE_DESCRIPTION"] = "To gain your access key, follow the below instructions<br><br>◉ Head over to this link: https://github.com/settings/tokens <br>◉ Sign in with your main account<br>◉ Create your new Personal Access token<br>◉ Be sure to set the Expiration to never<br>◉ Be Sure to select 'repo' as the minimum scope!";
 
 //** End Support Strings **/
 

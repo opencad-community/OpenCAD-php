@@ -2,31 +2,32 @@
 
 use Support\Support;
 
-require_once("../../../oc-config.php");
+require_once("../oc-config.php");
 require_once(ABSPATH . "/oc-functions.php");
 require_once(ABSPATH . "/oc-includes/autoload.inc.php");
 
 isSessionStarted();
 $support_data = new System\Support();
 
+
 if (isset($_POST["gh_key_BTN"])) {
     $key = $_POST["gh_key"];
 
     if ($support_data->checkRow()) {
-        $_SESSION["support_error"] = lang_key("SUPPORT_ERROR_GH_KEY_EXISTS");
-        header("location: " . BASE_URL . "/oc-admin/support.php?create=error");
+        $_SESSION["support_error"] = lang_key("ISSUE_ERROR_GH_KEY_EXISTS");
+        header("location: " . BASE_URL . "/oc-admin/issueLogger.php?create=error");
         exit();
     }
 
     $checkKey = $support_data->checkKey($key);
     if (strpos($checkKey, "Bad credentials")) {
-        $_SESSION["support_error"] = lang_key("SUPPORT_ERROR_GH_KEY_INCORRECT");
-        header("location: " . BASE_URL . "/oc-admin/support.php?create=error");
+        $_SESSION["support_error"] = lang_key("ISSUE_ERROR_GH_KEY_INCORRECT");
+        header("location: " . BASE_URL . "/oc-admin/issueLogger.php?create=error");
         exit();
     } else {
-        $_SESSION["support_success"] = lang_key("SUPPORT_SUCCESS_GH_KEY_CREATE");
+        $_SESSION["support_success"] = lang_key("ISSUE_SUCCESS_GH_KEY_CREATE");
         $support_data->createKey($key);
-        header("location: " . BASE_URL . "/oc-admin/support.php?create=success");
+        header("location: " . BASE_URL . "/oc-admin/issueLogger.php?create=success");
         exit();
     }
 
@@ -58,9 +59,9 @@ if (isset($_POST["gh_bug_submit"])) {
     $issueURL = str_replace('repos/', '', $issueURL);
 
 
-    $_SESSION["support_success"] = lang_key("SUPPORT_SUCCESS_GH_ISSUE_CREATED");
+    $_SESSION["support_success"] = lang_key("ISSUE_SUCCESS_GH_ISSUE_CREATED");
 
-    header("location: " . BASE_URL . "/oc-admin/support.php?success=createdIssue&id=" . $issueNum . "&link=" . $issueURL);
+    header("location: " . BASE_URL . "/oc-admin/issueLogger.php?success=createdIssue&id=" . $issueNum . "&link=" . $issueURL);
 
     exit();
 }

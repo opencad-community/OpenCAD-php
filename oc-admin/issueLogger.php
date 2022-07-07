@@ -81,9 +81,9 @@ if (isset($_SESSION["support_success"])) {
 				<div class="animated fadeIn">
 					<div class="card">
 						<div class="card-header">
-							<em class="fa fa-align-justify"></em> <?php echo lang_key("SUPPORT_TITLE"); ?>
+							<em class="fa fa-align-justify"></em> <?php echo lang_key("ISSUE_TITLE"); ?>
 						</div>
-						<form action="<?php echo BASE_URL; ?>/oc-content/plugins/support/index.php" method="POST">
+						<form action="<?php echo BASE_URL; ?>/oc-includes/issueLogger.php" method="POST">
 							<div class="card-body">
 								<?php if (!empty($errorMsg)) {
 									echo "<span class='label danger'>" . $errorMsg . "</span>";
@@ -100,31 +100,31 @@ if (isset($_SESSION["support_success"])) {
 										echo "<span class='label warning'>Your key is either not set or is invalid! Set it at the bottom of the page</span>";
 									} ?>
 									<div class="form-group">
-										<label for="name"><?php echo lang_key("SUPPORT_TITLE_BUG"); ?></label><input type="text" class="form-control" name="title_bug" placeholder="<?php echo lang_key("SUPPORT_TITLE_BUG_notes"); ?>" required />
+										<label for="name"><?php echo lang_key("ISSUE_TITLE_BUG"); ?></label><input type="text" class="form-control" name="title_bug" placeholder="<?php echo lang_key("ISSUE_TITLE_BUG_notes"); ?>" required />
 									</div>
 									<div class="form-group">
-										<label for="name"><?php echo lang_key("SUPPORT_DESCRIBE_BUG"); ?></label><textarea class="form-control" name="describe_bug" placeholder="<?php echo lang_key("SUPPORT_DESCRIBE_BUG_notes"); ?> " required></textarea>
+										<label for="name"><?php echo lang_key("ISSUE_DESCRIBE_BUG"); ?></label><textarea class="form-control" name="describe_bug" placeholder="<?php echo lang_key("ISSUE_DESCRIBE_BUG_notes"); ?> " required></textarea>
 									</div>
 									<div class="form-group">
-										<label for="name"><?php echo lang_key("SUPPORT_REPRODUCE_BUG"); ?></label><textarea class="form-control" name="reproduce_bug" placeholder="<?php echo lang_key("SUPPORT_REPRODUCE_BUG_notes"); ?>" required></textarea>
+										<label for="name"><?php echo lang_key("ISSUE_REPRODUCE_BUG"); ?></label><textarea class="form-control" name="reproduce_bug" placeholder="<?php echo lang_key("ISSUE_REPRODUCE_BUG_notes"); ?>" required></textarea>
 									</div>
 									<div class="form-group">
-										<label for="name"><?php echo lang_key("SUPPORT_EXPECTED_BEHAVIOUR_BUG"); ?></label><textarea class="form-control" name="expected_bug" placeholder="<?php echo lang_key("SUPPORT_EXPECTED_BEHAVIOUR_BUG_notes"); ?>"></textarea>
+										<label for="name"><?php echo lang_key("ISSUE_EXPECTED_BEHAVIOUR_BUG"); ?></label><textarea class="form-control" name="expected_bug" placeholder="<?php echo lang_key("ISSUE_EXPECTED_BEHAVIOUR_BUG_notes"); ?>"></textarea>
 									</div>
 									<div class="form-group">
-										<label for="name"><?php echo lang_key("SUPPORT_SCREENSHOTS_BUG"); ?></label><textarea class="form-control" name="screenshot_bug" placeholder="<?php echo lang_key("SUPPORT_SCREENSHOTS_BUG_notes"); ?>"></textarea>
+										<label for="name"><?php echo lang_key("ISSUE_SCREENSHOTS_BUG"); ?></label><textarea class="form-control" name="screenshot_bug" placeholder="<?php echo lang_key("ISSUE_SCREENSHOTS_BUG_notes"); ?>"></textarea>
 									</div>
 									<div class="form-group">
-										<label for="name"><?php echo lang_key("SUPPORT_DESKTOP_BUG"); ?></label><textarea class="form-control" name="desktop_bug" placeholder="<?php echo lang_key("SUPPORT_DESKTOP_BUG_notes"); ?>"></textarea>
+										<label for="name"><?php echo lang_key("ISSUE_DESKTOP_BUG"); ?></label><textarea class="form-control" name="desktop_bug" placeholder="<?php echo lang_key("ISSUE_DESKTOP_BUG_notes"); ?>"></textarea>
 									</div>
 									<div class="form-group">
-										<label for="name"><?php echo lang_key("SUPPORT_SMARTPHONE_BUG"); ?></label><textarea class="form-control" name="smartphone_bug" placeholder="<?php echo lang_key("SUPPORT_SMARTPHONE_BUG_notes"); ?>"></textarea>
+										<label for="name"><?php echo lang_key("ISSUE_SMARTPHONE_BUG"); ?></label><textarea class="form-control" name="smartphone_bug" placeholder="<?php echo lang_key("ISSUE_SMARTPHONE_BUG_notes"); ?>"></textarea>
 									</div>
 									<div class="form-group">
-										<label for="name"><?php echo lang_key("SUPPORT_SERVER_BUG"); ?></label><textarea class="form-control" name="server_bug" placeholder="<?php echo lang_key("SUPPORT_SERVER_BUG_notes"); ?>"></textarea>
+										<label for="name"><?php echo lang_key("ISSUE_SERVER_BUG"); ?></label><textarea class="form-control" name="server_bug" placeholder="<?php echo lang_key("ISSUE_SERVER_BUG_notes"); ?>"></textarea>
 									</div>
 									<div class="form-group">
-										<label for="name"><?php echo lang_key("SUPPORT_ADDITIONAL_INFO_BUG"); ?></label><textarea class="form-control" name="additional_bug" placeholder="<?php echo lang_key("SUPPORT_ADDITIONAL_INFO_BUG_notes"); ?>"></textarea>
+										<label for="name"><?php echo lang_key("ISSUE_ADDITIONAL_INFO_BUG"); ?></label><textarea class="form-control" name="additional_bug" placeholder="<?php echo lang_key("ISSUE_ADDITIONAL_INFO_BUG_notes"); ?>"></textarea>
 									</div>
 									<h6>Once you click submit, your report will be submitted to the GitHub Repo. This will allow the developers and support staff to assist you. Please be aware, we are unable to provide 24/7 support and will reply as soon as we can.</h6>
 									<input class="btn btn-primary" type="submit" name="gh_bug_submit" <?php if (!$support_data->checkRow()) {
@@ -139,9 +139,9 @@ if (isset($_SESSION["support_success"])) {
 
 					<div class="card">
 						<div class="card-header">
-							<em class="fa fa-align-justify"></em> <?php echo lang_key("SUPPORT_GH_CREATE_TITLE"); ?>
+							<em class="fa fa-align-justify"></em> <?php echo lang_key("ISSUE_GH_CREATE_TITLE"); ?>
 						</div>
-						<form action="<?php echo BASE_URL; ?>/oc-content/plugins/support/index.php" method="POST">
+						<form action="<?php echo BASE_URL; ?>/oc-includes/issueLogger.php" method="POST">
 							<div class="card-body">
 								<div class="card-body">
 									<div class="form-group">
@@ -149,13 +149,13 @@ if (isset($_SESSION["support_success"])) {
 											echo "Key is already set, if you want to change it, please delete the \"gh_key\" from the " . DB_PREFIX . "config table";
 										} ?>
 										<br><br>
-										<label for="name"><?php echo lang_key("SUPPORT_GH_CREATE_KEY"); ?></label><input type="text" class="form-control" name="gh_key" placeholder="<?php echo lang_key("SUPPORT_GH_CREATE_KEY_notes"); ?>" <?php if (!$support_data->checkRow()) {
+										<label for="name"><?php echo lang_key("ISSUE_GH_CREATE_KEY"); ?></label><input type="text" class="form-control" name="gh_key" placeholder="<?php echo lang_key("ISSUE_GH_CREATE_KEY_notes"); ?>" <?php if (!$support_data->checkRow()) {
 																																																													echo "required";
 																																																												} else {
 																																																													echo "disabled";
 																																																												} ?> />
 									</div>
-									<h6><?php echo lang_key("SUPPORT_GH_CREATE_DESCRIPTION"); ?></h6>
+									<h6><?php echo lang_key("ISSUE_GH_CREATE_DESCRIPTION"); ?></h6>
 									<input class="btn btn-primary" type="submit" name="gh_key_BTN" <?php if ($support_data->checkRow()) {
 																										echo "value='Disabled Because Key Is Set' disabled";
 																									} else {
