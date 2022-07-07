@@ -206,7 +206,7 @@ if (empty($_SESSION['logged_in'])) {
 					<div class="card">
 						<div class="card-header">
 							<h1><?php echo lang_key("MDT_CONSOLE"); ?>
-								<button class="btn btn-primary btn-lg float-right" name="aop" data-toggle="modal" data-target="#aop" id="getAOP"></button>
+								<button class="btn btn-primary btn-lg float-right" name="aop" data-toggle="modal" data-target="#aop" id="getAOP"><?php echo getAOP();?></button>
 							</h1>
 						</div>
 						<div class="card-body">
@@ -459,7 +459,7 @@ if (empty($_SESSION['logged_in'])) {
 				$('#menu_toggle').click();
 			});
 
-			//$('#callsign').modal('show');
+			$('#callsign').modal('show');
 			getCalls();
 			getStatus();
 			checkTones();

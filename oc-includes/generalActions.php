@@ -26,7 +26,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 if (session_id() == '' || !isset($_SESSION)) {
     session_start();
 }
-require_once('../oc-config.php');
+require_once(__DIR__ . '/../oc-config.php');
 require_once(ABSPATH . '/oc-functions.php');
 require_once(ABSPATH . '/oc-settings.php');
 require_once(ABSPATH . OCINC . "/apiAuth.php");
@@ -572,7 +572,7 @@ function getAOP()
         die();
     }
 
-    $result = $pdo->query("SELECT * FROM " . DB_PREFIX . "patrolInformation WHERE `key` = 'areaOfPatrol'");
+    $result = $pdo->query("SELECT * FROM " . DB_PREFIX . "patrolInformation WHERE `key` = 'aop'");
 
     if (!$result) {
         $_SESSION['error'] = $pdo->errorInfo();

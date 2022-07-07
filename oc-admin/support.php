@@ -12,13 +12,14 @@ This program is free software: you can redistribute it and/or modify
 
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
  **/
-
-session_start();
-
 require_once('../oc-config.php');
 require_once(ABSPATH . '/oc-functions.php');
 require_once(ABSPATH . '/oc-settings.php');
 require_once(ABSPATH . "/oc-includes/adminActions.php");
+require_once(ABSPATH . "/oc-includes/autoload.inc.php");
+
+
+isSessionStarted();
 
 if (empty($_SESSION['logged_in'])) {
 	header('Location: ' . BASE_URL);
@@ -27,8 +28,8 @@ if (empty($_SESSION['logged_in'])) {
 	// Do Nothing
 }
 
-
 isAdminOrMod();
+$support_data = new System\Support();
 
 $accessMessage = "";
 if (isset($_SESSION['accessMessage'])) {
@@ -46,6 +47,16 @@ if (isset($_SESSION['successMessage'])) {
 	$successMessage = $_SESSION['successMessage'];
 	unset($_SESSION['successMessage']);
 }
+if (isset($_SESSION["support_error"])) {
+	$errorMsg = $_SESSION["support_error"];
+	unset($_SESSION["support_error"]);
+}
+
+if (isset($_SESSION["support_success"])) {
+	$successMsg = $_SESSION["support_success"];
+	unset($_SESSION["support_success"]);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -74,15 +85,83 @@ if (isset($_SESSION['successMessage'])) {
 						</div>
 						<form action="<?php echo BASE_URL; ?>/oc-content/plugins/support/index.php" method="POST">
 							<div class="card-body">
-								<div class="form-group">
-									<label for="name"><?php echo lang_key("SUPPORT_DESCRIBE_PROBLEM"); ?></label><input type="text" class="form-control" name="PROBLEMS" placeholder="<?php echo lang_key("SUPPORT_DESCRIBE_PROBLEM_notes"); ?>" />
+								<?php if (!empty($errorMsg)) {
+									echo "<span class='label danger'>" . $errorMsg . "</span>";
+								} elseif (!empty($successMsg)) {
+									echo "<span class='label success'>" . $successMsg . "</span>";
+									if (isset($_GET["id"]) && isset($_GET["link"])) {
+										echo "<span class='label success'>Issue Link: <a id='successlink' href=" . $_GET["link"] . ">" . $_GET["link"] . "</a><br>Issue ID: " . $_GET["id"] . "</span>";
+									}
+								}
+								?>
+								<div class="card-body">
+									<?php
+									if (!$support_data->checkRow()) {
+										echo "<span class='label warning'>Your key is either not set or is invalid! Set it at the bottom of the page</span>";
+									} ?>
+									<div class="form-group">
+										<label for="name"><?php echo lang_key("SUPPORT_TITLE_BUG"); ?></label><input type="text" class="form-control" name="title_bug" placeholder="<?php echo lang_key("SUPPORT_TITLE_BUG_notes"); ?>" required />
+									</div>
+									<div class="form-group">
+										<label for="name"><?php echo lang_key("SUPPORT_DESCRIBE_BUG"); ?></label><textarea class="form-control" name="describe_bug" placeholder="<?php echo lang_key("SUPPORT_DESCRIBE_BUG_notes"); ?> " required></textarea>
+									</div>
+									<div class="form-group">
+										<label for="name"><?php echo lang_key("SUPPORT_REPRODUCE_BUG"); ?></label><textarea class="form-control" name="reproduce_bug" placeholder="<?php echo lang_key("SUPPORT_REPRODUCE_BUG_notes"); ?>" required></textarea>
+									</div>
+									<div class="form-group">
+										<label for="name"><?php echo lang_key("SUPPORT_EXPECTED_BEHAVIOUR_BUG"); ?></label><textarea class="form-control" name="expected_bug" placeholder="<?php echo lang_key("SUPPORT_EXPECTED_BEHAVIOUR_BUG_notes"); ?>"></textarea>
+									</div>
+									<div class="form-group">
+										<label for="name"><?php echo lang_key("SUPPORT_SCREENSHOTS_BUG"); ?></label><textarea class="form-control" name="screenshot_bug" placeholder="<?php echo lang_key("SUPPORT_SCREENSHOTS_BUG_notes"); ?>"></textarea>
+									</div>
+									<div class="form-group">
+										<label for="name"><?php echo lang_key("SUPPORT_DESKTOP_BUG"); ?></label><textarea class="form-control" name="desktop_bug" placeholder="<?php echo lang_key("SUPPORT_DESKTOP_BUG_notes"); ?>"></textarea>
+									</div>
+									<div class="form-group">
+										<label for="name"><?php echo lang_key("SUPPORT_SMARTPHONE_BUG"); ?></label><textarea class="form-control" name="smartphone_bug" placeholder="<?php echo lang_key("SUPPORT_SMARTPHONE_BUG_notes"); ?>"></textarea>
+									</div>
+									<div class="form-group">
+										<label for="name"><?php echo lang_key("SUPPORT_SERVER_BUG"); ?></label><textarea class="form-control" name="server_bug" placeholder="<?php echo lang_key("SUPPORT_SERVER_BUG_notes"); ?>"></textarea>
+									</div>
+									<div class="form-group">
+										<label for="name"><?php echo lang_key("SUPPORT_ADDITIONAL_INFO_BUG"); ?></label><textarea class="form-control" name="additional_bug" placeholder="<?php echo lang_key("SUPPORT_ADDITIONAL_INFO_BUG_notes"); ?>"></textarea>
+									</div>
+									<h6>Once you click submit, your report will be submitted to the GitHub Repo. This will allow the developers and support staff to assist you. Please be aware, we are unable to provide 24/7 support and will reply as soon as we can.</h6>
+									<input class="btn btn-primary" type="submit" name="gh_bug_submit" <?php if (!$support_data->checkRow()) {
+																											echo "value='Disabled Until Key Is Set' disabled";
+																										} else {
+																											echo 'value="Submit"';
+																										} ?>>
 								</div>
-								<div class="form-group">
-									<label for="name"><?php echo lang_key("SUPPORT_AFFECTING_FILE"); ?></label><input type="text" class="form-control" name="FILE" placeholder="<?php echo lang_key("SUPPORT_AFFECTING_FILE_notes"); ?>" />
+							</div>
+						</form>
+					</div>
+
+					<div class="card">
+						<div class="card-header">
+							<em class="fa fa-align-justify"></em> <?php echo lang_key("SUPPORT_GH_CREATE_TITLE"); ?>
+						</div>
+						<form action="<?php echo BASE_URL; ?>/oc-content/plugins/support/index.php" method="POST">
+							<div class="card-body">
+								<div class="card-body">
+									<div class="form-group">
+										<?php if ($support_data->checkRow()) {
+											echo "Key is already set, if you want to change it, please delete the \"gh_key\" from the " . DB_PREFIX . "config table";
+										} ?>
+										<br><br>
+										<label for="name"><?php echo lang_key("SUPPORT_GH_CREATE_KEY"); ?></label><input type="text" class="form-control" name="gh_key" placeholder="<?php echo lang_key("SUPPORT_GH_CREATE_KEY_notes"); ?>" <?php if (!$support_data->checkRow()) {
+																																																													echo "required";
+																																																												} else {
+																																																													echo "disabled";
+																																																												} ?> />
+									</div>
+									<h6><?php echo lang_key("SUPPORT_GH_CREATE_DESCRIPTION"); ?></h6>
+									<input class="btn btn-primary" type="submit" name="gh_key_BTN" <?php if ($support_data->checkRow()) {
+																										echo "value='Disabled Because Key Is Set' disabled";
+																									} else {
+																										echo 'value="Submit"';
+																									} ?>>
 								</div>
-								<h6>Once you click "Submit", your support request will be submitted. Please note that lots of additional information is sent with your request, you can find out what by clicking the "Show me" button.<br>Please note also, we will support you as quickly as possible. We are unable to provide 24/7 instant support.</h6>
-								<input class="btn btn-primary" type="submit" value="Submit">
-								<a  class="btn btn-primary" href="<?php echo BASE_URL; ?>/oc-content/plugins/support/index.php?showme=1">Show Me</a>
 							</div>
 						</form>
 					</div>

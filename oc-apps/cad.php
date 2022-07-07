@@ -31,18 +31,8 @@ if (empty($_SESSION['logged_in'])) {
 }
 
 setDispatcher("1");
+isAdminOrMod();
 
-if ($_SESSION['adminPrivilege'] == 3) {
-	if ($_SESSION['adminPrivilege'] == 'Administrator') {
-		//Do nothing
-	}
-} else if ($_SESSION['adminPrivilege'] == 2) {
-	if ($_SESSION['adminPrivilege'] == 'Moderator') {
-		// Do Nothing
-	}
-} else {
-	permissionDenied();
-}
 $aop =
 	$accessMessage = "";
 if (isset($_SESSION['accessMessage'])) {
@@ -77,9 +67,15 @@ if (isset($_SESSION['boloMessage'])) {
 <body class="app header-fixed">
 
 	<header class="app-header navbar">
-		<a rel="noopener" class="navbar-brand" href="#">
-			<img class="navbar-brand-full" src="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/images/logo_brand.png" width="30" height="25" alt="<?php echo COMMUNITY_NAME; ?> Logo">
+	<a rel="noopener" class="navbar-brand" href="#">
+			<img class="navbar-brand-full" src="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/images/logo_brand.png" width="30" height="25" alt="OpenCAD Logo">
 		</a>
+		<button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 		<?php
 		include_once(ABSPATH . "/" . OCTHEMES . "/" . THEME . "/includes/topProfile.inc.php");
 		?>
@@ -93,7 +89,7 @@ if (isset($_SESSION['boloMessage'])) {
 					<div class="card">
 						<div class="card-header">
 							<h1>CAD Console
-								<button class="btn btn-primary float-right" name="aop" data-toggle="modal" data-target="#aop" id="getAOP"></button>
+								<button class="btn btn-primary float-right" name="aop" data-toggle="modal" data-target="#aop" id="getAOP"><?php echo getAOP();?></button>
 							</h1>
 						</div>
 						<div class="card-body">
@@ -281,7 +277,10 @@ if (isset($_SESSION['boloMessage'])) {
 	<?php
 	require_once(ABSPATH . "/" . OCTHEMES . "/" . THEME . "/includes/footer.inc.php");
 	include_once(ABSPATH . "/" . OCTHEMES . "/" . THEME . "/modals/cad.modals.inc.php");
-	require_once(ABSPATH . OCTHEMEINC . "/scripts.inc.php"); ?>
+	require_once(ABSPATH . OCTHEMEINC . "/scripts.inc.php"); 
+	require_once(ABSPATH . "/" . OCTHEMES . "/" . THEME . "/includes/footer.inc.php");
+	?>
+	
 
 	<!-- AUDIO TONES -->
 	<audio id="recurringToneAudio" src="<?php echo BASE_URL; ?>oc-content/themes/<?php echo THEME; ?>/sounds/priority.mp3" preload="auto"></audio>
@@ -519,7 +518,6 @@ if (isset($_SESSION['boloMessage'])) {
 				},
 				success: function(response) {
 					$('#getAOP').html(response);
-
 					setTimeout(getAOP, 5000);
 
 

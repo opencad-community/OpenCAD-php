@@ -40,7 +40,7 @@ function name()
 			die();
 		}
 
-		$stmt = $pdo->prepare("SELECT id, name, dob, address, gender, race, dlIssuer, dlStatus, dlType, hairColor, build, weaponPermitStatus, deceased, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS age FROM ".DB_PREFIX."ncicNames WHERE name = ?");
+		$stmt = $pdo->prepare("SELECT id, name, dob, address, gender, race, dlIssuer, dlStatus, dlType, dlClass, hairColor, build, weaponPermitStatus, deceased, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS age FROM ".DB_PREFIX."ncicNames WHERE name = ?");
 		$resStatus = $stmt->execute(array($name));
 		$result = $stmt;
 
@@ -71,7 +71,7 @@ function name()
 				$encode["race"] = $row["race"];
 				$encode["dlStatus"] = $row["dlStatus"];
 				$encode["dlType"] = $row["dlType"];
-				$encode["dlClass"] = $row["dlCass"];
+				$encode["dlClass"] = $row["dlClass"];
 				$encode["dlIssuer"] = $row["dlIssuer"];
 				$encode["hairColor"] = $row["hairColor"];
 				$encode["build"] = $row["build"];
@@ -258,7 +258,6 @@ function plate()
 function weapon()
 {
 	$name = htmlspecialchars($_POST['ncicWeapon']);
-	$nameId = htmlspecialchars($_POST['ncic_weapon_id']);
 	
 
 
@@ -303,8 +302,8 @@ function weapon()
 
 			}
 
-			$stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."ncicWeapons WHERE nameId = $userId");
-			$resStatus = $stmt->execute(array($name));
+			$stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."ncicWeapons WHERE nameId = ?");
+			$resStatus = $stmt->execute(array($userId));
 			$result = $stmt;
 
 			if (!$resStatus)
@@ -325,7 +324,7 @@ function weapon()
 				foreach($result as $row)
 				{
 					$encode["nameId"] = $row['nameId'];
-					$encode['weaponId'][$warrantIndex] = $row["ncicNid"];
+					$encode['weaponId'][$warrantIndex] = $row["weaponName"];
 					$encode['weaponName'][$warrantIndex] = "$row[weaponType] | $row[weaponName]";
 
 					$warrantIndex++;

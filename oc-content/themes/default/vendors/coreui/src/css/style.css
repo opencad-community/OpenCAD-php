@@ -16903,6 +16903,16 @@ body {
 
 /*# Custom CSS - Kevingorman1000 */
 
+#successlink {
+    color: white;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+#successlink:hover {
+    text-decoration: none;
+}
+
 .label {
     display: block;
     text-align: center;
