@@ -531,7 +531,7 @@ $arrLang["WARRANTTYPE_MANAGER_notes"] = "No results found in the <em>Warrant Typ
 $arrLang["WEAPON_MANAGER"] = "Weapon Manager";
 $arrLang["WEAPON_MANAGER_notes"] = "No results found in the <em>weapons</em> datbase";
 $arrLang["ABOUT_OPENCAD"] = "About OpenCAD";
-$arrLang["SUPPORT_TAB"] = "Get Support";
+$arrLang["ISSUE_TAB"] = "Report Issue";
 $arrLang["SUPPORT_TITLE"] = "Support";
 $arrLang["RESET_DATA"] = "Reset Data";
 $arrLang["ENVIRONMENTAL_DATA_OPTGRP"] = "Environmental Data";
@@ -554,7 +554,7 @@ $arrLang["RESET_ALL_DATA_OPTGRP"] = "RESET ALL DATA (USE WITH CUATION)";
 $arrLang["RESET_ALL_DATA"] = "All Data (Use with CAUTION)";
 //** End Administrator/Moderator Console Strings  **/
 
-//** Begin Support Strings **/
+//** Begin Issue Strings **/
 $arrLang["ISSUE_TITLE"] = "Report An Issue";
 $arrLang["ISSUE_TITLE_BUG"] = "Enter Title *";
 $arrLang["ISSUE_DESCRIBE_BUG"] = "Description You are Facing *";
@@ -584,7 +584,7 @@ $arrLang["ISSUE_GH_CREATE_KEY"] = "Enter Key";
 $arrLang["ISSUE_GH_CREATE_KEY_notes"] = "Enter your GitHub Personal Access Key";
 $arrLang["ISSUE_GH_CREATE_DESCRIPTION"] = "To gain your access key, follow the below instructions<br><br>◉ Head over to this link: https://github.com/settings/tokens <br>◉ Sign in with your main account<br>◉ Create your new Personal Access token<br>◉ Be sure to set the Expiration to never<br>◉ Be Sure to select 'repo' as the minimum scope!";
 
-//** End Support Strings **/
+//** End Issue Strings **/
 
 //** Begin Webhook Strings **/
 
