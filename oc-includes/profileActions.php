@@ -10,23 +10,20 @@ This program is free software: you can redistribute it and/or modify
  (at your option) any later version.
 
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
-**/
+ **/
 
 require_once(__DIR__ . "/../oc-config.php");
-require_once( ABSPATH . OCINC . "/apiAuth.php");
+require_once(ABSPATH . OCINC . "/apiAuth.php");
 
 //Handle requests
-if (isset($_POST['update_profile_btn']))
-{
+if (isset($_POST['update_profile_btn'])) {
 	updateProfile();
 }
-if (isset($_GET['getMyRank']))
-{
+if (isset($_GET['getMyRank'])) {
 	getMyRank();
 }
-if (isset($_POST['changePassword']))
-{
-  changePassword();
+if (isset($_POST['changePassword'])) {
+	changePassword();
 }
 
 function updateProfile()
@@ -37,21 +34,17 @@ function updateProfile()
 	$email = htmlspecialchars($_POST['email']);
 	$identifier = htmlspecialchars($_POST['identifier']);
 
-	try{
-		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-	} catch(PDOException $ex)
-	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+	try {
+		$pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
+	} catch (PDOException $ex) {
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 		die();
 	}
 
-	$stmt = $pdo->prepare("UPDATE ".DB_PREFIX."users SET name = ?, email = ?, identifier = ? WHERE ID = ?");
+	$stmt = $pdo->prepare("UPDATE " . DB_PREFIX . "users SET name = ?, email = ?, identifier = ? WHERE ID = ?");
 	$result = $stmt->execute(array($name, $email, $identifier, $id));
 
-	if (!$result)
-	{
+	if (!$result) {
 		$_SESSION['error'] = $stmt->errorInfo();
 		header(ERRORREDIRECT);
 		die();
@@ -64,51 +57,44 @@ function updateProfile()
 	$_SESSION['identifier'] = $identifier;
 
 	//Let the user know their information was updated
-	$_SESSION['profileUpdate'] = '<div class="alert alert-success"><span>'.lang_key("PROFILE_SUCCESS").'</span></div>';
+	$_SESSION['profileUpdate'] = '<div class="alert alert-success"><span>' . lang_key("PROFILE_SUCCESS") . '</span></div>';
 
 	sleep(1); //Seconds to wait
-	header("Location: ".BASE_URL."/".OCAPPS."/oc-profile.php");
+	header("Location: " . BASE_URL . "/" . OCAPPS . "/oc-profile.php");
 }
 
 function getMyRank()
 {
 	$id = $_GET['unit'];
-	
-	try{
-		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-	} catch(PDOException $ex)
-	{
-		$_SESSION['error_blob'] = $ex;
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+
+	try {
+		$pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
+	} catch (PDOException $ex) {
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 		die();
 	}
 
-	$stmt = $pdo->prepare("SELECT ".DB_PREFIX."ranks.rankName FROM ".DB_PREFIX."ranksUsers INNER JOIN ".DB_PREFIX."ranks ON ".DB_PREFIX."ranks.rank_id=".DB_PREFIX."ranksUsers.rank_id WHERE ".DB_PREFIX."ranksUsers.userId = ?");
+	$stmt = $pdo->prepare("SELECT " . DB_PREFIX . "ranks.rankName FROM " . DB_PREFIX . "ranksUsers INNER JOIN " . DB_PREFIX . "ranks ON " . DB_PREFIX . "ranks.rank_id=" . DB_PREFIX . "ranksUsers.rank_id WHERE " . DB_PREFIX . "ranksUsers.userId = ?");
 	$result = $stmt->execute(array($id));
 
-	if (!$result)
-	{
+	if (!$result) {
 		$_SESSION['error'] = $stmt->errorInfo();
 		header(ERRORREDIRECT);
 		die();
 	}
 	$pdo = null;
 
-	foreach($result as $row)
-	{
+	foreach ($result as $row) {
 		echo $row[0];
 	}
 }
 
 function changePassword()
 {
-	try{
-		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-	} catch(PDOException $ex)
-	{
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+	try {
+		$pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
+	} catch (PDOException $ex) {
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 		die();
 	}
 
@@ -116,20 +102,19 @@ function changePassword()
 	$newpassword = htmlspecialchars($_POST['password']);
 	$hashedPassword = password_hash($newpassword, PASSWORD_DEFAULT);
 
-	$stmt = $pdo->prepare("UPDATE ".DB_PREFIX."users SET password = ? WHERE id = ?");
+	$stmt = $pdo->prepare("UPDATE " . DB_PREFIX . "users SET password = ? WHERE id = ?");
 	$result = $stmt->execute(array($hashedPassword, $id));
 
-	if (!$result)
-	{
+	if (!$result) {
 		$_SESSION['error'] = $pdo->errorInfo();
 		header(ERRORREDIRECT);
 		die();
 	}
 
-	$_SESSION['profileUpdate'] = '<div class="alert alert-success"><span>'.lang_key("PASSWORD_SUCCESS").'</span></div>';
+	$_SESSION['profileUpdate'] = '<div class="alert alert-success"><span>' . lang_key("PASSWORD_SUCCESS") . '</span></div>';
 
 	$pdo = null;
 	sleep(1); //Seconds to wait
 	echo $_SESSION['profileUpdate'];
-	header("Location: ".BASE_URL."/".OCAPPS."/oc-profile.php");
+	header("Location: " . BASE_URL . "/" . OCAPPS . "/oc-profile.php");
 }

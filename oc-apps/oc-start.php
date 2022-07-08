@@ -153,6 +153,15 @@ if (empty($_SESSION['logged_in'])) {
 			</nav>
 		</div>
 		<main class="main">
+			<?php
+			$latest = file_get_contents(APPLATESTVERSIONURL);
+			$obj = json_decode($latest);
+			$latestVersion = $obj->version;
+			$currentVersion = OC_VERSION;
+			if($latestVersion > $currentVersion){
+				ECHO "<span class='label danger'>".lang_key("OUTDATED")."<br>".lang_key("OUTDATED_notes")."<br>Your Version: ".OC_VERSION."<br>Latest Version:".$latestVersion."</span>";
+			}
+			?>
 			<div class="container-fluid">
 				<div class="animated fadeIn">
 					<br />

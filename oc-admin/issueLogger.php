@@ -146,14 +146,12 @@ if (isset($_SESSION["support_success"])) {
 								<div class="card-body">
 									<div class="form-group">
 										<?php if ($support_data->checkRow()) {
-											echo "Key is already set, if you want to change it, please delete the \"gh_key\" from the " . DB_PREFIX . "config table";
+											echo "Key is already set, if you want to change it, please delete the \"gh_key\" from the " . DB_PREFIX . "config table <br><br>";
 										} ?>
-										<br><br>
-										<label for="name"><?php echo lang_key("ISSUE_GH_CREATE_KEY"); ?></label><input type="text" class="form-control" name="gh_key" placeholder="<?php echo lang_key("ISSUE_GH_CREATE_KEY_notes"); ?>" <?php if (!$support_data->checkRow()) {
-																																																													echo "required";
-																																																												} else {
-																																																													echo "disabled";
-																																																												} ?> />
+
+										<label for="name"><?php echo lang_key("ISSUE_GH_CREATE_KEY"); ?></label><input type="text" class="form-control" name="gh_key" placeholder="<?php echo lang_key("ISSUE_GH_CREATE_KEY_notes"); ?>" <?php if ($support_data->checkRow()) {
+																																																												echo "disabled";
+																																																											} ?> />
 									</div>
 									<h6><?php echo lang_key("ISSUE_GH_CREATE_DESCRIPTION"); ?></h6>
 									<input class="btn btn-primary" type="submit" name="gh_key_BTN" <?php if ($support_data->checkRow()) {

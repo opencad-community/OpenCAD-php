@@ -577,14 +577,21 @@ $arrLang["ISSUE_ADDITIONAL_INFO_BUG_notes"] = "Any additional information that w
 $arrLang["ISSUE_ERROR_GH_KEY_NOT_VALID"] = "Your Github Key is either not set or is invalid!";
 $arrLang["ISSUE_ERROR_GH_KEY_INCORRECT"] = "Your Github Key Incorrect! Please check and try again";
 $arrLang["ISSUE_ERROR_GH_KEY_EXISTS"] = "There is already a key in the Database. Please remove this before trying again!";
-$arrLang["ISSUE_SUCCESS_GH_KEY_CREATE"] = "Your Github Key Has been Created!";
+$arrLang["ISSUE_SUCCESS_GH_KEY_CREATE"] = "Your Github Key Has been Inserted!";
 $arrLang["ISSUE_SUCCESS_GH_ISSUE_CREATED"] = "Sucessfully Created Issue!";
 $arrLang["ISSUE_GH_CREATE_TITLE"] = "Create Your GitHub Key";
 $arrLang["ISSUE_GH_CREATE_KEY"] = "Enter Key";
 $arrLang["ISSUE_GH_CREATE_KEY_notes"] = "Enter your GitHub Personal Access Key";
-$arrLang["ISSUE_GH_CREATE_DESCRIPTION"] = "To gain your access key, follow the below instructions<br><br>◉ Head over to this link: https://github.com/settings/tokens <br>◉ Sign in with your main account<br>◉ Create your new Personal Access token<br>◉ Be sure to set the Expiration to never<br>◉ Be Sure to select 'repo' as the minimum scope!";
+$arrLang["ISSUE_GH_CREATE_DESCRIPTION"] = "To gain your access key, follow the below instructions<br><br>◉ Head over to this link: https://github.com/settings/tokens <br>◉ Sign in with your main account<br>◉ Create your new Personal Access token<br>◉ Be sure to set the Expiration to never<br>◉ Be sure to select 'repo' as the minimum scope!<br><br>Please note, your GitHub key is encrypted using your secret keys within oc-config.php.<br>Be sure not to share this file with anyone as your keys can be decrpyted!";
 
 //** End Issue Strings **/
+
+//** Plugin Strings **/
+
+$arrLang["PLUGIN_TAB"] = "Plugin Manager";
+
+//** End Plugin Strings **/
+
 
 //** Begin Webhook Strings **/
 
@@ -614,6 +621,7 @@ $arrLang["WEBHOOK_SETTINGS_USERDELETE"] = "On User Deletetion";
 $arrLang["WEBHOOK_SETTINGS_USERSUSPENSION"] = "On User Suspension";
 $arrLang["WEBHOOK_SETTINGS_USERREGISTRATION"] = "On User Registration";
 $arrLang["WEBHOOK_SETTINGS_PANICBUTTONPRESSED"] = "On Panic Button Pressed";
+$arrLang["WEBHOOK_SETTINGS_ISSUEREPORT"] = "On Issue Create";
 
 
 //** End Webhook Strings **/
@@ -673,6 +681,12 @@ $arrLang["PASSWORD"] = "Password";
 $arrLang["CHANGE_PASSWORD"] = "Change Password";
 $arrLang["MY_PRFILE"] ="My Profile";
 $arrLang["PROFILE_SUCCESS"] = "Successfully updated your user profile.";
-$arrLang["PASSWORD_SUCCESS"] = "Successfully updated your password."
+$arrLang["PASSWORD_SUCCESS"] = "Successfully updated your password.";
 //** End Profile Console Strings *//
+
+
+// ** Begin MISC Strings **//
+$arrLang["OUTDATED"] = "Your version of OpenCAD is Outdated! Please download the lastest <a href='https://github.com/opencad-app/OpenCAD-php'>From our GitHub</a>";
+$arrLang["OUTDATED_notes"] = "<i>Notice:</i> You are welcome to ignore this message and carry on using OpenCAD, but please be aware, you won't have the latest features and fixes.";
+// ** End MISC Strings **//
 ?>

@@ -35,9 +35,5 @@
 			<li class="nav-item px-3" <?php if ($pageName == "" . lang_key("WEBHOOK_TAB") . "") echo $currentPage; ?>><a rel="noopener" href="<?php echo BASE_URL; ?>/oc-admin/webhook.php" style="color:black"><em class="fas fa-globe fa-3px" style="color:black"></em> <?php echo lang_key("WEBHOOK_TAB"); ?></a></li>
 			<li class="nav-item px-3" <?php if ($pageName == "" . lang_key("ABOUT_OPENCAD") . "") echo $currentPage; ?>><a rel="noopener" href="<?php echo BASE_URL; ?>/oc-admin/about.php" style="color:black"><em class="fas fa-info-circle fa-3px" style="color:black"></em> <?php echo lang_key("ABOUT_OPENCAD"); ?></a></li>
 			<li class="nav-item px-3" <?php if ($pageName == "" . lang_key("ISSUE_TAB") . "") echo $currentPage; ?>><a rel="noopener" href="<?php echo BASE_URL; ?>/oc-admin/issueLogger.php" style="color:black"><em class="fas fa-info-circle fa-3px" style="color:black"></em> <?php echo lang_key("ISSUE_TAB"); ?></a></li>
-			<?php if (!empty($testarray)) {
-				foreach ($testarray as $data) {
-					echo '<li class="nav-item px-3"<?php if ( $pageName == "" . '.$testarray["testName"].' . "") echo $currentPage; ?>><a rel="noopener" href="<?php echo BASE_URL; ?>/oc-admin/webhook.php"  style="color:black"><em class="fas fa-globe fa-3px" style="color:black"></em>'.$testarray["testName"].'</a></li>';
-				}
-			} ?>
+			
 		</ul>

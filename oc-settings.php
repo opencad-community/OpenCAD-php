@@ -24,7 +24,10 @@ define( 'OCTHEMEMOD', 'oc-content/themes/'. THEME .'/modals' );
 define( 'OCTHEMEJS', 'oc-content/themes/'. THEME .'/js' );
 define( 'APIDATAACTIONS', '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">');
 define( 'ERRORREDIRECT', '\'Location: '.BASE_URL.'/oc-content/plugins/error/index.php\'');
-define( 'APPLATESTVERSIONURL', "https://raw.githubusercontent.com/kevingorman1000/OpenCad-Versions-TEMP/main/version.json");
+/**
+ * This will need to be updated once we have a backend sorted
+ */
+define( 'APPLATESTVERSIONURL', "http://192.168.1.128/version.json");
 /*
  * These can't be directly globalized in version.php. When updating,
  * we're including version.php from another installation and don't want

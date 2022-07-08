@@ -8,7 +8,7 @@ require_once(ABSPATH . "/oc-includes/autoload.inc.php");
 
 isSessionStarted();
 $support_data = new System\Support();
-
+$config_data = new System\Config();
 
 if (isset($_POST["gh_key_BTN"])) {
     $key = $_POST["gh_key"];
@@ -46,7 +46,7 @@ if (isset($_POST["gh_bug_submit"])) {
     $additional = $_POST["additional_bug"] ?? NULL;
 
     $key = $support_data->getKey();
-    $key = $support_data->decrpytKey($key["value"]);
+    $key = $config_data->decrpytString($key["value"]);
 
     $array = array("title" => $title, "body" => "Description:\n $describe\n\nReproduce:\n $reproduce\n\nExpected Behaviour:\n $expected\n\nScreenshot Links:\n $screenshot\n\nDesktop Information:\n $desktop\n\nSmartphone Information:\n $smartphone\n\nServer Information:\n $server\n\nAdditional Information:\n $additional\n\n###### This issue was automatically generated within the OpenCAD 1.0 support plugin.");
     $array = json_encode($array);
@@ -60,6 +60,15 @@ if (isset($_POST["gh_bug_submit"])) {
 
 
     $_SESSION["support_success"] = lang_key("ISSUE_SUCCESS_GH_ISSUE_CREATED");
+
+    $webhook_data = new System\Webhook();
+	$getWebhooks = $webhook_data->getWebhookSetting("issueReport");
+
+	if ($getWebhooks) {
+		foreach ($getWebhooks as $data) {
+			$webhook_data->postWebhook($data["webhook_uri"], $data["webhook_json"]);
+		}
+	}
 
     header("location: " . BASE_URL . "/oc-admin/issueLogger.php?success=createdIssue&id=" . $issueNum . "&link=" . $issueURL);
 

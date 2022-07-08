@@ -39,8 +39,9 @@ class Support extends \Dbh
 
     public function createKey($value)
     {
+        $config_data = new Config();
         $key = "gh_key";
-        $value = $this->encrpytKey($value);
+        $value = $config_data->encryptString($value);
 
         $stmt = $this->connect()->prepare("INSERT INTO " . DB_PREFIX . "config (`key`, `value`) VALUES (?, ?)");
         if (!$stmt->execute(array($key, $value))) {
@@ -57,62 +58,9 @@ class Support extends \Dbh
         }
     }
 
-    public function encrpytKey($key)
-    {
-        $value = $key;
+   
 
-        // Encrpy key
-        $ciphering = "AES-256-CTR";
-
-        // Use OpenSSl Encryption method
-        $options = 0;
-
-        // Non-NULL Initialization Vector for encryption
-        $encryption_iv = substr(NONCE_KEY, 0, 16);
-
-        // Store the encryption key
-        $encryption_key = SECURE_AUTH_KEY;
-
-        // Use openssl_encrypt() function to encrypt the data
-        $encryption = openssl_encrypt(
-            $value,
-            $ciphering,
-            $encryption_key,
-            $options,
-            $encryption_iv
-        );
-
-        return $encryption;
-    }
-
-    public function decrpytKey($key)
-    {
-        $key = $key;
-
-        // Encrpy key
-        $ciphering = "AES-256-CTR";
-
-        // Use OpenSSl Encryption method
-        $iv_length = openssl_cipher_iv_length($ciphering);
-        $options = 0;
-
-        // Non-NULL Initialization Vector for decryption
-        $decryption_iv = substr(NONCE_KEY, 0, 16);
-
-        // Store the decryption key
-        $decryption_key = SECURE_AUTH_KEY;
-
-        // Use openssl_decrypt() function to decrypt the data
-        $decryption = openssl_decrypt(
-            $key,
-            $ciphering,
-            $decryption_key,
-            $options,
-            $decryption_iv
-        );
-
-        return $decryption;
-    }
+    
 
     public function checkKey($key)
     {

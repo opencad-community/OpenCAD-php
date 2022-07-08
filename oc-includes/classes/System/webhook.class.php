@@ -40,7 +40,7 @@ class Webhook extends \Dbh
 
     public function submitWebhook()
     {
-
+        $config_data = new Config();
         $title = $_POST["webhook_title"] ?? NULL;
         $json = json_encode($_POST["json_data"]) ?? NULL;
         $type = $_POST["webhook_settings"] ?? NULL;
@@ -52,10 +52,11 @@ class Webhook extends \Dbh
             $settings = "NULL";
         };
 
-
+        $uri = $config_data->encryptString($uri);
         $stmt = $this->connect()->prepare("INSERT INTO " . DB_PREFIX . "webhooks (webhook_title, webhook_uri, webhook_json, webhook_type, webhook_settings) VALUES (?, ?, ?, ?, ?)");
         if (!$stmt->execute(array($title, $uri, $json, $type, $settings))) {
             $_SESSION['error'] = $stmt->errorInfo();
+
             header('Location: ' . BASE_URL . '/plugins/error/index.php');
             die();
         }
@@ -70,11 +71,12 @@ class Webhook extends \Dbh
 
     public function updateWebook()
     {
+        $config_data = new Config();
 
         $title = $_POST["webhook_title"] ?? NULL;
         $json = json_encode($_POST["json_data"]) ?? NULL;
         $type = $_POST["webhook_settings"] ?? NULL;
-        $uri = $_POST["webhook_uri"] ?? NULL;
+        $uri = $config_data->encryptString($_POST["webhook_uri"]) ?? NULL;
         $id = $_POST["webhook_id"] ?? NULL;
         if (isset($_POST["webhook_activation"])) {
             $settings = $_POST["webhook_activation"];

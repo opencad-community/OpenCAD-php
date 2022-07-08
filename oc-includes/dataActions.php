@@ -176,9 +176,8 @@ function getCitationTypes()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 
@@ -292,9 +291,8 @@ function editCitationType()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 	
@@ -348,9 +346,8 @@ function getDepartments()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 
@@ -448,9 +445,8 @@ function getDepartmentDetails()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 
@@ -493,9 +489,8 @@ function editDepartment()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 
@@ -550,9 +545,8 @@ function getIncidentTypes()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 	
@@ -646,9 +640,8 @@ function getIncidentTypeDetails()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 
@@ -687,9 +680,8 @@ function editIncidentType()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 
@@ -744,9 +736,8 @@ function getRadioCodes()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 
@@ -839,9 +830,8 @@ function getRadioCodeDetails()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 
@@ -881,9 +871,8 @@ function editRadioCode()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 
@@ -938,9 +927,8 @@ function getStreets()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 
@@ -1032,9 +1020,8 @@ function getStreetDetails()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 
@@ -1073,9 +1060,8 @@ function editStreet()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 
@@ -1130,9 +1116,8 @@ function getVehicles()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 
@@ -1226,9 +1211,8 @@ function getVehicleDetails()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 
@@ -1273,9 +1257,8 @@ function editVehicle()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 
@@ -1332,9 +1315,8 @@ function getWarningTypes()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 
@@ -1423,9 +1405,8 @@ function getWarningTypeDetails()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 
@@ -1461,9 +1442,8 @@ function editWarningType()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 
@@ -1497,9 +1477,8 @@ function deleteWarningType()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 
@@ -1537,9 +1516,8 @@ function getWarrantTypes()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 
@@ -1643,9 +1621,8 @@ function getWarrantTypeDetails()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 
@@ -1681,9 +1658,8 @@ function editWarrantType()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 
@@ -1738,9 +1714,8 @@ function getWeapons()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 
@@ -1834,9 +1809,8 @@ function getWeaponDetails()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 	$stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."weapons WHERE id = ?");
@@ -1869,9 +1843,8 @@ function editWeapon()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 	$stmt = $pdo->prepare("UPDATE ".DB_PREFIX."weapons SET weaponName = ?, weaponType = ? WHERE id = ?");
@@ -1929,9 +1902,8 @@ function resetData()
 		$pdo    =   new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
 		die();
 	}
 	if ($_POST == "allData") 
