@@ -5,7 +5,7 @@
  * This file is required for the plugin to be loaded. Within this index file, you are able to include other files as normal. 
  * This file is a blank example of what you can do. 
  * 
- * Be sure you ahve created your plugins folder by naming it the same as your plugin (If there are spaces, please include "-" within the space.
+ * Be sure you have created your plugins folder by naming it the same as your plugin (If there are spaces, please include "-" within the space.
  * For example "My-Example-Plugin")
  * 
  * This will ensure that the plugin is loaded properly. 

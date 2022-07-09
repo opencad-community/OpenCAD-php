@@ -27,9 +27,8 @@ function logoutResponder()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		$_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-		$_SESSION['error_blob'] = $ex;
-		header(ERRORREDIRECT);
+throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+die();
 		die();
 	}
 

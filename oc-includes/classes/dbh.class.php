@@ -29,9 +29,7 @@ class Dbh {
         return $pdo;
     } catch(PDOException $ex)
     {
-        $_SESSION['error'] = "Could not connect -> ".$ex->getMessage();
-        $_SESSION['error_blob'] = $ex;
-        header('Location: '.BASE_URL.'/plugins/error/index.php');
+        throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
         die();
     }
   }

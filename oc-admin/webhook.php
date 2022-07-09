@@ -13,12 +13,13 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
  **/
 
-session_start();
 
 require_once('../oc-config.php');
 require_once(ABSPATH . '/oc-functions.php');
 require_once(ABSPATH . '/oc-settings.php');
 require_once(ABSPATH . "/oc-includes/adminActions.php");
+
+isSessionStarted();
 
 if (empty($_SESSION['logged_in'])) {
 	header('Location: ' . BASE_URL);
@@ -27,7 +28,7 @@ if (empty($_SESSION['logged_in'])) {
 	// Do Nothing
 }
 
-
+isSessionStarted();
 isAdminOrMod();
 
 
@@ -84,7 +85,11 @@ if (isset($_SESSION["webhook_success"])) {
 							<div class="card-header">
 								<em class="fa fa-align-justify"></em> <?php echo lang_key("WEBHOOK_CREATE_TITLE"); ?>
 							</div>
-							<form action="<?php if (isset($_GET["update"]) && $_GET["update"] == true) {echo BASE_URL . "/oc-includes/webhook.php?updateWebhook";} else {echo BASE_URL . "/oc-includes/webhook.php?verifyWebhook";} ?>" method="POST">
+							<form action="<?php if (isset($_GET["update"]) && $_GET["update"] == true) {
+												echo BASE_URL . "/oc-includes/webhook.php?updateWebhook";
+											} else {
+												echo BASE_URL . "/oc-includes/webhook.php?verifyWebhook";
+											} ?>" method="POST">
 								<div class="card-body">
 									<?php if (!empty($errorMsg)) {
 										echo "<span class='label danger'>" . $errorMsg . "</span>";
@@ -102,8 +107,10 @@ if (isset($_SESSION["webhook_success"])) {
 																																																													} ?>" />
 									</div>
 									<div class="form-group">
-										<label for="name"><?php echo lang_key("WEBHOOK_JSON"); ?></label><textarea id="json_data" rows="10" class="form-control" name="json_data"><?php if (isset($_GET["json"])) {
+										<label for="name"><?php echo lang_key("WEBHOOK_JSON"); ?></label><textarea id="json_data" rows="10" class="form-control" name="json_data"><?php if (isset($_GET["update"])) {
 																																														echo json_decode($_GET["json"]);
+																																													} elseif(isset($_GET["json"])) {
+																																														echo $_GET["json"];
 																																													} ?></textarea>
 										<?php echo lang_key("WEBHOOK_JSON_NOTES"); ?><br>
 										<button type="button" class="btn btn-primary" onclick="discordExample()">Example Discord Data</button>
@@ -144,7 +151,14 @@ if (isset($_SESSION["webhook_success"])) {
 																																		} ?>>
 										<label for="userSuspension"><?php echo lang_key("WEBHOOK_SETTINGS_USERSUSPENSION"); ?></label><br>
 
-										<?php if(isset($_GET["update"]) && $_GET["update"] == "true"){echo '<input type="hidden" id="webhook_id" name="webhook_id" value="'.$_GET["id"].'">';}?>
+										<input type="checkbox" id="issueReport" name='webhook_activation[]' value="issueReport" <?php if (isset($_GET["settings"]) && str_contains($_GET["settings"], "issueReport")) {
+																																	echo "checked='checked'";
+																																} ?>>
+										<label for="issueReport"><?php echo lang_key("WEBHOOK_SETTINGS_ISSUEREPORT"); ?></label><br>
+
+										<?php if (isset($_GET["update"]) && $_GET["update"] == "true") {
+											echo '<input type="hidden" id="webhook_id" name="webhook_id" value="' . $_GET["id"] . '">';
+										} ?>
 
 									</div>
 									<?php
@@ -177,15 +191,18 @@ if (isset($_SESSION["webhook_success"])) {
 								</thead>
 								<tbody>
 
-									<?php $getWebhooks = $webhook_data->getWebhooks();
+									<?php
+									$config_data = new System\Config();
+									$getWebhooks = $webhook_data->getWebhooks();
 									if (!$getWebhooks) {
+
 										echo "<td>No Webhooks Set!</td>";
 									} else {
 										foreach ($getWebhooks as $data) {
 											echo "<form action='" . BASE_URL . "/oc-includes/webhook.php' method='POST'";
 											echo "<tr>";
 											echo "<td>" . $data["webhook_title"] . "</td>";
-											echo "<td>" . $data["webhook_uri"] . "</td>";
+											echo "<td>" . $config_data->decrpytString($data["webhook_uri"]) . "</td>";
 											echo "<td>" . json_decode($data["webhook_json"], true) . "</td>";
 											echo "<td>" . $data["webhook_type"] . "</td>";
 											echo "<td>" . $data["webhook_settings"] . "</td>";

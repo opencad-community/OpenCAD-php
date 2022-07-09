@@ -86,8 +86,10 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>colors` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 CREATE TABLE IF NOT EXISTS `<DB_PREFIX>config` (
-  `key` varchar(80) NOT NULL,
-  `value` varchar(80) DEFAULT NULL
+  `key_data` varchar(80) NOT NULL,
+  `value` varchar(80) DEFAULT NULL,
+   PRIMARY KEY (`key`)
+
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 CREATE TABLE IF NOT EXISTS `<DB_PREFIX>departments` (

@@ -531,7 +531,7 @@ $arrLang["WARRANTTYPE_MANAGER_notes"] = "No results found in the <em>Warrant Typ
 $arrLang["WEAPON_MANAGER"] = "Weapon Manager";
 $arrLang["WEAPON_MANAGER_notes"] = "No results found in the <em>weapons</em> datbase";
 $arrLang["ABOUT_OPENCAD"] = "About OpenCAD";
-$arrLang["SUPPORT_TAB"] = "Get Support";
+$arrLang["ISSUE_TAB"] = "Report Issue";
 $arrLang["SUPPORT_TITLE"] = "Support";
 $arrLang["RESET_DATA"] = "Reset Data";
 $arrLang["ENVIRONMENTAL_DATA_OPTGRP"] = "Environmental Data";
@@ -554,14 +554,44 @@ $arrLang["RESET_ALL_DATA_OPTGRP"] = "RESET ALL DATA (USE WITH CUATION)";
 $arrLang["RESET_ALL_DATA"] = "All Data (Use with CAUTION)";
 //** End Administrator/Moderator Console Strings  **/
 
-//** Begin Support Strings **/
-$arrLang["SUPPORT_DESCRIBE_PROBLEM"] = "Please Describe Problem";
-$arrLang["SUPPORT_DESCRIBE_PROBLEM_notes"] = "Example: 'Unknown user' error on login even though details are correct";
-$arrLang["SUPPORT_AFFECTING_FILE"] = "File Causing Issues";
-$arrLang["SUPPORT_AFFECTING_FILE_notes"] = "Please provide what file is causing this error";
-$arrLang["SUPPORT_TITLE"] = "Get Support";
-$arrLang["SUPPORT_DETAILS_SENT"] = "Details Sent With Request";
-//** End Support Strings **/
+//** Begin Issue Strings **/
+$arrLang["ISSUE_TITLE"] = "Report An Issue";
+$arrLang["ISSUE_TITLE_BUG"] = "Enter Title *";
+$arrLang["ISSUE_DESCRIBE_BUG"] = "Description You are Facing *";
+$arrLang["ISSUE_REPRODUCE_BUG"] = "Steps to Reproduce *";
+$arrLang["ISSUE_EXPECTED_BEHAVIOUR_BUG"] = "Expected behavior";
+$arrLang["ISSUE_SCREENSHOTS_BUG"] = "Screenshots";
+$arrLang["ISSUE_DESKTOP_BUG"] = "Desktop Information";
+$arrLang["ISSUE_SMARTPHONE_BUG"] = "Smartphone Information (If affecting mobile too)";
+$arrLang["ISSUE_SERVER_BUG"] = "Server Information";
+$arrLang["ISSUE_ADDITIONAL_INFO_BUG"] = "Additional Useful Information";
+$arrLang["ISSUE_TITLE_BUG_notes"] = "Enter a title for your issue";
+$arrLang["ISSUE_DESCRIBE_BUG_notes"] = "A clear and concise description of what the bug is.";
+$arrLang["ISSUE_REPRODUCE_BUG_notes"] = "Steps to reproduce the behavior";
+$arrLang["ISSUE_EXPECTED_BEHAVIOUR_BUG_notes"] = "A clear and concise description of what you expected to happen.";
+$arrLang["ISSUE_SCREENSHOTS_BUG_notes"] = " If applicable, add screenshots to help explain your problem. These need to be links, seperated by a comma ','";
+$arrLang["ISSUE_DESKTOP_BUG_notes"] = "OS: [e.g. iOS], Browser [e.g. chrome, safari], Version [e.g. 22]";
+$arrLang["ISSUE_SMARTPHONE_BUG_notes"] = "Device: [e.g. iPhone6], OS: [e.g. iOS8.1], Browser [e.g. stock browser, safari], Version [e.g. 22]";
+$arrLang["ISSUE_SERVER_BUG_notes"] = "OS: [e.g, Debian Linux], Version [e.g. 11], Control Panel [e.g. CPanel 106]";
+$arrLang["ISSUE_ADDITIONAL_INFO_BUG_notes"] = "Any additional information that will be useful to help resolve this issue.";
+$arrLang["ISSUE_ERROR_GH_KEY_NOT_VALID"] = "Your Github Key is either not set or is invalid!";
+$arrLang["ISSUE_ERROR_GH_KEY_INCORRECT"] = "Your Github Key Incorrect! Please check and try again";
+$arrLang["ISSUE_ERROR_GH_KEY_EXISTS"] = "There is already a key in the Database. Please remove this before trying again!";
+$arrLang["ISSUE_SUCCESS_GH_KEY_CREATE"] = "Your Github Key Has been Inserted!";
+$arrLang["ISSUE_SUCCESS_GH_ISSUE_CREATED"] = "Sucessfully Created Issue!";
+$arrLang["ISSUE_GH_CREATE_TITLE"] = "Create Your GitHub Key";
+$arrLang["ISSUE_GH_CREATE_KEY"] = "Enter Key";
+$arrLang["ISSUE_GH_CREATE_KEY_notes"] = "Enter your GitHub Personal Access Key";
+$arrLang["ISSUE_GH_CREATE_DESCRIPTION"] = "To gain your access key, follow the below instructions<br><br>◉ Head over to this link: https://github.com/settings/tokens <br>◉ Sign in with your main account<br>◉ Create your new Personal Access token<br>◉ Be sure to set the Expiration to never<br>◉ Be sure to select 'repo' as the minimum scope!<br><br>Please note, your GitHub key is encrypted using your secret keys within oc-config.php.<br>Be sure not to share this file with anyone as your keys can be decrpyted!";
+
+//** End Issue Strings **/
+
+//** Plugin Strings **/
+
+$arrLang["PLUGIN_TAB"] = "Plugin Manager";
+
+//** End Plugin Strings **/
+
 
 //** Begin Webhook Strings **/
 
@@ -591,6 +621,7 @@ $arrLang["WEBHOOK_SETTINGS_USERDELETE"] = "On User Deletetion";
 $arrLang["WEBHOOK_SETTINGS_USERSUSPENSION"] = "On User Suspension";
 $arrLang["WEBHOOK_SETTINGS_USERREGISTRATION"] = "On User Registration";
 $arrLang["WEBHOOK_SETTINGS_PANICBUTTONPRESSED"] = "On Panic Button Pressed";
+$arrLang["WEBHOOK_SETTINGS_ISSUEREPORT"] = "On Issue Create";
 
 
 //** End Webhook Strings **/
@@ -650,6 +681,12 @@ $arrLang["PASSWORD"] = "Password";
 $arrLang["CHANGE_PASSWORD"] = "Change Password";
 $arrLang["MY_PRFILE"] ="My Profile";
 $arrLang["PROFILE_SUCCESS"] = "Successfully updated your user profile.";
-$arrLang["PASSWORD_SUCCESS"] = "Successfully updated your password."
+$arrLang["PASSWORD_SUCCESS"] = "Successfully updated your password.";
 //** End Profile Console Strings *//
+
+
+// ** Begin MISC Strings **//
+$arrLang["OUTDATED"] = "Your version of OpenCAD is Outdated! Please download the lastest <a href='https://github.com/opencad-app/OpenCAD-php'>From our GitHub</a>";
+$arrLang["OUTDATED_notes"] = "<i>Notice:</i> You are welcome to ignore this message and carry on using OpenCAD, but please be aware, you won't have the latest features and fixes.";
+// ** End MISC Strings **//
 ?>
