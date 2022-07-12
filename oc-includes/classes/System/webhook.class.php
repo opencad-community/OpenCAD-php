@@ -152,7 +152,7 @@ class Webhook extends \Dbh
         $response = curl_exec($curl);
 
         if ($error = curl_error($curl)) {
-            throw new Exception($error);
+            echo $error;
         }
 
         curl_close($curl);

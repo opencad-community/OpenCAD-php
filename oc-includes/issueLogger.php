@@ -1,10 +1,9 @@
 <?php
 
-use Support\Support;
-
 require_once("../oc-config.php");
 require_once(ABSPATH . "/oc-functions.php");
 require_once(ABSPATH . "/oc-includes/autoload.inc.php");
+
 
 isSessionStarted();
 $support_data = new System\Support();
@@ -35,15 +34,15 @@ if (isset($_POST["gh_key_BTN"])) {
 }
 
 if (isset($_POST["gh_bug_submit"])) {
-    $title = $_POST["title_bug"] ?? NULL;
-    $describe = $_POST["describe_bug"] ?? NULL;
-    $reproduce = $_POST["reproduce_bug"] ?? NULL;
-    $expected = $_POST["expected_bug"] ?? NULL;
-    $screenshot = $_POST["screenshot_bug"] ?? NULL;
-    $desktop = $_POST["desktop_bug"] ?? NULL;
-    $smartphone = $_POST["smartphone_bug"] ?? NULL;
-    $server = $_POST["server_bug"] ?? NULL;
-    $additional = $_POST["additional_bug"] ?? NULL;
+    $title = $_POST["title_bug"];
+    $describe = $_POST["describe_bug"];
+    $reproduce = $_POST["reproduce_bug"];
+    $expected = $_POST["expected_bug"];
+    $screenshot = $_POST["screenshot_bug"];
+    $desktop = $_POST["desktop_bug"];
+    $smartphone = $_POST["smartphone_bug"];
+    $server = $_POST["server_bug"];
+    $additional = $_POST["additional_bug"];
 
     $key = $support_data->getKey();
     $key = $config_data->decrpytString($key["value"]);
@@ -61,15 +60,18 @@ if (isset($_POST["gh_bug_submit"])) {
 
     $_SESSION["support_success"] = lang_key("ISSUE_SUCCESS_GH_ISSUE_CREATED");
 
+    
     $webhook_data = new System\Webhook();
 	$getWebhooks = $webhook_data->getWebhookSetting("issueReport");
 
+ 
 	if ($getWebhooks) {
 		foreach ($getWebhooks as $data) {
-			$webhook_data->postWebhook($data["webhook_uri"], $data["webhook_json"]);
+            $url = $config_data->decrpytString($data["webhook_uri"]);
+			$webhook_data->postWebhook($url, $data["webhook_json"]);
 		}
 	}
-
+    
     header("location: " . BASE_URL . "/oc-admin/issueLogger.php?success=createdIssue&id=" . $issueNum . "&link=" . $issueURL);
 
     exit();
