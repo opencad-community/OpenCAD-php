@@ -35,9 +35,9 @@
 			}
 
 			if ( CIV_LIMIT_MAX_WEAPONS == 0 ) {
-				echo '				<li class="nav-item px-2"><a rel="noopener" type="button" data-toggle="modal" data-target="#createWeaponModal"> '.lang_key("ADD_NEW_WEAPON").'</a></li>'.PHP_EOL;
+				echo '				<li class="nav-item px-2"><a rel="noopener" type="button" data-toggle="modal" data-target="#createWeaponModal"> <em class="fas fa-server"></em> '.lang_key("ADD_NEW_WEAPON").'</a></li>'.PHP_EOL;
 			} else if ( CIV_LIMIT_MAX_WEAPONS > getNumberOfWeapons() ) {
-				echo '				<li class="nav-item px-2"><a rel="noopener" type="button" data-toggle="modal" data-target="#createWeaponModal"> '.lang_key("ADD_NEW_WEAPON").'</a></li>'.PHP_EOL;
+				echo '				<li class="nav-item px-2"><a rel="noopener" type="button" data-toggle="modal" data-target="#createWeaponModal"> <em class="fas fa-server"></em> '.lang_key("ADD_NEW_WEAPON").'</a></li>'.PHP_EOL;
 			}
 		?>
 
