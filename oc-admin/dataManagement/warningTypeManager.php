@@ -21,7 +21,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	require_once( ABSPATH . '/oc-functions.php');
 	require_once( ABSPATH . '/oc-settings.php');
 	require_once( ABSPATH . "/oc-includes/adminActions.inc.php");
-	require_once( ABSPATH . "/oc-includes/dataActions.php");
+	require_once( ABSPATH . "/oc-includes/dataActions.inc.php");
 
 	if (empty($_SESSION['logged_in']))
 	{
@@ -108,7 +108,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				</div>
 				<!-- ./ modal-header -->
 				<div class="modal-body">
-					<form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/dataActions.php"
+					<form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/dataActions.inc.php"
 						class="form-horizontal">
 						<div class="form-group row">
 							<label class="col-md-3 control-label">Warning Description</label>
@@ -150,7 +150,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		$.ajax({
 			cache: false,
 			type: 'POST',
-			url: '<?php echo BASE_URL; ?>/oc-includes/dataActions.php',
+			url: '<?php echo BASE_URL; ?>/oc-includes/dataActions.inc.php',
 			data: {
 				'getWarningTypeDetails': 'yes',
 				'warningTypeID': warningTypeID

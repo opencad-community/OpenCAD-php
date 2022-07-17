@@ -19,9 +19,9 @@ if (session_id() == '' || !isset($_SESSION)) {
 include_once("../oc-config.php");
 include_once(ABSPATH . "/oc-functions.php");
 include_once(ABSPATH . "/oc-settings.php");
-include_once(ABSPATH  .  "oc-includes/generalActions.php");
-include_once(ABSPATH  . "oc-includes/publicFunctions.php");
-include_once(ABSPATH  . "oc-includes/dispatchActions.php");
+include_once(ABSPATH  .  "oc-includes/generalActions.inc.php");
+include_once(ABSPATH  . "oc-includes/publicFunctions.inc.php");
+include_once(ABSPATH  . "oc-includes/dispatchActions.inc.php");
 include_once(ABSPATH . "oc-includes/apiAuth.inc.php");
 
 $adminButton = "";
@@ -474,7 +474,7 @@ if (empty($_SESSION['logged_in'])) {
 
 				$.ajax({
 					type: "POST",
-					url: "<?php echo "/" . OCINC ?>/generalActions.php",
+					url: "<?php echo "/" . OCINC ?>/generalActions.inc.php",
 					data: {
 						quickStatus: 'yes',
 						event: 'enroute',
@@ -500,17 +500,17 @@ if (empty($_SESSION['logged_in'])) {
 		});
 		$(function() {
 			$("#ncicName").autocomplete({
-				source: "<?php echo "/" . OCINC ?>/search_name.php"
+				source: "<?php echo "/" . OCINC ?>/search_name.inc.php"
 			});
 		});
 		$(function() {
 			$("#ncicPlate").autocomplete({
-				source: "<?php echo "/" . OCINC ?>/search_plate.php"
+				source: "<?php echo "/" . OCINC ?>/search_plate.inc.php"
 			});
 		});
 		$(function() {
 			$("#ncicWeapon").autocomplete({
-				source: "<?php echo "/" . OCINC ?>/search_name.php"
+				source: "<?php echo "/" . OCINC ?>/search_name.inc.php"
 			});
 		});
 		// PNotify Stuff
@@ -530,7 +530,7 @@ if (empty($_SESSION['logged_in'])) {
 		function getAOP() {
 			$.ajax({
 				type: "GET",
-				url: "<?php echo "/" . OCINC ?>/generalActions.php",
+				url: "<?php echo "/" . OCINC ?>/generalActions.inc.php",
 				data: {
 					getAOP: 'yes'
 				},
@@ -557,7 +557,7 @@ if (empty($_SESSION['logged_in'])) {
 		function getCalls() {
 			$.ajax({
 				type: "GET",
-				url: "<?php echo "/" . OCINC ?>/generalActions.php",
+				url: "<?php echo "/" . OCINC ?>/generalActions.inc.php",
 				data: {
 					getCalls: 'yes',
 					responder: 'yes'
@@ -577,7 +577,7 @@ if (empty($_SESSION['logged_in'])) {
 		function getMyCall() {
 			$.ajax({
 				type: "GET",
-				url: "<?php echo "/" . OCINC ?>/generalActions.php",
+				url: "<?php echo "/" . OCINC ?>/generalActions.inc.php",
 				data: {
 					getMyCall: 'yes',
 					responder: 'yes'
@@ -597,7 +597,7 @@ if (empty($_SESSION['logged_in'])) {
 		function mdtGetVehicleBOLOS() {
 			$.ajax({
 				type: "GET",
-				url: "<?php echo "/" . OCINC ?>/responderActions.php",
+				url: "<?php echo "/" . OCINC ?>/responderActions.inc.php",
 				data: {
 					mdtGetVehicleBOLOS: 'yes',
 					responder: 'yes'
@@ -617,7 +617,7 @@ if (empty($_SESSION['logged_in'])) {
 		function mdtGetPersonBOLOS() {
 			$.ajax({
 				type: "GET",
-				url: "<?php echo "/" . OCINC ?>/responderActions.php",
+				url: "<?php echo "/" . OCINC ?>/responderActions.inc.php",
 				data: {
 					mdtGetPersonBOLOS: 'yes',
 					responder: 'yes'
@@ -645,7 +645,7 @@ if (empty($_SESSION['logged_in'])) {
 
 				$.ajax({
 					type: "POST",
-					url: "<?php echo "/" . OCINC ?>/responderActions.php",
+					url: "<?php echo "/" . OCINC ?>/responderActions.inc.php",
 					data: {
 						updateCallsign: 'yes',
 						details: $("#" + this.id).serialize()
@@ -708,7 +708,7 @@ if (empty($_SESSION['logged_in'])) {
 		function getStatus() {
 			$.ajax({
 				type: "GET",
-				url: "<?php echo "/" . OCINC ?>/responderActions.php",
+				url: "<?php echo "/" . OCINC ?>/responderActions.inc.php",
 				data: {
 					getStatus: 'yes'
 				},

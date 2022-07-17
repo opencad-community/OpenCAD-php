@@ -19,9 +19,9 @@ if (session_id() == '' || !isset($_SESSION)) {
 include_once("../oc-config.php");
 include_once(ABSPATH . "/oc-functions.php");
 include_once(ABSPATH . "/oc-settings.php");
-include_once(ABSPATH  .  "oc-includes/generalActions.php");
-include_once(ABSPATH  . "oc-includes/publicFunctions.php");
-include_once(ABSPATH  . "oc-includes/dispatchActions.php");
+include_once(ABSPATH  .  "oc-includes/generalActions.inc.php");
+include_once(ABSPATH  . "oc-includes/publicFunctions.inc.php");
+include_once(ABSPATH  . "oc-includes/dispatchActions.inc.php");
 include_once(ABSPATH . "oc-includes/apiAuth.inc.php");
 if (empty($_SESSION['logged_in'])) {
 	header('Location: ../index.php');
@@ -372,19 +372,19 @@ if (isset($_SESSION['boloMessage'])) {
 
 		$(function() {
 			$("#ncicName").autocomplete({
-				source: "../<?php echo OCINC ?>/search_name.php"
+				source: "../<?php echo OCINC ?>/search_name.inc.php"
 			});
 		});
 
 		$(function() {
 			$("#ncicPlate").autocomplete({
-				source: "../<?php echo OCINC ?>/search_plate.php"
+				source: "../<?php echo OCINC ?>/search_plate.inc.php"
 			});
 		});
 
 		$(function() {
 			$("#ncicWeapon").autocomplete({
-				source: "../<?php echo OCINC ?>/search_name.php"
+				source: "../<?php echo OCINC ?>/search_name.inc.php"
 			});
 		});
 
@@ -401,7 +401,7 @@ if (isset($_SESSION['boloMessage'])) {
 
 			$.ajax({
 				type: "POST",
-				url: "../<?php echo OCINC ?>/generalActions.php",
+				url: "../<?php echo OCINC ?>/generalActions.inc.php",
 				data: {
 					changeStatus: 'yes',
 					unit: unit,
@@ -438,7 +438,7 @@ if (isset($_SESSION['boloMessage'])) {
 
 				$.ajax({
 					type: "POST",
-					url: "../<?php echo OCINC ?>/generalActions.php",
+					url: "../<?php echo OCINC ?>/generalActions.inc.php",
 					data: {
 						logoutUser: 'yes',
 						unit: unit
@@ -468,7 +468,7 @@ if (isset($_SESSION['boloMessage'])) {
 		function getAvailableUnits() {
 			$.ajax({
 				type: "GET",
-				url: "../<?php echo OCINC ?>/generalActions.php",
+				url: "../<?php echo OCINC ?>/generalActions.inc.php",
 				data: {
 					getAvailableUnits: 'yes'
 				},
@@ -490,7 +490,7 @@ if (isset($_SESSION['boloMessage'])) {
 		function getDispatchers() {
 			$.ajax({
 				type: "GET",
-				url: "../<?php echo OCINC ?>/generalActions.php",
+				url: "../<?php echo OCINC ?>/generalActions.inc.php",
 				data: {
 					getDispatchers: 'yes'
 				},
@@ -512,7 +512,7 @@ if (isset($_SESSION['boloMessage'])) {
 		function getAOP() {
 			$.ajax({
 				type: "GET",
-				url: "../<?php echo OCINC ?>/generalActions.php",
+				url: "../<?php echo OCINC ?>/generalActions.inc.php",
 				data: {
 					getAOP: 'yes'
 				},
@@ -533,7 +533,7 @@ if (isset($_SESSION['boloMessage'])) {
 		function cadGetPersonBOLOS() {
 			$.ajax({
 				type: "GET",
-				url: "../<?php echo OCINC ?>/dispatchActions.php",
+				url: "../<?php echo OCINC ?>/dispatchActions.inc.php",
 				data: {
 					cadGetPersonBOLOS: 'yes'
 				},
@@ -554,7 +554,7 @@ if (isset($_SESSION['boloMessage'])) {
 		function cadGetVehicleBOLOS() {
 			$.ajax({
 				type: "GET",
-				url: "../<?php echo OCINC ?>/dispatchActions.php",
+				url: "../<?php echo OCINC ?>/dispatchActions.inc.php",
 				data: {
 					cadGetVehicleBOLOS: 'yes'
 				},
@@ -577,7 +577,7 @@ if (isset($_SESSION['boloMessage'])) {
 				e.preventDefault();
 				var edit_id = $(this).data('id');
 				$.ajax({
-						url: '../<?php echo OCINC ?>/dispatchActions.php',
+						url: '../<?php echo OCINC ?>/dispatchActions.inc.php',
 						type: 'POST',
 						data: 'bolos_personid=' + edit_id,
 						dataType: 'json',
@@ -597,7 +597,7 @@ if (isset($_SESSION['boloMessage'])) {
 				e.preventDefault();
 				var edit_id = $(this).data('id');
 				$.ajax({
-						url: '../<?php echo OCINC ?>/dispatchActions.php',
+						url: '../<?php echo OCINC ?>/dispatchActions.inc.php',
 						type: 'POST',
 						data: 'bolos_vehicleid=' + edit_id,
 						dataType: 'json',

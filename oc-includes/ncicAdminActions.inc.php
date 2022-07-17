@@ -13,7 +13,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 **/
 
 require_once(__DIR__ . "/../oc-config.php");
-include(__DIR__ . '/generalActions.php');
+include(__DIR__ . '/generalActions.inc.php');
 
 /* Handle POST requests */
 /**
@@ -929,7 +929,7 @@ function edit_name()
 		die();
 	}
 
-	$num_rows = $result->rowCount();
+	$num_rows = $stmt->rowCount();
 
 	if (!$num_rows == 0)
 	{

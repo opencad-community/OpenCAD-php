@@ -118,7 +118,7 @@ if (isset($_SESSION['successMessage'])) {
 								<p>
 									<em>Note:</em> Used to encrypt cookie 'aljksdz7'.
 								</p>
-								<a style="margin-left:10px" class="btn btn-primary" href="<?php echo BASE_URL; ?>/oc-includes/generalActions.php?newApiKey=1">Generate</a>
+								<a style="margin-left:10px" class="btn btn-primary" href="<?php echo BASE_URL; ?>/oc-includes/generalActions.inc.php?newApiKey=1">Generate</a>
 							</div>
 						</div>
 					</div>

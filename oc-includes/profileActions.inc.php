@@ -84,7 +84,7 @@ function getMyRank()
 	}
 	$pdo = null;
 
-	foreach ($result as $row) {
+	foreach ($stmt as $row) {
 		echo $row[0];
 	}
 }

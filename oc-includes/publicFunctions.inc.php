@@ -3,11 +3,11 @@
 if (isset($_GET['getAgencies'])) {
 	getAgencies();
 } else if (isset($_GET['getLicenseStatuses'])) {
-	getLicenseStatusesa();
+	// getLicenseStatusesa();
 } else if (isset($_GET['getLicenseTypes'])) {
 	getLicenseTypes();
 } else if (isset($_GET['getLicenseClasses'])) {
-	getLicenseClassses();
+	// getLicenseClassses();
 } else if (isset($_GET['getLicenseIssuers'])) {
 	getLicenseIssuers();
 } else if (isset($_GET['getGenders'])) {
@@ -15,11 +15,11 @@ if (isset($_GET['getAgencies'])) {
 } else if (isset($_GET['getRaces'])) {
 	getRaces();
 } else if (isset($_GET['getData2'])) {
-	getData2();
+	getData2($tableName, $column1, $column2);
 } else if (isset($_GET['getData3'])) {
-	getData3();
+	getData3($tableName, $column1, $column2, $column3);
 } else if (isset($_GET['getDataSetTable'])) {
-	getDataSetTable();
+	getDataSetTable($dataset, $column1, $column2, $leadTrim, $followTrim, $modeIs);
 }
 
 
@@ -53,7 +53,7 @@ function getAgenciesWarrants()
 		die();
 	}
 
-	$result = $pdo->query("SELECT departmentId, departmentName from " . DB_PREFIX . "departments " . WHERE . " departmentId != 1 AND departmentId != 7 AND departmentId != 8 AND departmentId != 9");
+	$result = $pdo->query("SELECT departmentId, departmentName from " . DB_PREFIX . "departments WHERE departmentId != 1 AND departmentId != 7 AND departmentId != 8 AND departmentId != 9");
 	if (!$result) {
 		$_SESSION['error'] = $pdo->errorInfo();
 		header(ERRORREDIRECT);

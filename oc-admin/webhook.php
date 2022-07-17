@@ -86,9 +86,9 @@ if (isset($_SESSION["webhook_success"])) {
 								<em class="fa fa-align-justify"></em> <?php echo lang_key("WEBHOOK_CREATE_TITLE"); ?>
 							</div>
 							<form action="<?php if (isset($_GET["update"]) && $_GET["update"] == true) {
-												echo BASE_URL . "/oc-includes/webhook.php?updateWebhook";
+												echo BASE_URL . "/oc-includes/webhook.inc.php?updateWebhook";
 											} else {
-												echo BASE_URL . "/oc-includes/webhook.php?verifyWebhook";
+												echo BASE_URL . "/oc-includes/webhook.inc.php?verifyWebhook";
 											} ?>" method="POST">
 								<div class="card-body">
 									<?php if (!empty($errorMsg)) {
@@ -199,7 +199,7 @@ if (isset($_SESSION["webhook_success"])) {
 										echo "<td>No Webhooks Set!</td>";
 									} else {
 										foreach ($getWebhooks as $data) {
-											echo "<form action='" . BASE_URL . "/oc-includes/webhook.php' method='POST'";
+											echo "<form action='" . BASE_URL . "/oc-includes/webhook.inc.php' method='POST'";
 											echo "<tr>";
 											echo "<td>" . $data["webhook_title"] . "</td>";
 											echo "<td>" . $config_data->decrpytString($data["webhook_uri"]) . "</td>";

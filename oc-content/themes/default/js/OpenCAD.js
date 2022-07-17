@@ -42,7 +42,7 @@ function deleteUser(uid) {
     if (r == true) {
         $.ajax({
             type: "POST",
-            url: "oc-includes/dispatchActions.php",
+            url: "oc-includes/dispatchActions.inc.php",
             data: {
                 deleteUser: 'yes',
                 userId: userId
@@ -74,7 +74,7 @@ function deleteStreet(streetID) {
 
         $.ajax({
             type: "POST",
-            url: "oc-includes/dataActions.php",
+            url: "oc-includes/dataActions.inc.php",
             data: {
                 deleteStreet: 'yes',
                 streetID: streetID
@@ -112,7 +112,7 @@ function deleteVehicle(vehicleID) {
 
         $.ajax({
             type: "POST",
-            url: "oc-includes/dataActions.php",
+            url: "oc-includes/dataActions.inc.php",
             data: {
                 deleteVehicle: 'yes',
                 vehicleID: vehicleID
@@ -171,7 +171,7 @@ $('#ncic_plate_btn').on('click', function(e) {
     $.ajax({
         cache: false,
         type: 'POST',
-        url: "oc-includes/ncic.php",
+        url: "oc-includes/ncic.inc.php",
         data: {
             'ncicPlate': 'yes',
             'ncicPlate': plate
@@ -321,7 +321,7 @@ $('#ncic_name_btn').on('click', function(e) {
     $.ajax({
         cache: false,
         type: 'POST',
-        url: "oc-includes/ncic.php",
+        url: "oc-includes/ncic.inc.php",
         data: {
             'ncicName': 'yes',
             'ncicName': name
@@ -431,7 +431,7 @@ $('#ncic_weapon_btn').on('click', function(e) {
     $.ajax({
         cache: false,
         type: 'POST',
-        url: "oc-includes/ncic.php",
+        url: "oc-includes/ncic.inc.php",
         data: {
             'ncicWeapon': 'yes',
             'ncicWeapon': name
@@ -476,13 +476,13 @@ $('#ncic_weapon_btn').on('click', function(e) {
 
 // Handles autocompletion on the new call form
 $(".txt-auto").autocomplete({
-    source: "oc-includes/dispatchActions.php",
+    source: "oc-includes/dispatchActions.inc.php",
     minLength: 2
 });
 $(".txt-auto").autocomplete("option", "appendTo", ".newCallForm");
 
 $(".txt-auto2").autocomplete({
-    source: "oc-includes/dispatchActions.php",
+    source: "oc-includes/dispatchActions.inc.php",
     minLength: 2
 });
 $(".txt-auto2").autocomplete("option", "appendTo", ".newCallForm");
@@ -494,7 +494,7 @@ $(function() {
 
         $.ajax({
             type: "POST",
-            url: "oc-includes/dispatchActions.php",
+            url: "oc-includes/dispatchActions.inc.php",
             data: {
                 newCall: 'yes',
                 details: $("#" + this.id).serialize()
@@ -535,7 +535,7 @@ $(function() {
 
         $.ajax({
             type: "POST",
-            url: "oc-includes/dispatchActions.php",
+            url: "oc-includes/dispatchActions.inc.php",
             data: {
                 addNarrative: 'yes',
                 callId: $('#callId_det').val(),
@@ -574,7 +574,7 @@ $(function() {
 
         $.ajax({
             type: "POST",
-            url: "oc-includes/dispatchActions.php",
+            url: "oc-includes/dispatchActions.inc.php",
             data: {
                 assignUnit: 'yes',
                 details: $("#" + this.id).serialize(),
@@ -620,7 +620,7 @@ $(function() {
 function getActiveDispatchers() {
     $.ajax({
         type: "GET",
-        url: "oc-includes/generalActions.php",
+        url: "oc-includes/generalActions.inc.php",
         data: {
             getDispatchers: 'yes'
         },
@@ -645,7 +645,7 @@ function getActiveDispatchers() {
 function getUnAvailableUnits() {
     $.ajax({
         type: "GET",
-        url: "oc-includes/generalActions.php",
+        url: "oc-includes/generalActions.inc.php",
         data: {
             getUnAvailableUnits: 'yes'
         },
@@ -669,7 +669,7 @@ $('#newCall').on('show.bs.modal', function(e) {
     $.ajax({
         cache: false,
         type: 'GET',
-        url: 'oc-includes/generalActions.php',
+        url: 'oc-includes/generalActions.inc.php',
         data: { 'getActiveUnits': 'yes' },
         success: function(result) {
             data = JSON.parse(result);
@@ -722,7 +722,7 @@ $('#assign').on('show.bs.modal', function(e) {
     $.ajax({
         cache: false,
         type: 'GET',
-        url: 'oc-includes/generalActions.php',
+        url: 'oc-includes/generalActions.inc.php',
         data: { 'getActiveUnitsModal': 'yes' },
         success: function(result) {
             //console.log(result);
@@ -754,7 +754,7 @@ $('#callDetails').on('show.bs.modal', function(e) {
     $.ajax({
         cache: false,
         type: 'GET',
-        url: 'oc-includes/generalActions.php',
+        url: 'oc-includes/generalActions.inc.php',
         data: {
             'getCallDetails': 'yes',
             'callId': callId
@@ -786,7 +786,7 @@ function clearCall(btn_id) {
     if (r == true) {
         $.ajax({
             type: "POST",
-            url: "oc-includes/dispatchActions.php",
+            url: "oc-includes/dispatchActions.inc.php",
             data: {
                 clearCall: 'yes',
                 callId: btn_id
@@ -822,7 +822,7 @@ function getCalls() {
 
     $.ajax({
         type: "GET",
-        url: "oc-includes/generalActions.php",
+        url: "oc-includes/generalActions.inc.php",
         data: {
             getCalls: 'yes',
             type: file
@@ -845,7 +845,7 @@ function getMyCall() {
 
     $.ajax({
         type: "GET",
-        url: "oc-includes/generalActions.php",
+        url: "oc-includes/generalActions.inc.php",
         data: {
             getMyCall: 'yes',
             type: file
@@ -909,7 +909,7 @@ function priorityTone(type) {
     function sendTone(name, action) {
         $.ajax({
             type: "POST",
-            url: "oc-includes/generalActions.php",
+            url: "oc-includes/generalActions.inc.php",
             data: {
                 setTone: 'yes',
                 tone: name,
@@ -946,7 +946,7 @@ function priorityTone(type) {
 function checkTones() {
     $.ajax({
         type: "GET",
-        url: "oc-includes/generalActions.php",
+        url: "oc-includes/generalActions.inc.php",
         data: {
             checkTones: 'yes'
         },
@@ -1037,7 +1037,7 @@ function responderChangeStatus(element) {
 
     $.ajax({
         type: "POST",
-        url: "oc-includes/generalActions.php",
+        url: "oc-includes/generalActions.inc.php",
         data: {
             changeStatus: 'yes',
             unit: unit,
@@ -1070,7 +1070,7 @@ function getMyRank(id) {
 
     $.ajax({
         type: "GET",
-        url: "oc-includes/profileActions.php",
+        url: "oc-includes/profileActions.inc.php",
         data: {
             getMyRank: 'yes',
             unit: id

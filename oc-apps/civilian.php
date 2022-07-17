@@ -17,8 +17,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
     require_once( ABSPATH . '/oc-functions.php');
     require_once( ABSPATH . '/oc-settings.php');
     require_once( ABSPATH . "/" . OCINC . '/civActions.inc.php');
-    require_once( ABSPATH . "/" . OCINC . '/generalActions.php');
-    require_once( ABSPATH . "/" . OCINC . '/publicFunctions.php');
+    require_once( ABSPATH . "/" . OCINC . '/generalActions.inc.php');
+    require_once( ABSPATH . "/" . OCINC . '/publicFunctions.inc.php');
 
     isSessionStarted();
 

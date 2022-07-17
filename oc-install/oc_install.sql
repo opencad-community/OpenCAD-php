@@ -320,8 +320,8 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>patrolinformation` (
   `value` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
-INSERT INTO `<DB_PREFIX>patrolinformation` (`key`, `value`) VALUES
-('aop',	'Metro Los Santos');
+INSERT INTO `<DB_PREFIX>aop` (`aop`) VALUES
+('Los Santos');
 
 INSERT INTO `<DB_PREFIX>config` (`key`, `value`) VALUES
 ('api_calls', '0');

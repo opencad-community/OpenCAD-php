@@ -14,7 +14,7 @@ header("Content-Type: application/json; charset=UTF-8");
 
 $key = getAPIKeyFromRequest();
 checkApiKey($key);
-checkKeyPermission($key, "ncicWarrants");
+checkKeyPermission($key, "ncicWarrants", $_SERVER["REQUEST_METHOD"]);
 
 // Instantiate database and ncic object
 $database = new Database();

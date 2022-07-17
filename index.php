@@ -18,8 +18,8 @@ if (!file_exists(getcwd() . '/oc-config.php') && is_writable(getcwd())) {
 require_once("oc-config.php");
 require_once(ABSPATH . "/oc-functions.php");
 require_once(ABSPATH . "/oc-settings.php");
-require_once(ABSPATH . "/oc-includes/register.php");
-require_once(ABSPATH . "/oc-includes/publicFunctions.php");
+require_once(ABSPATH . "/oc-includes/register.inc.php");
+require_once(ABSPATH . "/oc-includes/publicFunctions.inc.php");
 
 if(phpversion() < MINIMUM_PHP_VERSION){
 	echo "You need to update to PHP 8.0 (8.1 Recommended). Failure to do so will result in you being unable to use OpenCAD";

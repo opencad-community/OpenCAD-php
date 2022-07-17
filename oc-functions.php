@@ -14,7 +14,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 
 require_once("oc-config.php");
-require_once(ABSPATH . "/oc-includes/version.php");
+require_once(ABSPATH . "/oc-includes/version.inc.php");
 require_once(ABSPATH . "/oc-includes/autoload.inc.php");
 
 if(phpversion() < MINIMUM_PHP_VERSION){

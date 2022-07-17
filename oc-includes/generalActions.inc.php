@@ -346,8 +346,8 @@ function changeStatus()
 {
     $unit = htmlspecialchars($_POST['unit']);
     $status = htmlspecialchars($_POST['status']);
-    $statusId;
-    $statusDet;
+    $statusId = "0";
+    $statusDet = "0";
     $onCall = false;
 
     switch ($status) {
@@ -520,7 +520,7 @@ function deleteDispatcher()
 
 function setDispatcher($dep)
 {
-    $status;
+    $status = null;
     switch ($dep) {
         case "1":
             $status = "0";
@@ -562,7 +562,7 @@ function getAOP()
         die();
     }
 
-    $result = $pdo->query("SELECT * FROM " . DB_PREFIX . "patrolInformation WHERE `key` = 'aop'");
+    $result = $pdo->query("SELECT * FROM " . DB_PREFIX . "aop");
 
     if (!$result) {
         $_SESSION['error'] = $pdo->errorInfo();
@@ -577,7 +577,7 @@ function getAOP()
         echo "NO AOP SET";
     } else {
         foreach ($result as $row) {
-            echo 'AOP: ' . $row[1];
+            echo 'AOP: ' . $row["aop"];
         }
     }
 }
@@ -663,7 +663,7 @@ function setUnitActive($dep)
 {
     $identifier = $_SESSION['identifier'];
     $uid = $_SESSION['id'];
-    $status;
+    $status = null;
     switch ($dep) {
         case "1":
             $status = "1";

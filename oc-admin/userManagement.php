@@ -19,7 +19,7 @@ require_once('../oc-config.php');
 require_once(ABSPATH . '/oc-functions.php');
 require_once(ABSPATH . '/oc-settings.php');
 require_once(ABSPATH . "/oc-includes/adminActions.inc.php");
-require_once(ABSPATH . "/oc-includes/publicFunctions.php");
+require_once(ABSPATH . "/oc-includes/publicFunctions.inc.php");
 if (empty($_SESSION['logged_in'])) {
 	header('Location: ../index.php');
 	die("Not logged in");

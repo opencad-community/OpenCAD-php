@@ -13,7 +13,7 @@ header("Content-Type: application/json; charset=UTF-8");
 
 $key = getAPIKeyFromRequest();
 checkApiKey($key);
-checkKeyPermission($key, "ncicNames");
+checkKeyPermission($key, "ncicNames", $_SERVER["REQUEST_METHOD"]);
 
 
 // Instantiate database and ncic object

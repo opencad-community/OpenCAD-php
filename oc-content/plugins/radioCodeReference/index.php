@@ -14,7 +14,7 @@ Author URI:
 
 include_once( "../../../oc-config.php");
 include_once( ABSPATH . "/oc-settings.php");
-include( ABSPATH .`/`. OCINC . "/publicFunctions.php");
+include( ABSPATH .`/`. OCINC . "/publicFunctions.inc.php");
 
 ?>
 

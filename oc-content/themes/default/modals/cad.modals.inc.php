@@ -1,6 +1,6 @@
 <?php 
 	include_once(__DIR__ . '/../../../../oc-config.php');
-	include_once( ABSPATH . OCINC . "/dispatchActions.php" ); ?>
+	include_once( ABSPATH . OCINC . "/dispatchActions.inc.php" ); ?>
 	<!-- modals -->
 	<!-- Quick Guide Modal -->
 	<div class="modal" id="quickGuide" tabindex="-1" role="dialog" aria-hidden="true">
@@ -207,7 +207,7 @@
 		</div>
 		<!-- ./ modal-header -->
 		<div class="modal-body">
-			<form role="form" action="<?php echo BASE_URL . "/" . OCINC ?>/dispatchActions.php" method="post" aria-labelledby="setAreaOfPatrolLabel">
+			<form role="form" action="<?php echo BASE_URL . "/" . OCINC ?>/dispatchActions.inc.php" method="post" aria-labelledby="setAreaOfPatrolLabel">
 				<div class="form-group row">
 				</div>
 				<div class="form-group row">
@@ -306,7 +306,7 @@
 		</div>
 		<!-- ./ modal-header -->
 		<div class="modal-body">
-			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post" aria-labelledby="createPersonBoloLabel">
+			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.inc.php" method="post" aria-labelledby="createPersonBoloLabel">
 				<div class="form-group row">
 				</div>
 				<div class="form-group row">
@@ -390,7 +390,7 @@
 		</div>
 		<!-- ./ modal-header -->
 	<div class="modal-body">
-			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post" aria-labelledby="editPersonBoloLabel">
+			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.inc.php" method="post" aria-labelledby="editPersonBoloLabel">
 				<div class="form-group row">
 				</div>
 				<div class="form-group row">
@@ -474,7 +474,7 @@
 		</div>
 		<!-- ./ modal-header -->
 		<div class="modal-body">
-			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post" aria-labelledby="createVehicleBoloLabel">
+			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.inc.php" method="post" aria-labelledby="createVehicleBoloLabel">
 				<div class="form-group row">
 				</div>
 				<div class="form-group row">
@@ -561,7 +561,7 @@
 		</div>
 		<!-- ./ modal-header -->
 	<div class="modal-body">
-			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post" aria-labelledby="editVehicleBoloLabel">
+			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.inc.php" method="post" aria-labelledby="editVehicleBoloLabel">
 				<div class="form-group row">
 				</div>
 				<div class="form-group row">
@@ -827,7 +827,7 @@
 		</div>
 		<!-- ./ modal-header -->
 		<div class="modal-body">
-			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post" aria-labelledby="createCitationLabel">
+			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.inc.php" method="post" aria-labelledby="createCitationLabel">
 				<div class="form-group row">
 				<label class="col-lg-2 control-label">Civilian Name</label>
 				<div class="col-lg-10">
@@ -950,7 +950,7 @@
 		</div>
 		<!-- ./ modal-header -->
 		<div class="modal-body">
-			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post" aria-labelledby="createWarningLabel">
+			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.inc.php" method="post" aria-labelledby="createWarningLabel">
 				<div class="form-group row">
 				<label class="col-lg-2 control-label">Civilian Name</label>
 				<div class="col-lg-10">
@@ -1022,7 +1022,7 @@
 			</div>
 			<!-- ./ modal-header -->
 		<div class="modal-body">
-			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post" aria-labelledby="createArrestReportLabel">
+			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.inc.php" method="post" aria-labelledby="createArrestReportLabel">
 				<div class="form-group row">
 				<label class="col-lg-2 control-label">Civilian Name</label>
 				<div class="col-lg-10">
@@ -1190,7 +1190,7 @@
 		</div>
 		<!-- ./ modal-header -->
 		<div class="modal-body">
-			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.php" method="post" aria-labelledby="createWarrantLabel">
+			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.inc.php" method="post" aria-labelledby="createWarrantLabel">
 				<div class="form-group row">
 				<label class="col-lg-2 control-label">Civilian Name</label>
 				<div class="col-lg-10">

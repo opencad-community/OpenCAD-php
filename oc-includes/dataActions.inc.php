@@ -301,7 +301,7 @@ function editCitationType()
 		$pdo = null;
 
 		//Let the user know their information was updated
-		$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Citation '.$citation.' with a recommended fine of '.$code_fine.'  edited successfully.</span></div>';
+		$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Citation '.$citationDescription.' with a recommended fine of '.$citationFine.'  edited successfully.</span></div>';
 		header("Location: ".BASE_URL."/oc-admin/dataManagement/citationTypeManager.php");
 	} else {
 		echo "Error updating record: " . print_r($stmt->errorInfo(), true);
@@ -411,7 +411,7 @@ function getDepartments()
 		} else {
 			echo ' </td>
 				<td>
-				<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">
+				<form action="'.BASE_URL.'/oc-includes/dataActions.inc.php" method="post">
 				<button name="editDepartment" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editDepartmentModal" class="btn btn-xs btn-link" disabled >Edit</button>
 				<input name="deleteDepartment" type="submit" class="btn btn-xs btn-link" onclick="deleteDepartment(' . $row[0] . ')" value="Delete" disabled />
 				';
@@ -606,7 +606,7 @@ function getIncidentTypes()
 		} else {
 			echo ' </td>
 				<td>
-				<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">
+				<form action="'.BASE_URL.'/oc-includes/dataActions.inc.php" method="post">
 				<button name="editIncidentType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editIncidentTypeModal" class="btn btn-xs btn-link" disabled >Edit</button>
 				<input name="deleteIncidentType" type="submit" class="btn btn-xs btn-link" onclick="deleteIncidentType(' . $row[0] . ')" value="Delete" disabled />
 				';
@@ -796,7 +796,7 @@ function getRadioCodes()
 		} else {
 			echo ' </td>
 				<td>
-				<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">
+				<form action="'.BASE_URL.'/oc-includes/dataActions.inc.php" method="post">
 				<button name="editRadioCode" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editRadioCodeModal" class="btn btn-xs btn-link" disabled >Edit</button>
 				<input name="deleteRadioCode" type="submit" class="btn btn-xs btn-link" onclick="deleteRadioCode(' . $row[0] . ')" value="Delete" disabled />
 				';
@@ -986,7 +986,7 @@ function getStreets()
 		} else {
 			echo ' </td>
 				<td>
-				<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">
+				<form action="'.BASE_URL.'/oc-includes/dataActions.inc.php" method="post">
 				<button name="editStreet" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editStreetModal" class="btn btn-xs btn-link" disabled >Edit</button>
 				<input name="deleteStreet" type="submit" class="btn btn-xs btn-link" onclick="deleteStreet(' . $row[0] . ')" value="Delete" disabled />
 				';
@@ -1177,7 +1177,7 @@ function getVehicles()
 		} else {
 			echo ' </td>
 				<td>
-				<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">
+				<form action="'.BASE_URL.'/oc-includes/dataActions.inc.php" method="post">
 				<button name="editVehicle" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editVehicle" class="btn btn-xs btn-link" disabled >Edit</button>
 				<input name="deleteVehcile" type="submit" class="btn btn-xs btn-link" onclick="deleteVehicle(' . $row[0] . ')" value="Delete" disabled />
 				';
@@ -1372,7 +1372,7 @@ function getWarningTypes()
 		} else {
 			echo ' </td>
 				<td>
-				<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">
+				<form action="'.BASE_URL.'/oc-includes/dataActions.inc.php" method="post">
 				<button name="editWarningType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWarningTypeModal" class="btn btn-xs btn-link" disabled >Edit</button>
 				<input name="deleteWarningType" type="submit" class="btn btn-xs btn-link" onclick="deleteWarningType(' . $row[0] . ')" value="Delete" disabled />
 				';
@@ -1587,7 +1587,7 @@ function getWarrantTypes()
 		} else {
 			echo ' </td>
 				<td>
-				<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">
+				<form action="'.BASE_URL.'/oc-includes/dataActions.inc.php" method="post">
 				<button name="editWarrantType" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWarrantTypeModal" class="btn btn-xs btn-link" disabled >Edit</button>
 				<input name="deleteWarrantType" type="submit" class="btn btn-xs btn-link" onclick="deleteWarrantType(' . $row[0] . ')" value="Delete" disabled />
 				';
@@ -1775,7 +1775,7 @@ function getWeapons()
 		} else {
 			echo ' </td>
 				<td>
-				<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">
+				<form action="'.BASE_URL.'/oc-includes/dataActions.inc.php" method="post">
 				<button name="editWeapon" type="button" data-toggle="modal" id="' . $row[0] . '" data-target="#editWeaponModal" class="btn btn-xs btn-link" disabled >Edit</button>
 				<input name="deleteWeapon" type="submit" class="btn btn-xs btn-link" onclick="deleteWeapon(' . $row[0] . ')" value="Delete" disabled />
 				';
@@ -1966,4 +1966,3 @@ function resetData()
 	header("Location: ".BASE_URL."/oc-admin/admin.php");
 }
 //** END Data Import/Export/Reset FUNCTIONS **//
-?>

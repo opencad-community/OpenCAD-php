@@ -8,7 +8,7 @@
 			</div>
 		<!-- ./ modal-header -->
 		<div class="modal-body">
-			<form role="form" action="<?php echo BASE_URL . "/" . OCINC ?>/register.php" method="post" aria-labelledby="firstResponderRegLabel">
+			<form role="form" action="<?php echo BASE_URL . "/" . OCINC ?>/register.inc.php" method="post" aria-labelledby="firstResponderRegLabel">
 					<div class="form-group row">
 						<label class="col-lg-2 control-label"><?php echo lang_key("NAME"); ?></label>
 						<div class="col-lg-10">
@@ -75,7 +75,7 @@
 			</div>
 		<!-- ./ modal-header -->
 		<div class="modal-body">
-			<form role="form" action="<?php echo BASE_URL . "/" . OCINC ?>/register.php" method="post" aria-labelledby="firstResponderRegLabel">
+			<form role="form" action="<?php echo BASE_URL . "/" . OCINC ?>/register.inc.php" method="post" aria-labelledby="firstResponderRegLabel">
 					<div class="form-group row">
 						<label class="col-lg-2 control-label"><?php echo lang_key("NAME"); ?></label>
 						<div class="col-lg-10">
@@ -142,7 +142,7 @@
 			</div>
 		<!-- ./ modal-header -->
 		<div class="modal-body">
-			<form role="form" action="<?php echo BASE_URL . "/" . OCINC ?>/register.php" method="post" aria-labelledby="civiliaAccessReqLabel">
+			<form role="form" action="<?php echo BASE_URL . "/" . OCINC ?>/register.inc.php" method="post" aria-labelledby="civiliaAccessReqLabel">
 					<div class="form-group row">
 						<label class="col-lg-2 control-label"><?php echo lang_key("NAME"); ?></label>
 						<div class="col-lg-10">

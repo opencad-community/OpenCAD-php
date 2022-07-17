@@ -3,7 +3,7 @@
 require_once(__DIR__ . "/../oc-config.php");
 include_once( ABSPATH . "/oc-functions.php");
 include_once( ABSPATH . "/oc-settings.php");
-include_once( ABSPATH . OCINC . "/dbActions.php");
+include_once( ABSPATH . OCINC . "/dbActions.inc.php");
 include_once( ABSPATH . OCINC . "/apiAuth.inc.php");
 include_once( ABSPATH . OCINC . "/autoload.inc.php");
 

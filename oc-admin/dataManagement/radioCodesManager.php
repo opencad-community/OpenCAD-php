@@ -20,7 +20,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 	require_once( ABSPATH . '/oc-functions.php');
 	require_once( ABSPATH . '/oc-settings.php');
 	require_once( ABSPATH . "/oc-includes/adminActions.inc.php");
-	require_once( ABSPATH . "/oc-includes/dataActions.php");
+	require_once( ABSPATH . "/oc-includes/dataActions.inc.php");
 
     isAdminOrMod();
 
@@ -86,7 +86,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
                 </div>
                 <!-- ./ modal-header -->
                 <div class="modal-body">
-                    <form role="form" method="post" action="<?php echo BASE_URL; ?>/actions/dataActions.php"
+                    <form role="form" method="post" action="<?php echo BASE_URL; ?>/actions/dataActions.inc.php"
                         class="form-horizontal">
                         <div class="form-group row">
                             <label class="col-md-3 control-label">Radio Code</label>
@@ -138,7 +138,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
         $.ajax({
             cache: false,
             type: 'POST',
-            url: '<?php echo BASE_URL . OCINC; ?>/dataActions.php',
+            url: '<?php echo BASE_URL . OCINC; ?>/dataActions.inc.php',
             data: {
                 'getRadioCodeDetails': 'yes',
                 'id': id

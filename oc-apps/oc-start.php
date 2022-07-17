@@ -8,7 +8,7 @@ if (session_id() == '' || !isset($_SESSION)) {
 require_once("../oc-config.php");
 require_once(ABSPATH . 'oc-functions.php');
 require_once(ABSPATH . 'oc-settings.php');
-require_once(ABSPATH . "oc-includes/generalActions.php");
+require_once(ABSPATH . "oc-includes/generalActions.inc.php");
 require_once(ABSPATH . "oc-includes/adminActions.inc.php");
 include_once(ABSPATH . "oc-includes/apiAuth.inc.php");
 
@@ -228,7 +228,7 @@ if (empty($_SESSION['logged_in'])) {
 		function getAOP() {
 			$.ajax({
 				type: "GET",
-				url: "../<?php echo OCINC ?>/generalActions.php",
+				url: "../<?php echo OCINC ?>/generalActions.inc.php",
 				data: {
 					getAOP: 'yes'
 				},

@@ -19,8 +19,8 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 		}
 		require_once('../oc-config.php');
 		require_once( ABSPATH . '/oc-functions.php');
-		require_once( ABSPATH . "/oc-includes/generalActions.php");
-		require_once( ABSPATH . "/oc-includes/profileActions.php");
+		require_once( ABSPATH . "/oc-includes/generalActions.inc.php");
+		require_once( ABSPATH . "/oc-includes/profileActions.inc.php");
 
 		if (empty($_SESSION['logged_in']))
 		{
@@ -85,7 +85,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 					</div>
 				<div class="card-body">
 					<?php echo $profileUpdate ?>
-									<form action="<?php echo BASE_URL; ?>/oc-includes/profileActions.php" method="post" class="form-horizontal">
+									<form action="<?php echo BASE_URL; ?>/oc-includes/profileActions.inc.php" method="post" class="form-horizontal">
 									<fieldset>
 										<div class="form-group">
 						<label class="col-sm-2 control-label"><?php echo lang_key("NAME"); ?></label>
@@ -147,7 +147,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 				</div>
 				<!-- ./ modal-header -->
 				<div class="modal-body">
-					<form role="form" action="<?php BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/oc-includes/profileActions.php" method="post">
+					<form role="form" action="<?php BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/oc-includes/profileActions.inc.php" method="post">
 						<div class="form-group row">
 							<label class="col-lg-2 control-label"><?php echo lang_key("PASSWORD"); ?></label>
 							<div class="col-lg-10">
