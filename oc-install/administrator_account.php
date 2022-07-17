@@ -46,7 +46,6 @@
 			header('location: core_configuration.php');
 			exit;
 		}
-
 		$admin_name = isset($_POST['admin_name']) ? prepare_input($_POST['admin_name']) : '';
 		$admin_identifier = isset($_POST['admin_identifier']) ? prepare_input($_POST['admin_identifier']) : '';
 		$admin_password = isset($_POST['admin_password']) ? prepare_input($_POST['admin_password']) : '';
@@ -103,10 +102,10 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="author" content="OpenCAD Project">
-    <meta name="generator" content="OpenCAD Project Installer">
+    <meta name="generator" content="OpenCAD Project">
 	<title><?php echo lang_key("installation_guide"); ?> | <?php echo lang_key('administrator_account'); ?></title>
 
-	<link href="../images/favicon.ico" rel="shortcut icon" />
+	<link href="./images/favicon.ico" rel="shortcut icon" />
 	<link rel="stylesheet" type="text/css" href="templates/<?php echo EI_TEMPLATE; ?>/css/styles.css" />
 	<?php
 		if($curr_lang_direction == 'rtl'){
@@ -195,7 +194,7 @@
 			<tr><td colspan="2" nowrap height="50px">&nbsp;</td></tr>
 			<tr>
 				<td colspan="2">
-					<a href="database_settings.php" class="form_button" /><?php echo lang_key('back'); ?></a>
+					<a rel="noopener" href="database_settings.php" class="form_button" /><?php echo lang_key('back'); ?></a>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="submit" class="form_button" value="<?php echo lang_key('continue'); ?>" />
 				</td>

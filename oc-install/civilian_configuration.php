@@ -10,7 +10,7 @@
 	$passed_step = isset($_SESSION['passed_step']) ? (int)$_SESSION['passed_step'] : 0;
 	$focus_field = 'COMMUNITY_NAME';
 	$error_msg = '';
-	
+	$BASE_URL = $_SERVER['SERVER_NAME'];
 	// handle previous steps
 	// -------------------------------------------------
 	if($passed_step >= 6){
