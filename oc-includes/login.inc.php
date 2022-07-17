@@ -15,7 +15,7 @@ session_start();
 require_once("../oc-config.php");
 require_once(ABSPATH . "/oc-functions.php");
 require_once(ABSPATH . "/oc-settings.php");
-require_once(ABSPATH . OCINC . "/apiAuth.php");
+require_once(ABSPATH . OCINC . "/apiAuth.inc.php");
 
 if (!empty($_POST)) {
 	if (session_id() == '' || !isset($_SESSION)) {
@@ -104,7 +104,6 @@ $_SESSION['supervisorPrivilege'] = $superPriv['supervisorPrivilege'];
 $getDepartments = $pdo->query("SELECT `departmentId` from " . DB_PREFIX . "userDepartments WHERE userId = \"$id\"");
 $getDepartments->execute();
 $Department = $getDepartments->fetchAll(PDO::FETCH_COLUMN);
-print_r($Department);
 foreach ($Department as $Department) {
 
 	if ($Department == "1") {

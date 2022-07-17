@@ -20,7 +20,7 @@ if (session_id() == '' || !isset($_SESSION)) {
 require_once('../../oc-config.php');
 require_once(ABSPATH . '/oc-functions.php');
 require_once(ABSPATH . '/oc-settings.php');
-require_once(ABSPATH . "/oc-includes/adminActions.php");
+require_once(ABSPATH . "/oc-includes/adminActions.inc.php");
 require_once(ABSPATH . "/oc-includes/dataActions.php");
 
 if (empty($_SESSION['logged_in'])) {

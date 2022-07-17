@@ -12,8 +12,9 @@ header("Content-Type: application/json; charset=UTF-8");
 
 // Check API Key
 
-checkApiKey();
-
+$key = getAPIKeyFromRequest();
+checkApiKey($key);
+checkKeyPermission($key, "ncicArrests", $_SERVER["REQUEST_METHOD"]);
 
 // Instantiate database and ncic object
 $database = new Database();

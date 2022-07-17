@@ -1,5 +1,5 @@
 <?php include_once(__DIR__ . '/../../../../oc-config.php');
-include_once(ABSPATH . OCINC . "/civActions.php"); ?>
+include_once(ABSPATH . OCINC . "/civActions.inc.php"); ?>
 <!-- modals -->
 <div class="modal" id="newCallModal" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
@@ -10,7 +10,7 @@ include_once(ABSPATH . OCINC . "/civActions.php"); ?>
 			</div>
 			<!-- ./ modal-header -->
 			<div class="modal-body">
-				<form id="new_911" method="post" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" aria-labelledby="createNewCallLabel">
+				<form id="new_911" method="post" action="<?php echo BASE_URL; ?>/oc-includes/civActions.inc.php" aria-labelledby="createNewCallLabel">
 					<div class="form-group row">
 						<label class="col-md-2 control-label">Caller Name</label>
 						<div class="col-md-10">
@@ -58,7 +58,7 @@ include_once(ABSPATH . OCINC . "/civActions.php"); ?>
 			</div>
 			<!-- ./ modal-header -->
 			<div class="modal-body">
-				<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" method="post" aria-labelledby="createIdentityLabel">
+				<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.inc.php" method="post" aria-labelledby="createIdentityLabel">
 					<div class="form-group row">
 						<label class="col-lg-2 control-label">Name</label>
 						<div class="col-lg-10">
@@ -151,7 +151,7 @@ include_once(ABSPATH . OCINC . "/civActions.php"); ?>
 			</div>
 			<!-- ./ modal-header -->
 			<div class="modal-body">
-				<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" class="editname_modalform" method="post" aria-labelledby="editIdentityLabel">
+				<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.inc.php" class="editname_modalform" method="post" aria-labelledby="editIdentityLabel">
 					<div class="form-group row">
 					</div>
 					<div class="form-group row">
@@ -229,7 +229,7 @@ include_once(ABSPATH . OCINC . "/civActions.php"); ?>
 			</div>
 			<!-- ./ modal-header -->
 			<div class="modal-body">
-				<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" method="post" aria-labelledby="createPlateModal">
+				<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.inc.php" method="post" aria-labelledby="createPlateModal">
 					<div class="form-group row">
 					</div>
 					<div class="form-group row">
@@ -331,7 +331,7 @@ include_once(ABSPATH . OCINC . "/civActions.php"); ?>
 			</div>
 			<!-- ./ modal-header -->
 			<div class="modal-body">
-				<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" method="post" aria-labelledby="editPlateLabel">
+				<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.inc.php" method="post" aria-labelledby="editPlateLabel">
 					<div class="form-group row">
 						<label class="col-lg-2 control-label">Registered Owner</label>
 						<div class="col-lg-10">
@@ -426,7 +426,7 @@ include_once(ABSPATH . OCINC . "/civActions.php"); ?>
 			</div>
 			<!-- ./ modal-header -->
 			<div class="modal-body">
-				<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.php" method="post" aria-labellednby="createWeaponLabel">
+				<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/civActions.inc.php" method="post" aria-labellednby="createWeaponLabel">
 					<div class="form-group row">
 					</div>
 					<div class="form-group row">

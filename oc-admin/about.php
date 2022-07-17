@@ -18,7 +18,7 @@ session_start();
 require_once('../oc-config.php');
 require_once(ABSPATH . '/oc-functions.php');
 require_once(ABSPATH . '/oc-settings.php');
-require_once(ABSPATH . "/oc-includes/adminActions.php");
+require_once(ABSPATH . "/oc-includes/adminActions.inc.php");
 
 if (empty($_SESSION['logged_in'])) {
 	header('Location: ' . BASE_URL);
@@ -113,15 +113,12 @@ if (isset($_SESSION['successMessage'])) {
 								<?php echo lang_key("LOADED_PHP_MODULES_notes"); ?>
 							</div>
 							<div class="form-group">
-								<label for="name"><?php echo lang_key("API_KEY"); ?></label>
+								<label for="name"><?php echo lang_key("COOKIE_ENCRYPTION_KEY"); ?></label>
 								<input type="text" class="form-control" readonly="readonly" id="apikey" value="<?php echo getApiKey();?> " placeholder="<?php echo getApiKey(); ?>" />
 								<p>
-									<em>Note:</em> Used to encrypt cookie 'aljksdz7' and authenticate
-									request to the api if the requestor is not logged in.
-									This key is also used to authenticate with the API Endpoints.
+									<em>Note:</em> Used to encrypt cookie 'aljksdz7'.
 								</p>
 								<a style="margin-left:10px" class="btn btn-primary" href="<?php echo BASE_URL; ?>/oc-includes/generalActions.php?newApiKey=1">Generate</a>
-								<a style="margin-left:10px" class="btn btn-primary" href="#" onclick="copyAPI();return false;">Copy API Key</a>
 							</div>
 						</div>
 					</div>
@@ -141,20 +138,6 @@ if (isset($_SESSION['successMessage'])) {
 	<?php require_once(ABSPATH . OCTHEMEINC . "/scripts.inc.php"); ?>
 
 
-	<script>
-		function copyAPI() {
-			/* Get the text field */
-			var copyText = document.getElementById("apikey");
-
-			/* Select the text field */
-			copyText.select();
-			copyText.setSelectionRange(0, 99999); /* For mobile devices */
-
-			/* Copy the text inside the text field */
-			navigator.clipboard.writeText(copyText.value);
-		}
-	</script>
-
-</body>
+	</body>
 
 </html>

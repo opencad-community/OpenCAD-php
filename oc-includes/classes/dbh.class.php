@@ -19,7 +19,7 @@
 require_once(__DIR__ . "/../../oc-config.php");
 include_once( __DIR__ . "/../../oc-functions.php");
 include_once( __DIR__ . "/../../oc-settings.php");
-require_once( __DIR__ . "/../apiAuth.php");
+require_once( __DIR__ . "/../apiAuth.inc.php");
 
 class Dbh {
 

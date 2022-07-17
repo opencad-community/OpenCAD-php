@@ -135,7 +135,7 @@ function getIdentityRequests()
 				<td>'.$row['submittedByName'].'</td>
 				<td>'.$row['submitted_on'].'</td>
 				<td>
-					<form action="".BASE_URL."/oc-includes/ncicAdminActions.php" method="post">
+					<form action="".BASE_URL."/oc-includes/ncicadminActions.inc.php" method="post">
 					<button name="viewRequestDetails" data-toggle="modal" data-target="#requestDetails" class="btn btn-xs btn-link" type="button">Details</button>
 					<input name="reject_identity_request" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Quick Reject"/>
 					<input name="accept_identity_request" type="submit" class="btn btn-xs btn-link" style="color: green;" value="Quick Accept"/>
@@ -217,7 +217,7 @@ function ncicGetNames()
 				<td>'.$row['deceased'].'</td>
 				<td>
 					<button name="edit_name" data-toggle="modal" data-target="#IdentityEditModal" id="edit_nameBtn" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
-					<form action="".BASE_URL."/oc-includes/ncicAdminActions.php" method="post">
+					<form action="".BASE_URL."/oc-includes/ncicadminActions.inc.php" method="post">
 					<input name="delete_name" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
 					<input name="uid" type="hidden" value='.$row[0].' />
 					</form>
@@ -294,7 +294,7 @@ function ncicGetPlates()
 				<td>'.$row['flags'].'</td>
 				<td>'.$row['notes'].'</td>
 				<td>
-					<form action="".BASE_URL."/oc-includes/ncicAdminActions.php" method="post">
+					<form action="".BASE_URL."/oc-includes/ncicadminActions.inc.php" method="post">
 					<button name="edit_plate" data-toggle="modal" data-target="#editPlateModal" id="edit_plateBtn" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
 					<input name="delete_plate" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete" enabled/>
 					<input name="vehid" type="hidden" value='.$row[0].' />
@@ -360,7 +360,7 @@ function ncicGetWeapons()
 				<td>'.$row['weaponType'].'</td>
 				<td>'.$row['weaponName'].'</td>
 				<td>
-					<form action="".BASE_URL."/oc-includes/ncicAdminActions.php" method="post">
+					<form action="".BASE_URL."/oc-includes/ncicadminActions.inc.php" method="post">
 					<input name="delete_weapon" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
 					<input name="weaid" type="hidden" value='.$row[0].' />
 					</form>
@@ -571,7 +571,7 @@ function ncicGetArrests()
 				<td>'.$row['Issuer'].'</td>
 				<td>'.$row['issuedBy_agency'].'</td>
 				<td>
-					<form action="".BASE_URL."/oc-includes/ncicAdminActions.php" method="post">
+					<form action="".BASE_URL."/oc-includes/ncicadminActions.inc.php" method="post">
 					<input name="delete_arrest" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Remove"/>
 					<input name="aid" type="hidden" value='.$row[0].' />
 					</form>
@@ -642,7 +642,7 @@ function ncicGetWarrants()
 				<td>'.$row['expirationDate'].'</td>
 				<td>'.$row['issuer'].'</td>
 				<td>
-					<form action="".BASE_URL."/oc-includes/ncicAdminActions.php" method="post">
+					<form action="".BASE_URL."/oc-includes/ncicadminActions.inc.php" method="post">
 					';
 						if ($row[6] == "Active")
 						{
@@ -723,7 +723,7 @@ function ncicGetCitations()
 				<td>'.$row['Issuer'].'</td>
 				<td>'.$row['issuedBy_agency'].'</td>
 				<td>
-					<form action="".BASE_URL."/oc-includes/ncicAdminActions.php" method="post">
+					<form action="".BASE_URL."/oc-includes/ncicadminActions.inc.php" method="post">
 					<input name="delete_citation" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Remove"/>
 					<input name="cid" type="hidden" value='.$row[0].' />
 					</form>
@@ -792,7 +792,7 @@ function ncicGetWarnings()
 				<td>'.$row['Issuer'].'</td>
 				<td>'.$row['issuedBy_agency'].'</td>
 				<td>
-					<form action="".BASE_URL."/oc-includes/ncicAdminActions.php" method="post">
+					<form action="".BASE_URL."/oc-includes/ncicadminActions.inc.php" method="post">
 					<input name="delete_warning" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Remove"/>
 					<input name="wgid" type="hidden" value='.$row[0].' />
 					</form>

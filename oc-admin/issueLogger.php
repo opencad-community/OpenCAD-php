@@ -15,7 +15,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 require_once('../oc-config.php');
 require_once(ABSPATH . '/oc-functions.php');
 require_once(ABSPATH . '/oc-settings.php');
-require_once(ABSPATH . "/oc-includes/adminActions.php");
+require_once(ABSPATH . "/oc-includes/adminActions.inc.php");
 require_once(ABSPATH . "/oc-includes/autoload.inc.php");
 
 
@@ -83,7 +83,7 @@ if (isset($_SESSION["support_success"])) {
 						<div class="card-header">
 							<em class="fa fa-align-justify"></em> <?php echo lang_key("ISSUE_TITLE"); ?>
 						</div>
-						<form action="<?php echo BASE_URL; ?>/oc-includes/issueLogger.php" method="POST">
+						<form action="<?php echo BASE_URL; ?>/oc-includes/issueLogger.inc.php" method="POST">
 							<div class="card-body">
 								<?php if (!empty($errorMsg)) {
 									echo "<span class='label danger'>" . $errorMsg . "</span>";
@@ -141,7 +141,7 @@ if (isset($_SESSION["support_success"])) {
 						<div class="card-header">
 							<em class="fa fa-align-justify"></em> <?php echo lang_key("ISSUE_GH_CREATE_TITLE"); ?>
 						</div>
-						<form action="<?php echo BASE_URL; ?>/oc-includes/issueLogger.php" method="POST">
+						<form action="<?php echo BASE_URL; ?>/oc-includes/issueLogger.inc.php" method="POST">
 							<div class="card-body">
 								<div class="card-body">
 									<div class="form-group">

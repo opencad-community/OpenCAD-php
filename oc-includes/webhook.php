@@ -4,7 +4,7 @@
 require_once('../oc-config.php');
 require_once(ABSPATH . '/oc-functions.php');
 require_once(ABSPATH . '/oc-settings.php');
-require_once(ABSPATH . OCINC . "/apiAuth.php");
+require_once(ABSPATH . OCINC . "/apiAuth.inc.php");
 
 isAdminOrMod();
 isSessionStarted();
@@ -25,10 +25,10 @@ else{
 
 function updateWebhook(){
     $checkdetails = true;
-    $title = $_POST["webhook_title"] ?? NULL;
-    $json_data = $_POST["json_data"]?? NULL;
-    $type = $_POST["webhook_settings"]?? NULL;
-    $uri = $_POST["webhook_uri"]?? NULL;
+    $title = $_POST["webhook_title"];
+    $json_data = $_POST["json_data"];
+    $type = $_POST["webhook_settings"];
+    $uri = $_POST["webhook_uri"];
     if(isset($_POST["webhook_activation"])){$settings = $_POST["webhook_activation"];$settings = implode("-", $settings);}else{NULL;};
 
 
@@ -103,10 +103,10 @@ function deleteWebhook()
 function verifyNewWebhook()
 {
     $checkdetails = true;
-    $title = $_POST["webhook_title"] ?? NULL;
-    $json_data = $_POST["json_data"]?? NULL;
-    $type = $_POST["webhook_settings"]?? NULL;
-    $uri = $_POST["webhook_uri"]?? NULL;
+    $title = $_POST["webhook_title"];
+    $json_data = $_POST["json_data"];
+    $type = $_POST["webhook_settings"];
+    $uri = $_POST["webhook_uri"];
     if(isset($_POST["webhook_activation"])){$settings = $_POST["webhook_activation"];$settings = implode("-", $settings);}else{NULL;};
 
 

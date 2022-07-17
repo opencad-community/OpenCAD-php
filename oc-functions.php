@@ -16,6 +16,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 require_once("oc-config.php");
 require_once(ABSPATH . "/oc-includes/version.php");
 require_once(ABSPATH . "/oc-includes/autoload.inc.php");
+
+if(phpversion() < MINIMUM_PHP_VERSION){
+	echo "You need to update to PHP 8.0 (8.1 Recommended). Failure to do so will result in you being unable to use OpenCAD<br><br>Error: <strong>0x90626bf501ed</strong> Incorrect PHP Version";
+	exit();
+}
+
 loadPlugins();
 
 function loadPlugins()
@@ -25,7 +31,7 @@ function loadPlugins()
 	 * Autoloads the Plugin folder
 	 */
 
-	require_once(ABSPATH . "/oc-includes/plugin-loader.php");
+	require_once(ABSPATH . "/oc-includes/plugin-loader.inc.php");
 
 	$plugin = new PluginLoader(__DIR__ . '/oc-content/plugins');
 

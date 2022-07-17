@@ -9,7 +9,7 @@ $('#civilianDetailsModal').on('show.bs.modal', function(e) {
     $.ajax({
         cache: false,
         type: 'GET',
-        url: '../../../../oc-includes/civActions.php',
+        url: '../../../../oc-includes/civActions.inc.php',
         data: {
             'getCivilianDetails': 'yes',
             'nameId': civId
@@ -54,7 +54,7 @@ $(function() {
         var edit_id = $(this).data('id');
         console.log(edit_id);
         $.ajax({
-                url: '../../../../oc-includes/civActions.php',
+                url: '../../../../oc-includes/civActions.inc.php',
                 type: 'POST',
                 data: 'editid=' + edit_id,
                 dataType: 'json',
@@ -85,7 +85,7 @@ $(function() {
         var edit_id = $(this).data('id');
         console.log(edit_id);
         $.ajax({
-                url:  '../../../../oc-includes/civActions.php',
+                url:  '../../../../oc-includes/civActions.inc.php',
                 type: 'POST',
                 data: 'edit_plateid=' + edit_id,
                 dataType: 'json',

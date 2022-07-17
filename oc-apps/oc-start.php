@@ -9,8 +9,8 @@ require_once("../oc-config.php");
 require_once(ABSPATH . 'oc-functions.php');
 require_once(ABSPATH . 'oc-settings.php');
 require_once(ABSPATH . "oc-includes/generalActions.php");
-require_once(ABSPATH . "oc-includes/adminActions.php");
-include_once(ABSPATH . "oc-includes/apiAuth.php");
+require_once(ABSPATH . "oc-includes/adminActions.inc.php");
+include_once(ABSPATH . "oc-includes/apiAuth.inc.php");
 
 setDispatcher("1");
 

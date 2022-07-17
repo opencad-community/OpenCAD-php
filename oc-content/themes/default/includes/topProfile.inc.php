@@ -18,7 +18,7 @@ require_once( ABSPATH . '/oc-settings.php');?>
 						</div>
 						<a rel="noopener" class="dropdown-item" href="<?php echo BASE_URL.'/'.OCAPPS ?>/oc-profile.php">
 							<em class="fa fa-user"></em> <?php echo lang_key("MY_PROFILE"); ?></a>
-						<a rel="noopener" class="dropdown-item" href="<?php echo BASE_URL.'/'.OCINC ?>/logout.php">
+						<a rel="noopener" class="dropdown-item" href="<?php echo BASE_URL.'/'.OCINC ?>/logout.inc.php">
 							<em class="fa fa-lock"></em> <?php echo lang_key("LOGOUT") ?></a>
 					</div>
 				</li>

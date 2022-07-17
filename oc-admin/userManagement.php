@@ -18,7 +18,7 @@ if (session_id() == '' || !isset($_SESSION)) {
 require_once('../oc-config.php');
 require_once(ABSPATH . '/oc-functions.php');
 require_once(ABSPATH . '/oc-settings.php');
-require_once(ABSPATH . "/oc-includes/adminActions.php");
+require_once(ABSPATH . "/oc-includes/adminActions.inc.php");
 require_once(ABSPATH . "/oc-includes/publicFunctions.php");
 if (empty($_SESSION['logged_in'])) {
 	header('Location: ../index.php');
@@ -206,7 +206,7 @@ if (isset($_SESSION['successMessage'])) {
 				</div>
 				<!-- ./ modal-header -->
 				<div class="modal-body">
-					<form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/adminActions.php" class="form-horizontal" aria-label="Administrative user profile editor">
+					<form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/adminActions.inc.php" class="form-horizontal" aria-label="Administrative user profile editor">
 						<div class="form-group row">
 							<label class="col-md-3 control-label">Name</label>
 							<div class="col-md-9">
@@ -269,7 +269,7 @@ if (isset($_SESSION['successMessage'])) {
 				</div>
 				<!-- ./ modal-header -->
 				<div class="modal-body">
-					<form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/adminActions.php" class="form-horizontal" aria-label="Administrative user role editor">
+					<form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/adminActions.inc.php" class="form-horizontal" aria-label="Administrative user role editor">
 						<!-- ./ form-group -->
 						<div class="form-group row">
 							<label class="col-md-3 control-label">User Role</label>
@@ -310,7 +310,7 @@ if (isset($_SESSION['successMessage'])) {
 				</div>
 				<!-- ./ modal-header -->
 				<div class="modal-body">
-					<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/adminActions.php" method="post" aria-labelledby="changeUserPasswordLabel">
+					<form role="form" action="<?php echo BASE_URL; ?>/oc-includes/adminActions.inc.php" method="post" aria-labelledby="changeUserPasswordLabel">
 						<div class="form-group row">
 							<label class="col-lg-2 control-label" id="NewPassword">Password</label>
 							<div class="col-lg-10">
@@ -365,7 +365,7 @@ if (isset($_SESSION['successMessage'])) {
 			$.ajax({
 				cache: false,
 				type: 'POST',
-				url: '<?php echo BASE_URL . "/" . OCINC ?>/adminActions.php',
+				url: '<?php echo BASE_URL . "/" . OCINC ?>/adminActions.inc.php',
 				data: {
 					'getUserDetails': 'yes',
 					'userId': userId
@@ -395,7 +395,7 @@ if (isset($_SESSION['successMessage'])) {
 			$.ajax({
 				cache: false,
 				type: 'POST',
-				url: '../<?php echo OCINC ?>/adminActions.php',
+				url: '../<?php echo OCINC ?>/adminActions.inc.php',
 				data: {
 					'getUserID': 'yes',
 					'userId': userId
@@ -421,7 +421,7 @@ if (isset($_SESSION['successMessage'])) {
 				$.ajax({
 					cache: false,
 					type: 'GET',
-					url: '../<?php echo OCINC ?>/adminActions.php',
+					url: '../<?php echo OCINC ?>/adminActions.inc.php',
 					data: 'dept_id=' + dept_id + '&userId=' + userId,
 					success: function(result) {
 						//obj = jQuery.parseJSON(result);

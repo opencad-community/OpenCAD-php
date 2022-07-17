@@ -22,7 +22,7 @@ include_once(ABSPATH . "/oc-settings.php");
 include_once(ABSPATH  .  "oc-includes/generalActions.php");
 include_once(ABSPATH  . "oc-includes/publicFunctions.php");
 include_once(ABSPATH  . "oc-includes/dispatchActions.php");
-include_once(ABSPATH . "oc-includes/apiAuth.php");
+include_once(ABSPATH . "oc-includes/apiAuth.inc.php");
 if (empty($_SESSION['logged_in'])) {
 	header('Location: ../index.php');
 	die("Not logged in");

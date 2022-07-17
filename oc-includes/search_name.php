@@ -1,6 +1,6 @@
 <?php
 require_once("../oc-config.php");
-require_once( ABSPATH . OCINC . "/apiAuth.php");
+require_once( ABSPATH . OCINC . "/apiAuth.inc.php");
 
 //connect with the database
 $db = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);

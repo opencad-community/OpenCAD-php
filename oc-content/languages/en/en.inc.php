@@ -121,6 +121,8 @@ $arrLang['sendmail_from'] = "Sendmail From";
 $arrLang['sendmail_path'] = "Sendmail Path";
 $arrLang['server_api'] = "Server API";
 $arrLang['API_KEY'] = "API Key";
+$arrLang['MANAGE_API'] = "Manage API Keys";
+$arrLang['COOKIE_ENCRYPTION_KEY'] = "Cookie Encryption Key";
 $arrLang['server_requirements'] = "Server Requirements";
 $arrLang['session_support'] = "Session Support";
 $arrLang['short_open_tag'] = "Short Open Tag";
@@ -622,6 +624,48 @@ $arrLang["WEBHOOK_SETTINGS_USERSUSPENSION"] = "On User Suspension";
 $arrLang["WEBHOOK_SETTINGS_USERREGISTRATION"] = "On User Registration";
 $arrLang["WEBHOOK_SETTINGS_PANICBUTTONPRESSED"] = "On Panic Button Pressed";
 $arrLang["WEBHOOK_SETTINGS_ISSUEREPORT"] = "On Issue Create";
+
+
+//** End Webhook Strings **/
+
+//** Begin Webhook Strings **/
+
+$arrLang["API_TAB"] = "API Manager";
+$arrLang["API_LIST_TITLE"] = "Active APIs";
+$arrLang["API_CREATE_TITLE"] = "API Manager";
+$arrLang["API_NEW_TITLE"] = "Create API Title";
+$arrLang["API_NEW_TITLE_PLACEHOLDER"] = "My New API";
+$arrLang["API_NEW_KEY"] = "API Key";
+$arrLang["API_NEW_KEY_PLACEHOLDER"] = "Key";
+
+//** Error Messages */
+$arrLang["API_ERROR_PERMISSIONREQUIRED"] = "You are required to set permissions!";
+$arrLang["API_ERROR_TITLEREQUIRED"] = "A Title Required!";
+$arrLang["API_ERROR_METHODREQUIRED"] = "At least one Method is required!";
+$arrLang["API_ERROR_PERMISSIONREQUIRED"] = "At least one permission is requried!";
+
+//** END Error Messages */
+//** Success Messages */
+$arrLang["API_SUCCESS_SUBMITTED"] = "Succesfully Created API Key!";
+$arrLang["API_SUCCESS_DELETED"] = "Succesfully Revoked API Key!";
+
+//** END Success Messages */
+//** Method Strings **/
+$arrLang["API_SETTINGS_ALLOWPOST"] = "Allow POST";
+$arrLang["API_SETTINGS_ALLOWGET"] = "Allow GET";
+$arrLang["API_SETTINGS_ALLOWDELETE"] = "Allow DELETE";
+$arrLang["API_SETTINGS_ALLOWPUT"] = "Allow PUT";
+//** End Method Strings **/
+
+//** Method Strings **/
+$arrLang["API_SETTINGS_NCICARRESTS"] = "Allow NCIC Arrest Access";
+$arrLang["API_SETTINGS_NCICCITATIONS"] = "Allow NCIC Citations Access";
+$arrLang["API_SETTINGS_NCICWARRANTS"] = "Allow NCIC Warrants Access";
+$arrLang["API_SETTINGS_NCICWARNINGS"] = "Allow NCIC Warnings Access";
+$arrLang["API_SETTINGS_NCICPLATES"] = "Allow NCIC Plates Access";
+$arrLang["API_SETTINGS_NCICNAMES"] = "Allow NCIC Names Access";
+$arrLang["API_SETTINGS_NCICWEAPONS"] = "Allow NCIC Weapons Access";
+//** End Method Strings **/
 
 
 //** End Webhook Strings **/

@@ -4,7 +4,7 @@ require_once(__DIR__ . "/../oc-config.php");
 include_once( ABSPATH . "/oc-functions.php");
 include_once( ABSPATH . "/oc-settings.php");
 include_once( ABSPATH . OCINC . "/dbActions.php");
-include_once( ABSPATH . OCINC . "/apiAuth.php");
+include_once( ABSPATH . OCINC . "/apiAuth.inc.php");
 include_once( ABSPATH . OCINC . "/autoload.inc.php");
 
 /*
@@ -257,7 +257,7 @@ function getPendingUsers()
 
 			echo ' </td>
 				<td>
-					<form action="'.BASE_URL.'/oc-includes/adminActions.php" method="post">
+					<form action="'.BASE_URL.'/oc-includes/adminActions.inc.php" method="post">
 					<input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Approve" />
 					<input name="rejectUser" type="submit" class="btn btn-xs btn-link" value="Reject" />
 					<input name="uid" type="hidden" value=' . $row["id"] . ' />
@@ -653,7 +653,7 @@ function getUsers()
 		getUserGroupsApproved($row[0]);
 		echo '</td><td>';
 	if ( DEMO_MODE == false) {
-		echo '<form action="'.BASE_URL.'/oc-includes/adminActions.php" method="post">';
+		echo '<form action="'.BASE_URL.'/oc-includes/adminActions.inc.php" method="post">';
 		if ( ( MODERATOR_EDIT_USER == true && $_SESSION['adminPrivilege'] == 2 ) || ( $_SESSION['adminPrivilege'] == 3 ) )
 		{
 			echo '<button name="editUser" type="button" data-toggle="modal" id="' . $row['id'] . '" data-target="#editUserModal" class="btn btn-xs btn-link" aria-label=" Edit user: '. $row['name'] .'">Edit</button>';
@@ -698,7 +698,7 @@ function getUsers()
 	} else {
 		echo ' </td>
 			<td>
-			<form action="'.BASE_URL.'/oc-includes/adminActions.php" method="post">
+			<form action="'.BASE_URL.'/oc-includes/adminActions.inc.php" method="post">
 			<button name="editUser" type="button" data-toggle="modal" id="' . $row['id'] . '" data-target="#editUserModal" class="btn btn-xs btn-link" aria-label=" Edit user: '. $row['name'] .'" disabled >Edit</button>
 			<input name="deleteUser" type="submit" class="btn btn-xs btn-link" onclick="deleteUser(' . $row['id'] . ')" value="Delete" aria-label="Delete User: '. $row['name'] .'" disabled />
 			';
@@ -1058,7 +1058,7 @@ function getCallHistory()
 			<td>' . $row['callStreet3'] . '</td>
 			<td>' . $row['callNarrative'] . '</td>
 			<td>
-				<form action="'.BASE_URL.'/oc-includes/adminActions.php" method="post">
+				<form action="'.BASE_URL.'/oc-includes/adminActions.inc.php" method="post">
 				<input name="delete_callhistory" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
 				<input name="callId" type="hidden" value=' . $row[0] . ' />
 				</form>

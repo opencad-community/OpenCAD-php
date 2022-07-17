@@ -17,10 +17,10 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 require_once(__DIR__ . "/../oc-config.php");
 require_once( ABSPATH . "/oc-functions.php");
 require_once( ABSPATH . "/oc-settings.php");
-require_once( ABSPATH . OCINC . "/apiAuth.php");
+require_once( ABSPATH . OCINC . "/apiAuth.inc.php");
 
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+    isSessionStarted();
 }
 
 
@@ -159,7 +159,7 @@ function ncicGetNames()
                 <td>'.$row['build'].'</td>
                 <td>
                     '.$editButton.'
-                    <form action="".BASE_URL."/oc-includes/civActions.php" method="post">
+                    <form action="".BASE_URL."/oc-includes/civActions.inc.php" method="post">
                     <input name="delete_name" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
                     <input name="uid" type="hidden" value='.$row["id"].' />
                     </form>
@@ -241,7 +241,7 @@ function ncicGetPlates()
                 <td>'.$row['notes'].'</td>
                 <td>
                     <button name="edit_plate" data-toggle="modal" data-target="#editPlateModal" id="edit_plateBtn" data-id='.$row[0].' class="btn btn-xs btn-link">Edit</button>
-                    <form action="".BASE_URL."/oc-includes/civActions.php" method="post">
+                    <form action="".BASE_URL."/oc-includes/civActions.inc.php" method="post">
                     <input name="delete_plate" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete" enabled/>
                     <input name="vehid" type="hidden" value='.$row[0].' />
                     </form>
@@ -281,7 +281,7 @@ function delete_name()
     }
     $pdo = null;
 
-    session_start();
+    isSessionStarted();
     $_SESSION['nameMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian name</span></div>';
     header("Location: ".BASE_URL."/".OCAPPS."/civilian.php");
 }
@@ -310,14 +310,14 @@ function delete_plate()
     }
     $pdo = null;
 
-    session_start();
+    isSessionStarted();
     $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian plate</span></div>';
     header("Location: ".BASE_URL."/".OCAPPS."/civilian.php");
 }
 
 function create_name()
 {
-    session_start();
+    isSessionStarted();
 
     $fullName = htmlspecialchars($_POST['civNameReq']);
     $firstName = explode(" ", $fullName) [0];
@@ -403,7 +403,7 @@ function create_name()
 
 function create_plate()
 {
-	session_start();
+	isSessionStarted();
 
 	$plate = htmlspecialchars($_POST['vehPlate']);
 
@@ -452,7 +452,7 @@ function create_plate()
     }
     $pdo = null;
 
-    session_start();
+    isSessionStarted();
     $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully added plate to the database</span></div>';
 
     header("Location:".BASE_URL."/".OCAPPS."/civilian.php#plate_panel");
@@ -512,7 +512,7 @@ function create911Call()
     }
     $pdo = null;
 
-    session_start();
+    isSessionStarted();
     $_SESSION['good911'] = '<div class="alert alert-success"><span>Successfully created 911 call</span></div>';
 
     sleep(1);
@@ -522,7 +522,7 @@ function create911Call()
 
 function edit_name()
 {
-    session_start();
+    isSessionStarted();
 
     $fullName = htmlspecialchars($_POST['civNameReq']);
     $firstName = explode(" ", $fullName) [0];
@@ -610,7 +610,7 @@ function edit_name()
 
 function edit_plate()
 {
-    session_start();
+    isSessionStarted();
 
     $plate = htmlspecialchars($_POST['vehPlate']);
 
@@ -664,7 +664,7 @@ function edit_plate()
     }
     $pdo = null;
 
-    session_start();
+    isSessionStarted();
     $_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully Updated plate to the database</span></div>';
 
     header("Location:".BASE_URL."/civilian.php#plate_panel");
@@ -754,7 +754,7 @@ function create_warrant()
     }
     $pdo = null;
 
-    session_start();
+    isSessionStarted();
     $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully created warrant</span></div>';
 
     header("Location:".BASE_URL."/civilian.php");
@@ -835,7 +835,7 @@ function ncicGetWarrants()
                 <td>'.$row['expirationDate'].'</td>
                 <td>'.$row['issuer'].'</td>
                 <td>
-                    <form action="".BASE_URL."/oc-includes/civActions.php" method="post">
+                    <form action="".BASE_URL."/oc-includes/civActions.inc.php" method="post">
                     <input name="approveUser" type="submit" class="btn btn-xs btn-link" value="Edit" disabled />
                     ';
                         if ($row[6] == "Active")
@@ -875,7 +875,7 @@ function delete_warrant()
 
 function create_weapon()
 {
-	session_start();
+    isSessionStarted();
 
     $weapon = htmlspecialchars($_POST['weapon_all']);
     $wea_type = explode("—", $weapon) [0];
@@ -884,7 +884,7 @@ function create_weapon()
     $uid = $_SESSION['id'];
 
     $submittedById = $_SESSION['id'];
-    $userId = htmlspecialchars($_POST['civilian_names']);
+    $nameId = htmlspecialchars($_POST['civilian_names']);
     $wea_type;
     $wea_name;
     $notes = htmlspecialchars($_POST['weapon_notes']);
@@ -898,8 +898,8 @@ function create_weapon()
         die();
     }
 
-    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncicWeapons (nameId, weaponType, weaponName, userId, notes) VALUES (?, ?, ?, ?, ?)");
-    $result = $stmt->execute(array($userId, $wea_type, $wea_name, $submittedById, $notes));
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."ncicWeapons (nameId, weaponType, weaponName, notes) VALUES (?, ?, ?, ?)");
+    $result = $stmt->execute(array($nameId, $wea_type, $wea_name, $notes));
 
     if (!$result)
     {
@@ -909,7 +909,7 @@ function create_weapon()
     }
     $pdo = null;
 
-    session_start();
+    isSessionStarted();
     $_SESSION['weaponMessage'] = '<div class="alert alert-success"><span>Successfully added a weapon to the database</span></div>';
 
     header("Location:".BASE_URL."/".OCAPPS."/civilian.php#weapon_panel");
@@ -927,7 +927,7 @@ function ncicGetWeapons()
 
         die();
     }
-
+    
     $stmt = $pdo->prepare("SELECT ".DB_PREFIX."ncicWeapons.*, ".DB_PREFIX."ncicNames.name FROM ".DB_PREFIX."ncicWeapons INNER JOIN ".DB_PREFIX."ncicNames ON ".DB_PREFIX."ncicNames.id=".DB_PREFIX."ncicWeapons.nameId WHERE ".DB_PREFIX."ncicWeapons.userId = ?");
     $resStatus = $stmt->execute(array($uid));
     $result = $stmt;
@@ -938,7 +938,6 @@ function ncicGetWeapons()
         //header("Location: ".BASE_URL."/oc-content/plugins/error/index.php");
         
     }
-    $pdo = null;
 
     $num_rows = $result->rowCount();
 
@@ -971,7 +970,7 @@ function ncicGetWeapons()
             <td>'.$row['weaponName'].'</td>
             <td>'.$row['notes'].'</td>
                 <td>
-                    <form action="".BASE_URL."/oc-includes/civActions.php" method="post">
+                    <form action="".BASE_URL."/oc-includes/civActions.inc.php" method="post">
                     <input name="delete_weapon" type="submit" class="btn btn-xs btn-link" style="color: red;" value="Delete"/>
                     <input name="weaid" type="hidden" value='.$row[0].' />
                     </form>
@@ -993,14 +992,14 @@ function delete_weapon()
 
     DB::query("DELETE FROM ".DB_PREFIX."ncicWeapons WHERE id = " . $weaid);
 
-    session_start();
+    isSessionStarted();
     $_SESSION['weaponMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian weapon</span></div>';
     header("Location: ".BASE_URL."/".OCAPPS."/civilian.php");
 }
 
 function getNumberOfProfiles()
 {
-    session_start();
+    isSessionStarted();
     $id = $_SESSION['id'];
 
     try{
@@ -1030,7 +1029,7 @@ function getNumberOfProfiles()
 
 function getNumberOfVehicles()
 {
-    session_start();
+    isSessionStarted();
     $id = $_SESSION['id'];
 
     try{

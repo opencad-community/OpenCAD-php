@@ -11,7 +11,9 @@ header("Content-Type: application/json; charset=UTF-8");
 
 // Check API Key
 
-checkApiKey();
+$key = getAPIKeyFromRequest();
+checkApiKey($key);
+checkKeyPermission($key, "ncicNames");
 
 
 // Instantiate database and ncic object

@@ -7,13 +7,13 @@ function classAutoLoader($className){
     if(strpos($url, "oc-content") !== false){
         $path = ABSPATH . "oc-includes/classes/";
     }elseif(strpos($url, "oc-includes") !== false){
-        $path = "classes/";
+        $path = __DIR__ . "/classes/";
     }elseif(strpos($url, "oc-api") !== false){
-        $path = "../oc-includes/classes/";
+        $path = __DIR__ . "/../oc-includes/classes/";
     }elseif(strpos($url, "oc-admin") !== false){
-        $path = "../oc-includes/classes/";
+        $path = __DIR__ . "/../oc-includes/classes/";
     } else{
-        $path = "oc-includes/classes/";
+        $path = __DIR__ . "/oc-includes/classes/";
     }
     
     

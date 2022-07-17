@@ -18,7 +18,7 @@ sql.php
 *adminer*.php
 web.configW
 errorlog
-apiAuth.php
+apiAuth.inc.php
 test.php
 test1.php
 /oc-content/plugins/_oc-map

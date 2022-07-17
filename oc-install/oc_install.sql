@@ -12,6 +12,14 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>aop` (
   `aop` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
+CREATE TABLE IF NOT EXISTS `<DB_PREFIX>api` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `value` text NOT NULL,
+  `permissions` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
 CREATE TABLE IF NOT EXISTS `<DB_PREFIX>bolosPersons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `firstName` varchar(255) NOT NULL COMMENT 'First name of BOLO suspect.',
@@ -145,9 +153,9 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncicPlates` (
   `nameId` int(11) NOT NULL COMMENT 'Links to ncicnames db for driver information',
   `vehPlate` text NOT NULL,
   `vehMake` text NOT NULL,
-  `veh_model` text NOT NULL,
+  `vehModel` text NOT NULL,
   `vehPrimaryColor` text NOT NULL,
-  `vehSSecondaryolor` text NOT NULL,
+  `vehSecondaryColor` text NOT NULL,
   `vehInsurance` set('VALID','EXPIRED','CANCELED','SUSPENDED','Unknown') DEFAULT 'VALID',
   `vehInsuranceType` set('CTP','Third Party','Comprehensive') DEFAULT 'CTP',
   `flags` set('NONE','STOLEN','WANTED','SUSPENDED REGISTRATION','CANCELED REGISTRATION','EXPIRED REGISTRATION','INSURANCE FLAG','DRIVER FLAG','NO INSURANCE') DEFAULT NULL,
@@ -205,6 +213,7 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncicWarrants` (
 CREATE TABLE IF NOT EXISTS `<DB_PREFIX>ncicWeapons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nameId` int(11) NOT NULL COMMENT 'Links to ncicnames db for driver information',
+  `userId` int NOT NULL COMMENT 'Linked to the users ID (Not ncicNames!)',
   `weaponType` varchar(255) NOT NULL,
   `weaponName` varchar(255) NOT NULL,
   `notes` varchar(2048) DEFAULT NULL,

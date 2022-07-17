@@ -14,19 +14,19 @@ if (isset($_POST["gh_key_BTN"])) {
 
     if ($support_data->checkRow()) {
         $_SESSION["support_error"] = lang_key("ISSUE_ERROR_GH_KEY_EXISTS");
-        header("location: " . BASE_URL . "/oc-admin/issueLogger.php?create=error");
+        header("location: " . BASE_URL . "/oc-admin/issueLogger.inc.php?create=error");
         exit();
     }
 
     $checkKey = $support_data->checkKey($key);
     if (strpos($checkKey, "Bad credentials")) {
         $_SESSION["support_error"] = lang_key("ISSUE_ERROR_GH_KEY_INCORRECT");
-        header("location: " . BASE_URL . "/oc-admin/issueLogger.php?create=error");
+        header("location: " . BASE_URL . "/oc-admin/issueLogger.inc.php?create=error");
         exit();
     } else {
         $_SESSION["support_success"] = lang_key("ISSUE_SUCCESS_GH_KEY_CREATE");
         $support_data->createKey($key);
-        header("location: " . BASE_URL . "/oc-admin/issueLogger.php?create=success");
+        header("location: " . BASE_URL . "/oc-admin/issueLogger.inc.php?create=success");
         exit();
     }
 

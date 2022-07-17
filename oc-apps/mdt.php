@@ -22,7 +22,7 @@ include_once(ABSPATH . "/oc-settings.php");
 include_once(ABSPATH  .  "oc-includes/generalActions.php");
 include_once(ABSPATH  . "oc-includes/publicFunctions.php");
 include_once(ABSPATH  . "oc-includes/dispatchActions.php");
-include_once(ABSPATH . "oc-includes/apiAuth.php");
+include_once(ABSPATH . "oc-includes/apiAuth.inc.php");
 
 $adminButton = "";
 $debugInfo = "";
@@ -737,7 +737,7 @@ if (empty($_SESSION['logged_in'])) {
 
 					} else if (response.match("^<br>")) {
 						console.log("LOGGED OUT");
-						window.location.href = '<?php echo BASE_URL . '/' . OCINC; ?>/logout.php';
+						window.location.href = '<?php echo BASE_URL . '/' . OCINC; ?>/logout.inc.php';
 					}
 
 

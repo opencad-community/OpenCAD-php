@@ -27,7 +27,11 @@ define( 'ERRORREDIRECT', '\'Location: '.BASE_URL.'/oc-content/plugins/error/inde
 /**
  * This will need to be updated once we have a backend sorted
  */
-define( 'APPLATESTVERSIONURL', "http://192.168.1.128/version.json");
+if(OC_DEBUG){
+	define( 'APPLATESTVERSIONURL', "http://192.168.1.128/version.json");
+}else{
+	define( 'APPLATESTVERSIONURL', "https://raw.githubusercontent.com/kevingorman1000/OpenCad-Versions-TEMP/main/version.json");
+}
 /*
  * These can't be directly globalized in version.php. When updating,
  * we're including version.php from another installation and don't want

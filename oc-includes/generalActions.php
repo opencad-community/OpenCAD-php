@@ -29,7 +29,7 @@ if (session_id() == '' || !isset($_SESSION)) {
 require_once(__DIR__ . '/../oc-config.php');
 require_once(ABSPATH . '/oc-functions.php');
 require_once(ABSPATH . '/oc-settings.php');
-require_once(ABSPATH . OCINC . "/apiAuth.php");
+require_once(ABSPATH . OCINC . "/apiAuth.inc.php");
 
 if (isset($_GET['getCalls'])) {
     getActiveCalls();

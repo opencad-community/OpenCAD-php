@@ -17,7 +17,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 require_once('../oc-config.php');
 require_once(ABSPATH . '/oc-functions.php');
 require_once(ABSPATH . '/oc-settings.php');
-require_once(ABSPATH . "/oc-includes/adminActions.php");
+require_once(ABSPATH . "/oc-includes/adminActions.inc.php");
 
 isSessionStarted();
 
