@@ -41,10 +41,10 @@ class Webhook extends \Dbh
     public function submitWebhook()
     {
         $config_data = new Config();
-        $title = $_POST["webhook_title"] ?? NULL;
-        $json = json_encode($_POST["json_data"]) ?? NULL;
-        $type = $_POST["webhook_settings"] ?? NULL;
-        $uri = $_POST["webhook_uri"] ?? NULL;
+        $title = $_POST["webhook_title"];
+        $json = json_encode($_POST["json_data"]);
+        $type = $_POST["webhook_settings"];
+        $uri = $_POST["webhook_uri"];
         if (isset($_POST["webhook_activation"])) {
             $settings = $_POST["webhook_activation"];
             $settings = implode(", ", $settings);
@@ -73,11 +73,11 @@ class Webhook extends \Dbh
     {
         $config_data = new Config();
 
-        $title = $_POST["webhook_title"] ?? NULL;
-        $json = json_encode($_POST["json_data"]) ?? NULL;
-        $type = $_POST["webhook_settings"] ?? NULL;
-        $uri = $config_data->encryptString($_POST["webhook_uri"]) ?? NULL;
-        $id = $_POST["webhook_id"] ?? NULL;
+        $title = $_POST["webhook_title"];
+        $json = json_encode($_POST["json_data"]);
+        $type = $_POST["webhook_settings"];
+        $uri = $config_data->encryptString($_POST["webhook_uri"]);
+        $id = $_POST["webhook_id"];
         if (isset($_POST["webhook_activation"])) {
             $settings = $_POST["webhook_activation"];
             $settings = implode(", ", $settings);

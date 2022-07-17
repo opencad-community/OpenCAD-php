@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>colors` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 CREATE TABLE IF NOT EXISTS `<DB_PREFIX>config` (
-  `key_data` varchar(80) NOT NULL,
+  `key` varchar(80) NOT NULL,
   `value` varchar(80) DEFAULT NULL,
    PRIMARY KEY (`key`)
 
@@ -313,6 +313,10 @@ CREATE TABLE IF NOT EXISTS `<DB_PREFIX>patrolinformation` (
 
 INSERT INTO `<DB_PREFIX>patrolinformation` (`key`, `value`) VALUES
 ('aop',	'Metro Los Santos');
+
+INSERT INTO `<DB_PREFIX>config` (`key`, `value`) VALUES
+('api_calls', '0');
+COMMIT;
 
 CREATE TABLE `<DB_PREFIX>penalCode` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
