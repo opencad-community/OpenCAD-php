@@ -22,14 +22,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
  * @author       Phill Fernandes <pfernandes@opencad.io>
  * 
  */
-
-if (session_id() == '' || !isset($_SESSION)) {
-    session_start();
-}
 require_once(__DIR__ . '/../oc-config.php');
 require_once(ABSPATH . '/oc-functions.php');
 require_once(ABSPATH . '/oc-settings.php');
 require_once(ABSPATH . OCINC . "/apiAuth.inc.php");
+
+isSessionStarted();
 
 if (isset($_GET['getCalls'])) {
     getActiveCalls();
@@ -279,6 +277,7 @@ function checkTones()
 
 function setTone()
 {
+
     $tone = htmlspecialchars($_POST['tone']);
     $action = htmlspecialchars($_POST['action']);
 

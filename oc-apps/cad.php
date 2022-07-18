@@ -62,12 +62,12 @@ if (isset($_SESSION['boloMessage'])) {
 <html lang="en">
 
 <head>
-<?php include(ABSPATH . "/" . OCTHEMES . "/" . THEME . "/includes/header.inc.php"); ?>
+	<?php include(ABSPATH . "/" . OCTHEMES . "/" . THEME . "/includes/header.inc.php"); ?>
 
 <body class="app header-fixed">
 
 	<header class="app-header navbar">
-	<a rel="noopener" class="navbar-brand" href="#">
+		<a rel="noopener" class="navbar-brand" href="#">
 			<img class="navbar-brand-full" src="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME; ?>/images/logo_brand.png" width="30" height="25" alt="OpenCAD Logo">
 		</a>
 		<button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
@@ -84,262 +84,290 @@ if (isset($_SESSION['boloMessage'])) {
 	<div class="app-body">
 		<main class="main">
 			<div class="breadcrumb">
-			<div class="container-fluid">
-				<div class="animated fadeIn">
-					<div class="card">
-						<div class="card-header">
-							<h1>CAD Console
-								<button class="btn btn-primary float-right" name="aop" data-toggle="modal" data-target="#aop" id="getAOP"><?php echo getAOP();?></button>
-							</h1>
-						</div>
-						<div class="card-body">
-							<div class="row">
-								<div class="col-md-12 col-sm-12 col-xs-12">
-									<div class="card">
-										<div class="card-header">
-											<h2><?php echo lang_key("ACTIVE_CALLS"); ?></h2>
-										</div>
-										<!-- ./ x_title -->
-										<div class="card-content">
-											<div id="noCallsAlertHolder">
-												<span id="noCallsAlertSpan"></span>
-												<div id="live_calls"></div>
-											</div>
-										</div>
-										<!-- ./ x_content -->
-										<div class="card-footer">
-											<button class="btn btn-primary" name="new_call_btn" data-toggle="modal" data-target="#newCall"><?php echo lang_key("NEW_CALL"); ?></button>
-											<button class="btn btn-danger float-right" onClick="priorityTone('single')" value="0" id="priorityTone"><?php echo lang_key("STOP_TRANSMITTING"); ?></button>
-											<button class="btn btn-danger float-right" onClick="priorityTone('recurring')" value="0" id="recurringTone"><?php echo lang_key("PRIORITY_SIGNAL"); ?></button>
-											<button class="btn btn-danger float-right" onClick="priorityTone('panic')" value="0" id="panicTone"><?php echo lang_key("PANIC_BUTTON"); ?></button>
-										</div>
-									</div>
-									<!-- ./ x_panel -->
-								</div>
-								<!-- ./ col-md-12 col-sm-12 col-xs-12 -->
+				<div class="container-fluid">
+					<div class="animated fadeIn">
+						<div class="card">
+							<div class="card-header">
+								<h1>CAD Console
+									<button class="btn btn-primary float-right" name="aop" data-toggle="modal" data-target="#aop" id="getAOP"><?php echo getAOP(); ?></button>
+								</h1>
 							</div>
-							<div class="row">
-								<div class="col-md-12 col-sm-12 col-xs-12">
-									<div class="card">
-										<div class="card-header">
-											<h2><?php echo lang_key("ACTIVE_BOLOS"); ?></h2>
-										</div>
-										<!-- ./ x_title -->
-										<div class="card-conent">
-											<div id="noCallsAlertHolder">
-												<?php echo $boloMessage; ?>
+							<div class="card-body">
+								<div class="row">
+									<div class="col-md-12 col-sm-12 col-xs-12">
+										<div class="card">
+											<div class="card-header">
+												<h2><?php echo lang_key("ACTIVE_CALLS"); ?></h2>
 											</div>
+											<!-- ./ x_title -->
 											<div class="card-content">
-												<?php cadGetPersonBOLOS(); ?>
-											</div>
-											<div class="card-content">
-												<?php cadGetVehicleBOLOS(); ?>
-											</div>
-											<div class="card-content">
-												<span id="noCallsAlertSpan"></span>
-												<div id="live_calls"></div>
+												<div id="noCallsAlertHolder">
+													<span id="noCallsAlertSpan"></span>
+													<div id="live_calls"></div>
+												</div>
 											</div>
 											<!-- ./ x_content -->
-
 											<div class="card-footer">
-												<button class="btn btn-warning" name="new_call_btn" data-toggle="modal" data-target="#newPersonsBOLO"><?php echo lang_key("NEW_PERSONS_BOLO"); ?></button>
-												<button class="btn btn-warning" name="new_call_btn" data-toggle="modal" data-target="#newVehicleBOLO"><?php echo lang_key("NEW_VEHICLE_BOLO"); ?></button>
+												<button class="btn btn-primary" name="new_call_btn" data-toggle="modal" data-target="#newCall"><?php echo lang_key("NEW_CALL"); ?></button>
+												<button class="btn btn-danger float-right" onClick="priorityTone('single')" value="0" id="priorityTone"><?php echo lang_key("STOP_TRANSMITTING"); ?></button>
+												<button class="btn btn-danger float-right" onClick="priorityTone('recurring')" value="0" id="recurringTone"><?php echo lang_key("PRIORITY_SIGNAL"); ?></button>
+												<button class="btn btn-danger float-right" onClick="priorityTone('panic')" value="0" id="panicTone"><?php echo lang_key("PANIC_BUTTON"); ?></button>
+											</div>
+										</div>
+										<!-- ./ x_panel -->
+									</div>
+									<!-- ./ col-md-12 col-sm-12 col-xs-12 -->
+								</div>
+								<div class="row">
+									<div class="col-md-12 col-sm-12 col-xs-12">
+										<div class="card">
+											<div class="card-header">
+												<h2><?php echo lang_key("ACTIVE_BOLOS"); ?></h2>
+											</div>
+											<!-- ./ x_title -->
+											<div class="card-conent">
+												<div id="noCallsAlertHolder">
+													<?php echo $boloMessage; ?>
+												</div>
+												<div class="card-content">
+													<?php cadGetPersonBOLOS(); ?>
+												</div>
+												<div class="card-content">
+													<?php cadGetVehicleBOLOS(); ?>
+												</div>
+												<div class="card-content">
+													<span id="noCallsAlertSpan"></span>
+													<div id="live_calls"></div>
+												</div>
+												<!-- ./ x_content -->
+
+												<div class="card-footer">
+													<button class="btn btn-warning" name="new_call_btn" data-toggle="modal" data-target="#newPersonsBOLO"><?php echo lang_key("NEW_PERSONS_BOLO"); ?></button>
+													<button class="btn btn-warning" name="new_call_btn" data-toggle="modal" data-target="#newVehicleBOLO"><?php echo lang_key("NEW_VEHICLE_BOLO"); ?></button>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
 
-							<div class="row justify-content-center">
-								<div class="col-md-4 col-xs-4">
-									<div class="card w-1000">
-										<div class="card-header">
-											<h2><?php echo lang_key("ACTIVE_DISPATCHERS"); ?></h2>
-											<div class="clearfix"></div>
-										</div>
-										<!-- ./ x_title -->
-										<div class="card-content">
-											<?php getDispatchers(); ?>
-										</div>
-									</div>
-								</div>
-								<!-- /.col-->
-								<div class="col-md-4 col-xs-4">
-									<div class="card">
-										<div class="card-header">
-											<h2><?php echo lang_key("AVAILABLE_UNITS"); ?></h2>
-											<div class="clearfix"></div>
-										</div>
-										<!-- ./ x_title -->
-										<div class="card-contenmt">
-											<?php getAvailableUnits(); ?>
-										</div>
-									</div>
-								</div>
-								<!-- /.col-->
-								<div class="col-md-4 col-xs-4">
-									<div class="card">
-										<div class="card-header">
-											<h2><?php echo lang_key("UNAVAILABLE_UNITS"); ?></h2>
-										</div>
-										<!-- ./ x_title -->
-										<div class="card-content">
-											<div id="unAvailableUnits">
-												<?php getUnAvailableUnits(); ?>
+								<div class="row justify-content-center">
+									<div class="col-md-4 col-xs-4">
+										<div class="card w-1000">
+											<div class="card-header">
+												<h2><?php echo lang_key("ACTIVE_DISPATCHERS"); ?></h2>
+												<div class="clearfix"></div>
+											</div>
+											<!-- ./ x_title -->
+											<div class="card-content">
+												<?php getDispatchers(); ?>
 											</div>
 										</div>
 									</div>
 									<!-- /.col-->
+									<div class="col-md-4 col-xs-4">
+										<div class="card">
+											<div class="card-header">
+												<h2><?php echo lang_key("AVAILABLE_UNITS"); ?></h2>
+												<div class="clearfix"></div>
+											</div>
+											<!-- ./ x_title -->
+											<div class="card-contenmt">
+												<?php getAvailableUnits(); ?>
+											</div>
+										</div>
+									</div>
+									<!-- /.col-->
+									<div class="col-md-4 col-xs-4">
+										<div class="card">
+											<div class="card-header">
+												<h2><?php echo lang_key("UNAVAILABLE_UNITS"); ?></h2>
+											</div>
+											<!-- ./ x_title -->
+											<div class="card-content">
+												<div id="unAvailableUnits">
+													<?php getUnAvailableUnits(); ?>
+												</div>
+											</div>
+										</div>
+										<!-- /.col-->
+									</div>
+									<!-- ./ row -->
 								</div>
-								<!-- ./ row -->
-							</div>
-							<!-- ./ col-md-12 col-sm-12 col-xs-12 -->
+								<!-- ./ col-md-12 col-sm-12 col-xs-12 -->
 
-							<div class="row justify-content-center"">
+								<div class="row justify-content-center"">
 						<div class=" col-md-4 col-xs-4">
-								<div class="card">
-									<div class="card-header">
-										<h2><?php echo lang_key("NCIC_NAME_LOOKUP"); ?></h2>
-										<div class="clearfix"></div>
-									</div>
-									<!-- ./ x_title -->
-									<div class="card-body">
-										<div class="input-group">
-											<input id="ncicName" type="text" class="form-control" placeholder="John Doe" name="ncicName" />
-											<span class="input-group-append">
-												<button class="btn btn-primary" type="button" name="ncic_name_btn" id="ncic_name_btn"><?php echo lang_key("SEND"); ?></button>
-											</span>
+									<div class="card">
+										<div class="card-header">
+											<h2><?php echo lang_key("NCIC_NAME_LOOKUP"); ?></h2>
+											<div class="clearfix"></div>
 										</div>
-										<!-- ./ input-group -->
-										<div name="ncic_name_return" id="ncic_name_return" contenteditable="false" style="background-color: #eee; opacity: 1;  font-size: 15px; font-weight: bold;">
+										<!-- ./ x_title -->
+										<div class="card-body">
+											<div class="input-group">
+												<input id="ncicName" type="text" class="form-control" placeholder="John Doe" name="ncicName" />
+												<span class="input-group-append">
+													<button class="btn btn-primary" type="button" name="ncic_name_btn" id="ncic_name_btn"><?php echo lang_key("SEND"); ?></button>
+												</span>
+											</div>
+											<!-- ./ input-group -->
+											<div name="ncic_name_return" id="ncic_name_return" contenteditable="false" style="background-color: #eee; opacity: 1;  font-size: 15px; font-weight: bold;">
+											</div>
+											<!-- ./ ncic_name_return -->
 										</div>
-										<!-- ./ ncic_name_return -->
+										<!-- ./ x_content -->
 									</div>
-									<!-- ./ x_content -->
+									<!-- ./ x_panel -->
 								</div>
-								<!-- ./ x_panel -->
-							</div>
-							<!-- ./ col-md-4 col-sm-4 col-xs-4 -->
-							<div class="col-md-4 col-xs-4">
-								<div class="card">
-									<div class="card-header">
-										<h2><?php echo lang_key("NCIC_PLATE_LOOKUP"); ?></h2>
-									</div>
-									<!-- ./ x_title -->
-									<div class="card-body">
-										<div class="input-group">
-											<input type="text" name="ncicPlate" class="form-control" id="ncicPlate" placeholder="License Plate, (ABC123)" />
-											<span class="input-group-append">
-												<button type="button" class="btn btn-primary" id="ncic_plate_btn"><?php echo lang_key("SEND"); ?></button>
-											</span>
+								<!-- ./ col-md-4 col-sm-4 col-xs-4 -->
+								<div class="col-md-4 col-xs-4">
+									<div class="card">
+										<div class="card-header">
+											<h2><?php echo lang_key("NCIC_PLATE_LOOKUP"); ?></h2>
 										</div>
-										<!-- ./ input-group -->
-										<div name="ncic_plate_return" id="ncic_plate_return" contenteditable="false" style="background-color: #eee; opacity: 1;  font-size: 15px; font-weight: bold;">
+										<!-- ./ x_title -->
+										<div class="card-body">
+											<div class="input-group">
+												<input type="text" name="ncicPlate" class="form-control" id="ncicPlate" placeholder="License Plate, (ABC123)" />
+												<span class="input-group-append">
+													<button type="button" class="btn btn-primary" id="ncic_plate_btn"><?php echo lang_key("SEND"); ?></button>
+												</span>
+											</div>
+											<!-- ./ input-group -->
+											<div name="ncic_plate_return" id="ncic_plate_return" contenteditable="false" style="background-color: #eee; opacity: 1;  font-size: 15px; font-weight: bold;">
+											</div>
+											<!-- ./ ncic_plate_return -->
 										</div>
-										<!-- ./ ncic_plate_return -->
+										<!-- ./ x_content -->
 									</div>
-									<!-- ./ x_content -->
+									<!-- ./ x_panel -->
 								</div>
-								<!-- ./ x_panel -->
-							</div>
-							<!-- ./ col-sm-6 col-md-4 col-xs-4 -->
-							<div class="col-md-4 col-xs-4">
-								<div class="card">
-									<div class="card-header">
-										<h2><?php echo lang_key("NCIC_WEAPON_LOOKUP"); ?></h2>
-									</div>
-									<!-- ./ x_title -->
-									<div class="card-body">
-										<div class="input-group">
-											<input type="text" name="ncicWeapon" class="form-control" id="ncicWeapon" placeholder="John Doe" />
-											<span class="input-group-append">
-												<button type="button" class="btn btn-primary" name="ncic_weapon_btn" id="ncic_weapon_btn"><?php echo lang_key("SEND"); ?></button>
-											</span>
+								<!-- ./ col-sm-6 col-md-4 col-xs-4 -->
+								<div class="col-md-4 col-xs-4">
+									<div class="card">
+										<div class="card-header">
+											<h2><?php echo lang_key("NCIC_WEAPON_LOOKUP"); ?></h2>
 										</div>
-										<!-- ./ input-group -->
-										<div name="ncic_weapon_return" id="ncic_weapon_return" contenteditable="false" style="background-color: #eee; opacity: 1;  font-size: 15px; font-weight: bold;">
+										<!-- ./ x_title -->
+										<div class="card-body">
+											<div class="input-group">
+												<input type="text" name="ncicWeapon" class="form-control" id="ncicWeapon" placeholder="John Doe" />
+												<span class="input-group-append">
+													<button type="button" class="btn btn-primary" name="ncic_weapon_btn" id="ncic_weapon_btn"><?php echo lang_key("SEND"); ?></button>
+												</span>
+											</div>
+											<!-- ./ input-group -->
+											<div name="ncic_weapon_return" id="ncic_weapon_return" contenteditable="false" style="background-color: #eee; opacity: 1;  font-size: 15px; font-weight: bold;">
+											</div>
+											<!-- ./ ncic_weapon_return -->
 										</div>
-										<!-- ./ ncic_weapon_return -->
+										<!-- ./ x_content -->
 									</div>
-									<!-- ./ x_content -->
+									<!-- ./ x_panel -->
 								</div>
-								<!-- ./ x_panel -->
+								<!-- ./ col-md-4 col-sm-4 col-xs-4 -->
 							</div>
-							<!-- ./ col-md-4 col-sm-4 col-xs-4 -->
+							<!-- ./ row -->
 						</div>
-						<!-- ./ row -->
 					</div>
-				</div>
-				<!-- /.card-->
+					<!-- /.card-->
 		</main>
 	</div>
 
+
 	<?php
+	require_once(ABSPATH . OCTHEMEINC . "/scripts.inc.php");
 	require_once(ABSPATH . "/" . OCTHEMES . "/" . THEME . "/includes/footer.inc.php");
 	include_once(ABSPATH . "/" . OCTHEMES . "/" . THEME . "/modals/cad.modals.inc.php");
-	require_once(ABSPATH . OCTHEMEINC . "/scripts.inc.php"); 
+	// require_once(ABSPATH . OCTHEMEINC . "/scripts.inc.php");
 	require_once(ABSPATH . "/" . OCTHEMES . "/" . THEME . "/includes/footer.inc.php");
+
 	?>
-	
+
 
 	<!-- AUDIO TONES -->
-	<audio id="recurringToneAudio" src="<?php echo BASE_URL; ?>oc-content/themes/<?php echo THEME; ?>/sounds/priority.mp3" preload="auto"></audio>
-	<audio id="priorityToneAudio" src="<?php echo BASE_URL; ?>oc-content/themes/<?php echo THEME; ?>/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
-	<audio id="panicToneAudio" src="<?php echo BASE_URL; ?>oc-content/themes/<?php echo THEME; ?>/sounds/Panic_Button.m4a" preload="auto"></audio>
+	<audio id="recurringToneAudio" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/sounds/priority.mp3a" preload="auto"></audio>
+	<audio id="priorityToneAudio" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/sounds/Priority_Traffic_Alert.mp3" preload="auto"></audio>
+	<audio id="panicToneAudio" src="<?php echo BASE_URL; ?>/oc-content/themes/<?php echo THEME; ?>/sounds/Panic_Button.m4a" preload="auto"></audio>
 
 	<script>
-		var vid = document.getElementById("recurringToneAudio");
-		vid.volume = 0.3;
-
-
+		$(function() {
+			$("#ncic_Name").autocomplete({
+				source: "<?php echo ABSPATH;?>/oc-includes/search_name.inc.php"
+			});
+		});
+	</script>
+	<script>
+		$(function() {
+			$("#ncic_plate").autocomplete({
+				source: "<?php echo BASE_URL; ?>/actions/search_plate.php"
+			});
+		});
+	</script>
+	<script>
+		$(function() {
+			$("#ncic_weapon").autocomplete({
+				source: "<?php echo BASE_URL; ?>/actions/search_name.php"
+			});
+		});
+	</script>
+	<script>
 		$(document).ready(function() {
 			$('#ncic_warnings').DataTable({
 
 			});
 		});
-
+	</script>
+	<script>
 		$(document).ready(function() {
 			$('#ncic_citations').DataTable({
 
 			});
 		});
-
+	</script>
+	<script>
 		$(document).ready(function() {
-			$('#ncicArrests').DataTable({
+			$('#ncic_arrests').DataTable({
 
 			});
 		});
-
+	</script>
+	<script>
 		$(document).ready(function() {
-			$('#ncicwarrants').DataTable({
+			$('#ncic_warrants').DataTable({
 
 			});
 		});
-
+	</script>
+	<script>
 		$(document).ready(function() {
 			$('#rms_warnings').DataTable({
 
 			});
 		});
-
+	</script>
+	<script>
 		$(document).ready(function() {
 			$('#rms_citations').DataTable({
 
 			});
 		});
-
+	</script>
+	<script>
 		$(document).ready(function() {
 			$('#rms_arrests').DataTable({
 
 			});
 		});
-
+	</script>
+	<script>
 		$(document).ready(function() {
 			$('#rms_warrants').DataTable({
 
 			});
 		});
-
+	</script>
+	<script>
 		$(document).ready(function() {
 			$(function() {
 				$('#menu_toggle').click();
@@ -355,7 +383,8 @@ if (isset($_SESSION['boloMessage'])) {
 			getAOP();
 
 		});
-
+	</script>
+	<script>
 		// PNotify Stuff
 		priorityNotification = new PNotify({
 			title: 'Priority Traffic',
@@ -369,25 +398,8 @@ if (isset($_SESSION['boloMessage'])) {
 				sticker: false
 			}
 		});
-
-		$(function() {
-			$("#ncicName").autocomplete({
-				source: "../<?php echo OCINC ?>/search_name.inc.php"
-			});
-		});
-
-		$(function() {
-			$("#ncicPlate").autocomplete({
-				source: "../<?php echo OCINC ?>/search_plate.inc.php"
-			});
-		});
-
-		$(function() {
-			$("#ncicWeapon").autocomplete({
-				source: "../<?php echo OCINC ?>/search_name.inc.php"
-			});
-		});
-
+	</script>
+	<script>
 		function testFunction(element) {
 			statusInit = element.className;
 			status = statusInit.split(" ")[0];
@@ -401,7 +413,7 @@ if (isset($_SESSION['boloMessage'])) {
 
 			$.ajax({
 				type: "POST",
-				url: "../<?php echo OCINC ?>/generalActions.inc.php",
+				url: "<?php echo BASE_URL; ?>/actions/generalActions.php",
 				data: {
 					changeStatus: 'yes',
 					unit: unit,
@@ -425,7 +437,8 @@ if (isset($_SESSION['boloMessage'])) {
 
 			});
 		}
-
+	</script>
+	<script>
 		function logoutUser(element) {
 			var r = confirm("Are you sure you want to log this user out?");
 
@@ -438,7 +451,7 @@ if (isset($_SESSION['boloMessage'])) {
 
 				$.ajax({
 					type: "POST",
-					url: "../<?php echo OCINC ?>/generalActions.inc.php",
+					url: "<?php echo BASE_URL; ?>/actions/generalActions.php",
 					data: {
 						logoutUser: 'yes',
 						unit: unit
@@ -464,17 +477,24 @@ if (isset($_SESSION['boloMessage'])) {
 				//Do nothing
 			}
 		}
-
+	</script>
+	<script>
 		function getAvailableUnits() {
 			$.ajax({
 				type: "GET",
-				url: "../<?php echo OCINC ?>/generalActions.inc.php",
+				url: "<?php echo BASE_URL; ?>/actions/generalActions.php",
 				data: {
 					getAvailableUnits: 'yes'
 				},
 				success: function(response) {
 					$('#availableUnits').html(response);
 
+					// SG - Removed until node/real-time data setup
+					/*$('#activeUsers').DataTable({
+					 searching: false,
+					 scrollY: "200px",
+					 lengthMenu: [[4, -1], [4, "All"]]
+				});*/
 					setTimeout(getAvailableUnits, 5000);
 
 
@@ -485,18 +505,24 @@ if (isset($_SESSION['boloMessage'])) {
 
 			});
 		}
-
-
+	</script>
+	<script>
 		function getDispatchers() {
 			$.ajax({
 				type: "GET",
-				url: "../<?php echo OCINC ?>/generalActions.inc.php",
+				url: "<?php echo BASE_URL; ?>/actions/generalActions.php",
 				data: {
 					getDispatchers: 'yes'
 				},
 				success: function(response) {
 					$('#activeDispatchers').html(response);
 
+					// SG - Removed until node/real-time data setup
+					/*$('#activeUsers').DataTable({
+					 searching: false,
+					 scrollY: "200px",
+					 lengthMenu: [[4, -1], [4, "All"]]
+				});*/
 					setTimeout(getDispatchers, 5000);
 
 
@@ -507,17 +533,24 @@ if (isset($_SESSION['boloMessage'])) {
 
 			});
 		}
-
-
+	</script>
+	<script>
 		function getAOP() {
 			$.ajax({
 				type: "GET",
-				url: "../<?php echo OCINC ?>/generalActions.inc.php",
+				url: "<?php echo BASE_URL; ?>/actions/generalActions.php",
 				data: {
 					getAOP: 'yes'
 				},
 				success: function(response) {
 					$('#getAOP').html(response);
+
+					// SG - Removed until node/real-time data setup
+					/*$('#activeUsers').DataTable({
+					 searching: false,
+					 scrollY: "200px",
+					 lengthMenu: [[4, -1], [4, "All"]]
+				});*/
 					setTimeout(getAOP, 5000);
 
 
@@ -528,18 +561,24 @@ if (isset($_SESSION['boloMessage'])) {
 
 			});
 		}
-
-
+	</script>
+	<script>
 		function cadGetPersonBOLOS() {
 			$.ajax({
 				type: "GET",
-				url: "../<?php echo OCINC ?>/dispatchActions.inc.php",
+				url: "<?php echo BASE_URL; ?>/actions/dispatchActions.php",
 				data: {
 					cadGetPersonBOLOS: 'yes'
 				},
 				success: function(response) {
 					$('#cadpersonbolo').html(response);
 
+					// SG - Removed until node/real-time data setup
+					/*$('#activeUsers').DataTable({
+					 searching: false,
+					 scrollY: "200px",
+					 lengthMenu: [[4, -1], [4, "All"]]
+				});*/
 					setTimeout(cadGetPersonBOLOS, 5000);
 
 
@@ -550,17 +589,24 @@ if (isset($_SESSION['boloMessage'])) {
 
 			});
 		}
-
+	</script>
+	<script>
 		function cadGetVehicleBOLOS() {
 			$.ajax({
 				type: "GET",
-				url: "../<?php echo OCINC ?>/dispatchActions.inc.php",
+				url: "<?php echo BASE_URL; ?>/actions/dispatchActions.php",
 				data: {
 					cadGetVehicleBOLOS: 'yes'
 				},
 				success: function(response) {
 					$('#cadvehiclebolo').html(response);
 
+					// SG - Removed until node/real-time data setup
+					/*$('#activeUsers').DataTable({
+					 searching: false,
+					 scrollY: "200px",
+					 lengthMenu: [[4, -1], [4, "All"]]
+				});*/
 					setTimeout(cadGetVehicleBOLOS, 5000);
 
 
@@ -571,25 +617,26 @@ if (isset($_SESSION['boloMessage'])) {
 
 			});
 		}
-
+	</script>
+	<script>
 		$(function() {
 			$(document).on('click', '#edit_personbolo', function(e) {
 				e.preventDefault();
 				var edit_id = $(this).data('id');
 				$.ajax({
-						url: '../<?php echo OCINC ?>/dispatchActions.inc.php',
+						url: '<?php echo BASE_URL; ?>/actions/dispatchActions.php',
 						type: 'POST',
 						data: 'bolos_personid=' + edit_id,
 						dataType: 'json',
 						cache: false
 					})
 					.done(function(data) {
-						$('#editPersonboloModal #firstName').val(data.firstName);
-						$('#editPersonboloModal #lastName').val(data.lastName);
-						$('#editPersonboloModal #physicalDescription').val(data.physicalDescription);
+						$('#editPersonboloModal #first_name').val(data.first_name);
+						$('#editPersonboloModal #last_name').val(data.last_name);
+						$('#editPersonboloModal #physical_description').val(data.physical_description);
 						$('.gender_picker').selectpicker('val', data.gender);
-						$('#editPersonboloModal #reasonWanted').val(data.reasonWanted);
-						$('#editPersonboloModal #lastSeen').val(data.lastSeen);
+						$('#editPersonboloModal #reason_wanted').val(data.reason_wanted);
+						$('#editPersonboloModal #last_seen').val(data.last_seen);
 						$('#editPersonboloModal .Editdataid').val(data.id);
 					});
 			});
@@ -597,20 +644,20 @@ if (isset($_SESSION['boloMessage'])) {
 				e.preventDefault();
 				var edit_id = $(this).data('id');
 				$.ajax({
-						url: '../<?php echo OCINC ?>/dispatchActions.inc.php',
+						url: '<?php echo BASE_URL; ?>/actions/dispatchActions.php',
 						type: 'POST',
 						data: 'bolos_vehicleid=' + edit_id,
 						dataType: 'json',
 						cache: false
 					})
 					.done(function(data) {
-						$('#editVehicleBOLO .make').selectpicker('val', data.make);
-						$('#editVehicleBOLO .model').selectpicker('val', data.model);
-						$('#editVehicleBOLO .plate').val(data.plate);
-						$('#editVehicleBOLO .primaryColor').val(data.primaryColor);
-						$('#editVehicleBOLO .secondaryColor').val(data.secondaryColor);
-						$('#editVehicleBOLO .lastSeen').val(data.lastSeen);
-						$('#editVehicleBOLO .reasonWanted').val(data.reasonWanted);
+						$('#editVehicleBOLO .vehicle_make').selectpicker('val', data.vehicle_make);
+						$('#editVehicleBOLO .vehicle_model').selectpicker('val', data.vehicle_model);
+						$('#editVehicleBOLO .vehicle_plate').val(data.vehicle_plate);
+						$('#editVehicleBOLO .primary_color').val(data.primary_color);
+						$('#editVehicleBOLO .secondary_color').val(data.secondary_color);
+						$('#editVehicleBOLO .last_seen').val(data.last_seen);
+						$('#editVehicleBOLO .reason_wanted').val(data.reason_wanted);
 						$('#editVehicleBOLO .EditVehicleId').val(data.id);
 					});
 			})

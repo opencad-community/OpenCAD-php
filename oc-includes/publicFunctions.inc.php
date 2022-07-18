@@ -302,7 +302,7 @@ function getIncidentTypes()
 		die();
 	}
 
-	$incidentTypes = $pdo->query("SELECT id, codeId, codeName from " . DB_PREFIX . "incidentTypes");
+	$incidentTypes = $pdo->query("SELECT id, codeId, codeName from " . DB_PREFIX . "incidenttypes");
 	if (!$incidentTypes) {
 		$_SESSION['error'] = $pdo->errorInfo();
 		header(ERRORREDIRECT);

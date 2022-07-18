@@ -17,7 +17,7 @@ require_once("oc-config.php");
 require_once(ABSPATH . "/oc-includes/version.inc.php");
 require_once(ABSPATH . "/oc-includes/autoload.inc.php");
 
-if(phpversion() < MINIMUM_PHP_VERSION){
+if (phpversion() < MINIMUM_PHP_VERSION) {
 	echo "You need to update to PHP 8.0 (8.1 Recommended). Failure to do so will result in you being unable to use OpenCAD<br><br>Error: <strong>0x90626bf501ed</strong> Incorrect PHP Version";
 	exit();
 }
@@ -316,4 +316,13 @@ function lang_key($key)
 		$output = str_replace('_', ' ', $key);
 	}
 	return $output;
+}
+
+function write_to_console($data)
+{
+	$console = $data;
+	if (is_array($console))
+		$console = implode(',', $console);
+
+	echo "<script>console.log('Console: " . $console . "' );</script>";
 }

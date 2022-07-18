@@ -701,13 +701,14 @@ $arrLang["NEW_VEHICLE_BOLO"] = "New Vehicle BOLO";
 $arrLang["NEW_CALL"] = "New Call";
 $arrLang["PANIC_BUTTON"] = "Panic Button";
 $arrLang["PRIORITY_TONE"] = "Priority Tone";
-$arrLang["STOP_BORADCASTING_BUTTON"] = "10-3 Tone";
+$arrLang["__BORADCASTING_BUTTON"] = "10-3 Tone";
 $arrLang["STOPWATCH"] = "Stopwatch";
 $arrLang["WARNINGS"] = "Warnings";
 $arrLang["CITATIONS"] = "Citations";
 $arrLang["ARREST_REPORT"] = "Arrest Report";
 $arrLang["WARRANTS"] = "Warrants";
 $arrLang["SET_AREA_OF_PATROL"] = "Set Area of Patrol";
+$arrLang["STOP_TRANSMITTING"] = "10-3 Tone";
 //** End CAD Console Strings *//
 
 //** Begin MDT Console Strings **/

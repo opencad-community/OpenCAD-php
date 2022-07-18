@@ -550,7 +550,7 @@ function getIncidentTypes()
 		die();
 	}
 	
-	$stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."incidentTypes");
+	$stmt = $pdo->prepare("SELECT * FROM ".DB_PREFIX."incidenttypes");
 	$resStatus = $stmt->execute();
 	$result = $stmt;
 

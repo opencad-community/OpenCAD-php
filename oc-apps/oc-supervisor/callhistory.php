@@ -50,7 +50,7 @@ permissionDenied();
 
 		require_once(__DIR__ . '/../oc-config.php');
 		require_once(__DIR__ . '/../oc-functions.php');
-		include(__DIR__ . '/./oc-includes/adminActions.inc.php');
+		include(__DIR__ . '/./oc-includes/adminActions.php');
 
 		$historyMessage = "";
 		if(isset($_SESSION['historyMessage']))
@@ -102,7 +102,7 @@ permissionDenied();
 						<a data-toggle="tooltip" data-placement="top" title="Need Help?" href="https://guides.opencad.io/">
 						<span class="fas fa-info-circle" aria-hidden="true"></span>
 						</a>
-						<a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/oc-includes/logout.inc.php?responder=<?php echo $_SESSION['identifier'];?>">
+						<a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo BASE_URL; ?>/oc-includes/logout.php?responder=<?php echo $_SESSION['identifier'];?>">
 						<span class="fas fa-sign-out-alt" aria-hidden="true"></span>
 						</a>
 						</div>
@@ -126,7 +126,7 @@ permissionDenied();
 									</a>
 									<ul class="dropdown-menu dropdown-usermenu pull-right">
 										<li><a rel="noopener" href="../profile.php"><em class="fas fa-user pull-right"></em>My Profile</a></li>
-										<li><a rel="noopener" href="<?php echo BASE_URL; ?>/oc-includes/logout.inc.php"><em class="fas fa-sign-out-alt pull-right"></em> Log Out</a></li>
+										<li><a rel="noopener" href="<?php echo BASE_URL; ?>/oc-includes/logout.php"><em class="fas fa-sign-out-alt pull-right"></em> Log Out</a></li>
 									</ul>
 								</li>
 
