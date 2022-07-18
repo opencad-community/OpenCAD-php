@@ -364,7 +364,7 @@ function create_citation()
 	$_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully created citation</span></div>';
 
 	$pdo = null;
-	header("Location:".BASE_URL."/mdt.php?dep=".$_SESSION['activeDepartment']);
+	header("Location: ".BASE_URL."/oc-apps/mdt.php?dep=".$_SESSION['activeDepartment']);
 }
 
 function create_warning()

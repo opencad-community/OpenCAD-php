@@ -306,7 +306,7 @@
 		</div>
 		<!-- ./ modal-header -->
 		<div class="modal-body">
-			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.inc.php" method="post" aria-labelledby="createPersonBoloLabel">
+			<form role="form" action="<?php echo BASE_URL . "/" . OCINC ?>/dispatchActions.inc.php" method="post" aria-labelledby="createPersonBoloLabel">
 				<div class="form-group row">
 				</div>
 				<div class="form-group row">
@@ -474,7 +474,7 @@
 		</div>
 		<!-- ./ modal-header -->
 		<div class="modal-body">
-			<form role="form" action="<?php echo BASE_URL . OCINC ?>/dispatchActions.inc.php" method="post" aria-labelledby="createVehicleBoloLabel">
+			<form role="form" action="<?php echo BASE_URL . "/" . OCINC ?>/dispatchActions.inc.php" method="post" aria-labelledby="createVehicleBoloLabel">
 				<div class="form-group row">
 				</div>
 				<div class="form-group row">

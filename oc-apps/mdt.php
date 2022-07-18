@@ -13,9 +13,6 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
  **/
 
-if (session_id() == '' || !isset($_SESSION)) {
-	session_start();
-}
 include_once("../oc-config.php");
 include_once(ABSPATH . "/oc-functions.php");
 include_once(ABSPATH . "/oc-settings.php");
@@ -23,6 +20,8 @@ include_once(ABSPATH  .  "oc-includes/generalActions.inc.php");
 include_once(ABSPATH  . "oc-includes/publicFunctions.inc.php");
 include_once(ABSPATH  . "oc-includes/dispatchActions.inc.php");
 include_once(ABSPATH . "oc-includes/apiAuth.inc.php");
+
+isSessionStarted();
 
 $adminButton = "";
 $debugInfo = "";
@@ -38,6 +37,7 @@ $civilianTitle = "";
 $roadsideAssistButton = "";
 $leoTitle  = "";
 $firstResponderTitle  = "";
+$_SESSION["activeDepartment"] = $_GET["dep"];
 
 if (empty($_SESSION['logged_in'])) {
 	header('Location: ../index.php');
@@ -394,11 +394,6 @@ if (empty($_SESSION['logged_in'])) {
 		var vid = document.getElementById("recurringToneAudio");
 		vid.volume = 0.3;
 	</script>
-	<?php
-	if ($_SESSION['activeDepartment'] == 'fire') {
-	} else {
-	}
-	?>
 	<script type="text/javascript">
 		// Parse the URL parameter
 		function getParameterByName(name, url) {

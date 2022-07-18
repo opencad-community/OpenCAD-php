@@ -661,7 +661,7 @@ function create_citation()
     $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully created citation</span></div>';
 
     $pdo = null;
-    header("Location:".BASE_URL."/cad.php");
+    header("Location: ".BASE_URL."/oc-apps/cad.php");
 }
 
 function create_warning()
@@ -746,7 +746,7 @@ function create_warning()
     $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully created warning</span></div>';
 
     $pdo = null;
-    header("Location:".BASE_URL."/cad.php");
+    header("Location: ".BASE_URL."/oc-apps/cad.php");
 }
 
 function create_warrant()
@@ -784,7 +784,7 @@ function create_warrant()
 
     $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully created warrant</span></div>';
 
-    header("Location:".BASE_URL."/cad.php");
+    header("Location: ".BASE_URL."/oc-apps/cad.php");
 }
 
 function delete_citation()
@@ -794,7 +794,7 @@ function delete_citation()
     DB::query("DELETE FROM ".DB_PREFIX."ncicCitations WHERE id = " . $cid);
 
     $_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully removed citation</span></div>';
-    header("Location: ".BASE_URL."/cad.php");
+    header("Location: ".BASE_URL."/oc-apps/cad.php");
 }
 
 function delete_arrest()
@@ -804,7 +804,7 @@ function delete_arrest()
     DB::query("DELETE FROM ".DB_PREFIX."ncicArrests WHERE id = " . $aid);
 
     $_SESSION['arrestMessage'] = '<div class="alert alert-success"><span>Successfully removed arrest</span></div>';
-    header("Location: ".BASE_URL."/cad.php");
+    header("Location: ".BASE_URL."/oc-apps/cad.php");
 }
 
 function delete_warning()
@@ -814,7 +814,7 @@ function delete_warning()
     DB::query("DELETE FROM ".DB_PREFIX."ncicWarnings WHERE id = " . $wgid);
 
     $_SESSION['warningMessage'] = '<div class="alert alert-success"><span>Successfully removed warning</span></div>';
-    header("Location: ".BASE_URL."/cad.php");
+    header("Location: ".BASE_URL."/oc-apps/cad.php");
 }
 
 function delete_warrant()
@@ -824,7 +824,7 @@ function delete_warrant()
     DB::query("DELETE FROM ".DB_PREFIX."ncicWarrants WHERE id = " . $wid);
 
     $_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully removed warrant</span></div>';
-    header("Location: ".BASE_URL."/cad.php");
+    header("Location: ".BASE_URL."/oc-apps/cad.php");
 }
 
 function ncicGetArrests()
@@ -1148,7 +1148,7 @@ function create_personbolo()
 
     $_SESSION['boloMessage'] = '<div class="alert alert-success"><span>Successfully created BOLO</span></div>';
 
-    header("Location:".BASE_URL."/cad.php");
+    header("Location: ".BASE_URL."/oc-apps/cad.php");
 }
 
 function create_vehiclebolo()
@@ -1170,7 +1170,7 @@ function create_vehiclebolo()
         die();
     }
 
-    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."bolosVehicles (make, model, plate, primaryColor, secondaryColor, reasonWanted, lastSeen) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO ".DB_PREFIX."bolosVehicles (vehicleMake, vehicleModel, vehiclePlate, primaryColor, secondaryColor, reasonWanted, lastSeen) VALUES (?, ?, ?, ?, ?, ?, ?)");
     $result = $stmt->execute(array($make, $model, $plate, $primaryColor, $secondaryColor, $reasonWanted, $lastSeen));
 
     if (!$result)
@@ -1183,17 +1183,34 @@ function create_vehiclebolo()
 
     $_SESSION['boloMessage'] = '<div class="alert alert-success"><span>Successfully created BOLO</span></div>';
 
-    header("Location:".BASE_URL."/cad.php");
+    header("Location: ".BASE_URL."/oc-apps/cad.php");
 }
 
 function delete_personbolo()
 {
     $pbid = htmlspecialchars($_POST['pbid']);
 
-    DB::query("DELETE FROM ".DB_PREFIX."bolosPersons WHERE id = " . $pbid);
+    try{
+        $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    } catch(PDOException $ex)
+    {
+       throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+
+        die();
+    }
+
+    $stmt = $pdo->prepare("DELETE FROM ".DB_PREFIX."bolosPersons WHERE id = ?");
+    $result = $stmt->execute(array($pbid));
+
+    if (!$result)
+    {
+        $_SESSION['error'] = $stmt->errorInfo();
+        header(ERRORREDIRECT);
+        die();
+    }
  
     $_SESSION['boloMessage'] = '<div class="alert alert-success"><span>Successfully removed person BOLO</span></div>';
-    header("Location: ".BASE_URL."/cad.php");
+    header("Location: ".BASE_URL."/oc-apps/cad.php");
 }
 
 function delete_vehiclebolo()
@@ -1203,7 +1220,7 @@ function delete_vehiclebolo()
     DB::query("DELETE FROM ".DB_PREFIX."bolosVehicles WHERE id = " . $vbid);
     
     $_SESSION['boloMessage'] = '<div class="alert alert-success"><span>Successfully removed vehicle BOLO</span></div>';
-    header("Location: ".BASE_URL."/cad.php");
+    header("Location: ".BASE_URL."/oc-apps/cad.php");
 }
 
 function cadGetPersonBOLOSid()
@@ -1289,7 +1306,7 @@ function changeaop()
 
     $pdo = null;
 
-    header("Location:".BASE_URL."/oc-apps/cad.php");
+    header("Location: ".BASE_URL."/oc-apps/cad.php");
 }
 
 function editPersonBOLOS()
@@ -1324,7 +1341,7 @@ function editPersonBOLOS()
 
     $_SESSION['boloMessage'] = '<div class="alert alert-success"><span>Successfully updated BOLO</span></div>';
 
-    header("Location:".BASE_URL."/cad.php");
+    header("Location: ".BASE_URL."/oc-apps/cad.php");
 }
 
 function edit_vehiclebolo()
@@ -1360,7 +1377,7 @@ function edit_vehiclebolo()
 
     $_SESSION['boloMessage'] = '<div class="alert alert-success"><span>Successfully Updated BOLO</span></div>';
 
-    header("Location:".BASE_URL."/cad.php");
+    header("Location: ".BASE_URL."/oc-apps/cad.php");
 }
 
 function create_arrest()
@@ -1446,6 +1463,6 @@ function create_arrest()
     $_SESSION['arrestMessage'] = '<div class="alert alert-success"><span>Successfully created arrest report</span></div>';
 
     $pdo = null;
-    header("Location:".BASE_URL."/cad.php");
+    header("Location: ".BASE_URL."/oc-apps/cad.php");
 }
 ?>

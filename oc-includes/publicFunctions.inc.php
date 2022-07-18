@@ -309,8 +309,8 @@ function getIncidentTypes()
 		die();
 	}
 
-	$incidentTypes  = substr($incidentTypes, 14, strlen($incidentTypes) - 18);
-	$incidentTypes = preg_split("/','/", $incidentTypes);
+	// $incidentTypes  = substr($incidentTypes, 14, strlen($incidentTypes) - 18);
+	// $incidentTypes = preg_split("/','/", $incidentTypes);
 
 	foreach ($incidentTypes as $row) {
 		echo '<option value="' . $row['id'] . '">' . $row['codeId'] . ' &#8212; ' . $row['codeName'] . '</option>\n';
