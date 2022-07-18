@@ -27,7 +27,7 @@ function logoutResponder()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 die();
 		die();
 	}

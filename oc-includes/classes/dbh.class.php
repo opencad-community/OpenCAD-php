@@ -29,7 +29,7 @@ class Dbh {
         return $pdo;
     } catch(PDOException $ex)
     {
-        throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+        throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
         die();
     }
   }

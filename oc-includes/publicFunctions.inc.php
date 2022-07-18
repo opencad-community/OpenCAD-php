@@ -28,7 +28,7 @@ function getAgencies()
 	try {
 		$pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
 	} catch (PDOException $ex) {
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 		die();
 	}
 
@@ -49,7 +49,7 @@ function getAgenciesWarrants()
 	try {
 		$pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
 	} catch (PDOException $ex) {
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 		die();
 	}
 
@@ -76,7 +76,7 @@ function getLicenseStatuses()
 	try {
 		$pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
 	} catch (PDOException $ex) {
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 		die();
 	}
 
@@ -115,7 +115,7 @@ function getLicenseTypes()
 	try {
 		$pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
 	} catch (PDOException $ex) {
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 		die();
 	}
 
@@ -148,7 +148,7 @@ function getLicenseClasses()
 	try {
 		$pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
 	} catch (PDOException $ex) {
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 		die();
 	}
 
@@ -188,7 +188,7 @@ function getLicenseIssuers()
 	try {
 		$pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
 	} catch (PDOException $ex) {
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 		die();
 	}
 
@@ -228,7 +228,7 @@ function getPlateRegisrars()
 	try {
 		$pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
 	} catch (PDOException $ex) {
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 		die();
 	}
 
@@ -266,7 +266,7 @@ function getGenders()
 	try {
 		$pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
 	} catch (PDOException $ex) {
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 		die();
 	}
 
@@ -298,7 +298,7 @@ function getIncidentTypes()
 	try {
 		$pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
 	} catch (PDOException $ex) {
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 		die();
 	}
 
@@ -330,7 +330,7 @@ function getRaces()
 	try {
 		$pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
 	} catch (PDOException $ex) {
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 		die();
 	}
 
@@ -367,7 +367,7 @@ function getData2($tableName, $column1, $column2)
 	try {
 		$pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
 	} catch (PDOException $ex) {
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 		die();
 	}
 
@@ -398,7 +398,7 @@ function getData3($tableName, $column1, $column2, $column3)
 	try {
 		$pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
 	} catch (PDOException $ex) {
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 		die();
 	}
 
@@ -434,7 +434,7 @@ function getDataSetTable($dataSet, $column1, $column2, $leadTrim, $followTrim, $
 	try {
 		$pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
 	} catch (PDOException $ex) {
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 		die();
 	}
 

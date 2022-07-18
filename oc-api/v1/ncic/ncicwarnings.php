@@ -292,7 +292,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         addApiCallCount();
         exit();
     } catch (Exception $e) {
-        throw new Exception($e);
+        throw_new_error("API Error", "Error: 0x5a2a8e2e4a70 " . $e);
         addApiCallCount();
         die();
     }

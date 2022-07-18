@@ -1,17 +1,4 @@
 <?php
-
-/**
-Open source CAD system for RolePlaying Communities.
-Copyright (C) 2017 Shane Gill
-
-This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
-This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
- **/
-
 if (!file_exists(getcwd() . '/oc-config.php') && is_writable(getcwd())) {
 	header('Location://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'] . 'oc-install/start.php');
 }
@@ -21,12 +8,10 @@ require_once(ABSPATH . "/oc-settings.php");
 require_once(ABSPATH . "/oc-includes/register.inc.php");
 require_once(ABSPATH . "/oc-includes/publicFunctions.inc.php");
 
-if(phpversion() < MINIMUM_PHP_VERSION){
-	echo "You need to update to PHP 8.0 (8.1 Recommended). Failure to do so will result in you being unable to use OpenCAD";
-	exit();
-}
+check_php_version();
 
 isSessionStarted();
+
 $_SESSION['root_path'] = getcwd();
 $registerError = "";
 $registerSuccess = "";

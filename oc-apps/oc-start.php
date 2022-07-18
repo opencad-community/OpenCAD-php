@@ -105,8 +105,7 @@ if (isset($_SESSION['adminPrivilege'])) {
 }
 
 if (empty($_SESSION['logged_in'])) {
-	header('Location: ' . BASE_URL);
-	die("Not logged in");
+	permissionDenied();
 }
 ?>
 

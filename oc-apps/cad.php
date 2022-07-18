@@ -1,21 +1,16 @@
 <?php
-
 /**
+ * Open source CAD system for RolePlaying Communities.
+ * Copyright (C) 2022 OpenCAD Project
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
+ */
 
-Open source CAD system for RolePlaying Communities.
-Copyright (C) 2017 Shane Gill
-
-This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
-This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
- **/
-
-if (session_id() == '' || !isset($_SESSION)) {
-	session_start();
-}
 include_once("../oc-config.php");
 include_once(ABSPATH . "/oc-functions.php");
 include_once(ABSPATH . "/oc-settings.php");
@@ -23,9 +18,11 @@ include_once(ABSPATH  .  "oc-includes/generalActions.inc.php");
 include_once(ABSPATH  . "oc-includes/publicFunctions.inc.php");
 include_once(ABSPATH  . "oc-includes/dispatchActions.inc.php");
 include_once(ABSPATH . "oc-includes/apiAuth.inc.php");
+
+isSessionStarted();
+
 if (empty($_SESSION['logged_in'])) {
-	header('Location: ../index.php');
-	die("Not logged in");
+	permissionDenied();
 } else {
 	$name = $_SESSION['name'];
 }

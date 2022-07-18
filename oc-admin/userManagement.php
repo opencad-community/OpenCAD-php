@@ -12,17 +12,16 @@ the Free Software Foundation, either version 3 of the License, or
 
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
  **/
-if (session_id() == '' || !isset($_SESSION)) {
-	session_start();
-}
 require_once('../oc-config.php');
 require_once(ABSPATH . '/oc-functions.php');
 require_once(ABSPATH . '/oc-settings.php');
 require_once(ABSPATH . "/oc-includes/adminActions.inc.php");
 require_once(ABSPATH . "/oc-includes/publicFunctions.inc.php");
+
+isSessionStarted();
+
 if (empty($_SESSION['logged_in'])) {
-	header('Location: ../index.php');
-	die("Not logged in");
+	permissionDenied();
 }
 
 if ($_SESSION['adminPrivilege'] == 3) {

@@ -1,17 +1,16 @@
 <?php
 
 /**
-
-Open source CAD system for RolePlaying Communities.
-Copyright (C) 2017 Shane Gill
-
-This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
-This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
- **/
+ * Open source CAD system for RolePlaying Communities.
+ * Copyright (C) 2022 OpenCAD Project
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
+ */
 
 include_once("../oc-config.php");
 include_once(ABSPATH . "/oc-functions.php");
@@ -40,8 +39,7 @@ $firstResponderTitle  = "";
 $_SESSION["activeDepartment"] = $_GET["dep"];
 
 if (empty($_SESSION['logged_in'])) {
-	header('Location: ../index.php');
-	die("Not logged in");
+	permissionDenied();
 } else {
 	$name = $_SESSION['name'];
 }
@@ -155,8 +153,7 @@ if (isset($_SESSION['adminPrivilege'])) {
 }
 
 if (empty($_SESSION['logged_in'])) {
-	header('Location: ' . BASE_URL);
-	die("Not logged in");
+	permissionDenied();
 }
 ?>
 

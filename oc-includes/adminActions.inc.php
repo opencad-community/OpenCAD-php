@@ -104,7 +104,7 @@ function editUserAccount()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 		die();
 	}
 
@@ -156,7 +156,7 @@ function editUserAccountRole()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 		die();
 	}
  
@@ -210,7 +210,7 @@ function getPendingUsers()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 		die();
 	}
 
@@ -280,7 +280,7 @@ function getPendingUsersReadOnly()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 		die();
 	}
 
@@ -353,7 +353,7 @@ function _getRole($id)
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 		die();
 	}
 
@@ -377,7 +377,7 @@ function getUserGroups($uid)
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 		die();
 	}
 
@@ -405,7 +405,7 @@ function getUserGroupsApproved($uid)
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 
 		die();
 	}
@@ -443,7 +443,7 @@ function approveUser()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 
 		die();
 	}
@@ -494,7 +494,7 @@ function rejectUser()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 
 		die();
 	}
@@ -535,7 +535,7 @@ function getGroupCount($gid)
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 
 		die();
 	}
@@ -564,7 +564,7 @@ function getGroupName($gid)
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 
 		die();
 	}
@@ -591,7 +591,7 @@ function getUsers()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 
 		die();
 	}
@@ -744,7 +744,7 @@ function suspendUser()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 
 		die();
 	}
@@ -794,7 +794,7 @@ function suspendUserWithReason()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 
 		die();
 	}
@@ -845,7 +845,7 @@ function reactivateUser()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 
 		die();
 	}
@@ -875,7 +875,7 @@ function getUserDetails()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 
 		die();
 	}
@@ -910,7 +910,7 @@ function getUserID()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 
 		die();
 	}
@@ -941,7 +941,7 @@ function getUserGroupsEditor($encode, $userId)
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 
 		die();
 	}
@@ -1006,7 +1006,7 @@ function getCallHistory()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 
 		die();
 	}
@@ -1082,7 +1082,7 @@ function delete_callhistory()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 
 		die();
 	}
@@ -1112,7 +1112,7 @@ function changeUserPassword()
 		$pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
 	} catch(PDOException $ex)
 	{
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 		die();
 	}
 
