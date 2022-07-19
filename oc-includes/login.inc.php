@@ -11,16 +11,13 @@ This program is free software: you can redistribute it and/or modify
 
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
  **/
-session_start();
 require_once("../oc-config.php");
 require_once(ABSPATH . "/oc-functions.php");
 require_once(ABSPATH . "/oc-settings.php");
 require_once(ABSPATH . OCINC . "/apiAuth.inc.php");
 
+isSessionStarted();
 if (!empty($_POST)) {
-	if (session_id() == '' || !isset($_SESSION)) {
-		session_start();
-	}
 	$email = htmlspecialchars($_POST['email']);
 	$password = htmlspecialchars($_POST['password']);
 }
@@ -47,9 +44,7 @@ $login_ok = false;
 if (password_verify($password, $result['password'])) {
 	$login_ok = true;
 } else {
-	if (session_id() == '' || !isset($_SESSION)) {
-		session_start();
-	}
+	isSessionStarted();
 	$_SESSION['loginMessageDanger'] = 'Invalid credentials';
 	header("Location:" . BASE_URL . "/index.php");
 	exit();
@@ -61,18 +56,14 @@ if (password_verify($password, $result['password'])) {
 		2 = Suspended
 	*/
 if ($result['approved'] == "0") {
-	if (session_id() == '' || !isset($_SESSION)) {
-		session_start();
-	}
+	isSessionStarted();
 	$_SESSION['loginMessageDanger'] = 'Your account hasn\'t been approved yet. Please wait for an administrator to approve your access request.';
 	header("Location:" . BASE_URL . "/index.php");
 	exit();
 }
 if ($result['approved'] == "2") {
 	/* TODO: [OCPHP-704] Show reason why user is suspended */
-	if (session_id() == '' || !isset($_SESSION)) {
-		session_start();
-	}
+	isSessionStarted();
 	$_SESSION['loginMessageDanger'] = "Your account has been suspended by an administrator for: $suspended_reason";
 	header("Location:" . BASE_URL . "/index.php");
 	exit();
@@ -139,5 +130,8 @@ foreach ($Department as $Department) {
 $pdo = null;
 
 setcookie(htmlspecialchars(COOKIE_NAME), hash('whirlpool', session_id() . getApiKey()), time() + (86400 * 7), "/", null, true, true);
+
+do_hook('login_success', $id, $result['name'], $result['email'], $result['identifier']);
+
 
 header("Location:" . BASE_URL . "/" . OCAPPS . "/oc-start.php");

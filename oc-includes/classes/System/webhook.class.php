@@ -65,6 +65,7 @@ class Webhook extends \Dbh
             return false;
         } else {
             $results = $stmt->fetchAll();
+            do_hook('webhook_inserted_success', $title, $json, $type, $config_data->decrpytString($uri), $settings);
             return $results;
         }
     }
@@ -96,6 +97,7 @@ class Webhook extends \Dbh
             return false;
         } else {
             $results = $stmt->fetchAll();
+            do_hook('webhook_edited_success', $title, $json, $type, $config_data->decrpytString($uri), $settings);
             return $results;
         }
     }
@@ -131,6 +133,7 @@ class Webhook extends \Dbh
             return false;
         } else {
             $results = $stmt->fetchAll();
+            do_hook('webhook_delete_success', $id);
             return $results;
         }
     }
@@ -157,6 +160,7 @@ class Webhook extends \Dbh
 
         curl_close($curl);
         $response = json_decode($response, true);
+        do_hook('webhook_post_succcess', $response);
 
         return 'Response: ' . $response;
     }

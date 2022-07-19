@@ -53,7 +53,7 @@ function updateCallsign()
 	$callsign = explode("=", $detailsArr[0])[1];
 
 	//Use the user's session ID
-	session_start();
+	isSessionStarted();
 	$identifier = $_SESSION['identifier'];
 
 	try{
@@ -292,7 +292,7 @@ function create_citation()
 	$citation_fine_4 = htmlspecialchars($_POST['citation_fine_4']);
 	$citation_name_5 = htmlspecialchars($_POST['citation_name_5']);
 	$citation_fine_5 = htmlspecialchars($_POST['citation_fine_5']);
-	session_start();
+	isSessionStarted();
 	$Issuer = $_SESSION['name'];
 	$date = date('Y-m-d');
 
@@ -372,7 +372,7 @@ function create_warning()
 	$warning_name_3 = htmlspecialchars($_POST['warning_name_3']);
 	$warning_name_4 = htmlspecialchars($_POST['warning_name_4']);
 	$warning_name_5 = htmlspecialchars($_POST['warning_name_5']);
-	session_start();
+	isSessionStarted();
 	$Issuer = $_SESSION['name'];
 	$date = date('Y-m-d');
 
@@ -460,7 +460,7 @@ function create_arrest()
 	$arrestFine4 = htmlspecialchars($_POST['arrestFine4']);
 	$arrestReason5 = htmlspecialchars($_POST['arrestReason5']);
 	$arrestFine5 = htmlspecialchars($_POST['arrestFine5']);
-	session_start();
+	isSessionStarted();
 	$Issuer = $_SESSION['name'];
 	$date = date('Y-m-d');
 

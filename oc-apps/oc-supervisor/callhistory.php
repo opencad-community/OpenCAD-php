@@ -11,10 +11,7 @@
  * 
  * This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
  */
-	if(session_id() == '' || !isset($_SESSION)) {
-	// session isn't started
-	session_start();
-	}
+	isSessionStarted();
 permissionDenied();
 
 		if (empty($_SESSION['logged_in']))

@@ -28,7 +28,7 @@ if (isset($_POST['changePassword'])) {
 
 function updateProfile()
 {
-	session_start();
+	isSessionStarted();
 	$id = $_SESSION['id'];
 	$name = htmlspecialchars($_POST['name']);
 	$email = htmlspecialchars($_POST['email']);

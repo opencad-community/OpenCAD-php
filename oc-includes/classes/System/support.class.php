@@ -7,12 +7,10 @@ class Support extends \Dbh
 
     public function submitBug($key, $array)
     {
-        // TO BE DELETED AND HAVE MAIN REPO SET FOR FINAL RELEASE
-        if(!OC_DEVELOP){
-            $URL = "https://api.github.com/repos/opencad-app/OpenCAD-php/issues";
-        } else{
-            $URL = "https://api.github.com/repos/kevingorman1000/OpenCad-Versions-TEMP/issues";
-        }
+
+        // $URL = "https://api.github.com/repos/opencad-app/OpenCAD-php/issues";
+        $URL = "https://api.github.com/repos/kevingorman1000/OpenCad-Versions-TEMP/issues";
+
 
         $ch = curl_init();
 
@@ -24,11 +22,11 @@ class Support extends \Dbh
 
         $headers = array();
         $headers[] = 'Accept: application/vnd.github+json';
-        $headers[] = 'Authorization: token '. $key;
+        $headers[] = 'Authorization: token ' . $key;
         $headers[] = 'Content-Type: application/x-www-form-urlencoded';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-        $result=json_decode(curl_exec($ch),true);
+        $result = json_decode(curl_exec($ch), true);
         if (curl_errno($ch)) {
             echo 'Error:' . curl_error($ch);
         }
@@ -58,9 +56,9 @@ class Support extends \Dbh
         }
     }
 
-   
 
-    
+
+
 
     public function checkKey($key)
     {
@@ -119,13 +117,13 @@ class Support extends \Dbh
             }
         }
     }
-    
+
     public function getIssues($key)
     {
         // TO BE DELETED AND HAVE MAIN REPO SET FOR FINAL RELEASE
-        if(!OC_DEVELOP){
+        if (!OC_DEVELOP) {
             $URL = "https://api.github.com/repos/opencad-app/OpenCAD-php/issues";
-        } else{
+        } else {
             $URL = "https://api.github.com/repos/kevingorman1000/OpenCad-Versions-TEMP/issues";
         }
 
@@ -139,11 +137,11 @@ class Support extends \Dbh
 
         $headers = array();
         $headers[] = 'Accept: application/vnd.github+json';
-        $headers[] = 'Authorization: token '. $key;
+        $headers[] = 'Authorization: token ' . $key;
         $headers[] = 'Content-Type: application/x-www-form-urlencoded';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-        $result=json_decode(curl_exec($ch),true);
+        $result = json_decode(curl_exec($ch), true);
         if (curl_errno($ch)) {
             echo 'Error:' . curl_error($ch);
         }
@@ -167,11 +165,11 @@ class Support extends \Dbh
 
         $headers = array();
         $headers[] = 'Accept: application/vnd.github+json';
-        $headers[] = 'Authorization: token '. $key;
+        $headers[] = 'Authorization: token ' . $key;
         $headers[] = 'Content-Type: application/x-www-form-urlencoded';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-        $result=json_decode(curl_exec($ch),true);
+        $result = json_decode(curl_exec($ch), true);
         if (curl_errno($ch)) {
             echo 'Error:' . curl_error($ch);
         }
@@ -183,10 +181,10 @@ class Support extends \Dbh
     public function getIssuesByID($key, $id)
     {
         // TO BE DELETED AND HAVE MAIN REPO SET FOR FINAL RELEASE
-        if(!OC_DEVELOP){
-            $URL = "https://api.github.com/repos/opencad-app/OpenCAD-php/issues/".$id."/comments";
-        } else{
-            $URL = "https://api.github.com/repos/kevingorman1000/OpenCad-Versions-TEMP/issues/".$id."/comments";
+        if (!OC_DEVELOP) {
+            $URL = "https://api.github.com/repos/opencad-app/OpenCAD-php/issues/" . $id . "/comments";
+        } else {
+            $URL = "https://api.github.com/repos/kevingorman1000/OpenCad-Versions-TEMP/issues/" . $id . "/comments";
         }
 
 
@@ -200,11 +198,11 @@ class Support extends \Dbh
 
         $headers = array();
         $headers[] = 'Accept: application/vnd.github+json';
-        $headers[] = 'Authorization: token '. $key;
+        $headers[] = 'Authorization: token ' . $key;
         $headers[] = 'Content-Type: application/x-www-form-urlencoded';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-        $result=json_decode(curl_exec($ch),true);
+        $result = json_decode(curl_exec($ch), true);
         if (curl_errno($ch)) {
             echo 'Error:' . curl_error($ch);
         }

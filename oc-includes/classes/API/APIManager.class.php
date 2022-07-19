@@ -15,7 +15,9 @@ class APIManager extends \Dbh
         }
         $time = time();
         $time = substr_replace($time, uniqid(), 3, 0);
-        return uniqid($time.$randomString.session_id());
+        $string = uniqid($time.$randomString.session_id());
+        do_hook('api_new_key_generation', $string );
+        return $string;
     }
 
     public function insertKey()
@@ -41,6 +43,7 @@ class APIManager extends \Dbh
             return false;
         } else {
             $results = $stmt->fetchAll();
+            do_hook('api_new_key_inserted', $title, $key, $permissions);
             return $results;
         }
     }
@@ -91,6 +94,7 @@ class APIManager extends \Dbh
             return false;
         } else {
             $results = $stmt->fetchAll();
+            do_hook('api_revoke_key', $id);
             return $results;
         }
     }

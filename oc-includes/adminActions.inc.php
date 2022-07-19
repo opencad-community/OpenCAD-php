@@ -83,7 +83,7 @@ function editUserAccount()
 	$userGroups 	= !empty($_POST['userGroups']) ? $_POST['userGroups'] : '';
 	$userRole       = !empty($_POST['userRole']) ? htmlspecialchars($_POST['userRole']) : '';
 
-	session_start();
+	isSessionStarted();
 	$myRank = $_SESSION['adminPrivilege'];
 	$hisRank = _getRole($userId);
 
@@ -135,7 +135,7 @@ function editUserAccountRole()
 	$userId 		= !empty($_POST['userId']) ? htmlspecialchars($_POST['userId']) : '';
 	$userRole 		= !empty($_POST['userRole']) ? htmlspecialchars($_POST['userRole']) : '';
 
-	session_start();
+	isSessionStarted();
 	$myRank = $_SESSION['adminPrivilege'];
 	$hisRank = _getRole($userId);
 
@@ -175,7 +175,7 @@ function editUserAccountRole()
 
 function delete_user()
 {
-	session_start();
+	isSessionStarted();
 	$uid = htmlspecialchars($_POST['userId']);
 	$myRank = $_SESSION['adminPrivilege'];
 	$hisRank = _getRole($uid);
@@ -199,7 +199,7 @@ function delete_user()
 		}
 	}
 
-	session_start();
+	isSessionStarted();
 	$_SESSION['userMessage'] = '<div class="alert alert-success"><span>Successfully removed user from database</span></div>';
 	header("Location: ".BASE_URL."/oc-admin/userManagement.php#user_panel");
 }
@@ -479,7 +479,7 @@ function approveUser()
 	}
 	$pdo = null;
 
-	session_start();
+	isSessionStarted();
 	$_SESSION['accessMessage'] = '<div class="alert alert-success"><span>Successfully approved user access</span></div>';
 
 	sleep(1);
@@ -520,7 +520,7 @@ function rejectUser()
 	}
 	$pdo = null;
 
-	session_start();
+	isSessionStarted();
 	$_SESSION['accessMessage'] = '<div class="alert alert-danger"><span>Successfully rejected user access</span></div>';
 
 	sleep(1);
@@ -728,7 +728,7 @@ function getUsers()
 
 function suspendUser()
 {
-	session_start();
+	isSessionStarted();
 	$uid = htmlspecialchars($_POST['uid']);
 	$myRank = $_SESSION['adminPrivilege'];
 	$hisRank = _getRole($uid);
@@ -777,7 +777,7 @@ function suspendUser()
 
 function suspendUserWithReason()
 {
-	session_start();
+	isSessionStarted();
 	$uid = htmlspecialchars($_POST['uid']);
 	$suspendReason = htmlspecialchars($_POST['suspendReason']);
 	$myRank = $_SESSION['adminPrivilege'];
@@ -820,7 +820,7 @@ function suspendUserWithReason()
 	}
 	$pdo = null;
 
-	session_start();
+	isSessionStarted();
 	$_SESSION['accessMessage'] = '<div class="alert alert-success"><span>Successfully suspended user account with reason</span></div>';
 	
 	$webhook_data = new System\Webhook();
@@ -861,7 +861,7 @@ function reactivateUser()
 	}
 	$pdo = null;
 
-	session_start();
+	isSessionStarted();
 	$_SESSION['accessMessage'] = '<div class="alert alert-success"><span>Successfully reactivated user account</span></div>';
 
 	sleep(1);
@@ -1098,14 +1098,14 @@ function delete_callhistory()
 	}
 	$pdo = null;
 
-	session_start();
+	isSessionStarted();
 	$_SESSION['historyMessage'] = '<div class="alert alert-success"><span>Successfully removed archived call</span></div>';
 	header("Location: ".BASE_URL."/oc-admin/callhistory.php#history_panel");
 }
 
 function changeUserPassword()
 {
-	session_start();
+	isSessionStarted();
 	$userId 		= !empty($_POST['userId']) ? htmlspecialchars($_POST['userId']) : '';
 
 	try{

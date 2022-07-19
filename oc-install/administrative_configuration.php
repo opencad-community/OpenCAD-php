@@ -1,11 +1,11 @@
 <?php
 
-session_start();
-
 require_once('include/shared.inc.php');
 require_once('include/settings.inc.php');
 require_once('include/functions.inc.php');
 require_once('include/languages.inc.php');
+
+isSessionStarted();
 
 $passed_step = isset($_SESSION['passed_step']) ? (int)$_SESSION['passed_step'] : 0;
 $focus_field = 'MODERATOR_APPROVE_USER';

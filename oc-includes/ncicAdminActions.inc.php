@@ -81,7 +81,7 @@ function rejectRequest()
 	}
 	$pdo = null;
 
-	session_start();
+	isSessionStarted();
 	$_SESSION['identityRequestMessage'] = '<div class="alert alert-success"><span>Successfully rejected request</span></div>';
 	header("Location: ".BASE_URL."/oc-admin/ncicAdmin.php");
 }
@@ -399,7 +399,7 @@ function delete_weapon()
 	}
 	$pdo = null;
 
-	session_start();
+	isSessionStarted();
 	$_SESSION['weaponMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian weapon</span></div>';
 	header("Location: ".BASE_URL."/oc-admin/ncicAdmin.php");
 }
@@ -427,7 +427,7 @@ function delete_citation()
 	}
 	$pdo = null;
 
-	session_start();
+	isSessionStarted();
 	$_SESSION['citationMessage'] = '<div class="alert alert-success"><span>Successfully removed citation</span></div>';
 	header("Location: ".BASE_URL."/oc-admin/ncicAdmin.php");
 }
@@ -455,7 +455,7 @@ function delete_arrest()
 	}
 	$pdo = null;
 
-	session_start();
+	isSessionStarted();
 	$_SESSION['arrestMessage'] = '<div class="alert alert-success"><span>Successfully removed arrest</span></div>';
 	header("Location: ".BASE_URL."/oc-admin/ncicAdmin.php");
 }
@@ -483,7 +483,7 @@ function delete_warning()
 	}
 	$pdo = null;
 
-	session_start();
+	isSessionStarted();
 	$_SESSION['warningMessage'] = '<div class="alert alert-success"><span>Successfully removed warning</span></div>';
 	header("Location: ".BASE_URL."/oc-admin/ncicAdmin.php");
 }
@@ -511,7 +511,7 @@ function delete_warrant()
 	}
 	$pdo = null;
 
-	session_start();
+	isSessionStarted();
 	$_SESSION['warrantMessage'] = '<div class="alert alert-success"><span>Successfully removed warrant</span></div>';
 	header("Location: ".BASE_URL."/oc-admin/ncicAdmin.php");
 }
@@ -855,7 +855,7 @@ function delete_name()
 	}
 	$pdo = null;
 
-	session_start();
+	isSessionStarted();
 	$_SESSION['nameMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian name</span></div>';
 	header("Location: ".BASE_URL."/oc-admin/ncicAdmin.php#name_panel");
 }
@@ -882,14 +882,14 @@ function delete_plate()
 	}
 	$pdo = null;
 
-	session_start();
+	isSessionStarted();
 	$_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully removed civilian plate</span></div>';
 	header("Location: ".BASE_URL."/oc-admin/ncicAdmin.php#plate_panel");
 }
 
 function edit_name()
 {
-	session_start();
+	isSessionStarted();
 
 	$fullName = htmlspecialchars($_POST['civNameReq']);
 	$firstName = explode(" ", $fullName) [0];
@@ -975,7 +975,7 @@ function edit_name()
 
 function edit_plate()
 {
-	session_start();
+	isSessionStarted();
 	
 	$plate = htmlspecialchars($_POST['vehPlate']);
 	
@@ -1024,7 +1024,7 @@ function edit_plate()
 	}
 	$pdo = null;
 
-	session_start();
+	isSessionStarted();
 	$_SESSION['plateMessage'] = '<div class="alert alert-success"><span>Successfully Updated plate to the database</span></div>';
 
 	header("Location:".BASE_URL."/oc-admin/ncicAdmin.php#plate_panel");

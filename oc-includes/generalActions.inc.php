@@ -64,7 +64,7 @@ if (isset($_GET['getCalls'])) {
 
     if ($myRank == 2) {
         getApiKey(true);
-        session_start();
+        isSessionStarted();
         session_unset();
         session_destroy();
         setcookie(htmlspecialchars(COOKIE_NAME), null, -1, "/", null, true, true, 'Strict');
@@ -85,7 +85,7 @@ function quickStatus()
 {
     $event = htmlspecialchars($_POST['event']);
     $callId = htmlspecialchars($_POST['callId']);
-    session_start();
+    isSessionStarted();
     $callsign = $_SESSION['callsign'];
 
     switch ($event) {
@@ -120,7 +120,7 @@ function quickStatus()
 function getMyCall()
 {
     if (session_id() == '' || !isset($_SESSION)) {
-        session_start();
+        isSessionStarted();
     }
     //First, check to see if they're on a call
     $uid = $_SESSION['id'];

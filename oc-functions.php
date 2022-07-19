@@ -16,6 +16,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 require_once("oc-config.php");
 require_once(ABSPATH . "/oc-includes/version.inc.php");
 require_once(ABSPATH . "/oc-includes/autoload.inc.php");
+require_once(ABSPATH . "/oc-includes/hooks.inc.php");
 
 check_php_version();
 
@@ -86,20 +87,20 @@ function isSessionStarted()
 	die();
 }
 
-if (!file_exists(getcwd() . '/.htaccess') && is_writable(getcwd())) {
+// if (!file_exists(getcwd() . '/.htaccess') && is_writable(getcwd())) {
 
-	$root = "/oc-content/plugins/error/static";
+// 	$root = "/oc-content/plugins/error/static";
 
-	$htaccess =	"RewriteEngine on" . PHP_EOL
-		. "RewriteCond %{REQUEST_FILENAME} -d" . PHP_EOL
-		. "ErrorDocument 403 $root/403.php" . PHP_EOL
-		. "ErrorDocument 404 $root/404.php" . PHP_EOL
-		. "ErrorDocument 502 $root/502.php" . PHP_EOL
-		. "ErrorDocument 503 $root/503.php" . PHP_EOL
-		. "Options -Indexes";
+// 	$htaccess =	"RewriteEngine on" . PHP_EOL
+// 		. "RewriteCond %{REQUEST_FILENAME} -d" . PHP_EOL
+// 		. "ErrorDocument 403 $root/403.php" . PHP_EOL
+// 		. "ErrorDocument 404 $root/404.php" . PHP_EOL
+// 		. "ErrorDocument 502 $root/502.php" . PHP_EOL
+// 		. "ErrorDocument 503 $root/503.php" . PHP_EOL
+// 		. "Options -Indexes";
 
-	file_put_contents(getcwd() . '/.htaccess', $htaccess);
-}
+// 	file_put_contents(getcwd() . '/.htaccess', $htaccess);
+// }
 
 /**#@+
  * function get_avatar()
@@ -313,3 +314,4 @@ function check_php_version()
 	}
 	return true;
 }
+

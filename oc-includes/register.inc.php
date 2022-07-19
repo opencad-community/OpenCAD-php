@@ -10,8 +10,6 @@ This program is free software: you can redistribute it and/or modify
 This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
  **/
 
-use System\Webhook;
-
 require_once(__DIR__ . "/../oc-config.php");
 
 if (isset($_POST['register'])) {
@@ -32,7 +30,7 @@ function register()
 		array_push($divisions, htmlspecialchars($selectedOption));
 	}
 	if ($_POST['password'] !== $_POST['password1']) {
-		session_start();
+		isSessionStarted();
 		$_SESSION['register_error'] = "Passwords do not match";
 		sleep(1);
 		header("Location:" . BASE_URL . "/index.php#signup");
@@ -62,7 +60,7 @@ function register()
 
 	$num_rows = $result->rowCount();
 	if ($num_rows > 0) {
-		session_start();
+		isSessionStarted();
 		$_SESSION['register_error'] = "Email already exists";
 		sleep(1);
 		header("Location:" . BASE_URL . "/index.php#signup");
@@ -93,7 +91,7 @@ function register()
 	}
 
 	$pdo = null;
-	session_start();
+	isSessionStarted();
 	$webhook_data = new System\Webhook();
 	$getWebhooks = $webhook_data->getWebhookSetting("userRequested");
 
@@ -102,6 +100,7 @@ function register()
 			$webhook_data->postWebhook($data["webhook_uri"], $data["webhook_json"]);
 		}
 	}
+	do_hook('register_law_enforcement_success', $name, $email, $_POST["password"], $division);
 
 	$_SESSION['register_success'] = "Successfully requested access. Please wait for an administrator to approve your request.";
 	sleep(1);
@@ -114,7 +113,7 @@ function civreg()
 	$email = htmlspecialchars($_POST['email']);
 	$identifier = htmlspecialchars($_POST['identifier']);
 	if ($_POST['password'] !== $_POST['password1']) {
-		session_start();
+		isSessionStarted();
 		$_SESSION['register_error'] = "Passwords do not match";
 		sleep(1);
 		header("Location:" . BASE_URL . "/index.php#signup");
@@ -144,7 +143,7 @@ function civreg()
 	$num_rows = $result->rowCount();
 
 	if ($num_rows > 0) {
-		session_start();
+		isSessionStarted();
 		$_SESSION['register_error'] = "Email already exists";
 		sleep(1);
 		header("Location:" . BASE_URL . "/index.php#civreg");
@@ -171,7 +170,7 @@ function civreg()
 	}
 
 	$pdo = null;
-	session_start();
+	isSessionStarted();
 	$_SESSION['register_success'] = "Successfully registered. You may now log-in.";
 	$webhook_data = new System\Webhook();
 	$getWebhooks = $webhook_data->getWebhookSetting("civRegistered");

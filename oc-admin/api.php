@@ -251,39 +251,4 @@ if (isset($_SESSION["api_success"])) {
 
 </body>
 
-<script>
-	function discordExample() {
-		array = {
-			"content": "Test Content",
-			"embeds": [{
-				"title": "Embed 1 title",
-				"description": "Embed 1 content",
-				"url": "https://thumbs.dreamstime.com/b/funny-face-baby-27733390.jpg",
-				"color": 41983,
-				"author": {
-					"name": "Embed 1 Author",
-					"url": "https://pbs.twimg.com/profile_images/1350309631231483904/T_l9_QWN_400x400.jpg",
-					"icon_url": "https://pbs.twimg.com/profile_images/1350309631231483904/T_l9_QWN_400x400.jpg"
-				},
-				"footer": {
-					"text": "Footer",
-					"icon_url": "https://thumbs.dreamstime.com/b/funny-face-baby-27733390.jpg"
-				},
-				"timestamp": "2022-06-29T20:23:00.000Z",
-				"image": {
-					"url": "https://thumbs.dreamstime.com/b/funny-face-baby-27733390.jpg"
-				},
-				"thumbnail": {
-					"url": "https://thumbs.dreamstime.com/b/funny-face-baby-27733390.jpg"
-				}
-			}],
-			"username": "Username Of Bot",
-			"avatar_url": "https://thumbs.dreamstime.com/b/funny-face-baby-27733390.jpg",
-			"attachments": []
-		}
-
-		document.getElementById("json_data").value = JSON.stringify(array);
-	}
-</script>
-
 </html>

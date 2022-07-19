@@ -1,10 +1,5 @@
 <?php
 
-if (session_id() == '' || !isset($_SESSION)) {
-	// session isn't started
-	session_start();
-}
-
 require_once("../oc-config.php");
 require_once(ABSPATH . 'oc-functions.php');
 require_once(ABSPATH . 'oc-settings.php');
@@ -12,6 +7,7 @@ require_once(ABSPATH . "oc-includes/generalActions.inc.php");
 require_once(ABSPATH . "oc-includes/adminActions.inc.php");
 include_once(ABSPATH . "oc-includes/apiAuth.inc.php");
 
+isSessionStarted();
 setDispatcher("1");
 
 $adminButton = "";

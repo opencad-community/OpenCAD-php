@@ -88,7 +88,7 @@ if (isset($_SESSION["errorMsg"]) && isset($_SESSION["errorTitle"])) {
     </head>
 
     <body>
-        <?php if ($errorTitle === "Permission Denied") { ?>
+        <?php if ($errorTitle == "Permission Denied") { ?>
             <div id="notfound">
                 <div class="notfound-bg"></div>
                 <div class="notfound">

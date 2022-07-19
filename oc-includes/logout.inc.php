@@ -44,11 +44,14 @@ die();
 	$pdo = null;
 }
 
-session_start();
+isSessionStarted();
 session_unset();
 session_destroy();
- setcookie($name = htmlspecialchars(COOKIE_NAME), null, -1, "/", null, true, true);
- 
+setcookie($name = htmlspecialchars(COOKIE_NAME), null, -1, "/", null, true, true);
+
+do_hook('logout_success');
+
+
 header("Location: ".BASE_URL."/index.php?loggedOut=true");
 exit();
 ?>

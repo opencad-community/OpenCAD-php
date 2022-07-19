@@ -318,11 +318,11 @@ function editCitationType()
 **/
 function deleteCitationType()
 {
-	session_start();
+	isSessionStarted();
 	$id = htmlspecialchars($_POST['citationTypeID']);
 
 	DB::query("DELETE FROM ".DB_PREFIX."citationTypes WHERE id = ". $id);
-	session_start();
+	isSessionStarted();
 	$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed incident type from database</span></div>';
 	header("Location: ".BASE_URL."/oc-admin/dataManagement/citationTypeManager.php");
 }
@@ -517,7 +517,7 @@ function editDepartment()
 **/
 function deleteDepartment()
 {
-	session_start();
+	isSessionStarted();
 	$departmentID = htmlspecialchars($_POST['departmentID']);
 
 	DB::query("DELETE FROM ".DB_PREFIX."departments WHERE departmentId = " . $departmentID);
@@ -708,7 +708,7 @@ function editIncidentType()
 **/
 function deleteIncidentType()
 {
-	session_start();
+	isSessionStarted();
 	$id = htmlspecialchars($_POST['IncidentTypeID']);
 
 	DB::query("DELETE FROM ".DB_PREFIX."incident_types WHERE id = ". $id);
@@ -899,12 +899,12 @@ function editRadioCode()
 **/
 function deleteRadioCode()
 {
-	session_start();
+	isSessionStarted();
 	$id = htmlspecialchars($_POST['warrantTypeID']);
 
 	DB::query("DELETE FROM ".DB_PREFIX."radioCodes WHERE id = " . $id);
 
-	session_start();
+	isSessionStarted();
 	$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed incident type from database</span></div>';
 	header("Location: ".BASE_URL."/oc-admin/dataManagement/warrantTypeManager.php");
 }
@@ -1088,7 +1088,7 @@ function editStreet()
 **/
 function deleteStreet()
 {
-	session_start();
+	isSessionStarted();
 	$id = htmlspecialchars($_POST['streetID']);
 
 
@@ -1285,7 +1285,7 @@ function editVehicle()
 **/
 function deleteVehicle()
 {
-	session_start();
+	isSessionStarted();
 	$id         = !empty($_POST['make']) ? htmlspecialchars($_POST['vehicleID']) : '';
 	$make 		= !empty($_POST['make']) ? htmlspecialchars($_POST['make']) : '';
 	$model   	= !empty($_POST['model']) ? htmlspecialchars($_POST['model']) : '';
@@ -1470,7 +1470,7 @@ function editWarningType()
 **/
 function deleteWarningType()
 {
-	session_start();
+	isSessionStarted();
 	$id = htmlspecialchars($_POST['warningTypeID']);
 
 	try{
@@ -1492,7 +1492,7 @@ function deleteWarningType()
 
 	$pdo = null;
 
-	session_start();
+	isSessionStarted();
 	$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully removed incident type from database</span></div>';
 	header("Location: ".BASE_URL."/oc-admin/dataManagement/warningTypeManager.php");
 }
@@ -1686,7 +1686,7 @@ function editWarrantType()
 **/
 function deleteWarrantType()
 {
-	session_start();
+	isSessionStarted();
 	$id = htmlspecialchars($_POST['warrantTypeID']);
 
 	DB::query("DELETE FROM ".DB_PREFIX."warrantTypes WHERE id = " . $id);
@@ -1868,7 +1868,7 @@ function editWeapon()
 **/
 function deleteWeapon()
 {
-	session_start();
+	isSessionStarted();
 	$id = htmlspecialchars($_POST['WeaponID']);
 	
 	DB::query("DELETE FROM ".DB_PREFIX."weapons WHERE id = " . $id);
@@ -1961,7 +1961,7 @@ function resetData()
 
 	$pdo = null;
 
-	session_start();
+	isSessionStarted();
 	$_SESSION['successMessage'] = '<div class="alert alert-success"><span>Successfully reset the '.strtoupper($dataType).' table.</span></div>';
 	header("Location: ".BASE_URL."/oc-admin/admin.php");
 }
