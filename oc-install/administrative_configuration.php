@@ -5,7 +5,9 @@ require_once('include/settings.inc.php');
 require_once('include/functions.inc.php');
 require_once('include/languages.inc.php');
 
-isSessionStarted();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 $passed_step = isset($_SESSION['passed_step']) ? (int)$_SESSION['passed_step'] : 0;
 $focus_field = 'MODERATOR_APPROVE_USER';

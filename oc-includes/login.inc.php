@@ -14,7 +14,7 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 require_once("../oc-config.php");
 require_once(ABSPATH . "/oc-functions.php");
 require_once(ABSPATH . "/oc-settings.php");
-require_once(ABSPATH . OCINC . "/apiAuth.inc.php");
+require_once(ABSPATH . "/oc-includes/apiAuth.inc.php");
 
 isSessionStarted();
 if (!empty($_POST)) {
