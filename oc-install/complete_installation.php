@@ -47,7 +47,7 @@ if ($passed_step == 10) {
 	$COMMUNITY_NAME						= isset($_SESSION['COMMUNITY_NAME']) ? prepare_input($_SESSION['COMMUNITY_NAME']) : '';
 	$COMMUNITY_HOMEPAGE					= isset($_SESSION['COMMUNITY_HOMEPAGE']) ? prepare_input($_SESSION['COMMUNITY_HOMEPAGE']) : '';
 
-	//$BASE_URL							= isset($_SESSION['BASE_URL']) ? prepare_input($_SESSION['BASE_URL']) : '';
+	$BASE_URL							= isset($_SESSION['BASE_URL']) ? prepare_input($_SESSION['BASE_URL']) : '';
 
 	$API_SECURITY						= isset($_SESSION['API_SECURITY']) ? prepare_input($_SESSION['API_SECURITY']) : '';
 
@@ -90,7 +90,6 @@ if ($passed_step == 10) {
 	$CIV_LIMIT_MAX_IDENTITIES			= isset($_SESSION['CIV_LIMIT_MAX_IDENTITIES']) ? prepare_input($_SESSION['CIV_LIMIT_MAX_IDENTITIES']) : '';
 	$CIV_LIMIT_MAX_VEHICLES				= isset($_SESSION['CIV_LIMIT_MAX_VEHICLES']) ? prepare_input($_SESSION['CIV_LIMIT_MAX_VEHICLES']) : '';
 	$CIV_LIMIT_MAX_WEAPONS				= isset($_SESSION['CIV_LIMIT_MAX_WEAPONS']) ? prepare_input($_SESSION['CIV_LIMIT_MAX_WEAPONS']) : '';
-	// Missing ''; from above line, spent ages figuring out this issue!
 	$MODERATOR_USER_MANAGER				= isset($_SESSION['MODERATOR_USER_MANAGER']) ? prepare_input($_SESSION['MODERATOR_USER_MANAGER']) : '';
 	$MODERATOR_APPROVE_USER				= isset($_SESSION['MODERATOR_APPROVE_USER']) ? prepare_input($_SESSION['MODERATOR_APPROVE_USER']) : '';
 	$MODERATOR_EDIT_USER				= isset($_SESSION['MODERATOR_EDIT_USER']) ? prepare_input($_SESSION['MODERATOR_EDIT_USER']) : '';
@@ -203,7 +202,7 @@ if ($passed_step == 10) {
 
 						$config_file = str_replace('<COMMUNITY_NAME>', $COMMUNITY_NAME, $config_file);
 						$config_file = str_replace('<COMMUNITY_HOMEPAGE>', $COMMUNITY_HOMEPAGE, $config_file);
-						// $config_file = str_replace('<BASE_URL>', $BASE_URL, $config_file);
+						$config_file = str_replace('<BASE_URL>', $BASE_URL, $config_file);
 						$config_file = str_replace('<API_SECURITY>', $API_SECURITY, $config_file);
 
 						$config_file = str_replace('<CAD_FROM_EMAIL>', $CAD_FROM_EMAIL, $config_file);

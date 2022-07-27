@@ -18,10 +18,6 @@ require_once(ABSPATH . '/oc-functions.php');
 require_once(ABSPATH . '/oc-settings.php');
 require_once(ABSPATH . "/oc-includes/adminActions.inc.php");
 
-if (empty($_SESSION['logged_in'])) {
-	permissionDenied();
-}
-
 isSessionStarted();
 isAdminOrMod();
 
