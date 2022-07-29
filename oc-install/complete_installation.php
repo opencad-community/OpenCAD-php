@@ -162,9 +162,6 @@
 								$config_file = str_replace('<DB_PASSWORD>', $database_password, $config_file);
 								$config_file = str_replace('<DB_PREFIX>', $database_prefix, $config_file);
 								
-								$config_file = str_replace('<DEFAULT_LANGUAGE>', $DEFAULT_LANUGAGE, $config_file);
-								$config_file = str_replace('<DEFAULT_LANUGAGE_DIRECTION>', $DEFAULT_LANUGAGE_DIRECTION, $config_file);
-
 								$config_file = str_replace('<COMMUNITY_NAME>', $COMMUNITY_NAME, $config_file);
 								$config_file = str_replace('<BASE_URL>', $BASE_URL, $config_file);
 								$config_file = str_replace('<API_SECURITY>', $API_SECURITY, $config_file);
@@ -232,7 +229,7 @@
 								$config_file = str_replace('<DEMO_MODE>', $DEMO_MODE, $config_file);
 								$config_file = str_replace('<USE_GRAVATAR>', $USE_GRAVATAR, $config_file);
 								
-								chmod(EI_CONFIG_FILE_PATH, 0600);
+								// chmod(EI_CONFIG_FILE_PATH, 0600);
 								$f = fopen(EI_CONFIG_FILE_PATH, 'w+');
 								if(!fwrite($f, $config_file) > 0){
 									$error_mg[] = str_replace('_CONFIG_FILE_PATH_', EI_CONFIG_FILE_PATH, lang_key('error_can_not_open_config_file')); 
