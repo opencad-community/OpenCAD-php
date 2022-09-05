@@ -18,5 +18,12 @@ sql.php
 *adminer*.php
 web.configW
 errorlog
-apiAuth.php
+apiAuth.inc.php
 test.php
+test1.php
+/oc-content/plugins/_oc-map
+/oc-content/plugins/oc-map
+/oc-api/docs/postman_doc_gen.exe
+/oc-api/docs/OpenCAD API 1.0.0.postman_collection.json
+/old
+/ips

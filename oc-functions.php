@@ -14,8 +14,12 @@ This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
 
 
 require_once("oc-config.php");
-require_once(ABSPATH . "/oc-includes/version.php");
+require_once(ABSPATH . "/oc-includes/version.inc.php");
 require_once(ABSPATH . "/oc-includes/autoload.inc.php");
+require_once(ABSPATH . "/oc-includes/hooks.inc.php");
+
+check_php_version();
+
 loadPlugins();
 
 function loadPlugins()
@@ -25,7 +29,7 @@ function loadPlugins()
 	 * Autoloads the Plugin folder
 	 */
 
-	require_once(ABSPATH . "/oc-includes/plugin-loader.php");
+	require_once(ABSPATH . "/oc-includes/plugin-loader.inc.php");
 
 	$plugin = new PluginLoader(__DIR__ . '/oc-content/plugins');
 
@@ -79,45 +83,24 @@ function isSessionStarted()
 {
 
 	if (!isset($_SESSION)) session_start();
-
-	// if (php_sapi_name() !== 'cli' | php_sapi_name() === 'cgi') {
-	// 	if (version_compare(phpversion(), MINIMUM_PHP_VERSION, '<')) {
-	// 		session_start();
-	// 		$_SESSION['error_title'] = "Incompatable PHP Version";
-	// 		$_SESSION['error'] = "An incompatable version of PHP is active. OpenCAD requires PHP " . MINIMUM_PHP_VERSION . " at minimum, the current recommended version is " . RECOMENDED_PHP_VERSION . " Currently PHP " . phpversion() . " is active, please contact your server administrator.";
-
-	// 		header('Location:' . BASE_URL . '/oc-content/plugins/error/index.php');
-	// 		return session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE;
-	// 		die();
-	// 	} else {
-	// 		session_start();
-	// 	}
-	// }
 	return FALSE;
 	die();
 }
 
-if (!file_exists(getcwd() . '/.htaccess') && is_writable(getcwd())) {
+// if (!file_exists(getcwd() . '/.htaccess') && is_writable(getcwd())) {
 
-	$root = str_replace($_SERVER['DOCUMENT_ROOT'], '', getcwd()) . "/oc-content/plugins/error/static";
+// 	$root = "/oc-content/plugins/error/static";
 
-	$htaccess =	"RewriteEngine on" . PHP_EOL
-		. "RewriteCond %{REQUEST_FILENAME} -d" . PHP_EOL
-		// This line has been removed due to causingg the page to 403 error and not redirect to index.php files. 
-		// Removed 02/July/2022 for milestone 1.0
-		// . "RewriteRule ^ - [R=403,L]" . PHP_EOL
-		// This whole .htaccess file will need to be looked at.
-		// Seems to be setting up incorrect ErrorDocument pages and resulting in errors.
-		. "### Begin ATVG ErrorPages ###" . PHP_EOL
-		. "ErrorDocument 403 $root/403.php" . PHP_EOL
-		. "ErrorDocument 404 $root/404.php" . PHP_EOL
-		. "ErrorDocument 502 $root/502.php" . PHP_EOL
-		. "ErrorDocument 503 $root/503.php" . PHP_EOL
-		. "### End ATVG ErrorPages ###" . PHP_EOL
-		. "Options -Indexes" . PHP_EOL;
+// 	$htaccess =	"RewriteEngine on" . PHP_EOL
+// 		. "RewriteCond %{REQUEST_FILENAME} -d" . PHP_EOL
+// 		. "ErrorDocument 403 $root/403.php" . PHP_EOL
+// 		. "ErrorDocument 404 $root/404.php" . PHP_EOL
+// 		. "ErrorDocument 502 $root/502.php" . PHP_EOL
+// 		. "ErrorDocument 503 $root/503.php" . PHP_EOL
+// 		. "Options -Indexes";
 
-	file_put_contents(getcwd() . '/.htaccess', $htaccess);
-}
+// 	file_put_contents(getcwd() . '/.htaccess', $htaccess);
+// }
 
 /**#@+
  * function get_avatar()
@@ -198,16 +181,14 @@ function getApiKey($del_key = false)
 	try {
 		$pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
 	} catch (PDOException $ex) {
-		throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+		throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
 		die();
 	}
 
 	$result = $pdo->query("SELECT value FROM " . DB_PREFIX . "config WHERE `key`='api_key'");
 
 	if (!$result) {
-		$_SESSION['error'] = $pdo->errorInfo();
-		error_log(print_r($pdo->errorInfo(), true));
-		header('Location: ' . BASE_URL . '/plugins/error/index.php');
+		throw_new_error("DB Query Error", "Error: 0x7ecbcfff5cf2 " . $pdo->errorInfo());
 		die();
 	}
 
@@ -217,9 +198,8 @@ function getApiKey($del_key = false)
 		$result = $pdo->query("UPDATE " . DB_PREFIX . "config SET `value`='$key' WHERE `key`='api_key'");
 
 		if (!$result) {
-			$_SESSION['error'] = $pdo->errorInfo();
-			error_log(print_r($pdo->errorInfo(), true));
-			header('Location: ' . BASE_URL . '/plugins/error/index.php');
+			throw_new_error("DB Query Error", "Error: 0x7ecbcfff5cf2 " . $pdo->errorInfo());
+
 			die();
 		}
 
@@ -232,9 +212,8 @@ function getApiKey($del_key = false)
 		$result = $pdo->query("INSERT INTO " . DB_PREFIX . "config VALUES ('api_key', '$key')");
 
 		if (!$result) {
-			$_SESSION['error'] = $pdo->errorInfo();
-			error_log(print_r($pdo->errorInfo(), true));
-			header('Location: ' . BASE_URL . '/plugins/error/index.php');
+			throw_new_error("DB Query Error", "Error: 0x7ecbcfff5cf2 " . $pdo->errorInfo());
+
 			die();
 		}
 
@@ -271,10 +250,7 @@ function generateRandomString($length = 10)
  **/
 function permissionDenied()
 {
-	$_SESSION['error_title'] = "Permission Denied";
-	$_SESSION['error'] = "Sorry, you don't have permission to access this page.";
-	exit();
-	header('Location: ' . BASE_URL . '/oc-content/plugins/error/index.php');
+	throw_new_error("Permission Denied", "Sorry, you don't have permission to view this page!");
 	die();
 }
 
@@ -311,3 +287,31 @@ function lang_key($key)
 	}
 	return $output;
 }
+
+function write_to_console($data)
+{
+	$console = $data;
+	if (is_array($console))
+		$console = implode(',', $console);
+
+	echo "<script>console.log('Console: " . $console . "' );</script>";
+}
+
+function throw_new_error($title, $body)
+{
+	isSessionStarted();
+	$_SESSION["errorTitle"] = $title;
+	$_SESSION["errorMsg"] = $body;
+	header("Location: " . BASE_URL . "/oc-content/plugins/error/index.php");
+	exit();
+}
+
+function check_php_version()
+{
+	if (phpversion() < MINIMUM_PHP_VERSION) {
+		throw_new_error("Outdated PHP Version", "You need to update to PHP 8.0 (8.1 Recommended). Failure to do so will result in you being unable to use OpenCAD. Your version is: " . phpversion());
+		exit();
+	}
+	return true;
+}
+

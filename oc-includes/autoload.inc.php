@@ -9,11 +9,11 @@ function classAutoLoader($className){
     }elseif(strpos($url, "oc-includes") !== false){
         $path = "classes/";
     }elseif(strpos($url, "oc-api") !== false){
-        $path = "../oc-includes/classes/";
+        $path = __DIR__ . "/../oc-includes/classes/";
     }elseif(strpos($url, "oc-admin") !== false){
         $path = "../oc-includes/classes/";
     } else{
-        $path = "oc-includes/classes/";
+        $path = ABSPATH . "oc-includes/classes/";
     }
     
     

@@ -1,7 +1,11 @@
 <?php
-    session_start();
-    $_SESSION['error_title'] = "Unknown Document!";
-    $_SESSION['error'] = "The page you are trying to access, does not exist.";
+require_once("../../../../oc-config.php");
 
-    header('Location: '.str_replace('static','',str_replace($_SERVER['DOCUMENT_ROOT'], '', getcwd())).'index.php');
-?>
+if (isset($_SERVER["HTTP_REFERER"])) {
+    if ($_SERVER["HTTP_REFERER"] == str_contains($_SERVER["HTTP_REFERER"], "oc-apps/cad.php")) {
+    } else {
+        throw_new_error("Unknown Document!", "The page you are trying to access, does not exist.");
+    }
+} else {
+    throw_new_error("Unknown Document!", "The page you are trying to access, does not exist.");
+}

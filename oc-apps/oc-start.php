@@ -1,17 +1,13 @@
 <?php
 
-if (session_id() == '' || !isset($_SESSION)) {
-	// session isn't started
-	session_start();
-}
-
 require_once("../oc-config.php");
 require_once(ABSPATH . 'oc-functions.php');
 require_once(ABSPATH . 'oc-settings.php');
-require_once(ABSPATH . "oc-includes/generalActions.php");
-require_once(ABSPATH . "oc-includes/adminActions.php");
-include_once(ABSPATH . "oc-includes/apiAuth.php");
+require_once(ABSPATH . "oc-includes/generalActions.inc.php");
+require_once(ABSPATH . "oc-includes/adminActions.inc.php");
+include_once(ABSPATH . "oc-includes/apiAuth.inc.php");
 
+isSessionStarted();
 setDispatcher("1");
 
 $adminButton = "";
@@ -105,8 +101,7 @@ if (isset($_SESSION['adminPrivilege'])) {
 }
 
 if (empty($_SESSION['logged_in'])) {
-	header('Location: ' . BASE_URL);
-	die("Not logged in");
+	permissionDenied();
 }
 ?>
 
@@ -228,7 +223,7 @@ if (empty($_SESSION['logged_in'])) {
 		function getAOP() {
 			$.ajax({
 				type: "GET",
-				url: "../<?php echo OCINC ?>/generalActions.php",
+				url: "../<?php echo OCINC ?>/generalActions.inc.php",
 				data: {
 					getAOP: 'yes'
 				},

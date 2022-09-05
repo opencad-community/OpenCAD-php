@@ -22,19 +22,16 @@ define( 'OCTHEMES', 'oc-content/themes' );
 define( 'OCTHEMEINC', 'oc-content/themes/'. THEME .'/includes' );
 define( 'OCTHEMEMOD', 'oc-content/themes/'. THEME .'/modals' );
 define( 'OCTHEMEJS', 'oc-content/themes/'. THEME .'/js' );
-define( 'APIDATAACTIONS', '<form action="'.BASE_URL.'/oc-includes/dataActions.php" method="post">');
+define( 'APIDATAACTIONS', '<form action="'.BASE_URL.'/oc-includes/dataActions.inc.php" method="post">');
 define( 'ERRORREDIRECT', '\'Location: '.BASE_URL.'/oc-content/plugins/error/index.php\'');
-/**
- * This will need to be updated once we have a backend sorted
- */
-define( 'APPLATESTVERSIONURL', "http://192.168.1.128/version.json");
+define( 'APPLATESTVERSIONURL', "https://raw.githubusercontent.com/kevingorman1000/OpenCad-Versions-TEMP/main/version.json");
 /*
- * These can't be directly globalized in version.php. When updating,
- * we're including version.php from another installation and don't want
+ * These can't be directly globalized in version.inc.php. When updating,
+ * we're including version.inc.php from another installation and don't want
  * these values to be overridden if already set.
  */
 global $oc_version, $oc_db_version, $tinymce_version, $required_php_version, $required_mysql_version, $oc_local_package;
-require_once ( ABSPATH . OCINC . '/version.php' );
+require_once ( ABSPATH . OCINC . '/version.inc.php' );
 
 // Set initial default constants including OC_MEMORY_LIMIT, OC_MAX_MEMORY_LIMIT, OC_DEBUG, SCRIPT_DEBUG, OC_CONTENT_DIR and OC_CACHE.
 oc_initial_constants();

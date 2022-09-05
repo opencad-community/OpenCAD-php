@@ -1,9 +1,10 @@
 		<?php
-		// require_once(__DIR__ . "/../../../../../oc-includes/plugin.php");
 		if (session_id() == '' || !isset($_SESSION)) {
 			// session isn't started
 			session_start();
-		} ?>
+		}
+		?>
+
 		<a rel="noopener" class="navbar-brand" href="#">
 			<img class="navbar-brand-full" src="<?php echo BASE_URL . "/" . OCTHEMES . "/" . THEME ?>/images/logo_brand.png" width="30" height="25" alt="OpenCAD Logo">
 		</a>
@@ -33,7 +34,8 @@
 				</li>
 			<?php  } ?>
 			<li class="nav-item px-3" <?php if ($pageName == "" . lang_key("WEBHOOK_TAB") . "") echo $currentPage; ?>><a rel="noopener" href="<?php echo BASE_URL; ?>/oc-admin/webhook.php" style="color:black"><em class="fas fa-globe fa-3px" style="color:black"></em> <?php echo lang_key("WEBHOOK_TAB"); ?></a></li>
+			<li class="nav-item px-3" <?php if ($pageName == "" . lang_key("MANAGE_API") . "") echo $currentPage; ?>><a rel="noopener" href="<?php echo BASE_URL; ?>/oc-admin/api.php" style="color:black"><em class="fas fa-key fa-3px" style="color:black"></em> <?php echo lang_key("MANAGE_API"); ?></a></li>
 			<li class="nav-item px-3" <?php if ($pageName == "" . lang_key("ABOUT_OPENCAD") . "") echo $currentPage; ?>><a rel="noopener" href="<?php echo BASE_URL; ?>/oc-admin/about.php" style="color:black"><em class="fas fa-info-circle fa-3px" style="color:black"></em> <?php echo lang_key("ABOUT_OPENCAD"); ?></a></li>
 			<li class="nav-item px-3" <?php if ($pageName == "" . lang_key("ISSUE_TAB") . "") echo $currentPage; ?>><a rel="noopener" href="<?php echo BASE_URL; ?>/oc-admin/issueLogger.php" style="color:black"><em class="fas fa-info-circle fa-3px" style="color:black"></em> <?php echo lang_key("ISSUE_TAB"); ?></a></li>
-			
+
 		</ul>

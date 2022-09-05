@@ -1,6 +1,8 @@
 <?php
 
-	session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 	require_once('include/shared.inc.php');    
     require_once('include/settings.inc.php');    
@@ -153,7 +155,7 @@
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('BASE_URL'); ?>&nbsp;<span class="star">*</span></td>
-				<td><input name="BASE_URL" id="BASE_URL" value="//cad.mycommunity.com/" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('BASE_URL_notes')" onblur="textboxOnBlur('BASE_URL_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
+				<td><input name="BASE_URL" id="BASE_URL" value="//<?php echo $_SERVER['SERVER_NAME'];?>" class="form_text" size="28" maxlength="200" value="<?php echo $BASE_URL; ?>" onfocus="textboxOnFocus('BASE_URL_notes')" onblur="textboxOnBlur('BASE_URL_notes')" <?php if(EI_MODE != 'debug') echo 'autocomplete="off"'; ?> placeholder="<?php if(EI_MODE == 'demo') echo 'demo: test'; ?>" /></td>
 			</tr>
 			<tr>
 				<td>&nbsp;<?php echo lang_key('API_SECURITY'); ?>&nbsp;</td>

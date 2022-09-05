@@ -19,7 +19,7 @@
 require_once(__DIR__ . "/../../oc-config.php");
 include_once( __DIR__ . "/../../oc-functions.php");
 include_once( __DIR__ . "/../../oc-settings.php");
-require_once( __DIR__ . "/../apiAuth.php");
+require_once( __DIR__ . "/../apiAuth.inc.php");
 
 class Dbh {
 
@@ -29,7 +29,7 @@ class Dbh {
         return $pdo;
     } catch(PDOException $ex)
     {
-        throw new Exception("0xe133fd5eb502 Error Occured: " . $ex->getMessage());
+        throw_new_error("DB Connection Error", "0xe133fd5eb502 Error Occured: " . $ex->getMessage());
         die();
     }
   }

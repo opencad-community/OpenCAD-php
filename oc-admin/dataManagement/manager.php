@@ -1,31 +1,25 @@
 <?php
 
 /**
+ * Open source CAD system for RolePlaying Communities.
+ * Copyright (C) 2022 OpenCAD Project
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
+ */
 
-Open source CAD system for RolePlaying Communities.
-Copyright (C) 2017 Shane Gill
-
-This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
-This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
- **/
-
-if (session_id() == '' || !isset($_SESSION)) {
-    // session isn't started
-    session_start();
-}
 require_once('../../oc-config.php');
 require_once(ABSPATH . '/oc-functions.php');
 require_once(ABSPATH . '/oc-settings.php');
-require_once(ABSPATH . "/oc-includes/adminActions.php");
-require_once(ABSPATH . "/oc-includes/dataActions.php");
-
+require_once(ABSPATH . "/oc-includes/adminActions.inc.php");
+require_once(ABSPATH . "/oc-includes/dataActions.inc.php");
+isSessionStarted();
 if (empty($_SESSION['logged_in'])) {
-    header('Location: ../index.php');
-    die("Not logged in");
+    permissionDenied();
 } else {
     $name = $_SESSION['name'];
 }
@@ -236,7 +230,7 @@ if (isset($_SESSION['successMessage'])) {
                 </div>
                 <!-- ./ modal-header -->
                 <div class="modal-body">
-                    <form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/dataActions.php" class="form-horizontal">
+                    <form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/dataActions.inc.php" class="form-horizontal">
                         <div class="form-group row">
                             <label class="col-md-3 control-label"><?php echo $modalBox; ?></label>
                             <div class="col-md-9">
@@ -300,7 +294,7 @@ if (isset($_SESSION['successMessage'])) {
             $.ajax({
                 cache: false,
                 type: 'POST',
-                url: '<?php echo BASE_URL; ?>/oc-includes/dataActions.php',
+                url: '<?php echo BASE_URL; ?>/oc-includes/dataActions.inc.php',
                 data: {
                     '<?php echo $ajaxGetDetails ?>': 'yes',
                     '<?php echo $ajaxId; ?>': <?php echo $ajaxId; ?>

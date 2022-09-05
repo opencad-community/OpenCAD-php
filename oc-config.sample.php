@@ -68,7 +68,7 @@ define("DB_PREFIX", '<DB_PREFIX>');
  * @since 1.0a RC1
  * 
  **/
-define('BASE_URL', '<BASE_URL>');
+define('BASE_URL', <BASE_URL>);
 
 /**#@+
   * ENABLE_API_SECURITY

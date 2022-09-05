@@ -15,7 +15,7 @@
 				<!-- ./ modal-header -->
 				<div class="modal-body">
 					<!-- ./ form-group -->
-					<form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/dataActions.php" class="form-inline">
+					<form role="form" method="post" action="<?php echo BASE_URL; ?>/oc-includes/dataActions.inc.php" class="form-inline">
 						<label class="col-md-3 control-label"><?php echo lang_key("RESET_DATA"); ?></label>
 						<div class="col">
 							<div class="form-group"> _OPTGRP"); ?>">

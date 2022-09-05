@@ -1,6 +1,8 @@
 <?php
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 require_once('include/shared.inc.php');
 require_once('include/settings.inc.php');
@@ -88,7 +90,6 @@ if ($passed_step == 10) {
 	$CIV_LIMIT_MAX_IDENTITIES			= isset($_SESSION['CIV_LIMIT_MAX_IDENTITIES']) ? prepare_input($_SESSION['CIV_LIMIT_MAX_IDENTITIES']) : '';
 	$CIV_LIMIT_MAX_VEHICLES				= isset($_SESSION['CIV_LIMIT_MAX_VEHICLES']) ? prepare_input($_SESSION['CIV_LIMIT_MAX_VEHICLES']) : '';
 	$CIV_LIMIT_MAX_WEAPONS				= isset($_SESSION['CIV_LIMIT_MAX_WEAPONS']) ? prepare_input($_SESSION['CIV_LIMIT_MAX_WEAPONS']) : '';
-	// Missing ''; from above line, spent ages figuring out this issue!
 	$MODERATOR_USER_MANAGER				= isset($_SESSION['MODERATOR_USER_MANAGER']) ? prepare_input($_SESSION['MODERATOR_USER_MANAGER']) : '';
 	$MODERATOR_APPROVE_USER				= isset($_SESSION['MODERATOR_APPROVE_USER']) ? prepare_input($_SESSION['MODERATOR_APPROVE_USER']) : '';
 	$MODERATOR_EDIT_USER				= isset($_SESSION['MODERATOR_EDIT_USER']) ? prepare_input($_SESSION['MODERATOR_EDIT_USER']) : '';

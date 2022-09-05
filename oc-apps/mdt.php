@@ -1,28 +1,26 @@
 <?php
 
 /**
+ * Open source CAD system for RolePlaying Communities.
+ * Copyright (C) 2022 OpenCAD Project
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
+ */
 
-Open source CAD system for RolePlaying Communities.
-Copyright (C) 2017 Shane Gill
-
-This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
-This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
- **/
-
-if (session_id() == '' || !isset($_SESSION)) {
-	session_start();
-}
 include_once("../oc-config.php");
 include_once(ABSPATH . "/oc-functions.php");
 include_once(ABSPATH . "/oc-settings.php");
-include_once(ABSPATH  .  "oc-includes/generalActions.php");
-include_once(ABSPATH  . "oc-includes/publicFunctions.php");
-include_once(ABSPATH  . "oc-includes/dispatchActions.php");
-include_once(ABSPATH . "oc-includes/apiAuth.php");
+include_once(ABSPATH  .  "oc-includes/generalActions.inc.php");
+include_once(ABSPATH  . "oc-includes/publicFunctions.inc.php");
+include_once(ABSPATH  . "oc-includes/dispatchActions.inc.php");
+include_once(ABSPATH . "oc-includes/apiAuth.inc.php");
+
+isSessionStarted();
 
 $adminButton = "";
 $debugInfo = "";
@@ -38,10 +36,10 @@ $civilianTitle = "";
 $roadsideAssistButton = "";
 $leoTitle  = "";
 $firstResponderTitle  = "";
+$_SESSION["activeDepartment"] = $_GET["dep"];
 
 if (empty($_SESSION['logged_in'])) {
-	header('Location: ../index.php');
-	die("Not logged in");
+	permissionDenied();
 } else {
 	$name = $_SESSION['name'];
 }
@@ -155,8 +153,7 @@ if (isset($_SESSION['adminPrivilege'])) {
 }
 
 if (empty($_SESSION['logged_in'])) {
-	header('Location: ' . BASE_URL);
-	die("Not logged in");
+	permissionDenied();
 }
 ?>
 
@@ -394,11 +391,6 @@ if (empty($_SESSION['logged_in'])) {
 		var vid = document.getElementById("recurringToneAudio");
 		vid.volume = 0.3;
 	</script>
-	<?php
-	if ($_SESSION['activeDepartment'] == 'fire') {
-	} else {
-	}
-	?>
 	<script type="text/javascript">
 		// Parse the URL parameter
 		function getParameterByName(name, url) {
@@ -474,7 +466,7 @@ if (empty($_SESSION['logged_in'])) {
 
 				$.ajax({
 					type: "POST",
-					url: "<?php echo "/" . OCINC ?>/generalActions.php",
+					url: "<?php echo "/" . OCINC ?>/generalActions.inc.php",
 					data: {
 						quickStatus: 'yes',
 						event: 'enroute',
@@ -500,17 +492,17 @@ if (empty($_SESSION['logged_in'])) {
 		});
 		$(function() {
 			$("#ncicName").autocomplete({
-				source: "<?php echo "/" . OCINC ?>/search_name.php"
+				source: "<?php echo "/" . OCINC ?>/search_name.inc.php"
 			});
 		});
 		$(function() {
 			$("#ncicPlate").autocomplete({
-				source: "<?php echo "/" . OCINC ?>/search_plate.php"
+				source: "<?php echo "/" . OCINC ?>/search_plate.inc.php"
 			});
 		});
 		$(function() {
 			$("#ncicWeapon").autocomplete({
-				source: "<?php echo "/" . OCINC ?>/search_name.php"
+				source: "<?php echo "/" . OCINC ?>/search_name.inc.php"
 			});
 		});
 		// PNotify Stuff
@@ -530,7 +522,7 @@ if (empty($_SESSION['logged_in'])) {
 		function getAOP() {
 			$.ajax({
 				type: "GET",
-				url: "<?php echo "/" . OCINC ?>/generalActions.php",
+				url: "<?php echo "/" . OCINC ?>/generalActions.inc.php",
 				data: {
 					getAOP: 'yes'
 				},
@@ -557,7 +549,7 @@ if (empty($_SESSION['logged_in'])) {
 		function getCalls() {
 			$.ajax({
 				type: "GET",
-				url: "<?php echo "/" . OCINC ?>/generalActions.php",
+				url: "<?php echo "/" . OCINC ?>/generalActions.inc.php",
 				data: {
 					getCalls: 'yes',
 					responder: 'yes'
@@ -577,7 +569,7 @@ if (empty($_SESSION['logged_in'])) {
 		function getMyCall() {
 			$.ajax({
 				type: "GET",
-				url: "<?php echo "/" . OCINC ?>/generalActions.php",
+				url: "<?php echo "/" . OCINC ?>/generalActions.inc.php",
 				data: {
 					getMyCall: 'yes',
 					responder: 'yes'
@@ -597,7 +589,7 @@ if (empty($_SESSION['logged_in'])) {
 		function mdtGetVehicleBOLOS() {
 			$.ajax({
 				type: "GET",
-				url: "<?php echo "/" . OCINC ?>/responderActions.php",
+				url: "<?php echo "/" . OCINC ?>/responderActions.inc.php",
 				data: {
 					mdtGetVehicleBOLOS: 'yes',
 					responder: 'yes'
@@ -617,7 +609,7 @@ if (empty($_SESSION['logged_in'])) {
 		function mdtGetPersonBOLOS() {
 			$.ajax({
 				type: "GET",
-				url: "<?php echo "/" . OCINC ?>/responderActions.php",
+				url: "<?php echo "/" . OCINC ?>/responderActions.inc.php",
 				data: {
 					mdtGetPersonBOLOS: 'yes',
 					responder: 'yes'
@@ -645,7 +637,7 @@ if (empty($_SESSION['logged_in'])) {
 
 				$.ajax({
 					type: "POST",
-					url: "<?php echo "/" . OCINC ?>/responderActions.php",
+					url: "<?php echo "/" . OCINC ?>/responderActions.inc.php",
 					data: {
 						updateCallsign: 'yes',
 						details: $("#" + this.id).serialize()
@@ -708,7 +700,7 @@ if (empty($_SESSION['logged_in'])) {
 		function getStatus() {
 			$.ajax({
 				type: "GET",
-				url: "<?php echo "/" . OCINC ?>/responderActions.php",
+				url: "<?php echo "/" . OCINC ?>/responderActions.inc.php",
 				data: {
 					getStatus: 'yes'
 				},
@@ -737,7 +729,7 @@ if (empty($_SESSION['logged_in'])) {
 
 					} else if (response.match("^<br>")) {
 						console.log("LOGGED OUT");
-						window.location.href = '<?php echo BASE_URL . '/' . OCINC; ?>/logout.php';
+						window.location.href = '<?php echo BASE_URL . '/' . OCINC; ?>/logout.inc.php';
 					}
 
 

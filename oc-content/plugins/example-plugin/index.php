@@ -18,9 +18,7 @@
  * 
  **********************************************************************
  *** DO NOT DELETE THE FOLLOWING FOLDERS FROM THE PLUGIN DIRECTORY! ***
- ***    captcha     error   radioCodeReference      support         ***
+ ***    captcha                error          radioCodeReference    ***
  *** DELETEING ANY OF THESE FOLDERS WILL RESORT IN ERRORS WITHIN OC ***
  **********************************************************************
  */
-?>
-

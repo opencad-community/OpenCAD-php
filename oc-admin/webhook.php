@@ -1,31 +1,27 @@
 <?php
 
 /**
-
-Open source CAD system for RolePlaying Communities.
-Copyright (C) 2017 Shane Gill
-
-This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
-This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
- **/
+ * Open source CAD system for RolePlaying Communities.
+ * Copyright (C) 2022 OpenCAD Project
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program comes with ABSOLUTELY NO WARRANTY; Use at your own risk.
+ */
 
 
 require_once('../oc-config.php');
 require_once(ABSPATH . '/oc-functions.php');
 require_once(ABSPATH . '/oc-settings.php');
-require_once(ABSPATH . "/oc-includes/adminActions.php");
+require_once(ABSPATH . "/oc-includes/adminActions.inc.php");
 
 isSessionStarted();
 
 if (empty($_SESSION['logged_in'])) {
-	header('Location: ' . BASE_URL);
-	die("Not logged in");
-} else {
-	// Do Nothing
+	permissionDenied();
 }
 
 isSessionStarted();
@@ -86,9 +82,9 @@ if (isset($_SESSION["webhook_success"])) {
 								<em class="fa fa-align-justify"></em> <?php echo lang_key("WEBHOOK_CREATE_TITLE"); ?>
 							</div>
 							<form action="<?php if (isset($_GET["update"]) && $_GET["update"] == true) {
-												echo BASE_URL . "/oc-includes/webhook.php?updateWebhook";
+												echo BASE_URL . "/oc-includes/webhook.inc.php?updateWebhook";
 											} else {
-												echo BASE_URL . "/oc-includes/webhook.php?verifyWebhook";
+												echo BASE_URL . "/oc-includes/webhook.inc.php?verifyWebhook";
 											} ?>" method="POST">
 								<div class="card-body">
 									<?php if (!empty($errorMsg)) {
@@ -199,7 +195,7 @@ if (isset($_SESSION["webhook_success"])) {
 										echo "<td>No Webhooks Set!</td>";
 									} else {
 										foreach ($getWebhooks as $data) {
-											echo "<form action='" . BASE_URL . "/oc-includes/webhook.php' method='POST'";
+											echo "<form action='" . BASE_URL . "/oc-includes/webhook.inc.php' method='POST'";
 											echo "<tr>";
 											echo "<td>" . $data["webhook_title"] . "</td>";
 											echo "<td>" . $config_data->decrpytString($data["webhook_uri"]) . "</td>";

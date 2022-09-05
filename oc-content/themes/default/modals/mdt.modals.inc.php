@@ -1,14 +1,14 @@
 	<?php include_once(__DIR__ . '/../../../../oc-config.php');
-	include_once( ABSPATH . OCINC . "/generalActions.php" ); ?>
+	include_once( ABSPATH . OCINC . "/generalActions.inc.php" ); ?>
 <!-- MDT - Modals -->
 	<!-- MDT - New Call Modal -->
 	<div class="modal" id="newCall" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog modal-md">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 			<div class="modal-header">
-					<h3 class="modal-title" id="myModalLabel">New Call</h3>
-					<button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
+				<button type="button" class="close" data-dismiss="modal" id="closeNewCall"><span aria-hidden="true">×</span>
 				</button>
+				<h4 class="modal-title" id="myModalLabel">New Call</h4>
 			</div>
 			<!-- ./ modal-header -->
 			<div class="modal-body">
