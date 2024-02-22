@@ -1,4 +1,4 @@
-    <p align="center">
+<p align="center">
 <a href="http://discord.io/opencadproject"><img alt="Join our Discord" src="https://img.shields.io/discord/352884538676084756?style=for-the-badge"></a>
 <img alt="GitHub tag (latest SemVer)" src="https://img.shields.io/github/v/tag/opencad-app/opencad-php?style=for-the-badge">
 <img alt="GitHub release (latest SemVer)" src="https://img.shields.io/github/v/release/opencad-app/opencad-php?style=for-the-badge">
